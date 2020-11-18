@@ -4,17 +4,19 @@
 
 - 截图插入
 
-  <img src="README.assets\image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
+  <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
 
 - 复制网络图片插入（添加了一个神秘文件）
 
-  <img src="README.assets\57000045" alt="img" style="zoom:50%;" />
+  <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/57000045" alt="img" style="zoom:50%;" />
 
 - 拖动本地图片插入
 
-  <img src="README.assets\download.png" alt="download" style="zoom:50%;" />
+  <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/download.png" alt="download" style="zoom:50%;" />
   
   
+
+现均已上传至阿里云
 
 ### 格式化
 
