@@ -6,10 +6,6 @@
 
   <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
 
-- 复制网络图片插入（添加了一个神秘文件）
-
-  <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/57000045" alt="img" style="zoom:50%;" />
-
 - 拖动本地图片插入
 
   <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/download.png" alt="download" style="zoom:50%;" />
@@ -89,5 +85,9 @@ print('Hello world'+name)
 
 插入图片的格式：![图片名](图片路径或链接)，不过这里建议直接复制粘贴呢~
 
+这是下标 H~2~O	\~ + word + \~
 
+这是上标 X^2^	\^ + word + \^
+
+这是==高亮==	\=\= + word + \=\=
 
