@@ -223,3 +223,50 @@ $$
 \int_0^1 \arctan \mathrm{d}x = \arctan x \bigg| _0^1 - \int _0^1 x \mathrm{d}(\arctan x) = \frac{\pi}{4} - \frac{1}{2}\ln(1+x^2)
 $$
 
+```latex
+$$ \int _{-3}^3 \frac{x^5 \sin ^3 x}{4+x^2+x^4}\mathrm{d}x + \int _0^1 e ^\sqrt{x}\mathrm{d}x $$
+```
+
+
+$$
+\int _{-3}^3 \frac{x^5 \sin ^3 x}{4+x^2+x^4}\mathrm{d}x + \int _0^1 e ^\sqrt{x}\mathrm{d}x
+$$
+
+```latex
+$$ \begin{cases}
+\  \alpha_i \ge 0
+\\ \ y_if(x_i)-1 \ge 0
+\\ \ \alpha_i(y_if(\vec x_i)-1) \ge 0
+\end{cases} $$
+```
+
+$$
+\begin{cases}
+   \  \alpha_i \ge 0
+\\ \ y_if(x_i)-1 \ge 0
+\\ \ \alpha_i(y_if(\vec x_i)-1) \ge 0
+\end{cases}
+$$
+
+- 界定符前冠以 \left（修饰左定界符）或 \right（修饰右定界符），可以得到自适应缩放的定界符
+
+```latex
+$$ \left( \sum_{k=\frac{1}{2}}^{N^2}\frac{1}{k} \right) $$
+```
+
+$$
+\left(\sum_{k=\frac{1}{2}}^{N^2}\frac{1}{k}\right)
+$$
+
+```latex
+$$ A+AB=A
+\\ A+\overline AB=A+B
+\\ AB+\A \overline B=A
+\\ AB+\overline {A}C +BC=AB+\overline{A}C $$
+```
+
+$$ A+AB=A
+\\ A+\overline AB=A+B
+\\ AB+A \overline B=A
+\\ AB+\overline {A}C +BC=AB+\overline{A}C $$
+
