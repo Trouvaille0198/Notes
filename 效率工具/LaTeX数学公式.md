@@ -79,14 +79,16 @@
 
 ## 2.1 常用符号
 
-| 名称           | 代码                                  | 示例                                                         | 显示                                                         |
-| -------------- | ------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 上下标         | ^, _                                  | a_{ij}^{2}                                                   | $a_{ij}^{2} $                                                |
-| 分数           | \frac  \cfrac                         | \frac {1}{3}   \cfrac {1}{3}                                 | $\frac {1}{3}$  $\cfrac {1}{3}$                              |
-| 开方           | \sqrt[n]  []不写默认开平方根          | \sqrt[3]{5-x}                                                | $\sqrt[3]{5-x}$                                              |
-| 上下标记       | \overline, \underline                 | \overline{x+y} \qquad \underline{a+b}​                        | $\overline{x+y} \qquad \underline{a+b}$                      |
-| 上下水平大括号 | \overbrace, \underbrace               | \overbrace{1+2+\cdots+n}^{n个} \\ \underbrace{a+b+\cdots+z}_{26} | $\overbrace{1+2+\cdots+n}^{n个} \\ \underbrace{a+b+\cdots+z}_{26}$ |
-| 向量           | \vec, \overrightarrow, \overleftarrow | \vec{a} + \overrightarrow{AB} + \overleftarrow{DE}           | $\vec{a} + \overrightarrow{AB} + \overleftarrow{DE}$         |
+| 名称             | 代码                                  | 示例                                                         | 显示                                                         |
+| ---------------- | ------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 上下标           | ^, _                                  | a_{ij}^{2}                                                   | $a_{ij}^{2} $                                                |
+| 分数             | \frac  \cfrac                         | \frac {1}{3}   \cfrac {1}{3}                                 | $\frac {1}{3}$  $\cfrac {1}{3}$                              |
+| 开方             | \sqrt[n]  []不写默认开平方根          | \sqrt[3]{5-x}                                                | $\sqrt[3]{5-x}$                                              |
+| 上下标记         | \overline, \underline                 | \overline{x+y} \qquad \underline{a+b}​                        | $\overline{x+y} \qquad \underline{a+b}$                      |
+| 上下水平大括号   | \overbrace, \underbrace               | \overbrace{1+2+\cdots+n}^{n个} \\ \underbrace{a+b+\cdots+z}_{26} | $\overbrace{1+2+\cdots+n}^{n个} \\ \underbrace{a+b+\cdots+z}_{26}$ |
+| 向量             | \vec, \overrightarrow, \overleftarrow | \vec{a} + \overrightarrow{AB} + \overleftarrow{DE}           | $\vec{a} + \overrightarrow{AB} + \overleftarrow{DE}$         |
+| 段内效果的上下标 | \limits                               | \bigcap\limits_{i=1}^{n} A_i                                 | $\bigcap\limits_{i=1}^{n} A_i$                               |
+| 下省略号         | \ldots                                | \overline{A_1}\cap \overline{A_2}\ldots\cap \overline{A_n}   | $\overline{A_1}\cap \overline{A_2}\ldots\cap \overline{A_n}$ |
 
 ## 2.2 关系运算符
 
@@ -152,8 +154,8 @@
 | \subset   | $\subset$   |
 | \subseteq | $\subseteq$ |
 | \supseteq | $\supseteq$ |
-| \bigcap   | $\bigcap$   |
-| \bigcup   | $\bigcup$   |
+| \cap      | $\cap$      |
+| \cup      | $\cup$      |
 | \bigvee   | $\bigvee$   |
 | \bigwedge | $\bigwedge$ |
 
