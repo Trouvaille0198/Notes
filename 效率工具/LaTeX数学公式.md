@@ -99,16 +99,17 @@
 | \div           | $\div$       |
 | \mid           | $\mid$       |
 | \cdot （点乘） | $\cdot$      |
-| \bigodot       | $\bigodot$   |
-| \bigotimes     | $\bigotimes$ |
-| \bigoplus      | $\bigoplus$  |
-| \leq           | $\leq$       |
-| \geq           | $\geq$       |
+| \odot          | $\odot$      |
+| \otimes        | $\otimes$    |
+| \oplus         | $\oplus$     |
+| \leq or \le    | $\leq$       |
+| \geq or \ge    | $\geq$       |
 | \neq           | $\neq$       |
 | \approx        | $\approx$    |
 | \equiv         | $\equiv$     |
 | \sum           | $\sum$       |
 | \prod          | $\prod$      |
+| \pmod          | $\mathscr F$ |
 
 ## 2.3 对数运算符
 
@@ -146,18 +147,23 @@
 
 ## 2.6 集合运算符
 
-| 代码      | 符号        |
-| --------- | ----------- |
-| \emptyset | $\emptyset$ |
-| \in       | $\in$       |
-| \notin    | $\notin$    |
-| \subset   | $\subset$   |
-| \subseteq | $\subseteq$ |
-| \supseteq | $\supseteq$ |
-| \cap      | $\cap$      |
-| \cup      | $\cup$      |
-| \bigvee   | $\bigvee$   |
-| \bigwedge | $\bigwedge$ |
+| 代码                         | 符号                |
+| ---------------------------- | ------------------- |
+| \emptyset                    | $\emptyset$         |
+| \in                          | $\in$               |
+| \notin                       | $\notin$            |
+| \subset                      | $\subset$           |
+| \subseteq                    | $\subseteq$         |
+| \supseteq                    | $\supseteq$         |
+| \cap                         | $\cap$              |
+| \cup                         | $\cup$              |
+| \vee or \lor                 | $\vee$              |
+| \wedge or \land              | $\wedge$            |
+| \exists                      | $\exists$           |
+| \forall                      | $\forall$           |
+| \lfloor \rfloor （向下取整） | $\lfloor \ \rfloor$ |
+| \lceil  \rceil  （向上取整） | $\lceil \ \rceil$   |
+| \neg                         | $\neg$              |
 
 ## 2.7 矩阵
 
@@ -185,6 +191,38 @@ $$
 \vdots  & \vdots & \ddots \\
 \end{bmatrix}
 $$
+
+## 2.8 头顶符号
+
+| 代码  | 符号       |
+| ----- | ---------- |
+| \hat  | $\hat{x}$  |
+| \bar  | $\bar{x}$  |
+| \dot  | $\dot{x}$  |
+| \ddot | $\ddot{x}$ |
+| \vec  | $\vec{x}$  |
+
+## 2.9 箭头(arrow)
+
+| 说明                      | 代码                      | 符号                       |
+| :------------------------ | ------------------------- | -------------------------- |
+| 单箭头单向 left和right    | \leftarrow    \rightarrow | $\leftarrow \ \rightarrow$ |
+| 双箭头单向 Left和Right    | \Leftarrow    \Rightarrow | $\Leftarrow \ \Rightarrow$ |
+| 双向 leftright和Leftright | \leftrightarrow           | $\leftrightarrow$          |
+| 长箭头 long和Long         | \longleftarrow            | $\longleftarrow$           |
+| 否定 n                    | \nRightarrow              | $\nRightarrow$             |
+| 互推                      | \rightleftharpoons        | $\rightleftharpoons$       |
+
+## 2.10 界定符大小
+
+| 代码  | 符号     |
+| ----- | -------- |
+| \big  | $\big($  |
+| \Big  | $\Big($  |
+| \bigg | $\bigg($ |
+| \Bigg | $\Bigg($ |
+
+
 
 # 三、希腊字母
 
