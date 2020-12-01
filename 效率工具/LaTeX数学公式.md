@@ -92,24 +92,24 @@
 
 ## 2.2 关系运算符
 
-| 代码           | 符号         |
-| -------------- | ------------ |
-| \pm            | $\pm$        |
-| \times         | $\times$     |
-| \div           | $\div$       |
-| \mid           | $\mid$       |
-| \cdot （点乘） | $\cdot$      |
-| \odot          | $\odot$      |
-| \otimes        | $\otimes$    |
-| \oplus         | $\oplus$     |
-| \leq or \le    | $\leq$       |
-| \geq or \ge    | $\geq$       |
-| \neq           | $\neq$       |
-| \approx        | $\approx$    |
-| \equiv         | $\equiv$     |
-| \sum           | $\sum$       |
-| \prod          | $\prod$      |
-| \pmod          | $\mathscr F$ |
+| 代码           | 符号                |
+| -------------- | ------------------- |
+| \pm            | $\pm$               |
+| \times         | $\times$            |
+| \div           | $\div$              |
+| \mid           | $\mid$              |
+| \cdot （点乘） | $\cdot$             |
+| \odot          | $\odot$             |
+| \otimes        | $\otimes$           |
+| \oplus         | $\oplus$            |
+| \leq or \le    | $\leq$              |
+| \geq or \ge    | $\geq$              |
+| \neq           | $\neq$              |
+| \approx        | $\approx$           |
+| \equiv         | $\equiv$            |
+| \sum           | $\sum$              |
+| \prod          | $\prod$             |
+| \mathscr       | $\mathscr {ABCDEF}$ |
 
 ## 2.3 对数运算符
 
