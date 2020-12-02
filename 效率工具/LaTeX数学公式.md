@@ -253,7 +253,17 @@ $$
 | \Psi     | $\Psi$     | \psi      | $\psi$     |
 | \Omega   | $\Omega$   | \omega    | $\omega$   |
 
-# 四、一万个例子
+# 四、字体
+
+| 输入 |   说明   |     显示      | 输入  |   说明   |           显示           |
+| :--: | :------: | :-----------: | :---: | :------: | :----------------------: |
+| \rm  |  罗马体  | $\rm{Sample}$ | \cal  |   花体   |      $\cal{SAMPLE}$      |
+| \it  | 意大利体 | $\it{Sample}$ | \Bbb  | 黑板粗体 |      $\Bbb{SAMPLE}$      |
+| \bf  |   粗体   | $\bf{Sample}$ | \mit  | 数学斜体 |      $\mit{SAMPLE}$      |
+| \sf  |  等线体  | $\sf{Sample}$ | \scr  |  手写体  |      $\scr{SAPLE}$       |
+| \tt  | 打字机体 | $\tt{Sample}$ | \frak | 哥特字体 | $\frak{sample \ SAMPLE}$ |
+
+# 五、一万个例子
 
 ```latex
 $$ \int_0^1 \arctan \mathrm{d}x = \arctan x \bigg| _0^1 - \int _0^1 x \mathrm{d}(\arctan x) = \frac{\pi}{4} - \frac{1}{2}\ln(1+x^2) $$
