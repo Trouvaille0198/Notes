@@ -19,7 +19,7 @@ Masthead, Ear, Headline, Byline and dateline, Lead, Index, Cut and cutline, Jump
    - articles
    - linking words
    - verbs and auxiliary verbs.
-3. **The tenses** (时态)** and voices **(语态)
+3. **The tenses** (时态) **and voices **(语态)
    - Simple present tense
    - Simple future tense: will do, (be) to do
    - Present continuous tense: without be
