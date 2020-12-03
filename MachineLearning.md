@@ -40,7 +40,7 @@
 - 性能度量
 
   - 错误率（Error Rate）：$E=\cfrac{a}{m}$
-  - 精度（Accuracy）：1-E
+  - 精度（Accuracy）：$1-E$
   - 误差（Error）：$|Y-Y'|$
 
 - 数据集
