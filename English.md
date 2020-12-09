@@ -1,5 +1,29 @@
 # Week1
 
+## Significance of Newspaper Reading
+
+- Good learning resources
+- Enable the learners to enhance their reading abilities
+- Broaden the reader’s horizon
+- Good helper for the learners to improve their writing skill
+
+## Contents
+
+- politics and government 
+- disasters
+- crime and courts
+- business
+- strikes, demonstrate and disputes
+- war and terrorism
+- environment
+- famous people
+- sports
+- entertainments
+
+## Sections
+
+News, Features（专题报道，特写）, Sports, Business, Editorial（社论版）, Classifieds（专栏）, Sciences and Technology, Life, Health, Entertainment 
+
 ##  News Classification
 
 - hard news 
@@ -10,7 +34,7 @@
 
 ## Layout of Newspaper
 
-Masthead, Ear, Headline, Byline and dateline, Lead, Index, Cut and cutline, Jump line
+Masthead（报头）, Ear（报耳）, Headline, Byline and dateline（撰稿人署名与新闻来源）, Lead（新闻导语）, Index, Cut and cutline（插图及其说明）, Jump line（跳页）
 
 ### 1. the Characteristic of Headlines
 
@@ -29,4 +53,12 @@ Masthead, Ear, Headline, Byline and dateline, Lead, Index, Cut and cutline, Jump
    - Pun (双关): homonym (同形异义词), homophone (同音异义词), 
 5. **Wordings** (用词)
    - midget words
+     - Air: to make known
+     - Axe: to dismiss from a job
+     - Ink: to sign
+     - Probe: investigation
+     - Soar: to rise rapidly
+     - Vow: to solemn（发誓）
+     - Bid: to attempt（企图）
+     - plea: deeply felt request
    - Complicated modifier
