@@ -62,3 +62,10 @@ Masthead（报头）, Ear（报耳）, Headline, Byline and dateline（撰稿人
      - Bid: to attempt（企图）
      - plea: deeply felt request
    - Complicated modifier
+
+# Week2
+
+shed light on	阐明，解释
+
+mess with	干扰
+
