@@ -129,33 +129,36 @@ L称为表名，n称为表长，$a_i$：第i个称为位序，$a_1$称为首元�
 第$i$个元素的数组索引为$i-1$
 
 ```C++
-template <class ElemType>
+template <class DataType>
 class SeqList
 {
 protected:
-	// 顺序表的数据成员
-	int length;		 // 顺序表的当前长度
-	int maxLength;	 // 顺序表的最大容量
-	ElemType *elems; // 元素存储空间的首地址
+    static const int DEFAULT_SIZE = 100;
+    int _length;
+    int _maxlen;
+    DataType *_data;
 
 public:
-	// 顺序表的函数成员
-	SeqList(int size = DEFAULT_SIZE);						   // 构造一个空表
-	SeqList(ElemType v[], int n, int size = DEFAULT_SIZE);	   // 根据数组v的内容构造顺序表
-	virtual ~SeqList();										   // 析构函数
-	int GetLength() const;									   // 取顺序表长度
-	bool IsEmpty() const;									   // 判断顺序表是否为空
-	void Clear();											   // 将顺序表清空
-	void Traverse(void (*Visit)(const ElemType &)) const;	   // 遍历顺序表
-	int LocateElem(const ElemType &e) const;				   // 元素定位，求指定元素在顺序表中的位置
-	Status GetElem(int i, ElemType &e) const;				   // 取顺序表中第i个元素的值
-	Status SetElem(int i, const ElemType &e);				   // 修改顺序表中第i个元素的值
-	Status DeleteElem(int i, ElemType &e);					   // 删除顺序表中第i个元素
-	Status InsertElem(int i, const ElemType &e);			   // 在顺序表第i个位置插入元素
-	Status InsertElem(const ElemType &e);					   // 在顺序表表尾插入元素
-	SeqList(const SeqList<ElemType> &sa);					   // 复制构造函数
-	SeqList<ElemType> &operator=(const SeqList<ElemType> &sa); // 赋值语句重载
-}
+    SeqList(int maxlen = DEFAULT_SIZE);                          //建立空表
+    SeqList(DataType *a, int length, int maxlen = DEFAULT_SIZE); //根据数组创建新表
+    SeqList(const SeqList<DataType> &sa);                        //拷贝构造函数
+    virtual ~SeqList();                                          //析构函数
+    SeqList<DataType> &operator=(const SeqList<DataType> &sa);   //赋值运算符重载
+
+    void ClearList();                        //清空顺序表，暂时不知道有啥用
+    int GetLength() const;                   //返回长度
+    bool IsEmpty() const;                    //判空
+    bool IsFull() const;                     //判满
+    void DisplayList() const;                //遍历显示顺序表
+    int LocateElem(const DataType &e) const; //元素定位，返回指定元素位置
+
+    DataType GetElem(int i) const;             //查找元素，返回查找的元素
+    void SetElem(int i, const DataType &e);    //修改i位置的元素值
+    void InsertElem(int i, const DataType &e); //在i位置插入新元素
+    void InsertElem(const DataType &e);        //在末尾插入新元素
+    void DeleteElemByIndex(int i);             //删除i位置的元素
+    void DeleteElemByValue(const DataType &e); //删除指定元素
+};
 ```
 
 ### 3.3.2 具体实现
