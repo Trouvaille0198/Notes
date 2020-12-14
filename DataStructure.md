@@ -163,6 +163,37 @@ public:
 
 ### 3.3.2 具体实现
 
+#### 1）构造函数
+
+```python
+/*建立一个有默认最大长度的空表*/
+template <class DataType>
+SeqList<DataType>::SeqList(int maxlen) : _length(0), _maxlen(maxlen)
+{
+    _data = new DataType[_maxlen]; //申请存储空间
+    if (_data == NULL)
+    {
+        cout << "动态存储分配失败！" << endl;
+        exit(1);
+    }
+}
+```
+
+```python
+template <class DataType>
+SeqList<DataType>::SeqList(DataType *a, int length, int maxlen) : _length(length), _maxlen(maxlen)
+{
+    _data = new DataType[maxlen];
+    if (_data == NULL)
+    {
+        cout << "动态存储分配失败！" << endl;
+        exit(1);
+    }
+    for (int i = 0; i < length; i++)
+        _data[i] = a[i];
+}
+```
+
 ### 3.3.3 复杂度分析
 
 - 在任意位置插入、删除一个数据元素：$O(n)$
@@ -255,8 +286,73 @@ public:
 }
 ```
 
-### 3.4.2 双向循环链表
+### 3.4.2 双向循环链表（Double Circular List）
 
-### 3.4.3 静态链表
+### 3.4.3 静态链表（Static List）
 
 用数组方式存储数据，但数据间关系模拟链式存储
+
+# 四、栈、队列和递归
+
+栈和队列都是受限的线性表
+
+## 4.1 栈（Stack）
+
+限制存取位置的顺序表，只可在表尾位置插入和删除，所谓后进先出（Last In First Out, LIFO）允许插入删除的一端称为栈顶（top），不允许的一端称为栈底（bottom）。
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201214080922294.png" alt="image-20201214080922294" style="zoom:67%;" />
+
+- 基本操作
+  - 初始化
+  - 求长度
+  - 取栈顶元素
+  - 进栈（push，也叫压入）
+  - 出栈（pop，也叫弹出）
+  - 判断是否为空栈清空栈
+
+### 4.1.1 顺序栈
+
+#### 1）类模板定义
+
+#### 2）具体定义
+
+#### 3）共享存储空间的双顺序栈
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201214083413534.png" alt="image-20201214083413534" style="zoom:67%;" />
+
+
+
+### 4.1.2 链式栈
+
+与顺序栈相比，链式栈对于同时使用多个栈的情况下可以共享存储
+
+用不带头结点的的单链表示链式栈，且头指针表示top
+
+## 4.2 队列（Queue）
+
+队列允许在表的一端插入元素，在另一端删除元素，所谓先进先出（First In First Out, FIFO）。允许插入的一端称为队尾（rear），允许删除的一端称为队头（front）。
+
+- 操作
+  - 初始化
+  - 求长度
+  - 取队头元素
+  - 进队
+  - 出队
+  - 判空
+  - 清空队列
+
+约定：front指向队头元素，rear指向队尾元素后一个位置
+
+### 4.2.1 循环队列
+
+为了避免假溢出问题，把顺序队列所使用的存储空间构造成一个逻辑上首尾相连的循环队列，称为循环队列。
+
+### 4.2.2 链式队列
+
+## 4.3 递归（Recursion）
+
+若一个对象部分地包含自己，或用它自己给自己定义，则此对象是递归的。
+
+若一个过程直接或间接地调用自己，则此过程是递归的过程
+
+  
