@@ -166,16 +166,10 @@ public:
 #### 1）构造函数
 
 ```python
-/*建立一个有默认最大长度的空表*/
 template <class DataType>
 SeqList<DataType>::SeqList(int maxlen) : _length(0), _maxlen(maxlen)
 {
     _data = new DataType[_maxlen]; //申请存储空间
-    if (_data == NULL)
-    {
-        cout << "动态存储分配失败！" << endl;
-        exit(1);
-    }
 }
 ```
 
@@ -184,11 +178,6 @@ template <class DataType>
 SeqList<DataType>::SeqList(DataType *a, int length, int maxlen) : _length(length), _maxlen(maxlen)
 {
     _data = new DataType[maxlen];
-    if (_data == NULL)
-    {
-        cout << "动态存储分配失败！" << endl;
-        exit(1);
-    }
     for (int i = 0; i < length; i++)
         _data[i] = a[i];
 }
