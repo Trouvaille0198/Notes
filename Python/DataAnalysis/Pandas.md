@@ -138,7 +138,7 @@ df3
 
 ```python
 df = pd.read_csv('path')
-df = pd.read_csv('test.csv', encoding='gbk, sep=';') 	#分隔符为“；”，编码格式为gbk
+df = pd.read_csv('test.csv', encoding='gbk', sep=';') 	#分隔符为“；”，编码格式为gbk
 ```
 
 ### 1.2.5 用Series创建
