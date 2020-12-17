@@ -185,7 +185,16 @@ df[['b','e','f']]   #取b,e,f列
 
 输出
 
-<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207223843331.png" alt="image-20201207223843331" style="zoom:80%;" />
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207223843331.png" alt="image-20201207223843331" style="zoom: 67%;" />
+
+特殊情况下，`df[colName]`可以接收行名称或者行数，但必须是切片
+
+```python
+df[0:1]      # 第1行
+df[0:3]      # 前3行
+df['5':'5']  # 行名称为5的行
+df['5':'7']  # 行名称为5的行至行名称为7的行
+```
 
 ### 2.1.2 `df[colName][indexName]`
 
@@ -547,8 +556,11 @@ Name: C, dtype: int32
 ### 3.1.5 更改行列名称
 
 ```python
-df.rename(columns={'A': 'Name','C':'Age'})	#更改列名称
-df.rename(index={'e': 'eee'})				#更改行名称
+df.rename(columns={'A': 'Name','C':'Age'})			#更改列名称
+df.rename(index={'e': 'eee'})						#更改行名称
+
+df.columns=['animal','age','visits','priority'] 	#传入列表以改变列名称
+df.index=[...]								     	#传入列表以改变行名称
 ```
 
 输出
@@ -660,6 +672,73 @@ df_inner.groupby('city')['price'].agg([len,np.sum, np.mean])	#对city字段进�
 输出
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209222416782.png" alt="image-20201209222416782" style="zoom:67%;" />
+
+
+
+## 3.4 数据增删
+
+更多：https://www.cnblogs.com/guxh/p/9420610.html
+
+### 3.4.1 删除行列
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217130111523.png" alt="image-20201217130111523" style="zoom:77%;" />
+
+```python
+df1.drop(['0','1'])				#按行名删除（如果有的话）
+df1.drop(df1.index[0:2])		#按行号删除
+
+df.drop(['id','date'],axis=1) 	#按列名删除
+df.drop(df.columns[0:2],axis=1)	#按列号删除
+
+del.df['id'] 					#删除列（就地删除）
+```
+
+### 3.4.2 增加行
+
+![image-20201217132418146](https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png)
+
+想增加一行，行名称为‘a’，内容为[16, 17, 18, 19]
+
+```python
+df.loc['a'] = [16, 17, 18, 19]    
+df.at['a'] = [16, 17, 18, 19]
+df.set_value('a', df.columns, [16, 17, 18, 19], takeable=False)    # warning，set_value会被取消
+
+df.loc[len(df)] = [16, 17, 18, 19]#简单地逐行添加内容
+
+#.append()
+s = pd.Series([16, 17, 18, 19], index=df.columns, name='5') #添加有name的Series
+df.append(s) #赋值以生效
+```
+
+### 3.4.3 增加列
+
+般涉及到增加列项时，经常会对现有的数据进行遍历运算，获得新增列项的值
+
+```python
+#遍历DataFrame获取序列的方法
+s = [a + c for a, c in zip(df['A'], df['C'])]          # 通过遍历获取序列
+s = [row['A'] + row['C'] for i, row in df.iterrows()]  # 通过iterrows()获取序列，s为list
+s = df.apply(lambda row: row['A'] + row['C'], axis=1)  # 通过apply获取序列，s为Series
+s = df['A'] + df['C']                                  # 通过Series矢量相加获取序列
+s = df['A'].values + df['C'].values                    # 通过Numpy矢量相加获取序列
+
+#通过df[]或者df.loc添加序列
+df.loc[:, 'E'] = s
+df['E'] = s
+
+#.insert()可以指定插入位置，和插入列名称
+df.insert(0, 'E', s) #在第0列插入s，命名为E
+
+#.concat()
+s = pd.Series([16, 17, 18, 19], name='E', index=df.index)
+df = pd.concat([df, s], axis=1)
+
+#简单地逐列添加内容
+df[len(df)] = [16, 17, 18, 19]
+```
+
+
 
 
 
