@@ -279,7 +279,7 @@ public:
 
 ### 3.4.3 静态链表（Static List）
 
-用数组方式存储数据，但数据间关系模拟链式存储
+用数组方式存储数据，但数据间关系模拟链式存储，适用于不支持指针的语言。
 
 # 四、栈、队列和递归
 
@@ -302,6 +302,34 @@ public:
 ### 4.1.1 顺序栈
 
 #### 1）类模板定义
+
+```c++
+template <class DataType>
+class SeqStack
+{
+protected:
+    static const int DEFAULT_SIZE = 100;
+    int _top; //_top从0开始
+    int _maxlen;
+    DataType *_data;
+
+public:
+    SeqStack(int maxlen = DEFAULT_SIZE);                         //建立空栈
+    SeqStack(const SeqStack<DataType> &sa);                      //拷贝构造函数
+    virtual ~SeqStack();                                         //析构函数
+    SeqStack<DataType> &operator=(const SeqStack<DataType> &sa); //赋值运算符重载
+
+    void ClearStack();         //清空顺序表，暂时不知道有啥用
+    int GetLength() const;     //返回长度
+    bool IsFull() const;       //判满
+    bool IsEmpty() const;      //判空
+    void DisplayStack() const; //遍历显示顺序表
+
+    void PushElem(const DataType &e); //入栈
+    DataType TopElem();               //取栈顶元素
+    void PopElem();                   //出栈
+};
+```
 
 #### 2）具体定义
 
@@ -336,7 +364,14 @@ public:
 
 为了避免假溢出问题，把顺序队列所使用的存储空间构造成一个逻辑上首尾相连的循环队列，称为循环队列。
 
+- 假溢出问题的解决方法（主要是判空判满的问题）
+  - 少用一个存储空间，队满即`(rear + 1) % maxlen == front`
+  - 不设rear，改设length，队空`length == 0`；队满`length == maxlen`
+  - 新增数据成员flag，队空`flag == 0`；队满`flag == maxlen`
+
 ### 4.2.2 链式队列
+
+链式队列完全避免了假溢出的问题。
 
 ## 4.3 递归（Recursion）
 
@@ -344,4 +379,37 @@ public:
 
 若一个过程直接或间接地调用自己，则此过程是递归的过程
 
-  
+对任意一个递归，需要有**出口**和**同一形式**
+
+步骤
+
+- 保留调用信息（返回地址和实参信息）
+- 分配调用过程所需的数据空间
+- 将控制转到被调用的子过程
+
+特点
+
+- 不节省时间，也不节省空间
+- 容易根据定义进行编程
+- 结构清晰，便于阅读
+
+### 4.3.1 递归转换为非递归
+
+原因
+
+- 递归的时间效率通常比较差
+- 有些计算机语言不支持递归
+
+方法
+
+- 对于尾递归和单项递归，可用循环结构的算法替代。
+- 自己用栈来模拟系统运行时的栈（工作记录），保存有关信息。
+
+#### 1）尾递归和单项递归的消除
+
+尾递归：递归调用语句只有一个，且在函数最后。（如阶乘）
+
+单项递归：所有递归调用彼此间参数无关（不套娃），且均在函数最后。（如斐波那契数列）
+
+#### 2）用栈模拟系统运行时的栈
+
