@@ -346,6 +346,8 @@ dtype('O')
 ```python
 df.isnull()			#检查数据空值
 df['h'].isnull()	#检查特定列空值
+
+df.isnan() 			#判断nan值
 ```
 
 输出
@@ -444,7 +446,7 @@ df.sort_values(by=['B', 'C'], ascending=[False, True])	#先按B降序，再按C�
 df.sort_index(axis=0，ascending=1)		#按索引列升序排序，需要默认的索引值
 ```
 
-axis=0（行），1（列）
+axis=0（跨行），1（跨列）
 
 输出（此处index设置为了’A’）
 

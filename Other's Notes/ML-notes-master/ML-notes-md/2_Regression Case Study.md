@@ -339,7 +339,7 @@ $$
     if \ \ x_s=Weedle: \ \ \ y'=b_2+w_2\cdot x_{cp}+w_6\cdot(x_{cp})^2 \\
     if \ \ x_s=Pidgey: \ \ \ y'=b_3+w_3\cdot x_{cp}+w_7\cdot(x_{cp})^2 \\
     if \ \ x_s=Eevee: \ \ \ \ y'=b_4+w_4\cdot x_{cp}+w_8\cdot(x_{cp})^2 \\
-    y=y'+w_9\cdot x_{hp}+w_{10}\cdot(x_{hp})^2+w_{11}\cdot x_h+w_{12}\cdot (x_h)^2+w_{13}\cdot x_w+w_{14}\cdot (x_w)^2 
+    y=y'+w_9\cdot x_{hp}+w_{10}\cdot(x_{hp})^2+w_{11}\cdot x_h+w_{12}\cdot (x_h)^2+w_{13}\cdot x_w+w_{14}\cdot (x_w)^2
     $$
     而为了保证function的平滑性，loss function应使用regularization，即$L=\sum\limits_{i=1}^n(\widehat{y}^i-y^i)^2+\lambda\sum\limits_{j}(w_j)^2$，注意bias——参数b对function平滑性无影响，因此不额外再次计入loss function(y的表达式里已包含w、b)
 

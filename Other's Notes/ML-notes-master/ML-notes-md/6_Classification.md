@@ -113,8 +113,8 @@ C--> |"P(x|C2)"| D(x)
 
 于是我们得到：(分母为全概率公式)
 
-- x属于Class 1的概率为第一条路径除以两条路径和：$P(C_1|x)=\frac{P(C_1)P(x|C_1)}{P(C_1)P(x|C_1)+P(C_2)P(x|C_2)}$
-- x属于Class 2的概率为第二条路径除以两条路径和：$P(C_2|x)=\frac{P(C_2)P(x|C_2)}{P(C_1)P(x|C_1)+P(C_2)P(x|C_2)}$
+- x属于Class 1的概率为第一条路径除以两条路径和：$P(C_1|x)=\cfrac{P(C_1)P(x|C_1)}{P(C_1)P(x|C_1)+P(C_2)P(x|C_2)}$
+- x属于Class 2的概率为第二条路径除以两条路径和：$P(C_2|x)=\cfrac{P(C_2)P(x|C_2)}{P(C_1)P(x|C_1)+P(C_2)P(x|C_2)}$
 
 <center><img src="https://gitee.com/Sakura-gh/ML-notes/raw/master/img/two-class.png" width="60%;" /></center>
 
