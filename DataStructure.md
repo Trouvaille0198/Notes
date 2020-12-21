@@ -413,3 +413,58 @@ public:
 
 #### 2）用栈模拟系统运行时的栈
 
+# 五、串、数组和广义表
+
+## 5.1 字符串
+
+### 5.1.1 定义
+
+$$
+s=“a_0a_1\ldots a_{n-1}”
+$$
+
+- 空格符也是字符，空格串不是空串
+
+- 当串采用顺序存储时，存储串的数组名指出了串在内存中的首地址
+- C++中存储串的末尾会添加一个结束标识符NULL（编码值为0）
+
+### 5.1.2 模式匹配
+
+（Pattern Matching）
+
+设ob为主串，pat为模式串，查找pat在ob的匹配位置的操作称为模式匹配
+
+#### 1）Brute-Force算法
+
+从主串首字符开始依次匹配，若匹配失败，从第二个字符位开始匹配，以此类推。它是一种带回溯的算法。
+
+```c++
+int BF_find(const string &ob, const string &pat, const int p = 0)
+//查找pat在ob中从位置p开始子串
+{
+    int i = p, j = 0;
+    while (i < ob.length() && j < pat.length() && pat.length() - j <= ob.length() - i)
+    {
+        if (ob[i] == pat[j])//匹配成功，继续匹配下个字符
+        {
+            i++;
+            j++;
+        }
+        else //匹配失败
+        {
+            i = i - j + 1; //i退回到上趟匹配的下个字符位置
+            j = 0;         //j从头开始
+        }
+    }
+    if (j >= pat.length())
+        return i - j;
+    else
+    {
+        return -1;
+    }
+}
+```
+
+时间复杂度（最坏）：$O(m\sdot n)$
+
+#### 2）KMP算法
