@@ -43,9 +43,11 @@ r = requests.head('http://httpbin.org/get')
 r = requests.options('http://httpbin.org/get')
 ```
 
+返回`Response`对象
+
  ## 1.3 param
 
-用于传递URL参数
+接受一个字典，用于传递URL参数
 
 ```python
 payload = {'key1': 'value1', 'key2': 'value2'}
@@ -61,7 +63,15 @@ http://httpbin.org/get?key1=value1&key2=value2
 
 ## 1.4 headers
 
-用于传递header参数（请求头）
+接受一个字典，用于传递header参数（请求头）
+
+```python
+url = 'https://tophub.today/n/mproPpoq6O'
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36'
+}
+s = requests.get(url,headers=headers)
+```
 
 ## 1.5 data
 
@@ -141,4 +151,63 @@ PreparedRequest对象，可以用于查看发送请求时的信息，比如r.req
 
 ## 2.10 r.json()
 
-用于将响应解析成json格式
+用于将响应解析成JSON格式，即将返回结果是JSON格式的字符串转化为字典
+
+如果返回结果不是JSON格式，便会出现解析错误，抛出`json.decoder.JSONDecodeError`异常
+
+# 三、session对象
+
+## 3.1 会话维持
+
+requests中的session对象能够让我们跨http请求保持某些参数，即让同一个session对象发送的请求头携带某个指定的参数。当然，最常见的应用是它可以让cookie保持在后续的一串请求中
+
+即，利用Session对象，可以方便地维护一个会话
+
+```python
+import requests
+# tips: http://httpbin.org能够用于测试http请求和响应
+s = requests.Session() 											#第一步：发送一个请求，用于设置请求中的cookies
+s.get('http://httpbin.org/cookies/set/sessioncookie/123456789') #第二步：再发送一个请求，用于查看当前请求中的cookies
+r = s.get("http://httpbin.org/cookies")
+print(r.text)
+```
+
+输出
+
+```python
+{
+  "cookies": {
+    "sessioncookie": "123456789"
+  }
+}
+```
+
+第二次请求已经携带上了第一次请求所设置的cookie，即通过session达到了保持cookie的目的
+
+session让请求之间具有了连贯性
+
+## 3.2 s.cookies.update()
+
+用于设置请求中的cookies，方便实现跨参数请求，即能够在前后请求之间保持cookie
+
+传入参数：字典
+
+```python
+import requests
+
+s = requests.session()
+s.cookies.update({'cookies_are': 'cookie'})
+r = s.get(url='http://httpbin.org/cookies')
+print(r.text)
+```
+
+输出
+
+```python
+{
+  "cookies": {
+    "cookies_are": "cookie"
+  }
+}
+```
+
