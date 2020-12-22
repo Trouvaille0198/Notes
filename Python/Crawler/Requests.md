@@ -113,3 +113,32 @@ PreparedRequest对象，可以用于查看发送请求时的信息，比如r.req
 
 ## 2.3 r.text
 
+响应的内容，unicode类型
+
+## 2.4 r.content
+
+响应的内容，byte类型（二进制）
+
+## 2.5 r.status_code
+
+响应的http状态码
+
+## 2.6 r.links
+
+响应的解析头链接
+
+## 2.7 r.history
+
+请求的历史记录，可以用于查看重定向信息，以列表形式展示，排序方式是从最旧到最新的请求
+
+## 2.8 r.reason
+
+响应状态的描述，比如 "Not Found" or "OK"
+
+## 2.9 r.cookies
+
+服务器发回的cookies，RequestsCookieJar类型
+
+## 2.10 r.json()
+
+用于将响应解析成json格式
