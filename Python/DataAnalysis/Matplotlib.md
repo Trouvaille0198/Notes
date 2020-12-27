@@ -372,8 +372,9 @@ plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
 
 - *x,y*：数据，x可选
 - *fmt*：定义基本属性
-  - ` fmt = '[color][marker][line]'`
-
+  
+- ` fmt = '[color][marker][line]'`
+  
 - ***kwargs*
 
   - *label*
@@ -637,8 +638,9 @@ plt.show()
 - *radius*：设置饼图的半径大小；
 
 - *wedgeprops*：设置饼图内外边界的属性，如边界线的粗细、颜色等, 如
-  - `wedgeprops = {'linewidth': 1.5, 'edgecolor':'green'}`
-
+  
+- `wedgeprops = {'linewidth': 1.5, 'edgecolor':'green'}`
+  
 - *textprops*：设置饼图中文本的属性，如字体大小、颜色等；
 
 - *center*：指定饼图的中心点位置，默认为原点

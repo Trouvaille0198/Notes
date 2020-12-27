@@ -77,9 +77,47 @@ s = requests.get(url,headers=headers)
 
 用于POST请求中，传递请求体中的data参数
 
+该网站可以判断如果请求是POST方式，就把相关请求信息返回
+
+```python
+data = {'name': 'germey', 'age': '22'}
+r = requests.post("http://httpbin.org/post", data=data)
+print(r.text)
+```
+
+输出
+
+```
+{
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {
+    "age": "22", 
+    "name": "germey"
+  }, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "gzip, deflate", 
+    "Content-Length": "18", 
+    "Content-Type": "application/x-www-form-urlencoded", 
+    "Host": "httpbin.org", 
+    "User-Agent": "python-requests/2.25.0", 
+    "X-Amzn-Trace-Id": "Root=1-5fe43f55-5d4750b76935f7515662c3b3"
+  }, 
+  "json": null, 
+  "origin": "59.79.2.148", 
+  "url": "http://httpbin.org/post"
+}
+```
+
+
+
 ## 1.6 json
 
 用于POST请求中，传递请求体中json格式的的data参数
+
+
 
 ## 1.7 files
 
@@ -117,6 +155,11 @@ response类故名思议，它包含了服务器对http请求的响应。每次�
 
 请求的最终地址
 
+```python
+print(type(r.url), r.url)
+>>> <class 'str'> https://static1.scrape.center/
+```
+
 ## 2.2 r.request
 
 PreparedRequest对象，可以用于查看发送请求时的信息，比如r.request.headers查看请求头
@@ -125,13 +168,25 @@ PreparedRequest对象，可以用于查看发送请求时的信息，比如r.req
 
 响应的内容，unicode类型
 
+```python
+print(type(r.text), r.text)
+>>> <class 'str'> "HTML的内容"
+```
+
 ## 2.4 r.content
 
 响应的内容，byte类型（二进制）
 
+一般在抓取图像时有用
+
 ## 2.5 r.status_code
 
 响应的http状态码
+
+```python
+print(type(r.status_code), r.status_code)
+>>> <class 'int'> 500
+```
 
 ## 2.6 r.links
 
@@ -141,6 +196,11 @@ PreparedRequest对象，可以用于查看发送请求时的信息，比如r.req
 
 请求的历史记录，可以用于查看重定向信息，以列表形式展示，排序方式是从最旧到最新的请求
 
+```python
+print(type(r.history), r.history)
+>>> <class 'list'> []
+```
+
 ## 2.8 r.reason
 
 响应状态的描述，比如 "Not Found" or "OK"
@@ -149,11 +209,25 @@ PreparedRequest对象，可以用于查看发送请求时的信息，比如r.req
 
 服务器发回的cookies，RequestsCookieJar类型
 
+```python
+print(type(r.cookies), r.cookies)
+>>> <class 'requests.cookies.RequestsCookieJar'> <RequestsCookieJar[]>
+```
+
 ## 2.10 r.json()
 
 用于将响应解析成JSON格式，即将返回结果是JSON格式的字符串转化为字典
 
 如果返回结果不是JSON格式，便会出现解析错误，抛出`json.decoder.JSONDecodeError`异常
+
+## 2.11 r.headers()
+
+响应头，可单独取出某个字段的值，比如(r.headers)['content-type']
+
+```python
+print(type(r.headers), r.headers)
+>>> <class 'requests.structures.CaseInsensitiveDict'> {'Server': 'nginx/1.17.8', 'Date': 'Tue, 27 Oct 2020 15:10:32 GMT', 'Content-Type': 'text/html', 'Content-Length': '145', 'Connection': 'keep-alive', 'X-Frame-Options': 'DENY', 'Vary': 'Cookie', 'X-Content-Type-Options': 'nosniff', 'Strict-Transport-Security': 'max-age=15724800; includeSubDomains'}
+```
 
 # 三、session对象
 
@@ -209,5 +283,94 @@ print(r.text)
     "cookies_are": "cookie"
   }
 }
+```
+
+# 四、 状态码查询对象 requests.codes
+
+```python
+exit() if not r.status_code == requests.codes.ok else print('Request Successfully!')
+```
+
+返回码和相应的查询条件
+
+```python
+# 信息性状态码
+100: ('continue',),
+101: ('switching_protocols',),
+102: ('processing',),
+103: ('checkpoint',),
+122: ('uri_too_long', 'request_uri_too_long'),
+
+# 成功状态码
+200: ('ok', 'okay', 'all_ok', 'all_okay', 'all_good', '\\o/', '✓'),
+201: ('created',),
+202: ('accepted',),
+203: ('non_authoritative_info', 'non_authoritative_information'),
+204: ('no_content',),
+205: ('reset_content', 'reset'),
+206: ('partial_content', 'partial'),
+207: ('multi_status', 'multiple_status', 'multi_stati', 'multiple_stati'),
+208: ('already_reported',),
+226: ('im_used',),
+
+# 重定向状态码
+300: ('multiple_choices',),
+301: ('moved_permanently', 'moved', '\\o-'),
+302: ('found',),
+303: ('see_other', 'other'),
+304: ('not_modified',),
+305: ('use_proxy',),
+306: ('switch_proxy',),
+307: ('temporary_redirect', 'temporary_moved', 'temporary'),
+308: ('permanent_redirect',
+      'resume_incomplete', 'resume',), # These 2 to be removed in 3.0
+
+# 客户端错误状态码
+400: ('bad_request', 'bad'),
+401: ('unauthorized',),
+402: ('payment_required', 'payment'),
+403: ('forbidden',),
+404: ('not_found', '-o-'),
+405: ('method_not_allowed', 'not_allowed'),
+406: ('not_acceptable',),
+407: ('proxy_authentication_required', 'proxy_auth', 'proxy_authentication'),
+408: ('request_timeout', 'timeout'),
+409: ('conflict',),
+410: ('gone',),
+411: ('length_required',),
+412: ('precondition_failed', 'precondition'),
+413: ('request_entity_too_large',),
+414: ('request_uri_too_large',),
+415: ('unsupported_media_type', 'unsupported_media', 'media_type'),
+416: ('requested_range_not_satisfiable', 'requested_range', 'range_not_satisfiable'),
+417: ('expectation_failed',),
+418: ('im_a_teapot', 'teapot', 'i_am_a_teapot'),
+421: ('misdirected_request',),
+422: ('unprocessable_entity', 'unprocessable'),
+423: ('locked',),
+424: ('failed_dependency', 'dependency'),
+425: ('unordered_collection', 'unordered'),
+426: ('upgrade_required', 'upgrade'),
+428: ('precondition_required', 'precondition'),
+429: ('too_many_requests', 'too_many'),
+431: ('header_fields_too_large', 'fields_too_large'),
+444: ('no_response', 'none'),
+449: ('retry_with', 'retry'),
+450: ('blocked_by_windows_parental_controls', 'parental_controls'),
+451: ('unavailable_for_legal_reasons', 'legal_reasons'),
+499: ('client_closed_request',),
+
+# 服务端错误状态码
+500: ('internal_server_error', 'server_error', '/o\\', '✗'),
+501: ('not_implemented',),
+502: ('bad_gateway',),
+503: ('service_unavailable', 'unavailable'),
+504: ('gateway_timeout',),
+505: ('http_version_not_supported', 'http_version'),
+506: ('variant_also_negotiates',),
+507: ('insufficient_storage',),
+509: ('bandwidth_limit_exceeded', 'bandwidth'),
+510: ('not_extended',),
+511: ('network_authentication_required', 'network_auth', 'network_authentication')
 ```
 

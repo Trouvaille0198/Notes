@@ -572,6 +572,8 @@ df.index=[...]								     	#传入列表以改变行名称
 ### 3.1.6 删除重复值
 
 ```python
+df.duplicated().any()	#返回bool，查看是否有重复值
+
 df['A'].drop_duplicates()					#删除A列中有重复值的列
 df['A'].drop_duplicates(keep='last')		#删除先出现的重复值
 ```

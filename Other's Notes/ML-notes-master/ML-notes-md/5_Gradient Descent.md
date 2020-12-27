@@ -87,7 +87,7 @@ $$
 $$
 由于$\eta^t$和$\sigma^t$中都有一个$\sqrt{\frac{1}{1+t}}$的因子，两者相消，即可得到adagrad的最终表达式：
 
-$w^{t+1}=w^t-\frac{\eta}{\sum\limits_{i=0}^t(g^i)^2}\cdot g^t$
+$w^{t+1}=w^t-\cfrac{\eta}{\sum\limits_{i=0}^t(g^i)^2}\cdot g^t$
 
 ##### Adagrad的contradiction解释
 
