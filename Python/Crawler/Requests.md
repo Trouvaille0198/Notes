@@ -123,25 +123,162 @@ print(r.text)
 
 上传文件
 
+```python
+import requests
+files = {'file': open('favicon.ico', 'rb')}
+r = requests.post("http://httpbin.org/post", files=files)
+print(r.text)
+```
+
 ## 1.8 cookies
 
 用于传递cookies参数，不过将cookies写在headers中比较方便
+
+```python
+import requests
+r = requests.get("https://www.baidu.com")
+print(r.cookies)
+for key, value in r.cookies.items():
+    print(key + '=' + value)
+```
+
+输出
+
+```html
+<RequestsCookieJar[<Cookie BDORZ=27315 for .baidu.com/>]>
+BDORZ=27315
+```
+
+步骤
+
+1. 调用cookies属性，得到Cookies，可以发现它是RequestCookieJar类型
+2. 用items()方法将其转化为元组组成的列表，遍历输出每一个Cookie的名称和值，实现Cookie的遍历解析
 
 ## 1.9 verify
 
 用于https请求时的ssl证书验证，默认是开启的，如果不需要则设置为False即可
 
+例：请求一个HTTPS站点，但是证书验证错误的页面时，把verify参数设置为False
+
+```python
+import requests
+response = requests.get('https://www.12306.cn', verify=False)
+print(response.status_code)
+```
+
+输出
+
+```html
+D:\Application\Anaconda\lib\site-packages\urllib3\connectionpool.py:988: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.12306.cn'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  InsecureRequestWarning,
+200
+```
+
+报了一个警告，它建议我们给它指定证书
+
+- 可以通过设置忽略警告的方式来屏蔽这个警告
+
+```python
+from requests.packages import urllib3
+urllib3.disable_warnings()
+```
+
+- 或者通过捕获警告到日志的方式忽略警告
+
+```python
+import logging
+logging.captureWarnings(True)
+```
+
+- 可以指定一个本地证书用作客户端证书
+
+```python
+import requests
+response = requests.get('https://www.12306.cn',
+                        cert=('/path/server.crt', '/path/key'))
+print(response.status_code)
+```
+
+我们需要有crt和key文件，并且指定它们的路径。注意，本地私有证书的key必须是解密状态，加密状态的key是不支持的
+
 ## 1.10 proxies
 
 设置请求的代理，支持http代理以及socks代理（需要安装第三方库"pip install requests[socks]"）
 
+```python
+import requests
+proxies = {
+	"http": "http://10.10.1.10:3128",
+	"https": "http://10.10.1.10:1080",
+}
+requests.get("https://www.taobao.com", proxies=proxies)
+```
+
+- 若代理需要使用HTTP Basic Auth，可以使用类似[http://user](http://user/):password@host:port这样的语法来设置代理
+
+```python
+proxies = {
+    "http": "http://user:password@10.10.1.10:3128/",
+}
+```
+
+- 使用SOCKS协议代理
+
+```python
+proxies = {
+	'http': 'socks5://user:password@host:port',
+	'https': 'socks5://user:password@host:port'
+}
+```
+
 ## 1.11 timeout
 
-设置请求的超时时间，可以设置连接超时和读取超时
+设置请求的超时时间，（发出请求到服务器返回响应的时间），可以设置连接超时和读取超时
+
+```python
+import requests
+r = requests.get("https://www.taobao.com", timeout=1)
+print(r.status_code)
+```
+
+- 请求分为两个阶段，即连接（connect）和读取（read）。上面设置的timeout将用作连接和读取这二者的timeout总和
+
+- 如果想永久等待，可以直接将timeout设置为None，或者不设置直接留空，因为默认是None
 
 ## 1.12 auth
 
 身份认证时使用
+
+```python
+import requests
+from requests.auth import HTTPBasicAuth
+r = requests.get('http://localhost:5000',
+                 auth=HTTPBasicAuth('username', 'password'))
+print(r.status_code)
+```
+
+如果用户名和密码正确的话，请求时就会自动认证成功，会返回200状态码，如果认证失败，则返回401状态码
+
+- 直接传一个元组
+
+  它会默认使用HTTPBasicAuth这个类来认证
+
+```python
+r = requests.get('http://localhost:5000', auth=('username', 'password'))
+```
+
+- 使用OAuth1认证
+
+```python
+import requests
+from requests_oauthlib import OAuth1
+url = 'https://api.twitter.com/1.1/account/verify_credentials.json'
+auth = OAuth1('YOUR_APP_KEY', 'YOUR_APP_SECRET',
+              'USER_OAUTH_TOKEN', 'USER_OAUTH_TOKEN_SECRET')
+requests.get(url, auth=auth)
+```
+
+
 
 ## 1.13 allow_redirects
 
@@ -151,7 +288,9 @@ print(r.text)
 
 response类故名思议，它包含了服务器对http请求的响应。每次调用requests去请求之后，均会返回一个response对象，通过调用该对象，可以查看具体的响应信息
 
-## 2.1 r.url
+以下是response对象的部分属性
+
+## 2.1 .url
 
 请求的最终地址
 
@@ -160,11 +299,11 @@ print(type(r.url), r.url)
 >>> <class 'str'> https://static1.scrape.center/
 ```
 
-## 2.2 r.request
+## 2.2 .request
 
 PreparedRequest对象，可以用于查看发送请求时的信息，比如r.request.headers查看请求头
 
-## 2.3 r.text
+## 2.3 .text
 
 响应的内容，unicode类型
 
@@ -173,13 +312,13 @@ print(type(r.text), r.text)
 >>> <class 'str'> "HTML的内容"
 ```
 
-## 2.4 r.content
+## 2.4 .content
 
 响应的内容，byte类型（二进制）
 
 一般在抓取图像时有用
 
-## 2.5 r.status_code
+## 2.5 .status_code
 
 响应的http状态码
 
@@ -188,11 +327,11 @@ print(type(r.status_code), r.status_code)
 >>> <class 'int'> 500
 ```
 
-## 2.6 r.links
+## 2.6 .links
 
 响应的解析头链接
 
-## 2.7 r.history
+## 2.7 .history
 
 请求的历史记录，可以用于查看重定向信息，以列表形式展示，排序方式是从最旧到最新的请求
 
@@ -201,11 +340,11 @@ print(type(r.history), r.history)
 >>> <class 'list'> []
 ```
 
-## 2.8 r.reason
+## 2.8 .reason
 
 响应状态的描述，比如 "Not Found" or "OK"
 
-## 2.9 r.cookies
+## 2.9 .cookies
 
 服务器发回的cookies，RequestsCookieJar类型
 
@@ -214,13 +353,13 @@ print(type(r.cookies), r.cookies)
 >>> <class 'requests.cookies.RequestsCookieJar'> <RequestsCookieJar[]>
 ```
 
-## 2.10 r.json()
+## 2.10 .json()
 
 用于将响应解析成JSON格式，即将返回结果是JSON格式的字符串转化为字典
 
 如果返回结果不是JSON格式，便会出现解析错误，抛出`json.decoder.JSONDecodeError`异常
 
-## 2.11 r.headers()
+## 2.11 .headers()
 
 响应头，可单独取出某个字段的值，比如(r.headers)['content-type']
 
@@ -240,9 +379,9 @@ requests中的session对象能够让我们跨http请求保持某些参数，即�
 ```python
 import requests
 # tips: http://httpbin.org能够用于测试http请求和响应
-s = requests.Session() 											#第一步：发送一个请求，用于设置请求中的cookies
-s.get('http://httpbin.org/cookies/set/sessioncookie/123456789') #第二步：再发送一个请求，用于查看当前请求中的cookies
-r = s.get("http://httpbin.org/cookies")
+s = requests.Session() 											
+s.get('http://httpbin.org/cookies/set/sessioncookie/123456789') #第一步：发送一个请求，用于设置请求中的cookies
+r = s.get("http://httpbin.org/cookies") 						#第二步：再发送一个请求，用于查看当前请求中的cookies
 print(r.text)
 ```
 
