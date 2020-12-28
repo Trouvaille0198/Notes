@@ -513,3 +513,58 @@ void GetNext(const string &pat, int *next)
 }
 ```
 
+## 5.2 数组
+
+数据类型受限
+
+## 5.3 稀疏矩阵
+
+### 5.3.1 矩阵的压缩存储
+
+- 对称矩阵 （$a_{ij} == a_{ji}$）：记录三角及对角线
+- 三对角矩阵（除主对角线及其相邻两条斜线，其余元素均为0）：行列号插值不为1的为0
+- 稀疏矩阵 （大部分元素为0的矩阵）
+
+### 5.3.2 三元组
+
+用（行、列、值）来记录稀疏矩阵中的非零元素
+
+```c++
+template <class DataType>
+class Triple
+{
+    int _row, _col;
+    DataType _value;
+
+    Triple(){};
+    Triple(int row, int col, DataType value) _row(row), _col(col), _value(value){};
+};
+```
+
+### 5.3.3 三元组顺序表
+
+### 5.3.4 三元组的十字链表
+
+当非零元素经常变动时，不适合用顺序表。
+
+十字链表由行链表和列链表组成（不带头结点的循环表），每个非零元素既处于行链表又处于列链表中
+
+#### 1）非零元素节点类模板
+
+#### 2）
+
+## 5.4 广义表
+
+即列表（List），元素可以是一个数据也可以是一个表
+$$
+LS=(a_1,a_2,\ldots,a_n)
+$$
+
+- 表头：$a_1$
+- 表尾：$(a_2,a_3,\ldots,a_n)$
+
+- 深度：广义表中括号的深度；空表的深度为1
+
+### 5.4.1 广义链表
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201228093515706.png" alt="image-20201228093515706" style="zoom:67%;" />
