@@ -390,6 +390,15 @@ for parent in soup.b.parents:
     print(parent.name)
 ```
 
+输出
+
+```html
+p
+body
+html
+[document]
+```
+
 ## 3.3 兄弟节点
 
 ### 3.3.1 .next_sibling 和 .previous_sibling
@@ -433,6 +442,130 @@ for sibling in soup.a.next_siblings:
 
 ## 4.1 过滤器
 
+过滤器贯穿整个搜索的API。过滤器可以被用在tag的name中,节点的属性中,字符串中或他们的混合中
+
+### 4.1.1 字符串
+
+在搜索方法中传入一个字符串参数,Beautiful Soup会查找与字符串完整匹配的内容
+
+```python
+soup.find_all('a')
+```
+
+输出
+
+```html
+[<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
+ <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>,
+ <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+```
+
+### 4.1.2 正则表达式
+
+Beautiful Soup会通过正则表达式的 `match()` 来匹配内容
+
+下面代码找出所有名字中包含”t”的标签
+
+```python
+import re
+for tag in soup.find_all(re.compile("t")):
+    print(tag.name)
+```
+
+输出
+
+```html
+html
+title
+```
+
+### 4.1.3 列表
+
+Beautiful Soup会将与列表中任一元素匹配的内容返回
+
+下面代码找到文档中所有<a>标签和<b>标签
+
+```python
+soup.find_all(["a", "b"])
+```
+
+输出
+
+```html
+[<b>The Dormouse's story</b>,
+ <a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
+ <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>,
+ <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+```
+
+### 4.1.4 True
+
+`True` 可以匹配任何值
+
+下面代码查找到所有的tag名
+
+```python
+for tag in soup.find_all(True):
+    print(tag.name)
+```
+
+输出
+
+```html
+html
+head
+title
+body
+p
+b
+p
+a
+a
+a
+p
+```
+
+### 4.1.5 方法
+
+如果没有合适过滤器,那么还可以定义一个方法,方法只接受一个元素参数 [[4\]](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#id91) ,如果这个方法返回 `True` 表示当前元素匹配并且被找到,如果不是则反回 `False`
+
+下面方法校验了当前元素,如果包含 `class` 属性却不包含 `id` 属性,那么将返回 `True`
+
+```python
+def has_class_but_no_id(tag):
+    return tag.has_attr('class') and not tag.has_attr('id')
+soup.find_all(has_class_but_no_id)
+```
+
+输出
+
+```html
+[<p class="title"><b>The Dormouse's story</b></p>,
+ <p class="story">Once upon a time there were three little sisters; and their names were
+ <a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
+ <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a> and
+ <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>;
+ and they lived at the bottom of a well.</p>,
+ <p class="story">...</p>]	
+```
+
+通过一个方法来过滤一类标签属性的时候, 这个方法的参数是要被过滤的属性的值, 而不是这个标签
+
+下面的例子是找出 `href` 属性不符合指定正则的 `a` 标签
+
+```python
+def not_lacie(href):
+        return href and not re.compile("lacie").search(href)
+soup.find_all(href=not_lacie)
+```
+
+输出
+
+```html
+[<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
+ <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+```
+
 ## 4.2 find_all()
 
 ```python
@@ -440,3 +573,221 @@ find_all( name , attrs , recursive , string , **kwargs )
 ```
 
 `find_all()` 方法搜索当前tag的所有tag子节点,并判断是否符合过滤器的条件
+
+任意参数的值可以是任一类型的过滤器，字符串，正则表达式，列表，方法或是 `True` 
+
+### 4.2.1 name
+
+`name` 参数可以查找所有名字为 `name` 的tag,字符串对象会被自动忽略掉
+
+```python
+soup.find_all("a")
+```
+
+输出
+
+```html
+[<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
+ <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>,
+ <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+```
+
+### 4.2.2 keyword
+
+1. 如果一个指定名字的参数不是搜索内置的参数名,搜索时会把该参数当作指定名字tag的属性来搜索
+
+```python
+soup.find_all(id='link2')
+soup.find_all("a",'sister',href=re.compile('^.*?la'))
+soup.find_all(id=True)
+```
+
+输出
+
+```html
+[<a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>]
+[<a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>]
+[<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
+ <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>,
+ <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+```
+
+2. 有些tag属性在搜索不能使用,比如HTML5中的 data-* 属性，但是可以通过 `find_all()` 方法的 `attrs` 参数定义一个字典参数来搜索包含特殊属性的tag
+
+3. 标识CSS类名的关键字 `class` 在Python中是保留字,使用 `class` 做参数会导致语法错误.从Beautiful Soup的4.1.1版本开始,可以通过 `class_` 参数搜索有指定CSS类名的tag
+
+```python
+soup.find_all("a", class_="sister")
+
+def has_six_characters(css_class):
+    return css_class is not None and len(css_class) == 6
+soup.find_all(class_=has_six_characters)                 #与第一种方法输出相同结果
+```
+
+输出
+
+```html
+[<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
+ <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>,
+ <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+```
+
+### 4.2.3 string
+
+通过 `string` 参数可以搜搜文档中的字符串内容
+
+```python
+soup.find_all(string="Elsie") #单独使用时，返回字符串
+soup.find_all("a", string="Elsie") #与其他参数混合使用时，返回对应的Tag
+```
+
+输出
+
+```html
+['Elsie']
+[<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>]
+```
+
+### 4.2.4 limit
+
+`find_all()` 方法返回全部的搜索结构,如果文档树很大那么搜索会很慢.如果我们不需要全部结果,可以使用 `limit` 参数限制返回结果的数量
+
+```python
+soup.find_all("a", limit=2)
+```
+
+文档树中有3个tag符合搜索条件,但结果只返回了2个,因为我们限制了返回数量
+
+```html
+[<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
+ <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>]
+```
+
+### 4.2.5 recursive
+
+调用tag的 `find_all()` 方法时,Beautiful Soup会检索当前tag的所有子孙节点,如果只想搜索tag的直接子节点,可以使用参数 `recursive=False`
+
+```python
+soup.html.find_all("title")
+# [<title>The Dormouse's story</title>]
+
+soup.html.find_all("title", recursive=False)
+# []
+```
+
+### 4.2.6 简写方式
+
+`find_all()` 几乎是Beautiful Soup中最常用的搜索方法,所以我们定义了它的简写方法. `BeautifulSoup` 对象和 `tag` 对象可以被当作一个方法来使用,这个方法的执行结果与调用这个对象的 `find_all()` 方法相同
+
+下面代码是等价的
+
+```python
+soup.find_all("a")
+soup("a")
+
+soup.title.find_all(string=True)
+soup.title(string=True)
+```
+
+## 4.3 find()
+
+find( [name](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#id35) , [attrs](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#css) , [recursive](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#recursive) , [string](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#id36) , [**kwargs](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#keyword) )
+
+`find()` 方法将返回文档中符合条件的第一个tag
+
+下面两行代码是等价的
+
+```python
+soup.find_all('title', limit=1)
+# [<title>The Dormouse's story</title>]
+
+soup.find('title')
+# <title>The Dormouse's story</title>
+```
+
+唯一的区别是 `find_all()` 方法的返回结果是值包含一个元素的列表,而 `find()` 方法直接返回结果
+
+`find_all()` 方法没有找到目标是返回空列表, `find()` 方法找不到目标时,返回 `None`
+
+`soup.head.title` 是tag的名字方法的简写.这个简写的原理就是多次调用当前tag的 `find()` 方法
+
+```python
+soup.head.title
+# <title>The Dormouse's story</title>
+
+soup.find("head").find("title")
+# <title>The Dormouse's story</title>
+```
+
+## 4.4 其他方法
+
+1. find_parents()和find_parent()
+
+   前者返回所有祖先节点，后者返回直接父节点。
+
+   ```python
+   p_story = soup.find(class_='story')
+   for i in p_story.find_parents():
+       print(i.name)
+   ```
+
+   输出
+
+   ```html
+   body
+   html
+   [document]
+   ```
+
+2. find_next_siblings()和find_next_sibling()
+
+   前者返回后面所有的兄弟节点，后者返回后面第一个兄弟节点。
+
+3. find_previous_siblings()和find_previous_sibling()
+
+   前者返回前面所有的兄弟节点，后者返回前面第一个兄弟节点。
+
+4. find_all_next()和find_next()
+
+   前者返回节点后所有符合条件的节点，后者返回第一个符合条件的节点。
+
+5. find_all_previous()和find_previous()
+
+   前者返回节点后所有符合条件的节点，后者返回第一个符合条件的节点
+
+# 五、CSS选择器
+
+在 `Tag` 或 `BeautifulSoup` 对象的 `.select()` 方法中传入字符串参数, 即可使用CSS选择器的语法找到tag
+
+# 六、其他
+
+## 6.1 复制Beautiful Soup对象
+
+`copy.copy()` 方法可以复制任意 `Tag` 或 `NavigableString` 对象
+
+```python
+import copy
+p_copy = copy.copy(soup.p)
+```
+
+复制后的对象跟与对象是相等的, 但指向不同的内存地址
+
+```python
+print soup.p == p_copy
+# True
+
+print soup.p is p_copy
+# False
+```
+
+## 6.2 get_text()
+
+获取标签里面内容，除了可以使用 .string 之外，还可以使用 get_text 方法，不同的地方在于前者返回的一个 NavigableString 对象，后者返回的是 unicode 类型的字符串。
+
+实际场景中我们一般使用 get_text 方法获取标签中的内容。
+
+```python
+soup.head.get_text()
+# 'Harry potter'
+```
+
