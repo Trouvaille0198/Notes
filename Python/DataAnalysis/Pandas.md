@@ -694,7 +694,7 @@ df1.drop(df1.index[0:2])		#按行号删除
 df.drop(['id','date'],axis=1) 	#按列名删除
 df.drop(df.columns[0:2],axis=1)	#按列号删除
 
-del.df['id'] 					#删除列（就地删除）
+del df['id'] 					#删除列（就地删除）
 ```
 
 ### 3.4.2 增加行
