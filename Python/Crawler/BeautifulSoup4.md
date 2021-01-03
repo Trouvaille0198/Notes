@@ -791,11 +791,3 @@ soup.head.get_text()
 # 'Harry potter'
 ```
 
-
-
-```
-https://img1.doubanio.com/view/photo/m/public/p2563468229.webp
-
-https://img9.doubanio.com/view/photo/m/public/p2563468325.webp
-```
-
