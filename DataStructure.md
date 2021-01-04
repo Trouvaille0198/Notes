@@ -119,7 +119,7 @@ L称为表名，n称为表长，$a_i$：第i个称为位序，$a_1$称为首元�
 
 - 特点
   1. **随机访问**，在$O(1)$时间内找到第i个元素
-  2. 存储密度高（=1），每个节点只存储数据元素，不记录相对关系，节省空间
+  2. 存储密度高（=1），每个结点只存储数据元素，不记录相对关系，节省空间
   3. 因为设置了最大容量，空间会有富余，较为浪费
   4. 扩展容量不方便
   5. 插入、删除操作不方便，需要移动大量元素
@@ -202,13 +202,13 @@ SeqList<DataType>::SeqList(DataType *a, int length, int maxlen) : _length(length
 
 ### 3.4.1 单链表
 
-一个节点由两个域组成，data域存放数据元素，next域存放指向下一节点的指针
+一个结点由两个域组成，data域存放数据元素，next域存放指向下一结点的指针
 
-一般多用带有头节点的单链表（第一个节点为空）
+一般多用带有头结点的单链表（第一个结点为空）
 
-欲得知已知节点的前节点，需要顺序访问；欲得知已知节点的后节点，仅需使用next指针
+欲得知已知结点的前结点，需要顺序访问；欲得知已知结点的后结点，仅需使用next指针
 
-#### 1）节点类模板定义
+#### 1）结点类模板定义
 
 ```c++
 template <class ElemType>
@@ -224,7 +224,7 @@ struct Node
 }
 ```
 
-#### 2）节点实现
+#### 2）结点实现
 
 ```c++
 // 结点类的实现部分
@@ -475,7 +475,7 @@ int KMP(const string &ob, const string &pat, const int start = 0)
     int *next = new int[pat.length()];
     GetNext(pat, next);
     int i = start, j = 0;
-    while (ob[i] != '\0' && pat[j] != '\0')
+    while ((j == -1) || (ob[i] != '\0' && pat[j] != '\0'))
     {
         if (j == -1 || ob[i] == pat[j])
         {
@@ -515,6 +515,8 @@ void GetNext(const string &pat, int *next)
 
 ## 5.2 数组
 
+数组将线性关系进行扩展（一维变多维）
+
 数据类型受限
 
 ## 5.3 稀疏矩阵
@@ -549,7 +551,7 @@ class Triple
 
 十字链表由行链表和列链表组成（不带头结点的循环表），每个非零元素既处于行链表又处于列链表中
 
-#### 1）非零元素节点类模板
+#### 1）非零元素结点类模板
 
 #### 2）
 
@@ -567,4 +569,84 @@ $$
 
 ### 5.4.1 广义链表
 
-<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201228093515706.png" alt="image-20201228093515706" style="zoom:67%;" />
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201228093515706.png" alt="image-20201228093515706" style="zoom:67%;" /><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104080520301.png" alt="image-20210104080520301" style="zoom:67%;" />
+
+要点：
+
+1. 带头结点
+
+2. 单元素深度为0，空表深度为一
+
+3. 几乎所有操作都是递归，因为广义表本身的定义即是递归的
+
+4. 求深度公式
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104083030427.png" alt="image-20210104083030427" style="zoom:67%;" />
+
+#### 1）结点类模板定义
+
+#### 2）链表类模板定义
+
+# 六、数和森林
+
+一个数据可能有多个直接前驱（或后继），需要用非线性数据结构去表示，本章讲解树形结构的定义与实现
+
+## 6.1 树
+
+(tree)
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104090947185.png" alt="image-20210104090947185" style="zoom:67%;" />
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104092654359.png" alt="image-20210104092654359" style="zoom:67%;" />
+
+### 6.1.1 定义
+
+树$T$是一个包含$n$个数据元素的有限集合，每个数据元素用一个结点表示，且有
+
+1. $n=0$时，$T$为空树
+2. $n>0$时，$T$有且只有一个根（root），根结点只有后继，没有前驱
+3. $n>1$时，根以外的其余结点又是$m$个互不受限的非空有限集，它们是根结点的子树（subtree）
+
+### 6.1.2 术语
+
+- 结点（node）：每个数据元素及指向其子树根的分支
+- 结点的度（degree of node）：一个结点的分支个数（子树数目）
+- 终端结点（terminal tree）：度为0的结点，也叫叶子（leaf）
+- 非终端结点（nonterminal tree）：度不为0的结点，也叫分支结点
+- 树的度（degree of tree）：树的结点中最大的度
+- 孩子（child）和双亲（parent）：结点p的子树称为p的孩子，p是其子树的双亲
+- 兄弟（sibling）：双亲相同的结点
+- 祖先（ancestor）：从根结点到结点x所经分支上的所有结点是x的祖先
+- 子孙（descendant）：以结点p为根的所有字数中的所有结点都是p的子孙
+- 结点的层次（level）：根为第一层，根的孩子第二层，以此类推；树中任意结点的level是其双亲结点level+1
+- 树的深度（depth）：书中结点的最大层次（根的层次），也叫高度（height）
+- 堂兄弟：双亲在同一层的结点
+- 有序树：树中结点p的子树都是有顺序的
+- 无序树：树中结点p的子树没有顺序
+- 森林（forest）：m颗互不相交的的树的集合；对树中每个结点而言，其子树的集合即为森林（子树森林）
+
+## 6.2 二叉树
+
+（Binary Tree）
+
+### 6.2.1 定义
+
+二叉树是特殊的有序树，每个节点的度最多为2
+
+非空时，有根结点BT，余下的结点最多被组成两颗互不相交的、分别被称为BT的左子树（left subtree）和右子树（right subtree）的二叉树
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104093053829.png" alt="image-20210104093053829" style="zoom:67%;" />
+
+### 6.2.2 性质
+
+### 6.2.3 遍历
+
+（Traversing Binary Tree, TBT）
+
+定义：按某种顺序访问每个结点，并使每个结点只被访问一次
+
+方法：规定$L,D,R$为访问左子树，根，右子树，有：（规定先左再右）
+
+1. $DLR$：先序遍历
+2. $LDR$：中序遍历
+3. $LRD$：后序遍历
