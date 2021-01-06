@@ -2,6 +2,8 @@
 
 # 一、创建图片与子图
 
+==若不创建实例，一切对象名均使用plt！==
+
 ## 1.1 导入
 
 ```python
@@ -202,6 +204,13 @@ ax1.set_xticks([0,25,50,75,100])
 ax1.set_yticks([10,20,30,40,50])
 ```
 
+若要**直接在figure上操作**
+
+```python
+plt.xticks([0,25,50,75,100])
+plt.yticks([10,20,30,40,50])
+```
+
 ### 2.2.2 添加轴标签
 
 添加与刻度对应的标签
@@ -219,7 +228,7 @@ ax1.set_xlabel('stage')
 
 参数见2.1.1
 
-若要直接在figure上操作
+若要**直接在figure上操作**
 
 ```python
 plt.yticks([-2,-1.8,-1,1.22,3],['really bad','bad','normal','good','really ',
@@ -245,8 +254,6 @@ y轴亦如是
 ax.get_lim()
 ax.set_lim()
 ```
-
-
 
 ## 2.3 添加图例
 

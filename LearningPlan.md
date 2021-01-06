@@ -1,4 +1,4 @@
-# 大二冬季
+# 大二冬季+寒假
 
 ## 1. 机器学习
 
@@ -20,8 +20,6 @@
 - 整理已有笔记
 - 一百个爬虫实战 https://zhuanlan.zhihu.com/p/75036835
 - 《python网络爬虫权威指南》
-- Requests官方文档 https://2.python-requests.org/zh_CN/latest/user/quickstart.html
-- bs4官中文档 https://beautifulsoup.readthedocs.io/zh_CN/latest/
 - 爬虫实战合集 https://www.jianshu.com/p/dcd6438ce4c7/
 
 ## 3. 数据分析

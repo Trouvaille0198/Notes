@@ -498,7 +498,7 @@ df.std()		#返回每一列的标准差
 
 以下图为例
 
-![image-20201209163600487](https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209163600487.png)
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209163600487.png" alt="image-20201209163600487" style="zoom:67%;" />
 
 ### 3.1.1 处理空值
 

@@ -242,10 +242,10 @@ L=[x+10 for x in L]     #result:[11,12,13,14,15]
 参数 [start_index:  stop_index:  step] ：
 
    	 start_index是切片的起始位置索引，不提供时默认从头，可为负
-
-  	  stop_index是切片的结束位置（**不包括**）索引，不提供时默认至尾
-
-  	  step为步长，可以不提供，默认值是1
+   	
+   	  stop_index是切片的结束位置（**不包括**）索引，不提供时默认至尾
+   	
+   	  step为步长，可以不提供，默认值是1
 
 ### 2.3.6 复制列表/创建列表副本
 
@@ -613,7 +613,7 @@ len(dict)
 
 ## 4.1 基本语句
 
-### 1）创建类
+### 4.1.1 创建类
 
 ```python
 class Restaurant():
@@ -623,7 +623,7 @@ class Restaurant():
         self.customer_number = 0
 ```
 
-### 2）创建方法
+### 4.1.2 创建方法
 
 ```python
 def describe_rest(self):
@@ -634,13 +634,13 @@ def open_rest(self):
     print("This restaurant is opening")
 ```
 
-### 3） 使用类和实例
+### 4.1.3 使用类和实例
 
 ```python
 rest1 = Restaurant('KFC', 'snack bar')
 ```
 
-### 4） 调用方法
+### 4.1.4 调用方法
 
 ```python
 rest1.describe_rest()
@@ -649,7 +649,7 @@ rest1.open_rest()
 
 ## 4.2 继承
 
-### 1）子类
+### 4.2.1 子类
 
 ```python
 class IceCreamStand(Restaurant):
@@ -658,7 +658,7 @@ class IceCreamStand(Restaurant):
           self.flavours=['strawberry','chocolate','milk','matcha']           #为子类定义的属性
 ```
 
-### 2）给子类定义方法
+### 4.2.2 给子类定义方法
 
 ```python
 def describe_flavour(self):
@@ -667,7 +667,7 @@ for flavour in self.flavours:
     print(flavour,end=' ')
 ```
 
-### 3）使用子类和实例 
+### 4.2.3 使用子类和实例 
 
 ```python
 rest2=IceCreamStand('Dairy Queen','Ice Cream Stand')
@@ -709,33 +709,39 @@ from car import *
 
 ## 5.1 读取文件
 
-### 1）全部读取
+### 5.1.1 全部读取
+
+使用.read() 
 
 ```python
 with open(filename) as file_object:
-      contents = file_object.read()                    #使用.read()读取文件的全部内容
-      print(contents.rstrip())                         #使用.rstrip()来剥除.read()造成的末尾空字符串
+      contents = file_object.read()        #使用.read()读取文件的全部内容
+      print(contents.rstrip())             #使用.rstrip()来剥除.read()造成的末尾空字符串
 ```
 
-### 2）逐行读取
+### 5.1.2 逐行读取
+
+遍历
 
 ```python
 with open(filename) as file_object:
     for line in file_object:
-        print(line.rstrip())                            #使用.rstrip()来剥除文件每行末尾的换行符
+        print(line.rstrip())               #使用.rstrip()来剥除文件每行末尾的换行符
 ```
 
-### 3）创建一个包含文件各行内容的列表
+### 5.1.3 创建一个包含文件各行内容的列表
+
+使用.readlines()  
 
 ```python
 with open(filename) as file_object:
-    lines = file_object.readlines()                  #使用.readlines() 从文件中读取每一行并存储到一个列表中
+    lines = file_object.readlines()       #使用.readlines() 从文件中读取每一行并存储到一个列表中
 
 for line in lines:
     print(line.strip())
 ```
 
-### 4）使用文件内容并将文件的空格全部移除
+### 5.1.4 使用文件内容并将文件的空格全部移除
 
 ```python
 with open(filename) as file_object:
@@ -743,7 +749,7 @@ with open(filename) as file_object:
 
 pi_string=''
 for line in lines:
-    pi_string+=line.strip()                                       #使用.strip()将每行空格全部除去
+    pi_string+=line.strip()                 #使用.strip()将每行空格全部除去
 
 print(pi_string)
 print(pi_string[:10] + '...')
@@ -752,33 +758,70 @@ print(len(pi_string))
 
 ## 5.2 写入文件
 
-### 1）写入空文件
+### 5.2.1 写入空文件
 
 ```python
 filename = 'text_files\programming.txt'
 
 with open(filename, 'w') as file_object:
-    file_object.write('Heya!\n')                              #write()不会自动添加换行符，需手动添加
+    file_object.write('Heya!\n')                   #write()不会自动添加换行符，需手动添加
 ```
 
-### 2）附加到文件
+### 5.2.2 附加到文件
 
 ```python
 filename = 'text_files\programming.txt'
 
-with open(filename, 'a') as file_object:                      #'a'表示以附加模式打开文件
+with open(filename, 'a') as file_object:            #'a'表示以附加模式打开文件
     file_object.write('Greeting!\n') 
 ```
 
-## 5.3 用json存储数据
+## 5.3 其他打开方式
 
-### 1）导入模块
+- r：以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。
+- rb：以二进制只读方式打开一个文件。文件指针将会放在文件的开头。
+- r+：以读写方式打开一个文件。文件指针将会放在文件的开头。
+- rb+：以二进制读写方式打开一个文件。文件指针将会放在文件的开头。
+- w：以写入方式打开一个文件。如果该文件已存在，则将其覆盖。如果该文件不存在，则创建新文件。
+- wb：以二进制写入方式打开一个文件。如果该文件已存在，则将其覆盖。如果该文件不存在，则创建新文件。
+- w+：以读写方式打开一个文件。如果该文件已存在，则将其覆盖。如果该文件不存在，则创建新文件。
+- wb+：以二进制读写格式打开一个文件。如果该文件已存在，则将其覆盖。如果该文件不存在，则创建新文件。
+- a：以追加方式打开一个文件。如果该文件已存在，文件指针将会放在文件结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，则创建新文件来写入。
+- ab：以二进制追加方式打开一个文件。如果该文件已存在，则文件指针将会放在文件结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，则创建新文件来写入。
+- a+：以读写方式打开一个文件。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，则创建新文件来读写。
+- ab+：以二进制追加方式打开一个文件。如果该文件已存在，则文件指针将会放在文件结尾。如果该文件不存在，则创建新文件用于读写。
+
+## 5.4 用json处理数据
+
+### 5.4.1 json格式
+
+对象：它在 JavaScript 中是使用花括号 {} 包裹起来的内容，数据结构为 {key1：value1, key2：value2, ...} 的键值对结构。在面向对象的语言中，key 为对象的属性，value 为对应的值。键名可以使用整数和字符串来表示。值的类型可以是任意类型。
+
+数组：数组在 JavaScript 中是方括号 [] 包裹起来的内容，数据结构为 ["java", "javascript", "vb", ...] 的索引结构。在 JavaScript 中，数组是一种比较特殊的数据类型，它也可以像对象那样使用键值对，但还是索引用得多。同样，值的类型可以是任意类型。
+
+一个 JSON 对象可以写为如下形式：
+
+```json
+[{
+    "name": "Bob",
+    "gender": "male",
+    "birthday": "1992-10-18"
+}, {
+     "name": "Selina",
+    "gender": "female",
+    "birthday": "1995-10-18"
+}]
+```
+
+值得注意的是，JSON 的数据需要用双引号来包围，不能使用单引号
+
+### 5.4.2 导入模块
 
 ```python
 import json
 ```
 
-### 2）存储数据
+### 5.4.3 存储数据
 
 ```python
 filename = 'name.json'
@@ -786,11 +829,47 @@ with open(filename, 'w') as f_obj:
         json.dump(name, f_obj)                            #name为要储存的数据
 ```
 
-### 3）读取数据
+### 5.4.4 读取数据
+
+使用.loads() 
 
 ```python
 filename = 'name.json'
 with open(filename) as f_obj:
-        name = json.load(f_obj)                              #将json中的数据读到name中
+        name = json.loads(f_obj)                         #将json中的数据读到name中
+```
+
+使用 loads 方法将字符串转为 JSON 对象。由于最外层是中括号，所以最终的类型是列表类型。
+
+### 5.4.5 输出数据
+
+调用 dumps 方法将 JSON 对象转化为字符串
+
+```python
+import json
+
+data = [{
+    'name': 'Bob',
+    'gender': 'male',
+    'birthday': '1992-10-18'
+}]
+with open('data.json', 'w') as file:
+    file.write(json.dumps(data))
+```
+
+利用 dumps 方法，我们可以将 JSON 对象转为字符串，然后再调用文件的 write 方法写入文本
+
+如果想保存 JSON 的格式，可以再加一个参数 indent，代表缩进字符个数
+
+```python
+with open('data.json', 'w') as file:
+    file.write(json.dumps(data, indent=2))
+```
+
+为了输出中文，还需要指定参数 ensure_ascii 为 False，另外还要规定文件输出的编码
+
+```python
+with open('data.json', 'w', encoding='utf-8') as file:
+    file.write(json.dumps(data, indent=2, ensure_ascii=False))
 ```
 
