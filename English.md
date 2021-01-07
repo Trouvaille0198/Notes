@@ -72,3 +72,21 @@ mess with	干扰
 shanghainews2016@163.com
 
 psswd: 200444popo!
+
+# How to write a summary
+
+Rely on your memory first, revise the article then
+
+Don't focus on the evidence and example
+
+Start with the source's information
+
+Retain the author's point of view
+
+Eliminate repetition
+
+Add transitions to create logical connections
+
+
+
+wrote by mainly explain why Swedish dislike talking about wealth how the traditional thought Jantelagen, effect the   
