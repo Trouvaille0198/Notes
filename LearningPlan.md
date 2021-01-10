@@ -53,4 +53,6 @@
 ## 7. 前端
 
 - JQuery基本原理 https://docs.huihoo.com/jquery/jquery-fundamentals/zh-cn/index.html 
+- JavaScript 笔记整理
+- JavaScript 复习 https://github.com/zhangtianyi0110/JavaWebLearnNotes/blob/master/02-JavaScript/02-JavaScript.md
 
