@@ -691,7 +691,7 @@ soup.title(string=True)
 
 ## 4.3 find()
 
-find( [name](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#id35) , [attrs](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#css) , [recursive](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#recursive) , [string](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#id36) , [**kwargs](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#keyword) )
+find( name , attrs , recursive , string,  **kwargs )
 
 `find()` 方法将返回文档中符合条件的第一个tag
 

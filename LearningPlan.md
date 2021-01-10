@@ -17,7 +17,7 @@
 
 ## 2. 爬虫
 
-- 整理已有笔记
+- （completed）整理已有笔记
 - 一百个爬虫实战 https://zhuanlan.zhihu.com/p/75036835
 - 《python网络爬虫权威指南》
 - 爬虫实战合集 https://www.jianshu.com/p/dcd6438ce4c7/
@@ -31,11 +31,26 @@
 
 - 用pandas进行数据分析实战 https://zhuanlan.zhihu.com/p/27784143
 
-## 4. Go
+## 4. Java
+
+- 学习路线 https://zhuanlan.zhihu.com/p/115890802
+- W3Cschool https://www.w3cschool.cn/java/java-tutorial.html
+- 菜鸟 https://www.runoob.com/java
+
+## 5. Go
 
 - the-way-to-go_ZH_CN-master
+- http://www.topgoer.com/ 中文学习文档
+- http://docscn.studygolang.com/doc/ 中文学习文档（better）
+- 《go语言圣经》https://docs.hacknode.org/gopl-zh/
 
+## 6. 复习python
 
+- 廖雪峰
+- 大佬的word笔记，在Other’s Notes
+- 完善python杂项，大佬笔记无与伦比，特别注意Advanced Python
 
+## 7. 前端
 
+- JQuery基本原理 https://docs.huihoo.com/jquery/jquery-fundamentals/zh-cn/index.html 
 
