@@ -668,6 +668,16 @@ $$
 3. 统计节点
 4. 使非线性结构线性化
 
+#### 6）遍历的C++写法
+
+```c++
+void PreOrder(BinTreeNode<T> *root);
+void PreOrder(BinTreeNode<T> *root) const;
+void PreOrder(const BinTreeNode<T> *root);
+void PreOrder(const BinTreeNode<T> *root) const;
+void PreOrder(BinTreeNode<T> *&root);
+```
+
 ## 6.3 线索二叉树
 
 (Threaded Binary Tree)
