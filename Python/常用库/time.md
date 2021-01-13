@@ -148,3 +148,20 @@ end - start
 time.sleep(10)
 ```
 
+# 四、例
+
+## 4.1 秒数化为时间元组
+
+```python
+second_a = 1610524866.1898422
+struct_a = time.localtime(second_a)
+
+time.asctime(struct_a)
+<<
+	'Wed Jan 13 16:01:06 2021'
+ 
+time.strftime("%Y-%m-%d %H:%M:%S", struct_a)
+<<
+	'2021-01-13 16:01:06'
+```
+
