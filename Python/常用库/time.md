@@ -17,7 +17,7 @@ import time
 ```python
 time.time()
 
->>>
+<<
 	1610015368.4228694
 ```
 
@@ -28,7 +28,7 @@ time.time()
 ```python
 time.ctime()
 
->>>
+<<
 	'Thu Jan  7 18:30:37 2021'
 ```
 
@@ -39,7 +39,7 @@ time.ctime()
 ```python
 time.gmtime()
 
->>>
+<<
 	time.struct_time(tm_year=2021, tm_mon=1, tm_mday=7, tm_hour=10, tm_min=32, tm_sec=36, tm_wday=3, tm_yday=7, tm_isdst=0)
 ```
 
@@ -49,7 +49,7 @@ time.gmtime()
 
 ```python
 time.mktime(time.gmtime()) 
->>>
+<<
 	1609986979.0
 ```
 
@@ -60,7 +60,7 @@ time.mktime(time.gmtime())
 ```python
 time.asctime(time.gmtime()) 
 
->>>
+<<
 	'Thu Jan  7 10:36:57 2021'
 ```
 
@@ -90,19 +90,19 @@ time.asctime(time.gmtime())
 ```python
 t=time.gmtime()
 time.strftime("%Y-%m-%d %H:%M:%S", t)
->>>
+<<
 	'2021-01-07 10:40:34'
     
 time.strftime("%Y-%B-%d-%A-%H-%p-%S")
->>>
+<<
 	'2021-January-07-Thursday-18-PM-57'
 
 time.strftime("%A-%p")
->>>
+<<
 	'Thursday-PM'
 
 time.strftime("%M:%S")
->>>
+<<
     '48:37'
 ```
 
@@ -119,7 +119,7 @@ time.strftime("%M:%S")
 ```python
 timestr = '2018-01-26 12:55:33'
 time.strptime(timestr, "%Y-%m-%d %H:%M:%S")
->>>
+<<
 	time.struct_time(tm_year=2018, tm_mon=1, tm_mday=26, tm_hour=12, tm_min=55, tm_sec=33, tm_wday=4, tm_yday=26, tm_isdst=-1)
 ```
 
@@ -136,7 +136,7 @@ start = time.perf_counter()
 end = time.perf_counter()
 end - start
 
->>>
+<<
 	4.5900000259280205e-05
 ```
 
