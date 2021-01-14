@@ -89,5 +89,5 @@ print('Hello world'+name)
 
 这是上标 X^2^	\^ + word + \^
 
-这是==高亮==	\=\= + word + \=\=
+这是==高亮==	\=\= + word + \=\= （Typora专有）
 

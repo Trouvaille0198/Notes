@@ -727,3 +727,344 @@ text-shadow: h-shadow v-shadow blur color;
 
 <h1 style="color:white; text-shadow:2px 2px 4px #000000;">Text-shadow with neon glow</h1>
 
+# 五、背景
+
+Backgrounds
+
+## 5.1 颜色 background-color
+
+background-color属性设置一个元素的背景颜色。
+
+元素的背景是元素的总大小，包括填充和边界（但不包括边距）
+
+```css
+body {
+    background-color: yellow;
+}
+
+h1 {
+    background-color: #00ff00;
+}
+
+p {
+    background-color: rgb(255, 0, 255);
+}
+```
+
+属性值
+
+| 值          | 描述                                                         |
+| :---------- | :----------------------------------------------------------- |
+| *color*     | 指定背景颜色。在[CSS颜色值](https://www.runoob.com/css/css-colors-legal.html)近可能的寻找一个颜色值的完整列表。 |
+| transparent | 指定背景颜色应该是透明的。这是默认                           |
+
+## 5.2 图像 background-image
+
+background-image 属性设置一个元素的背景图像。
+
+元素的背景是元素的总大小，包括填充和边界（但不包括边距）。
+
+默认情况下，background-image放置在元素的左上角，并重复垂直和水平方向。
+
+提示：请设置一种可用的背景颜色，这样的话，假如背景图像不可用，可以使用背景色带代替。
+
+```css
+body {
+    background-image: url('paper.gif');
+    background-color: #cccccc;
+}
+```
+
+属性
+
+| 值                                                           | 说明                                      |
+| :----------------------------------------------------------- | :---------------------------------------- |
+| url(*'URL'*)                                                 | 图像的URL                                 |
+| none                                                         | 无图像背景会显示。这是默认                |
+| [linear-gradient()](https://www.runoob.com/cssref/func-linear-gradient.html) | 创建一个线性渐变的 "图像"(从上到下)       |
+| [radial-gradient()](https://www.runoob.com/cssref/func-radial-gradient.html) | 用径向渐变创建 "图像"。 (center to edges) |
+| [repeating-linear-gradient()](https://www.runoob.com/cssref/func-repeating-linear-gradient.html) | 创建重复的线性渐变 "图像"。               |
+| [repeating-radial-gradient()](https://www.runoob.com/cssref/func-repeating-radial-gradient.html) | 创建重复的径向渐变 "图像"                 |
+
+## 5.3 图像重复设置 background-repeat
+
+设置如何平铺对象的 background-image 属性。
+
+默认情况下，重复background-image的垂直和水平方向。
+
+```css
+body {
+    background-image: url('paper.gif');
+    background-repeat: repeat-y;
+}
+```
+
+属性
+
+| 值        | 说明                                     |
+| :-------- | :--------------------------------------- |
+| repeat    | 背景图像将向垂直和水平方向重复。（默认） |
+| repeat-x  | 只有水平位置会重复背景图像               |
+| repeat-y  | 只有垂直位置会重复背景图像               |
+| no-repeat | background-image不会重复，即显示图片原长 |
+
+## 5.4 图像固定或滚动 background-attachment
+
+ background-attachment设置背景图像是否固定或者随着页面的其余部分滚动。
+
+```css
+body
+{ 
+    background-image:url('smiley.gif');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+```
+
+属性值
+
+| 值     | 描述                                       |
+| :----- | :----------------------------------------- |
+| scroll | 背景图片随着页面的滚动而滚动，这是默认的。 |
+| fixed  | 背景图片不会随着页面的滚动而滚动。         |
+| local  | 背景图片会随着元素内容的滚动而滚动。       |
+
+## 5.5 图像起始位置 background-position
+
+background-position属性设置背景图像的起始位置。
+
+```css
+body {
+    background-image: url('smiley.gif');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+```
+
+属性值
+
+| 值                                                           | 描述                                                         |
+| :----------------------------------------------------------- | :----------------------------------------------------------- |
+| left top， left center， left bottom， right top， right center， right bottom， center top， center center， center bottom | 如果仅指定一个关键字，其他值将会是"center"                   |
+| *x% y%*                                                      | 第一个值是水平位置，第二个值是垂直。左上角是0％0％。右下角是100％100％。如果仅指定了一个值，其他值将是50％。 。默认值为：0％0％ |
+| *xpos ypos*                                                  | 第一个值是水平位置，第二个值是垂直。左上角是0。单位可以是像素（0px0px）或任何其他 [CSS单位](https://www.runoob.com/try/css-units.html)。如果仅指定了一个值，其他值将是50％。你可以混合使用％和positions |
+
+## 5.6 背景复合属性
+
+背景缩写属性可以在一个声明中设置所有的背景属性。
+
+可以设置的属性分别是：background-color、background-position、background-size、background-repeat、background-origin、background-clip、background-attachment 和 background-image。
+
+各值之间用空格分隔，不分先后顺序。可以只有其中的某些值
+
+> background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;
+
+属性值
+
+| 值                                                           | 说明                                             | CSS  |
+| :----------------------------------------------------------- | :----------------------------------------------- | :--- |
+| *[background-color](https://www.runoob.com/cssref/pr-background-color.html)* | 指定要使用的背景颜色                             | 1    |
+| *[background-position](https://www.runoob.com/cssref/pr-background-position.html)* | 指定背景图像的位置                               | 1    |
+| *[background-size](https://www.runoob.com/cssref/css3-pr-background-size.html)* | 指定背景图片的大小                               | 3    |
+| *[background-repeat](https://www.runoob.com/cssref/pr-background-repeat.html)* | 指定如何重复背景图像                             | 1    |
+| *[background-origin](https://www.runoob.com/cssref/css3-pr-background-origin.html)* | 指定背景图像的定位区域                           | 3    |
+| *[background-clip](https://www.runoob.com/cssref/css3-pr-background-clip.html)* | 指定背景图像的绘画区域                           | 3    |
+| *[background-attachment](https://www.runoob.com/cssref/pr-background-attachment.html)* | 设置背景图像是否固定或者随着页面的其余部分滚动。 | 1    |
+| *[background-image](https://www.runoob.com/cssref/pr-background-image.html)* | 指定要使用的一个或多个背景图像                   |      |
+
+# 六、链接
+
+链接的样式，可以用任何CSS属性（如颜色，字体，背景等）
+
+特别的链接，可以有不同的样式，这取决于他们是什么状态
+
+这四个链接状态是：
+
+- a:link - 正常，未访问过的链接
+- a:visited - 用户已访问过的链接
+- a:hover - 当用户鼠标放在链接上时
+- a:active - 链接被点击的那一刻
+
+```css
+/* 未访问链接*/
+a:link {
+    color: #000000;
+}
+
+/* 已访问链接 */
+a:visited {
+    color: #00FF00;
+}
+
+/* 鼠标移动到链接上 */
+a:hover {
+    color: #FF00FF;
+}
+
+/* 鼠标点击时 */
+a:active {
+    color: #0000FF;
+}
+```
+
+规则
+
+四种状态**必须按照固定的顺序写**，也就是所谓的“爱恨原则”（LoVe/HAte）：
+
+> a:link 、a:visited 、a:hover 、a:active
+
+# 七、列表
+
+CSS 列表属性作用如下：
+
+- 设置不同的列表项标记为有序列表
+- 设置不同的列表项标记为无序列表
+- 设置列表项标记为图像
+
+## 7.1 图像替代 list-style-image 
+
+list-style-image 属性使用图像来替换列表项的标记。
+
+```css
+ul {
+    list-style-image: url('sqpurple.gif');
+}
+```
+
+属性值
+
+| 值    | 描述                 |
+| :---- | :------------------- |
+| *URL* | 图像的路径。         |
+| none  | 默认。无图形被显示。 |
+
+## 7.2 标记位置 list-style-position
+
+list-style-position属性指示如何相对于对象的内容绘制列表项标记
+
+```css
+ul {
+    list-style-position: inside;
+}
+```
+
+属性值
+
+| 值      | 描述                                                         |
+| :------ | :----------------------------------------------------------- |
+| inside  | 列表项目标记放置在文本以内，且环绕文本根据标记对齐。         |
+| outside | 默认值。保持标记位于文本的左侧。列表项目标记放置在文本以外，且环绕文本不根据标记对齐。 |
+
+<p>该列表的 list-style-position 的值是 "inside"：</p>
+<ul class="inside" style="list-style-position: inside">
+<li>Earl Grey Tea - 一种黑颜色的茶</li>
+<li>Jasmine Tea - 一种神奇的“全功能”茶</li>
+<li>Honeybush Tea - 一种令人愉快的果味茶</li>
+</ul>
+
+<p>该列表的 list-style-position 的值是 "outside"：</p>
+<ul class="outside" style="list-style-position: outside">
+<li>Earl Grey Tea - 一种黑颜色的茶</li>
+<li>Jasmine Tea - 一种神奇的“全功能”茶</li>
+<li>Honeybush Tea - 一种令人愉快的果味茶</li>
+</ul>
+
+## 7.3 标记类型 list-style-type
+
+list-style-type 属性设置列表项标记的类型
+
+```css
+ul.circle {
+    list-style-type: circle
+}
+
+ul.square {
+    list-style-type: square
+}
+
+ol.upper-roman {
+    list-style-type: upper-roman
+}
+
+ol.lower-alpha {
+    list-style-type: lower-alpha
+}
+```
+
+属性值
+
+| 值                   | 描述                                                        |
+| :------------------- | :---------------------------------------------------------- |
+| none                 | 无标记。                                                    |
+| disc                 | 默认。标记是实心圆。                                        |
+| circle               | 标记是空心圆。                                              |
+| square               | 标记是实心方块。                                            |
+| decimal              | 标记是数字。                                                |
+| decimal-leading-zero | 0开头的数字标记。(01, 02, 03, 等。)                         |
+| lower-roman          | 小写罗马数字(i, ii, iii, iv, v, 等。)                       |
+| upper-roman          | 大写罗马数字(I, II, III, IV, V, 等。)                       |
+| lower-alpha          | 小写英文字母The marker is lower-alpha (a, b, c, d, e, 等。) |
+| upper-alpha          | 大写英文字母The marker is upper-alpha (A, B, C, D, E, 等。) |
+| lower-greek          | 小写希腊字母(alpha, beta, gamma, 等。)                      |
+| lower-latin          | 小写拉丁字母(a, b, c, d, e, 等。)                           |
+| upper-latin          | 大写拉丁字母(A, B, C, D, E, 等。)                           |
+| hebrew               | 传统的希伯来编号方式                                        |
+| armenian             | 传统的亚美尼亚编号方式                                      |
+| georgian             | 传统的乔治亚编号方式(an, ban, gan, 等。)                    |
+| cjk-ideographic      | 简单的表意数字                                              |
+| hiragana             | 标记是：a, i, u, e, o, ka, ki, 等。（日文平假名字符）       |
+| katakana             | 标记是：A, I, U, E, O, KA, KI, 等。（日文片假名字符）       |
+| hiragana-iroha       | 标记是：i, ro, ha, ni, ho, he, to, 等。（日文平假名序号）   |
+| katakana-iroha       | 标记是：I, RO, HA, NI, HO, HE, TO, 等。（日文片假名序号）   |
+
+<p>无序列表实例:</p>
+
+<ul class="a" style="list-style-type:circle;">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Coca Cola</li>
+</ul>
+
+<ul class="b" style="list-style-type:square;">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Coca Cola</li>
+</ul>
+
+<p>有序列表实例:</p>
+
+<ol class="c" style="list-style-type:upper-roman;">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Coca Cola</li>
+</ol>
+
+<ol class="d" style="list-style-type:lower-alpha;">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Coca Cola</li>
+</ol>
+
+## 7.4 列表复合属性 list-style
+
+list-style 简写属性在一个声明中设置所有的列表属性
+
+可以设置的属性（按顺序）： list-style-type, list-style-position, list-style-image.
+
+可以不设置其中的某个值，比如 "list-style:circle inside;" 也是允许的。未设置的属性会使用其默认值
+
+```css
+ul {
+    list-style: square url("sqpurple.gif");
+}
+```
+
+属性值
+
+| 值                    | 描述                       |
+| :-------------------- | :------------------------- |
+| *list-style-type*     | 设置列表项标记的类型       |
+| *list-style-position* | 设置在何处放置列表项标记   |
+| *list-style-image*    | 使用图像来替换列表项的标记 |
+| *initial*             | 将这个属性设置为默认值     |
