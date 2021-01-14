@@ -87,6 +87,8 @@ External style sheet，也叫链接式
 
 # 二、选择器
 
+ID选择器 > 类选择器 > 标签选择器
+
 ## 2.1 标签选择器
 
 也叫元素选择器，selector为标签名
