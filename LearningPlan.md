@@ -11,7 +11,7 @@
 - 无聊时看看  https://space.bilibili.com/243821484/channel/detail?cid=155687
 - sklearn
   - 官方文档  https://scikit-learn.org/stable/user_guide.html 
-  - 中文文档翻译  http://scikitlearn.com.cn/
+  - 中文文档翻译  http://scikitlearn.com.cn/    https://sklearn.apachecn.org/docs/master/39.html
 
 - Scipy
 
