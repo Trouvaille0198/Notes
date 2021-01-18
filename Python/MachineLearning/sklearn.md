@@ -764,5 +764,105 @@ print("(主成分分析)PCA降维:\n", data_new)
  [ 6.74943227]]
 ```
 
+# 三、转换器和估计器
+
+## 3.1 转换器
+
+特征工程的接口称之为转换器
+
+转换器调用形式
+
+- fit_transform
+- fit
+- transform
+
+## 3.2 估计器
+
+（estimator）
+
+估计器实现了算法的API
+
+- 用于分类的估计器：
+  - sklearn.neighbors k-近邻算法
+  - sklearn.naive_bayes 贝叶斯
+  - sklearn.linear_model.LogisticRegression 逻辑回归
+  - sklearn.tree 决策树与随机森林
+- 用于回归的估计器：
+  - sklearn.linear_model.LinearRegression 线性回归
+  - sklearn.linear_model.Ridge 岭回归
+- 用于无监督学习的估计器
+  - sklearn.cluster.KMeans 聚类
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/估计器工作流程.png" alt="估计器工作流程" style="zoom:67%;" />
 
 
+
+# 六、聚类
+
+K-means（K均值聚类）
+
+- 特点：采用迭代式算法，直观易懂并且非常实用
+- 缺点：容易收敛到局部最优解(多次聚类)
+
+## 6.1 聚类步骤
+
+1. 随机设置 K 个特征空间内的点作为初始的聚类中心
+
+2. 对于其他每个点计算到 K 个中心的距离，未知的点选择最近的一个聚类中心点作为标记类别
+
+3. 接着对着标记的聚类中心之后，重新计算出每个聚类的新中心点（平均值）
+
+4. 如果计算得出的新中心点与原中心点一样，那么结束，否则重新进行第二步过程
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/K-means过程分析.png" alt="K-means过程分析" style="zoom:67%;" />
+
+## 6.2 API
+
+***sklearn.cluster.KMeans(n_clusters=8, init=‘k-means++’)***
+
+- n_clusters：开始的聚类中心数量
+- init：初始化方法，默认为'k-means ++’
+- labels_：默认标记的类型，可以和真实值比较（不是值比较）
+
+## 6.3  轮廓系数
+
+轮廓系数作为 Kmeans 的性能评估指标
+
+### 6.3.1 公式
+
+$$
+sc_i=\cfrac{b_i-a_i}{max(b_i,a_i)}
+$$
+
+> 注：对于每个点 $i$ 为已聚类数据中的样本 ，$b_i$ 为 $i$ 到其它族群的所有样本的距离最小值，$a_i$ 为 $i$ 到本身簇的距离平均值。最终计算出所有的样本点的轮廓系数平均值
+
+### 6.3.2 轮廓系数值分析
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210118223723565.png" alt="image-20210118223723565" style="zoom: 60%;" />
+
+**分析过程**（以一个蓝1点为例）
+
+1. 计算出蓝1离本身族群所有点的距离的平均值$a_i$
+
+2. 蓝1到其它两个族群的距离计算出平均值红平均，绿平均，取最小的那个距离作为$b_i$
+
+3. 根据公式：极端值考虑：如果$b_i >>a_i$，那么公式结果趋近于1；如果$a_i>>>b_i$，那么公式结果趋近于-1
+
+**结论**：如果$b_i>>a_i$，趋近于1，效果好， $b_i<<a_i$，趋近于-1，效果不好。轮廓系数的值是介于 [-1,1] ，越趋近于1代表内聚度和分离度都相对较优
+
+### 6.3.3 API
+
+- ***sklearn.metrics.silhouette_score(X, labels)***：计算所有样本的平均轮廓系数
+  - X：特征值
+  - labels：被聚类标记的目标值
+
+## 6.4 例
+
+分析
+
+1. 降维之后的数据
+
+2. k-means聚类
+
+3. 聚类结果显示
+4. 用户聚类结果评估
