@@ -634,6 +634,12 @@ df_inner.set_index('A')
 
 ### 3.2.1` .merge()`
 
+参数
+
+- on：列名，join用来对齐的那一列的名字，用到这个参数的时候一定要保证左表和右表用来对齐的那一列都有相同的列名
+- how：数据融合的方法
+- sort：根据dataframe合并的keys按字典顺序排序，默认是，如果置false可以提高表现
+
 ```python
 df_inner=pd.merge(df1,df2,how='inner') 	#以小表为准
 df_outer=pd.merge(df1,df2,how='outer')	#以大表为准
