@@ -578,7 +578,7 @@ find_all( name , attrs , recursive , string , **kwargs )
 
 ### 4.2.1 name
 
-`name` 参数可以查找所有名字为 `name` 的tag,字符串对象会被自动忽略掉
+`name` 参数可以查找所有名字为 `name` 的tag，字符串对象会被自动忽略掉
 
 ```python
 soup.find_all("a")

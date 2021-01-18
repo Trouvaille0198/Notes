@@ -393,6 +393,8 @@ array([['cat', 'cat', 'snake', 'dog', 'dog', 'cat', 'snake', 'cat',
 
 ### 2.2.7 查看行、列名称
 
+返回 Index 对象
+
 ```python
 df.columns	#查看列名称
 df.index	#查看行名称
