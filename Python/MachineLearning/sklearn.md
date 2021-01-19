@@ -438,7 +438,7 @@ import sklearn.preprocessing
 
 $$
 X'=\cfrac{x-min}{max-min}\\
-X''=X'*(mx-mi)+mi
+X''=X'*(mx-mi)+mi
 $$
 
 >  作用于每一列，max 为一列的最大值，min 为一列的最小值，X’’为最终结果，mx，mi分别为指定区间值，默认mx为1，mi为0
@@ -580,7 +580,7 @@ import sklearn.feature_selection
   - 方差选择法：低方差特征过滤
   - 相关系数
 - 嵌入式（Embedded）：算法自动选择特征（特征与目标值之间的关联）
-  - 决策树:信息熵、信息增益
+  - 决策树：信息熵、信息增益
   - 正则化：L1、L2
   - 深度学习：卷积等
 
@@ -768,19 +768,29 @@ print("(主成分分析)PCA降维:\n", data_new)
 
 ## 3.1 转换器
 
-特征工程的接口称之为转换器
+（transformer）
+
+特征工程的接口称之为转换器；转换器是特征工程的父类
+
+调用步骤
+
+1. 实例化 (实例化的是一个转换器类(Transformer))
+
+2. 调用fit_transform(对于文档建立分类词频矩阵，不能同时调用)
 
 转换器调用形式
 
-- fit_transform
-- fit
-- transform
+- fit_transform()
+- fit()
+  - 按公式计算
+- transform()
+  - 进行最终的转换
 
 ## 3.2 估计器
 
 （estimator）
 
-估计器实现了算法的API
+估计器实现了算法的API，估计器是算法的父类
 
 - 用于分类的估计器：
   - sklearn.neighbors k-近邻算法
@@ -793,7 +803,33 @@ print("(主成分分析)PCA降维:\n", data_new)
 - 用于无监督学习的估计器
   - sklearn.cluster.KMeans 聚类
 
+调用步骤
+
+1. 实例化估计器类estimator
+
+2. 进行训练，一旦调用完毕，意味着模型生成
+
+   - *estimator.fit(x_train, y_train)*
+
+3. 模型评估
+
+   - 直接比对真实值和预测值
+
+     *y_predict = estimator.predict(x_test)*
+
+     *y_test == y_predict*
+
+   - 计算准确率
+
+     *accuracy = estimator.score(x_test, y_test)*
+
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/估计器工作流程.png" alt="估计器工作流程" style="zoom:67%;" />
+
+
+
+# 四、分类
+
+## 4.1 KNN 算法
 
 
 
@@ -818,11 +854,12 @@ K-means（K均值聚类）
 
 ## 6.2 API
 
-***sklearn.cluster.KMeans(n_clusters=8, init=‘k-means++’)***
+***sklearn.cluster.KMeans(n_clusters=8, init=‘k-means++’…)***
 
 - n_clusters：开始的聚类中心数量
 - init：初始化方法，默认为'k-means ++’
-- labels_：默认标记的类型，可以和真实值比较（不是值比较）
+
+*KMeans.labels_*：默认标记的类型，可以和真实值比较（不是值比较）
 
 ## 6.3  轮廓系数
 
@@ -854,7 +891,7 @@ $$
 
 - ***sklearn.metrics.silhouette_score(X, labels)***：计算所有样本的平均轮廓系数
   - X：特征值
-  - labels：被聚类标记的目标值
+  - labels：被聚类标记的目标值（聚类结果）
 
 ## 6.4 例
 
@@ -866,3 +903,45 @@ $$
 
 3. 聚类结果显示
 4. 用户聚类结果评估
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+from sklearn.datasets.samples_generator import make_blobs
+# X为样本特征，Y为样本簇类别， 共1000个样本，每个样本2个特征，共4个簇，簇中心在[-1,-1], [0,0],[1,1], [2,2]， 簇方差分别为[0.4, 0.2, 0.2]
+X, y = make_blobs(n_samples=1000, n_features=2, centers=[[-1,-1], [0,0], [1,1], [2,2]], cluster_std=[0.4, 0.2, 0.2, 0.2])
+plt.scatter(X[:, 0], X[:, 1], marker='o')
+plt.show()
+```
+
+案例样本
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210119103734104.png" alt="image-20210119103734104" style="zoom:67%;" />
+
+```python
+from sklearn.cluster import KMeans
+
+#y_pred = KMeans(n_clusters=4).fit_predict(X)
+estimator = KMeans(n_clusters=4, init='k-means++')
+estimator.fit(X)
+y_pred = estimator.predict(X)
+
+plt.scatter(X[:, 0], X[:, 1], c=y_pred)
+plt.show()
+```
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210119104047678.png" alt="image-20210119104047678" style="zoom:67%;" />
+
+```python
+from sklearn.metrics import silhouette_score # 所有模型评估都在metrics里面
+score = silhouette_score(X, y_pred)
+print("模型轮廓系数为(1 最好, -1 最差):", score)
+```
+
+输出
+
+```python
+模型轮廓系数为(1 最好, -1 最差): 0.6634549555891298
+```
+
