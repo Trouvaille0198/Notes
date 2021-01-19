@@ -129,11 +129,11 @@ import sklearn.feature_extraction
 
 ### 2.3.1 字典特征提取 DictVectorizer 
 
-***sklearn.feature_extraction.DictVectorizer(sparse=True,…)***
-
 它是一个转换器，应用时需要进行实例化
 
 #### 1）API
+
+***sklearn.feature_extraction.DictVectorizer(sparse=True,…)***
 
 - *DictVectorizer.fit_transform(X)*
   - X：字典或者包含字典的迭代器
@@ -196,11 +196,11 @@ print("特征名字：\n", transfer.get_feature_names())
 
 对文本数据进行词频特征值化
 
-***sklearn.feature_extraction.text.CountVectorizer(stop_words=[])***
-
 它是一个转换器，应用时需要进行实例化
 
 #### 1）API
+
+***sklearn.feature_extraction.text.CountVectorizer(stop_words=[])***
 
 - CountVectorizer.fit_transform(X)
   -  X：文本或者包含文本字符串的可迭代对象
@@ -325,8 +325,6 @@ print("返回特征名字：\n", transfer.get_feature_names())
 
 ### 2.3.3 Tf-idf文本特征提取 text.TfidfVectorizer
 
-***sklearn.feature_extraction.text.TfidfVectorizer(stop_words=[])***
-
 TF-IDF的主要思想是：如果某个词或短语在一篇文章中出现的概率高，并且在其他文章中很少出现，则认为此词或者短语具有很好的类别区分能力，适合用来分类。
 
 TF-IDF作用：用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。
@@ -343,6 +341,8 @@ $$
 >  假如一篇文件的总词语数是100个，而词语"非常"出现了5次，那么"非常"一词在该文件中的词频就是5/100=0.05。而计算文件频率（IDF）的方法是以文件集的文件总数，除以出现"非常"一词的文件数。所以，如果"非常"一词在1,000份文件出现过，而文件总数是10,000,000份的话，其逆向文件频率就是lg（10,000,000 / 1,0000）=3。最后"非常"对于这篇文档的tf-idf的分数为0.05 * 3=0.15
 
 #### 2）API
+
+***sklearn.feature_extraction.text.TfidfVectorizer(stop_words=[])***
 
 - TfidfVectorizer.fit_transform(X)
   -  X：文本或者包含文本字符串的可迭代对象
@@ -432,8 +432,6 @@ import sklearn.preprocessing
 
 通过对原始数据进行变换把数据映射到（默认为）[0,1] 之间
 
-***sklearn.preprocessing.MinMaxScaler (feature_range=(0,1)… )***
-
 #### 1）公式
 
 $$
@@ -444,6 +442,8 @@ $$
 >  作用于每一列，max 为一列的最大值，min 为一列的最小值，X’’为最终结果，mx，mi分别为指定区间值，默认mx为1，mi为0
 
 #### 2）API
+
+***sklearn.preprocessing.MinMaxScaler (feature_range=(0,1)… )***
 
 - *MinMaxScalar.fit_transform(X)*
   - X：numpy array格式的数据 [n_samples,n_features]
@@ -491,8 +491,6 @@ print("最小值最大值归一化处理的结果：\n", data)
 
 通过对原始数据进行变换把数据变换到均值为0，标准差为1的范围内
 
-***sklearn.preprocessing.StandardScaler( )***
-
 优势
 
 - 对于归一化来说：如果出现异常点，影响了最大值和最小值，那么结果显然会发生改变
@@ -507,6 +505,8 @@ $$
 > 作用于每一列，mean 为平均值，σ 为标准差
 
 #### 2）API
+
+***sklearn.preprocessing.StandardScaler( )***
 
 - *StandardScaler.fit_transform(X)*
   - X：numpy array 格式的数据[n_samples, n_features]
@@ -588,9 +588,9 @@ import sklearn.feature_selection
 
 删除低方差的一些特征
 
-***sklearn.feature_selection.VarianceThreshold(threshold = 0.0)***
-
 ##### API
+
+***sklearn.feature_selection.VarianceThreshold(threshold = 0.0)***
 
 - *Variance.fit_transform(X)*
   - X：numpy array 格式的数据 [n_samples, n_features]
@@ -662,7 +662,7 @@ $$
 
 ##### API
 
-pearsonr(X, Y)
+***pearsonr(X, Y)***
 
 - X：numpy array 格式的数据
 - Y：numpy array 格式的数据
@@ -716,12 +716,6 @@ milage和Liters的相关系数为:
 from sklearn.decomposition import PCA
 ```
 
-***sklearn.decomposition.PCA(n_components=None)***
-
-- *n_components*
-  - 小数：表示保留百分之多少的信息
-  - 整数：减少到多少特征
-
 #### 1）概念
 
 - 定义：高维数据转化为低维数据的过程，在此过程中可能会舍弃原有数据、创造新的变量
@@ -729,6 +723,12 @@ from sklearn.decomposition import PCA
 - 应用：回归分析或者聚类分析当中
 
 #### 2）API
+
+***sklearn.decomposition.PCA(n_components=None)***
+
+- 参数：*n_components*
+  - 小数：表示保留百分之多少的信息
+  - 整数：减少到多少特征
 
 - *PCA.fit_transform(X)*
   - X：numpy array 格式的数据 [n_samples,n_features]
@@ -830,6 +830,45 @@ print("(主成分分析)PCA降维:\n", data_new)
 # 四、分类
 
 ## 4.1 KNN 算法
+
+（K Nearest Neighbor）即K - 近邻算法
+
+如果一个样本在特征空间中的**k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别**，则该样本也属于这个类别。
+
+- 优点：
+  - 简单，易于理解，易于实现，无需训练
+- 缺点：
+  - 懒惰算法，对测试样本分类时的计算量大，内存开销大
+  - 必须指定K值，K值选择不当则分类精度不能保证
+- 使用场景：小数据场景，几千～几万样本，具体场景具体业务去测试
+
+### 4.1.1 API
+
+***sklearn.neighbors.KNeighborsClassifier(n_neighbors=5,algorithm='auto')***
+
+- n_neighbors：int，可选（默认= 5），使用的邻居数
+- algorithm：*{‘auto’，‘ball_tree’，‘kd_tree’，‘brute’}*，可选用于计算最近邻居的算法，不同实现方式影响效率
+  - *‘ball_tree’* 将会使用 BallTree
+  - *‘kd_tree’* 将使用 KDTree
+  - *‘auto’* 将尝试根据传递给fit方法的值来决定最合适的算法
+
+### 4.1.2 例
+
+```python
+# K值：算法传入参数不定的值    理论上：k = 根号(样本数)
+# K值：后面会使用参数调优方法，去轮流试出最好的参数[1,3,5,10,20,100,200]
+knn = KNeighborsClassifier(n_neighbors=1)
+
+# 调用fit()
+knn.fit(x_train, y_train)
+
+ # 预测测试数据集，得出准确率
+y_predict = knn.predict(x_test)
+
+print("预测测试集类别：", y_predict)
+
+print("准确率为：", knn.score(x_test, y_test))
+```
 
 
 
