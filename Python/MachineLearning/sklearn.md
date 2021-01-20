@@ -831,6 +831,10 @@ print("(主成分分析)PCA降维:\n", data_new)
 
 ## 4.1 KNN 算法
 
+```python
+from sklearn.neighbors import KNeighborsClassifier
+```
+
 （K Nearest Neighbor）即K - 近邻算法
 
 如果一个样本在特征空间中的**k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别**，则该样本也属于这个类别。
@@ -855,22 +859,25 @@ print("(主成分分析)PCA降维:\n", data_new)
 ### 4.1.2 例
 
 ```python
+from sklearn.neighbors import KNeighborsClassifier
 # K值：算法传入参数不定的值    理论上：k = 根号(样本数)
 # K值：后面会使用参数调优方法，去轮流试出最好的参数[1,3,5,10,20,100,200]
-knn = KNeighborsClassifier(n_neighbors=1)
+estimator_knn = KNeighborsClassifier(n_neighbors=3)
+estimator_knn.fit(x_train, y_train)
 
-# 调用fit()
-knn.fit(x_train, y_train)
-
- # 预测测试数据集，得出准确率
-y_predict = knn.predict(x_test)
-
-print("预测测试集类别：", y_predict)
-
-print("准确率为：", knn.score(x_test, y_test))
+# 预测测试数据集
+y_pred = estimator_knn.predict(x_test)
+print("预测测试集类别：", y_pred)
+print("准确率为：", estimator_knn.score(x_test, y_test))
 ```
 
+输出
 
+```python
+预测测试集类别： [0 0 2 0 0 0 0 2 1 2 0 2 2 2 1 0 2 1 0 2 1 1 2 1 0 2 1 1 0 1 2 1 2 1 0 2 0
+ 0]
+准确率为： 0.9210526315789473
+```
 
 # 六、聚类
 
