@@ -980,9 +980,7 @@ plt.show()
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210119104047678.png" alt="image-20210119104047678" style="zoom:67%;" />
 
 ```python
-from sklearn.metrics import silhouette_score # 所有模型评估都在metrics里面
-score = silhouette_score(X, y_pred)
-print("模型轮廓系数为(1 最好, -1 最差):", score)
+z
 ```
 
 输出
