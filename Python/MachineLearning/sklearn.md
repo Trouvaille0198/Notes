@@ -827,9 +827,49 @@ print("(主成分分析)PCA降维:\n", data_new)
 
 
 
+## 3.3 模型选择与调优
+
+```python
+from sklearn.model_selection import GridSearchCV
+```
+
+### 3.3.1 概念
+
+#### 1）交叉验证
+
+（cross validation）
+
+将拿到的训练数据，分为训练和验证集
+
+#### 2）超参数搜索-网格搜索
+
+（Grid Search）
+
+通常情况下，有很多参数是需要手动指定的（如k-近邻算法中的K值），这种叫超参数。但是手动过程繁杂，所以需要对模型预设几种超参数组合。每组超参数都采用交叉验证来进行评估。最后选出最优参数组合建立模型。
+
+### 3.3.2 API
+
+***sklearn.model_selection.GridSearchCV(estimator, param_grid=None,cv=None)***
+
+对估计器的指定参数值进行详尽搜索
+- 参数
+  - *estimator*：估计器对象
+  - *param_grid*：估计器参数 ` (dict){“n_neighbors”:[1,3,5]}`
+  - *cv*：指定几折交叉验证
+- 方法
+  - *fit*：输入训练数据
+  - *score*：准确率
+- 结果分析：
+  - *best_params_*：在交叉验证中验证的最好超参数
+  - *best_score_*：在交叉验证中验证的最好结果
+  - *best_estimator_*：最好的参数模型
+  - *cv_results_*：每次交叉验证后的验证集准确率结果和训练集准确率结果
+
 # 四、分类
 
 ## 4.1 KNN 算法
+
+> 根据邻居，判断类别
 
 ```python
 from sklearn.neighbors import KNeighborsClassifier
@@ -860,23 +900,185 @@ from sklearn.neighbors import KNeighborsClassifier
 
 ```python
 from sklearn.neighbors import KNeighborsClassifier
-# K值：算法传入参数不定的值    理论上：k = 根号(样本数)
-# K值：后面会使用参数调优方法，去轮流试出最好的参数[1,3,5,10,20,100,200]
-estimator_knn = KNeighborsClassifier(n_neighbors=3)
-estimator_knn.fit(x_train, y_train)
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn import datasets
+import numpy as np
+import pandas as pd
 
-# 预测测试数据集
-y_pred = estimator_knn.predict(x_test)
-print("预测测试集类别：", y_pred)
-print("准确率为：", estimator_knn.score(x_test, y_test))
+# 数据集导入
+iris = datasets.load_iris()
+
+# 数据集划分
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, random_state=43)
+
+# 标准化
+transfer_std = StandardScaler()
+x_train_std = transfer_std.fit_transform(x_train)
+x_test_std = transfer_std.transform(x_test)  # 测试集不要用fit, 因为要保持和训练集处理方式一致
+
+# KNN
+estimator_knn = KNeighborsClassifier(n_neighbors=3)
+
+# 调优
+param_dict = {"n_neighbors": [1, 3, 5, 7, 9, 11]}
+estimator_knn = GridSearchCV(
+    estimator_knn, param_grid=param_dict, cv=10)  # 10折
+
+# 训练模型
+estimator_knn.fit(x_train_std, y_train)
+y_pred = estimator_knn.predict(x_test_std)
+
+print("预测值为:", y_pred, "\n真实值为:", y_test, "\n比较结果为:", y_test == y_pred)
+print("准确率为：\n", estimator_knn.score(x_test_std, y_test))
+
+print("最佳参数:\n", estimator_knn.best_params_)
+print("最佳结果:\n", estimator_knn.best_score_)
+print("最佳估计器:\n", estimator_knn.best_estimator_)
+print("交叉验证结果:\n", estimator_knn.cv_results_)
+
 ```
 
 输出
 
 ```python
-预测测试集类别： [0 0 2 0 0 0 0 2 1 2 0 2 2 2 1 0 2 1 0 2 1 1 2 1 0 2 1 1 0 1 2 1 2 1 0 2 0
- 0]
-准确率为： 0.9210526315789473
+预测值为: [0 0 2 1 2 0 2 1 1 1 0 1 2 0 1 1 0 0 2 2 0 0 0 1 2 2 0 1 0 0 1 0 1 1 2 2 1
+ 2] 
+真实值为: [0 0 2 1 2 0 2 1 1 1 0 1 2 0 1 1 0 0 2 2 0 0 0 2 2 2 0 1 0 0 1 0 1 1 2 2 1
+ 2] 
+比较结果为: [ True  True  True  True  True  True  True  True  True  True  True  True
+  True  True  True  True  True  True  True  True  True  True  True False
+  True  True  True  True  True  True  True  True  True  True  True  True
+  True  True]
+准确率为：
+ 0.9736842105263158
+最佳参数:
+ {'n_neighbors': 1}
+最佳结果:
+ 0.9469696969696969
+最佳估计器:
+ KNeighborsClassifier(n_neighbors=1)
+交叉验证结果:
+ {'mean_fit_time': array([0.00029657, 0.00039995, 0.00039968, 0.00049977, 0.00029998,
+       0.00040131]), 'std_fit_time': array([0.00045309, 0.00048983, 0.00048951, 0.00049977, 0.00045822,
+       0.0004915 ]), 'mean_score_time': array([0.00089977, 0.00080023, 0.00110025, 0.00080018, 0.00079889,
+       0.00080283]), 'std_score_time': array([0.00029992, 0.0004004 , 0.00030082, 0.00040009, 0.00039965,
+       0.00040154]), 'param_n_neighbors': masked_array(data=[1, 3, 5, 7, 9, 11],
+             mask=[False, False, False, False, False, False],
+       fill_value='?',
+            dtype=object), 'params': [{'n_neighbors': 1}, {'n_neighbors': 3}, {'n_neighbors': 5}, {'n_neighbors': 7}, {'n_neighbors': 9}, {'n_neighbors': 11}], 'split0_test_score': array([0.91666667, 0.91666667, 0.91666667, 0.91666667, 0.91666667,
+       0.91666667]), 'split1_test_score': array([0.91666667, 0.91666667, 0.83333333, 0.91666667, 0.91666667,
+       0.91666667]), 'split2_test_score': array([0.90909091, 0.90909091, 0.90909091, 0.90909091, 0.90909091,
+       1.        ]), 'split3_test_score': array([0.90909091, 0.90909091, 0.90909091, 0.90909091, 0.90909091,
+       0.81818182]), 'split4_test_score': array([1., 1., 1., 1., 1., 1.]), 'split5_test_score': array([0.90909091, 0.90909091, 1.        , 1.        , 1.        ,
+       1.        ]), 'split6_test_score': array([1., 1., 1., 1., 1., 1.]), 'split7_test_score': array([0.90909091, 0.81818182, 0.81818182, 0.81818182, 0.81818182,
+       0.81818182]), 'split8_test_score': array([1., 1., 1., 1., 1., 1.]), 'split9_test_score': array([1.        , 0.90909091, 1.        , 1.        , 1.        ,
+       0.90909091]), 'mean_test_score': array([0.9469697 , 0.92878788, 0.93863636, 0.9469697 , 0.9469697 ,
+       0.93787879]), 'std_test_score': array([0.04338734, 0.05412294, 0.06830376, 0.05945884, 0.05945884,
+       0.07048305]), 'rank_test_score': array([1, 6, 4, 1, 1, 5])}
+```
+
+## 4.2 朴素贝叶斯算法
+
+（Naive Bayes）
+
+> 相互独立的特征 + 贝叶斯公式
+
+```python
+from sklearn.naive_bayes import MultinomialNB
+```
+
+朴素：特征与特征之间是相互独立的
+
+朴素贝叶斯算法经常用于文本分类, 因为文章转换成机器学习算法识别的数据是以单词为特征的
+
+- 优点：
+  - 朴素贝叶斯模型发源于古典数学理论，有稳定的分类效率。
+  - 对缺失数据不太敏感，算法也比较简单，常用于文本分类。
+  - 分类准确度高，速度快
+- 缺点：
+  - 由于使用了样本属性独立性的假设，所以如果特征属性有关联时其效果不好
+
+### 4.2.1 原理
+
+#### 1）贝叶斯公式
+
+以文本分类为例
+$$
+P(C|F_1,F_2,\ldots)=\cfrac{P(F_1,F_2,\ldots|C)P(C)}{P(F_1,F_2,\ldots)}
+$$
+
+- $P(C)$：每个文档类别的概率(某文档类别数／总文档数量)
+- $P(W│C)$：给定类别下特征（被预测文档中出现的词）的概率
+  - $W$ 为给定文档的特征值（频数统计）
+  - 计算方法：$P(F_1│C)=N_i/N$ （训练文档中去计算）
+    - $N_i$：该 $F_1$ 词在 $C$ 类别所有文档中出现的次数
+    - $N$：所属类别 $C$ 下的文档的文本总和
+- $P(F_1,F_2,\ldots)$ 预测文档中每个词的概率
+
+#### 2）拉普拉斯平滑系数
+
+目的：防止计算出的分类概率为0
+$$
+P(F_1|C)=\cfrac{N_i+\alpha}{N+\alpha m}
+$$
+
+- $\alpha$：预先指定的系数，默认为 1
+- $m$：训练文档中特征词的种类数
+
+```python
+# 因为样本数量不够，会出现特征词不在一类文本中出现的情况
+P(娱乐|影院,支付宝,云计算) = 𝑃(影院,支付宝,云计算|娱乐)∗P(娱乐)=(56/121)∗(15/121)∗(0/121)∗(60/90) = 0
+# 此时需要实用到拉普拉斯平滑系数
+P(娱乐|影院,支付宝,云计算) =P(影院,支付宝,云计算|娱乐)P(娱乐)=(56+1/121+4)(15+1/121+4)(0+1/121+1*4)(60/90) = 0.00002
+```
+
+### 4.2.2 API
+
+***sklearn.naive_bayes.MultinomialNB(alpha = 1.0)***
+
+- *alpha*：拉普拉斯平滑系数
+
+### 4.2.3 例：20类新闻分类
+
+分析
+
+- 划分数据集
+- tfidf 进行的特征抽取
+- 朴素贝叶斯预测
+
+```python
+from sklearn.datasets import fetch_20newsgroups, load_files
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+import pandas as pd
+
+data = fetch_20newsgroups(subset="all") 
+x_train, x_test, y_train, y_test = \
+        train_test_split(data.data, data.target, test_size=0.2, random_state=22)
+# 文本分类
+transfer = TfidfVectorizer()  
+x_train = transfer.fit_transform(x_train)
+x_test = transfer.transform(x_test)  
+# 朴素贝叶斯
+estimator = MultinomialNB()
+estimator.fit(x_train, y_train)
+y_predict = estimator.predict(x_test)
+
+print("预测值为:", y_predict, "\n真实值为:", y_test, "\n比较结果为:", y_test == y_predict)
+score = estimator.score(x_test, y_test)
+print("准确率为: ", score)
+```
+
+输出
+
+```python
+预测值为: [15 13 16 ... 13  2 13] 
+真实值为: [15 13 16 ... 13  2 13] 
+比较结果为: [ True  True  True ...  True  True  True]
+准确率为:  0.8511936339522547
 ```
 
 # 六、聚类

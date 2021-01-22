@@ -111,6 +111,8 @@ sns.relplot(kind='line',x='sepal_length',y='sepal_width',data=iris,hue='species'
 
 （categorical plots）
 
+类别图呈现单个数据与类别之间的关系
+
 ## 4.1 函数
 
 ```python
