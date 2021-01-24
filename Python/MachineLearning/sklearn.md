@@ -1081,6 +1081,110 @@ print("准确率为: ", score)
 准确率为:  0.8511936339522547
 ```
 
+## 4.3 决策树
+
+（Decision Tree）
+
+```python
+from sklearn.tree import DecisionTreeClassifier
+```
+
+> if - else
+
+### 4.3.1 原理
+
+#### 1）信息熵
+
+$$
+H(X)=-\sum\limits_{i=1}^n P(x_i)log_bP(x_i)
+$$
+
+#### 2）条件信息熵
+
+$$
+H(D|A)=\sum\limits_{i=1}^n \cfrac{|D_i|}{|D|}H(D_i)
+$$
+
+
+
+#### 3）信息增益
+
+决策树的划分依据之一
+
+特征 $A$ 对训练数据集 $D$ 的信息增益 $g(D,A)$,定义为集合 D 的信息熵 $H(D)$ 与特征 $A$ 给定条件下 $D$ 的信息条件熵 $H(D|A)$ 之差
+$$
+g(D,A)=H(D)=H(D|A)
+$$
+
+#### 4）三种算法实现
+
+- ID3
+  - 信息增益 最大的准则
+- C4.5
+  - 信息增益比 最大的准则
+- CART
+  - 分类树: 基尼系数 最小的准则 在sklearn中可以选择划分的默认原则
+  - 优势：划分更加细致（从后面例子的树显示来理解）
+
+### 4.3.2 API
+
+***class sklearn.tree.DecisionTreeClassifier(criterion=’gini’, max_depth=None,random_state=None)***
+
+决策树分类器
+
+- criterion：默认是’gini’系数，也可以选择信息增益的熵’entropy’
+- max_depth：树的深度大小
+- random_state：随机数种子
+
+### 4.3.3 保存树的结构
+
+```python
+from sklearn.tree import export_graphviz
+```
+
+***sklearn.tree.export_graphviz()*** 
+
+该函数能够导出DOT格式
+
+- tree.export_graphviz(estimator, out_file=path, feature_names)
+
+### 4.3.4 例
+
+```python
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, export_graphviz
+
+iris = datasets.load_iris()
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, random_state=22)
+# 决策树训练
+estimator = DecisionTreeClassifier(criterion="entropy")
+estimator.fit(x_train, y_train)
+# 生成树文件
+export_graphviz(estimator, out_file="tree.dot",
+                feature_names=iris.feature_names)
+
+y_pred = estimator.predict(x_test)
+print("预测值为:", y_pred, "\n真实值为:", y_test, "\n比较结果为:", y_test == y_pred)
+score = estimator.score(x_test, y_test)
+print("准确率为: ", score)
+```
+
+输出
+
+```python
+预测值为: [0 2 1 2 1 1 1 1 1 0 2 1 2 2 0 2 1 1 1 1 0 2 0 1 2 0 2 2 2 1 0 0 1 1 1 0 0
+ 0] 
+真实值为: [0 2 1 2 1 1 1 2 1 0 2 1 2 2 0 2 1 1 2 1 0 2 0 1 2 0 2 2 2 2 0 0 1 1 1 0 0
+ 0] 
+比较结果为: [ True  True  True  True  True  True  True False  True  True  True  True
+  True  True  True  True  True  True False  True  True  True  True  True
+  True  True  True  True  True False  True  True  True  True  True  True
+  True  True]
+准确率为:  0.9210526315789473
+```
+
 # 六、聚类
 
 K-means（K均值聚类）
@@ -1180,10 +1284,6 @@ plt.show()
 ```
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210119104047678.png" alt="image-20210119104047678" style="zoom:67%;" />
-
-```python
-z
-```
 
 输出
 

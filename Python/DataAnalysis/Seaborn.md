@@ -137,6 +137,7 @@ seaborn.catplot( kind='strip')
 
 1. `hue=` 参数可以给图像引入另一个维度。如果一个数据集有多个类别，`hue=` 参数就可以让数据点有更好的区分
 2. 计数条形图只传入一个分类参数
+3.  *jitter*：表示抖动的程度(仅沿类別轴)。当很多数据点重叠时，可以指定抖动的数量或者设为True使用默认值。
 
 ## 4.3 例
 
@@ -237,9 +238,11 @@ sns.displot(x, kind=hist, data)
 
 ### 5.1.1 参数说明
 
-*kdeplot*
+*bins*：用于控制条形的数量。
 
-- multiple：{“layer”, “stack”, “fill”}
+*kdeplot* 中：
+
+- *multiple*：{“layer”, “stack”, “fill”}
   - Method for drawing multiple elements when semantic mapping creates subsets. Only relevant with univariate data
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122170112089.png" alt="image-20210122170112089" style="zoom:67%;" />
@@ -396,4 +399,3 @@ sns.clustermap(iris)
 
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122161932756.png" alt="image-20210122161932756" style="zoom:67%;" />
-

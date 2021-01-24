@@ -202,10 +202,10 @@ favorate_singers= ['Mika','Jay Chou','Bruno Mars','Ed Sheeran']
 sorted(列表名)
 ```
 
-### 3）倒着排序列表(永久性)
+#### 3）倒着排序列表(永久性)
 
 ```python
-reverse(列表名)	#恢复的办法，再来一次reverse()
+列表名.reverse()	#恢复的办法，再来一次reverse()
 ```
 
 #### 4）确定列表的长度

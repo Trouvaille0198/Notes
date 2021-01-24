@@ -473,6 +473,8 @@ df.describe()
 
 ### 2.3.2 排序
 
+#### 1）df.sort_values
+
 ```python
 df.sort_values(by=['C'])								#按特定列的值升序排序
 df.sort_values(by=['B'],ascending=False)				#降序排序
@@ -483,41 +485,121 @@ df.sort_values(by=['B', 'C'], ascending=[False, True])	#先按B降序，再按C�
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209205226758.png" alt="image-20201209205226758" style="zoom:60%;" />
 
+#### 2）df.sort_index
+
+按索引排序
+
+- *axis*：0（跨行），1（跨列）
+- ascending：0（降序），1（升序）
+
+
+
 ```python
 df.sort_index(axis=0，ascending=1)		#按索引列升序排序，需要默认的索引值
 ```
-
-axis=0（跨行），1（跨列）
 
 输出（此处index设置为了’A’）
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212247769.png" alt="image-20201209212247769" style="zoom: 67%;" />
 
-### 2.3.3 求平均值
+### 2.3.3 统计函数
+
+返回 Series
+
+#### 1）max()、min()
 
 ```python
-df.mean() 		#默认跨行取均值
-df.mean(axis=1)	#跨列取均值
+# 使用统计函数：0 代表列求结果， 1 代表行求统计结果
+data.max(0)
+
+open 			34.99
+high 			36.35
+close 			35.21
+low 			34.01
+volume 			501915.41
+price_change 	3.03
+p_change 		10.03
+turnover 		12.56
+my_price_change 3.41
+dtype: float64
 ```
 
-输出
+#### 2）std()、var()
 
 ```python
-B    2.75
-C    1.90
+# 方差
+data.var(0)
+
+open 				1.545255e+01
+high 				1.662665e+01
+close 				1.554572e+01
+low 				1.437902e+01
+volume 				5.458124e+09
+price_change 		8.072595e-01
+p_change 			1.664394e+01
+turnover 			4.323800e+00
+my_price_change 	6.409037e-01
 dtype: float64
     
-a    1.75
-b    3.00
-c    1.25
-d    1.50
-e    3.50
-f    2.50
-g    2.75
-h    0.50
-i    4.50
-j    2.00
+# 标准差
+data.std(0)
+
+open 				3.930973
+high 				4.077578
+close 				3.942806
+low 				3.791968
+volume 				73879.119354
+price_change 		0.898476
+p_change 			4.079698
+turnover 			2.079375
+my_price_change 	0.800565
 dtype: float64
+```
+
+#### 3）median()
+
+```python
+df = pd.DataFrame({'COL1' : [2,3,4,5,4,2],
+					'COL2' : [0,1,2,3,4,2]})
+df.median()
+
+COL1 	3.5
+COL2 	2.0
+dtype: float64
+```
+
+#### 4）idxmax()、idxmin()
+
+求索引位置
+
+```python
+# 求出最大值的位置
+data.idxmax(axis=0)
+
+open 			2015-06-15
+high 			2015-06-10
+close 			2015-06-12
+low 			2015-06-12
+volume 			2017-10-26
+price_change 	2015-06-09
+p_change 		2015-08-28
+turnover 		2017-10-26
+my_price_change 2015-07-10
+dtype: object
+    
+# 求出最小值的位置
+data.idxmin(axis=0)
+
+open 			2015-03-02
+high 			2015-03-02
+close 			2015-09-02
+low 			2015-03-02
+volume 			2016-07-06
+price_change 	2015-06-15
+p_change 		2015-09-01
+turnover 		2016-07-06
+my_price_change 2015-06-15
+dtype: object
 ```
 
 ### 2.3.4 其他
@@ -525,17 +607,13 @@ dtype: float64
 ```python
 df.corr()		#返回列与列之间的相关系数
 df.count()		#返回每一列中的非空值的个数
-df.max()		#返回每一列的最大值
-df.min()		#返回每一列的最小值
-df.median()		#返回每一列的中位数
-df.std()		#返回每一列的标准差
 ```
 
 # 三、预处理
 
 ## 3.1 数据清理
 
-所有函数，不赋值不会生效
+所有函数，均返回 DataFrame 副本，不赋值不会生效
 
 以下图为例
 
@@ -602,35 +680,28 @@ Name: C, dtype: int32
 df.rename(columns={'A': 'Name','C':'Age'})			#更改列名称
 df.rename(index={'e': 'eee'})						#更改行名称
 
-df.columns=['animal','age','visits','priority'] 	#传入列表以改变列名称
-df.index=[...]								     	#传入列表以改变行名称
+df.columns = ['animal','age','visits','priority'] 	#传入列表以改变列名称
+df.index = [...]								    #传入列表以改变行名称
 ```
 
 输出
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209165738698.png" alt="image-20201209165738698" style="zoom:67%;" />
 
-### 3.1.6 删除重复值
+### 3.1.6 重复值处理
 
 ```python
-df.duplicated().any()	#返回bool，查看是否有重复值
+df.duplicated() 			# 返回一个布尔型的Series,显示各行是否有重复行
+df.duplicated().any()		# 返回bool，查看是否有重复值
+df.duplicated('k1') 		# 检查各行的k1列是否重复
+df.duplicated(['k1','k2'])	# 检查各行的k1，k2列是否重复
 
-df['A'].drop_duplicates()					#删除A列中有重复值的列
-df['A'].drop_duplicates(keep='last')		#删除先出现的重复值
-```
-
-输出
-
-```python
-a      cat
-c    snake
-d      dog
-Name: A, dtype: object
-
-g    snake
-h      cat
-j      dog
-Name: A, dtype: object
+df.drop_duplicates()             #保留第一个值，返回副本
+df.drop_duplicates(keep='last')  #保留最后一个值，返回副本
+df.drop_duplicates(keep=False)   #删除所有重复值，返回副本
+df.drop_duplicates('k1')         #删除第一列重复值，返回副本
+df.drop_duplicates(['k1','k2'])  #删除全部列重复值，返回副本
+df.drop_duplicates(inplace=True) #就地修改
 ```
 
 ### 3.1.7 **数值修改及替换**
@@ -789,13 +860,65 @@ df = pd.concat([df, s], axis=1)
 df[len(df)] = [16, 17, 18, 19]
 ```
 
+## 3.5 数据运算
 
+### 3.5.1 算术运算
 
+- add(other)
 
+```python
+data['A'].add(1)
+```
+
+- sub(other)
+
+```python
+data['A'].sub(2)
+```
+
+### 3.5.2 逻辑运算
+
+更多被运用到数据筛选中
+
+#### 1）符号
+
+```python
+data["A"] > 2 								# 返回Series
+data[data["A"] > 2].head() 					# 返回DataFrame副本
+data[(data["A"] > 1) & (data["A"] < 3)] 	# 多个逻辑判断
+```
+
+#### 2）函数
+
+- *query(expr)*
+  - expr：查询字符串
+
+````python
+data.query("A<3 & A>1") # 返回DataFrame副本
+````
+
+- *isin(values)*
+
+可以指定值进行一个判断，从而进行筛选操作
+
+```python
+data[data["A"].isin([1, 2])] # 返回DataFrame副本
+```
+
+### 3.5.3 自定义运算
+
+*apply( func, axis=0 )*：定义一个对列，最大值-最小值的函数
+
+- func：自定义函数
+- axis=0：默认是列，axis=1为行进行运算
 
 # 四、导入与到导出
 
 ## 4.1 导入数据
+
+- *path*：文件路径
+- *sep*：分隔符，默认用","隔开
+- *usecols*：指定读取的列名
 
 ```python
 pd.read_csv(filename)					#从CSV文件导入数据
@@ -808,6 +931,13 @@ pd.read_clipboard()						#从你的粘贴板获取内容，并传给read_table()
 ```
 
 ## 4.2 导出数据
+
+- *path*：文件路径
+- *sep*：分隔符，默认用","隔开
+- *columns*：选择需要的列索引
+- *header* ：boolean or list of string, default True，是否写入列索引
+- *index*：是否写入行索引
+- *mode*：'w'：重写, 'a' 追加
 
 ```python
 df.to_csv(filename)							#导出数据到CSV文件
