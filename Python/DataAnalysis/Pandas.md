@@ -380,7 +380,7 @@ dtype: object
 dtype('O')
 ```
 
-### 2.2.4 查看空值
+### 2.2.4 查看缺失值
 
 ```python
 df.isnull()			#检查数据空值
@@ -602,7 +602,7 @@ my_price_change 2015-06-15
 dtype: object
 ```
 
-### 2.3.4 其他
+#### 5）其他
 
 ```python
 df.corr()		#返回列与列之间的相关系数
@@ -619,7 +619,7 @@ df.count()		#返回每一列中的非空值的个数
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209163600487.png" alt="image-20201209163600487" style="zoom:67%;" />
 
-### 3.1.1 处理空值
+### 3.1.1 缺失值处理
 
 - `dropna(axis=, how=)`：丢弃NaN数据
   - axis：0(按行丢弃)，1(按列丢弃)
@@ -946,5 +946,40 @@ df.to_sql(table_name, connection_object)	#导出数据到SQL表
 df.to_json(filename)						#以Json格式导出数据到文本文件
 ```
 
-# 五、时间处理
+# 五、例
 
+1. 取出索引为 [3, 4, 8] 行的 animal 和 age 列
+
+```python
+df.loc[df.index[[3, 4, 8]], ['animal', 'age']]
+```
+
+2. 取出 age 值缺失的行
+
+```python
+df[df['age'].isnull()]
+```
+
+3. 计算每个不同种类 animal 的 age 的平均数
+
+```python
+df.groupby('animal')['age'].mean()
+```
+
+4. 计算 df 中每个种类 animal 的数量
+
+```python
+df['animal'].value_counts()
+```
+
+5. 将priority列中的yes, no替换为布尔值True, False
+
+```python
+df['priority'] = df['priority'].map({'yes': True, 'no': False})
+```
+
+6. 求哪一列的和最小
+
+```python3
+df.sum().idxmin()
+```

@@ -55,7 +55,7 @@ doc = pq(filename='demo.html')
 
 # 三、查找节点
 
-pyquery 的选择结果可能是多个节点，也可能是单个节点，类型都是` PyQuery `类型，并没有返回像 Beautiful Soup 那样的列表。
+pyquery 的选择结果可能是多个节点，也可能是单个节点，类型都是 ` PyQuery ` 类型，并没有返回像 Beautiful Soup 那样的列表。
 
 所有查找结点的方法都可以加入CSS选择器
 
