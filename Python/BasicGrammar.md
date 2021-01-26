@@ -150,7 +150,7 @@ func('Jack', 24, **extra)
 例
 
 ```python
-favorate_singers= ['Mika','Jay Chou','Bruno Mars','Ed Sheeran']
+favorate_singers = ['Mika','Jay Chou','Bruno Mars','Ed Sheeran']
 ```
 
 ### 2.1.2 添加列表元素
@@ -241,11 +241,11 @@ L=[x+10 for x in L]     #result:[11,12,13,14,15]
 
 参数 [start_index:  stop_index:  step] ：
 
-   	 start_index是切片的起始位置索引，不提供时默认从头，可为负
+   	 start_index是切片的起始位置索引，不提供时默认从头
    	
-   	  stop_index是切片的结束位置（**不包括**）索引，不提供时默认至尾
+   	 stop_index是切片的结束位置（**不包括**）索引，不提供时默认至尾,可为负
    	
-   	  step为步长，可以不提供，默认值是1
+   	 step为步长，可以不提供，默认值是1
 
 ### 2.3.6 复制列表/创建列表副本
 
@@ -289,7 +289,7 @@ tup1 = (50,)
 3. 可以对元组进行连接组合       
 
  ```python
-tup1 = (12, 34.56)
+tup1 =  
 tup2 = ('abc', 'xyz') 
 tup3 = tup1 + tup2
  ```

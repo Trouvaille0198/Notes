@@ -849,7 +849,7 @@ from sklearn.model_selection import GridSearchCV
 
 ### 3.3.2 API
 
-***sklearn.model_selection.GridSearchCV(estimator, param_grid=None,cv=None)***
+***GridSearchCV(estimator, param_grid=None,cv=None)***
 
 对估计器的指定参数值进行详尽搜索
 - 参数
@@ -888,7 +888,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 ### 4.1.1 API
 
-***sklearn.neighbors.KNeighborsClassifier(n_neighbors=5,algorithm='auto')***
+***KNeighborsClassifier(n_neighbors=5,algorithm='auto')***
 
 - n_neighbors：int，可选（默认= 5），使用的邻居数
 - algorithm：*{‘auto’，‘ball_tree’，‘kd_tree’，‘brute’}*，可选用于计算最近邻居的算法，不同实现方式影响效率
@@ -954,13 +954,13 @@ print("交叉验证结果:\n", estimator_knn.cv_results_)
 准确率为：
  0.9736842105263158
 最佳参数:
- {'n_neighbors': 1}
+{'n_neighbors': 1}
 最佳结果:
  0.9469696969696969
 最佳估计器:
  KNeighborsClassifier(n_neighbors=1)
 交叉验证结果:
- {'mean_fit_time': array([0.00029657, 0.00039995, 0.00039968, 0.00049977, 0.00029998,
+{'mean_fit_time': array([0.00029657, 0.00039995, 0.00039968, 0.00049977, 0.00029998,
        0.00040131]), 'std_fit_time': array([0.00045309, 0.00048983, 0.00048951, 0.00049977, 0.00045822,
        0.0004915 ]), 'mean_score_time': array([0.00089977, 0.00080023, 0.00110025, 0.00080018, 0.00079889,
        0.00080283]), 'std_score_time': array([0.00029992, 0.0004004 , 0.00030082, 0.00040009, 0.00039965,
@@ -1036,7 +1036,7 @@ P(娱乐|影院,支付宝,云计算) =P(影院,支付宝,云计算|娱乐)P(娱�
 
 ### 4.2.2 API
 
-***sklearn.naive_bayes.MultinomialNB(alpha = 1.0)***
+***MultinomialNB(alpha = 1.0)***
 
 - *alpha*：拉普拉斯平滑系数
 
@@ -1089,7 +1089,7 @@ print("准确率为: ", score)
 from sklearn.tree import DecisionTreeClassifier
 ```
 
-> if - else
+> if - else 根据特征的信息熵筛选
 
 ### 4.3.1 原理
 
@@ -1128,7 +1128,7 @@ $$
 
 ### 4.3.2 API
 
-***class sklearn.tree.DecisionTreeClassifier(criterion=’gini’, max_depth=None,random_state=None)***
+***DecisionTreeClassifier(criterion=’gini’, max_depth=None,random_state=None)***
 
 决策树分类器
 
@@ -1142,7 +1142,7 @@ $$
 from sklearn.tree import export_graphviz
 ```
 
-***sklearn.tree.export_graphviz()*** 
+***export_graphviz()*** 
 
 该函数能够导出DOT格式
 
@@ -1184,6 +1184,103 @@ print("准确率为: ", score)
   True  True]
 准确率为:  0.9210526315789473
 ```
+
+## 4.4 随机森林
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+```
+
+**随机森林是一个包含多个决策树的分类器**，并且其输出的类别是由个别树输出的类别的众数而定。
+
+### 4.4.1 原理
+
+学习算法根据下列算法而建造每棵树
+
+- 用 N 来表示 样本个数，M 表示特征数目。
+  - 1、有放回地抽样（bootstrap），一次随机选出一个样本，重复 N 次
+  - 2、随机选出 m 个特征, m <<M，建立决策树
+
+### 4.4.2 API
+
+***RandomForestClassifier(n_estimators=10, criterion=’gini’, max_depth=None, bootstrap=True, random_state=None, min_samples_split=2)***
+
+- 随机森林分类器
+- *n_estimators*：integer，optional（default = 10）森林里的树木数量 120,200,300,500,800,1200
+- *criteria*：string，可选（default =“gini”）分割特征的测量方法
+- *max_depth*：integer 或 None，可选（默认=无）树的最大深度 5,8,15,25,30
+- *max_features="auto”*：每个决策树的最大特征数量
+  - If "auto", then `max_features=sqrt(n_features)`.
+  - If "sqrt", then `max_features=sqrt(n_features)` (same as "auto").
+  - If "log2", then `max_features=log2(n_features)`.
+  - If None, then `max_features=n_features`.
+- *bootstrap*：boolean，optional（default = True）是否在构建树时使用放回抽样
+- *min_samples_split*：节点划分最少样本数
+- *min_samples_leaf*：叶子节点的最小样本数
+
+- 超参数：n_estimator, max_depth, min_samples_split,min_samples_leaf
+
+#### 4.4.3 例
+
+```python
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+
+iris = datasets.load_iris()
+# 数据集划分
+x_train, x_test, y_train, y_test = train_test_split(
+    iris.data, iris.target, random_state=22)
+# RandomForest
+estimator_rf = RandomForestClassifier() 
+# 超参调优
+param_dict = {"n_estimators": [120,200,300,500,800,1200], "max_depth": [5, 8, 15, 25, 30]}
+estimator_rf = GridSearchCV(estimator_rf, param_grid=param_dict,cv=5)
+# 训练
+estimator_rf.fit(x_train,y_train)
+y_pred = estimator_rf.predict(x_test)
+# 输出结果
+print("预测值为:", y_pred, "\n真实值为:", y_test, "\n比较结果为:", y_test == y_pred)
+print("准确率为：\n", estimator_rf.score(x_test, y_test))
+
+print("最佳参数:\n", estimator_rf.best_params_)
+print("最佳结果:\n", estimator_rf.best_score_)
+print("最佳估计器:\n", estimator_rf.best_estimator_)
+print("交叉验证结果:\n", estimator_rf.cv_results_)
+```
+
+输出
+
+```python
+预测值为: [0 2 1 2 1 1 1 1 1 0 2 1 2 2 0 2 1 1 1 1 0 2 0 1 2 0 2 2 2 1 0 0 1 1 1 0 0
+ 0] 
+真实值为: [0 2 1 2 1 1 1 2 1 0 2 1 2 2 0 2 1 1 2 1 0 2 0 1 2 0 2 2 2 2 0 0 1 1 1 0 0
+ 0] 
+比较结果为: [ True  True  True  True  True  True  True False  True  True  True  True
+  True  True  True  True  True  True False  True  True  True  True  True
+  True  True  True  True  True False  True  True  True  True  True  True
+  True  True]
+准确率为：
+ 0.9210526315789473
+最佳参数:
+{'max_depth': 5, 'n_estimators': 120}
+最佳结果:
+ 0.9553571428571429
+最佳估计器:
+ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=5, max_features='auto', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, n_estimators=120, n_jobs=1,
+            oob_score=False, random_state=None, verbose=0,
+            warm_start=False)
+交叉验证结果:
+ {'mean_fit_time': array([0.32009826, 0.57197742, ......., 0., 0., 0., 0.])}
+
+```
+
+
 
 # 六、聚类
 
