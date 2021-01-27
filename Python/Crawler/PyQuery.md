@@ -42,16 +42,17 @@ doc = pq(filename='demo.html')
 
 # 二、CSS选择器
 
-| 名称              | 例子            | 说明                         |
-| ----------------- | --------------- | ---------------------------- |
-| .class            | .color          | 选择class='color'的所有元素  |
-| #id               | #info           | 选择id='info'的所有元素      |
-| *                 | *               | 选择所有元素                 |
-| element           | p               | 选择所有的p元素              |
-| element, element  | div, p          | 选择所有的div元素和p元素     |
-| element element   | div p           | 选择div标签内的所有p元素     |
-| [attribute]       | [target]        | 选择带有target属性的所有元素 |
-| [attribute=value] | [target=_blank] | 选择target=_blank的所有元素  |
+| 名称              | 例子            | 说明                             |
+| ----------------- | --------------- | -------------------------------- |
+| .class            | .color          | 选择class='color'的所有元素      |
+| #id               | #info           | 选择id='info'的所有元素          |
+| *                 | *               | 选择所有元素                     |
+| element           | p               | 选择所有的p元素                  |
+| element, element  | div, p          | 选择所有的div元素和p元素         |
+| element element   | div p           | 选择div标签内的所有p元素         |
+| element > element | div > p         | 选择所有父级是 div 元素的 p 元素 |
+| [attribute]       | [target]        | 选择带有target属性的所有元素     |
+| [attribute=value] | [target=_blank] | 选择target=_blank的所有元素      |
 
 # 三、查找节点
 

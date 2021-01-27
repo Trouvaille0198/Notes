@@ -471,10 +471,22 @@ SHIFT = u'\ue008'
 SPACE = u'\ue00d'
 SUBTRACT = u'\ue027'
 TAB = u'\ue004'
-UP = u'\ue013'¶
+UP = u'\ue013'
+```
+
+# 五、常见操作
+
+1. 设置浏览器类的 options 选项
+
+```python
+options = webdriver.ChromeOptions()
+# 不加载图片,加快访问速度
+options.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2}) 
+# 此步骤很重要，设置为开发者模式，防止被各大网站识别出来使用了Seleniu
+options.add_experimental_option('excludeSwitches', ['enable-automation']) 
+
+browser = webdriver.Chrome(options=options)
 ```
 
 
-
-# 四、PhantomJS
 

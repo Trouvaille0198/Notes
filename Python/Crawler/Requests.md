@@ -513,3 +513,18 @@ exit() if not r.status_code == requests.codes.ok else print('Request Successfull
 511: ('network_authentication_required', 'network_auth', 'network_authentication')
 ```
 
+# 五、异常处理
+
+***requests.exceptions.ConnectionError***
+
+1. http 的连接数超过最大限制，默认的情况下连接是 Keep-alive 的，所以这就导致了服务器保持了太多连接而不能再新建连接。
+2. ip 被封
+3. 程序请求速度过快。
+
+```dart
+try:
+	response = requests.get(url)
+except requests.exceptions.ConnectionError:
+	print('error!')
+    continue
+```

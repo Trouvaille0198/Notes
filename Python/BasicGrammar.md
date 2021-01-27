@@ -430,7 +430,7 @@ alien_0 = {'color':'green','points':5}         #字典是一系列键-值对
 - 访问字典中的值
 
 ```python
-print(alien_0['point'])
+print(alien_0['points'])
 ```
 
 - 添加键-值对

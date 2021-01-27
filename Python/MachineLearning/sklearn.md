@@ -200,7 +200,7 @@ print("特征名字：\n", transfer.get_feature_names())
 
 #### 1）API
 
-***sklearn.feature_extraction.text.CountVectorizer(stop_words=[])***
+***CountVectorizer(stop_words=[])***
 
 - CountVectorizer.fit_transform(X)
   -  X：文本或者包含文本字符串的可迭代对象
@@ -342,7 +342,7 @@ $$
 
 #### 2）API
 
-***sklearn.feature_extraction.text.TfidfVectorizer(stop_words=[])***
+***TfidfVectorizer(stop_words=[])***
 
 - TfidfVectorizer.fit_transform(X)
   -  X：文本或者包含文本字符串的可迭代对象
@@ -443,7 +443,7 @@ $$
 
 #### 2）API
 
-***sklearn.preprocessing.MinMaxScaler (feature_range=(0,1)… )***
+***MinMaxScaler (feature_range=(0,1)… )***
 
 - *MinMaxScalar.fit_transform(X)*
   - X：numpy array格式的数据 [n_samples,n_features]
@@ -506,7 +506,7 @@ $$
 
 #### 2）API
 
-***sklearn.preprocessing.StandardScaler( )***
+***StandardScaler( )***
 
 - *StandardScaler.fit_transform(X)*
   - X：numpy array 格式的数据[n_samples, n_features]
@@ -590,7 +590,7 @@ import sklearn.feature_selection
 
 ##### API
 
-***sklearn.feature_selection.VarianceThreshold(threshold = 0.0)***
+***VarianceThreshold(threshold = 0.0)***
 
 - *Variance.fit_transform(X)*
   - X：numpy array 格式的数据 [n_samples, n_features]
@@ -703,9 +703,9 @@ print("milage和Liters的相关系数为:\n", r)
 
 ```python
 milage和Liters的相关系数为:
- (0.660861943290103, 0.2246299034335304)
+(0.660861943290103, 0.2246299034335304)
 milage和Liters的相关系数为:
- (-0.6406267138718624, 0.2441916485876286)
+(-0.6406267138718624, 0.2441916485876286)
 ```
 
 ### 2.5.2 主成分分析
@@ -724,7 +724,7 @@ from sklearn.decomposition import PCA
 
 #### 2）API
 
-***sklearn.decomposition.PCA(n_components=None)***
+***PCA(n_components=None)***
 
 - 参数：*n_components*
   - 小数：表示保留百分之多少的信息
@@ -864,6 +864,86 @@ from sklearn.model_selection import GridSearchCV
   - *best_score_*：在交叉验证中验证的最好结果
   - *best_estimator_*：最好的参数模型
   - *cv_results_*：每次交叉验证后的验证集准确率结果和训练集准确率结果
+
+## 3.4 分类的评估方法
+
+### 3.4.1 分类评估报告API
+
+```python
+from sklearn.metrics import classification_report
+```
+
+***classification_report(y_true, y_pred, labels=[], target_names=None )***
+
+- *y_true*：真实目标值
+- *y_pred*：估计器预测目标值
+- *labels*：指定类别对应的数字
+- *target_names*：目标类别名称
+- *return*：每个类别精确率与召回率
+
+### 3.4.2 ROC曲线与AUC指标
+
+```python
+from sklearn.metrics import roc_auc_score
+```
+
+- AUC 只能用来评价二分类
+- AUC 非常适合评价样本不平衡中的分类器性能
+
+#### 1）TPR与FPR
+
+- TPR = TP / (TP + FN)
+  - 所有真实类别为1的样本中，预测类别为1的比例
+  - 即为召回率（查全率）
+- FPR = FP / (FP + FN)
+  - 所有真实类别为0的样本中，预测类别为1的比例
+
+#### 2）ROC 曲线
+
+- ROC 曲线的横轴就是 FPRate，纵轴就是 TPRate，当二者相等时，表示的意义则是：对于不论真实类别是 1 还是 0 的样本，分类器预测为 1 的概率是相等的，此时 AUC 为 0.5
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/ROC.png" alt="ROC" style="zoom:67%;" />
+
+#### 3）AUC 指标
+
+- AUC 的概率意义是随机取一对正负样本，正样本得分大于负样本的概率
+- AUC 的最小值为 0.5，最大值为 1，取值越高越好
+- AUC=1，完美分类器，采用这个预测模型时，不管设定什么阈值都能得出完美预测。绝大多数预测的场合，不存在完美分类器。
+- 0.5<AUC<1，优于随机猜测。这个分类器（模型）妥善设定阈值的话，能有预测价值。
+
+> **最终AUC的范围在 [0.5, 1] 之间，并且越接近1越好**
+
+#### 4）API
+
+***roc_auc_score(y_true, y_score)***
+
+- 计算 ROC 曲线面积，即 AUC 值
+- *y_true*：每个样本的真实类别，必须为 0 (反例), 1 (正例)标记
+- *y_score*：每个样本预测的概率值
+
+## 3.5 模型保存和加载
+
+```python
+import joblib
+```
+
+- 保存：joblib.dump( estimator, 'XXX.pkl' )
+- 加载：estimator = joblib.load( 'XXX.pkl' )
+
+例
+
+```python
+import joblib
+
+def store_model(estimator, name):
+    joblib.dump(estimator, "../../models/"+name)
+    return "SUCCESS"
+
+
+def load_model(name):
+    model = joblib.load("../../models/"+name)
+    return model
+```
 
 # 四、分类
 
@@ -1280,9 +1360,500 @@ print("交叉验证结果:\n", estimator_rf.cv_results_)
 
 ```
 
+## 4.5 逻辑回归
 
+（Logistic Regression）
+
+```python
+from sklearn.linear_model import LogisticRegression
+```
+
+逻辑回归是机器学习中的一种分类模型，逻辑回归是一种分类算法，虽然名字中带有回归，但是它与回归之间有一定的联系。
+
+### 4.5.1 原理
+
+#### 1）输入
+
+逻辑回归的输入就是一个线性回归的结果。
+$$
+h(w)=w_1x_1+w_2x_2+w_3x_3\ldots+b
+$$
+
+#### 2）激活函数
+
+sigmoid 函数
+$$
+g(\theta^Tx)=\frac{1}{1+e^{-\theta^Tx}}
+$$
+分析
+
+- 回归的结果输入到 sigmoid 函数当中
+- 输出结果：[0, 1] 区间中的一个概率值，默认为 0.5 为阈值
+
+> 逻辑回归最终的分类是通过属于某个类别的概率值来判断是否属于某个类别，并且这个类别默认标记为 1 (正例),另外的一个类别会标记为 0 (反例)。（方便损失计算）
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/逻辑回归运算过程.png" alt="逻辑回归运算过程" style="zoom: 67%;" />
+
+#### 3）损失函数
+
+逻辑回归的损失，称之为**对数似然损失**
+$$
+cost(h_\theta(x),y)=\sum\limits_{i=1}^m-y_ilog(h_\theta(x))-(1-y_i)log(1-h_\theta(x))
+$$
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/损失计算过程.png" alt="损失计算过程" style="zoom: 67%;" />
+
+#### 4）优化
+
+同样使用梯度下降优化算法，去减少损失函数的值。这样去更新逻辑回归前面对应算法的权重参数，提升原本属于 1 类别的概率，降低原本是 0 类别的概率。
+
+### 4.5.2 API
+
+***LogisticRegression(solver='liblinear', penalty=‘l2’, C = 1.0)***
+
+- *solver*：优化求解方式（默认开源的 liblinear 库实现，内部使用了坐标轴下降法来迭代优化损失函数）
+  - *sag*：根据数据集自动选择，随机平均梯度下降
+- *penalty*：正则化的种类
+- *C*：正则化力度
+
+
+
+LogisticRegression 方法相当于 `SGDClassifier(loss="log", penalty=" ")`, SGDClassifier 实现了一个普通的随机梯度下降学习，也支持平均随机梯度下降法（ASGD），可以通过设置 average=True。而使用 LogisticRegression (实现了 SAG)
+
+### 4.5.3 例
+
+案例：癌症分类预测-良／恶性乳腺癌肿瘤预测
+
+> 数据描述
+>
+> （1）699条样本，共11列数据，第一列用语检索的id，后9列分别是与肿瘤
+>
+> 相关的医学特征，最后一列表示肿瘤类型的数值。
+>
+> （2）包含16个缺失值，用 ”?” 标出。
+
+分析
+
+- 缺失值处理
+- 标准化处理
+- 逻辑回归预测
+
+#### 1）初始化
+
+```python
+from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.model_selection import train_test_split
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import classification_report, roc_auc_score, roc_curve
+import matplotlib.pyplot as plt
+
+# 文件读取
+column_name = ['Sample code number', 'Clump Thickness',
+               'Uniformity of Cell Size', 'Uniformity of Cell Shape', 'Marginal Adhesion',
+               'Single Epithelial Cell Size',
+               'Bare Nuclei', 'Bland Chromatin',
+               'Normal Nucleoli', 'Mitoses', 'Class']
+original_data = pd.read_csv('../Data/breast-cancer-wisconsin.data',names=column_name)
+original_data.head()
+# 缺失值处理
+# 第一步先替换 ? 为 nan
+data = original_data.replace(to_replace="?", value=np.nan)
+data.dropna(inplace=True)
+print("检测是否还有缺失值(全为false表示没有缺失值)")  # 检测是否还有缺失值
+print(data.isnull().any())
+# 第三步 筛选特征值和目标值
+x = data.iloc[:, 1:-1]  # 表示每一行数据都要, 从第一列到倒数第二列的column字段也要
+y = data["Class"]
+x_train, x_test, y_train, y_test = train_test_split(x, y)
+```
+
+输出
+
+```python
+检测是否还有缺失值(全为false表示没有缺失值)
+Sample code number             False
+Clump Thickness                False
+Uniformity of Cell Size        False
+Uniformity of Cell Shape       False
+Marginal Adhesion              False
+Single Epithelial Cell Size    False
+Bare Nuclei                    False
+Bland Chromatin                False
+Normal Nucleoli                False
+Mitoses                        False
+Class                          False
+```
+
+#### 2）训练
+
+```python
+# 第四步: 开始特征工程
+transfer = StandardScaler()
+x_train = transfer.fit_transform(x_train)
+x_test = transfer.transform(x_test)
+
+# 第五步, 预估器流程
+estimator = LogisticRegression()  # 默认参数
+estimator.fit(x_train, y_train)
+print("逻辑回归_权重系数为: ", estimator.coef_)
+print("逻辑回归_偏置为:", estimator.intercept_)
+# 第六步, 模型评估
+y_predict = estimator.predict(x_test)
+print("逻辑回归_预测结果", y_predict)
+print("逻辑回归_预测结果对比:", y_test == y_predict)
+score = estimator.score(x_test, y_test)
+print("准确率为:", score)
+# 2是良性的 4是恶性的
+"""
+但是实际上这个预测结果不是我们想要的, 以上只能说明预测的正确与否,
+而事实上, 我们需要一种评估方式来显示我们对恶性breast的预测成功率, 也就是召回率
+同时可以查看F1-score的稳健性
+(召回率和精确率看笔记和截图)
+所以下面换一种评估方法
+"""
+```
+
+输出
+
+```python
+逻辑回归_权重系数为:  [[1.20895973 0.34430535 0.93605533 0.50117234 0.22296947 1.22295345
+  0.81648447 0.64096012 0.71930684]]
+逻辑回归_偏置为: [-0.9875554]
+逻辑回归_预测结果 [2 4 2 2 4 4 2 2 4 2 2 2 4 4 4 2 2 4 4 4 4 2 4 4 4 2 2 4 2 2 4 2 4 4 4 2 4
+ 2 2 2 2 4 4 2 4 2 2 2 2 4 2 2 2 4 4 2 4 2 2 2 2 2 2 4 4 4 2 2 2 2 2 4 2 2
+ 2 2 4 2 2 2 2 2 2 2 2 4 2 2 4 2 2 2 4 2 4 2 2 2 2 2 2 2 2 2 4 4 2 2 4 4 2
+ 2 2 4 2 4 2 2 4 4 2 2 2 2 4 2 2 2 4 2 2 2 2 2 4 2 4 2 4 2 2 4 2 2 2 4 4 4
+ 2 2 2 2 4 4 2 2 2 2 2 2 2 4 2 2 2 2 2 2 2 4 2]
+逻辑回归_预测结果对比: 541     True
+288     True
+395     True
+409     True
+568     True
+       ...  
+442     True
+51     False
+370     True
+304     True
+363     True
+Name: Class, Length: 171, dtype: bool
+准确率为: 0.9766081871345029
+```
+
+#### 3）查看精确率，召回率，F1-score
+
+```python
+Score = classification_report(y_test, y_predict, labels=[2, 4],
+                              target_names=["良性", "恶性"])
+print("查看精确率,召回率,F1-score\n", Score)
+# support表示样本量
+```
+
+输出
+
+```python
+查看精确率,召回率,F1-score
+               precision    recall  f1-score   support
+
+          良性       0.98      0.98      0.98       114
+          恶性       0.96      0.96      0.96        57
+
+    accuracy                           0.98       171
+   macro avg       0.97      0.97      0.97       171
+weighted avg       0.98      0.98      0.98       171
+```
+
+#### 4）查看 ROC 曲线和 AUC 指标
+
+```python
+"""
+ROC曲线和AUC指标(样本分类不均衡的情况下,可以使用这种方法)
+AUC = 0.5 是瞎猜模型
+AUC = 1 是最好的模型
+AUC < 0.5 属于反向毒奶
+更多的看截图
+"""
+# 需要转换为0,1表示
+y_true = np.where(y_test > 3, 1, 0)  # 表示大于3为1,反之为0(class值为2和4)
+return_value = roc_auc_score(y_true, y_predict)
+print("ROC曲线和AUC返回值为(三角形面积)", return_value)
+
+fpr, tpr, thresholds = roc_curve(y_true, y_predict)
+plt.plot(fpr, tpr)
+plt.show()
+```
+
+输出
+
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210127225009225.png" alt="image-20210127225009225" style="zoom:67%;" />
+
+
+
+# 五、回归
+
+（Regression）
+
+- 小规模数据：
+  - **LinearRegression(不能解决拟合问题)**
+  - 岭回归
+- 大规模数据：SGDRegressor
+
+## 5.1 线性回归
+
+```python
+from sklearn.linear_model import LinearRegression, SGDRegressorz
+```
+
+（Linear Regression）
+
+线性回归(Linear regression)是利用**回归方程(函数)**对一个或**多个自变量(特征值)和因变量(目标值)之间**关系进行建模的一种分析方式
+
+### 5.1.1 API
+
+#### 1）正规方程
+
+  正规方程的优化方法，不能解决拟合问题，一次性求解，针对小数据
+
+- ***LinearRegression(fit_intercept=True)***
+  - *fit_intercept*：是否计算偏置
+  - 属性
+    - *LinearRegression.coef_*：权重系数（回归系数）
+    - *LinearRegression.intercept_*：偏置
+
+#### 2）梯度下降
+
+其实是随机梯度下降
+
+- ***SGDRegressor(loss="squared_loss", fit_intercept=True, learning_rate ='invscaling', eta0=0.01)***
+  - SGDRegressor类实现了随机梯度下降学习，它支持不同的**loss函数和正则化惩罚项**来拟合线性回归模型。
+  - *loss*：损失类型
+    - **loss=”squared_loss”: 普通最小二乘法**
+  - *fit_intercept*：是否计算偏置
+  - *learning_rate*：string, optional
+    - 学习率填充，对于一个常数值的学习率来说，可以使用learning_rate=’constant’ ，并使用eta0来指定学习率。
+    - 'constant'：eta = eta0
+    - 'optimal'：eta = 1.0 / (alpha \* (t + t0)) [default]
+    - 'invscaling'：eta = eta0 / pow(t, power_t=0.25)
+  - *max_iter*：迭代次数
+  - 属性
+    - *SGDRegressor.coef_*：回归系数
+    - *SGDRegressor.intercept_*：偏置
+
+#### 3）对比
+
+|       梯度下降       |            正规方程             |
+| :------------------: | :-----------------------------: |
+|    需要选择学习率    |             不需要              |
+|     需要迭代求解     |          一次运算得出           |
+| 特征数量较大可以使用 | 需要计算方程，时间复杂度高O(n3) |
+
+### 5.1.2 回归性能评估
+
+```python
+from sklearn.metrics import mean_squared_error
+```
+
+均方误差（Mean Squared Error）MSE 评价机制
+
+***mean_squared_error(y_test, y_pred)***
+
+- 均方误差回归损失
+- *y_test*：真实值
+- *y_pred*：预测值
+- *return*：浮点数结果
+
+### 5.1.3 例
+
+#### 1）初始化
+
+```python
+from sklearn.linear_model import LinearRegression, SGDRegressor
+from sklearn.datasets import load_boston
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error  # 均方误差
+
+boston_data = load_boston()
+print("特征数量为:(样本数,特征数)", boston_data.data.shape)
+x_train, x_test, y_train, y_test = train_test_split(boston_data.data,
+                                                    boston_data.target, random_state=22)
+# 标准化
+transfer = StandardScaler()
+x_train = transfer.fit_transform(x_train)
+x_test = transfer.transform(x_test)
+```
+
+#### 2）正规方程
+
+```python
+estimator = LinearRegression()
+estimator.fit(x_train, y_train)
+
+print("正规方程_权重系数为: ", estimator.coef_)
+print("正规方程_偏置为:", estimator.intercept_)
+
+y_predict = estimator.predict(x_test)
+error = mean_squared_error(y_test, y_predict)
+print("正规方程_房价预测:", y_predict)
+print("正规方程_均分误差:", error)
+```
+
+输出
+
+```python
+正规方程_权重系数为:  [-0.64817766  1.14673408 -0.05949444  0.74216553 -1.95515269  2.70902585
+ -0.07737374 -3.29889391  2.50267196 -1.85679269 -1.75044624  0.87341624
+ -3.91336869]
+正规方程_偏置为: 22.62137203166228
+正规方程_房价预测: [28.22944896 31.5122308  21.11612841 32.6663189  20.0023467  19.07315705
+ 21.09772798 19.61400153 19.61907059 32.87611987 20.97911561 27.52898011
+ 15.54701758 19.78630176 ......
+ 15.17700342  3.81620663 29.18194848 20.68544417 22.32934783 28.01568563
+ 28.58237108]
+正规方程_均分误差: 20.627513763095386
+```
+
+#### 3）梯度下降
+
+```python
+estimator = SGDRegressor(learning_rate="constant", eta0=0.01, max_iter=10000)
+# estimator = SGDRegressor(penalty='l2', loss="squared_loss")  # 这样设置就相当于岭回归, 但是建议用Ridge方法
+estimator.fit(x_train, y_train)
+
+print("梯度下降_权重系数为: ", estimator.coef_)
+print("梯度下降_偏置为:", estimator.intercept_)
+
+y_predict = estimator.predict(x_test)
+error = mean_squared_error(y_test, y_predict)
+print("梯度下降_房价预测:", y_predict)
+print("梯度下降_均分误差:", error)
+```
+
+输出
+
+```python
+梯度下降_权重系数为:  [-0.63057536  1.10395195  0.0426204   1.11219718 -1.91486635  2.72806163
+ -0.05021542 -3.52443232  2.47863671 -1.62374879 -1.9093765   1.08972091
+ -4.48569927]
+梯度下降_偏置为: [22.36660176]
+梯度下降_房价预测: [28.44139247 31.71808756 20.86031611 34.1638423  19.35660167 19.18397968
+ 20.97064914 18.87641833 18.87914517 ......
+ 14.57654182  2.54082058 29.38973401 20.80732646 21.65598607 27.85659704
+ 29.41864109]
+梯度下降_均分误差: 20.997365545229272
+```
+
+## 5.2 岭回归
+
+（Ridge Regression）
+
+```python
+from sklearn.linear_model import Ridge, RidgeCV
+```
+
+岭回归，其实也是一种线性回归。只不过在算法建立回归方程时候，加上正则化的限制，从而达到解决过拟合的效果
+
+### 5.2.1 原理
+
+正则化类别
+
+- L2 正则化
+  - 作用：可以使得其中一些 W 的都很小，都接近于 0，削弱某个特征的影响
+  - 优点：越小的参数说明模型越简单，越简单的模型则越不容易产生过拟合现象
+  - Ridge 回归
+- L1正则化
+  - 作用：可以使得其中一些W的值直接为0，删除这个特征的影响
+  - LASSO 回归
+
+> 线性回归的损失函数用最小二乘法，等价于当预测值与真实值的误差满足正态分布时的极大似然估计；岭回归的损失函数，是最小二乘法+L2范数，等价于当预测值与真实值的误差满足正态分布，且权重值也满足正态分布（先验分布）时的最大后验估计；LASSO的损失函数，是最小二乘法+L1范数，等价于等价于当预测值与真实值的误差满足正态分布，且且权重值满足拉普拉斯分布（先验分布）时的最大后验估计
+
+### 5.2.2 API
+
+#### 1）常规岭回归
+
+***Ridge(alpha=1.0, fit_intercept=True,solver="auto", normalize=False)***
+
+- 具有 L2 正则化的线性回归
+
+- *alpha*：正则化力度，也叫 λ，即惩罚项系数
+  
+  - λ取值：0~1 1~10
+  
+- *solver*：会根据数据自动选择优化方法
+  
+  - *sag*：如果数据集、特征都比较大，选择该随机梯度下降优化
+  
+- *normalize*：数据是否进行标准化
+  
+  - `normalize=False`：可以在 fit 之前调用 preprocessing.StandardScaler 标准化数据
+  
+- 属性
+
+  - *Ridge.coef_*：回归权重
+
+  - *Ridge.intercept_*：回归偏置
+
+    
+
+Ridge 方法相当于 `SGDRegressor(penalty='l2', loss="squared_loss")`, 只不过 SGDRegressor 实现了一个普通的随机梯度下降学习，推荐使用Ridge(实现了SAG)
+
+#### 2）交叉验证岭回归
+
+***RidgeCV(_BaseRidgeCV, RegressorMixin)***
+
+- 具有 L2 正则化的线性回归，可以进行交叉验证
+- *coef_*：回归系数
+
+### 5.2.3 例
+
+```python
+from sklearn.linear_model import Ridge, RidgeCV
+from sklearn.datasets import load_boston
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error  # 均方误差
+
+boston_data = load_boston()
+x_train, x_test, y_train, y_test = train_test_split(boston_data.data,
+                                                    boston_data.target, random_state=22)
+
+# 标准化
+transfer = StandardScaler()
+x_train = transfer.fit_transform(x_train)
+x_test = transfer.transform(x_test)
+
+# 岭回归
+estimator = Ridge(max_iter=10000, alpha=0.5)  # 岭回归
+# estimator = RidgeCV(alphas=[0.1, 0.2, 0.3, 0.5])  # 加了交叉验证的岭回归
+estimator.fit(x_train, y_train)
+
+print("岭回归_权重系数为: ", estimator.coef_)
+print("岭回归_偏置为:", estimator.intercept_)
+
+y_predict = estimator.predict(x_test)
+error = mean_squared_error(y_test, y_predict)
+print("岭回归_房价预测:", y_predict)
+print("岭回归_均分误差:", error)
+```
+
+输出
+
+```python
+岭回归_权重系数为:  [-0.64193209  1.13369189 -0.07675643  0.74427624 -1.93681163  2.71424838
+ -0.08171268 -3.27871121  2.45697934 -1.81200596 -1.74659067  0.87272606
+ -3.90544403]
+岭回归_偏置为: 22.62137203166228
+岭回归_房价预测: [28.22536271 31.50554479 21.13191715 32.65799504 20.02127243 19.07245621
+ 21.10832868 19.61646071 ......15.19441045  3.81755887 29.1743764  20.68219692 22.33163756 28.01411044
+ 28.55668351]
+岭回归_均分误差: 20.641771606180914
+```
 
 # 六、聚类
+
+```python
+from sklearn.cluster import KMeans
+```
 
 K-means（K均值聚类）
 
@@ -1303,7 +1874,7 @@ K-means（K均值聚类）
 
 ## 6.2 API
 
-***sklearn.cluster.KMeans(n_clusters=8, init=‘k-means++’…)***
+***KMeans(n_clusters=8, init=‘k-means++’…)***
 
 - n_clusters：开始的聚类中心数量
 - init：初始化方法，默认为'k-means ++’
@@ -1311,6 +1882,10 @@ K-means（K均值聚类）
 *KMeans.labels_*：默认标记的类型，可以和真实值比较（不是值比较）
 
 ## 6.3  轮廓系数
+
+```python
+from sklearn.metrics import silhouette_score
+```
 
 轮廓系数作为 Kmeans 的性能评估指标
 
@@ -1338,7 +1913,7 @@ $$
 
 ### 6.3.3 API
 
-- ***sklearn.metrics.silhouette_score(X, labels)***：计算所有样本的平均轮廓系数
+- ***silhouette_score(X, labels)***：计算所有样本的平均轮廓系数
   - X：特征值
   - labels：被聚类标记的目标值（聚类结果）
 
@@ -1381,6 +1956,13 @@ plt.show()
 ```
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210119104047678.png" alt="image-20210119104047678" style="zoom:67%;" />
+
+```python
+from sklearn.metrics import silhouette_score 
+
+score = silhouette_score(X, y_pred)
+print("模型轮廓系数为(1 最好, -1 最差):", score)
+```
 
 输出
 
