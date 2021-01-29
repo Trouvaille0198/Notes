@@ -27,7 +27,7 @@ div {
 
 1. 每个属性用；分开。
 
-2. CSS注释以 **/\*** 开始, 以 ***/** 结束
+2. CSS注释以 **/\*** 开始, 以 **\*/** 结束
 
 ## 1.3 引入方式
 
@@ -49,7 +49,7 @@ Inline style，也叫行内式
 
 Internal style sheet，也叫嵌入式
 
-将所有CSS代码抽取出来，单独放到一个\<style\>标签中 
+将所有CSS代码抽取出来，单独放到一个\<style\>标签中
 
 ```css
 <style>
@@ -137,7 +137,7 @@ div {
 
 ```css
 h1.black {
-   color: #000000; 
+   color: #000000;
 }
 ```
 
@@ -147,7 +147,7 @@ h1.black {
 
 ```css
 .black h1 {
-   color: #000000; 
+   color: #000000;
 }
 ```
 
@@ -195,7 +195,7 @@ h1, h2, h3 {
 
 ```css
 ul em {
-   color: #000000; 
+   color: #000000;
 }
 ```
 
@@ -203,7 +203,7 @@ ul em {
 
 ```css
 body > p {
-   color: #000000; 
+   color: #000000;
 }
 ```
 
@@ -215,7 +215,7 @@ body > p {
 
 ```css
 input[type="text"] {
-   color: #000000; 
+   color: #000000;
 }
 ```
 
@@ -232,14 +232,14 @@ input[type="text"] {
 
 | 选择器                                                       | 例子                  | 例子描述                                                    | CSS  |
 | ------------------------------------------------------------ | --------------------- | ----------------------------------------------------------- | ---- |
-| [.*class*](https://www.w3school.com.cn/cssref/selector_class.asp) | .intro                | 选择 class="intro" 的所有元素。                             | 1    |
-| [#*id*](https://www.w3school.com.cn/cssref/selector_id.asp)  | #firstname            | 选择 id="firstname" 的所有元素。                            | 1    |
-| [*](https://www.w3school.com.cn/cssref/selector_all.asp)     | *                     | 选择所有元素。                                              | 2    |
-| [*element*](https://www.w3school.com.cn/cssref/selector_element.asp) | p                     | 选择所有 <p> 元素。                                         | 1    |
-| [*element*,*element*](https://www.w3school.com.cn/cssref/selector_element_comma.asp) | div,p                 | 选择所有 <div> 元素和所有 <p> 元素。                        | 1    |
-| [*element* *element*](https://www.w3school.com.cn/cssref/selector_element_element.asp) | div p                 | 选择 <div> 元素内部的所有 <p> 元素。                        | 1    |
-| [*element*>*element*](https://www.w3school.com.cn/cssref/selector_element_gt.asp) | div>p                 | 选择父元素为 <div> 元素的所有 <p> 元素。                    | 2    |
-| [*element*+*element*](https://www.w3school.com.cn/cssref/selector_element_plus.asp) | div+p                 | 选择紧接在 <div> 元素之后的所有 <p> 元素。                  | 2    |
+| .*class* | .intro                | 选择 class="intro" 的所有元素。                             | 1    |
+| #*id*  | #firstname            | 选择 id="firstname" 的所有元素。                            | 1    |
+| *     | *                     | 选择所有元素。                                              | 2    |
+| *element* | p                     | 选择所有 \<p> 元素。                                        | 1    |
+| *element*, *element*                                         | div,p                 | 选择所有 \<div> 元素和所有 \<p> 元素。                      | 1    |
+| *element* *element*                                          | div p                 | 选择 \<div> 元素内部的所有 \<p> 元素。                      | 1    |
+| *element* > *element*                                        | div>p                 | 选择父元素为 \<div> 元素的所有 \<p> 元素。                  | 2    |
+| *element* + *element*                                        | div+p                 | 选择紧接在 \<div> 元素之后的所有 \<p> 元素。                | 2    |
 | [[*attribute*\]](https://www.w3school.com.cn/cssref/selector_attribute.asp) | [target]              | 选择带有 target 属性所有元素。                              | 2    |
 | [[*attribute*=*value*\]](https://www.w3school.com.cn/cssref/selector_attribute_value.asp) | [target=_blank]       | 选择 target="_blank" 的所有元素。                           | 2    |
 | [[*attribute*~=*value*\]](https://www.w3school.com.cn/cssref/selector_attribute_value_contain.asp) | [title~=flower]       | 选择 title 属性包含单词 "flower" 的所有元素。               | 2    |
@@ -249,43 +249,43 @@ input[type="text"] {
 | [:active](https://www.w3school.com.cn/cssref/selector_active.asp) | a:active              | 选择活动链接。                                              | 1    |
 | [:hover](https://www.w3school.com.cn/cssref/selector_hover.asp) | a:hover               | 选择鼠标指针位于其上的链接。                                | 1    |
 | [:focus](https://www.w3school.com.cn/cssref/selector_focus.asp) | input:focus           | 选择获得焦点的 input 元素。                                 | 2    |
-| [:first-letter](https://www.w3school.com.cn/cssref/selector_first-letter.asp) | p:first-letter        | 选择每个 <p> 元素的首字母。                                 | 1    |
-| [:first-line](https://www.w3school.com.cn/cssref/selector_first-line.asp) | p:first-line          | 选择每个 <p> 元素的首行。                                   | 1    |
-| [:first-child](https://www.w3school.com.cn/cssref/selector_first-child.asp) | p:first-child         | 选择属于父元素的第一个子元素的每个 <p> 元素。               | 2    |
-| [:before](https://www.w3school.com.cn/cssref/selector_before.asp) | p:before              | 在每个 <p> 元素的内容之前插入内容。                         | 2    |
-| [:after](https://www.w3school.com.cn/cssref/selector_after.asp) | p:after               | 在每个 <p> 元素的内容之后插入内容。                         | 2    |
-| [:lang(*language*)](https://www.w3school.com.cn/cssref/selector_lang.asp) | p:lang(it)            | 选择带有以 "it" 开头的 lang 属性值的每个 <p> 元素。         | 2    |
-| [*element1*~*element2*](https://www.w3school.com.cn/cssref/selector_gen_sibling.asp) | p~ul                  | 选择前面有 <p> 元素的每个 <ul> 元素。                       | 3    |
-| [[*attribute*^=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_begin.asp) | a[src^="https"]       | 选择其 src 属性值以 "https" 开头的每个 <a> 元素。           | 3    |
-| [[*attribute*$=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_end.asp) | a[src$=".pdf"]        | 选择其 src 属性以 ".pdf" 结尾的所有 <a> 元素。              | 3    |
-| [[*attribute**=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_contain.asp) | a[src*="abc"]         | 选择其 src 属性中包含 "abc" 子串的每个 <a> 元素。           | 3    |
-| [:first-of-type](https://www.w3school.com.cn/cssref/selector_first-of-type.asp) | p:first-of-type       | 匹配同类型(<p>)中的**第一个**同级兄弟(含自己) <p> 元素      | 3    |
-| [:last-of-type](https://www.w3school.com.cn/cssref/selector_last-of-type.asp) | p:last-of-type        | 匹配同类型(<p>)中的**最后一个**同级兄弟(含自己) <p> 元素    | 3    |
-| [:only-of-type](https://www.w3school.com.cn/cssref/selector_only-of-type.asp) | p:only-of-type        | 选择属于其父元素**唯一的** <p> 元素。                       | 3    |
+| [:first-letter](https://www.w3school.com.cn/cssref/selector_first-letter.asp) | p:first-letter        | 选择每个 \<p> 元素的首字母。                                | 1    |
+| [:first-line](https://www.w3school.com.cn/cssref/selector_first-line.asp) | p:first-line          | 选择每个 \<p> 元素的首行。                                  | 1    |
+| [:first-child](https://www.w3school.com.cn/cssref/selector_first-child.asp) | p:first-child         | 选择属于父元素的第一个子元素的每个 \<p> 元素。              | 2    |
+| [:before](https://www.w3school.com.cn/cssref/selector_before.asp) | p:before              | 在每个 \<p> 元素的内容之前插入内容。                        | 2    |
+| [:after](https://www.w3school.com.cn/cssref/selector_after.asp) | p:after               | 在每个 \<p> 元素的内容之后插入内容。                        | 2    |
+| [:lang(*language*)](https://www.w3school.com.cn/cssref/selector_lang.asp) | p:lang(it)            | 选择带有以 "it" 开头的 lang 属性值的每个 \<p> 元素。        | 2    |
+| [*element1*~*element2*](https://www.w3school.com.cn/cssref/selector_gen_sibling.asp) | p~ul                  | 选择前面有 \<p> 元素的每个 \<ul> 元素。                     | 3    |
+| [[*attribute*^=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_begin.asp) | a[src^="https"]       | 选择其 src 属性值以 "https" 开头的每个 \<a> 元素。          | 3    |
+| [[*attribute*$=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_end.asp) | a[src$=".pdf"]        | 选择其 src 属性以 ".pdf" 结尾的所有 \<a> 元素。             | 3    |
+| [[*attribute**=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_contain.asp) | a[src*="abc"]         | 选择其 src 属性中包含 "abc" 子串的每个 \<a> 元素。          | 3    |
+| [:first-of-type](https://www.w3school.com.cn/cssref/selector_first-of-type.asp) | p:first-of-type       | 匹配同类型(\<p>)中的**第一个**同级兄弟(含自己) \<p> 元素    | 3    |
+| [:last-of-type](https://www.w3school.com.cn/cssref/selector_last-of-type.asp) | p:last-of-type        | 匹配同类型(\<p>)中的**最后一个**同级兄弟(含自己) \<p> 元素  | 3    |
+| [:only-of-type](https://www.w3school.com.cn/cssref/selector_only-of-type.asp) | p:only-of-type        | 选择属于其父元素**唯一的** \<p> 元素。                      | 3    |
 | [:only-child](https://www.w3school.com.cn/cssref/selector_only-child.asp) | p:only-child          | 选择属于其父元素的唯一子元素。                              | 3    |
 | [:nth-child(*n*)](https://www.w3school.com.cn/cssref/selector_nth-child.asp) | p:nth-child(2)        | 选择属于p的父元素的第二个子元素                             | 3    |
 | [:nth-last-child(*n*)](https://www.w3school.com.cn/cssref/selector_nth-last-child.asp) | p:nth-last-child(2)   | 同上，从最后一个子元素开始计数。                            | 3    |
 | [:nth-of-type(*n*)](https://www.w3school.com.cn/cssref/selector_nth-of-type.asp) | p:nth-of-type(2)      | 选择属于p的父元素第二个同类（这里是p）元素。                | 3    |
 | [:nth-last-of-type(*n*)](https://www.w3school.com.cn/cssref/selector_nth-last-of-type.asp) | p:nth-last-of-type(2) | 同上，但是从最后一个子元素开始计数。                        | 3    |
-| [:last-child](https://www.w3school.com.cn/cssref/selector_last-child.asp) | p:last-child          | 选择属于其父元素最后一个子元素每个 <p> 元素。               | 3    |
+| [:last-child](https://www.w3school.com.cn/cssref/selector_last-child.asp) | p:last-child          | 选择属于其父元素最后一个子元素每个 \<p> 元素。              | 3    |
 | [:root](https://www.w3school.com.cn/cssref/selector_root.asp) | :root                 | 选择文档的根元素。                                          | 3    |
-| [:empty](https://www.w3school.com.cn/cssref/selector_empty.asp) | p:empty               | 选择没有子元素的每个 <p> 元素（包括文本节点）。             | 3    |
+| [:empty](https://www.w3school.com.cn/cssref/selector_empty.asp) | p:empty               | 选择没有子元素的每个 \<p> 元素（包括文本节点）。            | 3    |
 | [:target](https://www.w3school.com.cn/cssref/selector_target.asp) | #news:target          | 选择当前活动的 #news 元素。                                 | 3    |
-| [:enabled](https://www.w3school.com.cn/cssref/selector_enabled.asp) | input:enabled         | 选择每个启用的 <input> 元素。                               | 3    |
-| [:disabled](https://www.w3school.com.cn/cssref/selector_disabled.asp) | input:disabled        | 选择每个禁用的 <input> 元素                                 | 3    |
-| [:checked](https://www.w3school.com.cn/cssref/selector_checked.asp) | input:checked         | 选择每个被选中的 <input> 元素。                             | 3    |
-| [:not(*selector*)](https://www.w3school.com.cn/cssref/selector_not.asp) | :not(p)               | 选择非 <p> 元素的每个元素。                                 | 3    |
+| [:enabled](https://www.w3school.com.cn/cssref/selector_enabled.asp) | input:enabled         | 选择每个启用的 \<input> 元素。                              | 3    |
+| [:disabled](https://www.w3school.com.cn/cssref/selector_disabled.asp) | input:disabled        | 选择每个禁用的 \<input> 元素                                | 3    |
+| [:checked](https://www.w3school.com.cn/cssref/selector_checked.asp) | input:checked         | 选择每个被选中的 \<input> 元素。                            | 3    |
+| [:not(*selector*)](https://www.w3school.com.cn/cssref/selector_not.asp) | :not(p)               | 选择非 \<p> 元素的每个元素。                                | 3    |
 | [::selection](https://www.w3school.com.cn/cssref/selector_selection.asp) | ::selection           | 选择被用户选取的元素部分。                                  | 3    |
 
 # 三、字体属性
 
-Font
+（Font）
 
-CSS字体属性定义字体，加粗，大小，文字样式
+CSS 字体属性定义字体，加粗，大小，文字样式
 
 ## 3.1 字体 font-family
 
-- font - family属性指定一个元素的字体。
+- font - family 属性指定一个元素的字体。
 
 - font-family 可以把多个字体名称作为一个"回退"系统来保存。如果浏览器不支持第一个字体，则会尝试下一个
 
@@ -330,19 +330,19 @@ p {
 font-size: xx-small;
 font-size: x-small;
 font-size: small;
-font-size: medium; 
+font-size: medium;
 font-size: large;
 font-size: x-large;
 font-size: xx-large;
- 
+
 /* <relative-size>，相对大小值 */
 font-size: larger;
 font-size: smaller;
- 
+
 /* <length>，长度值 */
 font-size: 12px;
 font-size: 0.8em;
- 
+
 /* <percentage>，百分比值 */
 font-size: 80%;
 ```
@@ -539,7 +539,7 @@ h3 {
 | center  | 把文本排列到中间。                       |
 | justify | 实现两端对齐文本效果。                   |
 
-## 4.3  修饰 text-decoration 
+## 4.3  修饰 text-decoration
 
 text-decoration 属性规定添加到文本的修饰，下划线、上划线、删除线等
 
@@ -814,7 +814,7 @@ body {
 
 ```css
 body
-{ 
+{
     background-image:url('smiley.gif');
     background-repeat:no-repeat;
     background-attachment:fixed;
@@ -922,7 +922,7 @@ CSS 列表属性作用如下：
 - 设置不同的列表项标记为无序列表
 - 设置列表项标记为图像
 
-## 7.1 图像替代 list-style-image 
+## 7.1 图像替代 list-style-image
 
 list-style-image 属性使用图像来替换列表项的标记。
 
@@ -941,7 +941,7 @@ ul {
 
 ## 7.2 标记位置 list-style-position
 
-list-style-position属性指示如何相对于对象的内容绘制列表项标记
+list-style-position 属性指示如何相对于对象的内容绘制列表项标记
 
 ```css
 ul {
@@ -1068,3 +1068,100 @@ ul {
 | *list-style-position* | 设置在何处放置列表项标记   |
 | *list-style-image*    | 使用图像来替换列表项的标记 |
 | *initial*             | 将这个属性设置为默认值     |
+
+# 八、表格
+
+## 8.1 边框属性 border
+
+```css
+table, th, td
+{
+    border: 1px solid black;
+}
+```
+
+在上面的例子中的表格有双边框。这是因为表和 th/ td 元素有独立的边界。
+
+为了显示一个表的单个边框，使用 border-collapse 属性。
+
+## 8.2 折叠边框 border-collapse
+
+border-collapse 属性设置表格的边框是否被折叠成一个单一的边框或隔开
+
+```css
+table
+{
+    border-collapse:collapse;
+}
+table,th, td
+{
+    border: 1px solid black;
+}
+```
+
+## 8.3 表格宽度和高度 Width 和 height
+
+Width和height属性定义表格的宽度和高度。
+
+下面的例子是设置 100％的宽度，50 像素的 th 元素的高度的表格
+
+```css
+table
+{
+    width:100%;
+}
+th
+{
+    height:50px;
+}
+```
+
+## 8.4 表格文字对齐 text-align 和 vertical-align
+
+表格中的文本对齐和垂直对齐属性。
+
+text-align 属性设置水平对齐方式，向左，右，或中心
+
+```css
+td
+{
+    text-align:right;
+}
+```
+
+垂直对齐属性 vertical-align 设置垂直对齐，比如顶部，底部或中间
+
+```css
+td
+{
+    height:50px;
+    vertical-align:bottom;
+}
+```
+
+## 8.5 表格填充 padding
+
+如果在表的内容中控制空格之间的边框，应使用 td 和 th 元素的填充属性 padding
+
+```css
+td
+{
+    padding:15px;
+}
+```
+
+## 8.6 表格颜色 color
+
+下面的例子指定边框的颜色，和th元素的文本和背景颜色
+
+```css
+table, td, th
+{
+    border:1px solid green;
+}
+th
+{
+    background-color:green;
+    color:white;
+}
+```
