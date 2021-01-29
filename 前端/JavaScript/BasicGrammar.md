@@ -125,7 +125,7 @@ s.substring(7); // 从索引7开始到结束，返回'world'
 
 ### 2.2.3 布尔值
 
-布尔值和布尔代数的表示完全一致，一个布尔值只有`true`、`false`两种值
+布尔值和布尔代数的表示完全一致，一个布尔值只有 `true`、`false` 两种值
 
 ```javascript
 true; // 这是一个true值
@@ -442,7 +442,7 @@ var xiaoming = {
 'grade' in xiaoming; // false
 ```
 
-不过要小心，如果`in`判断一个属性存在，这个属性不一定是`xiaoming`的，它可能是`xiaoming`继承得到的：
+不过要小心，如果 `in` 判断一个属性存在，这个属性不一定是 `xiaoming` 的，它可能是 `xiaoming` 继承得到的：
 
 ```javascript
 'toString' in xiaoming; // true
@@ -518,7 +518,7 @@ var names = ['Michael', 'Bob', 'Tracy'];
 var scores = [95, 75, 85];
 ```
 
-给定一个名字，要查找对应的成绩，就先要在names中找到对应的位置，再从scores取出对应的成绩，Array越长，耗时越长。
+给定一个名字，要查找对应的成绩，就先要在names中找到对应的位置，再从 scores 取出对应的成绩，Array 越长，耗时越长。
 
 如果用Map实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用 JavaScript 写一个 Map 如下：
 
@@ -545,7 +545,7 @@ m.get('Adam'); // undefined
 var m = new Map();
 m.set('Adam', 67);
 m.set('Adam', 88);
-m.get('Adam'); // 88
+m.get('Adam'); 		// 88
 ```
 
 ### 2.3.2 Set
@@ -583,3 +583,70 @@ s; // Set {1, 2, 3}
 s.delete(3);
 s; // Set {1, 2}
 ```
+
+## 2.4 iterable
+
+遍历 `Array` 可以采用下标循环，遍历 `Map` 和 `Set` 就无法使用下标。为了统一集合类型，ES6标准引入了新的 `iterable` 类型，`Array`、`Map` 和 `Set`都属于 `iterable` 类型。
+
+### 2.4.1 for … of
+
+具有 `iterable` 类型的集合可以通过新的 `for ... of` 循环来遍历。
+
+`for ... of` 循环是ES6引入的新的语法，
+
+```javascript
+var a = ['A', 'B', 'C'];
+var s = new Set(['A', 'B', 'C']);
+var m = new Map([[1, 'x'], [2, 'y'], [3, 'z']]);
+for (var x of a) { // 遍历Array
+    console.log(x);
+}
+for (var x of s) { // 遍历Set
+    console.log(x);
+}
+for (var x of m) { // 遍历Map
+    console.log(x[0] + '=' + x[1]);
+}
+```
+
+### 2.4.2 forEach
+
+更好的方式是直接使用 `iterable` 内置的 `forEach` 方法，它接收一个函数，每次迭代就自动回调该函数
+
+```javascript
+var a = ['A', 'B', 'C'];
+a.forEach(function (element, index, array) {
+    // element: 指向当前元素的值
+    // index: 指向当前索引
+    // array: 指向Array对象本身
+    console.log(element + ', index = ' + index);
+});
+```
+
+`Set` 与 `Array` 类似，但 `Set` 没有索引，因此回调函数的前两个参数都是元素本身：
+
+```javascript
+var s = new Set(['A', 'B', 'C']);
+s.forEach(function (element, sameElement, set) {
+    console.log(element);
+});
+```
+
+`Map` 的回调函数参数依次为 `value`、`key` 和 `map` 本身：
+
+```javascript
+var m = new Map([[1, 'x'], [2, 'y'], [3, 'z']]);
+m.forEach(function (value, key, map) {
+    console.log(value);
+});
+```
+
+如果对某些参数不感兴趣，由于 JavaScript 的函数调用不要求参数必须一致，因此可以忽略它们。例如，只需要获得 `Array` 的 `element`：
+
+```javascript
+var a = ['A', 'B', 'C'];
+a.forEach(function (element) {
+    console.log(element);
+});
+```
+
