@@ -4,15 +4,15 @@
 
 - 截图插入
 
-  <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
+  <img src="http://image.trouvaille0198.top/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
 
 - 拖动本地图片插入
 
-  <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/download.png" alt="download" style="zoom:50%;" />
+  <img src="http://image.trouvaille0198.top/download.png" alt="download" style="zoom:50%;" />
 
 
 
-现均已上传至阿里云
+现均已上传至七牛云
 
 ### 格式化
 
