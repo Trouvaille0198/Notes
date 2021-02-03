@@ -1659,7 +1659,7 @@ tk.Button(root, text="打开文件", command=callback).pack()
 root.mainloop()
 ```
 
-<img src="http://image.trouvaille0198.top/image-20210203223924813.png" alt="image-20210203223924813" style="zoom:67%;" />
+<img src="http://image.trouvaille0198.top/image-20210203225057051.png" alt="image-20210203225057051" style="zoom:67%;" />
 
 filedialog 模块提供了两个函数：askopenfilename(\*\*option) 和 asksaveasfilename(\*\*option)，分别用于打开文件和保存文件
 
