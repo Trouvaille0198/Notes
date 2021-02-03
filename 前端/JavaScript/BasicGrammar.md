@@ -50,7 +50,7 @@ Infinity; 	// Infinity表 示无限大，当数值超过了 JavaScript 的 Numbe
   - -Infinity，无穷小；
   - NaN，代表一个非数值
 
-### 2.2.2 字符串
+### 2.2.2 字符串 String
 
 字符串是以单引号 ' 或双引号 " 括起来的任意文本，比如 `'abc'`，`"xyz"` 等等。请注意，`''` 或 `""`本身只是一种表示方式，不是字符串的一部分
 
@@ -131,7 +131,7 @@ s.split(' '); // [How,are,you,doing,today?]
 s.split(''); // [H,o,w, ,a,r,e, ,y,o,u, ,d,o,i,n,g, ,t,o,d,a,y,?]
 ```
 
-### 2.2.3 布尔值
+### 2.2.3 布尔值 Bool
 
 布尔值和布尔代数的表示完全一致，一个布尔值只有 `true`、`false` 两种值
 
@@ -182,7 +182,7 @@ Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001; // true
 
 JavaScript 的设计者希望用 `null` 表示一个空的值，而 `undefined` 表示值未定义。事实证明，这并没有什么卵用，区分两者的意义不大。大多数情况下，我们都应该用 `null`。`undefined` 仅仅在判断函数参数是否传递的情况下有用。
 
-### 2.2.5 数组
+### 2.2.5 数组 Array
 
 数组是一组按顺序排列的集合，集合的每个值称为元素。JavaScript 的数组可以包括任意数据类型。例如：
 
@@ -1198,4 +1198,195 @@ arr.reduce(function (x, y) {
 ```
 
 # 四、面向对象编程
+
+JavaScript 不区分类和实例的概念，而是通过**原型**（prototype）来实现面向对象编程。
+
+JavaScript 的原型链和 Java 的 Class 区别就在，它没有“Class”的概念，所有对象都是实例，所谓继承关系不过是把一个对象的原型指向另一个对象而已
+
+## 4.1 创建对象
+
+### 4.1.1 原型回溯
+
+JavaScript 对每个创建的对象都会设置一个原型，指向它的原型对象。
+
+当我们用 `obj.xxx` 访问一个对象的属性时，JavaScript 引擎先在当前对象上查找该属性，如果没有找到，就到其原型对象上找，如果还没有找到，就一直上溯到 `Object.prototype` 对象，最后，如果还没有找到，就只能返回 `undefined`
+
+1. 创建一个 `Array` 对象：
+
+```javascript
+var arr = [1, 2, 3];
+```
+
+​	其原型链是：
+
+```javascript
+arr ----> Array.prototype ----> Object.prototype ----> null
+```
+
+2. 创建一个函数时：
+
+```javascript
+function foo() {
+    return 0;
+}
+```
+
+​	函数也是一个对象，它的原型链是：
+
+```javascript
+foo ----> Function.prototype ----> Object.prototype ----> null
+```
+
+如果原型链很长，那么访问一个对象的属性就会因为花更多的时间查找而变得更慢，因此要注意不要把原型链搞得太长
+
+### 4.1.2 构造函数
+
+例
+
+```javascript
+        function Cat(name) {
+            this.name = name;
+            // this.say = function () {
+            //     alert('miao~ ' + this.name);
+            // }
+        }
+        Cat.prototype.say = function () {
+            alert('miao~ ' + this.name);
+        }
+        var cat1 = new Cat('aa');
+        var cat2 = new Cat('bb');
+        cat1.say();
+        cat2.say();
+```
+
+#### 1）构造
+
+除了直接用 `{ ... }` 创建一个对象外，JavaScript 还可以用一种构造函数的方法来创建对象。它的用法是，先定义一个构造函数
+
+```javascript
+function Student(name) {
+    this.name = name;
+    this.hello = function () {
+        alert('Hello, ' + this.name + '!');
+    }
+}
+```
+
+按照约定，构造函数首字母应当大写，而普通函数首字母应当小写
+
+#### 2）调用
+
+用关键字 `new` 来调用这个函数，并返回一个对象
+
+```javascript
+var xiaoming = new Student('小明');
+xiaoming.name; // '小明'
+xiaoming.hello(); // Hello, 小明!
+```
+
+> 如果不写 `new`，这就是一个普通函数，它返回 `undefined`。但是，如果写了 `new`，它就变成了一个构造函数，它绑定的 `this` 指向新创建的对象，并默认返回 `this`，也就是说，不需要在最后写 `return this;`
+
+#### 3）constructor 属性
+
+对象会从原型上获得了个 `constructor`属性，它指向构造函数本身
+
+```javascript
+xiaoming.constructor === Student.prototype.constructor === Student; 
+
+Object.getPrototypeOf(xiaoming) === Student.prototype; // true
+
+xiaoming instanceof Student; // true
+```
+
+![protos](http://image.trouvaille0198.top/l)
+
+#### 4）共享函数
+
+Javascript 规定，每一个构造函数都有一个 `prototype` 属性，指向另一个对象。这个对象的所有属性和方法，都会被构造函数的实例继承。
+
+要让创建的对象共享一个函数，根据对象的属性查找原则，我们只要把这个函数移动到对象共同的原型上就可以了，在例子中也就是 `Student.prototype`
+
+修改代码如下：
+
+```javascript
+function Student(name) {
+    this.name = name;
+}
+
+Student.prototype.hello = function () {
+    alert('Hello, ' + this.name + '!');
+};
+```
+
+#### 5）封装
+
+可以编写一个 `createStudent()` 函数，在内部封装所有的 `new` 操作。一个常用的编程模式像这样：
+
+```javascript
+function Student(props) {
+    this.name = props.name || '匿名'; 	   // 默认值为'匿名'
+    this.grade = props.grade || 1; 			// 默认值为1
+}
+
+Student.prototype.hello = function () {
+    alert('Hello, ' + this.name + '!');
+};
+
+function createStudent(props) {
+    return new Student(props || {})
+}
+```
+
+这个 `createStudent()` 函数有几个巨大的优点：一是不需要 `new` 来调用，二是参数非常灵活，可以不传，也可以这么传：
+
+```javascript
+var xiaoming = createStudent({
+    name: '小明'
+});
+
+xiaoming.grade; // 1
+```
+
+如果创建的对象有很多属性，我们只需要传递需要的某些属性，剩下的属性可以用默认值。由于参数是一个 Object，我们无需记忆参数的顺序。如果恰好从 `JSON` 拿到了一个对象，就可以直接创建出 `xiaoming`。
+
+### 4.1.3 原型继承
+
+在传统的基于Class的语言如Java、C++中，继承的本质是扩展一个已有的Class，并生成新的Subclass。
+
+由于这类语言严格区分类和实例，继承实际上是类型的扩展。但是，JavaScript由于采用原型继承，我们无法直接扩展一个Class，因为根本不存在Class这种类型。
+
+JS 的继承就你妈是一坨屎，暂且不学
+
+### 4.1.4 class 继承
+
+新的关键字 `class` 从 ES6 开始正式被引入到 JavaScript 中。`class` 的目的就是让定义类更简单。
+
+```javascript
+class Student {
+    constructor(name) {
+        this.name = name;
+    }
+
+    hello() {
+        alert('Hello, ' + this.name + '!');
+    }
+}
+```
+
+> 比较一下就可以发现，`class` 的定义包含了构造函数 `constructor` 和定义在原型对象上的函数 `hello()`（注意没有 `function` 关键字），这样就避免了 `Student.prototype.hello = function () {...}` 这样分散的代码。
+
+用 `class `定义对象，继承可以直接通过 `extends` 来实现
+
+```javascript
+class PrimaryStudent extends Student {
+    constructor(name, grade) {
+        super(name); // 记得用super调用父类的构造方法!
+        this.grade = grade;
+    }
+
+    myGrade() {
+        alert('I am at grade ' + this.grade);
+    }
+}
+```
 

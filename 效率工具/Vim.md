@@ -1,4 +1,4 @@
-![img](https://trou.oss-cn-shanghai.aliyuncs.com/img/vi-vim-cheat-sheet-sch.gif)
+![img](http://image.trouvaille0198.top/vi-vim-cheat-sheet-sch.gif)
 
 # 一、模式
 
