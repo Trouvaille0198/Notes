@@ -731,7 +731,7 @@ with open(filename) as file_object:
 
 ### 5.1.3 创建一个包含文件各行内容的列表
 
-使用.readlines()  
+使用 .readlines()  
 
 ```python
 with open(filename) as file_object:

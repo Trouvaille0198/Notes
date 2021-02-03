@@ -9,8 +9,8 @@
 - 拖动本地图片插入
 
   <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/download.png" alt="download" style="zoom:50%;" />
-  
-  
+
+
 
 现均已上传至阿里云
 
@@ -30,7 +30,7 @@
 >
 > > 引用中的引用 (?)
 >
-> 若要在下一行退出引用，多按一次回车 
+> 若要在下一行退出引用，多按一次回车
 
 -----
 
@@ -52,7 +52,7 @@
 
 -----
 
-将短语表示为代码，`Just like this`	\` + word + \`	
+将短语表示为代码，`Just like this`	\` + word + \`
 
 使用\`\`\` + 语言名 + \`\`\`内容 来创建代码块
 
@@ -90,4 +90,3 @@ print('Hello world'+name)
 这是上标 X^2^	\^ + word + \^
 
 这是==高亮==	\=\= + word + \=\= （Typora专有）
-

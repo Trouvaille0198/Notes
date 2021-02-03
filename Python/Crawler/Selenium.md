@@ -488,5 +488,12 @@ options.add_experimental_option('excludeSwitches', ['enable-automation'])
 browser = webdriver.Chrome(options=options)
 ```
 
+2. 弹出框的处理 *switch_to.alert*
 
+```python
+browser.switch_to.alert.accept() # 确认
+browser.switch_to.alert.send_keys('abc')# 输入文本
+browser.switch_to.alert.dismiss() # 取消
+brower.switch_to_alert().text # 获取文本
+```
 

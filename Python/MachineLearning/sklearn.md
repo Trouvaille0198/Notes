@@ -148,8 +148,8 @@ import sklearn.feature_extraction
 
 流程分析
 
-- 实例化类DictVectorizer
-- 调用fit_transform方法输入数据并转换（注意返回格式）
+- 实例化类 DictVectorizer
+- 调用 fit_transform 方法输入数据并转换（注意返回格式）
 
 ```python
 from sklearn.feature_extraction import DictVectorizer
@@ -215,8 +215,8 @@ print("特征名字：\n", transfer.get_feature_names())
 
 流程分析
 
-- 实例化类CountVectorizer
-- 调用fit_transform方法输入数据并转换 （注意返回格式，利用toarray()进行sparse矩阵转换array数组）
+- 实例化类 CountVectorizer
+- 调用 fit_transform 方法输入数据并转换 （注意返回格式，利用 toarray() 进行 sparse 矩阵转换 array 数组）
 
 ```python
 from sklearn.feature_extraction.text import CountVectorizer
@@ -264,7 +264,7 @@ print("返回特征名字：\n", transfer.get_feature_names())
 
 #### 3）中文处理
 
-使用jieba分词库
+使用 jieba 分词库
 
 ***jieba.cut()***
 
@@ -1606,7 +1606,7 @@ from sklearn.linear_model import LinearRegression, SGDRegressorz
 
 （Linear Regression）
 
-线性回归(Linear regression)是利用**回归方程(函数)**对一个或**多个自变量(特征值)和因变量(目标值)之间**关系进行建模的一种分析方式
+线性回归 (Linear regression) 是利用**回归方程(函数)**对一个或**多个自变量(特征值)和因变量(目标值)之间**关系进行建模的一种分析方式
 
 ### 5.1.1 API
 
