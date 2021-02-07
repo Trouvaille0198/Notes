@@ -100,11 +100,13 @@ Iris plants dataset
 
 ## 2.2 数据集划分
 
+### 2.2.1 简单划分 train_test_split
+
 ```python
 from sklearn.model_selection import train_test_split
 ```
 
-***sklearn.model_selection.train_test_split( arrays, \*options )***
+***train_test_split ( arrays, \*options )***
 
 - x：数据集的特征值
 - y：数据集的标签值
@@ -115,6 +117,102 @@ from sklearn.model_selection import train_test_split
 
 ```python
 x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=22)
+```
+
+### 2.2.2 K折交叉验证
+
+（KFold Cross Validation）
+
+```python
+from sklearn.model_selection import KFold
+```
+
+***KFold ( n_splits=5, \*, shuffle=False, random_state=None )***
+
+参数
+
+- *n_splits*：K子集个数，int, default=5
+- *shuffle*：是否要洗牌（打乱数据），bool, default=False
+- *random_state*：int or RandomState instance, default=None
+
+方法
+
+- *get_n_splits([X, y, groups])*：返回迭代次数，Returns the number of splitting iterations in the cross-validator
+- *split(X)*：生成器，返回训练和测试集的索引值，Generate indices to split data into training and test set.
+
+```python
+from sklearn.model_selection import KFold
+from sklearn import datasets
+
+# 数据集导入
+iris = datasets.load_iris()
+x = iris.data
+y = iris.target
+# KFold
+kf = KFold(n_splits=5)
+# 输出划分数
+print(kf.get_n_splits(x))
+# 划分数据集
+for train_index, test_index in kf.split(x):
+    print("TRAIN:", train_index, "\nTEST:", test_index)
+    x_train, x_test = x[train_index], x[test_index]
+    y_train, y_test = y[train_index], y[test_index]
+```
+
+输出
+
+```python
+5
+
+TRAIN: [ 30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47
+  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65
+  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83
+  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101
+ 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
+ 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137
+ 138 139 140 141 142 143 144 145 146 147 148 149] 
+TEST: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+ 24 25 26 27 28 29]
+
+TRAIN: [  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+  18  19  20  21  22  23  24  25  26  27  28  29  60  61  62  63  64  65
+  66  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83
+  84  85  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101
+ 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
+ 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137
+ 138 139 140 141 142 143 144 145 146 147 148 149] 
+TEST: [30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53
+ 54 55 56 57 58 59]
+
+TRAIN: [  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35
+  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53
+  54  55  56  57  58  59  90  91  92  93  94  95  96  97  98  99 100 101
+ 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
+ 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137
+ 138 139 140 141 142 143 144 145 146 147 148 149] 
+TEST: [60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83
+ 84 85 86 87 88 89]
+
+TRAIN: [  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35
+  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53
+  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71
+  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89
+ 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137
+ 138 139 140 141 142 143 144 145 146 147 148 149] 
+TEST: [ 90  91  92  93  94  95  96  97  98  99 100 101 102 103 104 105 106 107
+ 108 109 110 111 112 113 114 115 116 117 118 119]
+
+TRAIN: [  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35
+  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53
+  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71
+  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89
+  90  91  92  93  94  95  96  97  98  99 100 101 102 103 104 105 106 107
+ 108 109 110 111 112 113 114 115 116 117 118 119] 
+TEST: [120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137
+ 138 139 140 141 142 143 144 145 146 147 148 149]
 ```
 
 ## 2.3 特征抽取
@@ -455,9 +553,9 @@ $$
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210118192214857.png" alt="image-20210118192214857" style="zoom:80%;" />
 
-- 实例化MinMaxScalar
+- 实例化 MinMaxScalar
 
-- 通过fit_transform转换
+- 通过 fit_transform 转换
 
 ```python
 from sklearn.preprocessing import MinMaxScaler
@@ -520,7 +618,7 @@ $$
 
 同样对 2.4.1 的数据进行处理
 
-- 实例化MinMaxScalar
+- 实例化 StandardScaler
 
 - 通过fit_transform转换
 
@@ -1601,7 +1699,7 @@ plt.show()
 ## 5.1 线性回归
 
 ```python
-from sklearn.linear_model import LinearRegression, SGDRegressorz
+from sklearn.linear_model import LinearRegression, SGDRegressor
 ```
 
 （Linear Regression）
@@ -1649,6 +1747,8 @@ from sklearn.linear_model import LinearRegression, SGDRegressorz
 
 ### 5.1.2 回归性能评估
 
+#### 1）均方误差 MSE
+
 ```python
 from sklearn.metrics import mean_squared_error
 ```
@@ -1658,6 +1758,19 @@ from sklearn.metrics import mean_squared_error
 ***mean_squared_error(y_test, y_pred)***
 
 - 均方误差回归损失
+- *y_test*：真实值
+- *y_pred*：预测值
+- *return*：浮点数结果
+
+#### 2）平均绝对误差 MAE
+
+```python
+from sklearn.metrics import mean_absolute_error
+```
+
+***mean_absolute_error(y_test, y_pred)***
+
+- 平均绝对误差回归损失
 - *y_test*：真实值
 - *y_pred*：预测值
 - *return*：浮点数结果
@@ -1802,6 +1915,8 @@ Ridge 方法相当于 `SGDRegressor(penalty='l2', loss="squared_loss")`, 只不�
 ***RidgeCV(_BaseRidgeCV, RegressorMixin)***
 
 - 具有 L2 正则化的线性回归，可以进行交叉验证
+- *alphas*：alpha 列表
+- *cv*：交叉验证次数
 - *coef_*：回归系数
 
 ### 5.2.3 例

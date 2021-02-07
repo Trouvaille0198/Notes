@@ -461,10 +461,10 @@ master.mainloop()
 | overrelief          | 1. 定义当鼠标飘过时 Button 的样式 2. 如果不设置，那么总是使用 relief 选项指定的样式 |
 | padx                | 指定 Button 水平方向上的额外间距（内容和边框间）             |
 | pady                | 指定 Button 垂直方向上的额外间距（内容和边框间）             |
-| *relief*            | 1. 指定边框样式 2. 通常当按钮被按下时是 "sunken"，其他时候是 "raised" 3. 另外你还可以设置 "groove"、"ridge" 或 "flat" 4. 默认值是 "raised" |
+| **relief**          | 1. 指定边框样式 2. 通常当按钮被按下时是 "sunken"，其他时候是 "raised" 3. 另外你还可以设置 "groove"、"ridge" 或 "flat" 4. 默认值是 "raised" |
 | repeatdelay         | 见下方 repeatinterval 选项的描述                             |
 | repeatinterval      | 1. 通常当用户鼠标按下按钮并释放的时候系统认为是一次点击动作。如果你希望当用户持续按下按钮的时候（没有松开），根据一定的间隔多次触发按钮，那么你可以设置这个选项。 2. 当用户持续按下按钮的时候，经过 repeatdelay 时间后，每 repeatinterval 间隔就触发一次按钮事件。 3. 例如设置 repeatdelay=1000，repeatinterval=300，则当用户持续按下按钮，在 1 秒的延迟后开始每 300 毫秒触发一次按钮事件，直到用户释放鼠标。 |
-| *state*             | 1. 指定 Button 的状态 2. 默认值是 "normal" 3. 另外你还可以设置 "active" 或 "disabled" |
+| **state**           | 1. 指定 Button 的状态 2. 默认值是 "normal" 3. 另外你还可以设置 "active" 或 "disabled" |
 | takefocus           | 1. 指定使用 Tab 键可以将焦点移到该 Button 组件上（这样按下空格键也相当于触发按钮事件） 2. 默认是开启的，可以将该选项设置为 False 避免焦点在此 Button 上 |
 | text                | 1. 指定 Button 显示的文本 2. 文本可以包含换行符 3. 如果设置了 bitmap 或 image 选项，该选项则被忽略 |
 | textvariable        | 1. Button 显示 Tkinter 变量（通常是一个 StringVar 变量）的内容 2. 如果变量被修改，Button 的文本会自动更新 |
@@ -695,7 +695,7 @@ master.mainloop()
 -- 调用 Radiobutton 中 command 选项指定的函数或方法，并返回函数的返回值。
 -- 如果 Radiobutton 的 state(状态)"disabled"是 （不可用）或没有指定 command 选项，则该方法无效。
 
-## 2.5 框架
+## 2.5 框架 Frame
 
 Frame（框架）组件是在屏幕上的一个矩形区域。Frame 主要是作为其他组件的框架基础，或为其他组件提供间距填充
 
