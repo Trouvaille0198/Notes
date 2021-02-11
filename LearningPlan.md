@@ -45,7 +45,7 @@
 - http://docscn.studygolang.com/doc/ 中文学习文档（better）
 - 《go语言圣经》https://docs.hacknode.org/gopl-zh/
 
-## 6. 复习python
+## 6. 复习 python
 
 - 廖雪峰
 - 大佬的word笔记，在Other’s Notes
