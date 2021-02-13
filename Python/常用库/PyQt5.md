@@ -115,6 +115,8 @@ if __name__ == '__main__':
 ```
 ## 1.3 事件与信号处理
 
+(signals and slots)
+
 GUI 应用程序是事件驱动的。在事件模型中，有三个参与者：
 
 - 事件来源：状态被更改的对象，它生成了事件
@@ -235,9 +237,9 @@ PyQt5 具有独特的信号和插槽机制来处理事件。 信号和槽用于�
 
 ### 2.2.1 状态栏 statusBar
 
-- ***QMAinWindow.StatusBar()***
+- ***QMAinWindow.statusBar()***
 
-    返回状态栏对象
+    设置并返回状态栏对象
 
 - ***QMAinWindow.StatusBar().showMessage(message, int timeout)***：显示状态栏信息
 
@@ -269,3 +271,615 @@ if __name__ == "__main__":
 ### 2.2.2 菜单栏 menuBar
 
 菜单栏是一组命令的集合
+
+- ***QMAinWindow.menuBar()***
+
+    设置并返回菜单栏对象
+
+- ***menuBar.addMenu(str)***
+
+    在菜单栏中添加菜单
+
+    *str*：菜单名
+
+- ***menu.addMenu(qmenu)***
+
+    往菜单中添加子菜单
+
+    *qmenu*：QMenu 对象
+
+- ***menu.addAction(qaction)***
+
+    往菜单中添加操作
+
+    *qaction*：QAction 对象
+
+- ***menu.addSeperator()***
+
+    往菜单中添加分隔线
+
+#### 1）简单菜单例
+
+```python
+import sys
+from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication
+from PyQt5.QtGui import QIcon
+
+
+class Example(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        # 初始化
+        self.statusBar()
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Simple menu')
+        
+        # 创建一个图标、一个 exit 的标签和一个快捷键组合，都执行了一个动作
+        exitAct = QAction(QIcon('7092.gif'), '&Exit', self)
+        exitAct.setShortcut('Ctrl+Q')
+        # 创建了一个状态栏，当鼠标悬停在菜单栏的时候，能显示当前状态
+        exitAct.setStatusTip('Exit application')
+        # 当执行这个指定的动作时，就触发了一个事件。
+        # 这个事件跟 QApplication 的 quit() 行为相关联，所以这个动作就能终止这个应用。
+        exitAct.triggered.connect(qApp.quit)
+
+        # 创建菜单栏
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('&File')
+        fileMenu.addAction(exitAct)
+
+        self.show()
+
+
+def main():
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()
+```
+
+![image-20210212145400143](http://image.trouvaille0198.top/image-20210212145400143.png)
+
+在上面的例子中，我们用一个菜单创建一个菜单。 此菜单将包含一个选择时终止应用程序的操作。 还创建状态栏。 该操作可通过Ctrl + Q快捷方式访问
+
+QAction 是使用菜单栏，工具栏或自定义键盘快捷方式执行操作的抽象。在上述三行中，我们创建一个具有特定图标和“退出”标签的动作。此外，为此操作定义了快捷方式。当我们选择这个特定的动作时，发出触发信号。 信号连接到 QApplication 小部件的 `quit()` 方法。 这终止了应用程序。
+
+#### 2）子菜单例
+
+```python
+# coding=utf-8
+
+from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, qApp, QMenu
+from PyQt5.QtGui import QIcon
+import sys
+
+
+class Example(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.InitUI()
+
+    def InitUI(self):
+        self.statusBar().showMessage('准备就绪')
+
+        self.setGeometry(300, 300, 400, 300)
+        self.setWindowTitle('关注微信公众号：学点编程吧--子菜单')
+
+        exitAct = QAction(QIcon('exit.png'), '退出(&E)', self)
+        exitAct.setShortcut('Ctrl+Q')
+        exitAct.setStatusTip('退出程序')
+        exitAct.triggered.connect(qApp.quit)
+
+        saveMenu = QMenu('保存方式(&S)', self)
+        saveAct = QAction(QIcon('save.png'), '保存...', self)
+        saveAct.setShortcut('Ctrl+S')
+        saveAct.setStatusTip('保存文件')
+        saveasAct = QAction(QIcon('saveas.png'), '另存为...(&O)', self)
+        saveasAct.setStatusTip('文件另存为')
+        saveMenu.addAction(saveAct)
+        saveMenu.addAction(saveasAct)
+
+        newAct = QAction(QIcon('new.png'), '新建(&N)', self)
+        newAct.setShortcut('Ctrl+N')
+
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('文件(&F)')
+        fileMenu.addAction(newAct)
+        fileMenu.addMenu(saveMenu)
+        fileMenu.addSeparator()
+        fileMenu.addAction(exitAct)
+
+        self.show()
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())
+```
+
+![image-20210212153342602](http://image.trouvaille0198.top/image-20210212153342602.png)
+
+在这个例子中，我们有三个菜单项： 其中两个位于文件菜单中（新建、退出），另一个位于文件的保存子菜单中
+
+#### 3）上下文菜单
+
+```python
+import sys
+from PyQt5.QtWidgets import QMainWindow, qApp, QMenu, QApplication
+
+
+class Example(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Context menu')
+        self.show()
+
+    def contextMenuEvent(self, event):
+        cmenu = QMenu(self)
+        newAct = cmenu.addAction("New")
+        openAct = cmenu.addAction("Open")
+        quitAct = cmenu.addAction("Quit")
+        # 使用 exec_() 方法显示菜单。从鼠标右键事件对象中获得当前坐标。
+        # mapToGlobal() 方法把当前组件的相对坐标转换为窗口（window）的绝对坐标。
+        action = cmenu.exec_(self.mapToGlobal(event.pos()))
+
+
+def main():
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()
+```
+
+![image-20210212154037291](http://image.trouvaille0198.top/image-20210212154037291.png)
+
+要使用上下文菜单，我们必须重新实现 `contextMenuEvent()` 方法
+
+使用 `exec_()` 方法显示上下文菜单。 从事件对象获取鼠标指针的坐标。 `mapToGlobal()` 方法将窗口小部件坐标转换为全局屏幕坐标
+
+### 2.2.3 工具栏
+
+各项命令都是在菜单栏当中，但是我们可以把一些常用的命令放在工具栏上，例如新建、打开、保存等等
+
+- ***QMAinWindow.addToolBar()***
+
+    设置并返回工具栏对象
+
+- ***tool.addAction(qaction)***
+
+    往工具栏中添加操作
+
+    *qaction*：QAction 对象
+
+```python
+# coding=utf-8
+
+from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, qApp, QMenu
+from PyQt5.QtGui import QIcon
+import sys
+
+
+class Example(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.InitUI()
+
+    def InitUI(self):
+        self.statusBar().showMessage('准备就绪')
+
+        self.setGeometry(300, 300, 400, 300)
+        self.setWindowTitle('Toolbar')
+
+        exitAct = QAction(QIcon('exit.png'), '退出(&E)', self)
+        exitAct.setShortcut('Ctrl+Q')
+        exitAct.setStatusTip('退出程序')
+        exitAct.triggered.connect(qApp.quit)
+
+        saveMenu = QMenu('保存方式(&S)', self)
+        saveAct = QAction(QIcon('save.png'), '保存...', self)
+        saveAct.setShortcut('Ctrl+S')
+        saveAct.setStatusTip('保存文件')
+        saveasAct = QAction(QIcon('saveas.png'), '另存为...(&O)', self)
+        saveasAct.setStatusTip('文件另存为')
+        saveMenu.addAction(saveAct)
+        saveMenu.addAction(saveasAct)
+
+        newAct = QAction(QIcon('new.png'), '新建(&N)', self)
+        newAct.setShortcut('Ctrl+N')
+        newAct.setStatusTip('新建文件')
+
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('文件(&F)')
+        fileMenu.addAction(newAct)
+        fileMenu.addMenu(saveMenu)
+        fileMenu.addSeparator()
+        fileMenu.addAction(exitAct)
+
+        toolbar = self.addToolBar('工具栏')
+        toolbar.addAction(newAct)
+        toolbar.addAction(exitAct)
+
+        self.show()
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())
+```
+
+![image-20210212154545698](http://image.trouvaille0198.top/image-20210212154545698.png)
+
+### 2.2.4 居中展示
+
+`QMainWindow` 利用 `QDesktopWidget` 类实现窗口居中显示
+
+```python
+from PyQt5.QtWidgets import QDesktopWidget, QApplication, QMainWindow
+import sys
+
+class Winform(QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle('主窗口放在屏幕中间例子')
+        self.resize(300, 200)
+        self.center()
+
+    def center(self):
+        # 获取屏幕信息
+        screen = QDesktopWidget().screenGeometry()
+        size = self.geometry()
+        x = int((screen.width() - size.width()) / 2)
+        y = int((screen.height() - size.height()) / 2)
+        self.move(x, y)
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    win = Winform()
+    win.show()
+    sys.exit(app.exec_())
+```
+
+也可以直接使用 `QDesktopWidget().availableGeometry().center()` 设置窗口居中
+
+```python
+import sys
+from PyQt5.QtWidgets import QWidget, QDesktopWidget, QApplication
+
+class CenterWin(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+    def initUI(self):               
+        self.resize(250, 150)
+        self.center()
+        self.setWindowTitle('Center')    
+        self.show()
+
+    def center(self):
+        qr = self.frameGeometry() # 获得主窗口所在的框架
+        # 获取显示器的分辨率，然后得到屏幕中间点的位置
+        cp = QDesktopWidget().availableGeometry().center()
+        # 然后把主窗口框架的中心点放置到屏幕的中心位置
+        qr.moveCenter(cp)
+        # 然后通过 move 函数把主窗口的左上角移动到其框架的左上角，这样就把窗口居中了
+        self.move(qr.topLeft())
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = CenterWin()
+    sys.exit(app.exec_())
+```
+
+# 三、布局
+
+一般有两种方式：绝对布局 （absolute positioning）和 PyQt5 的 Layout 类
+
+Layout 布局方式分为盒布局、网格布局、表单布局。
+
+## 3.1 绝对布局
+
+(absolute positioning)
+
+绝对布局主要是在窗口程序中指定每一个控件的显示坐标和大小来实现布局
+
+缺点
+
+- 窗口中控件的大小和位置不会随着我们更改窗口的位置和大小而变化。
+- 不能适用于不同的平台和不同分辨率的显示器。
+- 改变字体时可能会破坏布局。
+- 如果我们决定重构这个应用，需要全部计算一下每个元素的位置和大小，既烦琐又费时。
+
+## 3.2 盒布局
+
+采用 `QBoxLayout` 类可以在水平和垂直方向上排列控件，分别为：`QHBoxLayout` 和 `QVBoxLayout`
+
+- ***QBoxLayout.addStretch(int stretch)***
+
+    添加伸缩量
+
+    *strentch*：均分的比例，默认为0
+
+- ***QBoxLayout.addSpacing(int size)***
+
+    添加一个固定大小的间距
+
+    *size*：间距
+
+- ***QBoxLayout.addWidget(QWidget)***
+
+    在布局中添加控件
+
+- ***QBoxLayout.addLayout(QBoxLayout)***
+
+    添加一个盒布局对象
+
+- ***QWidget.setLayout(QBoxLayout)***
+
+    设置窗口的主要布局
+
+```python
+#coding = 'utf-8'
+
+import sys
+from PyQt5.QtWidgets import (QWidget, QPushButton, QApplication, QHBoxLayout,QVBoxLayout)
+
+
+class Example(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.Init_UI()
+
+    def Init_UI(self):
+        self.setGeometry(300, 300, 400, 300)
+        self.setWindowTitle('学点编程吧')
+
+        bt1 = QPushButton('剪刀', self)
+        bt2 = QPushButton('石头', self)
+        bt3 = QPushButton('布', self)
+
+        hbox = QHBoxLayout()
+        hbox.addStretch(1)  # 增加伸缩量
+        hbox.addWidget(bt1)
+        hbox.addStretch(1)  # 增加伸缩量
+        hbox.addWidget(bt2)
+        hbox.addStretch(1)  # 增加伸缩量
+        hbox.addWidget(bt3)
+        hbox.addStretch(1)  # 增加伸缩量
+
+        vbox = QVBoxLayout()
+        vbox.addStretch(1)
+        vbox.addLayout(hbox)
+
+        self.setLayout(vbox)
+
+        self.show()
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = Example()
+    app.exit(app.exec_())
+```
+
+![image-20210212182700766](http://image.trouvaille0198.top/image-20210212182700766.png)
+
+## 3.3 网格布局
+
+`QGridLayout`（网格布局）是将窗口分隔成行和列的网格来进行排列
+
+- ***QBoxLayout.addWidget(QWidget, frontRow, fromColumn, rowSpan, columnSpan)***
+
+    在布局中添加控件
+
+    *frontRow*：起始行数
+
+    *fromColumn*：起始列数
+
+    *rowSpan*：跨越的行数
+
+    *columnSpan*：跨越的列数
+
+- ***QBoxLayout.addWidget(QWidget, row, column)***
+
+    在布局中添加控件
+
+    *row*：行数	
+
+    *column*：列数
+
+- ***QWidget.setLayout(QGridLayout)***
+
+    设置窗口的主要布局
+
+- ***QBoxLayout.setSpacing(int spacing)***
+
+    控制控件在水平方向的间隔
+
+    *spacing*：间隔
+
+```python
+#coding = 'utf-8'
+
+import sys
+from PyQt5.QtWidgets import (
+    QWidget, QPushButton, QApplication, QGridLayout, QLCDNumber)
+
+
+class Example(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.Init_UI()
+
+    def Init_UI(self):
+        self.setGeometry(300, 300, 400, 300)
+        self.setWindowTitle('学点编程吧-计算器')
+
+        grid = QGridLayout()
+        self.setLayout(grid)
+
+        self.lcd = QLCDNumber()
+        grid.addWidget(self.lcd, 0, 0, 3, 0)
+        grid.setSpacing(10)
+
+        names = ['Cls', 'Bc', '', 'Close',
+                 '7', '8', '9', '/',
+                 '4', '5', '6', '*',
+                 '1', '2', '3', '-',
+                 '0', '.', '=', '+']
+
+        positions = [(i, j) for i in range(4, 9) for j in range(4, 8)]
+        for position, name in zip(positions, names):
+            if name == '':
+                continue
+            button = QPushButton(name)
+            grid.addWidget(button, *position)
+            button.clicked.connect(self.Cli)
+
+        self.show()
+
+    def Cli(self):
+        sender = self.sender().text()
+        ls = ['/', '*', '-', '=', '+']
+        if sender in ls:
+            self.lcd.display('A')
+        else:
+            self.lcd.display(sender)
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = Example()
+    app.exit(app.exec_())
+```
+
+![image-20210212191725891](http://image.trouvaille0198.top/image-20210212191725891.png)
+
+## 3.4 表单布局
+
+`QFormLayout` 是 label-field 式的表单布局，顾名思义，就是实现表单方式的布局。表单是提示用户进行交互的一种模式，其主要由两列组成，第一列用于显示信息，给用户提示，一般叫作 label 域；第二列需要用户进行选择或输入，一般叫作 field 域。label 与 field 的关系就是 label 关联 field。
+
+`QFormLayout` 是一个方便的布局类，其中的控件以两列的形式被布局在表单中。左列包括标签，右列包含输入控件，例如：QLineEdit、QSpinBox、QTextEdit 等
+
+- ***QFormLayout.addRow(label, field)***
+
+    添加一行表单
+
+```python
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QFormLayout, QLineEdit, QLabel, QTextEdit
+
+
+class Winform(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("窗体布局管理例子")
+        self.resize(350, 100)
+
+        formlayout = QFormLayout()
+
+        forms = [
+            ['姓名', '阿芒'],
+            ['性别', '男'],
+            ['年龄', '17']
+        ]
+
+        for name, value in forms:
+            formlayout.addRow(QLabel(name), QLabel(value))
+
+        introductionLabel = QLabel("简介")
+        introductionLineEdit = QTextEdit("")
+
+        formlayout.addRow(introductionLabel, introductionLineEdit)
+        self.setLayout(formlayout)
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    form = Winform()
+    form.show()
+    sys.exit(app.exec_())
+```
+
+![image-20210212193025509](http://image.trouvaille0198.top/image-20210212193025509.png)
+
+# 四、显示类控件
+
+## 4.1 QLabel
+
+`QLabel` 对象作为一个占位符可以显示不可编辑的文本、图片或者 GIF 动画等
+
+`QLabel` 是 GUI 中的标签类，它继承自 QFrame（是 QWidget 的子类）
+
+### 4.1.1 API
+
+#### 1）修改内容
+
+- ***setText(str text)***
+
+    - 设置文本内容
+    - *text*：文本内容
+
+- ***setPixmap(QPixmap)***
+
+    - 设置图片
+
+- ***setMovie(QMovie)***
+
+    - 设置视频
+
+    - `QMovie` 类是用 QImageReader 播放动画的便捷类。
+
+        这个类用来显示没有声音的简单的动画
+
+#### 2）文字设置
+
+- ***setAlignment()***
+    - 按固定值方式对齐文本
+    - `Qt.AlignLeft`：水平方向靠左对齐；
+    - `Qt.AlignRight`:水平方向靠右对齐；
+    - `Qt.AlignCenter`：水平方向居中对齐；
+    - `Qt.AlignJustify`：水平方向调整间距两端对齐；
+    - `Qt.AlignTop`：垂直方向靠上对齐；
+    - `Qt.AlignBottom`：垂直方向靠下对齐；
+    - `Qt.AlignVCenter`：垂直方向居中对齐。
+- ***serIndent()***
+    - 设置文本缩进值
+- ***setWordWrap()***
+    - 设置是否允许换行
+- ***setFont(QFont)***
+    - 设置字体的大小样式
+- ***setStyleSheet(str cssStyle)***
+    - 设置 CSS 样式
+    - cssStyle：CSS 样式，如 `"border-radius: 25px;border: 1px solid black;"`
+
+#### 3）返回
+
+- ***text()***
+    - 返回文本内容
+- ***selectedText()***
+    - 返回所选中的字符
+
+### 4.1.2 
+
+# 五、文本框类控件
+
+## 5.1 QLineEdit
+
+`QLineEdit` 类是一个单行文本框控件，可以输入单行字符串
+

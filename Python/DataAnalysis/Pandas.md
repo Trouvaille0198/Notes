@@ -983,3 +983,30 @@ df['priority'] = df['priority'].map({'yes': True, 'no': False})
 ```python3
 df.sum().idxmin()
 ```
+
+# 六、预览 DataFrame
+
+一个独立的支持库，pandas_profiling，可以快速预览数据集。
+
+```python
+import pandas_profiling as pp
+```
+
+`pp.ProfileReport(df)` 
+
+这个函数支持任意 DataFrame，并生成交互式 HTML 数据报告：
+
+- 第一部分是纵览数据集，还会列出数据一些可能存在的问题；
+- 第二部分汇总每列数据，点击 **toggle details** 查看更多信息；
+- 第三部分显示列之间的关联热力图；
+- 第四部分显示数据集的前几条数据。
+
+`profile.to_file(output_file="your_report.html")`
+
+保存 html 文件
+
+```python
+profile = pp.ProfileReport(data)
+profile.to_file(outputfile = "output_file.html")
+```
+

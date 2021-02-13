@@ -483,7 +483,7 @@ title
 
 Beautiful Soup会将与列表中任一元素匹配的内容返回
 
-下面代码找到文档中所有<a>标签和<b>标签
+下面代码找到文档中所有\<a>标签和\<b>标签
 
 ```python
 soup.find_all(["a", "b"])
@@ -575,6 +575,8 @@ find_all( name , attrs , recursive , string , **kwargs )
 `find_all()` 方法搜索当前tag的所有tag子节点,并判断是否符合过滤器的条件
 
 任意参数的值可以是任一类型的过滤器，字符串，正则表达式，列表，方法或是 `True` 
+
+返回列表
 
 ### 4.2.1 name
 
@@ -673,6 +675,14 @@ soup.html.find_all("title")
 
 soup.html.find_all("title", recursive=False)
 # []
+```
+
+### 4.2.6 attrs
+
+传入字典
+
+```python
+css_class = soup.find_all(attrs={'class':'primaryconsumers'})
 ```
 
 ### 4.2.6 简写方式
