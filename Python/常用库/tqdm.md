@@ -1,6 +1,10 @@
+# 一、tqdm
+
 Tqdm 是一个快速，可扩展的 Python 进度条，可以在 Python 长循环中添加一个进度提示信息，用户只需要封装任意的迭代器`tqdm(iterator)`。
 
-使用方法一: tqdm
+***`tqdm(iterator, color)`***
+
+## 1.1 使用方法一: tqdm
 
 `tqdm(list)` 方法可以传入任意一种list,比如数组
 
@@ -20,7 +24,7 @@ for char in tqdm(["a", "b", "c", "d"]):
     pass123
 ```
 
-使用方法二: trange
+## 1.2 使用方法二: trange
 
 `trange(i)` 是 `tqdm(range(i))` 的简单写法
 
@@ -31,18 +35,18 @@ for i in trange(100):
     pass1234
 ```
 
-使用方法三: 手动方法
+## 1.3 .set_description()
 
-在 for 循环外部初始化 tqdm,可以打印其他信息
-
-```python
-bar = tqdm(["a", "b", "c", "d"])
-for char in pbar:
-    pbar.set_description("Processing %s" % char)123
-```
-
-效果：
+实时查看每次处理的数据
 
 ```python
-100%|███████████████████████████████████| 857K/857K [00:04<00:00, 246Kloc/s]
+from tqdm import tqdm
+import time
+ 
+pbar = tqdm(["a","b","c","d"])
+for c in pbar:
+  time.sleep(1)
+  pbar.set_description("Processing %s"%c)
 ```
+
+![image-20210213224128056](http://image.trouvaille0198.top/image-20210213224128056.png)
