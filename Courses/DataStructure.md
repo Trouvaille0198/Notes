@@ -448,7 +448,7 @@ $$
 
 （Pattern Matching）
 
-设ob为主串，pat为模式串，查找pat在ob的匹配位置的操作称为模式匹配
+设 ob 为主串，pat 为模式串，查找 pat 在 ob 的匹配位置的操作称为模式匹配
 
 #### 1）Brute-Force算法
 

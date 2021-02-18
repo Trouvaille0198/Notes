@@ -22,6 +22,14 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 | `--high_quality`                      | `-qh`                 | Render at high quality                                    |
 | `--fourk_quality`                     | `-qk`                 | Render at 4K quality                                      |
 
+
+
+若要在 `Jupyter` 中使用
+
+```python
+%%manim Test1 [CLI options]
+```
+
 # 二、Mobject
 
 `Mobject` 是屏幕中出现的所有物体的超类
@@ -62,7 +70,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
     - *mobject*：另一个 Mobject 对象
     - *direction*：DIRECTION
-    - *buff*：两者的边界距离
+    - *buff*：两者的边界距离，默认为 0.25
 
 - ***align_to(mobject, direction)***
 
@@ -418,8 +426,6 @@ class test(Scene):
     - *start*：起点，默认 LEFT
     - *end*：终点，默认 RIGHT
 
-
-
 # 三、Animation
 
 ## 3.1 通用
@@ -469,6 +475,27 @@ class concurrent(Scene):
         self.wait()
 ```
 
+### 3.1.5 ApplyMethod()
+
+***ApplyMethod(method, \*args, \*\*kwargs)***
+
+因为 `ApplyMethod` 是Transform的子类，所以每次只能对同一个物体执行一次操作（最后一次）
+
+```python
+from manim import *
+
+
+class test16(Scene):
+    def construct(self):
+        A = Text("Text-A").to_edge(LEFT)
+
+        self.add(A)
+        self.play(ApplyMethod(A.shift, RIGHT * 7 + UP * 2), )
+        self.wait()
+```
+
+<img src="http://image.trouvaille0198.top/test16.gif" alt="test16" style="zoom: 67%;" />
+
 ## 3.2 PlayMethod
 
 ### 3.2.1 Mobject.animate.method()
@@ -496,7 +523,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test0](http://image.trouvaille0198.top/test0.gif)
+<img src="http://image.trouvaille0198.top/test0.gif" alt="test0" style="zoom:67%;" />
 
 - ***ShowCreation(mobject)***
 
@@ -573,12 +600,498 @@ Animations related to rotation.
 
 - ***Rotate(mobject, angle)***
 
-### 3.2.6 transform
+### 3.2.6 Transform
 
 Animations transforming one mobject into another.
 
-- ***Transform(mobject, target_mobject)***
+- ***Transform(mobject, target_mobject=None, \*\*kwargs)***\
+- ***TransformFromCopy(mobject, target_mobject, \*\*kwargs)***
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        A = Text("Text-A").scale(3)
+        B = Text("Text-B").scale(3).shift(UP * 2)
+
+        self.add(A)
+        self.play(TransformFromCopy(A, B))
+        self.wait()
+```
+
+![test15](http://image.trouvaille0198.top/test15.gif)
+
+- ***Restore(mobject, \*\*kwargs)***
+
+    返回之前保存的状态
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        A = Text("Text-A").to_edge(LEFT)
+        A.save_state()  # 记录下现在状态，restore会回到此时
+        A.scale(3).shift(RIGHT * 7 + UP * 2)
+
+        self.add(A)
+        self.play(Restore(A))
+        self.wait()
+```
+
+![test17](http://image.trouvaille0198.top/test17.gif)
+
+- ***ApplyFunction(function, mobject, \*\*kwargs)***
+
+    执行函数操作
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        A = Text("Text-A").to_edge(LEFT)
+
+        def function(mob):
+            return mob.scale(3).shift(RIGHT * 7 + UP * 2)
+            # 需要return一个mobject
+
+        self.add(A)
+        self.wait()
+        self.play(ApplyFunction(function, A))
+        self.wait()
+```
+
+![test18](http://image.trouvaille0198.top/test18.gif)
+
+- ***Swap(\*mobjects, \*\*kwargs)***
+
+    互换位置
+
+```python
+from manim import *
+
+
+class test19(Scene):
+    def construct(self):
+        A = Text("Text-A").scale(3)
+        B = Text("Text-B").scale(3)
+        VGroup(A, B).arrange(RIGHT)
+
+        self.add(A, B)
+        self.play(Swap(A, B))  # 或CyclicReplace(A, B)
+        self.wait()
+```
+
+![test19](http://image.trouvaille0198.top/test19.gif)
 
 ### 3.2.7 Grow
 
 - ***GrowArrow(arrow, \*\*kwargs)***
+
+- ***GrowFromPoint(mobject, point, \*\*kwargs)***
+
+    从指定方向由小变大进入
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        mobjects = VGroup(Circle(), Circle(fill_opacity=1),
+                          Text("Text").scale(2))
+        mobjects.arrange(LEFT)
+
+        directions = [UP, LEFT, DOWN, RIGHT]
+
+        for direction in directions:
+            self.play(*[
+                GrowFromPoint(mob,
+                              mob.get_center() + direction * 3)
+                for mob in mobjects
+            ])
+
+        self.wait()
+```
+
+![test3](http://image.trouvaille0198.top/test3.gif)
+
+- ***GrowFromCenter(mobject, \*\*kwargs)***
+
+- ***SpinInFromNothing(mobject, \*\*kwargs)***
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        mobjects = VGroup(Square(), Square(fill_opacity=1, color=BLUE),
+                          Text("Text").scale(2))
+        mobjects.scale(1.5)
+        mobjects.arrange(RIGHT, buff=2)
+
+        self.play(*[SpinInFromNothing(mob) for mob in mobjects])
+
+        self.wait()
+```
+
+![test4](http://image.trouvaille0198.top/test4.gif)
+
+### 3.2.8 Indication
+
+- ***FocusOn(focus_point, \*\*kwargs)***
+    - *focus_point*：Mobject or point
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        mobjects = VGroup(Dot(), Text("x"))
+        mobjects.arrange(RIGHT, buff=2)
+        colors = [GRAY, RED]
+
+        self.add(mobjects)
+        for obj, color in zip(mobjects, colors):
+            self.play(FocusOn(obj, color=color))
+        self.wait(0.3)
+```
+
+![test5](http://image.trouvaille0198.top/test5.gif)
+
+- ***Indicate(mobject, target_mobject=None, \*\*kwargs)***
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        formula = Tex("f(", "x", ")")
+        dot = Dot()
+
+        VGroup(formula, dot).scale(3).arrange(DOWN, buff=3)
+
+        self.add(formula, dot)
+
+        for mob in [formula[1], dot]:
+            self.play(Indicate(mob))
+
+        self.wait(0.3)
+```
+
+![test6](http://image.trouvaille0198.top/test6.gif)
+
+- ***Flash(point, color, \*\*kwargs)***
+
+    一闪一闪
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        mobjects = VGroup(Dot(), TexMobject("x")).scale(2)
+        mobjects.arrange(RIGHT, buff=2)
+
+        mobject_or_coord = [
+            *mobjects,  # Mobjects: Dot and "x"
+            mobjects.get_right() + RIGHT * 2  # Coord
+        ]
+
+        colors = [GRAY, RED, BLUE]
+
+        self.add(mobjects)
+
+        for obj, color in zip(mobject_or_coord, colors):
+            self.play(Flash(obj, color=color, flash_radius=0.5))
+
+        self.wait(0.3)
+```
+
+![test7](http://image.trouvaille0198.top/test7.gif)
+
+- ***CircleIndicate(mobject, \*\*kwargs)***
+
+    画圈圈
+
+```python
+from manim import *
+
+
+class test8(Scene):
+    def construct(self):
+        mobjects = VGroup(Dot(), TexMobject("x")).scale(2)
+        mobjects.arrange(RIGHT, buff=2)
+
+        self.add(mobjects)
+        self.wait(0.2)
+
+        for obj in mobjects:
+            self.play(CircleIndicate(obj))
+```
+
+![test8](http://image.trouvaille0198.top/test8.gif)
+
+- ***ShowCreationThenDestructionAround(mobject, \*\*kwargs)***
+
+    展示方框
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        mobjects = VGroup(Circle(), Circle(fill_opacity=1),
+                          Text("Text").scale(2))
+        mobjects.scale(1.5)
+        mobjects.arrange(RIGHT, buff=2)
+
+        self.add(mobjects)
+
+        self.play(
+            *[ShowCreationThenDestructionAround(mob) for mob in mobjects])
+
+        self.wait(0.3)
+```
+
+![test9](http://image.trouvaille0198.top/test9.gif)
+
+- ***ApplyWave(mobject, \*\*kwargs)***
+
+    水波效果
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        mobjects = VGroup(Circle(), Circle(fill_opacity=1),
+                          Text("Text").scale(2))
+        mobjects.scale(1.5)
+        mobjects.arrange(RIGHT, buff=2)
+
+        self.add(mobjects)
+
+        self.play(*[ApplyWave(mob) for mob in mobjects])
+
+        self.wait()
+```
+
+![test10](http://image.trouvaille0198.top/test10.gif)
+
+- ***WiggleOutThenIn(mobject, \*\*kwargs)***
+
+    扭一扭
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        mobjects = VGroup(Circle(), Circle(fill_opacity=1),
+                          Text("Text").scale(2))
+        mobjects.scale(1.5)
+        mobjects.arrange(RIGHT, buff=2)
+
+        self.add(mobjects)
+
+        self.play(*[WiggleOutThenIn(mob) for mob in mobjects])
+
+        self.wait()
+```
+
+![test11](http://image.trouvaille0198.top/test11.gif)
+
+### 3.2.9 Movement
+
+- ***MoveAlongPath(mobject, path, \*\*kwargs)***
+
+```python
+from manim import *
+
+
+class test11(Scene):
+    def construct(self):
+        line = Line(LEFT, RIGHT * 10, color=RED, buff=1)
+        line.move_to(ORIGIN)
+        dot = Dot()
+        dot.move_to(line.get_start())
+
+        self.add(line, dot)
+        self.play(MoveAlongPath(dot, line))
+        self.wait(0.3)
+```
+
+![test12](http://image.trouvaille0198.top/test12.gif)
+
+### 3.2.10 Numbers
+
+- ***ChangingDecimal(decimal_mob, number_update_func, \*\*kwargs)***
+
+    计数动画
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        number = DecimalNumber(0).scale(2)
+
+        def update_func(t):
+            return t * 10
+
+        self.add(number)
+        self.wait()
+        self.play(ChangingDecimal(number, update_func), run_time=3)
+        self.wait()
+```
+
+![test13](http://image.trouvaille0198.top/test13.gif)
+
+- ***ChangeDecimalToValue(decimal_mob, target_number, \*\*kwargs)***
+
+### 3.2.11 Rotation
+
+`Rotate` 目前是 `Transform` 的子类，即带有 `path_arc` 的 `Transform` ，所以会有扭曲
+
+`Rotating` 直接继承自 `Animation` ，根据角度插值，比较顺滑，推荐使用
+
+- ***Rotating(mobject, \*\*kwargs)***
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        square = Square().scale(2)
+        self.add(square)
+
+        self.play(Rotating(square, radians=PI / 4, run_time=2))
+        self.wait(0.3)
+        self.play(Rotating(square, radians=PI, run_time=2, axis=RIGHT))
+        self.wait(0.3)
+```
+
+![test14](http://image.trouvaille0198.top/test14.gif)
+
+### 3.2.12 Update
+
+- ***UpdateFromFunc()***
+
+    实时更新
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        square = Square().to_edge(UP)
+        mobject = Text("Text").scale(2).next_to(square, RIGHT)
+        
+        def update_func(mob):
+            mob.next_to(square, RIGHT)
+
+        self.add(square, mobject)
+        self.play(ApplyMethod(square.to_edge, DOWN),
+                  UpdateFromFunc(mobject, update_func))
+        self.wait()
+        
+        # equal to
+        # group = VGroup(square, mobject)
+
+        # self.add(group)
+        # self.play(ApplyMethod(group.to_edge, DOWN))
+        # self.wait()
+```
+
+![test20](http://image.trouvaille0198.top/test20.gif)
+
+- ***UpdateFromAlphaFunc(mobject, update_function, \*\*kwargs)***
+
+    传入的函数含有参数alpha，表示动画完成度(0~1之间)
+
+```python
+from manim import *
+
+
+class test(Scene):
+    def construct(self):
+        square = Square().to_edge(UP)
+        mobject = Text("Text").scale(2)
+        mobject.next_to(square, RIGHT, buff=0.05)
+
+        def update_func(mob, alpha):
+            mob.next_to(square, RIGHT, buff=0.05 + alpha)
+
+        self.add(square, mobject)
+        self.play(square.animate.to_edge(DOWN),
+                  UpdateFromAlphaFunc(mobject, update_func))
+        self.wait()
+```
+
+![test21](http://image.trouvaille0198.top/test21.gif)
+
+### 3.2.13 Composition
+
+- ***AnimationGroup(\*animations, \*\*kwargs)***
+
+    传入一系列动画，一起执行（不能通过下标访问动画）
+
+    - *lag_ratio*：默认为0（即上一个动画运行到0%的时候运行下一个动画）
+
+```python
+from manim import *
+
+
+class test22(Scene):
+    def construct(self):
+        cir1 = Circle()
+        cir2 = Circle(fill_opacity=1)
+        text = Text("Text").scale(2)
+        mobjects = VGroup(cir1, cir2, text).scale(1.5).arrange(RIGHT, buff=2)
+
+        anims = AnimationGroup(ShowCreation(cir1), Write(cir2), FadeIn(text))
+        self.play(anims)
+        self.wait()
+```
+
+![test22](http://image.trouvaille0198.top/test22.gif)
+
+# 四、Camera
+
+`Camera` 类及其子类用于获取当前屏幕上的画面， 然后作为每帧图像传递给 SceneFileWriter 来生成视频
+
+# 五、Constants
+
+## 5.1 Module Attributes
+
+| `ORIGIN`  | The center of the coordinate system.                        |
+| --------- | ----------------------------------------------------------- |
+| `UP`      | One unit step in the positive Y direction.                  |
+| `DOWN`    | One unit step in the negative Y direction.                  |
+| `RIGHT`   | One unit step in the positive X direction.                  |
+| `LEFT`    | One unit step in the negative X direction.                  |
+| `IN`      | One unit step in the negative Z direction.                  |
+| `OUT`     | One unit step in the positive Z direction.                  |
+| `UL`      | One step up plus one step left.                             |
+| `UR`      | One step up plus one step right.                            |
+| `DL`      | One step down plus one step left.                           |
+| `DR`      | One step down plus one step right.                          |
+| `PI`      | The ratio of the circumference of a circle to its diameter. |
+| `TAU`     | The ratio of the circumference of a circle to its radius.   |
+| `DEGREES` | The exchange rate between radians and degrees.              |
