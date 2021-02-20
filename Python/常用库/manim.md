@@ -490,7 +490,7 @@ class test16(Scene):
         A = Text("Text-A").to_edge(LEFT)
 
         self.add(A)
-        self.play(ApplyMethod(A.shift, RIGHT * 7 + UP * 2), )
+        self.play(ApplyMethod(A.shift, RIGHT * 7 + UP * 2))
         self.wait()
 ```
 
