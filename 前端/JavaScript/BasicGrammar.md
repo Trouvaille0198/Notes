@@ -1244,19 +1244,19 @@ foo ----> Function.prototype ----> Object.prototype ----> null
 例
 
 ```javascript
-        function Cat(name) {
-            this.name = name;
-            // this.say = function () {
-            //     alert('miao~ ' + this.name);
-            // }
-        }
-        Cat.prototype.say = function () {
-            alert('miao~ ' + this.name);
-        }
-        var cat1 = new Cat('aa');
-        var cat2 = new Cat('bb');
-        cat1.say();
-        cat2.say();
+function Cat(name) {
+    this.name = name;
+    // this.say = function () {
+    //     alert('miao~ ' + this.name);
+    // }
+}
+Cat.prototype.say = function () {
+    alert('miao~ ' + this.name);
+}
+var cat1 = new Cat('aa');
+var cat2 = new Cat('bb');
+cat1.say();
+cat2.say();
 ```
 
 #### 1）构造
