@@ -1095,3 +1095,10 @@ class test22(Scene):
 | `PI`      | The ratio of the circumference of a circle to its diameter. |
 | `TAU`     | The ratio of the circumference of a circle to its radius.   |
 | `DEGREES` | The exchange rate between radians and degrees.              |
+
+# 六 其他
+
+1. 公式怎么对齐
+    1. 直接在`TexMobject`中使用`&`对齐
+    2. 两个`mobject`对齐，使用`obj2.next_to(obj1, DOWN, aligned_edge=LEFT)`使`obj2`在`obj1`下方，并左对齐
+    3. `VGroup`内对齐，使用`group.arrange(DOWN, aligned_edge=LEFT)`使`VGroup`中的子元素依次向下排开，并左对齐

@@ -511,7 +511,7 @@ a = 'ABC'; // a变为字符串
 3. 转换为布尔型
    - `Boolean(var)` 返回布尔型，代表空、否定的值会被转换为false，如 '', 0, NaN, null, undefined
 
-## 2.3 Map和Set
+## 2.3 Map 和 Set
 
 JavaScript的默认对象表示方式 `{}` 可以视为其他语言中的 `Map` 或 `Dictionary` 的数据结构，即一组键值对。
 
@@ -659,6 +659,18 @@ a.forEach(function (element) {
     console.log(element);
 });
 ```
+
+### 2.4.3 for in 和 for of 辨析
+
+for... in 
+
+- 遍历对象时，得到 key
+- 遍历数组时，得到下标
+
+for... of
+
+- 遍历数组时，得到值
+- 不能遍历对象
 
 # 三、函数
 
