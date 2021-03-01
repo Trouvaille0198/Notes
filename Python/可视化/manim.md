@@ -1,4 +1,4 @@
-# 一、执行文件
+#  一、执行文件
 
 `manim yourfile.py [className] [-params]`
 
@@ -71,6 +71,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
     - *mobject*：另一个 Mobject 对象
     - *direction*：DIRECTION
     - *buff*：两者的边界距离，默认为 0.25
+    - *aligned_edge*：对齐的方向
 
 - ***align_to(mobject, direction)***
 
@@ -416,7 +417,7 @@ class test(Scene):
 
     - methods
 
-        - ******set_length(length)******
+        - **set_length(length)****
 
             缩放到 `length` 长度
 
