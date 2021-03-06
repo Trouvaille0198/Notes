@@ -73,7 +73,7 @@
 
    常对幂指阶
    
-   $O(1)<O(\log_2n<O(n)<O(n\log_2n)<O(n^2)<O(n^3)<O(2^n)<O(n!)<O(n^n)$
+   $O(1)<O(\log_2n)<O(n)<O(n\log_2n)<O(n^2)<O(n^3)<O(2^n)<O(n!)<O(n^n)$
 
 ### 2.4.2 空间复杂度
 
@@ -89,9 +89,9 @@
 
 ## 3.1 定义
 
-n个**相同类型**数据元素的**有限**序列，记为$L=(a_1,a_2,\ldots,a_n)$
+n 个**相同类型**数据元素的**有限**序列，记为 $L=(a_1,a_2,\ldots,a_n)$
 
-L称为表名，n称为表长，$a_i$：第i个称为位序，$a_1$称为首元素，$a_n$称为末元素
+L 称为表名，n 称为表长，$a_i$：第 i 个称为位序，$a_1$ 称为首元素，$a_n$ 称为末元素
 
 除首元素，其他元素拥有一个直接前驱；除末元素，其他元素拥有一个直接后继
 
@@ -133,35 +133,35 @@ L称为表名，n称为表长，$a_i$：第i个称为位序，$a_1$称为首元�
 第$i$个元素的数组索引为$i-1$
 
 ```C++
-template <class DataType>
+template <class T>
 class SeqList
 {
 protected:
     static const int DEFAULT_SIZE = 100;
     int _length;
     int _maxlen;
-    DataType *_data;
+    T *_data;
 
 public:
-    SeqList(int maxlen = DEFAULT_SIZE);                          //建立空表
-    SeqList(DataType *a, int length, int maxlen = DEFAULT_SIZE); //根据数组创建新表
-    SeqList(const SeqList<DataType> &sa);                        //拷贝构造函数
-    virtual ~SeqList();                                          //析构函数
-    SeqList<DataType> &operator=(const SeqList<DataType> &sa);   //赋值运算符重载
+    SeqList(int maxlen = DEFAULT_SIZE);                   //建立空表
+    SeqList(T *a, int length, int maxlen = DEFAULT_SIZE); //根据数组创建新表
+    SeqList(const SeqList<T> &sa);                        //拷贝构造函数
+    virtual ~SeqList();                                   //析构函数
+    SeqList<T> &operator=(const SeqList<T> &sa);          //赋值运算符重载
 
-    void ClearList();                        //清空顺序表，暂时不知道有啥用
-    int GetLength() const;                   //返回长度
-    bool IsEmpty() const;                    //判空
-    bool IsFull() const;                     //判满
-    void DisplayList() const;                //遍历显示顺序表
-    int LocateElem(const DataType &e) const; //元素定位，返回指定元素位置
+    void ClearList();                 //清空顺序表，暂时不知道有啥用
+    int GetLength() const;            //返回长度
+    bool IsEmpty() const;             //判空
+    bool IsFull() const;              //判满
+    void DisplayList() const;         //遍历显示顺序表
+    int LocateElem(const T &e) const; //元素定位，返回指定元素位置
 
-    DataType GetElem(int i) const;             //查找元素，返回查找的元素
-    void SetElem(int i, const DataType &e);    //修改i位置的元素值
-    void InsertElem(int i, const DataType &e); //在i位置插入新元素
-    void InsertElem(const DataType &e);        //在末尾插入新元素
-    void DeleteElemByIndex(int i);             //删除i位置的元素
-    void DeleteElemByValue(const DataType &e); //删除指定元素
+    T GetElem(int i) const;             //查找元素，返回查找的元素
+    void SetElem(int i, const T &e);    //修改i位置的元素值
+    void InsertElem(int i, const T &e); //在i位置插入新元素
+    void InsertElem(const T &e);        //在末尾插入新元素
+    void DeleteElemByIndex(int i);      //删除i位置的元素
+    void DeleteElemByValue(const T &e); //删除指定元素
 };
 ```
 
@@ -170,20 +170,72 @@ public:
 #### 1）构造函数
 
 ```python
-template <class DataType>
-SeqList<DataType>::SeqList(int maxlen) : _length(0), _maxlen(maxlen)
+template <class T>
+SeqList<T>::SeqList(int maxlen) : _length(0), _maxlen(maxlen)
 {
-    _data = new DataType[_maxlen]; //申请存储空间
+    _data = new T[_maxlen]; //申请存储空间
 }
 ```
 
 ```python
-template <class DataType>
-SeqList<DataType>::SeqList(DataType *a, int length, int maxlen) : _length(length), _maxlen(maxlen)
+template <class T>
+SeqList<T>::SeqList(T *a, int length, int maxlen) : _length(length), _maxlen(maxlen)
 {
-    _data = new DataType[maxlen];
+    _data = new T[maxlen];
     for (int i = 0; i < length; i++)
         _data[i] = a[i];
+}
+```
+
+#### 1）插入元素
+
+```c++
+template <class T>
+void SeqList<T>::InsertElem(int i, const T &e)
+{
+    if (IsFull())
+    {
+        cout << "线性表已满,不可添加新元素!" << endl;
+        return;
+    }
+    if (i < 1 || i > _length)
+    {
+        cout << "位置不合理！" << endl;
+        return;
+    }
+    else
+    {
+        for (int j = _length; j >= i; j--) //i后的元素向后移动一格
+        {
+            _data[j] = _data[j - 1];
+        }
+        _data[i - 1] = e;
+        _length++; //总长+1
+    }
+}
+```
+
+#### 3）删除元素
+
+```c++
+template <class T>
+void SeqList<T>::DeleteElemByIndex(int i)
+{
+    if (IsEmpty())
+    {
+        cout << "线性表已空,不可删除元素!" << endl;
+        return;
+    }
+    if (i < 1 || i > _length)
+    {
+        cout << "位置不合理！" << endl;
+        return;
+    }
+    for (int j = i - 1; j < _length - 1; j++)
+    {
+        _data[j] = _data[j + 1];
+    }
+    _length--;
 }
 ```
 
@@ -197,14 +249,14 @@ SeqList<DataType>::SeqList(DataType *a, int length, int maxlen) : _length(length
 
 （Linked List）
 
-采用链接存储方式存储的线性表称为线性链表（Linked List），信息域+指针域
+采用链接存储方式存储的线性表称为线性链表（Linked List），信息域 + 指针域
 
 - 特点
   1. 不要求连续空间，逻辑上相邻的元素，物理上不用相邻
   2. **顺序访问**，下标无助于访存
   3. 插入、删除元素无需大量移动
   4. 易于动态扩展
-  5. 存储密度>1
+  5. 存储密度 >1
 
 ### 3.4.1 单链表
 
