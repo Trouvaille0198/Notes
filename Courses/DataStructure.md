@@ -368,34 +368,76 @@ public:
 #### 1）类模板定义
 
 ```c++
-template <class DataType>
+template <class T>
 class SeqStack
 {
 protected:
     static const int DEFAULT_SIZE = 100;
     int _top; //_top从0开始
     int _maxlen;
-    DataType *_data;
+    T *_data;
 
 public:
-    SeqStack(int maxlen = DEFAULT_SIZE);                         //建立空栈
-    SeqStack(const SeqStack<DataType> &sa);                      //拷贝构造函数
-    virtual ~SeqStack();                                         //析构函数
-    SeqStack<DataType> &operator=(const SeqStack<DataType> &sa); //赋值运算符重载
+    SeqStack(int maxlen = DEFAULT_SIZE);           //建立空栈
+    SeqStack(const SeqStack<T> &sa);               //拷贝构造函数
+    virtual ~SeqStack();                           //析构函数
+    SeqStack<T> &operator=(const SeqStack<T> &sa); //赋值运算符重载
 
-    void ClearStack();         //清空顺序表，暂时不知道有啥用
+    void ClearStack();         //清空顺序表
     int GetLength() const;     //返回长度
     bool IsFull() const;       //判满
     bool IsEmpty() const;      //判空
     void DisplayStack() const; //遍历显示顺序表
 
-    void PushElem(const DataType &e); //入栈
-    DataType TopElem();               //取栈顶元素
-    void PopElem();                   //出栈
+    void PushElem(const T &e); //入栈
+    T TopElem();               //取栈顶元素
+    void PopElem();            //出栈
 };
 ```
 
 #### 2）具体定义
+
+````c++
+template <class T>
+void SeqStack<T>::PushElem(const T &e)
+//入栈
+{
+    if (IsFull())
+        cout << "顺序栈已满！" << endl;
+    else
+        _data[++_top] = e;
+}
+
+template <class T>
+T SeqStack<T>::TopElem()
+//取栈顶元素
+{
+    if (IsEmpty())
+    {
+        cout << "顺序栈已空，无法取出栈顶元素！" << endl;
+        //return NULL;
+    }
+    else
+    {
+        return _data[_top];
+    }
+}
+
+template <class T>
+void SeqStack<T>::PopElem()
+//出栈
+{
+    if (IsEmpty())
+    {
+        cout << "顺序栈已空，无法继续出栈！" << endl;
+        return;
+    }
+    else
+    {
+        _top--;
+    }
+}
+````
 
 #### 3）共享存储空间的双顺序栈
 
@@ -408,6 +450,72 @@ public:
 与顺序栈相比，链式栈对于同时使用多个栈的情况下可以共享存储
 
 用不带头结点的的单链表示链式栈，且头指针表示top
+
+#### 1）类模板定义
+
+```c++
+template <class T>
+class LinkStack
+{
+protected:
+    //不设头结点，_top为第一个节点
+    Node<T> *_top;
+
+public:
+    LinkStack();
+    virtual ~LinkStack();
+    LinkStack(const LinkStack<T> &la);
+    LinkStack<T> &operator=(const LinkStack<T> &la);
+
+    void ClearStack();
+    bool IsEmpty() const;
+    int GetLength() const;
+    void DisplayStack() const;
+
+    void PushElem(const T &e);
+    T TopElem();
+    void PopElem();
+};
+```
+
+#### 1）具体实现
+
+```c++
+template <class T>
+void LinkStack<T>::PushElem(const T &e)
+//入栈
+{
+    Node<T> *p = new Node<T>(e, _top);
+    if (p == NULL)
+        cout << "动态内存耗尽！" << endl;
+    else
+        _top = p;
+}
+
+template <class T>
+T LinkStack<T>::TopElem()
+//取栈顶元素
+{
+    if (IsEmpty())
+        cout << "链式栈已空" << endl;
+    else
+        return _top->data;
+}
+
+template <class T>
+void LinkStack<T>::PopElem()
+//出栈
+{
+    if (IsEmpty())
+        cout << "链式栈已空，无法出栈！" << endl;
+    else
+    {
+        Node<T> *p = _top; //取旧栈顶
+        _top = _top->next; //_top指向新栈顶
+        delete p;          //释放旧栈顶空间
+    }
+}
+```
 
 ## 4.2 队列
 
@@ -431,9 +539,9 @@ public:
 为了避免假溢出问题，把顺序队列所使用的存储空间构造成一个逻辑上首尾相连的循环队列，称为循环队列。
 
 - 假溢出问题的解决方法（主要是判空判满的问题）
-  - 少用一个存储空间，队满即`(rear + 1) % maxlen == front`
-  - 不设rear，改设length，队空`length == 0`；队满`length == maxlen`
-  - 新增数据成员flag，队空`flag == 0`；队满`flag == maxlen`
+  - 少用一个存储空间，队满即 `(rear + 1) % maxlen == front`
+  - 不设rear，改设length，队空 `length == 0`；队满 `length == maxlen`
+  - 新增数据成员flag，队空 `flag == 0`；队满 `flag == maxlen`
 
 ### 4.2.2 链式队列
 
@@ -621,8 +729,6 @@ class Triple
 
 #### 1）非零元素结点类模板
 
-#### 2）
-
 ## 5.4 广义表
 
 即列表（List），元素可以是一个数据也可以是一个表
@@ -723,11 +829,175 @@ $$
 
 #### 1）先序遍历
 
+```c++
+template <class T>
+void BinaryTree<T>::PreOrder(BinTreeNode<T> *&root)
+{
+    if (root != NULL)
+    {
+        cout << root->_data << " ";
+        PreOrder(root->_leftChild);
+        PreOrder(root->_rightChild);
+    }
+}
+```
+
+```c++
+template <class T>
+void BinaryTree<T>::PreOrder_NoRecurve(BinTreeNode<T> *&root)
+//DLR 节点不为空时即打印
+{
+    if (root == NULL)
+        return;
+    LinkStack<BinTreeNode<T> *> Stack;
+    BinTreeNode<T> *p = root;
+    while (!Stack.IsEmpty())
+    {
+        if (p != NULL)
+        {
+            cout << p->_data << " "; //先打印父节点
+            Stack.PushElem(p);       //父节点入栈
+            p = p->_leftChild;       //转到左节点
+        }
+        else
+        {
+            p = Stack.TopElem(); //回溯到父节点
+            Stack.PopElem();     //父节点出栈
+            p = p->_rightChild;  //转到右节点
+        }
+    }
+}
+```
+
 #### 2）中序遍历
+
+```c++
+template <class T>
+void BinaryTree<T>::InOrder(BinTreeNode<T> *&root)
+{
+    if (root != NULL)
+    {
+        InOrder(root->_leftChild);
+        cout << root->_data << " ";
+        InOrder(root->_rightChild);
+    }
+}
+```
+
+```c++
+template <class T>
+void BinaryTree<T>::InOrder_NoRecurve(BinTreeNode<T> *&root)
+//LDR 左节点为空时访问（或 即将转到右节点时访问）
+{
+    if (root == NULL)
+        return;
+    LinkStack<BinTreeNode<T> *> Stack;
+    BinTreeNode<T> *p = root;
+    while (!Stack.IsEmpty())
+    {
+        if (p != NULL)
+        {
+            Stack.PushElem(p); //入栈
+            p = p->_leftChild; //转到左节点
+        }
+        else
+        {
+            p = Stack.TopElem();
+            Stack.PopElem();         //栈顶出栈
+            cout << p->_data << " "; //即将转到右节点时，打印栈顶
+            p = p->_rightChild;      //转到右节点
+        }
+    }
+}
+```
+
+
 
 #### 3）后序遍历
 
+```c++
+template <class T>
+void BinaryTree<T>::PostOrder(BinTreeNode<T> *&root)
+{
+    if (root != NULL)
+    {
+        PostOrder(root->_leftChild);
+        PostOrder(root->_rightChild);
+        cout << root->_data << " ";
+    }
+}
+```
+
+```c++
+template <class T>
+void BinaryTree<T>::PostOrder_NoRecurve(BinTreeNode<T> *&root)
+//LRD 出栈时，需要判定左右节点遍历的完成情况
+{
+    if (_root == NULL)
+        return;
+    LinkStack<BinTreeNode<T> *> Stack;
+    LinkStack<BinTreeNode<T> *> Tag;
+    BinTreeNode<T> *p = root;
+    Stack.PushElem(p);
+    Tag.PushElem(0);
+    while (!Stack.IsEmpty())
+    {
+        if (p != NULL)
+        {
+            Stack.PushElem(p);
+            Tag.PushElem(0);
+            p = p->_leftChild;
+        }
+        else
+        {
+            if (Tag.TopElem() == 0) //此时左节点已经遍历完
+            {
+                p = Stack.TopElem(); //预出栈
+                Tag.PopElem();
+                Tag.PushElem(1); //将Tag栈顶改为1，表示已经遍历完左节点
+                p = p->_rightChild;
+            }
+            else //此时右节点已经遍历完
+            {
+                p = Stack.TopElem();
+                Stack.PopElem(); //真正出栈
+                Tag.PopElem();
+                cout << p->_data << " ";
+                p = p->_rightChild;
+            }
+        }
+    }
+}
+```
+
 #### 4）层序遍历
+
+```c++
+template <class T>
+void BinaryTree<T>::LevelOrder(BinTreeNode<T> *&root)
+//层序遍历
+{
+    LinkQueue<BinTreeNode<T> *> Queue;
+    BinTreeNode<T> *p;
+    if (root != NULL)
+        Queue.EnterQueue(root); //若根非空，则入队
+    while (!Queue.IsEmpty())
+    {
+        p = Queue.GetFront();    //取队头
+        Queue.DeleteQueue();     //出队
+        cout << p->_data << " "; //打印打印！
+
+        if (p->_leftChild != NULL) //若左节点非空，入队
+        {
+            Queue.EnterQueue(p->_leftChild);
+        }
+        if (p->_rightChild != NULL) //若右节点非空，入队
+        {
+            Queue.EnterQueue(p->_rightChild);
+        }
+    }
+}
+```
 
 #### 5）遍历的用途
 
