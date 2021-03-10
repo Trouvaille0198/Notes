@@ -532,7 +532,7 @@ void LinkStack<T>::PopElem()
   - 判空
   - 清空队列
 
-约定：front指向队头元素，rear指向队尾元素后一个位置
+约定：front 指向队头元素，rear 指向队尾元素后一个位置
 
 ### 4.2.1 循环队列
 
@@ -543,9 +543,186 @@ void LinkStack<T>::PopElem()
   - 不设rear，改设length，队空 `length == 0`；队满 `length == maxlen`
   - 新增数据成员flag，队空 `flag == 0`；队满 `flag == maxlen`
 
+#### 1）顺序队列类模板定义
+
+```c++
+template <class T>
+class SeqQueue
+{
+protected:
+    static const int DEFAULT_SIZE = 100;
+    int _front;
+    int _rear;
+    int _maxlen; //包含被闲置的那一个存储空间，真实供存储的最大值为_maxlen-1
+    T *_data;
+
+public:
+    SeqQueue(int maxlen = DEFAULT_SIZE);
+    virtual ~SeqQueue();
+    SeqQueue(const SeqQueue<T> &q);
+    SeqQueue<T> &operator=(const SeqQueue<T> &q);
+
+    int GetLength() const;
+    bool IsEmpty() const;
+    bool IsFull() const;
+    void ClearQueue();
+    void DisplayQueue() const;
+
+    void EnterQueue(const T &e); //入队
+    T GetFront() const;          //取队头
+    void DeleteQueue();          //出队
+};
+```
+
+#### 2）具体定义
+
+```c++
+template <class T>
+int SeqQueue<T>::GetLength() const
+//当 rear > front 时，长度为 rear-front;当 rear < front 时，长度为(QueueSize-front)+rear
+{
+    return (_rear - _front + _maxlen) % _maxlen;
+}
+
+template <class T>
+bool SeqQueue<T>::IsEmpty() const
+{
+    return _rear == _front;
+}
+
+template <class T>
+bool SeqQueue<T>::IsFull() const
+
+{
+    return (_rear + 1) % _maxlen == _front;
+}
+
+template <class T>
+void SeqQueue<T>::ClearQueue()
+//清空队列，不需要清空存储的元素
+{
+    _rear = _front = 0;
+}
+
+template <class T>
+void SeqQueue<T>::DisplayQueue() const
+{
+    if (IsEmpty())
+        cout << "队列中无元素！" << endl;
+    else
+    {
+        cout << "从对头到队尾，队列元素依次为：";
+        for (int i = _front; i != _rear - 1; i = (i + 1) % _maxlen)
+        {
+            cout << _data[i] << ", ";
+        }
+        cout << _data[_rear - 1] << endl;
+    }
+}
+
+template <class T>
+void SeqQueue<T>::EnterQueue(const T &e)
+//入队
+{
+    if (IsFull())
+        cout << "队列已满，无法继续添加元素！" << endl;
+    else
+    {
+        _data[_rear] = e;
+        _rear = (_rear + 1) % _maxlen;
+    }
+}
+
+template <class T>
+void SeqQueue<T>::DeleteQueue()
+//出队
+{
+    if (IsEmpty())
+        cout << "队列为空，无法出队！" << endl;
+    else
+    {
+        _front = (_front + 1) % _maxlen;
+    }
+}
+```
+
 ### 4.2.2 链式队列
 
 链式队列完全避免了假溢出的问题。
+
+#### 1）类模板定义
+
+`_front` 是空的头指针，其下一个元素是队头元素；`_rear` 指向队尾元素
+
+初始化时，`_rear` 等于 `_front`
+
+```c++
+template <class T>
+class LinkQueue
+//带头结点
+{
+protected:
+    Node<T> *_front, *_rear;
+
+public:
+    LinkQueue();
+    virtual ~LinkQueue();
+    LinkQueue(const LinkQueue<T> &q);
+    LinkQueue<T> &operator=(const LinkQueue<T> &q);
+
+    void ClearQueue();
+    int GetLength() const;
+    bool IsEmpty() const;
+    void DisplayQueue() const;
+
+    void EnterQueue(const T &e);
+    T GetFront() const;
+    void DeleteQueue();
+};
+```
+
+#### 2）具体定义
+
+```c++
+template <class T>
+void LinkQueue<T>::EnterQueue(const T &e)
+{
+    Node<T> *p = new Node<T>(e);
+    if (p) //判断系统空间是否足够
+    {
+        _rear->next = p;
+        _rear = _rear->next;
+    }
+    else
+    {
+        cout << "系统空间不足，无法入队！" << endl;
+    }
+}
+
+template <class T>
+T LinkQueue<T>::GetFront() const
+{
+    return _front->next->data;
+}
+
+template <class T>
+void LinkQueue<T>::DeleteQueue()
+{
+    if (IsEmpty())
+    {
+        cout << "链队列已空，无法出队！" << endl;
+    }
+    else
+    {
+        Node<T> *p = _front->next;
+        _front->next = p->next;
+
+        if (_rear == p)
+            _rear = _front;
+        delete p;
+    }
+}
+```
 
 ## 4.3 递归
 
@@ -708,18 +885,212 @@ void GetNext(const string &pat, int *next)
 用（行、列、值）来记录稀疏矩阵中的非零元素
 
 ```c++
-template <class DataType>
-class Triple
+template <class T>
+struct Triple
 {
     int _row, _col;
-    DataType _value;
+    T _value;
 
     Triple(){};
-    Triple(int row, int col, DataType value) _row(row), _col(col), _value(value){};
+    Triple(int row, int col, T value) : _row(row), _col(col), _value(value){};
 };
 ```
 
 ### 5.3.3 三元组顺序表
+
+#### 1）类模板定义
+
+```c++
+template <class T>
+class TriSparseMatrix
+//三元组顺序表实现
+{
+protected:
+    static const int DEFAULT_SIZE = 100;
+    Triple<T> *_data;       //存储三元组的数组
+    int _maxLen;            //非零元素最大个数
+    int _rows, _cols, _num; //行数、列数、非零元素个数
+public:
+    TriSparseMatrix(int rows = DEFAULT_SIZE, int cols = DEFAULT_SIZE, int maxLen = DEFAULT_SIZE);
+    ~TriSparseMatrix();
+    TriSparseMatrix(const TriSparseMatrix<T> &copy);
+    TriSparseMatrix<T> &operator=(const TriSparseMatrix<T> &copy);
+    TriSparseMatrix<T> operator+(const TriSparseMatrix<T> &copy);
+
+    int GetRows() const { return _rows; }
+    int GetCols() const { return _cols; }
+    int GetNum() const { return _num; }
+    void SetElem(int row, int col, const T &v);
+    T GetElem(int row, int col);
+    void Display();
+
+    void SimpleTranspose(TriSparseMatrix<T> &e); //简单转置
+    void FastTranspose(TriSparseMatrix<T> &e);   //快速转置
+};
+```
+
+#### 2）具体定义
+
+```c++
+template <class T>
+void TriSparseMatrix<T>::SetElem(int row, int col, const T &v)
+//三种情况：非零变零，零变非零，非零变非零
+{
+    if (v == 0) //若设置非零值为零
+    {
+        int i;
+        for (i = 0; i < _num; i++) //找到要设零的非零值
+        {
+            if (_data[i]._row == row && _data[i]._col == col)
+            {
+                //_data[i] = 0;
+                break;
+            }
+        }
+        if (i != _num) //说明确实设置了非零数为零
+        {
+            for (int j = i; j < _num - 1; j++)
+            {
+                _data[j] = _data[j + 1];
+            }
+            _num--; //非零值个数-1
+        }
+    }
+    else
+    {
+        Triple<T> e(row, col, v);
+        int i;
+        for (i = 0; i < _num; i++)
+        {
+            if (_data[i]._row == row && _data[i]._col == col) //修改非零值
+            {
+                _data[i] = e;
+                break;
+            }
+        }
+        if (i == _num) //设置零值为非零值
+            _data[_num++] = e;
+    }
+}
+
+template <class T>
+TriSparseMatrix<T> TriSparseMatrix<T>::operator+(const TriSparseMatrix<T> &e)
+{
+    TriSparseMatrix<T> result(_rows, _cols, DEFAULT_SIZE);
+    //result._num = 0;
+    if (_rows != e._rows || _cols != e._cols)
+    {
+        cout << "两矩阵行列数不等，无法进行加法运算！" << endl;
+        exit(1);
+    }
+    int i = 0;                     //控制左值，即this
+    int j = 0;                     //控制右值，即e
+    T value;                       //存放临时的非零值值
+    while (i < _num && j < e._num) //直到一个矩阵的非零元素被遍历完
+    {
+        if (_data[i]._row == e._data[j]._row) //行号相等时
+        {
+            if (_data[i]._col == e._data[j]._col) //行列号都相等时
+            {
+                value = _data[i]._value + e._data[j]._value;
+                if (value != 0)
+                {
+                    result.SetElem(_data[i]._row, _data[i]._col, value);
+                }
+                i++;
+                j++;
+            }
+            else if (_data[i]._col > e._data[j]._col) //行号相等，左值列号>右值列号
+            {
+                result.SetElem(e._data[j]._row, e._data[j]._col, e._data[j]._value); //将右值（即列较小值）添加到新矩阵中
+                j++;
+            }
+            else //行号相等，左值列号<右值列号
+            {
+                result.SetElem(_data[i]._row, _data[i]._col, _data[i]._value); //将左值（即列较小值）添加到新矩阵中
+                i++;
+            }
+        }
+        else if (_data[i]._row > e._data[j]._row) //左值行号>右值行号时
+        {
+            result.SetElem(e._data[j]._row, e._data[j]._col, e._data[j]._value); //将右值（即行较小值）添加到新矩阵中
+            j++;
+        }
+        else //左值行号<右值行号时
+        {
+            result.SetElem(_data[i]._row, _data[i]._col, _data[i]._value); //将左值（即行较小值）添加到新矩阵中
+            i++;
+        }
+    }
+    while (i < _num) //若左值中有剩余元素
+    {
+        result.SetElem(_data[i]._row, _data[i]._col, _data[i]._value);
+        i++;
+    }
+    while (j < e._num) //若右值中有剩余元素
+    {
+        result.SetElem(e._data[j]._row, e._data[j]._col, e._data[j]._value);
+        j++;
+    }
+    return result;
+}
+
+template <class T>
+void TriSparseMatrix<T>::SimpleTranspose(TriSparseMatrix<T> &e)
+//简单转置，时间复杂度O(_rows*_cols)
+{
+    e._rows = _rows;
+    e._cols = _cols;
+    e._num = 0;
+    e._maxLen = _maxLen;
+    delete[] e._data;
+    e._data = new Triple<T>[_maxLen];
+    for (int col = 0; col < _cols; col++) //对整个矩阵的列进行遍历
+    {
+        for (int i = 0; i < _num; i++) //对_data进行遍历
+        {
+            if (col == _data[i]._col) //若_data[i]中出现相应列，添加到e中
+            {
+                e.SetElem(_data[i]._col, _data[i]._row, _data[i]._value);
+            }
+        }
+    }
+    //*this = e;
+}
+
+template <class T>
+void TriSparseMatrix<T>::FastTranspose(TriSparseMatrix<T> &e)
+//快速转置，时间复杂度O(_num)
+{
+    e._rows = _rows;
+    e._cols = _cols;
+    e._num = _num;
+    e._maxLen = _maxLen;
+    delete[] e._data;
+    e._data = new Triple<T>[_maxLen];
+
+    int *DataNumInCol = new int[_cols]; //存放原矩阵每一列非零个数
+    int *FirstDataIne = new int[_cols]; //存放每一列第一个非零元素在e中的索引位置
+    for (int i = 0; i < _cols; i++)     //赋初值为0
+        DataNumInCol[i] = 0;
+    for (int i = 0; i < _num; i++) //记录每列的非零元素个数
+        DataNumInCol[_data[i]._col]++;
+    FirstDataIne[0] = 0;            //零行第一个非零元素必在0位置
+    for (int i = 1; i < _cols; i++) //当前列第一个元素的索引位置=上一列的索引位置+上一列的元素个数
+        FirstDataIne[i] = FirstDataIne[i - 1] + DataNumInCol[i - 1];
+    for (int i = 0; i < _num; i++)
+    {
+        int j = FirstDataIne[_data[i]._col]; //j记录当前列的索引
+        e._data[j]._row = _data[i]._col;
+        e._data[j]._col = _data[i]._row;
+        e._data[j]._value = _data[i]._value;
+        FirstDataIne[_data[i]._col]++; //当前列的索引值+1
+    }
+    delete[] DataNumInCol;
+    delete[] FirstDataIne;
+    //*this = e;
+}
+```
 
 ### 5.3.4 三元组的十字链表
 
