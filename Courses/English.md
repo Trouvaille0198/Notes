@@ -89,6 +89,8 @@ Add transitions to create logical connections
 
 
 
+# Summary
+
 This report wrote by Maddy Savage mainly explains why Swedes avoid discussing money in the effect of Jantelagen. Jantelagen, a traditional rule that discourages people to show themselves off and keeps everybody equal, especially the wealth part, makes talking about money a forbiddance in most Nordic regions. This mechanism maybe less pronounced among the same class. Nevertheless, the voice against Jantelagen has become a common phenomenon among youngsters, due to the push of Individualism and the generalized bragging on social media. In addition, Immigration boom has also eliminated Jantelagen’ s impact.
 
 Jantelagen keeps the society more stable and minimizes the stress of life from income levels. But it also makes the whole society conservative. People would not be proud of how much money they earn, thus reducing the passion to fight for success. Efforts need to be recognized public, too much modesty will only lead to depression and negativity. Jantelagen demonstrates the Swedish tradition of low-profile behavior and not comparing. However, we need more encouragement form others and society to move forward.
@@ -130,5 +132,11 @@ comment
 
 
 
+# Words
 
+passage n. 过渡 
+
+bound adj. 要到...去的 
+
+tap n. 开发
 
