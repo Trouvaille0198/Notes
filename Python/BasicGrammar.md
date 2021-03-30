@@ -878,3 +878,5 @@ with open('data.json', 'w', encoding='utf-8') as file:
     file.write(json.dumps(data, indent=2, ensure_ascii=False))
 ```
 
+# 六、异常处理
+
