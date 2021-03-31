@@ -333,7 +333,7 @@ x[4, … ,5, :] 等效于 x[4, : , : , 5, : ]
 
 返回四舍五入后的值，可指定精度
 
-*np.around(a, decimals=0, out=None)* 
+***np.around(a, decimals=0, out=None)*** 
 
 - *a*：输入数组
 
@@ -359,7 +359,7 @@ np.around(n, decimals=-1)
 
 返回不大于输入参数的最大整数
 
-*np.floor()*
+***np.floor()***
 
 ```python
 n = np.array([-1.7, -2.5, -0.2, 0.6, 1.2, 2.7, 11])
@@ -373,7 +373,7 @@ np.floor(n)
 
 返回输入值的上限
 
-*np.ceil()*
+***np.ceil()***
 
 ```python
 n = np.array([-1.7, -2.5, -0.2, 0.6, 1.2, 2.7, 11])
