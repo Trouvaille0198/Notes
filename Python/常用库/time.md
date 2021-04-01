@@ -132,7 +132,7 @@ time.strptime(timestr, "%Y-%m-%d %H:%M:%S")
 由于这个计数值起点不确定，连续调用差值才有意义
 
 ```python
-start = time.perf_counter()
+start = time.perf_counter 	()
 end = time.perf_counter()
 end - start
 
