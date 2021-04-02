@@ -383,8 +383,10 @@ dtype('O')
 ### 2.2.4 查看缺失值
 
 ```python
-df.isnull()			#检查数据空值
-df['h'].isnull()	#检查特定列空值
+df.isnull()			# 检查数据空值
+df['h'].isnull()	# 检查特定列空值
+df.isnull().sum()  	# 查看各列的缺失值个数
+df.isnull().any()   # 查看各列是否有缺失值
 
 df.isnan() 			#判断nan值
 ```
@@ -452,6 +454,17 @@ Index(['A', 'B', 'C', 'D'], dtype='object')
 df.head(5)
 df.tail(3)
 ```
+
+### 2.2.9 显示全部数据
+
+```python
+# 设置行不限制数量
+pd.set_option('display.max_rows',None)
+# 设置列不限制数量
+pd.set_option('display.max_columns',None)
+```
+
+
 
 ## 2.3 统计
 
