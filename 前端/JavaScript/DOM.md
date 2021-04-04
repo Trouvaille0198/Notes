@@ -118,7 +118,7 @@ var atts = para.attributes;
 
 ## 2.2 元素定位
 
-以下为 `Node` 对象的方法
+以下为 `Node` 对象的属性
 
 - ***.parentNode***
 

@@ -771,8 +771,12 @@ plt.show()
 import matplotlib as mpl
 mpl.rcParams["font.sans-serif"] = ["FangSong"]
 mpl.rcParams["axes.unicode_minus"] = False
-#或
+# 或
 import matplotlib as mpl
 mpl.rc("font", family='MicroSoft YaHei', weight='bold')
+# 或
+from matplotlib.font_manager import FontProperties
+myfont=FontProperties(fname=r'C:\Windows\Fonts\simhei.ttf',size=14)
+sns.set(font=myfont.get_name())
 ```
 

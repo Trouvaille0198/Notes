@@ -2,7 +2,7 @@
 
 ## 1.1 概念
 
-eaborn 是基于 matplotlib 的图形可视化 python 包。它提供了一种高度交互式界面，便于用户能够做出各种有吸引力的统计图表。
+seaborn 是基于 matplotlib 的图形可视化 python 包。它提供了一种高度交互式界面，便于用户能够做出各种有吸引力的统计图表。
 
 Seaborn 是在 matplotlib 的基础上进行了更高级的 API 封装，从而使得作图更加容易，在大多数情况下使用 seaborn 能做出很具有吸引力的图，而使用 matplotlib 就能制作具有更多特色的图。应该把 Seaborn 视为 matplotlib 的补充，而不是替代物。同时它能高度兼容 numpy 与 pandas 数据结构以及 scipy 与 statsmodels 等统计模式
 
@@ -65,12 +65,28 @@ sns.set(context='notebook', style='darkgrid', palette='deep', font='sans-serif',
   - *col_wrap*：int，可选
     - 以此宽度“包裹”列变量，以便列分面跨越多行。与 *row* 分面不兼容
 - color：控制颜色
+- bins：条形图的条数
+- palette：颜色列表
+
+## 1.5 保存
+
+```python
+ax = sns.distplot(x) # 画图
+
+# fig = ax.get_figure() # 获取图片
+
+fig.savefig(path, dpi = 400) # 保存图片
+```
+
+
 
 # 三、关联图
 
 （Relational plots）
 
 关联图用于呈现数据之间的关系，主要有散点图和条形图 2 种样式
+
+两个连续型变量之间的关系
 
 | 关联性分析  |       介绍       |
 | :---------: | :--------------: |
@@ -401,3 +417,12 @@ sns.clustermap(iris)
 
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122161932756.png" alt="image-20210122161932756" style="zoom:67%;" />
+
+# 八、技巧
+
+1. 设置颜色
+
+```python
+
+```
+
