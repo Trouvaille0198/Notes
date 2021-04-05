@@ -2,6 +2,27 @@
 
 ## 1.1 概念
 
+Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进 DOM 的系统
+
+```html
+<div id="app">
+  {{ message }}
+</div>
+```
+
+```javascript
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+```
+
+`v-` attribute 被称为**指令**。指令带有前缀 `v-`，以表示它们是 Vue 提供的特殊 attribute。
+
+它们会在渲染的 DOM 上应用特殊的响应式行为
+
 - JavaScript 框架
 - 简化 Dom 操作
 - 响应式数据驱动
@@ -12,6 +33,50 @@
 2. 事件绑定
 3. 用户输入获取
 4. 组件定义和使用
+
+## 1.3 引入
+
+### 1.3.1 CDN
+
+```html
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- 生产环境版本，优化了尺寸和速度 -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+```
+
+### 1.3.2 Vue CLI
+
+安装
+
+```bash
+npm install -g @vue/cli
+```
+
+升级
+
+```bash
+npm update -g @vue/cli
+```
+
+创建项目
+
+```bash
+vue create project-name
+```
+
+安装必要工具
+
+```bash
+npm install
+```
+
+开启本地端口
+
+```bash
+npm run serve
+```
 
 # 二、基础
 
@@ -540,3 +605,106 @@ axios('/user/12345');
   })
 }
 ```
+
+# 四、脚手架
+
+![img](http://image.trouvaille0198.top/image.png)
+
+## 4.1 架构
+
+### 4.1.1 main.js
+
+程序入口
+
+### 4.1.2 App.vue
+
+主视图
+
+```html
+<template>
+  <div id="app">
+    <div>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view />
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+<style lang="scss">
+</style>
+```
+
+结构：`<template>`
+
+脚本： `<script>`
+
+样式：`<style>`
+
+页面中放入一个路由视图容器：
+
+```html
+<router-view></router-view>
+```
+
+引用路由链接：
+
+```html
+<router-link to="/">Home</router-link> |
+<router-link to="/about">About</router-link>
+```
+### 4.1.3 router
+
+路由配置例
+
+```js
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/About.vue')
+  }
+]
+```
+
+用 Vue.js + Vue Router 创建单页应用
+
+使用 Vue.js ，我们已经可以通过组合组件来组成应用程序；当你要把 Vue Router 添加进来，我们需要做的是，将组件 (components) 映射到路由 (routes)，然后告诉 Vue Router 在哪里渲染它们。
+
+```html
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+<div id="app">
+  <h1>Hello App!</h1>
+  <p>
+    <!-- 使用 router-link 组件来导航. -->
+    <!-- 通过传入 `to` 属性指定链接. -->
+    <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+    <router-link to="/foo">Go to Foo</router-link>
+    <router-link to="/bar">Go to Bar</router-link>
+  </p>
+  <!-- 路由出口 -->
+  <!-- 路由匹配到的组件将渲染在这里 -->
+  <router-view></router-view>
+</div> 
+```
+
+## 4.2 单文件组件
+
+<img src="http://image.trouvaille0198.top/vue-component.png" style="zoom: 67%;" />
+
