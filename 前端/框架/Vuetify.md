@@ -73,11 +73,21 @@ yarn electron:serve
 
 Vuetify有两个主要布局组件， `v-app` 和 `v-main`
 
+```html
+<v-app>
+    <!-- 必须有app属性 -->
+    <v-app-bar app></v-app-bar>
+  <v-main>
+    Hello World
+  </v-main>
+</v-app>
+```
+
 ### 1.3.1 v-app
 
 `v-app` 组件是应用程序的根节点，直接替换默认的 Vue 入口 `<div id="app">`
 
-在其中写入的元素，会作为布局的一部分
+在其中写入的元素，会**作为布局的一部分**
 
 在组件或其他视图中，不需要引入 `v-app`
 
@@ -99,14 +109,14 @@ Vuetify有两个主要布局组件， `v-app` 和 `v-main`
 
 ## 1.4 通用属性
 
-| Name  | Type   | Default   | Description      |
-| ----- | ------ | --------- | ---------------- |
-| color | string | undefined | 详见 colors page |
-|       |        |           |                  |
-|       |        |           |                  |
-|       |        |           |                  |
-|       |        |           |                  |
-|       |        |           |                  |
+| Name  | Type   | Default   | Description                  |
+| ----- | ------ | --------- | ---------------------------- |
+| color | string | undefined | 详见 colors page             |
+| app   |        |           | 相应的组件是应用布局的一部分 |
+|       |        |           |                              |
+|       |        |           |                              |
+|       |        |           |                              |
+|       |        |           |                              |
 
 # 二、应用组件
 
@@ -152,3 +162,12 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 # 三、多功能组件
 
 ## 3.1 v-cards
+
+### 3.1.1 API
+
+### 3.1.2 子组件
+
+# 四、小型组件
+
+# 五、大型组件
+
