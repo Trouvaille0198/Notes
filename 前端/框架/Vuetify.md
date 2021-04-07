@@ -168,7 +168,15 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 专门为与 `v-toolbar` 和 `v-app-bar` 一起使用而创建的样式化图标按钮组件
 
+在工具栏的左侧显示为汉堡菜单，它通常用于控制导航抽屉的状态
+
+```html
+<v-app-bar-nav-icon></v-app-bar-nav-icon>
+```
+
 #### 2）v-app-bar-title
+
+修改过的 v-toolbar-title 组件 ，用于配合 `shrink-on-scroll` 属性使用
 
 ## 2.2 v-bottom-navigation
 
@@ -178,7 +186,26 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ## 2.4 v-navition-drawer
 
-`v-navigation-drawer` （导航抽屉）是您的用户用于导航应用程序的组件
+（导航抽屉）
+
+用于导航应用程序的组件
+
+为了显示的目的，一些示例被包装在 `v-card` 元素中。 
+
+通常会把 `v-navigation-drawer` 组件作为 `v-app` 的直接子组件
+
+使用 `null` 作为其 **v-model 的初始值** 将会将抽屉初始化为在移动设备上关闭，在桌面环境下打开。 
+
+通常使用 **nav** 属性将抽屉与 [v-list](https://vuetifyjs.com/zh-Hans/components/lists/) 组件配对
+
+### 2.4.1 API
+
+| Name                                                         | Type             | Default   | Description                                                  |
+| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
+| [expand-on-hover](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-expand-on-hover) | boolean          | false     | 将抽屉折叠成 **mini-variant**，直到用鼠标悬停                |
+| [temporary](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-temporary) | boolean          | false     | 临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗     |
+| [permanent](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-permanent) | boolean          | false     | 不管屏幕尺寸如何，抽屉都可以看到                             |
+| [src](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-src) | string \| object | undefined | 指定 [v-img](https://vuetifyjs.com/components/images) 作为组件背景。 |
 
 ## 2.5 v-system-bar
 
@@ -194,10 +221,127 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 `v-toolbar `组件对于任何 gui 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 `<a href="/components/navigation drawers">, v-navigation-drawer` 和 `v-card` 配合使用非常有效
 
-### 3.2.1 子组件
+```html
+<template>
+  <div>
+    <v-toolbar>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar-title>Vuetify</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>mdi-export</v-icon>
+      </v-btn>
+    </v-toolbar>
+  </div>
+</template>
+```
+
+### 3.2.1 API
+
+| Name                                                         | Type             | Default   | Description                                                  |
+| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
+| [prominent](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-prominent) | boolean          | false     | 将工具栏内容的高度增加到 128px                               |
+| [src](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-src) | string \| object | undefined | 指定 [v-img](https://vuetifyjs.com/components/images) 作为组件背景 |
+| [collapse](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-collapse) | boolean          | false     | 将工具栏置于折叠状态，以减小其最大宽度                       |
+| [dense](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-dense) | boolean          | false     | 将工具栏内容的高度降低到 48px                                |
+
+### 3.2.2 子组件
 
 #### 1）v-toolbar-items
+
+允许 `v-btn` 扩展全高度
+
 #### 2）v-toolbar-title
+
+用于显示标题
+
+## 3.3 v-list
+
+`v-list` 组件用于显示信息。 它可以包含头像、内容、操作、列表组标题等等。 列表以易于在集合中识别特定项目的方式显示内容。 它们为组织一组文本和图像提供了一致的样式
+
+列表有三种基本形式。 **单行** (默认), **双行** 和 **三行**. 行声明指定了项目的最小高度，也可以使用相同的属性从 `v-list` 中进行控制
+
+```html
+<template>
+  <v-card
+    class="mx-auto"
+    max-width="300"
+    tile
+  >
+    <v-list dense>
+      <v-subheader>REPORTS</v-subheader>
+      <v-list-item-group
+        v-model="selectedItem"
+        color="primary"
+      >
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+        >
+          <v-list-item-icon>
+            <v-icon v-text="item.icon"></v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.text"></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+  </v-card>
+</template>
+```
+
+<img src="http://image.trouvaille0198.top/image-20210407125112331.png" alt="image-20210407125112331" style="zoom:80%;" />
+
+### 3.3.1 API
+
+| Name                                                       | Type    | Default | Description                                                  |
+| ---------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------ |
+| disabled                                                   | boolean | false   | 禁用所有子级的 `v-list-item` 组件                            |
+| flat                                                       | boolean | false   | 删除活动的 `v-list-item` 上突出显示的背景                    |
+| dense                                                      | boolean | false   | 减小列表块的最大宽度                                         |
+| rounded                                                    | boolean | false   | 圆角 `v-list-item` 边                                        |
+| three-line / two-line                                      | boolean | false   | 增加三 \ 两行的列表项高度                                    |
+| [nav](https://vuetifyjs.com/zh-Hans/api/v-list/#props-nav) | boolean | false   | 另一种样式可以减小 `v-list-item` 的宽度并圆角化。 通常与 **[v-navigation-drawer](https://vuetifyjs.com/components/navigation-drawers)** 一起使用 |
+|                                                            |         |         |                                                              |
+
+### 3.3.2 子组件
+
+#### 1）v-list-item
+
+装载列表项子组件
+
+| Name                                                         | Type             | Default   | Description                                                  |
+| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
+| link                                                         | boolean          | false     | 指定组件为链接。当使用 **href** 或 **to**属性时，这是自动的设置的。 |
+| [to](https://vuetifyjs.com/zh-Hans/api/v-list-item/#props-to) | string \| object | undefined | 表示链接的目标路由                                           |
+| [href](https://vuetifyjs.com/zh-Hans/api/v-list-item/#props-href) | string \| object | undefined | 指定组件为锚点并应用 **href** 属性。                         |
+|                                                              |                  |           |                                                              |
+|                                                              |                  |           |                                                              |
+
+#### 2）v-list-item-content
+
+装载文字组件
+
+#### 3）v-list-item-icon
+
+装载图标组件
+
+#### 4）v-list-item-title
+
+列表元素标题
+
+#### 5）v-list-item-subtitle
+
+列表元素副标题
+
+#### 6）v-list-item-action
+
+装载动作组件
+
+#### 7）v-list-item-avatar
+
+装载头像类型的图片组件 img
 
 # 四、小型组件
 
