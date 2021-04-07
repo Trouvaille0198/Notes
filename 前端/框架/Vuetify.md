@@ -345,6 +345,26 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 # 四、小型组件
 
+## 4.1 v-btn
+
+### 4.1.1 API
+
+| Name                                                         | Type             | Default   | Description                                                  |
+| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
+| [outlined](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-outlined) | boolean          | false     | 使背景透明并使用薄边框                                       |
+| [block](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-block) | boolean          | false     | 将按钮扩大到可用空间的 100％。                               |
+| [depressed](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-depressed) | boolean          | false     | 移除按钮的阴影效果                                           |
+| [disabled](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-disabled) | boolean          | false     | 移除组件的单击或 target 功能                                 |
+| [elevation](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-elevation) | number \| string | undefined | 组件的海拔可接受 0 到 24 之间的值                            |
+| [exact](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-exact) | boolean          | false     | 完全匹配链接。如果没有这个链接，‘/’ 将匹配每个路由           |
+| [append](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-append) | boolean          | false     | 设置 **append** 属性总是会附加到当前路径的相对路径上。       |
+| [fab](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-fab)    | boolean          | false     | Designates the button as a floating-action-button. Button will become *round* |
+| [href](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-href)  | string \| object | undefined | 指定组件为锚点并应用 **href** 属性                           |
+| [icon](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-icon)  | boolean          | false     | Designates the button as icon. Button will become *round* and applies the **text** prop |
+| [link](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-link)  | boolean          | false     | 指定组件为链接。当使用 **href** 或 **to** 属性时，这是自动的设置的 |
+| [plain](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-plain) | boolean          | false     | 移除悬停在按钮上时应用的默认背景变化                         |
+| [value](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-value) | any              | undefined | 控制组件可见还是隐藏                                         |
+
 # 五、大型组件
 
 # 六、表单组件
@@ -353,19 +373,32 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 （Grid System）
 
-##  7. v-container
+##  7.1 v-container
 
-`v-container` 提供了将你的网站内容居中和水平填充的功能
+`v-container` 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 **fluid** 属性将容器在所有视口和设备尺寸上完全扩展。 
 
-## 7. v-row
-
-`v-col` 包裹内容，它必须是 `v-row` 的直接子代
-
-## 7. v-col
+## 7.2 v-row
 
 `v-row` 是 `v-col` 的容器组件。 它使用 flex 属性来控制其内栏的布局和流
 
-## 7. v-spacer
+| Name                                                         | Type                        | Default   | Description                                                  |
+| ------------------------------------------------------------ | --------------------------- | --------- | ------------------------------------------------------------ |
+| [cols](https://vuetifyjs.com/zh-Hans/api/v-col/#props-cols)  | boolean \| string \| number | false     | 设置组件扩展的默认列数。可用的选项是 **1 -> 12** 和 **auto** 。 |
+| [md](https://vuetifyjs.com/zh-Hans/api/v-col/#props-md)      | boolean \| string \| number | false     | 更改中等和较大断点上的列数，其他断点同理                     |
+| [align](https://vuetifyjs.com/zh-Hans/api/v-row/#props-align) | string                      | undefined | 应用 [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css 属性。可用的选项是 **start**, **center**, **end**, **baseline** 和 **stretch** |
+| [justify](https://vuetifyjs.com/zh-Hans/api/v-row/#props-justify) | string                      | undefined | 应用 [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css 属性。可用选项是 **start**, **center**, **end**, **space-between** 和 **space-around** |
+|                                                              |                             |           |                                                              |
+
+## 7.3 v-col
+
+`v-col` 包裹内容，它必须是 `v-row` 的直接子代
+
+| Name                                                         | Type    | Default | Description               |
+| ------------------------------------------------------------ | ------- | ------- | ------------------------- |
+| [dense](https://vuetifyjs.com/zh-Hans/api/v-row/#props-dense) | boolean | false   | 减少 `v-col` 之间的距离。 |
+|                                                              |         |         |                           |
+
+## 7.4 v-spacer
 
 `v-spacer` 是一个基本而又通用的间隔组件，用于分配父子组件之间的剩余宽度
 
@@ -472,7 +505,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 `text--primary` 与默认文本具有相同的不透明度。
 
- `text--secondary` 用于提示和辅助文本。 
+`text--secondary` 用于提示和辅助文本。 
 
 `text--disabled` 用于去除强调文本
 

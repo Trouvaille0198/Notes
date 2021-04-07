@@ -334,6 +334,26 @@ $ git pull origin <branch-name>
 2. 如果合并有冲突，则解决冲突，并在本地提交；
 3. 没有冲突或者解决掉冲突后，再用`git push origin <branch-name>`推送就能成功！
 
+## 5.6 fork 相关操作
+
+添加一个将被同步给 fork 远程的上游仓库
+
+```bash
+git remote add upstream git@github.com:GitHub-name/Repo-name.git
+```
+
+从上游仓库拉取更新
+
+```bash
+git fetch upstream
+```
+
+与自己的分支合并
+
+```bash
+git merge upstream/master
+```
+
 # 六、标签操作
 
 ## 6.1 创建标签

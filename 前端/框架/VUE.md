@@ -76,6 +76,7 @@ npm install
 
 ```bash
 npm run serve
+npm run serve -- --port 5000
 ```
 
 # 二、基础
@@ -708,3 +709,4 @@ const routes = [
 
 <img src="http://image.trouvaille0198.top/vue-component.png" style="zoom: 67%;" />
 
+# 五、Vuex
