@@ -120,14 +120,14 @@ export default {
 
 ## 1.4 通用属性
 
-| Name  | Type   | Default   | Description                  |
-| ----- | ------ | --------- | ---------------------------- |
-| color | string | undefined | 详见 colors page             |
-| app   |        |           | 相应的组件是应用布局的一部分 |
-|       |        |           |                              |
-|       |        |           |                              |
-|       |        |           |                              |
-|       |        |           |                              |
+| Name  | Type    | Default   | Description                  |
+| ----- | ------- | --------- | ---------------------------- |
+| color | string  | undefined | 详见 colors page             |
+| app   |         |           | 相应的组件是应用布局的一部分 |
+| dense | boolean | flase     | 使组件更小                   |
+|       |         |           |                              |
+|       |         |           |                              |
+|       |         |           |                              |
 
 # 二、应用组件
 
@@ -212,6 +212,8 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 # 三、多功能组件
 
 ## 3.1 v-cards
+
+卡中有4个基本组件。 `v-card-title`, `v-card-subtitle`, `v-card-text` 和 `v-card-actions`
 
 ### 3.1.1 API
 
@@ -364,6 +366,52 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [link](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-link)  | boolean          | false     | 指定组件为链接。当使用 **href** 或 **to** 属性时，这是自动的设置的 |
 | [plain](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-plain) | boolean          | false     | 移除悬停在按钮上时应用的默认背景变化                         |
 | [value](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-value) | any              | undefined | 控制组件可见还是隐藏                                         |
+| [text](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-text)  | boolean          | false     | Makes the background transparent                             |
+
+## 4.3 v-icon
+
+可以在按钮内部使用
+
+```html
+<v-btn
+       class="ma-2"
+       color="red"
+       dark
+       >
+    Decline
+    <v-icon
+            dark
+            right
+            >
+        mdi-cancel
+    </v-icon>
+</v-btn>
+```
+
+### 4.3.1 API
+
+| Name                                                         | Type    | Default | Description                                                  |
+| ------------------------------------------------------------ | ------- | ------- | ------------------------------------------------------------ |
+| [small](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-small) | boolean | false   | 使组件尺寸变的小                                             |
+| [large](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-large) | boolean | false   | 使组件尺寸变的巨大                                           |
+| [x-small](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-x-small) | boolean | false   | 使组件尺寸变的更小                                           |
+| [x-large](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-x-large) | boolean | false   | 使组件尺寸变的无比巨大                                       |
+| [right](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-right) | boolean | false   | 当按钮放置在另一个元素或文本的**右边**时，对按钮内的图标应用适当的间距 |
+| [left](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-left) | boolean | false   | 当按钮放置在另一个元素或文本的**左边**时，对按钮内的图标应用适当的间距 |
+
+## 4.4 v-img
+
+| Name                                                         | Type             | Default   | Description                                                  |
+| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
+| [alt](https://vuetifyjs.com/zh-Hans/api/v-img/#props-alt)    | string           | undefined | 屏幕阅读器的备用文本。 留空以装饰图像                        |
+| [aspect-ratio](https://vuetifyjs.com/zh-Hans/api/v-img/#props-aspect-ratio) | string \| number | undefined | 计算为`width/height`，因此对于 1920x1080px 的图片，其值为 `1.7778`。 |
+| [contain](https://vuetifyjs.com/zh-Hans/api/v-img/#props-contain) | boolean          | false     | 防止图像不合适时被裁剪                                       |
+| [x-large](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-x-large) | boolean          | false     | 使组件尺寸变的无比巨大                                       |
+| [max-height](https://vuetifyjs.com/zh-Hans/api/v-img/#props-max-height) | number \| string | undefined | 设定组件的最大高度                                           |
+| [min-width](https://vuetifyjs.com/zh-Hans/api/v-img/#props-min-width) | number \| string | undefined | 设定组件的最小宽度                                           |
+| [src](https://vuetifyjs.com/zh-Hans/api/v-img/#props-src)    | string \| object | undefined | 图像的 URL。这个属性是强制性的                               |
+|                                                              |                  |           |                                                              |
+|                                                              |                  |           |                                                              |
 
 # 五、大型组件
 

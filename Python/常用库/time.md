@@ -64,6 +64,10 @@ time.asctime(time.gmtime())
 	'Thu Jan  7 10:36:57 2021'
 ```
 
+## 2.6 localtime(seconds)
+
+将秒数转化为对应的时间元组
+
 # 二、时间格式化
 
 ## 2.1 .strftime(tpl, ts) 
