@@ -120,17 +120,17 @@ export default {
 
 ## 1.4 通用属性
 
-| Name                                                         | Type             | Default   | Description                       |
-| ------------------------------------------------------------ | ---------------- | --------- | --------------------------------- |
-| color                                                        | string           | undefined | 详见 colors page                  |
-| app                                                          |                  |           | 相应的组件是应用布局的一部分      |
-| dense                                                        | boolean          | flase     | 使组件更小                        |
+| Name                                                                   | Type             | Default   | Description                       |
+| ---------------------------------------------------------------------- | ---------------- | --------- | --------------------------------- |
+| color                                                                  | string           | undefined | 详见 colors page                  |
+| app                                                                    |                  |           | 相应的组件是应用布局的一部分      |
+| dense                                                                  | boolean          | flase     | 使组件更小                        |
 | [elevation](https://vuetifyjs.com/zh-Hans/api/v-card/#props-elevation) | number \| string | undefined | 组件的海拔可接受 0 到 24 之间的值 |
-| [disabled](https://vuetifyjs.com/zh-Hans/api/v-card/#props-disabled) | boolean          | false     | 移除组件的单击或 target 功能      |
-|                                                              |                  |           |                                   |
-|                                                              |                  |           |                                   |
-|                                                              |                  |           |                                   |
-|                                                              |                  |           |                                   |
+| [disabled](https://vuetifyjs.com/zh-Hans/api/v-card/#props-disabled)   | boolean          | false     | 移除组件的单击或 target 功能      |
+|                                                                        |                  |           |                                   |
+|                                                                        |                  |           |                                   |
+|                                                                        |                  |           |                                   |
+|                                                                        |                  |           |                                   |
 
 # 二、应用组件
 
@@ -156,14 +156,14 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ### 2.1.1 API
 
-| Name               | Type    | Default | Description                                                  |
-| ------------------ | ------- | ------- | ------------------------------------------------------------ |
-| **collapse**       | boolean | false   | 将工具栏置于折叠状态，以减小其最大宽度                       |
-| collapse-on-scroll | boolean | false   | 滚动时将应用栏置于折叠状态                                   |
+| Name               | Type    | Default | Description                                                         |
+| ------------------ | ------- | ------- | ------------------------------------------------------------------- |
+| **collapse**       | boolean | false   | 将工具栏置于折叠状态，以减小其最大宽度                              |
+| collapse-on-scroll | boolean | false   | 滚动时将应用栏置于折叠状态                                          |
 | dense              | boolean | false   | 将工具栏内容的高度降低到 48px（使用 **prominent** 属性时为 96px）。 |
-|                    |         |         |                                                              |
-|                    |         |         |                                                              |
-|                    |         |         |                                                              |
+|                    |         |         |                                                                     |
+|                    |         |         |                                                                     |
+|                    |         |         |                                                                     |
 
 ### 2.1.2 子组件
 
@@ -203,12 +203,12 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ### 2.4.1 API
 
-| Name                                                         | Type             | Default   | Description                                                  |
-| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
-| [expand-on-hover](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-expand-on-hover) | boolean          | false     | 将抽屉折叠成 **mini-variant**，直到用鼠标悬停                |
-| [temporary](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-temporary) | boolean          | false     | 临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗     |
-| [permanent](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-permanent) | boolean          | false     | 不管屏幕尺寸如何，抽屉都可以看到                             |
-| [src](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-src) | string \| object | undefined | 指定 [v-img](https://vuetifyjs.com/components/images) 作为组件背景。 |
+| Name                                                                                            | Type             | Default   | Description                                                          |
+| ----------------------------------------------------------------------------------------------- | ---------------- | --------- | -------------------------------------------------------------------- |
+| [expand-on-hover](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-expand-on-hover) | boolean          | false     | 将抽屉折叠成 **mini-variant**，直到用鼠标悬停                        |
+| [temporary](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-temporary)             | boolean          | false     | 临时抽屉位于其应用之上，并使用稀松布（叠加）来使背景变暗             |
+| [permanent](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-permanent)             | boolean          | false     | 不管屏幕尺寸如何，抽屉都可以看到                                     |
+| [src](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-src)                         | string \| object | undefined | 指定 [v-img](https://vuetifyjs.com/components/images) 作为组件背景。 |
 
 ## 2.5 v-system-bar
 
@@ -220,16 +220,16 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ### 3.1.1 API
 
-| Name                                                         | Type              | Default   | Description                                                  |
-| ------------------------------------------------------------ | ----------------- | --------- | ------------------------------------------------------------ |
-| [hover](https://vuetifyjs.com/zh-Hans/api/v-card/#props-hover) | boolean           | false     | 悬停时将应用 4dp 的海拔（默认值为 2dp）                      |
-| [img](https://vuetifyjs.com/zh-Hans/api/v-card/#props-img)   | string            | undefined | 指定卡片的背景图。对于更高级的实现，建议您使用 [v-img](https://vuetifyjs.com/components/images) 组件 |
-| [to](https://vuetifyjs.com/zh-Hans/api/v-card/#props-to)     | string \| object  | undefined | 表示链接的目标路由                                           |
-| [dense](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-dense) | boolean           | false     | 将工具栏内容的高度降低到 48px                                |
-| [rounded](https://vuetifyjs.com/zh-Hans/api/v-card/#props-rounded) | boolean \| string | undefined | 对指定的组件应用 **border-radius** 样式                      |
-| [outlined](https://vuetifyjs.com/zh-Hans/api/v-card/#props-outlined) | boolean           | false     | 去除卡片的实心颜色并添加细边框                               |
-| [loading](https://vuetifyjs.com/zh-Hans/api/v-card/#props-loading) | boolean \| string | false     | 显示线性进度条。可以是指定将哪种颜色应用于进度条的字符串（任何 material 色彩——主要（primary）, 次要（secondary）, 成功（success）, 信息（info），警告（warning），错误（error）），或者使用组件的布尔值 **color**（由色彩属性设置——如果它被组件支持的话）还可以是原色 |
-|                                                              |                   |           |                                                              |
+| Name                                                                 | Type              | Default   | Description                                                                                                                                                                                                                                                           |
+| -------------------------------------------------------------------- | ----------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [hover](https://vuetifyjs.com/zh-Hans/api/v-card/#props-hover)       | boolean           | false     | 悬停时将应用 4dp 的海拔（默认值为 2dp）                                                                                                                                                                                                                               |
+| [img](https://vuetifyjs.com/zh-Hans/api/v-card/#props-img)           | string            | undefined | 指定卡片的背景图。对于更高级的实现，建议您使用 [v-img](https://vuetifyjs.com/components/images) 组件                                                                                                                                                                  |
+| [to](https://vuetifyjs.com/zh-Hans/api/v-card/#props-to)             | string \| object  | undefined | 表示链接的目标路由                                                                                                                                                                                                                                                    |
+| [dense](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-dense)    | boolean           | false     | 将工具栏内容的高度降低到 48px                                                                                                                                                                                                                                         |
+| [rounded](https://vuetifyjs.com/zh-Hans/api/v-card/#props-rounded)   | boolean \| string | undefined | 对指定的组件应用 **border-radius** 样式                                                                                                                                                                                                                               |
+| [outlined](https://vuetifyjs.com/zh-Hans/api/v-card/#props-outlined) | boolean           | false     | 去除卡片的实心颜色并添加细边框                                                                                                                                                                                                                                        |
+| [loading](https://vuetifyjs.com/zh-Hans/api/v-card/#props-loading)   | boolean \| string | false     | 显示线性进度条。可以是指定将哪种颜色应用于进度条的字符串（任何 material 色彩——主要（primary）, 次要（secondary）, 成功（success）, 信息（info），警告（warning），错误（error）），或者使用组件的布尔值 **color**（由色彩属性设置——如果它被组件支持的话）还可以是原色 |
+|                                                                      |                   |           |                                                                                                                                                                                                                                                                       |
 
 ### 3.1.2 子组件
 
@@ -270,12 +270,12 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ### 3.2.1 API
 
-| Name                                                         | Type             | Default   | Description                                                  |
-| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
-| [prominent](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-prominent) | boolean          | false     | 将工具栏内容的高度增加到 128px                               |
-| [src](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-src) | string \| object | undefined | 指定 [v-img](https://vuetifyjs.com/components/images) 作为组件背景 |
-| [collapse](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-collapse) | boolean          | false     | 将工具栏置于折叠状态，以减小其最大宽度                       |
-| [dense](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-dense) | boolean          | false     | 将工具栏内容的高度降低到 48px                                |
+| Name                                                                      | Type             | Default   | Description                                                        |
+| ------------------------------------------------------------------------- | ---------------- | --------- | ------------------------------------------------------------------ |
+| [prominent](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-prominent) | boolean          | false     | 将工具栏内容的高度增加到 128px                                     |
+| [src](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-src)             | string \| object | undefined | 指定 [v-img](https://vuetifyjs.com/components/images) 作为组件背景 |
+| [collapse](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-collapse)   | boolean          | false     | 将工具栏置于折叠状态，以减小其最大宽度                             |
+| [dense](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-dense)         | boolean          | false     | 将工具栏内容的高度降低到 48px                                      |
 
 ### 3.2.2 子组件
 
@@ -327,15 +327,15 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ### 3.3.1 API
 
-| Name                                                       | Type    | Default | Description                                                  |
-| ---------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------ |
-| disabled                                                   | boolean | false   | 禁用所有子级的 `v-list-item` 组件                            |
-| flat                                                       | boolean | false   | 删除活动的 `v-list-item` 上突出显示的背景                    |
-| dense                                                      | boolean | false   | 减小列表块的最大宽度                                         |
-| rounded                                                    | boolean | false   | 圆角 `v-list-item` 边                                        |
-| three-line / two-line                                      | boolean | false   | 增加三 \ 两行的列表项高度                                    |
+| Name                                                       | Type    | Default | Description                                                                                                                                      |
+| ---------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| disabled                                                   | boolean | false   | 禁用所有子级的 `v-list-item` 组件                                                                                                                |
+| flat                                                       | boolean | false   | 删除活动的 `v-list-item` 上突出显示的背景                                                                                                        |
+| dense                                                      | boolean | false   | 减小列表块的最大宽度                                                                                                                             |
+| rounded                                                    | boolean | false   | 圆角 `v-list-item` 边                                                                                                                            |
+| three-line / two-line                                      | boolean | false   | 增加三 \ 两行的列表项高度                                                                                                                        |
 | [nav](https://vuetifyjs.com/zh-Hans/api/v-list/#props-nav) | boolean | false   | 另一种样式可以减小 `v-list-item` 的宽度并圆角化。 通常与 **[v-navigation-drawer](https://vuetifyjs.com/components/navigation-drawers)** 一起使用 |
-|                                                            |         |         |                                                              |
+|                                                            |         |         |                                                                                                                                                  |
 
 ### 3.3.2 子组件
 
@@ -343,13 +343,13 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 装载列表项子组件
 
-| Name                                                         | Type             | Default   | Description                                                  |
-| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
-| link                                                         | boolean          | false     | 指定组件为链接。当使用 **href** 或 **to**属性时，这是自动的设置的。 |
-| [to](https://vuetifyjs.com/zh-Hans/api/v-list-item/#props-to) | string \| object | undefined | 表示链接的目标路由                                           |
-| [href](https://vuetifyjs.com/zh-Hans/api/v-list-item/#props-href) | string \| object | undefined | 指定组件为锚点并应用 **href** 属性。                         |
-|                                                              |                  |           |                                                              |
-|                                                              |                  |           |                                                              |
+| Name                                                              | Type             | Default   | Description                                                         |
+| ----------------------------------------------------------------- | ---------------- | --------- | ------------------------------------------------------------------- |
+| link                                                              | boolean          | false     | 指定组件为链接。当使用 **href** 或 **to**属性时，这是自动的设置的。 |
+| [to](https://vuetifyjs.com/zh-Hans/api/v-list-item/#props-to)     | string \| object | undefined | 表示链接的目标路由                                                  |
+| [href](https://vuetifyjs.com/zh-Hans/api/v-list-item/#props-href) | string \| object | undefined | 指定组件为锚点并应用 **href** 属性。                                |
+|                                                                   |                  |           |                                                                     |
+|                                                                   |                  |           |                                                                     |
 
 #### 2）v-list-item-content
 
@@ -381,22 +381,22 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ### 4.1.1 API
 
-| Name                                                         | Type             | Default   | Description                                                  |
-| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
-| [outlined](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-outlined) | boolean          | false     | 使背景透明并使用薄边框                                       |
-| [block](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-block) | boolean          | false     | 将按钮扩大到可用空间的 100％。                               |
-| [depressed](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-depressed) | boolean          | false     | 移除按钮的阴影效果                                           |
-| [disabled](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-disabled) | boolean          | false     | 移除组件的单击或 target 功能                                 |
-| [elevation](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-elevation) | number \| string | undefined | 组件的海拔可接受 0 到 24 之间的值                            |
-| [exact](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-exact) | boolean          | false     | 完全匹配链接。如果没有这个链接，‘/’ 将匹配每个路由           |
-| [append](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-append) | boolean          | false     | 设置 **append** 属性总是会附加到当前路径的相对路径上。       |
-| [fab](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-fab)    | boolean          | false     | Designates the button as a floating-action-button. Button will become *round* |
-| [href](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-href)  | string \| object | undefined | 指定组件为锚点并应用 **href** 属性                           |
-| [icon](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-icon)  | boolean          | false     | Designates the button as icon. Button will become *round* and applies the **text** prop |
-| [link](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-link)  | boolean          | false     | 指定组件为链接。当使用 **href** 或 **to** 属性时，这是自动的设置的 |
-| [plain](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-plain) | boolean          | false     | 移除悬停在按钮上时应用的默认背景变化                         |
-| [value](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-value) | any              | undefined | 控制组件可见还是隐藏                                         |
-| [text](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-text)  | boolean          | false     | Makes the background transparent                             |
+| Name                                                                  | Type             | Default   | Description                                                                             |
+| --------------------------------------------------------------------- | ---------------- | --------- | --------------------------------------------------------------------------------------- |
+| [outlined](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-outlined)   | boolean          | false     | 使背景透明并使用薄边框                                                                  |
+| [block](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-block)         | boolean          | false     | 将按钮扩大到可用空间的 100％。                                                          |
+| [depressed](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-depressed) | boolean          | false     | 移除按钮的阴影效果                                                                      |
+| [disabled](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-disabled)   | boolean          | false     | 移除组件的单击或 target 功能                                                            |
+| [elevation](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-elevation) | number \| string | undefined | 组件的海拔可接受 0 到 24 之间的值                                                       |
+| [exact](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-exact)         | boolean          | false     | 完全匹配链接。如果没有这个链接，‘/’ 将匹配每个路由                                      |
+| [append](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-append)       | boolean          | false     | 设置 **append** 属性总是会附加到当前路径的相对路径上。                                  |
+| [fab](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-fab)             | boolean          | false     | Designates the button as a floating-action-button. Button will become *round*           |
+| [href](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-href)           | string \| object | undefined | 指定组件为锚点并应用 **href** 属性                                                      |
+| [icon](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-icon)           | boolean          | false     | Designates the button as icon. Button will become *round* and applies the **text** prop |
+| [link](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-link)           | boolean          | false     | 指定组件为链接。当使用 **href** 或 **to** 属性时，这是自动的设置的                      |
+| [plain](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-plain)         | boolean          | false     | 移除悬停在按钮上时应用的默认背景变化                                                    |
+| [value](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-value)         | any              | undefined | 控制组件可见还是隐藏                                                                    |
+| [text](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-text)           | boolean          | false     | Makes the background transparent                                                        |
 
 ## 4.3 v-icon
 
@@ -420,34 +420,43 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ### 4.3.1 API
 
-| Name                                                         | Type    | Default | Description                                                  |
-| ------------------------------------------------------------ | ------- | ------- | ------------------------------------------------------------ |
-| [small](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-small) | boolean | false   | 使组件尺寸变的小                                             |
-| [large](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-large) | boolean | false   | 使组件尺寸变的巨大                                           |
-| [x-small](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-x-small) | boolean | false   | 使组件尺寸变的更小                                           |
-| [x-large](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-x-large) | boolean | false   | 使组件尺寸变的无比巨大                                       |
-| [right](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-right) | boolean | false   | 当按钮放置在另一个元素或文本的**右边**时，对按钮内的图标应用适当的间距 |
-| [left](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-left) | boolean | false   | 当按钮放置在另一个元素或文本的**左边**时，对按钮内的图标应用适当的间距 |
+| Name                                                               | Type    | Default | Description                                                            |
+| ------------------------------------------------------------------ | ------- | ------- | ---------------------------------------------------------------------- |
+| [small](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-small)     | boolean | false   | 使组件尺寸变的小                                                       |
+| [large](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-large)     | boolean | false   | 使组件尺寸变的巨大                                                     |
+| [x-small](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-x-small) | boolean | false   | 使组件尺寸变的更小                                                     |
+| [x-large](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-x-large) | boolean | false   | 使组件尺寸变的无比巨大                                                 |
+| [right](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-right)     | boolean | false   | 当按钮放置在另一个元素或文本的**右边**时，对按钮内的图标应用适当的间距 |
+| [left](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-left)       | boolean | false   | 当按钮放置在另一个元素或文本的**左边**时，对按钮内的图标应用适当的间距 |
 
 ## 4.4 v-img
 
 ### 4.4.1 API
 
-| Name                                                         | Type             | Default   | Description                                                  |
-| ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
-| [alt](https://vuetifyjs.com/zh-Hans/api/v-img/#props-alt)    | string           | undefined | 屏幕阅读器的备用文本。 留空以装饰图像                        |
+| Name                                                                        | Type             | Default   | Description                                                          |
+| --------------------------------------------------------------------------- | ---------------- | --------- | -------------------------------------------------------------------- |
+| [alt](https://vuetifyjs.com/zh-Hans/api/v-img/#props-alt)                   | string           | undefined | 屏幕阅读器的备用文本。 留空以装饰图像                                |
 | [aspect-ratio](https://vuetifyjs.com/zh-Hans/api/v-img/#props-aspect-ratio) | string \| number | undefined | 计算为`width/height`，因此对于 1920x1080px 的图片，其值为 `1.7778`。 |
-| [contain](https://vuetifyjs.com/zh-Hans/api/v-img/#props-contain) | boolean          | false     | 防止图像不合适时被裁剪                                       |
-| [x-large](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-x-large) | boolean          | false     | 使组件尺寸变的无比巨大                                       |
-| [max-height](https://vuetifyjs.com/zh-Hans/api/v-img/#props-max-height) | number \| string | undefined | 设定组件的最大高度                                           |
-| [min-width](https://vuetifyjs.com/zh-Hans/api/v-img/#props-min-width) | number \| string | undefined | 设定组件的最小宽度                                           |
-| [src](https://vuetifyjs.com/zh-Hans/api/v-img/#props-src)    | string \| object | undefined | 图像的 URL。这个属性是强制性的                               |
-|                                                              |                  |           |                                                              |
-|                                                              |                  |           |                                                              |
+| [contain](https://vuetifyjs.com/zh-Hans/api/v-img/#props-contain)           | boolean          | false     | 防止图像不合适时被裁剪                                               |
+| [x-large](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-x-large)          | boolean          | false     | 使组件尺寸变的无比巨大                                               |
+| [max-height](https://vuetifyjs.com/zh-Hans/api/v-img/#props-max-height)     | number \| string | undefined | 设定组件的最大高度                                                   |
+| [min-width](https://vuetifyjs.com/zh-Hans/api/v-img/#props-min-width)       | number \| string | undefined | 设定组件的最小宽度                                                   |
+| [src](https://vuetifyjs.com/zh-Hans/api/v-img/#props-src)                   | string \| object | undefined | 图像的 URL。这个属性是强制性的                                       |
+|                                                                             |                  |           |                                                                      |
+|                                                                             |                  |           |                                                                      |
 
 # 五、大型组件
 
 # 六、表单组件
+
+## 6.1 v-text-field
+
+### 6.1.1 API
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+|      |      |         |             |
+|      |      |         |             |
 
 # 七、网格系统
 
@@ -461,22 +470,22 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 `v-row` 是 `v-col` 的容器组件。 它使用 flex 属性来控制其内栏的布局和流
 
-| Name                                                         | Type                        | Default   | Description                                                  |
-| ------------------------------------------------------------ | --------------------------- | --------- | ------------------------------------------------------------ |
-| [cols](https://vuetifyjs.com/zh-Hans/api/v-col/#props-cols)  | boolean \| string \| number | false     | 设置组件扩展的默认列数。可用的选项是 **1 -> 12** 和 **auto** 。 |
-| [md](https://vuetifyjs.com/zh-Hans/api/v-col/#props-md)      | boolean \| string \| number | false     | 更改中等和较大断点上的列数，其他断点同理                     |
-| [align](https://vuetifyjs.com/zh-Hans/api/v-row/#props-align) | string                      | undefined | 应用 [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css 属性。可用的选项是 **start**, **center**, **end**, **baseline** 和 **stretch** |
+| Name                                                              | Type                        | Default   | Description                                                                                                                                                                         |
+| ----------------------------------------------------------------- | --------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [cols](https://vuetifyjs.com/zh-Hans/api/v-col/#props-cols)       | boolean \| string \| number | false     | 设置组件扩展的默认列数。可用的选项是 **1 -> 12** 和 **auto** 。                                                                                                                     |
+| [md](https://vuetifyjs.com/zh-Hans/api/v-col/#props-md)           | boolean \| string \| number | false     | 更改中等和较大断点上的列数，其他断点同理                                                                                                                                            |
+| [align](https://vuetifyjs.com/zh-Hans/api/v-row/#props-align)     | string                      | undefined | 应用 [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css 属性。可用的选项是 **start**, **center**, **end**, **baseline** 和 **stretch**                 |
 | [justify](https://vuetifyjs.com/zh-Hans/api/v-row/#props-justify) | string                      | undefined | 应用 [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css 属性。可用选项是 **start**, **center**, **end**, **space-between** 和 **space-around** |
-|                                                              |                             |           |                                                              |
+|                                                                   |                             |           |                                                                                                                                                                                     |
 
 ## 7.3 v-col
 
 `v-col` 包裹内容，它必须是 `v-row` 的直接子代
 
-| Name                                                         | Type    | Default | Description               |
-| ------------------------------------------------------------ | ------- | ------- | ------------------------- |
+| Name                                                          | Type    | Default | Description               |
+| ------------------------------------------------------------- | ------- | ------- | ------------------------- |
 | [dense](https://vuetifyjs.com/zh-Hans/api/v-row/#props-dense) | boolean | false   | 减少 `v-col` 之间的距离。 |
-|                                                              |         |         |                           |
+|                                                               |         |         |                           |
 
 ## 7.4 v-spacer
 
