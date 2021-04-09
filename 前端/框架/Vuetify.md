@@ -120,14 +120,17 @@ export default {
 
 ## 1.4 通用属性
 
-| Name  | Type    | Default   | Description                  |
-| ----- | ------- | --------- | ---------------------------- |
-| color | string  | undefined | 详见 colors page             |
-| app   |         |           | 相应的组件是应用布局的一部分 |
-| dense | boolean | flase     | 使组件更小                   |
-|       |         |           |                              |
-|       |         |           |                              |
-|       |         |           |                              |
+| Name                                                         | Type             | Default   | Description                       |
+| ------------------------------------------------------------ | ---------------- | --------- | --------------------------------- |
+| color                                                        | string           | undefined | 详见 colors page                  |
+| app                                                          |                  |           | 相应的组件是应用布局的一部分      |
+| dense                                                        | boolean          | flase     | 使组件更小                        |
+| [elevation](https://vuetifyjs.com/zh-Hans/api/v-card/#props-elevation) | number \| string | undefined | 组件的海拔可接受 0 到 24 之间的值 |
+| [disabled](https://vuetifyjs.com/zh-Hans/api/v-card/#props-disabled) | boolean          | false     | 移除组件的单击或 target 功能      |
+|                                                              |                  |           |                                   |
+|                                                              |                  |           |                                   |
+|                                                              |                  |           |                                   |
+|                                                              |                  |           |                                   |
 
 # 二、应用组件
 
@@ -217,7 +220,34 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ### 3.1.1 API
 
+| Name                                                         | Type              | Default   | Description                                                  |
+| ------------------------------------------------------------ | ----------------- | --------- | ------------------------------------------------------------ |
+| [hover](https://vuetifyjs.com/zh-Hans/api/v-card/#props-hover) | boolean           | false     | 悬停时将应用 4dp 的海拔（默认值为 2dp）                      |
+| [img](https://vuetifyjs.com/zh-Hans/api/v-card/#props-img)   | string            | undefined | 指定卡片的背景图。对于更高级的实现，建议您使用 [v-img](https://vuetifyjs.com/components/images) 组件 |
+| [to](https://vuetifyjs.com/zh-Hans/api/v-card/#props-to)     | string \| object  | undefined | 表示链接的目标路由                                           |
+| [dense](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-dense) | boolean           | false     | 将工具栏内容的高度降低到 48px                                |
+| [rounded](https://vuetifyjs.com/zh-Hans/api/v-card/#props-rounded) | boolean \| string | undefined | 对指定的组件应用 **border-radius** 样式                      |
+| [outlined](https://vuetifyjs.com/zh-Hans/api/v-card/#props-outlined) | boolean           | false     | 去除卡片的实心颜色并添加细边框                               |
+| [loading](https://vuetifyjs.com/zh-Hans/api/v-card/#props-loading) | boolean \| string | false     | 显示线性进度条。可以是指定将哪种颜色应用于进度条的字符串（任何 material 色彩——主要（primary）, 次要（secondary）, 成功（success）, 信息（info），警告（warning），错误（error）），或者使用组件的布尔值 **color**（由色彩属性设置——如果它被组件支持的话）还可以是原色 |
+|                                                              |                   |           |                                                              |
+
 ### 3.1.2 子组件
+
+#### 1）v-card-actions
+
+用于为卡片放置 **动作** 的容器，如 v-btn 或 v-menu
+
+#### 2）v-card-text
+
+主要用于卡片中的 **文本内容**
+
+#### 3）v-card-subtitle
+
+为卡片字幕提供默认的 **字体大小** 和 **填充**
+
+#### 14）v-card-title
+
+为卡片字幕提供默认的 **字体大小** 和 **填充**
 
 ## 3.2 v-tool-bar
 
@@ -400,6 +430,8 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [left](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-left) | boolean | false   | 当按钮放置在另一个元素或文本的**左边**时，对按钮内的图标应用适当的间距 |
 
 ## 4.4 v-img
+
+### 4.4.1 API
 
 | Name                                                         | Type             | Default   | Description                                                  |
 | ------------------------------------------------------------ | ---------------- | --------- | ------------------------------------------------------------ |
