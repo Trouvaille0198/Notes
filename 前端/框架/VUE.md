@@ -406,6 +406,30 @@ var app = new Vue({
 
 父子组件之间的数据传递可以使用 props 或者 $emit 等方式
 
+### 2.3.1 父传子
+
+使用 props
+
+#### 1）子组件部分
+
+<img src="http://image.trouvaille0198.top/image-20210411160809257.png" alt="image-20210411160809257" style="zoom:150%;" />
+
+#### 2）父组件部分
+
+<img src="http://image.trouvaille0198.top/image-20210411160816904.png" alt="image-20210411160816904" style="zoom:150%;" />
+
+### 2.3.2 子传父
+
+通过事件传递数据
+
+#### 1）子组件部分
+
+<img src="http://image.trouvaille0198.top/image-20210411160915513.png" alt="image-20210411160915513" style="zoom:150%;" />
+
+#### 2）父组件部分
+
+<img src="http://image.trouvaille0198.top/image-20210411161044777.png" alt="image-20210411161044777" style="zoom:150%;" />
+
 # 三、axios
 
 ## 3.1 介绍
