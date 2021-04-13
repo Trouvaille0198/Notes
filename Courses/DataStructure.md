@@ -2071,3 +2071,202 @@ void UnionFindSets<T>::DepthUnion(T a, T b)
 }
 ```
 
+# 七、图
+
+## 7.1 基本概念
+
+数据结构中的图：不带自身环，关联边不能多于一条
+$$
+graph=(V,E)
+$$
+顶点 vertex
+
+有向边又称为弧，有弧尾（始点）和弧头（终点）
+
+## 7.2 存储结构
+
+### 7.2.1 邻接矩阵
+
+#### 1）概念
+
+<img src="http://image.trouvaille0198.top/image-20210412081500935.png" alt="image-20210412081500935" style="zoom:55%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210412081530638.png" alt="image-20210412081530638" style="zoom: 55%;" />
+
+用一维数组 `vertexes[]` 存储顶点信息，二维数组 `arcs[]` 存储边信息
+
+<img src="http://image.trouvaille0198.top/image-20210412081633859.png" alt="image-20210412081633859" style="zoom:55%;" />
+
+#### 2）无向图的邻接矩阵
+
+<img src="http://image.trouvaille0198.top/image-20210412082225634.png" alt="image-20210412082225634" style="zoom:55%;" />
+
+##### 1. 类模板定义
+
+### 7.2.2 邻接表
+
+把邻接矩阵的每一行记为一个单链表，把竖着排列的边连接成为一个边链表
+
+记录有向图的出度，使用**逆邻接表**
+
+<img src="http://image.trouvaille0198.top/image-20210412083406393.png" alt="image-20210412083406393" style="zoom:55%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210412083416383.png" alt="image-20210412083416383" style="zoom:55%;" />
+
+### 7.2.3 邻接多重表
+
+(Adjacency Multilist)
+
+用来存储无向图
+
+邻接多重表中，每条边用一个结点表示，每个顶点也用一个结点表示
+
+<img src="http://image.trouvaille0198.top/image-20210412084350845.png" alt="image-20210412084350845" style="zoom: 50%;" />
+
+- data：存储此顶点的数据；
+- firstedge：指针域，用于指向同该顶点有直接关联的存储其他顶点的节点
+
+<img src="http://image.trouvaille0198.top/image-20210412084359057.png" alt="image-20210412084359057" style="zoom:50%;" />
+
+- mark：标志域，用于标记此节点是否被操作过，例如在对图中顶点做遍历操作时，为了防止多次操作同一节点，mark 域为 0 表示还未被遍历；mark 为 1 表示该节点已被遍历；
+- ivex 和 jvex：数据域，分别存储图中各边两端的顶点所在数组中的位置下标；
+- ilink：指针域，指向下一个存储与 ivex 有直接关联顶点的节点；
+- jlink：指针域，指向下一个存储与 jvex 有直接关联顶点的节点；
+- info：指针域，用于存储与该顶点有关的其他信息，比如无向网中各边的权
+
+<img src="http://image.trouvaille0198.top/image-20210412084534537.png" alt="image-20210412084534537" style="zoom: 50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210412084959127.png" alt="image-20210412084959127" style="zoom:67%;" />
+
+### 7.2.4 十字链表
+
+（Orthogonal List）
+
+用来存储有向图
+
+十字链表（即有向图的邻接多重表）可以看作是邻接表和逆邻接表的合体
+
+<img src="http://image.trouvaille0198.top/image-20210412085322307.png" alt="image-20210412085322307" style="zoom:60%;" />
+
+## 7.3 遍历
+
+### 7.3.1 深度优先遍历
+
+（Depth First Search, DFS）
+
+理论上，结果不唯一
+
+#### 1）步骤
+
+1. 访问节点 v，并标记其已访问
+2. 取 v 的第一个临界顶点 w
+3. 判断
+    1. w 是存在
+        1. 若是，返回
+        2. 若否，继续
+    2. w 是否被访问
+        1. 若是，取 v 的下下个邻接顶点，转到步骤3
+        2. 若否，访问 w，标记，转到步骤1
+
+
+
+<img src="http://image.trouvaille0198.top/image-20210412090916957.png" alt="image-20210412090916957" style="zoom:67%;" />
+
+#### 2）时间复杂度
+
+- 邻接表：O(n+e)
+- 邻接矩阵：O(n^2^)
+
+#### 3）实现
+
+### 7.3.2 广度优先遍历
+
+（Breadth First Search, BFS）
+
+#### 1）步骤
+
+1. 访问节点 v，并标记其已访问，使 v 入队
+2. 队空时，返回；若队非空，继续
+3. 出队 v
+4. 取 v 的第一个邻接顶点 w
+5. 判断 w 是否存在
+    1. 若存在，继续
+    2. 若不存在，转步骤 3
+6. 判断 w 是否被访问
+    1. 若被访问，继续
+    2. 若未被访问，访问 w 并标记，使 w 入队，继续
+7. 取 v 的下下个邻接顶点覆盖 w，转步骤 5
+
+<img src="C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20210412092334084.png" alt="image-20210412092334084" style="zoom:67%;" />
+
+#### 2）时间复杂度
+
+- 邻接表：O(n+e)
+- 邻接矩阵：O(n^2^)
+
+### 7.3.3 连通分量
+
+遍历算法的应用
+
+定义：非连通图中的极大连通子图
+
+## 7.4 最小生成树
+
+### 7.4.1 概念
+
+#### 1）生成树
+
+- 定义：连通图的极小连通子图
+
+- 特点
+    - 任意两顶点有且只有一条路径
+    - n 个顶点的生成树具有 n-1 条边
+    - 生成树不唯一，n 个顶点的完全图有 $n^{n-2}$ 种生成树
+    - 不同遍历方法 / 不同顶点出发 / 不同存储结构，生成树不同
+    - n 个顶点 n-1 条边也不一定是生成树
+
+#### 2）最小生成树
+
+（minimum cost spanning tree, MST）
+
+- 定义：连通网中，权值总和最小的生成树，全称最小代价生成树
+
+<img src="http://image.trouvaille0198.top/image-20210412100310369.png" alt="image-20210412100310369" style="zoom:67%;" />
+
+- 性质：假设 N = (V, E) 是一个连通网，U 是顶点集 V的一个非空子集。若 (u, v) 是一条具有最小权值的边，其中u∈U， v∈V - U，则必存在一棵包含边（u，v）的最小生成树
+
+### 7.4.2 克鲁斯卡尔算法
+
+(Kruskal)
+
+#### 1）步骤
+
+<img src="http://image.trouvaille0198.top/image-20210412101458244.png" alt="image-20210412101458244" style="zoom: 50%;" />
+
+设 G = (V, E) 是具有 n 个顶点的连通网，T = (U，TE) 是其最小生成树。
+
+1. 选取权值最小的边（V~i~，V~j~），若边（V~i~，V~j~）加入到 TE 后形成回路 (环)，则舍弃该边，否则将该边加入到 TE 中。
+
+2. 重复 1，知道 TE 中含有 n-1 条边为止
+
+<img src="http://image.trouvaille0198.top/image-20210412101256880.png" alt="image-20210412101256880" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210412101237144.png" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210412102147705.png" alt="image-20210412102147705" style="zoom:50%;" />
+
+### 7.4.3 普利姆算法
+
+(Prim)
+
+基于 MST 性质、
+
+#### 1）步骤
+
+<img src="http://image.trouvaille0198.top/image-20210412103207051.png" alt="image-20210412103207051" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210412101256880.png" alt="image-20210412101256880" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210412102751502.png" alt="image-20210412102751502" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210412103347778.png" alt="image-20210412103347778" style="zoom:67%;" />
