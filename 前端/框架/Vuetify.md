@@ -445,7 +445,61 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                                             |                  |           |                                                                      |
 |                                                                             |                  |           |                                                                      |
 
+## 4.5 v-pagination
+
+`v-pagination` 组件用于分离长数据集，以便用户消化信息。 根据提供的数据量，分页组件将自动缩放
+
+分页默认根据设置的 **length** 属性显示页数，两边有 **prev** 和 **next** 按钮帮助导航
+
+### 4.5.1 API
+
+| Name                                                         | Type   | Default | Description              |
+| ------------------------------------------------------------ | ------ | ------- | ------------------------ |
+| [length](https://vuetifyjs.com/zh-Hans/api/v-pagination/#props-length) | number | 0       | 分页组件的长度           |
+| [prev-icon](https://vuetifyjs.com/zh-Hans/api/v-pagination/#props-prev-icon) | string | '$prev' | 指定用于上一个图标的图标 |
+| [next-icon](https://vuetifyjs.com/zh-Hans/api/v-pagination/#props-next-icon) | string | '$next' | 指定用于下一个图标的图标 |
+|                                                              |        |         |                          |
+|                                                              |        |         |                          |
+|                                                              |        |         |                          |
+
+## 4.6 v-snackbar
+
+`v-snackbar` 以最简单的形式向用户显示一个临时且可关闭的通知
+
+### 4.6.1 API
+
+| Name                                                         | Type             | Default | Description                                                  |
+| ------------------------------------------------------------ | ---------------- | ------- | ------------------------------------------------------------ |
+| [timeout](https://vuetifyjs.com/zh-Hans/api/v-snackbar/#props-timeout) | number \| string | 5000    | 等待snackbar 自动隐藏的时间 (毫秒) 。使用 “-1” 保持无限期打开 (版本 < 2 的 `0` )。 建议这个数字在 `4000` 和 `10000` 之间。此属性的更改将重置超时 |
+|                                                              |                  |         |                                                              |
+|                                                              |                  |         |                                                              |
+
 # 五、大型组件
+
+## 5.1 v-date-picker
+
+### 5.1.1 API
+
+| Name                                                         | Type    | Default   | Description                                                 |
+| ------------------------------------------------------------ | ------- | --------- | ----------------------------------------------------------- |
+| [max](https://vuetifyjs.com/zh-Hans/api/v-date-picker/#props-max) | string  | undefined | 允许的最大 日期/月份（ISO 8601格式）                        |
+| [min](https://vuetifyjs.com/zh-Hans/api/v-date-picker/#props-min) | string  | undefined | 允许的最小 日期/月份（ISO 8601格式）                        |
+| [multiple](https://vuetifyjs.com/zh-Hans/api/v-date-picker/#props-multiple) | boolean | false     | 允许选择多个日期                                            |
+| [picker-date](https://vuetifyjs.com/zh-Hans/api/v-date-picker/#props-picker-date) | string  | undefined | 显示 年/月                                                  |
+| [type](https://vuetifyjs.com/zh-Hans/api/v-date-picker/#props-type) | string  | 'date'    | 确定选择器的类型 - 日期选择器的 `date` ，月选择器的 `month` |
+| [scrollable](https://vuetifyjs.com/zh-Hans/api/v-date-picker/#props-scrollable) | boolean | false     | 允许通过鼠标滚动更改显示的月份                              |
+|                                                              |         |           |                                                             |
+|                                                              |         |           |                                                             |
+
+## 5.2 v-time-picker
+
+### 5.2.1 API
+
+| Name                                                         | Type    | Default | Description                                                 |
+| ------------------------------------------------------------ | ------- | ------- | ----------------------------------------------------------- |
+| [format](https://vuetifyjs.com/zh-Hans/api/v-time-picker/#props-format) | string  | 'ampm'  | 定义在选择器中显示的时间格式。可用的选项是 `ampm` 和 `24hr` |
+| [scrollable](https://vuetifyjs.com/zh-Hans/api/v-time-picker/#props-scrollable) | boolean | false   | 允许通过鼠标滚动更改 小时/分钟                              |
+|                                                              |         |         |                                                             |
 
 # 六、表单组件
 
