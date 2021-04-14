@@ -7,11 +7,11 @@
 ![image-20210410215951265](http://image.trouvaille0198.top/image-20210410215951265.png)
 
 - **URLs:** 虽然可以通过单个功能来处理来自每个URL的请求，但是编写单独的视图函数来处理每个资源是更加可维护的。URL映射器用于根据请求URL将HTTP请求重定向到相应的视图。URL映射器还可以匹配出现在URL中的字符串或数字的特定模式，并将其作为数据传递给视图功能。
-     
+  
 - **View:** 视图 是一个请求处理函数，它接收HTTP请求并返回HTTP响应。视图通过模型访问满足请求所需的数据，并将响应的格式委托给 模板。
-     
+  
 - **Models:** 模型 是定义应用程序数据结构的Python对象，并提供在数据库中管理（添加，修改，删除）和查询记录的机制。
-     
+  
 - **Templates:** 模板 是定义文件（例如HTML页面）的结构或布局的文本文件，用于表示实际内容的占位符。一个视图可以使用HTML模板，从数据填充它动态地创建一个HTML页面模型。可以使用模板来定义任何类型的文件的结构; 它不一定是HTML！
 
 ## 1.2 开始
@@ -61,9 +61,38 @@ app_name/
 python manage.py runserver 0.0.0.0:8000
 ```
 
-# 二、
+# 二、urls
 
-# 三、ORM
+`urls.py`：URLconf 文件
 
-SQL 语句映射，实现了代码与数据库操作的解耦合，在 Django 中体现在 Models.py 中
+```python
+from django.contrib import admin
+from django.urls import path, include
+from app01 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('app01/', views.test_view),
+    path('app02/', include('app02.urls'))
+]
+```
 
+
+
+# 三、Models
+
+## 3.1 认识
+
+- **ORM**
+
+    对象关系映射(Object Relational Mapping)，它的实质就是将关系数据（库）中的业务数据用对象的形式表示出来，并通过面向对象（Object-Oriented）的方式将这些对象组织起来，实现系统业务逻辑的过程
+
+    - 映射(Mapping) —— 把表结构映射成类
+    - 对象 —— 像操作类对象一样，操作数据库里的数据
+
+    SQL 语句映射，实现了代码与数据库操作的解耦合，在 Django 中体现在 Models.py 中
+
+- **Model**
+
+    模型是真实数据的简单明确的描述。它包含了储存的数据所必要的字段和行为
+
+# 四、views
