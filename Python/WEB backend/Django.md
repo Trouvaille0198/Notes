@@ -61,6 +61,30 @@ app_name/
 python manage.py runserver 0.0.0.0:8000
 ```
 
+### 1.2.4 生成迁移文件
+
+```python
+python manage.py makemigrations
+```
+
+为模型的改变生成迁移文件
+
+### 1.2.5 创建模型对应的数据表
+
+```python
+python manage.py migrate
+```
+
+该命令选中未执行过的迁移，将对模型的更改同步到数据库结构上
+
+### 1.2.6 创建管理账号
+
+```python
+python manage.py createsuperuser
+```
+
+
+
 # 二、urls
 
 `urls.py`：URLconf 文件
@@ -96,3 +120,9 @@ urlpatterns = [
     模型是真实数据的简单明确的描述。它包含了储存的数据所必要的字段和行为
 
 # 四、views
+
+每个视图必须要做的只有两件事：返回一个包含被请求页面内容的 [`HttpResponse`](https://docs.djangoproject.com/zh-hans/3.2/ref/request-response/#django.http.HttpResponse) 对象，或者抛出一个异常，比如 [`Http404`](https://docs.djangoproject.com/zh-hans/3.2/topics/http/views/#django.http.Http404) 。至于你还想干些什么，随便你。
+
+你的视图可以从数据库里读取记录，可以使用一个模板引擎（比如 Django 自带的，或者其他第三方的），可以生成一个 PDF 文件，可以输出一个 XML，创建一个 ZIP 文件，你可以做任何你想做的事，使用任何你想用的 Python 库。
+
+Django 只要求返回的是一个 [`HttpResponse`](https://docs.djangoproject.com/zh-hans/3.2/ref/request-response/#django.http.HttpResponse) ，或者抛出一个异常
