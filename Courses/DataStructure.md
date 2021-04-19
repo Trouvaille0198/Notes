@@ -2270,3 +2270,105 @@ $$
 <img src="http://image.trouvaille0198.top/image-20210412102751502.png" alt="image-20210412102751502" style="zoom:50%;" />
 
 <img src="http://image.trouvaille0198.top/image-20210412103347778.png" alt="image-20210412103347778" style="zoom:67%;" />
+
+## 7.5 最短路径
+
+（Shortest Path）
+
+### 7.5.1 类别
+
+- 单源点最短路径
+
+    给定网 G 和 V，求 V 到其他顶点的最短路径
+
+- 多源点最短路径
+
+    给定网 G，求其中顶点到其他各顶点的最短路径
+
+### 7.5.2 弧上权值非负的单源点最短路径
+
+<img src="http://image.trouvaille0198.top/image-20210419081428998.png" alt="image-20210419081428998" style="zoom:50%;" />
+
+迪杰斯特拉算法（Dijkstra）
+
+按路径长度递增的次序来产生最短路径；先求路径最短的一条，然后参照它求出长度次短的一条，以此类推，被求出长度的顶点放入集合 S 中，当 S 满，代表算法结束
+
+<img src="http://image.trouvaille0198.top/image-20210419081437115.png" alt="image-20210419081437115" style="zoom:50%;" />
+
+引入 dist[]，存储 v 到 v~i~ **当前**找到的最短路径长度；引入 path[]，存储 v~i~ 的直接前驱节点
+
+<img src="http://image.trouvaille0198.top/image-20210419083104462.png" alt="image-20210419083104462" style="zoom:50%;" />
+
+只看初边
+
+### 7.5.3 弧上权值任意值的单源点最短路径
+
+贝尔曼 - 福特算法
+
+从原点依次经过其他顶点，来缩短到达顶点的最短路径长度。要求：途中不能有路径长度为负数的**回路**
+
+<img src="http://image.trouvaille0198.top/image-20210419085915738.png" alt="image-20210419085915738" style="zoom:40%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210419090104101.png" alt="image-20210419090104101" style="zoom: 45%;" />
+
+递推公式
+
+<img src="http://image.trouvaille0198.top/image-20210419090451877.png" alt="image-20210419090451877" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210419090559757.png" alt="image-20210419090559757" style="zoom:50%;" />
+
+### 7.5.4 所有点之间的最短路径
+
+1. 以每一个点为原点，重复执行迪杰斯特拉算法；O(n^3^)
+2. 弗洛伊德（Floyd）算法
+
+<img src="http://image.trouvaille0198.top/image-20210419091217637.png" alt="image-20210419091217637" style="zoom:45%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210419091738628.png" alt="image-20210419091738628" style="zoom:50%;" />
+
+## 7.6 活动网络
+
+（Activity Network）
+
+### 7.6.1 用顶点表示活动的网络
+
+<img src="http://image.trouvaille0198.top/image-20210419093621497.png" alt="image-20210419093621497" style="zoom:45%;" />
+
+#### 1）概念
+
+- 有向无环图（Directed acycline graph）：一个无环的有向图，简称 DAG 图
+
+- 顶点表示活动的网络（Activity on vertices）：AOV 网络
+- 拓扑排序：把 AOV 网络中各顶点按照他们相互之间的优先关系排列成一个线性序列的过程
+    - 在有向图中选一个没有前驱的顶点且输出之
+    - 从图中删除该顶点和所有以它为尾的弧
+    - 重复前两步，直到所有顶点均已输出
+
+<img src="http://image.trouvaille0198.top/image-20210419100943832.png" alt="image-20210419100943832" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210419101244005.png" alt="image-20210419101244005" style="zoom:45%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210419101738002.png" alt="image-20210419101738002" style="zoom:40%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210419101626892.png" alt="image-20210419101626892" style="zoom:50%;" />
+
+### 7.6.2 用边表示活动的网络
+
+<img src="http://image.trouvaille0198.top/image-20210419101854295.png" alt="image-20210419101854295" style="zoom:50%;" />
+
+#### 1）概念
+
+- 边表示活动的网络（activity on edges）：简称 **AOE 网络**
+    - 边的值：此活动持续的时间
+
+- 顶点表示事件（event），保证一个源点，一个汇点
+    - 关键路径：具有最大路径长度的路径
+    - 关键活动：关键路径上的所有活动
+
+<img src="http://image.trouvaille0198.top/image-20210419102732678.png" alt="image-20210419102732678" style="zoom:45%;" />
+
+- 求顶点的最早开始时间：从源点起，各个入边的值加上其弧尾的最早开始时间，取最大值
+
+- 求顶点的最晚开始时间：从汇点起，顶点的最早开始时间减去各个出边的值，取最小值
+- 求活动的最早开始时间：弧尾的最早开始时间
+- 求活动的最晚开始时间：其弧头的最晚开始时间减去活动时间
