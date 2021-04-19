@@ -468,7 +468,7 @@ plt.show()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221185252453.png" alt="image-20201221185252453" style="zoom:67%;" />
 
-## 3.2.1 气泡图
+## 3.2 气泡图
 
 加入了第三个值 `s` 可以理解成普通散点，画的是二维，泡泡图体现了Z的大小
 
