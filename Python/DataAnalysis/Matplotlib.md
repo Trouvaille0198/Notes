@@ -1,5 +1,24 @@
 ![在这里插入图片描述](https://trou.oss-cn-shanghai.aliyuncs.com/img/20200311093420888.png)
 
+```python
+from birthday import get_p
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set()
+
+m = 2000
+n = [i for i in range(100)]
+q = [get_p(m, i) for i in n]
+
+plt.plot(n, q)
+plt.xlabel("student number")
+plt.ylabel("probability")
+plt.legend()
+
+plt.savefig(fname='pic.png')
+plt.show()
+```
+
 # 一、创建图片与子图
 
 ==若不创建实例，一切对象名均使用plt！==
