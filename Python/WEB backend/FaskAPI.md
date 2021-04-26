@@ -280,7 +280,7 @@ async def update_item(item_id: int, item: Item, user: User):
 }
 ```
 
-#### 2）添加额外请求体
+#### 2）添加额外请求体 `body`
 
 为了扩展先前的模型，你可能决定除了 `item` 和 `user` 之外，还想在同一请求体中具有另一个键 `importance`。
 
@@ -686,6 +686,80 @@ Tip
 >
 > 然后你接收的名为 `weights` 的 `dict` 实际上将具有 `int` 类型的键和 `float` 类型的值。
 
+### 2.5.9 模型示例
+
+#### 1）`Config` 和 `schema_extra`
+
+可以使用 `Config` 和 `schema_extra` 为 Pydantic 模型声明一个示例
+
+```python
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "name": "Foo",
+                "description": "A very nice Item",
+                "price": 35.4,
+                "tax": 3.2,
+            }
+        }
+```
+
+> 传递的那些额外参数不会添加任何验证，只会添加注释，用于文档的目的。
+
+#### 2）`example` 
+
+或者使用 `example` 为单个字段添加示例
+
+```python
+from pydantic import Field
+
+class Item(BaseModel):
+    name: str = Field(..., example="Foo")
+    description: Optional[str] = Field(None, example="A very nice Item")
+    price: float = Field(..., example=35.4)
+    tax: Optional[float] = Field(None, example=3.2)
+
+```
+
+不过这样写感觉蛮麻烦的... 
+
+#### 3）`Body`等的额外参数
+
+可以通过传递额外信息给 `Field` 同样的方式操作`Path`, `Query`, `Body`等。
+
+```python
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
+
+
+@app.put("/items/{item_id}")
+async def update_item(
+    item_id: int,
+    item: Item = Body(
+        ...,
+        example={
+            "name": "Foo",
+            "description": "A very nice Item",
+            "price": 35.4,
+            "tax": 3.2,
+        },
+    ),
+):
+    results = {"item_id": item_id, "item": item}
+    return results
+```
+
+感觉也没必要
+
 ## 2.6 校验
 
 ### 2.6.1 对查询参数的校验
@@ -838,3 +912,4 @@ async def read_items(
     # ...
 ```
 
+## 2.7 Cookie 参数
