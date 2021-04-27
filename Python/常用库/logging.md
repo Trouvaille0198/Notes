@@ -26,19 +26,25 @@ import logging
 
 使用模块级记录器
 
+`Logger` 是一个记录器类
+
 ```python
 logger = logging.getLogger(__name__)
 ```
 
 这意味着记录器名称跟踪包或模块的层次结构，并且直观地从记录器名称显示记录事件的位置。
 
-### 1.1.3 配置
+# 二、配置
 
-#### 1）***logging.basicConfig()***
+## 2.1 全局配置 ***basicConfig()***
+
+默认情况下，没有为任何日志记录消息设置目标。 你可以使用 `basicConfig()` 指定目标
+
+通过使用默认的 `Formatter` 创建一个 `StreamHandler` 并将其加入根日志记录器来为日志记录系统执行基本配置。 如果没有为根日志记录器定义处理程序则 debug(), info(), warning(), error() 和 critical() 等函数将自动调用 basicConfig()
 
 **参数**
 
-- *filename*：指定日志文件名，
+- *filename*：指定日志文件名
 - *filemode*：指定日志文件的打开模式，'w' 或者 'a'，默认为 'a'
 - *format*：指定输出的格式和内容
 
@@ -84,3 +90,312 @@ logger.info("Finish")
 ```
 
 对 [`basicConfig()`](https://docs.python.org/zh-cn/3/library/logging.html#logging.basicConfig) 的调用应该在 [`debug()`](https://docs.python.org/zh-cn/3/library/logging.html#logging.debug) ， [`info()`](https://docs.python.org/zh-cn/3/library/logging.html#logging.info) 等的前面。因为它被设计为一次性的配置，只有第一次调用会进行操作，随后的调用不会产生有效操作。
+
+## 2.2 对实例的配置
+
+对记录器类进行配置，实际上都是 `Logger` 类的成员函数
+```python
+import logging
+
+# create logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+
+# create formatter
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# add formatter to ch
+ch.setFormatter(formatter)
+
+# add ch to logger
+logger.addHandler(ch)
+
+# 'application' code
+logger.debug('debug message')
+logger.info('info message')
+logger.warning('warn message')
+logger.error('error message')
+logger.critical('critical message')
+```
+
+
+- ***setLevel(level)***
+
+    设置记录器级别，高于 level 会被输出
+
+    - *level*：级别，默认为 `logging.WARNING`
+
+    | 级别       | 数值 |
+    | :--------- | :--- |
+    | `CRITICAL` | 50   |
+    | `ERROR`    | 40   |
+    | `WARNING`  | 30   |
+    | `INFO`     | 20   |
+    | `DEBUG`    | 10   |
+    | `NOTSET`   | 0    |
+
+- ***addHandler(hdlr)***
+
+    将指定的处理器 hdlr 添加到此记录器
+
+- ***removeHandler(hdlr)***
+
+    移除指定处理器
+
+- ***addFilter(filter)***
+
+    将指定的过滤器 *filter* 添加到此记录器
+
+- ***removeFilter(filter)***
+
+    移除指定过滤器
+
+## 2.3 调用外部配置文件 ***fileConfig()***
+
+```python
+import logging
+import logging.config
+
+logging.config.fileConfig('logging.conf')
+
+# create logger
+logger = logging.getLogger(__name__)
+
+# 'application' code
+logger.debug('debug message')
+logger.info('info message')
+logger.warning('warn message')
+logger.error('error message')
+logger.critical('critical message')
+```
+
+配置文件例 (.conf)
+
+```conf
+[loggers]
+keys=root,simpleExample
+
+[handlers]
+keys=consoleHandler
+
+[formatters]
+keys=simpleFormatter
+
+[logger_root]
+level=DEBUG
+handlers=consoleHandler
+
+[logger_simpleExample]
+level=DEBUG
+handlers=consoleHandler
+qualname=simpleExample
+propagate=0
+
+[handler_consoleHandler]
+class=StreamHandler
+level=DEBUG
+formatter=simpleFormatter
+args=(sys.stdout,)
+
+[formatter_simpleFormatter]
+format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+datefmt=
+```
+
+或使用 YAML 格式
+
+```yaml
+version: 1
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+loggers:
+  simpleExample:
+    level: DEBUG
+    handlers: [console]
+    propagate: no
+root:
+  level: DEBUG
+  handlers: [console]
+```
+
+也可以使用 json 格式
+
+```python
+{
+    "version":1,
+    "disable_existing_loggers":false,
+    "formatters":{
+        "simple":{
+            "format":"%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        }
+    },
+    "handlers":{
+        "console":{
+            "class":"logging.StreamHandler",
+            "level":"DEBUG",
+            "formatter":"simple",
+            "stream":"ext://sys.stdout"
+        },
+        "info_file_handler":{
+            "class":"logging.handlers.RotatingFileHandler",
+            "level":"INFO",
+            "formatter":"simple",
+            "filename":"info.log",
+            "maxBytes":"10485760",
+            "backupCount":20,
+            "encoding":"utf8"
+        },
+        "error_file_handler":{
+            "class":"logging.handlers.RotatingFileHandler",
+            "level":"ERROR",
+            "formatter":"simple",
+            "filename":"errors.log",
+            "maxBytes":10485760,
+            "backupCount":20,
+            "encoding":"utf8"
+        }
+    },
+    "loggers":{
+        "my_module":{
+            "level":"ERROR",
+            "handlers":["info_file_handler"],
+            "propagate":"no"
+        }
+    },
+    "root":{
+        "level":"INFO",
+        "handlers":["console","info_file_handler","error_file_handler"]
+    }
+}
+```
+
+传入到程序中
+
+```python
+import json
+import logging.config
+import os
+ 
+def setup_logging(default_path = "logging.json",default_level = logging.INFO,env_key = "LOG_CFG"):
+    path = default_path
+    value = os.getenv(env_key,None)
+    if value:
+        path = value
+    if os.path.exists(path):
+        with open(path,"r") as f:
+            config = json.load(f)
+            logging.config.dictConfig(config)
+    else:
+        logging.basicConfig(level = default_level)
+ 
+def func():
+    logging.info("start func")
+ 
+    logging.info("exec func")
+ 
+    logging.info("end func")
+ 
+if __name__ == "__main__":
+    setup_logging(default_path = "logging.json")
+    func()
+```
+
+实际上将 json 格式转化为字典，借用了字典的配置
+
+## 2.4 字典配置 ***dictConfig()***
+
+# 三、处理器 Handler
+
+`Handler` 对象负责将适当的日志消息（基于日志消息的严重性）分派给处理程序的指定目标
+
+## 3.1 API
+
+- ***setLevel(level)***
+
+    为处理器设置等级
+
+- ***setFormatter(fmt)***
+
+- ***addFilter(filter)***
+
+    将指定的过滤器 *filter* 添加到处理器
+
+- ***removeFilter(filter)***
+
+    移除指定过滤器
+
+## 3.2 FileHandler
+
+要将日志打印到文件中，使用 `basicConfig` 中的 `filename` 参数指定日志文件
+
+更建议使用 `FileHandler` 实现
+
+生成实例时，传入日志文件名即可
+
+```python
+import logging
+logger = logging.getLogger(__name__)
+logger.setLevel(level = logging.INFO)
+
+handler = logging.FileHandler("log.txt")
+handler.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+```
+
+## 3.3 StreamHandler
+
+默认的 `basicConfig` 配置即支持打印日志
+
+但更建议使用 `StreamHandler` 实现
+
+以下例为**同时输出到控制台与文件**
+
+```python
+import logging
+logger = logging.getLogger(__name__)
+logger.setLevel(level = logging.INFO)
+
+fileHdlr = logging.FileHandler("log.txt")
+fileHdlr.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fileHdlr.setFormatter(formatter)
+ 
+consoleHdlr = logging.StreamHandler()
+consoleHdlr.setLevel(logging.INFO)
+ 
+logger.addHandler(fileHdlr)
+logger.addHandler(consoleHdlr)
+```
+
+# 四、过滤器 Filter
+
+格式化程序对象配置日志消息的最终顺序、结构和内容
+
+其构造函数有三个可选参数 —— 消息格式字符串、日期格式字符串和样式指示符
+
+```python
+logging.Formatter.__init__(fmt=None, datefmt=None, style='%')
+```
+
+参数形式与 `basicConfig` 中的 foramt 参数相同
+
+```python
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+```
+
+
+
