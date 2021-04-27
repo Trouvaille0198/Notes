@@ -161,6 +161,45 @@ func('Jack', 24, **extra)
 
 **kw是关键字参数，kw接收的是一个dict
 
+### 1.3.3 装饰器
+
+```python
+def timer(func):
+    def wrapper(*args):
+        start=time.time()
+        a=func(*args)
+        end=time.time()
+        print("time taken:",end-start)
+        return a
+    return wrapper
+
+def add(a,b):
+    return a+b
+def sub(a,b):
+    return a-b
+
+add=timer(add)
+sub=timer(sub)
+print(add(1,2))
+print(sub(1,2))
+```
+
+
+
+```python
+@timer
+def add(a,b):
+    return a+b
+@timer
+def sub(a,b):
+    return a-b
+
+print(add(1,2))
+print(sub(1,2))
+```
+
+
+
 # 二、列表
 
 列表赋值，实质上指向同一块内存
