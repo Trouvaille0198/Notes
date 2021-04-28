@@ -988,3 +988,20 @@ X-Token: bar
 
 ## 2.9 响应模型
 
+# 三、ORM
+
+使用 sqlalchemy
+
+## 3.1 目录格式
+
+```shell
+.
+└── sql_app
+    ├── __init__.py # 声明模块
+    ├── crud.py # 增删查改函数
+    ├── database.py 
+    ├── main.py
+    ├── models.py # 数据库表格模板
+    └── schemas.py 
+```
+

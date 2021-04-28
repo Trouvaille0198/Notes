@@ -5,6 +5,8 @@
     - [ ] 迭代器
     - [ ] 生成器
     - [ ] 装饰器
+- [ ] 看 Vuetify 案例
+- [ ] 看 FastAPI 与 Vue 项目
 - [ ] python 常用函数和库
     - [ ] collections
     - [ ] json
@@ -25,3 +27,5 @@
 - [ ] Java
 - [ ] Golang
 - [ ] js 内置对象
+- [ ] 看 Kaggle
+
