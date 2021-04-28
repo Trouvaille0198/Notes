@@ -760,6 +760,73 @@ async def update_item(
 
 感觉也没必要
 
+### 2.5.10 文件请求
+
+To receive uploaded files, install python-multipart
+
+```shell
+pip install python-multipart
+```
+
+```python
+from fastapi import File, UploadFile
+```
+
+```python
+@app.post("/files/")
+async def create_file(file: bytes = File(...)):
+    return {"file_size": len(file)}
+
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    return {"filename": file.filename}
+```
+
+Uploadfile 的属性
+
+- `filename`: A `str` with the original file name that was uploaded (e.g. `myimage.jpg`).
+- `content_type`: A `str` with the content type (MIME type / media type) (e.g. `image/jpeg`).
+- `file`: This is the actual Python file that you can pass directly to other functions or libraries that expect a "file-like" object.
+
+方法
+
+- `write(data)`: Writes `data` (`str` or `bytes`) to the file.
+- `read(size)`: Reads `size` (`int`) bytes/characters of the file.
+- `seek(offset)`: Goes to the byte position
+- `offset`(`int`) in the file.
+    - E.g., `await myfile.seek(0)` would go to the start of the file.
+    - This is especially useful if you run `await myfile.read()` once and then need to read the contents again.
+- `close()`: Closes the file
+
+As all these methods are `async` methods, you need to "await" them.
+
+For example, inside of an `async` *path operation function* you can get the contents with:
+
+```
+contents = await myfile.read()
+```
+
+If you are inside of a normal `def` *path operation function*, you can access the `UploadFile.file` directly, for example:
+
+```
+contents = myfile.file.read()
+```
+
+至于多文件上传
+
+```python
+@app.post("/files/")
+async def create_files(files: List[bytes] = File(...)):
+    return {"file_sizes": [len(file) for file in files]}
+
+
+@app.post("/uploadfiles/")
+async def create_upload_files(files: List[UploadFile] = File(...)):
+    return {"filenames": [file.filename for file in files]}
+```
+
+
+
 ## 2.6 校验
 
 ### 2.6.1 对查询参数的校验
@@ -986,7 +1053,395 @@ X-Token: bar
 }
 ```
 
-## 2.9 响应模型 response
+## 2.9 响应 response
+
+### 2.9.1 响应模型 response_model
+
+使用 `response_model` 参数来声明用于响应的模型，也就是要向前端返回的数据类型
+
+这样做的主要目的是**确保私有数据在返回时被过滤掉**
+
+FastAPI 将使用此 `response_model` 来：
+
+- 将输出数据转换为其声明的类型
+- 校验数据。
+- 在 OpenAPI 的*路径操作*中为响应添加一个 JSON Schema。
+- 并在自动生成文档系统中使用
+
+```python
+class UserIn(BaseModel):
+    username: str
+    password: str
+    email: EmailStr
+    full_name: Optional[str] = None
+
+class UserOut(BaseModel):
+    username: str
+    email: EmailStr
+    full_name: Optional[str] = None
+
+@app.post("/user/", response_model=UserOut)
+async def create_user(user: UserIn):
+    return user
+```
+
+**FastAPI** 将会负责过滤掉未在输出模型中声明的所有数据
+
+#### 1） 过滤默认值
+
+响应模型也可以拥有默认值
+
+你可以设置路径操作装饰器的 `response_model_exclude_unset=True` 参数，以便在响应的返回数据中去除默认值
+
+```python
+@app.get("/items/{item_id}", response_model=Item, response_model_exclude_unset=True)
+```
+
+#### 2）指定返回的数据
+
+使用路径操作装饰器的 `response_model_include` 和 `response_model_exclude` 参数
+
+```python
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: float = 10.5
+
+
+items = {
+    "foo": {"name": "Foo", "price": 50.2},
+    "bar": {"name": "Bar", "description": "The Bar fighters", "price": 62, "tax": 20.2},
+    "baz": {
+        "name": "Baz",
+        "description": "There goes my baz",
+        "price": 50.2,
+        "tax": 10.5,
+    },
+}
+
+
+@app.get(
+    "/items/{item_id}/name",
+    response_model=Item,
+    response_model_include={"name", "description"},
+)
+async def read_item_name(item_id: str):
+    return items[item_id]
+
+
+@app.get("/items/{item_id}/public", response_model=Item, response_model_exclude={"tax"})
+async def read_item_public_data(item_id: str):
+    return items[item_id]
+```
+
+可以用 set，也可以用 list
+
+#### 3）多个模型
+
+拥有多个相关的模型是很常见的。
+
+对用户模型来说尤其如此，因为：
+
+- **输入模型**需要拥有密码属性。
+- **输出模型**不应该包含密码。
+- **数据库模型**很可能需要保存密码的哈希值
+
+下面是应该如何根据它们的密码字段以及使用位置去定义模型的大概思路
+
+```python
+from typing import Optional
+from fastapi import FastAPI
+from pydantic import BaseModel, EmailStr
+
+app = FastAPI()
+
+class UserBase(BaseModel):
+    username: str
+    email: EmailStr
+    full_name: Optional[str] = None
+
+class UserIn(UserBase):
+    password: str
+
+class UserOut(UserBase):
+    pass
+
+class UserInDB(UserBase):
+    hashed_password: str
+
+def fake_password_hasher(raw_password: str):
+    return "supersecret" + raw_password
+
+def fake_save_user(user_in: UserIn):
+    hashed_password = fake_password_hasher(user_in.password)
+    user_in_db = UserInDB(**user_in.dict(), hashed_password=hashed_password)
+    print("User saved! ..not really")
+    return user_in_db
+
+@app.post("/user/", response_model=UserOut)
+async def create_user(user_in: UserIn):
+    user_saved = fake_save_user(user_in)
+    return user_saved
+```
+
+最终的结果如下
+
+```python
+UserInDB(
+    username = user_dict["username"],
+    password = user_dict["password"],
+    email = user_dict["email"],
+    full_name = user_dict["full_name"],
+    hashed_password = hashed_password,
+)
+```
+
+#### 4）Union
+
+你可以将一个响应声明为两种类型的 `Union`，这意味着该响应将是两种类型中的任何一种。
+
+这将在 OpenAPI 中使用 `anyOf` 进行定义。
+
+```python
+from typing import Union
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class BaseItem(BaseModel):
+    description: str
+    type: str
+
+class CarItem(BaseItem):
+    type = "car"
+
+class PlaneItem(BaseItem):
+    type = "plane"
+    size: int
+
+items = {
+    "item1": {"description": "All my friends drive a low rider", "type": "car"},
+    "item2": {
+        "description": "Music is my aeroplane, it's my aeroplane",
+        "type": "plane",
+        "size": 5,
+    },
+}
+
+@app.get("/items/{item_id}", response_model=Union[PlaneItem, CarItem])
+async def read_item(item_id: str):
+    return items[item_id]
+```
+
+> 定义一个 Union 类型时，首先包括最详细的类型，然后是不太详细的类型。在上面的示例中，更详细的 PlaneItem 位于 Union[PlaneItem，CarItem] 中的 CarItem 之前
+
+#### 5）列表形式的响应模型
+
+可以用同样的方式声明由对象列表构成的响应
+
+```python
+from typing import List
+from fastapi import FastAPI
+from pydantic import BaseModel
+app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    description: str
+
+items = [
+    {"name": "Foo", "description": "There comes my hero"},
+    {"name": "Red", "description": "It's my aeroplane"},
+]
+
+@app.get("/items/", response_model=List[Item])
+async def read_items():
+    return items
+```
+
+#### 6）任意 dict 构成的响应
+
+你还可以使用一个任意的普通 `dict` 声明响应，仅声明键和值的类型，而不使用 Pydantic 模型。
+
+如果你事先不知道有效的字段/属性名称（对于 Pydantic 模型是必需的），这将很有用。
+
+在这种情况下，你可以使用 `typing.Dict`：
+
+```python
+from typing import Dict
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/keyword-weights/", response_model=Dict[str, float])
+async def read_keyword_weights():
+    return {"foo": 2.3, "bar": 3.4}
+```
+
+### 2.9.2 响应状态码
+
+可以在路径操作器中使用 `status_code` 参数来声明用于响应的 HTTP 状态码
+
+```python
+@app.post("/items/", status_code=201)
+```
+
+#### 1）简介
+
+- `100` 及以上状态码用于「消息」响应。你很少直接使用它们。具有这些状态代码的响应不能带有响应体。
+- `200` 及以上状态码用于「成功」响应。这些是你最常使用的。
+    - `200` 是默认状态代码，它表示一切「正常」。
+    - 另一个例子会是 `201`，「已创建」。它通常在数据库中创建了一条新记录后使用。
+    - 一个特殊的例子是 `204`，「无内容」。此响应在没有内容返回给客户端时使用，因此该响应不能包含响应体。
+- **`300`** 及以上状态码用于「重定向」。具有这些状态码的响应可能有或者可能没有响应体，但 `304`「未修改」是个例外，该响应不得含有响应体。
+- `400` 及以上状态码用于「客户端错误」响应。这些可能是你第二常使用的类型。
+    - 一个例子是 `404`，用于「未找到」响应。
+    - 对于来自客户端的一般错误，你可以只使用 `400`。
+- `500` 及以上状态码用于服务器端错误。你几乎永远不会直接使用它们。当你的应用程序代码或服务器中的某些部分出现问题时，它将自动返回这些状态代码之一
+
+#### 2）便捷变量
+
+可以使用来自 `fastapi.status` 的便捷变量
+
+```python
+from fastapi import status
+
+@app.post("/items/", status_code=status.HTTP_201_CREATED)
+```
+
+仅仅是为了自动补全...
+
+### 2.9.3 表单数据
+
+When you need to receive form fields instead of JSON, you can use `Form`.
+
+```python
+from fastapi import FastAPI, Form
+
+app = FastAPI()
+
+@app.post("/login/")
+async def login(username: str = Form(...), password: str = Form(...)):
+    return {"username": username}
+```
+
+### 2.9.5 文件响应
+
+```python
+from fastapi import FastAPI, File, Form, UploadFile
+
+app = FastAPI()
+
+@app.post("/files/")
+async def create_file(
+    file: bytes = File(...), fileb:UploadFile = File(...), token: str = Form(...)
+):
+    return {
+        "file_size": len(file),
+        "token": token,
+        "fileb_content_type": fileb.content_type,
+    }
+```
+
+### 2.9.6 错误处理
+
+使用 `HTTPException` 来向前端返回错误请求
+
+```python
+from fastapi import HTTPException
+```
+
+```python
+items = {"foo": "The Foo Wrestlers"}
+
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: str):
+    if item_id not in items:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return {"item": items[item_id]}
+```
+
+## 2.10 路径修饰器的其他参数
+
+### 2.10.1 tags
+
+传递 list 或 str 参数
+
+Tags will be added to the OpenAPI schema and used by the automatic documentation interfaces
+
+```python
+@app.post("/items/", response_model=Item, tags=["items"])
+async def create_item(item: Item):
+    return item
+
+
+@app.get("/items/", tags=["items"])
+async def read_items():
+    return [{"name": "Foo", "price": 42}]
+
+
+@app.get("/users/", tags=["users"])
+async def read_users():
+    return [{"username": "johndoe"}]
+```
+
+### 2.10.2 Summary and description
+
+```python
+@app.post(
+    "/items/",
+    response_model=Item,
+    summary="Create an item",
+    description="Create an item with all the information, name, description, price, tax and a set of unique tags",
+)
+async def create_item(item: Item):
+    return item
+```
+
+### 2.10.3 Description from docstring
+
+You can write Markdown in the docstring, it will be interpreted and displayed correctly
+
+```python
+@app.post("/items/", response_model=Item, summary="Create an item")
+async def create_item(item: Item):
+    """
+    Create an item with all the information:
+
+    - **name**: each item must have a name
+    - **description**: a long description
+    - **price**: required
+    - **tax**: if the item doesn't have tax, you can omit this
+    - **tags**: a set of unique tag strings for this item
+    """
+    return item
+```
+
+### 2.10.4 Response description
+
+```python
+@app.post(
+    "/items/",
+    response_model=Item,
+    summary="Create an item",
+    response_description="The created item",
+)
+```
+
+> Notice that `response_description` refers specifically to the response, the `description` refers to the *path operation* in general.
+
+### 2.10.5 deprecated
+
+标记已废弃的 API
+
+```python
+@app.get("/elements/", tags=["items"], deprecated=True)
+async def read_elements():
+    return [{"item_id": "Foo"}]
+```
 
 # 三、ORM
 
@@ -1004,4 +1459,183 @@ X-Token: bar
     ├── models.py # 数据库表格模板
     └── schemas.py 
 ```
+
+# 四、跨域资源共享
+
+跨域资源共享指浏览器中运行的前端拥有与后端通信的 JavaScript 代码，而后端处于与前端不同的「源」的情况。
+
+## 4.1 源
+
+源是协议（`http`，`https`）、域（`myapp.com`，`localhost`，`localhost.tiangolo.com`）以及端口（`80`、`443`、`8080`）的组合。
+
+因此，这些都是不同的源：
+
+- `http://localhost`
+- `https://localhost`
+- `http://localhost:8080`
+
+即使它们都在 `localhost` 中，但是它们使用不同的协议或者端口，所以它们都是不同的「源」。
+
+后端必须有一个「允许的源」列表，才能接收来自前端的请求
+
+可以使用 `"*"`（一个「通配符」）声明这个列表，表示全部都是允许的，但为了一切都能正常工作，最好显式地指定允许的源
+
+## 4.2 CORSMiddleware
+
+你可以在 **FastAPI** 应用中使用 `CORSMiddleware` 来配置它。
+
+- 导入 `CORSMiddleware`。
+- 创建一个允许的源列表（由字符串组成）。
+- 将其作为「中间件」添加到你的 **FastAPI** 应用中。
+
+你也可以指定后端是否允许：
+
+- 凭证（授权 headers，Cookies 等）。
+- 特定的 HTTP 方法（`POST`，`PUT`）或者使用通配符 `"*"` 允许所有方法。
+- 特定的 HTTP headers 或者使用通配符 `"*"` 允许所有 headers。
+
+```python
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+async def main():
+    return {"message": "Hello World"}
+```
+
+**参数**
+
+- `allow_origins` - 一个允许跨域请求的源列表。例如 `['https://example.org', 'https://www.example.org']`。你可以使用 `['*']` 允许任何源。
+- `allow_origin_regex` - 一个正则表达式字符串，匹配的源允许跨域请求。例如 `'https://.*\.example\.org'`。
+- `allow_methods` - 一个允许跨域请求的 HTTP 方法列表。默认为 `['GET']`。你可以使用 `['*']` 来允许所有标准方法。
+- `allow_headers` - 一个允许跨域请求的 HTTP 请求头列表。默认为 `[]`。你可以使用 `['*']` 允许所有的请求头。`Accept`、`Accept-Language`、`Content-Language` 以及 `Content-Type` 请求头总是允许 CORS 请求。
+- `allow_credentials` - 指示跨域请求支持 cookies。默认是 `False`。另外，允许凭证时 `allow_origins` 不能设定为 `['*']`，必须指定源。
+- `expose_headers` - 指示可以被浏览器访问的响应头。默认为 `[]`。
+- `max_age` - 设定浏览器缓存 CORS 响应的最长时间，单位是秒。默认为 `600`。
+
+# 五、文件结构
+
+```shell
+.
+├── app
+│   ├── __init__.py
+│   ├── main.py
+│   ├── dependencies.py
+│   └── routers
+│   │   ├── __init__.py
+│   │   ├── items.py
+│   │   └── users.py
+│   └── internal
+│       ├── __init__.py
+│       └── admin.py
+```
+
+## 5.1 路径分离 APIRouter
+
+可以将 `APIRouter` 视为一个「迷你 `FastAPI`」类
+
+```python
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.get("/users/", tags=["users"])
+async def read_users():
+    return [{"username": "Rick"}, {"username": "Morty"}]
+```
+
+可以在 `APIRouter` 中增添配置，免去将配置项添加到每一个路径操作中的烦恼
+
+-  `prefix`：父级路径
+- `tags`：标签
+-  `responses`
+- `dependencies`：注入的依赖项
+
+> 仍然可以添加*更多*将会应用于特定的*路径操作*的 `tags`，以及一些特定于该*路径操作*的额外 `responses`
+
+```python
+router = APIRouter(
+    prefix="/items",
+    tags=["items"],
+    dependencies=[Depends(get_token_header)],
+    responses={404: {"description": "Not found"}},
+)
+
+fake_items_db = {"plumbus": {"name": "Plumbus"}, "gun": {"name": "Portal Gun"}}
+
+@router.get("/")
+async def read_items():
+    return fake_items_db
+
+@router.get("/{item_id}")
+async def read_item(item_id: str):
+    if item_id not in fake_items_db:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return {"name": fake_items_db[item_id]["name"], "item_id": item_id}
+```
+
+## 5.3 主体
+
+主题通常位于项目根目录，名字为 `main.py`
+
+```python
+from fastapi import Depends, FastAPI
+from .dependencies import get_query_token, get_token_header
+from .internal import admin
+from .routers import items, users
+
+app = FastAPI(dependencies=[Depends(get_query_token)])
+
+app.include_router(users.router)
+app.include_router(items.router)
+app.include_router(
+    admin.router,
+    prefix="/admin",
+    tags=["admin"],
+    dependencies=[Depends(get_token_header)],
+    responses={418: {"description": "I'm a teapot"}},
+)
+
+# 没必要
+@app.get("/")
+async def root():
+    return {"message": "Hello Bigger Applications!"}
+```
+
+>「相对导入」：
+>
+>```python
+>from .routers import items, users
+>```
+>
+>「绝对导入」：
+>
+>```python
+>from app.routers import items, users
+>```
+
+
+
+## 5.2 依赖项
+
+一些在应用程序的好几个地方所使用的依赖项，可以放在它们自己的 `dependencies` 模块（`app/dependencies.py`）中
+
+# 六、安全性
 
