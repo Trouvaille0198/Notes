@@ -16,7 +16,7 @@ uvicorn main:app --reload
 
 可选的文档：`url/redoc`
 
-# 二、特点
+# 二、特性
 
 ## 2.1 基本格式
 
@@ -913,3 +913,78 @@ async def read_items(
 ```
 
 ## 2.7 Cookie 参数
+
+```python
+from fastapi import Cookie
+```
+
+可以像定义 `Query` 参数和 `Path` 参数一样来定义 `Cookie` 参数
+
+```python
+@app.get("/items/")
+async def read_items(ads_id: Optional[str] = Cookie(None)):
+    return {"ads_id": ads_id}
+```
+
+> `Cookie` 、`Path` 、`Query`是兄弟类，它们都继承自公共的 `Param` 类
+>
+> 但请记住，当你从 `fastapi` 导入的 `Query`、`Path`、`Cookie` 或其他参数声明函数，这些实际上是返回特殊类的函数。
+
+## 2.8 Header 参数
+
+```python
+from fastapi import Header
+```
+
+使用和`Path`, `Query` and `Cookie` 一样的结构定义 header 参数
+
+```python
+@app.get("/items/")
+async def read_items(user_agent: Optional[str] = Header(None)):
+    return {"User-Agent": user_agent}
+```
+
+### 2.8.1 特性
+
+默认情况下, `Header` 将把参数名称的字符从下划线 (`_`) 转换为连字符 (`-`) 来提取并记录 headers
+
+同时，HTTP headers 是大小写不敏感的，因此，因此可以使用标准Python样式(也称为 "snake_case")声明它们
+
+若需要禁用下划线到连字符的自动转换
+
+```python
+Header(None, convert_underscores=False)
+```
+
+### 2.8.2 接受重复值
+
+相同的 header 具有多个值时，可以在类型声明中使用一个list来定义这些情况
+
+比如，为了声明一个 `X-Token` header 可以出现多次，你可以这样写
+
+```python
+@app.get("/items/")
+async def read_items(x_token: Optional[List[str]] = Header(None)):
+    return {"X-Token values": x_token}
+```
+
+如果你与*路径操作*通信时发送两个HTTP headers，就像：
+
+```python
+X-Token: foo
+X-Token: bar
+```
+
+响应会是:
+
+```python
+{
+    "X-Token values": [
+        "bar",
+        "foo"
+    ]
+}
+```
+
+## 2.9 响应模型
+
