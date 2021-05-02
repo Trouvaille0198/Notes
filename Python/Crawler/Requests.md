@@ -372,9 +372,9 @@ print(type(r.headers), r.headers)
 
 ## 3.1 会话维持
 
-requests中的session对象能够让我们跨http请求保持某些参数，即让同一个session对象发送的请求头携带某个指定的参数。当然，最常见的应用是它可以让cookie保持在后续的一串请求中
+requests 中的 session 对象能够让我们跨http请求保持某些参数，即让同一个 session 对象发送的请求头携带某个指定的参数。当然，最常见的应用是它可以让 cookie 保持在后续的一串请求中
 
-即，利用Session对象，可以方便地维护一个会话
+即，利用 Session 对象，可以方便地维护一个会话
 
 ```python
 import requests
