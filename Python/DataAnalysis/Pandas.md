@@ -997,6 +997,16 @@ df['priority'] = df['priority'].map({'yes': True, 'no': False})
 df.sum().idxmin()
 ```
 
+7. 去除 Unnamed:0 列
+
+```python
+pd.read_csv(path, index_col=0)
+# or
+pd.to_csv(path, index=False)
+```
+
+
+
 # 六、预览 DataFrame
 
 一个独立的支持库，pandas_profiling，可以快速预览数据集。

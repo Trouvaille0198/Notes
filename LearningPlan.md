@@ -5,6 +5,7 @@
     - [ ] 迭代器
     - [ ] 生成器
     - [ ] 装饰器
+    - [ ] 异步 I/O https://www.liaoxuefeng.com/wiki/1016959663602400/1017959540289152
 - [ ] 看 Vuetify 案例
 - [ ] 看 FastAPI 与 Vue 项目
 - [ ] python 常用函数和库
@@ -18,16 +19,17 @@
     - [ ] aiohttp
     - [ ] turtle
 - [ ] yaml
-- [ ] sqlalchemy
-- [ ] FastAPI
-    - [ ] 响应模型
+- [x] sqlalchemy
+- [x] FastAPI
 - [ ] vuex
 - [ ] scrapy
 - [ ] appium
-- [ ] fiddler
+- [x] fiddler
 - [ ] Java
 - [ ] Golang
 - [ ] js 内置对象
 - [ ] 看 Kaggle
 - [ ] nltk
+- [ ] NoneBot
+- [ ] Docker
 

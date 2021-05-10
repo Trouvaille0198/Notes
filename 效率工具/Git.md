@@ -440,7 +440,7 @@ $ touch .gitignore
 $ rm .git -rf
 ```
 
-# 八、规范建议
+# 八、规范
 
 ## 8.1 GitFlow
 
