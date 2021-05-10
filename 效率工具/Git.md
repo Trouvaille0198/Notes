@@ -440,34 +440,50 @@ $ touch .gitignore
 $ rm .git -rf
 ```
 
+# 八、规范建议
 
+## 8.1 GitFlow
 
-```javascript
-module.exports = function () {
-    StructureSpawn.prototype.spawnCustomCreep =
-        function (energy, roleName) {
+![img](http://image.trouvaille0198.top/o_git-workflow-release-cycle-4maintenance.png)
 
-            var body = [];
-            if (roleName == 'carrier') {
-                var numOfParts = Math.floor(energy / 100);
-                for (let i = 0; i < numOfParts; i++) {
-                    body.push(CARRY);
-                }
-                for (let i = 0; i < numOfParts; i++) {
-                    body.push(MOVE);
-                }
-            }
+### 8.1.1 分支命名规范
 
-            return this.spawnCreep(body, roleName + Game.time, { memory: { role: roleName, working: false } });
-        };
-    StructureSpawn.prototype.clearMemory =
-        function () {
-            for (let name in Memory.creeps) {
-                if (Game.creeps[name] == undefined) {
-                    delete Memory.creeps[name];
-                }
-            }
-        };
-};
+- master：也称 main，存储正式发布的产品。
+    - 这个分支上的产品要求随时处于可部署状态。
+    - 它只能通过与其他分支合并来更新内容，禁止直接在 `master || main` 分支进行修改。
+- develop：汇总开发者完成的工作成果
+    - `develop` 分支上的产品可以是缺失功能模块的半成品，但是已有的功能模块不能是半成品
+    - `develop` 分支只能通过与其他分支合并来更新内容，禁止直接在 `develop` 分支进行修改。
+- feature 分支：feature/<功能名>，例如：feature/login
+    - 当要开发新功能时，从 master 分支创建一个新的 `feature` 分支，并在 `feature` 分支上进行开发。
+    - 开发完成后，需要将该 `feature` 分支合并到 `develop` 分支，最后删除该 `feature` 分支
+- release 分支
+    - 当 `develop` 分支上的项目准备发布时，从 `develop` 分支上创建一个新的 `release` 分支，新建的 `release` 分支只能进行质量测试、bug 修复、文档生成等面向发布的任务，不能再添加功能。
+    - 这一系列发布任务完成后，需要将 `release` 分支合并到 `master` 分支上，并根据版本号为 `master` 分支添加 `tag`，然后将 `release` 分支创建以来的修改合并回 `develop` 分支，最后删除 `release` 分支
+- hotfix 分支：hotfix/日期，例如：hotfix/0104
+    - 当 `master` 分支中的产品出现需要立即修复的 bug 时，从 `master` 分支上创建一个新的 `hotfix` 分支，并在 `hotfix` 分支上进行 BUG 修复。
+    - 修复完成后，需要将 `hotfix` 分支合并到 `master` 分支和 `develop` 分支，并为 `master` 分支添加新的版本号 `tag`，最后删除 `hotfix` 分支。
+
+![](http://image.trouvaille0198.top/21810c5662374b2bb10e11e307e83d7c~tplv-k3u1fbpfcp-watermark.image)
+
+## 8.2 commit 规范
+
 ```
+<type>(<scope>): <subject>
+```
+
+type
+
+- feat：新功能（feature）
+- fix：问题修复
+- docs：文档
+- style：调整格式（不影响代码运行）
+- refactor：重构
+- test：增加测试
+- chore：构建过程或辅助工具的变动
+- revert：撤销以前的提交
+
+scope：用于说明提交的影响范围，内容根据具体项目而定
+
+subject：概括提交内容
 

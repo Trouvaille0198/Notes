@@ -2563,3 +2563,221 @@ BST（Binary Sort / Search Tree）
 
 1. 左子树找最大
 2. 右子树找最小
+
+## 8.4 平衡二叉树
+
+AVL（）
+
+### 8.4.1 定义
+
+- 或是空树，或是符合以下条件
+
+- 左右子树都是平衡二叉树
+- 左右子树的高度差值不超过 1
+- 平衡因子（Balance factor，BF）：左右子树高度差，其绝对值不超过 1
+- 其 ASL可保持在 $O(log_2n)$
+
+<img src="http://image.trouvaille0198.top/image-20210510080329179.png" alt="image-20210510080329179" style="zoom:60%;" />
+
+### 8.4.2 平衡旋转
+
+#### 1）LL 平衡旋转——右单旋转
+
+左孩子的左子树失衡
+
+顺时针旋转
+
+<img src="http://image.trouvaille0198.top/image-20210510081108724.png" alt="image-20210510081108724" style="zoom:70%;" />
+
+#### 2）RR 平衡旋转——左单旋转
+
+右孩子的右子树失衡
+
+逆时针旋转
+
+<img src="http://image.trouvaille0198.top/image-20210510081227246.png" alt="image-20210510081227246" style="zoom:70%;" />
+
+#### 3）LR 平衡旋转——先左后右双旋转
+
+左孩子的右子树失衡
+
+<img src="http://image.trouvaille0198.top/image-20210510081304603.png" alt="image-20210510081304603" style="zoom:70%;" />
+
+#### 4）RL 平衡旋转——先右后左双旋转
+
+右孩子的左子树失衡
+
+<img src="http://image.trouvaille0198.top/image-20210510081355449.png" alt="image-20210510081355449" style="zoom:70%;" />
+
+### 8.4.3 插入
+
+#### 1）思想
+
+1. 按二叉树的排序性质插入节点
+2. 若插入后产生失衡，继续步骤 3，否则结束
+3. 找到失衡的最小子树
+4. 判断平衡旋转类型，进行相应的平衡化处理
+
+<img src="http://image.trouvaille0198.top/image-20210510083139739.png" alt="image-20210510083139739" style="zoom:55%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210510083150370.png" alt="image-20210510083150370" style="zoom:55%;" />
+
+#### 2）示例
+
+<img src="http://image.trouvaille0198.top/image-20210510083216777.png" alt="image-20210510083216777" style="zoom:60%;" />
+
+### 8.4.4 删除
+
+#### 1）思想
+
+定义布尔变量 `isShorter` 判断被删除结点的子树高度有没有被缩短
+
+<img src="http://image.trouvaille0198.top/image-20210510083857938.png" alt="image-20210510083857938" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210510083915922.png" alt="image-20210510083915922" style="zoom:50%;" />
+
+#### 2）示例
+
+删除结点 50
+
+<img src="http://image.trouvaille0198.top/image-20210510084127101.png" alt="image-20210510084127101" style="zoom:50%;" />
+
+## 8.5 B-树
+
+二叉排序树适合在内存中组织较小的索引；若对于存放在外存中的较大的文件系统，使用B-树或B+树做文件索引
+
+### 8.5.1 动态的 m 路查找树
+
+**定义**
+
+- 或是空树，或满足以下条件
+- 根节点最多有 m 棵树并具有结构 $(n,p_0,k_1,p_1,k_2,p_2,\cdots,k_n,p_n)$。其中，$p_i$ 是指向子树的指针，$k_i$ 是数据元素的关键字；$1\le i\le n<m$
+- $k_i<k_{i+1},i\le i<n$
+- 在  $p_i$ 所指的子树中所有数据元素的关键字都大于 $k_i$，且小于 $k_{i+1}$，$0\le i\le n$
+- 在  $p_n$ 所指的子树中所有数据元素的关键字都大于 $k_n$，而子树 $p_0$ 中的所有数据元素的关键字均小于 $k_1$
+- $p_i$ 所指的子树也是 m 路查找树，$0\le i\le n$
+
+<img src="http://image.trouvaille0198.top/image-20210510090656452.png" alt="image-20210510090656452" style="zoom:50%;" />
+
+### 8.5.2 定义
+
+一颗 m 阶的 B-树是一种平衡的 m 路查找树，通常用于文件系统（外查找）
+
+失败节点即叶子节点
+
+<img src="http://image.trouvaille0198.top/image-20210510090920715.png" alt="image-20210510090920715" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210510091034784.png" alt="image-20210510091034784" style="zoom: 50%;" />
+
+### 8.5.3 插入
+
+#### 1）思路
+
+插入指在结点中插入关键字
+
+关键字数在 $[\lceil m/2 \rceil-1,m-1]$ 之间
+
+若关键字超出 m-1，结点要分裂
+
+<img src="http://image.trouvaille0198.top/image-20210510092154652.png" alt="image-20210510092154652" style="zoom:50%;" />
+
+插入是个递归的过程
+
+#### 2）示例
+
+按照关键字 {35，26，74，60，49，17，41，53，29} 构建 3 阶 B-树
+
+<img src="http://image.trouvaille0198.top/image-20210510092510793.png" alt="image-20210510092510793" style="zoom: 60%;" />
+
+### 8.5.4 删除
+
+<img src="http://image.trouvaille0198.top/image-20210510093239533.png" alt="image-20210510093239533" style="zoom:60%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210510093539490.png" alt="image-20210510093539490" style="zoom:60%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210510093553411.png" alt="image-20210510093553411" style="zoom:60%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210510093634951.png" alt="image-20210510093634951" style="zoom:60%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210510095925874.png" alt="image-20210510095925874" style="zoom:67%;" />
+
+### 8.5.5 B+树
+
+#### 1）定义
+
+叶子结点包含了全部关键字及对应指针
+
+<img src="http://image.trouvaille0198.top/image-20210510100347513.png" alt="image-20210510100347513" style="zoom:50%;" />
+
+## 8.6 散列表
+
+基本思想：在存储地址和关键字之间构建一个确定的对应关系。不经过比较就能在一次存取中得到所查元素
+
+### 8.6.1 定义
+
+- 哈希函数：在存储地址和关键字之间构建一个确定的对应关系/函数 $Addr(ai)=H(ki)$
+
+- 哈希表/散列表
+
+- 哈希存储/散列存储
+- 哈希查找/散列查找
+- 冲突 (collision)：$key1\neq key2,H(key1)=H(key2)$
+
+### 8.6.2 哈希函数
+
+定义域：全部关键字
+
+值域：0 到 m-1 之间
+
+#### 1）构造方法
+
+不是重点
+
+- 直接定址法
+
+    $H(key)=a*key+b$，无冲突，但是要求散列地址空间大小与关键字集合大小相同
+
+- 数字分析法
+
+- 除留余数法
+- 随机数法
+
+### 8.6.3 处理冲突
+
+#### 1）开放地址法
+
+当冲突发生时，形成一个探查序列，逐个探查，知道找出一个空位置
+
+**探查序列**
+
+1. 线性探测再散列
+    - d~i~=1,2,3,...,m-1
+2. 二次探测再散列
+    - d~i~=1^2^,-1^2^,2^2^,-2^2^,...,k^2^,-k^2^
+3. 伪随机探测再散列
+    - d~i~=伪随机序列
+4. 双散列函数探查法
+    - d~i~=iH~2~(key)[计算时间增加]
+
+<img src="http://image.trouvaille0198.top/image-20210510102542131.png" alt="image-20210510102542131" style="zoom: 40%;" />
+
+#### 2）拉链法
+
+将所有关键字为同义词的记录存储在一个单链表中，并用一维数组存放头指针
+
+<img src="http://image.trouvaille0198.top/image-20210510102941399.png" alt="image-20210510102941399" style="zoom:50%;" />
+
+### 8.6.4 哈希查找
+
+### 1）过程
+
+<img src="http://image.trouvaille0198.top/image-20210510103146013.png" alt="image-20210510103146013" style="zoom:50%;" />
+
+#### 2）分析
+
+用 ASL 分析效率
+
+装填因子：$\alpha=\frac{表中填入的记录数}{哈希表长度}$
+
+![image-20210510103516617](http://image.trouvaille0198.top/image-20210510103516617.png)
+

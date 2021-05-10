@@ -287,7 +287,309 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 ### 1.2.2 Session
 
+## 1.3 Column 参数
 
+- ***type***：字段的数据类型	
 
+| Object Name                                                  | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [**BigInteger**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.BigInteger) | A type for bigger `int` integers.                            |
+| [**Boolean**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Boolean) | A bool datatype.                                             |
+| [**Date**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Date) | A type for `datetime.date()` objects.                        |
+| [**DateTime**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.DateTime) | A type for `datetime.datetime()` objects.                    |
+| [**Enum**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Enum) | Generic Enum Type.                                           |
+| [**Float**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Float) | Type representing floating point types, such as `FLOAT` or `REAL`. |
+| [**Integer**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Integer) | A type for `int` integers.                                   |
+| [**Interval**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Interval) | A type for `datetime.timedelta()` objects.                   |
+| [**LargeBinary**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.LargeBinary) | A type for large binary byte data.                           |
+| [**MatchType**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.MatchType) | Refers to the return type of the MATCH operator.             |
+| [**Numeric**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Numeric) | A type for fixed precision numbers, such as `NUMERIC` or `DECIMAL`. |
+| [**PickleType**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.PickleType) | Holds Python objects, which are serialized using pickle.     |
+| [**SchemaType**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.SchemaType) | Mark a type as possibly requiring schema-level DDL for usage. |
+| [**SmallInteger**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.SmallInteger) | A type for smaller `int` integers.                           |
+| [**String**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.String) | The base for all string and character types.                 |
+| [**Text**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Text) | A variably sized string type.                                |
+| [**Time**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Time) | A type for `datetime.time()` objects.                        |
+| [**Unicode**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Unicode) | A variable length Unicode string type.                       |
+| [**UnicodeText**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.UnicodeText) | An unbounded-length Unicode string type.                     |
 
+| 类型名       | 说明                         |
+| ------------ | ---------------------------- |
+| Integer      | 普通整数，一般是32位         |
+| SmallInteger | 取值范围小的整数，一般是16位 |
+| Float        | 浮点数                       |
+| Numeric      | 定点数                       |
+| String       | 字符串                       |
+| Text         | 文本字符串                   |
+| Boolean      | 布尔值                       |
+| Date         | 日期                         |
+| Time         | 时间                         |
+| DateTime     | 日期和时间                   |
+
+- ***primary_key***：设置字段是否为主键
+- ***unique***：设置字段是否唯一
+- ***index***：设置字段是否为索引参数
+- ***default***：设置字段默认值
+- ***nullable***：设置字段是否可空
+- ***autoincrement***：设置字段是否自动递增
+- ***comment***：设置字段注释
+
+## 1.4 query
+
+`Session `的 `query` 函数会返回一个 `Query` 对象
+
+```python
+db.query(User).filter(User.id == user_id).first()
+```
+
+### 1.4.1 filter
+
+- `equals`:
+
+```bash
+query.filter(User.name == 'ed')
+```
+
+- `not equals`:
+
+```bash
+query.filter(User.name != 'ed')
+```
+
+- `LIKE`:
+
+```bash
+query.filter(User.name.like('%ed%'))
+```
+
+- `IN`:
+
+```bash
+query.filter(User.name.in_(['ed', 'wendy', 'jack']))
+
+# works with query objects too:
+query.filter(User.name.in_(
+        session.query(User.name).filter(User.name.like('%ed%'))
+))
+```
+
+- `NOT IN`:
+
+```bash
+query.filter(~User.name.in_(['ed', 'wendy', 'jack']))
+```
+
+- `IS NULL`:
+
+```bash
+query.filter(User.name == None)
+
+# alternatively, if pep8/linters are a concern
+query.filter(User.name.is_(None))
+```
+
+- `IS NOT NULL`:
+
+```bash
+query.filter(User.name != None)
+
+# alternatively, if pep8/linters are a concern
+query.filter(User.name.isnot(None))
+```
+
+- `AND`:
+
+```bash
+# use and_()
+from sqlalchemy import and_
+query.filter(and_(User.name == 'ed', User.fullname == 'Ed Jones'))
+
+# or send multiple expressions to .filter()
+query.filter(User.name == 'ed', User.fullname == 'Ed Jones')
+
+# or chain multiple filter()/filter_by() calls
+query.filter(User.name == 'ed').filter(User.fullname == 'Ed Jones')
+```
+
+- `OR`:
+
+```bash
+from sqlalchemy import or_
+query.filter(or_(User.name == 'ed', User.name == 'wendy'))
+```
+
+- `MATCH`:
+
+```bash
+query.filter(User.name.match('wendy'))
+```
+
+### 1.4.2 返回列表(List)和单项(Scalar)
+
+- `all()` 返回一个列表:
+
+```bash
+>>> query = session.query(User).filter(User.name.like('%ed')).order_by(User.id)
+SQL>>> query.all()
+[<User(name='ed', fullname='Ed Jones', password='f8s7ccs')>,
+      <User(name='fred', fullname='Fred Flinstone', password='blah')>]
+```
+
+- `first()` 返回至多一个结果，而且以单项形式，而不是只有一个元素的tuple形式返回这个结果.
+
+```bash
+>>> query.first()
+<User(name='ed', fullname='Ed Jones', password='f8s7ccs')>
+```
+
+- `one()` 返回且仅返回一个查询结果。当结果的数量不足一个或者多于一个时会报错。
+
+```bash
+>>> user = query.one()
+Traceback (most recent call last):
+...
+MultipleResultsFound: Multiple rows were found for one()
+```
+
+没有查找到结果时：
+
+```ruby
+>>> user = query.filter(User.id == 99).one()
+Traceback (most recent call last):
+...
+NoResultFound: No row was found for one()
+```
+
+- `one_or_none()`：从名称可以看出，当结果数量为 0 时返回 `None`， 多于1个时报错
+- `scalar()`和`one()` 类似，但是返回单项而不是 tuple
+
+### 1.4.3 嵌入使用SQL
+
+你可以在`Query`中通过`text()`使用SQL语句。例如：
+
+```bash
+>>> from sqlalchemy import text
+>>> for user in session.query(User).\
+...             filter(text("id<224")).\
+...             order_by(text("id")).all():
+...     print(user.name)
+ed
+wendy
+mary
+fred
+```
+
+除了上面这种直接将参数写进字符串的方式外，你还可以通过`params()`方法来传递参数
+
+```bash
+>>> session.query(User).filter(text("id<:value and name=:name")).\
+...     params(value=224, name='fred').order_by(User.id).one()
+<User(name='fred', fullname='Fred Flinstone', password='blah')>
+```
+
+并且，你可以直接使用完整的SQL语句，但是要注意将表名和列明写正确。
+
+```bash
+>>> session.query(User).from_statement(
+...                     text("SELECT * FROM users where name=:name")).\
+...                     params(name='ed').all()
+[<User(name='ed', fullname='Ed Jones', password='f8s7ccs')>]
+```
+
+## 1.5 关系
+
+外键 (ForeignKey) 始终定义在多的一方
+
+### 1.5.1 一对多
+
+`Child` 为多
+
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer,primary_key = True)
+    children = relationship("Child",backref='parent')
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer,primary_key = True)
+    parent_id = Column(Integer,ForeignKey('parent.id'))
+```
+
+### 1.5.2 多对一
+
+`Parent` 为多
+
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    child_id = Column(Integer, ForeignKey('child.id'))
+    child = relationship("Child", backref="parents")
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer, primary_key=True)
+```
+
+为了建立双向关系,可以在 `relationship()` 中设置 backref，Child 对象就有parents属性.设置 cascade= ‘all’，可以级联删除
+
+```python
+children = relationship("Child",cascade='all',backref='parent')
+```
+
+### 1.5.4 一对一
+
+一对一就是多对一和一对多的一个特例，只需在 relationship 加上一个参数 `uselist=False` 替换多的一端就是一对一
+
+从一对多转换到一对一
+
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    child = relationship("Child", uselist=False, backref="parent")
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer, primary_key=True)
+	parent_id = Column(Integer, ForeignKey('parent.id'))
+```
+
+从多对一转换到一对一
+
+```python
+class Parent(Base):
+    __tablename__ = 'parent'
+    id = Column(Integer, primary_key=True)
+    child_id = Column(Integer, ForeignKey('child.id'))
+    child = relationship("Child", backref=backref("parent", uselist=False))
+
+class Child(Base):
+    __tablename__ = 'child'
+    id = Column(Integer, primary_key=True)
+```
+
+### 1.5.5 多对多
+
+多对多关系需要一个中间关联表,通过参数 `secondary` 来指定
+
+```python
+from sqlalchemy import Table,Text
+post_keywords = Table('post_keywords',Base.metadata,
+        Column('post_id',Integer,ForeignKey('posts.id')),
+        Column('keyword_id',Integer,ForeignKey('keywords.id'))
+)
+
+class BlogPost(Base):
+    __tablename__ = 'posts'
+    id = Column(Integer,primary_key=True)
+    body = Column(Text)
+    keywords = relationship('Keyword',secondary=post_keywords,backref='posts')
+
+class Keyword(Base):
+    __tablename__ = 'keywords'
+    id = Column(Integer,primary_key = True)
+    keyword = Column(String(50),nullable=False,unique=True)
+```
 
