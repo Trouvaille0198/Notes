@@ -6,6 +6,8 @@
     - [ ] 生成器
     - [ ] 装饰器
     - [ ] 异步 I/O https://www.liaoxuefeng.com/wiki/1016959663602400/1017959540289152
+    - [ ] 字符串常量
+    - [ ] 正则
 - [ ] 看 Vuetify 案例
 - [ ] 看 FastAPI 与 Vue 项目
 - [ ] python 常用函数和库
@@ -21,7 +23,7 @@
 - [ ] yaml
 - [x] sqlalchemy
 - [x] FastAPI
-- [ ] vuex
+- [x] vuex
 - [ ] scrapy
 - [ ] appium
 - [x] fiddler

@@ -154,7 +154,9 @@ Hello 123 4567 World_This
 result = re.match('^Hello.*Demo$', content)
 ```
 
-### 3.2 使用()括号将想提取的子字符串括起来
+### 3.2 group()
+
+使用 `()` 括号将想提取的子字符串括起来
 
 ```python
 import re
@@ -182,6 +184,10 @@ Hello 1234567 World
 ```python
 result = re.match('^He.*?(\d+).*Demo$', content)
 ```
+
+### 3.3.1 其他
+
+- ***start()***
 
 ### 3.3 修饰符
 
@@ -251,3 +257,10 @@ print(result1, result2, result3)
 ```
 
 例如，这里有3个日期，我们想分别将3个日期中的时间去掉，这时可以借助`sub()`方法。该方法的第一个参数是正则表达式，但是这里没有必要重复写3个同样的正则表达式，此时可以借助`compile()`方法将正则表达式编译成一个正则表达式对象，以便复用
+
+## 3.8 split()
+
+## 3.9 escape()
+
+# 四、常用模板
+

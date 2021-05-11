@@ -904,6 +904,8 @@ with open(filename, 'a') as file_object:            #'a'表示以附加模式打
 import json
 ```
 
+json 库提供的主要功能也是字典与 json 的相互转换
+
 ### 5.4.3 存储数据
 
 ```python
@@ -914,7 +916,9 @@ with open(filename, 'w') as f_obj:
 
 ### 5.4.4 读取数据
 
-使用.loads() 
+使用`json.loads() `
+
+返回字典对象
 
 ```python
 filename = 'name.json'
@@ -922,7 +926,25 @@ with open(filename) as f_obj:
         name = json.loads(f_obj)                         #将json中的数据读到name中
 ```
 
-使用 loads 方法将字符串转为 JSON 对象。由于最外层是中括号，所以最终的类型是列表类型。
+使用 loads 方法将字符串转为 JSON 对象。如果最外层是中括号，那最终的类型是列表类型
+
+#### 1）数据转换表
+
+| JSON          | Python |
+| ------------- | ------ |
+| object        | dict   |
+| array         | list   |
+| string        | str    |
+| number (int)  | int    |
+| number (real) | float  |
+| true          | True   |
+| false         | False  |
+| null          | None   |
+
+#### 2）其他特点
+
+- 当 JSON 数据中有重复键名, 则后面的键值会覆盖前面的、
+- json.loads 方法默认会将 JSON 字符串中的 NaN, Infinity, -Infinity 转化为 Python 中的 float('nan'), float('inf') 和 float('-inf')
 
 ### 5.4.5 输出数据
 
