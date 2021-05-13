@@ -1024,12 +1024,12 @@ import pandas_profiling as pp
 - 第三部分显示列之间的关联热力图；
 - 第四部分显示数据集的前几条数据。
 
-`profile.to_file(output_file="your_report.html")`
+`profile.to_file("your_report.html")`
 
 保存 html 文件
 
 ```python
 profile = pp.ProfileReport(data)
-profile.to_file(outputfile = "output_file.html")
+profile.to_file("output_file.html")
 ```
 
