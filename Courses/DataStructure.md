@@ -2834,6 +2834,19 @@ AVL（）
 
 #### 1）实现
 
+顺序表实现
+
+```c++
+template <class T>
+SeqList<T> BubbleSort(SeqList<T> list)
+{
+    for (int i = 0; i < list.GetLength - 1; i++)
+        for (int j = 0; j < list.GetLength() - 1 - i; j++)
+            if (list.GetElem(i) > list.GetElem(i + 1))
+                list.ExchangeElem(i, i + 1);
+}
+```
+
 #### 2）分析
 
 - 比较次数：$\sum\limits_{i=1}^{n-1}(n-i)= n(n-1)/2$
@@ -2873,12 +2886,49 @@ graph LR
     con1 -- YES --> con2{"Elem[i] > Elem[j]?"}
     con2 -- YES --> exchange["i,j 值互换"]
 	exchange ---> pivot{"基准位置?"}
+	con2 -- NO -->pivot
 	pivot -- "前" --> j["j--"]
 	pivot -- "后" --> i["i++"]
 	i --> finish["下次循环"]
 	j --> finish
-	con2 -- NO -->finish
+	
 	finish --> con1
+```
+
+顺序表实现
+
+```cpp
+template <class T>
+void QuickSortHelp(SeqList<T> &list, int start, int end)
+{
+    int i = start;             // 基准
+    int j = end;               // 从最后开始比较
+    bool pivotLocation = true; // true表示基准位置在前
+    while (i < j)
+    {
+        if (list.GetElem(i) > list.GetElem(j))
+        {
+            list.ExchangeElem(i, j);
+            pivotLocation = !pivotLocation;
+        }
+        if (pivotLocation)
+            // 基准位置在前
+            j--;
+        else
+            // 基准位置在后
+            i++;
+    }
+    if (start < i - 1)
+        QuickSortHelp(list, start, i - 1);
+    if (i + 1 < end)
+        QuickSortHelp(list, i + 1, end);
+}
+
+template <class T>
+void QuickSort(SeqList<T> &list)
+{
+    QuickSortHelp(list, 0, list.GetLength() - 1);
+}
 ```
 
 #### 2）分析
@@ -2905,6 +2955,23 @@ graph LR
 <img src="http://image.trouvaille0198.top/image-20210517082910800.png" alt="image-20210517082910800" style="zoom: 60%;" />
 
 #### 1）实现
+
+线性表实现
+
+```c++
+template <class T>
+void StraightInsertionSort(SeqList<T> &list)
+{
+    int j;
+    for (int i = 1; i < list.GetLength(); i++) // 遍历无序区
+    {
+        T e = list.GetElem(i); // 取出无序区第一个元素
+        for (j = i - 1; j >= 0 && list.GetElem(j) > e; j--)
+            list.SetElem(j + 1, list.GetElem(j)); // 将比e大的元素后移一位
+        list.SetElem(j + 1, e);                   //在j+1处插入e
+    }
+}
+```
 
 #### 2）分析
 
