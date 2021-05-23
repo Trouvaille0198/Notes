@@ -668,26 +668,31 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 `v-container` 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 **fluid** 属性将容器在所有视口和设备尺寸上完全扩展。 
 
+- **fill-height** 将使整个内容 **相对于 page** 居中
+
 ## 7.2 v-row
 
 `v-row` 是 `v-col` 的容器组件。 它使用 flex 属性来控制其内栏的布局和流
 
-| Name                                                              | Type                        | Default   | Description                                                                                                                                                                         |
-| ----------------------------------------------------------------- | --------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [cols](https://vuetifyjs.com/zh-Hans/api/v-col/#props-cols)       | boolean \| string \| number | false     | 设置组件扩展的默认列数。可用的选项是 **1 -> 12** 和 **auto** 。                                                                                                                     |
-| [md](https://vuetifyjs.com/zh-Hans/api/v-col/#props-md)           | boolean \| string \| number | false     | 更改中等和较大断点上的列数，其他断点同理                                                                                                                                            |
-| [align](https://vuetifyjs.com/zh-Hans/api/v-row/#props-align)     | string                      | undefined | 应用 [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css 属性。可用的选项是 **start**, **center**, **end**, **baseline** 和 **stretch**                 |
-| [justify](https://vuetifyjs.com/zh-Hans/api/v-row/#props-justify) | string                      | undefined | 应用 [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css 属性。可用选项是 **start**, **center**, **end**, **space-between** 和 **space-around** |
-|                                                                   |                             |           |                                                                                                                                                                                     |
+| Name                                                         | Type   | Default   | Description                                                  |
+| ------------------------------------------------------------ | ------ | --------- | ------------------------------------------------------------ |
+|                                                              |        |           |                                                              |
+|                                                              |        |           |                                                              |
+| [align](https://vuetifyjs.com/zh-Hans/api/v-row/#props-align) | string | undefined | 应用 [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css 属性。可用的选项是 **start**, **center**, **end**, **baseline** 和 **stretch** |
+| [justify](https://vuetifyjs.com/zh-Hans/api/v-row/#props-justify) | string | undefined | 应用 [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css 属性。可用选项是 **start**, **center**, **end**, **space-between** 和 **space-around** |
+|                                                              |        |           |                                                              |
 
 ## 7.3 v-col
 
 `v-col` 包裹内容，它必须是 `v-row` 的直接子代
 
-| Name                                                          | Type    | Default | Description               |
-| ------------------------------------------------------------- | ------- | ------- | ------------------------- |
-| [dense](https://vuetifyjs.com/zh-Hans/api/v-row/#props-dense) | boolean | false   | 减少 `v-col` 之间的距离。 |
-|                                                               |         |         |                           |
+| Name                                                         | Type                        | Default | Description                                                  |
+| ------------------------------------------------------------ | --------------------------- | ------- | ------------------------------------------------------------ |
+| [dense](https://vuetifyjs.com/zh-Hans/api/v-row/#props-dense) | boolean                     | false   | 减少 `v-col` 之间的距离。                                    |
+| [cols](https://vuetifyjs.com/zh-Hans/api/v-col/#props-cols)  | boolean \| string \| number | false   | 设置组件扩展的默认列数。可用的选项是 **1 -> 12** 和 **auto** 。 |
+| [md](https://vuetifyjs.com/zh-Hans/api/v-col/#props-md)      | boolean \| string \| number | false   | 更改中等和更大断点上的列数，其他断点同理                     |
+|                                                              |                             |         |                                                              |
+|                                                              |                             |         |                                                              |
 
 ## 7.4 v-spacer
 
@@ -898,4 +903,6 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 - `only` - 只在某个指定断点隐藏元素
 - `and down` - 在指定的断点和以下隐藏元素, 从 `sm` 到 `lg` 断点
-- `and down` - 在指定的断点和以上隐藏元素, 从 `sm` 到 `lg` 断点
+- `and up` - 在指定的断点和以上隐藏元素, 从 `sm` 到 `lg` 断点
+
+https://vuetifyjs.com/zh-Hans/styles/display/#section-53ef89c16027

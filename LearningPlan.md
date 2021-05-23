@@ -11,15 +11,14 @@
 - [ ] 看 Vuetify 案例
 - [ ] 看 FastAPI 与 Vue 项目
 - [ ] python 常用函数和库
-    - [ ] collections
-    - [ ] json
-    - [ ] datetime
+    - [x] collections
+    - [x] json
+    - [x] datetime
     - [ ] bisect
     - [ ] getopt
     - [ ] map()
     - [ ] zip()
     - [ ] aiohttp
-    - [ ] turtle
 - [ ] yaml
 - [x] sqlalchemy
 - [x] FastAPI
@@ -34,4 +33,9 @@
 - [ ] nltk
 - [ ] NoneBot
 - [ ] Docker
+- [ ] MongoDB
+    - [ ] pymongo
+- [ ] GraphGL
+- [ ] nginx
+- [ ] Materialize
 

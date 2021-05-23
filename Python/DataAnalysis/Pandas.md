@@ -959,6 +959,8 @@ df.to_sql(table_name, connection_object)	#导出数据到SQL表
 df.to_json(filename)						#以Json格式导出数据到文本文件
 ```
 
+转换成 json 格式通常用 `df.to_json(filename, orient='records', force_ascii=False)`
+
 # 五、例
 
 1. 取出索引为 [3, 4, 8] 行的 animal 和 age 列

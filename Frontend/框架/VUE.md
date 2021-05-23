@@ -884,7 +884,7 @@ const getters = {
 
 #### 1）通过属性访问
 
-getter 会暴露为 `store.getters` 对象，可以以属性的形式访问这些值，如 `$store.getters.doneTodoNum`，不分组件
+getter 会暴露为 `store.getters` 对象，可以以属性的形式访问这些值，如 `$store.getters.doneTodoNum`，**不分组件**
 
 #### 2）通过方法访问
 
@@ -924,7 +924,7 @@ const mutations = {
 }
 ```
 
-要唤醒一个 mutation handler，需要以相应的 type 调用 **store.commit** 方法，如 `$store.commit('mutations','Sleep')`，不分组件
+要唤醒一个 mutation handler，需要以相应的 type 调用 **store.commit** 方法，如 `$store.commit('mutations','Sleep')`，**不分组件**
 
 #### 1）载荷
 

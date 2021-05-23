@@ -982,3 +982,9 @@ with open('data.json', 'w', encoding='utf-8') as file:
 
 # 七、技巧
 
+1. 生成依赖文件 `requirement.txt`：使用 `pipreqs`
+
+```shell
+pipreqs ./
+```
+

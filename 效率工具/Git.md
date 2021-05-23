@@ -478,6 +478,7 @@ type
 - fix：问题修复
 - docs：文档
 - style：调整格式（不影响代码运行）
+- perf：性能优化
 - refactor：重构
 - test：增加测试
 - chore：构建过程或辅助工具的变动
