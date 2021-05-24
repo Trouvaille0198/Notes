@@ -19,6 +19,8 @@
     - [ ] map()
     - [ ] zip()
     - [ ] aiohttp
+    - [ ] httpx
+    - [ ] nonebot2
 - [ ] yaml
 - [x] sqlalchemy
 - [x] FastAPI
@@ -38,4 +40,5 @@
 - [ ] GraphGL
 - [ ] nginx
 - [ ] Materialize
+- [ ] wsl
 

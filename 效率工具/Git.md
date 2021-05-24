@@ -478,11 +478,13 @@ type
 - fix：问题修复
 - docs：文档
 - style：调整格式（不影响代码运行）
-- perf：性能优化
+- perf：优化性能或体验
 - refactor：重构
 - test：增加测试
 - chore：构建过程或辅助工具的变动
+- merge：代码合并。
 - revert：撤销以前的提交
+- sync：同步主线或分支的Bug
 
 scope：用于说明提交的影响范围，内容根据具体项目而定
 
