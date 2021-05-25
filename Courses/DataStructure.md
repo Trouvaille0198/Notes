@@ -2973,6 +2973,8 @@ void QuickSort(SeqList<T> &list)
 
 （Straight Insertion Sort）
 
+![](http://image.trouvaille0198.top/1258817-20190325144034879-1237555952.gif)
+
 <img src="http://image.trouvaille0198.top/image-20210517082910800.png" alt="image-20210517082910800" style="zoom: 60%;" />
 
 #### 1）实现
