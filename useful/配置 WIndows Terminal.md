@@ -1,4 +1,4 @@
-## 一、设置
+##  一、设置
 
 ### 1.1 主题
 
@@ -118,7 +118,10 @@ notepad $PROFILE
 ```text
 Import-Module posh-git
 Import-Module oh-my-posh
-Set-PoshPrompt -Theme JanDeDobbeleer
+Set-PoshPrompt -Theme  blueish
+# Set-PoshPrompt -Theme  marcduiker
+# Set-PoshPrompt -Theme  remk
+# Set-PoshPrompt -Theme  powerlevel10k_rainbow
 ```
 
 - 第一条命令表示导入posh-git
