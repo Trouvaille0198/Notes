@@ -988,3 +988,11 @@ with open('data.json', 'w', encoding='utf-8') as file:
 pipreqs ./
 ```
 
+2. 去除分隔符，将一段字符串转化为词语列表
+
+```python
+punctuation = r"""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~“”？，！【】（）、。：；’‘……￥·"""
+dicts = {i: ' ' for i in punctuation}
+   punc_table = str.maketrans(dicts)
+```
+

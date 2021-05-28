@@ -18,9 +18,9 @@
     - [ ] getopt
     - [ ] map()
     - [ ] zip()
-    - [ ] aiohttp
+    - [x] aiohttp
     - [ ] httpx
-    - [ ] nonebot2
+    - [x] nonebot2
 - [ ] yaml
 - [x] sqlalchemy
 - [x] FastAPI
@@ -33,7 +33,6 @@
 - [ ] js 内置对象
 - [ ] 看 Kaggle
 - [ ] nltk
-- [ ] NoneBot
 - [ ] Docker
 - [ ] MongoDB
     - [ ] pymongo
