@@ -138,8 +138,6 @@ Set-PoshPrompt -Theme  blueish
 Get-PoshThemes
 ```
 
-
-
 ### 2.3 在 vscode 中配置 power shell 样式
 
 设置中查找 `Integrated:Font Family`
@@ -150,5 +148,16 @@ Get-PoshThemes
 Cousine Nerd Font
 DejaVuSansMono Nerd Font
 MesloLGM NF
+```
+
+# 三、添加 SSH
+
+```json
+{
+    "guid": "{4cbd411b-c4a8-d899-abb1-e2f69c6be01c}",
+    "hidden": false,
+    "name": "CentOS",
+    "commandline": "ssh u@ip"
+ }
 ```
 
