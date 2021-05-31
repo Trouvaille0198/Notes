@@ -2089,6 +2089,8 @@ $$
 
 ## 7.2 存储结构
 
+思考：如何找到环？
+
 ### 7.2.1 邻接矩阵
 
 #### 1）概念
@@ -2151,6 +2153,8 @@ $$
 <img src="http://image.trouvaille0198.top/image-20210412085322307.png" alt="image-20210412085322307" style="zoom:60%;" />
 
 ## 7.3 遍历
+
+思考：深度、广度分别有什么应用？
 
 ### 7.3.1 深度优先遍历
 
@@ -2257,6 +2261,12 @@ $$
 
 <img src="http://image.trouvaille0198.top/image-20210412102147705.png" alt="image-20210412102147705" style="zoom:50%;" />
 
+#### 2）实现
+
+用最小堆来找最小边
+
+用并查集来判断有无环
+
 ### 7.4.3 普利姆算法
 
 (Prim)
@@ -2291,7 +2301,7 @@ $$
 
 <img src="http://image.trouvaille0198.top/image-20210419081428998.png" alt="image-20210419081428998" style="zoom:50%;" />
 
-**迪杰斯特拉算法（Dijkstra）**
+#### 1）迪杰斯特拉算法（Dijkstra）
 
 按路径长度递增的次序来产生最短路径；先求路径最短的一条，然后参照它求出长度次短的一条，以此类推，被求出长度的顶点放入集合 S 中，当 S 满，代表算法结束
 
@@ -2303,9 +2313,79 @@ $$
 
 只看初边
 
+#### 2）实现
+
+```cpp
+template <class ElemType, class WeightType>
+void AdjMatrixGraph<ElemType, WeightType>::Dijkstra(int v)
+// 求索引为v的顶点的各个最短路径长度
+{
+    int _vexNum = _vertexes.GetLength();
+    WeightType min;
+    WeightType dist[_vexNum]; // 存储当前找到的最短路径长度
+    int path[_vexNum];        // 存储目标顶点的直接前驱节点
+
+    for (int i = 0; i < _vexNum; i++)
+    {
+        dist[i] = _arcs[v][i]; // 存入一条边的路径
+        SetTag(i, 0);          // 用_tag表示已经找到最短路径的集合
+        if (i != v && dist[i] < _infinity)
+            // 若dist[i]存在, 添加前驱节点
+            path[i] = v;
+        else
+            path[i] = -1;
+    }
+    SetTag(v, 1); //自身已经在集合中
+
+    cout << "所选源点: " << GetElem(v) << endl;
+
+    int finalVex; // 已求出最短路径的顶点
+    int w;
+    for (int i = 1; i < _vexNum; i++)
+    // 按递增序列求最短路径
+    {
+        min = _infinity;
+        finalVex = v;
+        for (int j = 0; j < _vexNum; j++)
+        // 查询最小的最短路径, 找出finalVex
+        {
+            if (_tag[j] == 0 && dist[j] < min)
+            {
+                finalVex = j;
+                min = dist[j];
+            }
+        }
+        SetTag(finalVex, 1);
+        for (int j = GetFirstAdjVex(finalVex); j != -1; j = GetNextAdjVex(finalVex, j))
+        // 从上一次找到的最短路径的顶点出发, 依次判断各顶点的最短路径能否更新
+        {
+            if (_tag[j] == 0 && min + GetWeight(finalVex, j) < dist[j])
+            {
+                dist[j] = min + GetWeight(finalVex, j);
+                path[j] = finalVex;
+            }
+        }
+    }
+    // 打印输出
+    for (int i = 0; i < _vexNum; i++)
+    {
+        if (i == v)
+            continue;
+        string pathStr(1, GetElem(i));
+
+        for (int j = path[i]; j != -1; j = path[j])
+        {
+            pathStr = string(1, GetElem(j)) + " -> " + pathStr;
+        }
+        cout << "从顶点 " << GetElem(v) << " 到顶点 " << GetElem(i) << " 的最短路径为: " << pathStr
+             << ", 长度为: " << dist[i] << endl;
+    }
+}
+```
+
 ### 7.5.3 弧上权值任意值的单源点最短路径
 
-**贝尔曼 - 福特算法**
+#### 1）贝尔曼 - 福特算法
 
 从原点依次经过其他顶点，来缩短到达顶点的最短路径长度。要求：途中不能有路径长度为负数的**回路**
 
@@ -2321,8 +2401,11 @@ $$
 
 ### 7.5.4 所有点之间的最短路径
 
-1. 以每一个点为原点，重复执行迪杰斯特拉算法；O(n^3^)
-2. 弗洛伊德（Floyd）算法
+#### 1）重复迪杰斯特拉
+
+以每一个点为原点，重复执行迪杰斯特拉算法；O(n^3^)
+
+#### 2）弗洛伊德（Floyd）算法
 
 <img src="http://image.trouvaille0198.top/image-20210419091217637.png" alt="image-20210419091217637" style="zoom:45%;" />
 
@@ -2371,9 +2454,9 @@ $$
 
 <img src="http://image.trouvaille0198.top/image-20210419102732678.png" alt="image-20210419102732678" style="zoom:45%;" />
 
-- 求事件（顶点）的最早开始时间 ve：从源点起，入边的值加上其弧尾的最早开始时间，取最大值
+- 求事件（顶点）的最早开始时间 ve：从源点起，入边的值加上其弧尾的最早开始时间，取最大值（看入边，求最大）
 
-- 求事件（顶点）的最晚开始时间 vl：从汇点起，弧头的最早开始时间减去出边的值，取最小值
+- 求事件（顶点）的最晚开始时间 vl：从汇点起，弧头的最早开始时间减去出边的值，取最小值（看出边，求最小）
 - 求活动（边）的最早开始时间 ee：弧尾的最早开始时间
 - 求活动（边）的最晚开始时间 el：其弧头的最晚开始时间减去活动时间
 
@@ -2572,7 +2655,7 @@ AVL（）
 
 - 或是空树，或是符合以下条件
 
-- 左右子树都是平衡二叉树
+- 左右子树都是平衡二叉树。
 - 左右子树的高度差值不超过 1
 - 平衡因子（Balance factor，BF）：左右子树高度差，其绝对值不超过 1
 - 其 ASL可保持在 $O(log_2n)$
