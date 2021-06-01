@@ -41,4 +41,5 @@
 - [ ] Materialize
 - [x] wsl
 - [ ] execjs
+- [ ] cv2
 

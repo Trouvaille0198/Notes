@@ -82,6 +82,29 @@ Python 字典中的键的顺序是任意的:它们不受添加的顺序的控制
 
 `collections.OrderedDict`类提供了保留他们添加顺序的字典对象。
 
+```python
+d1 = collections.OrderedDict()
+d1['a'] = 'A'
+d1['b'] = 'B'
+d1['c'] = 'C'
+d1['1'] = '1'
+d1['2'] = '2'
+for k,v in d1.items():
+    print k,v
+```
+
+输出
+
+```python\
+a A
+b B
+c C
+1 1
+312 2
+```
+
+
+
 # 五、namedtuple
 
 namedtuple 由自己的类工厂 namedtuple() 进行创建，而不是由表中的元组进行初始化

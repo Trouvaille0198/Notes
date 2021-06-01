@@ -113,13 +113,13 @@
 
 **()** 表示捕获分组，**()** 会把每个分组里的匹配的值保存起来， 多个匹配值可以通过数字 n 来查看(**n** 是一个数字，表示第 n 个捕获组的内容)
 
-## 三、python常用方法
+## 三、re 常用方法
 
 ### 3.1 match()
 
-向它传入要匹配的字符串以及正则表达式，就可以检测这个正则表达式是否匹配字符串
+***re.match(pattern, string, flags=0)***
 
-`match()`方法会尝试从字符串的起始位置匹配正则表达式，如果匹配，就返回匹配成功的结果；如果不匹配，就返回None
+`match()` 尝试从字符串的**起始位置**匹配正则表达式，若匹配，就返回匹配成功的结果；若不匹配，返回 None
 
 ```python
 import re
@@ -185,9 +185,36 @@ Hello 1234567 World
 result = re.match('^He.*?(\d+).*Demo$', content)
 ```
 
-### 3.3.1 其他
+### 3.3.1 匹配对象的方法
 
-- ***start()***
+- ***start([group])***
+    - 获取分组匹配的子串在整个字符串中的起始位置（子串第一个字符的索引）
+- ***end([group])***
+    - 获取分组匹配的子串在整个字符串中的结束位置（子串最后一个字符的索引 +1）
+- ***group()***
+    - `group()` 同 `group(0)`   返回匹配正则表达式整体结果（字符串）
+    - `group(n)` 列出第 n 个括号匹配部分
+- ***span([group])***
+    - 返回 `(start(group), end(group))`
+
+```python
+
+>>>import re
+>>> pattern = re.compile(r'\d+')   
+m = pattern.match('one12twothree34four', 3, 10) # 从'1'的位置开始匹配，正好匹配
+>>> print m                                         # 返回一个 Match 对象
+<_sre.SRE_Match object at 0x10a42aac0>
+>>> m.group(0)   # 可省略 0
+'12'
+>>> m.start(0)   # 可省略 0
+3
+>>> m.end(0)     # 可省略 0
+5
+>>> m.span(0)    # 可省略 0
+(3, 5)
+```
+
+
 
 ### 3.3 修饰符
 
@@ -211,7 +238,9 @@ result = re.match('^He.*?(\d+).*?Demo$', content, re.S)
 
 ### 3.5 findall()
 
-该方法会搜索整个字符串，然后返回匹配正则表达式的所有内容
+在字符串中找到正则表达式所匹配的所有子串，并返回一个列表，如果没有找到匹配的，则返回空列表。
+
+注意**：** match 和 search 是匹配一次；findall 匹配所有。
 
 ### 3.6 sub()
 
@@ -236,7 +265,7 @@ aKyroiRixLg
 
 ### 3.7 compile()
 
-这个方法可以将正则字符串编译成正则表达式对象，以便在后面的匹配中复用
+编译正则表达式，生成一个正则表达式 (Pattern) 对象，供 `match()` 和 `search()` 使用
 
 ```python
 import re
@@ -247,6 +276,8 @@ pattern = re.compile('\d{2}:\d{2}')
 result1 = re.sub(pattern, '', content1)
 result2 = re.sub(pattern, '', content2)
 result3 = re.sub(pattern, '', content3)
+# or
+result3 = pattern.sub('',content3)
 print(result1, result2, result3)
 ```
 
