@@ -1,0 +1,2024 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>logging · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="loguru.html" />
+    
+    
+    <link rel="prev" href="iohttp.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../markdown.html">
+            
+                <a href="../../markdown.html">
+            
+                    
+                    Help
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    专业课
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../Courses/计算机组成原理.html">
+            
+                <a href="../../Courses/计算机组成原理.html">
+            
+                    
+                    计算机组成原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../Courses/计算机网络.html">
+            
+                <a href="../../Courses/计算机网络.html">
+            
+                    
+                    计算机网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" >
+            
+                <span>
+            
+                    
+                    概率论与数理统计
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../Courses/概率论与数理统计/1. 概念.html">
+            
+                <a href="../../Courses/概率论与数理统计/1. 概念.html">
+            
+                    
+                    概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../Courses/概率论与数理统计/2. 随机变量及其分布.html">
+            
+                <a href="../../Courses/概率论与数理统计/2. 随机变量及其分布.html">
+            
+                    
+                    随机变量及其分布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../../Courses/概率论与数理统计/3. 多维随机变量及其分布.html">
+            
+                <a href="../../Courses/概率论与数理统计/3. 多维随机变量及其分布.html">
+            
+                    
+                    多维随机变量及其分布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.4" data-path="../../Courses/概率论与数理统计/4. 随机变量的数字特征.html">
+            
+                <a href="../../Courses/概率论与数理统计/4. 随机变量的数字特征.html">
+            
+                    
+                    随机变量的数字特征
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.5" data-path="../../Courses/概率论与数理统计/5. 大数定律与中心极限定理.html">
+            
+                <a href="../../Courses/概率论与数理统计/5. 大数定律与中心极限定理.html">
+            
+                    
+                    大数定律与中心极限定理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.6" data-path="../../Courses/概率论与数理统计/6. 样本及抽样分布.html">
+            
+                <a href="../../Courses/概率论与数理统计/6. 样本及抽样分布.html">
+            
+                    
+                    样本及抽样分布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.7" data-path="../../Courses/概率论与数理统计/7. 参数估计.html">
+            
+                <a href="../../Courses/概率论与数理统计/7. 参数估计.html">
+            
+                    
+                    参数估计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.8" data-path="../../Courses/概率论与数理统计/8. 假设检验.html">
+            
+                <a href="../../Courses/概率论与数理统计/8. 假设检验.html">
+            
+                    
+                    假设检验
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" >
+            
+                <span>
+            
+                    
+                    离散数学
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="../../Courses/离散数学/离散数学1.html">
+            
+                <a href="../../Courses/离散数学/离散数学1.html">
+            
+                    
+                    离散一
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.2" data-path="../../Courses/离散数学/离散数学2.html">
+            
+                <a href="../../Courses/离散数学/离散数学2.html">
+            
+                    
+                    离散二
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Python
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../BasicGrammar.html">
+            
+                <a href="../BasicGrammar.html">
+            
+                    
+                    基本语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" >
+            
+                <span>
+            
+                    
+                    爬虫
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../Crawler/Basic Knowledge.html">
+            
+                <a href="../Crawler/Basic Knowledge.html">
+            
+                    
+                    基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../Crawler/BeautifulSoup4.html">
+            
+                <a href="../Crawler/BeautifulSoup4.html">
+            
+                    
+                    BeautifulSoup4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../Crawler/PyQuery.html">
+            
+                <a href="../Crawler/PyQuery.html">
+            
+                    
+                    PyQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="../Crawler/RegularExpression.html">
+            
+                <a href="../Crawler/RegularExpression.html">
+            
+                    
+                    RegularExpression
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.5" data-path="../Crawler/Requests.html">
+            
+                <a href="../Crawler/Requests.html">
+            
+                    
+                    Requests
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.6" data-path="../Crawler/Selenium.html">
+            
+                <a href="../Crawler/Selenium.html">
+            
+                    
+                    Selenium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.7" data-path="../Crawler/XPath.html">
+            
+                <a href="../Crawler/XPath.html">
+            
+                    
+                    XPath
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" >
+            
+                <span>
+            
+                    
+                    数据分析
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../DataAnalysis/Matplotlib.html">
+            
+                <a href="../DataAnalysis/Matplotlib.html">
+            
+                    
+                    matplotlib
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../DataAnalysis/Numpy.html">
+            
+                <a href="../DataAnalysis/Numpy.html">
+            
+                    
+                    numpy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../DataAnalysis/Pandas.html">
+            
+                <a href="../DataAnalysis/Pandas.html">
+            
+                    
+                    pandas
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="../DataAnalysis/Seaborn.html">
+            
+                <a href="../DataAnalysis/Seaborn.html">
+            
+                    
+                    seaborn
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" >
+            
+                <span>
+            
+                    
+                    [机器学习()
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../MachineLearning/sklearn.html">
+            
+                <a href="../MachineLearning/sklearn.html">
+            
+                    
+                    sklearn
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" >
+            
+                <span>
+            
+                    
+                    后端
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../WEB backend/Django.html">
+            
+                <a href="../WEB backend/Django.html">
+            
+                    
+                    Django
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="../WEB backend/FastAPI.html">
+            
+                <a href="../WEB backend/FastAPI.html">
+            
+                    
+                    FastAPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.3" data-path="../WEB backend/Flask.html">
+            
+                <a href="../WEB backend/Flask.html">
+            
+                    
+                    Flask
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.4" data-path="../WEB backend/sqlalchemy.html">
+            
+                <a href="../WEB backend/sqlalchemy.html">
+            
+                    
+                    sqlalchemy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../内建函数.html">
+            
+                <a href="../内建函数.html">
+            
+                    
+                    内建函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" >
+            
+                <span>
+            
+                    
+                    可视化
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.7.1" data-path="../可视化/DearPyGui.html">
+            
+                <a href="../可视化/DearPyGui.html">
+            
+                    
+                    DearPyGui
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.2" data-path="../可视化/PyQt5.html">
+            
+                <a href="../可视化/PyQt5.html">
+            
+                    
+                    PyQt5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.3" data-path="../可视化/manim.html">
+            
+                <a href="../可视化/manim.html">
+            
+                    
+                    Manim
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.4" data-path="../可视化/tkinter.html">
+            
+                <a href="../可视化/tkinter.html">
+            
+                    
+                    Tkinter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.5" data-path="../可视化/wordcloud.html">
+            
+                <a href="../可视化/wordcloud.html">
+            
+                    
+                    Wordcloud
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" >
+            
+                <span>
+            
+                    
+                    常用库
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.8.1" data-path="aiohttp.html">
+            
+                <a href="aiohttp.html">
+            
+                    
+                    aiohttp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.2" data-path="bisect.html">
+            
+                <a href="bisect.html">
+            
+                    
+                    bisect
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.3" data-path="collections.html">
+            
+                <a href="collections.html">
+            
+                    
+                    collections
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.4" data-path="datetime.html">
+            
+                <a href="datetime.html">
+            
+                    
+                    datetime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.5" data-path="getpot.html">
+            
+                <a href="getpot.html">
+            
+                    
+                    getpot
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.6" data-path="iohttp.html">
+            
+                <a href="iohttp.html">
+            
+                    
+                    iohttp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.8.7" data-path="logging.html">
+            
+                <a href="logging.html">
+            
+                    
+                    logging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.8" data-path="loguru.html">
+            
+                <a href="loguru.html">
+            
+                    
+                    loguru
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.9" data-path="os.html">
+            
+                <a href="os.html">
+            
+                    
+                    os
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.10" data-path="pyinstaller.html">
+            
+                <a href="pyinstaller.html">
+            
+                    
+                    pyinstaller
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.11" data-path="random.html">
+            
+                <a href="random.html">
+            
+                    
+                    random
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.12" data-path="threading.html">
+            
+                <a href="threading.html">
+            
+                    
+                    threading
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.13" data-path="time.html">
+            
+                <a href="time.html">
+            
+                    
+                    time
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.14" data-path="tqdm.html">
+            
+                <a href="tqdm.html">
+            
+                    
+                    tqdm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    前端
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../Frontend/CSS.html">
+            
+                <a href="../../Frontend/CSS.html">
+            
+                    
+                    CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../Frontend/HTML.html">
+            
+                <a href="../../Frontend/HTML.html">
+            
+                    
+                    HTML
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" >
+            
+                <span>
+            
+                    
+                    JavaScript
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../Frontend/JavaScript/BasicGrammar.html">
+            
+                <a href="../../Frontend/JavaScript/BasicGrammar.html">
+            
+                    
+                    基本语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../../Frontend/JavaScript/DOM.html">
+            
+                <a href="../../Frontend/JavaScript/DOM.html">
+            
+                    
+                    DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="../../Frontend/JavaScript/标准对象.html">
+            
+                <a href="../../Frontend/JavaScript/标准对象.html">
+            
+                    
+                    标准对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" >
+            
+                <span>
+            
+                    
+                    前端框架
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../../Frontend/框架/API 规范.html">
+            
+                <a href="../../Frontend/框架/API 规范.html">
+            
+                    
+                    API 规范
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../../Frontend/框架/VUE.html">
+            
+                <a href="../../Frontend/框架/VUE.html">
+            
+                    
+                    VUE
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../../Frontend/框架/Vuetify.html">
+            
+                <a href="../../Frontend/框架/Vuetify.html">
+            
+                    
+                    Vuetify
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    Linux
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../Linux/BasicGrammar.html">
+            
+                <a href="../../Linux/BasicGrammar.html">
+            
+                    
+                    基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" >
+            
+                <span>
+            
+                    
+                    收集
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../Linux/useful/Install.html">
+            
+                <a href="../../Linux/useful/Install.html">
+            
+                    
+                    Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../../Linux/useful/apt-get.html">
+            
+                <a href="../../Linux/useful/apt-get.html">
+            
+                    
+                    Apt Get
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../../Linux/useful/screen.html">
+            
+                <a href="../../Linux/useful/screen.html">
+            
+                    
+                    Screen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    教程配置
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../useful/配置 SSH.html">
+            
+                <a href="../../useful/配置 SSH.html">
+            
+                    
+                    配置 SSH
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../useful/配置 WIndows Terminal.html">
+            
+                <a href="../../useful/配置 WIndows Terminal.html">
+            
+                    
+                    配置 WIndows Terminal
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    效率工具
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../效率工具/Git.html">
+            
+                <a href="../../效率工具/Git.html">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../效率工具/LaTeX数学公式.html">
+            
+                <a href="../../效率工具/LaTeX数学公式.html">
+            
+                    
+                    LaTeX数学公式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../效率工具/Vim.html">
+            
+                <a href="../../效率工具/Vim.html">
+            
+                    
+                    Vim
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../../效率工具/mermaid.html">
+            
+                <a href="../../效率工具/mermaid.html">
+            
+                    
+                    Mermaid
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" >
+            
+                <span>
+            
+                    
+                    C艹
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../Cpp/类.html">
+            
+                <a href="../../Cpp/类.html">
+            
+                    
+                    类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../Cpp/要点.html">
+            
+                <a href="../../Cpp/要点.html">
+            
+                    
+                    一些要点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    机器学习
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../../ML/MachineLearning.html">
+            
+                <a href="../../ML/MachineLearning.html">
+            
+                    
+                    MachineLearning
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" >
+            
+                <span>
+            
+                    
+                    Java
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../../Java/BasicGrammar.html">
+            
+                <a href="../../Java/BasicGrammar.html">
+            
+                    
+                    基本语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >logging</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x4E00;&#x3001;&#x8BA4;&#x8BC6;">&#x4E00;&#x3001;&#x8BA4;&#x8BC6;</h1>
+<p>&#x8F93;&#x51FA;&#x65E5;&#x5FD7;</p>
+<h2 id="11-&#x5BFC;&#x5165;">1.1 &#x5BFC;&#x5165;</h2>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> logging
+</code></pre>
+<h2 id="12-&#x521D;&#x59CB;&#x5316;">1.2 &#x521D;&#x59CB;&#x5316;</h2>
+<h3 id="111-&#x7EA7;&#x522B;&#x6392;&#x5E8F;">1.1.1 &#x7EA7;&#x522B;&#x6392;&#x5E8F;</h3>
+<p><strong>CRITICAL &gt; ERROR &gt; WARNING &gt; INFO &gt; DEBUG</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x7EA7;&#x522B;</th>
+<th style="text-align:left">&#x4F55;&#x65F6;&#x4F7F;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>DEBUG</code></td>
+<td style="text-align:left">&#x7EC6;&#x8282;&#x4FE1;&#x606F;&#xFF0C;&#x4EC5;&#x5F53;&#x8BCA;&#x65AD;&#x95EE;&#x9898;&#x65F6;&#x9002;&#x7528;&#x3002;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>INFO</code></td>
+<td style="text-align:left">&#x786E;&#x8BA4;&#x7A0B;&#x5E8F;&#x6309;&#x9884;&#x671F;&#x8FD0;&#x884C;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>WARNING</code></td>
+<td style="text-align:left">&#x8868;&#x660E;&#x6709;&#x5DF2;&#x7ECF;&#x6216;&#x5373;&#x5C06;&#x53D1;&#x751F;&#x7684;&#x610F;&#x5916;&#xFF08;&#x4F8B;&#x5982;&#xFF1A;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#x4E0D;&#x8DB3;&#xFF09;&#x3002;&#x7A0B;&#x5E8F;&#x4ECD;&#x6309;&#x9884;&#x671F;&#x8FDB;&#x884C;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ERROR</code></td>
+<td style="text-align:left">&#x7531;&#x4E8E;&#x4E25;&#x91CD;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x7A0B;&#x5E8F;&#x7684;&#x67D0;&#x4E9B;&#x529F;&#x80FD;&#x5DF2;&#x7ECF;&#x4E0D;&#x80FD;&#x6B63;&#x5E38;&#x6267;&#x884C;</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CRITICAL</code></td>
+<td style="text-align:left">&#x4E25;&#x91CD;&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x8868;&#x660E;&#x7A0B;&#x5E8F;&#x5DF2;&#x4E0D;&#x80FD;&#x7EE7;&#x7EED;&#x6267;&#x884C;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="112-&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;">1.1.2 &#x521B;&#x5EFA;&#x5B9E;&#x4F8B;</h3>
+<p>&#x4F7F;&#x7528;&#x6A21;&#x5757;&#x7EA7;&#x8BB0;&#x5F55;&#x5668;</p>
+<p><code>Logger</code> &#x662F;&#x4E00;&#x4E2A;&#x8BB0;&#x5F55;&#x5668;&#x7C7B;</p>
+<pre><code class="lang-python">logger = logging.getLogger(__name__)
+</code></pre>
+<p>&#x8FD9;&#x610F;&#x5473;&#x7740;&#x8BB0;&#x5F55;&#x5668;&#x540D;&#x79F0;&#x8DDF;&#x8E2A;&#x5305;&#x6216;&#x6A21;&#x5757;&#x7684;&#x5C42;&#x6B21;&#x7ED3;&#x6784;&#xFF0C;&#x5E76;&#x4E14;&#x76F4;&#x89C2;&#x5730;&#x4ECE;&#x8BB0;&#x5F55;&#x5668;&#x540D;&#x79F0;&#x663E;&#x793A;&#x8BB0;&#x5F55;&#x4E8B;&#x4EF6;&#x7684;&#x4F4D;&#x7F6E;&#x3002;</p>
+<h1 id="&#x4E8C;&#x3001;&#x914D;&#x7F6E;">&#x4E8C;&#x3001;&#x914D;&#x7F6E;</h1>
+<h2 id="21-&#x5168;&#x5C40;&#x914D;&#x7F6E;-basicconfig">2.1 &#x5168;&#x5C40;&#x914D;&#x7F6E; <strong><em>basicConfig()</em></strong></h2>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6CA1;&#x6709;&#x4E3A;&#x4EFB;&#x4F55;&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x6D88;&#x606F;&#x8BBE;&#x7F6E;&#x76EE;&#x6807;&#x3002; &#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>basicConfig()</code> &#x6307;&#x5B9A;&#x76EE;&#x6807;</p>
+<p>&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x7684; <code>Formatter</code> &#x521B;&#x5EFA;&#x4E00;&#x4E2A; <code>StreamHandler</code> &#x5E76;&#x5C06;&#x5176;&#x52A0;&#x5165;&#x6839;&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x5668;&#x6765;&#x4E3A;&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x7CFB;&#x7EDF;&#x6267;&#x884C;&#x57FA;&#x672C;&#x914D;&#x7F6E;&#x3002; &#x5982;&#x679C;&#x6CA1;&#x6709;&#x4E3A;&#x6839;&#x65E5;&#x5FD7;&#x8BB0;&#x5F55;&#x5668;&#x5B9A;&#x4E49;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x5219; debug(), info(), warning(), error() &#x548C; critical() &#x7B49;&#x51FD;&#x6570;&#x5C06;&#x81EA;&#x52A8;&#x8C03;&#x7528; basicConfig()</p>
+<p><strong>&#x53C2;&#x6570;</strong></p>
+<ul>
+<li><em>filename</em>&#xFF1A;&#x6307;&#x5B9A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x540D;</li>
+<li><em>filemode</em>&#xFF1A;&#x6307;&#x5B9A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x7684;&#x6253;&#x5F00;&#x6A21;&#x5F0F;&#xFF0C;&apos;w&apos; &#x6216;&#x8005; &apos;a&apos;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; &apos;a&apos;</li>
+<li><em>format</em>&#xFF1A;&#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x7684;&#x683C;&#x5F0F;&#x548C;&#x5185;&#x5BB9;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x53C2;&#x6570;</th>
+<th>&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">%(levelno)s</td>
+<td>&#x65E5;&#x5FD7;&#x7EA7;&#x522B;&#x7684;&#x6570;&#x503C;</td>
+</tr>
+<tr>
+<td style="text-align:left">%(levelname)s</td>
+<td>&#x65E5;&#x5FD7;&#x7EA7;&#x522B;&#x7684;&#x540D;&#x79F0;</td>
+</tr>
+<tr>
+<td style="text-align:left">%(pathname)s</td>
+<td>&#x5F53;&#x524D;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x5176;&#x5B9E;&#x5C31;&#x662F;sys.argv[0]</td>
+</tr>
+<tr>
+<td style="text-align:left">%(filename)s</td>
+<td>&#x5F53;&#x524D;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x540D;</td>
+</tr>
+<tr>
+<td style="text-align:left">%(funcName)s</td>
+<td>&#x5F53;&#x524D;&#x51FD;&#x6570;</td>
+</tr>
+<tr>
+<td style="text-align:left">%(lineno)d</td>
+<td>&#x5F53;&#x524D;&#x884C;&#x53F7;</td>
+</tr>
+<tr>
+<td style="text-align:left">%(asctime)s</td>
+<td>&#x65F6;&#x95F4;</td>
+</tr>
+<tr>
+<td style="text-align:left">%(thread)d</td>
+<td>&#x7EBF;&#x7A0B; ID</td>
+</tr>
+<tr>
+<td style="text-align:left">%(threadName)s</td>
+<td>&#x7EBF;&#x7A0B;&#x540D;&#x79F0;</td>
+</tr>
+<tr>
+<td style="text-align:left">%(process)d</td>
+<td>&#x8FDB;&#x7A0B; ID</td>
+</tr>
+<tr>
+<td style="text-align:left">%(message)s</td>
+<td>&#x65E5;&#x5FD7;&#x4FE1;&#x606F;</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><em>datefmt</em>&#xFF1A;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x683C;&#x5F0F;&#xFF0C;&#x540C; time.strftime()</li>
+<li><em>level</em>&#xFF1A;&#x8BBE;&#x7F6E;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; logging.WARNNING</li>
+<li><em>stream</em>&#xFF1A;&#x6307;&#x5B9A;&#x5C06;&#x65E5;&#x5FD7;&#x7684;&#x8F93;&#x51FA;&#x6D41;&#xFF0C;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x5230; sys.stderr&#xFF0C;sys.stdout &#x6216;&#x8005;&#x6587;&#x4EF6;&#xFF0C;&#x9ED8;&#x8BA4;&#x8F93;&#x51FA;&#x5230; sys.stderr&#xFF0C;&#x4E0E; filename &#x4E0D;&#x517C;&#x5BB9;</li>
+</ul>
+<p><strong>&#x4F8B;</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> logging
+logging.basicConfig(level=logging.DEBUG,
+                    format=<span class="hljs-string">&apos;%(asctime)s - %(levelname)s - %(message)s&apos;</span>)
+logger = logging.getLogger(__name__)
+
+logger.info(<span class="hljs-string">&quot;Start print log&quot;</span>)
+logger.debug(<span class="hljs-string">&quot;Do something&quot;</span>)
+logger.warning(<span class="hljs-string">&quot;Something maybe fail.&quot;</span>)
+logger.info(<span class="hljs-string">&quot;Finish&quot;</span>)
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-shell">2021-04-27 11:23:53,973 - INFO - Start print log
+2021-04-27 11:23:53,973 - DEBUG - Do something
+2021-04-27 11:23:53,973 - WARNING - Something maybe fail.
+2021-04-27 11:23:53,973 - INFO - Finish
+</code></pre>
+<p>&#x5BF9; <a href="https://docs.python.org/zh-cn/3/library/logging.html#logging.basicConfig" target="_blank"><code>basicConfig()</code></a> &#x7684;&#x8C03;&#x7528;&#x5E94;&#x8BE5;&#x5728; <a href="https://docs.python.org/zh-cn/3/library/logging.html#logging.debug" target="_blank"><code>debug()</code></a> &#xFF0C; <a href="https://docs.python.org/zh-cn/3/library/logging.html#logging.info" target="_blank"><code>info()</code></a> &#x7B49;&#x7684;&#x524D;&#x9762;&#x3002;&#x56E0;&#x4E3A;&#x5B83;&#x88AB;&#x8BBE;&#x8BA1;&#x4E3A;&#x4E00;&#x6B21;&#x6027;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x53EA;&#x6709;&#x7B2C;&#x4E00;&#x6B21;&#x8C03;&#x7528;&#x4F1A;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF0C;&#x968F;&#x540E;&#x7684;&#x8C03;&#x7528;&#x4E0D;&#x4F1A;&#x4EA7;&#x751F;&#x6709;&#x6548;&#x64CD;&#x4F5C;&#x3002;</p>
+<h2 id="22-&#x5BF9;&#x5B9E;&#x4F8B;&#x7684;&#x914D;&#x7F6E;">2.2 &#x5BF9;&#x5B9E;&#x4F8B;&#x7684;&#x914D;&#x7F6E;</h2>
+<p>&#x5BF9;&#x8BB0;&#x5F55;&#x5668;&#x7C7B;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x90FD;&#x662F; <code>Logger</code> &#x7C7B;&#x7684;&#x6210;&#x5458;&#x51FD;&#x6570;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> logging
+
+<span class="hljs-comment"># create logger</span>
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+<span class="hljs-comment"># create console handler and set level to debug</span>
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+
+<span class="hljs-comment"># create formatter</span>
+formatter = logging.Formatter(<span class="hljs-string">&apos;%(asctime)s - %(name)s - %(levelname)s - %(message)s&apos;</span>)
+
+<span class="hljs-comment"># add formatter to ch</span>
+ch.setFormatter(formatter)
+
+<span class="hljs-comment"># add ch to logger</span>
+logger.addHandler(ch)
+
+<span class="hljs-comment"># &apos;application&apos; code</span>
+logger.debug(<span class="hljs-string">&apos;debug message&apos;</span>)
+logger.info(<span class="hljs-string">&apos;info message&apos;</span>)
+logger.warning(<span class="hljs-string">&apos;warn message&apos;</span>)
+logger.error(<span class="hljs-string">&apos;error message&apos;</span>)
+logger.critical(<span class="hljs-string">&apos;critical message&apos;</span>)
+</code></pre>
+<ul>
+<li><p><strong><em>setLevel(level)</em></strong></p>
+<p>  &#x8BBE;&#x7F6E;&#x8BB0;&#x5F55;&#x5668;&#x7EA7;&#x522B;&#xFF0C;&#x9AD8;&#x4E8E; level &#x4F1A;&#x88AB;&#x8F93;&#x51FA;</p>
+<ul>
+<li><p><em>level</em>&#xFF1A;&#x7EA7;&#x522B;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A; <code>logging.WARNING</code></p>
+<p>| &#x7EA7;&#x522B;       | &#x6570;&#x503C; |
+| :--------- | :--- |
+| <code>CRITICAL</code> | 50   |
+| <code>ERROR</code>    | 40   |
+| <code>WARNING</code>  | 30   |
+| <code>INFO</code>     | 20   |
+| <code>DEBUG</code>    | 10   |
+| <code>NOTSET</code>   | 0    |</p>
+</li>
+</ul>
+</li>
+<li><p><strong><em>addHandler(hdlr)</em></strong></p>
+<p>  &#x5C06;&#x6307;&#x5B9A;&#x7684;&#x5904;&#x7406;&#x5668; hdlr &#x6DFB;&#x52A0;&#x5230;&#x6B64;&#x8BB0;&#x5F55;&#x5668;</p>
+</li>
+<li><p><strong><em>removeHandler(hdlr)</em></strong></p>
+<p>  &#x79FB;&#x9664;&#x6307;&#x5B9A;&#x5904;&#x7406;&#x5668;</p>
+</li>
+<li><p><strong><em>addFilter(filter)</em></strong></p>
+<p>  &#x5C06;&#x6307;&#x5B9A;&#x7684;&#x8FC7;&#x6EE4;&#x5668; <em>filter</em> &#x6DFB;&#x52A0;&#x5230;&#x6B64;&#x8BB0;&#x5F55;&#x5668;</p>
+</li>
+<li><p><strong><em>removeFilter(filter)</em></strong></p>
+<p>  &#x79FB;&#x9664;&#x6307;&#x5B9A;&#x8FC7;&#x6EE4;&#x5668;</p>
+</li>
+</ul>
+<h2 id="23-&#x8C03;&#x7528;&#x5916;&#x90E8;&#x914D;&#x7F6E;&#x6587;&#x4EF6;-fileconfig">2.3 &#x8C03;&#x7528;&#x5916;&#x90E8;&#x914D;&#x7F6E;&#x6587;&#x4EF6; <strong><em>fileConfig()</em></strong></h2>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> logging
+<span class="hljs-keyword">import</span> logging.config
+
+logging.config.fileConfig(<span class="hljs-string">&apos;logging.conf&apos;</span>)
+
+<span class="hljs-comment"># create logger</span>
+logger = logging.getLogger(__name__)
+
+<span class="hljs-comment"># &apos;application&apos; code</span>
+logger.debug(<span class="hljs-string">&apos;debug message&apos;</span>)
+logger.info(<span class="hljs-string">&apos;info message&apos;</span>)
+logger.warning(<span class="hljs-string">&apos;warn message&apos;</span>)
+logger.error(<span class="hljs-string">&apos;error message&apos;</span>)
+logger.critical(<span class="hljs-string">&apos;critical message&apos;</span>)
+</code></pre>
+<p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4F8B; (.conf)</p>
+<pre><code class="lang-conf">[loggers]
+keys=root,simpleExample
+
+[handlers]
+keys=consoleHandler
+
+[formatters]
+keys=simpleFormatter
+
+[logger_root]
+level=DEBUG
+handlers=consoleHandler
+
+[logger_simpleExample]
+level=DEBUG
+handlers=consoleHandler
+qualname=simpleExample
+propagate=0
+
+[handler_consoleHandler]
+class=StreamHandler
+level=DEBUG
+formatter=simpleFormatter
+args=(sys.stdout,)
+
+[formatter_simpleFormatter]
+format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+datefmt=
+</code></pre>
+<p>&#x6216;&#x4F7F;&#x7528; YAML &#x683C;&#x5F0F;</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">version:</span> <span class="hljs-number">1</span>
+<span class="hljs-attr">formatters:</span>
+<span class="hljs-attr">  simple:</span>
+<span class="hljs-attr">    format:</span> <span class="hljs-string">&apos;%(asctime)s - %(name)s - %(levelname)s - %(message)s&apos;</span>
+<span class="hljs-attr">handlers:</span>
+<span class="hljs-attr">  console:</span>
+<span class="hljs-attr">    class:</span> logging.StreamHandler
+<span class="hljs-attr">    level:</span> DEBUG
+<span class="hljs-attr">    formatter:</span> simple
+<span class="hljs-attr">    stream:</span> ext://sys.stdout
+<span class="hljs-attr">loggers:</span>
+<span class="hljs-attr">  simpleExample:</span>
+<span class="hljs-attr">    level:</span> DEBUG
+<span class="hljs-attr">    handlers:</span> [console]
+<span class="hljs-attr">    propagate:</span> <span class="hljs-literal">no</span>
+<span class="hljs-attr">root:</span>
+<span class="hljs-attr">  level:</span> DEBUG
+<span class="hljs-attr">  handlers:</span> [console]
+</code></pre>
+<p>&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; json &#x683C;&#x5F0F;</p>
+<pre><code class="lang-python">{
+    <span class="hljs-string">&quot;version&quot;</span>:<span class="hljs-number">1</span>,
+    <span class="hljs-string">&quot;disable_existing_loggers&quot;</span>:false,
+    <span class="hljs-string">&quot;formatters&quot;</span>:{
+        <span class="hljs-string">&quot;simple&quot;</span>:{
+            <span class="hljs-string">&quot;format&quot;</span>:<span class="hljs-string">&quot;%(asctime)s - %(name)s - %(levelname)s - %(message)s&quot;</span>
+        }
+    },
+    <span class="hljs-string">&quot;handlers&quot;</span>:{
+        <span class="hljs-string">&quot;console&quot;</span>:{
+            <span class="hljs-string">&quot;class&quot;</span>:<span class="hljs-string">&quot;logging.StreamHandler&quot;</span>,
+            <span class="hljs-string">&quot;level&quot;</span>:<span class="hljs-string">&quot;DEBUG&quot;</span>,
+            <span class="hljs-string">&quot;formatter&quot;</span>:<span class="hljs-string">&quot;simple&quot;</span>,
+            <span class="hljs-string">&quot;stream&quot;</span>:<span class="hljs-string">&quot;ext://sys.stdout&quot;</span>
+        },
+        <span class="hljs-string">&quot;info_file_handler&quot;</span>:{
+            <span class="hljs-string">&quot;class&quot;</span>:<span class="hljs-string">&quot;logging.handlers.RotatingFileHandler&quot;</span>,
+            <span class="hljs-string">&quot;level&quot;</span>:<span class="hljs-string">&quot;INFO&quot;</span>,
+            <span class="hljs-string">&quot;formatter&quot;</span>:<span class="hljs-string">&quot;simple&quot;</span>,
+            <span class="hljs-string">&quot;filename&quot;</span>:<span class="hljs-string">&quot;info.log&quot;</span>,
+            <span class="hljs-string">&quot;maxBytes&quot;</span>:<span class="hljs-string">&quot;10485760&quot;</span>,
+            <span class="hljs-string">&quot;backupCount&quot;</span>:<span class="hljs-number">20</span>,
+            <span class="hljs-string">&quot;encoding&quot;</span>:<span class="hljs-string">&quot;utf8&quot;</span>
+        },
+        <span class="hljs-string">&quot;error_file_handler&quot;</span>:{
+            <span class="hljs-string">&quot;class&quot;</span>:<span class="hljs-string">&quot;logging.handlers.RotatingFileHandler&quot;</span>,
+            <span class="hljs-string">&quot;level&quot;</span>:<span class="hljs-string">&quot;ERROR&quot;</span>,
+            <span class="hljs-string">&quot;formatter&quot;</span>:<span class="hljs-string">&quot;simple&quot;</span>,
+            <span class="hljs-string">&quot;filename&quot;</span>:<span class="hljs-string">&quot;errors.log&quot;</span>,
+            <span class="hljs-string">&quot;maxBytes&quot;</span>:<span class="hljs-number">10485760</span>,
+            <span class="hljs-string">&quot;backupCount&quot;</span>:<span class="hljs-number">20</span>,
+            <span class="hljs-string">&quot;encoding&quot;</span>:<span class="hljs-string">&quot;utf8&quot;</span>
+        }
+    },
+    <span class="hljs-string">&quot;loggers&quot;</span>:{
+        <span class="hljs-string">&quot;my_module&quot;</span>:{
+            <span class="hljs-string">&quot;level&quot;</span>:<span class="hljs-string">&quot;ERROR&quot;</span>,
+            <span class="hljs-string">&quot;handlers&quot;</span>:[<span class="hljs-string">&quot;info_file_handler&quot;</span>],
+            <span class="hljs-string">&quot;propagate&quot;</span>:<span class="hljs-string">&quot;no&quot;</span>
+        }
+    },
+    <span class="hljs-string">&quot;root&quot;</span>:{
+        <span class="hljs-string">&quot;level&quot;</span>:<span class="hljs-string">&quot;INFO&quot;</span>,
+        <span class="hljs-string">&quot;handlers&quot;</span>:[<span class="hljs-string">&quot;console&quot;</span>,<span class="hljs-string">&quot;info_file_handler&quot;</span>,<span class="hljs-string">&quot;error_file_handler&quot;</span>]
+    }
+}
+</code></pre>
+<p>&#x4F20;&#x5165;&#x5230;&#x7A0B;&#x5E8F;&#x4E2D;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> logging.config
+<span class="hljs-keyword">import</span> os
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setup_logging</span><span class="hljs-params">(default_path = <span class="hljs-string">&quot;logging.json&quot;</span>,default_level = logging.INFO,env_key = <span class="hljs-string">&quot;LOG_CFG&quot;</span>)</span>:</span>
+    path = default_path
+    value = os.getenv(env_key,<span class="hljs-keyword">None</span>)
+    <span class="hljs-keyword">if</span> value:
+        path = value
+    <span class="hljs-keyword">if</span> os.path.exists(path):
+        <span class="hljs-keyword">with</span> open(path,<span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:
+            config = json.load(f)
+            logging.config.dictConfig(config)
+    <span class="hljs-keyword">else</span>:
+        logging.basicConfig(level = default_level)
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span><span class="hljs-params">()</span>:</span>
+    logging.info(<span class="hljs-string">&quot;start func&quot;</span>)
+
+    logging.info(<span class="hljs-string">&quot;exec func&quot;</span>)
+
+    logging.info(<span class="hljs-string">&quot;end func&quot;</span>)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    setup_logging(default_path = <span class="hljs-string">&quot;logging.json&quot;</span>)
+    func()
+</code></pre>
+<p>&#x5B9E;&#x9645;&#x4E0A;&#x5C06; json &#x683C;&#x5F0F;&#x8F6C;&#x5316;&#x4E3A;&#x5B57;&#x5178;&#xFF0C;&#x501F;&#x7528;&#x4E86;&#x5B57;&#x5178;&#x7684;&#x914D;&#x7F6E;</p>
+<h2 id="24-&#x5B57;&#x5178;&#x914D;&#x7F6E;-dictconfig">2.4 &#x5B57;&#x5178;&#x914D;&#x7F6E; <strong><em>dictConfig()</em></strong></h2>
+<h1 id="&#x4E09;&#x3001;&#x5904;&#x7406;&#x5668;-handler">&#x4E09;&#x3001;&#x5904;&#x7406;&#x5668; Handler</h1>
+<p><code>Handler</code> &#x5BF9;&#x8C61;&#x8D1F;&#x8D23;&#x5C06;&#x9002;&#x5F53;&#x7684;&#x65E5;&#x5FD7;&#x6D88;&#x606F;&#xFF08;&#x57FA;&#x4E8E;&#x65E5;&#x5FD7;&#x6D88;&#x606F;&#x7684;&#x4E25;&#x91CD;&#x6027;&#xFF09;&#x5206;&#x6D3E;&#x7ED9;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x7684;&#x6307;&#x5B9A;&#x76EE;&#x6807;</p>
+<h2 id="31-api">3.1 API</h2>
+<ul>
+<li><p><strong><em>setLevel(level)</em></strong></p>
+<p>  &#x4E3A;&#x5904;&#x7406;&#x5668;&#x8BBE;&#x7F6E;&#x7B49;&#x7EA7;</p>
+</li>
+<li><p><strong><em>setFormatter(fmt)</em></strong></p>
+</li>
+<li><p><strong><em>addFilter(filter)</em></strong></p>
+<p>  &#x5C06;&#x6307;&#x5B9A;&#x7684;&#x8FC7;&#x6EE4;&#x5668; <em>filter</em> &#x6DFB;&#x52A0;&#x5230;&#x5904;&#x7406;&#x5668;</p>
+</li>
+<li><p><strong><em>removeFilter(filter)</em></strong></p>
+<p>  &#x79FB;&#x9664;&#x6307;&#x5B9A;&#x8FC7;&#x6EE4;&#x5668;</p>
+</li>
+</ul>
+<h2 id="32-filehandler">3.2 FileHandler</h2>
+<p>&#x8981;&#x5C06;&#x65E5;&#x5FD7;&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528; <code>basicConfig</code> &#x4E2D;&#x7684; <code>filename</code> &#x53C2;&#x6570;&#x6307;&#x5B9A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;</p>
+<p>&#x66F4;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528; <code>FileHandler</code> &#x5B9E;&#x73B0;</p>
+<p>&#x751F;&#x6210;&#x5B9E;&#x4F8B;&#x65F6;&#xFF0C;&#x4F20;&#x5165;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x540D;&#x5373;&#x53EF;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> logging
+logger = logging.getLogger(__name__)
+logger.setLevel(level = logging.INFO)
+
+handler = logging.FileHandler(<span class="hljs-string">&quot;log.txt&quot;</span>)
+handler.setLevel(logging.INFO)
+formatter = logging.Formatter(<span class="hljs-string">&apos;%(asctime)s - %(name)s - %(levelname)s - %(message)s&apos;</span>)
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+</code></pre>
+<h2 id="33-streamhandler">3.3 StreamHandler</h2>
+<p>&#x9ED8;&#x8BA4;&#x7684; <code>basicConfig</code> &#x914D;&#x7F6E;&#x5373;&#x652F;&#x6301;&#x6253;&#x5370;&#x65E5;&#x5FD7;</p>
+<p>&#x4F46;&#x66F4;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528; <code>StreamHandler</code> &#x5B9E;&#x73B0;</p>
+<p>&#x4EE5;&#x4E0B;&#x4F8B;&#x4E3A;<strong>&#x540C;&#x65F6;&#x8F93;&#x51FA;&#x5230;&#x63A7;&#x5236;&#x53F0;&#x4E0E;&#x6587;&#x4EF6;</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> logging
+logger = logging.getLogger(__name__)
+logger.setLevel(level = logging.INFO)
+
+fileHdlr = logging.FileHandler(<span class="hljs-string">&quot;log.txt&quot;</span>)
+fileHdlr.setLevel(logging.INFO)
+formatter = logging.Formatter(<span class="hljs-string">&apos;%(asctime)s - %(name)s - %(levelname)s - %(message)s&apos;</span>)
+fileHdlr.setFormatter(formatter)
+
+consoleHdlr = logging.StreamHandler()
+consoleHdlr.setLevel(logging.INFO)
+
+logger.addHandler(fileHdlr)
+logger.addHandler(consoleHdlr)
+</code></pre>
+<h1 id="&#x56DB;&#x3001;&#x8FC7;&#x6EE4;&#x5668;-filter">&#x56DB;&#x3001;&#x8FC7;&#x6EE4;&#x5668; Filter</h1>
+<p>&#x683C;&#x5F0F;&#x5316;&#x7A0B;&#x5E8F;&#x5BF9;&#x8C61;&#x914D;&#x7F6E;&#x65E5;&#x5FD7;&#x6D88;&#x606F;&#x7684;&#x6700;&#x7EC8;&#x987A;&#x5E8F;&#x3001;&#x7ED3;&#x6784;&#x548C;&#x5185;&#x5BB9;</p>
+<p>&#x5176;&#x6784;&#x9020;&#x51FD;&#x6570;&#x6709;&#x4E09;&#x4E2A;&#x53EF;&#x9009;&#x53C2;&#x6570; &#x2014;&#x2014; &#x6D88;&#x606F;&#x683C;&#x5F0F;&#x5B57;&#x7B26;&#x4E32;&#x3001;&#x65E5;&#x671F;&#x683C;&#x5F0F;&#x5B57;&#x7B26;&#x4E32;&#x548C;&#x6837;&#x5F0F;&#x6307;&#x793A;&#x7B26;</p>
+<pre><code class="lang-python">logging.Formatter.__init__(fmt=<span class="hljs-keyword">None</span>, datefmt=<span class="hljs-keyword">None</span>, style=<span class="hljs-string">&apos;%&apos;</span>)
+</code></pre>
+<p>&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#x4E0E; <code>basicConfig</code> &#x4E2D;&#x7684; foramt &#x53C2;&#x6570;&#x76F8;&#x540C;</p>
+<pre><code class="lang-python">formatter = logging.Formatter(<span class="hljs-string">&apos;%(asctime)s - %(name)s - %(levelname)s - %(message)s&apos;</span>)
+</code></pre>
+<h1 id="&#x4E94;&#x3001;&#x6837;&#x672C;">&#x4E94;&#x3001;&#x6837;&#x672C;</h1>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> logging
+<span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> makedirs
+<span class="hljs-keyword">from</span> os.path <span class="hljs-keyword">import</span> dirname, exists
+
+<span class="hljs-keyword">from</span> cmreslogging.handlers <span class="hljs-keyword">import</span> CMRESHandler
+
+loggers = {}
+
+LOG_ENABLED = <span class="hljs-keyword">True</span>  <span class="hljs-comment"># &#x662F;&#x5426;&#x5F00;&#x542F;&#x65E5;&#x5FD7;</span>
+LOG_TO_CONSOLE = <span class="hljs-keyword">True</span>  <span class="hljs-comment"># &#x662F;&#x5426;&#x8F93;&#x51FA;&#x5230;&#x63A7;&#x5236;&#x53F0;</span>
+LOG_TO_FILE = <span class="hljs-keyword">True</span>  <span class="hljs-comment"># &#x662F;&#x5426;&#x8F93;&#x51FA;&#x5230;&#x6587;&#x4EF6;</span>
+LOG_TO_ES = <span class="hljs-keyword">True</span>  <span class="hljs-comment"># &#x662F;&#x5426;&#x8F93;&#x51FA;&#x5230; Elasticsearch</span>
+
+LOG_PATH = <span class="hljs-string">&apos;./runtime.log&apos;</span>  <span class="hljs-comment"># &#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</span>
+LOG_LEVEL = <span class="hljs-string">&apos;DEBUG&apos;</span>  <span class="hljs-comment"># &#x65E5;&#x5FD7;&#x7EA7;&#x522B;</span>
+LOG_FORMAT = <span class="hljs-string">&apos;%(levelname)s - %(asctime)s - process: %(process)d - %(filename)s - %(name)s - %(lineno)d - %(module)s - %(message)s&apos;</span>  <span class="hljs-comment"># &#x6BCF;&#x6761;&#x65E5;&#x5FD7;&#x8F93;&#x51FA;&#x683C;&#x5F0F;</span>
+ELASTIC_SEARCH_HOST = <span class="hljs-string">&apos;eshost&apos;</span>  <span class="hljs-comment"># Elasticsearch Host</span>
+ELASTIC_SEARCH_PORT = <span class="hljs-number">9200</span>  <span class="hljs-comment"># Elasticsearch Port</span>
+ELASTIC_SEARCH_INDEX = <span class="hljs-string">&apos;runtime&apos;</span>  <span class="hljs-comment"># Elasticsearch Index Name</span>
+APP_ENVIRONMENT = <span class="hljs-string">&apos;dev&apos;</span>  <span class="hljs-comment"># &#x8FD0;&#x884C;&#x73AF;&#x5883;&#xFF0C;&#x5982;&#x6D4B;&#x8BD5;&#x73AF;&#x5883;&#x8FD8;&#x662F;&#x751F;&#x4EA7;&#x73AF;&#x5883;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_logger</span><span class="hljs-params">(name=None)</span>:</span>
+    <span class="hljs-string">&quot;&quot;&quot;
+    get logger by name
+    :param name: name of logger
+    :return: logger
+    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">global</span> loggers
+
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> name: name = __name__
+
+    <span class="hljs-keyword">if</span> loggers.get(name):
+        <span class="hljs-keyword">return</span> loggers.get(name)
+
+    logger = logging.getLogger(name)
+    logger.setLevel(LOG_LEVEL)
+
+    <span class="hljs-comment"># &#x8F93;&#x51FA;&#x5230;&#x63A7;&#x5236;&#x53F0;</span>
+    <span class="hljs-keyword">if</span> LOG_ENABLED <span class="hljs-keyword">and</span> LOG_TO_CONSOLE:
+        stream_handler = logging.StreamHandler(sys.stdout)
+        stream_handler.setLevel(level=LOG_LEVEL)
+        formatter = logging.Formatter(LOG_FORMAT)
+        stream_handler.setFormatter(formatter)
+        logger.addHandler(stream_handler)
+
+    <span class="hljs-comment"># &#x8F93;&#x51FA;&#x5230;&#x6587;&#x4EF6;</span>
+    <span class="hljs-keyword">if</span> LOG_ENABLED <span class="hljs-keyword">and</span> LOG_TO_FILE:
+        <span class="hljs-comment"># &#x5982;&#x679C;&#x8DEF;&#x5F84;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x521B;&#x5EFA;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x6587;&#x4EF6;&#x5939;</span>
+        log_dir = dirname(log_path)
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> exists(log_dir): makedirs(log_dir)
+        <span class="hljs-comment"># &#x6DFB;&#x52A0; FileHandler</span>
+        file_handler = logging.FileHandler(log_path, encoding=<span class="hljs-string">&apos;utf-8&apos;</span>)
+        file_handler.setLevel(level=LOG_LEVEL)
+        formatter = logging.Formatter(LOG_FORMAT)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+
+    <span class="hljs-comment"># &#x8F93;&#x51FA;&#x5230; Elasticsearch</span>
+    <span class="hljs-keyword">if</span> LOG_ENABLED <span class="hljs-keyword">and</span> LOG_TO_ES:
+        <span class="hljs-comment"># &#x6DFB;&#x52A0; CMRESHandler</span>
+        es_handler = CMRESHandler(hosts=[{<span class="hljs-string">&apos;host&apos;</span>: ELASTIC_SEARCH_HOST, <span class="hljs-string">&apos;port&apos;</span>: ELASTIC_SEARCH_PORT}],
+                                  <span class="hljs-comment"># &#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x5BF9;&#x5E94;&#x7684;&#x8BA4;&#x8BC1;&#x6743;&#x9650;</span>
+                                  auth_type=CMRESHandler.AuthType.NO_AUTH,  
+                                  es_index_name=ELASTIC_SEARCH_INDEX,
+                                  <span class="hljs-comment"># &#x4E00;&#x4E2A;&#x6708;&#x5206;&#x4E00;&#x4E2A; Index</span>
+                                  index_name_frequency=CMRESHandler.IndexNameFrequency.MONTHLY,
+                                  <span class="hljs-comment"># &#x989D;&#x5916;&#x589E;&#x52A0;&#x73AF;&#x5883;&#x6807;&#x8BC6;</span>
+                                  es_additional_fields={<span class="hljs-string">&apos;environment&apos;</span>: APP_ENVIRONMENT}  
+                                  )
+        es_handler.setLevel(level=LOG_LEVEL)
+        formatter = logging.Formatter(LOG_FORMAT)
+        es_handler.setFormatter(formatter)
+        logger.addHandler(es_handler)
+
+    <span class="hljs-comment"># &#x4FDD;&#x5B58;&#x5230;&#x5168;&#x5C40; loggers</span>
+    loggers[name] = logger
+    <span class="hljs-keyword">return</span> logger
+</code></pre>
+<p>&#x4F7F;&#x7528;&#x65F6;&#xFF0C;&#x8C03;&#x7528;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#x83B7;&#x53D6;&#x4E00;&#x4E2A; logger&#xFF0C;&#x7136;&#x540E; log &#x5BF9;&#x5E94;&#x7684;&#x5185;&#x5BB9;&#x5373;&#x53EF;</p>
+<pre><code class="lang-python">logger = get_logger()
+logger.debug(<span class="hljs-string">&apos;this is a message&apos;</span>)
+</code></pre>
+<p>&#x7B80;&#x5355;&#x7684;&#x914D;&#x7F6E;&#x65B9;&#x5F0F;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> logging
+logging.basicConfig(level = logging.INFO,format = <span class="hljs-string">&apos;%(asctime)s - %(name)s - %(levelname)s - %(message)s&apos;</span>)
+logger = logging.getLogger(__name__)
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="iohttp.html" class="navigation navigation-prev " aria-label="Previous page: iohttp">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="loguru.html" class="navigation navigation-next " aria-label="Next page: loguru">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"logging","level":"1.4.8.7","depth":3,"next":{"title":"loguru","level":"1.4.8.8","depth":3,"path":"Python/常用库/loguru.md","ref":"Python/常用库/loguru.md","articles":[]},"previous":{"title":"iohttp","level":"1.4.8.6","depth":3,"path":"Python/常用库/iohttp.md","ref":"Python/常用库/iohttp.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Python/常用库/logging.md","mtime":"2021-06-18T07:00:12.435Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-18T08:32:50.643Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

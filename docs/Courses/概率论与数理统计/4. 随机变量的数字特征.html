@@ -1,0 +1,1790 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>随机变量的数字特征 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="5. 大数定律与中心极限定理.html" />
+    
+    
+    <link rel="prev" href="3. 多维随机变量及其分布.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../markdown.html">
+            
+                <a href="../../markdown.html">
+            
+                    
+                    Help
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    专业课
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../计算机组成原理.html">
+            
+                <a href="../计算机组成原理.html">
+            
+                    
+                    计算机组成原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../计算机网络.html">
+            
+                <a href="../计算机网络.html">
+            
+                    
+                    计算机网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" >
+            
+                <span>
+            
+                    
+                    概率论与数理统计
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="1. 概念.html">
+            
+                <a href="1. 概念.html">
+            
+                    
+                    概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="2. 随机变量及其分布.html">
+            
+                <a href="2. 随机变量及其分布.html">
+            
+                    
+                    随机变量及其分布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="3. 多维随机变量及其分布.html">
+            
+                <a href="3. 多维随机变量及其分布.html">
+            
+                    
+                    多维随机变量及其分布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3.4" data-path="4. 随机变量的数字特征.html">
+            
+                <a href="4. 随机变量的数字特征.html">
+            
+                    
+                    随机变量的数字特征
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.5" data-path="5. 大数定律与中心极限定理.html">
+            
+                <a href="5. 大数定律与中心极限定理.html">
+            
+                    
+                    大数定律与中心极限定理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.6" data-path="6. 样本及抽样分布.html">
+            
+                <a href="6. 样本及抽样分布.html">
+            
+                    
+                    样本及抽样分布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.7" data-path="7. 参数估计.html">
+            
+                <a href="7. 参数估计.html">
+            
+                    
+                    参数估计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.8" data-path="8. 假设检验.html">
+            
+                <a href="8. 假设检验.html">
+            
+                    
+                    假设检验
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" >
+            
+                <span>
+            
+                    
+                    离散数学
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="../离散数学/离散数学1.html">
+            
+                <a href="../离散数学/离散数学1.html">
+            
+                    
+                    离散一
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.2" data-path="../离散数学/离散数学2.html">
+            
+                <a href="../离散数学/离散数学2.html">
+            
+                    
+                    离散二
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Python
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../../Python/BasicGrammar.html">
+            
+                <a href="../../Python/BasicGrammar.html">
+            
+                    
+                    基本语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" >
+            
+                <span>
+            
+                    
+                    爬虫
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../../Python/Crawler/Basic Knowledge.html">
+            
+                <a href="../../Python/Crawler/Basic Knowledge.html">
+            
+                    
+                    基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../../Python/Crawler/BeautifulSoup4.html">
+            
+                <a href="../../Python/Crawler/BeautifulSoup4.html">
+            
+                    
+                    BeautifulSoup4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../../Python/Crawler/PyQuery.html">
+            
+                <a href="../../Python/Crawler/PyQuery.html">
+            
+                    
+                    PyQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="../../Python/Crawler/RegularExpression.html">
+            
+                <a href="../../Python/Crawler/RegularExpression.html">
+            
+                    
+                    RegularExpression
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.5" data-path="../../Python/Crawler/Requests.html">
+            
+                <a href="../../Python/Crawler/Requests.html">
+            
+                    
+                    Requests
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.6" data-path="../../Python/Crawler/Selenium.html">
+            
+                <a href="../../Python/Crawler/Selenium.html">
+            
+                    
+                    Selenium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.7" data-path="../../Python/Crawler/XPath.html">
+            
+                <a href="../../Python/Crawler/XPath.html">
+            
+                    
+                    XPath
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" >
+            
+                <span>
+            
+                    
+                    数据分析
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="../../Python/DataAnalysis/Matplotlib.html">
+            
+                <a href="../../Python/DataAnalysis/Matplotlib.html">
+            
+                    
+                    matplotlib
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="../../Python/DataAnalysis/Numpy.html">
+            
+                <a href="../../Python/DataAnalysis/Numpy.html">
+            
+                    
+                    numpy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.3" data-path="../../Python/DataAnalysis/Pandas.html">
+            
+                <a href="../../Python/DataAnalysis/Pandas.html">
+            
+                    
+                    pandas
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="../../Python/DataAnalysis/Seaborn.html">
+            
+                <a href="../../Python/DataAnalysis/Seaborn.html">
+            
+                    
+                    seaborn
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" >
+            
+                <span>
+            
+                    
+                    [机器学习()
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../../Python/MachineLearning/sklearn.html">
+            
+                <a href="../../Python/MachineLearning/sklearn.html">
+            
+                    
+                    sklearn
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" >
+            
+                <span>
+            
+                    
+                    后端
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../../Python/WEB backend/Django.html">
+            
+                <a href="../../Python/WEB backend/Django.html">
+            
+                    
+                    Django
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="../../Python/WEB backend/FastAPI.html">
+            
+                <a href="../../Python/WEB backend/FastAPI.html">
+            
+                    
+                    FastAPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.3" data-path="../../Python/WEB backend/Flask.html">
+            
+                <a href="../../Python/WEB backend/Flask.html">
+            
+                    
+                    Flask
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.4" data-path="../../Python/WEB backend/sqlalchemy.html">
+            
+                <a href="../../Python/WEB backend/sqlalchemy.html">
+            
+                    
+                    sqlalchemy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../../Python/内建函数.html">
+            
+                <a href="../../Python/内建函数.html">
+            
+                    
+                    内建函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" >
+            
+                <span>
+            
+                    
+                    可视化
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.7.1" data-path="../../Python/可视化/DearPyGui.html">
+            
+                <a href="../../Python/可视化/DearPyGui.html">
+            
+                    
+                    DearPyGui
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.2" data-path="../../Python/可视化/PyQt5.html">
+            
+                <a href="../../Python/可视化/PyQt5.html">
+            
+                    
+                    PyQt5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.3" data-path="../../Python/可视化/manim.html">
+            
+                <a href="../../Python/可视化/manim.html">
+            
+                    
+                    Manim
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.4" data-path="../../Python/可视化/tkinter.html">
+            
+                <a href="../../Python/可视化/tkinter.html">
+            
+                    
+                    Tkinter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.5" data-path="../../Python/可视化/wordcloud.html">
+            
+                <a href="../../Python/可视化/wordcloud.html">
+            
+                    
+                    Wordcloud
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" >
+            
+                <span>
+            
+                    
+                    常用库
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.8.1" data-path="../../Python/常用库/aiohttp.html">
+            
+                <a href="../../Python/常用库/aiohttp.html">
+            
+                    
+                    aiohttp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.2" data-path="../../Python/常用库/bisect.html">
+            
+                <a href="../../Python/常用库/bisect.html">
+            
+                    
+                    bisect
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.3" data-path="../../Python/常用库/collections.html">
+            
+                <a href="../../Python/常用库/collections.html">
+            
+                    
+                    collections
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.4" data-path="../../Python/常用库/datetime.html">
+            
+                <a href="../../Python/常用库/datetime.html">
+            
+                    
+                    datetime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.5" data-path="../../Python/常用库/getpot.html">
+            
+                <a href="../../Python/常用库/getpot.html">
+            
+                    
+                    getpot
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.6" data-path="../../Python/常用库/iohttp.html">
+            
+                <a href="../../Python/常用库/iohttp.html">
+            
+                    
+                    iohttp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.7" data-path="../../Python/常用库/logging.html">
+            
+                <a href="../../Python/常用库/logging.html">
+            
+                    
+                    logging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.8" data-path="../../Python/常用库/loguru.html">
+            
+                <a href="../../Python/常用库/loguru.html">
+            
+                    
+                    loguru
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.9" data-path="../../Python/常用库/os.html">
+            
+                <a href="../../Python/常用库/os.html">
+            
+                    
+                    os
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.10" data-path="../../Python/常用库/pyinstaller.html">
+            
+                <a href="../../Python/常用库/pyinstaller.html">
+            
+                    
+                    pyinstaller
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.11" data-path="../../Python/常用库/random.html">
+            
+                <a href="../../Python/常用库/random.html">
+            
+                    
+                    random
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.12" data-path="../../Python/常用库/threading.html">
+            
+                <a href="../../Python/常用库/threading.html">
+            
+                    
+                    threading
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.13" data-path="../../Python/常用库/time.html">
+            
+                <a href="../../Python/常用库/time.html">
+            
+                    
+                    time
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.14" data-path="../../Python/常用库/tqdm.html">
+            
+                <a href="../../Python/常用库/tqdm.html">
+            
+                    
+                    tqdm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    前端
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../Frontend/CSS.html">
+            
+                <a href="../../Frontend/CSS.html">
+            
+                    
+                    CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../Frontend/HTML.html">
+            
+                <a href="../../Frontend/HTML.html">
+            
+                    
+                    HTML
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" >
+            
+                <span>
+            
+                    
+                    JavaScript
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../Frontend/JavaScript/BasicGrammar.html">
+            
+                <a href="../../Frontend/JavaScript/BasicGrammar.html">
+            
+                    
+                    基本语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../../Frontend/JavaScript/DOM.html">
+            
+                <a href="../../Frontend/JavaScript/DOM.html">
+            
+                    
+                    DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="../../Frontend/JavaScript/标准对象.html">
+            
+                <a href="../../Frontend/JavaScript/标准对象.html">
+            
+                    
+                    标准对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" >
+            
+                <span>
+            
+                    
+                    前端框架
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../../Frontend/框架/API 规范.html">
+            
+                <a href="../../Frontend/框架/API 规范.html">
+            
+                    
+                    API 规范
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../../Frontend/框架/VUE.html">
+            
+                <a href="../../Frontend/框架/VUE.html">
+            
+                    
+                    VUE
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../../Frontend/框架/Vuetify.html">
+            
+                <a href="../../Frontend/框架/Vuetify.html">
+            
+                    
+                    Vuetify
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    Linux
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../Linux/BasicGrammar.html">
+            
+                <a href="../../Linux/BasicGrammar.html">
+            
+                    
+                    基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" >
+            
+                <span>
+            
+                    
+                    收集
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../Linux/useful/Install.html">
+            
+                <a href="../../Linux/useful/Install.html">
+            
+                    
+                    Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../../Linux/useful/apt-get.html">
+            
+                <a href="../../Linux/useful/apt-get.html">
+            
+                    
+                    Apt Get
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../../Linux/useful/screen.html">
+            
+                <a href="../../Linux/useful/screen.html">
+            
+                    
+                    Screen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    教程配置
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../useful/配置 SSH.html">
+            
+                <a href="../../useful/配置 SSH.html">
+            
+                    
+                    配置 SSH
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../useful/配置 WIndows Terminal.html">
+            
+                <a href="../../useful/配置 WIndows Terminal.html">
+            
+                    
+                    配置 WIndows Terminal
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    效率工具
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../效率工具/Git.html">
+            
+                <a href="../../效率工具/Git.html">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../效率工具/LaTeX数学公式.html">
+            
+                <a href="../../效率工具/LaTeX数学公式.html">
+            
+                    
+                    LaTeX数学公式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../效率工具/Vim.html">
+            
+                <a href="../../效率工具/Vim.html">
+            
+                    
+                    Vim
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../../效率工具/mermaid.html">
+            
+                <a href="../../效率工具/mermaid.html">
+            
+                    
+                    Mermaid
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" >
+            
+                <span>
+            
+                    
+                    C艹
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../Cpp/类.html">
+            
+                <a href="../../Cpp/类.html">
+            
+                    
+                    类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../Cpp/要点.html">
+            
+                <a href="../../Cpp/要点.html">
+            
+                    
+                    一些要点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    机器学习
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../../ML/MachineLearning.html">
+            
+                <a href="../../ML/MachineLearning.html">
+            
+                    
+                    MachineLearning
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" >
+            
+                <span>
+            
+                    
+                    Java
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../../Java/BasicGrammar.html">
+            
+                <a href="../../Java/BasicGrammar.html">
+            
+                    
+                    基本语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >随机变量的数字特征</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x56DB;&#x3001;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;&#x6570;&#x5B57;&#x7279;&#x5F81;">&#x56DB;&#x3001;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;&#x6570;&#x5B57;&#x7279;&#x5F81;</h1>
+<p>&#x5B9A;&#x4E49;&#xFF1A;&#x8FD9;&#x4E9B;&#x7528;&#x6765;&#x63CF;&#x8FF0;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7EDF; &#x8BA1;&#x7279;&#x5F81;&#x7684;&#x6570;&#x5B57;&#xFF0C;&#x79F0;&#x4E3A;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;<strong>&#x6570;&#x5B57;&#x7279;&#x5F81;</strong>&#x3002;</p>
+<p>&#x200B;            &#x6700;&#x5E38;&#x7528;&#x7684;&#x6570;&#x5B57;&#x7279;&#x5F81;&#x6709;&#xFF1A;&#x6570;&#x5B66; &#x671F;&#x671B;(&#x5747;&#x503C;)&#x3001;&#x65B9;&#x5DEE;&#x3001;&#x76F8;&#x5173;&#x7CFB;&#x6570;&#x548C;&#x77E9;&#x3002;</p>
+<h2 id="41-&#x6570;&#x5B66;&#x671F;&#x671B;-ex">4.1 &#x6570;&#x5B66;&#x671F;&#x671B; E(x)</h2>
+<p>&#xFF08;Expectation&#xFF09;</p>
+<h3 id="411-&#x5B9A;&#x4E49;">4.1.1 &#x5B9A;&#x4E49;</h3>
+<p>&#x8BBE;&#x79BB;&#x6563;&#x578B;&#x968F;&#x673A;&#x53D8;&#x91CF;$X$&#x7684;&#x5206;&#x5E03;&#x5F8B;&#x4E3A;$P{X=x<em>k}=p_k,\quad (k=1,2,\ldots)$&#xFF0C;&#x82E5;&#x7EA7;&#x6570;$\sum\limits</em>{k=1}^\infty x<em>kp_k$&#x7EDD;&#x5BF9;&#x6536;&#x655B;&#xFF0C;&#x5219;&#x79F0;&#x7EA7;&#x6570;$\sum\limits</em>{k=1}^\infty x_kp_k$&#x7684;&#x548C;&#x4E3A;$X$&#x7684;<strong>&#x6570;&#x5B66;&#x671F;&#x671B;</strong>&#xFF08;&#x5747;&#x503C;&#xFF09;&#xFF0C;&#x8BB0;&#x4E3A;$E(X)$&#xFF1B;</p>
+<p>&#x8BBE;&#x8FDE;&#x7EED;&#x578B;&#x968F;&#x673A;&#x53D8;&#x91CF;$X$&#x7684;&#x6982;&#x7387;&#x5BC6;&#x5EA6;&#x4E3A;$f(x)$&#xFF0C;&#x82E5;&#x79EF;&#x5206;$\int<em>{-\infty}^{+\infty}xf(x)dx$&#x7EDD;&#x5BF9;&#x6536;&#x655B;&#xFF0C;&#x5219;&#x79F0;&#x7EA7;&#x6570;$\int</em>{-\infty}^{+\infty}xf(x)dx$&#x7684;&#x548C;&#x4E3A;$X$&#x7684;<strong>&#x6570;&#x5B66;&#x671F;&#x671B;</strong>&#xFF08;==&#x5747;&#x503C;==&#xFF09;&#xFF0C;&#x8BB0;&#x4E3A;$E(X)$&#xFF1B;</p>
+<p>&#x4F8B;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201218101413419.png" alt="image-20201218101413419" style="zoom: 50%;"></p>
+<h3 id="412-&#x6027;&#x8D28;">4.1.2 &#x6027;&#x8D28;</h3>
+<ul>
+<li>$E(C)=C$</li>
+<li>$E(CX)=CE(X)$</li>
+<li>$E(X+Y)=E(X)+E(Y)$</li>
+<li>&#x82E5;$X$&#x4E0E;$Y$&#x76F8;&#x4E92;&#x72EC;&#x7ACB;&#xFF0C;&#x5219;$E(XY)=E(X)E(Y)$</li>
+</ul>
+<h3 id="413-&#x516D;&#x4E2A;&#x5E38;&#x89C1;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;&#x6570;&#x5B66;&#x671F;&#x671B;">4.1.3 &#x516D;&#x4E2A;&#x5E38;&#x89C1;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;&#x6570;&#x5B66;&#x671F;&#x671B;</h3>
+<h4 id="1&#xFF09;&#xFF08;0-1&#xFF09;&#x5206;&#x5E03;">1&#xFF09;&#xFF08;0-1&#xFF09;&#x5206;&#x5E03;</h4>
+<p>$$
+E(X)=p</p>
+<p>$$</p>
+<h4 id="2&#xFF09;&#x4E8C;&#x9879;&#x5206;&#x5E03;-bnp">2&#xFF09;&#x4E8C;&#x9879;&#x5206;&#x5E03; $B(n,p)$</h4>
+<p>$$
+E(X)=np</p>
+<p>$$</p>
+<h4 id="3&#xFF09;&#x6CCA;&#x677E;&#x5206;&#x5E03;-pilambda">3&#xFF09;&#x6CCA;&#x677E;&#x5206;&#x5E03; $\pi(\lambda)$</h4>
+<p>$$
+E(X)=\lambda</p>
+<p>$$</p>
+<h4 id="4&#xFF09;&#x5747;&#x5300;&#x5206;&#x5E03;-uab">4&#xFF09;&#x5747;&#x5300;&#x5206;&#x5E03; $U(a,b)$</h4>
+<p>$$
+E(X)=\cfrac{a+b}{2}</p>
+<p>$$</p>
+<h4 id="5&#xFF09;&#x6307;&#x6570;&#x5206;&#x5E03;-elambda">5&#xFF09;&#x6307;&#x6570;&#x5206;&#x5E03; $e(\lambda)$</h4>
+<p>$$
+E(X)=\cfrac{1}{\lambda}</p>
+<p>$$</p>
+<h4 id="6&#xFF09;&#x6B63;&#x6001;&#x5206;&#x5E03;-nmusigma2">6&#xFF09;&#x6B63;&#x6001;&#x5206;&#x5E03; $N(\mu,\sigma^2)$</h4>
+<p>$$
+E(X)=\mu</p>
+<p>$$</p>
+<h3 id="414-&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;&#x51FD;&#x6570;&#x7684;&#x6570;&#x5B66;&#x671F;&#x671B;">4.1.4 &#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;&#x51FD;&#x6570;&#x7684;&#x6570;&#x5B66;&#x671F;&#x671B;</h3>
+<ul>
+<li><p>$X$&#x4E3A;&#x79BB;&#x6563;&#x578B;&#x7684;&#xFF0C;$Y=g(X)$&#x7684;&#x5747;&#x503C;</p>
+<p>&#x82E5;$X$&#x7684;&#x5206;&#x5E03;&#x5F8B;&#x4E3A;$P{X=x<em>i}=p_i\quad (i=1,2,\ldots)$&#xFF0C;&#x5219;
+$$
+E(Y)=\sum\limits</em>{i=1}^\infty g(x_i)p_i
+$$</p>
+</li>
+<li><p>$(X,Y)$&#x4E3A;&#x79BB;&#x6563;&#x578B;&#x7684;&#xFF0C;$Z=g(X,Y)$&#x7684;&#x5747;&#x503C;</p>
+<p>&#x82E5;$(X,Y)$&#x7684;&#x5206;&#x5E03;&#x5F8B;&#x4E3A;$P{X=x<em>i,Y=y_i}=p</em>{i,j}\quad (i,j=1,2,\ldots)$&#xFF0C;&#x5219;
+$$
+E(Z)=\sum\limits<em>{i,j}g(x_i,y_i)p</em>{i,j}
+$$</p>
+</li>
+<li><p>$X$&#x4E3A;&#x8FDE;&#x7EED;&#x578B;&#x7684;&#xFF0C;$Y=g(X)$&#x7684;&#x5747;&#x503C;</p>
+<p>&#x82E5;$X$&#x7684;&#x6982;&#x7387;&#x5BC6;&#x5EA6;&#x4E3A;$f<em>X(x)$&#xFF0C;&#x5219;
+$$
+E(Y)=\int</em>{-\infty}^{+\infty}g(x)f_X(x)dx
+$$</p>
+</li>
+<li><p>$(X,Y)$&#x4E3A;&#x8FDE;&#x7EED;&#x578B;&#x7684;&#xFF0C;$Z=g(X,Y)$&#x7684;&#x5747;&#x503C;</p>
+<p>&#x82E5;$(X,Y)$&#x7684;&#x6982;&#x7387;&#x5BC6;&#x5EA6;&#x4E3A;$f(x,y)$&#xFF0C;&#x5219;
+$$
+E(Z)=\int<em>{-\infty}^{+\infty}\int</em>{-\infty}^{+\infty}g(x,y)f(x,y)dxdy
+$$</p>
+</li>
+</ul>
+<p>&#x4F8B;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201218105951288.png" alt="image-20201218105951288" style="zoom:50%;"></p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201218110057750.png" alt="image-20201218110057750" style="zoom:50%;"></p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201218110111093.png" alt="image-20201218110111093" style="zoom:50%;"></p>
+<h2 id="42-&#x65B9;&#x5DEE;-dx">4.2 &#x65B9;&#x5DEE; D(X)</h2>
+<p>(Variance)</p>
+<h3 id="421-&#x5B9A;&#x4E49;">4.2.1 &#x5B9A;&#x4E49;</h3>
+<p>&#x8BBE;$X$&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x968F;&#x673A;&#x53D8;&#x91CF;&#xFF0C;&#x82E5;$E{[X-E(X)]^2}$&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x79F0;&#x5176;&#x4E3A;$X$&#x7684;<strong>&#x65B9;&#x5DEE;</strong>&#xFF0C;&#x8BB0;&#x4E3A;$D(X)$&#x6216;$Var(X)$</p>
+<p>&#x79F0;$\sqrt{D(X)}$&#x4E3A;<strong>&#x6807;&#x51C6;&#x5DEE;</strong>&#x6216;<strong>&#x5747;&#x65B9;&#x5DEE;</strong>&#xFF0C;&#x8BB0;&#x4E3A;$\sigma(X)$</p>
+<ul>
+<li><p>&#x8BA4;&#x8BC6;</p>
+<p>&#x6807;&#x51C6;&#x5DEE;&#x3001;&#x65B9;&#x5DEE;&#x8D8A;&#x5927;&#xFF0C;&#x79BB;&#x6563;&#x7A0B;&#x5EA6;&#x8D8A;&#x5927;&#xFF0C;&#x82E5;$X$&#x7684;&#x53D6;&#x503C;&#x6BD4;&#x8F83;&#x96C6;&#x4E2D;&#xFF0C;&#x5219;&#x65B9;&#x5DEE;$D(X)$&#x8F83;&#x5C0F;,&#x82E5;$X$&#x7684;&#x53D6;&#x503C;&#x6BD4;&#x8F83;&#x5206;&#x6563;&#xFF0C;&#x5219;&#x65B9;&#x5DEE;$D(X)$&#x8F83;&#x5927;&#x3002;&#x56E0;&#x6B64;&#xFF0C;$D(X)$&#x662F;&#x523B;&#x753B;$X$&#x53D6;&#x503C;&#x5206;&#x6563;&#x7A0B;&#x5EA6;&#x7684;&#x4E00;&#x4E2A;&#x91CF;&#xFF0C;&#x5B83;&#x662F;&#x8861;&#x91CF;&#x53D6;&#x503C;&#x5206;&#x6563;&#x7A0B;&#x5EA6;&#x7684;&#x4E00;&#x4E2A;&#x5C3A;&#x5EA6;</p>
+</li>
+<li><p>==&#x516C;&#x5F0F;==</p>
+</li>
+</ul>
+<p>$$
+D(X)=E(X^2)-[E(X)]^2</p>
+<p>$$</p>
+<h3 id="422-&#x6027;&#x8D28;">4.2.2 &#x6027;&#x8D28;</h3>
+<ul>
+<li><p>$D(C)=0$</p>
+</li>
+<li><p>$D(CX)=C^2D(X)$</p>
+</li>
+<li><p>$D(X+Y)=D(X)+D(Y)+2E{[X-E(X)][Y-E(Y)]}$</p>
+<p>&#x82E5;$X$&#xFF0C;$Y$&#x76F8;&#x4E92;&#x72EC;&#x7ACB;&#xFF0C;&#x5219;&#x6709;$D(X+Y)=D(X)+D(Y)$&#xFF0C;&#x53C8;&#x6709;$D(X-Y)=D(X)+D(Y)$</p>
+</li>
+</ul>
+<h3 id="423-&#x5E38;&#x89C1;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x5DEE;">4.2.3 &#x5E38;&#x89C1;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x5DEE;</h3>
+<h4 id="1&#xFF09;&#xFF08;0-1&#xFF09;&#x5206;&#x5E03;">1&#xFF09;&#xFF08;0-1&#xFF09;&#x5206;&#x5E03;</h4>
+<p>$$
+D(X)=p(1-p)</p>
+<p>$$</p>
+<h4 id="2&#xFF09;&#x4E8C;&#x9879;&#x5206;&#x5E03;-bnp">2&#xFF09;&#x4E8C;&#x9879;&#x5206;&#x5E03; $B(n,p)$</h4>
+<p>$$
+D(X)=np(1-p)</p>
+<p>$$</p>
+<h4 id="3&#xFF09;&#x6CCA;&#x677E;&#x5206;&#x5E03;-pilambda">3&#xFF09;&#x6CCA;&#x677E;&#x5206;&#x5E03; $\pi(\lambda)$</h4>
+<p>$$
+D(X)=\lambda</p>
+<p>$$</p>
+<h4 id="4&#xFF09;&#x5747;&#x5300;&#x5206;&#x5E03;-uab">4&#xFF09;&#x5747;&#x5300;&#x5206;&#x5E03; $U(a,b)$</h4>
+<p>$$
+D(X)=\cfrac{(b-a)^2}{12}</p>
+<p>$$</p>
+<h4 id="5&#xFF09;&#x6307;&#x6570;&#x5206;&#x5E03;-elambda">5&#xFF09;&#x6307;&#x6570;&#x5206;&#x5E03; $e(\lambda)$</h4>
+<p>$$
+D(X)=\cfrac{1}{\lambda^2}</p>
+<p>$$</p>
+<h4 id="6&#xFF09;&#x6B63;&#x6001;&#x5206;&#x5E03;-nmusigma2">6&#xFF09;&#x6B63;&#x6001;&#x5206;&#x5E03; $N(\mu,\sigma^2)$</h4>
+<p>$$
+D(X)=\sigma^2</p>
+<p>$$</p>
+<h4 id="&#x968F;&#x673A;&#x53D8;&#x91CF;&#x53C2;&#x8003;&#x603B;&#x7ED3;">==&#x968F;&#x673A;&#x53D8;&#x91CF;&#x53C2;&#x8003;&#x603B;&#x7ED3;==</h4>
+<table>
+<thead>
+<tr>
+<th>&#x5206;&#x5E03;&#x540D;&#x79F0;</th>
+<th>&#x5206;&#x5E03;&#x5F8B;&#x6216;&#x6982;&#x7387;&#x5BC6;&#x5EA6;</th>
+<th>&#x6570;&#x5B66;&#x671F;&#x671B;</th>
+<th>&#x65B9;&#x5DEE;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#xFF08;0-1&#xFF09;&#x5206;&#x5E03;</td>
+<td>$P{X=k}=p^k(1-p)^{1-k}$</td>
+<td>$p$</td>
+<td>$p(1-p)$</td>
+</tr>
+<tr>
+<td>&#x4E8C;&#x9879;&#x5206;&#x5E03; $B(n,p)$</td>
+<td>$P{X=k}=C_n^kp^k(1-p)^{n-k}$</td>
+<td>$np$</td>
+<td>$np(1-p)$</td>
+</tr>
+<tr>
+<td>&#x6CCA;&#x677E;&#x5206;&#x5E03; $\pi(\lambda)$</td>
+<td>$P{X=k}=e^{-\lambda}\cfrac{\lambda^k}{k!}$</td>
+<td>$\lambda$</td>
+<td>$\lambda$</td>
+</tr>
+<tr>
+<td>&#x5747;&#x5300;&#x5206;&#x5E03; $U(a,b)$</td>
+<td>$f(x)=\begin{cases}\  \cfrac{1}{b-a}\qquad a&lt;x&lt;b\ \ 0\qquad\qquad &#x5176;&#x4ED6;\end{cases}$</td>
+<td>$\cfrac{a+b}{2}$</td>
+<td>$\cfrac{(b-a)^2}{12}$</td>
+</tr>
+<tr>
+<td>&#x6307;&#x6570;&#x5206;&#x5E03; $e(\lambda)$</td>
+<td>$f(x)=\begin{cases}\ \lambda e^{-\lambda x}\qquad x\ge 0\ \ 0\qquad\qquad &#x5176;&#x4ED6;\end{cases}$</td>
+<td>$\cfrac{1}{\lambda}$</td>
+<td>$\cfrac{1}{\lambda^2}$</td>
+</tr>
+<tr>
+<td>&#x6B63;&#x6001;&#x5206;&#x5E03; $N(\mu,\sigma^2)$</td>
+<td>$f(x)=\cfrac{1}{\sqrt{2\pi}\sigma}e^{-\cfrac{(x-\mu)^2}{2\sigma^2}}$</td>
+<td>$\mu$</td>
+<td>$\sigma^2$</td>
+</tr>
+</tbody>
+</table>
+<p>&#x4F8B;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201218113426305.png" alt="image-20201218113426305" style="zoom:50%;"></p>
+<h2 id="43-&#x534F;&#x65B9;&#x5DEE;">4.3 &#x534F;&#x65B9;&#x5DEE;</h2>
+<h3 id="431-&#x5B9A;&#x4E49;">4.3.1 &#x5B9A;&#x4E49;</h3>
+<p>&#x8BBE;$(X,Y)$&#x4E3A;&#x4E8C;&#x7EF4;&#x968F;&#x673A;&#x53D8;&#x91CF;&#xFF0C;&#x82E5;$E{[X-E(X)][Y-E(Y)]}$&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x79F0;&#x5176;&#x4E3A;$X$&#x548C;$Y$&#x7684;<strong>&#x534F;&#x65B9;&#x5DEE;</strong>&#xFF0C;&#x8BB0;&#x4E3A;$Cov(X,Y)$</p>
+<ul>
+<li>==&#x516C;&#x5F0F;==</li>
+</ul>
+<p>$$
+Cov(X,Y)=E(XY)-E(X)E(Y)</p>
+<p>$$</p>
+<h3 id="432-&#x6027;&#x8D28;">4.3.2 &#x6027;&#x8D28;</h3>
+<ul>
+<li>$Cov(X,X)=D(X)$</li>
+<li>$Cov(X,Y)=Cov(Y,X)$</li>
+<li>$Cov(aX,bY)=abCov(X,Y)$</li>
+<li>$Cov(C,X)=0$</li>
+<li>$Cov(X_1+X_2,Y)=Cov(X_1,Y)+Cov(X_2,Y)$</li>
+<li>&#x5F53;$X$&#x4E0E;$Y$&#x76F8;&#x4E92;&#x72EC;&#x7ACB;&#x65F6;&#xFF0C;$Cov(X,Y)=0$</li>
+<li>$D(aX+bY)=a^2D(X)+b^2D(Y)+2abCov(X,Y)$</li>
+</ul>
+<h2 id="44-&#x76F8;&#x5173;&#x7CFB;&#x6570;">4.4 &#x76F8;&#x5173;&#x7CFB;&#x6570;</h2>
+<h3 id="441-&#x5B9A;&#x4E49;">4.4.1 &#x5B9A;&#x4E49;</h3>
+<p>&#x8BBE;$(X,Y)$&#x4E3A;&#x4E8C;&#x7EF4;&#x968F;&#x673A;&#x53D8;&#x91CF;&#xFF0C;$D(X)&gt;0,D(Y)&gt;0$&#xFF0C;&#x79F0;</p>
+<p>$$
+\cfrac{Cov(X,Y)}{\sqrt{D(X)D(Y)}}</p>
+<p>$$
+&#x4E3A;$X$&#x548C;$Y$&#x7684;<strong>&#x76F8;&#x5173;&#x7CFB;&#x6570;</strong>&#xFF0C;&#x8BB0;&#x4E3A;$\rho_{XY}$&#x3002;&#x5176;&#x503C;&#x4E3A;0&#x65F6;&#xFF0C;$X$&#x548C;$Y$&#x4E0D;&#x76F8;&#x5173;</p>
+<h3 id="442-&#x6027;&#x8D28;">4.4.2 &#x6027;&#x8D28;</h3>
+<ul>
+<li>$|\rho_{XY}|\le 1$</li>
+<li><p>&#x5F53;$X$&#x4E0E;$Y$&#x76F8;&#x4E92;&#x72EC;&#x7ACB;&#x65F6;&#xFF0C;$\rho_{XY}=0$&#xFF0C;$X$&#x548C;$Y$&#x4E0D;&#x76F8;&#x5173;</p>
+</li>
+<li><p>&#x82E5;$D(X)&gt;0,D(Y)&gt;0,|\rho_{XY}|=1\Leftrightarrow &#x5B58;&#x5728;&#x5E38;&#x6570;a,b&#xFF0C;&#x4F7F;&#x5F97;P{Y=aX+b}=1$</p>
+<p>&#x800C;&#x4E14;&#x5F53;$a&gt;0$&#x65F6;&#xFF0C;$\rho<em>{XY}=1$&#xFF0C;&#x5F53;$a&lt;0$&#x65F6;&#xFF0C;$\rho</em>{XY}=-1$</p>
+</li>
+</ul>
+<p>==&#x76F8;&#x5173;&#x7CFB;&#x6570;&#x523B;&#x753B;&#x4E86;&#x968F;&#x673A;&#x53D8;&#x91CF;$X$&#x4E0E;$Y$&#x4E4B;&#x95F4;&#x201D;&#x7EBF;&#x6027;&#x76F8;&#x5173;&#x201C;&#x7684;&#x7A0B;&#x5EA6;==</p>
+<p>&#x4F8B;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221110802057.png" alt="image-20201221110802057" style="zoom:50%;"></p>
+<ul>
+<li>$X^*=\cfrac{X-E(X)}{\sqrt{D{X}}}$&#x662F;&#x5BF9;&#x968F;&#x673A;&#x53D8;&#x91CF;$X$&#x7684;&#x6807;&#x51C6;&#x5316;&#xFF0C;&#x6709;</li>
+</ul>
+<p>$$
+\rho_{XY}=Cov(X^<em>,Y^</em>)</p>
+<p>$$</p>
+<ul>
+<li>&#x5BF9;&#x4E8E;&#x4E8C;&#x7EF4;&#x6B63;&#x6001;&#x5206;&#x5E03;&#x6765;&#x8BF4;&#xFF0C;&#x4E0D;&#x76F8;&#x5173;$\Leftrightarrow$&#x72EC;&#x7ACB;</li>
+</ul>
+<p>&#x4F8B;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201228112938854.png" alt="image-20201228112938854" style="zoom:50%;"></p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201228112956332.png" alt="image-20201228112956332" style="zoom:50%;"></p>
+<h3 id="443-&#x4E0D;&#x76F8;&#x5173;&#x4E0E;&#x72EC;&#x7ACB;">4.4.3 &#x4E0D;&#x76F8;&#x5173;&#x4E0E;&#x72EC;&#x7ACB;</h3>
+<p>&#x72EC;&#x7ACB;&#xFF1A;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x5173;&#x7CFB;</p>
+<p>&#x4E0D;&#x76F8;&#x5173;&#xFF1A;&#x6CA1;&#x6709;&#x7EBF;&#x6027;&#x5173;&#x7CFB;</p>
+<p>$&#x72EC;&#x7ACB; \Rightarrow &#x4E0D;&#x76F8;&#x5173; \ &#x4E0D;&#x76F8;&#x5173; \nRightarrow &#x72EC;&#x7ACB;$</p>
+<p>&#x4E8C;&#x7EF4;&#x968F;&#x673A;&#x53D8;&#x91CF;&#x4E2D;&#xFF0C;&#x4E24;&#x8005;&#x7B49;&#x4EF7;</p>
+<h2 id="45-&#x77E9;">4.5 &#x77E9;</h2>
+<h3 id="451-&#x5B9A;&#x4E49;">4.5.1 &#x5B9A;&#x4E49;</h3>
+<p>&#x8BBE;$X,Y$&#x662F;&#x968F;&#x673A;&#x53D8;&#x91CF;</p>
+<ul>
+<li>&#x82E5;$E(X^k),k=1,2,\ldots$&#x5B58;&#x5728;&#xFF0C;&#x79F0;&#x5B83;&#x4E3A;$X$&#x7684;$k$&#x9636;&#x539F;&#x70B9;&#x77E9;&#xFF0C;&#x7B80;&#x79F0;<strong>$k$&#x9636;&#x77E9;</strong></li>
+<li>&#x82E5;$E{[X-E(X)]^k},k=2,3,\ldots$&#x5B58;&#x5728;&#xFF0C;&#x79F0;&#x5B83;&#x4E3A;$X$&#x7684;<strong>$k$&#x9636;&#x4E2D;&#x5FC3;&#x77E9;</strong></li>
+<li>&#x82E5;$E(X^kY^l),k,l=1,2,\ldots$&#x5B58;&#x5728;&#xFF0C;&#x79F0;&#x5B83;&#x4E3A;$X$&#x548C;$Y$&#x7684;<strong>$k+l$&#x9636;&#x6DF7;&#x5408;&#x77E9;</strong></li>
+<li>&#x82E5;$E{[X-E(X)]^k[Y-E(Y)]^l},k,l=2,3,\ldots$&#x5B58;&#x5728;&#xFF0C;&#x79F0;&#x5B83;&#x4E3A;<strong>$X$&#x548C;$Y$&#x7684;$k+l$&#x9636;&#x6DF7;&#x5408;&#x4E2D;&#x5FC3;&#x77E9;</strong></li>
+</ul>
+<p>&#x6570;&#x5B66;&#x671F;&#x671B;&#x4E3A;&#x4E00;&#x9636;&#x539F;&#x70B9;&#x77E9;&#xFF0C;&#x65B9;&#x5DEE;&#x4E3A;&#x4E8C;&#x9636;&#x4E2D;&#x5FC3;&#x77E9;&#xFF0C;&#x534F;&#x65B9;&#x5DEE;&#x4E3A;&#x4E8C;&#x9636;&#x6DF7;&#x5408;&#x4E2D;&#x5FC3;&#x77E9;</p>
+<h3 id="452-&#x534F;&#x65B9;&#x5DEE;&#x77E9;&#x9635;">4.5.2 &#x534F;&#x65B9;&#x5DEE;&#x77E9;&#x9635;</h3>
+<p>&#x8BBE;$n$&#x7EF4;&#x968F;&#x673A;&#x53D8;&#x91CF;$(X<em>1,X_2,\ldots,X_n)$&#x7684;&#x4E8C;&#x9636;&#x6DF7;&#x5408;&#x4E2D;&#x5FC3;&#x77E9;$E{[X_i-E(X_i)][Y_j-E(Y_j)]}\triangleq c</em>{i,j}, (i,j=1,2,\ldots,n)$&#x90FD;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x79F0;&#x77E9;&#x9635;</p>
+<p>$$
+\begin{pmatrix} c<em>{11}&amp;c</em>{12}&amp;\ldots&amp;c<em>{1n} \ c</em>{21}&amp;c<em>{22}&amp;\ldots&amp;c</em>{nn}\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots \ c<em>{n1}&amp;c</em>{n2}&amp;\ldots&amp;c_{nn} \end{pmatrix}</p>
+<p>$$
+&#x4E3A;$n$&#x7EF4;&#x968F;&#x673A;&#x53D8;&#x91CF;$(X_1,X_2,\ldots,X_n)$&#x7684;<strong>&#x534F;&#x65B9;&#x5DEE;&#x77E9;&#x9635;</strong></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="3. 多维随机变量及其分布.html" class="navigation navigation-prev " aria-label="Previous page: 多维随机变量及其分布">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="5. 大数定律与中心极限定理.html" class="navigation navigation-next " aria-label="Next page: 大数定律与中心极限定理">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"随机变量的数字特征","level":"1.3.3.4","depth":3,"next":{"title":"大数定律与中心极限定理","level":"1.3.3.5","depth":3,"path":"Courses/概率论与数理统计/5. 大数定律与中心极限定理.md","ref":"Courses/概率论与数理统计/5. 大数定律与中心极限定理.md","articles":[]},"previous":{"title":"多维随机变量及其分布","level":"1.3.3.3","depth":3,"path":"Courses/概率论与数理统计/3. 多维随机变量及其分布.md","ref":"Courses/概率论与数理统计/3. 多维随机变量及其分布.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Courses/概率论与数理统计/4. 随机变量的数字特征.md","mtime":"2021-06-18T07:00:12.287Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-18T08:32:50.643Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

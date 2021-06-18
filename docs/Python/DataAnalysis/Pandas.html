@@ -1,0 +1,2264 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>pandas · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Seaborn.html" />
+    
+    
+    <link rel="prev" href="Numpy.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../markdown.html">
+            
+                <a href="../../markdown.html">
+            
+                    
+                    Help
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" >
+            
+                <span>
+            
+                    
+                    专业课
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../Courses/计算机组成原理.html">
+            
+                <a href="../../Courses/计算机组成原理.html">
+            
+                    
+                    计算机组成原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../Courses/计算机网络.html">
+            
+                <a href="../../Courses/计算机网络.html">
+            
+                    
+                    计算机网络
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" >
+            
+                <span>
+            
+                    
+                    概率论与数理统计
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.3.1" data-path="../../Courses/概率论与数理统计/1. 概念.html">
+            
+                <a href="../../Courses/概率论与数理统计/1. 概念.html">
+            
+                    
+                    概念
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.2" data-path="../../Courses/概率论与数理统计/2. 随机变量及其分布.html">
+            
+                <a href="../../Courses/概率论与数理统计/2. 随机变量及其分布.html">
+            
+                    
+                    随机变量及其分布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.3" data-path="../../Courses/概率论与数理统计/3. 多维随机变量及其分布.html">
+            
+                <a href="../../Courses/概率论与数理统计/3. 多维随机变量及其分布.html">
+            
+                    
+                    多维随机变量及其分布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.4" data-path="../../Courses/概率论与数理统计/4. 随机变量的数字特征.html">
+            
+                <a href="../../Courses/概率论与数理统计/4. 随机变量的数字特征.html">
+            
+                    
+                    随机变量的数字特征
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.5" data-path="../../Courses/概率论与数理统计/5. 大数定律与中心极限定理.html">
+            
+                <a href="../../Courses/概率论与数理统计/5. 大数定律与中心极限定理.html">
+            
+                    
+                    大数定律与中心极限定理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.6" data-path="../../Courses/概率论与数理统计/6. 样本及抽样分布.html">
+            
+                <a href="../../Courses/概率论与数理统计/6. 样本及抽样分布.html">
+            
+                    
+                    样本及抽样分布
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.7" data-path="../../Courses/概率论与数理统计/7. 参数估计.html">
+            
+                <a href="../../Courses/概率论与数理统计/7. 参数估计.html">
+            
+                    
+                    参数估计
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3.8" data-path="../../Courses/概率论与数理统计/8. 假设检验.html">
+            
+                <a href="../../Courses/概率论与数理统计/8. 假设检验.html">
+            
+                    
+                    假设检验
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" >
+            
+                <span>
+            
+                    
+                    离散数学
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.4.1" data-path="../../Courses/离散数学/离散数学1.html">
+            
+                <a href="../../Courses/离散数学/离散数学1.html">
+            
+                    
+                    离散一
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4.2" data-path="../../Courses/离散数学/离散数学2.html">
+            
+                <a href="../../Courses/离散数学/离散数学2.html">
+            
+                    
+                    离散二
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" >
+            
+                <span>
+            
+                    
+                    Python
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../BasicGrammar.html">
+            
+                <a href="../BasicGrammar.html">
+            
+                    
+                    基本语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" >
+            
+                <span>
+            
+                    
+                    爬虫
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.2.1" data-path="../Crawler/Basic Knowledge.html">
+            
+                <a href="../Crawler/Basic Knowledge.html">
+            
+                    
+                    基础知识
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.2" data-path="../Crawler/BeautifulSoup4.html">
+            
+                <a href="../Crawler/BeautifulSoup4.html">
+            
+                    
+                    BeautifulSoup4
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.3" data-path="../Crawler/PyQuery.html">
+            
+                <a href="../Crawler/PyQuery.html">
+            
+                    
+                    PyQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.4" data-path="../Crawler/RegularExpression.html">
+            
+                <a href="../Crawler/RegularExpression.html">
+            
+                    
+                    RegularExpression
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.5" data-path="../Crawler/Requests.html">
+            
+                <a href="../Crawler/Requests.html">
+            
+                    
+                    Requests
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.6" data-path="../Crawler/Selenium.html">
+            
+                <a href="../Crawler/Selenium.html">
+            
+                    
+                    Selenium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2.7" data-path="../Crawler/XPath.html">
+            
+                <a href="../Crawler/XPath.html">
+            
+                    
+                    XPath
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" >
+            
+                <span>
+            
+                    
+                    数据分析
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.3.1" data-path="Matplotlib.html">
+            
+                <a href="Matplotlib.html">
+            
+                    
+                    matplotlib
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.2" data-path="Numpy.html">
+            
+                <a href="Numpy.html">
+            
+                    
+                    numpy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.3.3" data-path="Pandas.html">
+            
+                <a href="Pandas.html">
+            
+                    
+                    pandas
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3.4" data-path="Seaborn.html">
+            
+                <a href="Seaborn.html">
+            
+                    
+                    seaborn
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" >
+            
+                <span>
+            
+                    
+                    [机器学习()
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.4.1" data-path="../MachineLearning/sklearn.html">
+            
+                <a href="../MachineLearning/sklearn.html">
+            
+                    
+                    sklearn
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" >
+            
+                <span>
+            
+                    
+                    后端
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.5.1" data-path="../WEB backend/Django.html">
+            
+                <a href="../WEB backend/Django.html">
+            
+                    
+                    Django
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.2" data-path="../WEB backend/FastAPI.html">
+            
+                <a href="../WEB backend/FastAPI.html">
+            
+                    
+                    FastAPI
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.3" data-path="../WEB backend/Flask.html">
+            
+                <a href="../WEB backend/Flask.html">
+            
+                    
+                    Flask
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5.4" data-path="../WEB backend/sqlalchemy.html">
+            
+                <a href="../WEB backend/sqlalchemy.html">
+            
+                    
+                    sqlalchemy
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../内建函数.html">
+            
+                <a href="../内建函数.html">
+            
+                    
+                    内建函数
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" >
+            
+                <span>
+            
+                    
+                    可视化
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.7.1" data-path="../可视化/DearPyGui.html">
+            
+                <a href="../可视化/DearPyGui.html">
+            
+                    
+                    DearPyGui
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.2" data-path="../可视化/PyQt5.html">
+            
+                <a href="../可视化/PyQt5.html">
+            
+                    
+                    PyQt5
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.3" data-path="../可视化/manim.html">
+            
+                <a href="../可视化/manim.html">
+            
+                    
+                    Manim
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.4" data-path="../可视化/tkinter.html">
+            
+                <a href="../可视化/tkinter.html">
+            
+                    
+                    Tkinter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7.5" data-path="../可视化/wordcloud.html">
+            
+                <a href="../可视化/wordcloud.html">
+            
+                    
+                    Wordcloud
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" >
+            
+                <span>
+            
+                    
+                    常用库
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.8.1" data-path="../常用库/aiohttp.html">
+            
+                <a href="../常用库/aiohttp.html">
+            
+                    
+                    aiohttp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.2" data-path="../常用库/bisect.html">
+            
+                <a href="../常用库/bisect.html">
+            
+                    
+                    bisect
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.3" data-path="../常用库/collections.html">
+            
+                <a href="../常用库/collections.html">
+            
+                    
+                    collections
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.4" data-path="../常用库/datetime.html">
+            
+                <a href="../常用库/datetime.html">
+            
+                    
+                    datetime
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.5" data-path="../常用库/getpot.html">
+            
+                <a href="../常用库/getpot.html">
+            
+                    
+                    getpot
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.6" data-path="../常用库/iohttp.html">
+            
+                <a href="../常用库/iohttp.html">
+            
+                    
+                    iohttp
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.7" data-path="../常用库/logging.html">
+            
+                <a href="../常用库/logging.html">
+            
+                    
+                    logging
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.8" data-path="../常用库/loguru.html">
+            
+                <a href="../常用库/loguru.html">
+            
+                    
+                    loguru
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.9" data-path="../常用库/os.html">
+            
+                <a href="../常用库/os.html">
+            
+                    
+                    os
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.10" data-path="../常用库/pyinstaller.html">
+            
+                <a href="../常用库/pyinstaller.html">
+            
+                    
+                    pyinstaller
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.11" data-path="../常用库/random.html">
+            
+                <a href="../常用库/random.html">
+            
+                    
+                    random
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.12" data-path="../常用库/threading.html">
+            
+                <a href="../常用库/threading.html">
+            
+                    
+                    threading
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.13" data-path="../常用库/time.html">
+            
+                <a href="../常用库/time.html">
+            
+                    
+                    time
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8.14" data-path="../常用库/tqdm.html">
+            
+                <a href="../常用库/tqdm.html">
+            
+                    
+                    tqdm
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" >
+            
+                <span>
+            
+                    
+                    前端
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../Frontend/CSS.html">
+            
+                <a href="../../Frontend/CSS.html">
+            
+                    
+                    CSS
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../../Frontend/HTML.html">
+            
+                <a href="../../Frontend/HTML.html">
+            
+                    
+                    HTML
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" >
+            
+                <span>
+            
+                    
+                    JavaScript
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.3.1" data-path="../../Frontend/JavaScript/BasicGrammar.html">
+            
+                <a href="../../Frontend/JavaScript/BasicGrammar.html">
+            
+                    
+                    基本语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.2" data-path="../../Frontend/JavaScript/DOM.html">
+            
+                <a href="../../Frontend/JavaScript/DOM.html">
+            
+                    
+                    DOM
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3.3" data-path="../../Frontend/JavaScript/标准对象.html">
+            
+                <a href="../../Frontend/JavaScript/标准对象.html">
+            
+                    
+                    标准对象
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" >
+            
+                <span>
+            
+                    
+                    前端框架
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.4.1" data-path="../../Frontend/框架/API 规范.html">
+            
+                <a href="../../Frontend/框架/API 规范.html">
+            
+                    
+                    API 规范
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.2" data-path="../../Frontend/框架/VUE.html">
+            
+                <a href="../../Frontend/框架/VUE.html">
+            
+                    
+                    VUE
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4.3" data-path="../../Frontend/框架/Vuetify.html">
+            
+                <a href="../../Frontend/框架/Vuetify.html">
+            
+                    
+                    Vuetify
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" >
+            
+                <span>
+            
+                    
+                    Linux
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../Linux/BasicGrammar.html">
+            
+                <a href="../../Linux/BasicGrammar.html">
+            
+                    
+                    基本操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" >
+            
+                <span>
+            
+                    
+                    收集
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.2.1" data-path="../../Linux/useful/Install.html">
+            
+                <a href="../../Linux/useful/Install.html">
+            
+                    
+                    Install
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.2" data-path="../../Linux/useful/apt-get.html">
+            
+                <a href="../../Linux/useful/apt-get.html">
+            
+                    
+                    Apt Get
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2.3" data-path="../../Linux/useful/screen.html">
+            
+                <a href="../../Linux/useful/screen.html">
+            
+                    
+                    Screen
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" >
+            
+                <span>
+            
+                    
+                    教程配置
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../../useful/配置 SSH.html">
+            
+                <a href="../../useful/配置 SSH.html">
+            
+                    
+                    配置 SSH
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../../useful/配置 WIndows Terminal.html">
+            
+                <a href="../../useful/配置 WIndows Terminal.html">
+            
+                    
+                    配置 WIndows Terminal
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    效率工具
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="../../效率工具/Git.html">
+            
+                <a href="../../效率工具/Git.html">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="../../效率工具/LaTeX数学公式.html">
+            
+                <a href="../../效率工具/LaTeX数学公式.html">
+            
+                    
+                    LaTeX数学公式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="../../效率工具/Vim.html">
+            
+                <a href="../../效率工具/Vim.html">
+            
+                    
+                    Vim
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="../../效率工具/mermaid.html">
+            
+                <a href="../../效率工具/mermaid.html">
+            
+                    
+                    Mermaid
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" >
+            
+                <span>
+            
+                    
+                    C艹
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="../../Cpp/类.html">
+            
+                <a href="../../Cpp/类.html">
+            
+                    
+                    类
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="../../Cpp/要点.html">
+            
+                <a href="../../Cpp/要点.html">
+            
+                    
+                    一些要点
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    机器学习
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="../../ML/MachineLearning.html">
+            
+                <a href="../../ML/MachineLearning.html">
+            
+                    
+                    MachineLearning
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" >
+            
+                <span>
+            
+                    
+                    Java
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="../../Java/BasicGrammar.html">
+            
+                <a href="../../Java/BasicGrammar.html">
+            
+                    
+                    基本语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >pandas</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x4E00;&#x3001;&#x5206;&#x7C7B;&#x4E0E;&#x521B;&#x5EFA;">&#x4E00;&#x3001;&#x5206;&#x7C7B;&#x4E0E;&#x521B;&#x5EFA;</h1>
+<h2 id="11-series">1.1 Series</h2>
+<p>Series&#x662F;&#x4E00;&#x79CD;&#x7C7B;&#x4F3C;&#x4E8E;&#x4EE5;&#x4E3A;NumPy&#x6570;&#x7EC4;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x7531;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#xFF08;&#x5404;&#x79CD;NumPy&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF09;&#x548C;&#x4E0E;&#x4E4B;&#x76F8;&#x5173;&#x7684;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x6807;&#x7B7E;&#xFF08;&#x5373;&#x7D22;&#x5F15;&#xFF09;&#x7EC4;&#x6210;&#x7684;&#x3002;&#x53EF;&#x4EE5;&#x7528;index&#x548C;values&#x5206;&#x522B;&#x89C4;&#x5B9A;&#x7D22;&#x5F15;&#x548C;&#x503C;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x89C4;&#x5B9A;&#x7D22;&#x5F15;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x521B;&#x5EFA; 0 &#x5230; N-1 &#x7D22;&#x5F15;&#x3002;</p>
+<p>Series&#x662F;1&#x7EF4;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x62E5;&#x6709;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x4E00;&#x822C;&#x4EE5;&#x7AD6;&#x884C;&#x5F62;&#x5F0F;&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207200644867.png" alt="image-20201207200644867" style="zoom:50%;"></p>
+<h3 id="111-&#x521B;&#x5EFA;">1.1.1 &#x521B;&#x5EFA;</h3>
+<p>Series&#x53EF;&#x4EE5;&#x65B9;&#x4FBF;&#x7684;&#x901A;&#x8FC7;list&#xFF0C;array&#x8FD8;&#x6709;dict&#x6765;&#x6784;&#x5EFA;</p>
+<pre><code class="lang-python">pd.Series()
+</code></pre>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+
+mylist = list(<span class="hljs-string">&apos;abc&apos;</span>)
+myarr = np.arange(<span class="hljs-number">3</span>)
+mydict = dict(zip(mylist, myarr))
+
+ser1 = pd.Series(mylist)  <span class="hljs-comment">#&#x4F7F;&#x7528;&#x5217;&#x8868;&#x521B;&#x5EFA;</span>
+ser2 = pd.Series(myarr)   <span class="hljs-comment">#&#x4F7F;&#x7528;&#x6570;&#x7EC4;&#x521B;&#x5EFA;</span>
+ser3 = pd.Series(mydict)  <span class="hljs-comment">#&#x4F7F;&#x7528;&#x5B57;&#x5178;&#x521B;&#x5EFA;</span>
+
+print(ser1,<span class="hljs-string">&apos;\n&apos;</span>)
+print(ser2,<span class="hljs-string">&apos;\n&apos;</span>)
+print(ser3,<span class="hljs-string">&apos;\n&apos;</span>)
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python"><span class="hljs-number">0</span>    a
+<span class="hljs-number">1</span>    b
+<span class="hljs-number">2</span>    c
+dtype: object 
+
+<span class="hljs-number">0</span>    <span class="hljs-number">0</span>
+<span class="hljs-number">1</span>    <span class="hljs-number">1</span>
+<span class="hljs-number">2</span>    <span class="hljs-number">2</span>
+dtype: int32 
+
+a    <span class="hljs-number">0</span>
+b    <span class="hljs-number">1</span>
+c    <span class="hljs-number">2</span>
+dtype: int64
+</code></pre>
+<p>&#x5728;&#x6784;&#x5EFA;Series&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6307;&#x5B9A;index&#x6765;&#x4EE3;&#x66FF;&#x9ED8;&#x8BA4;&#x7684;0~n&#x6570;&#x5B57;&#x5F0F;&#x7D22;&#x5F15;</p>
+<pre><code class="lang-python">ser4 = pd.Series([<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">150</span>], index=[<span class="hljs-string">&apos;apple&apos;</span>, <span class="hljs-string">&apos;banana&apos;</span>, <span class="hljs-string">&apos;peach&apos;</span>])
+print(ser4)
+</code></pre>
+<pre><code class="lang-python">apple     <span class="hljs-number">100</span>
+banana    <span class="hljs-number">200</span>
+peach     <span class="hljs-number">150</span>
+dtype: int64
+</code></pre>
+<h3 id="112-&#x8BBF;&#x95EE;">1.1.2 &#x8BBF;&#x95EE;</h3>
+<p>&#x4E0B;&#x6807;&#x65B9;&#x5F0F;&#x8BBF;&#x95EE;</p>
+<pre><code class="lang-python">ser4[<span class="hljs-string">&apos;banana&apos;</span>]
+</code></pre>
+<p>index&#x65B9;&#x5F0F;&#x8BBF;&#x95EE;</p>
+<pre><code class="lang-python">ser4[<span class="hljs-number">1</span>]
+</code></pre>
+<h2 id="12-dataframe">1.2 DataFrame</h2>
+<p>DataFrame&#x662F;&#x4E00;&#x79CD;&#x8868;&#x683C;&#x578B;&#x7ED3;&#x6784;&#xFF0C;&#x542B;&#x6709;&#x4E00;&#x7EC4;&#x6709;&#x5E8F;&#x7684;&#x5217;&#xFF0C;&#x6BCF;&#x4E00;&#x5217;&#x53EF;&#x4EE5;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;&#x65E2;&#x6709;&#x884C;&#x7D22;&#x5F15;&#xFF0C;&#x53C8;&#x6709;&#x5217;&#x7D22;&#x5F15;<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/J$F`0{7$G@6E@1QX3O3$X{Q.png" alt="img" style="zoom:67%;"></p>
+<h3 id="121-&#x4ECE;&#x5177;&#x6709;&#x7D22;&#x5F15;&#x6807;&#x7B7E;&#x7684;&#x5B57;&#x5178;&#x6570;&#x636E;&#x521B;&#x5EFA;">1.2.1 &#x4ECE;&#x5177;&#x6709;&#x7D22;&#x5F15;&#x6807;&#x7B7E;&#x7684;&#x5B57;&#x5178;&#x6570;&#x636E;&#x521B;&#x5EFA;</h3>
+<pre><code class="lang-python">data = {<span class="hljs-string">&apos;animal&apos;</span>: [<span class="hljs-string">&apos;cat&apos;</span>, <span class="hljs-string">&apos;cat&apos;</span>, <span class="hljs-string">&apos;snake&apos;</span>, <span class="hljs-string">&apos;dog&apos;</span>, <span class="hljs-string">&apos;dog&apos;</span>, <span class="hljs-string">&apos;cat&apos;</span>, <span class="hljs-string">&apos;snake&apos;</span>, <span class="hljs-string">&apos;cat&apos;</span>, <span class="hljs-string">&apos;dog&apos;</span>, <span class="hljs-string">&apos;dog&apos;</span>],
+        <span class="hljs-string">&apos;age&apos;</span>: [<span class="hljs-number">2.5</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0.5</span>, np.nan, <span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4.5</span>, np.nan, <span class="hljs-number">7</span>, <span class="hljs-number">3</span>],
+        <span class="hljs-string">&apos;visits&apos;</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>],
+        <span class="hljs-string">&apos;priority&apos;</span>: [<span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>]}
+labels = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>, <span class="hljs-string">&apos;c&apos;</span>, <span class="hljs-string">&apos;d&apos;</span>, <span class="hljs-string">&apos;e&apos;</span>, <span class="hljs-string">&apos;f&apos;</span>, <span class="hljs-string">&apos;g&apos;</span>, <span class="hljs-string">&apos;h&apos;</span>, <span class="hljs-string">&apos;i&apos;</span>, <span class="hljs-string">&apos;j&apos;</span>]
+
+df = pd.DataFrame(data,index = labels)
+df
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205444467.png" alt="image-20201207205444467" style="zoom:80%;"></p>
+<h3 id="122-&#x4ECE;numpy-&#x6570;&#x7EC4;&#x521B;&#x5EFA;">1.2.2 &#x4ECE;numpy &#x6570;&#x7EC4;&#x521B;&#x5EFA;</h3>
+<pre><code class="lang-python">df2 = pd.DataFrame(np.array([[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>], [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]]),
+                    columns=[<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>, <span class="hljs-string">&apos;c&apos;</span>])
+df2
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205555602.png" alt="image-20201207205555602"></p>
+<pre><code class="lang-python">df = pd.DataFrame(np.arange(<span class="hljs-number">9</span>).reshape(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>), index = [
+    <span class="hljs-string">&quot;Mon&quot;</span>, <span class="hljs-string">&quot;Tue&quot;</span>, <span class="hljs-string">&quot;Wed&quot;</span>], columns=[<span class="hljs-string">&apos;store1&apos;</span>, <span class="hljs-string">&apos;store2&apos;</span>, <span class="hljs-string">&apos;store3&apos;</span>])
+df
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205853449.png" alt="image-20201207205853449" style="zoom:80%;"></p>
+<h3 id="123-&#x901A;&#x8FC7;&#x5176;&#x4ED6;dataframe&#x6765;&#x521B;&#x5EFA;">1.2.3 &#x901A;&#x8FC7;&#x5176;&#x4ED6;DataFrame&#x6765;&#x521B;&#x5EFA;</h3>
+<pre><code class="lang-python">df3 = df2[[<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;b&quot;</span>,<span class="hljs-string">&quot;c&quot;</span>]].copy()
+df3
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png" alt="image-20201207205620990"></p>
+<h3 id="124-&#x4ECE;csv&#x6587;&#x4EF6;&#x521B;&#x5EFA;">1.2.4 &#x4ECE;csv&#x6587;&#x4EF6;&#x521B;&#x5EFA;</h3>
+<pre><code class="lang-python">df = pd.read_csv(<span class="hljs-string">&apos;path&apos;</span>)
+df = pd.read_csv(<span class="hljs-string">&apos;test.csv&apos;</span>, encoding=<span class="hljs-string">&apos;gbk&apos;</span>, sep=<span class="hljs-string">&apos;;&apos;</span>)     <span class="hljs-comment">#&#x5206;&#x9694;&#x7B26;&#x4E3A;&#x201C;&#xFF1B;&#x201D;&#xFF0C;&#x7F16;&#x7801;&#x683C;&#x5F0F;&#x4E3A;gbk</span>
+</code></pre>
+<h3 id="125-&#x7528;series&#x521B;&#x5EFA;">1.2.5 &#x7528;Series&#x521B;&#x5EFA;</h3>
+<pre><code class="lang-python">s_1 = pd.Series(data[<span class="hljs-string">&apos;animal&apos;</span>])
+s_2 = pd.Series(data[<span class="hljs-string">&apos;age&apos;</span>])
+s_3 = pd.Series(data[<span class="hljs-string">&apos;visits&apos;</span>])
+s_4 = pd.Series(data[<span class="hljs-string">&apos;priority&apos;</span>])
+
+df = pd.DataFrame([s_1,s_2,s_3,s_4])
+df
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205642638.png" alt="image-20201207205642638" style="zoom:80%;"></p>
+<p>&#x8FD9;&#x73A9;&#x610F;&#x53EF;&#x4EE5;&#x770B;&#x505A;&#x662F;&#x591A;&#x4E2A;Series&#x7684;&#x7EC4;&#x5408;&#x3002;DataFrame&#x7684;&#x4E0D;&#x540C;&#x5217;&#x53EF;&#x4EE5;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;,&#x5982;&#x679C;&#x4EE5;Series&#x6570;&#x7EC4;&#x6765;&#x521B;&#x5EFA;DataFrame&#xFF0C;&#x6BCF;&#x4E2A;Series&#x5C06;&#x6210;&#x4E3A;&#x4E00;&#x884C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E00;&#x5217;</p>
+<h1 id="&#x4E8C;&#x3001;&#x5BA1;&#x89C6;">&#x4E8C;&#x3001;&#x5BA1;&#x89C6;</h1>
+<h2 id="21-&#x8BBF;&#x95EE;">2.1 &#x8BBF;&#x95EE;</h2>
+<p>&#x4EE5;&#x4E0B;&#x56FE;&#x4E3A;&#x4F8B;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207222452955.png" alt="image-20201207222452955" style="zoom:80%;"></p>
+<p>col&#xFF0C;index&#x4E3A;&#x5217;&#x53F7;&#x548C;&#x884C;&#x53F7;</p>
+<p>colName&#xFF0C;indexName&#x4E3A;&#x5177;&#x4F53;&#x503C;</p>
+<h3 id="211-dfcolname">2.1.1 <code>df[colName]</code></h3>
+<p>&#x6839;&#x636E;&#x5217;&#x540D;&#xFF0C;&#x5E76;&#x4EE5;Series&#x7684;&#x5F62;&#x5F0F;&#x8FD4;&#x56DE;&#x5217;</p>
+<p>&#x82E5;&#x5217;&#x540D;&#x4E3A;&#x9ED8;&#x8BA4;&#x7684;&#x6570;&#x5B57;&#x65F6;&#xFF0C;colName&#x53EF;&#x4EE5;&#x88AB;&#x89C6;&#x4E3A;col&#xFF08;&#x5176;&#x4E2D;&#x5C31;col&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E3A;&#x5217;&#x8868;&#x5F62;&#x5F0F;&#x548C;&#x5207;&#x7247;&#x5F62;&#x5F0F;&#xFF09;</p>
+<pre><code class="lang-python">df[<span class="hljs-string">&apos;a&apos;</span>]             <span class="hljs-comment">#&#x53D6;a&#x5217;</span>
+df.a                <span class="hljs-comment">#&#x4E5F;&#x53EF;</span>
+df[[<span class="hljs-string">&apos;b&apos;</span>,<span class="hljs-string">&apos;e&apos;</span>,<span class="hljs-string">&apos;f&apos;</span>]]   <span class="hljs-comment">#&#x53D6;b,e,f&#x5217;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207223843331.png" alt="image-20201207223843331" style="zoom: 67%;"></p>
+<p>&#x7279;&#x6B8A;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>df[colName]</code>&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x884C;&#x540D;&#x79F0;&#x6216;&#x8005;&#x884C;&#x6570;&#xFF0C;&#x4F46;&#x5FC5;&#x987B;&#x662F;&#x5207;&#x7247;</p>
+<pre><code class="lang-python">df[<span class="hljs-number">0</span>:<span class="hljs-number">1</span>]      <span class="hljs-comment"># &#x7B2C;1&#x884C;</span>
+df[<span class="hljs-number">0</span>:<span class="hljs-number">3</span>]      <span class="hljs-comment"># &#x524D;3&#x884C;</span>
+df[<span class="hljs-string">&apos;5&apos;</span>:<span class="hljs-string">&apos;5&apos;</span>]  <span class="hljs-comment"># &#x884C;&#x540D;&#x79F0;&#x4E3A;5&#x7684;&#x884C;</span>
+df[<span class="hljs-string">&apos;5&apos;</span>:<span class="hljs-string">&apos;7&apos;</span>]  <span class="hljs-comment"># &#x884C;&#x540D;&#x79F0;&#x4E3A;5&#x7684;&#x884C;&#x81F3;&#x884C;&#x540D;&#x79F0;&#x4E3A;7&#x7684;&#x884C;</span>
+</code></pre>
+<h3 id="212-dfcolnameindexname">2.1.2 <code>df[colName][indexName]</code></h3>
+<p>&#x66F4;&#x7CBE;&#x51C6;&#x7684;&#x8BBF;&#x95EE;&#xFF08;&#x51E0;&#x5217;&#x51E0;&#x884C;&#xFF09;</p>
+<p>&#x82E5;&#x5217;&#x540D;&#x4E3A;&#x9ED8;&#x8BA4;&#x7684;&#x6570;&#x5B57;&#x65F6;&#xFF0C;colName&#x53EF;&#x4EE5;&#x88AB;&#x89C6;&#x4E3A;col&#xFF08;&#x5176;&#x4E2D;&#x5C31;col&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E3A;&#x5217;&#x8868;&#x5F62;&#x5F0F;&#x548C;&#x5207;&#x7247;&#x5F62;&#x5F0F;&#xFF09;</p>
+<pre><code class="lang-python">df[<span class="hljs-string">&apos;c&apos;</span>][<span class="hljs-string">&apos;B&apos;</span>]
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python"><span class="hljs-number">0.5</span>
+</code></pre>
+<h3 id="213-dfilocindex-col">2.1.3 <code>df.iloc[index, col]</code></h3>
+<p>&#x5176;&#x4E2D;index&#xFF0C;col&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x4E3A;&#x5217;&#x8868;&#x5F62;&#x5F0F;&#x548C;&#x5207;&#x7247;&#x5F62;&#x5F0F;&#xFF0C;&#x5F53;&#x53EA;&#x4F20;&#x5165;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x65F6;&#xFF0C;&#x8BE5;&#x53C2;&#x6570;&#x9ED8;&#x8BA4;&#x4E3A;index</p>
+<pre><code class="lang-python">df.iloc[<span class="hljs-number">0</span>:<span class="hljs-number">1</span>]             <span class="hljs-comment">#&#x53D6;&#x7B2C;0&#x884C;&#x6570;&#x636E;&#xFF0C;&#x8F83;&#x4E3A;&#x89C4;&#x8303;</span>
+df.iloc[<span class="hljs-number">0</span>]               <span class="hljs-comment">#&#x786C;&#x8981;&#x8FD9;&#x6837;&#x4FFA;&#x4E5F;&#x6CA1;&#x529E;&#x6CD5;</span>
+df.iloc[:,[<span class="hljs-number">2</span>]]          <span class="hljs-comment">#&#x53D6;&#x7B2C;2&#x5217;&#x6570;&#x636E;</span>
+df.iloc[<span class="hljs-number">0</span>:<span class="hljs-number">3</span>,<span class="hljs-number">2</span>:<span class="hljs-number">6</span>]          <span class="hljs-comment">#&#x53D6;0&#x5230;2&#x884C;&#xFF0C;2&#x5230;5&#x5217;&#x6570;&#x636E;</span>
+df.iloc[[<span class="hljs-number">0</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">7</span>]]  <span class="hljs-comment">#&#x53D6;0&#x548C;3&#x884C;&#xFF0C;2&#x3001;3&#x3001;7&#x5217;&#x76F8;&#x4EA4;&#x6570;&#x636E;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207224248457.png" alt="image-20201207224248457" style="zoom: 65%;"></p>
+<h3 id="215-dflocindexnamecolname">2.1.5 <code>df.loc[indexName,colName]</code></h3>
+<p><code>df.iloc</code>&#x53EA;&#x80FD;&#x9009;&#x53D6;&#x6570;&#x636E;&#x8868;&#x91CC;&#x5B9E;&#x9645;&#x6709;&#x7684;&#x884C;&#x548C;&#x5217;&#xFF0C;&#x800C;<code>df.loc</code>&#x53EF;&#x4EE5;&#x9009;&#x53D6;&#x6CA1;&#x6709;&#x7684;&#x884C;&#x548C;&#x5217;&#xFF0C;&#x8D4B;&#x503C;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x65B0;&#x884C;&#x6216;&#x8005;&#x5217;</p>
+<pre><code class="lang-python">df.loc[:,<span class="hljs-string">&apos;c&apos;</span>]                         <span class="hljs-comment">#&#x9009;&#x53D6;c&#x5217;</span>
+df.loc[[<span class="hljs-string">&apos;A&apos;</span>,<span class="hljs-string">&apos;C&apos;</span>],[<span class="hljs-string">&apos;c&apos;</span>,<span class="hljs-string">&apos;e&apos;</span>,<span class="hljs-string">&apos;f&apos;</span>]]     <span class="hljs-comment">#&#x9009;&#x53D6;A,C&#x5217;&#xFF0C;c,e,f&#x884C;&#x76F8;&#x4EA4;&#x6570;&#x636E;</span>
+df.loc[df[<span class="hljs-string">&apos;c&apos;</span>]==<span class="hljs-string">&apos;snake&apos;</span>]             <span class="hljs-comment">#&#x9009;&#x53D6;c&#x5217;&#x4E2D;&#x5185;&#x5BB9;&#x4E3A;snake&#x7684;&#x884C;&#x6570;&#x636E;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207230245814.png" alt="image-20201207230245814" style="zoom:70%;"></p>
+<h3 id="216-dfixinco">2.1.6 <code>df.ix[in,co]</code></h3>
+<p>ix&#x662F;loc&#x548C;iloc&#x7684;&#x6DF7;&#x5408;&#xFF0C;&#x65E2;&#x80FD;&#x6309;&#x7D22;&#x5F15;&#x6807;&#x7B7E;&#x63D0;&#x53D6;&#xFF0C;&#x4E5F;&#x80FD;&#x6309;&#x4F4D;&#x7F6E;&#x8FDB;&#x884C;&#x6570; &#x636E;&#x63D0;&#x53D6;</p>
+<h3 id="217-&#x7B5B;&#x9009;">2.1.7 &#x7B5B;&#x9009;</h3>
+<pre><code class="lang-python">df.loc[df.index[[<span class="hljs-number">1</span>,<span class="hljs-number">3</span>]], [<span class="hljs-string">&apos;d&apos;</span>,<span class="hljs-string">&apos;f&apos;</span>]]    <span class="hljs-comment">#&#x7B5B;&#x9009;&#x51FA;&#x7D22;&#x5F15;&#x4E3A;1&#xFF0C;3&#x884C;&#x7684;d&#xFF0C;f&#x5217;</span>
+df[df[<span class="hljs-string">&apos;d&apos;</span>] &gt; <span class="hljs-number">3</span>]                        <span class="hljs-comment">#&#x7B5B;&#x9009;d&#xFF08;&#x5217;&#x540D;&#xFF09;&#x503C;&#x5927;&#x4E8E;3&#x7684;&#x884C;</span>
+df[df[<span class="hljs-string">&apos;d&apos;</span>].isnull()]                 <span class="hljs-comment">#&#x7B5B;&#x9009;d&#xFF08;&#x5217;&#x540D;&#xFF09;&#x503C;&#x4E3A;&#x7A7A;&#x7684;&#x884C;</span>
+
+df[<span class="hljs-string">&apos;A&apos;</span>].isin([<span class="hljs-string">&apos;cat&apos;</span>])                <span class="hljs-comment">#&#x7B5B;&#x9009;A&#x5217;&#x4E2D;&#x542B;&#x6709;cat&#x7684;&#x884C;</span>
+<span class="hljs-comment">#&#x8F93;&#x51FA;</span>
+a     <span class="hljs-keyword">True</span>
+b     <span class="hljs-keyword">True</span>
+c    <span class="hljs-keyword">False</span>
+d    <span class="hljs-keyword">False</span>
+e    <span class="hljs-keyword">False</span>
+f     <span class="hljs-keyword">True</span>
+g    <span class="hljs-keyword">False</span>
+h     <span class="hljs-keyword">True</span>
+i    <span class="hljs-keyword">False</span>
+j    <span class="hljs-keyword">False</span>
+Name: A, dtype: bool
+</code></pre>
+<h4 id="dfquery"><strong><em>df.query()</em></strong></h4>
+<p>&#x4EE5;&#x4E0B;&#x8868;&#x4E3A;&#x4F8B;</p>
+<pre><code class="lang-python">   A   B  C
+<span class="hljs-number">0</span>  <span class="hljs-number">1</span>  <span class="hljs-number">10</span>  <span class="hljs-number">2</span>
+<span class="hljs-number">1</span>  <span class="hljs-number">2</span>   <span class="hljs-number">8</span>  <span class="hljs-number">2</span>
+<span class="hljs-number">2</span>  <span class="hljs-number">3</span>   <span class="hljs-number">6</span>  <span class="hljs-number">2</span>
+<span class="hljs-number">3</span>  <span class="hljs-number">4</span>   <span class="hljs-number">4</span>  <span class="hljs-number">2</span>
+<span class="hljs-number">4</span>  <span class="hljs-number">5</span>   <span class="hljs-number">2</span>  <span class="hljs-number">2</span>
+</code></pre>
+<pre><code class="lang-python">df = pd.DataFrame({
+    <span class="hljs-string">&apos;A&apos;</span>: range(<span class="hljs-number">1</span>,<span class="hljs-number">6</span>),
+    <span class="hljs-string">&apos;B&apos;</span>: range(<span class="hljs-number">10</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-2</span>),
+    <span class="hljs-string">&apos;C&apos;</span>: <span class="hljs-number">2</span>
+})
+
+df.query(<span class="hljs-string">&apos;B == 2&apos;</span>) <span class="hljs-comment"># &#x67E5;&#x8BE2;B&#x5217;&#x4E2D;&#x6570;&#x503C;&#x4E3A;2&#x7684;&#x884C;&#x8BB0;&#x5F55;</span>
+df[df.A &lt; df.B] <span class="hljs-comment"># &#x67E5;&#x8BE2;A&#x5217;&#x6570;&#x503C;&#x5C0F;&#x4E8E;B&#x5217;&#x7684;&#x884C;&#x8BB0;&#x5F55;</span>
+df.query(<span class="hljs-string">&apos;A &lt; B&apos;</span>)
+df[df.B == df[<span class="hljs-string">&apos;C C&apos;</span>]] <span class="hljs-comment"># &#x67E5;&#x8BE2;B&#x5217;&#x6570;&#x503C;&#x548C;C C&#x5217;&#x76F8;&#x7B49;&#x7684;&#x884C;&#x8BB0;&#x5F55;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python">   A  B  C
+<span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>
+
+   A   B  C
+<span class="hljs-number">0</span>  <span class="hljs-number">1</span>  <span class="hljs-number">10</span>  <span class="hljs-number">2</span>
+<span class="hljs-number">1</span>  <span class="hljs-number">2</span>   <span class="hljs-number">8</span>  <span class="hljs-number">2</span>
+<span class="hljs-number">2</span>  <span class="hljs-number">3</span>   <span class="hljs-number">6</span>  <span class="hljs-number">2</span>
+
+   A  B  C
+<span class="hljs-number">4</span>  <span class="hljs-number">5</span>  <span class="hljs-number">2</span>  <span class="hljs-number">2</span>
+</code></pre>
+<h2 id="22-&#x67E5;&#x770B;">2.2 &#x67E5;&#x770B;</h2>
+<h3 id="221-&#x67E5;&#x770B;&#x884C;&#x6570;&#x3001;&#x5217;&#x6570;">2.2.1 &#x67E5;&#x770B;&#x884C;&#x6570;&#x3001;&#x5217;&#x6570;</h3>
+<pre><code class="lang-python">df.shape
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python">(<span class="hljs-number">4</span>, <span class="hljs-number">10</span>)
+</code></pre>
+<h3 id="222-&#x67E5;&#x770B;&#x6574;&#x4F53;&#x4FE1;&#x606F;">2.2.2 &#x67E5;&#x770B;&#x6574;&#x4F53;&#x4FE1;&#x606F;</h3>
+<p>&#x4F7F;&#x7528;info&#x51FD;&#x6570;&#x67E5;&#x770B;&#x6570;&#x636E;&#x8868;&#x7684;&#x6574;&#x4F53;&#x4FE1;&#x606F;&#xFF0C;&#x5305;&#x62EC;&#x6570;&#x636E;&#x7EF4;&#x5EA6;&#x3001;&#x5217;&#x540D;&#x79F0;&#x3001;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x548C;&#x6240;&#x5360;&#x7A7A;&#x95F4;&#x7B49;&#x4FE1;&#x606F;</p>
+<pre><code class="lang-python">df.info()
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python">&lt;class &apos;pandas.core.frame.DataFrame&apos;&gt;
+Index: 4 entries, A to D
+Data columns (total 10 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   a       4 non-null      object
+ 1   b       4 non-null      object
+ 2   c       4 non-null      object
+ 3   d       3 non-null      object
+ 4   e       4 non-null      object
+ 5   f       4 non-null      object
+ 6   g       4 non-null      object
+ 7   h       3 non-null      object
+ 8   i       4 non-null      object
+ 9   j       4 non-null      object
+dtypes: object(10)
+memory usage: 352.0+ bytes
+</code></pre>
+<h3 id="223-&#x67E5;&#x770B;&#x6570;&#x636E;&#x683C;&#x5F0F;">2.2.3 <strong>&#x67E5;&#x770B;&#x6570;&#x636E;&#x683C;&#x5F0F;</strong></h3>
+<p>&#x4F7F;&#x7528;dtypes&#x51FD;&#x6570;&#x6765;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x683C;&#x5F0F;</p>
+<pre><code class="lang-python">df.dtypes       <span class="hljs-comment">#&#x67E5;&#x770B;&#x6570;&#x636E;&#x8868;&#x5404;&#x5217;&#x683C;&#x5F0F;</span>
+df[<span class="hljs-string">&apos;B&apos;</span>].dtype    <span class="hljs-comment">#&#x67E5;&#x770B;&#x5355;&#x5217;&#x683C;&#x5F0F;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python">a    object
+b    object
+c    object
+d    object
+e    object
+f    object
+g    object
+h    object
+i    object
+j    object
+dtype: object
+
+dtype(<span class="hljs-string">&apos;O&apos;</span>)
+</code></pre>
+<h3 id="224-&#x67E5;&#x770B;&#x7F3A;&#x5931;&#x503C;">2.2.4 &#x67E5;&#x770B;&#x7F3A;&#x5931;&#x503C;</h3>
+<pre><code class="lang-python">df.isnull()            <span class="hljs-comment"># &#x68C0;&#x67E5;&#x6570;&#x636E;&#x7A7A;&#x503C;</span>
+df[<span class="hljs-string">&apos;h&apos;</span>].isnull()    <span class="hljs-comment"># &#x68C0;&#x67E5;&#x7279;&#x5B9A;&#x5217;&#x7A7A;&#x503C;</span>
+df.isnull().sum()      <span class="hljs-comment"># &#x67E5;&#x770B;&#x5404;&#x5217;&#x7684;&#x7F3A;&#x5931;&#x503C;&#x4E2A;&#x6570;</span>
+df.isnull().any()   <span class="hljs-comment"># &#x67E5;&#x770B;&#x5404;&#x5217;&#x662F;&#x5426;&#x6709;&#x7F3A;&#x5931;&#x503C;</span>
+
+df.isnan()             <span class="hljs-comment">#&#x5224;&#x65AD;nan&#x503C;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209152042577.png" alt="image-20201209152042577" style="zoom:80%;"></p>
+<pre><code class="lang-python">A    <span class="hljs-keyword">False</span>
+B     <span class="hljs-keyword">True</span>
+C    <span class="hljs-keyword">False</span>
+D    <span class="hljs-keyword">False</span>
+Name: h, dtype: bool
+</code></pre>
+<h3 id="225-&#x67E5;&#x770B;&#x552F;&#x4E00;&#x503C;">2.2.5 &#x67E5;&#x770B;&#x552F;&#x4E00;&#x503C;</h3>
+<pre><code class="lang-python">df[<span class="hljs-string">&apos;a&apos;</span>].unique()    <span class="hljs-comment">#&#x67E5;&#x770B;a&#x5217;&#x4E2D;&#x7684;&#x552F;&#x4E00;&#x503C;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python">array([<span class="hljs-string">&apos;cat&apos;</span>, <span class="hljs-number">2.5</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&apos;yes&apos;</span>], dtype=object)
+</code></pre>
+<h3 id="226-&#x67E5;&#x770B;&#x6570;&#x636E;&#x8868;&#x6570;&#x503C;">2.2.6 <strong>&#x67E5;&#x770B;&#x6570;&#x636E;&#x8868;&#x6570;&#x503C;</strong></h3>
+<pre><code class="lang-python">df.values
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python">array([[<span class="hljs-string">&apos;cat&apos;</span>, <span class="hljs-string">&apos;cat&apos;</span>, <span class="hljs-string">&apos;snake&apos;</span>, <span class="hljs-string">&apos;dog&apos;</span>, <span class="hljs-string">&apos;dog&apos;</span>, <span class="hljs-string">&apos;cat&apos;</span>, <span class="hljs-string">&apos;snake&apos;</span>, <span class="hljs-string">&apos;cat&apos;</span>,
+        <span class="hljs-string">&apos;dog&apos;</span>, <span class="hljs-string">&apos;dog&apos;</span>],
+       [<span class="hljs-number">2.5</span>, <span class="hljs-number">3.0</span>, <span class="hljs-number">0.5</span>, nan, <span class="hljs-number">5.0</span>, <span class="hljs-number">2.0</span>, <span class="hljs-number">4.5</span>, nan, <span class="hljs-number">7.0</span>, <span class="hljs-number">3.0</span>],
+       [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>],
+       [<span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>, <span class="hljs-string">&apos;no&apos;</span>]],
+      dtype=object)
+</code></pre>
+<h3 id="227-&#x67E5;&#x770B;&#x884C;&#x3001;&#x5217;&#x540D;&#x79F0;">2.2.7 &#x67E5;&#x770B;&#x884C;&#x3001;&#x5217;&#x540D;&#x79F0;</h3>
+<p>&#x8FD4;&#x56DE; Index &#x5BF9;&#x8C61;</p>
+<pre><code class="lang-python">df.columns    <span class="hljs-comment">#&#x67E5;&#x770B;&#x5217;&#x540D;&#x79F0;</span>
+df.index    <span class="hljs-comment">#&#x67E5;&#x770B;&#x884C;&#x540D;&#x79F0;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python">Index([<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;b&apos;</span>, <span class="hljs-string">&apos;c&apos;</span>, <span class="hljs-string">&apos;d&apos;</span>, <span class="hljs-string">&apos;e&apos;</span>, <span class="hljs-string">&apos;f&apos;</span>, <span class="hljs-string">&apos;g&apos;</span>, <span class="hljs-string">&apos;h&apos;</span>, <span class="hljs-string">&apos;i&apos;</span>, <span class="hljs-string">&apos;j&apos;</span>], dtype=<span class="hljs-string">&apos;object&apos;</span>)
+Index([<span class="hljs-string">&apos;A&apos;</span>, <span class="hljs-string">&apos;B&apos;</span>, <span class="hljs-string">&apos;C&apos;</span>, <span class="hljs-string">&apos;D&apos;</span>], dtype=<span class="hljs-string">&apos;object&apos;</span>)
+</code></pre>
+<h3 id="228-&#x67E5;&#x770B;&#x524D;&#x540E;n&#x884C;&#x6570;&#x636E;">2.2.8 &#x67E5;&#x770B;&#x524D;&#x540E;n&#x884C;&#x6570;&#x636E;</h3>
+<pre><code class="lang-python">df.head(<span class="hljs-number">5</span>)
+df.tail(<span class="hljs-number">3</span>)
+</code></pre>
+<h3 id="229-&#x663E;&#x793A;&#x5168;&#x90E8;&#x6570;&#x636E;">2.2.9 &#x663E;&#x793A;&#x5168;&#x90E8;&#x6570;&#x636E;</h3>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x8BBE;&#x7F6E;&#x884C;&#x4E0D;&#x9650;&#x5236;&#x6570;&#x91CF;</span>
+pd.set_option(<span class="hljs-string">&apos;display.max_rows&apos;</span>,<span class="hljs-keyword">None</span>)
+<span class="hljs-comment"># &#x8BBE;&#x7F6E;&#x5217;&#x4E0D;&#x9650;&#x5236;&#x6570;&#x91CF;</span>
+pd.set_option(<span class="hljs-string">&apos;display.max_columns&apos;</span>,<span class="hljs-keyword">None</span>)
+</code></pre>
+<h2 id="23-&#x7EDF;&#x8BA1;">2.3 &#x7EDF;&#x8BA1;</h2>
+<p>&#x4EE5;&#x4E0B;&#x56FE;&#x4E3A;&#x4F8B;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209203305092.png" alt="image-20201209203305092" style="zoom: 80%;"></p>
+<h3 id="231-&#x5BF9;&#x6570;&#x636E;&#x7684;&#x7EDF;&#x8BA1;&#x6C47;&#x603B;">2.3.1 &#x5BF9;&#x6570;&#x636E;&#x7684;&#x7EDF;&#x8BA1;&#x6C47;&#x603B;</h3>
+<p>&#x53EA;&#x4F1A;&#x7EDF;&#x8BA1;&#x6570;&#x503C;&#x578B;&#x6570;&#x636E;</p>
+<pre><code class="lang-python">df.describe()
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209203341244.png" alt="image-20201209203341244" style="zoom: 75%;"></p>
+<h3 id="232-&#x6392;&#x5E8F;">2.3.2 &#x6392;&#x5E8F;</h3>
+<h4 id="1&#xFF09;dfsortvalues">1&#xFF09;df.sort_values</h4>
+<pre><code class="lang-python">df.sort_values(by=[<span class="hljs-string">&apos;C&apos;</span>])                                <span class="hljs-comment">#&#x6309;&#x7279;&#x5B9A;&#x5217;&#x7684;&#x503C;&#x5347;&#x5E8F;&#x6392;&#x5E8F;</span>
+df.sort_values(by=[<span class="hljs-string">&apos;B&apos;</span>],ascending=<span class="hljs-keyword">False</span>)                <span class="hljs-comment">#&#x964D;&#x5E8F;&#x6392;&#x5E8F;</span>
+df.sort_values(by=[<span class="hljs-string">&apos;B&apos;</span>, <span class="hljs-string">&apos;C&apos;</span>], ascending=[<span class="hljs-keyword">False</span>, <span class="hljs-keyword">True</span>])    <span class="hljs-comment">#&#x5148;&#x6309;B&#x964D;&#x5E8F;&#xFF0C;&#x518D;&#x6309;C&#x5347;&#x5E8F;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209205226758.png" alt="image-20201209205226758" style="zoom:60%;"></p>
+<h4 id="2&#xFF09;dfsortindex">2&#xFF09;df.sort_index</h4>
+<p>&#x6309;&#x7D22;&#x5F15;&#x6392;&#x5E8F;</p>
+<ul>
+<li><em>axis</em>&#xFF1A;0&#xFF08;&#x8DE8;&#x884C;&#xFF09;&#xFF0C;1&#xFF08;&#x8DE8;&#x5217;&#xFF09;</li>
+<li>ascending&#xFF1A;0&#xFF08;&#x964D;&#x5E8F;&#xFF09;&#xFF0C;1&#xFF08;&#x5347;&#x5E8F;&#xFF09;</li>
+</ul>
+<pre><code class="lang-python">df.sort_index(axis=<span class="hljs-number">0</span>&#xFF0C;ascending=<span class="hljs-number">1</span>)        <span class="hljs-comment">#&#x6309;&#x7D22;&#x5F15;&#x5217;&#x5347;&#x5E8F;&#x6392;&#x5E8F;&#xFF0C;&#x9700;&#x8981;&#x9ED8;&#x8BA4;&#x7684;&#x7D22;&#x5F15;&#x503C;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;&#xFF08;&#x6B64;&#x5904;index&#x8BBE;&#x7F6E;&#x4E3A;&#x4E86;&#x2019;A&#x2019;&#xFF09;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212247769.png" alt="image-20201209212247769" style="zoom: 67%;"></p>
+<h3 id="233-&#x7EDF;&#x8BA1;&#x51FD;&#x6570;">2.3.3 &#x7EDF;&#x8BA1;&#x51FD;&#x6570;</h3>
+<p>&#x8FD4;&#x56DE; Series</p>
+<h4 id="1&#xFF09;max&#x3001;min">1&#xFF09;max()&#x3001;min()</h4>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x4F7F;&#x7528;&#x7EDF;&#x8BA1;&#x51FD;&#x6570;&#xFF1A;0 &#x4EE3;&#x8868;&#x5217;&#x6C42;&#x7ED3;&#x679C;&#xFF0C; 1 &#x4EE3;&#x8868;&#x884C;&#x6C42;&#x7EDF;&#x8BA1;&#x7ED3;&#x679C;</span>
+data.max(<span class="hljs-number">0</span>)
+
+open             <span class="hljs-number">34.99</span>
+high             <span class="hljs-number">36.35</span>
+close             <span class="hljs-number">35.21</span>
+low             <span class="hljs-number">34.01</span>
+volume             <span class="hljs-number">501915.41</span>
+price_change     <span class="hljs-number">3.03</span>
+p_change         <span class="hljs-number">10.03</span>
+turnover         <span class="hljs-number">12.56</span>
+my_price_change <span class="hljs-number">3.41</span>
+dtype: float64
+</code></pre>
+<h4 id="2&#xFF09;std&#x3001;var">2&#xFF09;std()&#x3001;var()</h4>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x65B9;&#x5DEE;</span>
+data.var(<span class="hljs-number">0</span>)
+
+open                 <span class="hljs-number">1.545255e+01</span>
+high                 <span class="hljs-number">1.662665e+01</span>
+close                 <span class="hljs-number">1.554572e+01</span>
+low                 <span class="hljs-number">1.437902e+01</span>
+volume                 <span class="hljs-number">5.458124e+09</span>
+price_change         <span class="hljs-number">8.072595e-01</span>
+p_change             <span class="hljs-number">1.664394e+01</span>
+turnover             <span class="hljs-number">4.323800e+00</span>
+my_price_change     <span class="hljs-number">6.409037e-01</span>
+dtype: float64
+
+<span class="hljs-comment"># &#x6807;&#x51C6;&#x5DEE;</span>
+data.std(<span class="hljs-number">0</span>)
+
+open                 <span class="hljs-number">3.930973</span>
+high                 <span class="hljs-number">4.077578</span>
+close                 <span class="hljs-number">3.942806</span>
+low                 <span class="hljs-number">3.791968</span>
+volume                 <span class="hljs-number">73879.119354</span>
+price_change         <span class="hljs-number">0.898476</span>
+p_change             <span class="hljs-number">4.079698</span>
+turnover             <span class="hljs-number">2.079375</span>
+my_price_change     <span class="hljs-number">0.800565</span>
+dtype: float64
+</code></pre>
+<h4 id="3&#xFF09;median">3&#xFF09;median()</h4>
+<pre><code class="lang-python">df = pd.DataFrame({<span class="hljs-string">&apos;COL1&apos;</span> : [<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>],
+                    <span class="hljs-string">&apos;COL2&apos;</span> : [<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">2</span>]})
+df.median()
+
+COL1     <span class="hljs-number">3.5</span>
+COL2     <span class="hljs-number">2.0</span>
+dtype: float64
+</code></pre>
+<h4 id="4&#xFF09;idxmax&#x3001;idxmin">4&#xFF09;idxmax()&#x3001;idxmin()</h4>
+<p>&#x6C42;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;</p>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x6C42;&#x51FA;&#x6700;&#x5927;&#x503C;&#x7684;&#x4F4D;&#x7F6E;</span>
+data.idxmax(axis=<span class="hljs-number">0</span>)
+
+open             <span class="hljs-number">2015</span><span class="hljs-number">-06</span><span class="hljs-number">-15</span>
+high             <span class="hljs-number">2015</span><span class="hljs-number">-06</span><span class="hljs-number">-10</span>
+close             <span class="hljs-number">2015</span><span class="hljs-number">-06</span><span class="hljs-number">-12</span>
+low             <span class="hljs-number">2015</span><span class="hljs-number">-06</span><span class="hljs-number">-12</span>
+volume             <span class="hljs-number">2017</span><span class="hljs-number">-10</span><span class="hljs-number">-26</span>
+price_change     <span class="hljs-number">2015</span><span class="hljs-number">-06</span><span class="hljs-number">-09</span>
+p_change         <span class="hljs-number">2015</span><span class="hljs-number">-08</span><span class="hljs-number">-28</span>
+turnover         <span class="hljs-number">2017</span><span class="hljs-number">-10</span><span class="hljs-number">-26</span>
+my_price_change <span class="hljs-number">2015</span><span class="hljs-number">-07</span><span class="hljs-number">-10</span>
+dtype: object
+
+<span class="hljs-comment"># &#x6C42;&#x51FA;&#x6700;&#x5C0F;&#x503C;&#x7684;&#x4F4D;&#x7F6E;</span>
+data.idxmin(axis=<span class="hljs-number">0</span>)
+
+open             <span class="hljs-number">2015</span><span class="hljs-number">-03</span><span class="hljs-number">-02</span>
+high             <span class="hljs-number">2015</span><span class="hljs-number">-03</span><span class="hljs-number">-02</span>
+close             <span class="hljs-number">2015</span><span class="hljs-number">-09</span><span class="hljs-number">-02</span>
+low             <span class="hljs-number">2015</span><span class="hljs-number">-03</span><span class="hljs-number">-02</span>
+volume             <span class="hljs-number">2016</span><span class="hljs-number">-07</span><span class="hljs-number">-06</span>
+price_change     <span class="hljs-number">2015</span><span class="hljs-number">-06</span><span class="hljs-number">-15</span>
+p_change         <span class="hljs-number">2015</span><span class="hljs-number">-09</span><span class="hljs-number">-01</span>
+turnover         <span class="hljs-number">2016</span><span class="hljs-number">-07</span><span class="hljs-number">-06</span>
+my_price_change <span class="hljs-number">2015</span><span class="hljs-number">-06</span><span class="hljs-number">-15</span>
+dtype: object
+</code></pre>
+<h4 id="5&#xFF09;&#x5176;&#x4ED6;">5&#xFF09;&#x5176;&#x4ED6;</h4>
+<pre><code class="lang-python">df.corr()        <span class="hljs-comment">#&#x8FD4;&#x56DE;&#x5217;&#x4E0E;&#x5217;&#x4E4B;&#x95F4;&#x7684;&#x76F8;&#x5173;&#x7CFB;&#x6570;</span>
+df.count()        <span class="hljs-comment">#&#x8FD4;&#x56DE;&#x6BCF;&#x4E00;&#x5217;&#x4E2D;&#x7684;&#x975E;&#x7A7A;&#x503C;&#x7684;&#x4E2A;&#x6570;</span>
+</code></pre>
+<h1 id="&#x4E09;&#x3001;&#x9884;&#x5904;&#x7406;">&#x4E09;&#x3001;&#x9884;&#x5904;&#x7406;</h1>
+<h2 id="31-&#x6570;&#x636E;&#x6E05;&#x7406;">3.1 &#x6570;&#x636E;&#x6E05;&#x7406;</h2>
+<p>&#x6240;&#x6709;&#x51FD;&#x6570;&#xFF0C;&#x5747;&#x8FD4;&#x56DE; DataFrame &#x526F;&#x672C;&#xFF0C;&#x4E0D;&#x8D4B;&#x503C;&#x4E0D;&#x4F1A;&#x751F;&#x6548;</p>
+<p>&#x4EE5;&#x4E0B;&#x56FE;&#x4E3A;&#x4F8B;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209163600487.png" alt="image-20201209163600487" style="zoom:67%;"></p>
+<h3 id="311-&#x7F3A;&#x5931;&#x503C;&#x5904;&#x7406;">3.1.1 &#x7F3A;&#x5931;&#x503C;&#x5904;&#x7406;</h3>
+<ul>
+<li><code>dropna(axis=, how=)</code>&#xFF1A;&#x4E22;&#x5F03;NaN&#x6570;&#x636E;<ul>
+<li>axis&#xFF1A;0(&#x6309;&#x884C;&#x4E22;&#x5F03;)&#xFF0C;1(&#x6309;&#x5217;&#x4E22;&#x5F03;)</li>
+<li>how&#xFF1A;&apos;any&apos;(&#x53EA;&#x8981;&#x542B;&#x6709;NaN&#x6570;&#x636E;&#x5C31;&#x4E22;&#x5F03;)&#xFF0C;&apos;all&apos;(&#x6240;&#x6709;&#x6570;&#x636E;&#x90FD;&#x4E3A;NaN&#x65F6;&#x4E22;&#x5F03;)</li>
+</ul>
+</li>
+<li><code>fillna(value=)</code>&#xFF1A;&#x5C06;NaN&#x503C;&#x90FD;&#x8BBE;&#x7F6E;&#x4E3A;value&#x7684;&#x503C;</li>
+</ul>
+<pre><code class="lang-python">df.dropna(how=<span class="hljs-string">&apos;any&apos;</span>)                    <span class="hljs-comment">#&#x5220;&#x9664;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x542B;&#x6709;&#x7A7A;&#x503C;&#x7684;&#x884C;</span>
+df.fillna(value=<span class="hljs-number">0</span>)                        <span class="hljs-comment">#&#x4F7F;&#x7528;&#x6570;&#x5B57;0&#x586B;&#x5145;&#x6570;&#x636E;&#x8868;&#x4E2D;&#x7A7A;&#x503C;</span>
+df[<span class="hljs-string">&apos;B&apos;</span>].fillna(df[<span class="hljs-string">&apos;B&apos;</span>].mean())            <span class="hljs-comment">#&#x4F7F;&#x7528;price&#x5747;&#x503C;&#x5BF9;NA&#x8FDB;&#x884C;&#x586B;&#x5145;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209164235597.png" alt="image-20201209164235597" style="zoom:67%;"></p>
+<h3 id="312-&#x6E05;&#x7406;&#x7A7A;&#x683C;">3.1.2 <strong>&#x6E05;&#x7406;&#x7A7A;&#x683C;</strong></h3>
+<pre><code class="lang-python">df[<span class="hljs-string">&apos;city&apos;</span>]=df[<span class="hljs-string">&apos;city&apos;</span>].map(str.strip)    <span class="hljs-comment">#&#x6E05;&#x9664;city&#x5B57;&#x6BB5;&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x7A7A;&#x683C;</span>
+</code></pre>
+<h3 id="313-&#x5927;&#x5C0F;&#x5199;&#x8F6C;&#x6362;">3.1.3 <strong>&#x5927;&#x5C0F;&#x5199;&#x8F6C;&#x6362;</strong></h3>
+<pre><code class="lang-python">df[<span class="hljs-string">&apos;A&apos;</span>].str.upper()                <span class="hljs-comment">#city&#x5217;&#x5927;&#x5C0F;&#x5199;&#x8F6C;&#x6362;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209164710193.png" alt="image-20201209164710193" style="zoom:67%;"></p>
+<h3 id="314-&#x66F4;&#x6539;&#x6570;&#x636E;&#x683C;&#x5F0F;">3.1.4 <strong>&#x66F4;&#x6539;&#x6570;&#x636E;&#x683C;&#x5F0F;</strong></h3>
+<pre><code class="lang-python">df[<span class="hljs-string">&apos;C&apos;</span>].astype(<span class="hljs-string">&apos;int&apos;</span>)
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python">a    <span class="hljs-number">1</span>
+b    <span class="hljs-number">3</span>
+c    <span class="hljs-number">2</span>
+d    <span class="hljs-number">3</span>
+e    <span class="hljs-number">2</span>
+f    <span class="hljs-number">3</span>
+g    <span class="hljs-number">1</span>
+h    <span class="hljs-number">1</span>
+i    <span class="hljs-number">2</span>
+j    <span class="hljs-number">1</span>
+Name: C, dtype: int32
+</code></pre>
+<h3 id="315-&#x66F4;&#x6539;&#x884C;&#x5217;&#x540D;&#x79F0;">3.1.5 &#x66F4;&#x6539;&#x884C;&#x5217;&#x540D;&#x79F0;</h3>
+<pre><code class="lang-python">df.rename(columns={<span class="hljs-string">&apos;A&apos;</span>: <span class="hljs-string">&apos;Name&apos;</span>,<span class="hljs-string">&apos;C&apos;</span>:<span class="hljs-string">&apos;Age&apos;</span>})            <span class="hljs-comment">#&#x66F4;&#x6539;&#x5217;&#x540D;&#x79F0;</span>
+df.rename(index={<span class="hljs-string">&apos;e&apos;</span>: <span class="hljs-string">&apos;eee&apos;</span>})                        <span class="hljs-comment">#&#x66F4;&#x6539;&#x884C;&#x540D;&#x79F0;</span>
+
+df.columns = [<span class="hljs-string">&apos;animal&apos;</span>,<span class="hljs-string">&apos;age&apos;</span>,<span class="hljs-string">&apos;visits&apos;</span>,<span class="hljs-string">&apos;priority&apos;</span>]     <span class="hljs-comment">#&#x4F20;&#x5165;&#x5217;&#x8868;&#x4EE5;&#x6539;&#x53D8;&#x5217;&#x540D;&#x79F0;</span>
+df.index = [...]                                    <span class="hljs-comment">#&#x4F20;&#x5165;&#x5217;&#x8868;&#x4EE5;&#x6539;&#x53D8;&#x884C;&#x540D;&#x79F0;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209165738698.png" alt="image-20201209165738698" style="zoom:67%;"></p>
+<h3 id="316-&#x91CD;&#x590D;&#x503C;&#x5904;&#x7406;">3.1.6 &#x91CD;&#x590D;&#x503C;&#x5904;&#x7406;</h3>
+<pre><code class="lang-python">df.duplicated()             <span class="hljs-comment"># &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5E03;&#x5C14;&#x578B;&#x7684;Series,&#x663E;&#x793A;&#x5404;&#x884C;&#x662F;&#x5426;&#x6709;&#x91CD;&#x590D;&#x884C;</span>
+df.duplicated().any()        <span class="hljs-comment"># &#x8FD4;&#x56DE;bool&#xFF0C;&#x67E5;&#x770B;&#x662F;&#x5426;&#x6709;&#x91CD;&#x590D;&#x503C;</span>
+df.duplicated(<span class="hljs-string">&apos;k1&apos;</span>)         <span class="hljs-comment"># &#x68C0;&#x67E5;&#x5404;&#x884C;&#x7684;k1&#x5217;&#x662F;&#x5426;&#x91CD;&#x590D;</span>
+df.duplicated([<span class="hljs-string">&apos;k1&apos;</span>,<span class="hljs-string">&apos;k2&apos;</span>])    <span class="hljs-comment"># &#x68C0;&#x67E5;&#x5404;&#x884C;&#x7684;k1&#xFF0C;k2&#x5217;&#x662F;&#x5426;&#x91CD;&#x590D;</span>
+
+df.drop_duplicates()             <span class="hljs-comment">#&#x4FDD;&#x7559;&#x7B2C;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x8FD4;&#x56DE;&#x526F;&#x672C;</span>
+df.drop_duplicates(keep=<span class="hljs-string">&apos;last&apos;</span>)  <span class="hljs-comment">#&#x4FDD;&#x7559;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x8FD4;&#x56DE;&#x526F;&#x672C;</span>
+df.drop_duplicates(keep=<span class="hljs-keyword">False</span>)   <span class="hljs-comment">#&#x5220;&#x9664;&#x6240;&#x6709;&#x91CD;&#x590D;&#x503C;&#xFF0C;&#x8FD4;&#x56DE;&#x526F;&#x672C;</span>
+df.drop_duplicates(<span class="hljs-string">&apos;k1&apos;</span>)         <span class="hljs-comment">#&#x5220;&#x9664;&#x7B2C;&#x4E00;&#x5217;&#x91CD;&#x590D;&#x503C;&#xFF0C;&#x8FD4;&#x56DE;&#x526F;&#x672C;</span>
+df.drop_duplicates([<span class="hljs-string">&apos;k1&apos;</span>,<span class="hljs-string">&apos;k2&apos;</span>])  <span class="hljs-comment">#&#x5220;&#x9664;&#x5168;&#x90E8;&#x5217;&#x91CD;&#x590D;&#x503C;&#xFF0C;&#x8FD4;&#x56DE;&#x526F;&#x672C;</span>
+df.drop_duplicates(inplace=<span class="hljs-keyword">True</span>) <span class="hljs-comment">#&#x5C31;&#x5730;&#x4FEE;&#x6539;</span>
+</code></pre>
+<h3 id="317-&#x6570;&#x503C;&#x4FEE;&#x6539;&#x53CA;&#x66FF;&#x6362;">3.1.7 <strong>&#x6570;&#x503C;&#x4FEE;&#x6539;&#x53CA;&#x66FF;&#x6362;</strong></h3>
+<pre><code class="lang-python">df[<span class="hljs-string">&apos;D&apos;</span>].replace(<span class="hljs-string">&apos;yes&apos;</span>, <span class="hljs-string">&apos;true&apos;</span>)
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<pre><code class="lang-python">a    true
+b    true
+c      no
+d    true
+e      no
+f      no
+g      no
+h    true
+i      no
+j      no
+Name: D, dtype: object
+</code></pre>
+<h3 id="318-&#x8BBE;&#x7F6E;&#x7D22;&#x5F15;&#x5217;">3.1.8 &#x8BBE;&#x7F6E;&#x7D22;&#x5F15;&#x5217;</h3>
+<pre><code class="lang-python">df_inner.set_index(<span class="hljs-string">&apos;A&apos;</span>)
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212104774.png" alt="image-20201209212104774" style="zoom:67%;"></p>
+<h2 id="32-&#x6570;&#x636E;&#x8868;&#x5408;&#x5E76;">3.2 &#x6570;&#x636E;&#x8868;&#x5408;&#x5E76;</h2>
+<p>&#x4EE5;&#x4E0B;&#x4E24;&#x5F20;&#x56FE;&#x4E3A;&#x4F8B;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209210714655.png" alt="image-20201209210714655" style="zoom:65%;"></p>
+<h3 id="321merge">3.2.1<code>.merge()</code></h3>
+<p>&#x53C2;&#x6570;</p>
+<ul>
+<li>on&#xFF1A;&#x5217;&#x540D;&#xFF0C;join&#x7528;&#x6765;&#x5BF9;&#x9F50;&#x7684;&#x90A3;&#x4E00;&#x5217;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x7528;&#x5230;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x65F6;&#x5019;&#x4E00;&#x5B9A;&#x8981;&#x4FDD;&#x8BC1;&#x5DE6;&#x8868;&#x548C;&#x53F3;&#x8868;&#x7528;&#x6765;&#x5BF9;&#x9F50;&#x7684;&#x90A3;&#x4E00;&#x5217;&#x90FD;&#x6709;&#x76F8;&#x540C;&#x7684;&#x5217;&#x540D;</li>
+<li>how&#xFF1A;&#x6570;&#x636E;&#x878D;&#x5408;&#x7684;&#x65B9;&#x6CD5;</li>
+<li>sort&#xFF1A;&#x6839;&#x636E;dataframe&#x5408;&#x5E76;&#x7684;keys&#x6309;&#x5B57;&#x5178;&#x987A;&#x5E8F;&#x6392;&#x5E8F;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x7F6E;false&#x53EF;&#x4EE5;&#x63D0;&#x9AD8;&#x8868;&#x73B0;</li>
+</ul>
+<pre><code class="lang-python">df_inner=pd.merge(df1,df2,how=<span class="hljs-string">&apos;inner&apos;</span>)     <span class="hljs-comment">#&#x4EE5;&#x5C0F;&#x8868;&#x4E3A;&#x51C6;</span>
+df_outer=pd.merge(df1,df2,how=<span class="hljs-string">&apos;outer&apos;</span>)    <span class="hljs-comment">#&#x4EE5;&#x5927;&#x8868;&#x4E3A;&#x51C6;</span>
+df_left=pd.merge(df1,df2,how=<span class="hljs-string">&apos;left&apos;</span>)    <span class="hljs-comment">#&#x4EE5;&#x5DE6;&#x8868;&#x4E3A;&#x51C6;&#xFF0C;&#x8FD9;&#x91CC;&#x7B49;&#x540C;&#x4E8E;inner_df</span>
+df_right=pd.merge(df1,df2,how=<span class="hljs-string">&apos;right&apos;</span>)    <span class="hljs-comment">#&#x4EE5;&#x53F3;&#x8868;&#x4E3A;&#x51C6;,&#x8FD9;&#x91CC;&#x7B49;&#x540C;&#x4E8E;outer_df</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209211615829.png" alt="image-20201209211615829" style="zoom:67%;"></p>
+<h3 id="322-concat">3.2.2 <code>.concat()</code></h3>
+<p>&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;&#x9700;&#x8981;&#x5408;&#x5E76;&#x7684;&#x77E9;&#x9635;</p>
+<p>axis&#xFF1A;&#x5408;&#x5E76;&#x7EF4;&#x5EA6;&#xFF0C;0&#xFF1A;&#x6309;&#x884C;&#x5408;&#x5E76;&#xFF0C;1&#xFF1A;&#x6309;&#x5217;&#x5408;&#x5E76;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;0</p>
+<p>join&#xFF1A;&#x5904;&#x7406;&#x975E;&#x516C;&#x6709; &#x5217;/&#x884C; &#x7684;&#x65B9;&#x5F0F;&#xFF0C;inner&#xFF1A;&#x53BB;&#x9664;&#x975E;&#x516C;&#x6709;&#x7684; &#x5217;/&#x884C;&#xFF0C;outer&#xFF1A;&#x5BF9;&#x975E;&#x516C;&#x6709;&#x7684; &#x5217;/&#x884C; &#x8FDB;&#x884C;NaN&#x503C;&#x586B;&#x5145;&#x7136;&#x540E;&#x5408;&#x5E76;</p>
+<p>ignore_index&#xFF1A;&#x662F;&#x5426;&#x91CD;&#x6392;&#x884C;&#x7D22;&#x5F15;&#xFF0C;&#x82E5;&#x91CD;&#x6392;&#xFF0C;&#x884C;&#x7D22;&#x5F15;&#x4E3A;&#x987A;&#x5E8F;&#x3002;&#x9ED8;&#x8BA4;&#x4E3A;0</p>
+<pre><code class="lang-python">pd.concat([df1, df2], join=<span class="hljs-string">&apos;outer&apos;</span>, ignore_index=<span class="hljs-keyword">True</span>)     <span class="hljs-comment">#&#x6309;&#x884C;&#x5408;&#x5E76;&#xFF0C;&#x91CD;&#x6392;&#x884C;&#x7D22;&#x5F15;</span>
+pd.concat([df1, df2], axis=<span class="hljs-number">1</span>, join=<span class="hljs-string">&apos;inner&apos;</span>)                <span class="hljs-comment">#&#x6309;&#x5217;&#x5408;&#x5E76;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209213557164.png" alt="image-20201209213557164" style="zoom: 80%;"></p>
+<h2 id="33-&#x6570;&#x636E;&#x5206;&#x7EC4;">3.3 &#x6570;&#x636E;&#x5206;&#x7EC4;</h2>
+<h3 id="331-&#x5206;&#x7C7B;&#x6C47;&#x603B;">3.3.1 &#x5206;&#x7C7B;&#x6C47;&#x603B;</h3>
+<pre><code class="lang-python">df_inner.groupby(<span class="hljs-string">&apos;city&apos;</span>).count()                                <span class="hljs-comment">#&#x5BF9;&#x6240;&#x6709;&#x5217;&#x8FDB;&#x884C;&#x8BA1;&#x6570;&#x6C47;&#x603B;</span>
+df_inner.groupby(<span class="hljs-string">&apos;city&apos;</span>)[<span class="hljs-string">&apos;id&apos;</span>].count()                            <span class="hljs-comment">#&#x5BF9;&#x7279;&#x5B9A;&#x7684;ID&#x5217;&#x8FDB;&#x884C;&#x8BA1;&#x6570;&#x6C47;&#x603B;</span>
+df_inner.groupby([<span class="hljs-string">&apos;city&apos;</span>,<span class="hljs-string">&apos;pay&apos;</span>])[<span class="hljs-string">&apos;id&apos;</span>].count()                    <span class="hljs-comment">#&#x5BF9;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;&#x8FDB;&#x884C;&#x6C47;&#x603B;&#x8BA1;&#x6570;</span>
+df_inner.groupby(<span class="hljs-string">&apos;city&apos;</span>)[<span class="hljs-string">&apos;price&apos;</span>].agg([len,np.sum, np.mean])    <span class="hljs-comment">#&#x5BF9;city&#x5B57;&#x6BB5;&#x8FDB;&#x884C;&#x6C47;&#x603B;&#x5E76;&#x8BA1;&#x7B97;price&#x7684;&#x5408;&#x8BA1;&#x548C;&#x5747;&#x503C;</span>
+</code></pre>
+<p>&#x8F93;&#x51FA;</p>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209222416782.png" alt="image-20201209222416782" style="zoom:67%;"></p>
+<h2 id="34-&#x6570;&#x636E;&#x589E;&#x5220;">3.4 &#x6570;&#x636E;&#x589E;&#x5220;</h2>
+<p>&#x66F4;&#x591A;&#xFF1A;<a href="https://www.cnblogs.com/guxh/p/9420610.html" target="_blank">https://www.cnblogs.com/guxh/p/9420610.html</a></p>
+<h3 id="341-&#x5220;&#x9664;&#x884C;&#x5217;">3.4.1 &#x5220;&#x9664;&#x884C;&#x5217;</h3>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217130111523.png" alt="image-20201217130111523" style="zoom:77%;"></p>
+<pre><code class="lang-python">df1.drop([<span class="hljs-string">&apos;0&apos;</span>,<span class="hljs-string">&apos;1&apos;</span>])                <span class="hljs-comment">#&#x6309;&#x884C;&#x540D;&#x5220;&#x9664;&#xFF08;&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;&#xFF09;</span>
+df1.drop(df1.index[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>])        <span class="hljs-comment">#&#x6309;&#x884C;&#x53F7;&#x5220;&#x9664;</span>
+
+df.drop([<span class="hljs-string">&apos;id&apos;</span>,<span class="hljs-string">&apos;date&apos;</span>],axis=<span class="hljs-number">1</span>)     <span class="hljs-comment">#&#x6309;&#x5217;&#x540D;&#x5220;&#x9664;</span>
+df.drop(df.columns[<span class="hljs-number">0</span>:<span class="hljs-number">2</span>],axis=<span class="hljs-number">1</span>)    <span class="hljs-comment">#&#x6309;&#x5217;&#x53F7;&#x5220;&#x9664;</span>
+
+<span class="hljs-keyword">del</span> df[<span class="hljs-string">&apos;id&apos;</span>]                     <span class="hljs-comment">#&#x5220;&#x9664;&#x5217;&#xFF08;&#x5C31;&#x5730;&#x5220;&#x9664;&#xFF09;</span>
+</code></pre>
+<h3 id="342-&#x589E;&#x52A0;&#x884C;">3.4.2 &#x589E;&#x52A0;&#x884C;</h3>
+<p><img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png" alt="image-20201217132418146"></p>
+<p>&#x60F3;&#x589E;&#x52A0;&#x4E00;&#x884C;&#xFF0C;&#x884C;&#x540D;&#x79F0;&#x4E3A;&#x2018;a&#x2019;&#xFF0C;&#x5185;&#x5BB9;&#x4E3A;[16, 17, 18, 19]</p>
+<pre><code class="lang-python">df.loc[<span class="hljs-string">&apos;a&apos;</span>] = [<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>]    
+df.at[<span class="hljs-string">&apos;a&apos;</span>] = [<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>]
+df.set_value(<span class="hljs-string">&apos;a&apos;</span>, df.columns, [<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>], takeable=<span class="hljs-keyword">False</span>)    <span class="hljs-comment"># warning&#xFF0C;set_value&#x4F1A;&#x88AB;&#x53D6;&#x6D88;</span>
+
+df.loc[len(df)] = [<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>]<span class="hljs-comment">#&#x7B80;&#x5355;&#x5730;&#x9010;&#x884C;&#x6DFB;&#x52A0;&#x5185;&#x5BB9;</span>
+
+<span class="hljs-comment">#.append()</span>
+s = pd.Series([<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>], index=df.columns, name=<span class="hljs-string">&apos;5&apos;</span>) <span class="hljs-comment">#&#x6DFB;&#x52A0;&#x6709;name&#x7684;Series</span>
+df.append(s) <span class="hljs-comment">#&#x8D4B;&#x503C;&#x4EE5;&#x751F;&#x6548;</span>
+</code></pre>
+<h3 id="343-&#x589E;&#x52A0;&#x5217;">3.4.3 &#x589E;&#x52A0;&#x5217;</h3>
+<p>&#x822C;&#x6D89;&#x53CA;&#x5230;&#x589E;&#x52A0;&#x5217;&#x9879;&#x65F6;&#xFF0C;&#x7ECF;&#x5E38;&#x4F1A;&#x5BF9;&#x73B0;&#x6709;&#x7684;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x904D;&#x5386;&#x8FD0;&#x7B97;&#xFF0C;&#x83B7;&#x5F97;&#x65B0;&#x589E;&#x5217;&#x9879;&#x7684;&#x503C;</p>
+<pre><code class="lang-python"><span class="hljs-comment">#&#x904D;&#x5386;DataFrame&#x83B7;&#x53D6;&#x5E8F;&#x5217;&#x7684;&#x65B9;&#x6CD5;</span>
+s = [a + c <span class="hljs-keyword">for</span> a, c <span class="hljs-keyword">in</span> zip(df[<span class="hljs-string">&apos;A&apos;</span>], df[<span class="hljs-string">&apos;C&apos;</span>])]          <span class="hljs-comment"># &#x901A;&#x8FC7;&#x904D;&#x5386;&#x83B7;&#x53D6;&#x5E8F;&#x5217;</span>
+s = [row[<span class="hljs-string">&apos;A&apos;</span>] + row[<span class="hljs-string">&apos;C&apos;</span>] <span class="hljs-keyword">for</span> i, row <span class="hljs-keyword">in</span> df.iterrows()]  <span class="hljs-comment"># &#x901A;&#x8FC7;iterrows()&#x83B7;&#x53D6;&#x5E8F;&#x5217;&#xFF0C;s&#x4E3A;list</span>
+s = df.apply(<span class="hljs-keyword">lambda</span> row: row[<span class="hljs-string">&apos;A&apos;</span>] + row[<span class="hljs-string">&apos;C&apos;</span>], axis=<span class="hljs-number">1</span>)  <span class="hljs-comment"># &#x901A;&#x8FC7;apply&#x83B7;&#x53D6;&#x5E8F;&#x5217;&#xFF0C;s&#x4E3A;Series</span>
+s = df[<span class="hljs-string">&apos;A&apos;</span>] + df[<span class="hljs-string">&apos;C&apos;</span>]                                  <span class="hljs-comment"># &#x901A;&#x8FC7;Series&#x77E2;&#x91CF;&#x76F8;&#x52A0;&#x83B7;&#x53D6;&#x5E8F;&#x5217;</span>
+s = df[<span class="hljs-string">&apos;A&apos;</span>].values + df[<span class="hljs-string">&apos;C&apos;</span>].values                    <span class="hljs-comment"># &#x901A;&#x8FC7;Numpy&#x77E2;&#x91CF;&#x76F8;&#x52A0;&#x83B7;&#x53D6;&#x5E8F;&#x5217;</span>
+
+<span class="hljs-comment">#&#x901A;&#x8FC7;df[]&#x6216;&#x8005;df.loc&#x6DFB;&#x52A0;&#x5E8F;&#x5217;</span>
+df.loc[:, <span class="hljs-string">&apos;E&apos;</span>] = s
+df[<span class="hljs-string">&apos;E&apos;</span>] = s
+
+<span class="hljs-comment">#.insert()&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x63D2;&#x5165;&#x4F4D;&#x7F6E;&#xFF0C;&#x548C;&#x63D2;&#x5165;&#x5217;&#x540D;&#x79F0;</span>
+df.insert(<span class="hljs-number">0</span>, <span class="hljs-string">&apos;E&apos;</span>, s) <span class="hljs-comment">#&#x5728;&#x7B2C;0&#x5217;&#x63D2;&#x5165;s&#xFF0C;&#x547D;&#x540D;&#x4E3A;E</span>
+
+<span class="hljs-comment">#.concat()</span>
+s = pd.Series([<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>], name=<span class="hljs-string">&apos;E&apos;</span>, index=df.index)
+df = pd.concat([df, s], axis=<span class="hljs-number">1</span>)
+
+<span class="hljs-comment">#&#x7B80;&#x5355;&#x5730;&#x9010;&#x5217;&#x6DFB;&#x52A0;&#x5185;&#x5BB9;</span>
+df[len(df)] = [<span class="hljs-number">16</span>, <span class="hljs-number">17</span>, <span class="hljs-number">18</span>, <span class="hljs-number">19</span>]
+</code></pre>
+<h2 id="35-&#x6570;&#x636E;&#x8FD0;&#x7B97;">3.5 &#x6570;&#x636E;&#x8FD0;&#x7B97;</h2>
+<h3 id="351-&#x7B97;&#x672F;&#x8FD0;&#x7B97;">3.5.1 &#x7B97;&#x672F;&#x8FD0;&#x7B97;</h3>
+<ul>
+<li>add(other)</li>
+</ul>
+<pre><code class="lang-python">data[<span class="hljs-string">&apos;A&apos;</span>].add(<span class="hljs-number">1</span>)
+</code></pre>
+<ul>
+<li>sub(other)</li>
+</ul>
+<pre><code class="lang-python">data[<span class="hljs-string">&apos;A&apos;</span>].sub(<span class="hljs-number">2</span>)
+</code></pre>
+<h3 id="352-&#x903B;&#x8F91;&#x8FD0;&#x7B97;">3.5.2 &#x903B;&#x8F91;&#x8FD0;&#x7B97;</h3>
+<p>&#x66F4;&#x591A;&#x88AB;&#x8FD0;&#x7528;&#x5230;&#x6570;&#x636E;&#x7B5B;&#x9009;&#x4E2D;</p>
+<h4 id="1&#xFF09;&#x7B26;&#x53F7;">1&#xFF09;&#x7B26;&#x53F7;</h4>
+<pre><code class="lang-python">data[<span class="hljs-string">&quot;A&quot;</span>] &gt; <span class="hljs-number">2</span>                                 <span class="hljs-comment"># &#x8FD4;&#x56DE;Series</span>
+data[data[<span class="hljs-string">&quot;A&quot;</span>] &gt; <span class="hljs-number">2</span>].head()                     <span class="hljs-comment"># &#x8FD4;&#x56DE;DataFrame&#x526F;&#x672C;</span>
+data[(data[<span class="hljs-string">&quot;A&quot;</span>] &gt; <span class="hljs-number">1</span>) &amp; (data[<span class="hljs-string">&quot;A&quot;</span>] &lt; <span class="hljs-number">3</span>)]     <span class="hljs-comment"># &#x591A;&#x4E2A;&#x903B;&#x8F91;&#x5224;&#x65AD;</span>
+</code></pre>
+<h4 id="2&#xFF09;&#x51FD;&#x6570;">2&#xFF09;&#x51FD;&#x6570;</h4>
+<ul>
+<li><em>query(expr)</em><ul>
+<li>expr&#xFF1A;&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;</li>
+</ul>
+</li>
+</ul>
+<pre><code class="lang-python">data.query(<span class="hljs-string">&quot;A&lt;3 &amp; A&gt;1&quot;</span>) <span class="hljs-comment"># &#x8FD4;&#x56DE;DataFrame&#x526F;&#x672C;</span>
+</code></pre>
+<ul>
+<li><em>isin(values)</em></li>
+</ul>
+<p>&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x503C;&#x8FDB;&#x884C;&#x4E00;&#x4E2A;&#x5224;&#x65AD;&#xFF0C;&#x4ECE;&#x800C;&#x8FDB;&#x884C;&#x7B5B;&#x9009;&#x64CD;&#x4F5C;</p>
+<pre><code class="lang-python">data[data[<span class="hljs-string">&quot;A&quot;</span>].isin([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>])] <span class="hljs-comment"># &#x8FD4;&#x56DE;DataFrame&#x526F;&#x672C;</span>
+</code></pre>
+<h3 id="353-&#x81EA;&#x5B9A;&#x4E49;&#x8FD0;&#x7B97;">3.5.3 &#x81EA;&#x5B9A;&#x4E49;&#x8FD0;&#x7B97;</h3>
+<p><em>apply( func, axis=0 )</em>&#xFF1A;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5BF9;&#x5217;&#xFF0C;&#x6700;&#x5927;&#x503C;-&#x6700;&#x5C0F;&#x503C;&#x7684;&#x51FD;&#x6570;</p>
+<ul>
+<li>func&#xFF1A;&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;</li>
+<li>axis=0&#xFF1A;&#x9ED8;&#x8BA4;&#x662F;&#x5217;&#xFF0C;axis=1&#x4E3A;&#x884C;&#x8FDB;&#x884C;&#x8FD0;&#x7B97;</li>
+</ul>
+<h1 id="&#x56DB;&#x3001;&#x5BFC;&#x5165;&#x4E0E;&#x5230;&#x5BFC;&#x51FA;">&#x56DB;&#x3001;&#x5BFC;&#x5165;&#x4E0E;&#x5230;&#x5BFC;&#x51FA;</h1>
+<h2 id="41-&#x5BFC;&#x5165;&#x6570;&#x636E;">4.1 &#x5BFC;&#x5165;&#x6570;&#x636E;</h2>
+<ul>
+<li><em>path</em>&#xFF1A;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</li>
+<li><em>sep</em>&#xFF1A;&#x5206;&#x9694;&#x7B26;&#xFF0C;&#x9ED8;&#x8BA4;&#x7528;&quot;,&quot;&#x9694;&#x5F00;</li>
+<li><em>usecols</em>&#xFF1A;&#x6307;&#x5B9A;&#x8BFB;&#x53D6;&#x7684;&#x5217;&#x540D;</li>
+</ul>
+<pre><code class="lang-python">pd.read_csv(filename)                    <span class="hljs-comment">#&#x4ECE;CSV&#x6587;&#x4EF6;&#x5BFC;&#x5165;&#x6570;&#x636E;</span>
+pd.read_table(filename)                    <span class="hljs-comment">#&#x4ECE;&#x9650;&#x5B9A;&#x5206;&#x9694;&#x7B26;&#x7684;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x5BFC;&#x5165;&#x6570;&#x636E;</span>
+pd.read_excel(filename)                    <span class="hljs-comment">#&#x4ECE;Excel&#x6587;&#x4EF6;&#x5BFC;&#x5165;&#x6570;&#x636E;</span>
+pd.read_sql(query, connection_object)    <span class="hljs-comment">#&#x4ECE;SQL&#x8868;/&#x5E93;&#x5BFC;&#x5165;&#x6570;&#x636E;</span>
+pd.read_json(json_string)                <span class="hljs-comment">#&#x4ECE;JSON&#x683C;&#x5F0F;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5BFC;&#x5165;&#x6570;&#x636E;</span>
+pd.read_html(url)                        <span class="hljs-comment">#&#x89E3;&#x6790;URL&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x8005;HTML&#x6587;&#x4EF6;&#xFF0C;&#x62BD;&#x53D6;&#x5176;&#x4E2D;&#x7684;tables&#x8868;&#x683C;</span>
+pd.read_clipboard()                        <span class="hljs-comment">#&#x4ECE;&#x4F60;&#x7684;&#x7C98;&#x8D34;&#x677F;&#x83B7;&#x53D6;&#x5185;&#x5BB9;&#xFF0C;&#x5E76;&#x4F20;&#x7ED9;read_table()</span>
+</code></pre>
+<h2 id="42-&#x5BFC;&#x51FA;&#x6570;&#x636E;">4.2 &#x5BFC;&#x51FA;&#x6570;&#x636E;</h2>
+<ul>
+<li><em>path</em>&#xFF1A;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;</li>
+<li><em>sep</em>&#xFF1A;&#x5206;&#x9694;&#x7B26;&#xFF0C;&#x9ED8;&#x8BA4;&#x7528;&quot;,&quot;&#x9694;&#x5F00;</li>
+<li><em>columns</em>&#xFF1A;&#x9009;&#x62E9;&#x9700;&#x8981;&#x7684;&#x5217;&#x7D22;&#x5F15;</li>
+<li><em>header</em> &#xFF1A;boolean or list of string, default True&#xFF0C;&#x662F;&#x5426;&#x5199;&#x5165;&#x5217;&#x7D22;&#x5F15;</li>
+<li><em>index</em>&#xFF1A;&#x662F;&#x5426;&#x5199;&#x5165;&#x884C;&#x7D22;&#x5F15;</li>
+<li><em>mode</em>&#xFF1A;&apos;w&apos;&#xFF1A;&#x91CD;&#x5199;, &apos;a&apos; &#x8FFD;&#x52A0;</li>
+</ul>
+<pre><code class="lang-python">df.to_csv(filename)                            <span class="hljs-comment">#&#x5BFC;&#x51FA;&#x6570;&#x636E;&#x5230;CSV&#x6587;&#x4EF6;</span>
+df.to_excel(filename)                        <span class="hljs-comment">#&#x5BFC;&#x51FA;&#x6570;&#x636E;&#x5230;Excel&#x6587;&#x4EF6;</span>
+df.to_sql(table_name, connection_object)    <span class="hljs-comment">#&#x5BFC;&#x51FA;&#x6570;&#x636E;&#x5230;SQL&#x8868;</span>
+df.to_json(filename)                        <span class="hljs-comment">#&#x4EE5;Json&#x683C;&#x5F0F;&#x5BFC;&#x51FA;&#x6570;&#x636E;&#x5230;&#x6587;&#x672C;&#x6587;&#x4EF6;</span>
+</code></pre>
+<p>&#x8F6C;&#x6362;&#x6210; json &#x683C;&#x5F0F;&#x901A;&#x5E38;&#x7528; <code>df.to_json(filename, orient=&apos;records&apos;, force_ascii=False)</code></p>
+<h1 id="&#x4E94;&#x3001;&#x4F8B;">&#x4E94;&#x3001;&#x4F8B;</h1>
+<ol>
+<li>&#x53D6;&#x51FA;&#x7D22;&#x5F15;&#x4E3A; [3, 4, 8] &#x884C;&#x7684; animal &#x548C; age &#x5217;</li>
+</ol>
+<pre><code class="lang-python">df.loc[df.index[[<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">8</span>]], [<span class="hljs-string">&apos;animal&apos;</span>, <span class="hljs-string">&apos;age&apos;</span>]]
+</code></pre>
+<ol>
+<li>&#x53D6;&#x51FA; age &#x503C;&#x7F3A;&#x5931;&#x7684;&#x884C;</li>
+</ol>
+<pre><code class="lang-python">df[df[<span class="hljs-string">&apos;age&apos;</span>].isnull()]
+</code></pre>
+<ol>
+<li>&#x8BA1;&#x7B97;&#x6BCF;&#x4E2A;&#x4E0D;&#x540C;&#x79CD;&#x7C7B; animal &#x7684; age &#x7684;&#x5E73;&#x5747;&#x6570;</li>
+</ol>
+<pre><code class="lang-python">df.groupby(<span class="hljs-string">&apos;animal&apos;</span>)[<span class="hljs-string">&apos;age&apos;</span>].mean()
+</code></pre>
+<ol>
+<li>&#x8BA1;&#x7B97; df &#x4E2D;&#x6BCF;&#x4E2A;&#x79CD;&#x7C7B; animal &#x7684;&#x6570;&#x91CF;</li>
+</ol>
+<pre><code class="lang-python">df[<span class="hljs-string">&apos;animal&apos;</span>].value_counts()
+</code></pre>
+<ol>
+<li>&#x5C06;priority&#x5217;&#x4E2D;&#x7684;yes, no&#x66FF;&#x6362;&#x4E3A;&#x5E03;&#x5C14;&#x503C;True, False</li>
+</ol>
+<pre><code class="lang-python">df[<span class="hljs-string">&apos;priority&apos;</span>] = df[<span class="hljs-string">&apos;priority&apos;</span>].map({<span class="hljs-string">&apos;yes&apos;</span>: <span class="hljs-keyword">True</span>, <span class="hljs-string">&apos;no&apos;</span>: <span class="hljs-keyword">False</span>})
+</code></pre>
+<ol>
+<li>&#x6C42;&#x54EA;&#x4E00;&#x5217;&#x7684;&#x548C;&#x6700;&#x5C0F;</li>
+</ol>
+<pre><code class="lang-python3">df.sum().idxmin()
+</code></pre>
+<ol>
+<li>&#x53BB;&#x9664; Unnamed:0 &#x5217;</li>
+</ol>
+<pre><code class="lang-python">pd.read_csv(path, index_col=<span class="hljs-number">0</span>)
+<span class="hljs-comment"># or</span>
+pd.to_csv(path, index=<span class="hljs-keyword">False</span>)
+</code></pre>
+<h1 id="&#x516D;&#x3001;&#x9884;&#x89C8;-dataframe">&#x516D;&#x3001;&#x9884;&#x89C8; DataFrame</h1>
+<p>&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x652F;&#x6301;&#x5E93;&#xFF0C;pandas_profiling&#xFF0C;&#x53EF;&#x4EE5;&#x5FEB;&#x901F;&#x9884;&#x89C8;&#x6570;&#x636E;&#x96C6;&#x3002;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> pandas_profiling <span class="hljs-keyword">as</span> pp
+</code></pre>
+<p><code>pp.ProfileReport(df)</code> </p>
+<p>&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x652F;&#x6301;&#x4EFB;&#x610F; DataFrame&#xFF0C;&#x5E76;&#x751F;&#x6210;&#x4EA4;&#x4E92;&#x5F0F; HTML &#x6570;&#x636E;&#x62A5;&#x544A;&#xFF1A;</p>
+<ul>
+<li>&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#x662F;&#x7EB5;&#x89C8;&#x6570;&#x636E;&#x96C6;&#xFF0C;&#x8FD8;&#x4F1A;&#x5217;&#x51FA;&#x6570;&#x636E;&#x4E00;&#x4E9B;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x7684;&#x95EE;&#x9898;&#xFF1B;</li>
+<li>&#x7B2C;&#x4E8C;&#x90E8;&#x5206;&#x6C47;&#x603B;&#x6BCF;&#x5217;&#x6570;&#x636E;&#xFF0C;&#x70B9;&#x51FB; <strong>toggle details</strong> &#x67E5;&#x770B;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#xFF1B;</li>
+<li>&#x7B2C;&#x4E09;&#x90E8;&#x5206;&#x663E;&#x793A;&#x5217;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x8054;&#x70ED;&#x529B;&#x56FE;&#xFF1B;</li>
+<li>&#x7B2C;&#x56DB;&#x90E8;&#x5206;&#x663E;&#x793A;&#x6570;&#x636E;&#x96C6;&#x7684;&#x524D;&#x51E0;&#x6761;&#x6570;&#x636E;&#x3002;</li>
+</ul>
+<p><code>profile.to_file(&quot;your_report.html&quot;)</code></p>
+<p>&#x4FDD;&#x5B58; html &#x6587;&#x4EF6;</p>
+<pre><code class="lang-python">profile = pp.ProfileReport(data)
+profile.to_file(<span class="hljs-string">&quot;output_file.html&quot;</span>)
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Numpy.html" class="navigation navigation-prev " aria-label="Previous page: numpy">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Seaborn.html" class="navigation navigation-next " aria-label="Next page: seaborn">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"pandas","level":"1.4.3.3","depth":3,"next":{"title":"seaborn","level":"1.4.3.4","depth":3,"path":"Python/DataAnalysis/Seaborn.md","ref":"Python/DataAnalysis/Seaborn.md","articles":[]},"previous":{"title":"numpy","level":"1.4.3.2","depth":3,"path":"Python/DataAnalysis/Numpy.md","ref":"Python/DataAnalysis/Numpy.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"Python/DataAnalysis/Pandas.md","mtime":"2021-06-18T07:00:12.426Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-18T08:32:50.643Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
