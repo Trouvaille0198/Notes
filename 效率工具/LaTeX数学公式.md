@@ -26,15 +26,15 @@
 
 - 格式
 
-  `$ 公式 $`
+  `$$ 公式 $$`
 
 - 例
 
   ```latex
-  $ f(x)=a+b $
+  $$ f(x)=a+b $$
   ```
 
-  $f(x)=a+b$
+  $$f(x)=a+b$$
 
 ## 1.2 行间公式
 
@@ -79,100 +79,100 @@
 
 ## 2.1 常用符号
 
-| 名称             | 代码                                  | 示例                                                         | 显示                                                         |
-| ---------------- | ------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 上下标           | ^, _                                  | a_{ij}^{2}                                                   | $a_{ij}^{2} $                                                |
-| 分数             | \frac  \cfrac                         | \frac {1}{3}   \cfrac {1}{3}                                 | $\frac {1}{3}$  $\cfrac {1}{3}$                              |
-| 开方             | \sqrt[n]  []不写默认开平方根          | \sqrt[3]{5-x}                                                | $\sqrt[3]{5-x}$                                              |
-| 上下标记         | \overline, \underline                 | \overline{x+y} \qquad \underline{a+b}​                        | $\overline{x+y} \qquad \underline{a+b}$                      |
-| 上下水平大括号   | \overbrace, \underbrace               | \overbrace{1+2+\cdots+n}^{n个} \\ \underbrace{a+b+\cdots+z}_{26} | $\overbrace{1+2+\cdots+n}^{n个} \\ \underbrace{a+b+\cdots+z}_{26}$ |
-| 向量             | \vec, \overrightarrow, \overleftarrow | \vec{a} + \overrightarrow{AB} + \overleftarrow{DE}           | $\vec{a} + \overrightarrow{AB} + \overleftarrow{DE}$         |
-| 段内效果的上下标 | \limits                               | \bigcap\limits_{i=1}^{n} A_i                                 | $\bigcap\limits_{i=1}^{n} A_i$                               |
-| 下省略号         | \ldots                                | \overline{A_1}\cap \overline{A_2}\ldots\cap \overline{A_n}   | $\overline{A_1}\cap \overline{A_2}\ldots\cap \overline{A_n}$ |
+| 名称             | 代码                                  | 示例                                                             | 显示                                                                 |
+| ---------------- | ------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------- |
+| 上下标           | ^, _                                  | a_{ij}^{2}                                                       | $$a_{ij}^{2} $$                                                      |
+| 分数             | \frac  \cfrac                         | \frac {1}{3}   \cfrac {1}{3}                                     | $$\frac {1}{3}$$  $$\cfrac {1}{3}$$                                  |
+| 开方             | \sqrt[n]  []不写默认开平方根          | \sqrt[3]{5-x}                                                    | $$\sqrt[3]{5-x}$$                                                    |
+| 上下标记         | \overline, \underline                 | \overline{x+y} \qquad \underline{a+b}​                           | $$\overline{x+y} \qquad \underline{a+b}$$                            |
+| 上下水平大括号   | \overbrace, \underbrace               | \overbrace{1+2+\cdots+n}^{n个} \\ \underbrace{a+b+\cdots+z}_{26} | $$\overbrace{1+2+\cdots+n}^{n个} \\ \underbrace{a+b+\cdots+z}_{26}$$ |
+| 向量             | \vec, \overrightarrow, \overleftarrow | \vec{a} + \overrightarrow{AB} + \overleftarrow{DE}               | $$\vec{a} + \overrightarrow{AB} + \overleftarrow{DE}$$               |
+| 段内效果的上下标 | \limits                               | \bigcap\limits_{i=1}^{n} A_i                                     | $$\bigcap\limits_{i=1}^{n} A_i$$                                     |
+| 下省略号         | \ldots                                | \overline{A_1}\cap \overline{A_2}\ldots\cap \overline{A_n}       | $$\overline{A_1}\cap \overline{A_2}\ldots\cap \overline{A_n}$$       |
 
 ## 2.2 关系运算符
 
-| 代码           | 符号                |
-| -------------- | ------------------- |
-| \pm            | $\pm$               |
-| \times         | $\times$            |
-| \div           | $\div$              |
-| \mid           | $\mid$              |
-| \cdot （点乘） | $\cdot$             |
-| \odot          | $\odot$             |
-| \otimes        | $\otimes$           |
-| \oplus         | $\oplus$            |
-| \leq or \le    | $\leq$              |
-| \geq or \ge    | $\geq$              |
-| \neq           | $\neq$              |
-| \approx        | $\approx$           |
-| \equiv         | $\equiv$            |
-| \sum           | $\sum$              |
-| \prod          | $\prod$             |
-| \mathscr       | $\mathscr {ABCDEF}$ |
+| 代码           | 符号                  |
+| -------------- | --------------------- |
+| \pm            | $$\pm$$               |
+| \times         | $$\times$$            |
+| \div           | $$\div$$              |
+| \mid           | $$\mid$$              |
+| \cdot （点乘） | $$\cdot$$             |
+| \odot          | $$\odot$$             |
+| \otimes        | $$\otimes$$           |
+| \oplus         | $$\oplus$$            |
+| \leq or \le    | $$\leq$$              |
+| \geq or \ge    | $$\geq$$              |
+| \neq           | $$\neq$$              |
+| \approx        | $$\approx$$           |
+| \equiv         | $$\equiv$$            |
+| \sum           | $$\sum$$              |
+| \prod          | $$\prod$$             |
+| \mathscr       | $$\mathscr {ABCDEF}$$ |
 
 ## 2.3 对数运算符
 
-| 代码 | 符号   |
-| ---- | ------ |
-| \log | $\log$ |
-| \lg  | $\lg$  |
-| \ln  | $\ln$  |
+| 代码 | 符号     |
+| ---- | -------- |
+| \log | $$\log$$ |
+| \lg  | $$\lg$$  |
+| \ln  | $$\ln$$  |
 
 ## 2.4 三角运算符
 
-| 代码   | 符号     |
-| ------ | -------- |
-| \bot   | $\bot$   |
-| \angle | $\angle$ |
-| \sin   | $\sin$   |
-| \cos   | $\cos$   |
-| \tan   | $\tan$   |
-| \cot   | $\cot$   |
-| \sec   | $\sec$   |
-| \csc   | $\csc$   |
+| 代码   | 符号       |
+| ------ | ---------- |
+| \bot   | $$\bot$$   |
+| \angle | $$\angle$$ |
+| \sin   | $$\sin$$   |
+| \cos   | $$\cos$$   |
+| \tan   | $$\tan$$   |
+| \cot   | $$\cot$$   |
+| \sec   | $$\sec$$   |
+| \csc   | $$\csc$$   |
 
 ## 2.5 微积分运算符
 
-| 代码       | 符号         |
-| ---------- | ------------ |
-| \int       | $\int$       |
-| \iint      | $\iint$      |
-| \iiint     | $\iiint$     |
-| \oint      | $\oint$      |
-| \lim       | $\lim$       |
-| \infty     | $\infty$     |
-| \mathrm{d} | $\mathrm{d}$ |
-| \partial   | $\partial$   |
+| 代码       | 符号           |
+| ---------- | -------------- |
+| \int       | $$\int$$       |
+| \iint      | $$\iint$$      |
+| \iiint     | $$\iiint$$     |
+| \oint      | $$\oint$$      |
+| \lim       | $$\lim$$       |
+| \infty     | $$\infty$$     |
+| \mathrm{d} | $$\mathrm{d}$$ |
+| \partial   | $$\partial$$   |
 
 ## 2.6 集合运算符
 
-| 代码                         | 符号                |
-| ---------------------------- | ------------------- |
-| \emptyset                    | $\emptyset$         |
-| \in                          | $\in$               |
-| \notin                       | $\notin$            |
-| \subset                      | $\subset$           |
-| \subseteq                    | $\subseteq$         |
-| \supseteq                    | $\supseteq$         |
-| \cap                         | $\cap$              |
-| \cup                         | $\cup$              |
-| \vee or \lor                 | $\vee$              |
-| \wedge or \land              | $\wedge$            |
-| \exists                      | $\exists$           |
-| \forall                      | $\forall$           |
-| \lfloor \rfloor （向下取整） | $\lfloor \ \rfloor$ |
-| \lceil  \rceil  （向上取整） | $\lceil \ \rceil$   |
-| \neg                         | $\neg$              |
+| 代码                         | 符号                  |
+| ---------------------------- | --------------------- |
+| \emptyset                    | $$\emptyset$$         |
+| \in                          | $$\in$$               |
+| \notin                       | $$\notin$$            |
+| \subset                      | $$\subset$$           |
+| \subseteq                    | $$\subseteq$$         |
+| \supseteq                    | $$\supseteq$$         |
+| \cap                         | $$\cap$$              |
+| \cup                         | $$\cup$$              |
+| \vee or \lor                 | $$\vee$$              |
+| \wedge or \land              | $$\wedge$$            |
+| \exists                      | $$\exists$$           |
+| \forall                      | $$\forall$$           |
+| \lfloor \rfloor （向下取整） | $$\lfloor \ \rfloor$$ |
+| \lceil  \rceil  （向上取整） | $$\lceil \ \rceil$$   |
+| \neg                         | $$\neg$$              |
 
 ## 2.7 矩阵
 
-| 代码     | 示例                                                  | 显示                                                    |
-| -------- | ----------------------------------------------------- | ------------------------------------------------------- |
-| \matrix  | \begin{matrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{matrix}   | $\begin{matrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{matrix}$   |
-| \bmatrix | \begin{bmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{bmatrix} | $\begin{bmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{bmatrix}$ |
-| \vmatrix | \begin{vmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{vmatrix} | $\begin{vmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{vmatrix}$ |
-| \pmatrix | \begin{pmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{pmatrix} | $\begin{pmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{pmatrix}$ |
+| 代码     | 示例                                                  | 显示                                                      |
+| -------- | ----------------------------------------------------- | --------------------------------------------------------- |
+| \matrix  | \begin{matrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{matrix}   | $$\begin{matrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{matrix}$$   |
+| \bmatrix | \begin{bmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{bmatrix} | $$\begin{bmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{bmatrix}$$ |
+| \vmatrix | \begin{vmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{vmatrix} | $$\begin{vmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{vmatrix}$$ |
+| \pmatrix | \begin{pmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{pmatrix} | $$\begin{pmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{pmatrix}$$ |
 
 下列代码中，&用于分隔列，\用于分隔行
 
@@ -194,74 +194,74 @@ $$
 
 ## 2.8 头顶符号
 
-| 代码  | 符号       |
-| ----- | ---------- |
-| \hat  | $\hat{x}$  |
-| \bar  | $\bar{x}$  |
-| \dot  | $\dot{x}$  |
-| \ddot | $\ddot{x}$ |
-| \vec  | $\vec{x}$  |
+| 代码  | 符号         |
+| ----- | ------------ |
+| \hat  | $$\hat{x}$$  |
+| \bar  | $$\bar{x}$$  |
+| \dot  | $$\dot{x}$$  |
+| \ddot | $$\ddot{x}$$ |
+| \vec  | $$\vec{x}$$  |
 
 ## 2.9 箭头(arrow)
 
-| 说明                      | 代码                      | 符号                       |
-| :------------------------ | ------------------------- | -------------------------- |
-| 单箭头单向 left和right    | \leftarrow    \rightarrow | $\leftarrow \ \rightarrow$ |
-| 双箭头单向 Left和Right    | \Leftarrow    \Rightarrow | $\Leftarrow \ \Rightarrow$ |
-| 双向 leftright和Leftright | \leftrightarrow           | $\leftrightarrow$          |
-| 长箭头 long和Long         | \longleftarrow            | $\longleftarrow$           |
-| 否定 n                    | \nRightarrow              | $\nRightarrow$             |
-| 互推                      | \rightleftharpoons        | $\rightleftharpoons$       |
+| 说明                      | 代码                      | 符号                         |
+| :------------------------ | ------------------------- | ---------------------------- |
+| 单箭头单向 left和right    | \leftarrow    \rightarrow | $$\leftarrow \ \rightarrow$$ |
+| 双箭头单向 Left和Right    | \Leftarrow    \Rightarrow | $$\Leftarrow \ \Rightarrow$$ |
+| 双向 leftright和Leftright | \leftrightarrow           | $$\leftrightarrow$$          |
+| 长箭头 long和Long         | \longleftarrow            | $$\longleftarrow$$           |
+| 否定 n                    | \nRightarrow              | $$\nRightarrow$$             |
+| 互推                      | \rightleftharpoons        | $$\rightleftharpoons$$       |
 
 ## 2.10 界定符大小
 
-| 代码  | 符号     |
-| ----- | -------- |
-| \big  | $\big($  |
-| \Big  | $\Big($  |
-| \bigg | $\bigg($ |
-| \Bigg | $\Bigg($ |
+| 代码  | 符号       |
+| ----- | ---------- |
+| \big  | $$\big($$  |
+| \Big  | $$\Big($$  |
+| \bigg | $$\bigg($$ |
+| \Bigg | $$\Bigg($$ |
 
 
 
 # 三、希腊字母
 
-| 代码     | 大写       | 代码      | 小写       |
-| -------- | ---------- | --------- | ---------- |
-| A        | $A$        | \alpha    | $\alpha$   |
-| B        | $B$        | \beta     | $\beta$    |
-| \Gamma   | $\Gamma$   | \gamma    | $\gamma$   |
-| \Delta   | $\Delta$   | \delta    | $\delta$   |
-| E        | $E$        | \epsilon  | $\epsilon$ |
-| Z        | $Z$        | \zeta     | $\zeta$    |
-| H        | $H$        | \eta      | $\eta$     |
-| \Theta   | $\Theta$   | \theta    | $\theta$   |
-| I        | $I$        | \iota     | $\iota$    |
-| K        | $K$        | \kappa    | $\kappa$   |
-| \Lambda  | $\Lambda$  | \lambda   | $\lambda$  |
-| M        | $M$        | \mu       | $\mu$      |
-| N        | $N$        | \nu       | $\nu$      |
-| Xi       | $Xi$       | \xi       | $\xi$      |
-| O        | $O$        | \\omicron | $\omicron$ |
-| \Pi      | $\Pi$      | \pi       | $\pi$      |
-| P        | $P$        | \rho      | $\rho$     |
-| \Sigma   | $\Sigma$   | \sigma    | $\sigma$   |
-| T        | $T$        | \tau      | $\tau$     |
-| \Upsilon | $\Upsilon$ | \upsilon  | $\upsilon$ |
-| \Phi     | $\Phi$     | \phi      | $\phi$     |
-| X        | $X$        | \chi      | $\chi$     |
-| \Psi     | $\Psi$     | \psi      | $\psi$     |
-| \Omega   | $\Omega$   | \omega    | $\omega$   |
+| 代码     | 大写         | 代码      | 小写         |
+| -------- | ------------ | --------- | ------------ |
+| A        | $$A$$        | \alpha    | $$\alpha$$   |
+| B        | $$B$$        | \beta     | $$\beta$$    |
+| \Gamma   | $$\Gamma$$   | \gamma    | $$\gamma$$   |
+| \Delta   | $$\Delta$$   | \delta    | $$\delta$$   |
+| E        | $$E$$        | \epsilon  | $$\epsilon$$ |
+| Z        | $$Z$$        | \zeta     | $$\zeta$$    |
+| H        | $$H$$        | \eta      | $$\eta$$     |
+| \Theta   | $$\Theta$$   | \theta    | $$\theta$$   |
+| I        | $$I$$        | \iota     | $$\iota$$    |
+| K        | $$K$$        | \kappa    | $$\kappa$$   |
+| \Lambda  | $$\Lambda$$  | \lambda   | $$\lambda$$  |
+| M        | $$M$$        | \mu       | $$\mu$$      |
+| N        | $$N$$        | \nu       | $$\nu$$      |
+| Xi       | $$Xi$$       | \xi       | $$\xi$$      |
+| O        | $$O$$        | \\omicron | $$\omicron$$ |
+| \Pi      | $$\Pi$$      | \pi       | $$\pi$$      |
+| P        | $$P$$        | \rho      | $$\rho$$     |
+| \Sigma   | $$\Sigma$$   | \sigma    | $$\sigma$$   |
+| T        | $$T$$        | \tau      | $$\tau$$     |
+| \Upsilon | $$\Upsilon$$ | \upsilon  | $$\upsilon$$ |
+| \Phi     | $$\Phi$$     | \phi      | $$\phi$$     |
+| X        | $$X$$        | \chi      | $$\chi$$     |
+| \Psi     | $$\Psi$$     | \psi      | $$\psi$$     |
+| \Omega   | $$\Omega$$   | \omega    | $$\omega$$   |
 
 # 四、字体
 
-| 输入 |   说明   |     显示      | 输入  |   说明   |           显示           |
-| :--: | :------: | :-----------: | :---: | :------: | :----------------------: |
-| \rm  |  罗马体  | $\rm{Sample}$ | \cal  |   花体   |      $\cal{SAMPLE}$      |
-| \it  | 意大利体 | $\it{Sample}$ | \Bbb  | 黑板粗体 |      $\Bbb{SAMPLE}$      |
-| \bf  |   粗体   | $\bf{Sample}$ | \mit  | 数学斜体 |      $\mit{SAMPLE}$      |
-| \sf  |  等线体  | $\sf{Sample}$ | \scr  |  手写体  |      $\scr{SAPLE}$       |
-| \tt  | 打字机体 | $\tt{Sample}$ | \frak | 哥特字体 | $\frak{sample \ SAMPLE}$ |
+| 输入  |   说明   |      显示       | 输入  |   说明   |            显示            |
+| :---: | :------: | :-------------: | :---: | :------: | :------------------------: |
+|  \rm  |  罗马体  | $$\rm{Sample}$$ | \cal  |   花体   |      $$\cal{SAMPLE}$$      |
+|  \it  | 意大利体 | $$\it{Sample}$$ | \Bbb  | 黑板粗体 |      $$\Bbb{SAMPLE}$$      |
+|  \bf  |   粗体   | $$\bf{Sample}$$ | \mit  | 数学斜体 |      $$\mit{SAMPLE}$$      |
+|  \sf  |  等线体  | $$\sf{Sample}$$ | \scr  |  手写体  |      $$\scr{SAPLE}$$       |
+|  \tt  | 打字机体 | $$\tt{Sample}$$ | \frak | 哥特字体 | $$\frak{sample \ SAMPLE}$$ |
 
 # 五、一万个例子
 

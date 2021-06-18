@@ -39,9 +39,9 @@
 
 - 性能度量
 
-  - 错误率（Error Rate）：$E=\cfrac{a}{m}$
-  - 精度（Accuracy）：$1-E$
-  - 误差（Error）：$|Y-Y'|$
+  - 错误率（Error Rate）：$$E=\cfrac{a}{m}$$
+  - 精度（Accuracy）：$$1-E$$
+  - 误差（Error）：$$|Y-Y'|$$
 
 - 数据集
 
@@ -76,7 +76,7 @@
 
    在数据集D中随机挑选样本放入训练集S中，再放回，重复m次（自助采样）。
 
-   此时，D中部分样本会在S中多次出现，部分样本不会出现，不被采到的概率为$(1-\cfrac{1}{m})^m$，取极限约为36.8%，将不出现的样本作为测试集T，这样的测试结果称为包外估计（out-of-bagestimate）。
+   此时，D中部分样本会在S中多次出现，部分样本不会出现，不被采到的概率为$$(1-\cfrac{1}{m})^m$$，取极限约为36.8%，将不出现的样本作为测试集T，这样的测试结果称为包外估计（out-of-bagestimate）。
 
    缺点：改变了初始数据集的分布，引入估计偏差。
 
@@ -84,7 +84,7 @@
 
 #### 1）基本公式
 
-给定样例集$D=\{(x_1,y_1),(x_2,y_2),\ldots,(x_m,y_m)\}$，其中$y_i$是示例$x_i$的真实标记，要评估学习器$f$的性能，就要把学习器的预测结果$f(x)$与真实标记$y$进行比较。
+给定样例集$$D=\{(x_1,y_1),(x_2,y_2),\ldots,(x_m,y_m)\}$$，其中$$y_i$$是示例$$x_i$$的真实标记，要评估学习器$$f$$的性能，就要把学习器的预测结果$$f(x)$$与真实标记$$y$$进行比较。
 
 - 均方误差
 
@@ -92,7 +92,7 @@ $$
 E(f;D)=\cfrac{1}{m}\sum\limits_{i=1}^{m}(f(x_i)-y_i)^2
 $$
 
-- 对于数据分布$\cal{D}$和概率密度函数$p(\cdot)$，均方误差可描述为
+- 对于数据分布$$\cal{D}$$和概率密度函数$$p(\cdot)$$，均方误差可描述为
 
 $$
 E(f;D)=\int_{x\sim D}(f(x)-y)^2p(x)dx
@@ -116,13 +116,13 @@ $$
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202154655842.png" alt="image-20201202154655842" style="zoom:80%;" />
 
-- 查准率$P$（Precision）：预测为正例的结果中有多少是对的，阈值（Threshold）较大（谨慎），查准率往往会高
+- 查准率$$P$$（Precision）：预测为正例的结果中有多少是对的，阈值（Threshold）较大（谨慎），查准率往往会高
 
 $$
 P=\cfrac{TP}{TP+FP}
 $$
 
-- 查全率$R$（Recall）：真正的正例有多少被预测出来了，阈值较小（宽松），查全率往往会高
+- 查全率$$R$$（Recall）：真正的正例有多少被预测出来了，阈值较小（宽松），查全率往往会高
 
 $$
 R=\cfrac{TP}{TP+FN}
@@ -131,7 +131,7 @@ $$
 #### 3）最优阈值的确定
 
 - **选取平衡点**（Break-Even Point），简称BEP
-- **$F1$度量**（P与R的调和平均数）
+- **$$F1$$度量**（P与R的调和平均数）
 
 $$
 \cfrac{1}{F1}=\cfrac{1}{2}(\cfrac{1}{R}+\cfrac{1}{P}) \\
@@ -140,29 +140,29 @@ $$
 
 ​			与算术平均与几何平均相比，调和平均更重视最小值
 
-- **$F_\beta$度量**（加权调和平均）
+- **$$F_\beta$$度量**（加权调和平均）
 
 $$
 \cfrac{1}{F_\beta}=\cfrac{1}{1+\beta^2}(\cfrac{1}{P}+\cfrac{\beta^2}{R}) =\cfrac{(1+\beta^2)\times P\times R}{(\beta^2\times P)+R}
 $$
 
-​			$\beta$度量了查全率相对于查准率的重要性，$\beta>1$时查全率影响更大；$\beta<1$时查准率影响更大
+​			$$\beta$$度量了查全率相对于查准率的重要性，$$\beta>1$$时查全率影响更大；$$\beta<1$$时查准率影响更大
 
 #### 4）n个二分类实现的多分类问题
 
 - 先分别计算，再求平均值
 
-  有$(P_1,R_1),(P_2,R_2),\ldots,(P_n,R_n)$
+  有$$(P_1,R_1),(P_2,R_2),\ldots,(P_n,R_n)$$
 
-  - macro-P 宏查准率：$macro-P=\cfrac{1}{n}\sum\limits_{i=1}^n P_i$
-  - macro-R 宏查全率：$macro-R=\cfrac{1}{n}\sum\limits_{i=1}^n R_i$
-  - macro-F1 宏F1：$macro-F1=\cfrac{2\times macroP\times macroR}{macroP+macroR}$
+  - macro-P 宏查准率：$$macro-P=\cfrac{1}{n}\sum\limits_{i=1}^n P_i$$
+  - macro-R 宏查全率：$$macro-R=\cfrac{1}{n}\sum\limits_{i=1}^n R_i$$
+  - macro-F1 宏F1：$$macro-F1=\cfrac{2\times macroP\times macroR}{macroP+macroR}$$
 
 - 先平均再计算
-  - macro-P 宏查准率：$micro-P=\cfrac{\overline{TP}}{\overline{TP}+\overline{FP}}$
-  - macro-R 宏查全率：$micro-R=\cfrac{\overline{TP}}{\overline{TP}+\overline{FN}}$
+  - macro-P 宏查准率：$$micro-P=\cfrac{\overline{TP}}{\overline{TP}+\overline{FP}}$$
+  - macro-R 宏查全率：$$micro-R=\cfrac{\overline{TP}}{\overline{TP}+\overline{FN}}$$
 
-  - macro-F1 宏F1：$micro-F1=\cfrac{2\times microP\times microR}{microP+microR}$
+  - macro-F1 宏F1：$$micro-F1=\cfrac{2\times microP\times microR}{microP+microR}$$
 
 ## 2.2 一种训练集，多种算法
 
@@ -175,8 +175,8 @@ $$
 - 首先确定A和B优于C，AB间由于交叉不好确定
 - 对于AB
   - 法一：比较面积，但不易估算
-  - 法二：$F1$
-  - 法三：$F\beta$
+  - 法二：$$F1$$
+  - 法三：$$F\beta$$
 
 ## 2.2.2 ROC与AUC
 
