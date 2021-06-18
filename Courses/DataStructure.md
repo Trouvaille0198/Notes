@@ -2125,6 +2125,58 @@ $$
 
 ##### 1. 类模板定义
 
+```c++
+//图的邻接矩阵类
+template <class ElemType, class WeightType>
+class AdjMatrixGraph
+{
+protected:
+    int _vexMaxNum, _arcNum;     // 最大顶点数, 边数
+    int *_tag;                   // 标志数组
+    SeqList<ElemType> _vertexes; // 顶点数组
+    int **_arcs;                 // 邻接矩阵, 二维数组
+    int _dirType;                // 有向图或无向图
+    int _weightType;             // 带权值或不带权值
+    WeightType _infinity;
+
+public:
+    AdjMatrixGraph(int dirType = 0, int weightType = 0,
+                   int vexMaxNum = DEFAULT_SIZE, WeightType infinity = DEFAULT_INFINITY); //默认构造函数
+    AdjMatrixGraph(ElemType *es, int vexNum,
+                   int dirType = 0, int weightType = 0,
+                   int vexMaxNum = DEFAULT_SIZE, WeightType infinity = DEFAULT_INFINITY); //构造函数
+    ~AdjMatrixGraph();
+    void Clear();
+    bool IsEmpty();
+    int GetVexNum() const;                          // 求顶点个数
+    int GetArcNum() const;                          // 求边数
+    int GetOrder(ElemType vex) const;               // 求顶点序号
+    ElemType GetElem(int index) const;              // 求指定下标的顶点值
+    void SetElem(int index, ElemType vex);          // 更新指定下标的顶点值
+    int GetFirstAdjVex(int v) const;                // 求v的第一个邻接点的下标
+    int GetNextAdjVex(int v1, int v2) const;        // 求v1相对于v2的下一个邻接点的下标
+    void InsertVex(const ElemType &vex);            // 插入顶点
+    void InsertArc(int v1, int v2, int weight = 1); // 插入边
+    void DeleteVex(const ElemType &vex);            // 删除顶点
+    void DeleteArc(int v1, int v2);                 // 删除边
+    WeightType GetWeight(int v1, int v2) const;     // 求从顶点为v1到v2的边的权值
+    void SetWeight(int v1, int v2, WeightType w);   // 设置从顶点为v1到v2的边的权值
+    int GetTag(int v) const;                        // 求顶点v的标志值
+    void SetTag(int v, int value);                  // 设置顶点v的标志值
+    void Display() const;                           // 打印图
+    void SetArcs(int **arcs, int vexNum);           // 设置新的邻接矩阵
+    void Dijkstra(int v);                           // 迪杰斯特拉算法
+    int GetInDegree(int v) const;                   // 求v的入度
+    void TopSort() const;                           // 有向无权图的拓扑排序
+    void CriticalPath() const;                      // AOE网络的开始时间、关键路径
+    bool IsConnected();                             // 判断图是否连通
+    void DFS(int v);                                // 深度优先搜索
+    void DFSHelp(int v);                            // 深度优先遍历, 无输出
+    void DFSTraverse();                             // 深度优先遍历
+    void TearCycle();                               // 破圈法, 求带权连通无向图的最小生成树
+};
+```
+
 ### 7.2.2 邻接表
 
 把邻接矩阵的每一行记为一个单链表，把竖着排列的边连接成为一个边链表
@@ -2465,7 +2517,7 @@ void AdjMatrixGraph<ElemType, WeightType>::Dijkstra(int v)
 <img src="http://image.trouvaille0198.top/image-20210425112512555.png" alt="image-20210425112512555" style="zoom:50%;" />
 
 - 顶点表示事件（event），保证一个源点，一个汇点
-    - 关键路径：具有最大路径长度的路径
+    - 关键路径：从源点到汇点，具有最大路径长度的路径
     - 关键活动：关键路径上的所有活动
 
 <img src="http://image.trouvaille0198.top/image-20210419102732678.png" alt="image-20210419102732678" style="zoom:45%;" />
@@ -2483,9 +2535,9 @@ void AdjMatrixGraph<ElemType, WeightType>::Dijkstra(int v)
 - 数据表：数据的有限集合
 - 关键字：字段、属性域；互不相同的关键字也成为主关键字
 - 查找表：支持查找功能的数据表
-- 静态查找表：表中元素固定不变
-- 动态查找表：表中元素在插入和删除时会得到调整，当查找失败时，将给定值的数据元素插入数据表中
-- 装载因子 / 装填因子：数据表的长度 m 与数据元素个数 n 的比值，$\alpha=m/n$
+    - 静态查找表：表中元素固定不变
+    - 动态查找表：表中元素在插入和删除时会得到调整，当查找失败时，将给定值的数据元素插入数据表中
+- 装载因子 / 装填因子：数据表的长度 m 与数据元素个数 n 的比值，$\alpha=n/m$
 - 平均查找长度 ASL (Average Search Length)：n 个关键字，第 i 个元素被查找的概率 P~i~，查找第 i 个元素所需进行关键字的比较次数为 C~i~
 
 $$
@@ -2534,7 +2586,7 @@ int SqSearch(T elem[], int n, T key)
 #### 3）性能分析
 
 $$
-ASL=\sum_{i=1}^n\frac{i}{n}\times i=\frac{n+1}{2}
+ASL=\sum_{i=1}^n\frac{1}{n}\times i=\frac{n-1}{2}
 $$
 
 优点：算法简单，适应面广，对表的结构或关键字是否有序没有要求
@@ -2628,6 +2680,33 @@ BST（Binary Sort / Search Tree）
 
 ### 8.3.2 模板定义
 
+```c++
+template <class T>
+class BinSortTree : public BinaryTree<T>
+{
+    // 继承二叉树的根节点数据成员
+public:
+    BinSortTree(T refvalue) : BinaryTree<T>(refvalue){};
+    BinSortTree(T *a, int n); // 插入数组元素构建二叉排序树, 不用判断
+    ~BinSortTree() {}
+    void Insert(const T &x, BinTreeNode<T> *&p); // 以p为根节点, 按大小插入元素
+    /*判定是否为二叉排序树*/
+    bool IsBST_Recursive(BinTreeNode<T> *r, T *pre, bool *result); // 递归方式判断是否为二叉排序树
+    bool IsBST_Recursive();
+    void DisplayLarger(BinTreeNode<T> *p, const T &x); // 从大到小输出不小于x的元素
+    void DisplayLarger(const T &x)
+    {
+        DisplayLarger(this->_root, x);
+        cout << endl;
+    }
+    bool Find_NoRecursive(BinTreeNode<T> *&root, const T &x); // 在以root为根的子树中查找x
+    bool Find_NoRecursive(const T &x) { return Find_NoRecursive(this->_root, x); }
+    void Insert_NoRecursive(BinTreeNode<T> *&root, const T &x); // 在以root为根的子树中插入x
+    void Insert_NoRecursive(const T &x) { Insert_NoRecursive(this->_root, x); }
+    bool SearchOrInsert(T &x);
+};
+```
+
 ### 8.3.3 查找
 
 - 步骤
@@ -2661,15 +2740,15 @@ BST（Binary Sort / Search Tree）
 被删节点左右子树都有
 
 1. 左子树找最大
-2. 右子树找最小
+2. 或者右子树找最小
 
 ## 8.4 平衡二叉树
 
-AVL（）
+AVL
 
 ### 8.4.1 定义
 
-- 或是空树，或是符合以下条件
+- 或是空树，或是符合以下条件的二叉排序树
 
 - 左右子树都是平衡二叉树。
 - 左右子树的高度差值不超过 1
@@ -2697,6 +2776,8 @@ AVL（）
 <img src="http://image.trouvaille0198.top/image-20210510081227246.png" alt="image-20210510081227246" style="zoom:70%;" />
 
 #### 3）LR 平衡旋转——先左后右双旋转
+
+先逆时针再顺时针
 
 左孩子的右子树失衡
 
@@ -2740,6 +2821,8 @@ AVL（）
 删除结点 50
 
 <img src="http://image.trouvaille0198.top/image-20210510084127101.png" alt="image-20210510084127101" style="zoom:50%;" />
+
+<img src="http://image.trouvaille0198.top/image-20210613131053818.png" alt="image-20210613131053818" style="zoom:80%;" />
 
 ## 8.5 B-树
 
@@ -2845,7 +2928,7 @@ AVL（）
 
 #### 1）开放地址法
 
-当冲突发生时，形成一个探查序列，逐个探查，知道找出一个空位置
+当冲突发生时，形成一个探查序列，逐个探查，直到找出一个空位置
 
 **探查序列**
 
@@ -2868,7 +2951,7 @@ AVL（）
 
 ### 8.6.4 哈希查找
 
-### 1）过程
+#### 1）过程
 
 <img src="http://image.trouvaille0198.top/image-20210510103146013.png" alt="image-20210510103146013" style="zoom:50%;" />
 
@@ -2937,7 +3020,7 @@ AVL（）
 - 关键字的分布情况
     - 分布平均、随机
         - 快速排序（时间短）、堆排序（空间少），希尔排序（也可）
-    - 分许基本有序
+    - 分组基本有序
         - 冒泡排序、直接插入排序
 
 ## 9.2 交换排序
@@ -3135,8 +3218,6 @@ n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d
 
 <img src="http://image.trouvaille0198.top/image-20210517090706915.png" alt="image-20210517090706915" style="zoom:50%;" />
 
-#### 1）实现
-
 #### 2）分析
 
 - 不稳定
@@ -3181,7 +3262,7 @@ n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d
 
 - 比较次数：$O(nlog_2n)$
 - 时间复杂度：$O(nlog_2n)$
-- 空间复杂度：$$
+- 空间复杂度：
 - 不稳定
 
 ### 9.4.3 堆排序
@@ -3191,10 +3272,6 @@ n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d
 建堆，输出堆顶，调整堆，以此类推
 
 <img src="http://image.trouvaille0198.top/image-20210517104227355.png" alt="image-20210517104227355" style="zoom:60%;" />
-
-#### 1）实现
-
-#### 2）分析
 
 ## 9.5 归并排序
 
@@ -3251,9 +3328,7 @@ n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d
 
 ![image-20210524093145089](http://image.trouvaille0198.top/image-20210524093145089.png)
 
-#### 1）实现
-
-#### 2）分析
+#### 分析
 
 - 时间复杂度 n 记录数，d 关键字位数，radix 关键字取值范围
     - $O(d(n+radix))$，即—— n 趟 * （n 次分配 + radix 次收集）

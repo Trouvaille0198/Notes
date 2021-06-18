@@ -189,7 +189,7 @@ def calc(*numbers)
 calc(1, 2)
 ```
 
-*numbers表示把number这个list的所有元素作为可变参数传进去。这种写法相当有用，而且很常见
+*numbers 表示把 number 这个 list 的所有元素作为可变参数传进去。这种写法相当有用，而且很常见
 
 #### 3）关键字参数
 
