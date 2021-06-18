@@ -83,7 +83,7 @@
 
 - [教程配置]()
   - [配置 SSH](useful/配置 SSH.md)
-  - [配置 Windows Terminal](useful/配置 Windows Terminal.md)
+  - [配置 WindowsTerminal](useful/配置 WindowsTerminal.md)
 
 - [效率工具]()
   - [Git](效率工具/Git.md)
