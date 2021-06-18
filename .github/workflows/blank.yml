@@ -22,10 +22,10 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: checkout main
+    - name: checkout master
       uses: actions/checkout@v2
       with:
-        ref: main
+        ref: master
             
     - name: install nodejs
       uses: actions/setup-node@v1
@@ -53,5 +53,5 @@ jobs:
         git remote add origin https://${REF}
         git add . 
         git commit -m "Updated By Github Actions With Build ${{github.run_number}} of ${{github.workflow}} For Github Pages"
-        git branch -M main
-        git push --force --quiet "https://${TOKEN}@${REF}" main:gh-pages
+        git branch -M master
+        git push --force --quiet "https://${TOKEN}@${REF}" master:gh-pages
