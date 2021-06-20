@@ -88,7 +88,7 @@
       - [VUE](Frontend/框架/VUE.md)
       - [Vuetify](Frontend/框架/Vuetify.md)
 - [Linux]()
-  - [基本操作](Linux/BasicGrammar.md)
+  - [基础](Linux/基础.md)
   - [收集]()
       - [Install](Linux/useful/Install.md)
       - [Apt Get](Linux/useful/apt-get.md)
