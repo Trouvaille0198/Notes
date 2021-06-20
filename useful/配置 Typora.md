@@ -2,6 +2,8 @@
 
 ## 自动添加标题序号
 
+新建 `base.user.css` 文件，内容如下
+
 ```css
 /** initialize css counter */
 #write {
