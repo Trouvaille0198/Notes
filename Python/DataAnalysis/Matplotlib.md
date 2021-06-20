@@ -19,23 +19,23 @@ plt.savefig(fname='pic.png')
 plt.show()
 ```
 
-# 一、创建图片与子图
+# 创建图片与子图
 
 ==若不创建实例，一切对象名均使用plt！==
 
-## 1.1 导入
+## 导入
 
 ```python
 import matplotlib.pyplot as plt
 ```
 
-## 1.2 层次
+## 层次
 
 - Figure：面板(图)，matplotlib中的所有图像都是位于figure对象中，一个图像只能有一个figure对象。
 
 - Subplot：子图，figure对象下创建一个或多个subplot对象(即axes)用于绘制图像。
 
-## 1.3 创建图片
+## 创建图片
 
 ```python
 fig = plt.figure()
@@ -56,9 +56,9 @@ fig = plt.figure()
 - *frameon*：若为False，则没有边框
 - *clear*：若为True，如果图的编号已存在则先清除
 
-## 1.4 创建子图
+## 创建子图
 
-### 1.4.1 `.add_subplot()`
+### `.add_subplot()`
 
 ```python
 ax1 = fig.add_subplot(2, 2, 1)
@@ -74,7 +74,7 @@ ax3 = fig.add_subplot(2, 2, 3)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221134419683.png" alt="image-20201221134419683" style="zoom:67%;" />
 
-### 1.4.2 `plt.subplots()`
+### `plt.subplots()`
 
 使用子图网格创建图片是非常常见的任务，所以matplotlib包含了一个便捷方法plt.subplots，它创建一个新的图片，然后返回包含了已生成子图对象的NumPy数组：
 
@@ -84,7 +84,7 @@ fig, axes = plt.subplots(2, 3)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221140159363.png" alt="image-20201221140159363" style="zoom:67%;" />
 
-#### 1）API
+#### API
 
 ```python
 plt.subplots(nrows=1, ncols=1, sharex=False, sharey=False, squeeze=True, subplot_kw=None, gridspec_kw=None, **fig_kw)
@@ -92,7 +92,7 @@ plt.subplots(nrows=1, ncols=1, sharex=False, sharey=False, squeeze=True, subplot
 
 返回figure实例和子图数组
 
-#### 2）参数
+#### 参数
 
 - *nrows，ncols*：子图的行列数
 - *sharex, sharey* 
@@ -107,7 +107,7 @@ plt.subplots(nrows=1, ncols=1, sharex=False, sharey=False, squeeze=True, subplot
 - gridspec_kw：字典格式，传递给`GridSpec`的构造函数，用于创建子图所摆放的网格。
 - *\*\*fig_kw* ：所有其他关键字参数都传递给 `figure()`调用。
 
-#### 3）格式
+#### 格式
 
 ```python
 #单行单列，按照一维数组来表示
@@ -125,7 +125,7 @@ ax[1,1].plot([1,2], [3,4])	# 第四个图
 
 数组axes可以像二维数组那样方便地进行索引，例如，axes[0，1]
 
-## 1.5 调整子图周围的间距
+## 调整子图周围的间距
 
 默认情况下，matplotlib会在子图的外部和子图之间留出一定的间距。这个间距都是相对于图的高度和宽度来指定的，所以如果你通过编程或手动使用GUI窗口来调整图的大小，那么图就会自动调整。
 
@@ -137,13 +137,13 @@ plt.subplots_adjust(wspace=1,hspace=0)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221141911201.png" alt="image-20201221141911201" style="zoom:50%;" />
 
-#### 1）API
+#### API
 
 ```python
 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=None)
 ```
 
-#### 2）参数
+#### 参数
 
 - *left, right, bottom, top*：子图所在区域的边界
   - 当值大于1.0的时候子图会超出figure的边界从而显示不全；值不大于1.0的时候，子图会自动分布在一个矩形区域
@@ -153,11 +153,11 @@ plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, h
 
 - *wspace, hspace*：子图之间的横向间距、纵向间距分别与子图平均宽度、平均高度的比值，也就是图片的宽度和高度百分比
 
-# 二、修饰
+# 修饰
 
-## 2.1 设置标题
+## 设置标题
 
-### 2.1.1 设置图片标题
+### 设置图片标题
 
 ```python
 plt.suptitle('The Title',fontsize=14,color='purple')
@@ -194,7 +194,7 @@ fig.title('The Title',fontsize=14,color='purple')
   - `‘edgecolor’ `：(简写ec)边框线条颜色
   - `‘edgewidth’` ：边框线条大小
 
-### 2.1.2 设置子图标题
+### 设置子图标题
 
 ```python
 ax1.set_title('graph1')
@@ -204,7 +204,7 @@ ax1.set_title('graph1')
 
 参数见2.1.1
 
-## 2.2 轴操作
+## 轴操作
 
 set方法允许批量设置绘图属性，如
 
@@ -216,7 +216,7 @@ props = {
 ax1.set(**props)
 ```
 
-### 2.2.1 改变轴刻度
+### 改变轴刻度
 
 ```python
 ax1.set_xticks([0,25,50,75,100])
@@ -230,7 +230,7 @@ plt.xticks([0,25,50,75,100])
 plt.yticks([10,20,30,40,50])
 ```
 
-### 2.2.2 添加轴标签
+### 添加轴标签
 
 添加与刻度对应的标签
 
@@ -257,7 +257,7 @@ plt.xlabel('x-year',fontsize=14)
 plt.ylabel('y-income',fontsize=14)
 ```
 
-### 2.3.3 设置显示范围
+### 设置显示范围
 
 ```python
 plt.xlim(xmin, xmax)
@@ -274,7 +274,7 @@ ax.get_lim()
 ax.set_lim()
 ```
 
-## 2.3 添加图例
+## 添加图例
 
 .lengend()自动接受图像的`label`值，（`label`值在画图时传入）
 
@@ -302,9 +302,9 @@ ax1.legend(loc=4)
 plt.legend()
 ```
 
-## 2.4 添加注释
+## 添加注释
 
-### 1）.text()
+### .text()
 
 ```python
 plt.text(0.4,0.8,"This is a text",rotation=45)
@@ -324,7 +324,7 @@ plt.text(0.4,0.8,"This is a text",rotation=45)
 - *string*：设置说明文字
 - 其余详见2.1.1
 
-### 2）.annotate()
+### .annotate()
 
 ```python
 plt.annotate('Testing',xy=(0.4,0.6),fontsize=20,color='b')
@@ -344,13 +344,13 @@ plt.annotate('Testing',xy=(0.4,0.6),fontsize=20,color='b')
 - *xy*：设置被注释的坐标点
 - *xytext*：设置注释文字的坐标位置
 
-## 2.5 添加网格
+## 添加网格
 
 ```python
 plt.grid(linestyle="--", alpha=0.5)
 ```
 
-## 2.6 绘制参考线
+## 绘制参考线
 
 ```python
 plt.axhline(y, c, ls, lw) 	#绘制平行于x轴的水平参考线
@@ -365,7 +365,7 @@ plt.axvline(x, c, ls, lw)  	#绘制平行于y轴的垂直参考线
 
 *lw*：参考线的线条宽度
 
-## 2.7 其他坐标轴设置
+## 其他坐标轴设置
 
 ```python
 .axis()
@@ -377,15 +377,15 @@ plt.axvline(x, c, ls, lw)  	#绘制平行于y轴的垂直参考线
 - *‘off’*：关闭坐标轴
 - *[a, b, c, d]*：设置x轴的范围为[a, b]，y轴的范围为[c, d]
 
-# 三、绘图
+# 绘图
 
-## 3.1 点图，线图
+## 点图，线图
 
 ```python
 .plot(x,y)
 ```
 
-### 3.1.1 API
+### API
 
 ```python
 #单条线：
@@ -394,7 +394,7 @@ plot([x], y, [fmt], data=None, **kwargs)
 plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
 ```
 
-### 3.1.2 参数
+### 参数
 
 - *x,y*：数据，x可选
 - *fmt*：定义基本属性
@@ -415,47 +415,47 @@ plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
 
     - 可以用缩写、RGB、灰度字符串
 
-    - | character | color   |
-      | :-------- | :------ |
-      | ‘b’       | blue    |
-      | ‘g’       | green   |
-      | ‘r’       | red     |
-      | ‘c’       | cyan    |
-      | ‘m’       | magenta |
-      | ‘y’       | yellow  |
-      | ‘k’       | black   |
-      | ‘w’       | white   |
+    | -    | character | color |
+    | :--- | :-------- |
+    | ‘b’  | blue      |
+    | ‘g’  | green     |
+    | ‘r’  | red       |
+    | ‘c’  | cyan      |
+    | ‘m’  | magenta   |
+    | ‘y’  | yellow    |
+    | ‘k’  | black     |
+    | ‘w’  | white     |
 
   - *marker*
 
-    - | character | description           |
-      | :-------- | :-------------------- |
-      | `'.'`     | point marker          |
-      | `','`     | pixel marker          |
-      | `'o'`     | circle marker         |
-      | `'v'`     | triangle_down marker  |
-      | `'^'`     | triangle_up marker    |
-      | `'<'`     | triangle_left marker  |
-      | `'>'`     | triangle_right marker |
-      | `'1'`     | tri_down marker       |
-      | `'2'`     | tri_up marker         |
-      | `'3'`     | tri_left marker       |
-      | `'4'`     | tri_right marker      |
-      | `'s'`     | square marker         |
-      | `'p'`     | pentagon marker       |
-      | `'*'`     | star marker           |
-      | `'h'`     | hexagon1 marker       |
-      | `'H'`     | hexagon2 marker       |
-      | `'+'`     | plus marker           |
-      | `'x'`     | x marker              |
-      | `'D'`     | diamond marker        |
-      | `'d'`     | thin_diamond marker   |
-      | `'|'`     | vline marker          |
-      | `'_'`     | hline marker          |
+    | -     | character             | description |
+    | :---- | :-------------------- |
+    | `'.'` | point marker          |
+    | `','` | pixel marker          |
+    | `'o'` | circle marker         |
+    | `'v'` | triangle_down marker  |
+    | `'^'` | triangle_up marker    |
+    | `'<'` | triangle_left marker  |
+    | `'>'` | triangle_right marker |
+    | `'1'` | tri_down marker       |
+    | `'2'` | tri_up marker         |
+    | `'3'` | tri_left marker       |
+    | `'4'` | tri_right marker      |
+    | `'s'` | square marker         |
+    | `'p'` | pentagon marker       |
+    | `'*'` | star marker           |
+    | `'h'` | hexagon1 marker       |
+    | `'H'` | hexagon2 marker       |
+    | `'+'` | plus marker           |
+    | `'x'` | x marker              |
+    | `'D'` | diamond marker        |
+    | `'d'` | thin_diamond marker   |
+    | `'|'` | vline marker          |
+    | `'_'` | hline marker          |
 
   - *alpha*：透明值，接受0~1之间的浮点数
 
-### 3.1.3 例
+### 例
 
 ```python
 x = [1, 2, 3, 4] 
@@ -470,7 +470,7 @@ plt.show()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221183813297.png" alt="image-20201221183813297" style="zoom:67%;" />
 
-## 3.2 散点图
+## 散点图
 
 ```python
 .scatter(x,y)
@@ -487,7 +487,7 @@ plt.show()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221185252453.png" alt="image-20201221185252453" style="zoom:67%;" />
 
-## 3.2 气泡图
+## 气泡图
 
 加入了第三个值 `s` 可以理解成普通散点，画的是二维，泡泡图体现了Z的大小
 
@@ -504,7 +504,7 @@ N = 50
 x = np.random.rand(N)
 y = np.random.rand(N)
 colors = np.random.rand(N)
-area = (30 * np.random.rand(N))**2  # 0 to 15 point radii
+area = (30 * np.random.rand(N))**2  # to 15 point radii
 
 plt.scatter(x, y, s=area, c=colors, alpha=0.5)
 plt.show()
@@ -512,7 +512,7 @@ plt.show()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221194637023.png" alt="image-20201221194637023" style="zoom:67%;" />
 
-## 3.3 柱状图
+## 柱状图
 
 ```python
 .bar(x, y)
@@ -567,7 +567,7 @@ plt.show()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221195650960.png" alt="image-20201221195650960" style="zoom:67%;" />
 
-## 3.4 直方图
+## 直方图
 
 直方图用于表明数据分布情况，横轴是数据，纵轴是出现的次数（也就是频数）
 
@@ -577,7 +577,7 @@ plt.show()
 
 *x*：在x轴上绘制箱体的定量数据输入值
 
-### 3.4.1 重要参数
+### 重要参数
 
 - *x* : arrays(一个或多个)，在x轴上绘制箱体的定量数据输入值
 
@@ -599,7 +599,7 @@ plt.show()
 
 - *label*：刻度标签
 
-### 3.4.2 例
+### 例
 
 ```python
 np.random.seed(19680801)
@@ -629,7 +629,7 @@ plt.show()
 
 ![image-20201221191835717](https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221191835717.png)
 
-## 3.5 饼图
+## 饼图
 
 饼图自动根据数据的百分比画饼
 
@@ -637,7 +637,7 @@ plt.show()
 .pie(x)
 ```
 
-### 3.5.1 重要参数
+### 重要参数
 
 - *x*: 定性数据的不同类别的百分比
 
@@ -671,7 +671,7 @@ plt.show()
 
 - *center*：指定饼图的中心点位置，默认为原点
 
-### 3.5.2 例
+### 例
 
 ```python
 labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
@@ -691,7 +691,7 @@ plt.show()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221193236346.png" alt="image-20201221193236346" style="zoom:70%;" />
 
-## 3.6 箱型图
+## 箱型图
 
 ```python
 .boxplot(x)
@@ -716,7 +716,7 @@ plt.show()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221194013577.png" alt="image-20201221194013577" style="zoom:67%;" />
 
-## 3.7 棉棒图
+## 棉棒图
 
 绘制离散有序数据
 
@@ -748,7 +748,7 @@ plt.show()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221194353533.png" alt="image-20201221194353533" style="zoom:67%;" />
 
-## 3.8 三维图
+## 三维图
 
 ```python
 fig = plt.figure(5)
@@ -767,9 +767,9 @@ plt.show()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221200155588.png" alt="image-20201221200155588" style="zoom:67%;" />
 
-# 四、其他
+# 其他
 
-## 4.1 保存
+## 保存
 
 ```python
 .savefig(path, dpi, facecolor, edgecolor,bbox_inches)
@@ -784,7 +784,7 @@ plt.show()
   - `'png','pdf','svg','ps',''eps'......`
 - bbox_inches：要保存的图片范围，若传递`'tight'`，会去除图片周围空白部分
 
-## 4.2 解决中文乱码问题
+## 解决中文乱码问题
 
 ```python
 import matplotlib as mpl

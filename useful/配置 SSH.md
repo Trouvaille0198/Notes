@@ -1,12 +1,12 @@
-# 一、客户端
+# 客户端
 
-## 1.1 配置私钥
+## 配置私钥
 
 ```shell
 ssh-keygen
 ```
 
-## 1.2 连接服务端
+## 连接服务端
 
 ```ssh
 ssh username@ip [-p port]

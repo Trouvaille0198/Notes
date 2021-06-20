@@ -1,6 +1,6 @@
-# 一、基本知识
+# 基本知识
 
-## 1.1 概念
+## 概念
 
 seaborn 是基于 matplotlib 的图形可视化 python 包。它提供了一种高度交互式界面，便于用户能够做出各种有吸引力的统计图表。
 
@@ -10,19 +10,19 @@ Seaborn 是在 matplotlib 的基础上进行了更高级的 API 封装，从而�
 import seaborn as sns
 ```
 
-## 1.2 层级 API
+## 层级 API
 
 Seaborn 中的 API 分为 Figure-level 和 Axes-level 两种
 
 Axes-level 的函数可以实现与 Matplotlib 更灵活和紧密的结合，而 Figure-level 则更像是「懒人函数」，适合于快速应用
 
-## 1.3 声明样式
+## 声明样式
 
 ```python
 sns.set()
 ```
 
-### 1.3.1 参数
+### 参数
 
 - *context*
   - 控制着默认的画幅大小，分别有 `{paper, notebook, talk, poster}` 四个值。
@@ -42,7 +42,7 @@ sns.set()
 sns.set(context='notebook', style='darkgrid', palette='deep', font='sans-serif', font_scale=1, color_codes=False, rc=None)
 ```
 
-## 1.4 通用参数
+## 通用参数
 
 **sns.图名(x='X轴 列名', y='Y轴 列名', data=原始数据df对象)**
 
@@ -68,7 +68,7 @@ sns.set(context='notebook', style='darkgrid', palette='deep', font='sans-serif',
 - bins：条形图的条数
 - palette：颜色列表
 
-## 1.5 保存
+## 保存
 
 ```python
 ax = sns.distplot(x) # 画图
@@ -80,7 +80,7 @@ fig.savefig(path, dpi = 400) # 保存图片
 
 
 
-# 三、关联图
+# 关联图
 
 （Relational plots）
 
@@ -94,7 +94,7 @@ fig.savefig(path, dpi = 400) # 保存图片
 | scatterplot | 多维度分析散点图 |
 |  lineplot   | 多维度分析线形图 |
 
-## 3.1 函数
+## 函数
 
 ```python
 seaborn.relplot( kind='scatter')
@@ -107,7 +107,7 @@ seaborn.relplot( kind='scatter')
 - 折线图
   - *lineplot()*：通过 `kind="line"` 访问
 
-## 3.2 例
+## 例
 
 以鸢尾花数据集为例
 
@@ -123,7 +123,7 @@ sns.relplot(kind='line',x='sepal_length',y='sepal_width',data=iris,hue='species'
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151011958.png" alt="image-20210122151011958" style="zoom:67%;" />
 
-# 四、类别图
+# 类别图
 
 （categorical plots）
 
@@ -131,7 +131,7 @@ sns.relplot(kind='line',x='sepal_length',y='sepal_width',data=iris,hue='species'
 
 针对一个离散型变量与一个连续型变量之间的关系
 
-## 4.1 函数
+## 函数
 
 ```python
 seaborn.catplot( kind='strip')
@@ -151,15 +151,15 @@ seaborn.catplot( kind='strip')
   - *barplot()*：(`kind="bar"`)
   - *countplot()*：(`kind="count"`)
 
-## 4.2 参数说明
+## 参数说明
 
 1. `hue=` 参数可以给图像引入另一个维度。如果一个数据集有多个类别，`hue=` 参数就可以让数据点有更好的区分
 2. 计数条形图只传入一个分类参数
 3.  *jitter*：表示抖动的程度(仅沿类別轴)。当很多数据点重叠时，可以指定抖动的数量或者设为True使用默认值。
 
-## 4.3 例
+## 例
 
-### 4.3.1 散点图
+### 散点图
 
 ```python
 sns.catplot(x="sepal_length", y="species", data=iris)
@@ -175,9 +175,9 @@ sns.catplot(x="sepal_length", y="species", kind="swarm", data=iris)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151628884.png" alt="image-20210122151628884" style="zoom:67%;" />
 
-### 4.3.2 分布图
+### 分布图
 
-#### 1）箱线图
+#### 箱线图
 
 ```python
 sns.catplot(x="sepal_length", y="species", kind="box", data=iris)
@@ -185,7 +185,7 @@ sns.catplot(x="sepal_length", y="species", kind="box", data=iris)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151848523.png" alt="image-20210122151848523" style="zoom:67%;" />
 
-#### 2）增强箱线图
+#### 增强箱线图
 
 ```python
 sns.catplot(x="sepal_length", y="species", kind="boxen", data=iris)
@@ -193,7 +193,7 @@ sns.catplot(x="sepal_length", y="species", kind="boxen", data=iris)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151907621.png" alt="image-20210122151907621" style="zoom:67%;" />
 
-#### 3）小提琴图
+#### 小提琴图
 
 ```python
 sns.catplot(x="sepal_length", y="species", kind="violin", data=iris)
@@ -203,9 +203,9 @@ sns.catplot(x="sepal_length", y="species", kind="violin", data=iris)
 
 
 
-### 4.3.3 估计图
+### 估计图
 
-#### 1）点线图
+#### 点线图
 
 ````python
 sns.catplot(x="sepal_length", y="species", kind="point", data=iris)
@@ -213,7 +213,7 @@ sns.catplot(x="sepal_length", y="species", kind="point", data=iris)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152518957.png" alt="image-20210122152518957" style="zoom:67%;" />
 
-#### 2）条形图
+#### 条形图
 
 ```python
 sns.catplot(x="sepal_length", y="species", kind="bar", data=iris)
@@ -221,7 +221,7 @@ sns.catplot(x="sepal_length", y="species", kind="bar", data=iris)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152541817.png" alt="image-20210122152541817" style="zoom:67%;" />
 
-#### 3）计数条形图
+#### 计数条形图
 
 只传入一个分类参数
 
@@ -231,13 +231,13 @@ sns.catplot(x="species", kind="count", data=iris)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152611043.png" alt="image-20210122152611043" style="zoom:67%;" />
 
-# 五、分布图
+# 分布图
 
 （Distribution plots）
 
 分布图主要是用于可视化变量的分布情况，一般分为单变量分布和多变量分布。当然这里的多变量多指二元变量，更多的变量无法绘制出直观的可视化图形
 
-## 5.1 displot() 单变量分布
+## displot() 单变量分布
 
 ```python
 sns.displot(x, kind=hist, data)
@@ -254,7 +254,7 @@ sns.displot(x, kind=hist, data)
 - 核密度估计图
   - *kdeplot()*：通过 `kind='kde'` 访问
 
-### 5.1.1 参数说明
+### 参数说明
 
 *bins*：用于控制条形的数量。
 
@@ -265,7 +265,7 @@ sns.displot(x, kind=hist, data)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122170112089.png" alt="image-20210122170112089" style="zoom:67%;" />
 
-### 5.1.2 例
+### 例
 
 ```python
 sns.displot(x=iris["sepal_length"],kind='kde',data=iris) # 核密度估计图
@@ -282,7 +282,7 @@ sns.displot(x=iris["sepal_length"],kind='kde',hue='species',data=iris) # 分类�
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122170422635.png" alt="image-20210122170422635" style="zoom:67%;" />
 
-## 5.2 jointplot() 双变量分布
+## jointplot() 双变量分布
 
 ```python
 sns.jointplot(x, y, data)
@@ -314,7 +314,7 @@ sns.jointplot(x="sepal_length", y="sepal_width", data=iris, kind="hist",hue="spe
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155729225.png" alt="image-20210122155729225" style="zoom:67%;" />
 
-## 5.3 pairplot() 两两对比分布
+## pairplot() 两两对比分布
 
 ```python
 sns.pairplot(data)
@@ -332,11 +332,11 @@ sns.pairplot(iris,hue="species")
 
 ![image-20210122155340104](https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155340104.png)
 
-# 六、回归图
+# 回归图
 
 （Regression plots）
 
-## 5.1 regplot 线性回归
+## regplot 线性回归
 
 ```python
 sns.regplot(x, y, data)
@@ -356,7 +356,7 @@ sns.regplot(x="petal_length", y="petal_width", data=iris)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122160432232.png" alt="image-20210122160432232" style="zoom:67%;" />
 
-## 5.2 lmplot 分类回归
+## lmplot 分类回归
 
 ```python
 sns.lmplot(x, y, hue, data)
@@ -374,11 +374,11 @@ sns.lmplot(x="sepal_length", y="sepal_width", hue="species", data=iris)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122160656660.png" alt="image-20210122160656660" style="zoom:67%;" />
 
-# 七、矩阵图
+# 矩阵图
 
 （Matrix plots）
 
-## 7.1 heatmap() 热力图
+## heatmap() 热力图
 
 ```python
 sns.heatmap(data)
@@ -396,7 +396,7 @@ sns.heatmap(np.random.rand(10, 10))
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122161503663.png" alt="image-20210122161503663" style="zoom: 80%;" />
 
-## 7.2 clustermap() 分层聚类热图
+## clustermap() 分层聚类热图
 
 ```python
 seaborn.clustermap(data)
@@ -418,7 +418,7 @@ sns.clustermap(iris)
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122161932756.png" alt="image-20210122161932756" style="zoom:67%;" />
 
-# 八、技巧
+# 技巧
 
 1. 设置颜色
 

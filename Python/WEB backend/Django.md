@@ -1,6 +1,6 @@
-# 一、认识
+# 认识
 
-## 1.1 概念
+## 概念
 
 ![1](https://mdn.mozillademos.org/files/13931/basic-django.png)
 
@@ -14,9 +14,9 @@
   
 - **Templates:** 模板 是定义文件（例如HTML页面）的结构或布局的文本文件，用于表示实际内容的占位符。一个视图可以使用HTML模板，从数据填充它动态地创建一个HTML页面模型。可以使用模板来定义任何类型的文件的结构; 它不一定是HTML！
 
-## 1.2 开始
+## 开始
 
-### 1.2.1 创建项目
+### 创建项目
 
 ```shell
 django-admin startproject mysite
@@ -35,7 +35,7 @@ mysite/
         wsgi.py
 ```
 
-### 1.2.2 创建 app
+### 创建 app
 
 ```shell
 py manage.py startapp app_name
@@ -55,13 +55,13 @@ app_name/
     views.py  # 业务逻辑代码
 ```
 
-### 1.2.3 运行服务器
+### 运行服务器
 
 ```shell
 python manage.py runserver 0.0.0.0:8000
 ```
 
-### 1.2.4 生成迁移文件
+### 生成迁移文件
 
 ```python
 python manage.py makemigrations
@@ -69,7 +69,7 @@ python manage.py makemigrations
 
 为模型的改变生成迁移文件
 
-### 1.2.5 创建模型对应的数据表
+### 创建模型对应的数据表
 
 ```python
 python manage.py migrate
@@ -77,7 +77,7 @@ python manage.py migrate
 
 该命令选中未执行过的迁移，将对模型的更改同步到数据库结构上
 
-### 1.2.6 创建管理账号
+### 创建管理账号
 
 ```python
 python manage.py createsuperuser
@@ -85,7 +85,7 @@ python manage.py createsuperuser
 
 
 
-# 二、urls
+# urls
 
 `urls.py`：URLconf 文件
 
@@ -102,9 +102,9 @@ urlpatterns = [
 
 
 
-# 三、Models
+# Models
 
-## 3.1 认识
+## 认识
 
 - **ORM**
 
@@ -119,7 +119,7 @@ urlpatterns = [
 
     模型是真实数据的简单明确的描述。它包含了储存的数据所必要的字段和行为
 
-# 四、views
+# views
 
 每个视图必须要做的只有两件事：返回一个包含被请求页面内容的 [`HttpResponse`](https://docs.djangoproject.com/zh-hans/3.2/ref/request-response/#django.http.HttpResponse) 对象，或者抛出一个异常，比如 [`Http404`](https://docs.djangoproject.com/zh-hans/3.2/topics/http/views/#django.http.Http404) 。至于你还想干些什么，随便你。
 

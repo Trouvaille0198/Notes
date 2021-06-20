@@ -1,6 +1,6 @@
-# 一、认识
+# 认识
 
-## 1.1 概念
+## 概念
 
 Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进 DOM 的系统
 
@@ -27,16 +27,16 @@ var app = new Vue({
 - 简化 Dom 操作
 - 响应式数据驱动
 
-## 1.2 核心
+## 核心
 
 1. 数据绑定
 2. 事件绑定
 3. 用户输入获取
 4. 组件定义和使用
 
-## 1.3 引入
+## 引入
 
-### 1.3.1 CDN
+### CDN
 
 ```html
 <!-- 开发环境版本，包含了有帮助的命令行警告 -->
@@ -46,7 +46,7 @@ var app = new Vue({
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 ```
 
-### 1.3.2 Vue CLI
+### Vue CLI
 
 安装
 
@@ -79,9 +79,9 @@ npm run serve
 npm run serve -- --port 5000
 ```
 
-# 二、基础
+# 基础
 
-## 2.1 Vue 实例
+## Vue 实例
 
 ```javascript
 var app = new Vue({
@@ -102,12 +102,12 @@ var app = new Vue({
     - data 中可以写复杂类型的数据
     - 渲染复杂类型数据时,遵守 js 的语法即可
 
-## 2.2 Vue 指令
+## Vue 指令
 
 Vue 指令指的是,以 v- 开头的一组特殊语法
 
 
-### 2.2.1 v-text
+### v-text
 
 设置标签的文本值 (textContent)
 
@@ -138,7 +138,7 @@ var app = new Vue({
 </div>
 ```
 
-### 2.2.2 v-html
+### v-html
 
 设置标签的 innerHTML
 
@@ -161,7 +161,7 @@ var app = new Vue({
 </div>
 ```
 
-### 2.2.3 v-on
+### v-on
 
 为元素绑定事件
 
@@ -193,7 +193,7 @@ var app = new Vue({
 </div>
 ```
 
-#### 1）例：计数器
+#### 例：计数器
 
 ```html
 <div id="app">
@@ -221,7 +221,7 @@ var app = new Vue({
 </script>
 ```
 
-#### 2）修饰符
+#### 修饰符
 
 事件的后面跟上 `.修饰符` 可以对事件进行限制
 
@@ -278,7 +278,7 @@ var app = new Vue({
 <button v-on="{ mousedown: doThis, mouseup: doThat }"></button>
 ```
 
-### 2.2.4 v-show
+### v-show
 
 根据表达值的真假，切换元素的显示和隐藏
 
@@ -303,7 +303,7 @@ var app = new Vue({
 </div>
 ```
 
-### 2.2.5 v-if
+### v-if
 
 根据表达值的真假,切换元素的显示和隐藏 (操纵 dom 元素)
 
@@ -328,7 +328,7 @@ var app = new Vue({
     </div>
 ```
 
-### 2.2.6 v-bind
+### v-bind
 
 设置元素的属性：`v-bind:属性名=表达式`
 
@@ -355,7 +355,7 @@ var app = new Vue({
 </div>
 ```
 
-### 2.2.7 v-for
+### v-for
 
 根据数据生成列表结构
 
@@ -390,7 +390,7 @@ var app = new Vue({
 </div>
 ```
 
-### 2.2.8 v-model
+### v-model
 
 获取和设置表单元素的值 (双向数据绑定)
 
@@ -402,41 +402,41 @@ var app = new Vue({
 </div>
 ```
 
-## 2.3 组件间的数据传递
+## 组件间的数据传递
 
 父子组件之间的数据传递可以使用 props 或者 $emit 等方式
 
-### 2.3.1 父传子
+### 父传子
 
 使用 props
 
-#### 1）子组件部分
+#### 子组件部分
 
 <img src="http://image.trouvaille0198.top/image-20210411160809257.png" alt="image-20210411160809257" style="zoom:150%;" />
 
-#### 2）父组件部分
+#### 父组件部分
 
 <img src="http://image.trouvaille0198.top/image-20210411160816904.png" alt="image-20210411160816904" style="zoom:150%;" />
 
-### 2.3.2 子传父
+### 子传父
 
 通过事件传递数据
 
-#### 1）子组件部分
+#### 子组件部分
 
 <img src="http://image.trouvaille0198.top/image-20210411160915513.png" alt="image-20210411160915513" style="zoom:150%;" />
 
-#### 2）父组件部分
+#### 父组件部分
 
 <img src="http://image.trouvaille0198.top/image-20210411161044777.png" alt="image-20210411161044777" style="zoom:150%;" />
 
-# 三、axios
+# axios
 
-## 3.1 介绍
+## 介绍
 
 Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。
 
-### 3.1.1 引入
+### 引入
 
 使用 npm:
 
@@ -456,7 +456,7 @@ $ bower install axios
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 ```
 
-### 3.1.2 样例
+### 样例
 
 ```javascript
 axios({
@@ -476,9 +476,9 @@ axios.post('/user', {
 })
 ```
 
-## 3.2 使用
+## 使用
 
-### 3.2.1 axios(config)
+### axios(config)
 
 ```javascript
 // 发送 POST 请求
@@ -492,20 +492,20 @@ axios({
 });
 ```
 
-### 3.2.2 axios(url[, config])
+### axios(url[, config])
 
 ```javascript
 // 发送 GET 请求（默认的方法）
 axios('/user/12345');
 ```
 
-### 3.2.3 别名
+### 别名
 
 ***axios.get(url[, config])***
 
 ***axios.post(url[, data[, config]])***
 
-## 3.3 配置项
+## 配置项
 
 ```javascript
 {
@@ -635,21 +635,21 @@ axios('/user/12345');
 }
 ```
 
-## 3.4 工程化目录结构
+## 工程化目录结构
 
 
 
-# 四、脚手架
+# 脚手架
 
 ![img](http://image.trouvaille0198.top/image.png)
 
-## 4.1 架构
+## 架构
 
-### 4.1.1 main.js
+### main.js
 
 程序入口
 
-### 4.1.2 App.vue
+### App.vue
 
 主视图
 
@@ -689,7 +689,7 @@ export default {};
 <router-link to="/">Home</router-link> |
 <router-link to="/about">About</router-link>
 ```
-### 4.1.3 router
+### router
 
 路由配置例
 
@@ -737,13 +737,13 @@ const routes = [
 </div> 
 ```
 
-## 4.2 单文件组件
+## 单文件组件
 
 <img src="http://image.trouvaille0198.top/vue-component.png" style="zoom: 67%;" />
 
-# 五、Vuex
+# Vuex
 
-## 5.1 认识
+## 认识
 
 vuex 是一个专门为 vue.js 应用程序开发的状态管理模式。
 
@@ -751,7 +751,7 @@ vuex 是一个专门为 vue.js 应用程序开发的状态管理模式。
 
 ![vuex](http://image.trouvaille0198.top/vuex.png)
 
-### 5.1.1 五类对象
+### 五类对象
 
 - state：存储状态（变量）在组件中使用 `$store.state.foo`
 - getters：对数据获取之前的再次编译，可以理解为 state 的 computed 属性。在组件中使用 `$store.getters.fun()`
@@ -759,9 +759,9 @@ vuex 是一个专门为 vue.js 应用程序开发的状态管理模式。
 - actions：异步操作。在组件中使用是 `$store.dispath('funcName',params)`
 - modules：store 的子模块，为了开发大型项目，方便状态管理而使用的。
 
-## 5.2 简单配置
+## 简单配置
 
-### 5.2.1 main.js
+### main.js
 
 Vuex 提供了一个从根组件向所有子组件，以 `store` 选项的方式 “注入” 该 store 的机制
 
@@ -777,7 +777,7 @@ new Vue({
 });
 ```
 
-### 5.2.2 store/index.js
+### store/index.js
 
 ```javascript
 import Vue from 'vue'; //首先引入vue
@@ -829,7 +829,7 @@ export default store;
 
 **但更建议的做法是**：在单独的文件里写好每个组件的状态，最后统一在 `index.js` 中引入
 
-### 5.2.3 项目结构
+### 项目结构
 
 ```bash
 ├── index.html
@@ -848,9 +848,9 @@ export default store;
         └── products.js   # 产品模块
 ```
 
-## 5.3 对象
+## 对象
 
-### 5.3.1 state
+### state
 
 state 中存放状态对象
 
@@ -865,7 +865,7 @@ const state = {
 
 以形似 `$store.state.todos` 或  `$store.state.todo.todos` （如果此状态分模块单独存放的话）调用
 
-### 5.3.2 getters
+### getters
 
 getters 里存放着从 state 中派生出来的一些状态，类似于 computed，所以 getters 里的状态都具有相应的依赖值，而且以函数的形式进行定义
 
@@ -882,11 +882,11 @@ const getters = {
 
 注意，getter 也可以接受其他 getter 作为第二个参数
 
-#### 1）通过属性访问
+#### 通过属性访问
 
 getter 会暴露为 `store.getters` 对象，可以以属性的形式访问这些值，如 `$store.getters.doneTodoNum`，**不分组件**
 
-#### 2）通过方法访问
+#### 通过方法访问
 
 也可以通过让 getter 返回一个函数，来实现给 getter 传参。在对 store 里的数组进行查询时非常有用
 
@@ -903,7 +903,7 @@ $store.getters.getTodoById(2)
 
 注意，getter 在通过方法访问时，每次都会去进行调用，而不会缓存结果
 
-### 5.3.3 mutations
+### mutations
 
 更改 Vuex 的 store 中的状态的唯一方法是提交 mutation
 
@@ -926,7 +926,7 @@ const mutations = {
 
 要唤醒一个 mutation handler，需要以相应的 type 调用 **store.commit** 方法，如 `$store.commit('mutations','Sleep')`，**不分组件**
 
-#### 1）载荷
+#### 载荷
 
 传入的额外参数称为**载荷（payload）**
 
@@ -945,7 +945,7 @@ store.commit('increment', {
 })
 ```
 
-#### 2）type 属性
+#### type 属性
 
 提交 mutation 的另一种方式是直接使用包含 `type` 属性的对象
 
@@ -956,7 +956,7 @@ store.commit({
 })
 ```
 
-#### 4）Mutation 需遵守 Vue 的响应规则
+#### Mutation 需遵守 Vue 的响应规则
 
 既然 Vuex 的 store 中的状态是响应式的，那么当我们变更状态时，监视状态的 Vue 组件也会自动更新。这也意味着 Vuex 中的 mutation 也需要与使用 Vue 一样遵守一些注意事项：
 
@@ -971,7 +971,7 @@ store.commit({
     state.obj = { ...state.obj, newProp: 123 }
     ```
 
-### 5.3.4 actions
+### actions
 
 Action 类似于 mutation，不同在于：
 
@@ -1015,7 +1015,7 @@ store.dispatch({
 })
 ```
 
-#### 1）使用参数结构定义
+#### 使用参数结构定义
 
 实践中，我们会经常用到 ES2015 的 参数解构 (opens new window) 来简化代码（特别是我们需要调用 `commit` 很多次的时候）：
 
@@ -1027,7 +1027,7 @@ actions: {
 }
 ```
 
-#### 2）异步触发
+#### 异步触发
 
 可以在 action 内部执行**异步**操作
 
@@ -1062,7 +1062,7 @@ actions: {
 }
 ```
 
-### 5.3.5 modules
+### modules
 
 由于使用单一状态树，应用的所有状态会集中到一个比较大的对象。当应用变得非常复杂时，store 对象就有可能变得相当臃肿。
 
@@ -1072,9 +1072,9 @@ actions: {
 
 如果希望你的模块具有更高的封装度和复用性，你可以通过添加 `namespaced: true` 的方式使其成为带命名空间的模块。当模块被注册后，它的所有 getter、action 及 mutation 都会自动根据模块注册的路径调整命名。例如：
 
-## 5.4 mapState、mapGetters、mapActions
+## mapState、mapGetters、mapActions
 
-### 5.4.1 mapState
+### mapState
 
 当一个组件需要获取多个状态的时候，将这些状态都声明为计算属性会有些重复和冗余。为了解决这个问题，我们可以使用 `mapState` 辅助函数帮助我们生成计算属性，让你少按几次键：
 

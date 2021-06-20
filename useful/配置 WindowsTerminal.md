@@ -1,6 +1,6 @@
 ##  一、设置
 
-### 1.1 主题
+### 主题
 
 放在 `schemes` 中
 
@@ -32,7 +32,7 @@ https://windowsterminalthemes.dev/
 },
 ```
 
-## 1.2 其他配置
+## 其他配置
 
 放在 `defaults` 中
 
@@ -56,11 +56,11 @@ https://windowsterminalthemes.dev/
 "showTabsInTitlebar": false
 ```
 
-## 二、美化
+## 美化
 
-### 2.1 字体
+### 字体
 
-#### 2.1.1 Nerd Fonts
+#### Nerd Fonts
 
 下载：https://www.nerdfonts.com/font-downloads
 
@@ -71,15 +71,15 @@ https://windowsterminalthemes.dev/
 // Cousine Nerd Font
 ```
 
-#### 2.1.2 Meslo LGM NF
+#### Meslo LGM NF
 
 下载：https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
 
-### 2.2 oh-my-posh
+### oh-my-posh
 
 官网：https://ohmyposh.dev/docs/
 
-#### 2.2.1 安装
+#### 安装
 
 - 第一条命令（绕过power shell执行策略，使其可以执行脚本文件<后面会用到>）
 
@@ -99,7 +99,7 @@ Install-Module oh-my-posh -Scope CurrentUser
 Install-Module posh-git -Scope CurrentUser
 ```
 
-#### 2.2.2 PowerShell 配置
+#### PowerShell 配置
 
 - 第一条（启动编辑power shell配置文件的引擎）
 
@@ -130,7 +130,7 @@ Set-PoshPrompt -Theme  blueish
 
 **配置完后**，每次打开Windows Terminal中的Power shell都会执行脚本文件中的三条命令。
 
-#### 2.2.3 查看操作
+#### 查看操作
 
 预览所有主题
 
@@ -138,7 +138,7 @@ Set-PoshPrompt -Theme  blueish
 Get-PoshThemes
 ```
 
-### 2.3 在 vscode 中配置 power shell 样式
+### 在 vscode 中配置 power shell 样式
 
 设置中查找 `Integrated:Font Family`
 
@@ -150,7 +150,7 @@ DejaVuSansMono Nerd Font
 MesloLGM NF
 ```
 
-# 三、添加 SSH
+# 添加 SSH
 
 ```json
 {

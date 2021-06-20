@@ -1,4 +1,4 @@
-# 一、FlowChart
+# FlowChart
 
 ```
 ​```mermaid
@@ -7,7 +7,7 @@
 ​```
 ```
 
-## 1.1 方向
+## 方向
 
 * TB 从上到下
 * BT 从下到上
@@ -20,7 +20,7 @@ graph TD
 Up-->Down
 ```
 
-## 1.2 基本图形
+## 基本图形
 
 -  [带文本的矩形]
 -  [(带文本的圆角矩形)
@@ -50,7 +50,7 @@ graph TD
     E((带文本的圆形))
 ```
 
-## 1.3 结点间连接
+## 结点间连接
 
 - A --> B   A带箭头指向B
 - A --- B   A不带箭头指向B
@@ -117,7 +117,7 @@ graph TB
     end
 ```
 
-## 1.5 Demo
+## Demo
 
 ```
 ​```mermaid
@@ -153,7 +153,7 @@ graph LR
     printB --> stop
 ```
 
-# 二、Class Diagram
+# Class Diagram
 
 ```
 ​```mermaid
@@ -205,7 +205,7 @@ graph LR
       }
 ```
 
-## 2.1 定义类
+## 定义类
 
 1. 使用关键字 `class`
 2. 使用关系符 `<|--` 定义两个类的关系
@@ -216,7 +216,7 @@ classDiagram
     Vehicle <|-- Car
 ```
 
-## 2.2 定义属性、方法
+## 定义属性、方法
 
 Mermaid distinguishes between attributes and functions/methods based on if the **parenthesis** `()` are present or not
 
@@ -238,7 +238,7 @@ Mermaid distinguishes between attributes and functions/methods based on if the *
 }
 ```
 
-#### 1）函数返回值
+#### 函数返回值
 
 写在函数后
 
@@ -246,7 +246,7 @@ Mermaid distinguishes between attributes and functions/methods based on if the *
 +withdrawl(amount) int
 ```
 
-#### 2）设置泛型
+#### 设置泛型
 
 使用 `~~` 包围
 
@@ -278,7 +278,7 @@ Square : +setMessages(List~string~ messages)
 Square : +getMessages() List~string~
 ```
 
-#### 3）设置成员可视类型
+#### 设置成员可视类型
 
 - `+` Public
 - `-` Private
@@ -290,7 +290,7 @@ Square : +getMessages() List~string~
 > - `*` Abstract e.g.: `someAbstractMethod()*`
 > - `$` Static e.g.: `someStaticMethod()$`
 
-## 2.3 类关系
+## 类关系
 
 ```
 [classA][Arrow][ClassB]:LabelText
@@ -319,7 +319,7 @@ classM <|.. classN
 classO .. classP :I'm a label
 ```
 
-# 三、Entity Relationship Diagrams
+# Entity Relationship Diagrams
 
 ```
 erDiagram

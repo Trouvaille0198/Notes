@@ -1,28 +1,28 @@
-# 一、认识
+# 认识
 
 输出日志
 
-## 1.1 导入
+## 导入
 
 ```python
 import logging
 ```
 
-## 1.2 初始化
+## 初始化
 
-### 1.1.1 级别排序
+### 级别排序
 
 **CRITICAL > ERROR > WARNING > INFO > DEBUG**
 
-| 级别       | 何时使用                                                     |
-| :--------- | :----------------------------------------------------------- |
-| `DEBUG`    | 细节信息，仅当诊断问题时适用。                               |
-| `INFO`     | 确认程序按预期运行                                           |
+| 级别       | 何时使用                                                           |
+| :--------- | :----------------------------------------------------------------- |
+| `DEBUG`    | 细节信息，仅当诊断问题时适用。                                     |
+| `INFO`     | 确认程序按预期运行                                                 |
 | `WARNING`  | 表明有已经或即将发生的意外（例如：磁盘空间不足）。程序仍按预期进行 |
-| `ERROR`    | 由于严重的问题，程序的某些功能已经不能正常执行               |
-| `CRITICAL` | 严重的错误，表明程序已不能继续执行                           |
+| `ERROR`    | 由于严重的问题，程序的某些功能已经不能正常执行                     |
+| `CRITICAL` | 严重的错误，表明程序已不能继续执行                                 |
 
-### 1.1.2 创建实例
+### 创建实例
 
 使用模块级记录器
 
@@ -34,9 +34,9 @@ logger = logging.getLogger(__name__)
 
 这意味着记录器名称跟踪包或模块的层次结构，并且直观地从记录器名称显示记录事件的位置。
 
-# 二、配置
+# 配置
 
-## 2.1 全局配置 ***basicConfig()***
+## 全局配置 ***basicConfig()***
 
 默认情况下，没有为任何日志记录消息设置目标。 你可以使用 `basicConfig()` 指定目标
 
@@ -91,7 +91,7 @@ logger.info("Finish")
 
 对 [`basicConfig()`](https://docs.python.org/zh-cn/3/library/logging.html#logging.basicConfig) 的调用应该在 [`debug()`](https://docs.python.org/zh-cn/3/library/logging.html#logging.debug) ， [`info()`](https://docs.python.org/zh-cn/3/library/logging.html#logging.info) 等的前面。因为它被设计为一次性的配置，只有第一次调用会进行操作，随后的调用不会产生有效操作。
 
-## 2.2 对实例的配置
+## 对实例的配置
 
 对记录器类进行配置，实际上都是 `Logger` 类的成员函数
 ```python
@@ -154,7 +154,7 @@ logger.critical('critical message')
 
     移除指定过滤器
 
-## 2.3 调用外部配置文件 ***fileConfig()***
+## 调用外部配置文件 ***fileConfig()***
 
 ```python
 import logging
@@ -313,13 +313,13 @@ if __name__ == "__main__":
 
 实际上将 json 格式转化为字典，借用了字典的配置
 
-## 2.4 字典配置 ***dictConfig()***
+## 字典配置 ***dictConfig()***
 
-# 三、处理器 Handler
+# 处理器 Handler
 
 `Handler` 对象负责将适当的日志消息（基于日志消息的严重性）分派给处理程序的指定目标
 
-## 3.1 API
+## API
 
 - ***setLevel(level)***
 
@@ -335,7 +335,7 @@ if __name__ == "__main__":
 
     移除指定过滤器
 
-## 3.2 FileHandler
+## FileHandler
 
 要将日志打印到文件中，使用 `basicConfig` 中的 `filename` 参数指定日志文件
 
@@ -356,7 +356,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 ```
 
-## 3.3 StreamHandler
+## StreamHandler
 
 默认的 `basicConfig` 配置即支持打印日志
 
@@ -381,7 +381,7 @@ logger.addHandler(fileHdlr)
 logger.addHandler(consoleHdlr)
 ```
 
-# 四、过滤器 Filter
+# 过滤器 Filter
 
 格式化程序对象配置日志消息的最终顺序、结构和内容
 
@@ -397,7 +397,7 @@ logging.Formatter.__init__(fmt=None, datefmt=None, style='%')
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 ```
 
-# 五、样本
+# 样本
 
 ```python
 import logging

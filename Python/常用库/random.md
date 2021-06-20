@@ -1,8 +1,8 @@
-# 一、认识
+# 认识
 
 生成各种随机数
 
-## 1.1 导入
+## 导入
 
 ```python
 import random
@@ -10,11 +10,11 @@ import random
 
 模块中主要使用 `random` 类
 
-# 二、API
+# API
 
 下述方法均为 `random` 类的成员函数
 
-## 2.1 基本
+## 基本
 
 - ***random()***
 
@@ -52,7 +52,7 @@ import random
 
     从序列 seq 中随机获取指定长度 len 的片段并返回
 
-## 2.2 分布
+## 分布
 
 - ***normalvariate(mu, sigma)*** 
 

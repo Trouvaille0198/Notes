@@ -1,4 +1,4 @@
-# 一、概述
+# 概述
 
 wordcloud 是优秀的词云展示第三方库，以词语为基本单位，通过图形可视化的方式，更加直观和艺术的展示文本
 
@@ -50,9 +50,9 @@ wc.to_file(r'new.png')  #保存图片
 
 <img src="http://image.trouvaille0198.top/image-20210130212211268.png" alt="image-20210130212211268" style="zoom:67%;" />
 
-# 二、对象
+# 对象
 
-## 2.1 WordCloud
+## WordCloud
 
 ```python
 from wordcloud import WordCloud
@@ -62,7 +62,7 @@ from wordcloud import WordCloud
 
 - 词云对象，Word cloud object for generating and drawing
 
-### 2.1.1 参数
+### 参数
 
 - *font_path*：字体路径，string，Font path to the font that will be used (OTF or TTF). 
 
@@ -71,7 +71,7 @@ from wordcloud import WordCloud
 - *background_color*：color value (default=”black”)，Background color for the word cloud image.
 - *mask*：nd-array or None (default=None)，传入转换为数组后的图片作为底片，必须白底
 
-### 2.1.2 方法
+### 方法
 
 *.generate(text)*：向 WordCloud 对象中加载文本 txt，Generate wordcloud from text.
 

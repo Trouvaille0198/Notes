@@ -1,8 +1,8 @@
-# 一、认识
+# 认识
 
-# 二、例子
+# 例子
 
-## 2.1 初始化
+## 初始化
 
 ```python
 from flask import Flask
@@ -30,7 +30,7 @@ $ flask run
 app.run(host=0.0.0.0)
 ```
 
-## 2.2 路由
+## 路由
 
 ```python
 @app.route('/')
@@ -60,7 +60,7 @@ def json(data):
 | `path`   | 类似 `string` ，但可以包含斜杠      |
 | `uuid`   | 接受 UUID 字符串                    |
 
-### 2.2.1 唯一的 URL 与重定向
+### 唯一的 URL 与重定向
 
 以下两条规则的不同之处在于是否使用尾部的斜杠。:
 
@@ -78,7 +78,7 @@ def about():
 
 - `about` 的 URL 没有尾部斜杠，因此其行为表现与**一个文件**类似。如果访问这个 URL 时添加了尾部斜杠就会得到一个 404 错误。这样可以**保持 URL 唯一**，并帮助 搜索引擎避免重复索引同一页面。
 
-### 2.2.2 Flask HTTP方法
+### Flask HTTP方法
 
 ```python
 from flask import request
@@ -91,14 +91,14 @@ def login():
         return show_the_login_form()
 ```
 
-| 方法 | 名称   | 描述                                                         |
-| ---- | ------ | ------------------------------------------------------------ |
-| 1    | GET    | 请求指定的页面信息，并返回实体主体。                         |
+| 方法 | 名称   | 描述                                                                                                                                     |
+| ---- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | GET    | 请求指定的页面信息，并返回实体主体。                                                                                                     |
 | 2    | POST   | 向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST 请求可能会导致新的资源的建立和/或已有资源的修改。 |
-| 3    | PUT    | 从客户端向服务器传送的数据取代指定的文档的内容。             |
-| 4    | DELETE | 请求服务器删除指定的页面。                                   |
+| 3    | PUT    | 从客户端向服务器传送的数据取代指定的文档的内容。                                                                                         |
+| 4    | DELETE | 请求服务器删除指定的页面。                                                                                                               |
 
-### 2.2.3 重定向
+### 重定向
 
 网页跳转
 
@@ -110,7 +110,7 @@ def index():
     return redirect("https://www.bilibili.com")
 ```
 
-### 2.2.4 POST
+### POST
 
 ```python
 @app.route('/test/post', methods=['POST'])
@@ -127,7 +127,7 @@ def post():
         return "Request failed!"
 ```
 
-## 2.3 Cookies
+## Cookies
 
 要访问 cookies ，可以使用 `cookies` 属性。可以使用响应 对象 的 `set_cookie` 方法来设置 cookies 。
 
@@ -159,7 +159,7 @@ def index():
     return resp
 ```
 
-## 2.4 Sessions
+## Sessions
 
 ```python
 from . import admin
@@ -238,5 +238,5 @@ def logout():
 
 
 
-# 三、SQLalchemy
+# SQLalchemy
 

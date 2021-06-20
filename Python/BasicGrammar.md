@@ -1,12 +1,12 @@
-# 一、基本语法
+# 基本语法
 
-## 1.0 认识
+## 认识
 
 强类型语言：解释器会根据赋值或运算来自动推断变量类型
 
 动态类型语言：变量类型可以随时变化，是为 “状态机”
 
-### 1.0.1 对象模型
+### 对象模型
 
 - 对象：python 中处理的每样 “东西” 都是对象
     - 内置对象：可直接使用
@@ -14,7 +14,7 @@
     - 非内置对象：需要导入模块才能使用
         - 如sin(x)，random( )等。
 
-### 1.0.2 内存管理
+### 内存管理
 
 python 采用基于值的管理方式
 
@@ -28,7 +28,7 @@ python 采用基于值的管理方式
 - 使用 `del(a)` 主动释放一个变量，但如果对象还被引用不会导致对象被消除
 - 形如 `a.append(a)` 会造成引用环，对垃圾回收会造成一定困难
 
-### 1.0.3 操作符
+### 操作符
 
 ```python
 >>> [1,2,3] * 3
@@ -44,11 +44,11 @@ python 采用基于值的管理方式
 [1, 2, 3, 4, 5, 6]
 ```
 
-### 1.0.2 浅拷贝与深拷贝
+### 浅拷贝与深拷贝
 
 列表的切片是浅拷贝，是对原列表的引用。当列表含列表元素时，会产生问题
 
-## 1.1 选择结构
+## 选择结构
 
 格式
 
@@ -65,11 +65,11 @@ else:
 
 注意冒号和缩进
 
-## 1.2 循环结构
+## 循环结构
 
 循环后可以跟 `else` 语句，当循环正常结束时执行，不正常结束就不执行
 
-### 1.2.1 for循环
+### for循环
 
 #### 1) 格式
 
@@ -126,14 +126,14 @@ False
 
 迭代时，产生的是临时变量，修改此临时变量不会影响本身迭代对象里对应元素的值
 
-### 1.2.2 while循环
+### while循环
 
 ```python
 while <condition>:
     <statements>
 ```
 
-### 1.2.3 循环的 else 语句
+### 循环的 else 语句
 
 循环自然结束，就执行 else 中的语句，如果遇到 break，则不执行 else 中的语句
 
@@ -151,24 +151,24 @@ else:
     <statements>
 ```
 
-## 1.3 函数
+## 函数
 
-### 1.3.1 定义
+### 定义
 
 ```python
 def 函数名（参数列表）:
     函数体
 ```
 
-### 1.3.2 参数
+### 参数
 
-#### 1） 默认参数
+####  默认参数
 
 必选参数在前，默认参数在后，否则Python的解释器会报错
 
 当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数
 
-#### 2）可变参数
+#### 可变参数
 
 传入的参数个数可变
 
@@ -191,7 +191,7 @@ calc(1, 2)
 
 *numbers 表示把 number 这个 list 的所有元素作为可变参数传进去。这种写法相当有用，而且很常见
 
-#### 3）关键字参数
+#### 关键字参数
 
 键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict
 
@@ -205,13 +205,13 @@ func('Jack', 24, **extra)
 
 \*\*extra表示把extra这个dict的所有key-value用关键字参数传入到函数的\*\*kw参数
 
-#### 4）补充
+#### 补充
 
 *args是可变参数，args接收的是一个tuple
 
 **kw是关键字参数，kw接收的是一个dict
 
-### 1.3.3 装饰器
+### 装饰器
 
 ```python
 def timer(func):
@@ -248,7 +248,7 @@ print(add(1,2))
 print(sub(1,2))
 ```
 
-### 1.3.4 lambda 表达式
+### lambda 表达式
 
 声明临时用的匿名函数
 
@@ -272,15 +272,15 @@ list(map(lambda x:pow(x), a))
 list(map(lambda x:x**2,a))
 ```
 
-# 二、列表
+# 列表
 
 列表赋值，实质上指向同一块内存
 
 要创建指向不同内存的列表，使用切片
 
-## 2.1 基本语句
+## 基本语句
 
-### 2.1.1 声明列表
+### 声明列表
 
 例
 
@@ -288,7 +288,7 @@ list(map(lambda x:x**2,a))
 favorate_singers = ['Mika','Jay Chou','Bruno Mars','Ed Sheeran']
 ```
 
-### 2.1.2 添加列表元素
+### 添加列表元素
 
 1. 在列表末尾添加元素
 
@@ -308,7 +308,7 @@ list.insert(index，value)
 list_a.extend(list_b)
 ```
 
-### 2.1.3 删除列表元素
+### 删除列表元素
 
 1. 知晓索引并将其删除
 
@@ -328,41 +328,41 @@ list.pop([index])	   #括号内为空，则弹出最后一个元素；返回弹�
 list.remove(value)       #只删除第一个指定的值，要删除多个相同值需使用循环
 ```
 
-### 2.1.4 组织列表
+### 组织列表
 
-#### 1）按照首字母顺序排序列表(永久性）
+#### 按照首字母顺序排序列表(永久性）
 
 ```python
 list.sort()	# 反向排序：列表名.sort(reverse=True)
 ```
 
-#### 2）按照首字母顺序排序列表(临时性)
+#### 按照首字母顺序排序列表(临时性)
 
 ```python
 sorted(list)
 ```
 
-#### 3）倒着排序列表(永久性)
+#### 倒着排序列表(永久性)
 
 ```python
 list.reverse()	# 恢复的办法，再来一次 reverse()
 ```
 
-#### 4）倒着排序列表(临时性)
+#### 倒着排序列表(临时性)
 
 ```python
 reversed(list) # 返回迭代器
 ```
 
-#### 5）确定列表的长度
+#### 确定列表的长度
 
 ```python
 len(list)
 ```
 
-### 2.1.5 操作列表
+### 操作列表
 
-#### 1）遍历列表
+#### 遍历列表
 
 ```python
 L=[1,2,3,4,5]
@@ -376,14 +376,14 @@ for i in range(1,6):
 print(L)
 ```
 
-#### 2）列表解析
+#### 列表解析
 
 ```python
 L=[1,2,3,4,5]
 L=[x+10 for x in L]     #result:[11,12,13,14,15]
 ```
 
-#### 3）创建切片
+#### 创建切片
 
 参数 [start_index:  stop_index:  step] ：
 
@@ -393,7 +393,7 @@ L=[x+10 for x in L]     #result:[11,12,13,14,15]
    	
    	 step为步长，可以不提供，默认值是1
 
-### 2.1.6 复制列表/创建列表副本
+### 复制列表/创建列表副本
 
  用切片复制
 
@@ -401,7 +401,7 @@ L=[x+10 for x in L]     #result:[11,12,13,14,15]
 List2 = List1[:]
 ```
 
-### 2.1.7 检查元素是否在列表中
+### 检查元素是否在列表中
 
 ```python
 List = [a,b,c,d,e]
@@ -409,16 +409,16 @@ if a in List
 if a not in List
 ```
 
-### 2.1.8 其他函数
+### 其他函数
 
 - ***list.index(value)***
     - 返回值为 value 的首个元素的下标
 - ***list.count(value)***
     - 返回值为 value 的元素在列表中出现的个数
 
-## 2.2 性质
+## 性质
 
-### 2.2.1 序列对象的内存机制
+### 序列对象的内存机制
 
 序列对象在内存中的起始地址是不变的，修改序列中的值不会影响到整个序列的起始地址。（有点像链表）
 
@@ -458,20 +458,20 @@ True
 
 4. 列表直接赋值是深拷贝，修改其一，另一也会变；而切片是浅拷贝，可以放心使用
 
-### 2.2.2 列表表达式
+### 列表表达式
 
 ```python
 >>> [v**2 if v%2==0 else v+1 for v in [2,3,4,-1] if v>0]
 [4, 4, 16]
 ```
 
-## 2.2 元组
+## 元组
 
 概念：不可变的列表，用圆括号来标识（tuple）
 
 元组可以作为字典的键，而列表不能
 
-### 2.2.1 定义元组
+### 定义元组
 
  例
 
@@ -498,7 +498,7 @@ tup2 = ('abc', 'xyz')
 tup3 = tup1 + tup2
  ```
 
-### 2.2.3 序列解包
+### 序列解包
 
 可以使用元组进行序列解包
 
@@ -517,9 +517,9 @@ tup3 = tup1 + tup2
 {'x': 1, 'y': 2}
 ```
 
-## 2.3 生成器
+## 生成器
 
-### 2.3.1 定义
+### 定义
 
 在Python中，一边循环一边计算的机制，称为生成器（generator）
 
@@ -527,9 +527,9 @@ tup3 = tup1 + tup2
 
 生成器类似于返回值为数组的一个函数，这个函数可以接受参数，可以被调用，但是，不同于一般的函数会一次性返回包括了所有数值的数组，生成器一次只能产生一个值，这样消耗的内存数量将大大减小，而且允许调用函数可以很快的处理前几个返回值，因此生成器看起来像是一个函数，但是表现得却像是迭代器
 
-### 2.3.2 创建
+### 创建
 
-#### 1）把一个列表生成式的 [] 中括号改为 () 小括号
+#### 把一个列表生成式的 [] 中括号改为 () 小括号
 
 ```python
 l = [x*x for x in range(10)]
@@ -561,7 +561,7 @@ for i in g:
     print(i)
 ```
 
-#### 2）构建函数
+#### 构建函数
 
 如果一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator
 
@@ -576,7 +576,7 @@ def generator(max):
 g = generator(4)
 ```
 
-## 2.4 技巧
+## 技巧
 
 1. 索引数从 0 开始
 2. 将索引指定为 -1，可以返回最后一个列表元素
@@ -640,9 +640,9 @@ g = generator(4)
      ['hello', 'world', 'ibm', 'apple']
      ```
 
-# 三、字典
+# 字典
 
-## 3.1 基本语句
+## 基本语句
 
 - 声明字典
 
@@ -712,15 +712,15 @@ for key in sorted(alien_0.keys()):
 for value in set(alien_0.values()): 
 ```
 
-## 3.2 集合
+## 集合
 
-### 3.2.1 定义
+### 定义
 
 集合（set）是一个无序的不重复元素序列
 
 set 和 dict 类似，也是一组 key 的集合，但不存储 value。由于 key 不能重复，所以，在 set 中，没有重复的 key
 
-### 3.2.2 基本操作
+### 基本操作
 
 - 初始化
 
@@ -748,11 +748,11 @@ s1 & s2
 s1 | s2
 ```
 
-### 3.2.3 嵌套
+### 嵌套
 
 定义：列表中嵌套字典，字典中嵌套列表，字典中嵌套字典
 
-#### 1）在列表中存储字典
+#### 在列表中存储字典
 
 ```python
 aliens=[]
@@ -761,7 +761,7 @@ for new_alien in range(30):
     aliens.append(new_alien)
 ```
 
-#### 2）在字典中存储列表
+#### 在字典中存储列表
 
 ```python
 favorate_languages={
@@ -781,7 +781,7 @@ for x,y in favorate_languages.items( ):
             print(Y)
 ```
 
-#### 3）在字典中存储字典
+#### 在字典中存储字典
 
 ```python
 users={
@@ -801,9 +801,9 @@ for x,y in users.items():
     print("\t"+y['gender']+' , '+y['location'])
 ```
 
-## 3.3 相关函数
+## 相关函数
 
-### 3.3.1 get()
+### get()
 
 - 说明：返回指定键的值，如果值不在字典中返回默认值None
 
@@ -817,7 +817,7 @@ dict.get(key, default=None)
   - key -- 字典中要查找的键
   - default -- 如果指定键的值不存在时，返回该默认值
 
-### 3.3.2 len()
+### len()
 
 - 说明：计算字典元素个数，即键的总数。
 
@@ -827,7 +827,7 @@ dict.get(key, default=None)
 len(dict)
 ```
 
-## 3.4 其他技巧
+## 其他技巧
 
 1. 通常习惯声明一个空字典以便添加键-值对
 
@@ -855,11 +855,11 @@ len(dict)
 
     
 
-# 四、类
+# 类
 
-## 4.1 基本语句
+## 基本语句
 
-### 4.1.1 创建类
+### 创建类
 
 ```python
 class Restaurant():
@@ -869,7 +869,7 @@ class Restaurant():
         self.customer_number = 0
 ```
 
-### 4.1.2 创建方法
+### 创建方法
 
 ```python
 def describe_rest(self):
@@ -880,22 +880,22 @@ def open_rest(self):
     print("This restaurant is opening")
 ```
 
-### 4.1.3 使用类和实例
+### 使用类和实例
 
 ```python
 rest1 = Restaurant('KFC', 'snack bar')
 ```
 
-### 4.1.4 调用方法
+### 调用方法
 
 ```python
 rest1.describe_rest()
 rest1.open_rest()
 ```
 
-## 4.2 继承
+## 继承
 
-### 4.2.1 子类
+### 子类
 
 ```python
 class IceCreamStand(Restaurant):
@@ -904,7 +904,7 @@ class IceCreamStand(Restaurant):
           self.flavours=['strawberry','chocolate','milk','matcha']           #为子类定义的属性
 ```
 
-### 4.2.2 给子类定义方法
+### 给子类定义方法
 
 ```python
 def describe_flavour(self):
@@ -913,7 +913,7 @@ for flavour in self.flavours:
     print(flavour,end=' ')
 ```
 
-### 4.2.3 使用子类和实例 
+### 使用子类和实例 
 
 ```python
 rest2=IceCreamStand('Dairy Queen','Ice Cream Stand')
@@ -921,7 +921,7 @@ rest2.describe_rest()
 rest2.describe_flavour()
 ```
 
-## 4.3 导入
+## 导入
 
 假若有 Car 类, ElectricCar 类于 car.py 模块中
 
@@ -951,7 +951,7 @@ from car import *
 
 必要时，也允许从一个模块中导入另一个模块来构建子类
 
-### 4.3.1 关于 `if __name__ == '__main__'`
+### 关于 `if __name__ == '__main__'`
 
 这是个 Python 的语法，`__name__` 属性显示当前模块名
 
@@ -961,7 +961,7 @@ from car import *
 
 可以用作测试，也可以用作模板
 
-## 4.4 私有成员与公有成员
+## 私有成员与公有成员
 
 python 并没有对私有成员提供严格的访问保护机制。
 
@@ -970,7 +970,7 @@ python 并没有对私有成员提供严格的访问保护机制。
 - 保护成员："_" 开头
     - 不能被作为包导入
 
-## 4.5 特殊方法
+## 特殊方法
 
 - `__new__`：构造函数
 - `__init__`：初始化函数
@@ -986,11 +986,11 @@ python 并没有对私有成员提供严格的访问保护机制。
 - `__setitem__`：下标修改或迭代器修改
 - `__dict__`：使用一个字典对对象中成员的值进行修改，一般不需要重载
 
-# 五、文件
+# 文件
 
-## 5.1 读取文件
+## 读取文件
 
-### 5.1.1 全部读取
+### 全部读取
 
 使用.read() 
 
@@ -1000,7 +1000,7 @@ with open(filename) as file_object:
       print(contents.rstrip())             #使用.rstrip()来剥除.read()造成的末尾空字符串
 ```
 
-### 5.1.2 逐行读取
+### 逐行读取
 
 遍历
 
@@ -1010,7 +1010,7 @@ with open(filename) as file_object:
         print(line.rstrip())               #使用.rstrip()来剥除文件每行末尾的换行符
 ```
 
-### 5.1.3 创建一个包含文件各行内容的列表
+### 创建一个包含文件各行内容的列表
 
 使用 .readlines()  
 
@@ -1022,7 +1022,7 @@ for line in lines:
     print(line.strip())
 ```
 
-### 5.1.4 使用文件内容并将文件的空格全部移除
+### 使用文件内容并将文件的空格全部移除
 
 ```python
 with open(filename) as file_object:
@@ -1037,9 +1037,9 @@ print(pi_string[:10] + '...')
 print(len(pi_string))
 ```
 
-## 5.2 写入文件
+## 写入文件
 
-### 5.2.1 写入空文件
+### 写入空文件
 
 ```python
 filename = 'text_files\programming.txt'
@@ -1048,7 +1048,7 @@ with open(filename, 'w') as file_object:
     file_object.write('Heya!\n')                   #write()不会自动添加换行符，需手动添加
 ```
 
-### 5.2.2 附加到文件
+### 附加到文件
 
 ```python
 filename = 'text_files\programming.txt'
@@ -1057,7 +1057,7 @@ with open(filename, 'a') as file_object:            #'a'表示以附加模式打
     file_object.write('Greeting!\n') 
 ```
 
-## 5.3 其他打开方式
+## 其他打开方式
 
 - r：以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。
 - rb：以二进制只读方式打开一个文件。文件指针将会放在文件的开头。
@@ -1072,9 +1072,9 @@ with open(filename, 'a') as file_object:            #'a'表示以附加模式打
 - a+：以读写方式打开一个文件。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，则创建新文件来读写。
 - ab+：以二进制追加方式打开一个文件。如果该文件已存在，则文件指针将会放在文件结尾。如果该文件不存在，则创建新文件用于读写。
 
-## 5.4 用json处理数据
+## 用json处理数据
 
-### 5.4.1 json格式
+### json格式
 
 对象：它在 JavaScript 中是使用花括号 {} 包裹起来的内容，数据结构为 {key1：value1, key2：value2, ...} 的键值对结构。在面向对象的语言中，key 为对象的属性，value 为对应的值。键名可以使用整数和字符串来表示。值的类型可以是任意类型。
 
@@ -1096,7 +1096,7 @@ with open(filename, 'a') as file_object:            #'a'表示以附加模式打
 
 值得注意的是，JSON 的数据需要用双引号来包围，不能使用单引号
 
-### 5.4.2 导入模块
+### 导入模块
 
 ```python
 import json
@@ -1104,7 +1104,7 @@ import json
 
 json 库提供的主要功能也是字典与 json 的相互转换
 
-### 5.4.3 存储数据
+### 存储数据
 
 ```python
 filename = 'name.json'
@@ -1112,7 +1112,7 @@ with open(filename, 'w') as f_obj:
         json.dump(name, f_obj)                            #name为要储存的数据
 ```
 
-### 5.4.4 读取数据
+### 读取数据
 
 使用`json.loads() `
 
@@ -1126,7 +1126,7 @@ with open(filename) as f_obj:
 
 使用 loads 方法将字符串转为 JSON 对象。如果最外层是中括号，那最终的类型是列表类型
 
-#### 1）数据转换表
+#### 数据转换表
 
 | JSON          | Python |
 | ------------- | ------ |
@@ -1139,12 +1139,12 @@ with open(filename) as f_obj:
 | false         | False  |
 | null          | None   |
 
-#### 2）其他特点
+#### 其他特点
 
 - 当 JSON 数据中有重复键名, 则后面的键值会覆盖前面的、
 - json.loads 方法默认会将 JSON 字符串中的 NaN, Infinity, -Infinity 转化为 Python 中的 float('nan'), float('inf') 和 float('-inf')
 
-### 5.4.5 输出数据
+### 输出数据
 
 调用 dumps 方法将 JSON 对象转化为字符串
 
@@ -1176,9 +1176,9 @@ with open('data.json', 'w', encoding='utf-8') as file:
     file.write(json.dumps(data, indent=2, ensure_ascii=False))
 ```
 
-# 六、异常处理
+# 异常处理
 
-# 七、技巧
+# 技巧
 
 1. 生成依赖文件 `requirement.txt`：使用 `pipreqs`
 

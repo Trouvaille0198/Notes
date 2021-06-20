@@ -36,7 +36,7 @@ News, Features（专题报道，特写）, Sports, Business, Editorial（社论�
 
 Masthead（报头）, Ear（报耳）, Headline, Byline and dateline（撰稿人署名与新闻来源）, Lead（新闻导语）, Index, Cut and cutline（插图及其说明）, Jump line（跳页）
 
-### 1. the Characteristic of Headlines
+### the Characteristic of Headlines
 
 1. **Abbreviations and initialisms**(首字母缩写)
 2. **Omission **

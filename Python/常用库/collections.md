@@ -1,4 +1,4 @@
-# 一、认识
+# 认识
 
 collections 实现了特定目标的容器，以提供 Python 标准内建容器 dict、list、set、tuple 的替代选择
 
@@ -9,9 +9,9 @@ collections 实现了特定目标的容器，以提供 Python 标准内建容器
 - deque：双向队列，类似列表容器，实现了在两端快速添加 (append) 和弹出 (pop)
 - ChainMap：类似字典的容器类，将多个映射集合到一个视图里面
 
-# 二、Counter
+# Counter
 
-## 2.1 说明
+## 说明
 
 Counter作为字典dicit（）的一个子类用来进行 hashtable 计数，将元素进行数量统计
 
@@ -26,7 +26,7 @@ print(a)
 
 允许进行 `Counter` 对象之间的**加减操作**
 
-## 2.2 方法
+## 方法
 
 - ***elements()***
 
@@ -70,13 +70,13 @@ print(a)
 
 ```
 
-# 三、defaultdict
+# defaultdict
 
 默认字典，字典的一个子类，继承所有字典的方法，默认字典在进行定义初始化的时候得指定字典值有默认类型
 
 暂时没啥用
 
-# 四、OrderedDict
+# OrderedDict
 
 Python 字典中的键的顺序是任意的:它们不受添加的顺序的控制。
 
@@ -105,7 +105,7 @@ c C
 
 
 
-# 五、namedtuple
+# namedtuple
 
 namedtuple 由自己的类工厂 namedtuple() 进行创建，而不是由表中的元组进行初始化
 
@@ -122,7 +122,7 @@ print(zhangsan)
 # Person1(name='zhangsan', age=20, sex='male')
 ```
 
-# 六、deque
+# deque
 
 `collections.deque`返回一个新的双向队列对象，从左到右初始化(用方法 append()) ，从 iterable （迭代对象) 数据创建。如果 iterable 没有指定，新队列为空。
 
@@ -153,7 +153,7 @@ print(a)
 # deque(['2', '1'], maxlen=10)
 ```
 
-# 七、ChainMap
+# ChainMap
 
 一个 ChainMap 将多个字典或者其他映射组合在一起，创建一个单独的可更新的视图。若没有 maps 被指定，就提供一个默认的空字典 
 

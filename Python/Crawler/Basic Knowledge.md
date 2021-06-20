@@ -1,4 +1,4 @@
-# 一、HTTP原理
+# HTTP原理
 
-## 1.1 URL和URI
+## URL和URI
 

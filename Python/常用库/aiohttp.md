@@ -1,10 +1,10 @@
-# 一、认识
+# 认识
 
 > Asynchronous HTTP Client/Server for asyncio and Python.
 
 用于 asyncio 和 Python 的异步 HTTP 客户端/服务器。
 
-## 1.1 同步与异步的比较
+## 同步与异步的比较
 
 同步
 
@@ -93,7 +93,7 @@ if __name__ == '__main__':
     print("异步用时为：{}".format(datetime.now() - start))
 ```
 
-# 二、客户端
+# 客户端
 
 ```python
 import aiohttp
@@ -114,7 +114,7 @@ asyncio.run(main())
 
 用法与 `requests` 类似
 
-# 三、服务端
+# 服务端
 
 ```python
 from aiohttp import web

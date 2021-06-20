@@ -1,4 +1,4 @@
-# 一、简介
+# 简介
 
 os模块提供了多数操作系统的功能接口函数。当os模块被导入后，它会自适应于不同的操作系统平台，根据不同的平台进行相应的操作，在python编程时，经常和文件、目录打交道，这时就离不了os模块
 
@@ -6,9 +6,9 @@ os模块提供了多数操作系统的功能接口函数。当os模块被导入�
 import os
 ```
 
-# 二、文件路径操作
+# 文件路径操作
 
-## 2.1 os.getcwd()
+## os.getcwd()
 
 查看当前路径（get current dictory）
 
@@ -18,7 +18,7 @@ os.getcwd()
 	'D:\\repo\\PythonLearning\\Jupyter\\LearningTest'
 ```
 
-## 2.2 os.listdir(path)
+## os.listdir(path)
 
 列举 path 目录下所有文件，返回列表
 
@@ -35,7 +35,7 @@ os.listdir("..")
  	'PandasTest.ipynb']
 ```
 
-## 2.3 os.path.abspath(path):
+## os.path.abspath(path):
 
 返回 path 的绝对路径
 
@@ -45,7 +45,7 @@ os.path.abspath('..')
 	'D:\\repo\\PythonLearning\\Jupyter'
 ```
 
-## 2.4 os.path.split(path)
+## os.path.split(path)
 
 将路径分解为（文件夹,文件名），返回的是元组类型 	
 
@@ -65,7 +65,7 @@ os.path.split('D:\\pythontest\\ostest\\')
 	('D:\\pythontest\\ostest', '')
 ```
 
-## 2.5 os.path.join(path1,path2,...)
+## os.path.join(path1,path2,...)
 
 将 path 进行组合，返回组合后的路径
 
@@ -80,7 +80,7 @@ os.path.join('D:\\pythontest\\b', 'D:\\pythontest\\a')
 	'D:\\pythontest\\a'
 ```
 
-## 2.6  os.path.dirname(path)
+##  os.path.dirname(path)
 
 返回 path 中的文件夹部分，结果不包含 '\\'
 
@@ -92,7 +92,7 @@ os.path.dirname('D:\\pythontest\\ostest\\hello.py')
 	'D:\\pythontest\\ostest'
 ```
 
-## 2.7  os.path.basename(path)
+##  os.path.basename(path)
 
 返回 path 中的文件名
 
@@ -107,7 +107,7 @@ os.path.basename('D:\\pythontest\\ostest\\')
 	''
 ```
 
-## 2.8 os.path.isfile(path)
+## os.path.isfile(path)
 
 判断 path 是否是一个存在的文件，返回布尔类型
 
@@ -122,7 +122,7 @@ os.path.isfile('C:\\Users\\13759\\shopName_2015.csv')
 	True
 ```
 
-## 2.9  os.path.isdir(path)
+##  os.path.isdir(path)
 
 判断 path 是否为一个存在的目录，返回布尔类型
 
@@ -139,7 +139,7 @@ os.path.isdir('.')
 	True
 ```
 
-## 2.10  os.path.exists(path)
+##  os.path.exists(path)
 
 检验 path 是否存在，返回布尔类型
 
@@ -152,9 +152,9 @@ os.path.exists('C:\\Users\\13759\\shopName_2015.csv')
 	True
 ```
 
-# 三、查看文件信息
+# 查看文件信息
 
-## 3.1  os.path.getsize(path)
+##  os.path.getsize(path)
 
 查看文件大小 ，单位为字节 (Byte)
 
@@ -164,7 +164,7 @@ os.path.getsize('D:\\repo\\PythonLearning\\Jupyter\\LearningTest\\NumpyTest.ipyn
 	3499
 ```
 
-## 3.2 os.path.getmtime(path)
+## os.path.getmtime(path)
 
 查看文件或文件夹的最后修改时间（modify time），从新纪元到访问时的秒数
 
@@ -174,7 +174,7 @@ os.path.getmtime('NumpyTest.ipynb')
 	1609932700.1095462
 ```
 
-## 3.3 os.path.getatime(path)
+## os.path.getatime(path)
 
 文件或文件夹的最后访问时间（access time），从新纪元到访问时的秒数
 
@@ -184,7 +184,7 @@ os.path.getatime('NumpyTest.ipynb')
 	1610524866.1898422
 ```
 
-## 3.4 os.path.getctime(path)
+## os.path.getctime(path)
 
 文件或文件夹的创建时间（change time），从新纪元到访问时的秒数
 
@@ -194,7 +194,7 @@ os.path.getctime('NumpyTest.ipynb')
 	1609920794.9881816
 ```
 
-## 3.5 os.stat()
+## os.stat()
 
 获取文件或目录信息
 
@@ -204,13 +204,13 @@ os.stat('.')
 	os.stat_result(st_mode=16895, st_ino=1688849860358640, st_dev=1957125357, st_nlink=1, st_uid=0, st_gid=0, st_size=4096, st_atime=1610524887, st_mtime=1609680144, st_ctime=1607355357)
 ```
 
-# 四、文件操作
+# 文件操作
 
-## 4.1 os.chdir(path)
+## os.chdir(path)
 
 （change dir）转到指定 path，相当于cd
 
-## 4.2 os.mkdir(path)
+## os.mkdir(path)
 
 创建path指定的目录，可以写相对路径也可以写绝对路径
 
@@ -219,26 +219,26 @@ os.mkdir('aaa')
 os.mkdir('D:\\repo\\PythonLearning\\aaa')
 ```
 
-## 4.3 os.rmdir(path)
+## os.rmdir(path)
 
 删除path指定的目录，可以写相对路径也可以写绝对路径
 
-## 4.4 os.remove(path)
+## os.remove(path)
 
 删除path指定的文件
 
-## 4.5 os.makedirs(path)
+## os.makedirs(path)
 
 生成多层递归目录
 
-## 4.6 os.removedirs(path)
+## os.removedirs(path)
 
 递归删除空目录（危险！）
 
-## 4.7 os.rename(oldname, newname)
+## os.rename(oldname, newname)
 
 重命名文件或目录
 
-## 4.8 os.system(cmd)
+## os.system(cmd)
 
 执行shell命令。返回值是脚本的退出状态码，0代表成功，1代表不成功

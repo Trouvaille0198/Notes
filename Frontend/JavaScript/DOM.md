@@ -1,6 +1,6 @@
-# 一、简介
+# 简介
 
-## 1.1 概念
+## 概念
 
 文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口
 
@@ -12,7 +12,7 @@
 
 DOM 把以上内容都看作对象
 
-## 1.2 节点思想
+## 节点思想
 
 根据 W3C 的 HTML DOM 标准，HTML 文档中的所有内容都是节点：
 
@@ -22,9 +22,9 @@ DOM 把以上内容都看作对象
 - 每个 HTML 属性是属性节点
 - 注释是注释节点
 
-# 二、DOM 属性
+# DOM 属性
 
-## 2.1 元素属性
+## 元素属性
 
 以下为 `Node` 对象的属性
 
@@ -116,7 +116,7 @@ var atts = para.attributes;
 
     返回当前元素的标签名
 
-## 2.2 元素定位
+## 元素定位
 
 以下为 `Node` 对象的属性
 
@@ -144,31 +144,31 @@ var atts = para.attributes;
 
     返回孩子节点的 `NodeList`
 
-## 2.3 根节点
+## 根节点
 
 这里有两个特殊的属性，可以访问全部文档：
 
 - `document.documentElement` - 全部文档
 - `document.body` - 文档的主体
 
-# 三、DOM 方法
+# DOM 方法
 
-| 方法                     | 描述                                                         |
-| :----------------------- | :----------------------------------------------------------- |
-| getElementById()         | 返回带有指定 ID 的元素。                                     |
+| 方法                     | 描述                                                            |
+| :----------------------- | :-------------------------------------------------------------- |
+| getElementById()         | 返回带有指定 ID 的元素。                                        |
 | getElementsByTagName()   | 返回包含带有指定标签名称的所有元素的节点列表（集合/节点数组）。 |
-| getElementsByClassName() | 返回包含带有指定类名的所有元素的节点列表。                   |
-| appendChild()            | 把新的子节点添加到指定节点。                                 |
-| removeChild()            | 删除子节点。                                                 |
-| replaceChild()           | 替换子节点。                                                 |
-| insertBefore()           | 在指定的子节点前面插入新的子节点。                           |
-| createAttribute()        | 创建属性节点。                                               |
-| createElement()          | 创建元素节点。                                               |
-| createTextNode()         | 创建文本节点。                                               |
-| getAttribute()           | 返回指定的属性值。                                           |
-| setAttribute()           | 把指定属性设置或修改为指定的值。                             |
+| getElementsByClassName() | 返回包含带有指定类名的所有元素的节点列表。                      |
+| appendChild()            | 把新的子节点添加到指定节点。                                    |
+| removeChild()            | 删除子节点。                                                    |
+| replaceChild()           | 替换子节点。                                                    |
+| insertBefore()           | 在指定的子节点前面插入新的子节点。                              |
+| createAttribute()        | 创建属性节点。                                                  |
+| createElement()          | 创建元素节点。                                                  |
+| createTextNode()         | 创建文本节点。                                                  |
+| getAttribute()           | 返回指定的属性值。                                              |
+| setAttribute()           | 把指定属性设置或修改为指定的值。                                |
 
-## 3.1 访问
+## 访问
 
 以下为 `Document` 对象的方法
 
@@ -198,11 +198,11 @@ document.getElementsByTagName("p");
 
     返回上下文中的根节点
 
-## 3.2 修改
+## 修改
 
-### 3.2.1 创建
+### 创建
 
-#### 1）创建内容
+#### 创建内容
 
 创建元素内容的最简单的方法是使用 innerHTML 属性
 
@@ -210,13 +210,13 @@ document.getElementsByTagName("p");
 document.getElementById("p1").innerHTML="New text!";
 ```
 
-#### 2）改变样式
+#### 改变样式
 
 ```javascript
 document.getElementById("p2").style.color="blue";
 ```
 
-#### 3）创建元素
+#### 创建元素
 
 先创建该元素（元素节点），然后把它追加到已有的元素上
 
@@ -254,7 +254,7 @@ var para=document.createElement("p");
 var node=document.createTextNode("This is a new paragraph.");
 ```
 
-### 3.2.2 添加
+### 添加
 
 以下为 `Node` 对象的方法
 
@@ -269,7 +269,7 @@ element.appendChild(para);
 
     在指定的已有子节点之前插入新的子节点
 
-### 3.2.3 删除
+### 删除
 
 - ***removeChild()***
 
@@ -286,7 +286,7 @@ var child=document.getElementById("p1");
 child.parentNode.removeChild(child);
 ```
 
-### 3.2.4 替换
+### 替换
 
 - ***replaceChild(newnode,oldnode)***
 
@@ -296,7 +296,7 @@ child.parentNode.removeChild(child);
 parent.replaceChild(newChild,oldChild);
 ```
 
-## 3.3 其他
+## 其他
 
 以下为 `Node` 对象的方法
 
@@ -316,7 +316,7 @@ parent.replaceChild(newChild,oldChild);
 
     返回 Boolean，来表示该元素是否包含有子节点
 
-# 四、事件
+# 事件
 
 HTML DOM 允许您在事件发生时执行代码。
 
@@ -330,9 +330,9 @@ HTML DOM 允许您在事件发生时执行代码。
 - 当 HTML 表单被提交时
 - 当用户触发按键时
 
-## 4.1 创建事件
+## 创建事件
 
-### 4.1.1 在元素中创建
+### 在元素中创建
 
 如需在用户点击某个元素时执行代码，把 JavaScript 代码添加到 HTML 事件属性中
 
@@ -348,7 +348,7 @@ onclick=JavaScript
 </html>
 ```
 
-### 4.1.2 使用 DOM 分配事件
+### 使用 DOM 分配事件
 
 ```html
 <script>
@@ -356,7 +356,7 @@ document.getElementById("myBtn").onclick=function(){displayDate()};
 </script>
 ```
 
-## 4.2 事件类型
+## 事件类型
 
 - ***onload***
 
@@ -501,49 +501,49 @@ function keydown(event){
 
     某个按键被被按下并松开时
 
-| 属性                                                         | 此事件发生在何时...                  |
-| :----------------------------------------------------------- | :----------------------------------- |
-| [onabort](https://www.w3school.com.cn/jsref/event_onabort.asp) | 图像的加载被中断。                   |
-| [onblur](https://www.w3school.com.cn/jsref/event_onblur.asp) | 元素失去焦点。                       |
-| [onchange](https://www.w3school.com.cn/jsref/event_onchange.asp) | 域的内容被改变。                     |
-| [onclick](https://www.w3school.com.cn/jsref/event_onclick.asp) | 当用户点击某个对象时调用的事件句柄。 |
-| [ondblclick](https://www.w3school.com.cn/jsref/event_ondblclick.asp) | 当用户双击某个对象时调用的事件句柄。 |
-| [onerror](https://www.w3school.com.cn/jsref/event_onerror.asp) | 在加载文档或图像时发生错误。         |
-| [onfocus](https://www.w3school.com.cn/jsref/event_onfocus.asp) | 元素获得焦点。                       |
-| [onkeydown](https://www.w3school.com.cn/jsref/event_onkeydown.asp) | 某个键盘按键被按下。                 |
-| [onkeypress](https://www.w3school.com.cn/jsref/event_onkeypress.asp) | 某个键盘按键被按下并松开。           |
-| [onkeyup](https://www.w3school.com.cn/jsref/event_onkeyup.asp) | 某个键盘按键被松开。                 |
-| [onload](https://www.w3school.com.cn/jsref/event_onload.asp) | 一张页面或一幅图像完成加载。         |
+| 属性                                                                   | 此事件发生在何时...                  |
+| :--------------------------------------------------------------------- | :----------------------------------- |
+| [onabort](https://www.w3school.com.cn/jsref/event_onabort.asp)         | 图像的加载被中断。                   |
+| [onblur](https://www.w3school.com.cn/jsref/event_onblur.asp)           | 元素失去焦点。                       |
+| [onchange](https://www.w3school.com.cn/jsref/event_onchange.asp)       | 域的内容被改变。                     |
+| [onclick](https://www.w3school.com.cn/jsref/event_onclick.asp)         | 当用户点击某个对象时调用的事件句柄。 |
+| [ondblclick](https://www.w3school.com.cn/jsref/event_ondblclick.asp)   | 当用户双击某个对象时调用的事件句柄。 |
+| [onerror](https://www.w3school.com.cn/jsref/event_onerror.asp)         | 在加载文档或图像时发生错误。         |
+| [onfocus](https://www.w3school.com.cn/jsref/event_onfocus.asp)         | 元素获得焦点。                       |
+| [onkeydown](https://www.w3school.com.cn/jsref/event_onkeydown.asp)     | 某个键盘按键被按下。                 |
+| [onkeypress](https://www.w3school.com.cn/jsref/event_onkeypress.asp)   | 某个键盘按键被按下并松开。           |
+| [onkeyup](https://www.w3school.com.cn/jsref/event_onkeyup.asp)         | 某个键盘按键被松开。                 |
+| [onload](https://www.w3school.com.cn/jsref/event_onload.asp)           | 一张页面或一幅图像完成加载。         |
 | [onmousedown](https://www.w3school.com.cn/jsref/event_onmousedown.asp) | 鼠标按钮被按下。                     |
 | [onmousemove](https://www.w3school.com.cn/jsref/event_onmousemove.asp) | 鼠标被移动。                         |
-| [onmouseout](https://www.w3school.com.cn/jsref/event_onmouseout.asp) | 鼠标从某元素移开。                   |
+| [onmouseout](https://www.w3school.com.cn/jsref/event_onmouseout.asp)   | 鼠标从某元素移开。                   |
 | [onmouseover](https://www.w3school.com.cn/jsref/event_onmouseover.asp) | 鼠标移到某元素之上。                 |
-| [onmouseup](https://www.w3school.com.cn/jsref/event_onmouseup.asp) | 鼠标按键被松开。                     |
-| [onreset](https://www.w3school.com.cn/jsref/event_onreset.asp) | 重置按钮被点击。                     |
-| [onresize](https://www.w3school.com.cn/jsref/event_onresize.asp) | 窗口或框架被重新调整大小。           |
-| [onselect](https://www.w3school.com.cn/jsref/event_onselect.asp) | 文本被选中。                         |
-| [onsubmit](https://www.w3school.com.cn/jsref/event_onsubmit.asp) | 确认按钮被点击。                     |
-| [onunload](https://www.w3school.com.cn/jsref/event_onunload.asp) | 用户退出页面。                       |
+| [onmouseup](https://www.w3school.com.cn/jsref/event_onmouseup.asp)     | 鼠标按键被松开。                     |
+| [onreset](https://www.w3school.com.cn/jsref/event_onreset.asp)         | 重置按钮被点击。                     |
+| [onresize](https://www.w3school.com.cn/jsref/event_onresize.asp)       | 窗口或框架被重新调整大小。           |
+| [onselect](https://www.w3school.com.cn/jsref/event_onselect.asp)       | 文本被选中。                         |
+| [onsubmit](https://www.w3school.com.cn/jsref/event_onsubmit.asp)       | 确认按钮被点击。                     |
+| [onunload](https://www.w3school.com.cn/jsref/event_onunload.asp)       | 用户退出页面。                       |
 
-# 五、对象
+# 对象
 
 EventTarget <- Node <- Element <- Document
 
-## 5.1 Node
+## Node
 
 **`Node`** 是一个接口，各种类型的 DOM API 对象会从这个接口继承。它允许我们使用相似的方式对待这些不同类型的对象；比如, 继承同一组方法，或者用同样的方式测试。
 
-## 5.2 Element
+## Element
 
 **`Element`** 是一个通用性非常强的基类，所有 `Document`对象下的对象都继承自它。这个接口描述了所有相同种类的元素所普遍具有的方法和属性
 
-## 5.3 Document
+## Document
 
 `Document` 接口表示任何在浏览器中载入的网页，并作为网页内容的入口，也就是 DOM 树
 
 `Document` 接口描述了任何类型的文档的通用属性与方法。
 
-### 5.3.1 属性
+### 属性
 
 - ***.body***
 
@@ -563,13 +563,13 @@ EventTarget <- Node <- Element <- Document
 
     返回标题
 
-### 5.3.2 方法
+### 方法
 
 - ***.write()***
 
     向文档流中写入内容
 
-## 5.4 NodeList
+## NodeList
 
 `NodeList` 对象是节点的集合，通常是由属性，如`Node.childNodes` 和 方法，如`document.querySelectorAll` 返回的。
 
@@ -577,12 +577,12 @@ EventTarget <- Node <- Element <- Document
 
 在一些情况下，`NodeList` 是一个实时集合，也就是说，如果文档中的节点树发生变化，`NodeList` 也会随之变化
 
-### 5.4.1 属性
+### 属性
 
 - ***NodeList.length***
     `NodeList` 中包含的节点个数。
 
-### 5.4.2 遍历
+### 遍历
 
 使用 length 属性来循环节点列表
 
@@ -605,17 +605,17 @@ for (var checkbox of list) {
 }
 ```
 
-## 5.5 DOMTokenList
+## DOMTokenList
 
 `DOMTokenList` 接口表示一组空格分隔的标记（tokens），主要用于操作 `classList`
 
-### 5.5.1 属性
+### 属性
 
 - ***.length***
 
     一个整数，表示存储在该对象里值的个数
 
-### 5.5.2 方法
+### 方法
 
 - ***.contains(token)***
     是否包括指定字符串，返回 `bool`
@@ -626,7 +626,7 @@ for (var checkbox of list) {
 - ***.replace(oldToken, newToken)***
     使用 `newToken` 替换 `token` 。
 
-### 5.5.3 修改空格和重复的特性
+### 修改空格和重复的特性
 
 修改 `DOMTokenList` 的方法（例如 `DOMTokenList.add()`）会自动去除多余的空格（Whitespace）和列表中的重复项目
 
@@ -641,13 +641,13 @@ span.textContent = `span classList is "${classes}"`;
 
 输出：span classList is "d e f x"
 
-## 5.6 Window
+## Window
 
 `Window` 对象表示浏览器中打开的窗口，如果文档包含框架（frame 或 iframe 标签），浏览器会为 HTML 文档创建一个 `window` 对象，并为每个框架创建一个额外的 `window` 对象。
 
-### 5.6.1 属性
+### 属性
 
-### 5.6.2 方法
+### 方法
 
 - ***.alert()***
 
@@ -661,12 +661,12 @@ span.textContent = `span classList is "${classes}"`;
 
     `window.open(URL,name,features,replace)`
 
-    | 参数     | 描述                                                         |
-    | :------- | :----------------------------------------------------------- |
-    | URL      | 一个可选的字符串，声明了要在新窗口中显示的文档的 URL。如果省略了这个参数，或者它的值是空字符串，那么新窗口就不会显示任何文档。 |
+    | 参数     | 描述                                                                                                                                                                                                                                                                                                         |
+    | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | URL      | 一个可选的字符串，声明了要在新窗口中显示的文档的 URL。如果省略了这个参数，或者它的值是空字符串，那么新窗口就不会显示任何文档。                                                                                                                                                                               |
     | name     | 一个可选的字符串，该字符串是一个由逗号分隔的特征列表，其中包括数字、字母和下划线，该字符声明了新窗口的名称。这个名称可以用作标记 \<a> 和 \<form> 的属性 target 的值。如果该参数指定了一个已经存在的窗口，那么 open() 方法就不再创建一个新窗口，而只是返回对指定窗口的引用。在这种情况下，features 将被忽略。 |
-    | features | 一个可选的字符串，声明了新窗口要显示的标准浏览器的特征。如果省略该参数，新窗口将具有所有标准特征。 |
-    | replace  | 一个可选的布尔值。规定了装载到窗口的 URL 是在窗口的浏览历史中创建一个新条目，还是替换浏览历史中的当前条目。支持下面的值：true - URL 替换浏览历史中的当前条目。false - URL 在浏览历史中创建新的条目。 |
+    | features | 一个可选的字符串，声明了新窗口要显示的标准浏览器的特征。如果省略该参数，新窗口将具有所有标准特征。                                                                                                                                                                                                           |
+    | replace  | 一个可选的布尔值。规定了装载到窗口的 URL 是在窗口的浏览历史中创建一个新条目，还是替换浏览历史中的当前条目。支持下面的值：true - URL 替换浏览历史中的当前条目。false - URL 在浏览历史中创建新的条目。                                                                                                         |
 
 ```html
 <html>

@@ -1,6 +1,6 @@
-# 一、 request API
+#  request API
 
-## 1.1 模块
+## 模块
 
 - *requests.request(method, url, **kwargs)*
 - *requests.get(url, params=None, **kwargs)*
@@ -13,24 +13,24 @@
 
 除了`requests.request()`外，其余7个方法与http协议中的请求方法一一对应。这7个方法其实都是在调用`requests.request()`方法
 
-| method          | 简述                                                         |
-| --------------- | ------------------------------------------------------------ |
-| url             | 请求的url                                                    |
-| params          | 请求携带的params                                             |
-| data            | 请求body中的data                                             |
-| json            | 请求body中的json格式的data                                   |
-| headers         | 请求携带的headers                                            |
-| cookies         | 请求携带的cookies                                            |
-| files           | 上传文件时使用                                               |
-| auth            | 身份认证时使用                                               |
-| timeout         | 设置请求的超时时间，可以设置连接超时和读取超时               |
-| allow_redirects | 是否允许重定向，默认True，即允许重定向                       |
+| method          | 简述                                                                                       |
+| --------------- | ------------------------------------------------------------------------------------------ |
+| url             | 请求的url                                                                                  |
+| params          | 请求携带的params                                                                           |
+| data            | 请求body中的data                                                                           |
+| json            | 请求body中的json格式的data                                                                 |
+| headers         | 请求携带的headers                                                                          |
+| cookies         | 请求携带的cookies                                                                          |
+| files           | 上传文件时使用                                                                             |
+| auth            | 身份认证时使用                                                                             |
+| timeout         | 设置请求的超时时间，可以设置连接超时和读取超时                                             |
+| allow_redirects | 是否允许重定向，默认True，即允许重定向                                                     |
 | proxies         | 设置请求的代理，支持http代理以及socks代理（需要安装第三方库"pip install requests[socks]"） |
-| verify          | 用于https请求时的ssl证书验证，默认是开启的，如果不需要则设置为False即可 |
-| stream          | 是否立即下载响应内容，默认是False，即立即下载响应内容        |
-| cert            | 用于指定本地文件用作客户端证书                               |
+| verify          | 用于https请求时的ssl证书验证，默认是开启的，如果不需要则设置为False即可                    |
+| stream          | 是否立即下载响应内容，默认是False，即立即下载响应内容                                      |
+| cert            | 用于指定本地文件用作客户端证书                                                             |
 
-## 1.2 基本调用
+## 基本调用
 
 ```python
 import requests
@@ -45,7 +45,7 @@ r = requests.options('http://httpbin.org/get')
 
 返回`Response`对象
 
- ## 1.3 param
+ ## param
 
 接受一个字典，用于传递URL参数
 
@@ -61,7 +61,7 @@ print(r.url)
 http://httpbin.org/get?key1=value1&key2=value2
 ```
 
-## 1.4 headers
+## headers
 
 接受一个字典，用于传递header参数（请求头）
 
@@ -73,7 +73,7 @@ headers = {
 s = requests.get(url,headers=headers)
 ```
 
-## 1.5 data
+## data
 
 用于POST请求中，传递请求体中的data参数
 
@@ -113,13 +113,13 @@ print(r.text)
 
 
 
-## 1.6 json
+## json
 
 用于POST请求中，传递请求体中json格式的的data参数
 
 
 
-## 1.7 files
+## files
 
 上传文件
 
@@ -130,7 +130,7 @@ r = requests.post("http://httpbin.org/post", files=files)
 print(r.text)
 ```
 
-## 1.8 cookies
+## cookies
 
 用于传递cookies参数，不过将cookies写在headers中比较方便
 
@@ -154,7 +154,7 @@ BDORZ=27315
 1. 调用cookies属性，得到Cookies，可以发现它是RequestCookieJar类型
 2. 用items()方法将其转化为元组组成的列表，遍历输出每一个Cookie的名称和值，实现Cookie的遍历解析
 
-## 1.9 verify
+## verify
 
 用于https请求时的ssl证书验证，默认是开启的，如果不需要则设置为False即可
 
@@ -201,7 +201,7 @@ print(response.status_code)
 
 我们需要有crt和key文件，并且指定它们的路径。注意，本地私有证书的key必须是解密状态，加密状态的key是不支持的
 
-## 1.10 proxies
+## proxies
 
 设置请求的代理，支持http代理以及socks代理（需要安装第三方库"pip install requests[socks]"）
 
@@ -231,7 +231,7 @@ proxies = {
 }
 ```
 
-## 1.11 timeout
+## timeout
 
 设置请求的超时时间，（发出请求到服务器返回响应的时间），可以设置连接超时和读取超时
 
@@ -245,7 +245,7 @@ print(r.status_code)
 
 - 如果想永久等待，可以直接将timeout设置为None，或者不设置直接留空，因为默认是None
 
-## 1.12 auth
+## auth
 
 身份认证时使用
 
@@ -280,17 +280,17 @@ requests.get(url, auth=auth)
 
 
 
-## 1.13 allow_redirects
+## allow_redirects
 
 是否允许重定向，默认True，即允许重定向
 
-# 二、response对象
+# response对象
 
 response类故名思议，它包含了服务器对http请求的响应。每次调用requests去请求之后，均会返回一个response对象，通过调用该对象，可以查看具体的响应信息
 
 以下是response对象的部分属性
 
-## 2.1 .url
+## .url
 
 请求的最终地址
 
@@ -299,11 +299,11 @@ print(type(r.url), r.url)
 >>> <class 'str'> https://static1.scrape.center/
 ```
 
-## 2.2 .request
+## .request
 
 PreparedRequest对象，可以用于查看发送请求时的信息，比如r.request.headers查看请求头
 
-## 2.3 .text
+## .text
 
 响应的内容，unicode类型
 
@@ -312,13 +312,13 @@ print(type(r.text), r.text)
 >>> <class 'str'> "HTML的内容"
 ```
 
-## 2.4 .content
+## .content
 
 响应的内容，byte类型（二进制）
 
 一般在抓取图像时有用
 
-## 2.5 .status_code
+## .status_code
 
 响应的http状态码
 
@@ -327,11 +327,11 @@ print(type(r.status_code), r.status_code)
 >>> <class 'int'> 500
 ```
 
-## 2.6 .links
+## .links
 
 响应的解析头链接
 
-## 2.7 .history
+## .history
 
 请求的历史记录，可以用于查看重定向信息，以列表形式展示，排序方式是从最旧到最新的请求
 
@@ -340,11 +340,11 @@ print(type(r.history), r.history)
 >>> <class 'list'> []
 ```
 
-## 2.8 .reason
+## .reason
 
 响应状态的描述，比如 "Not Found" or "OK"
 
-## 2.9 .cookies
+## .cookies
 
 服务器发回的cookies，RequestsCookieJar类型
 
@@ -353,13 +353,13 @@ print(type(r.cookies), r.cookies)
 >>> <class 'requests.cookies.RequestsCookieJar'> <RequestsCookieJar[]>
 ```
 
-## 2.10 .json()
+## .json()
 
 用于将响应解析成JSON格式，即将返回结果是JSON格式的字符串转化为字典
 
 如果返回结果不是JSON格式，便会出现解析错误，抛出`json.decoder.JSONDecodeError`异常
 
-## 2.11 .headers()
+## .headers()
 
 响应头，可单独取出某个字段的值，比如(r.headers)['content-type']
 
@@ -368,9 +368,9 @@ print(type(r.headers), r.headers)
 >>> <class 'requests.structures.CaseInsensitiveDict'> {'Server': 'nginx/1.17.8', 'Date': 'Tue, 27 Oct 2020 15:10:32 GMT', 'Content-Type': 'text/html', 'Content-Length': '145', 'Connection': 'keep-alive', 'X-Frame-Options': 'DENY', 'Vary': 'Cookie', 'X-Content-Type-Options': 'nosniff', 'Strict-Transport-Security': 'max-age=15724800; includeSubDomains'}
 ```
 
-# 三、session对象
+# session对象
 
-## 3.1 会话维持
+## 会话维持
 
 requests 中的 session 对象能够让我们跨http请求保持某些参数，即让同一个 session 对象发送的请求头携带某个指定的参数。当然，最常见的应用是它可以让 cookie 保持在后续的一串请求中
 
@@ -399,7 +399,7 @@ print(r.text)
 
 session让请求之间具有了连贯性
 
-## 3.2 s.cookies.update()
+## s.cookies.update()
 
 用于设置请求中的cookies，方便实现跨参数请求，即能够在前后请求之间保持cookie
 
@@ -424,7 +424,7 @@ print(r.text)
 }
 ```
 
-# 四、 状态码查询对象 requests.codes
+#  状态码查询对象 requests.codes
 
 ```python
 exit() if not r.status_code == requests.codes.ok else print('Request Successfully!')
@@ -513,7 +513,7 @@ exit() if not r.status_code == requests.codes.ok else print('Request Successfull
 511: ('network_authentication_required', 'network_auth', 'network_authentication')
 ```
 
-# 五、异常处理
+# 异常处理
 
 ***requests.exceptions.ConnectionError***
 

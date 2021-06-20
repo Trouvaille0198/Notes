@@ -1,12 +1,12 @@
-# 一、简介
+# 简介
 
-# 二、特征工程
+# 特征工程
 
 (Feature Engineering)
 
 特征工程是使用专业背景知识和技巧处理数据**，**使得特征能在机器学习算法上发挥更好的作用的过程
 
-## 2.1 数据集
+## 数据集
 
 *scikit-learn* 提供了一些标准数据集
 
@@ -14,7 +14,7 @@
 from sklearn import datasets
 ```
 
-### 2.1.1 小规模 load_\*()
+### 小规模 load_\*()
 
 ***datasets.load_\*()***
 
@@ -25,7 +25,7 @@ data1 = datasets.load_iris()
 data2 = datasets.load_boston()
 ```
 
-### 2.1.2 大规模 fetch_\*()
+### 大规模 fetch_\*()
 
 ***datasets.fetch_\*(data_home, subset)***
 
@@ -34,7 +34,7 @@ data2 = datasets.load_boston()
 - *data_home*：数据集下载的目录，默认是 ~/scikit_learn_data/
 - *subset*：选择要加载的数据集。'train'或者'test'，'all'，可选
 
-### 2.1.3 返回值
+### 返回值
 
 load 和 fetch 返回的数据类型为 *datasets.base.Bunch* (字典继承)
 
@@ -98,9 +98,9 @@ Iris plants dataset
    - Many, many more ...
 ```
 
-## 2.2 数据集划分
+## 数据集划分
 
-### 2.2.1 简单划分 train_test_split
+### 简单划分 train_test_split
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -119,7 +119,7 @@ from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=22)
 ```
 
-### 2.2.2 K折交叉验证
+### K折交叉验证
 
 （KFold Cross Validation）
 
@@ -215,7 +215,7 @@ TEST: [120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137
  138 139 140 141 142 143 144 145 146 147 148 149]
 ```
 
-## 2.3 特征抽取
+## 特征抽取
 
 （feature extraction）
 
@@ -225,11 +225,11 @@ TEST: [120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137
 import sklearn.feature_extraction
 ```
 
-### 2.3.1 字典特征提取 DictVectorizer 
+### 字典特征提取 DictVectorizer 
 
 它是一个转换器，应用时需要进行实例化
 
-#### 1）API
+#### API
 
 ***sklearn.feature_extraction.DictVectorizer(sparse=True,…)***
 
@@ -242,7 +242,7 @@ import sklearn.feature_extraction
 - *DictVectorizer.get_feature_names()* 
   - 返回类别名称
 
-#### 2）例
+#### 例
 
 流程分析
 
@@ -290,13 +290,13 @@ print("特征名字：\n", transfer.get_feature_names())
 
 这个处理数据的技巧叫做 *one-hot* 编码
 
-### 2.3.2 文本词频特征提取 text.CountVectorizer
+### 文本词频特征提取 text.CountVectorizer
 
 对文本数据进行词频特征值化
 
 它是一个转换器，应用时需要进行实例化
 
-#### 1）API
+#### API
 
 ***CountVectorizer(stop_words=[])***
 
@@ -309,7 +309,7 @@ print("特征名字：\n", transfer.get_feature_names())
 - CountVectorizer.get_feature_names() 
   - 返回值单词列表
 
-#### 2）例
+#### 例
 
 流程分析
 
@@ -360,7 +360,7 @@ print("返回特征名字：\n", transfer.get_feature_names())
  ['dislike', 'is', 'life', 'like', 'long', 'python', 'short', 'too']
 ```
 
-#### 3）中文处理
+#### 中文处理
 
 使用 jieba 分词库
 
@@ -421,13 +421,13 @@ print("返回特征名字：\n", transfer.get_feature_names())
  ['一种', '不会', '不要', '之前', '了解', '事物', '今天', '光是在', '几百万年', '发出', '取决于', '只用', '后天', '含义', '大部分', '如何', '如果', '宇宙', '我们', '所以', '放弃', '方式', '明天', '星系', '晚上', '某样', '残酷', '每个', '看到', '真正', '秘密', '绝对', '美好', '联系', '过去', '还是', '这样']
 ```
 
-### 2.3.3 Tf-idf文本特征提取 text.TfidfVectorizer
+### Tf-idf文本特征提取 text.TfidfVectorizer
 
 TF-IDF的主要思想是：如果某个词或短语在一篇文章中出现的概率高，并且在其他文章中很少出现，则认为此词或者短语具有很好的类别区分能力，适合用来分类。
 
 TF-IDF作用：用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。
 
-#### 1）公式
+#### 公式
 
 - 词频（term frequency，tf）指的是某一个给定的词语在该文件中出现的频率
 - 逆向文档频率（inverse document frequency，idf）是一个词语普遍重要性的度量。由总文件数目除以包含该词语之文件的数目，再将得到的商取以10为底的对数得到
@@ -438,7 +438,7 @@ $$
 
 >  假如一篇文件的总词语数是100个，而词语"非常"出现了5次，那么"非常"一词在该文件中的词频就是5/100=0.05。而计算文件频率（IDF）的方法是以文件集的文件总数，除以出现"非常"一词的文件数。所以，如果"非常"一词在1,000份文件出现过，而文件总数是10,000,000份的话，其逆向文件频率就是lg（10,000,000 / 1,0000）=3。最后"非常"对于这篇文档的tf-idf的分数为0.05 * 3=0.15
 
-#### 2）API
+#### API
 
 ***TfidfVectorizer(stop_words=[])***
 
@@ -451,7 +451,7 @@ $$
 - TfidfVectorizer.get_feature_names() 
   - 返回值单词列表
 
-#### 3）例
+#### 例
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -509,7 +509,7 @@ print("返回特征名字：\n", transfer.get_feature_names())
  ['之前', '了解', '事物', '今天', '光是在', '几百万年', '发出', '取决于', '只用', '后天', '含义', '大部分', '如何', '如果', '宇宙', '我们', '所以', '放弃', '方式', '明天', '星系', '晚上', '某样', '残酷', '每个', '看到', '真正', '秘密', '绝对', '美好', '联系', '过去', '还是', '这样']
 ```
 
-## 2.4 特征预处理
+## 特征预处理
 
 （feature preprocessing）
 
@@ -526,11 +526,11 @@ print("返回特征名字：\n", transfer.get_feature_names())
 import sklearn.preprocessing
 ```
 
-### 2.4.1 归一化
+### 归一化
 
 通过对原始数据进行变换把数据映射到（默认为）[0,1] 之间
 
-#### 1）公式
+#### 公式
 
 $$
 X'=\cfrac{x-min}{max-min}\\
@@ -539,7 +539,7 @@ $$
 
 >  作用于每一列，max 为一列的最大值，min 为一列的最小值，X’’为最终结果，mx，mi分别为指定区间值，默认mx为1，mi为0
 
-#### 2）API
+#### API
 
 ***MinMaxScaler (feature_range=(0,1)… )***
 
@@ -547,7 +547,7 @@ $$
   - X：numpy array格式的数据 [n_samples,n_features]
   - 返回值：转换后的形状相同的array
 
-#### 3）例
+#### 例
 
 以下为数据实例
 
@@ -585,7 +585,7 @@ print("最小值最大值归一化处理的结果：\n", data)
 
 注意最大值最小值是变化的，另外，最大值与最小值非常容易受异常点影响，所以这种方法鲁棒性较差，只适合传统精确小数据场景
 
-### 2.4.2 标准化
+### 标准化
 
 通过对原始数据进行变换把数据变换到均值为0，标准差为1的范围内
 
@@ -594,7 +594,7 @@ print("最小值最大值归一化处理的结果：\n", data)
 - 对于归一化来说：如果出现异常点，影响了最大值和最小值，那么结果显然会发生改变
 - 对于标准化来说：如果出现异常点，由于具有一定数据量，少量的异常点对于平均值的影响并不大，从而方差改变较小
 
-#### 1）公式
+#### 公式
 
 $$
 X'=\cfrac{x-mean}{\sigma}
@@ -602,7 +602,7 @@ $$
 
 > 作用于每一列，mean 为平均值，σ 为标准差
 
-#### 2）API
+#### API
 
 ***StandardScaler( )***
 
@@ -614,7 +614,7 @@ $$
 - *StandardScaler.var_*
   - 返回值：每一列特征的方差
 
-#### 3）例
+#### 例
 
 同样对 2.4.1 的数据进行处理
 
@@ -653,7 +653,7 @@ print("每一列特征的方差：\n", transfer.var_)
  [4.15683072e+08 1.93505309e+01 2.73652475e-01]
 ```
 
-## 2.5 特征降维
+## 特征降维
 
 （Feature Dimension Reduce）
 
@@ -664,7 +664,7 @@ print("每一列特征的方差：\n", transfer.var_)
 - 特征选择
 - 主成分分析（可以理解一种特征提取的方式）
 
-### 2.5.1 特征选择
+### 特征选择
 
 ```python
 import sklearn.feature_selection
@@ -682,7 +682,7 @@ import sklearn.feature_selection
   - 正则化：L1、L2
   - 深度学习：卷积等
 
-#### 1）低方差特征过滤
+#### 低方差特征过滤
 
 删除低方差的一些特征
 
@@ -735,7 +735,7 @@ print("形状：\n", data.shape)
  (5, 2)
 ```
 
-#### 2）相关系数
+#### 相关系数
 
 去除相关特征（correlated feature）的影响
 
@@ -806,7 +806,7 @@ milage和Liters的相关系数为:
 (-0.6406267138718624, 0.2441916485876286)
 ```
 
-### 2.5.2 主成分分析
+### 主成分分析
 
 （PCA）将数据分解为较低维数空间
 
@@ -814,13 +814,13 @@ milage和Liters的相关系数为:
 from sklearn.decomposition import PCA
 ```
 
-#### 1）概念
+#### 概念
 
 - 定义：高维数据转化为低维数据的过程，在此过程中可能会舍弃原有数据、创造新的变量
 - 作用：是数据维数压缩，尽可能降低原数据的维数（复杂度），损失少量信息
 - 应用：回归分析或者聚类分析当中
 
-#### 2）API
+#### API
 
 ***PCA(n_components=None)***
 
@@ -832,7 +832,7 @@ from sklearn.decomposition import PCA
   - X：numpy array 格式的数据 [n_samples,n_features]
   - 返回值：转换后指定维度的 array
 
-#### 3）例
+#### 例
 
 ```python
 from sklearn.decomposition import PCA
@@ -862,9 +862,9 @@ print("(主成分分析)PCA降维:\n", data_new)
  [ 6.74943227]]
 ```
 
-# 三、转换器和估计器
+# 转换器和估计器
 
-## 3.1 转换器
+## 转换器
 
 （transformer）
 
@@ -884,7 +884,7 @@ print("(主成分分析)PCA降维:\n", data_new)
 - transform()
   - 进行最终的转换
 
-## 3.2 估计器
+## 估计器
 
 （estimator）
 
@@ -925,27 +925,27 @@ print("(主成分分析)PCA降维:\n", data_new)
 
 
 
-## 3.3 模型选择与调优
+## 模型选择与调优
 
 ```python
 from sklearn.model_selection import GridSearchCV
 ```
 
-### 3.3.1 概念
+### 概念
 
-#### 1）交叉验证
+#### 交叉验证
 
 （cross validation）
 
 将拿到的训练数据，分为训练和验证集
 
-#### 2）超参数搜索-网格搜索
+#### 超参数搜索-网格搜索
 
 （Grid Search）
 
 通常情况下，有很多参数是需要手动指定的（如k-近邻算法中的K值），这种叫超参数。但是手动过程繁杂，所以需要对模型预设几种超参数组合。每组超参数都采用交叉验证来进行评估。最后选出最优参数组合建立模型。
 
-### 3.3.2 API
+### API
 
 ***GridSearchCV(estimator, param_grid=None,cv=None)***
 
@@ -963,9 +963,9 @@ from sklearn.model_selection import GridSearchCV
   - *best_estimator_*：最好的参数模型
   - *cv_results_*：每次交叉验证后的验证集准确率结果和训练集准确率结果
 
-## 3.4 分类的评估方法
+## 分类的评估方法
 
-### 3.4.1 分类评估报告API
+### 分类评估报告API
 
 ```python
 from sklearn.metrics import classification_report
@@ -979,7 +979,7 @@ from sklearn.metrics import classification_report
 - *target_names*：目标类别名称
 - *return*：每个类别精确率与召回率
 
-### 3.4.2 ROC曲线与AUC指标
+### ROC曲线与AUC指标
 
 ```python
 from sklearn.metrics import roc_auc_score
@@ -988,7 +988,7 @@ from sklearn.metrics import roc_auc_score
 - AUC 只能用来评价二分类
 - AUC 非常适合评价样本不平衡中的分类器性能
 
-#### 1）TPR与FPR
+#### TPR与FPR
 
 - TPR = TP / (TP + FN)
   - 所有真实类别为1的样本中，预测类别为1的比例
@@ -996,13 +996,13 @@ from sklearn.metrics import roc_auc_score
 - FPR = FP / (FP + FN)
   - 所有真实类别为0的样本中，预测类别为1的比例
 
-#### 2）ROC 曲线
+#### ROC 曲线
 
 - ROC 曲线的横轴就是 FPRate，纵轴就是 TPRate，当二者相等时，表示的意义则是：对于不论真实类别是 1 还是 0 的样本，分类器预测为 1 的概率是相等的，此时 AUC 为 0.5
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/ROC.png" alt="ROC" style="zoom:67%;" />
 
-#### 3）AUC 指标
+#### AUC 指标
 
 - AUC 的概率意义是随机取一对正负样本，正样本得分大于负样本的概率
 - AUC 的最小值为 0.5，最大值为 1，取值越高越好
@@ -1011,7 +1011,7 @@ from sklearn.metrics import roc_auc_score
 
 > **最终AUC的范围在 [0.5, 1] 之间，并且越接近1越好**
 
-#### 4）API
+#### API
 
 ***roc_auc_score(y_true, y_score)***
 
@@ -1019,7 +1019,7 @@ from sklearn.metrics import roc_auc_score
 - *y_true*：每个样本的真实类别，必须为 0 (反例), 1 (正例)标记
 - *y_score*：每个样本预测的概率值
 
-## 3.5 模型保存和加载
+## 模型保存和加载
 
 ```python
 import joblib
@@ -1043,9 +1043,9 @@ def load_model(name):
     return model
 ```
 
-# 四、分类
+# 分类
 
-## 4.1 KNN 算法
+## KNN 算法
 
 > 根据邻居，判断类别
 
@@ -1064,7 +1064,7 @@ from sklearn.neighbors import KNeighborsClassifier
   - 必须指定K值，K值选择不当则分类精度不能保证
 - 使用场景：小数据场景，几千～几万样本，具体场景具体业务去测试
 
-### 4.1.1 API
+### API
 
 ***KNeighborsClassifier(n_neighbors=5,algorithm='auto')***
 
@@ -1074,7 +1074,7 @@ from sklearn.neighbors import KNeighborsClassifier
   - *‘kd_tree’* 将使用 KDTree
   - *‘auto’* 将尝试根据传递给fit方法的值来决定最合适的算法
 
-### 4.1.2 例
+### 例
 
 ```python
 from sklearn.neighbors import KNeighborsClassifier
@@ -1157,7 +1157,7 @@ print("交叉验证结果:\n", estimator_knn.cv_results_)
        0.07048305]), 'rank_test_score': array([1, 6, 4, 1, 1, 5])}
 ```
 
-## 4.2 朴素贝叶斯算法
+## 朴素贝叶斯算法
 
 （Naive Bayes）
 
@@ -1178,9 +1178,9 @@ from sklearn.naive_bayes import MultinomialNB
 - 缺点：
   - 由于使用了样本属性独立性的假设，所以如果特征属性有关联时其效果不好
 
-### 4.2.1 原理
+### 原理
 
-#### 1）贝叶斯公式
+#### 贝叶斯公式
 
 以文本分类为例
 $$
@@ -1195,7 +1195,7 @@ $$
     - $N$：所属类别 $C$ 下的文档的文本总和
 - $P(F_1,F_2,\ldots)$ 预测文档中每个词的概率
 
-#### 2）拉普拉斯平滑系数
+#### 拉普拉斯平滑系数
 
 目的：防止计算出的分类概率为0
 $$
@@ -1212,13 +1212,13 @@ P(娱乐|影院,支付宝,云计算) = 𝑃(影院,支付宝,云计算|娱乐)�
 P(娱乐|影院,支付宝,云计算) =P(影院,支付宝,云计算|娱乐)P(娱乐)=(56+1/121+4)(15+1/121+4)(0+1/121+1*4)(60/90) = 0.00002
 ```
 
-### 4.2.2 API
+### API
 
 ***MultinomialNB(alpha = 1.0)***
 
 - *alpha*：拉普拉斯平滑系数
 
-### 4.2.3 例：20类新闻分类
+### 例：20类新闻分类
 
 分析
 
@@ -1259,7 +1259,7 @@ print("准确率为: ", score)
 准确率为:  0.8511936339522547
 ```
 
-## 4.3 决策树
+## 决策树
 
 （Decision Tree）
 
@@ -1269,15 +1269,15 @@ from sklearn.tree import DecisionTreeClassifier
 
 > if - else 根据特征的信息熵筛选
 
-### 4.3.1 原理
+### 原理
 
-#### 1）信息熵
+#### 信息熵
 
 $$
 H(X)=-\sum\limits_{i=1}^n P(x_i)log_bP(x_i)
 $$
 
-#### 2）条件信息熵
+#### 条件信息熵
 
 $$
 H(D|A)=\sum\limits_{i=1}^n \cfrac{|D_i|}{|D|}H(D_i)
@@ -1285,7 +1285,7 @@ $$
 
 
 
-#### 3）信息增益
+#### 信息增益
 
 决策树的划分依据之一
 
@@ -1294,7 +1294,7 @@ $$
 g(D,A)=H(D)=H(D|A)
 $$
 
-#### 4）三种算法实现
+#### 三种算法实现
 
 - ID3
   - 信息增益 最大的准则
@@ -1304,7 +1304,7 @@ $$
   - 分类树: 基尼系数 最小的准则 在sklearn中可以选择划分的默认原则
   - 优势：划分更加细致（从后面例子的树显示来理解）
 
-### 4.3.2 API
+### API
 
 ***DecisionTreeClassifier(criterion=’gini’, max_depth=None,random_state=None)***
 
@@ -1314,7 +1314,7 @@ $$
 - max_depth：树的深度大小
 - random_state：随机数种子
 
-### 4.3.3 保存树的结构
+### 保存树的结构
 
 ```python
 from sklearn.tree import export_graphviz
@@ -1326,7 +1326,7 @@ from sklearn.tree import export_graphviz
 
 - tree.export_graphviz(estimator, out_file=path, feature_names)
 
-### 4.3.4 例
+### 例
 
 ```python
 from sklearn import datasets
@@ -1363,7 +1363,7 @@ print("准确率为: ", score)
 准确率为:  0.9210526315789473
 ```
 
-## 4.4 随机森林
+## 随机森林
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -1371,7 +1371,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 **随机森林是一个包含多个决策树的分类器**，并且其输出的类别是由个别树输出的类别的众数而定。
 
-### 4.4.1 原理
+### 原理
 
 学习算法根据下列算法而建造每棵树
 
@@ -1379,7 +1379,7 @@ from sklearn.ensemble import RandomForestClassifier
   - 1、有放回地抽样（bootstrap），一次随机选出一个样本，重复 N 次
   - 2、随机选出 m 个特征, m <<M，建立决策树
 
-### 4.4.2 API
+### API
 
 ***RandomForestClassifier(n_estimators=10, criterion=’gini’, max_depth=None, bootstrap=True, random_state=None, min_samples_split=2)***
 
@@ -1398,7 +1398,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 - 超参数：n_estimator, max_depth, min_samples_split,min_samples_leaf
 
-#### 4.4.3 例
+#### 例
 
 ```python
 from sklearn import datasets
@@ -1458,7 +1458,7 @@ print("交叉验证结果:\n", estimator_rf.cv_results_)
 
 ```
 
-## 4.5 逻辑回归
+## 逻辑回归
 
 （Logistic Regression）
 
@@ -1468,16 +1468,16 @@ from sklearn.linear_model import LogisticRegression
 
 逻辑回归是机器学习中的一种分类模型，逻辑回归是一种分类算法，虽然名字中带有回归，但是它与回归之间有一定的联系。
 
-### 4.5.1 原理
+### 原理
 
-#### 1）输入
+#### 输入
 
 逻辑回归的输入就是一个线性回归的结果。
 $$
 h(w)=w_1x_1+w_2x_2+w_3x_3\ldots+b
 $$
 
-#### 2）激活函数
+#### 激活函数
 
 sigmoid 函数
 $$
@@ -1492,7 +1492,7 @@ $$
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/逻辑回归运算过程.png" alt="逻辑回归运算过程" style="zoom: 67%;" />
 
-#### 3）损失函数
+#### 损失函数
 
 逻辑回归的损失，称之为**对数似然损失**
 $$
@@ -1500,11 +1500,11 @@ cost(h_\theta(x),y)=\sum\limits_{i=1}^m-y_ilog(h_\theta(x))-(1-y_i)log(1-h_\thet
 $$
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/损失计算过程.png" alt="损失计算过程" style="zoom: 67%;" />
 
-#### 4）优化
+#### 优化
 
 同样使用梯度下降优化算法，去减少损失函数的值。这样去更新逻辑回归前面对应算法的权重参数，提升原本属于 1 类别的概率，降低原本是 0 类别的概率。
 
-### 4.5.2 API
+### API
 
 ***LogisticRegression(solver='liblinear', penalty=‘l2’, C = 1.0)***
 
@@ -1517,7 +1517,7 @@ $$
 
 LogisticRegression 方法相当于 `SGDClassifier(loss="log", penalty=" ")`, SGDClassifier 实现了一个普通的随机梯度下降学习，也支持平均随机梯度下降法（ASGD），可以通过设置 average=True。而使用 LogisticRegression (实现了 SAG)
 
-### 4.5.3 例
+### 例
 
 案例：癌症分类预测-良／恶性乳腺癌肿瘤预测
 
@@ -1535,7 +1535,7 @@ LogisticRegression 方法相当于 `SGDClassifier(loss="log", penalty=" ")`, SGD
 - 标准化处理
 - 逻辑回归预测
 
-#### 1）初始化
+#### 初始化
 
 ```python
 from sklearn.linear_model import LogisticRegression, SGDClassifier
@@ -1583,7 +1583,7 @@ Mitoses                        False
 Class                          False
 ```
 
-#### 2）训练
+#### 训练
 
 ```python
 # 第四步: 开始特征工程
@@ -1638,7 +1638,7 @@ Name: Class, Length: 171, dtype: bool
 准确率为: 0.9766081871345029
 ```
 
-#### 3）查看精确率，召回率，F1-score
+#### 查看精确率，召回率，F1-score
 
 ```python
 Score = classification_report(y_test, y_predict, labels=[2, 4],
@@ -1661,7 +1661,7 @@ print("查看精确率,召回率,F1-score\n", Score)
 weighted avg       0.98      0.98      0.98       171
 ```
 
-#### 4）查看 ROC 曲线和 AUC 指标
+#### 查看 ROC 曲线和 AUC 指标
 
 ```python
 """
@@ -1687,7 +1687,7 @@ plt.show()
 
 
 
-# 五、回归
+# 回归
 
 （Regression）
 
@@ -1696,7 +1696,7 @@ plt.show()
   - 岭回归
 - 大规模数据：SGDRegressor
 
-## 5.1 线性回归
+## 线性回归
 
 ```python
 from sklearn.linear_model import LinearRegression, SGDRegressor
@@ -1706,9 +1706,9 @@ from sklearn.linear_model import LinearRegression, SGDRegressor
 
 线性回归 (Linear regression) 是利用**回归方程(函数)**对一个或**多个自变量(特征值)和因变量(目标值)之间**关系进行建模的一种分析方式
 
-### 5.1.1 API
+### API
 
-#### 1）正规方程
+#### 正规方程
 
   正规方程的优化方法，不能解决拟合问题，一次性求解，针对小数据
 
@@ -1718,7 +1718,7 @@ from sklearn.linear_model import LinearRegression, SGDRegressor
     - *LinearRegression.coef_*：权重系数（回归系数）
     - *LinearRegression.intercept_*：偏置
 
-#### 2）梯度下降
+#### 梯度下降
 
 其实是随机梯度下降
 
@@ -1737,7 +1737,7 @@ from sklearn.linear_model import LinearRegression, SGDRegressor
     - *SGDRegressor.coef_*：回归系数
     - *SGDRegressor.intercept_*：偏置
 
-#### 3）对比
+#### 对比
 
 |       梯度下降       |            正规方程             |
 | :------------------: | :-----------------------------: |
@@ -1745,9 +1745,9 @@ from sklearn.linear_model import LinearRegression, SGDRegressor
 |     需要迭代求解     |          一次运算得出           |
 | 特征数量较大可以使用 | 需要计算方程，时间复杂度高O(n3) |
 
-### 5.1.2 回归性能评估
+### 回归性能评估
 
-#### 1）均方误差 MSE
+#### 均方误差 MSE
 
 ```python
 from sklearn.metrics import mean_squared_error
@@ -1762,7 +1762,7 @@ from sklearn.metrics import mean_squared_error
 - *y_pred*：预测值
 - *return*：浮点数结果
 
-#### 2）平均绝对误差 MAE
+#### 平均绝对误差 MAE
 
 ```python
 from sklearn.metrics import mean_absolute_error
@@ -1775,9 +1775,9 @@ from sklearn.metrics import mean_absolute_error
 - *y_pred*：预测值
 - *return*：浮点数结果
 
-### 5.1.3 例
+### 例
 
-#### 1）初始化
+#### 初始化
 
 ```python
 from sklearn.linear_model import LinearRegression, SGDRegressor
@@ -1796,7 +1796,7 @@ x_train = transfer.fit_transform(x_train)
 x_test = transfer.transform(x_test)
 ```
 
-#### 2）正规方程
+#### 正规方程
 
 ```python
 estimator = LinearRegression()
@@ -1826,7 +1826,7 @@ print("正规方程_均分误差:", error)
 正规方程_均分误差: 20.627513763095386
 ```
 
-#### 3）梯度下降
+#### 梯度下降
 
 ```python
 estimator = SGDRegressor(learning_rate="constant", eta0=0.01, max_iter=10000)
@@ -1856,7 +1856,7 @@ print("梯度下降_均分误差:", error)
 梯度下降_均分误差: 20.997365545229272
 ```
 
-## 5.2 岭回归
+## 岭回归
 
 （Ridge Regression）
 
@@ -1866,7 +1866,7 @@ from sklearn.linear_model import Ridge, RidgeCV
 
 岭回归，其实也是一种线性回归。只不过在算法建立回归方程时候，加上正则化的限制，从而达到解决过拟合的效果
 
-### 5.2.1 原理
+### 原理
 
 正则化类别
 
@@ -1880,9 +1880,9 @@ from sklearn.linear_model import Ridge, RidgeCV
 
 > 线性回归的损失函数用最小二乘法，等价于当预测值与真实值的误差满足正态分布时的极大似然估计；岭回归的损失函数，是最小二乘法+L2范数，等价于当预测值与真实值的误差满足正态分布，且权重值也满足正态分布（先验分布）时的最大后验估计；LASSO的损失函数，是最小二乘法+L1范数，等价于等价于当预测值与真实值的误差满足正态分布，且且权重值满足拉普拉斯分布（先验分布）时的最大后验估计
 
-### 5.2.2 API
+### API
 
-#### 1）常规岭回归
+#### 常规岭回归
 
 ***Ridge(alpha=1.0, fit_intercept=True,solver="auto", normalize=False)***
 
@@ -1910,7 +1910,7 @@ from sklearn.linear_model import Ridge, RidgeCV
 
 Ridge 方法相当于 `SGDRegressor(penalty='l2', loss="squared_loss")`, 只不过 SGDRegressor 实现了一个普通的随机梯度下降学习，推荐使用Ridge(实现了SAG)
 
-#### 2）交叉验证岭回归
+#### 交叉验证岭回归
 
 ***RidgeCV(_BaseRidgeCV, RegressorMixin)***
 
@@ -1919,7 +1919,7 @@ Ridge 方法相当于 `SGDRegressor(penalty='l2', loss="squared_loss")`, 只不�
 - *cv*：交叉验证次数
 - *coef_*：回归系数
 
-### 5.2.3 例
+### 例
 
 ```python
 from sklearn.linear_model import Ridge, RidgeCV
@@ -1964,7 +1964,7 @@ print("岭回归_均分误差:", error)
 岭回归_均分误差: 20.641771606180914
 ```
 
-# 六、聚类
+# 聚类
 
 ```python
 from sklearn.cluster import KMeans
@@ -1975,7 +1975,7 @@ K-means（K均值聚类）
 - 特点：采用迭代式算法，直观易懂并且非常实用
 - 缺点：容易收敛到局部最优解(多次聚类)
 
-## 6.1 聚类步骤
+## 聚类步骤
 
 1. 随机设置 K 个特征空间内的点作为初始的聚类中心
 
@@ -1987,7 +1987,7 @@ K-means（K均值聚类）
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/K-means过程分析.png" alt="K-means过程分析" style="zoom:67%;" />
 
-## 6.2 API
+## API
 
 ***KMeans(n_clusters=8, init=‘k-means++’…)***
 
@@ -1996,7 +1996,7 @@ K-means（K均值聚类）
 
 *KMeans.labels_*：默认标记的类型，可以和真实值比较（不是值比较）
 
-## 6.3  轮廓系数
+##  轮廓系数
 
 ```python
 from sklearn.metrics import silhouette_score
@@ -2004,7 +2004,7 @@ from sklearn.metrics import silhouette_score
 
 轮廓系数作为 Kmeans 的性能评估指标
 
-### 6.3.1 公式
+### 公式
 
 $$
 sc_i=\cfrac{b_i-a_i}{max(b_i,a_i)}
@@ -2012,7 +2012,7 @@ $$
 
 > 注：对于每个点 $i$ 为已聚类数据中的样本 ，$b_i$ 为 $i$ 到其它族群的所有样本的距离最小值，$a_i$ 为 $i$ 到本身簇的距离平均值。最终计算出所有的样本点的轮廓系数平均值
 
-### 6.3.2 轮廓系数值分析
+### 轮廓系数值分析
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210118223723565.png" alt="image-20210118223723565" style="zoom: 60%;" />
 
@@ -2026,13 +2026,13 @@ $$
 
 **结论**：如果$b_i>>a_i$，趋近于1，效果好， $b_i<<a_i$，趋近于-1，效果不好。轮廓系数的值是介于 [-1,1] ，越趋近于1代表内聚度和分离度都相对较优
 
-### 6.3.3 API
+### API
 
 - ***silhouette_score(X, labels)***：计算所有样本的平均轮廓系数
   - X：特征值
   - labels：被聚类标记的目标值（聚类结果）
 
-## 6.4 例
+## 例
 
 分析
 

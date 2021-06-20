@@ -1,4 +1,4 @@
-# 一、认识
+# 认识
 
 ORM：Object Relational Mapping（对象关系映射）将数据库中的表与类构建映射
 
@@ -12,7 +12,7 @@ ORM：Object Relational Mapping（对象关系映射）将数据库中的表与�
 - 表的字段 (field) 映射为 Column
 - 表的记录 (record）以类的实例 (instance) 来表示
 
-## 1.1 快速入门
+## 快速入门
 
 FastAPI 的文件结构
 
@@ -27,7 +27,7 @@ FastAPI 的文件结构
     └── schemas.py # 建立 pydantic 模型
 ```
 
- ### 1.1.1 创建引擎
+ ### 创建引擎
 
  ```python
  # database.py
@@ -51,7 +51,7 @@ engine = create_engine(
     SQLALCHEMY_DATABASE_URL1, connect_args={"check_same_thread": False}
 ) 	# needed only for SQLite
 ```
-### 1.1.2 建立对象   
+### 建立对象   
 
 ```python
 # database.py
@@ -59,7 +59,7 @@ engine = create_engine(
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 ```
 
-### 1.1.3 声名映射
+### 声名映射
 
 声明 Base 实例（在 `database.py` 中）
 
@@ -101,7 +101,7 @@ class Item(Base):
     owner = relationship("User", back_populates="items")
 ```
 
-### 1.1.4 建立 Pydantic 模型
+### 建立 Pydantic 模型
 
 ```python
 # schemas.py
@@ -139,11 +139,11 @@ class User(UserBase): # API调用的对象
         orm_mode = True
 ```
 
-### 1.1.5 CRUD
+### CRUD
 
 **C**reate, **R**ead, **U**pdate, and **D**elete
 
-#### 1）读
+#### 读
 
 ```python
 from sqlalchemy.orm import Session
@@ -162,7 +162,7 @@ def get_items(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Item).offset(skip).limit(limit).all()
 ```
 
-#### 2）建
+#### 建
 
 ```python
 def create_user(db: Session, user: schemas.UserCreate):
@@ -181,7 +181,7 @@ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
     return db_item
 ```
 
-### 1.1.6 创建表
+### 创建表
 
 ```python
 from typing import List
@@ -244,7 +244,7 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 
 
-## 1.2 概念
+## 概念
 
 | 概念    | 对应               | 说明                 |
 | ------- | ------------------ | -------------------- |
@@ -254,7 +254,7 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 | column  | 列                 |                      |
 | query   | 若干行             | 可以链式添加多个文件 |
 
-### 1.2.1 Engine
+### Engine
 
 - 位于数据库驱动之上的一个抽象概念，它适配了各种数据库驱动，提供了连接池等功能
 - 用法：`engine = create_engine(<数据库连接串>)`
@@ -285,33 +285,33 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
         engine = create_engine('sqlite:////absolute/path/to/foo.db')
         ```
 
-### 1.2.2 Session
+### Session
 
-## 1.3 Column 参数
+## Column 参数
 
 - ***type***：字段的数据类型	
 
-| Object Name                                                  | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| [**BigInteger**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.BigInteger) | A type for bigger `int` integers.                            |
-| [**Boolean**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Boolean) | A bool datatype.                                             |
-| [**Date**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Date) | A type for `datetime.date()` objects.                        |
-| [**DateTime**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.DateTime) | A type for `datetime.datetime()` objects.                    |
-| [**Enum**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Enum) | Generic Enum Type.                                           |
-| [**Float**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Float) | Type representing floating point types, such as `FLOAT` or `REAL`. |
-| [**Integer**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Integer) | A type for `int` integers.                                   |
-| [**Interval**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Interval) | A type for `datetime.timedelta()` objects.                   |
-| [**LargeBinary**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.LargeBinary) | A type for large binary byte data.                           |
-| [**MatchType**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.MatchType) | Refers to the return type of the MATCH operator.             |
-| [**Numeric**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Numeric) | A type for fixed precision numbers, such as `NUMERIC` or `DECIMAL`. |
-| [**PickleType**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.PickleType) | Holds Python objects, which are serialized using pickle.     |
-| [**SchemaType**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.SchemaType) | Mark a type as possibly requiring schema-level DDL for usage. |
-| [**SmallInteger**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.SmallInteger) | A type for smaller `int` integers.                           |
-| [**String**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.String) | The base for all string and character types.                 |
-| [**Text**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Text) | A variably sized string type.                                |
-| [**Time**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Time) | A type for `datetime.time()` objects.                        |
-| [**Unicode**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Unicode) | A variable length Unicode string type.                       |
-| [**UnicodeText**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.UnicodeText) | An unbounded-length Unicode string type.                     |
+| Object Name                                                                                               | Description                                                         |
+| --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [**BigInteger**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.BigInteger)     | A type for bigger `int` integers.                                   |
+| [**Boolean**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Boolean)           | A bool datatype.                                                    |
+| [**Date**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Date)                 | A type for `datetime.date()` objects.                               |
+| [**DateTime**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.DateTime)         | A type for `datetime.datetime()` objects.                           |
+| [**Enum**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Enum)                 | Generic Enum Type.                                                  |
+| [**Float**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Float)               | Type representing floating point types, such as `FLOAT` or `REAL`.  |
+| [**Integer**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Integer)           | A type for `int` integers.                                          |
+| [**Interval**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Interval)         | A type for `datetime.timedelta()` objects.                          |
+| [**LargeBinary**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.LargeBinary)   | A type for large binary byte data.                                  |
+| [**MatchType**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.MatchType)       | Refers to the return type of the MATCH operator.                    |
+| [**Numeric**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Numeric)           | A type for fixed precision numbers, such as `NUMERIC` or `DECIMAL`. |
+| [**PickleType**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.PickleType)     | Holds Python objects, which are serialized using pickle.            |
+| [**SchemaType**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.SchemaType)     | Mark a type as possibly requiring schema-level DDL for usage.       |
+| [**SmallInteger**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.SmallInteger) | A type for smaller `int` integers.                                  |
+| [**String**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.String)             | The base for all string and character types.                        |
+| [**Text**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Text)                 | A variably sized string type.                                       |
+| [**Time**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Time)                 | A type for `datetime.time()` objects.                               |
+| [**Unicode**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.Unicode)           | A variable length Unicode string type.                              |
+| [**UnicodeText**](https://docs.sqlalchemy.org/en/14/core/type_basics.html#sqlalchemy.types.UnicodeText)   | An unbounded-length Unicode string type.                            |
 
 | 类型名       | 说明                         |
 | ------------ | ---------------------------- |
@@ -334,7 +334,7 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 - ***autoincrement***：设置字段是否自动递增
 - ***comment***：设置字段注释
 
-## 1.4 query
+## query
 
 `Session `的 `query` 函数会返回一个 `Query` 对象
 
@@ -342,7 +342,7 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 db.query(User).filter(User.id == user_id).first()
 ```
 
-### 1.4.1 filter
+### filter
 
 - `equals`:
 
@@ -424,7 +424,7 @@ query.filter(or_(User.name == 'ed', User.name == 'wendy'))
 query.filter(User.name.match('wendy'))
 ```
 
-### 1.4.2 返回列表(List)和单项(Scalar)
+### 返回列表(List)和单项(Scalar)
 
 - `all()` 返回一个列表:
 
@@ -463,7 +463,7 @@ NoResultFound: No row was found for one()
 - `one_or_none()`：从名称可以看出，当结果数量为 0 时返回 `None`， 多于1个时报错
 - `scalar()`和`one()` 类似，但是返回单项而不是 tuple
 
-### 1.4.3 嵌入使用SQL
+### 嵌入使用SQL
 
 你可以在`Query`中通过`text()`使用SQL语句。例如：
 
@@ -496,11 +496,11 @@ fred
 [<User(name='ed', fullname='Ed Jones', password='f8s7ccs')>]
 ```
 
-## 1.5 关系
+## 关系
 
 外键 (ForeignKey) 始终定义在多的一方
 
-### 1.5.1 一对多
+### 一对多
 
 `Child` 为多
 
@@ -516,7 +516,7 @@ class Child(Base):
     parent_id = Column(Integer,ForeignKey('parent.id'))
 ```
 
-### 1.5.2 多对一
+### 多对一
 
 `Parent` 为多
 
@@ -538,7 +538,7 @@ class Child(Base):
 children = relationship("Child",cascade='all',backref='parent')
 ```
 
-### 1.5.4 一对一
+### 一对一
 
 一对一就是多对一和一对多的一个特例，只需在 relationship 加上一个参数 `uselist=False` 替换多的一端就是一对一
 
@@ -570,7 +570,7 @@ class Child(Base):
     id = Column(Integer, primary_key=True)
 ```
 
-### 1.5.5 多对多
+### 多对多
 
 多对多关系需要一个中间关联表,通过参数 `secondary` 来指定
 

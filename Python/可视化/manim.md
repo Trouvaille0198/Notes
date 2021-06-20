@@ -30,15 +30,15 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 %%manim Test1 [CLI options]
 ```
 
-# 二、Mobject
+# Mobject
 
 `Mobject` 是屏幕中出现的所有物体的超类
 
-## 2.1 通用方法
+## 通用方法
 
 所有方法以 `Mobject.` 开头
 
-### 2.1.1 移动
+### 移动
 
 - ***to_edge(edge, buff=)***
 
@@ -90,7 +90,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
     放到画面中心
 
-### 2.1.2 旋转
+### 旋转
 
 - ***rotate(angle)***
 
@@ -104,7 +104,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
     - *direction*：DIRECTION
 
-### 2.1.3 变形
+### 变形
 
 - ***become(mobject)***
 
@@ -135,7 +135,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
     - *darkness*：暗度
 
-### 2.1.4 获取信息
+### 获取信息
 
 - ***get_center()***
 
@@ -151,7 +151,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
 
 
-### 2.1.5 组合
+### 组合
 
 - ***arrange(direction, buff=0.25, center=True, \*\*kwargs)***
 
@@ -170,7 +170,7 @@ class Example(Scene):
 
 ![image-20210216112707187](http://image.trouvaille0198.top/image-20210216112707187.png)
 
-### 2.1.6 VMobject 独有方法
+### VMobject 独有方法
 
 `VMobject` 是 `Mobject` 的子类，使用贝塞尔曲线来表示物体
 
@@ -193,9 +193,9 @@ class Example(Scene):
 
     允许设置全部样式
 
-## 2.2 SVG
+## SVG
 
-### 2.2.1 Text
+### Text
 
 Mobjects used for displaying (non-LaTeX) text.
 
@@ -210,7 +210,7 @@ class HelloWorld(Scene):
         self.add(text)
 ```
 
-#### 1）Parameters
+#### Parameters
 
 - color
     - 改变全部文字的颜色
@@ -248,14 +248,14 @@ class HelloWorld(Scene):
     - 或者切片模式，如`{'[1:4]': BOLD}`
 - 其余 `Mobject` 属性
 
-#### 2）Methods
+#### Methods
 
 - ***set_color_by_t2c(self, t2c)***:
     - `text.set_color_by_t2c({'world':BLUE})`
 - ***set_color_by_t2g(self, t2g)***:
     - `text.set_color_by_t2g({'world':(BLUE, GREEN)})`
 
-### 3）切片
+### 切片
 
 ```python
 from manim import *
@@ -277,7 +277,7 @@ class test(Scene):
 
 ![image-20210215185733556](http://image.trouvaille0198.top/image-20210215185733556.png)
 
-### 2.2.2 Tex
+### Tex
 
 A string compiled with LaTeX in normal mode.
 
@@ -294,17 +294,17 @@ class HelloLaTeX(Scene):
 
 we are using a raw string (`r'---'`) instead of a regular string (`'---'`). 
 
-### 2.2.3 MathTex
+### MathTex
 
 Whereas in a MathTex mobject everything is math-mode by default.
 
-### 2.2.4 Code
+### Code
 
 `Code` 使用 pygments 给代码生成带语法高亮的 html 文件，然后再转换为物体。
 
 ***Code(file_name=None, \*\*kwargs)***
 
-#### 1）结构
+#### 结构
 
 1. `Code[0]` 是代码的背景 ( `Code.background_mobject` )
     1. 如果 `background == "rectangle"` 则是一个Rectangle
@@ -312,7 +312,7 @@ Whereas in a MathTex mobject everything is math-mode by default.
 2. `Code[1]` 是行号 ( `Code.line_numbers` 一个Paragraph)，可以使用 `Code.line_numbers[0]` 或者 `Code[1][0]` 来访问行号中的第一个数字
 3. `Code[2]` 是代码 (`Code.code`)，一个带有颜色的Paragraph
 
-#### 2）parameters
+#### parameters
 
 - *file_name*
     - Name of the code file to display.
@@ -348,40 +348,40 @@ class test(Scene):
 
 ![image-20210215191333989](http://image.trouvaille0198.top/image-20210215191333989.png)
 
-### 2.2.5 Brace
+### Brace
 
 大括号
 
 ***Brace(mobject, direction, \*\*kwargs)***
 
-### 2.2.6 ImageMobject
+### ImageMobject
 
 注意：`ImageMobject` 不是 `VMobject` 的子类，所以有很多动画无法使用
 
 ***ImageMobject(filename, \*\*kwargs)***
 
-#### 2）parameters
+#### parameters
 
 - *height*：插入图片的高度，默认为 2
 
-#### 1）Methods
+#### Methods
 
 - ***set_opacity(alpha)***
     设置图片不透明度
 
-## 2.3 Geometry
+## Geometry
 
-### 2.3.1 通用参数
+### 通用参数
 
 - *color*：颜色
 - *fill_opacity*：图形内不透明度，默认为 0 （透明）
 
-### 2.3.1 圆
+### 圆
 
 - ***Circle(\*\*kwargs)***
     - 正圆
 
-### 2.3.2 点
+### 点
 
 - ***Dot(point, radius, stroke_width, fill_opacity, color, \*\*kwargs)***
     - *point*：np.array 或 DIRECTION，默认为 `array([0.0, 0.0, 0.0])`
@@ -390,12 +390,12 @@ class test(Scene):
     - *fill_opacity*：不透明度，默认为 1.0
     - *color*：颜色，默认为 `'#FFFFFF'`
 
-### 2.3.3 三角形
+### 三角形
 
 - ***Triangle(\*\*kwargs)***
     - 正三角形
 
-### 2.3.4 矩形
+### 矩形
 
 - ***Rectangle(\*\*kwargs)***
     - 矩形
@@ -407,7 +407,7 @@ class test(Scene):
     - parameters
         - `side_length` ：正方形边长
 
-### 2.3.6 线
+### 线
 
 - ***Line(start, end, \*\*kwargs)***
 
@@ -421,37 +421,37 @@ class test(Scene):
 
             缩放到 `length` 长度
 
-### 2.3.5 箭头
+### 箭头
 
 - ***Arrow(\*args, \*\*kwargs)***
     - *start*：起点，默认 LEFT
     - *end*：终点，默认 RIGHT
 
-# 三、Animation
+# Animation
 
-## 3.1 通用
+## 通用
 
 所有方法以 `self.` 开头
 
-### 3.1.1 wait()
+### wait()
 
 ***wait(seconds)***
 
 等待动画停留时间，如果没有参数则默认等待到将动画播放完为止
 
-### 3.1.2 add()
+### add()
 
 ***add(someObject1, someObject2, ...)***
 
 无动画添加文字
 
-### 3.1.3 remove()
+### remove()
 
 ***remove(someObject1, someObject2, ...)***
 
 移除
 
-### 3.1.4 play()
+### play()
 
 ***play(SomePlayMethod(someObject), run_time=seconds)***
 
@@ -476,7 +476,7 @@ class concurrent(Scene):
         self.wait()
 ```
 
-### 3.1.5 ApplyMethod()
+### ApplyMethod()
 
 ***ApplyMethod(method, \*args, \*\*kwargs)***
 
@@ -497,11 +497,11 @@ class test16(Scene):
 
 <img src="http://image.trouvaille0198.top/test16.gif" alt="test16" style="zoom: 67%;" />
 
-## 3.2 PlayMethod
+## PlayMethod
 
-### 3.2.1 Mobject.animate.method()
+### Mobject.animate.method()
 
-### 3.2.2 Creation
+### Creation
 
 `manim.animation.creation`
 
@@ -556,7 +556,7 @@ class test(Scene):
 
     Simulate hand-writing a `Text` or hand-drawing a `VMobject`.
 
-### 3.2.3 Fading
+### Fading
 
 `manim.animation.fading`
 
@@ -589,19 +589,19 @@ class test(Scene):
 - ***FadeOutAndShift(mobject, direction)***
 	从指定方向淡出
 
-### 3.2.4 Movement
+### Movement
 
 - ***MoveAlongPath(mobject, path)***
 
     Make one mobject move along the path of another mobject
 
-### 3.2.5 Rotate
+### Rotate
 
 Animations related to rotation.
 
 - ***Rotate(mobject, angle)***
 
-### 3.2.6 Transform
+### Transform
 
 Animations transforming one mobject into another.
 
@@ -690,7 +690,7 @@ class test19(Scene):
 
 ![test19](http://image.trouvaille0198.top/test19.gif)
 
-### 3.2.7 Grow
+### Grow
 
 - ***GrowArrow(arrow, \*\*kwargs)***
 
@@ -744,7 +744,7 @@ class test(Scene):
 
 ![test4](http://image.trouvaille0198.top/test4.gif)
 
-### 3.2.8 Indication
+### Indication
 
 - ***FocusOn(focus_point, \*\*kwargs)***
     - *focus_point*：Mobject or point
@@ -915,7 +915,7 @@ class test(Scene):
 
 ![test11](http://image.trouvaille0198.top/test11.gif)
 
-### 3.2.9 Movement
+### Movement
 
 - ***MoveAlongPath(mobject, path, \*\*kwargs)***
 
@@ -937,7 +937,7 @@ class test11(Scene):
 
 ![test12](http://image.trouvaille0198.top/test12.gif)
 
-### 3.2.10 Numbers
+### Numbers
 
 - ***ChangingDecimal(decimal_mob, number_update_func, \*\*kwargs)***
 
@@ -964,7 +964,7 @@ class test(Scene):
 
 - ***ChangeDecimalToValue(decimal_mob, target_number, \*\*kwargs)***
 
-### 3.2.11 Rotation
+### Rotation
 
 `Rotate` 目前是 `Transform` 的子类，即带有 `path_arc` 的 `Transform` ，所以会有扭曲
 
@@ -989,7 +989,7 @@ class test(Scene):
 
 ![test14](http://image.trouvaille0198.top/test14.gif)
 
-### 3.2.12 Update
+### Update
 
 - ***UpdateFromFunc()***
 
@@ -1047,7 +1047,7 @@ class test(Scene):
 
 ![test21](http://image.trouvaille0198.top/test21.gif)
 
-### 3.2.13 Composition
+### Composition
 
 - ***AnimationGroup(\*animations, \*\*kwargs)***
 
@@ -1073,13 +1073,13 @@ class test22(Scene):
 
 ![test22](http://image.trouvaille0198.top/test22.gif)
 
-# 四、Camera
+# Camera
 
 `Camera` 类及其子类用于获取当前屏幕上的画面， 然后作为每帧图像传递给 SceneFileWriter 来生成视频
 
-# 五、Constants
+# Constants
 
-## 5.1 Module Attributes
+## Module Attributes
 
 | `ORIGIN`  | The center of the coordinate system.                        |
 | --------- | ----------------------------------------------------------- |
