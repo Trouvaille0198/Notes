@@ -229,7 +229,7 @@ os.mkdir('D:\\repo\\PythonLearning\\aaa')
 
 ## os.makedirs(path)
 
-生成多层递归目录
+生成多层**递归**目录
 
 ## os.removedirs(path)
 

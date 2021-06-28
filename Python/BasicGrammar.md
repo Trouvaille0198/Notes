@@ -203,7 +203,7 @@ func('Jack', 24, city=extra['city'], job=extra['job'])
 func('Jack', 24, **extra)
 ```
 
-\*\*extra表示把extra这个dict的所有key-value用关键字参数传入到函数的\*\*kw参数
+\*\*extra 表示把 extra 这个 dict 的所有 key-value 用关键字参数传入到函数的 \*\*kw 参数
 
 #### 补充
 
