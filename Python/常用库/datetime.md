@@ -84,6 +84,9 @@ print(a<b)
     a.strftime("%Y%m%d")
     ```
 
+- ***strptime(str,format)***
+    - 将字符串对象转化为日期对象
+
 # time
 
 ***time([hour[, minute[, second[, microsecond[, tzinfo]]]]])***
