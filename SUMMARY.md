@@ -105,6 +105,7 @@
   - [配置 WindowsTerminal](useful/配置 WindowsTerminal.md)
   - [配置 gitbook](useful/配置 gitbook.md)
   - [配置 Typora](useful/配置 Typora.md)
+  - [Steam 开服教程](useful/Steam 开服教程.md)
 - [效率工具]()
   - [Git](效率工具/Git.md)
   - [LaTeX数学公式](效率工具/LaTeX数学公式.md)
