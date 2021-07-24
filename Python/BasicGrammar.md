@@ -698,7 +698,7 @@ for value in alien_0.values():
 
 - 有顺序地遍历
 
-  使用sorted()函数，如：
+  使用 `sorted()` 函数，如：
 
 ```python
 for key in sorted(alien_0.keys()):
@@ -706,7 +706,7 @@ for key in sorted(alien_0.keys()):
 
 - 合并遍历中的重复项
 
-  使用set()函数，如：
+  使用 `set()` 函数，如：
 
 ```python
 for value in set(alien_0.values()): 
@@ -1076,9 +1076,9 @@ with open(filename, 'a') as file_object:            #'a'表示以附加模式打
 
 ### json格式
 
-对象：它在 JavaScript 中是使用花括号 {} 包裹起来的内容，数据结构为 {key1：value1, key2：value2, ...} 的键值对结构。在面向对象的语言中，key 为对象的属性，value 为对应的值。键名可以使用整数和字符串来表示。值的类型可以是任意类型。
+对象：它在 JavaScript 中是使用花括号 {} 包裹起来的内容，数据结构为 `{key1：value1, key2：value2, ...}` 的键值对结构。在面向对象的语言中，key 为对象的属性，value 为对应的值。键名可以使用整数和字符串来表示。值的类型可以是任意类型。
 
-数组：数组在 JavaScript 中是方括号 [] 包裹起来的内容，数据结构为 ["java", "javascript", "vb", ...] 的索引结构。在 JavaScript 中，数组是一种比较特殊的数据类型，它也可以像对象那样使用键值对，但还是索引用得多。同样，值的类型可以是任意类型。
+数组：数组在 JavaScript 中是方括号 `[]` 包裹起来的内容，数据结构为 `["java", "javascript", "vb", ...]` 的索引结构。在 JavaScript 中，数组是一种比较特殊的数据类型，它也可以像对象那样使用键值对，但还是索引用得多。同样，值的类型可以是任意类型。
 
 一个 JSON 对象可以写为如下形式：
 
@@ -1114,17 +1114,17 @@ with open(filename, 'w') as f_obj:
 
 ### 读取数据
 
-使用`json.loads() `
+使用`json.load() `
 
 返回字典对象
 
 ```python
 filename = 'name.json'
 with open(filename) as f_obj:
-        name = json.loads(f_obj)                         #将json中的数据读到name中
+        name = json.load(f_obj)                         #将json中的数据读到name中
 ```
 
-使用 loads 方法将字符串转为 JSON 对象。如果最外层是中括号，那最终的类型是列表类型
+使用 load 方法将字符串转为 JSON 对象。如果最外层是中括号，那最终的类型是列表类型
 
 #### 数据转换表
 

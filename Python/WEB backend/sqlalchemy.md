@@ -101,6 +101,14 @@ class Item(Base):
     owner = relationship("User", back_populates="items")
 ```
 
+SQLAlchemy 提供了 `backref` 让我们可以只需要定义一个关系：
+
+```python
+items = relationship("Item", backref="owner")
+```
+
+添加了这个就可以不用再在 `Item` 中定义 `relationship` 了！
+
 ### 建立 Pydantic 模型
 
 ```python
@@ -532,7 +540,7 @@ class Child(Base):
     id = Column(Integer, primary_key=True)
 ```
 
-为了建立双向关系,可以在 `relationship()` 中设置 backref，Child 对象就有parents属性.设置 cascade= ‘all’，可以级联删除
+为了建立双向关系,可以在 `relationship()` 中设置 backref，Child 对象就有 parents 属性. 设置 `cascade= ‘all’`，可以级联删除
 
 ```python
 children = relationship("Child",cascade='all',backref='parent')
@@ -540,7 +548,7 @@ children = relationship("Child",cascade='all',backref='parent')
 
 ### 一对一
 
-一对一就是多对一和一对多的一个特例，只需在 relationship 加上一个参数 `uselist=False` 替换多的一端就是一对一
+“一对一“就是“多对一”和“一对多”的一个特例，只需在 `relationship` 加上一个参数 `uselist=False` 替换多的一端即可
 
 从一对多转换到一对一
 
