@@ -173,6 +173,20 @@ def get_items(db: Session, skip: int = 0, limit: int = 100):
 #### 建
 
 ```python
+# 把描述的表创建出来
+Base.metadata.create_all(engine) # Bas
+
+# 把多个表数据添加到会话
+session.add_all(Users)
+
+# 把一个表数据添加到会话
+session.add(dog)
+
+# 提交会话
+session.commit()
+```
+
+```python
 def create_user(db: Session, user: schemas.UserCreate):
     fake_hashed_password = user.password + "notreallyhashed"
     db_user = models.User(email=user.email, hashed_password=fake_hashed_password)
@@ -187,6 +201,22 @@ def create_user_item(db: Session, item: schemas.ItemCreate, user_id: int):
     db.commit()
     db.refresh(db_item)
     return db_item
+```
+
+#### 改
+
+直接改
+
+#### 删
+
+```python
+db.delete(user1)
+```
+
+删除整个数据库
+
+```pyhton
+db.drop_all()
 ```
 
 ### 创建表
@@ -247,10 +277,6 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_items(db, skip=skip, limit=limit)
     return items
 ```
-
-
-
-
 
 ## 概念
 
@@ -338,7 +364,7 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 - ***unique***：设置字段是否唯一
 - ***index***：设置字段是否为索引参数
 - ***default***：设置字段默认值
-- ***nullable***：设置字段是否可空
+- ***nullable***：设置字段是否可空，默认为 `True`（可空）
 - ***autoincrement***：设置字段是否自动递增
 - ***comment***：设置字段注释
 
@@ -348,6 +374,14 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 ```python
 db.query(User).filter(User.id == user_id).first()
+```
+
+### get
+
+根据指定主键查询
+
+```python
+query.get(id)
 ```
 
 ### filter
@@ -430,6 +464,14 @@ query.filter(or_(User.name == 'ed', User.name == 'wendy'))
 
 ```bash
 query.filter(User.name.match('wendy'))
+```
+
+### filter_by
+
+查询指定字段值的结果
+
+```python
+query.filter_by(User.name='wang_wu').all() # 查询所有名字为wang_wu的实例
 ```
 
 ### 返回列表(List)和单项(Scalar)

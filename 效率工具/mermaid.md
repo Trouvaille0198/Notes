@@ -1,11 +1,11 @@
 # FlowChart
 
-```
-​```mermaid
+````
+```mermaid
 	graph TD
 	A-->B
-​```
 ```
+````
 
 ## 方向
 
@@ -31,7 +31,7 @@ Up-->Down
 如果节点的文字中包含标点符号，需要时用双引号包裹起来
 
 ```
-​```mermaid
+```mermaid
 graph TD
     A[带文本的矩形]
     B(带文本的圆角矩形)
@@ -96,7 +96,7 @@ graph TB
 ## 1.4子流程图
 
 ```
-​```mermaid
+```mermaid
 subgraph title
     graph definition
 end
@@ -120,7 +120,7 @@ graph TB
 ## Demo
 
 ```
-​```mermaid
+```mermaid
 	graph LR
     start[开始] --> input[输入A,B,C]
     input --> conditionA{A是否大于B}
@@ -135,8 +135,6 @@ graph TB
     printB --> stop
 ​```
 ```
-
-
 
 ```mermaid
 graph LR
@@ -156,7 +154,7 @@ graph LR
 # Class Diagram
 
 ```
-​```mermaid
+```mermaid
 	 classDiagram
       Animal <|-- Duck
       Animal <|-- Fish

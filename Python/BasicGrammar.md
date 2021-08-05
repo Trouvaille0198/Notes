@@ -1198,3 +1198,11 @@ dicts = {i: ' ' for i in punctuation}
 
     ![image-20210530153535372](http://image.trouvaille0198.top/image-20210530153535372.png)
 
+4. 获取当前路径
+
+```python
+from pathlib import Path
+
+current_path = Path.cwd()
+```
+
