@@ -153,6 +153,8 @@ class User(UserBase): # API调用的对象
 
 #### 读
 
+详细：https://www.cnblogs.com/jingqi/p/8059673.html
+
 ```python
 from sqlalchemy.orm import Session
 from . import models, schemas

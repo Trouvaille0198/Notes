@@ -32,7 +32,7 @@ import random
 
 - ***randint(a: int, b: int)***
 
-    生成浮点数
+    生成整型数
 
 - ***randrange(start, stop[, step])***
 
