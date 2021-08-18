@@ -173,9 +173,9 @@ colName，indexName为具体值
 
 ### `df[colName]`
 
-根据列名，并以Series的形式返回列
+根据列名，并以 Series 的形式返回列
 
-若列名为默认的数字时，colName可以被视为col（其中就col可以表示为列表形式和切片形式）
+若列名为默认的数字时，colName 可以被视为 col（其中就col可以表示为列表形式和切片形式）
 
 ```python
 df['a'] 			#取a列
@@ -187,7 +187,7 @@ df[['b','e','f']]   #取b,e,f列
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207223843331.png" alt="image-20201207223843331" style="zoom: 67%;" />
 
-特殊情况下，`df[colName]`可以接收行名称或者行数，但必须是切片
+特殊情况下，`df[colName]` 可以接收行名称或者行数，但必须是切片
 
 ```python
 df[0:1]      # 第1行
@@ -217,11 +217,11 @@ df['c']['B']
 其中index，col可以表示为列表形式和切片形式，当只传入一个参数时，该参数默认为index
 
 ```python
-df.iloc[0:1] 			#取第0行数据，较为规范
-df.iloc[0]   			#硬要这样俺也没办法
-df.iloc[:,[2]]  		#取第2列数据
-df.iloc[0:3,2:6]  		#取0到2行，2到5列数据
-df.iloc[[0,3],[2,3,7]]  #取0和3行，2、3、7列相交数据
+df.iloc[0:1] 			# 取第0行数据，较为规范
+df.iloc[0]   			# 硬要这样俺也没办法
+df.iloc[:,[2]]  		# 取第2列数据
+df.iloc[0:3,2:6]  		# 取0到2行，2到5列数据
+df.iloc[[0,3],[2,3,7]]  # 取0和3行，2、3、7列相交数据
 ```
 
 输出
@@ -932,6 +932,8 @@ data[data["A"].isin([1, 2])] # 返回DataFrame副本
 - *path*：文件路径
 - *sep*：分隔符，默认用","隔开
 - *usecols*：指定读取的列名
+
+可以使用 `index_col=[0]` 参数指定默认索引
 
 ```python
 pd.read_csv(filename)					#从CSV文件导入数据
