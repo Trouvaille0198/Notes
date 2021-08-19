@@ -152,8 +152,8 @@ Area: 15.75
 当一个值类型转换为对象类型时，则被称为 **装箱**；另一方面，当一个对象类型转换为值类型时，则被称为 **拆箱**
 
 ```csharp
-object obj;
-obj = 100; // 这是装箱
+object obj; // 这是装箱
+obj = 100; // 这是拆箱
 ```
 
 #### 动态 `Dynamic` 类型
@@ -573,13 +573,763 @@ Line 7 - c 的值是 21
 
 位运算符作用于位，并逐位执行操作。&、 | 和 ^ 的真值表如下所示：
 
-| p    | q    | p & q | p \| q | p ^ q |
-| :--- | :--- | :---- | :----- | :---- |
-| 0    | 0    | 0     | 0      | 0     |
-| 0    | 1    | 0     | 1      | 1     |
-| 1    | 1    | 1     | 1      | 0     |
-| 1    | 0    | 0     | 1      | 1     |
+| p    | q    | p & q（与） | p \| q（或） | p ^ q（异或） |
+| :--- | :--- | :---------- | :----------- | :------------ |
+| 0    | 0    | 0           | 0            | 0             |
+| 0    | 1    | 0           | 1            | 1             |
+| 1    | 1    | 1           | 1            | 0             |
+| 1    | 0    | 0           | 1            | 1             |
 
-- 赋值运算符
-- 其他运算符
+| 符号 | 说明                                                         |
+| ---- | ------------------------------------------------------------ |
+| ~    | 按位取反运算符是一元运算符，具有"翻转"位效果，即0变成1，1变成0，包括符号位。 |
+| <<   | 二进制左移运算符。左操作数的值向左移动右操作数指定的位数。   |
+| >>   | 二进制右移运算符。左操作数的值向右移动右操作数指定的位数。   |
 
+### 赋值运算符
+
+| 运算符 | 描述                                                         | 实例                            |
+| :----- | :----------------------------------------------------------- | :------------------------------ |
+| =      | 简单的赋值运算符，把右边操作数的值赋给左边操作数             | C = A + B 将把 A + B 的值赋给 C |
+| +=     | 加且赋值运算符，把右边操作数加上左边操作数的结果赋值给左边操作数 | C += A 相当于 C = C + A         |
+| -=     | 减且赋值运算符，把左边操作数减去右边操作数的结果赋值给左边操作数 | C -= A 相当于 C = C - A         |
+| *=     | 乘且赋值运算符，把右边操作数乘以左边操作数的结果赋值给左边操作数 | C *= A 相当于 C = C * A         |
+| /=     | 除且赋值运算符，把左边操作数除以右边操作数的结果赋值给左边操作数 | C /= A 相当于 C = C / A         |
+| %=     | 求模且赋值运算符，求两个操作数的模赋值给左边操作数           | C %= A 相当于 C = C % A         |
+| <<=    | 左移且赋值运算符                                             | C <<= 2 等同于 C = C << 2       |
+| >>=    | 右移且赋值运算符                                             | C >>= 2 等同于 C = C >> 2       |
+| &=     | 按位与且赋值运算符                                           | C &= 2 等同于 C = C & 2         |
+| ^=     | 按位异或且赋值运算符                                         | C ^= 2 等同于 C = C ^ 2         |
+| \|=    | 按位或且赋值运算符                                           | C \|= 2 等同于 C = C \| 2       |
+
+### 其他运算符
+
+| 运算符   | 描述                                   | 实例                                                         |
+| :------- | :------------------------------------- | :----------------------------------------------------------- |
+| sizeof() | 返回数据类型的大小。                   | sizeof(int)，将返回 4.                                       |
+| typeof() | 返回 class 的类型。                    | typeof(StreamReader);                                        |
+| &        | 返回变量的地址。                       | &a; 将得到变量的实际地址。                                   |
+| *        | 变量的指针。                           | *a; 将指向一个变量。                                         |
+| ? :      | 条件表达式                             | 如果条件为真 ? 则为 X : 否则为 Y                             |
+| is       | 判断对象是否为某一类型。               | If( Ford is Car) // 检查 Ford 是否是 Car 类的一个对象。      |
+| as       | 强制转换，即使转换失败也不会抛出异常。 | Object obj = new StringReader("Hello"); StringReader r = obj as StringReader; |
+
+### 运算优先级
+
+| 类别       | 运算符                            | 结合性   |
+| :--------- | :-------------------------------- | :------- |
+| 后缀       | () [] -> . ++ - -                 | 从左到右 |
+| 一元       | + - ! ~ ++ - - (type)* & sizeof   | 从右到左 |
+| 乘除       | * / %                             | 从左到右 |
+| 加减       | + -                               | 从左到右 |
+| 移位       | << >>                             | 从左到右 |
+| 关系       | < <= > >=                         | 从左到右 |
+| 相等       | == !=                             | 从左到右 |
+| 位与 AND   | &                                 | 从左到右 |
+| 位异或 XOR | ^                                 | 从左到右 |
+| 位或 OR    | \|                                | 从左到右 |
+| 逻辑与 AND | &&                                | 从左到右 |
+| 逻辑或 OR  | \|\|                              | 从左到右 |
+| 条件       | ?:                                | 从右到左 |
+| 赋值       | = += -= *= /= %=>>= <<= &= ^= \|= | 从右到左 |
+| 逗号       | ,                                 | 从左到右 |
+
+## 判断语句
+
+### if 语句
+
+```C#
+if(boolean_expression)
+{
+   /* 如果布尔表达式为真将执行的语句 */
+}
+```
+
+### if...else 语句
+
+```C#
+if(boolean_expression)
+{
+   /* 如果布尔表达式为真将执行的语句 */
+}
+else
+{
+  /* 如果布尔表达式为假将执行的语句 */
+}
+```
+
+### switch 语句
+
+```C#
+switch(expression){
+    case constant-expression  :
+       statement(s);
+       break; 
+    case constant-expression  :
+       statement(s);
+       break; 
+  
+    /* 您可以有任意数量的 case 语句 */
+    default : /* 可选的 */
+       statement(s);
+       break; 
+}
+```
+
+- **switch** 语句中的 **expression** 必须是一个整型或枚举类型，或者是一个 class 类型（其中有一个单一的转换函数将其转换为整型或枚举类型）
+- case 的 **constant-expression** 必须与 switch 中的变量具有相同的数据类型，且必须是一个常量
+- 不是每一个 case 都需要包含 **break**。如果 case 语句为空，则可以不包含 **break**，控制流将会 *继续* 后续的 case，直到遇到 break 为止。
+- 一个 **switch** 语句可以有一个可选的 **default** case，出现在 switch 的结尾。default case 可用于在上面所有 case 都不为真时执行一个任务。default case 中的 **break** 语句不是必需的。
+
+```C#
+using System;
+
+namespace DecisionMaking
+{
+   
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /* 局部变量定义 */
+            char grade = 'B';
+
+            switch (grade)
+            {
+                case 'A':
+                    Console.WriteLine("很棒！");
+                    break;
+                case 'B':
+                case 'C':
+                    Console.WriteLine("做得好");
+                    break;
+                case 'D':
+                    Console.WriteLine("您通过了");
+                    break;
+                case 'F':
+                    Console.WriteLine("最好再试一下");
+                    break;
+                default:
+                    Console.WriteLine("无效的成绩");
+                    break;
+            }
+            Console.WriteLine("您的成绩是 {0}", grade);
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+## 循环语句
+
+C# 拥有 `break` 和 `continue` 两个循环控制语句
+
+### while 循环
+
+```C#
+while(condition)
+{
+   statement(s);
+}
+```
+
+### for 循环
+
+```C#
+for ( init; condition; increment )
+{
+   statement(s);
+}
+```
+
+### foreach 循环
+
+使用 foreach 可以迭代数组或者一个集合对象。
+
+以下实例有三个部分：
+
+- 通过 foreach 循环输出整型数组中的元素。
+- 通过 for 循环输出整型数组中的元素。
+- foreach 循环设置数组元素的计算器。
+
+```C#
+class ForEachTest
+{
+    static void Main(string[] args)
+    {
+        int[] fibarray = new int[] { 0, 1, 1, 2, 3, 5, 8, 13 };
+        foreach (int element in fibarray)
+        {
+            System.Console.WriteLine(element);
+        }
+        System.Console.WriteLine();
+
+
+        // 类似 foreach 循环
+        for (int i = 0; i < fibarray.Length; i++)
+        {
+            System.Console.WriteLine(fibarray[i]);
+        }
+        System.Console.WriteLine();
+
+
+        // 设置集合中元素的计算器
+        int count = 0;
+        foreach (int element in fibarray)
+        {
+            count += 1;
+            System.Console.WriteLine("Element #{0}: {1}", count, element);
+        }
+        System.Console.WriteLine("Number of elements in the array: {0}", count);
+    }
+}
+```
+
+### do...while 循环
+
+**do...while** 循环在循环的尾部检查它的条件，所以它确保至少执行一次循环。
+
+```c#
+do
+{
+   statement(s);
+
+} while( condition );
+```
+
+## 封装
+
+**封装** 被定义为"把一个或多个项目封闭在一个物理的或者逻辑的包中"。在面向对象程序设计方法论中，封装是为了防止对实现细节的访问
+
+C# 封装根据具体的需要，设置使用者的访问权限，并通过 **访问修饰符** 来实现
+
+一个 **访问修饰符** 定义了一个类成员的范围和可见性。C# 支持的访问修饰符如下所示：
+
+- public：所有对象都可以访问；
+- private：对象本身在对象内部可以访问；
+- protected：只有该类对象及其子类对象可以访问
+- internal：同一个程序集的对象可以访问；
+- protected internal：访问限于当前程序集或派生自包含类的类型
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/csharp-public.png)
+
+### Public 访问修饰符
+
+Public 访问修饰符允许一个类将其成员变量和成员函数暴露给其他的函数和对象。任何公有成员可以被外部的类访问
+
+```C#
+using System;
+
+namespace RectangleApplication
+{
+    class Rectangle
+    {
+        //成员变量
+        public double length;
+        public double width;
+
+        public double GetArea()
+        {
+            return length * width;
+        }
+        public void Display()
+        {
+            Console.WriteLine("长度： {0}", length);
+            Console.WriteLine("宽度： {0}", width);
+            Console.WriteLine("面积： {0}", GetArea());
+        }
+    }// Rectangle 结束
+
+    class ExecuteRectangle
+    {
+        static void Main(string[] args)
+        {
+            Rectangle r = new Rectangle();
+            r.length = 4.5;
+            r.width = 3.5;
+            r.Display();
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+### Protected 访问修饰符
+
+Protected 访问修饰符允许子类访问它的基类的成员变量和成员函数。这样有助于实现继承。
+
+### Private 访问修饰符
+
+如果没有指定访问修饰符，则使用类成员的默认访问修饰符，即为 **private**。
+
+### Internal 访问修饰符
+
+Internal 访问说明符限于当前**命名空间**
+
+换句话说，带有 internal 访问修饰符的任何成员可以被定义在该成员所定义的应用程序内的任何类或方法访问。
+
+### Protected Internal 访问修饰符
+
+Protected Internal 访问修饰符允许在本类,派生类或者包含该类的程序集中访问。这也被用于实现继承。
+
+## 方法
+
+一个方法是把一些相关的语句组织在一起，用来执行一个任务的语句块。每一个 C# 程序至少有一个带有 Main 方法的类
+
+### 定义方法
+
+```c#
+<Access Specifier> <Return Type> <Method Name>(Parameter List)
+{
+   // Method Body
+}
+```
+
+- **Access Specifier**：访问修饰符，这个决定了变量或方法对于另一个类的可见性。
+- **Return type**：返回类型，一个方法可以返回一个值。返回类型是方法返回的值的数据类型。如果方法不返回任何值，则返回类型为 **void**。
+- **Method name**：方法名称，是一个唯一的标识符，且是大小写敏感的。它不能与类中声明的其他标识符相同。
+- **Parameter list**：参数列表，使用圆括号括起来，该参数是用来传递和接收方法的数据。参数列表是指方法的参数类型、顺序和数量。参数是可选的，也就是说，一个方法可能不包含参数。
+- **Method body**：方法主体，包含了完成任务所需的指令集。
+
+有例
+
+```C#
+class NumberManipulator
+{
+   public int FindMax(int num1, int num2)
+   {
+      /* 局部变量声明 */
+      int result;
+
+      if (num1 > num2)
+         result = num1;
+      else
+         result = num2;
+
+      return result;
+   }
+   ...
+}
+```
+
+### 引用方法
+
+```c#
+using System;
+
+namespace CalculatorApplication
+{
+   class NumberManipulator
+   {
+      public int FindMax(int num1, int num2)
+      {
+         /* 局部变量声明 */
+         int result;
+
+         if (num1 > num2)
+            result = num1;
+         else
+            result = num2;
+
+         return result;
+      }
+      static void Main(string[] args)
+      {
+         /* 局部变量定义 */
+         int a = 100;
+         int b = 200;
+         int ret;
+         NumberManipulator n = new NumberManipulator();
+
+         //调用 FindMax 方法
+         ret = n.FindMax(a, b);
+         Console.WriteLine("最大值是： {0}", ret );
+         Console.ReadLine();
+      }
+   }
+}
+```
+
+### 参数传递
+
+| 方式     | 描述                                                         |
+| :------- | :----------------------------------------------------------- |
+| 值参数   | 这种方式复制参数的实际值给函数的形式参数，实参和形参使用的是**两个不同内存中的值**，这保证了实参数据的安全。 |
+| 引用参数 | 这种方式复制参数的内存位置的引用给形式参数。这意味着，当形参的值发生改变时，同时也改变实参的值。 |
+| 输出参数 | 这种方式可以返回多个值。                                     |
+
+```c#
+// 值参数，这个函数屁用没有
+public void swap(int x, int y)
+{
+    int temp;
+
+    temp = x; /* 保存 x 的值 */
+    x = y;    /* 把 y 赋值给 x */
+    y = temp; /* 把 temp 赋值给 y */
+}
+// 调用时
+int a = 100;
+int b = 200;
+n.swap(a, b);
+
+// 引用参数，使用 ref 修饰
+public void swap(ref int x, ref int y)
+{
+    int temp;
+
+    temp = x; /* 保存 x 的值 */
+    x = y;    /* 把 y 赋值给 x */
+    y = temp; /* 把 temp 赋值给 y */
+}
+// 调用时
+int a = 100;
+int b = 200;
+n.swap(ref a, ref b);
+
+// 输出参数
+public void getValue(out int x )
+{
+    int temp = 5;
+    x = temp;
+}
+// 调用时
+int a = 100;
+n.swap(out a);
+```
+
+提供给输出参数的变量不需要赋值（只需要声明即可）。当需要从一个参数没有指定初始值的方法中返回值时，输出参数特别有用
+
+```c#
+using System;
+
+namespace CalculatorApplication
+{
+   class NumberManipulator
+   {
+      public void getValues(out int x, out int y )
+      {
+          Console.WriteLine("请输入第一个值： ");
+          x = Convert.ToInt32(Console.ReadLine());
+          Console.WriteLine("请输入第二个值： ");
+          y = Convert.ToInt32(Console.ReadLine());
+      }
+   
+      static void Main(string[] args)
+      {
+         NumberManipulator n = new NumberManipulator();
+         /* 局部变量定义 */
+         int a , b;
+         
+         /* 调用函数来获取值 */
+         n.getValues(out a, out b);
+
+         Console.WriteLine("在方法调用之后，a 的值： {0}", a);
+         Console.WriteLine("在方法调用之后，b 的值： {0}", b);
+         Console.ReadLine();
+      }
+   }
+}
+```
+
+## 可空类型 nullable
+
+可空类型可以表示其基础值类型正常范围内的值，再加上一个 null 值。
+
+例如，Nullable< Int32 >，读作"可空的 Int32"，可以被赋值为 -2,147,483,648 到 2,147,483,647 之间的任意值，也可以被赋值为 null 值。
+
+```C#
+<data_type> ? <variable_name> = null;、
+
+int i;   //默认值0
+int? ii; //默认值null
+```
+
+```c#
+using System;
+namespace CalculatorApplication
+{
+   class NullablesAtShow
+   {
+      static void Main(string[] args)
+      {
+         int? num1 = null;
+         int? num2 = 45;
+         double? num3 = new double?();
+         double? num4 = 3.14157;
+         
+         bool? boolval = new bool?();
+
+         // 显示值
+         Console.WriteLine("显示可空类型的值： {0}, {1}, {2}, {3}",
+                            num1, num2, num3, num4);
+         Console.WriteLine("一个可空的布尔值： {0}", boolval);
+         Console.ReadLine();
+
+      }
+   }
+}
+```
+
+输出
+
+```
+显示可空类型的值： , 45,  , 3.14157
+一个可空的布尔值：
+```
+
+### Null 合并运算符（ ?? ）
+
+Null 合并运算符为类型转换定义了一个预设值，以防可空类型的值为 Null。
+
+```c#
+using System;
+namespace CalculatorApplication
+{
+   class NullablesAtShow
+   {
+         
+      static void Main(string[] args)
+      {
+         
+         double? num1 = null;
+         double? num2 = 3.14157;
+         double num3;
+         num3 = num1 ?? 5.34;      // num1 如果为空值则返回 5.34
+         Console.WriteLine("num3 的值： {0}", num3);
+         num3 = num2 ?? 5.34;
+         Console.WriteLine("num3 的值： {0}", num3);
+         Console.ReadLine();
+
+      }
+   }
+}
+```
+
+## 数组 Array
+
+### 基本操作
+
+#### 声明
+
+```C#
+datatype[] arrayName;
+//如
+double[] balance;
+```
+
+#### 初始化
+
+数组是一个引用类型，需要使用 **new** 关键字来创建数组的实例
+
+```C#
+double[] balance = new double[10];
+```
+
+#### 赋值
+
+给单个元素赋值
+
+```C#
+double[] balance = new double[10];
+balance[0] = 4500.0;
+```
+
+在声明数组的同时赋值
+
+```C#
+double[] balance = { 2340.0, 4523.69, 3421.0};
+```
+
+创建并初始化一个数组
+
+```c#
+int[] marks = new int[5]  { 99,  98, 92, 97, 95};
+```
+
+省略数组的大小
+
+```c#
+int[] marks = new int[]  { 99,  98, 92, 97, 95};
+```
+
+赋值一个数组变量到另一个目标数组变量中。在这种情况下，目标和源会指向相同的内存位置
+
+```c#
+int 、[] marks = new int[]  { 99,  98, 92, 97, 95};
+int[] score = marks;
+```
+
+当创建一个数组时，C# 编译器会根据数组类型隐式初始化每个数组元素为一个默认值。例如，int 数组的所有元素都会被初始化为 0
+
+#### 访问
+
+```c#
+double salary = balance[9];
+```
+
+### 多维数组
+
+多维数组又称为矩形数组
+
+声明一个 string 变量的二维数组，如下：
+
+```c#
+string [,] names;
+```
+
+![C# 中的二维数组](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/two_dimensional_arrays.jpg)
+
+或者，声明一个 int 变量的三维数组，如下：
+
+```c#
+int [ , , ] m;
+```
+
+#### 初始化二维数组
+
+多维数组可以通过在括号内为每行指定值来进行初始化。下面是一个带有 3 行 4 列的数组。
+
+```c#
+int [,] a = new int [3,4] {
+ {0, 1, 2, 3} ,   /*  初始化索引号为 0 的行 */
+ {4, 5, 6, 7} ,   /*  初始化索引号为 1 的行 */
+ {8, 9, 10, 11}   /*  初始化索引号为 2 的行 */
+};
+```
+
+#### 访问二维数组元素
+
+二维数组中的元素是通过使用下标（即数组的行索引和列索引）来访问的。例如：
+
+```c#
+int val = a[2,3];
+```
+
+### 交错数组
+
+交错数组就是数组的数组
+
+可以声明一个带有 **int** 值的交错数组 *scores*，如下所示：
+
+```c#
+int [][] scores;
+```
+
+第一个中括号中的数字为数组的长度
+
+声明一个数组不会在内存中创建数组。
+
+创建上面的数组：
+
+```C#
+int[][] scores = new int[5][];
+for (int i = 0; i < scores.Length; i++) 
+{
+   scores[i] = new int[4];
+}
+```
+
+初始化一个交错数组，如下所示：
+
+```c#
+int[][] scores = new int[2][]{new int[]{92,93,94},new int[]{85,66,87,88}};
+```
+
+其中，scores 是一个由两个整型数组组成的数组 -- scores[0] 是一个带有 3 个整数的数组，scores[1] 是一个带有 4 个整数的数组。
+
+有例：
+
+```c#
+using System;
+
+namespace ArrayApplication
+{
+    class MyArray
+    {
+        static void Main(string[] args)
+        {
+            /* 一个由 5 个整型数组组成的交错数组 */
+            int[][] a = new int[][]{new int[]{0,0},new int[]{1,2},
+            new int[]{2,4},new int[]{ 3, 6 }, new int[]{ 4, 8 } };
+
+            int i, j;
+
+            /* 输出数组中每个元素的值 */
+            for (i = 0; i < 5; i++)
+            {
+                for (j = 0; j < 2; j++)
+                {
+                    Console.WriteLine("a[{0}][{1}] = {2}", i, j, a[i][j]);
+                }
+            }
+           Console.ReadKey();
+        }
+    }
+}
+```
+
+### Array 类
+
+Array 类是 C# 中所有数组的基类，它是在 System 命名空间中定义。Array 类提供了各种用于数组的属性和方法。
+
+#### 属性
+
+- ***Length***
+    - 数组长度，32 位整数
+- ***LongLength***
+    - 数组长度，64 位整数
+- ***Rank***
+    - 数组的秩，即维度数
+- ***IsReadOnly***
+    - 数组是否为只读
+- ***IsFixedSize***
+    - 数组大小是否固定
+
+#### 方法
+
+`list` 代表数组实例
+
+- ***list.GetValue(int index)***
+    - 获取一维数组中指定位置的元素值
+- ***list.SetValue(object? value, int index)***
+    - 给一维数组中指定位置的元素设置值。索引由一个 32 位整数指定
+- ***Array.Clear(Array array, int startIndex, int length)***
+    - 删除数组中的所有元素
+- ***list.IndexOf(Array array, object? value)***
+    - 获取指定数组指定元素的索引
+- ***list.LastIndexOf(Array array, object? value)***
+    - 获取指定数组指定元素出现的**最后位置**的索引
+- ***Array.Sort(Array array)***
+    - 顺序排序
+- ***Array.Reverse(Array array)***
+    - 将数组倒置
+- ***list.GetLength(int dimension)***
+    - 查询数组指定秩的元素数量
+- ***GetLongLength()***
+- ***FindIndex()***
+- ***Copy()***
+- ***CopyTo()***
+- ***Clone()***
+- ***ConstrainedCopy()***
+- ***BinarySearch()***
+- ***GetLowerBound()***
+- ***GetUpperBound()***
+
+
+| 序号 | 方法 & 描述                                                  |
+| :--- | :----------------------------------------------------------- |
+| 1    | **Clear()** 根据元素的类型，设置数组中某个范围的元素为零、为 false 或者为 null。 |
+| 2    | **Copy(Array, Array, Int32)** 从数组的第一个元素开始复制某个范围的元素到另一个数组的第一个元素位置。长度由一个 32 位整数指定。 |
+| 3    | **CopyTo(Array, Int32)** 从当前的一维数组中复制所有的元素到一个指定的一维数组的指定索引位置。索引由一个 32 位整数指定。 |
+| 4    | **GetLength** 获取一个 32 位整数，该值表示指定维度的数组中的元素总数。 |
+| 5    | **GetLongLength** 获取一个 64 位整数，该值表示指定维度的数组中的元素总数。 |
+| 6    | **GetLowerBound** 获取数组中指定维度的下界。                 |
+| 7    | **GetType** 获取当前实例的类型。从对象（Object）继承。       |
+| 8    | **GetUpperBound** 获取数组中指定维度的上界。                 |
+| 9    | **GetValue(Int32)** 获取一维数组中指定位置的值。索引由一个 32 位整数指定。 |
+| 10   | **IndexOf(Array, Object)** 搜索指定的对象，返回整个一维数组中第一次出现的索引。 |
+| 11   | **Reverse(Array)** 逆转整个一维数组中元素的顺序。            |
+| 12   | **SetValue(Object, Int32)** 给一维数组中指定位置的元素设置值。索引由一个 32 位整数指定。 |
+| 13   | **Sort(Array)** 使用数组的每个元素的 IComparable 实现来排序整个一维数组中的元素。 |
+| 14   | **ToString** 返回一个表示当前对象的字符串。从对象（Object）继承。 |
