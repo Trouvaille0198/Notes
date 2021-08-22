@@ -1,5 +1,4 @@
 # BasicGrammar
-
 ## 认识
 
 ### 简介
@@ -1296,40 +1295,1491 @@ Array 类是 C# 中所有数组的基类，它是在 System 命名空间中定�
     - 给一维数组中指定位置的元素设置值。索引由一个 32 位整数指定
 - ***Array.Clear(Array array, int startIndex, int length)***
     - 删除数组中的所有元素
-- ***list.IndexOf(Array array, object? value)***
+- ***Array.IndexOf(T[] array, object? value)***
     - 获取指定数组指定元素的索引
-- ***list.LastIndexOf(Array array, object? value)***
+- ***Array.LastIndexOf(T[] array, object? value)***
     - 获取指定数组指定元素出现的**最后位置**的索引
-- ***Array.Sort(Array array)***
+- ***Array.Sort(T[] array)***
     - 顺序排序
-- ***Array.Reverse(Array array)***
+- ***Array.Reverse(T[] array)***
     - 将数组倒置
 - ***list.GetLength(int dimension)***
     - 查询数组指定秩的元素数量
-- ***GetLongLength()***
-- ***FindIndex()***
-- ***Copy()***
-- ***CopyTo()***
+- ***list.GetLongLength(int dimension)***
+    - 查询数组指定秩的元素数量，64 位整数
+- ***Array.FindIndex(T[] array, int startIndex, int count, Predicate\<T\> match)***
+    - 搜索指定元素，返回索引（用法存疑）
+- ***Array.Copy(Array sourceArray, Array destinationArray, int length)***
+    - 将 `SourceArray` 拷贝到 `destinationArray` 上
+- ***list.CopyTo(Array array, int index)***
+    - 将 `list` 拷贝至 `array`（从 `array` 索引为 `index` 的位上开始）
 - ***Clone()***
 - ***ConstrainedCopy()***
 - ***BinarySearch()***
 - ***GetLowerBound()***
 - ***GetUpperBound()***
 
+```C#
+using System;
+namespace TypeConversionApplication
+{
+    class ExplicitConversion
+    {
+        static void Main(string[] args)
+        {
+            int[] list;
 
-| 序号 | 方法 & 描述                                                  |
-| :--- | :----------------------------------------------------------- |
-| 1    | **Clear()** 根据元素的类型，设置数组中某个范围的元素为零、为 false 或者为 null。 |
-| 2    | **Copy(Array, Array, Int32)** 从数组的第一个元素开始复制某个范围的元素到另一个数组的第一个元素位置。长度由一个 32 位整数指定。 |
-| 3    | **CopyTo(Array, Int32)** 从当前的一维数组中复制所有的元素到一个指定的一维数组的指定索引位置。索引由一个 32 位整数指定。 |
-| 4    | **GetLength** 获取一个 32 位整数，该值表示指定维度的数组中的元素总数。 |
-| 5    | **GetLongLength** 获取一个 64 位整数，该值表示指定维度的数组中的元素总数。 |
-| 6    | **GetLowerBound** 获取数组中指定维度的下界。                 |
-| 7    | **GetType** 获取当前实例的类型。从对象（Object）继承。       |
-| 8    | **GetUpperBound** 获取数组中指定维度的上界。                 |
-| 9    | **GetValue(Int32)** 获取一维数组中指定位置的值。索引由一个 32 位整数指定。 |
-| 10   | **IndexOf(Array, Object)** 搜索指定的对象，返回整个一维数组中第一次出现的索引。 |
-| 11   | **Reverse(Array)** 逆转整个一维数组中元素的顺序。            |
-| 12   | **SetValue(Object, Int32)** 给一维数组中指定位置的元素设置值。索引由一个 32 位整数指定。 |
-| 13   | **Sort(Array)** 使用数组的每个元素的 IComparable 实现来排序整个一维数组中的元素。 |
-| 14   | **ToString** 返回一个表示当前对象的字符串。从对象（Object）继承。 |
+            Console.WriteLine("Sort");
+            list = new int[] { 1, 5, 2, 6, 3 };
+            Array.Sort(list);
+            foreach (int x in list)
+            {
+
+                Console.WriteLine(x);
+            }
+
+
+            Console.WriteLine("Reverse");
+            list = new int[] { 1, 5, 2, 6, 3 };
+            Array.Reverse(list);
+            foreach (int x in list)
+            {
+
+                Console.WriteLine(x);
+            }
+
+
+            Console.WriteLine("Clear");
+            list = new int[] { 1, 5, 2, 6, 3 };
+            Array.Clear(list, 0, list.Length);
+            foreach (int x in list)
+            {
+
+                Console.WriteLine(x);
+            }
+
+
+            Console.WriteLine("GetValue");
+            list = new int[] { 1, 5, 2, 6, 3 };
+            Console.WriteLine(list.GetValue(0));
+
+
+            Console.WriteLine("SetValue");
+            list = new int[] { 1, 5, 2, 6, 3 };
+            list.SetValue(100, 0);
+            Console.WriteLine(list[0]);
+
+
+            Console.WriteLine("IndexOf");
+            list = new int[] { 1, 5, 2, 6, 3, 1 };
+            Console.WriteLine(Array.IndexOf(list, 1));
+
+
+            Console.WriteLine("LastIndexOf");
+            list = new int[] { 1, 5, 2, 6, 3, 1 };
+            Console.WriteLine(Array.LastIndexOf(list, 1));
+
+
+            Console.WriteLine("GetLength");
+            int[,] list2 = new int[,] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+            Console.WriteLine(list2.GetLength(0)); // 秩为0的元素数量，为3
+            Console.WriteLine(list2.GetLength(1)); // 秩为1的元素数量，为2
+
+            Console.WriteLine("Copy");
+            list = new int[] { 1, 5, 2, 6, 3, 1 };
+            int[] listCopy = new int[10];
+            Array.Copy(list, listCopy, 4);
+            foreach (int i in listCopy)
+            {
+                Console.WriteLine(i);
+            }
+
+            Console.WriteLine("CopyTo");
+            list = new int[] { 1, 5, 2, 6, 3, 1 };
+            int[] listCopy2 = new int[10];
+            list.CopyTo(listCopy2, 1);
+            foreach (int i in listCopy2)
+            {
+                Console.WriteLine(i); //0 1 5 2 6 3 1 0 0 0
+            }
+
+            // Console.ReadKey();
+        }
+    }
+}
+```
+
+## 字符串 String
+
+可以使用字符数组来表示字符串，但是更常见的做法是使用 **string** 关键字来声明一个字符串变量。
+
+string 关键字是 **System.String** 类的别名。
+
+### 创建
+
+可以使用以下方法之一来创建 string 对象：
+
+- 通过给 String 变量指定一个字符串
+- 通过使用 String 类构造函数
+- 通过使用字符串串联运算符（ + ）
+- 通过检索属性或调用一个返回字符串的方法
+- 通过格式化方法来转换一个值或对象为它的字符串表示形式
+
+```c#
+using System;
+
+namespace StringApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           //字符串，字符串连接
+            string fname, lname;
+            fname = "Rowan";
+            lname = "Atkinson";
+
+            string fullname = fname + lname;
+            Console.WriteLine("Full Name: {0}", fullname);
+
+            //通过使用 string 构造函数
+            char[] letters = { 'H', 'e', 'l', 'l','o' };
+            string greetings = new string(letters);
+            Console.WriteLine("Greetings: {0}", greetings);
+
+            //方法返回字符串
+            string[] sarray = { "Hello", "From", "Tutorials", "Point" };
+            string message = String.Join(" ", sarray);
+            Console.WriteLine("Message: {0}", message);
+
+            //用于转化值的格式化方法
+            DateTime waiting = new DateTime(2012, 10, 10, 17, 58, 1);
+            string chat = String.Format("Message sent at {0:t} on {0:D}",
+            waiting);
+            Console.WriteLine("Message: {0}", chat);
+            Console.ReadKey() ;
+        }
+    }
+}
+```
+
+输出
+
+```
+Full Name: RowanAtkinson
+Greetings: Hello
+Message: Hello From Tutorials Point
+Message: Message sent at 17:58 on Wednesday, 10 October 2012
+```
+
+### 属性
+
+- ***Length***
+    - 字符串长度
+
+### 方法
+
+- ***ToUpper()***
+    - 小写转大写
+- ***ToLower()***
+    - 大写转小写
+- ***Equals(String? value, StringComparison comparisonType)***
+    - 是否与 `value`  相同
+    - *StringComparison comparisonType*
+        - `StringComparison.OrdinalIgnoreCase` 不区分大小写
+        - `StringComparison.Ordinal` 区分大小写
+- ***Spilt(String? separator, StringSplitOptions options = StringSplitOptions.None)***
+    - 根据 `separator` 分割字符串，返回字符串类型的数组
+    - *StringSplitOptions options*
+        - `StringSplitOptions.RemoveEmptyEntries` 移除空字符串
+- ***SubString(int startIndex)***
+    - 截取字符串，在截取的时候包含截取的索引位置
+    - 返回从 `startIndex` 后的字符串
+- ***IndexOf(char value)***
+    - 返回 `value` 在字符串中的位置索引
+- ***LastIndexOf()(char value)***
+    - 返回 `value` 在最后出现在字符串中的位置索引
+- ***StartsWith(char value)***
+    - 判断字符串是否以 `value` 开头
+- ***Replace(char oldChar, char newChar)***
+    - 替换指定字符串
+- ***Contains(char value)***
+    - 判断字符串是否包含指定的子字符串 `value`
+- ***Trim()***
+    - 掉字符串前后的空格
+- ***TrimStart() 和 TrimEnd()***
+    - 去掉字符串前面的空格，去掉字符串后面的空格
+- ***IsNullOrEmpty()***
+    - 判断字符串是否为空
+- ***string.Join(char separator, string[] str)***
+    - 数组 `str` 按照指定的字符串 `separator` 连接，并返回一个字符串
+
+## 结构体 struct
+
+### 定义
+
+```C#
+struct Books
+{
+   public string title;
+   public string author;
+   public string subject;
+   public int book_id;
+};  
+```
+
+有例：
+
+```c#
+public class testStructure
+{
+   public static void Main(string[] args)
+   {
+
+      Books Book1;        /* 声明 Book1，类型为 Books */
+      Books Book2;        /* 声明 Book2，类型为 Books */
+
+      /* book 1 详述 */
+      Book1.title = "C Programming";
+      Book1.author = "Nuha Ali";
+      Book1.subject = "C Programming Tutorial";
+      Book1.book_id = 6495407;
+
+      /* book 2 详述 */
+      Book2.title = "Telecom Billing";
+      Book2.author = "Zara Ali";
+      Book2.subject =  "Telecom Billing Tutorial";
+      Book2.book_id = 6495700;
+
+      Console.ReadKey();
+
+   }
+}
+```
+
+### 特点
+
+- 结构可带有方法、字段、索引、属性、运算符方法和事件。
+- 结构可定义构造函数，但不能定义析构函数。但是不能为结构定义无参构造函数。无参构造函数(默认)是自动定义的，且不能被改变。
+- 与类不同，结构不能继承其他的结构或类。
+- 结构不能作为其他结构或类的基础结构。
+- 结构可实现一个或多个接口。
+- 结构成员不能指定为 abstract、virtual 或 protected。
+- 当您使用 **New** 操作符创建一个结构对象时，会调用适当的构造函数来创建结构。与类不同，结构可以不使用 New 操作符即可被实例化。
+- 如果不使用 New 操作符，只有在所有的字段都被初始化之后，字段才被赋值，对象才被使用。
+
+有例：
+
+```c#
+struct Books
+{
+   private string title;
+   private string author;
+   private string subject;
+   private int book_id;
+   public void setValues(string t, string a, string s, int id)
+   {
+      title = t;
+      author = a;
+      subject = s;
+      book_id =id;
+   }
+   public void display()
+   {
+      Console.WriteLine("Title : {0}", title);
+      Console.WriteLine("Author : {0}", author);
+      Console.WriteLine("Subject : {0}", subject);
+      Console.WriteLine("Book_id :{0}", book_id);
+   }
+
+}; 
+```
+
+### 类与结构体的不同点
+
+- 类是引用类型，结构是值类型。
+- 结构不支持继承。
+- 结构不能声明默认的构造函数。
+- 结构体中声明的字段无法赋予初值，类可以
+
+## 枚举 enum
+
+枚举是一组命名整型常量。枚举类型是使用 **enum** 关键字声明的
+
+### 声明
+
+```c#
+enum <enum_name>
+{ 
+    enumeration list 
+};
+```
+
+- *enum_name* 指定枚举的类型名称。
+- *enumeration list* 是一个用逗号分隔的标识符列表。
+
+枚举列表中的每个符号代表一个整数值，一个比它前面的符号大的整数值。
+
+默认情况下，第一个枚举符号的值是 0
+
+```C#
+enum Days { Sun, Mon, tue, Wed, thu, Fri, Sat };
+```
+
+有例：
+
+```c#
+using System;
+
+public class EnumTest
+{
+    enum Day { Sun, Mon, Tue, Wed, Thu, Fri, Sat };
+
+    static void Main()
+    {
+        int x = (int)Day.Sun;
+        int y = (int)Day.Fri;
+        Console.WriteLine("Sun = {0}", x);
+        Console.WriteLine("Fri = {0}", y);
+    }
+}
+```
+
+## 类 class
+
+你定义一个类时，你定义了一个数据类型的蓝图
+
+## 定义
+
+```c#
+<access specifier> class  class_name
+{
+    // member variables
+    <access specifier> <data type> variable1;
+    <access specifier> <data type> variable2;
+    ...
+    <access specifier> <data type> variableN;
+    // member methods
+    <access specifier> <return type> method1(parameter_list)
+    {
+        // method body
+    }
+    <access specifier> <return type> method2(parameter_list)
+    {
+        // method body
+    }
+    ...
+    <access specifier> <return type> methodN(parameter_list)
+    {
+        // method body
+    }
+}
+```
+
+- 访问标识符 `<access specifier>` 指定了对类及其成员的访问规则。如果没有指定，则使用默认的访问标识符。类的默认访问标识符是 **internal**，成员的默认访问标识符是 **private**。
+- 数据类型 `<data type>` 指定了变量的类型，返回类型 `<return type>` 指定了返回的方法返回的数据类型。
+- 如果要访问类的成员，你要使用点（.）运算符。点运算符链接了对象的名称和成员的名称
+
+### 构造函数
+
+构造函数是类的一个特殊的成员函数，当创建类的新对象时执行。
+
+构造函数的名称与类的名称完全相同，它没有任何返回类型
+
+```c#
+using System;
+namespace LineApplication
+{
+   class Line
+   {
+      private double length;   // 线条的长度
+      public Line()
+      {
+         Console.WriteLine("对象已创建");
+      }
+
+      public void setLength( double len )
+      {
+         length = len;
+      }
+      public double getLength()
+      {
+         return length;
+      }
+
+      static void Main(string[] args)
+      {
+         Line line = new Line();    
+         // 设置线条长度
+         line.setLength(6.0);
+         Console.WriteLine("线条的长度： {0}", line.getLength());
+         Console.ReadKey();
+      }
+   }
+}
+```
+
+默认的构造函数没有任何参数。有参数的构造函数叫做参数化构造函数
+
+```C#
+public Line(double len)  // 参数化构造函数
+{
+    Console.WriteLine("对象已创建，length = {0}", len);
+    length = len;
+}
+```
+
+### 析构函数
+
+当类的对象超出范围时，析构函数执行
+
+析构函数的名称是在类的名称前加上一个波浪形（~）作为前缀，它不返回值，也不带任何参数
+
+析构函数用于在结束程序（比如关闭文件、释放内存等）之前释放资源。析构函数不能继承或重载。
+
+```c#
+~Line() //析构函数
+{
+    Console.WriteLine("对象已删除");
+}
+```
+
+### 静态成员
+
+使用 **static** 关键字把类成员定义为静态的
+
+当我们声明一个类成员为静态时，意味着无论有多少个类的对象被创建，只会有一个该静态成员的副本。
+
+静态变量用于定义常量，因为它们的值可以通过直接调用类而不需要创建类的实例来获取
+
+静态变量可在成员函数或类的定义外部进行初始化，也可以在类的定义内部初始化
+
+```c#
+class StaticVar
+{
+    public static int num;
+    public void count()
+    {
+        num++;
+    }
+    public int getNum()
+    {
+        return num;
+    }
+}
+// 调用 count() 时，所有实例的 num 都会 ++
+```
+
+### 继承
+
+```c#
+<访问修饰符符> class <基类>
+{
+ ...
+}
+
+class <派生类> : <基类>
+{
+ ...
+}
+```
+
+有例：
+
+```c#
+using System;
+namespace InheritanceApplication
+{
+   class Shape
+   {
+      public void setWidth(int w)
+      {
+         width = w;
+      }
+      public void setHeight(int h)
+      {
+         height = h;
+      }
+      protected int width;
+      protected int height;
+   }
+
+   // 派生类
+   class Rectangle: Shape
+   {
+      public int getArea()
+      {
+         return (width * height);
+      }
+   }
+   
+   class RectangleTester
+   {
+      static void Main(string[] args)
+      {
+         Rectangle Rect = new Rectangle();
+
+         Rect.setWidth(5);
+         Rect.setHeight(7);
+
+         // 打印对象的面积
+         Console.WriteLine("总面积： {0}",  Rect.getArea());
+         Console.ReadKey();
+      }
+   }
+}
+```
+
+#### 要点
+
+- 父类对象应在子类对象创建之前被创建
+
+#### 多重继承
+
+多重继承指的是一个类别可以同时从多于一个父类继承行为与特征的功能。而单一继承指一个类别只可以继承自一个父类。
+
+```c#
+using System;
+namespace InheritanceApplication
+{
+   class Shape
+   {
+      public void setWidth(int w)
+      {
+         width = w;
+      }
+      public void setHeight(int h)
+      {
+         height = h;
+      }
+      protected int width;
+      protected int height;
+   }
+
+   // 基类 PaintCost
+   public interface PaintCost
+   {
+      int getCost(int area);
+
+   }
+   // 派生类
+   class Rectangle : Shape, PaintCost
+   {
+      public int getArea()
+      {
+         return (width * height);
+      }
+      public int getCost(int area)
+      {
+         return area * 70;
+      }
+   }
+   class RectangleTester
+   {
+      static void Main(string[] args)
+      {
+         Rectangle Rect = new Rectangle();
+         int area;
+         Rect.setWidth(5);
+         Rect.setHeight(7);
+         area = Rect.getArea();
+         // 打印对象的面积
+         Console.WriteLine("总面积： {0}",  Rect.getArea());
+         Console.WriteLine("油漆总成本： ${0}" , Rect.getCost(area));
+         Console.ReadKey();
+      }
+   }
+}
+```
+
+### 多态
+
+多态是同一个行为具有多个不同表现形式或形态的能力，往往表现为“一个接口，多个功能”
+
+多态性可以是静态的或动态的。
+
+- 在**静态多态性**中，函数的响应是在编译时发生的。
+- 在**动态多态性**中，函数的响应是在运行时发生的。
+
+#### 静态多态性
+
+在编译时，函数和对象的连接机制被称为早期绑定，也被称为静态绑定
+
+##### 函数重载
+
+可以在同一个范围内对相同的函数名有多个定义
+
+函数的定义必须彼此不同，可以是参数列表中的参数类型不同，也可以是参数个数不同。
+
+不能重载只有返回类型不同的函数声明
+
+```c#
+public class TestData  
+{  
+    public int Add(int a, int b, int c)  
+    {  
+        return a + b + c;  
+    }  
+    public int Add(int a, int b)  
+    {  
+        return a + b;  
+    }  
+}
+```
+
+##### 运算符重载
+
+重载运算符是具有特殊名称的函数，是通过关键字 **operator** 后跟运算符的符号来定义的。
+
+与其他函数一样，重载运算符有返回类型和参数列表。
+
+```c#
+public static Box operator+ (Box b, Box c)
+{
+   Box box = new Box();
+   box.length = b.length + c.length;
+   box.breadth = b.breadth + c.breadth;
+   box.height = b.height + c.height;
+   return box;
+}
+// 此函数为用户自定义的类 Box 实现了加法运算符（+）。它把两个 Box 对象的属性相加，并返回相加后的 Box 对象。
+```
+
+有例：
+
+```c#
+using System;
+
+namespace OperatorOvlApplication
+{
+   class Box
+   {
+      private double length;      // 长度
+      private double breadth;     // 宽度
+      private double height;      // 高度
+
+      public double getVolume()
+      {
+         return length * breadth * height;
+      }
+      public void setLength( double len )
+      {
+         length = len;
+      }
+
+      public void setBreadth( double bre )
+      {
+         breadth = bre;
+      }
+
+      public void setHeight( double hei )
+      {
+         height = hei;
+      }
+      // 重载 + 运算符来把两个 Box 对象相加
+      public static Box operator+ (Box b, Box c)
+      {
+         Box box = new Box();
+         box.length = b.length + c.length;
+         box.breadth = b.breadth + c.breadth;
+         box.height = b.height + c.height;
+         return box;
+      }
+
+   }
+
+   class Tester
+   {
+      static void Main(string[] args)
+      {
+         Box Box1 = new Box();         // 声明 Box1，类型为 Box
+         Box Box2 = new Box();         // 声明 Box2，类型为 Box
+         Box Box3 = new Box();         // 声明 Box3，类型为 Box
+         double volume = 0.0;          // 体积
+
+         // Box1 详述
+         Box1.setLength(6.0);
+         Box1.setBreadth(7.0);
+         Box1.setHeight(5.0);
+
+         // Box2 详述
+         Box2.setLength(12.0);
+         Box2.setBreadth(13.0);
+         Box2.setHeight(10.0);
+
+         // Box1 的体积
+         volume = Box1.getVolume();
+         Console.WriteLine("Box1 的体积： {0}", volume);
+
+         // Box2 的体积
+         volume = Box2.getVolume();
+         Console.WriteLine("Box2 的体积： {0}", volume);
+
+         // 把两个对象相加
+         Box3 = Box1 + Box2;
+
+         // Box3 的体积
+         volume = Box3.getVolume();
+         Console.WriteLine("Box3 的体积： {0}", volume);
+         Console.ReadKey();
+      }
+   }
+}
+```
+
+##### 可重载和不可重载的运算符
+
+| 运算符                                | 描述                                         |
+| :------------------------------------ | :------------------------------------------- |
+| +, -, !, ~, ++, --                    | 这些一元运算符只有一个操作数，且可以被重载。 |
+| +, -, *, /, %                         | 这些二元运算符带有两个操作数，且可以被重载。 |
+| ==, !=, <, >, <=, >=                  | 这些比较运算符可以被重载。                   |
+| &&, \|\|                              | 这些条件逻辑运算符不能被直接重载。           |
+| +=, -=, *=, /=, %=                    | 这些赋值运算符不能被重载。                   |
+| =, ., ?:, ->, new, is, sizeof, typeof | 这些运算符不能被重载。                       |
+
+有例：
+
+```c#
+public static Box operator+ (Box b, Box c)
+{
+    Box box = new Box();
+    box.length = b.length + c.length;
+    box.breadth = b.breadth + c.breadth;
+    box.height = b.height + c.height;
+    return box;
+}
+
+public static bool operator == (Box lhs, Box rhs)
+{
+    bool status = false;
+    if (lhs.length == rhs.length && lhs.height == rhs.height
+        && lhs.breadth == rhs.breadth)
+    {
+        status = true;
+    }
+    return status;
+}
+public static bool operator !=(Box lhs, Box rhs)
+{
+    bool status = false;
+    if (lhs.length != rhs.length || lhs.height != rhs.height
+        || lhs.breadth != rhs.breadth)
+    {
+        status = true;
+    }
+    return status;
+}
+public static bool operator <(Box lhs, Box rhs)
+{
+    bool status = false;
+    if (lhs.length < rhs.length && lhs.height
+        < rhs.height && lhs.breadth < rhs.breadth)
+    {
+        status = true;
+    }
+    return status;
+}
+
+public static bool operator >(Box lhs, Box rhs)
+{
+    bool status = false;
+    if (lhs.length > rhs.length && lhs.height
+        > rhs.height && lhs.breadth > rhs.breadth)
+    {
+        status = true;
+    }
+    return status;
+}
+
+public static bool operator <=(Box lhs, Box rhs)
+{
+    bool status = false;
+    if (lhs.length <= rhs.length && lhs.height
+        <= rhs.height && lhs.breadth <= rhs.breadth)
+    {
+        status = true;
+    }
+    return status;
+}
+
+public static bool operator >=(Box lhs, Box rhs)
+{
+    bool status = false;
+    if (lhs.length >= rhs.length && lhs.height
+        >= rhs.height && lhs.breadth >= rhs.breadth)
+    {
+        status = true;
+    }
+    return status;
+}
+```
+
+
+
+#### 动态多态性
+
+动态多态性是通过 **抽象类** 和 **虚方法** 实现的。
+
+##### abstract
+
+使用关键字 **abstract** 创建抽象类，用于提供接口的部分类的实现
+
+当一个派生类继承自该抽象类时，实现即完成。
+
+**抽象类**包含抽象方法，抽象方法可被派生类实现。派生类具有更专业的功能。
+
+抽象类不能直接实例化，但允许派生出具体的，具有实际功能的类。
+
+**规则**
+
+- 不能创建一个抽象类的实例。
+- 不能在一个抽象类外部声明一个抽象方法。
+- 通过在类定义前面放置关键字 **sealed**，可以将类声明为**密封类**。当一个类被声明为 **sealed** 时，它不能被继承。抽象类不能被声明为 sealed。
+
+有例：
+
+```c#
+using System;
+namespace PolymorphismApplication
+{
+   abstract class Shape
+   {
+       abstract public int area();
+   }
+   class Rectangle:  Shape
+   {
+      private int length;
+      private int width;
+      public Rectangle( int a=0, int b=0)
+      {
+         length = a;
+         width = b;
+      }
+      public override int area()
+      {
+         Console.WriteLine("Rectangle 类的面积：");
+         return (width * length);
+      }
+   }
+
+   class RectangleTester
+   {
+      static void Main(string[] args)
+      {
+         Rectangle r = new Rectangle(10, 7);
+         double a = r.area();
+         Console.WriteLine("面积： {0}",a);
+         Console.ReadKey();
+      }
+   }
+}
+```
+
+##### virtual
+
+- 当有一个定义在类中的函数需要在继承类中实现时，可以使用**虚方法**。
+
+- 虚方法是使用关键字 **virtual** 声明的。
+
+- 虚方法可以在不同的继承类中有不同的实现。
+
+- 对虚方法的调用是在运行时发生的。
+
+以下实例创建了 Shape 基类，并创建派生类 Circle、 Rectangle、Triangle， Shape 类提供一个名为 Draw 的虚拟方法，在每个派生类中重写该方法以绘制该类的指定形状。
+
+```C#
+using System;
+using System.Collections.Generic;
+
+public class Shape
+{
+    public int X { get; private set; }
+    public int Y { get; private set; }
+    public int Height { get; set; }
+    public int Width { get; set; }
+   
+    // 虚方法
+    public virtual void Draw()
+    {
+        Console.WriteLine("执行基类的画图任务");
+    }
+}
+
+class Circle : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("画一个圆形");
+        base.Draw();
+    }
+}
+class Rectangle : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("画一个长方形");
+        base.Draw();
+    }
+}
+class Triangle : Shape
+{
+    public override void Draw()
+    {
+        Console.WriteLine("画一个三角形");
+        base.Draw();
+    }
+}
+```
+
+## 接口 interface
+
+接口定义了所有类继承接口时应遵循的语法合同。
+
+接口定义了语法合同 **"是什么"** 部分，派生类定义了语法合同 **"怎么做"** 部分。
+
+接口使得实现接口的类或结构**在形式上保持一致**。
+
+抽象类在某种程度上与接口类似，但是，它们大多只是用在当只有少数方法由基类声明由派生类实现时。
+
+接口本身并不实现任何功能，它只是和声明实现该接口的对象订立一个必须实现哪些行为的契约。
+
+### 定义
+使用 **interface** 关键字声明，它与类的声明类似。接口声明默认是 public 的
+```C#
+using System;  
+  
+interface IMyInterface  
+{  
+ // 接口成员  
+ void MethodToImplement();  
+}  
+```
+
+以上代码定义了接口 `IMyInterface`。通常接口命令以 **I** 字母开头，这个接口只有一个方法 `MethodToImplement()`，没有参数和返回值，当然可以按照需求设置参数和返回值
+```c#
+class InterfaceImplementer : IMyInterface  
+{  
+ static void Main()  
+ {  
+ InterfaceImplementer iImp = new InterfaceImplementer();  
+ iImp.MethodToImplement();  
+ }  
+  
+ public void MethodToImplement()  
+ {  
+ Console.WriteLine("MethodToImplement() called.");  
+ }  
+}
+```
+`InterfaceImplementer` 类实现了 `IMyInterface` 接口，接口的实现与类的继承语法格式类似：
+
+```C#
+class InterfaceImplementer : IMyInterface
+```
+
+继承接口后，我们需要实现接口的方法 `MethodToImplement()` , 方法名必须与接口定义的方法名一致
+
+### 继承
+
+以下实例定义了两个接口 IMyInterface 和 IParentInterface。
+
+如果一个接口继承其他接口，那么实现类或结构就需要实现所有接口的成员。
+
+以下实例 IMyInterface 继承了 IParentInterface 接口，因此接口实现类必须实现 MethodToImplement() 和 ParentInterfaceMethod() 方法：
+
+## 实例
+
+以下实例定义了两个接口 IMyInterface 和 IParentInterface。
+
+如果一个接口继承其他接口，那么实现类或结构就需要实现所有接口的成员。
+
+以下实例 IMyInterface 继承了 IParentInterface 接口，因此接口实现类必须实现 MethodToImplement() 和 ParentInterfaceMethod() 方法：
+
+```c#
+using System;
+
+interface IParentInterface
+{
+    void ParentInterfaceMethod();
+}
+
+interface IMyInterface : IParentInterface
+{
+    void MethodToImplement();
+}
+
+class InterfaceImplementer : IMyInterface
+{
+    static void Main()
+    {
+        InterfaceImplementer iImp = new InterfaceImplementer();
+        iImp.MethodToImplement();
+        iImp.ParentInterfaceMethod();
+    }
+
+    public void MethodToImplement()
+    {
+        Console.WriteLine("MethodToImplement() called.");
+    }
+
+    public void ParentInterfaceMethod()
+    {
+        Console.WriteLine("ParentInterfaceMethod() called.");
+    }
+}
+```
+
+实例输出结果为：
+
+```C#
+MethodToImplement() called.
+ParentInterfaceMethod() called.
+```
+
+## 命名空间
+
+命名空间的设计目的是提供一种让一组名称与其他名称分隔开的方式。
+
+在一个命名空间中声明的类的名称与另一个命名空间中声明的相同的类的名称不冲突
+
+## 定义
+
+以关键字 **namespace** 开始，后跟命名空间的名称
+
+```c#
+namespace namespace_name
+{
+   // 代码声明
+}
+```
+
+为了调用支持命名空间版本的函数或变量，会把命名空间的名称置于前面，如下所示：
+
+```C#
+namespace_name.item_name;
+```
+
+有例：
+
+```c#
+using System;
+namespace first_space
+{
+   class namespace_cl
+   {
+      public void func()
+      {
+         Console.WriteLine("Inside first_space");
+      }
+   }
+}
+namespace second_space
+{
+   class namespace_cl
+   {
+      public void func()
+      {
+         Console.WriteLine("Inside second_space");
+      }
+   }
+}  
+class TestClass
+{
+   static void Main(string[] args)
+   {
+      first_space.namespace_cl fc = new first_space.namespace_cl();
+      second_space.namespace_cl sc = new second_space.namespace_cl();
+      fc.func();
+      sc.func();
+      Console.ReadKey();
+   }
+}
+```
+
+### using 关键字
+
+**using** 关键字表明程序使用的是给定命名空间中的名称
+
+```c#
+using System;
+using first_space;
+using second_space;
+
+namespace first_space
+{
+   class abc
+   {
+      public void func()
+      {
+         Console.WriteLine("Inside first_space");
+      }
+   }
+}
+namespace second_space
+{
+   class efg
+   {
+      public void func()
+      {
+         Console.WriteLine("Inside second_space");
+      }
+   }
+}  
+class TestClass
+{
+   static void Main(string[] args)
+   {
+      abc fc = new abc();
+      efg sc = new efg();
+      fc.func();
+      sc.func();
+      Console.ReadKey();
+   }
+}
+```
+
+#### 嵌套命名空间
+
+命名空间可以被嵌套
+
+```C#
+namespace namespace_name1 
+{
+   // 代码声明
+   namespace namespace_name2 
+   {
+     // 代码声明
+   }
+}
+```
+
+有例：
+
+```C#
+using System;
+using SomeNameSpace;
+using SomeNameSpace.Nested;
+
+namespace SomeNameSpace
+{
+    public class MyClass
+    {
+        static void Main()
+        {
+            Console.WriteLine("In SomeNameSpace");
+            Nested.NestedNameSpaceClass.SayHello();
+        }
+    }
+
+    // 内嵌命名空间
+    namespace Nested  
+    {
+        public class NestedNameSpaceClass
+        {
+            public static void SayHello()
+            {
+                Console.WriteLine("In Nested");
+            }
+        }
+    }
+}
+```
+
+#### 用处
+
+**1. using指令：引入命名空间**
+
+这是最常见的用法，例如：
+
+```C#
+using System;
+using Namespace1.SubNameSpace;
+```
+
+**2. using static 指令：指定无需指定类型名称即可访问其静态成员的类型**
+
+```C#
+using static System.Math;var = PI; // 直接使用System.Math.PI
+```
+
+**3. 起别名**
+
+```C#
+using Project = PC.MyCompany.Project;
+```
+
+**4. using语句：将实例与代码绑定**
+
+```C#
+using (Font font3 = new Font("Arial", 10.0f),
+            font4 = new Font("Arial", 10.0f))
+{
+    // Use font3 and font4.
+}
+```
+
+代码段结束时，自动调用font3和font4的Dispose方法，释放实例。
+
+## 预处理指令
+
+预处理器指令指导编译器在实际编译开始之前对信息进行预处理
+
+所有的预处理器指令都是以 # 开始。且在一行上，只有空白字符可以出现在预处理器指令之前。预处理器指令不是语句，所以它们不以分号 `;` 结束。
+
+| 预处理器指令 | 描述                                                         |
+| :----------- | :----------------------------------------------------------- |
+| #define      | 用于定义一系列成为符号的字符。                               |
+| #undef       | 用于取消定义符号。                                           |
+| #if          | 用于测试符号是否为真。                                       |
+| #else        | 用于创建复合条件指令，与 #if 一起使用。                      |
+| #elif        | 用于创建复合条件指令。                                       |
+| #endif       | 定一个条件指令的结束。                                       |
+| #line        | 允许修改编译器的行数以及（可选地）输出错误和警告的文件名。   |
+| #error       | 允许从代码的指定位置生成一个错误。                           |
+| #warning     | 允许从代码的指定位置生成一级警告。                           |
+| #region      | 允许在使用 Visual Studio Code Editor 的大纲特性时，指定一个可展开或折叠的代码块。 |
+| #endregion   | 标识着 #region 块的结束。                                    |
+
+### #define 指令
+
+\#define 预处理器指令创建符号常量
+
+```C#
+#define symbol
+```
+
+有例：
+
+```C#
+#define PI
+using System;
+namespace PreprocessorDAppl
+{
+   class Program
+   {
+      static void Main(string[] args)
+      {
+         #if (PI)
+            Console.WriteLine("PI is defined");
+         #else
+            Console.WriteLine("PI is not defined");
+         #endif
+         Console.ReadKey();
+      }
+   }
+}
+```
+
+输出
+
+```C#
+PI is defined
+```
+
+### 条件指令
+
+条件指令用于测试符号是否为真。如果为真，编译器会执行 #if 和下一个指令之间的代码
+
+```c#
+#if symbol [operator symbol]...
+```
+
+其中，*symbol* 是要测试的符号名称。也可以使用 true 和 false，或在符号前放置否定运算符。
+
+常见运算符有：
+
+- == (等于)
+- != (不等于)
+- && (与)
+- || (或)
+
+您也可以用括号把符号和运算符进行分组。条件指令用于在调试版本或编译指定配置时编译代码。一个以 **#if** 指令开始的条件指令，必须显示地以一个 **#endif** 指令终止。
+
+```c#
+#define DEBUG
+#define VC_V10
+using System;
+public class TestClass
+{
+   public static void Main()
+   {
+
+      #if (DEBUG && !VC_V10)
+         Console.WriteLine("DEBUG is defined");
+      #elif (!DEBUG && VC_V10)
+         Console.WriteLine("VC_V10 is defined");
+      #elif (DEBUG && VC_V10)
+         Console.WriteLine("DEBUG and VC_V10 are defined");
+      #else
+         Console.WriteLine("DEBUG and VC_V10 are not defined");
+      #endif
+      Console.ReadKey();
+   }
+}
+```
+
+输出
+
+```c#
+DEBUG and VC_V10 are defined
+```
+
+## 异常处理
+
+关键词
+
+- **try**：一个 try 块标识了一个将被激活的特定的异常的代码块。后跟一个或多个 catch 块。
+- **catch**：程序通过异常处理程序捕获异常。catch 关键字表示异常的捕获。
+- **finally**：finally 块用于执行给定的语句，不管异常是否被抛出都会执行。例如，如果您打开一个文件，不管是否出现异常文件都要被关闭。
+- **throw**：当问题出现时，程序抛出一个异常。使用 throw 关键字来完成。
+
+### 语法
+
+可以列出多个 catch 语句捕获不同类型的异常，以防 try 块在不同的情况下生成多个异常
+
+```c#
+try
+{
+   // 引起异常的语句
+}
+catch( ExceptionName e1 )
+{
+   // 错误处理代码
+}
+catch( ExceptionName e2 )
+{
+   // 错误处理代码
+}
+catch( ExceptionName eN )
+{
+   // 错误处理代码
+}
+finally
+{
+   // 要执行的语句
+}
+```
+
+### 异常类
+
+C# 异常是使用类来表示的，他们主要是直接或间接地派生于 **System.Exception** 类
+
+**System.ApplicationException** 和 **System.SystemException** 类是派生于 System.Exception 类的异常类。
+
+- **System.ApplicationException** 类支持由应用程序生成的异常。所以程序员定义的异常都应派生自该类。
+
+- **System.SystemException** 类是所有预定义的系统异常的基类。
+
+    - | 异常类                            | 描述                                           |
+        | :-------------------------------- | :--------------------------------------------- |
+        | System.IO.IOException             | 处理 I/O 错误。                                |
+        | System.IndexOutOfRangeException   | 处理当方法指向超出范围的数组索引时生成的错误。 |
+        | System.ArrayTypeMismatchException | 处理当数组类型不匹配时生成的错误。             |
+        | System.NullReferenceException     | 处理当依从一个空对象时生成的错误。             |
+        | System.DivideByZeroException      | 处理当除以零时生成的错误。                     |
+        | System.InvalidCastException       | 处理在类型转换期间生成的错误。                 |
+        | System.OutOfMemoryException       | 处理空闲内存不足生成的错误。                   |
+        | System.StackOverflowException     | 处理栈溢出生成的错误。                         |
+
+有例：
+
+```c#
+using System;
+namespace ErrorHandlingApplication
+{
+    class DivNumbers
+    {
+        int result;
+        DivNumbers()
+        {
+            result = 0;
+        }
+        public void division(int num1, int num2)
+        {
+            try
+            {
+                result = num1 / num2;
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine("Exception caught: {0}", e);
+            }
+            finally
+            {
+                Console.WriteLine("Result: {0}", result);
+            }
+
+        }
+        static void Main(string[] args)
+        {
+            DivNumbers d = new DivNumbers();
+            d.division(25, 0);
+            Console.ReadKey();
+        }
+    }
+}
+```
+
+### 创建自定义异常
+
+用户自定义的异常类是派生自 **ApplicationException** 类
+
+```C#
+using System;
+namespace UserDefinedException
+{
+   class TestTemperature
+   {
+      static void Main(string[] args)
+      {
+         Temperature temp = new Temperature();
+         try
+         {
+            temp.showTemp();
+         }
+         catch(TempIsZeroException e)
+         {
+            Console.WriteLine("TempIsZeroException: {0}", e.Message);
+         }
+         Console.ReadKey();
+      }
+   }
+}
+public class TempIsZeroException: ApplicationException
+{
+   public TempIsZeroException(string message): base(message)
+   {
+   }
+}
+public class Temperature
+{
+   int temperature = 0;
+   public void showTemp()
+   {
+      if(temperature == 0)
+      {
+         throw (new TempIsZeroException("Zero Temperature found"));
+      }
+      else
+      {
+         Console.WriteLine("Temperature: {0}", temperature);
+      }
+   }
+}
+```
+
+### 抛出对象
+
+如果异常是直接或间接派生自 **System.Exception** 类，您可以抛出一个对象。
+
+您可以在 catch 块中使用 throw 语句来抛出当前的对象
+
+```C#
+Catch(Exception e)
+{
+   // ...
+   Throw e
+}
+```
+

@@ -1,5 +1,4 @@
 # 程序基础
-
 <img src="http://image.trouvaille0198.top/662E827A-FA32-4464-B0BD-40087F429E98.jpg" alt="img" style="zoom:77%;" />
 
 ## 程序基本结构
