@@ -94,7 +94,7 @@ vi updateUnturned.sh
 ### 设置自动执行
 
 ```shell
-corntab -e  # 打开自动执行设置
+crontab -e  # 打开自动执行设置
 
 # * * * * * <执行对象>   用法: *(min) *(hour) *(day) *(month) *(year) 
 * * 1 * * ~/sh/updateUnturned.sh
