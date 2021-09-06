@@ -152,7 +152,7 @@ DejaVuSansMono Nerd Font
 MesloLGM NF
 ```
 
-# 添加 SSH
+## 添加 SSH
 
 ```json
 {

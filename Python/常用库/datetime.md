@@ -49,8 +49,9 @@ print(a<b)
 ## 方法
 
 - ***.isoformat()***
+    
     - 返回 ISO 格式字符串
-
+    
 - ***.isocalendar()***
     - 返回 ISO 格式元组
     
@@ -118,3 +119,15 @@ print(a)
     - 将一个 date 对象和一个 time 对象合并生成一个 datetime 对象
 - ***.now()***
     - 返回当前日期时间的 datetime 对象
+
+```
+loguru==0.5.3
+pydantic==1.8.1
+jieba==0.42.1
+aiohttp==3.7.4.post0
+nb-cli
+nonebot-plugin-test
+nonebot-adapter-cqhttp
+nonebot_plugin_apscheduler
+```
+
