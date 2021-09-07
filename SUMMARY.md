@@ -1,5 +1,4 @@
 - [Help](markdown.md) 
-
 - [专业课]()
   - [计算机组成原理]()
     - [概论](Courses/计算机组成原理/1. 概论.md)
@@ -10,6 +9,8 @@
     - [总线系统](Courses/计算机组成原理/6. 总线系统.md)
     - [外围设备](Courses/计算机组成原理/7. 外围设备.md)
     - [输入输出系统](Courses/计算机组成原理/8. 输入输出系统.md)
+  - [算法设计与分析](Courses/算法设计与分析.md)
+  - [数字图像处理](Courses/数字图像处理.md)
   - [数据结构](Courses/DataStructure.md)
   - [计算机网络]()
     - [概述](Courses/计算机网络/1. 概述.md)
@@ -78,6 +79,8 @@
       - [tqdm](Python/常用库/tqdm.md)
       - [pygtrans](Python/常用库/pygtrans.md)
       - [faker](Python/常用库/faker.md)
+  - [图像处理]()
+      - [cv2](Python/图像处理/cv2.md)
 - [数据库]()
     - [MongoDB](DataBase/MongoDB.md) 	
     - [SQLite](DataBase/SQLite.md)
@@ -137,7 +140,6 @@
         - [伊利奥斯](Games/Overwatch/破坏球点位/伊利奥斯.md)
     - [文明六](Games/文明六.md)
       
-    
 - [诗]()
     - [传统诗](poerty/classic.md)
     - [现代诗](poetry/modern.md)
