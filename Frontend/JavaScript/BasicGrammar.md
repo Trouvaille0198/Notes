@@ -827,9 +827,9 @@ function foo() {
 }
 ```
 
-语句 `var x = 'Hello, ' + y;` 并不报错，原因是变量 `y` 在稍后申明了。但是 `console.log` 显示 `Hello, undefined`，说明变量 `y` 的值为`undefined`。这正是因为JavaScript引擎自动提升了变量 `y` 的声明，但不会提升变量 `y` 的赋值。
+语句 `var x = 'Hello, ' + y;` 并不报错，原因是变量 `y` 在稍后申明了。但是 `console.log` 显示 `Hello, undefined`，说明变量 `y` 的值为 `undefined`。这正是因为 JavaScript 引擎自动提升了变量 `y` 的声明，但不会提升变量 `y` 的赋值。
 
-由于 JavaScript 的这一怪异的“特性”，我们在函数内部定义变量时，请严格遵守“在函数内部首先申明所有变量”这一规则。最常见的做法是用一个`var`申明函数内部用到的所有变量
+由于 JavaScript 的这一怪异的“特性”，我们在函数内部定义变量时，请严格遵守“在函数内部首先申明所有变量”这一规则。最常见的做法是用一个 `var` 申明函数内部用到的所有变量
 
 ```javascript
 function foo() {
@@ -846,7 +846,7 @@ function foo() {
 
 ## 全局作用域
 
-不在任何函数内定义的变量就具有全局作用域。实际上，JavaScript默认有一个全局对象`window`，全局作用域的变量实际上被绑定到`window`的一个属性：
+不在任何函数内定义的变量就具有全局作用域。实际上，JavaScript默认有一个全局对象`window`，全局作用域的变量实际上被绑定到 `window` 的一个属性：
 
 例如，直接访问全局变量 `course` 和访问 `window.course` 是完全一样的。
 
@@ -891,9 +891,9 @@ MYAPP.foo = function () {
 
 许多著名的JavaScript库都是这么干的：jQuery，YUI，underscore等等
 
-## 局部作用域
+## 局部作用域 
 
-由于JavaScript的变量作用域实际上是函数内部，我们在`for`循环等语句块中是无法定义具有局部作用域的变量的：
+由于 JavaScript 的变量作用域实际上是函数内部，我们在 `for` 循环等语句块中是无法定义具有局部作用域的变量的：
 
 ```javascript
 function foo() {
@@ -904,7 +904,7 @@ function foo() {
 }
 ```
 
-为了解决块级作用域，ES6引入了新的关键字`let`，用`let`替代`var`可以申明一个块级作用域的变量：
+为了解决块级作用域，ES6引入了新的关键字 `let`，用 `let` 替代 `var` 可以**申明一个块级作用域的变量**：
 
 ```javascript
 function foo() {
@@ -916,6 +916,8 @@ function foo() {
     i += 1;
 }
 ```
+
+==let 的具体作用==：https://typescript.bootcss.com/variable-declarations.html
 
 ## 常量
 
