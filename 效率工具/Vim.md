@@ -1,4 +1,4 @@
-![img](http://image.trouvaille0198.top/vi-vim-cheat-sheet-sch.gif)
+![img](http://lvshuhuai.cn/vi-vim-cheat-sheet-sch.gif)
 
 # 模式
 

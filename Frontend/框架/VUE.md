@@ -412,11 +412,11 @@ var app = new Vue({
 
 #### 子组件部分
 
-<img src="http://image.trouvaille0198.top/image-20210411160809257.png" alt="image-20210411160809257" style="zoom:150%;" />
+<img src="http://lvshuhuai.cn/image-20210411160809257.png" alt="image-20210411160809257" style="zoom:150%;" />
 
 #### 父组件部分
 
-<img src="http://image.trouvaille0198.top/image-20210411160816904.png" alt="image-20210411160816904" style="zoom:150%;" />
+<img src="http://lvshuhuai.cn/image-20210411160816904.png" alt="image-20210411160816904" style="zoom:150%;" />
 
 ### 子传父
 
@@ -424,11 +424,11 @@ var app = new Vue({
 
 #### 子组件部分
 
-<img src="http://image.trouvaille0198.top/image-20210411160915513.png" alt="image-20210411160915513" style="zoom:150%;" />
+<img src="http://lvshuhuai.cn/image-20210411160915513.png" alt="image-20210411160915513" style="zoom:150%;" />
 
 #### 父组件部分
 
-<img src="http://image.trouvaille0198.top/image-20210411161044777.png" alt="image-20210411161044777" style="zoom:150%;" />
+<img src="http://lvshuhuai.cn/image-20210411161044777.png" alt="image-20210411161044777" style="zoom:150%;" />
 
 # axios
 
@@ -641,7 +641,7 @@ axios('/user/12345');
 
 # 脚手架
 
-![img](http://image.trouvaille0198.top/image.png)
+![img](http://lvshuhuai.cn/image.png)
 
 ## 架构
 
@@ -739,7 +739,7 @@ const routes = [
 
 ## 单文件组件
 
-<img src="http://image.trouvaille0198.top/vue-component.png" style="zoom: 67%;" />
+<img src="http://lvshuhuai.cn/vue-component.png" style="zoom: 67%;" />
 
 # Vuex
 
@@ -749,7 +749,7 @@ vuex 是一个专门为 vue.js 应用程序开发的状态管理模式。
 
 核心思想：把组件的共享状态抽取出来，以一个全局单例模式进行管理
 
-![vuex](http://image.trouvaille0198.top/vuex.png)
+![vuex](http://lvshuhuai.cn/vuex.png)
 
 ### 五类对象
 

@@ -4,11 +4,11 @@
 
 - 截图插入
 
-  <img src="http://image.trouvaille0198.top/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
+  <img src="http://lvshuhuai.cn/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
 
 - 拖动本地图片插入
 
-  <img src="http://image.trouvaille0198.top/download.png" alt="download" style="zoom:50%;" />
+  <img src="http://lvshuhuai.cn/download.png" alt="download" style="zoom:50%;" />
 
 
 
@@ -78,10 +78,10 @@ print('Hello world'+name)
 
 使用|来创建表格
 
-| 1    | 2    | 3    |
-| ---- | ---- | ---- |
-| 嘿   | 哈   | 吼   |
-| 哼   | 嚯   | 嗐   |
+| 1   | 2   | 3   |
+| --- | --- | --- |
+| 嘿  | 哈  | 吼  |
+| 哼  | 嚯  | 嗐  |
 
 插入图片的格式：![图片名](图片路径或链接)，不过这里建议直接复制粘贴呢~
 

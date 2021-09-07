@@ -152,7 +152,7 @@ PyQt5 具有独特的信号和插槽机制来处理事件。 信号和槽用于�
 - 客户区 (Client Area)：不包含边框的部分，即用户操作的界面，可以添加子控件。
 - 窗口：整一个界面
 
-![img](http://image.trouvaille0198.top/1114626-dace58b6414623d5.png)
+![img](http://lvshuhuai.cn/1114626-dace58b6414623d5.png)
 
 ### 获取大小
 
@@ -266,7 +266,7 @@ if __name__ == "__main__":
     sys.exit(app.exec_())
 ```
 
-![image-20210211155643867](http://image.trouvaille0198.top/image-20210211155643867.png)
+![image-20210211155643867](http://lvshuhuai.cn/image-20210211155643867.png)
 
 ### 菜单栏 menuBar
 
@@ -344,7 +344,7 @@ if __name__ == '__main__':
     main()
 ```
 
-![image-20210212145400143](http://image.trouvaille0198.top/image-20210212145400143.png)
+![image-20210212145400143](http://lvshuhuai.cn/image-20210212145400143.png)
 
 在上面的例子中，我们用一个菜单创建一个菜单。 此菜单将包含一个选择时终止应用程序的操作。 还创建状态栏。 该操作可通过Ctrl + Q快捷方式访问
 
@@ -404,7 +404,7 @@ if __name__ == '__main__':
     sys.exit(app.exec_())
 ```
 
-![image-20210212153342602](http://image.trouvaille0198.top/image-20210212153342602.png)
+![image-20210212153342602](http://lvshuhuai.cn/image-20210212153342602.png)
 
 在这个例子中，我们有三个菜单项： 其中两个位于文件菜单中（新建、退出），另一个位于文件的保存子菜单中
 
@@ -445,7 +445,7 @@ if __name__ == '__main__':
     main()
 ```
 
-![image-20210212154037291](http://image.trouvaille0198.top/image-20210212154037291.png)
+![image-20210212154037291](http://lvshuhuai.cn/image-20210212154037291.png)
 
 要使用上下文菜单，我们必须重新实现 `contextMenuEvent()` 方法
 
@@ -522,7 +522,7 @@ if __name__ == '__main__':
     sys.exit(app.exec_())
 ```
 
-![image-20210212154545698](http://image.trouvaille0198.top/image-20210212154545698.png)
+![image-20210212154545698](http://lvshuhuai.cn/image-20210212154545698.png)
 
 ### 居中展示
 
@@ -677,7 +677,7 @@ if __name__ == '__main__':
     app.exit(app.exec_())
 ```
 
-![image-20210212182700766](http://image.trouvaille0198.top/image-20210212182700766.png)
+![image-20210212182700766](http://lvshuhuai.cn/image-20210212182700766.png)
 
 ## 网格布局
 
@@ -768,7 +768,7 @@ if __name__ == '__main__':
     app.exit(app.exec_())
 ```
 
-![image-20210212191725891](http://image.trouvaille0198.top/image-20210212191725891.png)
+![image-20210212191725891](http://lvshuhuai.cn/image-20210212191725891.png)
 
 ## 表单布局
 
@@ -816,7 +816,7 @@ if __name__ == "__main__":
     sys.exit(app.exec_())
 ```
 
-![image-20210212193025509](http://image.trouvaille0198.top/image-20210212193025509.png)
+![image-20210212193025509](http://lvshuhuai.cn/image-20210212193025509.png)
 
 # 显示类控件
 

@@ -49,7 +49,7 @@ for c in pbar:
   pbar.set_description("Processing %s"%c)
 ```
 
-![image-20210213224128056](http://image.trouvaille0198.top/image-20210213224128056.png)
+![image-20210213224128056](http://lvshuhuai.cn/image-20210213224128056.png)
 
 ## 控制进度
 

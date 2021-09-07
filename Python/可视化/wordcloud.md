@@ -21,7 +21,7 @@ plt.axis('off') #不显示坐标轴
 plt.show() #显示图片
 ```
 
-![image-20210130210417201](http://image.trouvaille0198.top/image-20210130210417201.png)
+![image-20210130210417201](http://lvshuhuai.cn/image-20210130210417201.png)
 
 ```python
 filename = r'D:\Repo\Jupyter\Crawler\Result\心灵奇旅短评.txt'
@@ -48,7 +48,7 @@ plt.show()  #显示图片
 wc.to_file(r'new.png')  #保存图片
 ```
 
-<img src="http://image.trouvaille0198.top/image-20210130212211268.png" alt="image-20210130212211268" style="zoom:67%;" />
+<img src="http://lvshuhuai.cn/image-20210130212211268.png" alt="image-20210130212211268" style="zoom:67%;" />
 
 # 对象
 

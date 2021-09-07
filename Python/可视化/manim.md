@@ -168,7 +168,7 @@ class Example(Scene):
         self.add(x)
 ```
 
-![image-20210216112707187](http://image.trouvaille0198.top/image-20210216112707187.png)
+![image-20210216112707187](http://lvshuhuai.cn/image-20210216112707187.png)
 
 ### VMobject 独有方法
 
@@ -275,7 +275,7 @@ class test(Scene):
         self.play(Write(text))
 ```
 
-![image-20210215185733556](http://image.trouvaille0198.top/image-20210215185733556.png)
+![image-20210215185733556](http://lvshuhuai.cn/image-20210215185733556.png)
 
 ### Tex
 
@@ -346,7 +346,7 @@ class test(Scene):
                   run_time=2)
 ```
 
-![image-20210215191333989](http://image.trouvaille0198.top/image-20210215191333989.png)
+![image-20210215191333989](http://lvshuhuai.cn/image-20210215191333989.png)
 
 ### Brace
 
@@ -495,7 +495,7 @@ class test16(Scene):
         self.wait()
 ```
 
-<img src="http://image.trouvaille0198.top/test16.gif" alt="test16" style="zoom: 67%;" />
+<img src="http://lvshuhuai.cn/test16.gif" alt="test16" style="zoom: 67%;" />
 
 ## PlayMethod
 
@@ -524,7 +524,7 @@ class test(Scene):
         self.wait()
 ```
 
-<img src="http://image.trouvaille0198.top/test0.gif" alt="test0" style="zoom:67%;" />
+<img src="http://lvshuhuai.cn/test0.gif" alt="test0" style="zoom:67%;" />
 
 - ***ShowCreation(mobject)***
 
@@ -546,7 +546,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test](http://image.trouvaille0198.top/test.gif)
+![test](http://lvshuhuai.cn/test.gif)
 
 - ***Uncreate(mobject)***
 
@@ -582,7 +582,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test1](http://image.trouvaille0198.top/test1.gif)
+![test1](http://lvshuhuai.cn/test1.gif)
 
 - ***FadOut(mobject)***
 	淡出
@@ -622,7 +622,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test15](http://image.trouvaille0198.top/test15.gif)
+![test15](http://lvshuhuai.cn/test15.gif)
 
 - ***Restore(mobject, \*\*kwargs)***
 
@@ -643,7 +643,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test17](http://image.trouvaille0198.top/test17.gif)
+![test17](http://lvshuhuai.cn/test17.gif)
 
 - ***ApplyFunction(function, mobject, \*\*kwargs)***
 
@@ -667,7 +667,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test18](http://image.trouvaille0198.top/test18.gif)
+![test18](http://lvshuhuai.cn/test18.gif)
 
 - ***Swap(\*mobjects, \*\*kwargs)***
 
@@ -688,7 +688,7 @@ class test19(Scene):
         self.wait()
 ```
 
-![test19](http://image.trouvaille0198.top/test19.gif)
+![test19](http://lvshuhuai.cn/test19.gif)
 
 ### Grow
 
@@ -720,7 +720,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test3](http://image.trouvaille0198.top/test3.gif)
+![test3](http://lvshuhuai.cn/test3.gif)
 
 - ***GrowFromCenter(mobject, \*\*kwargs)***
 
@@ -742,7 +742,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test4](http://image.trouvaille0198.top/test4.gif)
+![test4](http://lvshuhuai.cn/test4.gif)
 
 ### Indication
 
@@ -765,7 +765,7 @@ class test(Scene):
         self.wait(0.3)
 ```
 
-![test5](http://image.trouvaille0198.top/test5.gif)
+![test5](http://lvshuhuai.cn/test5.gif)
 
 - ***Indicate(mobject, target_mobject=None, \*\*kwargs)***
 
@@ -788,7 +788,7 @@ class test(Scene):
         self.wait(0.3)
 ```
 
-![test6](http://image.trouvaille0198.top/test6.gif)
+![test6](http://lvshuhuai.cn/test6.gif)
 
 - ***Flash(point, color, \*\*kwargs)***
 
@@ -818,7 +818,7 @@ class test(Scene):
         self.wait(0.3)
 ```
 
-![test7](http://image.trouvaille0198.top/test7.gif)
+![test7](http://lvshuhuai.cn/test7.gif)
 
 - ***CircleIndicate(mobject, \*\*kwargs)***
 
@@ -840,7 +840,7 @@ class test8(Scene):
             self.play(CircleIndicate(obj))
 ```
 
-![test8](http://image.trouvaille0198.top/test8.gif)
+![test8](http://lvshuhuai.cn/test8.gif)
 
 - ***ShowCreationThenDestructionAround(mobject, \*\*kwargs)***
 
@@ -865,7 +865,7 @@ class test(Scene):
         self.wait(0.3)
 ```
 
-![test9](http://image.trouvaille0198.top/test9.gif)
+![test9](http://lvshuhuai.cn/test9.gif)
 
 - ***ApplyWave(mobject, \*\*kwargs)***
 
@@ -889,7 +889,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test10](http://image.trouvaille0198.top/test10.gif)
+![test10](http://lvshuhuai.cn/test10.gif)
 
 - ***WiggleOutThenIn(mobject, \*\*kwargs)***
 
@@ -913,7 +913,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test11](http://image.trouvaille0198.top/test11.gif)
+![test11](http://lvshuhuai.cn/test11.gif)
 
 ### Movement
 
@@ -935,7 +935,7 @@ class test11(Scene):
         self.wait(0.3)
 ```
 
-![test12](http://image.trouvaille0198.top/test12.gif)
+![test12](http://lvshuhuai.cn/test12.gif)
 
 ### Numbers
 
@@ -960,7 +960,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test13](http://image.trouvaille0198.top/test13.gif)
+![test13](http://lvshuhuai.cn/test13.gif)
 
 - ***ChangeDecimalToValue(decimal_mob, target_number, \*\*kwargs)***
 
@@ -987,7 +987,7 @@ class test(Scene):
         self.wait(0.3)
 ```
 
-![test14](http://image.trouvaille0198.top/test14.gif)
+![test14](http://lvshuhuai.cn/test14.gif)
 
 ### Update
 
@@ -1020,7 +1020,7 @@ class test(Scene):
         # self.wait()
 ```
 
-![test20](http://image.trouvaille0198.top/test20.gif)
+![test20](http://lvshuhuai.cn/test20.gif)
 
 - ***UpdateFromAlphaFunc(mobject, update_function, \*\*kwargs)***
 
@@ -1045,7 +1045,7 @@ class test(Scene):
         self.wait()
 ```
 
-![test21](http://image.trouvaille0198.top/test21.gif)
+![test21](http://lvshuhuai.cn/test21.gif)
 
 ### Composition
 
@@ -1071,7 +1071,7 @@ class test22(Scene):
         self.wait()
 ```
 
-![test22](http://image.trouvaille0198.top/test22.gif)
+![test22](http://lvshuhuai.cn/test22.gif)
 
 # Camera
 
