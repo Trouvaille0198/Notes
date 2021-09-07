@@ -1,4 +1,4 @@
-![img](http://lvshuhuai.cn/vi-vim-cheat-sheet-sch.gif)
+![img](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/vi-vim-cheat-sheet-sch.gif)
 
 # 模式
 

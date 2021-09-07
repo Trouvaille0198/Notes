@@ -1182,7 +1182,7 @@ $$
     Parent 存储结点的双亲在数组中的序号。
 3. 实现求双亲操作很方便，但对于求某节点的孩子节点的操作需要查询整个数组，实现求兄弟的操作也比较困难。
 
-<img src="http://lvshuhuai.cn/image-20210329082007138.png" alt="image-20210329082007138" style="zoom: 50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210329082007138.png" alt="image-20210329082007138" style="zoom: 50%;" />
 
 #### 孩子表示法
 
@@ -1199,14 +1199,14 @@ $$
 
 有些麻烦
 
-<img src="http://lvshuhuai.cn/image-20210329082616400.png" alt="image-20210329082616400" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210329082616400.png" alt="image-20210329082616400" style="zoom:67%;" />
 
 #### 孩子 - 兄弟表示法
 
 1. 二重链表表示法
 2. 查找某结点的孩子结点比较方便，如果在每一个结点中增加一个指向双亲的指针，就可以方便地找到各结点的祖先。
 
-<img src="http://lvshuhuai.cn/image-20210329082944536.png" alt="image-20210329082944536" style="zoom: 50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210329082944536.png" alt="image-20210329082944536" style="zoom: 50%;" />
 
 ### 树、森林和二叉树的转换
 
@@ -1223,7 +1223,7 @@ $$
     2. 树作这样的转化所构成的二叉树是唯一的。
     3. 树转化成的二叉树，其根结点无右子树。
 
-<img src="http://lvshuhuai.cn/image-20210329084439741.png" alt="image-20210329084439741" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210329084439741.png" alt="image-20210329084439741" style="zoom:50%;" />
 
 #### 森林转化为二叉树
 
@@ -1232,7 +1232,7 @@ $$
 1. 依次将森林中每棵树转化成相应的二叉树。
 2. 从第二棵二叉树开始，依次把当前的二叉树作为前一棵二叉树根结点的右子树，此时所得到的二叉树就是由森林转化得到的二叉树。
 
-<img src="http://lvshuhuai.cn/image-20210329084517512.png" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210329084517512.png" style="zoom:50%;" />
 
 #### 二叉树转化为森林
 
@@ -1240,7 +1240,7 @@ $$
 2. **删线**：删除二叉树中所有结点和其右孩子结点之间的连线。
 3. **美化**：整理，使结构层次分明。
 
-<img src="http://lvshuhuai.cn/image-20210329084543768.png" alt="image-20210329084543768" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210329084543768.png" alt="image-20210329084543768" style="zoom:50%;" />
 
 ### 树的遍历
 
@@ -1254,7 +1254,7 @@ $$
 
 **与二叉树先序遍历结果序列相同。**
 
-<img src="http://lvshuhuai.cn/image-20210611135015723.png" style="zoom: 67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210611135015723.png" style="zoom: 67%;" />
 
 ABEFKLCGDHIMNJ
 
@@ -1267,7 +1267,7 @@ ABEFKLCGDHIMNJ
 
 **与二叉树中序遍历结果序列相同。**
 
-<img src="http://lvshuhuai.cn/image-20210611135015723.png" style="zoom: 67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210611135015723.png" style="zoom: 67%;" />
 
 EKLFBGCHMNIJDA
 
@@ -1292,7 +1292,7 @@ EKLFBGCHMNIJDA
 
 **与二叉树先序遍历结果序列相同。**
 
-![image-20210611135715150](http://lvshuhuai.cn/image-20210611135715150.png)
+![image-20210611135715150](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210611135715150.png)
 
 ABCDEFGHI
 
@@ -1306,7 +1306,7 @@ ABCDEFGHI
 
 **与二叉树中序遍历结果序列相同。**
 
-![](http://lvshuhuai.cn/image-20210611135715150.png)
+![](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210611135715150.png)
 
 BCDAFEHIG
 
@@ -1320,7 +1320,7 @@ BCDAFEHIG
 
 **与二叉树后序遍历结果序列相同。**
 
-![](http://lvshuhuai.cn/image-20210611135715150.png)
+![](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210611135715150.png)
 
 DCBFIHGEA
 
@@ -1358,9 +1358,9 @@ DCBFIHGEA
 
 先序+中序（or 后序+中序）的遍历结果可以反向推导出二叉树
 
-<img src="http://lvshuhuai.cn/image-20210316141122137.png" alt="image-20210316141122137" style="zoom: 67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210316141122137.png" alt="image-20210316141122137" style="zoom: 67%;" />
 
-<img src="http://lvshuhuai.cn/image-20210316141042079.png" alt="image-20210316141042079" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210316141042079.png" alt="image-20210316141042079" style="zoom:67%;" />
 
 #### 先序遍历
 
@@ -1901,7 +1901,7 @@ int BinaryTree<T>::GetLeafNum(const BinTreeNode<T> *root) const
 
 #### 向下调整 FilterDown
 
-<img src="http://lvshuhuai.cn/image-20210425170330961.png" alt="image-20210425170330961" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210425170330961.png" alt="image-20210425170330961" style="zoom:50%;" />
 
 ## 哈夫曼树 
 
@@ -1949,7 +1949,7 @@ $$
     1. 查找效率取决于树的高度
 2. 树的高度取决于合并操作
 
-![image-20210611144154134](http://lvshuhuai.cn/image-20210611144154134.png)
+![image-20210611144154134](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210611144154134.png)
 
 ### 合并算法的改进
 
@@ -1969,7 +1969,7 @@ $$
 
     设 j 是以 i 为根的树中的一个结点，则对于从 j 到根 i 的路径上的每一个结点 k，如果 k 的双亲不等于 i，则把 i 设置为 k 的双亲。
 
-<img src="http://lvshuhuai.cn/image-20210329101540959.png" alt="image-20210329101540959" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210329101540959.png" alt="image-20210329101540959" style="zoom:50%;" />
 
 ​		使用折叠规则完成一次查找，所需时间比 `Find()` 多，但是能改善树的性能，减少以后查找操作所需的时间。
 
@@ -2111,17 +2111,17 @@ $$
 
 #### 概念
 
-<img src="http://lvshuhuai.cn/image-20210412081500935.png" alt="image-20210412081500935" style="zoom:55%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412081500935.png" alt="image-20210412081500935" style="zoom:55%;" />
 
-<img src="http://lvshuhuai.cn/image-20210412081530638.png" alt="image-20210412081530638" style="zoom: 55%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412081530638.png" alt="image-20210412081530638" style="zoom: 55%;" />
 
 用一维数组 `vertexes[]` 存储顶点信息，二维数组 `arcs[]` 存储边信息
 
-<img src="http://lvshuhuai.cn/image-20210412081633859.png" alt="image-20210412081633859" style="zoom:55%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412081633859.png" alt="image-20210412081633859" style="zoom:55%;" />
 
 #### 无向图的邻接矩阵
 
-<img src="http://lvshuhuai.cn/image-20210412082225634.png" alt="image-20210412082225634" style="zoom:55%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412082225634.png" alt="image-20210412082225634" style="zoom:55%;" />
 
 ##### 类模板定义
 
@@ -2183,9 +2183,9 @@ public:
 
 记录有向图的出度，使用**逆邻接表**
 
-<img src="http://lvshuhuai.cn/image-20210412083406393.png" alt="image-20210412083406393" style="zoom:55%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412083406393.png" alt="image-20210412083406393" style="zoom:55%;" />
 
-<img src="http://lvshuhuai.cn/image-20210412083416383.png" alt="image-20210412083416383" style="zoom:55%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412083416383.png" alt="image-20210412083416383" style="zoom:55%;" />
 
 ### 邻接多重表
 
@@ -2195,12 +2195,12 @@ public:
 
 邻接多重表中，每条边用一个结点表示，每个顶点也用一个结点表示
 
-<img src="http://lvshuhuai.cn/image-20210412084350845.png" alt="image-20210412084350845" style="zoom: 50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412084350845.png" alt="image-20210412084350845" style="zoom: 50%;" />
 
 - data：存储此顶点的数据；
 - firstedge：指针域，用于指向同该顶点有直接关联的存储其他顶点的节点
 
-<img src="http://lvshuhuai.cn/image-20210412084359057.png" alt="image-20210412084359057" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412084359057.png" alt="image-20210412084359057" style="zoom:50%;" />
 
 - mark：标志域，用于标记此节点是否被操作过，例如在对图中顶点做遍历操作时，为了防止多次操作同一节点，mark 域为 0 表示还未被遍历；mark 为 1 表示该节点已被遍历；
 - ivex 和 jvex：数据域，分别存储图中各边两端的顶点所在数组中的位置下标；
@@ -2208,7 +2208,7 @@ public:
 - jlink：指针域，指向下一个存储与 jvex 有直接关联顶点的节点；
 - info：指针域，用于存储与该顶点有关的其他信息，比如无向网中各边的权
 
-<img src="http://lvshuhuai.cn/image-20210412084959127.png" alt="image-20210412084959127" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412084959127.png" alt="image-20210412084959127" style="zoom:67%;" />
 
 ### 十字链表
 
@@ -2218,7 +2218,7 @@ public:
 
 十字链表（即有向图的邻接多重表）可以看作是邻接表和逆邻接表的合体
 
-<img src="http://lvshuhuai.cn/image-20210412085322307.png" alt="image-20210412085322307" style="zoom:60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412085322307.png" alt="image-20210412085322307" style="zoom:60%;" />
 
 ## 遍历
 
@@ -2244,7 +2244,7 @@ public:
 
 
 
-<img src="http://lvshuhuai.cn/image-20210412090916957.png" alt="image-20210412090916957" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412090916957.png" alt="image-20210412090916957" style="zoom:67%;" />
 
 #### 时间复杂度
 
@@ -2271,7 +2271,7 @@ public:
     2. 若未被访问，访问 w 并标记，使 w 入队，继续
 7. 取 v 的下下个邻接顶点覆盖 w，转步骤 5
 
-![image-20210424141055004](http://lvshuhuai.cn/image-20210424141055004.png)
+![image-20210424141055004](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210424141055004.png)
 
 #### 时间复杂度
 
@@ -2305,7 +2305,7 @@ public:
 
 - 定义：连通网中，权值总和最小的生成树，全称最小代价生成树
 
-<img src="http://lvshuhuai.cn/image-20210412100310369.png" alt="image-20210412100310369" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412100310369.png" alt="image-20210412100310369" style="zoom:67%;" />
 
 - 性质：假设 N = (V, E) 是一个连通网，U 是顶点集 V的一个非空子集。若 (u, v) 是一条具有最小权值的边，其中u∈U， v∈V - U，则必存在一棵包含边（u，v）的最小生成树
 
@@ -2315,7 +2315,7 @@ public:
 
 #### 步骤
 
-<img src="http://lvshuhuai.cn/image-20210412101458244.png" alt="image-20210412101458244" style="zoom: 50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412101458244.png" alt="image-20210412101458244" style="zoom: 50%;" />
 
 设 G = (V, E) 是具有 n 个顶点的连通网，T = (U，TE) 是其最小生成树。
 
@@ -2323,11 +2323,11 @@ public:
 
 2. 重复 1，知道 TE 中含有 n-1 条边为止
 
-<img src="http://lvshuhuai.cn/image-20210412101256880.png" alt="image-20210412101256880" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412101256880.png" alt="image-20210412101256880" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210412101237144.png" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412101237144.png" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210412102147705.png" alt="image-20210412102147705" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412102147705.png" alt="image-20210412102147705" style="zoom:50%;" />
 
 #### 实现
 
@@ -2343,13 +2343,13 @@ public:
 
 #### 步骤
 
-<img src="http://lvshuhuai.cn/image-20210412103207051.png" alt="image-20210412103207051" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412103207051.png" alt="image-20210412103207051" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210412101256880.png" alt="image-20210412101256880" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412101256880.png" alt="image-20210412101256880" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210412102751502.png" alt="image-20210412102751502" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412102751502.png" alt="image-20210412102751502" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210412103347778.png" alt="image-20210412103347778" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210412103347778.png" alt="image-20210412103347778" style="zoom:67%;" />
 
 ## 最短路径
 
@@ -2367,17 +2367,17 @@ public:
 
 ### 弧上权值非负的单源点最短路径
 
-<img src="http://lvshuhuai.cn/image-20210419081428998.png" alt="image-20210419081428998" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419081428998.png" alt="image-20210419081428998" style="zoom:50%;" />
 
 #### 迪杰斯特拉算法（Dijkstra）
 
 按路径长度递增的次序来产生最短路径；先求路径最短的一条，然后参照它进行刷新，求出长度次短的一条，以此类推，被求出长度的顶点放入集合 S 中，当 S 满，代表算法结束
 
-<img src="http://lvshuhuai.cn/image-20210419081437115.png" alt="image-20210419081437115" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419081437115.png" alt="image-20210419081437115" style="zoom:50%;" />
 
 引入 dist[]，存储 v 到 v~i~ **当前**找到的最短路径长度；引入 path[]，存储 v~i~ 的直接前驱节点
 
-<img src="http://lvshuhuai.cn/image-20210419083104462.png" alt="image-20210419083104462" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419083104462.png" alt="image-20210419083104462" style="zoom:50%;" />
 
 只看初边
 
@@ -2457,15 +2457,15 @@ void AdjMatrixGraph<ElemType, WeightType>::Dijkstra(int v)
 
 从原点依次经过其他顶点，来缩短到达顶点的最短路径长度。要求：途中不能有路径长度为负数的**回路**
 
-<img src="http://lvshuhuai.cn/image-20210419085915738.png" alt="image-20210419085915738" style="zoom:40%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419085915738.png" alt="image-20210419085915738" style="zoom:40%;" />
 
-<img src="http://lvshuhuai.cn/image-20210419090104101.png" alt="image-20210419090104101" style="zoom: 45%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419090104101.png" alt="image-20210419090104101" style="zoom: 45%;" />
 
 递推公式
 
-<img src="http://lvshuhuai.cn/image-20210419090451877.png" alt="image-20210419090451877" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419090451877.png" alt="image-20210419090451877" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210419090559757.png" alt="image-20210419090559757" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419090559757.png" alt="image-20210419090559757" style="zoom:50%;" />
 
 ### 所有点之间的最短路径
 
@@ -2475,9 +2475,9 @@ void AdjMatrixGraph<ElemType, WeightType>::Dijkstra(int v)
 
 #### 弗洛伊德（Floyd）算法
 
-<img src="http://lvshuhuai.cn/image-20210419091217637.png" alt="image-20210419091217637" style="zoom:45%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419091217637.png" alt="image-20210419091217637" style="zoom:45%;" />
 
-<img src="http://lvshuhuai.cn/image-20210419091738628.png" alt="image-20210419091738628" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419091738628.png" alt="image-20210419091738628" style="zoom:50%;" />
 
 ## 活动网络
 
@@ -2485,7 +2485,7 @@ void AdjMatrixGraph<ElemType, WeightType>::Dijkstra(int v)
 
 ### 用顶点表示活动的网络
 
-<img src="http://lvshuhuai.cn/image-20210419093621497.png" alt="image-20210419093621497" style="zoom:45%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419093621497.png" alt="image-20210419093621497" style="zoom:45%;" />
 
 #### 概念
 
@@ -2497,30 +2497,30 @@ void AdjMatrixGraph<ElemType, WeightType>::Dijkstra(int v)
     - 从图中删除该顶点和所有以它为尾的弧
     - 重复前两步，直到所有顶点均已输出
 
-<img src="http://lvshuhuai.cn/image-20210419100943832.png" alt="image-20210419100943832" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419100943832.png" alt="image-20210419100943832" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210419101244005.png" alt="image-20210419101244005" style="zoom:45%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419101244005.png" alt="image-20210419101244005" style="zoom:45%;" />
 
-<img src="http://lvshuhuai.cn/image-20210419101738002.png" alt="image-20210419101738002" style="zoom:40%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419101738002.png" alt="image-20210419101738002" style="zoom:40%;" />
 
-<img src="http://lvshuhuai.cn/image-20210419101626892.png" alt="image-20210419101626892" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419101626892.png" alt="image-20210419101626892" style="zoom:50%;" />
 
 ### 用边表示活动的网络
 
-<img src="http://lvshuhuai.cn/image-20210419101854295.png" alt="image-20210419101854295" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419101854295.png" alt="image-20210419101854295" style="zoom:50%;" />
 
 #### 概念
 
 - 边表示活动的网络（activity on edges）：简称 **AOE 网络**
     - 边的值：此活动持续的时间
 
-<img src="http://lvshuhuai.cn/image-20210425112512555.png" alt="image-20210425112512555" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210425112512555.png" alt="image-20210425112512555" style="zoom:50%;" />
 
 - 顶点表示事件（event），保证一个源点，一个汇点
     - 关键路径：从源点到汇点，具有最大路径长度的路径
     - 关键活动：关键路径上的所有活动
 
-<img src="http://lvshuhuai.cn/image-20210419102732678.png" alt="image-20210419102732678" style="zoom:45%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210419102732678.png" alt="image-20210419102732678" style="zoom:45%;" />
 
 - 求事件（顶点）的最早开始时间 ve：从源点起，入边的值加上其弧尾的最早开始时间，取最大值（看入边，求最大）
 
@@ -2599,7 +2599,7 @@ $$
 
 按顺序方式存储 + 关键字排序
 
-<img src="http://lvshuhuai.cn/image-20210426083900676.png" alt="image-20210426083900676" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210426083900676.png" alt="image-20210426083900676" style="zoom:50%;" />
 
 #### 迭代实现
 
@@ -2609,7 +2609,7 @@ $$
 
 用二叉查找树来分析
 
-<img src="http://lvshuhuai.cn/image-20210426084515121.png" alt="image-20210426084515121" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210426084515121.png" alt="image-20210426084515121" style="zoom:50%;" />
 $$
 ASL=\log_2(n+1)-1
 $$
@@ -2623,13 +2623,13 @@ $$
 
 主表 + 索引表
 
-<img src="http://lvshuhuai.cn/image-20210426090835254.png" alt="image-20210426090835254" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210426090835254.png" alt="image-20210426090835254" style="zoom:50%;" />
 
 当完全索引表中的关键字分块有序存放，可以建立二级索引表
 
 块与块之间有序，块内无序
 
-<img src="http://lvshuhuai.cn/image-20210426090931149.png" alt="image-20210426090931149" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210426090931149.png" alt="image-20210426090931149" style="zoom:50%;" />
 
 #### 分块查找
 
@@ -2643,7 +2643,7 @@ $$
 
 #### 链式倒排表
 
-<img src="http://lvshuhuai.cn/image-20210426092552894.png" alt="image-20210426092552894" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210426092552894.png" alt="image-20210426092552894" style="zoom:50%;" />
 
 寻找时，求交集即可
 
@@ -2651,7 +2651,7 @@ $$
 
 #### 单元素倒排表
 
-<img src="http://lvshuhuai.cn/image-20210426092730832.png" alt="image-20210426092730832" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210426092730832.png" alt="image-20210426092730832" style="zoom:50%;" />
 
 ### 比较
 
@@ -2676,7 +2676,7 @@ BST（Binary Sort / Search Tree）
 
 特点：中序遍历结果有序
 
-<img src="http://lvshuhuai.cn/image-20210426100408810.png" alt="image-20210426100408810" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210426100408810.png" alt="image-20210426100408810" style="zoom:50%;" />
 
 ### 模板定义
 
@@ -2719,7 +2719,7 @@ public:
 
 ### 性能分析
 
-<img src="http://lvshuhuai.cn/image-20210426101235491.png" alt="image-20210426101235491" style="zoom:40%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210426101235491.png" alt="image-20210426101235491" style="zoom:40%;" />
 
 ### 操作
 
@@ -2755,7 +2755,7 @@ AVL
 - 平衡因子（Balance factor，BF）：左右子树高度差，其绝对值不超过 1
 - 其 ASL可保持在 $$O(log_2n)$$
 
-<img src="http://lvshuhuai.cn/image-20210510080329179.png" alt="image-20210510080329179" style="zoom:60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510080329179.png" alt="image-20210510080329179" style="zoom:60%;" />
 
 ### 平衡旋转
 
@@ -2765,7 +2765,7 @@ AVL
 
 顺时针旋转
 
-<img src="http://lvshuhuai.cn/image-20210510081108724.png" alt="image-20210510081108724" style="zoom:70%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510081108724.png" alt="image-20210510081108724" style="zoom:70%;" />
 
 #### RR 平衡旋转——左单旋转
 
@@ -2773,7 +2773,7 @@ AVL
 
 逆时针旋转
 
-<img src="http://lvshuhuai.cn/image-20210510081227246.png" alt="image-20210510081227246" style="zoom:70%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510081227246.png" alt="image-20210510081227246" style="zoom:70%;" />
 
 #### LR 平衡旋转——先左后右双旋转
 
@@ -2781,13 +2781,13 @@ AVL
 
 左孩子的右子树失衡
 
-<img src="http://lvshuhuai.cn/image-20210510081304603.png" alt="image-20210510081304603" style="zoom:70%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510081304603.png" alt="image-20210510081304603" style="zoom:70%;" />
 
 #### RL 平衡旋转——先右后左双旋转
 
 右孩子的左子树失衡
 
-<img src="http://lvshuhuai.cn/image-20210510081355449.png" alt="image-20210510081355449" style="zoom:70%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510081355449.png" alt="image-20210510081355449" style="zoom:70%;" />
 
 ### 插入
 
@@ -2798,13 +2798,13 @@ AVL
 3. 找到失衡的最小子树
 4. 判断平衡旋转类型，进行相应的平衡化处理
 
-<img src="http://lvshuhuai.cn/image-20210510083139739.png" alt="image-20210510083139739" style="zoom:55%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510083139739.png" alt="image-20210510083139739" style="zoom:55%;" />
 
-<img src="http://lvshuhuai.cn/image-20210510083150370.png" alt="image-20210510083150370" style="zoom:55%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510083150370.png" alt="image-20210510083150370" style="zoom:55%;" />
 
 #### 示例
 
-<img src="http://lvshuhuai.cn/image-20210510083216777.png" alt="image-20210510083216777" style="zoom:60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510083216777.png" alt="image-20210510083216777" style="zoom:60%;" />
 
 ### 删除
 
@@ -2812,17 +2812,17 @@ AVL
 
 定义布尔变量 `isShorter` 判断被删除结点的子树高度有没有被缩短
 
-<img src="http://lvshuhuai.cn/image-20210510083857938.png" alt="image-20210510083857938" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510083857938.png" alt="image-20210510083857938" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210510083915922.png" alt="image-20210510083915922" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510083915922.png" alt="image-20210510083915922" style="zoom:50%;" />
 
 #### 示例
 
 删除结点 50
 
-<img src="http://lvshuhuai.cn/image-20210510084127101.png" alt="image-20210510084127101" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510084127101.png" alt="image-20210510084127101" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210613131053818.png" alt="image-20210613131053818" style="zoom:80%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210613131053818.png" alt="image-20210613131053818" style="zoom:80%;" />
 
 ## B-树
 
@@ -2839,7 +2839,7 @@ AVL
 - 在  $$p_n$$ 所指的子树中所有数据元素的关键字都大于 $$k_n$$，而子树 $$p_0$$ 中的所有数据元素的关键字均小于 $$k_1$$
 - $$p_i$$ 所指的子树也是 m 路查找树，$$0\le i\le n$$
 
-<img src="http://lvshuhuai.cn/image-20210510090656452.png" alt="image-20210510090656452" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510090656452.png" alt="image-20210510090656452" style="zoom:50%;" />
 
 ### 定义
 
@@ -2847,9 +2847,9 @@ AVL
 
 失败节点即叶子节点
 
-<img src="http://lvshuhuai.cn/image-20210510090920715.png" alt="image-20210510090920715" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510090920715.png" alt="image-20210510090920715" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210510091034784.png" alt="image-20210510091034784" style="zoom: 50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510091034784.png" alt="image-20210510091034784" style="zoom: 50%;" />
 
 ### 插入
 
@@ -2861,7 +2861,7 @@ AVL
 
 若关键字超出 m-1，结点要分裂
 
-<img src="http://lvshuhuai.cn/image-20210510092154652.png" alt="image-20210510092154652" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510092154652.png" alt="image-20210510092154652" style="zoom:50%;" />
 
 插入是个递归的过程
 
@@ -2869,19 +2869,19 @@ AVL
 
 按照关键字 {35，26，74，60，49，17，41，53，29} 构建 3 阶 B-树
 
-<img src="http://lvshuhuai.cn/image-20210510092510793.png" alt="image-20210510092510793" style="zoom: 60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510092510793.png" alt="image-20210510092510793" style="zoom: 60%;" />
 
 ### 删除
 
-<img src="http://lvshuhuai.cn/image-20210510093239533.png" alt="image-20210510093239533" style="zoom:60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093239533.png" alt="image-20210510093239533" style="zoom:60%;" />
 
-<img src="http://lvshuhuai.cn/image-20210510093539490.png" alt="image-20210510093539490" style="zoom:60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093539490.png" alt="image-20210510093539490" style="zoom:60%;" />
 
-<img src="http://lvshuhuai.cn/image-20210510093553411.png" alt="image-20210510093553411" style="zoom:60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093553411.png" alt="image-20210510093553411" style="zoom:60%;" />
 
-<img src="http://lvshuhuai.cn/image-20210510093634951.png" alt="image-20210510093634951" style="zoom:60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093634951.png" alt="image-20210510093634951" style="zoom:60%;" />
 
-<img src="http://lvshuhuai.cn/image-20210510095925874.png" alt="image-20210510095925874" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510095925874.png" alt="image-20210510095925874" style="zoom:67%;" />
 
 ### B+树
 
@@ -2889,7 +2889,7 @@ AVL
 
 叶子结点包含了全部关键字及对应指针
 
-<img src="http://lvshuhuai.cn/image-20210510100347513.png" alt="image-20210510100347513" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510100347513.png" alt="image-20210510100347513" style="zoom:50%;" />
 
 ## 散列表
 
@@ -2941,19 +2941,19 @@ AVL
 4. 双散列函数探查法
     - d~i~=iH~2~(key)[计算时间增加]
 
-<img src="http://lvshuhuai.cn/image-20210510102542131.png" alt="image-20210510102542131" style="zoom: 40%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510102542131.png" alt="image-20210510102542131" style="zoom: 40%;" />
 
 #### 拉链法
 
 将所有关键字为同义词的记录存储在一个单链表中，并用一维数组存放头指针
 
-<img src="http://lvshuhuai.cn/image-20210510102941399.png" alt="image-20210510102941399" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510102941399.png" alt="image-20210510102941399" style="zoom:50%;" />
 
 ### 哈希查找
 
 #### 过程
 
-<img src="http://lvshuhuai.cn/image-20210510103146013.png" alt="image-20210510103146013" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510103146013.png" alt="image-20210510103146013" style="zoom:50%;" />
 
 #### 分析
 
@@ -2961,15 +2961,15 @@ AVL
 
 装填因子：$$\alpha=\frac{表中填入的记录数}{哈希表长度}$$
 
-![image-20210510103516617](http://lvshuhuai.cn/image-20210510103516617.png)
+![image-20210510103516617](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510103516617.png)
 
 # 排序
 
 原理和算法实现不一定对应
 
-<img src="http://lvshuhuai.cn/image-20210524094014136.png" alt="image-20210524094014136" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210524094014136.png" alt="image-20210524094014136" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/849589-20180402133438219-1946132192.png" style="zoom: 40%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/849589-20180402133438219-1946132192.png" style="zoom: 40%;" />
 
 ## 基础知识
 
@@ -3033,7 +3033,7 @@ AVL
 
 两两相比，重复，每次循环只确定一个最大/小值
 
-![img](http://lvshuhuai.cn/849589-20171015223238449-2146169197.gif)
+![img](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/849589-20171015223238449-2146169197.gif)
 
 #### 实现
 
@@ -3067,7 +3067,7 @@ SeqList<T> BubbleSort(SeqList<T> list)
 
 任取某个元素作为基准，划分左右子表，再在左右子表中递归快排
 
-<img src="http://lvshuhuai.cn/image-20210517094051933.png" alt="image-20210517094051933" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210517094051933.png" alt="image-20210517094051933" style="zoom:50%;" />
 
 ![1](https://images2017.cnblogs.com/blog/849589/201710/849589-20171015230936371-1413523412.gif)
 
@@ -3155,9 +3155,9 @@ void QuickSort(SeqList<T> &list)
 
 （Straight Insertion Sort）
 
-![](http://lvshuhuai.cn/1258817-20190325144034879-1237555952.gif)
+![](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/1258817-20190325144034879-1237555952.gif)
 
-<img src="http://lvshuhuai.cn/image-20210517082910800.png" alt="image-20210517082910800" style="zoom: 60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210517082910800.png" alt="image-20210517082910800" style="zoom: 60%;" />
 
 #### 实现
 
@@ -3216,7 +3216,7 @@ void StraightInsertionSort(SeqList<T> &list)
 
 n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d 的数据元素放在同一子表中，子表中进行直接插入排序；然后再缩小 d（如取 $$d=\lceil d/2 \rceil$$），重复迭代直到 d = 1 后，将所有数据一起来依一次直接插入排序
 
-<img src="http://lvshuhuai.cn/image-20210517090706915.png" alt="image-20210517090706915" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210517090706915.png" alt="image-20210517090706915" style="zoom:50%;" />
 
 #### 分析
 
@@ -3232,9 +3232,9 @@ n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d
 
 在序列中首先找到最小元素放在首位，再在未排序序列（无序区）中寻找最小元素放在已排序序列（有序区）末尾，以此类推
 
-<img src="http://lvshuhuai.cn/image-20210517102931312.png" alt="image-20210517102931312" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210517102931312.png" alt="image-20210517102931312" style="zoom:50%;" />
 
-![](http://lvshuhuai.cn/849589-20171015224719590-1433219824.gif)
+![](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/849589-20171015224719590-1433219824.gif)
 
 #### 实现
 
@@ -3254,7 +3254,7 @@ n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d
 
 将 n 个元素两两分组，分别比较，得到 n/2 个优胜者，保留结果；对优胜者继续比较，以此类推。
 
-<img src="http://lvshuhuai.cn/image-20210517103442290.png" alt="image-20210517103442290" style="zoom:60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210517103442290.png" alt="image-20210517103442290" style="zoom:60%;" />
 
 #### 分析
 
@@ -3271,7 +3271,7 @@ n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d
 
 建堆，输出堆顶，调整堆，以此类推
 
-<img src="http://lvshuhuai.cn/image-20210517104227355.png" alt="image-20210517104227355" style="zoom:60%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210517104227355.png" alt="image-20210517104227355" style="zoom:60%;" />
 
 ## 归并排序
 
@@ -3279,15 +3279,15 @@ n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d
 
 归并：将两个（二路归并）或两个以上的有序表合并成一个新的有序表
 
-<img src="http://lvshuhuai.cn/image-20210524080251828.png" alt="image-20210524080251828" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210524080251828.png" alt="image-20210524080251828" style="zoom:50%;" />
 
 ### 二路归并排序
 
 一直两两归并，顺序存储时，另外开辟空间
 
-<img src="http://lvshuhuai.cn/image-20210524081059143.png" alt="image-20210524081059143" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210524081059143.png" alt="image-20210524081059143" style="zoom:50%;" />
 
-<img src="http://lvshuhuai.cn/image-20210524080641843.png" alt="image-20210524080641843" style="zoom: 67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210524080641843.png" alt="image-20210524080641843" style="zoom: 67%;" />
 
 #### 实现
 
@@ -3318,15 +3318,15 @@ n 个元素，取长度 d < n 作为间隔，分出 d 个子表，所有相距 d
 
 基数：关键字取值的种数
 
-![](http://lvshuhuai.cn/849589-20171015232453668-1397662527.gif)
+![](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/849589-20171015232453668-1397662527.gif)
 
 ### 链式基数排序
 
 用链表模拟队列
 
-<img src="http://lvshuhuai.cn/image-20210524092533926.png" alt="image-20210524092533926" style="zoom:50%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210524092533926.png" alt="image-20210524092533926" style="zoom:50%;" />
 
-![image-20210524093145089](http://lvshuhuai.cn/image-20210524093145089.png)
+![image-20210524093145089](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210524093145089.png)
 
 #### 分析
 

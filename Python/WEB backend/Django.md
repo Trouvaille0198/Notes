@@ -4,7 +4,7 @@
 
 ![1](https://mdn.mozillademos.org/files/13931/basic-django.png)
 
-![image-20210410215951265](http://lvshuhuai.cn/image-20210410215951265.png)
+![image-20210410215951265](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210410215951265.png)
 
 - **URLs:** 虽然可以通过单个功能来处理来自每个URL的请求，但是编写单独的视图函数来处理每个资源是更加可维护的。URL映射器用于根据请求URL将HTTP请求重定向到相应的视图。URL映射器还可以匹配出现在URL中的字符串或数字的特定模式，并将其作为数据传递给视图功能。
   

@@ -239,7 +239,7 @@ src 是 `<img>` 标签的必须属性，用于指定图像文件的路径和文�
 </table>
 ```
 
-![image-20210620161957250](http://lvshuhuai.cn/image-20210620161957250.png)
+![image-20210620161957250](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620161957250.png)
 
 
 ```html
@@ -266,7 +266,7 @@ src 是 `<img>` 标签的必须属性，用于指定图像文件的路径和文�
 </body>
 ```
 
-![image-20210620162006891](http://lvshuhuai.cn/image-20210620162006891.png)
+![image-20210620162006891](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620162006891.png)
 
 
 ## 水平线标签 `<hr />`
@@ -311,7 +311,7 @@ src 是 `<img>` 标签的必须属性，用于指定图像文件的路径和文�
 
  ### 输出
 
-![image-20210620161406006](http://lvshuhuai.cn/image-20210620161406006.png)
+![image-20210620161406006](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620161406006.png)
 
 
 ## 表单标签
@@ -387,7 +387,7 @@ type 属性值
 
 在 option 中定义 `selected="selected"`，默认选中此选项
 
-![image-20210620161419300](http://lvshuhuai.cn/image-20210620161419300.png)
+![image-20210620161419300](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620161419300.png)
 
 
 #### 文本域元素
@@ -406,7 +406,7 @@ type 属性值
 </textarea>
 ```
 
-![image-20210620161042167](http://lvshuhuai.cn/image-20210620161042167.png)
+![image-20210620161042167](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620161042167.png)
 
 
 ### 例子
@@ -432,7 +432,7 @@ type 属性值
 
 
 
-![image-20210620161052876](http://lvshuhuai.cn/image-20210620161052876.png)
+![image-20210620161052876](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620161052876.png)
 
 
 
@@ -515,7 +515,7 @@ type 属性值
 </body>
 ```
 
-![image-20210620161116099](http://lvshuhuai.cn/image-20210620161116099.png)
+![image-20210620161116099](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620161116099.png)
 
 
 ### 表单提交

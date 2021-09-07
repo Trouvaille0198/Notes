@@ -305,7 +305,7 @@ with window("Tutorial"):
 start_dearpygui()
 ```
 
-![image-20210501221056398](http://lvshuhuai.cn/image-20210501221056398.png)
+![image-20210501221056398](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210501221056398.png)
 
 #### 修改
 

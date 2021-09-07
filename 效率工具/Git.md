@@ -444,7 +444,7 @@ $ rm .git -rf
 
 ## GitFlow
 
-![img](http://lvshuhuai.cn/o_git-workflow-release-cycle-4maintenance.png)
+![img](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/o_git-workflow-release-cycle-4maintenance.png)
 
 ### 分支命名规范
 
@@ -464,7 +464,7 @@ $ rm .git -rf
     - 当 `master` 分支中的产品出现需要立即修复的 bug 时，从 `master` 分支上创建一个新的 `hotfix` 分支，并在 `hotfix` 分支上进行 BUG 修复。
     - 修复完成后，需要将 `hotfix` 分支合并到 `master` 分支和 `develop` 分支，并为 `master` 分支添加新的版本号 `tag`，最后删除 `hotfix` 分支。
 
-![](http://lvshuhuai.cn/21810c5662374b2bb10e11e307e83d7c~tplv-k3u1fbpfcp-watermark.image)
+![](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/21810c5662374b2bb10e11e307e83d7c~tplv-k3u1fbpfcp-watermark.image)
 
 ## commit 规范
 

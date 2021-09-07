@@ -360,7 +360,7 @@ w.pack()
 master.mainloop()
 ```
 
-![image-20210203204437109](http://lvshuhuai.cn/image-20210203204437109.png)
+![image-20210203204437109](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203204437109.png)
 
 如果你没有指定 Label 的大小，那么 Label 的尺寸是正好可以容纳其内容而已
 
@@ -425,7 +425,7 @@ b.pack()
 master.mainloop()
 ```
 
-![image-20210203205325365](http://lvshuhuai.cn/image-20210203205325365.png)
+![image-20210203205325365](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203205325365.png)
 
 ### 参数
 
@@ -500,7 +500,7 @@ c.pack()
 mainloop()
 ```
 
-![image-20210203210307785](http://lvshuhuai.cn/image-20210203210307785.png)
+![image-20210203210307785](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203210307785.png)
 
 默认情况下，variable 选项设置为 1 表示选中状态，反之设置为 0
 
@@ -606,7 +606,7 @@ tk.Radiobutton(master, text="Three", variable=v, value=3).pack(anchor="w")
 master.mainloop()
 ```
 
-![image-20210203211041140](http://lvshuhuai.cn/image-20210203211041140.png)
+![image-20210203211041140](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203211041140.png)
 
 如果按钮（选项）比较多，强烈建议您使用以下方式来初始化 Radiobutton 组件：
 
@@ -630,7 +630,7 @@ for girl, num in GIRLS:
 master.mainloop()
 ```
 
-![image-20210203211405507](http://lvshuhuai.cn/image-20210203211405507.png)
+![image-20210203211405507](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203211405507.png)
 
 ### 参数
 
@@ -716,7 +716,7 @@ tk.Label(text="小鸡炖蘑菇").pack()
 master.mainloop()
 ```
 
-![image-20210203211832334](http://lvshuhuai.cn/image-20210203211832334.png)
+![image-20210203211832334](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203211832334.png)
 
 ### 参数
 
@@ -769,7 +769,7 @@ r3 = tk.Radiobutton(group, text="老师/学长介绍", variable=v, value=3).pack
 master.mainloop()
 ```
 
-![image-20210203212646783](http://lvshuhuai.cn/image-20210203212646783.png)
+![image-20210203212646783](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203212646783.png)
 
 ### 参数
 
@@ -826,7 +826,7 @@ e.insert(0, "默认文本...")
 master.mainloop()
 ```
 
-![image-20210203213234423](http://lvshuhuai.cn/image-20210203213234423.png)
+![image-20210203213234423](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203213234423.png)
 
 Entry 组件允许通过以下几种方式指定字符的位置
 
@@ -921,7 +921,7 @@ text.insert("end", "Python.com!")
 root.mainloop()
 ```
 
-<img src="http://lvshuhuai.cn/image-20210203214123731.png" alt="image-20210203214123731" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203214123731.png" alt="image-20210203214123731" style="zoom:67%;" />
 
 ### 参数
 
@@ -1238,7 +1238,7 @@ tk.Button(root, text="创建顶级窗口", command=create).pack()
 root.mainloop()
 ```
 
-<img src="http://lvshuhuai.cn/image-20210203214849716.png" alt="image-20210203214849716" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203214849716.png" alt="image-20210203214849716" style="zoom:67%;" />
 
 ### 参数
 
@@ -1305,7 +1305,7 @@ root.config(menu=menubar)
 root.mainloop()
 ```
 
-<img src="http://lvshuhuai.cn/image-20210203215735047.png" alt="image-20210203215735047" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203215735047.png" alt="image-20210203215735047" style="zoom:67%;" />
 
 ### 参数
 
@@ -1480,7 +1480,7 @@ for i in range(10):
 root.mainloop()
 ```
 
-<img src="http://lvshuhuai.cn/image-20210203221444206.png" alt="image-20210203221444206"  />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203221444206.png" alt="image-20210203221444206"  />
 
 ### 参数
 
@@ -1519,7 +1519,7 @@ tk.Entry(root, show="*").grid(row=1, column=1)
 root.mainloop()
 ```
 
-![image-20210203222402496](http://lvshuhuai.cn/image-20210203222402496.png)
+![image-20210203222402496](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203222402496.png)
 
 默认情况下组件会居中显示在对应的网格里，你可以使用 sticky 选项来修改这一特性
 
@@ -1560,7 +1560,7 @@ tk.Button(root, text="点我", command=callback).place(relx=0.5, rely=0.5, ancho
 root.mainloop()
 ```
 
-![image-20210203222650526](http://lvshuhuai.cn/image-20210203222650526.png)
+![image-20210203222650526](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203222650526.png)
 
 relx 和 rely 选项指定的是相对于父组件的位置，范围是 00 ~ 1.0，因此 0.5 表示位于正中间。那么 relwidth 和 relheight 选项则是指定相对于父组件的尺寸
 
@@ -1602,19 +1602,19 @@ messagebox.askokcancel("Python Demo", "发射核弹？")
 tk.mainloop()
 ```
 
-<img src="http://lvshuhuai.cn/image-20210203223132391.png" alt="image-20210203223132391" style="zoom:77%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203223132391.png" alt="image-20210203223132391" style="zoom:77%;" />
 
 ### 标准对话框样式
 
-| **使用函数**                            | **对话框样式**                                            |
-| --------------------------------------- | --------------------------------------------------------- |
-| askokcancel(title, message, options)    | ![img](https://img-blog.csdnimg.cn/20190102102603983.png) |
-| askquestion(title, message, options)    | ![img](https://img-blog.csdnimg.cn/20190102104400724.png) |
-| askretrycancel(title, message, options) | ![img](https://img-blog.csdnimg.cn/20190102104522848.png) |
-| askyesno(title, message, options)       | ![img](https://img-blog.csdnimg.cn/20190102104602651.png) |
-| showerror(title, message, options)      | ![img](https://img-blog.csdnimg.cn/2019010210464195.png)  |
-| showinfo(title, message, options)       | ![img](https://img-blog.csdnimg.cn/20190102104752798.png) |
-| showwarning(title, message, options)    | ![img](http://lvshuhuai.cn/20190102104846588.png)         |
+| **使用函数**                            | **对话框样式**                                                                        |
+| --------------------------------------- | ------------------------------------------------------------------------------------- |
+| askokcancel(title, message, options)    | ![img](https://img-blog.csdnimg.cn/20190102102603983.png)                             |
+| askquestion(title, message, options)    | ![img](https://img-blog.csdnimg.cn/20190102104400724.png)                             |
+| askretrycancel(title, message, options) | ![img](https://img-blog.csdnimg.cn/20190102104522848.png)                             |
+| askyesno(title, message, options)       | ![img](https://img-blog.csdnimg.cn/20190102104602651.png)                             |
+| showerror(title, message, options)      | ![img](https://img-blog.csdnimg.cn/2019010210464195.png)                              |
+| showinfo(title, message, options)       | ![img](https://img-blog.csdnimg.cn/20190102104752798.png)                             |
+| showwarning(title, message, options)    | ![img](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20190102104846588.png) |
 
 ### 参数
 
@@ -1659,7 +1659,7 @@ tk.Button(root, text="打开文件", command=callback).pack()
 root.mainloop()
 ```
 
-<img src="http://lvshuhuai.cn/image-20210203225057051.png" alt="image-20210203225057051" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203225057051.png" alt="image-20210203225057051" style="zoom:67%;" />
 
 filedialog 模块提供了两个函数：askopenfilename(\*\*option) 和 asksaveasfilename(\*\*option)，分别用于打开文件和保存文件
 
@@ -1700,7 +1700,7 @@ tk.Button(root, text="选择颜色", command=callback).pack()
 root.mainloop()
 ```
 
-<img src="http://lvshuhuai.cn/image-20210203223907695.png" alt="image-20210203223907695" style="zoom:67%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203223907695.png" alt="image-20210203223907695" style="zoom:67%;" />
 
 #### 参数
 

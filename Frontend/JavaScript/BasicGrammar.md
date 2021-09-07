@@ -1333,7 +1333,7 @@ Object.getPrototypeOf(xiaoming) === Student.prototype; // true
 xiaoming instanceof Student; // true
 ```
 
-![protos](http://lvshuhuai.cn/l)
+![protos](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/l)
 
 #### 共享函数
 

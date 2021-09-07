@@ -20,7 +20,7 @@ python 采用基于值的管理方式
 
 - 在 Python 中，即使是简单的赋值语句 `a = 1`，也只是将变量标识符 `a` 引用向对象 `1`
 
-  - ![image-20210529161755060](http://lvshuhuai.cn/image-20210529161755060.png)
+  - ![image-20210529161755060](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210529161755060.png)
 - 基于值的内存管理：小整数、短字符串等对象都被 Python 缓存，多个变量值相等时，可能会有相同的id
 - 在 `a = b` 中，建立的是 `a` 对 `b` 的引用。
 - 使用 `a is b` 来判断 a 和 b 是否引用同一对象，`a is b` 是 `id(a) == id(b)` 的充分非必要条件
@@ -1196,7 +1196,7 @@ dicts = {i: ' ' for i in punctuation}
 
 3. 矩阵转置
 
-    ![image-20210530153535372](http://lvshuhuai.cn/image-20210530153535372.png)
+    ![image-20210530153535372](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210530153535372.png)
 
 4. 获取当前路径
 

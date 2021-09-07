@@ -4,11 +4,11 @@
 
 - 截图插入
 
-  <img src="http://lvshuhuai.cn/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
+  <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
 
 - 拖动本地图片插入
 
-  <img src="http://lvshuhuai.cn/download.png" alt="download" style="zoom:50%;" />
+  <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/download.png" alt="download" style="zoom:50%;" />
 
 
 
