@@ -5,7 +5,8 @@
 ### 安装
 
 ```shell
-pip install opencv-python  
+pip install opencv-python 
+pip install opencv-contrib-python
 ```
 
 ## 基本操作
@@ -44,7 +45,7 @@ cv2.imwrite("Copy.jpg", imgGrey)
 - *wname*：显示图像的窗口的名字
 - *img*：要显示的图像（imread 读入的图像），窗口大小自动调整为图片大小
 
-***cv2.imwrite(file，img，num)***    
+***cv2.imwrite(file, img, num)***    
 
 - 保存一张图像
 - *file*：是要保存的文件名
@@ -55,7 +56,7 @@ cv2.imwrite("Copy.jpg", imgGrey)
 
 - 等待指定时间内是否有键盘输入
     - 若在等待时间内按下任意键则返回按键的ASCII码，程序继续运行
-    - 若没有按下任何键，超时后返回 -1。参数为 0 表示无限等待。
+    - 若没有按下任何键，超时后返回 -1。参数为 0 表示无限等待（只显示第一帧）
     - 不调用此函数的话，窗口会一闪而逝，看不到显示的图片
 - *time*：时间，单位为毫秒
 
@@ -216,13 +217,37 @@ img2 = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)   #灰度化：彩色图像转为灰
 img3 = cv2.cvtColor(img,cv2.COLOR_GRAY2RGB)   #彩色化：灰度图像转为彩色图像
 ```
 
-### 图像的缩放与翻转
+### 图像的几何变换
 
-***cv2.resize(image, dsize)***
+***cv2.resize(image, dsize, fx, fy, interpolation)***
 
 - 图像缩放，返回缩放后的图像
+
 - *img*：原始图像
-- *dsize*：图像大小，如 `(200, 100)`
+
+- *dsize*：图像大小，宽度在前，高度在后，如 `(200, 100)`
+
+- *fx*：代表水平方向上（图像宽度）的缩放系数
+
+- *fy*：代表竖直方向上（图像高度）的缩放系数
+
+- | interpolation 选项 | 所用的插值方法                                               |
+    | ------------------ | ------------------------------------------------------------ |
+    | INTER_NEAREST      | 最近邻插值                                                   |
+    | INTER_LINEAR       | 双线性插值（默认设置）                                       |
+    | INTER_AREA         | 使用像素区域关系进行重采样。 它可能是图像抽取的首选方法，因为它会产生无云纹理的结果。 但是当图像缩放时，它类似于INTER_NEAREST方法。 |
+    | INTER_CUBIC        | 4x4像素邻域的双三次插值                                      |
+    | INTER_LANCZOS4     | 8x8像素邻域的Lanczos插值                                     |
+
+    在缩小时推荐使用 cv2.INTER_AREA，扩大时推荐使用 cv2.INTER_CUBIC 和 cv2.INTER_LINEAR。
+
+将图片放大一倍
+
+```python
+img = cv2.resize(img, dsize=None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)
+# or
+img = cv2.resize(img, (int(2*width), int(2*height)), interpolation=cv2.INTER_AREA)
+```
 
 ***cv2.flip(img, flipcode)***
 
@@ -232,6 +257,45 @@ img3 = cv2.cvtColor(img,cv2.COLOR_GRAY2RGB)   #彩色化：灰度图像转为彩
     - flipcode = 0：沿 x 轴翻转；
     - flipcode > 0：沿 y 轴翻转；
     - flipcode < 0：x, y 轴同时翻转
+
+***cv2.getRotationMarix2D(center, angle, scale)***
+
+- 获得仿射变化矩阵
+- *center*：旋转中心
+- *angle*：旋转角度
+- *scale*：缩放倍数
+
+***cv2.warpAffine(img,M,dsize,flags,borderMode,borderValue)***
+
+- 进行仿射变化
+- *img*：图像
+- *M*：变换矩阵
+- *dsize*：输出图像的大小，格式为 `(rows,cols)`
+- *flags*：插值方法的组合，默认为 `cv2.INTER_LINEAR`
+- *borderMode*：边界像素模式，默认为 `cv2.BORDER_REFLECT`
+- *borderValue*：边界填充值; 默认为 0，可设成 `(255,255,255)`
+- 日常进行仿射变换时，在只设置前三个参数的情况下，如 `cv2.warpAffine(img,M,(rows,cols))` 可以实现基本的仿射变换效果，但可能出现“黑边”现象
+
+图像旋转
+
+```python
+import cv2
+
+img = cv2.imread('4.jpg')
+rows, cols = img.shape[:2]
+# 第一个参数是旋转中心，第二个参数是旋转角度，第三个参数是缩放比例
+M1 = cv2.getRotationMatrix2D((cols/2, rows/2), 45, 0.5)
+M2 = cv2.getRotationMatrix2D((cols/2, rows/2), 45, 2)
+M3 = cv2.getRotationMatrix2D((cols/2, rows/2), 45, 1)
+res1 = cv2.warpAffine(img, M1, (cols, rows))
+res2 = cv2.warpAffine(img, M2, (cols, rows))
+res3 = cv2.warpAffine(img, M3, (cols, rows))
+cv2.imshow('res1', res1)
+cv2.imshow('res2', res2)
+cv2.imshow('res3', res3)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
 
 ### 图像三通道分离和合并
 
@@ -265,4 +329,26 @@ cv2.imshow("Red",r)
 cv2.imshow("Merged",merged)
 cv2.waitKey()
 ```
+
+### 正确的退出方法
+
+### 实现正常退出
+
+`cv2.waitkey(delaytime) ->returnvalue` 
+
+- 在 `delaytime` 时间内，按键盘，返回所按键的ASCII值
+
+- 若未在 `delaytime` 时间内按任何键，返回 -1
+
+- 当 `delaytime` 为 0 时，表示永不退回
+
+- 当按 ecs 键时，因为其 ASCII 值为 27，而所有returnvalue的值为27，故可用此机制实现在 `delaytime` 内正常退出
+
+- 推荐使用
+
+    - ```python
+        if cv2.waitKey() == ord('q'):
+            cv2.destroyAllWindows()
+        # ord(‘q’)返回q对应的Unicode码对应的值
+        ```
 
