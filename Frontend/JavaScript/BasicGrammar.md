@@ -1386,9 +1386,9 @@ xiaoming.grade; // 1
 
 ### 原型继承
 
-在传统的基于Class的语言如Java、C++中，继承的本质是扩展一个已有的Class，并生成新的Subclass。
+在传统的基于 Class 的语言如 Java、C++ 中，继承的本质是扩展一个已有的 Class，并生成新的 Subclass。
 
-由于这类语言严格区分类和实例，继承实际上是类型的扩展。但是，JavaScript由于采用原型继承，我们无法直接扩展一个Class，因为根本不存在Class这种类型。
+由于这类语言严格区分类和实例，继承实际上是类型的扩展。但是，JavaScript 由于采用原型继承，我们无法直接扩展一个 Class，因为根本不存在 Class 这种类型。
 
 JS 的继承就你妈是一坨屎，暂且不学
 
@@ -1424,4 +1424,3 @@ class PrimaryStudent extends Student {
     }
 }
 ```
-
