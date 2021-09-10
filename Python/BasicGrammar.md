@@ -71,7 +71,7 @@ else:
 
 ### for循环
 
-#### 1) 格式
+#### 格式
 
 ```python
 for < variable> in < sequence >:
@@ -80,14 +80,14 @@ else:
     <statements>
 ```
 
-#### 2) 特殊语句
+#### 特殊语句
 
 - **break** 语句可以跳出 for 和 while 的循环体。如果你从 for 或 while 循环中终止，任何对应的循环 else 块将不执行
 - **continue** 语句被用来告诉 Python 跳过当前循环块中的剩余语句，然后继续进行下一轮循环
 
-#### 3) 迭代
+#### 迭代
 
-如果给定一个list或tuple，我们可以通过for循环来遍历这个list或tuple，这种遍历我们称为迭代（Iteration）。在Python中，迭代是通过for ... in来完成的。Python的for循环不仅可以用在list或tuple上，还可以作用在其他可迭代对象上
+如果给定一个 list 或tuple，我们可以通过for循环来遍历这个list或tuple，这种遍历我们称为迭代（Iteration）。在Python中，迭代是通过for ... in来完成的。Python的for循环不仅可以用在list或tuple上，还可以作用在其他可迭代对象上
 
 1. 默认情况下，dict迭代的是key。如果要迭代value，可以用for value in d.values()，如果要同时迭代key和value，可以用`for k, v in d.items()`
 
@@ -126,7 +126,7 @@ False
 
 迭代时，产生的是临时变量，修改此临时变量不会影响本身迭代对象里对应元素的值
 
-### while循环
+### while 循环
 
 ```python
 while <condition>:
@@ -164,7 +164,7 @@ def 函数名（参数列表）:
 
 ####  默认参数
 
-必选参数在前，默认参数在后，否则Python的解释器会报错
+必选参数在前，默认参数在后，否则 Python 的解释器会报错
 
 当函数有多个参数时，把变化大的参数放前面，变化小的参数放后面。变化小的参数就可以作为默认参数
 
@@ -193,7 +193,7 @@ calc(1, 2)
 
 #### 关键字参数
 
-键字参数允许你传入0个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个dict
+键字参数允许你传入 0 个或任意个含参数名的参数，这些关键字参数在函数内部自动组装为一个 dict
 
 ```python
 def func(name, age, **kw)
@@ -207,9 +207,9 @@ func('Jack', 24, **extra)
 
 #### 补充
 
-*args是可变参数，args接收的是一个tuple
+*args 是可变参数，args 接收的是一个 tuple
 
-**kw是关键字参数，kw接收的是一个dict
+**kw 是关键字参数，kw 接收的是一个 dict
 
 ### 装饰器
 
@@ -319,13 +319,13 @@ list_a.extend(list_b)
 2. 删除元素并将其弹出
 
 ```python
-list.pop([index])	   #括号内为空，则弹出最后一个元素；返回弹出的元素值
+list.pop([index])	   # 括号内为空，则弹出最后一个元素；返回弹出的元素值
 ```
 
 3. 根据值删除元素
 
 ```python
-list.remove(value)       #只删除第一个指定的值，要删除多个相同值需使用循环
+list.remove(value)      # 只删除第一个指定的值，要删除多个相同值需使用循环
 ```
 
 ### 组织列表
@@ -370,7 +370,7 @@ for i in range(len(L)):
      L[i]+=10         
 print(L) 
                #等效于
-L=[ ]
+L=[]
 for i in range(1,6):
 	L.append(i+10)
 print(L)
@@ -385,7 +385,7 @@ L=[x+10 for x in L]     #result:[11,12,13,14,15]
 
 #### 创建切片
 
-参数 [start_index:  stop_index:  step] ：
+参数 [start_index: stop_index: step] ：
 
    	 start_index是切片的起始位置索引，不提供时默认从头
    	
@@ -481,13 +481,13 @@ tup2 = (1, 2, 3, 4, 5 )
 tup3 = "a", "b", "c", "d"
 ```
 
-### 2.2.2注意
+### 注意
 
 1. 元组本身不可改变，但是可以给元组变量赋值
 2. 元组中只包含一个元素时，需要在元素后面添加逗号
 
 ```python
-tup1 = (50,)
+tup1 = (50, )
 ```
 
 3. 可以对元组进行连接组合       
@@ -521,9 +521,9 @@ tup3 = tup1 + tup2
 
 ### 定义
 
-在Python中，一边循环一边计算的机制，称为生成器（generator）
+在 Python 中，一边循环一边计算的机制，称为生成器（generator）
 
-生成器是一个特殊的程序，可以被用作控制循环的迭代行为，python 中生成器是迭代器的一种，使用 yield 返回值函数，每次调用 yield 会暂停，而可以使用 `next() `函数和 `send()` 函数恢复生成器
+生成器是一个特殊的程序，可以被用作控制循环的迭代行为，python 中生成器是迭代器的一种，使用 yield 返回值函数，每次调用 yield 会暂停，而可以使用 `next() ` 函数和 `send()` 函数恢复生成器
 
 生成器类似于返回值为数组的一个函数，这个函数可以接受参数，可以被调用，但是，不同于一般的函数会一次性返回包括了所有数值的数组，生成器一次只能产生一个值，这样消耗的内存数量将大大减小，而且允许调用函数可以很快的处理前几个返回值，因此生成器看起来像是一个函数，但是表现得却像是迭代器
 
@@ -582,7 +582,7 @@ g = generator(4)
 2. 将索引指定为 -1，可以返回最后一个列表元素
 3. 负数索引返回离列表末尾相应距离的元素，如 print(list[-3:]) 即打印 list 的最后三个元素
 
-![image-20201206215555032](https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201206215555032.png)
+![image-20201206215555032](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20201206215555032.png)
 
 4. 在 if 语句和 while 语句中，将列表名用在条件表达式中时，列表包含至少一个元素，则返回 True；列表为空返回 False
 
