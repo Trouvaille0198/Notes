@@ -83,7 +83,7 @@ https://api.example.com/employees
 | GET      | /animals/{animal}                | 获取指定的动物详情                                 |
 | PUT      | /animals/{animal}                | 更新指定的动物(整个对象)                           |
 | PATCH    | /animals/{animal}                | 更新指定的动物(部分对象)                           |
-| GET      | /animal_types                    | 获取所有动物类型(ID和名称，不要太详细)             |
+| GET      | /                                | 获取所有动物类型(ID和名称，不要太详细)             |
 | GET      | /animal_types/{type}             | 获取指定的动物类型详情                             |
 | GET      | /employees                       | 检索整个雇员列表                                   |
 | GET      | /employees/{employee}            | 检索指定特定的员工                                 |

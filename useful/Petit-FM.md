@@ -299,6 +299,9 @@ Python 小意思，写着写着就熟了
 - 我之前写的前后端分离小 Demo（Vue2 + Vuex + vue-router + axios + Vuetify，FastAPI + sqlalchemy）：https://github.com/Trouvaille0198/littttle-site，主要看后端部分，前端是Vue2，可以不看
 - vue-blog 项目，感觉还行：https://github.com/biaochenxuying/blog-vue-typescript
 - vue-admin 项目（Vue3 + Vite + TS + vue-router + Pinia），有点复杂看不懂。。：https://github.com/anncwb/vue-vben-admin
+- naive-ui
+    - https://github.com/zmtlwzy/vue3-api-demo
+    - https://github.com/zhizouvip/ok-admin-vue/blob/main/src/layout/LaySidebar/index.vue
 
 ## 开发规范
 
