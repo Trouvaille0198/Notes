@@ -46,15 +46,34 @@ console.log(hello)
 
 ```shell
 npm install -g typescript
+# or
+npm i -g typescript
 ```
 
 使用命令来执行 ts 代码：
 
 ```shell
 tsc file1.ts
+node file.js
 ```
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/ts-2020-11-26-3.png)
+
+简化执行步骤
+
+安装 ts-node
+
+```shell
+npm i -g ts-node
+```
+
+执行
+
+```shell
+ts-node f
+```
+
+
 
 ## 基础类型
 
@@ -1060,6 +1079,36 @@ let greeter = new Greeter("world");
 ### 访问器
 
 在 TypeScript 中，我们可以通过 `getter` 和 `setter` 方法来实现数据的封装和有效性校验，防止出现异常数据。
+
+```ts
+class Hello{
+    private _name: string;
+    private _age: number;
+    get name(): string {
+        return this._name;
+    }
+    set name(value: string) {
+        this._name = value;
+    }
+    get age(): number{
+        return this._age;
+    }
+    set age(age: number) {
+        if(age>0 && age<100){
+            console.log("年龄在0-100之间"); // 年龄在0-100之间
+            return;
+        }
+        this._age = age;
+    }
+}
+
+let hello = new Hello();
+hello.name = "muyy";
+hello.age = 23
+console.log(hello.name); // muyy
+```
+
+另外一个例子：
 
 ```ts
 let passcode = "Hello TypeScript";

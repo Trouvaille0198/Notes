@@ -1424,3 +1424,97 @@ class PrimaryStudent extends Student {
     }
 }
 ```
+
+## 骚皮操作
+
+### ! 与 ？
+
+#### ! 用法
+
+- 用在变量前表示取反
+- 用在赋值的内容后时，使 null 和 undefined 类型可以赋值给其他类型并通过编译
+
+```tsx
+let y:number
+
+y = null        // 无法通过编译
+y = undefined   // 无法通过编译
+
+y = null!
+y = undefined!
+```
+
+```tsx
+// 由于x是可选的，因此parma.x的类型为number | undefined，无法传递给number类型的y，因此需要用x!
+interface IDemo {
+    x?: number
+}
+
+let y:number
+
+const demo = (parma: IDemo) => {
+    y = parma.x!
+    return y
+}
+```
+
+如果存在空情况的判断并赋具体值时，可以不用 !，但是如果要想令 y 存在等于 undefined 的情况还是需要用!
+
+```tsx
+interface IDemo {
+    x?: number
+}
+
+let y:number
+
+const demo = (parma: IDemo) => {
+    y = parma.x || 1    // 如果为undefined，返回y=1，如果不为undefined，则返回parma.x的值
+    return y
+}
+```
+
+#### ? 用法
+
+- 除了表示可选参数外
+- 当使用 A 对象属性 A.B 时，如果无法确定 A 是否为空，则需要用 A?.B，表示当A有值的时候才去访问 B 属性，没有值的时候就不去访问，如果不使用?则会报错
+
+```tsx
+// 由于函数参数可选，因此parma无法确定是否拥有，所以无法正常使用parma.x，使用parma?.x向编译器假设此时parma不为空且为IDemo类型，同时parma?.x无法保证非空，因此使用parma?.x!来保证了整体通过编译
+interface IDemo {
+    x: number
+}
+
+let y:number
+
+const demo = (parma?: IDemo) => {
+    y = parma?.x!
+    console.log(parma?.x)   // 只是单纯调用属性时就无需!    
+    return y
+}
+    
+// 如果使用y = parma!.x!是会报错的，因为当parma为空时，是不拥有x属性的，会报找不到x的错误
+```
+
+但是 ? 用法只能读操作而不能写操作，对一个可能为空的属性赋值是不会被编译通过的，此时还需用用到类型断言
+
+```tsx
+interface IDemo {
+    x: number
+}
+
+// 编译报错，不能赋值给可选属性
+const demo = (parma?: IDemo) => {
+    parma?.x = 1    
+}
+    
+// 使用类型断言  
+const demo = (parma?: IDemo) => {
+    let _parma = parma as IDemo
+    _parma.x = 1
+}
+```
+
+#### ?? 用法
+
+空值合并操作符（`??`）是一个逻辑操作符，当左侧的操作数为 `null` 或者 `undefined` 时，返回其右侧操作数，否则返回左侧操作数。
+

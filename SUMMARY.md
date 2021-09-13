@@ -93,7 +93,8 @@
       - [标准对象](Frontend/JavaScript/标准对象.md)
   - [前端框架]()
       - [API 规范](Frontend/框架/API 规范.md)
-      - [VUE](Frontend/框架/VUE.md)
+      - [Vue3](Frontend/框架/Vue3.md)
+      - [Vue2](Frontend/框架/Vue2.md)
       - [Vuetify](Frontend/框架/Vuetify.md)
 - [Linux]()
   - [基础](Linux/1. 基础.md)
@@ -139,7 +140,7 @@
         - [努巴尼](Games/Overwatch/破坏球点位/努巴尼.md)
         - [伊利奥斯](Games/Overwatch/破坏球点位/伊利奥斯.md)
     - [文明六](Games/文明六.md)
-      
+    
 - [诗]()
     - [传统诗](poerty/classic.md)
     - [现代诗](poetry/modern.md)
