@@ -477,9 +477,9 @@ type
 - feat：新功能（feature）
 - fix：问题修复
 - docs：文档
-- style：调整格式（不影响代码运行）
-- perf：优化性能或体验
-- refactor：重构
+- style：调整格式（不影响代码运行 white-space, formatting, missing semi colons, etc）
+- perf：优化**性能**或体验
+- refactor：重构（既不是新增功能，也不是修補 bug 的程式碼變動）
 - test：增加测试
 - chore：构建过程或辅助工具的变动
 - merge：代码合并。
@@ -490,3 +490,4 @@ scope：用于说明提交的影响范围，内容根据具体项目而定
 
 subject：概括提交内容
 
+详见：https://www.cnblogs.com/daysme/p/7722474.html
