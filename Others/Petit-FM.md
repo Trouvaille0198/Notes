@@ -301,7 +301,7 @@ Python 小意思，写着写着就熟了
 - vue-admin 项目（Vue3 + Vite + TS + vue-router + Pinia），有点复杂看不懂。。：https://github.com/anncwb/vue-vben-admin
 - naive-ui
     - https://github.com/zmtlwzy/vue3-api-demo
-    - https://github.com/zhizouvip/ok-admin-vue/blob/main/src/layout/LaySidebar/index.vue
+    - https://github.com/zhizouvip/ok-admin-vue/
 
 ## 开发规范
 
