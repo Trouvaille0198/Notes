@@ -4,7 +4,7 @@
 
 1. 思考：你的用户名、用户标识、组名、组标识是什么？当前你处在系统的哪个位置中？现在有哪些用户和你一块儿共享系统？
 
-![image-20210914100008892](C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20210914100008892.png)
+![image-20210914100008892](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100008892.png)
 
 2. 思考：文件链接是什么意思？有什么作用？
 3. 思考：Linux文件类型有哪几种？文件的存取控制模式如何描述？
@@ -29,7 +29,7 @@
 
 8. Linux 系统的Shell是什么？请查找这方面的资料，说明不同版本的Shell的特点。 下面每一项说明的是哪类文件。 
 
-    ![image-20210914100201952](C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20210914100201952.png)
+    ![image-20210914100201952](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100201952.png)
 
 
 

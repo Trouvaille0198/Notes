@@ -334,7 +334,7 @@ cv2.waitKey()
 
 ### 实现正常退出
 
-`cv2.waitkey(delaytime) ->returnvalue` 
+***cv2.waitkey(delaytime) ->returnvalue***
 
 - 在 `delaytime` 时间内，按键盘，返回所按键的ASCII值
 
@@ -349,6 +349,25 @@ cv2.waitKey()
     - ```python
         if cv2.waitKey() == ord('q'):
             cv2.destroyAllWindows()
-        # ord(‘q’)返回q对应的Unicode码对应的值
+        # ord('q')返回q对应的Unicode码对应的值
         ```
 
+## 滤波
+
+### 均值滤波
+
+### 中值滤波
+
+中值滤波是一种典型的非线性滤波，是基于排序统计理论的一种能够有效抑制噪声的非线性信号处理技术
+
+基本思：用像素点邻域灰度值的中值来代替该像素点的灰度值，让周围的像素值接近真实的值从而消除孤立的噪声点。
+
+该方法在取出脉冲噪声、椒盐噪声的同时能保留图像的边缘细节。这些优良特性是线性滤波所不具备的。
+
+中值滤波将图像的每个像素用邻域（以当前像素为中心的正方形区域）像素的**中值**代替 。与邻域平均法类似，但计算的是中值。
+
+***cv2.medianBlur(img, ksize)***
+
+- ksize：滤波模板的尺寸大小，必须是大于1的奇数，如3、5、7
+
+!(C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20210922185320907.png)
