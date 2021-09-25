@@ -134,21 +134,23 @@
 
 #### 能力数值
 
-射门
+射门：决定球员的得分能力
 
-过人
+传球：维持球权的能力，战术衔接的关键
 
-速度
+过人：面对防守球员的突破能力
 
-力量
+速度：面对防守球员的突破能力，防守反击战术中的反应能力
 
-抢断
+力量：影响争顶成功率
 
-体能
+抢断：阻截进攻球员的能力，为球队取得球权的方式之一
 
-守门
+体能：使球员在场上保持状态的持久能力
 
-惯用脚
+守门：面对射门的扑救能力
+
+惯用脚：决定边路球员的位置喜好
 
 #### 场上司职
 
@@ -178,139 +180,9 @@
 
 ### 转会
 
-## 开发蓝图
+200 字简介（TODO）
 
-## 技术栈学习路线
+本项目制作了一款前后端分离的足球经理网页游戏
 
-### 前端
 
-#### 语言基础
 
-##### HTML + CSS
-
-简单，也用得不深，混个眼熟即可
-
-- 黑马的基础教程，两倍速过，不用太仔细：https://www.bilibili.com/video/BV1pE411q7FU?spm_id_from=333.999.0.0 
-
-##### JavaScript
-
-走马观花即可，到时候用着用着就熟了
-
-- 黑马的基础教程，两倍速过：https://www.bilibili.com/video/BV1ux411d75J 
-
-##### TypeScript
-
-js 的超集，看完 js 就可以看这个
-
-- JS 转到 TS（先看这个！）：https://muyunyun.cn/posts/66a54fc2/
-
-- TS 中文手册（看不懂就跳过）：https://typescript.bootcss.com/
-- 一个 TS 入门教程（看不懂就跳过）：https://juejin.cn/post/6844904182843965453?share_token=838edeb2-89c0-4f11-be5d-0598100ff7b1#heading-56
-
-#### Vue
-
-##### Vue2 基础
-
-- 黑马的 Vue2 基础教程，两倍速过：https://www.bilibili.com/video/BV12J411m7MG?from=search&seid=11414460699659749889&spm_id_from=333.337.0.0
-
-- Vue2 的官方 Tutorial，可以一看：https://cn.vuejs.org/v2/guide/
-
-- 关注 Vue-cli 脚手架的使用！可以看我的笔记：https://trouvaille0198.github.io/Notes/Frontend/%E6%A1%86%E6%9E%B6/VUE.html#%E8%84%9A%E6%89%8B%E6%9E%B6
-
-##### Vue-Router
-
-路由管理器
-
-- 官方文档，大致瞄一眼怎么用就行：https://router.vuejs.org/zh/installation.html
-- 我的笔记：https://trouvaille0198.github.io/Notes/Frontend/%E6%A1%86%E6%9E%B6/VUE.html#router
-
-##### axios
-
-一个网络请求库，发 request 就靠它了
-
-- 官方文档：https://axios-http.com/zh/docs/intro
-- 我的笔记：https://trouvaille0198.github.io/Notes/Frontend/%E6%A1%86%E6%9E%B6/VUE.html#axios
-
-这玩意儿也是大致看懂就行，具体在项目中的用法看我的 Demo：https://github.com/Trouvaille0198/littttle-site
-
-##### Vuex
-
-一个状态管理库，管理全局变量用的。
-
-- 官方文档：https://vuex.vuejs.org/zh/guide/
-- 我的笔记：https://trouvaille0198.github.io/Notes/Frontend/%E6%A1%86%E6%9E%B6/VUE.html#vuex
-
-##### Pinia
-
-也是一个状态管理库，考虑可以替代 Vuex
-
-- 快速入门：https://segmentfault.com/a/1190000040373313?utm_source=sf-similar-article
-
-- 官方文档：https://pinia.esm.dev/introduction.html
-
-##### Vue3
-
-重点是与 Vue2 的不同之处
-
-- 官方文档，讲得很清楚，多看看：https://v3.cn.vuejs.org/guide/introduction.html
-- Composition API 的用法（官方文档里也有，也去看看）：https://segmentfault.com/a/1190000040319089
-
-##### 其他
-
-关于到底要不要在 Vue3 中使用 Vuex，以及如果不用的话，用什么来代替它？
-
-- https://zhuanlan.zhihu.com/p/309371894
-- https://developer.51cto.com/art/202007/622439.htm
-- 这是专门适配 Vue3 的 Vuex 新版本文档：https://next.vuex.vuejs.org/zh/index.html
-- Vue3中如何使用vuex语法糖：https://blog.csdn.net/qq_19788257/article/details/118963756
-
-#### Naive UI
-
-一个蛮好看的 UI 框架库
-
-- 官方文档（很好玩）：https://www.naiveui.com/zh-CN/light
-- 一个模板，值得好好看看：https://github.com/zce/fearless
-
-### 后端
-
-#### Python
-
-Python 小意思，写着写着就熟了
-
-懂基本语法就 ok
-
-#### FastApi
-
-后端框架，用来写 API 的
-
-- 官方文档，写的蛮好，看它就足够了：https://fastapi.tiangolo.com/zh/
-- 我的笔记（与官方文档相似度 98%）：https://trouvaille0198.github.io/Notes/Python/WEB%20backend/FastAPI.html
-
-#### sqlalchemy
-
-这玩意儿的官方文档跟一坨屎一样，不要看
-
-一直没找到好的资料，你们加油
-
-- 可以瞅一瞅我的笔记玩玩（也不是很完善）：https://trouvaille0198.github.io/Notes/Python/WEB%20backend/sqlalchemy.html
-
-### 其他
-
-- 我之前写的前后端分离小 Demo（Vue2 + Vuex + vue-router + axios + Vuetify，FastAPI + sqlalchemy）：https://github.com/Trouvaille0198/littttle-site，主要看后端部分，前端是Vue2，可以不看
-- vue-blog 项目，感觉还行：https://github.com/biaochenxuying/blog-vue-typescript
-- vue-admin 项目（Vue3 + Vite + TS + vue-router + Pinia），有点复杂看不懂。。：https://github.com/anncwb/vue-vben-admin
-- naive-ui
-    - https://github.com/zmtlwzy/vue3-api-demo
-    - https://github.com/zhizouvip/ok-admin-vue/
-
-## 开发规范
-
-### 前端
-
-#### Vue
-
-- 组件化
-
-- **必须**使用小驼峰命名法，以免在父组件传递 `prop` 或 `emit` 给子组件时发生错误
-
-- 使用 Composition API
