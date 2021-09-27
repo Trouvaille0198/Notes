@@ -57,7 +57,7 @@ create-vite-app <project-name>
 # 缩写命令
 cva <project-name>
 
-# or
+# or 推荐
 npm init vite@latest <project-name> -- --template vue
 ```
 
@@ -79,8 +79,6 @@ module.exports = {
   },
 };
 ```
-
-
 
 #### Vue CLI
 
