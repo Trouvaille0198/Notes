@@ -208,9 +208,21 @@ int lockf(int fd, int cmd, off_t len);
 
 int main()
 {
-    printf("Pid: %d.\n", getpid());
-    printf("Gid: %d.\n", getgid());
-    printf("Uid: %d.\n", getuid());
+    printf("Pid: %d\n", getpid());
+    printf("Gid: %d\n", getgid());
+    printf("Uid: %d\n", getuid());
+    sleep(2);
+    char ch;
+    while (1)
+    {
+        printf("quit? [Y/N]\n");
+        fflush(stdin);
+        scanf("%c", &ch);
+        if (ch == 'Y' || ch == 'y')
+        {
+            break;
+        }
+    }
 }
 ```
 
@@ -262,10 +274,10 @@ The child process, ID number -1, is finished.
 
 **子进程是如何产生的？ 又是如何结束的？**
 
-父进程调用 `fork()` 来创建子进程，此时两个进程同时进行；
+父进程**调用 `fork()` 来创建子进程**，此时两个进程同时进行；
 
 - 在父进程中，`fork()` 返回子进程的 pid，故运行 `if` 语句内的代码块，`wait()` 函数使父进程阻塞（直到子进程结束）并且返回子进程 pid；
-- 在子进程中，`fork()` 返回 0，故运行 `else` 语句内的代码块，`exit()` 函数终止子进程
+- 在子进程中，`fork()` 返回 0，故运行 `else` 语句内的代码块，**`exit()` 函数终止子进程**
 - 父进程收到子进程结束的信号后，继续执行剩余的代码段
 
 **子进程被创建后它的运行环境是怎样建立的？** 
@@ -314,31 +326,31 @@ Pid 9690: The child 9693 is finished.
 
 **画出进程家族树**
 
-> ```text
-> 296───9690─┬─9691─┬─9692───9693
-> 		   │      └─9694       
-> 		   ├─9695───9696
-> 		   │	  
-> 		   └─9697	  		  
-> ```
-
 ```text
-296───9690─┬─9691
-           │            
-           ├─9692
-           │	  
-           └─9693
+296───9690─┬─9691─┬─9692───9693
+		   │      └─9694       
+		   ├─9695───9696
+		   │	  
+		   └─9697	  		  
 ```
+
+> ```text
+> 296───9690─┬─9691
+>            │            
+>            ├─9692
+>            │	  
+>            └─9693
+> ```
 
 **子进程的运行环境是怎样建立的？**
 
-（TBD）`fork()` 调用后，内核会为子进程分配对应的虚拟内存空间，同时它的正文段，数据段，堆栈端都是指向了父进程的物理空间，实现物理空间共享，并且内容可读，一旦某个进程修改这个共享的物理空间的内容，就会复制到子进程自己的物理空间。
+父进程调用`fork()` 后，内核会为子进程分配对应的虚拟内存空间。
 
 **反复运行此程序会出现什么情况？**
 
-进程号将递增
+进程号在递增
 
-原因：（TBD）Linux 有缓存机制
+原因：Linux 的缓存机制
 
 **修改程序，是运行结果呈单分支结构**
 
@@ -519,7 +531,7 @@ void main()
     else
     // 父进程执行
     {
-        printf("Parent %d did not changed the vari and global.\n", getpid());
+        printf("Parent %d did not change the vari and global.\n", getpid());
     }
     printf("pid=%d, global=%d, vari=%d\n", getpid(), global, vari);
     exit(0);
@@ -530,7 +542,7 @@ void main()
 
 ```text
 Before fork.
-Parent 1463 did not changed the vari and global.
+Parent 1463 did not change the vari and global.
 pid=1463, global=4, vari=5
 Child 1464 changed the vari and gobal.
 pid=1464, global=5, vari=4
@@ -642,7 +654,7 @@ Parent 2185: Child process p2 is sending messages!
 
 ## 第七题
 
-（TBD）
+父子进程利用管道通信；父进程撤销进程，先于子进程结束
 
 ### 实现
 
@@ -679,7 +691,7 @@ void main()
     // 父进程
     {
         printf("Parent process terminated!");
-        exit(0);
+        exit(0); // 撤销父进程
     }
 }
 ```
@@ -697,13 +709,95 @@ Child process terminated!
 
 **系统如何处理孤儿进程？**
 
-孤儿进程将被 init 进程(进程号为 1)所收养，并由 init 进程对它们完成状态收集工作
+孤儿进程将被 init 进程（进程号为 1）所收养，并由 init 进程对它们完成状态收集工作
 
 ## 第八题
 
 客户进程向服务器进程发出信号，服务器进程接受作出应答，再向客户返回消息
 
+### Client
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+
+#define MSGKEY 75
+struct msgform
+{
+    long mtype;
+    char mtext[256];
+} msg;
+
+void main()
+{
+    struct msgform msg;
+    int msgqid, pid, *pint;
+
+    msgqid = msgget(MSGKEY, 0777);
+    pid = getpid();
+    pint = (int *)msg.mtext;
+    *pint = pid;
+    msg.mtype = 1;
+    msgsnd(msgqid, &msg, sizeof(int), 0);
+
+    msgrcv(msgqid, &msg, 256, pid, 0);
+
+    printf("Client: receive from pid %d.\n", *pint);
+}
+```
+
+### Server
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+
+#define MSGKEY 75
+struct msgform
+{
+    long mtype;
+    char mtext[256];
+} msg;
+
+int msgqid;
+
+void main()
+{
+    int i, pid, *pint;
+    extern cleanup();
+    for (i = 0; i < 20; i++) // 设置软中断信号的处理程序
+        signal(i, cleanup);
+    msgqid = msgget(MSGKEY, 0777 | IPC_CREAT);
+    for (;;)
+    {
+        msgrcv(msgqid, &msg, 256, 1, 0);
+        pint = (int *)msg.mtext;
+        pid = *pint;
+        printf("Server: receive from pid %d.\n", pid);
+        msg.mtype = pid;
+        *pint = getpid();
+        msgsnd(msgqid, &msg, sizeof(int), 0);
+    }
+}
+
+cleanup()
+{
+    msgctl(msgqid, IPC_RMID, 0);
+    exit(0);
+}
+```
+
 ### 思考
+
+**服务者程序和客户程序还可以用什么机制来实现？**
 
 服务者程序和客户程序还可以利用 socket 进行通信
 
@@ -768,5 +862,51 @@ After wait 4466,Parent 4465: finished.
 
 用信号量机制编写一个解决生产者——消费者问题的程序
 
+（TBD）
+
 ## 研究并讨论
+
+**讨论 Linux 系统进程运行时的机制和特点，系统通过什么来管理进程？**
+
+
+
+**C 语言中是如何使用 Linux 提供的功能的？**
+
+Linux 在 C 语言中提供了一系列系统调用接口给编程人员使用
+
+如 `fork()` 函数用来创建子进程；`execl()` 函数用来使用 shell 命令等
+
+**什么是进程？它是如何产生的？**
+
+进程是**进程实体**的运行过程，是系统进行资源分配和调度的一个独立单位
+
+执行程序时，会产生相应的进程
+
+**进程控制如何实现？**
+
+系统为了控制进程，设计出一种数据结构——进程控制块 PCB，其中记录了操作系统所需的、用于描述进程当前情况以及控制进程运行的全部信息。
+
+**进程通信方式各有什么特点？**
+
+- 共享存储器系统
+    - 基于共享数据结构、共享存储区的通信方式
+    - 仅适用于传递相对少量的数据，通信效率低，属于低级通信）
+- 管道通信系统
+    - 互斥：当一个进程正在对 pipe 执行读/写操作时，其它进程必须等待
+    - 同步，当一个进程将一定数量的数据写入，然后就去睡眠等待，直到读进程将数据取走，再去唤醒。读进程与之类似
+    - 需要确定对方是否存在
+- 消息传递系统
+    - 进程间的数据交换以格式化的消息为单位
+- 客户机服务器系统
+    - 基于 socket 协议
+
+**管道通信如何实现？该通信方式可以用在何处？**
+
+管道的实质是一个内核缓冲区，进程以先进先出的方式从缓冲区存取数据：管道一端的进程顺序地将进程数据写入缓冲区，另一端的进程则顺序地读取数据。
+
+管道通信通常用于两个进程之间的相互通信
+
+**什么是软中断？软中断信号通信如何实现？**
+
+软中断是 CPU 根据软件的某条指令或者软件对标志寄存器的某个标志位的设置而产生
 
