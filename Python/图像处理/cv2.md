@@ -356,18 +356,201 @@ cv2.waitKey()
 
 ### 均值滤波
 
+均值滤波只取内核区域下所有像素的平均值并替换中心元素。3x3 标准化的盒式过滤器如下所示：
+
+![img](https://img-blog.csdnimg.cn/20191029161721268.png)
+
+***cv2.blur(img,ksize)***
+
+参数
+
+- *ksize*：核大小，如 `(5, 5)`
+
+特征：核中区域贡献率相同。
+
+作用：对于椒盐噪声的滤除效果比较好。
+
 ### 中值滤波
 
 中值滤波是一种典型的非线性滤波，是基于排序统计理论的一种能够有效抑制噪声的非线性信号处理技术
 
-基本思：用像素点邻域灰度值的中值来代替该像素点的灰度值，让周围的像素值接近真实的值从而消除孤立的噪声点。
-
-该方法在取出脉冲噪声、椒盐噪声的同时能保留图像的边缘细节。这些优良特性是线性滤波所不具备的。
-
 中值滤波将图像的每个像素用邻域（以当前像素为中心的正方形区域）像素的**中值**代替 。与邻域平均法类似，但计算的是中值。
+
+特征：中心点的像素被核中中位数的像素值代替
+
+作用：对于椒盐噪声有效
 
 ***cv2.medianBlur(img, ksize)***
 
+参数
+
 - ksize：滤波模板的尺寸大小，必须是大于1的奇数，如3、5、7
 
-!(C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20210922185320907.png)
+### 高斯滤波
+
+对整幅图像进行加权平均，每个像素的值尤其本身和邻域内的其他像素值经过加权平均后得到
+
+***cv2.GuassianBlur(img, ksize,sigmaX,sigmaY)***
+
+参数
+
+- *sigmaX*，*sigmaY*：分别表示 X，Y 方向的标准偏差
+    - 如果仅指定了 sigmaX，则 sigmaY 与 sigmaX 相同
+    - 如果两者都为零，则根据内核大小计算它们
+
+特征：核中区域贡献率与距离区域中心成正比，权重与高斯分布相关。
+
+作用：高斯模糊在从图像中去除高斯噪声方面非常有效	
+
+## 图像提取
+
+SIFT 的全称是 Scale Invariant Feature Transform，尺度不变特征变换。是在不同的尺度空间上查找关键点（特征点），并计算出关键点的方向。
+
+SIFT所查找到的关键点是一些十分突出、不会因光照、仿射变换和噪音等因素而变化的点，如角点、边缘点、暗区的亮点及亮区的暗点等。
+
+SIFT 特征对旋转、尺度缩放、亮度变化等保持不变性，是一种非常稳定的局部特征。
+
+**环境**
+
+```python
+pip install opencv-contrib-python
+```
+
+**例**
+
+```python
+import cv2
+import matplotlib.pyplot as plt
+
+img = cv2.imread(
+    r'D:\Repo\PythonLearning\cv2Learning\assets\selina.jpg', 0)  # 输入灰度图
+# 构造生成器
+sift = cv2.xfeatures2d.SIFT_create()
+# 检测图片
+kp, des = sift.detectAndCompute(img, None)  # 关键点（Keypoint）和描述子（Descriptor）
+# 绘出关键点
+img2 = cv2.drawKeypoints(img, kp, None, (255, 0, 0), 4)
+
+# 显示
+plt.figure(figsize=(10, 10))  # 画布放大10倍
+plt.axis('off')  # 隐藏坐标轴
+plt.imshow(img2)  # 打印图像
+plt.show()  # 显示画布
+
+if cv2.waitKey() == ord('q'):
+    cv2.destroyAllWindows()
+```
+
+
+
+## 阈值分割
+
+### 二值阈值分割
+
+***cv2.threshold(src, thresh, maxval, type[, dst])***
+
+参数
+
+- *thresh*：阈值
+- *maxval*：最大阈值，一般为 255
+- *type*：阈值方式，最主要有五种
+
+返回值
+
+- *ret*
+- *dst*：阈值分割后的图像
+
+例：
+
+```python
+import cv2
+import matplotlib.pyplot as plt
+
+# 灰度图读入
+img = cv2.imread(r'D:\Repo\PythonLearning\cv2Learning\assets\gradient.png', 0)
+
+# 5种不同的阈值方法
+ret, th1 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+ret, th2 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
+ret, th3 = cv2.threshold(img, 127, 255, cv2.THRESH_TRUNC)
+ret, th4 = cv2.threshold(img, 127, 255, cv2.THRESH_TOZERO)
+ret, th5 = cv2.threshold(img, 127, 255, cv2.THRESH_TOZERO_INV)
+titles = ['Original', 'BINARY', 'BINARY_INV', 'TRUNC', 'TOZERO', 'TOZERO_INV']
+images = [img, th1, th2, th3, th4, th5]
+
+# 使用Matplotlib显示
+# 两行三列图
+for i in range(6):
+    plt.subplot(2, 3, i + 1)
+    plt.imshow(images[i], 'gray')
+    plt.title(titles[i], fontsize=8)
+    plt.xticks([]), plt.yticks([])  # 隐藏坐标轴
+plt.show()
+```
+
+输出
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210929180610118.png" alt="image-20210929180610118" style="zoom:50%;" />
+
+### 自适应阈值分割
+
+固定阈值将整幅图片分成两类值，它并不适用于明暗分布不均的图片。而自适应阈值会每次取图片的一小部分计算阈值。这样图片不同区域的阈值就不尽相同
+
+***cv2.adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C)***
+
+参数
+
+- *maxValue*：当 thresholdType 采用 `cv2.THRESH_BINARY` 和 `cv2.THRESH_BINARY_INV` 时像素点被赋予的新值
+- *adaptiveMethod*：自适应阈值的计算方法
+    - `cv2.ADPTIVE_THRESH_MEAN_C`：阈值取**自相邻区域**（也就是小区域）的平均值
+    - `cv2.ADPTIVE_THRESH_GAUSSIAN_C`：阈值取值相邻区域的加权和，权重为一个高斯窗口
+- *thresholdType*：阈值分割类型，共 5 种，同 `cv2.threshold()` 的阈值分割类型参数
+- *blockSize*：用来计算阈值的邻域大小（小区域的面积，如 11 就是 11 * 11 的小块）
+- *C*：常数，最终阈值 = 小区域计算出的阈值 - C
+
+例
+
+```python
+import cv2
+import matplotlib.pyplot as plt
+
+# 灰度图读入
+img = cv2.imread(r'D:\Repo\PythonLearning\cv2Learning\assets\selina.jpg', 0)
+
+# 固定阈值
+ret, th1 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+
+# 自适应阈值
+th2 = cv2.adaptiveThreshold(
+    img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 4)
+th3 = cv2.adaptiveThreshold(
+    img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 17, 6)
+
+titles = ['Original', 'Global(v = 127)', 'Adaptive Mean', 'Adaptve Gaussian']
+images = [img, th1, th2, th3]
+
+for i in range(4):
+    plt.subplot(2, 2, i + 1), plt.imshow(images[i], 'gray')
+    plt.title(titles[i], fontsize=8)
+    plt.xticks([]), plt.yticks([])  # 隐藏坐标轴
+plt.show()
+```
+
+输出
+
+![image-20210929182009030](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210929182009030.png)
+
+## 标记
+
+***cv2.drawKeypoints(img, keypoints, outputimage, color, flags)***
+
+参数
+
+- *keypoints*：从原图中获得的关键点，这也是画图时所用到的数据
+- *outputimage*：输出（可以是原始图片）
+- *color*：颜色设置，格式为 `(r, g, b)`
+- *flags*：绘图功能的标识设置
+    -  `cv2.DRAW_MATCHES_FLAGS_DEFAULT`：创建输出图像矩阵，使用现存的输出图像绘制匹配对和特征点，对每一个关键点只绘制中间点
+    - `cv2.DRAW_MATCHES_FLAGS_DRAW_OVER_OUTIMG`：不创建输出图像矩阵，而是在输出图像上绘制匹配对
+    - `cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS`：对每一个特征点绘制带大小和方向的关键点图形
+    - `cv2.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS`：单点的特征点不被绘制 

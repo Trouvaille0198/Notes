@@ -787,9 +787,9 @@ plt.show()
 ## 解决中文乱码问题
 
 ```python
-import matplotlib as mpl
-mpl.rcParams["font.sans-serif"] = ["FangSong"]
-mpl.rcParams["axes.unicode_minus"] = False
+import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
+plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
 # 或
 import matplotlib as mpl
 mpl.rc("font", family='MicroSoft YaHei', weight='bold')
