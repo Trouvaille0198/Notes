@@ -30,6 +30,7 @@ Vue.createApp(Counter).mount('#counter')
 ### 新特性
 
 - 树摇（Tree shacking）
+- 组合式 API（Composition API）
 
 ### 安装
 
@@ -810,6 +811,158 @@ Vue 为最常用的键提供了别名：
 
 https://segmentfault.com/a/1190000040319089
 
+https://www.jianshu.com/p/5996f611c990
+
+![img](https://pic1.zhimg.com/80/v2-b72736d77cfceecc80a2b1497c649e54_1440w.jpg?source=1940ef5c)
+
+### setup
+
+`setup` 是一个组件选项，所以像别的组件选项一样，写在组件导出的对象里。
+
+```xml
+<script>
+  export default {
+    name: "App",
+    setup() {
+      // ...
+
+      return {
+        // ...
+      }
+    },
+  }
+</script>
+```
+
+1. `setup` 选项应该为一个函数
+2. `setup` 选项函数接受两个参数： `props` 和 `context`
+3. `setup` 选项函数需要返回要暴露给组件的内容
+
+#### 参数
+
+##### props
+
+正如在一个标准组件中所期望的那样，`setup` 函数中的 `props` 是响应式的，当传入新的 prop 时，它将被更新。
+
+
+
+```jsx
+// MyBook.vue
+
+export default {
+  props: {
+    title: String
+  },
+  setup(props) {
+    console.log(props.title)
+  }
+}
+```
+
+但是，因为 `props` 是响应式的，你**不能使用 ES6 解构**，因为它会消除 prop 的响应性。
+如果需要解构 prop，可以通过使用 `setup` 函数中的 `toRefs` 来安全地完成此操作。
+
+```jsx
+import { toRefs } from 'vue'
+
+setup(props) {
+    const { title } = toRefs(props)
+
+    console.log(title.value)
+}
+```
+
+##### context
+
+`context` 上下文是一个普通的 JavaScript 对象，它暴露三个组件的 property：
+
+```ts
+// MyBook.vue
+export default {
+  setup(props, context) {
+    // Attribute (非响应式对象)
+    console.log(context.attrs)
+
+    // 插槽 (非响应式对象)
+    console.log(context.slots)
+
+    // 触发事件 (方法)
+    console.log(context.emit)
+  }
+}
+```
+
+`context` 是一个普通的 JavaScript 对象，也就是说，它不是响应式的，这意味着你可以安全地对 `context` 使用 ES6 解构。
+
+```ts
+// MyBook.vue
+export default {
+  setup(props, { attrs, slots, emit }) {
+    ...
+  }
+}
+```
+
+`attrs` 和 `slots` 是有状态的对象，它们总是会随组件本身的更新而更新。这意味着你应该避免对它们进行解构，并始终以 `attrs.x` 或 `slots.x` 的方式引用 property。请注意，与 `props` 不同，`attrs` 和 `slots` 是非响应式的。如果你打算根据 `attrs` 或 `slots` 更改应用副作用，那么应该在 `onUpdated` 生命周期钩子中执行此操作。
+
+#### 返回值
+
+##### 对象
+
+如果 `setup` 返回一个对象，则可以在组件的模板中像传递给 `setup` 的 `props` property 一样访问该对象的 property：
+
+```html
+<!-- MyBook.vue -->
+<template>
+  <!-- 模板中使用会被自动解开，所以不需要 .value  -->
+  <div>{{ readersNumber }} {{ book.title }}</div>
+</template>
+
+<script>
+  import { ref, reactive } from 'vue'
+
+  export default {
+    setup() {
+      const readersNumber = ref(0)
+      const book = reactive({ title: 'Vue 3 Guide' })
+
+      // expose to template
+      return {
+        readersNumber,
+        book
+      }
+    }
+  }
+</script>
+```
+
+> 注意，从 `setup` 返回的 [refs](https://links.jianshu.com/go?to=https%3A%2F%2Fvue3js.cn%2Fdocs%2Fzh%2Fapi%2Frefs-api.html%23ref) 在模板中访问时是[被自动解开](https://links.jianshu.com/go?to=https%3A%2F%2Fvue3js.cn%2Fdocs%2Fzh%2Fguide%2Freactivity-fundamentals.html%23ref-%E8%A7%A3%E5%BC%80)的，因此不应在模板中使用 `.value`。
+
+##### 渲染函数
+
+`setup` 还可以返回一个渲染函数，该函数可以直接使用在同一作用域中声明的响应式状态：
+
+```jsx
+// MyBook.vue
+
+import { h, ref, reactive } from 'vue'
+
+export default {
+  setup() {
+    const readersNumber = ref(0)
+    const book = reactive({ title: 'Vue 3 Guide' })
+    // Please note that we need to explicitly expose ref value here
+    return () => h('div', [readersNumber.value, book.title])
+  }
+}
+```
+
+新的 `setup` 组件选项在**创建组件之前**执行，一旦 `props` 被解析，并充当合成 API 的入口点。
+
+#### 不用 this
+
+在 `setup()` 内部，`this` 不会是该活跃实例的引用，因为 `setup()` 是在解析其它组件选项之前被调用的，所以 `setup()` 内部的 `this` 的行为与其它选项中的 `this` 完全不同。这在和其它选项式 API 一起使用 `setup()` 时可能会导致混淆。
+
 ### ref 与 reactive
 
 reactive 和 ref 都是用来定义响应式数据的
@@ -818,7 +971,168 @@ reactive 更推荐去定义复杂的数据类型，ref 更推荐定义基本类�
 
 可以简单的理解为：ref 是对 reactive 的二次包装，ref 定义的数据访问的时候要多一个 `.value`
 
-> toRefs API提供了一个方法可以把 reactive 的值处理为 ref
+> toRefs API 提供了一个方法可以把 reactive 的值处理为 ref
+
+#### reactive
+
+`reactive()` 接收一个普通对象然后返回该普通对象的响应式代理。等同于 2.x 的 `Vue.observable()`
+
+```ts
+const obj = reactive({ count: 0 })
+```
+
+响应式转换是“深层的”：会影响对象内部所有嵌套的属性。基于 ES2015 的 Proxy 实现，返回的代理对象**不等于**原始对象。建议仅使用代理对象而避免依赖原始对象。
+
+```html
+<template>
+  <div id="app">{ state.count }</div>
+</template>
+
+<script>
+import { reactive } from 'vue'
+export default {
+  setup() {
+    // state 现在是一个响应式的状态
+    const state = reactive({
+      count: 0,
+    })
+  }
+}
+</script>
+```
+
+#### ref
+
+接受一个参数值并返回一个响应式且可改变的 ref 对象。ref 对象拥有一个指向内部值的单一属性 `.value`
+
+```ts
+const count = ref(0)
+console.log(count.value) // 0
+
+count.value++
+console.log(count.value) // 1
+```
+
+如果传入 ref 的是一个对象，将调用 `reactive` 方法进行深层响应转换。
+
+##### **模板中访问**
+
+当 ref 作为渲染上下文的属性返回（即在`setup()` 返回的对象中）并在模板中使用时，它会自动解套，无需在模板内额外书写 `.value`：
+
+```html
+<template>
+  <div>{{ count }}</div>
+</template>
+
+<script>
+  export default {
+    setup() {
+      return {
+        count: ref(0),
+      }
+    },
+  }
+</script>
+```
+
+##### **作为响应式对象的属性访问**
+
+当 ref 作为 reactive 对象的 property 被访问或修改时，也将自动解套 value 值，其行为类似普通属性：
+
+```ts
+const count = ref(0)
+const state = reactive({
+  count,
+})
+
+console.log(state.count) // 0
+
+state.count = 1
+console.log(count.value) // 1
+```
+
+注意如果将一个新的 ref 分配给现有的 ref， 将替换旧的 ref：
+
+```ts
+const otherCount = ref(2)
+
+state.count = otherCount
+console.log(state.count) // 2
+console.log(count.value) // 1
+```
+
+注意当嵌套在 reactive `Object` 中时，ref 才会解套。从 `Array` 或者 `Map` 等原生集合类中访问 ref 时，不会自动解套：
+
+```ts
+const arr = reactive([ref(0)])
+// 这里需要 .value
+console.log(arr[0].value)
+
+const map = reactive(new Map([['foo', ref(0)]]))
+// 这里需要 .value
+console.log(map.get('foo').value)
+```
+
+##### **类型定义**
+
+```ts 
+interface Ref<T> {
+  value: T
+}
+
+function ref<T>(value: T): Ref<T>
+```
+
+有时我们可能需要为 ref 做一个较为复杂的类型标注。我们可以通过在调用 `ref` 时传递泛型参数来覆盖默认推导：
+
+```ts
+const foo = ref<string | number>('foo') // foo 的类型: Ref<string | number>
+
+foo.value = 123 // 能够通过！
+```
+
+### computed
+
+使用响应式 `computed` API 有两种方式：
+
+1. 传入一个 getter 函数，返回一个默认不可手动修改的 ref 对象。
+
+```csharp
+const count = ref(1)
+const plusOne = computed(() => count.value + 1)
+
+console.log(plusOne.value) // 2
+
+plusOne.value++ // 错误！
+```
+
+2. 传入一个拥有 `get` 和 `set` 函数的对象，创建一个可手动修改的计算状态。
+
+```csharp
+const count = ref(1)
+const plusOne = computed({
+  get: () => count.value + 1,
+  set: (val) => {
+    count.value = val - 1
+  },
+})
+
+plusOne.value = 1
+console.log(count.value) // 0
+```
+
+#### **类型定义**
+
+```ts
+// 只读的
+function computed<T>(getter: () => T): Readonly<Ref<Readonly<T>>>
+
+// 可更改的
+function computed<T>(options: {
+  get: () => T
+  set: (value: T) => void
+}): Ref<T>
+```
 
 ### 模块化
 
