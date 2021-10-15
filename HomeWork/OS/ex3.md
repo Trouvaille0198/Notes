@@ -244,20 +244,21 @@ Uid: 1000
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-main()
+int main()
 {
-    int i;
+    int status;
+    int ppid;
     if (fork())
     {
-        i = wait();
+        pid = wait(&status);
         printf("It's a parent process.\n");
-        printf("The child process, ID number %d, is finished.\n", i);
+        printf("The child process, ID number %d, is finished.\n", pid);
     }
     else
     {
         printf("It's a child process.\n");
-        sleep(10);
-        exit(i);
+        sleep(2);
+        exit(0);
     }
 }
 ```
