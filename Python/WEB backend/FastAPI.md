@@ -158,7 +158,7 @@ q: list = Query([])
 
 ## 请求体 request
 
-**请求**体是客户端发送给 API 的数据。**响应**体是 API 发送给客户端的数据。
+**请求体**是客户端发送给 API 的数据。**响应体**是 API 发送给客户端的数据。
 
 你的 API 几乎总是要发送**响应**体。但是客户端并不总是需要发送**请求**体。
 
@@ -431,7 +431,7 @@ class Item(BaseModel):
 
 ### 嵌套模型
 
-使用 **FastAPI**，你可以定义、校验、记录文档并使用任意深度嵌套的模型（归功于Pydantic）。
+使用 **FastAPI**，你可以定义、校验、记录文档并使用任意深度嵌套的模型（归功于 Pydantic）。
 
 #### List
 
@@ -678,7 +678,7 @@ async def create_index_weights(weights: Dict[int, float]):
 
 Tip
 
-> 请记住 JSON 仅支持将 `str` 作为键。
+> 请记住 **JSON 仅支持将 `str` 作为键**。
 >
 > 但是 Pydantic 具有自动转换数据的功能。
 >
@@ -729,7 +729,7 @@ class Item(BaseModel):
 
 不过这样写感觉蛮麻烦的... 
 
-#### `Body`等的额外参数
+#### `Body` 等的额外参数
 
 可以通过传递额外信息给 `Field` 同样的方式操作`Path`, `Query`, `Body`等。
 
@@ -825,8 +825,6 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
     return {"filenames": [file.filename for file in files]}
 ```
 
-
-
 ## 校验
 
 ### 对查询参数的校验
@@ -864,7 +862,7 @@ q: Optional[str] = Query(None, min_length=3, max_length=50, regex="^fixedquery$"
 q: str = Query("fixedquery", min_length=3)
 ```
 
-若要声明为必须参数，使用 `...`
+**若要声明为必须参数，使用 `...`**
 
 ```python
 q: str = Query(..., min_length=3)
@@ -993,7 +991,7 @@ async def read_items(ads_id: Optional[str] = Cookie(None)):
     return {"ads_id": ads_id}
 ```
 
-> `Cookie` 、`Path` 、`Query`是兄弟类，它们都继承自公共的 `Param` 类
+> `Cookie` 、`Path` 、`Query` 是兄弟类，它们都继承自公共的 `Param` 类
 >
 > 但请记住，当你从 `fastapi` 导入的 `Query`、`Path`、`Cookie` 或其他参数声明函数，这些实际上是返回特殊类的函数。
 
@@ -1003,7 +1001,7 @@ async def read_items(ads_id: Optional[str] = Cookie(None)):
 from fastapi import Header
 ```
 
-使用和`Path`, `Query` and `Cookie` 一样的结构定义 header 参数
+使用和 `Path`, `Query` and `Cookie` 一样的结构定义 header 参数
 
 ```python
 @app.get("/items/")
@@ -1025,7 +1023,7 @@ Header(None, convert_underscores=False)
 
 ### 接受重复值
 
-相同的 header 具有多个值时，可以在类型声明中使用一个list来定义这些情况
+相同的 header 具有多个值时，可以在类型声明中使用一个 list 来定义这些情况
 
 比如，为了声明一个 `X-Token` header 可以出现多次，你可以这样写
 
@@ -1635,7 +1633,148 @@ async def root():
 
 ## 依赖项
 
-一些在应用程序的好几个地方所使用的依赖项，可以放在它们自己的 `dependencies` 模块（`app/dependencies.py`）中
+### 声明依赖项
 
-# 安全性
+#### 函数式
+
+```python
+from typing import Optional
+from fastapi import Depends, FastAPI
+app = FastAPI()
+
+async def common_parameters(q: Optional[str] = None, skip: int = 0, limit: int = 100):
+    return {"q": q, "skip": skip, "limit": limit}
+
+@app.get("/items/")
+async def read_items(commons: dict = Depends(common_parameters)):
+    return commons
+
+@app.get("/users/")
+async def read_users(commons: dict = Depends(common_parameters)):
+    return commons
+```
+
+只能传给 Depends 一个参数。
+
+且该参数必须是可调用对象，比如函数。
+
+该函数接收的参数和*路径操作函数*的参数一样
+
+#### 对象式
+
+```python
+from typing import Optional
+
+from fastapi import Depends, FastAPI
+
+app = FastAPI()
+
+
+fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
+
+
+class CommonQueryParams:
+    def __init__(self, q: Optional[str] = None, skip: int = 0, limit: int = 100):
+        self.q = q
+        self.skip = skip
+        self.limit = limit
+
+
+@app.get("/items/")
+async def read_items(commons: CommonQueryParams = Depends(CommonQueryParams)):
+    response = {}
+    if commons.q:
+        response.update({"q": commons.q})
+    items = fake_items_db[commons.skip : commons.skip + commons.limit]
+    response.update({"items": items})
+    return response
+```
+
+Instead of writing:
+
+```
+commons: CommonQueryParams = Depends(CommonQueryParams)
+```
+
+... you can also write:
+
+```
+commons: CommonQueryParams = Depends()
+```
+
+### 子依赖项
+
+```python
+from typing import Optional
+
+from fastapi import Cookie, Depends, FastAPI
+
+app = FastAPI()
+
+
+def query_extractor(q: Optional[str] = None):
+    return q
+
+
+def query_or_cookie_extractor(
+    q: str = Depends(query_extractor), last_query: Optional[str] = Cookie(None)
+):
+    if not q:
+        return last_query
+    return q
+
+
+@app.get("/items/")
+async def read_query(query_or_default: str = Depends(query_or_cookie_extractor)):
+    return {"q_or_cookie": query_or_default}
+```
+
+`query_or_cookie_extractor` 的参数：
+
+- 尽管该函数自身是依赖项，但还声明了另一个依赖项（它「依赖」于其他对象）
+    - 该函数依赖 `query_extractor`, 并把 `query_extractor` 的返回值赋给参数 `q`
+- 同时，该函数还声明了类型是 `str` 的可选 cookie（`last_query`）
+    - 用户未提供查询参数 `q` 时，则使用上次使用后保存在 cookie 中的查询
+
+>如果在同一个*路径操作* 多次声明了同一个依赖项，例如，多个依赖项共用一个子依赖项，**FastAPI** 在处理同一请求时，只调用一次该子依赖项。
+
+### 路径操作装饰器依赖项
+
+有时，我们并不需要在*路径操作函数*中使用依赖项的返回值。或者说，有些依赖项不返回值，但仍要执行或解析该依赖项。
+
+对于这种情况，不必在声明*路径操作函数*的参数时使用 `Depends`，而是可以在*路径操作装饰器*中添加一个由 `dependencies` 组成的 `list`。
+
+```python
+from fastapi import Depends, FastAPI, Header, HTTPException
+
+app = FastAPI()
+
+
+async def verify_token(x_token: str = Header(...)):
+    if x_token != "fake-super-secret-token":
+        raise HTTPException(status_code=400, detail="X-Token header invalid")
+
+
+async def verify_key(x_key: str = Header(...)):
+    if x_key != "fake-super-secret-key":
+        raise HTTPException(status_code=400, detail="X-Key header invalid")
+    return x_key
+
+
+@app.get("/items/", dependencies=[Depends(verify_token), Depends(verify_key)])
+async def read_items():
+    return [{"item": "Foo"}, {"item": "Bar"}]
+```
+
+路径操作装饰器依赖项（以下简称为**“路径装饰器依赖项”**）的执行或解析方式和普通依赖项一样，但就算这些依赖项会返回值，它们的值也不会传递给*路径操作函数*。
+
+### 全局依赖项
+
+有时，我们要为整个应用添加依赖项
+
+```python
+app = FastAPI(dependencies=[Depends(verify_token), Depends(verify_key)])
+```
+
+一些在应用程序的好几个地方所使用的依赖项，可以放在它们自己的 `dependencies` 模块（`app/dependencies.py`）中
 
