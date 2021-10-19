@@ -83,8 +83,6 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-
-
 # urls
 
 `urls.py`：URLconf 文件
@@ -99,8 +97,6 @@ urlpatterns = [
     path('app02/', include('app02.urls'))
 ]
 ```
-
-
 
 # Models
 
