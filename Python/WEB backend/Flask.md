@@ -236,7 +236,3 @@ def logout():
     return jsonify(re_code=200, msg="成功退出登录!")
 ```
 
-
-
-# SQLalchemy
-

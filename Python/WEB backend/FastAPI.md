@@ -1778,3 +1778,40 @@ app = FastAPI(dependencies=[Depends(verify_token), Depends(verify_key)])
 
 一些在应用程序的好几个地方所使用的依赖项，可以放在它们自己的 `dependencies` 模块（`app/dependencies.py`）中
 
+## 测试
+
+```python
+from fastapi.testclient import TestClient
+```
+
+Import `TestClient`.
+
+Create a `TestClient` passing to it your **FastAPI** application.
+
+Create functions with a name that starts with `test_` (this is standard `pytest` conventions).
+
+Use the `TestClient` object the same way as you do with `requests`.
+
+Write simple `assert` statements with the standard Python expressions that you need to check (again, standard `pytest`).
+
+```python
+from fastapi import FastAPI
+from fastapi.testclient import TestClient
+
+app = FastAPI()
+
+
+@app.get("/")
+async def read_main():
+    return {"msg": "Hello World"}
+
+
+client = TestClient(app)
+
+
+def test_read_main():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"msg": "Hello World"}
+```
+
