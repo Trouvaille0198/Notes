@@ -12,6 +12,7 @@
   - [算法设计与分析](Courses/算法设计与分析.md)
   - [数字图像处理](Courses/数字图像处理.md)
   - [数据结构](Courses/DataStructure.md)
+  - [操作系统](Courses/OperatingSystem.md)
   - [计算机网络]()
     - [概述](Courses/计算机网络/1. 概述.md)
     - [物理层](Courses/计算机网络/2. 物理层.md)

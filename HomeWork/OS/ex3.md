@@ -1,4 +1,6 @@
-# ex3
+# 实验三
+
+第八组  19120198  孙天野
 
 ## 函数详解
 
@@ -861,7 +863,130 @@ Linux 内核将中断函数需要处理的任务分为两部分，一部分在�
 
 用信号量机制编写一个解决生产者——消费者问题的程序
 
-（TBD）
+```c
+#include <stdio.h>
+#include <windows.h>
+
+#define BUFFER_SIZE 10
+int buffer[BUFFER_SIZE];
+int in = 0;
+int out = 0;
+typedef int Semaphore;
+Semaphore   full = 0;
+Semaphore   empty = BUFFER_SIZE;
+Semaphore   mutex = 1;
+#define PRODUCER    0
+#define CONSUMER    1
+int count=0;
+//记录型信号量的wait操作
+void waitS(int type, Semaphore *s)
+{
+    while (*s == 0)
+    {
+        if (type == PRODUCER)
+        {
+            printf("Producer is waiting for empty\n\n");
+        }
+        else if (type == CONSUMER)
+        {
+            printf("Consumer is waiting for full\n\n");
+        }
+        Sleep(30);
+    }
+    (*s)--;
+}
+
+//互斥型信号量的wait操作，number用于指示是生产者还是消费者
+void waitM(int type, Semaphore *s)
+{
+    if (*s == 1)
+    {
+        (*s) = 0;
+    }
+    else
+    {
+        if (type == PRODUCER)
+        {
+            printf("Producer is waiting for mutex\n\n");
+        }
+        else if (type == CONSUMER)
+        {
+            printf("Consumer is waiting for mutex\n\n");
+        }
+        Sleep(30);
+    }
+}
+
+//记录型信号量的signal操作
+void signalS(Semaphore *s)
+{
+    (*s)++;
+}
+
+//互斥型信号量的signal操作
+void signalM(Semaphore *s)
+{
+    *s = 1;
+}
+
+//生产者
+int  producer(LPVOID lpThreadParameter)
+{
+    int nextp;
+    while(1)
+    {
+        nextp = count++;
+        printf("Produce an item.\n");
+        waitS(PRODUCER,&empty);
+        waitM(PRODUCER,&mutex);
+        printf("Producer write to buffer.\n");
+        buffer[in] = nextp;
+        in = (++in) % BUFFER_SIZE;
+        printf("After producing: in = %d, out = %d, full = %d, empty = %d.\n",in,out,full+1,empty);
+        signalM(&mutex);
+        signalS(&full);
+        printf("Producer left critical section.\n\n");
+    }
+    return 0;
+}
+
+//消费者
+int consumer(LPVOID lpThreadParameter)
+{
+    int nextc;
+    while(1)
+    {
+        waitS(CONSUMER,&full);
+        waitM(CONSUMER,&mutex);
+        printf("Consumer read from buffer.\n");
+        nextc = buffer[out];
+        out = (++out) % BUFFER_SIZE;
+        printf("After consemer leaves critical section in = %d, out = %d, full = %d, empty = %d.\n",in,out,full,empty+1);
+        signalM(&mutex);
+        signalS(&empty);
+        printf("Consume an item: %d.\n\n",nextc);
+    }
+    return 0;
+}
+
+int main()
+{
+    HANDLE  hProducer,hConsumer;
+
+    //创建生产者和消费者线程并立即运行
+    hProducer = CreateThread(NULL,0,producer,NULL,0,NULL);
+
+    hConsumer = CreateThread(NULL,0,consumer,NULL,0,NULL);
+
+    Sleep(500);
+
+    TerminateThread(hProducer,0);
+    TerminateThread(hConsumer,0);
+
+
+    return 0;
+}
+```
 
 ## 研究并讨论
 
