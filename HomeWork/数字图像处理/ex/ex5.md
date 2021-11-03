@@ -60,6 +60,8 @@
 
 ### 连通域标记
 
+使用四邻域标记算法标记区域，并且区域用不同颜色划分开来
+
 #### 代码
 
 ```python
@@ -140,7 +142,7 @@ cv2.destroyAllWindows()
 
 - 查出地图上湖水的 RGB 值，根据这个值来对整个图像进行阈值分割
 - 调用 `findContours` 找出湖泊轮廓
-- 调用 ``
+- 调用 `drawContours` 绘制轮廓线
 
 ```python
 import cv2
@@ -160,11 +162,6 @@ contours, hierarchy = cv2.findContours(
 all_lakes_img = img
 cv2.drawContours(
     all_lakes_img, contours, -1, (0, 0, 255), 3)  # 绘制轮廓
-
-# 绘制方框
-for c in contours:
-    (x, y, w, h) = cv2.boundingRect(c)
-    all_lakes_img = cv2.rectangle(all_lakes_img, (x, y), (x + w, y + h), (0, 255, 255), 1)
 
 
 cv2.imshow("final", all_lakes_img)
@@ -213,3 +210,5 @@ if cv2.waitKey() == ord('q'):
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211103162419611.png" alt="image-20211103162419611" style="zoom: 33%;" />
 
 找出图像的角点分布
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211103173940638.png" alt="image-20211103173940638" style="zoom: 25%;" />

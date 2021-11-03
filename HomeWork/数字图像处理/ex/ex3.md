@@ -16,6 +16,10 @@
 
 ### 代码
 
+`median_blur1` 函数是调用了 cv2 的 `medianBlur ` 函数
+
+`median_blur2` 手动实现了简单的中值滤波
+
 ```python
 # ex3 中值滤波
 import numpy as np
@@ -99,4 +103,4 @@ if __name__ == '__main__':
 
 ![image-20211103165001761](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211103165001761.png)
 
-可以看到，cv2 中的中值滤波函数经过很大优化，耗时非常短。
+可以看到，cv2 中的中值滤波函数经过优化，耗时非常短。
