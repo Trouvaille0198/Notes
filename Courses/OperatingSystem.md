@@ -1235,7 +1235,7 @@ SJF 算法的抢占式
 - 分派器
 - 上下文切换器
 
-<img src="C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20211028111744790.png" alt="image-20211028111744790" style="zoom:50%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028111744790.png" alt="image-20211028111744790" style="zoom:50%;" />
 
 #### **进程调度方式**
 
@@ -1277,9 +1277,9 @@ SJF 算法的抢占式
 
 这里也有**响应时间**，为用户数目 × 时间片大小
 
-<img src="C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20211028112822697.png" alt="image-20211028112822697" style="zoom:50%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028112822697.png" alt="image-20211028112822697" style="zoom:50%;" />
 
-<img src="C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20211028112929043.png" alt="image-20211028112929043" style="zoom:40%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028112929043.png" alt="image-20211028112929043" style="zoom:40%;" />
 
 #### **多级反馈队列调度算法** MFQ
 
@@ -1292,7 +1292,7 @@ SJF 算法的抢占式
 - 队列按照优先级调度
     - 随着队列优先级的降低，分配的时间片变长
 
-<img src="C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20211028113227853.png" alt="image-20211028113227853" style="zoom:50%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028113227853.png" alt="image-20211028113227853" style="zoom:50%;" />
 
 #### **调度算法的性能**
 
@@ -1349,11 +1349,24 @@ SJF 算法的抢占式
 
 #### **预防死锁**
 
-破坏四个必要条件之一，其中互斥不能破坏。
+破坏四个必要条件之一
 
-- 破坏“请求和保持”条件：进程在中间不会请求新的资源
-- 破坏“不可抢占”条件：不可抢占→可抢占，影响进程执行效率
-- 破坏“循环等待”条件：规定每个进程必须按序号递增的顺序请求资源
+- “互斥条件”是设备的固有属性，应加以保证，不能被破坏
+
+- 破坏“请求和保持”条件：进程在中间不会请求新的资源，所有进程在开始前必须**一次性申请**所需全部资源
+
+    - 简单、安全、易于实现
+    - 资源浪费严重
+    - 进程延迟运行
+
+- 破坏“不可抢占”条件：（不可抢占→可抢占）进程逐个申请资源；一旦进程申请的新资源**不能得到满足时，必须放弃**自己**所有**已有的资源。
+
+    - 实现复杂、代价高昂
+    - 延长了进程的周转时间，增加系统开销、降低系统吞吐量
+
+- 破坏“循环等待”条件：资源按类型分配序号并排队；规定每个进程必须按**序号递增**的顺序请求资源（而不按自己的使用顺序）
+
+    <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105103426015.png" alt="image-20211105103426015" style="zoom: 67%;" />
 
 #### **避免死锁**
 
@@ -1444,9 +1457,9 @@ SJF 算法的抢占式
     go to step 2
     ```
 
-4. 如果所有进程的 `Finish[i]=true` 都满足，则表示系统处于安全状态。
+4. 如果所有进程的 `Finish[i] == true` 都满足，则表示系统处于安全状态。
 
-> 步骤 2 中所有类型的资源都要被判断，步骤 3 中所有类型的资源都要被释放
+> 步骤 2 中所有类型的资源都要被判断，步骤 3 中所有类型的资源都要被释放，使用循环
 
 ##### 不足
 
@@ -1456,12 +1469,42 @@ SJF 算法的抢占式
 
 ### 死锁的检测与解除
 
-**资源分配图**
+#### 死锁检测 
 
-S为死锁状态的充分条件是：当且仅当S状态的资源分配图是不可完全简化的。
+##### **资源分配图**
 
-**解除死锁**
+（Resource Allocation Graph）
 
-- 抢占资源
+若不存在环路，则必然不存在死锁
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105804705.png" alt="image-20211105105804705" style="zoom:50%;" />
+
+##### 死锁定理
+
+- 从既不阻塞又非独立的进程结点开始简化：**消去请求边和分配边**
+    - 将请求边转换为分配边（如果可以的话）
+- **S 为死锁状态的充分条件是：当且仅当 S 状态的资源分配图是不可完全简化的**
+
+![image-20211105105954178](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png)
+
+**死锁检测的数据结构**
+
+类似银行家算法的数据结构
+
+- 可利用资源向量 Available
+- 不占用资源的进程（`Allocation == 0）`记入 L 表
+- 从进程集合中找到一个 `Request_i <= Work` 的进程
+    - 将其资源分配图简化
+    - 释放资源
+    - 增加工作向量 `Work += Allocation`
+    - 记入 L 表
+- 若不能把所有进程都计入 L 表 -> 状态 S 资源分配图不能被完全简化 -> 死锁
+
+#### 死锁解除
+
+- 抢占资源（剥夺资源）
+    - 从其他进程剥夺资源给死锁进程
 - 终止（或撤销）进程
+    1. 撤销所有死锁进程
+    2. 按照某种资源逐个撤销代价最小的进程，直至资源可用
 

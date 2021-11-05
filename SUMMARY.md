@@ -10,7 +10,7 @@
     - [外围设备](Courses/计算机组成原理/7. 外围设备.md)
     - [输入输出系统](Courses/计算机组成原理/8. 输入输出系统.md)
   - [算法设计与分析](Courses/算法设计与分析.md)
-  - [数字图像处理](Courses/数字图像处理.md)
+  - [数字图像处理](Courses/DigitalImageProcessing.md)
   - [数据结构](Courses/DataStructure.md)
   - [操作系统](Courses/OperatingSystem.md)
   - [计算机网络]()
