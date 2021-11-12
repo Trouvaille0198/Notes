@@ -110,7 +110,7 @@ from sklearn.model_selection import train_test_split
 
 - x：数据集的特征值
 - y：数据集的标签值
-- test_size：测试集的大小，一般为float
+- test_size：测试集的大小，一般为 float
 - random_state：随机数种子,不同的种子会造成不同的随机采样结果。相同的种子采样结果相同。
 
 返回：测试集特征值，测试集标签，训练集特征值，训练集标签（默认随机取）
@@ -119,7 +119,7 @@ from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=22)
 ```
 
-### K折交叉验证
+### K 折交叉验证
 
 （KFold Cross Validation）
 
@@ -129,9 +129,11 @@ from sklearn.model_selection import KFold
 
 ***KFold ( n_splits=5, \*, shuffle=False, random_state=None )***
 
+返回 k 折对象
+
 参数
 
-- *n_splits*：K子集个数，int, default=5
+- *n_splits*：K 子集个数，int, default=5
 - *shuffle*：是否要洗牌（打乱数据），bool, default=False
 - *random_state*：int or RandomState instance, default=None
 
@@ -235,9 +237,9 @@ import sklearn.feature_extraction
 
 - *DictVectorizer.fit_transform(X)*
   - X：字典或者包含字典的迭代器
-  - 返回sparse矩阵或array数组
+  - 返回 sparse 矩阵或 array 数组
 - *DictVectorizer.inverse_transform(X)*
-  - X：array数组或者sparse矩阵 
+  - X：array 数组或者 sparse 矩阵 
   - 返回转换之前数据格式
 - *DictVectorizer.get_feature_names()* 
   - 返回类别名称
@@ -302,9 +304,9 @@ print("特征名字：\n", transfer.get_feature_names())
 
 - CountVectorizer.fit_transform(X)
   -  X：文本或者包含文本字符串的可迭代对象
-  - 返回sparse矩阵
+  - 返回 sparse 矩阵
 - CountVectorizer.inverse_transform(X)
-  -  X：array数组或者sparse矩阵 
+  -  X：array 数组或者 sparse 矩阵 
   - 返回转换之前数据格
 - CountVectorizer.get_feature_names() 
   - 返回值单词列表
@@ -331,7 +333,7 @@ print("文本特征抽取的结果：\n", data.toarray())
 print("返回特征名字：\n", transfer.get_feature_names())
 ```
 
-输出（因为没有 sparse 参数，若要转换成二维数组形式，需要利用toarray()）
+输出（因为没有 sparse 参数，若要转换成二维数组形式，需要利用 `toarray()`）
 
 ```python
 文本特征抽取的结果：
@@ -1055,13 +1057,13 @@ from sklearn.neighbors import KNeighborsClassifier
 
 （K Nearest Neighbor）即K - 近邻算法
 
-如果一个样本在特征空间中的**k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别**，则该样本也属于这个类别。
+如果一个样本在特征空间中的 **k 个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别**，则该样本也属于这个类别。
 
 - 优点：
   - 简单，易于理解，易于实现，无需训练
 - 缺点：
   - 懒惰算法，对测试样本分类时的计算量大，内存开销大
-  - 必须指定K值，K值选择不当则分类精度不能保证
+  - 必须指定 K 值，K 值选择不当则分类精度不能保证
 - 使用场景：小数据场景，几千～几万样本，具体场景具体业务去测试
 
 ### API
@@ -1115,7 +1117,6 @@ print("最佳参数:\n", estimator_knn.best_params_)
 print("最佳结果:\n", estimator_knn.best_score_)
 print("最佳估计器:\n", estimator_knn.best_estimator_)
 print("交叉验证结果:\n", estimator_knn.cv_results_)
-
 ```
 
 输出
