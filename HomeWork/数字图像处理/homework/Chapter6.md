@@ -58,7 +58,7 @@ $$
 
 ![image-20211027180853605](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211027180853605.png)
 
-（a）因为图像完全饱和，所以图像 H 恒为 1；所有方块的亮度 I 均为 1/3；故红色部分最灰，绿色部分次灰，蓝色部分灰色最浅。
+（a）因为图像完全饱和，所以图像 S 恒为 1；所有方块的亮度 I 均为 1/3；H：故红色部分最灰，绿色部分次灰，蓝色部分灰色最浅。
 
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211027181746179.png" alt="image-20211027181746179" style="zoom:50%;" />
 
