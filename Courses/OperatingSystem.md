@@ -77,6 +77,8 @@
 
 (**多道、单道的比较**)
 
+![image-20211119181802230](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png)
+
 #### **分时系统**
 
 - 人机交互、共享主机
