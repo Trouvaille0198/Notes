@@ -419,6 +419,7 @@ int main()
     // 运行子进程1的内容
     {
         execlp("echo", "echo", "Child process 1 is running~", NULL); // 启动其他程序
+    
         perror("exec1 error.\n");
         exit(1);
     }
@@ -459,7 +460,6 @@ int main()
     puts("Parent proccess terminated.");
     exit(0);
 }
-
 ```
 
 输出：
