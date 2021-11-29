@@ -30,7 +30,7 @@ Up-->Down
 
 如果节点的文字中包含标点符号，需要时用双引号包裹起来
 
-```
+````
 ```mermaid
 graph TD
     A[带文本的矩形]
@@ -38,8 +38,8 @@ graph TD
     C>带文本的不对称的矩形]
     D{带文本的菱形}
     E((带文本的圆形))
-​```
 ```
+````
 
 ```mermaid
 graph TD
@@ -95,13 +95,13 @@ graph TB
 
 ## 1.4子流程图
 
-```
+````
 ```mermaid
 subgraph title
     graph definition
 end
-​```
 ```
+````
 
 ```mermaid
 graph TB
@@ -153,7 +153,7 @@ graph LR
 
 # Class Diagram
 
-```
+````
 ```mermaid
 	 classDiagram
       Animal <|-- Duck
@@ -176,8 +176,8 @@ graph LR
           +bool is_wild
           +run()
       }
-​```
 ```
+````
 
 ```mermaid
  classDiagram

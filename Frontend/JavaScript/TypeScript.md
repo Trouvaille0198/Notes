@@ -42,7 +42,7 @@ console.log(hello)
 
 ### 安装
 
-针对使用npm的用户：
+针对使用 npm 的用户：
 
 ```shell
 npm install -g typescript

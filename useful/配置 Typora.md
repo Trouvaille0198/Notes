@@ -41,12 +41,12 @@ h3.md-focus.md-heading:before /** override the default style for focused heading
 #write h4:before,
 h4.md-focus.md-heading:before {
 	counter-increment: h4;
-	content: counter(h4) ") ";
+	content: counter(h2) "." counter(h3) "." counter(h4) " ";
 }
 #write h5:before,
 h5.md-focus.md-heading:before {
 	counter-increment: h5;
-	content: counter(h5) ". ";
+	content: counter(h5) ") ";
 }
 #write h6:before,
 h6.md-focus.md-heading:before {

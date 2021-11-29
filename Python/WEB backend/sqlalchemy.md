@@ -645,3 +645,21 @@ class Keyword(Base):
     keyword = Column(String(50),nullable=False,unique=True)
 ```
 
+## 技巧
+
+### `relationship()` 中 `lazy` 属性详解
+
+`lazy` 决定了 `SQLAlchemy` 什么时候从数据库中加载数据
+
+- select：就是访问到属性的时候，就会全部加载该属性的数据
+
+- joined：对关联的两个表使用联接
+
+- subquery：与 joined 类似，但使用子子查询
+
+- dynamic：不加载记录，但提供加载记录的查询，也就是生成 query 对象
+
+    - 只可以用在一对多和多对多关系中，不可以用在一对一和多对一中
+
+    
+
