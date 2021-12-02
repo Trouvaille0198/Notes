@@ -1,6 +1,8 @@
-# 认识
+# Vue2
 
-## 概念
+## 认识
+
+### 概念
 
 Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进 DOM 的系统
 
@@ -27,16 +29,16 @@ var app = new Vue({
 - 简化 Dom 操作
 - 响应式数据驱动
 
-## 核心
+### 核心
 
 1. 数据绑定
 2. 事件绑定
 3. 用户输入获取
 4. 组件定义和使用
 
-## 引入
+### 引入
 
-### CDN
+#### CDN
 
 ```html
 <!-- 开发环境版本，包含了有帮助的命令行警告 -->
@@ -46,7 +48,7 @@ var app = new Vue({
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 ```
 
-### Vue CLI
+#### Vue CLI
 
 安装
 
@@ -79,9 +81,9 @@ npm run serve
 npm run serve -- --port 5000
 ```
 
-# 基础
+## 基础
 
-## Vue 实例
+### Vue 实例
 
 ```javascript
 var app = new Vue({
@@ -102,12 +104,12 @@ var app = new Vue({
     - data 中可以写复杂类型的数据
     - 渲染复杂类型数据时,遵守 js 的语法即可
 
-## Vue 指令
+### Vue 指令
 
 Vue 指令指的是,以 v- 开头的一组特殊语法
 
 
-### v-text
+#### v-text
 
 设置标签的文本值 (textContent)
 
@@ -138,7 +140,7 @@ var app = new Vue({
 </div>
 ```
 
-### v-html
+#### v-html
 
 设置标签的 innerHTML
 
@@ -161,7 +163,7 @@ var app = new Vue({
 </div>
 ```
 
-### v-on
+#### v-on
 
 为元素绑定事件
 
@@ -193,7 +195,7 @@ var app = new Vue({
 </div>
 ```
 
-#### 例：计数器
+##### 例：计数器
 
 ```html
 <div id="app">
@@ -221,7 +223,7 @@ var app = new Vue({
 </script>
 ```
 
-#### 修饰符
+##### 修饰符
 
 事件的后面跟上 `.修饰符` 可以对事件进行限制
 
@@ -278,7 +280,7 @@ var app = new Vue({
 <button v-on="{ mousedown: doThis, mouseup: doThat }"></button>
 ```
 
-### v-show
+#### v-show
 
 根据表达值的真假，切换元素的显示和隐藏
 
@@ -303,7 +305,7 @@ var app = new Vue({
 </div>
 ```
 
-### v-if
+#### v-if
 
 根据表达值的真假,切换元素的显示和隐藏 (操纵 dom 元素)
 
@@ -328,7 +330,7 @@ var app = new Vue({
     </div>
 ```
 
-### v-bind
+#### v-bind
 
 设置元素的属性：`v-bind:属性名=表达式`
 
@@ -355,7 +357,7 @@ var app = new Vue({
 </div>
 ```
 
-### v-for
+#### v-for
 
 根据数据生成列表结构
 
@@ -390,7 +392,7 @@ var app = new Vue({
 </div>
 ```
 
-### v-model
+#### v-model
 
 获取和设置表单元素的值 (双向数据绑定)
 
@@ -402,33 +404,68 @@ var app = new Vue({
 </div>
 ```
 
-## 组件间的数据传递
+### 组件间的数据传递
 
 父子组件之间的数据传递可以使用 props 或者 $emit 等方式
 
-### 父传子
+#### 父传子
 
 使用 props
 
-#### 子组件部分
+##### 子组件部分
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210411160809257.png" alt="image-20210411160809257" style="zoom:150%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210411160809257.png" alt="image-20210411160809257" style="zoom: 70%;" />
 
-#### 父组件部分
+##### 父组件部分
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210411160816904.png" alt="image-20210411160816904" style="zoom:150%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210411160816904.png" alt="image-20210411160816904" style="zoom: 80%;" />
 
-### 子传父
+#### 子传父
 
 通过事件传递数据
 
-#### 子组件部分
+##### 子组件部分
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210411160915513.png" alt="image-20210411160915513" style="zoom:150%;" />
 
-#### 父组件部分
+##### 父组件部分
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210411161044777.png" alt="image-20210411161044777" style="zoom:150%;" />
+
+## 一些原理
+
+### 计算属性 computed 中的 getter
+
+在 Vue 中，computed 的属性可以被视为是 data 一样，可以读取和设值，因此在 computed 中可以分成 getter（读取） 和 setter（设值），一般情况下是没有 setter 的，computed 预设只有 getter ，也就是只能读取，不能改变设值。
+
+vue.js 计算属性默认只有 getter，因为是默认值所以我们也常常省略不写，如下代码：
+
+```js
+var vm = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'Foo',
+    lastName: 'Bar'
+  },
+  computed: {
+    fullName: function () {
+      return this.firstName + ' ' + this.lastName
+    }
+  }
+})
+```
+
+其实computed里的代码完整的写法应该是：
+
+```js
+computed: {
+    fullName: {
+      get(){
+         return this.firstName + ' ' + this.lastName
+      }
+    }
+  }
+```
 
 # axios
 

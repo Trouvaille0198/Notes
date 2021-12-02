@@ -131,7 +131,7 @@ $$
 #### 最优阈值的确定
 
 - **选取平衡点**（Break-Even Point），简称BEP
-- **$$F1$$度量**（P与R的调和平均数）
+- **$$F1$$ 度量**（P与R的调和平均数）
 
 $$
 \cfrac{1}{F1}=\cfrac{1}{2}(\cfrac{1}{R}+\cfrac{1}{P}) \\
@@ -140,7 +140,7 @@ $$
 
 ​			与算术平均与几何平均相比，调和平均更重视最小值
 
-- **$$F_\beta$$度量**（加权调和平均）
+- **$$F_\beta$$ 度量**（加权调和平均）
 
 $$
 \cfrac{1}{F_\beta}=\cfrac{1}{1+\beta^2}(\cfrac{1}{P}+\cfrac{\beta^2}{R}) =\cfrac{(1+\beta^2)\times P\times R}{(\beta^2\times P)+R}
@@ -148,7 +148,7 @@ $$
 
 ​			$$\beta$$度量了查全率相对于查准率的重要性，$$\beta>1$$时查全率影响更大；$$\beta<1$$时查准率影响更大
 
-#### n个二分类实现的多分类问题
+#### n 个二分类实现的多分类问题
 
 - 先分别计算，再求平均值
 
@@ -162,7 +162,7 @@ $$
   - macro-P 宏查准率：$$micro-P=\cfrac{\overline{TP}}{\overline{TP}+\overline{FP}}$$
   - macro-R 宏查全率：$$micro-R=\cfrac{\overline{TP}}{\overline{TP}+\overline{FN}}$$
 
-  - macro-F1 宏F1：$$micro-F1=\cfrac{2\times microP\times microR}{microP+microR}$$
+  - macro-F1 宏 F1：$$micro-F1=\cfrac{2\times microP\times microR}{microP+microR}$$
 
 ## 一种训练集，多种算法
 
@@ -170,13 +170,13 @@ $$
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202155643356.png" alt="image-20201202155643356" style="zoom: 67%;" />
 
-要比较ABC三个模型的好坏
+要比较 ABC 三个模型的好坏
 
-- 首先确定A和B优于C，AB间由于交叉不好确定
-- 对于AB
+- 首先确定 A 和 B 优于 C，AB 间由于交叉不好确定
+- 对于 AB
   - 法一：比较面积，但不易估算
   - 法二：$$F1$$
   - 法三：$$F\beta$$
 
-## ROC与AUC
+## ROC 与 AUC
 

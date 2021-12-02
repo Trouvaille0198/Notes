@@ -27,6 +27,34 @@ const Counter = {
 Vue.createApp(Counter).mount('#counter')
 ```
 
+另一个例子
+
+```ts
+const app = Vue.createApp({
+  data() {
+    return { count: 4 }
+  },
+  methods: {
+    increment() {
+      // `this` 指向该组件实例
+      this.count++
+    }
+  }
+})
+const vm = app.mount('#app')
+```
+
+### 不成熟的认知习惯
+
+- 在 OptionsAPI 中
+
+    - data 写成函数形式，里面 return 一个对象
+
+    - methods 写成对象形式
+    - computed 写成对象形式，里面的计算属性写成函数形式
+
+    - mounted 写成函数形式
+
 ### 新特性
 
 - 树摇（Tree shacking）
@@ -476,6 +504,35 @@ Vue 还通过组件实例暴露了一些内置 property，如 `$attrs` 和 `$emi
 
 在接下来对 `v-on` 和 `v-for`等功能的探索中，将会看到修饰符的其它例子
 
+### Data Property
+
+组件的 `data` 选项是一个函数。Vue 会在创建新组件实例的过程中调用此函数。它应该返回一个对象，然后 Vue 会通过响应性系统将其包裹起来，并以 `$data` 的形式存储在组件实例中。为方便起见，该对象的任何顶级 property 也会直接通过组件实例暴露出来：
+
+```js
+const app = Vue.createApp({
+  data() {
+    return { count: 4 }
+  }
+})
+
+const vm = app.mount('#app')
+
+console.log(vm.$data.count) // => 4
+console.log(vm.count)       // => 4
+
+// 修改 vm.count 的值也会更新 $data.count
+vm.count = 5
+console.log(vm.$data.count) // => 5
+
+// 反之亦然
+vm.$data.count = 6
+console.log(vm.count) // => 6
+```
+
+直接将不包含在 `data` 中的新 property 添加到组件实例是可行的。但由于该 property 不在背后的响应式 `$data` 对象内，所以 Vue 的响应性系统不会自动跟踪它。
+
+Vue 使用 `$` 前缀通过组件实例暴露自己的内置 API。它还为内部 property 保留 `_` 前缀。你应该避免使用这两个字符开头的的顶级 `data` property 名称
+
 ### 防抖和节流
 
 Vue 没有内置支持防抖和节流，但可以使用 [Lodash](https://lodash.com/) 等库来实现。
@@ -520,6 +577,31 @@ app.component('save-button', {
   `
 })
 ```
+
+### 计算属性的 Setter
+
+计算属性默认只有 getter，不过在需要时你也可以提供一个 setter：
+
+```js
+// ...
+computed: {
+  fullName: {
+    // getter
+    get() {
+      return this.firstName + ' ' + this.lastName
+    },
+    // setter
+    set(newValue) {
+      const names = newValue.split(' ')
+      this.firstName = names[0]
+      this.lastName = names[names.length - 1]
+    }
+  } 
+}
+// ...
+```
+
+现在再运行 `vm.fullName = 'John Doe'` 时，setter 会被调用，`vm.firstName` 和 `vm.lastName` 也会相应地被更新。
 
 ### 侦听器
 
@@ -576,7 +658,57 @@ app.component('save-button', {
 
 在这个示例中，使用 `watch` 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。这些都是计算属性无法做到的。
 
+### 计算属性 vs 侦听器
+
+Vue 提供了一种更通用的方式来观察和响应当前活动的实例上的数据变动：**侦听属性**。当你有一些数据需要随着其它数据变动而变动时，`watch` 很容易被滥用——特别是如果你之前使用过 AngularJS。然而，通常更好的做法是使用计算属性而不是命令式的 `watch` 回调。细想一下这个例子：
+
+```html
+<div id="demo">{{ fullName }}</div>
+```
+
+```js
+const vm = Vue.createApp({
+  data() {
+    return {
+      firstName: 'Foo',
+      lastName: 'Bar',
+      fullName: 'Foo Bar'
+    }
+  },
+  watch: {
+    firstName(val) {
+      this.fullName = val + ' ' + this.lastName
+    },
+    lastName(val) {
+      this.fullName = this.firstName + ' ' + val
+    }
+  }
+}).mount('#demo')
+```
+
+上面代码是命令式且重复的。将它与计算属性的版本进行比较：
+
+```js
+const vm = Vue.createApp({
+  data() {
+    return {
+      firstName: 'Foo',
+      lastName: 'Bar'
+    }
+  },
+  computed: {
+    fullName() {
+      return this.firstName + ' ' + this.lastName
+    }
+  }
+}).mount('#demo')
+```
+
+好很多了，不是吗？
+
 ### class 的对象语法
+
+#### 在模板里定义对象
 
 我们可以传给 `:class` (`v-bind:class` 的简写) 一个对象，以动态地切换 class：
 
@@ -601,6 +733,27 @@ data() {
 ```html
 <div class="static active"></div>
 ```
+
+#### 在 data 中定义对象
+
+绑定的数据对象不必内联定义在模板里
+
+```html
+<div :class="classObject"></div>
+```
+
+```js
+data() {
+  return {
+    classObject: {
+      active: true,
+      'text-danger': false
+    }
+  }
+}
+```
+
+#### 在计算属性里定义对象
 
 我们也可以在这里绑定一个返回对象的计算属性。这是一个常用且强大的模式：
 
@@ -642,7 +795,7 @@ data() {
 }
 ```
 
-**数组语法**：
+#### 数组语法
 
 我们也可以把一个数组传给 `:class`，以应用一个 class 列表：
 
@@ -663,6 +816,20 @@ data() {
 
 ```html
 <div class="active text-danger"></div>
+```
+
+如果你想根据条件切换列表中的 class，可以使用三元表达式：
+
+```html
+<div :class="[isActive ? activeClass : '', errorClass]"></div>
+```
+
+这样写将始终添加 `errorClass`，但是只有在 `isActive` 为 truthy 时才添加 `activeClass`
+
+不过，当有多个条件 class 时这样写有些繁琐。所以在数组语法中也可以使用对象语法：
+
+```html
+<div :class="[{ active: isActive }, errorClass]"></div>
 ```
 
 ### 关于 `v-on` 
@@ -807,7 +974,77 @@ Vue 为最常用的键提供了别名：
 
 ## Composition API
 
+### 结构示例
+
+#### optionAPI
+
+```vue
+<template>
+  <div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: '',
+  components: {},
+  props: {},
+  data() {
+    return {}
+  },
+  watch: {},
+  created() {},
+  mounted() {},
+  methods: {}
+}
+</script>
+
+<style  lang="scss" scoped></style>
+```
+
+#### CompositionAPI
+
+```vue
+<template> </template>
+<script lang="ts">
+  import { defineComponent, onMounted, reactive, UnwrapRef, watch } from 'vue';
+
+  interface State {}
+  export default defineComponent({
+    name: 'components name',
+    props: {},
+    setup(props) {
+      console.log('props: ', props);
+      //data
+      const state: UnwrapRef<State> = reactive({});
+
+      //Lifecycle Hooks
+      onMounted(() => {});
+      //watch
+      watch(
+        () => props,
+        (_count, _prevCount) => {},
+        {
+          deep: true,
+          immediate: true,
+        }
+      );
+      //methods
+      const getList = () => {};
+      
+      return {
+        state,
+        getList
+      };
+    },
+  });
+</script>
+<style lang="scss" scoped></style>
+```
+
 （组合式 API）
+
+一些基础性的总结：https://juejin.cn/post/7008063765585330207
 
 https://segmentfault.com/a/1190000040319089
 
@@ -843,8 +1080,6 @@ https://www.jianshu.com/p/5996f611c990
 ##### props
 
 正如在一个标准组件中所期望的那样，`setup` 函数中的 `props` 是响应式的，当传入新的 prop 时，它将被更新。
-
-
 
 ```jsx
 // MyBook.vue
@@ -1091,6 +1326,47 @@ const foo = ref<string | number>('foo') // foo 的类型: Ref<string | number>
 foo.value = 123 // 能够通过！
 ```
 
+#### 例
+
+```vue
+<template>
+  <div>{{count}}
+    <button @click="changeCount">添加</button>
+  </div>
+  <div>学生的姓名是:{{student.name}}</div>
+  <div>学生的年龄是:{{student.age}}
+    <button @click="changeStudentAge(20)">添加</button>
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, reactive } from 'vue';
+
+export default defineComponent({
+  name: 'Home',
+  setup () {
+    const count = ref(0)
+    const changeCount = () => {
+      count.value = count.value + 1
+    }
+    const student = reactive({
+      name: 'Bob',
+      age: 12
+    })
+    const changeStudentAge = (age: number) => {
+      student.age = age
+    }
+    return {
+      count,
+      changeCount,
+      student,
+      changeStudentAge
+    }
+  }
+});
+</script>
+```
+
 ### computed
 
 使用响应式 `computed` API 有两种方式：
@@ -1121,18 +1397,185 @@ plusOne.value = 1
 console.log(count.value) // 0
 ```
 
-#### **类型定义**
+### watch
+
+- 引入 watch， `import { watch } from 'vue'`
+
+- 直接使用watch，watch 接受 3 个参数
+
+    1. 要监听更新的响应式引用或者 getter 函数
+
+    2. 一个回调用来做更新后的操作
+
+    3. 可选配置项
 
 ```ts
-// 只读的
-function computed<T>(getter: () => T): Readonly<Ref<Readonly<T>>>
-
-// 可更改的
-function computed<T>(options: {
-  get: () => T
-  set: (value: T) => void
-}): Ref<T>
+ setup() {
+     const count = ref(0)
+     //监听count
+     watch(
+         () = > count, (_count, _prevCount) = > {}, {
+             deep: true,
+             immediate: true
+         }
+     );
+ }
 ```
+
+```vue
+<template>
+  <div>{{count}}</div>
+  <div>{{doubleCount}}</div>
+  <button @click="addCount">添加</button>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, computed, watchEffect, watch } from 'vue';
+
+export default defineComponent({
+  name: 'App',
+  setup () {
+    const count = ref(0)
+    watch(count, (newValue, oldValue) => { // 如多个则用数组的方式传入[count, count1]
+      console.log(`newValue为：${newValue},--------oldValue为：${oldValue}`)
+    })
+    watchEffect(() => {
+      console.log('watchEffect', count.value)
+    })
+    const addCount = () => {
+      count.value++
+    }
+    const doubleCount = computed(() => {
+      return count.value * 2
+    })
+    return {
+      count,
+      doubleCount,
+      addCount
+    }
+  }
+});
+</script>
+```
+
+### props/$emit
+
+父子组件传值的写法
+
+- 父组件
+
+```elixir
+<Search @searchData="searchData" :quaryParams="quaryParams"/>
+```
+
+父组件的写法和`vue`还是一样的，只是子组件需要作一些改变
+
+- 子组件
+
+```typescript
+<script lang="ts">
+import { defineComponent } from 'vue';
+interface GetUserListParams {
+    pageNum: number;
+    pageSize: number;
+    roleName: string;
+}
+export default defineComponent({
+    name: 'Search',
+    props: {
+        quaryParams: {
+            type: Object as PropType<GetUserListParams> ,
+            default: () = > ({
+                pageNum: 1,
+                pageSize: 10,
+                roleName: ''
+            })
+        }
+    },
+    emits: ['searchData'],//需要声明emits
+    setup(_props, context) {
+    
+      const onSubmit = () => {
+        context.emit('searchData', "我是子节点传递给父节点的值");
+      }
+      
+      return {
+        getData
+      }
+    }
+});
+</script>
+```
+
+### 跨组件传值
+
+在 `Vue 2` 中，我们可以使用 `Provide/Inject` 跨组件传值，在 Vue 3 中也可以。
+
+在 `setup` 中 使用，必须从 `vue` 中导入使用。
+
+使用 `Provide` 时，一般设置为 响应式更新的，这样的话，父组件变更，子组件，子孙组件也跟着更新。
+
+#### 怎么设置为响应式更新呢？
+
+> 1. 使用 `ref` / `reactive` 创建响应式变量
+> 2. 使用 `provide('name', '要传递的响应式变量')`
+> 3. 最后添加一个更新 响应式变量的事件，这样响应式变量更新，` provide` 中的变量也跟着更新
+
+#### 父组件
+
+```vue
+<template>
+  
+  <Son/>
+  
+</template>
+
+
+<script>
+    import { provide, defineComponent, ref, reactive } from "vue";
+    export default defineComponent({
+    setup() {
+            const father = ref("我父组件");
+    const info = reactive({
+      id: 23,
+      message: "前端自学社区",
+    });
+    function changeProvide(){
+      info.message = '测试'
+    }
+    provide('father',father)
+    provide('info',info)
+    return {changeProvide};
+    }
+    
+})
+</script>
+```
+
+#### 子组件
+
+```vue
+<template>
+    <div>
+        <h1>{{info.message}}</h1>
+        <h1>{{fatherData}}</h1>
+    </div>
+</template>
+
+<script>
+import {provide, defineComponent,ref,reactive, inject} from 'vue'
+export default defineComponent({
+    setup () {
+        const fatherData = inject('father')
+        const info = inject('info')
+        
+        return {fatherData,info}
+    }
+})
+</script>
+```
+
+
 
 ### 模块化
 
@@ -1207,3 +1650,251 @@ export default {
   }
 }
 ```
+
+### defineComponent
+
+最主要的功能是为了 ts 下的类型推导
+
+如果我们直接写
+
+```ts
+export default {}
+```
+
+这个时候，对于编辑器而言，{} 只是一个 Object 的类型，无法有针对性的提示我们对于 vue 组件来说 {} 里应该有哪些属性。但是增加一层 defineComponet 的话，
+
+```ts
+export default defineComponent({})
+```
+
+这时，{} 就变成了 defineComponent 的参数，那么对参数类型的提示，就可以实现对 {} 中属性的提示，外还可以进行对参数的一些类型推导等操作。
+
+### 与 TS 的结合
+
+#### 接口约束约束属性
+
+> 采用 `TypeScirpt` 的特性， 类型断言 + 接口 完美的对 属性进行了 约束
+
+##### `interface`
+
+```javascript
+分页查询 字段属性类型验证
+export default  interface queryType{
+    page: Number,
+    size: Number,
+    name: String,
+    age:  Number
+}
+```
+
+##### 组件中使用
+
+```typescript
+import queryType from '../interface/Home'
+
+
+    data() {
+        return {
+            query:{
+                page:0,
+                size:10,
+                name:'测试',
+                age: 2
+            } as queryType
+        }
+    },
+```
+
+#### 组件使用 `defineComponent` 来定义
+
+> 这样 `TypeScript` 正确推断 `Vue` 组件选项中的类型
+
+```javascript
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+    setup(){
+        return{ }
+    }
+})
+```
+
+#### 类型声明 `reactive`
+
+```javascript
+export default  interface Product {
+    name:String,
+    price:Number,
+    address:String
+}
+
+
+
+import  Product from '@/interface/Product' 
+import {reactive} from 'vue'
+const product = reactive({name:'xiaomi 11',price:5999,address:'北京'}) as Product
+       
+return {fatherData,info,product}
+```
+
+### setup script
+
+setup script 是 vue3 新出的一个语法糖，使用方法就是在书写 script 标签的时候在其后面加上一个 `setup` 修饰。
+
+```vue
+<script setup></script>
+```
+
+#### 自动注册子组件
+
+普通语法
+
+```vue
+<template>
+  <div>
+    <h2>我是父组件!</h2>
+    <Child />
+  </div>
+</template>
+
+<script>
+import { defineComponent, ref } from 'vue';
+import Child from './Child.vue'
+
+export default defineComponent({
+  components: {
+      Child
+  },
+  setup() {
+
+    return {
+      
+    }
+  }
+});
+</script>
+```
+
+vue3 语法在引入 Child 组件后，需要在 components 中注册对应的组件才可使用。
+
+setup script 写法
+
+```vue
+<template>
+  <div>
+    <h2>我是父组件!-setup script</h2>
+    <Child />
+  </div>
+</template>
+
+<script setup>
+import Child from './Child.vue'
+
+</script>
+```
+
+#### 属性和方法无需返回
+
+```vue
+<template>
+  <div>
+    <h2 @click="ageInc">{{ name }} is {{ age }}</h2>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const name = ref('CoCoyY1')
+const age = ref(18)
+
+const ageInc = () => {
+  age.value++
+}
+
+</script>
+```
+
+#### 支持 props、emit 和 context
+
+普通语法
+
+```vue
+//Father.vue
+<template>
+  <div >
+    <h2 >我是父组件！</h2>
+    <Child msg="hello" @child-click="childCtx" />
+  </div>
+</template>
+
+<script>
+import { defineComponent, ref } from 'vue';
+import Child from './Child.vue';
+
+export default defineComponent({
+  components: {
+    Child
+  },
+  setup(props, context) {
+    const childCtx = (ctx) => {
+      console.log(ctx);
+    }
+
+    return {
+      childCtx
+    }
+  }
+})
+</script>
+
+
+//Child.vue
+<template>
+  <span @click="handleClick">我是子组件! -- msg: {{ props.msg }}</span>
+</template>
+
+<script>
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  emits: [
+    'child-click'
+  ],
+  props: {
+    msg: String
+  },
+  setup(props, context) {
+    const handleClick = () => {
+      context.emit('child-click', context)
+    }
+
+    return {
+      props,
+      handleClick
+    }
+  },
+})
+</script>
+```
+
+setup script 语法
+
+```vue
+<script setup>
+const props = defineProps({
+  foo: String
+})
+
+const emit = defineEmits(['change', 'delete'])
+// setup code
+</script>
+```
+
+setup script 语法糖提供了三个新的 API 来供我们使用：`defineProps`、`defineEmits`和 `useContext`。
+
+其中 `defineProps` 用来接收父组件传来的值 props。`defineEmits` 用来声明触发的事件表。`useContext` 用来获取组件上下文 context。
+
+- `defineProps` 和 `defineEmits` 都是只在 `<script setup>` 中才能使用的**编译器宏**。他们不需要导入且会随着 `<script setup>` 处理过程一同被编译掉。
+- `defineProps` 接收与 `props` 选项相同的值，`defineEmits` 也接收 `emits` 选项相同的值。
+- `defineProps` 和 `defineEmits` 在选项传入后，会提供恰当的类型推断。
