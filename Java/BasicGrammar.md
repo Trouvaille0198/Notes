@@ -13,8 +13,8 @@ public class Hello {
 
 1. 因为 Java 是面向对象的语言，一个程序的基本单位就是 `class`，`class` 是关键字。
 2. 注意到 `public` 是访问修饰符，表示该 `class` 是公开的。不写 `public`，也能正确编译，但是这个类将无法从命令行执行。
-3. 在`class`内部，可以定义若干方法（method）
-4. 关键字`static`是另一个修饰符，它表示静态方法
+3. 在 `class` 内部，可以定义若干方法（method）
+4. 关键字 `static` 是另一个修饰符，它表示静态方法
 5. Java 规定，某个类定义的 `public static void main(String[] args)` 是 Java 程序的固定入口方法，因此，Java 程序总是从 `main` 方法开始执行。
 
 ## 数据类型
@@ -62,7 +62,7 @@ double d3 = 4.9e-324; // 科学计数法表示的4.9x10^-324
 
 ### 布尔类型
 
-布尔类型 `boolean `只有 `true` 和 `false` 两个值，布尔类型总是关系运算的计算结果
+布尔类型 `boolean` 只有 `true` 和 `false` 两个值，布尔类型总是关系运算的计算结果
 
 ```java
 boolean b1 = true;
@@ -104,7 +104,7 @@ PI = 300; // compile error!
 
 ### var 关键字
 
-如果想省略变量类型，可以使用 `var `关键字，编译器会根据赋值语句自动推断出变量类型
+如果想省略变量类型，可以使用 `var`关键字，编译器会根据赋值语句自动推断出变量类型
 
 ```java
 StringBuilder sb = new StringBuilder();
