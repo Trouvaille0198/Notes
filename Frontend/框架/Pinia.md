@@ -9,7 +9,7 @@ import { defineStore } from 'pinia'
 
 export const todos = defineStore('todos', {
   state: () => ({
-    /** @type {{ text: string, id: number, isFinished: boolean }[]} */
+    /** @type { text: string, id: number, isFinished: boolean }[] */
     todos: [],
     /** @type {'all' | 'finished' | 'unfinished'} */
     filter: 'all',
@@ -25,7 +25,7 @@ export const todos = defineStore('todos', {
       return state.todos.filter((todo) => !todo.isFinished)
     },
     /**
-     * @returns {{ text: string, id: number, isFinished: boolean }[]}
+     * @returns { text: string, id: number, isFinished: boolean }[]
      */
     filteredTodos(state) {
       if (this.filter === 'finished') {
