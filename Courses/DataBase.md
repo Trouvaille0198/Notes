@@ -21,7 +21,7 @@
 - **模式**：对应**基本表**（元组称为行、属性称为列）
 - **外模式**：对应**视图**
 
-SQL 体系结构的特征：
+**SQL 体系结构的特征**
 
 - SQL模式是表和约束的集合
 - 表是行的集合
@@ -32,34 +32,40 @@ SQL 体系结构的特征：
 
 **SQL的组成**：
 
-- **数据定义**：定义SQL模式、基本表、视图和索引
+- **数据定义**：定义 SQL模式、基本表、视图和索引
 - **数据操纵**：数据查询、数据更新（插入删除修改）
 - **数据控制** -> 第八章：对基本表和视图的授权、完整性规则描述、事务控制语句
-- **嵌入式SQL**：嵌入SQL的规则
+- **嵌入式 SQL**：嵌入 SQL 的规则
 
 ### SQL 数据定义
 
-**SQL模式的创建和撤销**：
+**SQL 模式的创建和撤销**
 
-- 创建：`CREATE SCHEMA <模式名> AUTHORIZATION <拥有者>;`
+- 创建
 
-- 撤销：
-
+    ```mysql
+    CREATE SCHEMA <模式名> AUTHORIZATION <拥有者>;
     ```
+
+- 撤销
+
+    ```mysql
     DROP SCHEMA <模式名> [CASECADE|RESTRICT];
     ```
 
     - `CASECADE`（级联）连锁式
-    - `RESTRICT`约束式：只有当模式中没有任何下属元素时允许撤销
+    - `RESTRICT` 约束式：只有当模式中没有任何下属元素时允许撤销
 
 **基本数据类型**：
 
-- 数值型：`INTEGER`、`DOUBLE PRECISION`双精度、`DECEMIAL(p,d)` p.d位定点小数
-- 字符串型：`CHAR(n)`定长、`VACHAR(n)`最大长度n
-- 位串型：`BIT(n)`定长、`BIT VARYING(n)`最大长度n
+- 数值型：`INTEGER`、`DOUBLE PRECISION` 双精度、`DECEMIAL(p,d)` p.d 位定点小数
+- 字符串型：`CHAR(n)` 定长、`VACHAR(n)` 最大长度n
+- 位串型：`BIT(n)` 定长、`BIT VARYING(n)` 最大长度n
 - 时间型：`DATE(YYYY-MM-DD)`、`TIME(HH:MM:SS)`
 
-**基本表创建**☆：
+**基本表创建 **☆
+
+列级约束 + 表级约束
 
 **三个子句**：主键子句、外键子句、检查子句
 
@@ -103,9 +109,9 @@ CREATE UNIQUE INDEX SPJ_INDEX ON SPJ(SNO ASC, PNO, ASC, JON DESC);
 DROP INDEX JNO_INDEX, SPJ_INDEX;
 ```
 
-### SQL 数据查询☆
+### SQL 数据查询 ☆
 
-**SQL查询语句**：
+#### SQL 查询语句
 
 ```
 SELECT [DISTINCT] 列名序列
@@ -115,69 +121,71 @@ FROM 表名
 [ORDER BY 列名[ASC|DESC]序列]              -- 排序子句
 ```
 
-**多表查询与联接操作**：
+#### 多表查询与联接操作
 
 `INNER JOIN`：内联接 -> 匹配行
 
-`LEFT JOIN`：左外联接 -> 匹配行+左表
+`LEFT JOIN`：左外联接 -> 匹配行+左表；保证左边所有行都存在
 
 `RIGHT JOIN`：右外联接 -> 匹配行+右表
 
-`FULL JOIN`：完全外联接 -> 匹配行+左表+右表
+`FULL JOIN`：完全外联接 -> 匹配行+左表+右表；左右不匹配的行也保留
 
 `CROSS JOIN`：交叉联接 -> 笛卡尔积
 
-以下五者等价：*查询选修2号课程的学生姓名*
+以下五者等价：查询选修 2 号课程的学生姓名
 
-- **联接查询**
+##### **联接查询**
 
+from 表1 联接类型 表2 on 联接条件
+
+```sql
+SELECT SNAME
+FROM SC INNER JOIN S ON S.SNO=SC.SNO   -- 注意 ON
+WHERE CNO=’2’;
+```
+
+##### **多表查询**
+
+```sql
+SELECT SNAME 
+FROM S,SC 
+WHERE S.SNO=SC.SNO AND CNO=’2’;
+```
+
+##### **嵌套操作**
+
+- **不相关子查询**：子查询条件不依赖父查询，效率最高
+
+    ```sql
+    SELECT SNAME FROM S WHERE SNO IN (
+        SELECT SNO FROM SC WHERE CNO=’2’
+    );
     ```
-    SELECT SNAME
-    FROM SC INNER JOIN S ON S.SNO=SC.SNO   -- 注意 ON
-    WHERE CNO=’2’;
+
+- **相关子查询**：子查询条件依赖父查询
+
+    ```sql
+    SELECT SNAME FROM S WHERE ‘2’ IN (
+        SELECT CNO FROM SC WHERE SNO=S.SNO
+    );
     ```
 
-- **多表查询**
+- **EXISTS**：也是相关子查询
 
+    ```sql
+    SELECT SNAME FROM S WHERE EXISTS (
+        SELECT * FROM SC WHERE SNO=S.SNO AND CNO=’2’
+    );
     ```
-    SELECT SNAME 
-    FROM S,SC 
-    WHERE S.SNO=SC.SNO AND CNO=’2’;
-    ```
 
-- **嵌套操作**
+#### ANY、ALL 谓词
 
-    - 不相关子查询：子查询条件不依赖父查询
-
-        ```
-        SELECT SNAME FROM S WHERE SNO IN (
-            SELECT SNO FROM SC WHERE CNO=’2’
-        );
-        ```
-
-    - 相关子查询：子查询条件依赖父查询
-
-        ```
-        SELECT SNAME FROM S WHERE ‘2’ IN (
-            SELECT CNO FROM SC WHERE SNO=S.SNO
-        );
-        ```
-
-    - EXISTS：
-
-        ```
-        SELECT SNAME FROM S WHERE EXISTS (
-            SELECT * FROM SC WHERE SNO=S.SNO AND CNO=’2’
-        );
-        ```
-
-**ANY、ALL谓词：**
-
-ANY、ALL**用于单属性表前**以聚合，MAX、MIN用于SELECT后以聚合。
+ANY、ALL **用于单属性表前**以聚合，MAX、MIN 用于 SELECT 后以聚合。
 
 *查询非信息系中比信息系至少某一个学生年龄小的学生姓名年龄*：
 
-```
+```sql
 SELECT Sname, Sage
 FROM S
 WHERE Sdept!=’IS’ AND Sage < ANY (
@@ -192,7 +200,7 @@ WHERE Sdept!=’IS’ AND Sage<(
 );
 ```
 
-**EXISTS存在**谓词：
+**EXISTS 存在**谓词：
 
 **存在表任意关系**：$\forall x \left( p \right) \equiv \neg \exists x \left( \neg p \right)$
 
@@ -601,9 +609,9 @@ WHERE sno=’S4’
 
 ### 数据库管理系统 DBMS
 
-DMBS是DBS的核心，一切对DB的操作都通过DBMS进行
+DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 
-事物是DBMS的基本工作单位，是由用户定义的一个操作序列，这些操作要么全做要么全不做，是不可分割的
+事物是 DBMS 的基本工作单位，是由用户定义的一个操作序列，这些操作要么全做要么全不做，是不可分割的
 
 **工作模式**：接受用户请求，转换，对数据库操作，接受结果，转换，返回用户
 
@@ -611,16 +619,18 @@ DMBS是DBS的核心，一切对DB的操作都通过DBMS进行
 
 **模块组成**：
 
-- 查询处理器：DML编译器、DDL编译器、嵌入式DML预编译器、查询运行核心程序
-- 存储处理器：权限和完整性管理器、事务管理器、文件管理器、缓冲区管理器
+- **查询处理器**：DML 编译器、DDL 编译器、嵌入式 DML 预编译器、查询运行核心程序
+- **存储处理器**：权限和完整性管理器、事务管理器、文件管理器、缓冲区管理器
 
-**数据库系统DBS：**
+**数据库系统 DBS：**
 
-**组成：**数据库、硬件、软件、数据库管理员DBA
+**组成：**数据库、硬件、软件、数据库管理员 DBA
 
-分类：集中式DBS、客户服务器式DBS、分布式DBS
+分类：集中式 DBS、客户服务器式 DBS、分布式 DBS
 
-# 第三章 关系运算
+## 关系运算
+
+第三章
 
 ## 3.1 关系模型
 

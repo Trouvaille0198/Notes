@@ -1560,7 +1560,7 @@ SJF 算法的抢占式
 
     ```c
     Available[j] = Available[j] - Request_i[j];
-    
+    	
     Allocation[i,j]=Allocation[i,j]+Request_i[j];
     
     Need[i,j]=Need[i,j]-Request_i[j];

@@ -491,3 +491,12 @@ scope：用于说明提交的影响范围，内容根据具体项目而定
 subject：概括提交内容
 
 详见：https://www.cnblogs.com/daysme/p/7722474.html
+
+## 其他
+
+识别大小写
+
+```bash
+git config core.ignorecase false
+```
+

@@ -625,8 +625,6 @@ p {
 | uppercase  | 定义仅有大写字母。                             |
 | lowercase  | 定义无大写字母，仅有小写字母。                 |
 
-
-
 ## 字符间距 letter-spacing
 
 letter-spacing 属性增加或减少字符间的空白（字符间距）

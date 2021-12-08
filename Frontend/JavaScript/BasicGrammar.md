@@ -395,8 +395,6 @@ var ary = [1,23,4];
 console.log(ary instanceof Array)	//true;
 ```
 
-
-
 ### 对象 Object
 
 JavaScript 的对象是一组由键-值组成的无序集合，例如：
@@ -534,7 +532,7 @@ var scores = [95, 75, 85];
 
 给定一个名字，要查找对应的成绩，就先要在names中找到对应的位置，再从 scores 取出对应的成绩，Array 越长，耗时越长。
 
-如果用Map实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用 JavaScript 写一个 Map 如下：
+如果用 Map 实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用 JavaScript 写一个 Map 如下：
 
 ```javascript
 var m = new Map([['Michael', 95], ['Bob', 75], ['Tracy', 85]]);
@@ -564,7 +562,7 @@ m.get('Adam'); 		// 88
 
 ### Set
 
-`Set` 和 `Map`类似，也是一组 key 的集合，但不存储 value。由于 key 不能重复，所以，在 `Set` 中，没有重复的 key。
+`Set` 和 `Map` 类似，也是一组 key 的集合，但不存储 value。由于 key 不能重复，所以，在 `Set` 中，没有重复的 key。
 
 要创建一个 `Set`，需要提供一个`Array`作为输入，或者直接创建一个空 `Set`：
 

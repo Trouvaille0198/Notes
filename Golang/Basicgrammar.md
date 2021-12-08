@@ -207,7 +207,7 @@ ok   compress/gzip 0.033s
 
 go 命令依赖一个重要的环境变量：$GOPATH
 
-> Windows系统中环境变量的形式为 `%GOPATH%`
+> Windows 系统中环境变量的形式为 `%GOPATH%`
 >
 > GOPATH 允许多个目录，当有多个目录时，请注意分隔符，Windows 是分号，Linux 是冒号，当有多个 GOPATH 时，默认会将 go get 的内容放在第一个目录下
 
@@ -220,8 +220,30 @@ $GOPATH 目录有三个子目录：
 GOPATH 下的 src 目录就是接下来开发程序的主要目录，所有的源码都是放在这个目录下面。一般情况下，一个文件夹就是一个项目
 
 - 例如: $GOPATH/src/mymath 表示 mymath 是个应用包或者可执行应用（根据 package 是 main 还是其他来决定，main 的话就是可执行应用）
-
 - 允许多级目录，例如在 src 下面新建了目录 $GOPATH/src/github.com/astaxie/beedb 那么这个包路径就是 "github.com/astaxie/beedb"，包名称是最后一个目录 beedb
+
+**文件结构举例**
+
+```
+bin/
+	mathapp
+pkg/
+	平台名/ 如：darwin_amd64、linux_amd64
+		 mymath.a
+		 github.com/
+			  astaxie/
+				   beedb.a
+src/
+	mathapp
+		  main.go
+	mymath/
+		  sqrt.go
+	github.com/
+		   astaxie/
+				beedb/
+					beedb.go
+					util.go
+```
 
 #### 编写应用包例
 
@@ -266,6 +288,78 @@ func Sqrt(x float64) float64 {
 
 ### Go Module
 
+#### 基本操作
+
+初始化
+
+```
+go mod init [module 名称]
+```
+
+检测和清理依赖
+
+```
+go mod tidy
+```
+
+执行
+
+```go
+go run XX.go
+```
+
+第一次执行时，go mod 会自动查找依赖自动下载
+
+> go module 安装 package 的原則是先拉最新的 release tag，若无tag则拉最新的commit
+>
+> go 会自动生成一个 go.sum 文件来记录 dependency tree
+
+安装指定包
+
+```
+go get -v github.com/go-ego/gse@v0.60.0-rc4.2
+```
+
+检查可以升级的 package
+
+```
+go list -m -u all
+```
+
+下载依赖文件
+
+```
+go mod download
+```
+
+#### 更新依赖
+
+```
+go get -u
+```
+
+更新指定包依赖:
+
+```
+go get -u github.com/go-ego/gse
+```
+
+指定版本:
+
+```
+go get -u github/com/go-ego/gse@v0.60.0-rc4.2
+```
+
+替换无法直接获取的 pkg
+
+modules 可以通过在 go.mod 文件中使用 replace 指令替换成github上对应的库，比如：
+
+```
+replace (
+    golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a => github.com/golang/crypto v0.0.0-20190313024323-a1f597ede03a
+)
+```
+
 
 
 ## 数据类型
@@ -289,17 +383,45 @@ a := 1
 msg := "Hello World!"
 ```
 
+> `:=` 只能用在函数内部；在函数外部使用则会无法编译通过，所以一般用 `var` 方式来定义全局变量。
+
+`_`（下划线）是个特殊的变量名，任何赋予它的值都会被丢弃。在这个例子中，我们将值 `35` 赋予 `b`，并同时丢弃 `34`：
+
+```go
+_, b := 34, 35
+```
+
+Go 对于已声明但未使用的变量会在编译阶段报错
+
+### 常量
+
+常量可定义为数值、布尔值或字符串等类型
+
+```go
+const constantName = value
+//如果需要，也可以明确指定常量的类型：
+const Pi float32 = 3.1415926
+
+// example
+const Pi = 3.1415926
+const i = 10000
+const MaxThread = 10
+const prefix = "astaxie_"
+```
+
+> Go 常量和一般程序语言不同的是，可以指定相当多的小数位数 (例如 200 位)， 若指定给 float32 自动缩短为 32bit，指定给 float64 自动缩短为 64bit
+
 ### 简单类型
 
 - 空值：nil
-
 - 整型类型： int (取决于操作系统), int8, int16, int32, int64, uint8, uint16, …
+    - `rune` 是 `int32` 的别称，`byte` 是 `uint8` 的别称
+    - 这些类型的变量之间不允许互相赋值或操作
 
 - 浮点数类型：float32, float64
-
 - 字节类型：byte (等价于 uint8)
 - 字符串类型：string
-- 布尔值类型：boolean，(true 或 false)
+- 布尔值类型：bool，(true 或 false)
 
 ```go
 var a int8 = 10
@@ -309,7 +431,28 @@ var msg = "Hello World"
 ok := false
 ```
 
+Go 还支持复数。它的默认类型是 `complex128`（64 位实数 + 64 位虚数）。如果需要小一些的，也有`complex64` (32 位实数 + 32 位虚数)。复数的形式为 `RE + IMi`，其中 `RE` 是实数部分，`IM` 是虚数部分，而最后的 `i` 是虚数单位。下面是一个使用复数的例子：
+
+```go
+var c complex64 = 5+5i
+
+fmt.Printf("Value is: %v", c) //output: (5+5i)
+```
+
 ### 字符串
+
+```go
+//示例代码
+var frenchHello string  // 声明变量为字符串的一般方法
+var emptyString string = ""  // 声明了一个字符串变量，初始化为空字符串
+func test() {
+	no, yes, maybe := "no", "yes", "maybe"  // 简短声明，同时声明多个变量
+	japaneseHello := "Konichiwa"  // 同上
+	frenchHello = "Bonjour"  // 常规赋值
+}
+```
+
+#### utf-8
 
 在 Go 语言中，字符串使用 UTF8 编码
 
@@ -335,6 +478,28 @@ func main() {
 - `reflect.TypeOf().Kind()` 可以知道某个变量的类型，我们可以看到，字符串是以 byte 数组形式保存的，类型是 uint8，占 1 个 byte，打印时需要用 string 进行类型转换，否则打印的是编码值。
 - 因为字符串是以 byte 数组的形式存储的，所以，`str2[2]` 的值并不等于 `语`。str2 的长度 `len(str2)` 也不是 4，而是 8（ `Go` 占 2 byte，`语言` 占 6 byte）。
 
+#### 特性
+
+使用 `+` 操作符来连接两个字符串：
+
+```go
+s := "hello,"
+m := " world"
+a := s + m
+fmt.Printf("%s\n", a)
+```
+
+使用反引号来声明多行字符串（没有字符转义）
+
+```go
+m := `hello
+	world`
+```
+
+
+
+#### 处理中文
+
 正确的处理方式是将 string 转为 rune 数组
 
 ```go
@@ -346,6 +511,25 @@ fmt.Println("len(runeArr)：", len(runeArr))    // len(runeArr)： 4
 ```
 
 转换成 `[]rune` 类型后，字符串中的每个字符，无论占多少个字节都用 int32 来表示，因而可以正确处理中文。
+
+#### 修改字符串
+
+在Go中字符串是不可变的，如果真的想要改：
+
+```go
+s := "hello"
+c := []byte(s)  // 将字符串 s 转换为 []byte 类型
+c[0] = 'c'
+s2 := string(c)  // 再转换回 string 类型
+fmt.Printf("%s\n", s2)
+
+// or
+s := "hello"
+s = "c" + s[1:] // 字符串虽不能更改，但可进行切片操作
+fmt.Printf("%s\n", s)
+```
+
+
 
 ### 数组 (array)
 
@@ -601,7 +785,7 @@ func add(num1 int, num2 int) (ans int) {
 
 如果函数实现过程中，如果出现不能处理的错误，可以返回给调用者处理。比如我们调用标准库函数`os.Open`读取文件，`os.Open` 有2个返回值，第一个是 `*File`，第二个是 `error`， 如果调用成功，error 的值是 nil，如果调用失败，例如文件不存在，我们可以通过 error 知道具体的错误信息。
 
-```
+```go
 import (
 	"fmt"
 	"os"
@@ -619,7 +803,7 @@ func main() {
 
 可以通过 `errorw.New` 返回自定义的错误
 
-```
+```go
 import (
 	"errors"
 	"fmt"
@@ -643,7 +827,7 @@ func main() {
 
 error 往往是能预知的错误，但是也可能出现一些不可预知的错误，例如数组越界，这种错误可能会导致程序非正常退出，在 Go 语言中称之为 panic。
 
-```
+```go
 func get(index int) int {
 	arr := [3]int{2, 3, 4}
 	return arr[index]
@@ -661,7 +845,7 @@ exit status 2
 
 在 Python、Java 等语言中有 `try...catch` 机制，在 `try` 中捕获各种类型的异常，在 `catch` 中定义异常处理的行为。Go 语言也提供了类似的机制 `defer` 和 `recover`。
 
-```
+```go
 func get(index int) (ret int) {
 	defer func() {
 		if r := recover(); r != nil {
@@ -686,13 +870,13 @@ finished
 - 在 get 函数中，使用 defer 定义了异常处理的函数，在协程退出前，会执行完 defer 挂载的任务。因此如果触发了 panic，控制权就交给了 defer。
 - 在 defer 的处理逻辑中，使用 recover，使程序恢复正常，并且将返回值设置为 -1，在这里也可以不处理返回值，如果不处理返回值，返回值将被置为默认值 0。
 
-## 6 结构体，方法和接口
+## 结构体，方法和接口
 
-### 6.1 结构体(struct) 和方法(methods)
+### 结构体 (struct) 和方法 (methods)
 
 结构体类似于其他语言中的 class，可以在结构体中定义多个字段，为结构体实现方法，实例化等。接下来我们定义一个结构体 Student，并为 Student 添加 name，age 字段，并实现 `hello()` 方法。
 
-```
+```go
 type Student struct {
 	name string
 	age  int
@@ -717,20 +901,63 @@ func main() {
 
 除此之外，还可以使用 `new` 实例化：
 
-```
+```go
 func main() {
 	stu2 := new(Student)
 	fmt.Println(stu2.hello("Alice")) // hello Alice, I am  , name 被赋予默认值""
 }
 ```
 
-### 6.2 接口(interfaces)
+#### 值类型调用与指针类型调用
 
-一般而言，接口定义了一组方法的集合，接口不能被实例化，一个类型可以实现多个接口。
+```go
+type Data struct {
+    x int
+}
 
-举一个简单的例子，定义一个接口 `Person`和对应的方法 `getName()` 和 `getAge()`：
+// 值类型调用
+func (u User) NotifyValue() {
+    fmt.Printf("%v : %v \n", u.Name, u.Email)
+}
 
+// 指针类型调用
+func (u *User) NotifyPointer() {
+    fmt.Printf("%v : %v \n", u.Name, u.Email)
+}
 ```
+
+当接受者 (结构体实例) 不是一个指针时，**方法**操作对应接受者的值的**副本**——即使你使用了指针调用函数，但是函数的接受者是值类型，所以函数内部操作还是对副本的操作，而不是指针操作。
+
+```go
+func main() {
+    // 值类型调用方法
+    u1 := User{"golang", "golang@golang.com"}
+    u1.NotifyValue() //正常
+    
+    // 指针类型调用方法
+    u2 := User{"go", "go@go.com"}
+    u3 := &u2
+    // 可以简写成 u3 := &User{"go", "go@go.com"}
+    u3.NotifyValue() //当我们使用指针时，Go 调整和解引用指针使得调用可以被执行
+}
+```
+
+同理，当接受者是指针时，即使用值类型调用那么函数内部也是对指针的操作
+
+所以，是值调用还是指针调用，**一切取决于接受者（即结构体实例）的类型**
+
+#### 普通函数与方法的区别
+
+- 对于普通函数，接收者为值类型时，不能将指针类型的数据直接传递，反之亦然。
+- 对于方法（如 struct 的方法），接收者为值类型时，可以直接用指针类型的变量调用方法，反过来同样也可以。
+
+### 接口 (interfaces)
+
+一般而言，**接口定义了一组方法的集合**，接口不能被实例化，一个类型可以实现多个接口。
+
+举一个简单的例子，定义一个接口 `Person` 和对应的方法 `getName()` 和 `getAge()`：
+
+```go
 type Person interface {
 	getName() string
 }
@@ -764,11 +991,11 @@ func main() {
 ```
 
 - Go 语言中，并不需要显式地声明实现了哪一个接口，只需要直接实现该接口对应的方法即可。
-- 实例化 `Student`后，强制类型转换为接口类型 Person。
+- 实例化 `Student` 后，强制类型转换为接口类型 Person。
 
 在上面的例子中，我们在 main 函数中尝试将 Student 实例类型转换为 Person，如果 Student 没有完全实现 Person 的方法，比如我们将 `(*Student).getName()` 删掉，编译时会出现如下报错信息。
 
-```
+```shell
 *Student does not implement Person (missing getName method)
 ```
 
@@ -784,7 +1011,7 @@ var _ Person = (*Worker)(nil)
 
 实例可以强制类型转换为接口，接口也可以强制类型转换为实例。
 
-```
+```go
 func main() {
 	var p Person = &Student{
 		name: "Tom",
@@ -796,11 +1023,11 @@ func main() {
 }
 ```
 
-### 6.3 空接口
+### 空接口
 
 如果定义了一个没有任何方法的空接口，那么这个接口可以表示任意类型。例如
 
-```
+```go
 func main() {
 	m := make(map[string]interface{})
 	m["name"] = "Tom"
@@ -810,15 +1037,15 @@ func main() {
 }
 ```
 
-## 7 并发编程(goroutine)
+## 并发编程 (goroutine)
 
-### 7.1 sync
+### sync
 
-Go 语言提供了 sync 和 channel 两种方式支持协程(goroutine)的并发。
+Go 语言提供了 sync 和 channel 两种方式支持协程 (goroutine) 的并发。
 
 例如我们希望并发下载 N 个资源，多个并发协程之间不需要通信，那么就可以使用 sync.WaitGroup，等待所有并发协程执行结束。
 
-```
+```go
 import (
 	"fmt"
 	"sync"
@@ -843,9 +1070,9 @@ func main() {
 }
 ```
 
-- wg.Add(1)：为 wg 添加一个计数，wg.Done()，减去一个计数。
-- go download()：启动新的协程并发执行 download 函数。
-- wg.Wait()：等待所有的协程执行结束。
+- `wg.Add(1)`：为 wg 添加一个计数，wg.Done()，减去一个计数。
+- `go download()`：启动新的协程并发执行 download 函数。
+- `wg.Wait()`：等待所有的协程执行结束。
 
 ```
 $  time go run .
@@ -859,9 +1086,9 @@ real    0m1.563s
 
 可以看到串行需要 3s 的下载操作，并发后，只需要 1s。
 
-### 7.2 channel
+### channel
 
-```
+```go
 var ch = make(chan string, 10) // 创建大小为 10 的缓冲信道
 
 func download(url string) {
@@ -884,7 +1111,7 @@ func main() {
 
 使用 channel 信道，可以在协程之间传递消息。阻塞等待并发协程返回消息。
 
-```
+```shell
 $ time go run .
 start to download a.com/2
 start to download a.com/0
@@ -897,11 +1124,11 @@ Done!
 real    0m1.528s
 ```
 
-## 8 单元测试(unit test)
+## 单元测试 (unit test)
 
-假设我们希望测试 package main 下 `calc.go` 中的函数，要只需要新建 `calc_test.go` 文件，在`calc_test.go`中新建测试用例即可。
+假设我们希望测试 package main 下 `calc.go` 中的函数，要只需要新建 `calc_test.go` 文件，在 `calc_test.go` 中新建测试用例即可。
 
-```
+```go
 // calc.go
 package main
 
@@ -922,7 +1149,7 @@ func TestAdd(t *testing.T) {
 
 运行 `go test`，将自动运行当前 package 下的所有测试用例，如果需要查看详细的信息，可以添加`-v`参数。
 
-```
+```shell
 $ go test -v
 === RUN   TestAdd
 --- PASS: TestAdd (0.00s)
@@ -930,15 +1157,15 @@ PASS
 ok      example 0.040s
 ```
 
-## 9 包(Package)和模块(Modules)
+## 包 (Package) 和模块 (Modules)
 
-### 9.1 Package
+### Package
 
 一般来说，一个文件夹可以作为 package，同一个 package 内部变量、类型、方法等定义可以相互看到。
 
 比如我们新建一个文件 `calc.go`， `main.go` 平级，分别定义 add 和 main 方法。
 
-```
+```go
 // calc.go
 package main
 
@@ -957,33 +1184,37 @@ func main() {
 
 运行 `go run main.go`，会报错，add 未定义：
 
-```
+```shell
 ./main.go:6:14: undefined: add
 ```
 
 因为 `go run main.go` 仅编译 main.go 一个文件，所以命令需要换成
 
-```
+```text
 $ go run main.go calc.go
 8
 ```
 
 或
 
-```
+```text
 $ go run .
 8
 ```
 
 Go 语言也有 Public 和 Private 的概念，粒度是包。如果类型/接口/方法/函数/字段的首字母大写，则是 Public 的，对其他 package 可见，如果首字母小写，则是 Private 的，对其他 package 不可见。
 
-### 9.2 Modules
+### Modules
 
-[Go Modules](https://github.com/golang/go/wiki/Modules) 是 Go 1.11 版本之后引入的，Go 1.11 之前使用 $GOPATH 机制。Go Modules 可以算作是较为完善的包管理工具。同时支持代理，国内也能享受高速的第三方包镜像服务。接下来简单介绍 `go mod` 的使用。Go Modules 在 1.13 版本仍是可选使用的，环境变量 GO111MODULE 的值默认为 AUTO，强制使用 Go Modules 进行依赖管理，可以将 GO111MODULE 设置为 ON。
+Go Modules 是 Go 1.11 版本之后引入的，Go 1.11 之前使用 $GOPATH 机制。
+
+Go Modules 可以算作是较为完善的包管理工具。同时支持代理，国内也能享受高速的第三方包镜像服务。
+
+Go Modules 在 1.13 版本仍是可选使用的，环境变量 GO111MODULE 的值默认为 AUTO，强制使用 Go Modules 进行依赖管理，可以将 GO111MODULE 设置为 ON。
 
 在一个空文件夹下，初始化一个 Module
 
-```
+```text
 $ go mod init example
 go: creating new go.mod: module example
 ```
@@ -992,7 +1223,7 @@ go: creating new go.mod: module example
 
 接着，我们在当前目录下新建文件 `main.go`，添加如下代码：
 
-```
+```go
 package main
 
 import (
@@ -1027,7 +1258,7 @@ demo/
 
 在 `calc.go` 中写入
 
-```
+```go
 package calc
 
 func Add(num1 int, num2 int) int {
@@ -1037,7 +1268,7 @@ func Add(num1 int, num2 int) int {
 
 在 package main 中如何使用 package cal 中的 Add 函数呢？`import 模块名/子目录名` 即可，修改后的 main 函数如下：
 
-```
+```go
 package main
 
 import (
@@ -1055,3 +1286,89 @@ $ go run .
 Ahoy, world!
 13
 ```
+
+## 一些技巧和特性
+
+### 分组声明
+
+在Go语言中，同时声明多个常量、变量，或者导入多个包时，可采用分组的方式进行声明。
+
+例如下面的代码：
+
+```go
+import "fmt"
+import "os"
+
+const i = 100
+const pi = 3.1415
+const prefix = "Go_"
+
+var i int
+var pi float32
+var prefix string
+```
+
+可以分组写成如下形式：
+
+```go
+import(
+	"fmt"
+	"os"
+)
+
+const(
+	i = 100
+	pi = 3.1415
+	prefix = "Go_"
+)
+
+var(
+	i int
+	pi float32
+	prefix string
+)
+```
+
+### iota 枚举
+
+Go 里面有一个关键字 `iota`，这个关键字用来声明 `enum` 的时候采用，它默认开始值是 0，const 中每增加一行加 1
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+const (
+	x = iota // x == 0
+	y = iota // y == 1
+	z = iota // z == 2
+	w        // 常量声明省略值时，默认和之前一个值的字面相同。这里隐式地说w = iota，因此w == 3。其实上面y和z可同样不用"= iota"
+)
+
+const v = iota // 每遇到一个const关键字，iota就会重置，此时v == 0
+
+const (
+	h, i, j = iota, iota, iota //h=0,i=0,j=0 iota在同一行值相同
+)
+
+const (
+	a       = iota //a=0
+	b       = "B"
+	c       = iota             //c=2
+	d, e, f = iota, iota, iota //d=3,e=3,f=3
+	g       = iota             //g = 4
+)
+
+func main() {
+	fmt.Println(a, b, c, d, e, f, g, h, i, j, x, y, z, w, v)
+}
+```
+
+除非被显式设置为其它值或 `iota`，每个 `const` 分组的第一个常量被默认设置为它的 0 值，第二及后续的常量被默认设置为它前面那个常量的值，如果前面那个常量的值是 `iota`，则它也被设置为 `iota`。
+
+### 变量、函数命名原则
+
+- 大写字母开头的变量是可导出的，也就是其它包可以读取的，是公有变量；小写字母开头的就是不可导出的，是私有变量。
+- 大写字母开头的函数也是一样，相当于 `class` 中的带 `public` 关键词的公有函数；小写字母开头的就是有`private` 关键词的私有函数。
