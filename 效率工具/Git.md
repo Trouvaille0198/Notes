@@ -472,7 +472,7 @@ $ rm .git -rf
 <type>(<scope>): <subject>
 ```
 
-type
+**type**
 
 - feat：新功能（feature）
 - fix：问题修复
@@ -498,5 +498,11 @@ subject：概括提交内容
 
 ```bash
 git config core.ignorecase false
+```
+
+修改上一次的 commit 记录
+
+```bash
+git commit --amend
 ```
 

@@ -515,9 +515,9 @@ NoResultFound: No row was found for one()
 - `one_or_none()`：从名称可以看出，当结果数量为 0 时返回 `None`， 多于1个时报错
 - `scalar()`和`one()` 类似，但是返回单项而不是 tuple
 
-### 嵌入使用SQL
+### 嵌入使用 SQL
 
-你可以在`Query`中通过`text()`使用SQL语句。例如：
+你可以在 `Query` 中通过 `text()` 使用 SQL 语句。例如：
 
 ```bash
 >>> from sqlalchemy import text
@@ -531,7 +531,7 @@ mary
 fred
 ```
 
-除了上面这种直接将参数写进字符串的方式外，你还可以通过`params()`方法来传递参数
+除了上面这种直接将参数写进字符串的方式外，你还可以通过 `params()` 方法来传递参数
 
 ```bash
 >>> session.query(User).filter(text("id<:value and name=:name")).\
@@ -539,7 +539,7 @@ fred
 <User(name='fred', fullname='Fred Flinstone', password='blah')>
 ```
 
-并且，你可以直接使用完整的SQL语句，但是要注意将表名和列明写正确。
+并且，你可以直接使用完整的 SQL 语句，但是要注意将表名和列明写正确。
 
 ```bash
 >>> session.query(User).from_statement(
@@ -661,5 +661,196 @@ class Keyword(Base):
 
     - 只可以用在一对多和多对多关系中，不可以用在一对一和多对一中
 
-    
 
+### 关于更新数据的讨论
+
+```python
+# 1 (bad)
+user.no_of_logins += 1
+# result: UPDATE user SET no_of_logins = 31 WHERE user.id = 6
+
+# 2 (bad)
+user.no_of_logins = user.no_of_logins + 1
+# result: UPDATE user SET no_of_logins = 31 WHERE user.id = 6
+
+# 3 (bad)
+setattr(user, 'no_of_logins', user.no_of_logins + 1)
+# result: UPDATE user SET no_of_logins = 31 WHERE user.id = 6
+
+# 4 (ok)
+user.no_of_logins = User.no_of_logins + 1
+# result: UPDATE user SET no_of_logins = no_of_logins + 1 WHERE user.id = 6
+
+# 5 (ok)
+setattr(user, 'no_of_logins', User.no_of_logins + 1)
+# result: UPDATE user SET no_of_logins = no_of_logins + 1 WHERE user.id = 6
+```
+
+If you are going to increment twice via code that produces SQL like `SET no_of_logins = no_of_logins + 1`, then you will need to commit or at least flush in between increments, or else you will only get one increment in total:
+
+```python
+# 6 (bad)
+user.no_of_logins = User.no_of_logins + 1
+user.no_of_logins = User.no_of_logins + 1
+session.commit()
+# result: UPDATE user SET no_of_logins = no_of_logins + 1 WHERE user.id = 6
+
+# 7 (ok)
+user.no_of_logins = User.no_of_logins + 1
+session.flush()
+# result: UPDATE user SET no_of_logins = no_of_logins + 1 WHERE user.id = 6
+user.no_of_logins = User.no_of_logins + 1
+session.commit()
+# result: UPDATE user SET no_of_logins = no_of_logins + 1 WHERE user.id = 6
+```
+
+### 关于插入大量数据的讨论
+
+官方：https://docs.sqlalchemy.org/en/13/faq/performance.html#i-m-inserting-400-000-rows-with-the-orm-and-it-s-really-slow
+
+大体意思：ORM 模型不适合于大量数据的插入，使用 sqlalchemy Core 或者 sqlalchemy 提供的 bulk insert 函数会是更好的选择
+
+```
+SQLAlchemy ORM: Total time for 100000 records 2.39429616928 secs
+SQLAlchemy ORM pk given: Total time for 100000 records 1.51412987709 secs
+SQLAlchemy ORM bulk_save_objects(): Total time for 100000 records 0.568987131119 secs
+SQLAlchemy ORM bulk_insert_mappings(): Total time for 100000 records 0.320806980133 secs
+SQLAlchemy Core: Total time for 100000 records 0.206904888153 secs
+sqlite3: Total time for 100000 records 0.165791988373 sec
+```
+
+Script:
+
+```python
+import time
+import sqlite3
+
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String,  create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+
+Base = declarative_base()
+DBSession = scoped_session(sessionmaker())
+engine = None
+
+
+class Customer(Base):
+    __tablename__ = "customer"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(255))
+
+
+def init_sqlalchemy(dbname='sqlite:///sqlalchemy.db'):
+    global engine
+    engine = create_engine(dbname, echo=False)
+    DBSession.remove()
+    DBSession.configure(bind=engine, autoflush=False, expire_on_commit=False)
+    Base.metadata.drop_all(engine)
+    Base.metadata.create_all(engine)
+
+
+def test_sqlalchemy_orm(n=100000):
+    init_sqlalchemy()
+    t0 = time.time()
+    for i in xrange(n):
+        customer = Customer()
+        customer.name = 'NAME ' + str(i)
+        DBSession.add(customer)
+        if i % 1000 == 0:
+            DBSession.flush()
+    DBSession.commit()
+    print(
+        "SQLAlchemy ORM: Total time for " + str(n) +
+        " records " + str(time.time() - t0) + " secs")
+
+
+def test_sqlalchemy_orm_pk_given(n=100000):
+    init_sqlalchemy()
+    t0 = time.time()
+    for i in xrange(n):
+        customer = Customer(id=i + 1, name="NAME " + str(i))
+        DBSession.add(customer)
+        if i % 1000 == 0:
+            DBSession.flush()
+    DBSession.commit()
+    print(
+        "SQLAlchemy ORM pk given: Total time for " + str(n) +
+        " records " + str(time.time() - t0) + " secs")
+
+
+def test_sqlalchemy_orm_bulk_save_objects(n=100000):
+    init_sqlalchemy()
+    t0 = time.time()
+    for chunk in range(0, n, 10000):
+        DBSession.bulk_save_objects(
+            [
+                Customer(name="NAME " + str(i))
+                for i in xrange(chunk, min(chunk + 10000, n))
+            ]
+        )
+    DBSession.commit()
+    print(
+        "SQLAlchemy ORM bulk_save_objects(): Total time for " + str(n) +
+        " records " + str(time.time() - t0) + " secs")
+
+
+def test_sqlalchemy_orm_bulk_insert(n=100000):
+    init_sqlalchemy()
+    t0 = time.time()
+    for chunk in range(0, n, 10000):
+        DBSession.bulk_insert_mappings(
+            Customer,
+            [
+                dict(name="NAME " + str(i))
+                for i in xrange(chunk, min(chunk + 10000, n))
+            ]
+        )
+    DBSession.commit()
+    print(
+        "SQLAlchemy ORM bulk_insert_mappings(): Total time for " + str(n) +
+        " records " + str(time.time() - t0) + " secs")
+
+
+def test_sqlalchemy_core(n=100000):
+    init_sqlalchemy()
+    t0 = time.time()
+    engine.execute(
+        Customer.__table__.insert(),
+        [{"name": 'NAME ' + str(i)} for i in xrange(n)]
+    )
+    print(
+        "SQLAlchemy Core: Total time for " + str(n) +
+        " records " + str(time.time() - t0) + " secs")
+
+
+def init_sqlite3(dbname):
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+    c.execute("DROP TABLE IF EXISTS customer")
+    c.execute(
+        "CREATE TABLE customer (id INTEGER NOT NULL, "
+        "name VARCHAR(255), PRIMARY KEY(id))")
+    conn.commit()
+    return conn
+
+
+def test_sqlite3(n=100000, dbname='sqlite3.db'):
+    conn = init_sqlite3(dbname)
+    c = conn.cursor()
+    t0 = time.time()
+    for i in xrange(n):
+        row = ('NAME ' + str(i),)
+        c.execute("INSERT INTO customer (name) VALUES (?)", row)
+    conn.commit()
+    print(
+        "sqlite3: Total time for " + str(n) +
+        " records " + str(time.time() - t0) + " sec")
+
+if __name__ == '__main__':
+    test_sqlalchemy_orm(100000)
+    test_sqlalchemy_orm_pk_given(100000)
+    test_sqlalchemy_orm_bulk_save_objects(100000)
+    test_sqlalchemy_orm_bulk_insert(100000)
+    test_sqlalchemy_core(100000)
+    test_sqlite3(100000)
+```

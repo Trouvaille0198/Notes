@@ -360,8 +360,6 @@ replace (
 )
 ```
 
-
-
 ## 数据类型
 
 ### 变量 (Variable)
@@ -413,15 +411,16 @@ const prefix = "astaxie_"
 
 ### 简单类型
 
-- 空值：nil
-- 整型类型： int (取决于操作系统), int8, int16, int32, int64, uint8, uint16, …
+- **空值：**nil
+- **整型类型**： int (取决于操作系统), int8, int16, int32, int64, uint8, uint16, …
     - `rune` 是 `int32` 的别称，`byte` 是 `uint8` 的别称
     - 这些类型的变量之间不允许互相赋值或操作
-
-- 浮点数类型：float32, float64
-- 字节类型：byte (等价于 uint8)
-- 字符串类型：string
-- 布尔值类型：bool，(true 或 false)
+    - 尽管 int 的长度是 32 bit, 但 int 与 int32 并不可以互用
+    
+- **浮点数类型**：float32, float64
+- **字节类型**：byte (等价于 uint8)
+- **字符串类型**：string
+- **布尔值类型**：bool，(true 或 false)
 
 ```go
 var a int8 = 10
@@ -431,7 +430,7 @@ var msg = "Hello World"
 ok := false
 ```
 
-Go 还支持复数。它的默认类型是 `complex128`（64 位实数 + 64 位虚数）。如果需要小一些的，也有`complex64` (32 位实数 + 32 位虚数)。复数的形式为 `RE + IMi`，其中 `RE` 是实数部分，`IM` 是虚数部分，而最后的 `i` 是虚数单位。下面是一个使用复数的例子：
+Go 还支持**复数**。它的默认类型是 `complex128`（64 位实数 + 64 位虚数）。如果需要小一些的，也有`complex64` (32 位实数 + 32 位虚数)。复数的形式为 `RE + IMi`，其中 `RE` 是实数部分，`IM` 是虚数部分，而最后的 `i` 是虚数单位。下面是一个使用复数的例子：
 
 ```go
 var c complex64 = 5+5i
@@ -489,6 +488,14 @@ a := s + m
 fmt.Printf("%s\n", a)
 ```
 
+修改字符串也可写为：
+
+```go
+s := "hello"
+s = "c" + s[1:] // 字符串虽不能更改，但可进行切片操作
+fmt.Printf("%s\n", s)
+```
+
 使用反引号来声明多行字符串（没有字符转义）
 
 ```go
@@ -496,21 +503,39 @@ m := `hello
 	world`
 ```
 
-
-
 #### 处理中文
 
 正确的处理方式是将 string 转为 rune 数组
 
 ```go
-str2 := "Go语言"
-runeArr := []rune(str2)
-fmt.Println(reflect.TypeOf(runeArr[2]).Kind()) // int32
-fmt.Println(runeArr[2], string(runeArr[2]))    // 35821 语
-fmt.Println("len(runeArr)：", len(runeArr))    // len(runeArr)： 4
+package main
+
+import (
+    "fmt"
+    "unicode/utf8"
+)
+
+func main() {
+
+    var str = "hello 你好"
+
+    //golang中string底层是通过byte数组实现的，座椅直接求len 实际是在按字节长度计算  所以一个汉字占3个字节算了3个长度
+    fmt.Println("len(str):", len(str))
+    
+    //以下两种都可以得到str的字符串长度
+    
+    //golang中的unicode/utf8包提供了用utf-8获取长度的方法
+    fmt.Println("RuneCountInString:", utf8.RuneCountInString(str))
+
+    //通过rune类型处理unicode字符
+    fmt.Println("rune:", len([]rune(str)))
+}
 ```
 
 转换成 `[]rune` 类型后，字符串中的每个字符，无论占多少个字节都用 int32 来表示，因而可以正确处理中文。
+
+> `byte` 表示一个字节，可以表示英文字符等占用一个字节的字符，占用多于一个字节的字符就无法正确表示，例如占用 3 个字节的汉字
+> `rune` 表示一个字符，用来表示任何一个字符
 
 #### 修改字符串
 
@@ -529,22 +554,47 @@ s = "c" + s[1:] // 字符串虽不能更改，但可进行切片操作
 fmt.Printf("%s\n", s)
 ```
 
+### 错误类型
 
+Go 内置有一个 `error` 类型，专门用来处理错误信息，Go 的 `package` 里面还专门有一个包 `errors` 来处理错误：
+
+```go
+err := errors.New("emit macho dwarf: elf header corrupted")
+if err != nil {
+	fmt.Print(err)
+}
+```
 
 ### 数组 (array)
+
+```go
+var arr [n]type
+```
 
 声明数组
 
 ```go
 var arr [5]int     // 一维
 var arr2 [5][5]int // 二维 
+var arr = [5]int{1, 2, 3, 4, 5} // 声明时初始化
 ```
 
-声明时初始化
+使用 `:=` 声明
 
 ```go
-var arr = [5]int{1, 2, 3, 4, 5}
-// 或 arr := [5]int{1, 2, 3, 4, 5}
+a := [3]int{1, 2, 3} 
+b := [10]int{1, 2, 3} // 前三个元素初始化为1、2、3，其它默认为0
+c := [...]int{4, 5, 6} // 可以省略长度而采用`...`的方式，Go会自动根据元素个数来计算长度
+```
+
+声明嵌套数组
+
+```go
+// 声明了一个二维数组，该数组以两个数组作为元素，其中每个数组中又有4个int类型的元素
+doubleArray := [2][4]int{[4]int{1, 2, 3, 4}, [4]int{5, 6, 7, 8}}
+
+// 上面的声明可以简化，直接忽略内部的类型
+easyArray := [2][4]int{{1, 2, 3, 4}, {5, 6, 7, 8}}
 ```
 
 使用 `[]` 索引/修改数组
@@ -557,22 +607,75 @@ for i := 0; i < len(arr); i++ {
 fmt.Println(arr)  // [101 102 103 104 105]
 ```
 
+> 由于长度也是数组类型的一部分，因此 `[3]int` 与 `[4]int` 是不同的类型，数组也就不能改变长度。
+>
+> 数组之间的赋值是值的赋值，即当把一个数组作为参数传入函数的时候，传入的其实是该数组的副本，而不是它的指针。要传指针得使用 `slice`
+
 ### 切片 (slice)
 
-数组的长度不能改变，如果想拼接 2 个数组，或是获取子数组，需要使用切片。
+数组的长度不能改变，如果想拼接 2 个数组，或是获取子数组，需要使用切片
+
+> Go 和 Python 的切片在底层实现上完全不同
+>
+> python 的切片产生的是新的对象，对新对象的成员的操作不影响旧对象；
+>
+> go 的切片产生的是旧对象一部分的引用，对其成员的操作会影响旧对象。
+>
+> 这其实也体现了脚本语言和编译语言的不同。虽然两个语言都有类似的切片操作；但是 python 主要目标是方便；go 主要目标却是快速（并弥补丢弃指针运算的缺陷）
+
+#### 性质
 
 - 切片是数组的抽象。 
-- 切片使用数组作为底层结构。
-- 切片包含三个组件：容量，长度和指向底层数组的指针
+
+- 切片**使用数组作为底层结构**。
+
+- 切片包含三个组件
+
+    - 容量：`slice` 开始位置到数组的最后位置的长度，也叫最大长度
+
+    - 长度：`slice` 的长度
+
+    - 指向底层数组的指针：指向数组中 `slice` 指定的开始位置
+
+        ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png)
+
 - 切片可以随时进行扩展
 
-声明切片：
+> `slice` 并不是真正意义上的动态数组，而是一个**引用**类型。`slice` 总是指向一个**底层** `array`
+
+#### 声明
+
+声明切片和 `array` 一样，只是不需要指定长度
+
+```go
+// 普通声明
+var fslice []int
+
+// 声明并初始化
+slice := []byte {'a', 'b', 'c', 'd'}
+
+// 从一个数组或一个已经存在的slice中再次声明
+var ar = [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+a := ar[2:5]
+```
+
+或者使用 `make()` 创建切片
 
 ```go
 slice1 := make([]float32, 0) // 长度为0的切片
 slice2 := make([]float32, 3, 5) // [0 0 0] 长度为3容量为5的切片
 fmt.Println(len(slice2), cap(slice2)) // 3 5
 ```
+
+从 Go1.2 开始 `slice` 支持三个参数的声明
+
+```go
+var array [10]int
+slice := array[2:4]   // 一般声明方法, cap=8
+slice = array[2:4:7]  //使用三个参数声明, cap=7-2
+```
+
+#### 使用
 
 使用切片：
 
@@ -592,12 +695,27 @@ combined := append(sub1, sub2...) // [1, 2, 3, 4, 0, 0, 0]
 - 在实际使用的过程中，如果容量不够，切片容量会**自动扩展**。
 - `sub2...` 是切片解构的写法，将切片解构为 N 个独立的元素。
 
+#### 内置函数
+
+- `len()`：获取 `slice` 的长度
+- `cap()`：获取 `slice` 的最大容量
+- `append()`：向 `slice` 里面追加一个或者多个元素，然后返回一个和 `slice` 一样类型的 `slice`
+- `copy()`：函数 `copy` 从源 `slice` 的 `src` 中复制元素到目标 `dst`，并且返回复制的元素的个数
+
+> `append` 函数会改变 `slice` 所引用的数组的内容，从而影响到引用同一数组的其它 `slice`。
+>
+> 但当 `slice` 中没有剩余空间（即 `(cap-len) == 0`）时，此时将动态分配新的数组空间。返回的 `slice` 数组指针将指向这个空间，而原数组的内容将保持不变；其它引用此数组的 `slice` 则不受影响。
+
 ### 字典 (键值对，map)
 
 map 类似于 java 的 HashMap，Python 的字典 (dict)，是一种存储键值对 (Key-Value) 的数据结构。使用方式和其他语言几乎没有区别。
 
+#### 声明
+
 ```go
-// 仅声明
+// 仅声明，这种方式的声明需要在使用之前使用make初始化
+var m0 map[string]int
+// 声明并用make初始化
 m1 := make(map[string]int)
 // 声明时初始化
 m2 := map[string]string{
@@ -607,6 +725,76 @@ m2 := map[string]string{
 // 赋值/修改
 m1["Tom"] = 18
 ```
+
+#### 特性
+
+- `map` 是无序的，每次打印出来的 `map` 都会不一样，它不能通过 `index` 获取，而必须通过 `key` 获取
+- `map` 的长度不固定，和 `slice` 一样，也是一种引用类型
+- 内置的 `len` 函数将返回 `map` 拥有的 `key` 的数量
+- `map` 和其他基本型别不同，它不是 thread-safe，在多个 go-routine 存取时，必须使用 mutex lock 机制
+
+因为 `map` 也是一种引用类型，如果两个 `map` 同时指向一个底层，那么一个改变，另一个也相应的改变：
+
+```go
+m := make(map[string]string)
+m["Hello"] = "Bonjour"
+m1 := m
+m1["Hello"] = "Salut"  // 现在m["hello"]的值已经是Salut了
+```
+
+#### 删除
+
+```go
+// 初始化一个字典
+rating := map[string]float32{"C":5, "Go":4.5, "Python":4.5, "C++":2 }
+// map有两个返回值，第二个返回值，如果不存在key，那么ok为false，如果存在ok为true
+csharpRating, ok := rating["C#"]
+if ok {
+	fmt.Println("C# is in the map and its rating is ", csharpRating)
+} else {
+	fmt.Println("We have no rating associated with C# in the map")
+}
+
+delete(rating, "C")  // 删除key为C的元素
+```
+
+### make, new 操作
+
+`make` 用于内建类型（`map`、`slice` 和 `channel`）的内存分配。`new` 用于各种类型的内存分配。
+
+内建函数 `new` 本质上说跟其它语言中的同名函数功能一样：`new(T)` 分配了零值填充的 `T` 类型的内存空间，并且返回其地址，即一个 `*T` 类型的值。用 Go 的术语说，它返回了一个指针，指向新分配的类型 `T` 的零值。
+
+一言以蔽之：**`new` 返回指针。**
+
+内建函数 `make(T, args)` 与 `new(T)` 有着不同的功能，`make` 只能创建 `slice`、`map` 和 `channel`，并且返回一个有初始值(非零)的 `T` 类型，而不是 `*T`。
+
+本质来讲，导致这三个类型有所不同的原因是指向数据结构的引用在使用前必须被初始化。例如，一个 `slice`，是一个包含指向数据（内部 `array`）的指针、长度和容量的三项描述符；在这些项目被初始化之前，`slice` 为`nil`。对于 `slice`、`map` 和 `channel` 来说，`make` 初始化了内部的数据结构，填充适当的值。
+
+一言以蔽之：**`make` 返回初始化后的（非零）值。**
+
+下面这个图详细的解释了 `new` 和 `make` 之间的区别。
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.makenew.png" alt="img" style="zoom:67%;" />
+
+### 零值
+
+关于“零值”，所指并非是空值，而是一种“变量未填充前”的默认值，通常为 0。 此处罗列部分类型的“零值”
+
+```go
+int     0
+int8    0
+int32   0
+int64   0
+uint    0x0
+rune    0   //rune的实际类型是 int32
+byte    0x0 // byte的实际类型是 uint8
+float32 0   //长度为 4 byte
+float64 0   //长度为 8 byte
+bool    false
+string  ""
+```
+
+布尔类型的零值（初始值）为 false，数值类型的零值为 0，字符串类型的零值为空字符串`""`，而**指针、切片、映射、通道、函数和接口的零值则是 nil**。
 
 ### 指针 (pointer)
 
@@ -644,7 +832,11 @@ func main() {
 }
 ```
 
-## 流程控制 (if, for, switch)
+- 传指针使得多个函数能操作同一个对象。
+- 传指针比较轻量级 (8bytes),只是传内存地址，我们可以用指针传递体积大的结构体。如果用参数值传递的话, 在每次 copy 上面就会花费相对较多的系统开销（内存和时间）。所以当你要传递大的结构体的时候，用指针是一个明智的选择。
+- Go语言中 `channel`，`slice`，`map` 这三种类型的实现机制类似指针，所以可以直接传递，而不用取地址后传递指针。（注：若函数需改变 `slice` 的长度，则仍需要取地址传递指针）
+
+## 流程控制
 
 ### 条件语句 if else
 
@@ -663,6 +855,34 @@ if age := 18; age < 18 {
 	fmt.Printf("Adult")
 }
 ```
+
+多个条件
+
+```go
+if integer == 3 {
+	fmt.Println("The integer is equal to 3")
+} else if integer < 3 {
+	fmt.Println("The integer is less than 3")
+} else {
+	fmt.Println("The integer is greater than 3")
+}
+```
+
+### goto
+
+Go 有 `goto` 语句——请明智地使用它。用 `goto` 跳转到必须在当前函数内定义的标签。例如假设这样一个循环：
+
+```go
+func myFunc() {
+	i := 0
+Here:   //这行的第一个词，以冒号结束作为标签
+	println(i)
+	i++
+	goto Here   //跳转到Here去
+}
+```
+
+> 标签名是大小写敏感的。
 
 ### switch
 
@@ -706,6 +926,22 @@ default:
 // unknown
 ```
 
+可以将很多值聚合在一个 `case` 里
+
+```go
+i := 10
+switch i {
+case 1:
+	fmt.Println("i is equal to 1")
+case 2, 3, 4:
+	fmt.Println("i is equal to 2, 3 or 4")
+case 10:
+	fmt.Println("i is equal to 10")
+default:
+	fmt.Println("All I know is that i is an integer")
+}
+```
+
 ### for 循环
 
 一个简单的累加的例子，break 和 continue 的用法与其他语言没有区别。
@@ -720,7 +956,23 @@ for i := 0; i < 10; i++ {
 }
 ```
 
-对数组 (arr)、切片 (slice)、字典 (map) 使用 for range 遍历：
+当忽略 `expression1` 和 `expression3` 时，`;` 可以省略
+
+```go
+sum := 1
+for ; sum < 1000;  {
+	sum += sum
+}
+// 冒号可以省略
+sum := 1
+for sum < 1000 {
+	sum += sum
+}
+```
+
+`break` 和 `continue` 还可以跟着标号，用来跳到多重循环中的外层循环
+
+对数组 (arr)、切片 (slice)、字典 (map) 可以使用 for range 遍历：
 
 ```go
 nums := []int{10, 20, 30, 40}
@@ -731,6 +983,7 @@ for i, num := range nums {
 // 1 20
 // 2 30
 // 3 40
+
 m2 := map[string]string{
 	"Sam":   "Male",
 	"Alice": "Female",
@@ -743,7 +996,7 @@ for key, value := range m2 {
 // Alice Female
 ```
 
-## 函数 (functions)
+## 函数 functions
 
 ### 参数与返回值
 
@@ -752,6 +1005,7 @@ for key, value := range m2 {
 ```go
 func funcName(param1 Type1, param2 Type2, ...) (return1 Type3, ...) {
     // body
+    return value1, value2
 }
 ```
 
@@ -781,7 +1035,150 @@ func add(num1 int, num2 int) (ans int) {
 }
 ```
 
-### 错误处理 (error handling)
+> 不建议这样做，虽然使得代码更加简洁了，但是会造成生成的文档可读性差
+
+函数参数的类型默认为离它最近的类型
+
+```go
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+```
+
+上述代码中，`max` 函数有两个参数，它们的类型都是 `int`，那么第一个变量的类型就可以省略（即 `a,b int`, 而非 `a int, b int`)
+
+### 变参 `...`
+
+Go 函数支持变参。接受变参的函数是有着不定数量的参数的。为了做到这点，首先需要定义函数使其接受变参：
+
+```go
+func myfunc(arg ...int) {}
+```
+
+`arg ...int` 告诉 Go 这个函数接受不定数量的参数。注意，这些参数的类型全部是 `int`。在函数体中，变量`arg` 是一个 `int` 的 `slice`：
+
+```go
+for _, n := range arg {
+	fmt.Printf("And the number is: %d\n", n)
+}
+```
+
+### 延迟语句 defer
+
+Go 语言中有种不错的设计，即延迟（defer）语句，你可以在函数中添加多个 defer 语句。
+
+当函数执行到最后时，这些 defer 语句会按照逆序执行（栈），最后该函数返回。
+
+即：先执行 defer，后返回
+
+特别是当你在进行一些打开资源的操作时，遇到错误需要提前返回，在返回前你需要关闭相应的资源，不然很容易造成资源泄露等问题。
+
+如下代码所示，我们一般写打开一个资源是这样操作的：
+
+```go
+func ReadWrite() bool {
+	file.Open("file")
+// 做一些工作
+	if failureX {
+		file.Close()
+		return false
+	}
+
+	if failureY {
+		file.Close()
+		return false
+	}
+
+	file.Close()
+	return true
+}
+```
+
+我们看到上面有很多重复的代码，Go 的 `defer` 有效解决了这个问题。使用它后，不但代码量减少了很多，而且程序变得更优雅。在 `defer` 后指定的函数会在函数退出前调用。
+
+```go
+func ReadWrite() bool {
+	file.Open("file")
+	defer file.Close()
+	if failureX {
+		return false
+	}
+	if failureY {
+		return false
+	}
+	return true
+}
+```
+
+如果有很多调用 `defer`，那么 `defer` 是采用后进先出模式，所以如下代码会输出`4 3 2 1 0`
+
+```go
+for i := 0; i < 5; i++ {
+	defer fmt.Printf("%d ", i)
+}
+```
+
+### 函数作为值、类型
+
+在 Go 中函数也是一种变量，我们可以通过 `type` 来定义它，它的类型就是所有拥有相同的参数，相同的返回值的一种类型
+
+```go
+type typeName func(input1 inputType1 , input2 inputType2 [, ...]) (result1 resultType1 [, ...])
+```
+
+将函数作为类型后，可以把这个类型的函数当做值来传递
+
+```go
+package main
+
+import "fmt"
+
+type testInt func(int) bool // 声明了一个函数类型
+
+func isOdd(integer int) bool {
+	if integer%2 == 0 {
+		return false
+	}
+	return true
+}
+
+func isEven(integer int) bool {
+	if integer%2 == 0 {
+		return true
+	}
+	return false
+}
+
+// 声明的函数类型在这个地方当做了一个参数
+
+func filter(slice []int, f testInt) []int {
+	var result []int
+	for _, value := range slice {
+		if f(value) {
+			result = append(result, value)
+		}
+	}
+	return result
+}
+
+func main(){
+	slice := []int {1, 2, 3, 4, 5, 7}
+	fmt.Println("slice = ", slice)
+	odd := filter(slice, isOdd)    // 函数当做值来传递了
+	fmt.Println("Odd elements of slice are: ", odd)
+	even := filter(slice, isEven)  // 函数当做值来传递了
+	fmt.Println("Even elements of slice are: ", even)
+}
+```
+
+函数当做值和类型在我们写一些通用接口的时候非常有用
+
+上面例子中 `testInt` 类型是一个函数类型，然后两个 `filter` 函数的参数和返回值与 `testInt` 类型是一样的，但是我们可以实现很多种的逻辑，这样使得我们的程序变得非常的灵活。
+
+### 错误处理 error handling
 
 如果函数实现过程中，如果出现不能处理的错误，可以返回给调用者处理。比如我们调用标准库函数`os.Open`读取文件，`os.Open` 有2个返回值，第一个是 `*File`，第二个是 `error`， 如果调用成功，error 的值是 nil，如果调用失败，例如文件不存在，我们可以通过 error 知道具体的错误信息。
 
@@ -825,7 +1222,51 @@ func main() {
 // error: name is null
 ```
 
+#### panic 和 recover
+
 error 往往是能预知的错误，但是也可能出现一些不可预知的错误，例如数组越界，这种错误可能会导致程序非正常退出，在 Go 语言中称之为 panic。
+
+**Panic**
+
+- 它是一个内建函数，可以中断原有的控制流程，进入一个 `panic` 状态中。
+- 当函数 `F` 调用 `panic`，函数的执行被中断，但是 `F` 中的延迟函数 `defer` 会正常执行，然后 `F` 返回到调用它的地方。
+- 在调用的地方，`F` 的行为就像调用了 `panic`。这一过程继续向上，直到发生 `panic` 的 `goroutine` 中所有调用的函数返回，此时程序退出。
+- `panic` 可以直接调用 `panic` 产生。也可以由运行时错误产生，例如访问越界的数组。
+
+**Recover**
+
+- 它是一个内建的函数，可以让进入 `panic` 状态的 `goroutine` 恢复过来。
+- `recover` 仅在延迟函数 `defer` 中有效。
+- 在正常的执行过程中，调用 `recover` 会返回 `nil`，并且没有其它任何效果。
+- **如果当前的 `goroutine` 陷入 `panic` 状态，调用 `recover` 可以捕获到 `panic` 的输入值，并且恢复正常的执行。**
+
+例一：下面这个函数演示了如何在过程中使用 `panic`
+
+```go
+var user = os.Getenv("USER")
+
+func init() {
+	if user == "" {
+		panic("no value for $USER")
+	}
+}
+```
+
+下面这个函数检查作为其参数的函数在执行时是否会产生 `panic`：
+
+```go
+func throwsPanic(f func()) (b bool) {
+	defer func() {
+		if x := recover(); x != nil {
+			b = true
+		}
+	}()
+	f() //执行函数f，如果f中出现了panic，那么就可以恢复回来
+	return
+}
+```
+
+例二：数组越界的情况
 
 ```go
 func get(index int) int {
@@ -837,13 +1278,14 @@ func main() {
 	fmt.Println(get(5))
 	fmt.Println("finished")
 }
+
 $ go run .
 panic: runtime error: index out of range [5] with length 3
 goroutine 1 [running]:
 exit status 2
 ```
 
-在 Python、Java 等语言中有 `try...catch` 机制，在 `try` 中捕获各种类型的异常，在 `catch` 中定义异常处理的行为。Go 语言也提供了类似的机制 `defer` 和 `recover`。
+使用 `panic` 和 `recover` 来捕获错误
 
 ```go
 func get(index int) (ret int) {
@@ -861,6 +1303,7 @@ func main() {
 	fmt.Println(get(5))
 	fmt.Println("finished")
 }
+
 $ go run .
 Some error happened! runtime error: index out of range [5] with length 3
 -1
@@ -870,45 +1313,375 @@ finished
 - 在 get 函数中，使用 defer 定义了异常处理的函数，在协程退出前，会执行完 defer 挂载的任务。因此如果触发了 panic，控制权就交给了 defer。
 - 在 defer 的处理逻辑中，使用 recover，使程序恢复正常，并且将返回值设置为 -1，在这里也可以不处理返回值，如果不处理返回值，返回值将被置为默认值 0。
 
-## 结构体，方法和接口
+> 应当在关键的时刻使用 panic 和 recover，而不能滥用
 
-### 结构体 (struct) 和方法 (methods)
+### `main` 函数和 `init` 函数
 
-结构体类似于其他语言中的 class，可以在结构体中定义多个字段，为结构体实现方法，实例化等。接下来我们定义一个结构体 Student，并为 Student 添加 name，age 字段，并实现 `hello()` 方法。
+Go 里面有两个保留的函数：`init` 函数（能够应用于所有的 `package`）和 `main` 函数（只能应用于 `package main`）。这两个函数在定义时**不能有任何的参数和返回值**。
+
+每个 `package` 中的 `init` 函数都是可选的，但 `package main` 必须包含一个 `main` 函数。
+
+虽然一个 `package` 里面可以写任意多个 `init` 函数，但无论是对于可读性还是以后的可维护性来说，建议只写一个 `init` 函数。
+
+Go 程序会自动调用 `init()` 和 `main()`，你不需要在任何地方调用这两个函数。
+
+### 程序的初始化过程
+
+程序的初始化和执行都起始于 `main` 包。如果 `main` 包还导入了其它的包，那么就会在编译时将它们依次导入。
+
+有时一个包会被多个包同时导入，那么它只会被导入一次（例如很多包可能都会用到 `fmt` 包，但它只会被导入一次，因为没有必要导入多次）。
+
+当一个包被导入时，如果该包还导入了其它的包，那么会先将其它包导入进来，然后再对这些包中的包级常量和变量进行初始化，接着执行 `init` 函数（如果有的话），依次类推。
+
+等所有被导入的包都加载完毕了，就会开始对 `main` 包中的包级常量和变量进行初始化，然后执行 `main` 包中的 `init` 函数（如果存在的话），最后执行 `main` 函数。下图详细地解释了整个执行过程：
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png)
+
+### import
+
+#### 点操作
 
 ```go
-type Student struct {
+ import(
+     . "fmt"
+ )
+```
+
+点操作允许使用**省略前缀**的包名
+
+#### 别名操作
+
+```go
+ import(
+     f "fmt"
+ )
+```
+
+别名操作允许使用别名来使用包
+
+#### `_` 操作
+
+```go
+import (
+	"database/sql"
+	_ "github.com/ziutek/mymysql/godrv"
+)
+```
+
+`_` 操作引入了包，而不直接使用包里面的函数，而是调用了该包里面的 `init` 函数
+
+## 结构体，方法和接口
+
+### 结构体 struct
+
+```go
+package main
+
+import "fmt"
+
+// 声明一个新的类型
+type person struct {
 	name string
-	age  int
+	age int
 }
 
-func (stu *Student) hello(person string) string {
-	return fmt.Sprintf("hello %s, I am %s", person, stu.name)
+// 比较两个人的年龄，返回年龄大的那个人，并且返回年龄差
+// struct也是传值的
+func Older(p1, p2 person) (person, int) {
+	if p1.age>p2.age {  // 比较p1和p2这两个人的年龄
+		return p1, p1.age-p2.age
+	}
+	return p2, p2.age-p1.age
 }
 
 func main() {
-	stu := &Student{
-		name: "Tom",
-	}
-	msg := stu.hello("Jack")
-	fmt.Println(msg) // hello Jack, I am Tom
+	// 赋值初始化
+    var tom person
+	tom.name, tom.age = "Tom", 18
+
+	// 两个字段都写清楚的初始化
+	bob := person{age:25, name:"Bob"}
+
+	// 按照struct定义顺序初始化值
+	paul := person{"Paul", 43}
+	
+    // 当然也可以通过new函数分配一个指针，此处P的类型为*person
+    // P := new(person)
+    
+	tb_Older, tb_diff := Older(tom, bob)
+	tp_Older, tp_diff := Older(tom, paul)
+	bp_Older, bp_diff := Older(bob, paul)
+
+	fmt.Printf("Of %s and %s, %s is older by %d years\n",
+		tom.name, bob.name, tb_Older.name, tb_diff)
+
+	fmt.Printf("Of %s and %s, %s is older by %d years\n",
+		tom.name, paul.name, tp_Older.name, tp_diff)
+
+	fmt.Printf("Of %s and %s, %s is older by %d years\n",
+		bob.name, paul.name, bp_Older.name, bp_diff)
 }
 ```
 
-- 使用 `Student{field: value, ...}`的形式创建 Student 的实例，字段不需要每个都赋值，没有显性赋值的变量将被赋予默认值，例如 age 将被赋予默认值 0。
-- 实现方法与实现函数的区别在于，`func` 和函数名`hello` 之间，加上该方法对应的实例名 `stu` 及其类型 `*Student`，可以通过实例名访问该实例的字段`name`和其他方法了。
-- 调用方法通过 `实例名.方法名(参数)` 的方式。
+#### 匿名字段
 
-除此之外，还可以使用 `new` 实例化：
+Go 语言支持只提供类型，而不写字段名的方式，也就是匿名字段，或称为嵌入字段。
+
+当匿名字段是一个 struct 的时候，那么这个 struct 所拥有的**全部字段以及方法**都被隐式地引入了当前定义的这个 struct
 
 ```go
+package main
+
+import "fmt"
+
+type Human struct {
+	name string
+	age int
+	weight int
+}
+
+type Student struct {
+	Human  // 匿名字段，那么默认Student就包含了Human的所有字段
+	speciality string
+}
+
 func main() {
-	stu2 := new(Student)
-	fmt.Println(stu2.hello("Alice")) // hello Alice, I am  , name 被赋予默认值""
+	// 初始化一个学生
+	mark := Student{Human{"Mark", 25, 120}, "Computer Science"}
+
+	// 访问相应的字段
+	fmt.Println("His name is ", mark.name)
+	fmt.Println("His age is ", mark.age)
+	fmt.Println("His weight is ", mark.weight)
+	fmt.Println("His speciality is ", mark.speciality)
+	// 修改对应的备注信息
+	mark.speciality = "AI"
+	fmt.Println("Mark changed his speciality")
+	fmt.Println("His speciality is ", mark.speciality)
+	// 修改其年龄信息
+	fmt.Println("Mark become old")
+	mark.age = 46
+	fmt.Println("His age is", mark.age)
+	// 修改其体重信息
+	fmt.Println("Mark is not an athlet anymore")
+	mark.weight += 60
+	fmt.Println("His weight is", mark.weight)
+}
+```
+
+匿名字段能够实现字段的继承
+
+student 还能访问 Human 这个字段作为字段名。
+
+```go
+mark.Human = Human{"Marcus", 55, 220}
+mark.Human.age -= 1
+```
+
+不仅仅是 struct，所有的内置类型和自定义类型都可以作为匿名字段
+
+```go
+
+package main
+
+import "fmt"
+
+type Skills []string
+
+type Human struct {
+	name string
+	age int
+	weight int
+}
+
+type Student struct {
+	Human  // 匿名字段，struct
+	Skills // 匿名字段，自定义的类型string slice
+	int    // 内置类型作为匿名字段
+	speciality string
+}
+
+func main() {
+	// 初始化学生Jane
+	jane := Student{Human:Human{"Jane", 35, 100}, speciality:"Biology"}
+	// 访问相应的字段
+	fmt.Println("Her name is ", jane.name)
+	fmt.Println("Her age is ", jane.age)
+	fmt.Println("Her weight is ", jane.weight)
+	fmt.Println("Her speciality is ", jane.speciality)
+	// 修改其skill技能字段
+	jane.Skills = []string{"anatomy"}
+	fmt.Println("Her skills are ", jane.Skills)
+	fmt.Println("She acquired two new ones ")
+	jane.Skills = append(jane.Skills, "physics", "golang")
+	fmt.Println("Her skills now are ", jane.Skills)
+	// 修改匿名内置类型字段
+	jane.int = 3
+	fmt.Println("Her preferred number is", jane.int)
+}
+```
+
+当存在两个相同的字段时，**最外层的优先访问**，这就允许我们去重载通过匿名字段继承的一些字段
+
+如果想要访问重载后对应匿名类型里面的字段，可以通过匿名字段名来访问。
+
+```go
+package main
+
+import "fmt"
+
+type Human struct {
+	name string
+	age int
+	phone string  // Human类型拥有的字段
+}
+
+type Employee struct {
+	Human  // 匿名字段Human
+	speciality string
+	phone string  // 雇员的phone字段
+}
+
+func main() {
+	Bob := Employee{Human{"Bob", 34, "777-444-XXXX"}, "Designer", "333-222"}
+	fmt.Println("Bob's work phone is:", Bob.phone)
+	// 如果我们要访问Human的phone字段
+	fmt.Println("Bob's personal phone is:", Bob.Human.phone)
+}
+```
+
+### 方法 methods
+
+```go
+func (r ReceiverType) funcName(parameters) (results)
+```
+
+> "A method is a function with an implicit first argument, called a receiver."
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+type Rectangle struct {
+	width, height float64
+}
+
+type Circle struct {
+	radius float64
+}
+
+func (r Rectangle) area() float64 {
+	return r.width * r.height
+}
+
+func (c Circle) area() float64 {
+	return c.radius * c.radius * math.Pi
+}
+
+
+func main() {
+	r1 := Rectangle{12, 2}
+	r2 := Rectangle{9, 4}
+	c1 := Circle{10}
+	c2 := Circle{25}
+
+	fmt.Println("Area of r1 is: ", r1.area())
+	fmt.Println("Area of r2 is: ", r2.area())
+	fmt.Println("Area of c1 is: ", c1.area())
+	fmt.Println("Area of c2 is: ", c2.area())
+}
+```
+
+method 可以定义在任何你自定义的类型、内置类型、struct等各种类型上面。
+
+```go
+
+package main
+
+import "fmt"
+
+const(
+	WHITE = iota
+	BLACK
+	BLUE
+	RED
+	YELLOW
+)
+
+type Color byte
+
+type Box struct {
+	width, height, depth float64
+	color Color
+}
+
+type BoxList []Box //a slice of boxes
+
+func (b Box) Volume() float64 {
+	return b.width * b.height * b.depth
+}
+
+func (b *Box) SetColor(c Color) {
+	b.color = c
+}
+
+func (bl BoxList) BiggestColor() Color {
+	v := 0.00
+	k := Color(WHITE)
+	for _, b := range bl {
+		if bv := b.Volume(); bv > v {
+			v = bv
+			k = b.color
+		}
+	}
+	return k
+}
+
+func (bl BoxList) PaintItBlack() {
+	for i := range bl {
+		bl[i].SetColor(BLACK)
+	}
+}
+
+func (c Color) String() string {
+	strings := []string {"WHITE", "BLACK", "BLUE", "RED", "YELLOW"}
+	return strings[c]
+}
+
+func main() {
+	boxes := BoxList {
+		Box{4, 4, 4, RED},
+		Box{10, 10, 1, YELLOW},
+		Box{1, 1, 20, BLACK},
+		Box{10, 10, 1, BLUE},
+		Box{10, 30, 1, WHITE},
+		Box{20, 20, 20, YELLOW},
+	}
+
+	fmt.Printf("We have %d boxes in our set\n", len(boxes))
+	fmt.Println("The volume of the first one is", boxes[0].Volume(), "cm³")
+	fmt.Println("The color of the last one is",boxes[len(boxes)-1].color.String())
+	fmt.Println("The biggest one is", boxes.BiggestColor().String())
+
+	fmt.Println("Let's paint them all black")
+	boxes.PaintItBlack()
+	fmt.Println("The color of the second one is", boxes[1].color.String())
+
+	fmt.Println("Obviously, now, the biggest one is", boxes.BiggestColor().String())
 }
 ```
 
 #### 值类型调用与指针类型调用
+
+> 如果一个 method 的 receiver 是 *T，你可以在一个 T 类型的实例变量 V 上面调用这个 method，而不需要 &V 去调用这个 method
+>
+> 如果一个 method 的 receiver 是 T，你可以在一个 *T 类型的变量 P 上面调用这个 method，而不需要 *P 去调用这个method
+>
+> 但是一切结果取决于 receiver 的类型
 
 ```go
 type Data struct {
@@ -926,7 +1699,7 @@ func (u *User) NotifyPointer() {
 }
 ```
 
-当接受者 (结构体实例) 不是一个指针时，**方法**操作对应接受者的值的**副本**——即使你使用了指针调用函数，但是函数的接受者是值类型，所以函数内部操作还是对副本的操作，而不是指针操作。
+当接受者不是一个指针时，**方法**操作对应接受者的值的**副本**——即使你使用了指针调用函数，但是函数的接受者是值类型，所以函数内部操作还是对副本的操作，而不是指针操作。
 
 ```go
 func main() {
@@ -944,91 +1717,213 @@ func main() {
 
 同理，当接受者是指针时，即使用值类型调用那么函数内部也是对指针的操作
 
-所以，是值调用还是指针调用，**一切取决于接受者（即结构体实例）的类型**
+所以，是值调用还是指针调用，**一切取决于接受者的类型**
 
 #### 普通函数与方法的区别
 
 - 对于普通函数，接收者为值类型时，不能将指针类型的数据直接传递，反之亦然。
 - 对于方法（如 struct 的方法），接收者为值类型时，可以直接用指针类型的变量调用方法，反过来同样也可以。
 
-### 接口 (interfaces)
+#### method 继承
 
-一般而言，**接口定义了一组方法的集合**，接口不能被实例化，一个类型可以实现多个接口。
-
-举一个简单的例子，定义一个接口 `Person` 和对应的方法 `getName()` 和 `getAge()`：
+如果匿名字段实现了一个 method，那么包含这个匿名字段的 struct 也能调用该 method
 
 ```go
-type Person interface {
-	getName() string
+package main
+
+import "fmt"
+
+type Human struct {
+	name string
+	age int
+	phone string
 }
 
 type Student struct {
-	name string
-	age  int
+	Human //匿名字段
+	school string
 }
 
-func (stu *Student) getName() string {
-	return stu.name
+type Employee struct {
+	Human //匿名字段
+	company string
 }
 
-type Worker struct {
-	name   string
-	gender string
-}
-
-func (w *Worker) getName() string {
-	return w.name
+//在human上面定义了一个method
+func (h *Human) SayHi() {
+	fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone)
 }
 
 func main() {
-	var p Person = &Student{
-		name: "Tom",
-		age:  18,
-	}
+	mark := Student{Human{"Mark", 25, "222-222-YYYY"}, "MIT"}
+	sam := Employee{Human{"Sam", 45, "111-888-XXXX"}, "Golang Inc"}
 
-	fmt.Println(p.getName()) // Tom
+	mark.SayHi()
+	sam.SayHi()
 }
 ```
 
-- Go 语言中，并不需要显式地声明实现了哪一个接口，只需要直接实现该接口对应的方法即可。
-- 实例化 `Student` 后，强制类型转换为接口类型 Person。
+#### method 重写
 
-在上面的例子中，我们在 main 函数中尝试将 Student 实例类型转换为 Person，如果 Student 没有完全实现 Person 的方法，比如我们将 `(*Student).getName()` 删掉，编译时会出现如下报错信息。
-
-```shell
-*Student does not implement Person (missing getName method)
-```
-
-但是删除 `(*Worker).getName()` 程序并不会报错，因为我们并没有在 main 函数中使用。这种情况下我们如何确保某个类型实现了某个接口的所有方法呢？一般可以使用下面的方法进行检测，如果实现不完整，编译期将会报错。
-
-```
-var _ Person = (*Student)(nil)
-var _ Person = (*Worker)(nil)
-```
-
-- 将空值 nil 转换为 *Student 类型，再转换为 Person 接口，如果转换失败，说明 Student 并没有实现 Person 接口的所有方法。
-- Worker 同上。
-
-实例可以强制类型转换为接口，接口也可以强制类型转换为实例。
+可以在Employee上面定义一个method，重写匿名字段的方法
 
 ```go
-func main() {
-	var p Person = &Student{
-		name: "Tom",
-		age:  18,
-	}
+//Employee的method重写Human的method
+func (e *Employee) SayHi() {
+	fmt.Printf("Hi, I am %s, I work at %s. Call me on %s\n", e.name,
+		e.company, e.phone) //Yes you can split into 2 lines here.
+}
 
-	stu := p.(*Student) // 接口转为实例
-	fmt.Println(stu.getAge())
+func main() {
+	mark := Student{Human{"Mark", 25, "222-222-YYYY"}, "MIT"}
+	sam := Employee{Human{"Sam", 45, "111-888-XXXX"}, "Golang Inc"}
+
+	mark.SayHi()
+	sam.SayHi()
 }
 ```
+
+#### interface 函数参数
+
+interface 的变量可以持有任意实现该 interface 类型的对象，这给我们编写函数 (包括 method ) 提供了一些额外的思考，我们是不是可以通过定义 interface 参数，让函数接受各种类型的参数。
+
+举个例子：fmt.Println 是我们常用的一个函数，但是它可以接受任意类型的数据。打开 fmt 的源码文件，你会看到这样一个定义:
+
+```go
+type Stringer interface {
+	 String() string
+}
+```
+
+也就是说，任何实现了 String 方法的类型都能作为参数被 fmt.Println 调用
+
+```go
+package main
+import (
+	"fmt"
+	"strconv"
+)
+
+type Human struct {
+	name string
+	age int
+	phone string
+}
+
+// 通过这个方法 Human 实现了 fmt.Stringer
+func (h Human) String() string {
+	return "❰"+h.name+" - "+strconv.Itoa(h.age)+" years -  ✆ " +h.phone+"❱"
+}
+
+func main() {
+	Bob := Human{"Bob", 39, "000-7777-XXX"}
+	fmt.Println("This Human is : ", Bob)
+}
+```
+
+### 接口 (interfaces)
+
+一般而言，**接口定义了一组方法的集合**，我们通过interface来定义对象的一组行为。
+
+- 如果某个对象实现了某个接口的所有方法，则此对象就实现了此接口
+
+- 接口不能被实例化
+- 一个类型可以实现多个接口。
+
+```go
+
+type Human struct {
+	name string
+	age int
+	phone string
+}
+
+type Student struct {
+	Human //匿名字段Human
+	school string
+	loan float32
+}
+
+type Employee struct {
+	Human //匿名字段Human
+	company string
+	money float32
+}
+
+//Human对象实现Sayhi方法
+func (h *Human) SayHi() {
+	fmt.Printf("Hi, I am %s you can call me on %s\n", h.name, h.phone)
+}
+
+// Human对象实现Sing方法
+func (h *Human) Sing(lyrics string) {
+	fmt.Println("La la, la la la, la la la la la...", lyrics)
+}
+
+//Human对象实现Guzzle方法
+func (h *Human) Guzzle(beerStein string) {
+	fmt.Println("Guzzle Guzzle Guzzle...", beerStein)
+}
+
+// Employee重载Human的Sayhi方法
+func (e *Employee) SayHi() {
+	fmt.Printf("Hi, I am %s, I work at %s. Call me on %s\n", e.name,
+		e.company, e.phone) //此句可以分成多行
+}
+
+//Student实现BorrowMoney方法
+func (s *Student) BorrowMoney(amount float32) {
+	s.loan += amount // (again and again and...)
+}
+
+//Employee实现SpendSalary方法
+func (e *Employee) SpendSalary(amount float32) {
+	e.money -= amount // More vodka please!!! Get me through the day!
+}
+
+// 定义interface
+type Men interface {
+	SayHi()
+	Sing(lyrics string)
+	Guzzle(beerStein string)
+}
+
+type YoungChap interface {
+	SayHi()
+	Sing(song string)
+	BorrowMoney(amount float32)
+}
+
+type ElderlyGent interface {
+	SayHi()
+	Sing(song string)
+	SpendSalary(amount float32)
+}
+```
+
+> 任意的类型都实现了空 interface（我们这样定义：`interface{}`)，也就是包含 0 个方法的 interface。
+
+- 对象不需要显式地声明实现了哪一个接口，只需要直接实现该接口对应的方法即可。
+- 如果我们定义了一个 interface 的变量，那么这个变量里面可以存实现这个 interface 的任意类型的对象
+
+总而言之，interface 就是一组抽象方法的集合，它必须由其他非 interface 类型来实现，而不能自我实现； Go 通过 interface 实现了 duck-typing："当看到一只鸟走起来像鸭子、游泳起来像鸭子、叫起来也像鸭子，那么这只鸟就可以被称为鸭子"。
 
 ### 空接口
 
-如果定义了一个没有任何方法的空接口，那么这个接口可以表示任意类型。例如
+如果定义了一个没有任何方法的空接口，那么这个接口可以表示任意类型，有点类似于 C 语言的 `void*` 类型。
 
 ```go
 func main() {
+    // 定义a为空接口
+    var a interface{}
+    var i int = 5
+    s := "Hello world"
+    // a可以存储任意类型的数值
+    a = i
+    a = s
+
+    
+    
 	m := make(map[string]interface{})
 	m["name"] = "Tom"
 	m["age"] = 18
@@ -1037,7 +1932,9 @@ func main() {
 }
 ```
 
-## 并发编程 (goroutine)
+## 并发编程 goroutine
+
+> 不要通过共享来通信，而要通过通信来共享
 
 ### sync
 

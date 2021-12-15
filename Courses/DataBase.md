@@ -13,7 +13,7 @@
 - **超键**：能唯一标识元组的属性组合（可能多余）
 - **候选键**：能唯一标识元组的最小属性组合
 - **主键**：候选键中的一个
-- **外键**：若关系R包含关系S的主键对应的属性组F，则F为R的外键。S为参照关系，R为依赖关系
+- **外键**：若关系 R 包含关系 S 的主键对应的属性组 F，则 F 为 R 的外键。S 为参照关系，R 为依赖关系
 
 **SQL 体系结构**（三级体系结构对应关系）：
 
@@ -69,7 +69,7 @@
 
 **三个子句**：主键子句、外键子句、检查子句
 
-```
+```sql
 CREATE TABLE S (
     SNO CHAR(4) NOT NULL,
     PRIMARY KEY (SNO,PNO),             -- 主键子句
@@ -88,7 +88,7 @@ CREATE TABLE S (
 
 **视图创建**：
 
-```
+```sql
 CREATE VIEW JSP_NAME(JNO,JNAME) AS
     SELECT (J.JNO,J.JNAME)
     FROM S,J
@@ -99,13 +99,13 @@ CREATE VIEW JSP_NAME(JNO,JNAME) AS
 
 索引创建：
 
-```
+```sql
 CREATE UNIQUE INDEX SPJ_INDEX ON SPJ(SNO ASC, PNO, ASC, JON DESC);
 ```
 
 索引撤销：
 
-```
+```sql
 DROP INDEX JNO_INDEX, SPJ_INDEX;
 ```
 
@@ -113,7 +113,9 @@ DROP INDEX JNO_INDEX, SPJ_INDEX;
 
 #### SQL 查询语句
 
-```
+select 投影、from 笛卡尔积、where 选择（条件）
+
+```sql
 SELECT [DISTINCT] 列名序列
 FROM 表名
 [WHERE 行条件表达式]                       -- 行条件子句
@@ -191,6 +193,7 @@ FROM S
 WHERE Sdept!=’IS’ AND Sage < ANY (
     SELECT Sage FROM S WHERE Sdept=’IS’
 );
+
 SELECT Sname, Sage
 FROM S
 WHERE Sdept!=’IS’ AND Sage<(
@@ -200,13 +203,13 @@ WHERE Sdept!=’IS’ AND Sage<(
 );
 ```
 
-**EXISTS 存在**谓词：
+#### EXISTS 存在谓词
 
 **存在表任意关系**：$\forall x \left( p \right) \equiv \neg \exists x \left( \neg p \right)$
 
-*查询选修全部课程的学生姓名*：
+*查询选修全部课程的学生姓名*：（也就是不存在一门课它没选）
 
-```
+```sql
 SELECT Sname
 FROM S
 WHERE NOT EXISTS(
@@ -218,6 +221,7 @@ WHERE NOT EXISTS(
         WHERE Cno=C.Cno AND Sno=S.Sno
     )
 );
+
 SELECT Sname
 FROM S
 WHERE NOT EXISTS( /*查询S没选的课*/
@@ -230,9 +234,9 @@ WHERE NOT EXISTS( /*查询S没选的课*/
 
 **存在表蕴含关系**： $ \forall y \left( p \rightarrow q \right) \equiv \neg \exists y \left( \neg \left( \neg p \vee q \right) \right) \equiv \neg \exists y \left( p \wedge \neg q \right) $
 
-*查询选过学生A（学号95002）选过的全部课程的学生B学号*：
+*查询选过学生 A（学号95002）选过的全部课程的学生B学号*：（不存在 A 选的课它没选）
 
-```
+```sql
 SELECT DISTINCT Sno
 FROM SC AS X
 WHERE NOT EXISTS( /*不存在这样一个课程号*/
@@ -247,19 +251,24 @@ WHERE NOT EXISTS( /*不存在这样一个课程号*/
 );
 ```
 
-**聚合函数**：
+#### 聚合函数
+
+**逻辑：先用 where 筛选，再 having，最后运行聚合函数**
 
 - `COUNT(*)` 元组个数
-- `COUNT(列名)`列中非空值个数
+- `COUNT(列名)` 列中非空值个数
 - `COUNT(DISTINCT 列名)` 列中元素种数
 - `SUM(列)`、`AVG(列)`
 - `MAX(列)`、`MIN(列)`
+- `DISTINCT`
 
 *查询每门课的选课人数*：
 
-Group By属性必须在SELECT后出现；在select指定的字段要么就要包含在Group By语句的后面，作为分组的依据；要么就要被包含在聚合函数中
+Group By 属性必须在 SELECT 后出现；
 
-```
+在 SELECT 中指定的字段要么就要**包含在 Group By 语句中**，作为分组的依据；要么就要被**包含在聚合函数**中
+
+```sql
 SELECT Cno, COUNT(Sno)
 FROM SC
 GROUP BY Cno;
@@ -267,27 +276,27 @@ GROUP BY Cno;
 
 *数据分组、集合操作*
 
-### SQL数据更新☆
+### SQL 数据更新 ☆
 
 **数据插入**：
 
 - 插入单个元组：
 
-    ```
+    ```sql
     INSERT INTO TABLE 
     VALUES(‘…’,’…’)
     ```
 
 - 插入子查询结果：
 
-    ```
+    ```sql
     INSERT INTO TABLE 
     SELECT… FROM… WHERE…
     ```
 
 **数据删除**：
 
-```
+```sql
 DELETE FROM TABLE
 WHERE…
 ```
@@ -304,7 +313,11 @@ WHERE…
 
 **视图查询**：系统会根据数据字典的定义将视图查询转换为对基本表的查询
 
-```
+HAVING：组条件
+
+WHERE：行条件
+
+```sql
 CREATE VIEW S_GRADE(sno, c_num, avg_grade) AS (
     SELECT sno, COUNT(cno),AVG(grade)
     FROM SC
@@ -322,7 +335,7 @@ WHERE c_num >(
 
 会转变成：
 
-```
+```sql
 SELECT sno, AVG(grade) AS avg_grade
 FROM SC
 GROUP BY sno
@@ -345,7 +358,7 @@ HAVING COUNT(cno)>(
 - 视图从多个基本表**联结**导出
 - 视图有**分组**或**聚合**操作
 
-```
+```sql
 /* 以下更新会被拒绝：
 ** 因为视图包含分组聚合操作COUNT(cno), AVG(grade)
 **/

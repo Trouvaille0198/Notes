@@ -1668,3 +1668,143 @@ compilerOptions 每个选项的详细说明如下：
   }
 }
 ```
+
+## 与 Vue3 的结合
+
+### ref 的类型声明
+
+```ts
+const year = ref(2020)
+const month = ref<string | number>('9')
+```
+
+如果不给定 `ref` 定义的类型的话， `vue3` 也能根据初始值来进行类型推导，然后需要指定复杂类型的时候简单传递一个泛型即可。
+
+### reactive 的类型声明
+
+```ts
+const student = reactive<Student>({ name: '阿勇', age: 16 })
+// or
+const student: Student = reactive({ name: '阿勇', age: 16 })
+// or
+const student = reactive({ name: '阿勇', age: 16, class: 'cs' }) as Student
+```
+
+比较倾向于第一种
+
+### 自定义 hooks
+
+作者：JS开发宝典
+链接：https://zhuanlan.zhihu.com/p/360947847
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
+`vue3` 借鉴 `react hooks` 开发出了 `Composition API` ，那么也就意味着 `Composition API` 也能进行自定义封装 `hooks` ，接下来我们就用 `TypeScript` 风格封装一个计数器逻辑的 `hooks` （ `useCount` ）:
+
+首先来看看这个 `hooks` 怎么使用：
+
+```js
+import { ref } from '/@modules/vue'
+import  useCount from './useCount'
+
+export default {
+  name: 'CountDemo',
+  props: {
+    msg: String
+  },
+  setup() {
+    const { current: count, inc, dec, set, reset } = useCount(2, {
+      min: 1,
+      max: 15
+    })
+    const msg = ref('Demo useCount')
+
+    return {
+      count,
+      inc,
+      dec,
+      set,
+      reset,
+      msg
+    }
+  }
+}
+```
+
+出来的效果就是：
+
+<video class="ztext-gif GifPlayer-gif2mp4" src="https://vdn3.vzuu.com/SD/c7cfa0ca-9101-11eb-b345-7698b3d4c6f1.mp4?disable_local_cache=1&amp;auth_key=1639565556-0-0-796615e0111e0cccd76ee991f55588e7&amp;f=mp4&amp;bu=pico&amp;expiration=1639565556&amp;v=tx" data-thumbnail="https://pic2.zhimg.com/v2-30b558edcab2711150a124c0b5b430a9_b.jpg" poster="https://pic2.zhimg.com/v2-30b558edcab2711150a124c0b5b430a9_b.jpg" data-size="normal" preload="metadata" loop="" playsinline=""></video>
+
+
+
+贴上 `useCount` 的源码：
+
+```js
+import { ref, Ref, watch } from 'vue'
+
+interface Range {
+  min?: number,
+  max?: number
+}
+
+interface Result {
+  current: Ref<number>,
+  inc: (delta?: number) => void,
+  dec: (delta?: number) => void,
+  set: (value: number) => void,
+  reset: () => void
+}
+
+export default function useCount(initialVal: number, range?: Range): Result {
+  const current = ref(initialVal)
+  const inc = (delta?: number): void => {
+    if (typeof delta === 'number') {
+      current.value += delta
+    } else {
+      current.value += 1
+    }
+  }
+  const dec = (delta?: number): void => {
+    if (typeof delta === 'number') {
+      current.value -= delta
+    } else {
+      current.value -= 1
+    }
+  }
+  const set = (value: number): void => {
+    current.value = value
+  }
+  const reset = () => {
+    current.value = initialVal
+  }
+
+  watch(current, (newVal: number, oldVal: number) => {
+    if (newVal === oldVal) return
+    if (range && range.min && newVal < range.min) {
+      current.value = range.min
+    } else if (range && range.max && newVal > range.max) {
+      current.value = range.max
+    }
+  })
+
+  return {
+    current,
+    inc,
+    dec,
+    set,
+    reset
+  }
+}
+```
+
+**分析源码**
+
+这里首先是对 `hooks` 函数的入参类型和返回类型进行了定义，入参的 `Range` 和返回的 `Result` 分别用一个接口来指定，这样做了以后，最大的好处就是在使用 `useCount` 函数的时候，ide就会自动提示哪些参数是必填项，各个参数的类型是什么，防止业务逻辑出错。
+
+![img](https://pic2.zhimg.com/v2-b3bffccd67b28b5f41413189b0fc47c1_b.jpg)
+
+接下来，在增加 `inc` 和减少 `dec` 的两个函数中增加了 `typeo` 类型守卫检查，因为传入的 `delta` 类型值在某些特定场景下不是很确定，比如在 `template` 中调用方法的话，类型检查可能会失效，传入的类型就是一个原生的 `Event` 。
+
+关于 `ref` 类型值，这里并没有特别声明类型，因为 `vue3` 会进行自动类型推导，但如果是复杂类型的话可以采用类型断言的方式： `ref(initObj) as Ref<ObjType>`

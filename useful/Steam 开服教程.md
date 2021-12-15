@@ -132,3 +132,4 @@ loadout <ID/ID/ID...>  #设置出生装备
 Owner <ID>  #服务器所有者
 ```
 
+英灵神殿：App_update 892970 validate
