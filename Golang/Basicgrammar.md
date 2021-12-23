@@ -565,7 +565,7 @@ if err != nil {
 }
 ```
 
-### 数组 (array)
+### 数组 array
 
 ```go
 var arr [n]type
@@ -611,7 +611,7 @@ fmt.Println(arr)  // [101 102 103 104 105]
 >
 > 数组之间的赋值是值的赋值，即当把一个数组作为参数传入函数的时候，传入的其实是该数组的副本，而不是它的指针。要传指针得使用 `slice`
 
-### 切片 (slice)
+### 切片 slice
 
 数组的长度不能改变，如果想拼接 2 个数组，或是获取子数组，需要使用切片
 
@@ -706,7 +706,7 @@ combined := append(sub1, sub2...) // [1, 2, 3, 4, 0, 0, 0]
 >
 > 但当 `slice` 中没有剩余空间（即 `(cap-len) == 0`）时，此时将动态分配新的数组空间。返回的 `slice` 数组指针将指向这个空间，而原数组的内容将保持不变；其它引用此数组的 `slice` 则不受影响。
 
-### 字典 (键值对，map)
+### 字典 键值对，map
 
 map 类似于 java 的 HashMap，Python 的字典 (dict)，是一种存储键值对 (Key-Value) 的数据结构。使用方式和其他语言几乎没有区别。
 
@@ -796,7 +796,7 @@ string  ""
 
 布尔类型的零值（初始值）为 false，数值类型的零值为 0，字符串类型的零值为空字符串`""`，而**指针、切片、映射、通道、函数和接口的零值则是 nil**。
 
-### 指针 (pointer)
+### 指针 pointer
 
 指针即某个值的地址，类型定义时使用符号 `*`，对一个已经存在的变量，使用 `&` 获取该变量的地址。
 
@@ -940,6 +940,24 @@ case 10:
 default:
 	fmt.Println("All I know is that i is an integer")
 }
+```
+
+A type `switch` compares types instead of values. You can use this to discover the type of an interface value. In this example, the variable `t` will have the type corresponding to its clause.
+
+```go
+whatAmI := func(i interface{}) {
+        switch t := i.(type) {
+        case bool:
+            fmt.Println("I'm a bool")
+        case int:
+            fmt.Println("I'm an int")
+        default:
+            fmt.Printf("Don't know type %T\n", t)
+        }
+    }
+    whatAmI(true)
+    whatAmI(1)
+    whatAmI("hey")
 ```
 
 ### for 循环
@@ -1177,6 +1195,49 @@ func main(){
 函数当做值和类型在我们写一些通用接口的时候非常有用
 
 上面例子中 `testInt` 类型是一个函数类型，然后两个 `filter` 函数的参数和返回值与 `testInt` 类型是一样的，但是我们可以实现很多种的逻辑，这样使得我们的程序变得非常的灵活。
+
+### 闭包 Closures
+
+Go supports anonymous functions, which can form closures. Anonymous functions are useful when you want to define a function inline without having to name it.
+
+```go
+package main
+
+import "fmt"
+
+func intSeq() func() int {
+    i := 0
+    return func() int {
+        i++
+        return i
+    }
+}
+
+func main() {
+
+    nextInt := intSeq()
+
+    fmt.Println(nextInt())
+    fmt.Println(nextInt())
+    fmt.Println(nextInt())
+
+    newInts := intSeq()
+    fmt.Println(newInts())
+}
+
+/* output:
+ *  1
+ *  2
+ *  3
+ *  1
+ 
+```
+
+This function `intSeq` returns another function, which we define anonymously in the body of `intSeq`. 
+
+The returned function *closes over* the variable `i` to form a closure.
+
+We call `intSeq`, assigning the result (a function) to `nextInt`. This function value captures its own `i` value, which will be updated each time we call `nextInt`.
 
 ### 错误处理 error handling
 
@@ -1821,7 +1882,7 @@ func main() {
 }
 ```
 
-### 接口 (interfaces)
+### 接口 interfaces
 
 一般而言，**接口定义了一组方法的集合**，我们通过interface来定义对象的一组行为。
 
@@ -1931,6 +1992,37 @@ func main() {
 	fmt.Println(m) // map[age:18 name:Tom scores:[98 99 85]]
 }
 ```
+
+### 类型断言
+
+类型断言（Type Assertion）是一个**使用在接口值上**的操作，用于检查接口类型变量所持有的值是否实现了期望的接口或者具体的类型。
+
+```go
+value, ok := x.(T)
+```
+
+x 表示一个接口的类型，T 表示一个具体的类型（也可为接口类型）。
+
+```go
+package main
+import (
+    "fmt"
+)
+func main() {
+    var x interface{}
+    x = 10
+    value, ok := x.(int)
+    fmt.Print(value, ",", ok)
+}
+```
+
+输出
+
+```
+10,true
+```
+
+
 
 ## 并发编程 goroutine
 

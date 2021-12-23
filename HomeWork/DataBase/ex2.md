@@ -18,6 +18,31 @@
 
     <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211214180200647.png" alt="image-20211214180200647" style="zoom:50%;" />
 
+    用以插入记录的脚本：
+
+    ```python
+    import pymysql
+    import string
+    from pymysql import cursors
+    conn = pymysql.connect(host= 'localhost',user='root',passwd='',db='school',charset='utf8')
+    cursor = conn.cursor()
+    cursor.execute("delete from a")
+    conn.commit
+    
+    for j in range(0,100):
+    	values = []
+    	i=0
+    	for i in range(100000*j,100000*(j+1)):
+    		values.append((i))
+    	cursor.executemany('insert into a values(%s)',values)
+    	print("insert"+str((j+1)*100000))
+    	conn.commit()
+    
+    
+    cursor.close
+    conn.close()
+    ```
+
 2. **查询 2011 年进校年龄大于 20 岁的男学生的学号与姓名。**
 
     ```sql
@@ -76,6 +101,8 @@
         );
     ```
     
+    ![image-20211216124216706](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211216124216706.png)
+    
 4. **查询计算机学院男生成绩及格、教授开设的课程的课程号、课名、开课教师姓名，按开课教师升序，课程号降序排序。**
 
     ```sql
@@ -108,6 +135,8 @@
     	csrq<(SELECT csrq FROM s WHERE xm='张颖')
     ```
 
+    ![image-20211216124258498](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211216124258498.png)
+
 6. **检索同时选修了“08305001”和“08305002”的学生学号和姓名。**
 
     ```sql
@@ -129,6 +158,8 @@
     	AND a.xh = b.xh)
     ```
 
+    ![image-20211216124320697](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211216124320697.png)
+
 7. **查询每个学生选课情况（包括没有选修课程的学生）。**
 
     ```sql
@@ -141,4 +172,4 @@
     	LEFT JOIN c ON e.kh = c.kh
     ```
     
-    
+    ![image-20211216124342967](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211216124342967.png)

@@ -303,7 +303,7 @@ WHERE…
 
 **数据修改**：
 
-```
+```sql
 UPDATE TABLE
 SET grade=grade*1.1
 WHERE…
@@ -367,7 +367,7 @@ SET sno=’S3’
 WHERE sno=’S4’
 ```
 
-**嵌入式SQL**：
+**嵌入式 SQL**：
 
 通过**共享变量**进行数据交互
 

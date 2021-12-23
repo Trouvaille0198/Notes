@@ -96,7 +96,7 @@ type List struct {
 }
 ```
 
-基本使用是先创建 list，然后往 list 中插入值，list 就内部创建一个 Element，并内部设置好 Element 的 next,prev 等。具体可以看下例子：
+基本使用是先创建 list，然后往 list 中插入值，list 就内部创建一个 Element，并内部设置好 Element 的 next, prev 等。具体可以看下例子：
 
 ```golang
 // This example demonstrates an integer heap built using the heap interface.
@@ -148,7 +148,7 @@ type List
     func (l *List) Remove(e *Element) interface{} // 删除某个元素
 ```
 
-## 1.3. 3.3.3 环
+## 环
 
 环的结构有点特殊，环的尾部就是头部，所以每个元素实际上就可以代表自身的这个环。 它不需要像 list 一样保持 list 和 element 两个结构，只需要保持一个结构就行。
 
@@ -203,3 +203,4 @@ type Ring
     func (r *Ring) Prev() *Ring // 当前元素的上个元素
     func (r *Ring) Unlink(n int) *Ring // 从当前元素开始，删除 n 个元素
 ```
+
