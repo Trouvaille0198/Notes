@@ -278,40 +278,83 @@ GROUP BY Cno;
 
 ### SQL 数据更新 ☆
 
-**数据插入**：
+#### 数据插入
 
 - 插入单个元组：
 
     ```sql
-    INSERT INTO TABLE 
+    INSERT INTO table_name
     VALUES(‘…’,’…’)
     ```
 
 - 插入子查询结果：
 
     ```sql
-    INSERT INTO TABLE 
+    INSERT INTO table_name 
     SELECT… FROM… WHERE…
     ```
 
-**数据删除**：
+#### 数据删除
 
 ```sql
-DELETE FROM TABLE
+DELETE FROM table_name
 WHERE…
 ```
 
-**数据修改**：
+#### 数据修改
 
 ```sql
-UPDATE TABLE
-SET grade=grade*1.1
+UPDATE table_name
+SET 列名=值表达式[, 列名=值表达式…]
 WHERE…
 ```
 
-*视图创建撤销*
+例：把课程名为”数据库原理”的成绩提高10%.
 
-**视图查询**：系统会根据数据字典的定义将视图查询转换为对基本表的查询
+```sql
+ UPDATE  SC 
+  SET GRADE=1.1*GRADE
+  WHERE CNO IN (SELECT CNO FROM C
+                WHERE CNAME='数据库原理');
+```
+
+### 视图操作
+
+**视图**：虚表，只存定义，不存数据。
+
+在 SQL 中，外模式一级数据结构的基本单位是视图（View）
+
+视图是从若干基本表和（或）其他视图构造出来的表。
+
+在创建一个视图时，系统把视图的定义存放在数据字典中，而不存储视图对应的数据，在用户使用视图时才去求对应的数据。
+
+视图被称为“虚表”
+
+#### 创建
+
+```sql
+CREATE VIEW <视图名>(列名表)
+AS  <SELECT  查询语句>
+```
+
+在基本表 SC 上，建立一个学生学习情况视图，内容包括：学号、选修课程门数、平均成绩。
+
+```sql
+CREATE VIEW  S_GRADE(SNO,C_NUM,AVG_GRADE)
+	AS (SELECT SNO,COUNT(CNO),AVG(GRADE)
+	    FROM SC
+	    GROUP BY SNO);
+```
+
+#### 撤销
+
+```sql
+DROP VIEW <视图名>
+```
+
+#### 查询
+
+系统会根据数据字典的定义将视图查询**转换为对基本表的查询**
 
 HAVING：组条件
 
@@ -347,11 +390,11 @@ HAVING COUNT(cno)>(
 );
 ```
 
-**视图**：虚表，只存定义，不存数据。
+#### 更新
 
-**视图更新**：只有**行列子集视图**可以进行更新
+只有**行列子集视图**可以进行更新
 
-行列子集视图：当视图是从单个基本表仅使用**选择**和**投影**导出，并包含了基本表的主键或某个**候选键**，则可以进行更新操作。
+**行列子集视图**：当视图是从单个基本表**仅**使用**选择**和**投影**导出，并包含了基本表的主键或某个**候选键**，则可以进行更新操作。
 
 拒绝更新的视图：
 
@@ -367,15 +410,17 @@ SET sno=’S3’
 WHERE sno=’S4’
 ```
 
-**嵌入式 SQL**：
+### 嵌入式 SQL
+
+为区分 SQL 语句与宿主语言语句，在所有的 SQL 语句前必须加上前缀标识 `EXEC  SQL`，并以 `END EXEC` 作为语句结束标志
 
 通过**共享变量**进行数据交互
 
-通过**游标**统一SQL中一次一集合的和程序中一次一记录工作方式
+通过**游标**统一 SQL 中一次一集合的和程序中一次一记录工作方式	
 
 只有查询结果是多条记录、或需要对当前记录进行操作时才需要使用游标
 
-使用嵌入式的目标：统一SQL中一次一集合的和程序中一次一记录工作方式
+使用嵌入式的目标：统一 SQL 中一次一集合的和程序中一次一记录工作方式
 
 ## 数据库发展史
 
@@ -645,16 +690,16 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 
 第三章
 
-## 3.1 关系模型
+### 关系模型
 
-**关系(数据)模型**：
+关系(数据)模型
 
 **定义**：用二维表格表示实体集，用关键码（外键）表示实体间联系的数据模型
 
 **形式定义**：关系是域的笛卡尔积的子集，元组的集合
 
 - **属性**：表格中的列
-- **域**：属性的**值的集合**
+- **域**：值的集合，即属性的取值范围
 - **元组**：表格中的行，域的笛卡尔积的元素
 - **关系**：二维表格，**域的笛卡尔积的子集**，（集合论）**元组的集合**，表示一个实体集
 
@@ -694,16 +739,20 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 
 关系模型由**数据结构、数据操作、完整性规则**组成
 
-## 3.2 关系代数☆
+### 关系代数 ☆
 
-数据操纵语言DML：查询语句、更新语句
+数据操纵语言 DML：查询语句、更新语句
 
 **关系查询语言**：**非过程性**语言
 
 - **关系代数**语言：查询操作以**集合操作**为基础
 - **关系演算**语言：查询操作以**谓词演算**（一阶逻辑）为基础，非过程性更强一些
 
-**关系代数的基本运算**：并 $ \bigcup $ 、差 — 、笛卡尔积 $ \times $、投影$ \pi $ 、选择 $ \sigma $
+#### 关系代数的基本运算
+
+要求参与运算的两个集合是同种性质
+
+并 $ \bigcup $ 、差 — 、笛卡尔积 $ \times $、投影$ \pi $ 、选择 $ \sigma $
 
 - **并**：$ R\bigcup S = \left\{ t|t \in R \vee t \in S \right \} $ 列要一样 `or`
 - **差**： $ R-S=\left \{ t|t \in R \wedge t \notin S \right \} $ 列要一样 `not exists`
@@ -711,10 +760,12 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 - **投影**：$ {\pi_{i_1,\cdots ,i_m}}\left( R \right)=\left\{ t|t=\left\langle t_{i_1},\cdots ,t_{i_m} \right\rangle \wedge \left\langle t_1,\cdots ,t_k \right\rangle \in R \right\} $ ，自动去重 `select distinct`
 - **选择**： $ \sigma_f\left( R \right)=\left\{ t|t\in R\wedge f\left( t \right)=\text{true} \right\} $ ，如 $\sigma _{\text{age=18}}\left( S \right)$ `where`
 
-**关系代数的组合运算**：交 $\bigcap$ 、联接 $\triangleright \triangleleft $ 、自然联接 $\triangleright \triangleleft $ 、除 $\div$
+#### 关系代数的组合运算
+
+交 $\bigcap$ 、联接 $\triangleright \triangleleft $ 、自然联接 $\triangleright \triangleleft $ 、除 $\div$
 
 - **交**： $R\bigcap S=R-\left( R-S \right)=S-\left( S-R \right)$ `and`
-- **联接**：$R\underset{i\ \theta \ j}{\mathop \triangleright \triangleleft }\,S={\sigma }_{i\ \theta \ \left( r+j \right)}\left( R\times S \right)$ 其中i，j为下标，i，j列都保留
+- **联接**：$R\underset{i\ \theta \ j}{\mathop \triangleright \triangleleft }\,S={\sigma }_{i\ \theta \ \left( r+j \right)}\left( R\times S \right)$ 其中 i，j 为下标，i，j 列都保留（笛卡尔积后选择）
 - **自然联接**：$R\triangleright \triangleleft S=\pi \left( \sigma \left( R\times S \right) \right)$ 先笛卡尔积，再选择，再投影掉重复的列 `inner join`
 - **除**：$R\div S=\pi \left( R \right)-\pi \left( \pi \left( R \right)\times S-R \right)$ R中满足S中所有条件的元组的剩余信息 `not exists(not exists)`
 
@@ -849,9 +900,9 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 
 ------
 
-填空题TLB：
+填空题 TLB：
 
-> SQL三个阶段：人工管理、文件系统、数据库系统
+> SQL 三个阶段：人工管理、文件系统、数据库系统
 > 数据库技术三个阶段：层次模型、网状模型、关系模型
 > 数据控制四功能：并发控制、恢复、完整性、安全性
 > 三个世界：现实世界、信息世界、机器世界

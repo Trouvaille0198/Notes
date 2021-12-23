@@ -49,7 +49,7 @@ Inline style，也叫行内式
 
 Internal style sheet，也叫嵌入式
 
-将所有CSS代码抽取出来，单独放到一个\<style\>标签中
+将所有 CSS 代码抽取出来，单独放到一个 `<style>` 标签中
 
 ```css
 <style>
@@ -65,20 +65,20 @@ div {
 
 External style sheet，也叫链接式
 
-样式单独写到CSS文件中，把文件引入到HTML页面中使用
+样式单独写到 CSS 文件中，把文件引入到 HTML 页面中使用
 
 建立步驟
 
-1. 新建一个后缀名为.css样式的文件，把CSS代码放入其中
+1. 新建一个后缀名为 .css 样式的文件，把 CSS 代码放入其中
 2. 用\<link>标签引入文件
 
 ```css
 <link rel="stylesheet" type="text/css" href="css文件路径">
 ```
 
-## Emmet语法
+## Emmet 语法
 
-### 快速生成HTML语法
+### 快速生成 HTML 语法
 
 -  生成标签：写标签名，按 tab
 - 生成多个相同标签：标签名 *num，按 tab
@@ -87,11 +87,11 @@ External style sheet，也叫链接式
 
 # 选择器
 
-ID选择器 > 类选择器 > 标签选择器
+ID 选择器 > 类选择器 > 标签选择器
 
 ## 标签选择器
 
-也叫元素选择器，selector为标签名
+也叫元素选择器，selector 为标签名
 
 ```css
 div {
@@ -103,7 +103,7 @@ div {
 
 ## 类选择器
 
-以一个点"."号显示
+以一个点 "." 号显示
 
 任何标签都可以添加一个或多个 class 属性（类名间用空格分开），并且 class 属性是可以相同的
 
@@ -116,6 +116,26 @@ div {
   color: green;
 }
 ```
+
+- **可以单独设置拥有 class 名的特定标签的样式**
+
+```css
+h1.black {
+   color: #000000;
+}
+```
+
+上述规则仅将 **class** 属性设置为 black 的 `<h1>` 元素呈现为黑色
+
+- **可以单独设置位于拥有 class 名的标签内部的标签的样式**
+
+```css
+.black h1 {
+   color: #000000;
+}
+```
+
+在此示例中，当所有 `<h1>` 位于 id 属性设置为 black 的标签中时，这些标题将以黑色显示
 
 ## id 选择器
 
@@ -133,29 +153,9 @@ div {
 }
 ```
 
-- 可以单独设置拥有class名的特定标签的样式
-
-```css
-h1.black {
-   color: #000000;
-}
-```
-
-上述规则仅将**class**属性设置为black的\<h1>元素呈现为黑色
-
-- 可以单独设置位于拥有class名的标签内部的标签的样式
-
-```css
-.black h1 {
-   color: #000000;
-}
-```
-
-在此示例中，当所有\<h1>位于 id 属性设置为 black 的标签中时，这些标题将以黑色显示
-
 ## 通配符选择器
 
-使用“*”定义，表示选取页面中所有的元素（标签）
+使用 “*” 定义，表示选取页面中所有的元素（标签）
 
 不需要调用，作用于全局
 
@@ -191,7 +191,7 @@ h1, h2, h3 {
 
 假设仅当样式规则位于特定元素内时，才希望将其应用于特定元素
 
-如以下示例所示，样式规则仅在\<em>元素位于\<ul>标签内时才适用
+如以下示例所示，样式规则仅在 `<em>` 元素位于 `<ul>` 标签内时才适用
 
 ```css
 ul em {
@@ -207,11 +207,11 @@ body > p {
 }
 ```
 
-\<body>元素的直接\<p>子元素将呈现为黑色
+`<body>` 元素的直接 `<p>` 子元素将呈现为黑色
 
 ## 属性选择器
 
-将样式应用于具有特定属性的HTML元素
+将样式应用于具有特定属性的 HTML 元素
 
 ```css
 input[type="text"] {
@@ -219,7 +219,7 @@ input[type="text"] {
 }
 ```
 
-上述样式规则将匹配所有具有type属性值为 text 的输入元素
+上述样式规则将匹配所有具有 type 属性值为 text 的输入元素
 
 以下规则适用于属性选择器
 
@@ -240,12 +240,12 @@ input[type="text"] {
 | *element* *element*                                                                                | div p                 | 选择 \<div> 元素内部的所有 \<p> 元素。                      | 1   |
 | *element* > *element*                                                                              | div>p                 | 选择父元素为 \<div> 元素的所有 \<p> 元素。                  | 2   |
 | *element* + *element*                                                                              | div+p                 | 选择紧接在 \<div> 元素之后的所有 \<p> 元素。                | 2   |
-| [[*attribute*\]](https://www.w3school.com.cn/cssref/selector_attribute.asp)                        | [target]              | 选择带有 target 属性所有元素。                              | 2   |
-| [[*attribute*=*value*\]](https://www.w3school.com.cn/cssref/selector_attribute_value.asp)          | [target=_blank]       | 选择 target="_blank" 的所有元素。                           | 2   |
-| [[*attribute*~=*value*\]](https://www.w3school.com.cn/cssref/selector_attribute_value_contain.asp) | [title~=flower]       | 选择 title 属性包含单词 "flower" 的所有元素。               | 2   |
-| [[*attribute*\|=*value*\]](https://www.w3school.com.cn/cssref/selector_attribute_value_start.asp)  | [lang\|=en]           | 选择 lang 属性值以 "en" 开头并用“-”分隔的字符串的所有元素。 | 2   |
-| [:link](https://www.w3school.com.cn/cssref/selector_link.asp)                                      | a:link                | 选择所有未被访问的链接。                                    | 1   |
-| [:visited](https://www.w3school.com.cn/cssref/selector_visited.asp)                                | a:visited             | 选择所有已被访问的链接。                                    | 1   |
+| [*attribute*]                       | [target]              | 选择带有 target 属性所有元素。                              | 2   |
+| [*attribute*=*value*\]          | [target=_blank]       | 选择 target="_blank" 的所有元素。                           | 2   |
+| [*attribute*~=*value*\] | [title~=flower]       | 选择 title 属性包含单词 "flower" 的所有元素。               | 2   |
+| [*attribute*\|=*value*\]  | [lang\|=en]           | 选择 lang 属性值以 "en" 开头并用“-”分隔的字符串的所有元素。 | 2   |
+| :link                                      | a:link                | 选择所有未被访问的链接。                                    | 1   |
+| :visited                                | a:visited             | 选择所有已被访问的链接。                                    | 1   |
 | [:active](https://www.w3school.com.cn/cssref/selector_active.asp)                                  | a:active              | 选择活动链接。                                              | 1   |
 | [:hover](https://www.w3school.com.cn/cssref/selector_hover.asp)                                    | a:hover               | 选择鼠标指针位于其上的链接。                                | 1   |
 | [:focus](https://www.w3school.com.cn/cssref/selector_focus.asp)                                    | input:focus           | 选择获得焦点的 input 元素。                                 | 2   |
@@ -257,7 +257,7 @@ input[type="text"] {
 | [:lang(*language*)](https://www.w3school.com.cn/cssref/selector_lang.asp)                          | p:lang(it)            | 选择带有以 "it" 开头的 lang 属性值的每个 \<p> 元素。        | 2   |
 | [*element1*~*element2*](https://www.w3school.com.cn/cssref/selector_gen_sibling.asp)               | p~ul                  | 选择前面有 \<p> 元素的每个 \<ul> 元素。                     | 3   |
 | [[*attribute*^=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_begin.asp)              | a[src^="https"]       | 选择其 src 属性值以 "https" 开头的每个 \<a> 元素。          | 3   |
-| [[*attribute*$=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_end.asp)                | a[src$=".pdf"]        | 选择其 src 属性以 ".pdf" 结尾的所有 \<a> 元素。             | 3   |
+| [[*attribute*$=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_end.asp)                | a[src$=".pdf"]        | 选择其 src 属性以 ".pdf" 结尾的所有 \<a> 元素。             | 3   ||
 | [[*attribute**=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_contain.asp)            | a[src*="abc"]         | 选择其 src 属性中包含 "abc" 子串的每个 \<a> 元素。          | 3   |
 | [:first-of-type](https://www.w3school.com.cn/cssref/selector_first-of-type.asp)                    | p:first-of-type       | 匹配同类型(\<p>)中的**第一个**同级兄弟(含自己) \<p> 元素    | 3   |
 | [:last-of-type](https://www.w3school.com.cn/cssref/selector_last-of-type.asp)                      | p:last-of-type        | 匹配同类型(\<p>)中的**最后一个**同级兄弟(含自己) \<p> 元素  | 3   |
@@ -1165,3 +1165,4 @@ th
 ```
 
 ![image-20210913153944537](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210913153944537.png)
+

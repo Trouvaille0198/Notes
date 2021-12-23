@@ -35,7 +35,7 @@ math 包实现的就是数学函数计算。
 - func Atanh(x float64) float64
 ```
 
-## 5.1.2 幂次函数
+## 幂次函数
 
 ```go
 - func Cbrt(x float64) float64 // 立方根函数
@@ -72,7 +72,7 @@ math 包实现的就是数学函数计算。
 - func Float64frombits(b uint64) float64 // uint64 和 float64 的转换
 ```
 
-## 5.1.5 其他函数
+## 其他函数
 
 ```go
 - func Abs(x float64) float64 // 绝对值函数

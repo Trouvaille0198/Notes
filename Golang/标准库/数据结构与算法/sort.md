@@ -207,7 +207,7 @@ func GuessingGame() {
 
 ## 已支持的内部数据类型排序
 
-前面已经提到，*sort *包原生支持 []int、[]float64 和 []string 三种内建数据类型切片的排序操作，即不必我们自己实现相关的 Len()、Less() 和 Swap() 方法。
+前面已经提到，sort 包原生支持 []int、[]float64 和 []string 三种内建数据类型切片的排序操作，即不必我们自己实现相关的 Len()、Less() 和 Swap() 方法。
 
 ### IntSlice 类型及 []int 排序
 
@@ -311,7 +311,7 @@ func SearchStrings(a []string, x string) int
 
 ## []interface 排序与查找
 
-通过前面的内容我们可以知道，只要实现了 `sort.Interface` 接口，即可通过 sort 包内的函数完成排序，查找等操作。并且 sort 包已经帮我们把`[]int`,`[]float64`,`[]string` 三种类型都实现了该接口，我们可以方便的调用。但是这种用法对于其它数据类型的 slice 不友好，可能我们需要为大量的 struct 定义一个单独的 []struct 类型，再为其实现 `sort.Interface` 接口，类似这样：
+通过前面的内容我们可以知道，只要实现了 `sort.Interface` 接口，即可通过 sort 包内的函数完成排序，查找等操作。并且 sort 包已经帮我们把`[]int`, `[]float64`, `[]string` 三种类型都实现了该接口，我们可以方便的调用。但是这种用法对于其它数据类型的 slice 不友好，可能我们需要为大量的 struct 定义一个单独的 []struct 类型，再为其实现 `sort.Interface` 接口，类似这样：
 
 ```go
 type Person struct {
@@ -346,7 +346,7 @@ func Search(n int, f func(int) bool) int
 
 通过函数签名可以看到，排序相关的三个函数都接收 `[]interface`，并且需要传入一个比较函数，用于为程序比较两个变量的大小，因为函数签名和作用域的原因，这个函数只能是 `匿名函数`。
 
-### sort.Slice()
+### sort.Slice
 
 该函数完成 []interface 的**排序**，举个栗子：
 
