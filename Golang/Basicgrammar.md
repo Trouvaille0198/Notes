@@ -328,25 +328,25 @@ go list -m -u all
 
 下载依赖文件
 
-```
+```sh
 go mod download
 ```
 
 #### 更新依赖
 
-```
+```sh
 go get -u
 ```
 
 更新指定包依赖:
 
-```
+```sh
 go get -u github.com/go-ego/gse
 ```
 
 指定版本:
 
-```
+```sh
 go get -u github/com/go-ego/gse@v0.60.0-rc4.2
 ```
 
@@ -354,7 +354,7 @@ go get -u github/com/go-ego/gse@v0.60.0-rc4.2
 
 modules 可以通过在 go.mod 文件中使用 replace 指令替换成github上对应的库，比如：
 
-```
+```go
 replace (
     golang.org/x/crypto v0.0.0-20190313024323-a1f597ede03a => github.com/golang/crypto v0.0.0-20190313024323-a1f597ede03a
 )
@@ -1696,10 +1696,9 @@ func main() {
 }
 ```
 
-method 可以定义在任何你自定义的类型、内置类型、struct等各种类型上面。
+method 可以定义在任何你自定义的类型、内置类型、struct 等各种类型上面。
 
 ```go
-
 package main
 
 import "fmt"
@@ -1776,6 +1775,8 @@ func main() {
 ```
 
 #### 值类型调用与指针类型调用
+
+https://learnku.com/docs/effective-go/2020/method/6245
 
 > 如果一个 method 的 receiver 是 *T，你可以在一个 T 类型的实例变量 V 上面调用这个 method，而不需要 &V 去调用这个 method
 >
@@ -1923,7 +1924,7 @@ func main() {
 
 ### 接口 interfaces
 
-一般而言，**接口定义了一组方法的集合**，我们通过interface来定义对象的一组行为。
+一般而言，**接口定义了一组方法的集合**，我们通过 interface 来定义对象的一组行为。
 
 - 如果某个对象实现了某个接口的所有方法，则此对象就实现了此接口
 
@@ -2022,8 +2023,7 @@ func main() {
     a = i
     a = s
 
-    
-    
+   
 	m := make(map[string]interface{})
 	m["name"] = "Tom"
 	m["age"] = 18
@@ -2409,54 +2409,142 @@ Go语言并没有对删除切片元素提供专用的语法或者接口，需要
 
 删除开头的元素可以直接移动数据指针：
 
-```
-a = []int{1, 2, 3}a = a[1:] // 删除开头1个元素a = a[N:] // 删除开头N个元素
+```go
+a = []int{1, 2, 3}a = a[1:] // 删除开头1个元素
+a = a[N:] // 删除开头N个元素
 ```
 
 也可以不移动数据指针，但是将后面的数据向开头移动，可以用 append 原地完成（所谓原地完成是指在原有的切片数据对应的内存区间内完成，不会导致内存空间结构的变化）：
 
-```
-a = []int{1, 2, 3}a = append(a[:0], a[1:]...) // 删除开头1个元素a = append(a[:0], a[N:]...) // 删除开头N个元素
+```go
+a = []int{1, 2, 3}a = append(a[:0], a[1:]...) // 删除开头1个元素
+a = append(a[:0], a[N:]...) // 删除开头N个元素
 ```
 
 还可以用 copy() 函数来删除开头的元素：
 
-```
-a = []int{1, 2, 3}a = a[:copy(a, a[1:])] // 删除开头1个元素a = a[:copy(a, a[N:])] // 删除开头N个元素
+```go
+a = []int{1, 2, 3}a = a[:copy(a, a[1:])] // 删除开头1个元素
+a = a[:copy(a, a[N:])] // 删除开头N个元素
 ```
 
 #### 从中间位置删除
 
 对于删除中间的元素，需要对剩余的元素进行一次整体挪动，同样可以用 append 或 copy 原地完成：
 
-```
-a = []int{1, 2, 3, ...}a = append(a[:i], a[i+1:]...) // 删除中间1个元素a = append(a[:i], a[i+N:]...) // 删除中间N个元素a = a[:i+copy(a[i:], a[i+1:])] // 删除中间1个元素a = a[:i+copy(a[i:], a[i+N:])] // 删除中间N个元素
+```go
+a = []int{1, 2, 3, ...}a = append(a[:i], a[i+1:]...) // 删除中间1个元素
+a = append(a[:i], a[i+N:]...) // 删除中间N个元素
+a = a[:i+copy(a[i:], a[i+1:])] // 删除中间1个元素
+a = a[:i+copy(a[i:], a[i+N:])] // 删除中间N个元素
 ```
 
 #### 从尾部删除
 
-```
-a = []int{1, 2, 3}a = a[:len(a)-1] // 删除尾部1个元素a = a[:len(a)-N] // 删除尾部N个元素
+```go
+a = []int{1, 2, 3}a = a[:len(a)-1] // 删除尾部1个元素
+a = a[:len(a)-N] // 删除尾部N个元素
 ```
 
 
 删除开头的元素和删除尾部的元素都可以认为是删除中间元素操作的特殊情况，下面来看一个示例。
 
-【示例】删除切片指定位置的元素。
+示例：删除切片指定位置的元素。
 
+```go
+package main
+import "fmt"
+func main() {
+    seq := []string{"a", "b", "c", "d", "e"}    // 指定删除位置    
+    index := 2    // 查看删除位置之前的元素和之后的元素    
+    fmt.Println(seq[:index], seq[index+1:])    // 将删除点前后的元素连接起来    
+    seq = append(seq[:index], seq[index+1:]...)    
+    fmt.Println(seq)
+}
 ```
-package mainimport "fmt"func main() {    seq := []string{"a", "b", "c", "d", "e"}    // 指定删除位置    index := 2    // 查看删除位置之前的元素和之后的元素    fmt.Println(seq[:index], seq[index+1:])    // 将删除点前后的元素连接起来    seq = append(seq[:index], seq[index+1:]...)    fmt.Println(seq)}
+
+### 类型选择
+
+switch 也可用于判断接口变量的动态类型。如 类型选择 通过圆括号中的关键字 type 使用类型断言语法。若 switch 在表达式中声明了一个变量，那么该变量的每个子句中都将有该变量对应的类型。在每一个 case 子句中，重复利用该变量名字也是惯常的做法，实际上这是在每一个 case 子句中，分别声明一个拥有相同名字，但类型不同的新变量。
+
+```go
+var t interface{}
+t = functionOfSomeType()
+switch t := t.(type) {
+default:
+    fmt.Printf("unexpected type %T\n", t)     // %T 打印任何类型的 t
+case bool:
+    fmt.Printf("boolean %t\n", t)             // t 是 bool 类型
+case int:
+    fmt.Printf("integer %d\n", t)             // t 是 int 类型
+case *bool:
+    fmt.Printf("pointer to boolean %t\n", *t) // t 是 *bool 类型
+case *int:
+    fmt.Printf("pointer to integer %d\n", *t) // t 是 *int 类型
+}
 ```
 
-代码输出结果：
+### 判断 map 中是否存在某建
 
-[a b] [d e]
-[a b d e]
+```go
+if seconds, ok := timeZone[tz]; ok {
+        return t
+}
+```
 
-代码说明如下：
+### init 函数
 
-- 第 1 行，声明一个整型切片，保存含有从 a 到 e 的字符串。
-- 第 4 行，为了演示和讲解方便，使用 index 变量保存需要删除的元素位置。
-- 第 7 行，seq[:index] 表示的就是被删除元素的前半部分，值为 [1 2]，seq[index+1:] 表示的是被删除元素的后半部分，值为 [4 5]。
-- 第 10 行，使用 append() 函数将两个切片连接起来。
-- 第 12 行，输出连接好的新切片，此时，索引为 2 的元素已经被删除。
+每个源文件都可以通过定义自己的无参数 init 函数来设置一些必要的状态。 （其实每个文件都可以拥有多个 init 函数。）而它的结束就意味着初始化结束： 只有该包中的所有变量声明都通过它们的初始化器求值后 init 才会被调用， 而包中的变量只有在所有已导入的包都被初始化后才会被求值。
+
+除了那些不能被表示成声明的初始化外，init 函数还常被用在程序真正开始执行前，检验或校正程序的状态。
+
+```go
+func init() {
+    if user == "" {
+        log.Fatal("$USER not set")
+    }
+    if home == "" {
+        home = "/home/" + user
+    }
+    if gopath == "" {
+        gopath = home + "/go"
+    }
+    // gopath 可通过命令行中的 --gopath 标记覆盖掉。
+    flag.StringVar(&gopath, "gopath", gopath, "override default GOPATH")
+}
+```
+
+### runtime.Caller()
+
+报告当前 go 程调用栈所执行的函数的文件和行号信息
+
+获取（调用处）上 n 个函数的信息，像一个栈
+
+```go
+func Caller(skip int) (pc uintptr, file string, line int, ok bool)
+```
+
+参数
+
+- skip：要提升的堆栈帧数，0 当前函数，1 上一层函数
+
+  返回值
+
+- pc：函数指针
+- file：函数所在文件名目录
+- line：所在行号
+- ok：是否可以获取到信息
+
+### 使用空白标识符进行接口检查
+
+```go
+var _ json.Marshaler = (*RawMessage)(nil)
+```
+
+在此声明中，我们调用了一个 *RawMessage 转换并将其赋予了 Marshaler，以此来要求 *RawMessage 实现 Marshaler，这时其属性就会在编译时被检测。 
+
+若 json.Marshaler 接口被更改，此包将无法通过编译， 而我们则会注意到它需要更新。
+
+在这种结构中出现空白标识符，即表示该声明的存在只是为了类型检查。 
+
+不过请不要为满足接口就将它用于任何类型。作为约定， 只有当代码中不存在静态类型转换时才能使用这种声明，毕竟这是种非常罕见的情况。

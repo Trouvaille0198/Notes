@@ -676,8 +676,6 @@ async def create_index_weights(weights: Dict[int, float]):
     return weights
 ```
 
-Tip
-
 > 请记住 **JSON 仅支持将 `str` 作为键**。
 >
 > 但是 Pydantic 具有自动转换数据的功能。

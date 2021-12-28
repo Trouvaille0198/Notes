@@ -129,7 +129,7 @@ func OpenFile(name string, flag int, perm FileMode) (*File, error)
 
 位掩码参数 `flag` 用于指定文件的访问模式，可用的值在 `os` 中定义为常量（以下值并非所有操作系统都可用）：
 
-```
+```go
 const (
     O_RDONLY int = syscall.O_RDONLY // 只读模式打开文件
     O_WRONLY int = syscall.O_WRONLY // 只写模式打开文件

@@ -1,6 +1,6 @@
 # 实验三
 
-1. **用频率分析破解单表代换密码。**
+**用频率分析破解单表代换密码。**
 
 对密文进行单字频率分析
 
@@ -181,3 +181,22 @@ director and apart from argo movies that land best picture without also
 earning best director nominations are few and far between
 ```
 
+**用 AES 加密算法（128 位密钥，CBC 模式）加密一个文件并进行解密**
+
+加密
+
+```sh
+$ openssl enc -ciphertype -e -in plain.txt -out cipher.bin \
+-K 00112233445566778889aabbccddeeff \
+-iv 0102030405060708
+```
+
+解密
+
+```sh
+$ openssl enc -ciphertype -d -in cipher.txt -out plain.bin \
+-K 00112233445566778889aabbccddeeff \
+-iv 0102030405060708
+```
+
+**用 AES 加密算法（128 位密钥），分别采用 ECB 和 CBC 模式加密一个 bmp 图片，查看加密后的图片**

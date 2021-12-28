@@ -1,3 +1,5 @@
+# 实验二
+
 ```python
 import random
 from functools import reduce
