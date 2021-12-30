@@ -12,7 +12,7 @@
 
 三字频率分析
 
-<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/E6GpVPc1CDw4Xjq.png" alt="image-20211222133741641" style="zoom:50%;" />
+<img src="C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20211229142031947.png" alt="image-20211229142031947" style="zoom:50%;" />
 
 由此可以进行猜测
 
@@ -186,17 +186,53 @@ earning best director nominations are few and far between
 加密
 
 ```sh
-$ openssl enc -ciphertype -e -in plain.txt -out cipher.bin \
--K 00112233445566778889aabbccddeeff \
--iv 0102030405060708
+$ openssl enc -aes-128-cbc -e -in plain.txt -out cipher.txt 
 ```
 
 解密
 
 ```sh
-$ openssl enc -ciphertype -d -in cipher.txt -out plain.bin \
--K 00112233445566778889aabbccddeeff \
--iv 0102030405060708
+$ openssl enc -aes-128-cbc -d -in cipher.txt -out plain.txt
 ```
 
 **用 AES 加密算法（128 位密钥），分别采用 ECB 和 CBC 模式加密一个 bmp 图片，查看加密后的图片**
+
+ECB 加密
+
+```sh
+$ openssl enc -aes-128-ecb -e -in pic_original.bmp -out pic_ecb.bmp
+```
+
+CBC 加密
+
+```sh
+$ openssl enc -aes-128-cbc -e -in pic_original.bmp -out pic_cbc.bmp 
+```
+
+```sh
+$ head -c 54 pic_original.bmp > header
+$ tail -c +55 pic_ecb.bmp > body
+$ cat header body > pic_ecb.bmp
+
+$ tail -c +55 pic_cbc.bmp > body
+$ cat header body > pic_cbc.bmp
+```
+
+**Padding**
+
+创建文件
+
+```sh
+echo -n "12345" > f1.txt
+echo -n "1234567890" > f2.txt
+echo -n "123456789012345" > f3.txt
+```
+
+加密
+
+```sh
+openssl enc -aes-128-ofb -e -in f2.txt -out f2_cipher.txt
+
+openssl enc -aes-128-ofb -d -nopad -in f2_cipher.txt -out f2.txt
+```
+
