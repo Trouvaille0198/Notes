@@ -1,5 +1,7 @@
 # 实验三
 
+https://blog.csdn.net/l4kjih3gfe2dcba1/article/details/119145719
+
 **用频率分析破解单表代换密码。**
 
 对密文进行单字频率分析
@@ -231,8 +233,17 @@ echo -n "123456789012345" > f3.txt
 加密
 
 ```sh
-openssl enc -aes-128-ofb -e -in f2.txt -out f2_cipher.txt
+openssl enc -aes-128-ofb -e -in f1.txt -out f1_cipher.txt -iv 1111 -k qwer
 
 openssl enc -aes-128-ofb -d -nopad -in f2_cipher.txt -out f2.txt
 ```
 
+b8dca467e2e955250fa9127ce90a6148
+
+00e9f9c5e2e955250fa9127ce90a6148
+
+```
+e1502eaf0d0d0d0d0d0d0d0d0d0d0d0d
+```
+
+![image-20211229200142420](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211229200142420.png)

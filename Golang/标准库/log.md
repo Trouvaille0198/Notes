@@ -8,7 +8,7 @@ log 包定义了 Logger 类型，该类型提供了一些格式化输出的方�
 
 本包也提供了一个预定义的 “标准” logger，可以通过调用函数 Print 系列 (Print|Printf|Println）、Fatal 系列（Fatal|Fatalf|Fatalln）、和 Panic 系列（Panic|Panicf|Panicln）来使用，比自行创建一个 logger 对象更容易使用。
 
-例如，我们可以像下面的代码一样直接通过log包来调用上面提到的方法，默认它们会将日志信息打印到终端界面：
+例如，我们可以像下面的代码一样直接通过 log 包来调用上面提到的方法，默认它们会将日志信息打印到终端界面：
 
 ```go
 package main

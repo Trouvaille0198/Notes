@@ -1724,12 +1724,12 @@ from sklearn.linear_model import LinearRegression, SGDRegressor
 其实是随机梯度下降
 
 - ***SGDRegressor(loss="squared_loss", fit_intercept=True, learning_rate ='invscaling', eta0=0.01)***
-  - SGDRegressor类实现了随机梯度下降学习，它支持不同的**loss函数和正则化惩罚项**来拟合线性回归模型。
+  - SGDRegressor类实现了随机梯度下降学习，它支持不同的 **loss 函数和正则化惩罚项**来拟合线性回归模型。
   - *loss*：损失类型
     - **loss=”squared_loss”: 普通最小二乘法**
   - *fit_intercept*：是否计算偏置
   - *learning_rate*：string, optional
-    - 学习率填充，对于一个常数值的学习率来说，可以使用learning_rate=’constant’ ，并使用eta0来指定学习率。
+    - 学习率填充，对于一个常数值的学习率来说，可以使用 learning_rate=’constant’ ，并使用 eta0 来指定学习率。
     - 'constant'：eta = eta0
     - 'optimal'：eta = 1.0 / (alpha \* (t + t0)) [default]
     - 'invscaling'：eta = eta0 / pow(t, power_t=0.25)
