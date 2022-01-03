@@ -331,6 +331,8 @@ fmt.Printf("%05s\n", s)
 
 Go 语言 fmt 包下有 fmt.Scan、fmt.Scanf、fmt.Scanln 三个函数，可以在程序运行过程中从标准输入获取用户的输入。
 
+Scanln 和 Scanf 都会吸收掉上次输入的回车符，所以使用时在前面加一个 `fmt.Scanln()`
+
 ### scan
 
 fmt.Scan 从标准输入中扫描用户输入的数据，将以空白符分隔的数据分别存入指定的参数。

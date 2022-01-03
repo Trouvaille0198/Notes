@@ -1311,7 +1311,7 @@ $$
 
 决策树分类器
 
-- criterion：默认是’gini’系数，也可以选择信息增益的熵’entropy’
+- criterion：默认是 ’gini’ 系数，也可以选择信息增益的熵 ’entropy’
 - max_depth：树的深度大小
 - random_state：随机数种子
 
@@ -1323,7 +1323,7 @@ from sklearn.tree import export_graphviz
 
 ***export_graphviz()*** 
 
-该函数能够导出DOT格式
+该函数能够导出 DOT 格式
 
 - tree.export_graphviz(estimator, out_file=path, feature_names)
 
