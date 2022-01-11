@@ -236,7 +236,7 @@ void RoundRobin(int n)
         // 到轮转时间
         {
             cout << time << ": Process " << p.pid << " back to tail" << endl;
-            p.status = W;
+                p.status = W;
             proList.pop_front();
             proList.push_back(p);
         }

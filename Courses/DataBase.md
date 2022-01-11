@@ -765,26 +765,55 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 交 $\bigcap$ 、联接 $\triangleright \triangleleft $ 、自然联接 $\triangleright \triangleleft $ 、除 $\div$
 
 - **交**： $R\bigcap S=R-\left( R-S \right)=S-\left( S-R \right)$ `and`
+
 - **联接**：$R\underset{i\ \theta \ j}{\mathop \triangleright \triangleleft }\,S={\sigma }_{i\ \theta \ \left( r+j \right)}\left( R\times S \right)$ 其中 i，j 为下标，i，j 列都保留（笛卡尔积后选择）
+
 - **自然联接**：$R\triangleright \triangleleft S=\pi \left( \sigma \left( R\times S \right) \right)$ 先笛卡尔积，再选择，再投影掉重复的列 `inner join`
-- **除**：$R\div S=\pi \left( R \right)-\pi \left( \pi \left( R \right)\times S-R \right)$ R中满足S中所有条件的元组的剩余信息 `not exists(not exists)`
+
+- **除**：$R\div S=\pi_{1,2,...,r-s} \left( R \right)-\pi_{1,2,...,r-s} \left( \pi_{1,2,...,r-s} \left( R \right)\times S-R \right)$ R 中满足 S 中所有条件的元组的剩余信息 `not exists(not exists)` 
+
+    <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104183233065.png" alt="image-20220104183233065" style="zoom: 33%;" />
+
+    <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104183607634.png" alt="image-20220104183607634" style="zoom:25%;" />
 
 **扩充的关系代数操作**：
 
-- **外联接**：（左、右、全）（级联左右带双横线=）哪边有=哪边有表对面有空
-- **外部并**：把两表并起来，并填上null（普通并要求属性一致）
-- *半联接*：⋉自然联接的投影左表属性 S⋉SC为选了课的学生
+- **外联接**：（左、右、全）（级联左右带双横线 =）哪边有 = 哪边有表对面有空
 
-## 3.3 关系演算
+    <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104190218847.png" alt="image-20220104190218847" style="zoom:33%;" />
 
-**关系代数和关系演算的区别**：
+- **外部并**：把两表并起来，并填上 null（普通并要求属性一致）
 
-**关系代数**以**集合操作**为基础，**关系演算**以**谓词演算**为基础（谓词即离散数学中的一阶逻辑）
+    <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104190327881.png" alt="image-20220104190327881" style="zoom:33%;" />
+
+- ***半联接***：⋉ 自然联接的投影左表属性 S⋉SC 为选了课的学生
+
+    <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104190446215.png" alt="image-20220104190446215" style="zoom:33%;" />
+
+### 例子
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104183859742.png" alt="image-20220104183859742" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104184436764.png" alt="image-20220104184436764" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104184424823.png" alt="image-20220104184424823" style="zoom:33%;" />
+
+## 关系演算
+
+**关系代数和关系演算的区别**：关系代数以**集合操作**为基础，关系演算以**谓词演算**为基础（谓词即离散数学中的一阶逻辑）
 
 **关系演算分类**：
 
 - **元组**关系演算：$\left\{ t|P\left( t \right) \right\}$ ，$t$ 代表一个元组（一行）
 - **域**关系演算： $\left\{ t_1\cdots t_k|P\left( t_1\cdots t_k \right) \right\}$ ，$t_1\cdots t_k$ 代表一个元组
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104190757883.png" alt="image-20220104190757883" style="zoom:40%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104190912939.png" alt="image-20220104190912939" style="zoom:40%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104190938069.png" alt="image-20220104190938069" style="zoom:40%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104191334025.png" alt="image-20220104191334025" style="zoom:33%;" />
 
 **关系运算的安全性**：
 
@@ -793,6 +822,12 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 **关系运算的等价性**：
 
 **关系代数** = **安全的元组关系演算** = **安全的域关系演算**
+
+### 例子
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104191627976.png" alt="image-20220104191627976" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104191736773.png" alt="image-20220104191736773" style="zoom:33%;" />
 
 ## 3.4 查询优化
 

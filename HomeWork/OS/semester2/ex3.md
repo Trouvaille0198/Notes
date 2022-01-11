@@ -1,8 +1,6 @@
-# 实验三
+# 实验三 请求页式存储管理
 
 ## 实验目的与要求
-
-**请求页式存储管理**
 
 ### 目的
 
@@ -24,6 +22,8 @@
 ## 实验内容及其设计与实现
 
 ### 指令地址流生成
+
+#### 模拟生成
 
 按以下规则模拟真实情况的指令地址流：
 
@@ -92,6 +92,75 @@ func (a *AddressStream) GetAddressPages(pageSize int) []int {
 ```
 
 顺序生成的指令地址流，大都处于同一页中，符合现实情况
+
+#### 使用真实地址流
+
+为了体现局部性原理，我们编写了 python 脚本，获取计算机中真实运行的进程地址
+
+```python
+# made by 王启隆
+import os
+import re
+import time
+import string
+import psutil
+
+# 统计某一个进程名所占用的内存，同一个进程名，可能有多个进程
+def countProcessMemoey(processName):
+    pattern = re.compile(r'([^\s]+)\s+(\d+)\s.*\s([^\s]+\sK)')
+    cmd = 'tasklist /fi "imagename eq ' + processName + \
+        '"' + ' | findstr.exe ' + '"' + processName + '"'
+    # findstr后面的程序名加上引号防止出现程序带有空格
+    result = os.popen(cmd).read()
+    resultList = result.split("\n")
+    pids = []
+    for srcLine in resultList:
+        srcLine = "".join(srcLine.split('\n'))
+        if len(srcLine) == 0:
+            break
+        m = pattern.search(srcLine)
+        if m == None:
+            continue
+        # 由于是查看python进程所占内存，因此通过pid将本程序过滤掉
+        if str(os.getpid()) == m.group(2):
+            continue
+        ori_mem = m.group(3).replace(',', '')
+        ori_mem = ori_mem.replace(' K', '')
+        ori_mem = ori_mem.replace(r'\sK', '')
+        memEach = int(ori_mem)
+        pids.append(m.group(2))
+    return pids
+
+
+if __name__ == '__main__':
+    lis = []
+    pids = psutil.pids()
+    for pid in pids:
+        p = psutil.Process(pid)
+        lis.append(str(p.name()))
+    results = []
+    for i in lis[:50]:
+        ProcessName = i  # 进程名
+        results.extend(countProcessMemoey(ProcessName))
+    with open("./addrs.txt", "w") as f_b:
+        f_b.write(",".join(results))
+```
+
+脚本最终将进程地址流保存到文件里，以便在 Go 中读取
+
+```go
+// 采用真实地址流
+f, err := ioutil.ReadFile("./as.txt")
+if err != nil {
+   return &AddressStream{}, err
+}
+for i, addr := range strings.Split(string(f), ",")[:addressNum] {
+   addresses[i], err = strconv.Atoi(addr)
+   if err != nil {
+      panic("error when reading address file")
+   }
+}
+```
 
 ### 页面置换算法
 

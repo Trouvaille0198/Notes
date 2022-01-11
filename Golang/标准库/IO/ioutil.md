@@ -9,18 +9,18 @@
 比如，在标准库 net/http 包中的 NewRequest，接收一个 io.Reader 的 body，而实际上，Request 的 Body 的类型是 io.ReadCloser，因此，代码内部进行了判断，如果传递的 io.Reader 也实现了 io.ReadCloser 接口，则转换，否则通过ioutil.NopCloser 包装转换一下。相关代码如下：
 
 ```go
-    rc, ok := body.(io.ReadCloser)
-    if !ok && body != nil {
-        rc = ioutil.NopCloser(body)
-    }
+rc, ok := body.(io.ReadCloser)
+if !ok && body != nil {
+    rc = ioutil.NopCloser(body)
+}
 ```
 
 ## ReadAll 函数
 
-很多时候，我们需要一次性读取 io.Reader 中的数据，通过上一节的讲解，我们知道有很多种实现方式。考虑到读取所有数据的需求比较多，Go 提供了 ReadAll 这个函数，用来从io.Reader 中一次读取所有数据。
+很多时候，我们需要一次性读取 io.Reader 中的数据。考虑到读取所有数据的需求比较多，Go 提供了 ReadAll 这个函数，用来从io.Reader 中一次读取所有数据。
 
 ```go
-    func ReadAll(r io.Reader) ([]byte, error)
+func ReadAll(r io.Reader) ([]byte, error)
 ```
 
 阅读该函数的源码发现，它是通过 bytes.Buffer 中的 [ReadFrom](http://docscn.studygolang.com/src/bytes/buffer.go?s=5385:5444#L144) 来实现读取所有数据的。该函数成功调用后会返回 err == nil 而不是 err == EOF。(成功读取完毕应该为 err == io.EOF，这里返回 nil 由于该函数成功期望 err == io.EOF，符合无错误不处理的理念)
@@ -64,7 +64,7 @@ func listAll(path string, curHier int){
 
 ## ReadFile 函数
 
-ReadFile 读取整个文件的内容，在上一节我们自己实现了一个函数读取文件整个内容，由于这种需求很常见，因此 Go 提供了 ReadFile 函数，方便使用。
+ReadFile 读取整个文件的内容，由于这种需求很常见，因此 Go 提供了 ReadFile 函数，方便使用。
 
 ReadFile 的实现和 ReadAll 类似，不过，ReadFile 会先判断文件的大小，给 bytes.Buffer 一个**预定义容量**，避免额外分配内存。
 
