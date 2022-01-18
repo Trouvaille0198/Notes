@@ -802,10 +802,9 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 
 **关系代数和关系演算的区别**：关系代数以**集合操作**为基础，关系演算以**谓词演算**为基础（谓词即离散数学中的一阶逻辑）
 
-**关系演算分类**：
+### **元组**关系演算
 
-- **元组**关系演算：$\left\{ t|P\left( t \right) \right\}$ ，$t$ 代表一个元组（一行）
-- **域**关系演算： $\left\{ t_1\cdots t_k|P\left( t_1\cdots t_k \right) \right\}$ ，$t_1\cdots t_k$ 代表一个元组
+$\left\{ t|P\left( t \right) \right\}$ ，$t$ 代表一个元组（一行）
 
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104190757883.png" alt="image-20220104190757883" style="zoom:40%;" />
 
@@ -815,21 +814,41 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104191334025.png" alt="image-20220104191334025" style="zoom:33%;" />
 
-**关系运算的安全性**：
+### **域**关系演算
+
+ $\left\{ t_1\cdots t_k|P\left( t_1\cdots t_k \right) \right\}$ ，$t_1\cdots t_k$ 代表一个元组
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111182258624.png" alt="image-20220111182258624" style="zoom:40%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111182258624.png" style="zoom: 40%;" />
+
+
+
+### 关系运算的安全性
 
 关系代数操作结果不应包括**无限关系**和**无穷验证**
 
-**关系运算的等价性**：
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111183244310.png" alt="image-20220111183244310" style="zoom:37%;" />
+
+### 关系运算的等价性
 
 **关系代数** = **安全的元组关系演算** = **安全的域关系演算**
 
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111183308649.png" alt="image-20220111183308649" style="zoom:40%;" />
+
 ### 例子
+
+#### 元组关系演算
 
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104191627976.png" alt="image-20220104191627976" style="zoom:33%;" />
 
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220104191736773.png" alt="image-20220104191736773" style="zoom:33%;" />
 
-## 3.4 查询优化
+#### 域关系演算
+
+## 查询优化
+
+关键：如何花费较少的时间和空间，有效地执行笛卡尔积操作
 
 **等价变换规则**：书P58
 
@@ -842,16 +861,30 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 - 投影对笛卡尔积分配： $\pi _L\left( E_1\times E_2 \right)=\pi _{L_1}\left( E_1 \right)\times \pi _{L_2}\left( E_2 \right)$
 - 投影对并分配： $\pi _L\left( E_1\bigcup E_2 \right)=\pi _L\left( E_1 \right)\bigcup \pi _L\left( E_2 \right)$
 
-**优化的一般策略**：
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111190543057.png" alt="image-20220111190543057" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111190601671.png" alt="image-20220111190601671" style="zoom:33%;" />
+
+<img src="C:\Users\Tyeah\AppData\Roaming\Typora\typora-user-images\image-20220111190624967.png" alt="image-20220111190624967" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111190657139.png" alt="image-20220111190657139" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111190711400.png" alt="image-20220111190711400" style="zoom:33%;" />
+
+### 优化的一般策略
 
 - 尽早执行选择操作
-- 笛卡尔积和其后的选择、投影合并运算
+- 笛卡尔积和其后的选择、投影**合并运算**
 - 同时计算选择和投影
-- 预处理多次出现的子表达式
-- 预处理建立合理的索引方式
-- 优化表达式的计算方法，如 选择哪个作为外层循环
+- 预处理多次出现的**子表达式**
+    - 如在一个表达式中多次出现某个子表达式，可先对该子表达式进行计算并保存结果，以免重复计算
 
-**优化算法**☆：由DBMS中的DML编译器完成
+- **预处理**建立合理的索引方式
+- 优化表达式的计算方法，如选择哪个作为外层循环
+
+### **优化算法**☆
+
+由DBMS中的DML编译器完成
 
 - 将自然联接转为笛卡尔积 + 选择 + 投影
 - 逆用选择串联，将选择拆开
@@ -859,9 +892,23 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 - 将相邻的投影和选择转化为(0/1个)选择 + (0/1个)投影
 - 按二元运算分组，每组只有一个二元运算
 
-# 第六章 实体联系模型
+#### 例
 
-## 6.1 ER模型的基本元素
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111191447894.png" alt="image-20220111191447894" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111191458432.png" alt="image-20220111191458432" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111191520169.png" alt="image-20220111191520169" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111191558503.png" alt="image-20220111191558503" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111191617544.png" alt="image-20220111191617544" style="zoom:33%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220111191631666.png" alt="image-20220111191631666" style="zoom:33%;" />
+
+## 实体联系模型
+
+### ER 模型的基本元素
 
 **基本元素**：实体、联系、属性
 
@@ -869,7 +916,7 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 - **联系**：表示实体间的关系 -> 菱形框，用线段和实体相连
 - **属性**：表示实体的特性 -> 椭圆形框，实体标识符加下划线，用线段和实体相连
 
-## 6.2 属性的分类
+### 属性的分类
 
 - 基本属性
 
@@ -904,7 +951,7 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 - 未知空值：表示未知（已婚但配偶名未知）
 - 员工是否已婚未知
 
-## 6.3 联系的设计
+### 联系的设计
 
 **联系的元数**：
 
@@ -921,7 +968,7 @@ DMBS 是 DBS 的核心，一切对 DB 的操作都通过 DBMS 进行
 
 **联系的基数**：写在联系两侧，格式为 $\left( \min ,\max \right)$ ，靠近一侧做主语
 
-## 6.4 ER模型的扩充
+### ER 模型的扩充
 
 **依赖联系**：一个实体的存在以另一个实体的存在为前提
 

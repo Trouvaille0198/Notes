@@ -1898,3 +1898,6 @@ setup script 语法糖提供了三个新的 API 来供我们使用：`defineProp
 - `defineProps` 和 `defineEmits` 都是只在 `<script setup>` 中才能使用的**编译器宏**。他们不需要导入且会随着 `<script setup>` 处理过程一同被编译掉。
 - `defineProps` 接收与 `props` 选项相同的值，`defineEmits` 也接收 `emits` 选项相同的值。
 - `defineProps` 和 `defineEmits` 在选项传入后，会提供恰当的类型推断。
+
+# 技巧
+

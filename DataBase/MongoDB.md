@@ -6,15 +6,15 @@ MongoDB 是由 C++ 语言编写的，是一个基于分布式文件存储的开�
 
 ### 一些概念
 
-| QL术语/概念 | MongoDB术语/概念 | 解释/说明                           |
-| :---------- | :--------------- | :---------------------------------- |
-| database    | database         | 数据库                              |
-| table       | collection       | 数据库表/集合                       |
-| row         | document         | 数据记录行/文档                     |
-| column      | field            | 数据字段/域                         |
-| index       | index            | 索引                                |
-| table joins |                  | 表连接,MongoDB不支持                |
-| primary key | primary key      | 主键,MongoDB自动将_id字段设置为主键 |
+| QL术语/概念 | MongoDB术语/概念 | 解释/说明                               |
+| :---------- | :--------------- | :-------------------------------------- |
+| database    | database         | 数据库                                  |
+| table       | collection       | 数据库表/集合                           |
+| row         | document         | 数据记录行/文档                         |
+| column      | field            | 数据字段/域                             |
+| index       | index            | 索引                                    |
+| table joins |                  | 表连接，MongoDB 不支持                  |
+| primary key | primary key      | 主键，MongoDB 自动将 _id 字段设置为主键 |
 
 #### 数据库
 
@@ -29,7 +29,7 @@ MongoDB 是由 C++ 语言编写的，是一个基于分布式文件存储的开�
 
 - **admin**：从权限的角度来看，这是 "root" 数据库。要是将一个用户添加到这个数据库，这个用户自动继承所有数据库的权限。一些特定的服务器端命令也只能从这个数据库运行，比如列出所有的数据库或者关闭服务器。
 - **local:** 这个数据永远不会被复制，可以用来存储限于本地单台服务器的任意集合
-- **config**: 当Mongo用于分片设置时，config数据库在内部使用，用于保存分片的相关信息。
+- **config**: 当 Mongo 用于分片设置时，config 数据库在内部使用，用于保存分片的相关信息。
 
 #### 文档
 
@@ -55,7 +55,7 @@ MongoDB 是由 C++ 语言编写的，是一个基于分布式文件存储的开�
 
 （Collections）
 
-集合就是 MongoDB **文档组**，类似于 RDBMS （关系数据库管理系统：Relational Database Management System)中的**表格**。
+集合就是 MongoDB **文档组**，类似于 RDBMS （关系数据库管理系统：Relational Database Management System) 中的**表格**。
 
 集合存在于数据库中，集合没有固定的结构，这意味着你在对集合可以插入不同格式和类型的数据，但通常情况下我们插入集合的数据都会有一定的关联性
 
@@ -995,8 +995,6 @@ mongo_collection.drop()
 ```python
 db.collection_names() 
 ```
-
-
 
 ### 常用操作
 
