@@ -833,7 +833,7 @@ wait(S){
 	while(S<=0);
 	S--;
 }
-  
+
 signal(S){
     // 释放
 	S++;
@@ -858,6 +858,7 @@ wait(semaphore *S)
 	if(S->value<0) 
         block(S->list);
 }
+
 signal(semaphore *S)
 // 释放一个单位资源
 {

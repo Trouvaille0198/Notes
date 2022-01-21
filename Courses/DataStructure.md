@@ -787,7 +787,7 @@ $$
 
 设 ob 为主串，pat 为模式串，查找 pat 在 ob 的匹配位置的操作称为模式匹配
 
-#### Brute-Force算法
+#### Brute-Force 算法
 
 从主串首字符开始依次匹配，若匹配失败，从第二个字符位开始匹配，以此类推。它是一种带回溯的算法。
 
@@ -812,7 +812,7 @@ int BF_find(const string &ob, const string &pat, const int p = 0)
     if (j >= pat.length())
         return i - j;
     else
-    {m
+    {
         return -1;
     }
 }
@@ -820,7 +820,7 @@ int BF_find(const string &ob, const string &pat, const int p = 0)
 
 时间复杂度（最坏）：$$O(m\sdot n)$$
 
-#### KMP算法
+#### KMP 算法
 
 ```c++
 int KMP(const string &ob, const string &pat, const int start = 0)
@@ -1427,7 +1427,7 @@ void BinaryTree<T>::InOrder(BinTreeNode<T> *&root)
 ```c++
 template <class T>
 void BinaryTree<T>::InOrder_NoRecurve(BinTreeNode<T> *&root)
-//LDR 左节点为空时访问（或 即将转到右节点时访问）
+// LDR 左节点为空时访问（或 即将转到右节点时访问）
 {
     if (root == NULL)
         return;
@@ -2824,9 +2824,9 @@ AVL
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210613131053818.png" alt="image-20210613131053818" style="zoom:80%;" />
 
-## B-树
+## B- 树
 
-二叉排序树适合在内存中组织较小的索引；若对于存放在外存中的较大的文件系统，使用B-树或B+树做文件索引
+二叉排序树适合在内存中组织较小的索引；若对于存放在外存中的较大的文件系统，使用 B- 树或 B+ 树做文件索引
 
 ### 动态的 m 路查找树
 
@@ -2843,7 +2843,7 @@ AVL
 
 ### 定义
 
-一颗 m 阶的 B-树是一种平衡的 m 路查找树，通常用于文件系统（外查找）
+一颗 m 阶的 B- 树是一种平衡的 m 路查找树，通常用于文件系统（外查找）
 
 失败节点即叶子节点
 
@@ -3142,7 +3142,7 @@ void QuickSort(SeqList<T> &list)
     - 最好情况 $$O(nlog_2n)$$，最坏情况 $$O(n^2)$$
 - 空间复杂度
     - 最坏情况 $$S(n)=O(n)$$
-    - 一般情况 $$S(n)=O(log_2n)$$
+    - 一般情况 $$S(n)=O(nlog_2n)$$
 - 不稳定
 
 ## 插入排序
