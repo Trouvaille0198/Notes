@@ -2753,7 +2753,7 @@ AVL
 - 左右子树都是平衡二叉树。
 - 左右子树的高度差值不超过 1
 - 平衡因子（Balance factor，BF）：左右子树高度差，其绝对值不超过 1
-- 其 ASL可保持在 $$O(log_2n)$$
+- 其 ASL 可保持在 $$O(log_2n)$$
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510080329179.png" alt="image-20210510080329179" style="zoom:60%;" />
 

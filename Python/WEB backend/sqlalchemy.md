@@ -854,3 +854,7 @@ if __name__ == '__main__':
     test_sqlalchemy_core(100000)
     test_sqlite3(100000)
 ```
+
+### 级联删除
+
+https://www.cnblogs.com/ShanCe/p/15381412.html

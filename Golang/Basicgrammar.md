@@ -2382,7 +2382,7 @@ const (
 )
 
 const (
-	a       = iota //a=0
+	a       = iota // a=0
 	b       = "B"
 	c       = iota             //c=2
 	d, e, f = iota, iota, iota //d=3,e=3,f=3
@@ -2484,7 +2484,7 @@ case *int:
 }
 ```
 
-### 判断 map 中是否存在某建
+### 判断 map 中是否存在某键
 
 ```go
 if seconds, ok := timeZone[tz]; ok {

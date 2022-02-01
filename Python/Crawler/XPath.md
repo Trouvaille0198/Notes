@@ -24,7 +24,7 @@ result = etree.tostring(html)	#result为修正后的HTML代码(bytes类型)
 print(result.decode('utf-8'))	#用decode方法将其转成str类型并输出
 ```
 
- etree模块可以自动修正HTML文本
+ etree模块可以自动修正 HTML 文本
 
 ```html
 <html><body><div>
@@ -178,7 +178,7 @@ XPath 通配符可用来选取未知的 XML 元素。
 | ancestor-or-self::book | 选取当前节点的所有 book 先辈以及当前节点（如果此节点是 book 节点） |
 | child::*/child::price  | 选取当前节点的所有 price 孙节点。z                                 |
 
-# Python实现
+# Python 实现
 
 ## 选取所有节点
 
@@ -222,7 +222,7 @@ result = html.xpath('//a[@href="link4.html"]/parent::*/@class')
 
 ### 单值匹配
 
-用 @符号进行属性过滤
+用 @ 符号进行属性过滤
 
 如果要选取 class 为 item-0 的 li 节点
 

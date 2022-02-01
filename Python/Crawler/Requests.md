@@ -111,13 +111,9 @@ print(r.text)
 }
 ```
 
-
-
 ## json
 
 用于POST请求中，传递请求体中json格式的的data参数
-
-
 
 ## files
 
