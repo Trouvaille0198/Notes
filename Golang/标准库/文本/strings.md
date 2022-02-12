@@ -6,7 +6,7 @@
 
 ## 字符串比较
 
-不推荐 `Compare()`，用运算符更直观
+不推荐 `Compare()`，用**运算符**更直观
 
 ```go
 // Compare 函数，用于比较两个字符串的大小，如果两个字符串相等，返回为 0。如果 a 小于 b ，返回 -1 ，反之返回 1 。不推荐使用这个函数，直接使用 == != > < >= <= 等一系列运算符更加直观。
@@ -119,7 +119,7 @@ fmt.Println(strings.Count("fivevev", "vev"))
 
 ## 字符串分割为 []string
 
-这个需求很常见，倒不一定是为了得到[]string。
+这个需求很常见，倒不一定是为了得到 []string。
 
 该包提供了六个三组分割函数：Fields 和 FieldsFunc、Split 和 SplitAfter、SplitN 和 SplitAfterN。
 

@@ -32,7 +32,7 @@ type Context interface {
     - 如果当前 Context 超时就会返回 DeadlineExceeded 错误；
 - Value 方法会从 Context 中返回键对应的值，对于同一个上下文来说，多次调用 Value 并传入相同的 Key 会返回相同的结果，该方法仅用于传递跨 API 和进程间跟请求域的数据。
 
-### Background() 和 TODO()
+### `Background()` 和 `TODO()`
 
 Go语言内置两个函数：`Background()` 和 `TODO()`，这两个函数分别返回一个实现了 Context 接口的 background 和 todo。
 
@@ -118,7 +118,7 @@ func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
 
 WithDeadline 函数会返回父上下文的副本，并将 deadline 调整为不迟于 d。
 
-如果父上下文的 deadline 已经早于 d，则 WithDeadline(parent, d) 在语义上等同于父上下文。
+如果父上下文的 deadline 已经早于 d，则 `WithDeadline(parent, d)` 在语义上等同于父上下文。
 
 当截止日过期时，当调用返回的 cancel 函数时，或者当父上下文的 Done 通道关闭时，返回上下文的 Done 通道将被关闭，以最先发生的情况为准。
 
@@ -157,7 +157,7 @@ go run main.go
 context deadline exceeded
 ```
 
-上面的代码中，定义了一个 50 毫秒之后过期的 deadline，然后我们调用 context.WithDeadline(context.Background(), d) 得到一个上下文（ctx）和一个取消函数（cancel），然后使用一个 select 让主程序陷入等待，等待 1 秒后打印 overslept 退出或者等待 ctx 过期后退出。因为 ctx 50 秒后就过期，所以 ctx.Done() 会先接收到值，然后打印 ctx.Err() 取消原因。
+上面的代码中，定义了一个 50 毫秒之后过期的 deadline，然后我们调用 `context.WithDeadline(context.Background(), d)` 得到一个上下文（ctx）和一个取消函数（cancel），然后使用一个 select 让主程序陷入等待，等待 1 秒后打印 overslept 退出或者等待 ctx 过期后退出。因为 ctx 50 秒后就过期，所以 `ctx.Done()` 会先接收到值，然后打印 `ctx.Err()` 取消原因。
 
 #### WithTimeout
 
@@ -167,7 +167,7 @@ WithTimeout 的函数签名如下：
 func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
 ```
 
-WithTimeout 函数返回 WithDeadline(parent, time.Now().Add(timeout))。
+WithTimeout 函数返回 `WithDeadline(parent, time.Now().Add(timeout))`。
 
 取消此上下文将释放与其相关的资源，因此代码应该在此上下文中运行的操作完成后立即调用 cancel，示例代码如下：
 
@@ -210,9 +210,11 @@ WithValue 函数能够将请求作用域的数据与 Context 对象建立关系�
 func WithValue(parent Context, key, val interface{}) Context
 ```
 
-WithValue 函数接收 context 并返回派生的 context，其中值 val 与 key 关联，并通过 context 树与 context 一起传递。这意味着一旦获得带有值的 context，从中派生的任何 context 都会获得此值。不建议使用 context 值传递关键参数，函数应接收签名中的那些值，使其显式化。
+WithValue 函数接收 context 并返回派生的 context，其中值 val 与 key 关联，并通过 context 树与 context 一起传递。这意味着一旦获得带有值的 context，从中派生的任何 context 都会获得此值。
 
-所提供的键必须是可比较的，并且不应该是 string 类型或任何其他内置类型，以避免使用上下文在包之间发生冲突。WithValue 的用户应该为键定义自己的类型，为了避免在分配给接口`{ } `时进行分配，上下文键通常具有具体类型 struct{}。或者，导出的上下文关键变量的静态类型应该是指针或接口。
+不建议使用 context 值传递关键参数，函数应接收签名中的那些值，使其显式化。
+
+所提供的键必须是可比较的，并且不应该是 string 类型或任何其他内置类型，以避免使用上下文在包之间发生冲突。WithValue 的用户应该为键定义自己的类型，为了避免在分配给接口 `{ } ` 时进行分配，上下文键通常具有具体类型 struct{}。或者，导出的上下文关键变量的静态类型应该是指针或接口。
 
 ```go
 package main
@@ -259,6 +261,6 @@ key not found: color
 
 ## 总结
 
-Go语言中的 Context 的主要作用还是在多个 Goroutine 或者模块之间同步取消信号或者截止日期，用于减少对资源的消耗和长时间占用，避免资源浪费，虽然传值也是它的功能之一，但是这个功能我们还是很少用到。
+Go 语言中的 Context 的主要作用还是**在多个 Goroutine 或者模块之间同步取消信号或者截止日期**，用于减少对资源的消耗和长时间占用，避免资源浪费，虽然传值也是它的功能之一，但是这个功能我们还是很少用到。
 
 在真正使用传值的功能时我们也应该非常谨慎，不能将请求的所有参数都使用 Context 进行传递，这是一种非常差的设计，比较常见的使用场景是传递请求对应用户的认证令牌以及用于进行分布式追踪的请求 ID。

@@ -1311,7 +1311,7 @@ func selectgo(cas0 *scase, order0 *uint16, ncases int) (int, bool)
 函数参数：
 
 - `cas0` 为 scase 数组的首地址，`selectgo()` 就是从这些 scase 中找出一个返回。
-- `order0 `为一个两倍 `cas0` 数组长度的 buffer，保存 scase 随机序列 `pollorder `和 scase 中 channel 地址序列 `lockorder`
+- `order0` 为一个两倍 `cas0` 数组长度的 buffer，保存 scase 随机序列 `pollorder` 和 scase 中 channel 地址序列 `lockorder`
     - `pollorder`：每次 selectgo 执行都会把 scase 序列打乱，以达到随机检测 case 的目的。
     - `lockorder`：所有 case 语句中 channel 序列，以达到去重防止对 channel 加锁时重复加锁的目的。
 - `ncases` 表示 scase 数组的长度
@@ -1824,83 +1824,1743 @@ Goroutine 调度是一个很复杂的机制，尽管 Go 源码中提供了大量
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png)
 
-为了方便下面的叙述，我们把任务队列中的每一个任务称作G，而G往往代表一个函数。 线程池中的worker线程不断的从任务队列中取出任务并执行。而worker线程的调度则交给操作系统进行调度。
+为了方便下面的叙述，我们把任务队列中的每一个任务称作 G，而 G 往往代表一个函数。 线程池中的 worker 线程不断的从任务队列中取出任务并执行。而 worker 线程的调度则交给操作系统进行调度。
 
-如果worker线程执行的G任务中发生系统调用，则操作系统会将该线程置为阻塞状态，也意味着该线程在怠工，也意味着消费任务队列的worker线程变少了，也就是说线程池消费任务队列的能力变弱了。
+如果 worker 线程执行的 G 任务中发生系统调用，则操作系统会将该线程置为阻塞状态，也意味着该线程在怠工，也意味着消费任务队列的 worker 线程变少了，也就是说线程池消费任务队列的能力变弱了。
 
-如果任务队列中的大部分任务都会进行系统调用，则会让这种状态恶化，大部分worker线程进入阻塞状态，从而任务队列中的任务产生堆积。
+如果任务队列中的大部分任务都会进行系统调用，则会让这种状态恶化，大部分 worker 线程进入阻塞状态，从而任务队列中的任务产生堆积。
 
-解决这个问题的一个思路就是重新审视线程池中线程的数量，增加线程池中线程数量可以一定程度上提高消费能力，但随着线程数量增多，由于过多线程争抢CPU，消费能力会有上限，甚至出现消费能力下降。 如下图所示：
+解决这个问题的一个思路就是重新审视线程池中线程的数量，增加线程池中线程数量可以一定程度上提高消费能力，但随着线程数量增多，由于过多线程争抢 CPU，消费能力会有上限，甚至出现消费能力下降。 如下图所示：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png)
 
-# 2. Goroutine调度器
+### Goroutine 调度器
 
-线程数过多，意味着操作系统会不断的切换线程，频繁的上下文切换就成了性能瓶颈。 Go提供一种机制，可以在线程中自己实现调度，上下文切换更轻量，从而达到了线程数少，而并发数并不少的效果。而线程中调度的就是Goroutine.
+线程数过多，意味着操作系统会不断的切换线程，频繁的上下文切换就成了性能瓶颈。
 
-早期Go版本，比如1.9.2版本的源码注释中有关于调度器的解释。 Goroutine 调度器的工作就是把“ready-to-run”的goroutine分发到线程中。
+Go 提供一种机制，可以在线程中自己实现调度，上下文切换更轻量，从而达到了线程数少，而并发数并不少的效果。而线程中调度的就是 Goroutine.
 
-Goroutine主要概念如下：
+早期 Go 版本，比如 1.9.2 版本的源码注释中有关于调度器的解释。 Goroutine 调度器的工作就是把 “ready-to-run” 的 goroutine 分发到线程中。
 
-- G（Goroutine）: 即Go协程，每个go关键字都会创建一个协程。
-- M（Machine）： 工作线程，在Go中称为Machine。
-- P(Processor): 处理器（Go中定义的一个摡念，不是指CPU），包含运行Go代码的必要资源，也有调度goroutine的能力。
+Goroutine 主要概念如下：
 
-M必须拥有P才可以执行G中的代码，P含有一个包含多个G的队列，P可以调度G交由M执行。其关系如下图所示：
+- G (Goroutine)：
+    - 即 Go 协程，每个 go 关键字都会创建一个协程。
+    - 本质上也是一种轻量级的线程。
+
+- M (Machine)：
+    - 工作线程，在 Go 中称为 Machine。
+    - 一个 `M` 直接关联了一个内核线程.
+
+- P (Processor)
+    - 代表了 `M` 所需的上下文环境，也是处理用户级代码逻辑的处理器
+    - 它包含运行 Go 代码的必要资源，也有调度 goroutine 的能力。
+
+
+M 必须拥有 P 才可以执行 G 中的代码，P 含有一个包含多个 G 的队列，P 可以调度 G 交由 M 执行。
+
+换句话来说：一个 M 会对应一个内核线程，一个 M 也会连接一个上下文 P，一个上下文 P 相当于一个“处理器”，一个上下文连接一个或者多个 Goroutine。
+
+其关系如下图所示：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png)
 
-图中M是交给操作系统调度的线程，M持有一个P，P将G调度进M中执行。P同时还维护着一个包含G的队列（图中灰色部分），可以按照一定的策略将G调度到M中执行。
+称为 **MPG 模型**
 
-P的个数在程序启动时决定，默认情况下等同于CPU的核数，由于M必须持有一个P才可以运行Go代码，所以同时运行的M个数，也即线程数一般等同于CPU的个数，以达到尽可能的使用CPU而又不至于产生过多的线程切换开销。
+图中 M 是交给操作系统调度的线程，M 持有一个 P，P 将 G 调度进 M 中执行。P 同时还维护着一个包含 G 的队列（图中灰色部分），可以按照一定的策略将 G 调度到 M 中执行。
 
-程序中可以使用`runtime.GOMAXPROCS()`设置P的个数，在某些IO密集型的场景下可以在一定程度上提高性能。这个后面再详细介绍。
+P 的个数在程序启动时决定，默认情况下等同于 CPU 的核数，由于 M 必须持有一个 P 才可以运行 Go 代码，所以同时运行的 M 个数，也即线程数一般等同于 CPU 的个数，以达到尽可能的使用 CPU 而又不至于产生过多的线程切换开销。
 
-# 3. Goroutine调度策略
+程序中可以使用 `runtime.GOMAXPROCS()` 设置 P 的个数，在某些 IO 密集型的场景下可以在一定程度上提高性能。这个后面再详细介绍。
 
-## 3.1 队列轮转
+### Goroutine 调度策略
 
-上图中可见每个P维护着一个包含G的队列，不考虑G进入系统调用或IO操作的情况下，P周期性的将G调度到M中执行，执行一小段时间，将上下文保存下来，然后将G放到队列尾部，然后从队列中重新取出一个G进行调度。
+#### 队列轮转
 
-除了每个P维护的G队列以外，还有一个全局的队列，每个P会周期性的查看全局队列中是否有G待运行并将期调度到M中执行，全局队列中G的来源，主要有从系统调用中恢复的G。之所以P会周期性的查看全局队列，也是为了防止全局队列中的G被饿死。
+上图中可见每个 P 维护着一个包含 G 的队列，不考虑 G 进入系统调用或 IO 操作的情况下，P 周期性的将 G 调度到 M 中执行，执行一小段时间，将上下文保存下来，然后将 G 放到队列尾部，然后从队列中重新取出一个 G 进行调度。
 
-## 3.2 系统调用
+除了每个 P 维护的 G 队列以外，还有一个全局的队列，每个 P 会周期性的查看全局队列中是否有 G 待运行并将其调度到 M 中执行，全局队列中 G 的来源，主要有从系统调用中恢复的 G。之所以 P 会周期性的查看全局队列，也是为了防止全局队列中的 G 被饿死。
 
-上面说到P的个数默认等于CPU核数，每个M必须持有一个P才可以执行G，一般情况下M的个数会略大于P的个数，这多出来的M将会在G产生系统调用时发挥作用。类似线程池，Go也提供一个M的池子，需要时从池子中获取，用完放回池子，不够用时就再创建一个。
+#### 系统调用
 
-当M运行的某个G产生系统调用时，如下图所示：
+上面说到 P 的个数默认等于 CPU 核数，每个 M 必须持有一个 P 才可以执行 G，一般情况下 M 的个数会略大于 P 的个数，这多出来的 M 将会在 G 产生系统调用时发挥作用。
+
+类似线程池，Go 也提供一个 M 的池子，需要时从池子中获取，用完放回池子，不够用时就再创建一个。
+
+当 M 运行的某个 G 产生系统调用时，如下图所示：
 
 ![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png)
 
-如图所示，当G0即将进入系统调用时，M0将释放P，进而某个空闲的M1获取P，继续执行P队列中剩下的G。而M0由于陷入系统调用而进被阻塞，M1接替M0的工作，只要P不空闲，就可以保证充分利用CPU。
+如图所示，M0 中的 G0 执行了 syscall，然后就创建了一个 M1(也有可能本身就存在，没创建)，**当 G0 即将进入系统调用时，M0 将释放 P，进而某个空闲的 M1 获取 P，继续执行 P 队列中剩下的 G**。而 M0 由于陷入系统调用而进被阻塞，M1**接管** M0 的工作，只要 P 不空闲，就可以保证充分利用 CPU。
 
-M1的来源有可能是M的缓存池，也可能是新建的。当G0系统调用结束后，跟据M0是否能获取到P，将会将G0做不同的处理：
+M1 的来源有可能是 M 的缓存池，也可能是新建的。当 G0 系统调用结束后，跟据 M0 是否能获取到 P，将会将 G0 做不同的处理：
 
-1. 如果有空闲的P，则获取一个P，继续执行G0。
-2. 如果没有空闲的P，则将G0放入全局队列，等待被其他的P调度。然后M0将进入缓存池睡眠。
+1. 如果有空闲的 P，则获取一个 P，继续执行 G0。
+2. 如果没有空闲的 P，则将 G0 放入全局队列，等待被其他的 P 调度。然后 M0 将进入缓存池睡眠。
 
-## 3.3 工作量窃取
+#### 工作量窃取
 
-多个P中维护的G队列有可能是不均衡的，比如下图：
+多个 P 中维护的 G 队列有可能是不均衡的，比如下图：
 
 ![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png)
 
-竖线左侧中右边的P已经将G全部执行完，然后去查询全局队列，全局队列中也没有G，而另一个M中除了正在运行的G外，队列中还有3个G待运行。此时，空闲的P会将其他P中的G偷取一部分过来，一般每次偷取一半。偷取完如右图所示。
+竖线左侧中右边的 P 已经将 G 全部执行完，然后去查询全局队列，全局队列中也没有 G，而另一个 M 中除了正在运行的 G 外，队列中还有 3 个 G 待运行。此时，空闲的 P 会将其他 P 中的 G 偷取一部分过来，一般每次偷取一半。偷取完如右图所示。
 
-## 4. GOMAXPROCS设置对性能的影响
+#### GOMAXPROCS 设置对性能的影响
 
-一般来讲，程序运行时就将GOMAXPROCS大小设置为CPU核数，可让Go程序充分利用CPU。 在某些IO密集型的应用里，这个值可能并不意味着性能最好。 理论上当某个Goroutine进入系统调用时，会有一个新的M被启用或创建，继续占满CPU。 但由于Go调度器检测到M被阻塞是有一定延迟的，也即旧的M被阻塞和新的M得到运行之间是有一定间隔的，所以在IO密集型应用中不妨把GOMAXPROCS设置的大一些，或许会有好的效果。
+一般来讲，程序运行时就将 GOMAXPROCS 大小设置为 CPU 核数，可让 Go 程序充分利用 CPU。 在某些 IO 密集型的应用里，这个值可能并不意味着性能最好。 
 
-# 5.参考文章
+理论上当某个 Goroutine 进入系统调用时，会有一个新的 M 被启用或创建，继续占满 CPU。 但由于 Go 调度器检测到 M 被阻塞是有一定延迟的，也即旧的 M 被阻塞和新的M得到运行之间是有一定间隔的，所以在 IO 密集型应用中不妨把 GOMAXPROCS 设置的大一些，或许会有好的效果。
 
-## 5.1 《The Go scheduler》http://morsmachine.dk/go-scheduler
+## 内存管理
 
+本章主要介绍 GO 语言的自动垃圾回收机制。
 
-
-
-
-本章主要介绍GO语言的自动垃圾回收机制。
-
-自动垃圾回收是GO语言最大的特色之一，也是很有争议的话题。因为自动垃圾回收解放了程序员，使其不用担心内存泄露的问题，争议在于垃圾回收的性能，在某些应用场景下垃圾回收会暂时停止程序运行。
+自动垃圾回收是 GO 语言最大的特色之一，也是很有争议的话题。因为自动垃圾回收解放了程序员，使其不用担心内存泄露的问题，争议在于垃圾回收的性能，在某些应用场景下垃圾回收会暂时停止程序运行。
 
 本章从内存分配原理讲起，然后再看垃圾回收原理，最后再聊一些与垃圾回收性能优化相关的话题。
+
+### 内存分配原理
+
+编写过 C 语言程序的肯定知道通过 `malloc()` 方法动态申请内存，其中内存分配器使用的是 glibc 提供的ptmalloc2。 
+
+除了 glibc，业界比较出名的内存分配器有 Google 的 tcmalloc 和 Facebook 的 jemalloc。二者在避免内存碎片和性能上均比 glic 有比较大的优势，在多线程环境中效果更明显。
+
+Golang 中也实现了内存分配器，原理与 tcmalloc 类似，简单的说就是维护一块大的全局内存，每个线程 (Golang中为 P) 维护一块小的私有内存，私有内存不足再从全局申请。
+
+另外，内存分配与 GC（垃圾回收）关系密切，所以了解 GC 前有必要了解内存分配的原理。
+
+#### TCMalloc
+
+引入虚拟内存后，让内存的并发访问问题的粒度从多进程级别，降低到多线程级别。
+
+然而同一进程下的所有线程共享相同的内存空间，它们申请内存时需要加锁，如果不加锁就存在同一块内存被 2 个线程同时访问的问题。
+
+TCMalloc 的做法是什么呢？为每个线程预分配一块缓存，线程申请小内存时，可以从缓存分配内存，这样有2个好处：
+
+1. 为线程预分配缓存需要进行 1 次系统调用，后续线程申请小内存时直接从缓存分配，都是在用户态执行的，没有了系统调用，缩短了内存总体的分配和释放时间，这是快速分配内存的第二个层次。
+2. 多个线程同时申请小内存时，**从各自的缓存分配**，访问的是不同的地址空间，从而无需加锁，把内存并发访问的粒度进一步降低了，这是快速分配内存的第三个层次。
+
+下面就简单介绍下 TCMalloc，细致程度够我们理解 Go 的内存管理即可。
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg)
+
+结合上图，介绍 TCMalloc 的几个重要概念：
+
+- **Page**
+
+操作系统对内存管理以页为单位，TCMalloc 也是这样，只不过 TCMalloc 里的 Page 大小与操作系统里的大小并不一定相等，而是倍数关系。《TCMalloc 解密》里称 x64 下 Page 大小是 8KB。
+
+- **Span**
+
+**一组连续的 Page 被称为 Span**，比如可以有 2 个页大小的 Span，也可以有 16 页大小的 Span，Span 比 Page 高一个层级，是为了方便管理一定大小的内存区域，Span 是 TCMalloc 中内存管理的基本单位。
+
+- **ThreadCache**
+
+ThreadCache 是每个线程各自的 Cache，一个 Cache 包含多个**空闲内存块链表**，每个链表连接的都是内存块，同一个链表上内存块的大小是相同的，也可以说按内存块大小，给内存块分了个类，这样可以根据申请的内存大小，快速从合适的链表选择空闲内存块。
+
+由于每个线程有自己的 ThreadCache，所以 ThreadCache 访问**是无锁的**。
+
+- **CentralCache**
+
+CentralCache 是所有线程共享的缓存，也是保存的空闲内存块链表，链表的数量与 ThreadCache 中链表数量相同。
+
+- 当 ThreadCache 的内存块不足时，可以从 CentralCache 获取内存块；
+
+- 当 ThreadCache 内存块过多时，可以放回 CentralCache。
+
+由于 CentralCache 是共享的，所以它的访问是要加锁的。
+
+- **PageHeap**
+
+PageHeap 是对堆内存的抽象，PageHeap 存的也是若干链表，链表保存的是 Span。
+
+- 当 CentralCache 的内存不足时，会从 PageHeap 获取空闲的内存 Span，**然后把 1 个 Span 拆成若干内存块**，添加到对应大小的链表中并分配内存；
+
+- 当 CentralCache 的内存过多时，会把空闲的内存块放回 PageHeap 中。
+
+如下图所示，分别是 1 页 Page 的 Span 链表，2 页 Page 的 Span 链表等，最后是 **large span set**，这个是用来保存中大对象的。
+
+毫无疑问，PageHeap 也是要加锁的。
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg)
+
+前文提到了小、中、大对象，Go 内存管理中也有类似的概念，我们看一眼 TCMalloc 的定义：
+
+- 小对象大小：0~256KB
+- 中对象大小：257~1MB
+- 大对象大小：>1MB
+
+- 小对象的分配流程：`ThreadCache -> CentralCache -> HeapPage`，大部分时候，ThreadCache 缓存都是足够的，不需要去访问 CentralCache 和 HeapPage，**无系统调用配合无锁分配，分配效率是非常高的**。
+
+- 中对象分配流程：直接在 PageHeap 中选择适当的大小即可，128 Page 的 Span 所保存的最大内存是 1MB。
+
+- 大对象分配流程：从 large span set 选择合适数量的页面组成 span，用来存储数据。
+
+通过本节的介绍，你应当对 TCMalloc 主要思想有一定了解了，我建议再回顾一下上面的内容。
+
+#### 基本概念
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg" alt="img" style="zoom: 180%;" />
+
+- **Page**
+
+与 TCMalloc 中的 Page 相同，x64 架构下 1 个 Page 的大小是 8KB。上图的最下方，1 个浅蓝色的长方形代表 1 个 Page。
+
+- **Span**
+
+Span 与 TCMalloc 中的 Span 相同，Span 是内存管理的基本单位，**代码中为 mspan**，一组连续的 Page 组成 1 个 Span，所以上图最下方，一组连续的浅蓝色长方形代表的是一组 Page 组成的 1 个 Span，另外，1 个淡紫色长方形为 1 个 Span。
+
+- **mcache**
+
+mcache 与 TCMalloc 中的 ThreadCache 类似，mcache 保存的是各种大小的 Span，并按 Span class 分类，小对象直接从 mcache 分配内存，它起到了缓存的作用，并且可以无锁访问。
+
+但是 mcache 与 ThreadCache 也有不同点，TCMalloc 中是每个线程 1 个 ThreadCache，Go 中是每个 P 拥有 1 个 mcache（其实是一样的）。因为在 Go 程序中，当前最多有 GOMAXPROCS 个线程在运行，所以最多需要 GOMAXPROCS 个mcache 就可以保证各线程对 mcache 的无锁访问，线程的运行又是与 P 绑定的，把 mcache 交给 P 刚刚好。
+
+- **mcentral**
+
+mcentral 与 TCMalloc 中的 CentralCache 类似，是所有线程共享的缓存，需要加锁访问。
+
+它按 Span 级别对 Span 分类，然后串联成链表，当 mcache 的某个级别 Span 的内存被分配光时，它会向mcentral 申请 1 个当前级别的 Span。
+
+但是 mcentral 与 CentralCache 也有不同点，CentralCache 是每个级别的 Span 有 1个 链表，mcache是每个级别的 Span 有 2 个链表，这和 mcache 申请内存有关，稍后再解释。
+
+- **mheap**
+
+mheap 与 TCMalloc 中的 PageHeap 类似，它是**堆内存的抽象**，把从 OS 申请出的内存页组织成 Span，并保存起来。
+
+当 mcentral 的 Span 不够用时会向 mheap 申请内存，而 mheap 的 Span 不够用时会向 OS 申请内存。mheap 向 OS 的内存申请是按页来的，然后把申请来的内存页生成 Span 组织起来，同样也是需要加锁访问的。
+
+但是 mheap 与 PageHeap也有不同点：mheap 把 Span 组织成了**树结构**，而不是链表，并且还是 2 棵树，然后把 Span 分配到 heapArena 进行管理，它包含地址映射和 span 是否包含指针等位图，这样做的主要原因是为了更高效的利用内存：分配、回收和再利用。
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg)
+
+1. **object size**：代码里简称 `size`，指申请内存的对象大小。
+2. **size class**：代码里简称 `class`，它是 size 的级别，相当于把 size 归类到一定大小的区间段，比如 size[1,8] 属于 size class 1，size(8,16] 属于 size class 2。
+3. **span class**：指 span 的级别，但 span class 的大小与 span 的大小并没有正比关系。span class 主要用来和 size class 做对应，1 个 size class 对应 2 个 span class，2 个 span class 的 span 大小相同，只是功能不同，1 个用来存放包含指针的对象，一个用来存放不包含指针的对象，不包含指针对象的 Span 就无需 GC 扫描了。
+4. **num of page**：代码里简称 `npage`，代表 Page 的数量，其实就是 Span 包含的页数，用来分配内存。
+
+#### 内存分配
+
+Go 中的内存分类并不像 TCMalloc 那样分成小、中、大对象，但是它的小对象里又细分了一个 Tiny 对象，Tiny 对象指大小在 1Byte 到 16Byte 之间并且不包含指针的对象。
+
+小对象和大对象只用大小划定，无其他区分。
+
+![img](https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg)
+
+小对象是在 mcache 中分配的，而大对象是直接从 mheap 分配的，从小对象的内存分配看起。
+
+##### 概览
+
+针对待分配对象的大小不同有不同的分配逻辑：
+
+- (0, 16B) 且不包含指针的对象： Tiny 分配
+- (0, 16B) 包含指针的对象：正常分配
+- [16B, 32KB] : 正常分配
+- (32KB, -) : 大对象分配
+
+以申请 size 为 n 的内存为例，分配步骤如下：
+
+1. 获取当前线程的私有缓存 mcache
+2. 跟据 size 计算出适合的 class 的 ID
+3. 从 mcache 的 alloc[class] 链表中查询可用的 span
+4. 如果 mcache 没有可用的 span 则从 mcentral 申请一个新的 span 加入 mcache 中
+5. 如果 mcentral 中也没有可用的 span 则从 mheap 中申请一个新的 span 加入 mcentral
+6. 从该 span 中获取到空闲对象地址并返回
+
+##### 小对象的内存分配
+
+![img](https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg)
+
+大小转换这一小节，我们介绍了转换表，size class 从 1 到 66 共 66 个，代码中 _NumSizeClasses=67 代表了实际使用的 size class 数量，即 67 个，从 0 到 67，size class 0 实际并未使用到。
+
+上文提到 1 个 size class 对应 2 个 span class：
+
+```go
+numSpanClasses = _NumSizeClasses * 2
+```
+
+numSpanClasses 为 span class 的数量为 134 个，所以 span class 的下标是从 0 到 133，所以上图中 mcache 标注了的 span class 是：span class 0 到 span class 133。每 1 个 span class 都指向 1 个 span，也就是 **mcache 最多有 134 个 span**。
+
+- **为对象寻找span**
+
+寻找 span 的流程如下：
+
+1. 计算对象所需内存大小 size
+2. 根据 size 到 size class 映射，计算出所需的 size class
+3. 根据 size class 和对象是否包含指针计算出 span class
+4. 获取该 span class 指向的 span
+
+以分配一个不包含指针的，大小为 24Byte 的对象为例，根据映射表：
+
+```bash
+// class  bytes/obj  bytes/span  objects  tail waste  max waste
+//     1          8        8192     1024           0     87.50%
+//     2         16        8192      512           0     43.75%
+//     3         32        8192      256           0     46.88%
+//     4         48        8192      170          32     31.52%
+// ...
+```
+
+对应的 size class 为 3，它的对象大小范围是 (16,32]Byte，24Byte 刚好在此区间，所以此对象的 size class 为 3
+
+Size class 到 span class 的计算如下：
+
+```go
+// noscan为true代表对象不包含指针
+func makeSpanClass(sizeclass uint8, noscan bool) spanClass {
+    return spanClass(sizeclass<<1) | spanClass(bool2int(noscan))
+}
+```
+
+所以对应的 span class 为 7，所以该对象需要的是 span class 7 指向的 span。
+
+```go
+span class = 3 << 1 | 1 = 7
+```
+
+- **从 span 分配对象空间**
+
+Span 可以按对象大小切成很多份，这些都可以从映射表上计算出来，以 size class 3 对应的 span 为例，span 大小是 8KB，每个对象实际所占空间为 32Byte，这个 span 就被分成了 256 块，可以根据 span 的起始地址计算出每个对象块的内存地址。
+
+![img](https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg)
+
+随着内存的分配，span 中的对象内存块，有些被占用，有些未被占用，比如上图，整体代表 1 个 span，蓝色块代表已被占用内存，绿色块代表未被占用内存。当分配内存时，只要快速找到第一个可用的绿色块，并计算出内存地址即可，如果需要还可以对内存块数据清零。
+
+当 span 内的所有内存块都被占用时，没有剩余空间继续分配对象，mcache 会向 mcentral申请 1 个 span，mcache 拿到 span 后继续分配对象。
+
+- **mcache 向 mcentral 申请 span**
+
+mcentral 和 mcache一样，都是 0~133 这 134 个 span class 级别，但每个级别都保存了 2 个 span list，即 2 个 span 链表：
+
+1. **nonempty**：这个链表里的 span，所有 span 都至少有 1 个空闲的对象空间。这些 span 是 mcache 释放 span 时加入到该链表的。
+2. **empty**：这个链表里的 span，所有的 span 都不确定里面是否有空闲的对象空间。当一个 span 交给 mcache 的时候，就会加入到 empty 链表。
+
+这两个东西名称一直有点绕，建议直接把 empty 理解为没有对象空间就好了。
+
+![img](https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg)
+
+mcache 向 mcentral 申请 span 时，mcentral 会先从 nonempty 搜索满足条件的 span，如果没有找到再从emtpy 搜索满足条件的 span，然后把找到的 span 交给 mcache。
+
+- **mheap 的 span 管理**
+
+mheap 里保存了两棵二叉排序树，按 span 的 page 数量进行排序：
+
+1. free：free 中保存的 span 是空闲并且非垃圾回收的 span。
+2. scav：scav 中保存的是空闲并且已经垃圾回收的 span。
+
+如果是垃圾回收导致的 span 释放，span 会被加入到 scav，否则加入到 free，比如刚从 OS 申请的的内存也组成的 Span。
+
+![img](https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg)
+
+mheap 中还有 arenas，由一组 heapArena 组成，每一个 heapArena 都包含了连续的 pagesPerArena 个 span，这个主要是为 mheap 管理 span 和垃圾回收服务。mheap 本身是一个全局变量，它里面的数据，也都是从 OS 直接申请来的内存，并不在 mheap 所管理的那部分内存以内。
+
+- **mcentral 向 mheap 申请 span**
+
+当 mcentral 向 mcache 提供 span 时，如果 empty 里也没有符合条件的 span，mcentral 会向 mheap 申请 span。
+
+此时，mcentral 需要向 mheap 提供需要的内存页数和 span class 级别，然后它优先从 free 中搜索可用的 span。
+
+如果没有找到，会从 scav 中搜索可用的 span。
+
+如果还没有找到，mheap 会向 OS 申请内存，再重新搜索 2 棵树，必然能找到 span。
+
+如果找到的 span 比需要的 span 大，则把 span 进行分割成 2 个 span，其中 1 个刚好是需求大小，把剩下的 span 再加入到 free 中去，然后设置需要的 span 的基本信息，然后交给 mcentral。
+
+- **mheap 向 OS 申请内存**
+
+当 mheap 没有足够的内存时，mheap 会向 OS 申请内存，把申请的内存页保存为 span，然后把 span 插入到 free 树。
+
+在 32 位系统中，mheap 还会预留一部分空间，当 mheap 没有空间时，先从预留空间申请，如果预留空间内存也没有了，才向 OS 申请。
+
+##### 大对象的内存分配
+
+大对象的分配比小对象省事多了，99% 的流程与 mcentral 向 mheap 申请内存的相同，所以不重复介绍了。不同的一点在于 mheap 会记录一点大对象的统计信息，详情见 `mheap.alloc_m()`。
+
+#### Go 垃圾回收和内存释放
+
+如果只申请和分配内存，内存终将枯竭。Go 使用垃圾回收收集不再使用的 span，调用 `mspan.scavenge()` 把 span 释放还给 OS（并非真释放，只是告诉 OS 这片内存的信息无用了，如果你需要的话，收回去好了），然后交给 mheap，mheap 对 span 进行 span 的合并，把合并后的 span 加入 scav 树中，等待再分配内存时，由 mheap 进行内存再分配，Go 垃圾回收也是一个很强的主题，详见下一部分。
+
+现在我们关注一下，Go 程序是怎么把内存释放给操作系统的？释放内存的函数是 sysUnused，它会被`mspan.scavenge()` 调用:
+
+```go
+func sysUnused(v unsafe.Pointer, n uintptr) {
+    // MADV_FREE_REUSABLE is like MADV_FREE except it also propagates
+    // accounting information about the process to task_info.
+    madvise(v, n, _MADV_FREE_REUSABLE)
+}
+```
+
+注释说  _MADV_FREE_REUSABLE 与 MADV_FREE 的功能类似，它的功能是给内核提供一个建议：这个内存地址区间的内存已经不再使用，可以进行回收。但内核是否回收，以及什么时候回收，这就是内核的事情了。
+
+如果内核真把这片内存回收了，当 Go 程序再使用这个地址时，内核会重新进行虚拟地址到物理地址的映射。所以在内存充足的情况下，内核也没有必要立刻回收内存。
+
+#### Go 的栈内存
+
+最后提一下栈内存。从一个宏观的角度看，内存管理不应当只有堆，也应当有栈。每个 goroutine 都有自己的栈，栈的初始大小是 2KB，100 万的 goroutine 会占用 2G，但 goroutine 的栈会在 2KB 不够用时自动扩容，当扩容为 4KB 的时候，百万 goroutine 会占用 4GB。
+
+#### 相关数据结构
+
+为了方便自主管理内存，做法便是先向系统申请一块内存，然后将内存切割成小块，通过一定的内存分配算法管理内存。 
+
+以 64 位系统为例，Golang 程序启动时会向系统申请的内存如下图所示：
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png)
+
+预申请的内存划分为 spans、bitmap、arena 三部分。其中 arena 即为所谓的堆区，应用中需要的内存从这里分配。其中 spans 和 bitmap 是为了管理 arena 区而存在的。
+
+- arena 的大小为 512G，为了方便管理把 arena 区域划分成一个个的 page，每个 page 为 8KB，一共有 512GB/8KB 个页；
+- spans 区域存放 span 的指针，每个指针对应一个 page，所以 span 区域的大小为 (512GB/8KB) * 指针大小 8byte = 512M
+- bitmap 区域大小也是通过 arena 计算出来，不过主要用于 GC。
+
+##### span
+
+span 是用于管理 arena 页的关键数据结构，每个 span 中包含 1 个或多个连续页，为了满足小对象分配，span 中的一页会划分更小的粒度，而对于大对象比如超过页大小，则通过多页实现。
+
+###### **class**
+
+跟据对象大小，Golang 划分了一系列 class，每个 class 都代表一个固定大小的对象，以及每个 span 的大小。
+
+如下表所示：
+
+```go
+// class  bytes/obj  bytes/span  objects  waste bytes
+//     1          8        8192     1024            0
+//     2         16        8192      512            0
+//     3         32        8192      256            0
+//     4         48        8192      170           32
+//     5         64        8192      128            0
+//     6         80        8192      102           32
+//     7         96        8192       85           32
+//     8        112        8192       73           16
+//     9        128        8192       64            0
+//    10        144        8192       56          128
+//    11        160        8192       51           32
+//    12        176        8192       46           96
+//    13        192        8192       42          128
+//    14        208        8192       39           80
+//    15        224        8192       36          128
+//    16        240        8192       34           32
+//    17        256        8192       32            0
+//    18        288        8192       28          128
+//    19        320        8192       25          192
+//    20        352        8192       23           96
+//    21        384        8192       21          128
+//    22        416        8192       19          288
+//    23        448        8192       18          128
+//    24        480        8192       17           32
+//    25        512        8192       16            0
+//    26        576        8192       14          128
+//    27        640        8192       12          512
+//    28        704        8192       11          448
+//    29        768        8192       10          512
+//    30        896        8192        9          128
+//    31       1024        8192        8            0
+//    32       1152        8192        7          128
+//    33       1280        8192        6          512
+//    34       1408       16384       11          896
+//    35       1536        8192        5          512
+//    36       1792       16384        9          256
+//    37       2048        8192        4            0
+//    38       2304       16384        7          256
+//    39       2688        8192        3          128
+//    40       3072       24576        8            0
+//    41       3200       16384        5          384
+//    42       3456       24576        7          384
+//    43       4096        8192        2            0
+//    44       4864       24576        5          256
+//    45       5376       16384        3          256
+//    46       6144       24576        4            0
+//    47       6528       32768        5          128
+//    48       6784       40960        6          256
+//    49       6912       49152        7          768
+//    50       8192        8192        1            0
+//    51       9472       57344        6          512
+//    52       9728       49152        5          512
+//    53      10240       40960        4            0
+//    54      10880       32768        3          128
+//    55      12288       24576        2            0
+//    56      13568       40960        3          256
+//    57      14336       57344        4            0
+//    58      16384       16384        1            0
+//    59      18432       73728        4            0
+//    60      19072       57344        3          128
+//    61      20480       40960        2            0
+//    62      21760       65536        3          256
+//    63      24576       24576        1            0
+//    64      27264       81920        3          128
+//    65      28672       57344        2            0
+//    66      32768       32768        1            0
+```
+
+上表中每列含义如下：
+
+- `class`：class ID，每个 span 结构中都有一个 class ID, 表示该 span 可处理的对象类型
+- `bytes/obj`：该 class 代表对象的字节数
+- `bytes/span`：每个 span 占用堆的字节数，也即：页数 * 页大小
+- `objects`：每个 span 可分配的对象个数，也即（bytes/spans）/（bytes/obj）
+- `waste bytes`：每个 span 产生的内存碎片，也即（bytes/spans）%（bytes/obj）
+
+上表可见最大的对象是 32K 大小，超过 32K 大小的由特殊的 class 表示，该 class ID 为 0，每个 class 只包含一个对象。
+
+###### **span 数据结构**
+
+span 是内存管理的基本单位,每个 span 用于管理特定的 class 对象, 跟据对象大小，span 将一个或多个页拆分成多个块进行管理。
+
+`src/runtime/mheap.go:mspan` 定义了其数据结构：
+
+```go
+type mspan struct {
+    next *mspan            //链表前向指针，用于将span链接起来
+    prev *mspan            //链表前向指针，用于将span链接起来
+    startAddr uintptr // 起始地址，也即所管理页的地址
+    npages    uintptr // 管理的页数
+
+    nelems uintptr // 块个数，也即有多少个块可供分配
+
+    allocBits  *gcBits //分配位图，每一位代表一个块是否已分配
+
+    allocCount  uint16     // 已分配块的个数
+    spanclass   spanClass  // class表中的class ID
+
+    elemsize    uintptr    // class表中的对象大小，也即块大小
+}
+```
+
+以 class 10 为例：
+
+- spanclass 为 10，参照 class 表可得出 npages=1, nelems=56, elemsize 为 144。
+- 其中 startAddr 是在 span 初始化时就指定了某个页的地址。
+- allocBits 指向一个位图，每位代表一个块是否被分配，若有两个块已经被分配，其 allocCount 也为 2。
+
+next 和 prev 用于将多个 span 链接起来，这有利于管理多个 span，接下来会进行说明。
+
+##### cache
+
+有了管理内存的基本单位 span，还要有个数据结构来管理 span，这个数据结构叫 mcentral，各线程需要内存时从 mcentral 管理的 span 中申请内存，为了避免多线程申请内存时不断的加锁，Golang 为每个线程分配了 span 的缓存，这个缓存即是 cache。
+
+`src/runtime/mcache.go:mcache` 定义了 cache 的数据结构：
+
+```go
+type mcache struct {
+    alloc [67*2]*mspan // 按class分组的mspan列表
+}
+```
+
+alloc 为 mspan 的指针数组，数组大小为 class 总数的 2 倍。
+
+数组中每个元素代表了一种 class 类型的 span 列表，每种 class 类型都有两组 span 列表，第一组列表中所表示的对象中包含了指针，第二组列表中所表示的对象不含有指针，这么做是为了提高 GC 扫描性能，对于不包含指针的 span 列表，没必要去扫描。
+
+根据对象是否包含指针，将对象分为 noscan 和 scan 两类，其中 noscan 代表没有指针，而 scan 则代表有指针，需要 GC 进行扫描。
+
+mchache 在初始化时是没有任何 span 的，在使用过程中会动态的从 central 中获取并缓存下来，跟据使用情况，每种 class 的 span 个数也不相同。上图所示，class 0 的 span 数比 class1 的要多，说明本线程中分配的小对象要多一些。
+
+##### central
+
+cache 作为线程的私有资源为单个线程服务，而 central 则是全局资源，为多个线程服务，当某个线程内存不足时会向 central 申请，当某个线程释放内存时又会回收进 central。
+
+`src/runtime/mcentral.go:mcentral` 定义了 central 数据结构：
+
+```go
+type mcentral struct {
+    lock      mutex     //互斥锁
+    spanclass spanClass // span class ID
+    nonempty  mSpanList // non-empty 指还有空闲块的span列表
+    empty     mSpanList // 指没有空闲块的span列表
+
+    nmalloc uint64      // 已累计分配的对象个数
+}
+```
+
+- `lock`: 线程间互斥锁，防止多线程读写冲突
+- `spanclass `: 每个 mcentral 管理着一组有相同 class 的 span 列表
+- `nonempty`: 指还有内存可用的 span 列表
+- `empty`: 指没有内存可用的 span 列表
+- `nmalloc`: 指累计分配的对象个数
+
+线程从 central 获取 span 步骤如下：
+
+1. 加锁
+2. 从 nonempty 列表获取一个可用 span，并将其从链表中删除
+3. 将取出的 span 放入 empty 链表
+4. 将 span 返回给线程
+5. 解锁
+6. 线程将该 span 缓存进 cache
+
+线程将 span 归还步骤如下：
+
+1. 加锁
+2. 将 span 从 empty 列表删除
+3. 将 span 加入 noneempty 列表
+4. 解锁
+
+上述线程从 central 中获取 span 和归还 span 只是简单流程，为简单起见，并未对具体细节展开。
+
+##### heap
+
+从 mcentral 数据结构可见，每个 mcentral 对象只管理特定的 class 规格的 span。事实上每种 class 都会对应一个 mcentral,这个 mcentral 的集合存放于 mheap 数据结构中。
+
+`src/runtime/mheap.go:mheap` 定义了 heap 的数据结构：
+
+```go
+type mheap struct {
+    lock      mutex
+
+    spans []*mspan
+
+    bitmap        uintptr     //指向bitmap首地址，bitmap是从高地址向低地址增长的
+
+    arena_start uintptr        //指示arena区首地址
+    arena_used  uintptr        //指示arena区已使用地址位置
+
+    central [67*2]struct {
+        mcentral mcentral
+        pad      [sys.CacheLineSize - unsafe.Sizeof(mcentral{})%sys.CacheLineSize]byte
+    }
+}
+```
+
+- `lock`： 互斥锁
+- `spans`: 指向 spans 区域，用于映射 span 和 page 的关系
+- `bitmap`：bitmap 的起始地址
+- `arena_start`: arena 区域首地址
+- `arena_used`: 当前 arena 已使用区域的最大地址
+- `central`: 每种 class 对应的两个 mcentral
+
+从数据结构可见，mheap 管理着全部的内存，**事实上 Golang 就是通过一个 mheap 类型的全局变量进行内存管理的。**
+
+系统预分配的内存分为 spans、bitmap、arean 三个区域，通过 mheap 管理起来。接下来看内存分配过程。
+
+##### 总结
+
+Golang 内存分配是个相当复杂的过程，其中还掺杂了 GC 的处理。
+
+1. Golang 程序启动时申请一大块内存，并划分成 spans、bitmap、arena 区域
+2. arena 区域按页划分成一个个小块
+3. span 管理一个或多个页
+4. mcentral 管理多个 span 供线程申请使用
+5. mcache 作为线程私有资源，资源来源于 mcentral
+
+Go 的内存分配原理主要强调两个重要的思想：
+
+1. **使用缓存提高效率**。在存储的整个体系中到处可见缓存的思想，Go 内存分配和管理也使用了缓存，利用缓存一是**减少了系统调用的次数**，二是**降低了锁的粒度、减少加锁的次数**，从这 2 点提高了内存管理效率。
+2. **以空间换时间**，提高内存管理效率。空间换时间是一种常用的性能优化思想，这种思想其实非常普遍，比如Hash、Map、二叉排序树等数据结构的本质就是空间换时间，在数据库中也很常见，比如数据库索引、索引视图和数据缓存等，再如 Redis 等缓存数据库也是空间换时间的思想。
+
+### 垃圾回收原理
+
+所谓垃圾就是不再需要的内存块，这些垃圾如果不清理就没办法再次被分配使用，在不支持垃圾回收的编程语言里，这些垃圾内存就是泄露的内存。
+
+Golang 的垃圾回收（GC）也是内存管理的一部分，了解垃圾回收最好先了解前面介绍的内存分配原理。
+
+#### 垃圾回收算法
+
+业界常见的垃圾回收算法有以下几种：
+
+- 引用计数：对每个对象维护一个引用计数，当引用该对象的对象被销毁时，引用计数减1，当引用计数器为0是回收该对象。
+    - 优点：对象可以很快的被回收，不会出现内存耗尽或达到某个阀值时才回收。
+    - 缺点：不能很好的处理循环引用，而且实时维护引用计数，有也一定的代价。
+    - 代表语言：Python、PHP、Swift
+- 标记-清除：从根变量开始遍历所有引用的对象，引用的对象标记为"被引用"，没有被标记的进行回收。
+    - 优点：解决了引用计数的缺点。
+    - 缺点：需要STW，即要暂时停掉程序运行。
+    - 代表语言：Golang(其采用三色标记法)
+- 分代收集：按照对象生命周期长短划分不同的代空间，生命周期长的放入老年代，而短的放入新生代，不同代有不能的回收算法和回收频率。
+    - 优点：回收性能好
+    - 缺点：算法复杂
+    - 代表语言： JAVA
+
+#### Golang 垃圾回收
+
+##### 垃圾回收原理
+
+简单的说，垃圾回收的核心就是以供后续内存分配时使用。
+
+下图展示了一段内存，内存中即有已分配掉的内存，也有未分配的内存，垃圾回收的目标就是把那些已经分配的但没有对象引用的内存找出来并回收掉：
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png)
+
+上图中，内存块 1、2、4 号位上的内存块已被分配（数字 1 代表已被分配，0 未分配）。
+
+变量 a, b 为一指针，指向内存的 1、2 号位。内存块的 4 号位曾经被使用过，但现在没有任何对象引用了，就需要被回收掉。
+
+垃圾回收开始时从 root 对象开始扫描，把 root 对象引用的内存标记为"被引用"，考虑到内存块中存放的可能是指针，所以还需要递归的进行标记，全部标记完成后，只保留被标记的内存，未被标记的全部标识为未分配即完成了回收。
+
+##### 内存标记 (Mark)
+
+前面介绍内存分配时，介绍过 span 数据结构，span 中维护了一个个内存块，并由一个位图 allocBits 表示每个内存块的分配情况。在 span 数据结构中还有另一个位图 gcmarkBits 用于标记内存块被引用情况。
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png)
+
+如上图所示，allocBits 记录了每块内存分配情况，而 gcmarkBits 记录了每块内存标记情况。标记阶段对每块内存进行标记，有对象引用的的内存标记为 1 (如图中灰色所示)，没有引用到的保持默认为 0。
+
+allocBits 和 gcmarkBits 数据结构是完全一样的，标记结束就是内存回收，回收时将 allocBits 指向 gcmarkBits，则代表标记过的才是存活的，gcmarkBits 则会在下次标记时重新分配内存，非常的巧妙。
+
+##### 三色标记法
+
+前面介绍了对象标记状态的存储方式，还需要有一个标记队列来存放待标记的对象，可以简单想象成把对象从标记队列中取出，将对象的引用状态标记在 span 的 gcmarkBits，把对象引用到的其他对象再放入队列中。
+
+三色只是为了叙述上方便抽象出来的一种说法，实际上对象并没有颜色之分。这里的三色，对应了垃圾回收过程中对象的三种状态：
+
+- 灰色：对象还在标记队列中等待
+- 黑色：对象已被标记，gcmarkBits 对应的位为 1（该对象不会在本次 GC 中被清理）
+- 白色：对象未被标记，gcmarkBits 对应的位为 0（该对象将会在本次 GC 中被清理）
+
+例如，当前内存中有 A~F 一共 6 个对象，根对象 a，b 本身为栈上分配的局部变量，根对象a、b分别引用了对象A、B, 而 B 对象又引用了对象 D，则 GC 开始前各对象的状态如下图所示:
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png)
+
+初始状态下所有对象都是白色的。
+
+接着开始扫描根对象 a、b:
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png)
+
+由于根对象引用了对象 A、B，那么 A、B 变为灰色对象，接下来就开始分析灰色对象，分析 A 时，A 没有引用其他对象很快就转入黑色，B 引用了 D，则 B 转入黑色的同时还需要将 D 转为灰色，进行接下来的分析。如下图所示：
+
+![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png)
+
+上图中灰色对象只有 D，由于 D 没有引用其他对象，所以 D 转入黑色。标记过程结束：
+
+![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png)
+
+最终，黑色的对象会被保留下来，白色对象会被回收掉。
+
+##### Stop The World
+
+印度电影《苏丹》中有句描述摔跤的一句台词是：“所谓摔跤，就是把对手控制住，然后摔倒他。”
+
+对于垃圾回收来说，回收过程中也需要控制住内存的变化，否则回收过程中指针传递会引起内存引用关系变化，如果错误的回收了还在使用的内存，结果将是灾难性的。
+
+Golang 中的 STW（Stop The World）就是停掉所有的 goroutine，专心做垃圾回收，待垃圾回收结束后再恢复 goroutine。
+
+STW 时间的长短直接影响了应用的执行，时间过长对于一些 web 应用来说是不可接受的，这也是广受诟病的原因之一。
+
+为了缩短 STW 的时间，Golang 不断优化垃圾回收算法，这种情况得到了很大的改善。
+
+#### 垃圾回收优化
+
+##### 写屏障 (Write Barrier)
+
+前面说过 STW 目的是防止 GC 扫描时内存变化而停掉 goroutine，而写屏障就是让 goroutine 与 GC 同时运行的手段。虽然写屏障不能完全消除 STW，但是可以大大减少 STW 的时间。
+
+写屏障类似一种开关，在 GC 的特定时机开启，开启后指针传递时会把指针标记，即本轮不回收，下次 GC 时再确定。
+
+GC 过程中新分配的内存会被立即标记，用的并不是写屏障技术，也即 GC 过程中分配的内存不会在本轮 GC 中回收。
+
+##### 辅助 GC (Mutator Assist)
+
+为了防止内存分配过快，在 GC 执行过程中，如果 goroutine 需要分配内存，那么这个 goroutine 会参与一部分 GC 的工作，即帮助 GC 做一部分工作，这个机制叫作 Mutator Assist。
+
+#### 垃圾回收触发时机
+
+##### 内存分配量达到阀值触发 GC
+
+每次内存分配时都会检查当前内存分配量是否已达到阀值，如果达到阀值则立即启动 GC。
+
+```
+阀值 = 上次GC内存分配量 * 内存增长率
+```
+
+内存增长率由环境变量 `GOGC` 控制，默认为 100，即每当内存扩大一倍时启动 GC。
+
+##### 定期触发 GC
+
+默认情况下，最长 2 分钟触发一次 GC，这个间隔在 `src/runtime/proc.go:forcegcperiod` 变量中被声明：
+
+```go
+// forcegcperiod is the maximum time in nanoseconds between garbage
+// collections. If we go this long without a garbage collection, one
+// is forced to run.
+//
+// This is a variable for testing purposes. It normally doesn't change.
+var forcegcperiod int64 = 2 * 60 * 1e9
+```
+
+##### 手动触发
+
+程序代码中也可以使用 `runtime.GC()` 来手动触发 GC。这主要用于 GC 性能测试和统计。
+
+#### GC 性能优化
+
+GC 性能与对象数量负相关，对象越多 GC 性能越差，对程序影响越大。
+
+所以 GC 性能优化的思路之一就是减少对象分配个数，比如对象复用或使用大对象组合多个小对象等等。
+
+另外，由于内存逃逸现象，有些隐式的内存分配也会产生，也有可能成为 GC 的负担。
+
+关于 GC 性能优化的具体方法，后面单独介绍。
+
+### 逃逸分析
+
+所谓逃逸分析（Escape analysis）是指由编译器决定内存分配的位置，不需要程序员指定。 函数中申请一个新的对象
+
+- 如果分配在栈中，则函数执行结束可自动将内存回收；
+- 如果分配在堆中，则函数执行结束可交给 GC（垃圾回收）处理;
+
+有了逃逸分析，返回函数局部变量将变得可能，除此之外，逃逸分析还跟闭包息息相关，了解哪些场景下对象会逃逸至关重要。
+
+#### 逃逸策略
+
+每当函数中申请新的对象，编译器会跟据该对象是否被函数外部引用来决定是否逃逸：
+
+1. 如果函数外部没有引用，则优先放到栈中；
+2. 如果函数外部存在引用，则必定放到堆中；
+
+注意，对于函数外部没有引用的对象，也有可能放到堆中，比如内存过大超过栈的存储能力。
+
+#### 逃逸场景
+
+##### 指针逃逸
+
+我们知道 Go 可以返回局部变量指针，这其实是一个典型的变量逃逸案例，示例代码如下：
+
+```go
+package main
+
+type Student struct {
+    Name string
+    Age  int
+}
+
+func StudentRegister(name string, age int) *Student {
+    s := new(Student) //局部变量s逃逸到堆
+
+    s.Name = name
+    s.Age = age
+
+    return s
+}
+
+func main() {
+    StudentRegister("Jim", 18)
+}
+```
+
+函数 `StudentRegister()` 内部 s 为局部变量，其值通过函数返回值返回，s 本身为一指针，其指向的内存地址不会是栈而是堆，这就是典型的逃逸案例。
+
+通过编译参数 -gcflag=-m 可以查询编译过程中的逃逸分析：
+
+```go
+D:\SourceCode\GoExpert\src>go build -gcflags=-m
+# _/D_/SourceCode/GoExpert/src
+.\main.go:8: can inline StudentRegister
+.\main.go:17: can inline main
+.\main.go:18: inlining call to StudentRegister
+.\main.go:8: leaking param: name
+.\main.go:9: new(Student) escapes to heap
+.\main.go:18: main new(Student) does not escape
+```
+
+可见在 `StudentRegister()` 函数中，也即代码第9行显示 "escapes to heap"，代表该行内存分配发生了逃逸现象。
+
+##### 栈空间不足逃逸
+
+看下面的代码，是否会产生逃逸呢？
+
+```go
+package main
+
+func Slice() {
+    s := make([]int, 1000, 1000)
+
+    for index, _ := range s {
+        s[index] = index
+    }
+}
+
+func main() {
+    Slice()
+}
+```
+
+上面代码 `Slice()` 函数中分配了一个1000个长度的切片，是否逃逸取决于栈空间是否足够大。 直接查看编译提示，如下：
+
+```go
+D:\SourceCode\GoExpert\src>go build -gcflags=-m
+# _/D_/SourceCode/GoExpert/src
+.\main.go:4: Slice make([]int, 1000, 1000) does not escape
+```
+
+我们发现此处并没有发生逃逸。那么把切片长度扩大 10 倍即 10000 会如何呢?
+
+```go
+D:\SourceCode\GoExpert\src>go build -gcflags=-m
+# _/D_/SourceCode/GoExpert/src
+.\main.go:4: make([]int, 10000, 10000) escapes to heap
+```
+
+我们发现当切片长度扩大到 10000 时就会逃逸。
+
+实际上当栈空间不足以存放当前对象时或无法判断当前切片长度时会将对象分配到堆中。
+
+##### 动态类型逃逸
+
+很多函数参数为 interface 类型，比如 `fmt.Println(a ...interface{})`，编译期间很难确定其参数的具体类型，也容易产生逃逸。 如下代码所示：
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    s := "Escape"
+    fmt.Println(s)
+}
+```
+
+上述代码 s 变量只是一个 string 类型变量，调用 `fmt.Println()` 时会产生逃逸：
+
+```go
+D:\SourceCode\GoExpert\src>go build -gcflags=-m
+# _/D_/SourceCode/GoExpert/src
+.\main.go:7: s escapes to heap
+.\main.go:7: main ... argument does not escape
+```
+
+##### 闭包引用对象逃逸
+
+某著名的开源框架实现了某个返回 Fibonacci 数列的函数：
+
+```go
+func Fibonacci() func() int {
+    a, b := 0, 1
+    return func() int {
+        a, b = b, a+b
+        return a
+    }
+}
+```
+
+该函数返回一个闭包，闭包引用了函数的局部变量 a 和 b，使用时通过该函数获取该闭包，然后每次执行闭包都会依次输出 Fibonacci 数列。 完整的示例程序如下所示：
+
+```go
+package main
+
+import "fmt"
+
+func Fibonacci() func() int {
+    a, b := 0, 1
+    return func() int {
+        a, b = b, a+b
+        return a
+    }
+}
+
+func main() {
+    f := Fibonacci()
+
+    for i := 0; i < 10; i++ {
+        fmt.Printf("Fibonacci: %d\n", f())
+    }
+}
+```
+
+上述代码通过 `Fibonacci()` 获取一个闭包，每次执行闭包就会打印一个 Fibonacci 数值。输出如下所示：
+
+```go
+D:\SourceCode\GoExpert\src>src.exe
+Fibonacci: 1
+Fibonacci: 1
+Fibonacci: 2
+Fibonacci: 3
+Fibonacci: 5
+Fibonacci: 8
+Fibonacci: 13
+Fibonacci: 21
+Fibonacci: 34
+Fibonacci: 55
+```
+
+`Fibonacci()` 函数中原本属于局部变量的 a 和 b 由于闭包的引用，不得不将二者放到堆上，以致产生逃逸：
+
+```go
+D:\SourceCode\GoExpert\src>go build -gcflags=-m
+# _/D_/SourceCode/GoExpert/src
+.\main.go:7: can inline Fibonacci.func1
+.\main.go:7: func literal escapes to heap
+.\main.go:7: func literal escapes to heap
+.\main.go:8: &a escapes to heap
+.\main.go:6: moved to heap: a
+.\main.go:8: &b escapes to heap
+.\main.go:6: moved to heap: b
+.\main.go:17: f() escapes to heap
+.\main.go:17: main ... argument does not escape
+```
+
+#### 逃逸总结
+
+- 栈上分配内存比在堆中分配内存有更高的效率
+- 栈上分配的内存不需要 GC 处理
+- 堆上分配的内存使用完毕会交给 GC 处理
+- **逃逸分析目的是决定内分配地址是栈还是堆**
+- 逃逸分析在编译阶段完成
+
+### 编程 Tips
+
+思考一下这个问题：函数传递指针真的比传值效率高吗？ 我们知道传递指针可以减少底层值的拷贝，可以提高效率，但是如果拷贝的数据量小，由于指针传递会产生逃逸，可能会使用堆，也可能会增加 GC 的负担，所以传递指针不一定是高效的。
+
+## 并发控制
+
+本章主要介绍 GO 语言开发过程中经常使用的并发控制手段。
+
+我们考虑这么一种场景，协程 A 执行过程中需要创建子协程 A1、A2、A3...An，协程 A 创建完子协程后就等待子协程退出。 针对这种场景，GO 提供了三种解决方案：
+
+- Channel：使用 channel 控制子协程
+- WaitGroup：使用信号量机制控制子协程
+- Context：使用上下文控制子协程
+
+三种方案各有优劣，比如 Channel 优点是实现简单，清晰易懂，WaitGroup 优点是子协程个数动态可调整，Context 优点是对子协程派生出来的孙子协程的控制。 缺点是相对而言的，要结合实例应用场景进行选择。
+
+channel一般用于协程之间的通信，channel也可以用于并发控制。比如主协程启动N个子协程，主协程等待所有子协程退出后再继续后续流程，这种场景下channel也可轻易实现。
+
+### channel
+
+下面程序展示一个使用 channel 控制子协程的例子：
+
+```go
+package main
+
+import (
+    "time"
+    "fmt"
+)
+
+func Process(ch chan int) {
+    // Do some work...
+    time.Sleep(time.Second)
+
+    ch <- 1 // 管道中写入一个元素表示当前协程已结束
+}
+
+func main() {
+    channels := make([]chan int, 10) //创建一个10个元素的切片，元素类型为channel
+
+    for i:= 0; i < 10; i++ {
+        channels[i] = make(chan int) //切片中放入一个channel
+        go Process(channels[i])      //启动协程，传一个管道用于通信
+    }
+
+    for i, ch := range channels {  //遍历切片，等待子协程结束
+        <-ch
+        fmt.Println("Routine ", i, " quit!")
+    }
+}
+```
+
+上面程序通过创建 N 个 channel 来管理 N 个协程，每个协程都有一个 channel 用于跟父协程通信，父协程创建完所有协程中等待所有协程结束。
+
+这个例子中，父协程仅仅是等待子协程结束，其实父协程也可以向管道中写入数据通知子协程结束，这时子协程需要定期的探测管道中是否有消息出现。
+
+#### 总结
+
+使用 channel 来控制子协程的优点是实现简单，缺点是当需要大量创建协程时就需要有相同数量的 channel，而且对于子协程继续派生出来的协程不方便控制。
+
+后面继续介绍的 WaitGroup、Context 看起来比 channel 优雅一些，在各种开源组件中使用频率比 channel 高得多。
+
+### WaitGroup
+
+WaitGroup 是 Golang 应用开发过程中经常使用的并发控制技术。
+
+WaitGroup，可理解为 Wait-Goroutine-Group，即**等待一组 goroutine 结束**。比如某个 goroutine 需要等待其他几个 goroutine 全部完成，那么使用 WaitGroup 可以轻松实现。
+
+下面程序展示了一个 goroutine 等待另外两个 goroutine 结束的例子：
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+    "sync"
+)
+
+func main() {
+    var wg sync.WaitGroup
+
+    wg.Add(2) //设置计数器，数值即为goroutine的个数
+    go func() {
+        //Do some work
+        time.Sleep(1*time.Second)
+
+        fmt.Println("Goroutine 1 finished!")
+        wg.Done() //goroutine执行结束后将计数器减1
+    }()
+
+    go func() {
+        //Do some work
+        time.Sleep(2*time.Second)
+
+        fmt.Println("Goroutine 2 finished!")
+        wg.Done() //goroutine执行结束后将计数器减1
+    }()
+
+    wg.Wait() //主goroutine阻塞等待计数器变为0
+    fmt.Printf("All Goroutine finished!")
+}
+```
+
+简单的说，上面程序中 wg 内部维护了一个计数器：
+
+1. 启动 goroutine 前将计数器通过 `Add(2)` 将计数器设置为待启动的 goroutine 个数。
+2. 启动 goroutine 后，使用 `Wait()` 方法阻塞自己，等待计数器变为 0。
+3. 每个 goroutine 执行结束通过 `Done()` 方法将计数器减 1。
+4. 计数器变为 0 后，阻塞的 goroutine 被唤醒。
+
+其实 WaitGroup 也可以实现一组 goroutine 等待另一组 goroutine，这有点像玩杂技，很容易出错，如果不了解其实现原理更是如此。实际上，WaitGroup 的实现源码非常简单。
+
+#### 基础知识
+
+##### 信号量
+
+信号量是 Unix 系统提供的一种保护共享资源的机制，用于防止多个线程同时访问某个资源。
+
+可简单理解为信号量为一个数值：
+
+- 当信号量 > 0 时，表示资源可用，获取信号量时系统自动将信号量减 1；
+- 当信号量 == 0 时，表示资源暂不可用，获取信号量时，当前线程会进入睡眠，当信号量为正时被唤醒；
+
+由于 WaitGroup 实现中也使用了信号量，在此做个简单介绍。
+
+#### WaitGroup
+
+##### 数据结构
+
+源码包中 `src/sync/waitgroup.go:WaitGroup` 定义了其数据结构：
+
+```go
+type WaitGroup struct {
+    state1 [3]uint32
+}
+```
+
+`state1` 是个长度为 3 的数组，其中包含了 state 和一个信号量，而 state 实际上是两个计数器：
+
+- counter：当前还未执行结束的 goroutine 计数器
+- waiter count：等待 goroutine-group 结束的 goroutine 数量，即有多少个等候者
+- semaphore：信号量
+
+考虑到字节是否对齐，三者出现的位置不同，为简单起见，依照字节已对齐情况下，三者在内存中的位置如下所示：
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png)
+
+WaitGroup 对外提供三个接口：
+
+- `Add(delta int)`：将 delta 值加到 counter 中
+- `Wait()`：waiter 递增 1，并阻塞等待信号量 semaphore
+- `Done()`：counter 递减 1，按照 waiter 数值释放相应次数信号量
+
+下面分别介绍这三个函数的实现细节。
+
+##### `Add(delta int)`
+
+`Add()` 做了两件事，一是把 delta 值累加到 counter 中，因为 delta 可以为负值，也就是说 counter 有可能变成 0 或负值，所以第二件事就是当 counter 值变为 0 时，跟据 waiter 数值释放等量的信号量，把等待的 goroutine 全部唤醒，如果 counter 变为负值，则 panic。
+
+`Add()` 伪代码如下：
+
+```go
+func (wg *WaitGroup) Add(delta int) {
+    statep, semap := wg.state() // 获取state和semaphore地址指针
+
+    state := atomic.AddUint64(statep, uint64(delta)<<32) // 把delta左移32位累加到state，即累加到counter中
+    v := int32(state >> 32) // 获取counter值
+    w := uint32(state)      // 获取waiter值
+
+    if v < 0 {              // 经过累加后counter值变为负值，panic
+        panic("sync: negative WaitGroup counter")
+    }
+
+    // 经过累加后，此时，counter >= 0
+    // 如果counter为正，说明不需要释放信号量，直接退出
+    // 如果waiter为零，说明没有等待者，也不需要释放信号量，直接退出
+    if v > 0 || w == 0 {
+        return
+    }
+
+    // 此时，counter一定等于0，而waiter一定大于0（内部维护waiter，不会出现小于0的情况），
+    // 先把counter置为0，再释放waiter个数的信号量
+    *statep = 0
+    for ; w != 0; w-- {
+        runtime_Semrelease(semap, false) // 释放信号量，执行一次释放一个，唤醒一个等待者
+    }
+}
+```
+
+##### `Wait()`
+
+`Wait()` 方法也做了两件事，一是累加 waiter，二是阻塞等待信号量
+
+```go
+func (wg *WaitGroup) Wait() {
+    statep, semap := wg.state() // 获取state和semaphore地址指针
+    for {
+        state := atomic.LoadUint64(statep) // 获取state值
+        v := int32(state >> 32)            // 获取counter值
+        w := uint32(state)                 // 获取waiter值
+        if v == 0 {                        // 如果counter值为0，说明所有goroutine都退出了，不需要待待，直接返回
+            return
+        }
+
+        // 使用CAS（比较交换算法）累加waiter，累加可能会失败，失败后通过for loop下次重试
+        if atomic.CompareAndSwapUint64(statep, state, state+1) {
+            runtime_Semacquire(semap) // 累加成功后，等待信号量唤醒自己
+            return
+        }
+    }
+}
+```
+
+这里用到了 CAS 算法保证有多个 goroutine 同时执行 `Wait()` 时也能正确累加 waiter。
+
+##### `Done()`
+
+`Done()` 只做一件事，即把 counter 减 1，我们知道 `Add()` 可以接受负值，所以 `Done()` **实际上只是调用了`Add(-1)`**。
+
+源码如下：
+
+```go
+func (wg *WaitGroup) Done() {
+    wg.Add(-1)
+}
+```
+
+`Done()` 的执行逻辑就转到了 `Add()`，实际上也正是最后一个完成的 goroutine 把等待者唤醒的。
+
+##### 编程 Tips
+
+- `Add()` 操作必须早于 `Wait()`，否则会 panic
+- `Add()` 设置的值必须与实际等待的 goroutine 个数一致，否则会 panic
+
+Golang context是Golang应用开发常用的并发控制技术，它与WaitGroup最大的不同点是context对于派生goroutine有更强的控制力，它可以控制多级的goroutine。
+
+context翻译成中文是"上下文"，即它可以控制一组呈树状结构的goroutine，每个goroutine拥有相同的上下文。
+
+典型的使用场景如下图所示：
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png)
+
+上图中由于goroutine派生出子goroutine，而子goroutine又继续派生新的goroutine，这种情况下使用WaitGroup就不太容易，因为子goroutine个数不容易确定。而使用context就可以很容易实现。
+
+### Context 实现原理
+
+Context 也叫作“上下文”，是一个比较抽象的概念，一般理解为**程序单元的一个运行状态、现场、快照**。其中上下是指存在上下层的传递，上会把内容传递给下，程序单元则指的是 Goroutine。
+
+每个 Goroutine 在执行之前，都要先知道程序当前的执行状态，通常将这些执行状态封装在一个 Context 变量中，传递给要执行的 Goroutine 中。
+
+context 实际上只定义了接口，凡是实现该接口的类都可称为是一种 context，官方包中实现了几个常用的 context，分别可用于不同的场景。
+
+#### 接口定义
+
+源码包中 `src/context/context.go:Context`  定义了该接口：
+
+```go
+type Context interface {
+    Deadline() (deadline time.Time, ok bool)
+
+    Done() <-chan struct{}
+
+    Err() error
+
+    Value(key interface{}) interface{}
+}
+```
+
+基础的 context 接口只定义了 4 个方法，下面分别简要说明一下：
+
+##### `Deadline()`
+
+该方法返回一个 `deadline` 和标识是否已设置 `deadline` 的 bool 值，如果没有设置 `deadline`，则 `ok == false`，此时 deadline 为一个初始值的 `time.Time` 值
+
+##### `Done()`
+
+该方法返回一个 channel，需要在 select-case 语句中使用，如 `case <-context.Done()`
+
+- 当 context 关闭后，`Done()` 返回一个被关闭的管道，关闭的管理仍然是可读的，据此 goroutine 可以收到关闭请求； 
+
+- 当 context 还未关闭时，`Done()` 返回 nil。
+
+##### `Err()`
+
+该方法描述 context 关闭的原因。关闭原因由 context 实现控制，不需要用户设置。比如 Deadline context，关闭原因可能是因为 deadline，也可能提前被主动关闭，那么关闭原因就会不同:
+
+- 因 deadline 关闭：“context deadline exceeded”；
+- 因主动关闭： "context canceled"。
+
+当 context 关闭后，`Err()` 返回 context 的关闭原因； 当 context 还未关闭时，`Err()` 返回 nil；
+
+##### `Value()`
+
+有一种 context，它不是用于控制呈树状分布的 goroutine，而是用于在树状分布的 goroutine 间传递信息。
+
+`Value()` 方法就是用于此种类型的 context，该方法根据 key 值查询 map 中的 value。具体使用后面示例说明。
+
+#### 空 context
+
+context 包中定义了一个空的 context， 名为 `emptyCtx`，用于 context 的根节点，空的 context 只是简单的实现了 Context，本身不包含任何值，仅用于其他 context 的父节点。
+
+它是一个不可取消，没有设置截止时间，没有携带任何值的 Context。
+
+`emptyCtx` 类型定义如下代码所示：
+
+```go
+type emptyCtx int
+
+func (*emptyCtx) Deadline() (deadline time.Time, ok bool) {
+    return
+}
+
+func (*emptyCtx) Done() <-chan struct{} {
+    return nil
+}
+
+func (*emptyCtx) Err() error {
+    return nil
+}
+
+func (*emptyCtx) Value(key interface{}) interface{} {
+    return nil
+}
+```
+
+context 包中定义了一个公用的 emptCtx 全局变量，名为 background，可以使用 `context.Background()` 获取它，实现代码如下所示：
+
+```go
+var background = new(emptyCtx)
+func Background() Context {
+    return background
+}
+```
+
+context 包提供了 4 个方法创建不同类型的 context，使用这四个方法时如果没有父 context，都需要传入 backgroud，即 backgroud 作为其父节点：
+
+- `WithCancel()`
+- `WithDeadline()`
+- `WithTimeout()`
+- `WithValue()`
+
+context 包中实现 Context 接口的 struct，除了 `emptyCtx` 外，还有 `cancelCtx`、`timerCtx` 和 `valueCtx` 三种，正是基于这三种 context 实例，实现了上述 4 种类型的 context。
+
+context 包中各 context 类型之间的关系，如下图所示：
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png)
+
+struct cancelCtx、timerCtx、valueCtx 都继承于 Context，下面分别介绍这三个 struct。
+
+#### cancelCtx
+
+源码包中 `src/context/context.go:cancelCtx`  定义了该类型 context：
+
+```go
+type cancelCtx struct {
+    Context
+
+    mu       sync.Mutex            // protects following fields
+    done     chan struct{}         // created lazily, closed by first cancel call
+    children map[canceler]struct{} // set to nil by the first cancel call
+    err      error                 // set to non-nil by the first cancel call
+}
+```
+
+children 中记录了由此 context 派生的所有 child，此 context 被 cancle 时会把其中的所有 child 都 cancle 掉。
+
+cancelCtx 与 deadline 和 value 无关，所以只需要实现 `Done()` 和 `Err()` 接口外露接口即可。
+
+##### `Done()` 接口实现
+
+按照Context定义，Done()接口只需要返回一个channel即可，对于cancelCtx来说只需要返回成员变量done即可。
+
+这里直接看下源码，非常简单：
+
+```go
+func (c *cancelCtx) Done() <-chan struct{} {
+    c.mu.Lock()
+    if c.done == nil {
+        c.done = make(chan struct{})
+    }
+    d := c.done
+    c.mu.Unlock()
+    return d
+}
+```
+
+由于cancelCtx没有指定初始化函数，所以cancelCtx.done可能还未分配，所以需要考虑初始化。 cancelCtx.done会在context被cancel时关闭，所以cancelCtx.done的值一般经历如三个阶段： nil --> chan struct{} --> closed chan。
+
+##### `Err()` 接口实现
+
+按照Context定义，Err()只需要返回一个error告知context被关闭的原因。对于cancelCtx来说只需要返回成员变量err即可。
+
+还是直接看下源码：
+
+```go
+func (c *cancelCtx) Err() error {
+    c.mu.Lock()
+    err := c.err
+    c.mu.Unlock()
+    return err
+}
+```
+
+cancelCtx.err默认是nil，在context被cancel时指定一个error变量： `var Canceled = errors.New("context canceled")`。
+
+##### `cancel()` 接口实现
+
+cancel()内部方法是理解cancelCtx的最关键的方法，其作用是关闭自己和其后代，其后代存储在cancelCtx.children的map中，其中key值即后代对象，value值并没有意义，这里使用map只是为了方便查询而已。
+
+cancel方法实现伪代码如下所示：
+
+```go
+func (c *cancelCtx) cancel(removeFromParent bool, err error) {
+    c.mu.Lock()
+
+    c.err = err                          //设置一个error，说明关闭原因
+    close(c.done)                     //将channel关闭，以此通知派生的context
+
+    for child := range c.children {   //遍历所有children，逐个调用cancel方法
+        child.cancel(false, err)
+    }
+    c.children = nil
+    c.mu.Unlock()
+
+    if removeFromParent {            //正常情况下，需要将自己从parent删除
+        removeChild(c.Context, c)
+    }
+}
+```
+
+实际上，WithCancel()返回的第二个用于cancel context的方法正是此cancel()。
+
+##### `WithCancel()` 方法实现
+
+WithCancel()方法作了三件事：
+
+- 初始化一个cancelCtx实例
+- 将cancelCtx实例添加到其父节点的children中(如果父节点也可以被cancel的话)
+- 返回cancelCtx实例和cancel()方法
+
+其实现源码如下所示：
+
+```go
+func WithCancel(parent Context) (ctx Context, cancel CancelFunc) {
+    c := newCancelCtx(parent)
+    propagateCancel(parent, &c)   //将自身添加到父节点
+    return &c, func() { c.cancel(true, Canceled) }
+}
+```
+
+这里将自身添加到父节点的过程有必要简单说明一下：
+
+1. 如果父节点也支持cancel，也就是说其父节点肯定有children成员，那么把新context添加到children里即可；
+2. 如果父节点不支持cancel，就继续向上查询，直到找到一个支持cancel的节点，把新context添加到children里；
+3. 如果所有的父节点均不支持cancel，则启动一个协程等待父节点结束，然后再把当前context结束。
+
+##### 典型使用案例
+
+一个典型的使用 cancel context 的例子如下所示：
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+    "context"
+)
+
+func HandelRequest(ctx context.Context) {
+    go WriteRedis(ctx)
+    go WriteDatabase(ctx)
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Println("HandelRequest Done.")
+            return
+        default:
+            fmt.Println("HandelRequest running")
+            time.Sleep(2 * time.Second)
+        }
+    }
+}
+
+func WriteRedis(ctx context.Context) {
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Println("WriteRedis Done.")
+            return
+        default:
+            fmt.Println("WriteRedis running")
+            time.Sleep(2 * time.Second)
+        }
+    }
+}
+
+func WriteDatabase(ctx context.Context) {
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Println("WriteDatabase Done.")
+            return
+        default:
+            fmt.Println("WriteDatabase running")
+            time.Sleep(2 * time.Second)
+        }
+    }
+}
+
+func main() {
+    ctx, cancel := context.WithCancel(context.Background())
+    go HandelRequest(ctx)
+
+    time.Sleep(5 * time.Second)
+    fmt.Println("It's time to stop all sub goroutines!")
+    cancel()
+
+    //Just for test whether sub goroutines exit or not
+    time.Sleep(5 * time.Second)
+}
+```
+
+上面代码中协程 `HandelRequest()` 用于处理某个请求，其又会创建两个协程：`WriteRedis()`、`WriteDatabase()`，main 协程创建创建 context，并把 context 在各子协程间传递，main 协程在适当的时机可以 cancel 掉所有子协程。
+
+程序输出如下所示：
+
+```go
+HandelRequest running
+WriteDatabase running
+WriteRedis running
+HandelRequest running
+WriteDatabase running
+WriteRedis running
+HandelRequest running
+WriteDatabase running
+WriteRedis running
+It's time to stop all sub goroutines!
+WriteDatabase Done.
+HandelRequest Done.
+WriteRedis Done.
+```
+
+#### timerCtx
+
+源码包中 `src/context/context.go:timerCtx` 定义了该类型 context：
+
+```go
+type timerCtx struct {
+    cancelCtx
+    timer *time.Timer // Under cancelCtx.mu.
+
+    deadline time.Time
+}
+```
+
+timerCtx在cancelCtx基础上增加了deadline用于标示自动cancel的最终时间，而timer就是一个触发自动cancel的定时器。
+
+由此，衍生出WithDeadline()和WithTimeout()。实现上这两种类型实现原理一样，只不过使用语境不一样：
+
+- deadline: 指定最后期限，比如context将2018.10.20 00:00:00之时自动结束
+- timeout: 指定最长存活时间，比如context将在30s后结束。
+
+对于接口来说，timerCtx在cancelCtx基础上还需要实现Deadline()和cancel()方法，其中cancel()方法是重写的。
+
+##### `Deadline()` 接口实现
+
+Deadline()方法仅仅是返回timerCtx.deadline而矣。而timerCtx.deadline是WithDeadline()或WithTimeout()方法设置的。
+
+##### `cancel()` 接口实现
+
+cancel()方法基本继承cancelCtx，只需要额外把timer关闭。
+
+timerCtx被关闭后，timerCtx.cancelCtx.err将会存储关闭原因：
+
+- 如果deadline到来之前手动关闭，则关闭原因与cancelCtx显示一致；
+- 如果deadline到来时自动关闭，则原因为："context deadline exceeded"
+
+##### `WithDeadline()` 方法实现
+
+WithDeadline()方法实现步骤如下：
+
+- 初始化一个timerCtx实例
+- 将timerCtx实例添加到其父节点的children中(如果父节点也可以被cancel的话)
+- 启动定时器，定时器到期后会自动cancel本context
+- 返回timerCtx实例和cancel()方法
+
+也就是说，timerCtx类型的context不仅支持手动cancel，也会在定时器到来后自动cancel。
+
+##### `WithTimeout()` 方法实现
+
+WithTimeout()实际调用了WithDeadline，二者实现原理一致。
+
+看代码会非常清晰：
+
+```go
+func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc) {
+    return WithDeadline(parent, time.Now().Add(timeout))
+}
+```
+
+##### 典型使用案例
+
+下面例子中使用WithTimeout()获得一个context并在其子协程中传递：
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+    "context"
+)
+
+func HandelRequest(ctx context.Context) {
+    go WriteRedis(ctx)
+    go WriteDatabase(ctx)
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Println("HandelRequest Done.")
+            return
+        default:
+            fmt.Println("HandelRequest running")
+            time.Sleep(2 * time.Second)
+        }
+    }
+}
+
+func WriteRedis(ctx context.Context) {
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Println("WriteRedis Done.")
+            return
+        default:
+            fmt.Println("WriteRedis running")
+            time.Sleep(2 * time.Second)
+        }
+    }
+}
+
+func WriteDatabase(ctx context.Context) {
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Println("WriteDatabase Done.")
+            return
+        default:
+            fmt.Println("WriteDatabase running")
+            time.Sleep(2 * time.Second)
+        }
+    }
+}
+
+func main() {
+    ctx, _ := context.WithTimeout(context.Background(), 5 * time.Second)
+    go HandelRequest(ctx)
+
+    time.Sleep(10 * time.Second)
+}
+```
+
+主协程中创建一个10s超时的context，并将其传递给子协程，10s自动关闭context。程序输出如下：
+
+```go
+HandelRequest running
+WriteRedis running
+WriteDatabase running
+HandelRequest running
+WriteRedis running
+WriteDatabase running
+HandelRequest running
+WriteRedis running
+WriteDatabase running
+HandelRequest Done.
+WriteDatabase Done.
+WriteRedis Done.
+```
+
+#### valueCtx
+
+源码包中`src/context/context.go:valueCtx` 定义了该类型context：
+
+```go
+type valueCtx struct {
+    Context
+    key, val interface{}
+}
+```
+
+valueCtx只是在Context基础上增加了一个key-value对，用于在各级协程间传递一些数据。
+
+由于valueCtx既不需要cancel，也不需要deadline，那么只需要实现Value()接口即可。
+
+##### `Value()` 接口实现
+
+由valueCtx数据结构定义可见，valueCtx.key和valueCtx.val分别代表其key和value值。 实现也很简单：
+
+```go
+func (c *valueCtx) Value(key interface{}) interface{} {
+    if c.key == key {
+        return c.val
+    }
+    return c.Context.Value(key)
+}
+```
+
+这里有个细节需要关注一下，即当前context查找不到key时，会向父节点查找，如果查询不到则最终返回interface{}。也就是说，可以通过子context查询到父的value值。
+
+##### `WithValue()` 方法实现
+
+WithValue()实现也是非常的简单, 伪代码如下：
+
+```go
+func WithValue(parent Context, key, val interface{}) Context {
+    if key == nil {
+        panic("nil key")
+    }
+    return &valueCtx{parent, key, val}
+}
+```
+
+##### 典型使用案例
+
+下面示例程序展示valueCtx的用法：
+
+```go
+package main
+
+import (
+    "fmt"
+    "time"
+    "context"
+)
+
+func HandelRequest(ctx context.Context) {
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Println("HandelRequest Done.")
+            return
+        default:
+            fmt.Println("HandelRequest running, parameter: ", ctx.Value("parameter"))
+            time.Sleep(2 * time.Second)
+        }
+    }
+}
+
+func main() {
+    ctx := context.WithValue(context.Background(), "parameter", "1")
+    go HandelRequest(ctx)
+
+    time.Sleep(10 * time.Second)
+}
+```
+
+上例main()中通过WithValue()方法获得一个context，需要指定一个父context、key和value。然后通将该context传递给子协程HandelRequest，子协程可以读取到context的key-value。
+
+注意：本例中子协程无法自动结束，因为context是不支持cancle的，也就是说<-ctx.Done()永远无法返回。如果需要返回，需要在创建context时指定一个可以cancel的context作为父节点，使用父节点的cancel()在适当的时机结束整个context。
+
+#### 总结
+
+- Context 仅仅是一个接口定义，跟据实现的不同，可以衍生出不同的 context 类型；
+- `cancelCtx `实现了 Context 接口，通过` WithCancel()` 创建 `cancelCtx `实例；
+- `timerCtx` 实现了 Context 接口，通过 `WithDeadline()` 和 `WithTimeout()` 创建 `timerCtx `实例；
+- `valueCtx` 实现了 Context 接口，通过 `WithValue()` 创建 `valueCtx `实例；
+- 三种 context 实例可互为父节点，从而可以组合成不同的应用形式；
