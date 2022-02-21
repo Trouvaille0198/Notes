@@ -3030,23 +3030,21 @@ func (wg *WaitGroup) Done() {
 - `Add()` 操作必须早于 `Wait()`，否则会 panic
 - `Add()` 设置的值必须与实际等待的 goroutine 个数一致，否则会 panic
 
-Golang context是Golang应用开发常用的并发控制技术，它与WaitGroup最大的不同点是context对于派生goroutine有更强的控制力，它可以控制多级的goroutine。
+### Context
 
-context翻译成中文是"上下文"，即它可以控制一组呈树状结构的goroutine，每个goroutine拥有相同的上下文。
+Context 也叫作“上下文”，是一个比较抽象的概念，一般理解为**程序单元的一个运行状态、现场、快照**。其中上下是指存在上下层的传递，上会把内容传递给下，程序单元则指的是 Goroutine。
+
+Golang context 是 Golang 应用开发常用的并发控制技术，它与 WaitGroup 最大的不同点是 **context 对于派生 goroutine 有更强的控制力**，它可以控制多级的 goroutine。
+
+每个 Goroutine 在执行之前，都要先知道程序当前的执行状态，通常将这些执行状态封装在一个 Context 变量中，传递给要执行的 Goroutine 中。
+
+context 实际上只定义了接口，凡是实现该接口的类都可称为是一种 context，官方包中实现了几个常用的 context，分别可用于不同的场景。
 
 典型的使用场景如下图所示：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png)
 
-上图中由于goroutine派生出子goroutine，而子goroutine又继续派生新的goroutine，这种情况下使用WaitGroup就不太容易，因为子goroutine个数不容易确定。而使用context就可以很容易实现。
-
-### Context 实现原理
-
-Context 也叫作“上下文”，是一个比较抽象的概念，一般理解为**程序单元的一个运行状态、现场、快照**。其中上下是指存在上下层的传递，上会把内容传递给下，程序单元则指的是 Goroutine。
-
-每个 Goroutine 在执行之前，都要先知道程序当前的执行状态，通常将这些执行状态封装在一个 Context 变量中，传递给要执行的 Goroutine 中。
-
-context 实际上只定义了接口，凡是实现该接口的类都可称为是一种 context，官方包中实现了几个常用的 context，分别可用于不同的场景。
+上图中由于 goroutine派生出子 goroutine，而子 goroutine 又继续派生新的 goroutine，这种情况下使用 WaitGroup 就不太容易，因为子 goroutine 个数不容易确定。而使用 context 就可以很容易实现。
 
 #### 接口定义
 
@@ -3166,7 +3164,7 @@ cancelCtx 与 deadline 和 value 无关，所以只需要实现 `Done()` 和 `Er
 
 ##### `Done()` 接口实现
 
-按照Context定义，Done()接口只需要返回一个channel即可，对于cancelCtx来说只需要返回成员变量done即可。
+按照 Context 定义，`Done()` 接口只需要返回一个 channel 即可，对于 cancelCtx 来说只需要返回成员变量 done 即可。
 
 这里直接看下源码，非常简单：
 
@@ -3182,11 +3180,13 @@ func (c *cancelCtx) Done() <-chan struct{} {
 }
 ```
 
-由于cancelCtx没有指定初始化函数，所以cancelCtx.done可能还未分配，所以需要考虑初始化。 cancelCtx.done会在context被cancel时关闭，所以cancelCtx.done的值一般经历如三个阶段： nil --> chan struct{} --> closed chan。
+由于 cancelCtx 没有指定初始化函数，所以 `cancelCtx.done` 可能还未分配，所以需要考虑初始化。 
+
+`cancelCtx.done` 会在 context 被 cancel 时关闭，所以 `cancelCtx.done` 的值一般经历如三个阶段： `nil` --> `chan struct{}` --> `closed chan`。
 
 ##### `Err()` 接口实现
 
-按照Context定义，Err()只需要返回一个error告知context被关闭的原因。对于cancelCtx来说只需要返回成员变量err即可。
+按照 Context 定义，`Err()` 只需要返回一个 error 告知 context 被关闭的原因。对于 cancelCtx 来说只需要返回成员变量 err 即可。
 
 还是直接看下源码：
 
@@ -3199,58 +3199,58 @@ func (c *cancelCtx) Err() error {
 }
 ```
 
-cancelCtx.err默认是nil，在context被cancel时指定一个error变量： `var Canceled = errors.New("context canceled")`。
+`cancelCtx.err` 默认是 nil，在 context 被 cancel 时指定一个 error 变量： `var Canceled = errors.New("context canceled")`。
 
 ##### `cancel()` 接口实现
 
-cancel()内部方法是理解cancelCtx的最关键的方法，其作用是关闭自己和其后代，其后代存储在cancelCtx.children的map中，其中key值即后代对象，value值并没有意义，这里使用map只是为了方便查询而已。
+`cancel()` 内部方法是理解 cancelCtx 的最关键的方法，其作用是关闭自己和其后代，其后代存储在`cancelCtx.children` 的 map 中，其中 key 值即后代对象，value 值并没有意义，这里使用 map 只是为了方便查询而已。
 
-cancel方法实现伪代码如下所示：
+cancel 方法实现伪代码如下所示：
 
 ```go
 func (c *cancelCtx) cancel(removeFromParent bool, err error) {
     c.mu.Lock()
 
-    c.err = err                          //设置一个error，说明关闭原因
-    close(c.done)                     //将channel关闭，以此通知派生的context
+    c.err = err                       // 设置一个error，说明关闭原因
+    close(c.done)                     // 将channel关闭，以此通知派生的context
 
-    for child := range c.children {   //遍历所有children，逐个调用cancel方法
+    for child := range c.children {   // 遍历所有children，逐个调用cancel方法
         child.cancel(false, err)
     }
     c.children = nil
     c.mu.Unlock()
 
-    if removeFromParent {            //正常情况下，需要将自己从parent删除
+    if removeFromParent {            // 正常情况下，需要将自己从parent删除
         removeChild(c.Context, c)
     }
 }
 ```
 
-实际上，WithCancel()返回的第二个用于cancel context的方法正是此cancel()。
+实际上，`WithCancel()` 返回的第二个用于 cancel context 的方法正是此 `cancel()`。
 
 ##### `WithCancel()` 方法实现
 
-WithCancel()方法作了三件事：
+`WithCancel()` 方法作了三件事：
 
-- 初始化一个cancelCtx实例
-- 将cancelCtx实例添加到其父节点的children中(如果父节点也可以被cancel的话)
-- 返回cancelCtx实例和cancel()方法
+- 初始化一个 cancelCtx 实例
+- 将 cancelCtx 实例添加到其父节点的 children 中(如果父节点也可以被 cancel 的话)
+- 返回 cancelCtx 实例和 `cancel()` 方法
 
 其实现源码如下所示：
 
 ```go
 func WithCancel(parent Context) (ctx Context, cancel CancelFunc) {
     c := newCancelCtx(parent)
-    propagateCancel(parent, &c)   //将自身添加到父节点
+    propagateCancel(parent, &c)   // 将自身添加到父节点
     return &c, func() { c.cancel(true, Canceled) }
 }
 ```
 
 这里将自身添加到父节点的过程有必要简单说明一下：
 
-1. 如果父节点也支持cancel，也就是说其父节点肯定有children成员，那么把新context添加到children里即可；
-2. 如果父节点不支持cancel，就继续向上查询，直到找到一个支持cancel的节点，把新context添加到children里；
-3. 如果所有的父节点均不支持cancel，则启动一个协程等待父节点结束，然后再把当前context结束。
+1. 如果父节点也支持 cancel，也就是说其父节点肯定有 children 成员，那么把新 context 添加到 children 里即可；
+2. 如果父节点不支持 cancel，就继续向上查询，直到找到一个支持 cancel 的节点，把新 context 添加到 children 里；
+3. 如果所有的父节点均不支持 cancel，则启动一个协程等待父节点结束，然后再把当前 context 结束。
 
 ##### 典型使用案例
 
@@ -3352,42 +3352,42 @@ type timerCtx struct {
 }
 ```
 
-timerCtx在cancelCtx基础上增加了deadline用于标示自动cancel的最终时间，而timer就是一个触发自动cancel的定时器。
+timerCtx 在 cancelCtx 基础上增加了 deadline 用于标示自动 cancel 的最终时间，而 timer 就是一个触发自动cancel 的定时器。
 
-由此，衍生出WithDeadline()和WithTimeout()。实现上这两种类型实现原理一样，只不过使用语境不一样：
+由此，衍生出 `WithDeadline()` 和 `WithTimeout()`。实现上这两种类型实现原理一样，只不过使用语境不一样：
 
-- deadline: 指定最后期限，比如context将2018.10.20 00:00:00之时自动结束
-- timeout: 指定最长存活时间，比如context将在30s后结束。
+- deadline: 指定最后期限，比如 context 将 2018.10.20 00:00:00 之时自动结束
+- timeout: 指定最长存活时间，比如 context 将在 30s 后结束。
 
-对于接口来说，timerCtx在cancelCtx基础上还需要实现Deadline()和cancel()方法，其中cancel()方法是重写的。
+对于接口来说，timerCtx 在 cancelCtx 基础上还需要实现 `Deadline()` 和 `cancel()` 方法，其中 `cancel()` 方法是重写的。
 
 ##### `Deadline()` 接口实现
 
-Deadline()方法仅仅是返回timerCtx.deadline而矣。而timerCtx.deadline是WithDeadline()或WithTimeout()方法设置的。
+`Deadline()` 方法仅仅是返回 timerCtx.deadline 而已。而 timerCtx.deadline 是 `WithDeadline()` 或 `WithTimeout()` 方法设置的。
 
 ##### `cancel()` 接口实现
 
-cancel()方法基本继承cancelCtx，只需要额外把timer关闭。
+`cancel()` 方法基本继承 cancelCtx，只需要额外把 timer 关闭。
 
-timerCtx被关闭后，timerCtx.cancelCtx.err将会存储关闭原因：
+timerCtx 被关闭后，`timerCtx.cancelCtx.err` 将会存储关闭原因：
 
-- 如果deadline到来之前手动关闭，则关闭原因与cancelCtx显示一致；
-- 如果deadline到来时自动关闭，则原因为："context deadline exceeded"
+- 如果 deadline 到来之前手动关闭，则关闭原因与 cancelCtx 显示一致；
+- 如果 deadline 到来时自动关闭，则原因为："context deadline exceeded"
 
 ##### `WithDeadline()` 方法实现
 
-WithDeadline()方法实现步骤如下：
+`WithDeadline()` 方法实现步骤如下：
 
-- 初始化一个timerCtx实例
-- 将timerCtx实例添加到其父节点的children中(如果父节点也可以被cancel的话)
-- 启动定时器，定时器到期后会自动cancel本context
-- 返回timerCtx实例和cancel()方法
+- 初始化一个 timerCtx 实例
+- 将 timerCtx 实例添加到其父节点的 children 中(如果父节点也可以被 cancel 的话)
+- 启动定时器，定时器到期后会自动 cancel 本 context
+- 返回 timerCtx 实例和 `cancel()` 方法
 
-也就是说，timerCtx类型的context不仅支持手动cancel，也会在定时器到来后自动cancel。
+也就是说，timerCtx 类型的 context 不仅支持手动 cancel，也会在定时器到来后自动 cancel。
 
 ##### `WithTimeout()` 方法实现
 
-WithTimeout()实际调用了WithDeadline，二者实现原理一致。
+`WithTimeout()` 实际调用了 WithDeadline，二者实现原理一致。
 
 看代码会非常清晰：
 
@@ -3399,7 +3399,7 @@ func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc) {
 
 ##### 典型使用案例
 
-下面例子中使用WithTimeout()获得一个context并在其子协程中传递：
+下面例子中使用 `WithTimeout()` 获得一个 context 并在其子协程中传递：
 
 ```go
 package main
@@ -3459,7 +3459,7 @@ func main() {
 }
 ```
 
-主协程中创建一个10s超时的context，并将其传递给子协程，10s自动关闭context。程序输出如下：
+主协程中创建一个 10s 超时的 context，并将其传递给子协程，10s 自动关闭 context。程序输出如下：
 
 ```go
 HandelRequest running
@@ -3478,7 +3478,7 @@ WriteRedis Done.
 
 #### valueCtx
 
-源码包中`src/context/context.go:valueCtx` 定义了该类型context：
+源码包中 `src/context/context.go:valueCtx` 定义了该类型 context：
 
 ```go
 type valueCtx struct {
@@ -3487,13 +3487,13 @@ type valueCtx struct {
 }
 ```
 
-valueCtx只是在Context基础上增加了一个key-value对，用于在各级协程间传递一些数据。
+valueCtx 只是在 Context 基础上增加了一个 key-value 对，用于在各级协程间传递一些数据。
 
-由于valueCtx既不需要cancel，也不需要deadline，那么只需要实现Value()接口即可。
+由于 valueCtx 既不需要 cancel，也不需要 deadline，那么只需要实现 `Value()` 接口即可。
 
 ##### `Value()` 接口实现
 
-由valueCtx数据结构定义可见，valueCtx.key和valueCtx.val分别代表其key和value值。 实现也很简单：
+由 valueCtx 数据结构定义可见，valueCtx.key 和 valueCtx.val 分别代表其 key 和 value 值。 实现也很简单：
 
 ```go
 func (c *valueCtx) Value(key interface{}) interface{} {
@@ -3504,11 +3504,11 @@ func (c *valueCtx) Value(key interface{}) interface{} {
 }
 ```
 
-这里有个细节需要关注一下，即当前context查找不到key时，会向父节点查找，如果查询不到则最终返回interface{}。也就是说，可以通过子context查询到父的value值。
+这里有个细节需要关注一下，即当前 context 查找不到 key 时，会向父节点查找，如果查询不到则最终返回`interface{}`。也就是说，可以通过子 context 查询到父的 value 值。
 
 ##### `WithValue()` 方法实现
 
-WithValue()实现也是非常的简单, 伪代码如下：
+`WithValue()` 实现也是非常的简单, 伪代码如下：
 
 ```go
 func WithValue(parent Context, key, val interface{}) Context {
@@ -3521,7 +3521,7 @@ func WithValue(parent Context, key, val interface{}) Context {
 
 ##### 典型使用案例
 
-下面示例程序展示valueCtx的用法：
+下面示例程序展示 valueCtx 的用法：
 
 ```go
 package main
@@ -3553,14 +3553,221 @@ func main() {
 }
 ```
 
-上例main()中通过WithValue()方法获得一个context，需要指定一个父context、key和value。然后通将该context传递给子协程HandelRequest，子协程可以读取到context的key-value。
+上例 `main()` 中通过 `WithValue()` 方法获得一个 context，需要指定一个父 context、key 和 value。然后将该 context 传递给子协程 HandelRequest，子协程可以读取到 context 的 key-value。
 
-注意：本例中子协程无法自动结束，因为context是不支持cancle的，也就是说<-ctx.Done()永远无法返回。如果需要返回，需要在创建context时指定一个可以cancel的context作为父节点，使用父节点的cancel()在适当的时机结束整个context。
+注意：本例中子协程无法自动结束，因为 context 是不支持 cancel 的，也就是说 `<-ctx.Done()` 永远无法返回。如果需要返回，**需要在创建 context 时指定一个可以 cancel 的 context 作为父节点**，使用父节点的 `cancel()` 在适当的时机结束整个 context。
 
 #### 总结
 
 - Context 仅仅是一个接口定义，跟据实现的不同，可以衍生出不同的 context 类型；
-- `cancelCtx `实现了 Context 接口，通过` WithCancel()` 创建 `cancelCtx `实例；
-- `timerCtx` 实现了 Context 接口，通过 `WithDeadline()` 和 `WithTimeout()` 创建 `timerCtx `实例；
-- `valueCtx` 实现了 Context 接口，通过 `WithValue()` 创建 `valueCtx `实例；
+- `cancelCtx` 实现了 Context 接口，通过 `WithCancel()` 创建 `cancelCtx` 实例；
+- `timerCtx` 实现了 Context 接口，通过 `WithDeadline()` 和 `WithTimeout()` 创建 `timerCtx` 实例；
+- `valueCtx` 实现了 Context 接口，通过 `WithValue()` 创建 `valueCtx` 实例；
 - 三种 context 实例可互为父节点，从而可以组合成不同的应用形式；
+
+## 反射概念
+
+官方对此有个非常简明的介绍，两句话耐人寻味：
+
+1. 反射提供一种让程序检查自身结构的能力
+2. 反射是困惑的源泉
+
+第1条，再精确点的描述是“反射是一种检查interface变量的底层类型和值的机制”。 第2条，很有喜感的自嘲，不过往后看就笑不出来了，因为你很可能产生困惑.
+
+想深入了解反射，必须深入理解类型和接口概念。下面开始复习一下这些基础概念。
+
+## 2.1 关于静态类型
+
+你肯定知道Go是静态类型语言，比如"int"、"float32"、"[]byte"等等。每个变量都有一个静态类型，且在编译时就确定了。 那么考虑一下如下一种类型声明:
+
+```go
+type Myint int
+
+var i int
+var j Myint
+```
+
+Q: i 和j 类型相同吗？ A：i 和j类型是不同的。 二者拥有不同的静态类型，没有类型转换的话是不可以互相赋值的，尽管二者底层类型是一样的。
+
+## 2.2 特殊的静态类型interface
+
+interface类型是一种特殊的类型，它代表方法集合。 它可以存放任何实现了其方法的值。
+
+经常被拿来举例的是io包里的这两个接口类型：
+
+```go
+// Reader is the interface that wraps the basic Read method.
+type Reader interface {
+    Read(p []byte) (n int, err error)
+}
+
+// Writer is the interface that wraps the basic Write method.
+type Writer interface {
+    Write(p []byte) (n int, err error)
+}
+```
+
+任何类型，比如某struct，只要实现了其中的Read()方法就被认为是实现了Reader接口，只要实现了Write()方法，就被认为是实现了Writer接口，不过方法参数和返回值要跟接口声明的一致。
+
+接口类型的变量可以存储任何实现该接口的值。
+
+## 2.3 特殊的interface类型
+
+最特殊的interface类型为空interface类型，即`interface {}`，前面说了，interface用来表示一组方法集合，所有实现该方法集合的类型都被认为是实现了该接口。那么空interface类型的方法集合为空，也就是说所有类型都可以认为是实现了该接口。
+
+一个类型实现空interface并不重要，重要的是一个空interface类型变量可以存放所有值，记住是所有值，这才是最最重要的。 这也是有些人认为Go是动态类型的原因，这是个错觉。
+
+## 2.4 interface类型是如何表示的
+
+前面讲了，interface类型的变量可以存放任何实现了该接口的值。还是以上面的`io.Reader`为例进行说明，`io.Reader`是一个接口类型，`os.OpenFile()`方法返回一个`File`结构体类型变量，该结构体类型实现了`io.Reader`的方法，那么`io.Reader`类型变量就可以用来接收该返回值。如下所示：
+
+```go
+var r io.Reader
+tty, err := os.OpenFile("/dev/tty", os.O_RDWR, 0)
+if err != nil {
+    return nil, err
+}
+r = tty
+```
+
+那么问题来了。 Q： r的类型是什么？ A: r的类型始终是`io.Reader`interface类型，无论其存储什么值。
+
+Q：那`File`类型体现在哪里？ A：r保存了一个(value, type)对来表示其所存储值的信息。 value即为r所持有元素的值，type即为所持有元素的底层类型
+
+Q：如何将r转换成另一个类型结构体变量？比如转换成`io.Writer` A：使用类型断言，如`w = r.(io.Writer)`. 意思是如果r所持有的元素如果同样实现了io.Writer接口,那么就把值传递给w。
+
+# 3. 反射三定律
+
+前面之所以讲类型，是为了引出interface，之所以讲interface是想说interface类型有个(value，type)对，而反射就是检查interface的这个(value, type)对的。具体一点说就是Go提供一组方法提取interface的value，提供另一组方法提取interface的type.
+
+官方提供了三条定律来说明反射，比较清晰，下面也按照这三定律来总结。
+
+反射包里有两个接口类型要先了解一下.
+
+- `reflect.Type` 提供一组接口处理interface的类型，即（value, type）中的type
+- `reflect.Value`提供一组接口处理interface的值,即(value, type)中的value
+
+下面会提到反射对象，所谓反射对象即反射包里提供的两种类型的对象。
+
+- `reflect.Type` 类型对象
+- `reflect.Value`类型对象
+
+## 3.1 反射第一定律：反射可以将interface类型变量转换成反射对象
+
+下面示例，看看是如何通过反射获取一个变量的值和类型的：
+
+```go
+package main
+
+import (
+    "fmt"
+    "reflect"
+)
+
+func main() {
+    var x float64 = 3.4
+    t := reflect.TypeOf(x)  //t is reflext.Type
+    fmt.Println("type:", t)
+
+    v := reflect.ValueOf(x) //v is reflext.Value
+    fmt.Println("value:", v)
+}
+```
+
+程序输出如下：
+
+```go
+type: float64
+value: 3.4
+```
+
+注意：反射是针对interface类型变量的，其中`TypeOf()`和`ValueOf()`接受的参数都是`interface{}`类型的，也即x值是被转成了interface传入的。
+
+除了`reflect.TypeOf()`和`reflect.ValueOf()`，还有其他很多方法可以操作，本文先不过多介绍，否则一不小心会会引起困惑。
+
+## 3.2 反射第二定律：反射可以将反射对象还原成interface对象
+
+之所以叫'反射'，反射对象与interface对象是可以互相转化的。看以下例子：
+
+```go
+package main
+
+import (
+    "fmt"
+    "reflect"
+)
+
+func main() {
+    var x float64 = 3.4
+
+    v := reflect.ValueOf(x) //v is reflext.Value
+
+    var y float64 = v.Interface().(float64)
+    fmt.Println("value:", y)
+}
+```
+
+对象x转换成反射对象v，v又通过Interface()接口转换成interface对象，interface对象通过.(float64)类型断言获取float64类型的值。
+
+## 3.3 反射第三定律：反射对象可修改，value值必须是可设置的
+
+通过反射可以将interface类型变量转换成反射对象，可以使用该反射对象设置其持有的值。在介绍何谓反射对象可修改前，先看一下失败的例子：
+
+```go
+package main
+
+import (
+    "reflect"
+)
+
+func main() {
+    var x float64 = 3.4
+    v := reflect.ValueOf(x)
+    v.SetFloat(7.1) // Error: will panic.
+}
+```
+
+如下代码，通过反射对象v设置新值，会出现panic。报错如下：
+
+```go
+panic: reflect: reflect.Value.SetFloat using unaddressable value
+```
+
+错误原因即是v是不可修改的。
+
+反射对象是否可修改取决于其所存储的值，回想一下函数传参时是传值还是传址就不难理解上例中为何失败了。
+
+上例中，传入reflect.ValueOf()函数的其实是x的值，而非x本身。即通过v修改其值是无法影响x的，也即是无效的修改，所以golang会报错。
+
+想到此处，即可明白，如果构建v时使用x的地址就可实现修改了，但此时v代表的是指针地址，我们要设置的是指针所指向的内容，也即我们想要修改的是`*v`。 那怎么通过v修改x的值呢？
+
+`reflect.Value`提供了`Elem()`方法，可以获得指针向指向的`value`。看如下代码：
+
+```go
+package main
+
+import (
+"reflect"
+    "fmt"
+)
+
+func main() {
+    var x float64 = 3.4
+    v := reflect.ValueOf(&x)
+    v.Elem().SetFloat(7.1)
+    fmt.Println("x :", v.Elem().Interface())
+}
+```
+
+输出为：
+
+```go
+x : 7.1
+```
+
+## 4. 总结
+
+结合官方博客及本文，至少可以对反射理解个大概，还有很多方法没有涉及。 对反射的深入理解，个人觉得还需要继续看的内容：
+
+- 参考业界，尤其是开源框架中是如何使用反射的
+- 研究反射实现原理，探究其性能优化的手段

@@ -2274,6 +2274,12 @@ db.Model(&user).Association("Languages").Find(&languages)
 
 查找带条件的关联
 
+```sql
+select * from courses as c, selections as sc where sc.student_id = 1 and c.id = sc.co 
+```
+
+
+
 ```go
 codes := []string{"zh-CN", "en-US", "ja-JP"}
 db.Model(&user).Where("code IN ?", codes).Association("Languages").Find(&languages)
@@ -2358,7 +2364,7 @@ db.Model(&users).Association("Team").Replace(&userA, &userB, &[]User{userA, user
 
 你可以在删除记录时通过 `Select` 来删除具有 has one、has many、many2many 关系的记录，例如：
 
-```
+```go
 // 删除 user 时，也删除 user 的 account
 db.Select("Account").Delete(&user)
 
@@ -2374,7 +2380,7 @@ db.Select("Account").Delete(&users)
 
 > **注意：** 只有当记录的主键不为空时，关联才会被删除，GORM 会使用这些主键作为条件来删除关联记录
 >
-> ```
+> ```go
 > // DOESN'T WORK
 > db.Select("Account").Where("name = ?", "jinzhu").Delete(&User{})
 > // 会删除所有 name=`jinzhu` 的 user，但这些 user 的 account 不会被删除
