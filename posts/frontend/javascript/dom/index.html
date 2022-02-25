@@ -4,17 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
-<meta property="og:description" content="简介 概念 文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口 文档">
+<title>JavaScript DOM - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="JavaScript DOM">
+<meta property="og:description" content="DOM 简介 概念 文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口 文">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/frontend/javascript/dom/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-10-23T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content>
-<meta name=twitter:description content="简介 概念 文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口 文档">
+<meta name=twitter:title content="JavaScript DOM">
+<meta name=twitter:description content="DOM 简介 概念 文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口 文">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/frontend/javascript/dom/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/frontend/javascript/typescript/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/javascript/basicgrammar/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/javascript\/dom\/"},"genre":"posts","wordcount":4337,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/javascript\/dom\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/frontend/javascript/dom/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/frontend/javascript/basicgrammar/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/html/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"JavaScript DOM","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/javascript\/dom\/"},"genre":"posts","keywords":"JavaScript, 前端","wordcount":4338,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/javascript\/dom\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2021-10-23T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -80,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4337 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">JavaScript DOM</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E5%89%8D%E7%AB%AF/><i class="far fa-folder fa-fw"></i>前端</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4338 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -91,14 +93,20 @@
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
+<li><a href=#简介>简介</a>
+<ul>
 <li><a href=#概念>概念</a></li>
 <li><a href=#节点思想>节点思想</a></li>
 </ul>
+</li>
+<li><a href=#dom-属性>DOM 属性</a>
 <ul>
 <li><a href=#元素属性>元素属性</a></li>
 <li><a href=#元素定位>元素定位</a></li>
 <li><a href=#根节点>根节点</a></li>
 </ul>
+</li>
+<li><a href=#dom-方法>DOM 方法</a>
 <ul>
 <li><a href=#访问>访问</a></li>
 <li><a href=#修改>修改</a>
@@ -117,6 +125,8 @@
 </li>
 <li><a href=#其他>其他</a></li>
 </ul>
+</li>
+<li><a href=#事件>事件</a>
 <ul>
 <li><a href=#创建事件>创建事件</a>
 <ul>
@@ -126,6 +136,8 @@
 </li>
 <li><a href=#事件类型>事件类型</a></li>
 </ul>
+</li>
+<li><a href=#对象>对象</a>
 <ul>
 <li><a href=#node>Node</a></li>
 <li><a href=#element>Element</a></li>
@@ -155,9 +167,12 @@
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 </nav></div>
-</div><div class=content id=content><h1 id=简介>简介</h1>
-<h2 id=概念>概念</h2>
+</div><div class=content id=content><h1 id=dom>DOM</h1>
+<h2 id=简介>简介</h2>
+<h3 id=概念>概念</h3>
 <p>文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口</p>
 <ul>
 <li>
@@ -171,7 +186,7 @@
 </li>
 </ul>
 <p>DOM 把以上内容都看作对象</p>
-<h2 id=节点思想>节点思想</h2>
+<h3 id=节点思想>节点思想</h3>
 <p>根据 W3C 的 HTML DOM 标准，HTML 文档中的所有内容都是节点：</p>
 <ul>
 <li>整个文档是一个文档节点</li>
@@ -180,8 +195,8 @@
 <li>每个 HTML 属性是属性节点</li>
 <li>注释是注释节点</li>
 </ul>
-<h1 id=dom-属性>DOM 属性</h1>
-<h2 id=元素属性>元素属性</h2>
+<h2 id=dom-属性>DOM 属性</h2>
+<h3 id=元素属性>元素属性</h3>
 <p>以下为 <code>Node</code> 对象的属性</p>
 <ul>
 <li>
@@ -338,7 +353,7 @@
 <p>返回当前元素的标签名</p>
 </li>
 </ul>
-<h2 id=元素定位>元素定位</h2>
+<h3 id=元素定位>元素定位</h3>
 <p>以下为 <code>Node</code> 对象的属性</p>
 <ul>
 <li>
@@ -366,13 +381,13 @@
 <p>返回孩子节点的 <code>NodeList</code></p>
 </li>
 </ul>
-<h2 id=根节点>根节点</h2>
+<h3 id=根节点>根节点</h3>
 <p>这里有两个特殊的属性，可以访问全部文档：</p>
 <ul>
 <li><code>document.documentElement</code> - 全部文档</li>
 <li><code>document.body</code> - 文档的主体</li>
 </ul>
-<h1 id=dom-方法>DOM 方法</h1>
+<h2 id=dom-方法>DOM 方法</h2>
 <table>
 <thead>
 <tr>
@@ -431,7 +446,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id=访问>访问</h2>
+<h3 id=访问>访问</h3>
 <p>以下为 <code>Document</code> 对象的方法</p>
 <ul>
 <li>
@@ -474,9 +489,9 @@
 <p>返回上下文中的根节点</p>
 </li>
 </ul>
-<h2 id=修改>修改</h2>
-<h3 id=创建>创建</h3>
-<h4 id=创建内容>创建内容</h4>
+<h3 id=修改>修改</h3>
+<h4 id=创建>创建</h4>
+<h5 id=创建内容>创建内容</h5>
 <p>创建元素内容的最简单的方法是使用 innerHTML 属性</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -486,7 +501,7 @@
 <pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=n>document</span><span class=o>.</span><span class=na>getElementById</span><span class=o>(</span><span class=s>&#34;p1&#34;</span><span class=o>).</span><span class=na>innerHTML</span><span class=o>=</span><span class=s>&#34;New text!&#34;</span><span class=o>;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=改变样式>改变样式</h4>
+</div><h5 id=改变样式>改变样式</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -495,7 +510,7 @@
 <pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;p2&#34;</span><span class=p>).</span><span class=nx>style</span><span class=p>.</span><span class=nx>color</span><span class=o>=</span><span class=s2>&#34;blue&#34;</span><span class=p>;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=创建元素>创建元素</h4>
+</div><h5 id=创建元素>创建元素</h5>
 <p>先创建该元素（元素节点），然后把它追加到已有的元素上</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -558,7 +573,7 @@
 <pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>var</span> <span class=nx>node</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>createTextNode</span><span class=p>(</span><span class=s2>&#34;This is a new paragraph.&#34;</span><span class=p>);</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=添加>添加</h3>
+</div><h4 id=添加>添加</h4>
 <p>以下为 <code>Node</code> 对象的方法</p>
 <ul>
 <li>
@@ -580,7 +595,7 @@
 <p>在指定的已有子节点之前插入新的子节点</p>
 </li>
 </ul>
-<h3 id=删除>删除</h3>
+<h4 id=删除>删除</h4>
 <ul>
 <li>
 <p><em><strong>removeChild()</strong></em></p>
@@ -606,7 +621,7 @@
 <span class=nx>child</span><span class=p>.</span><span class=nx>parentNode</span><span class=p>.</span><span class=nx>removeChild</span><span class=p>(</span><span class=nx>child</span><span class=p>);</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=替换>替换</h3>
+</div><h4 id=替换>替换</h4>
 <ul>
 <li>
 <p><em><strong>replaceChild(newnode,oldnode)</strong></em></p>
@@ -621,7 +636,7 @@
 <pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nx>parent</span><span class=p>.</span><span class=nx>replaceChild</span><span class=p>(</span><span class=nx>newChild</span><span class=p>,</span><span class=nx>oldChild</span><span class=p>);</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=其他>其他</h2>
+</div><h3 id=其他>其他</h3>
 <p>以下为 <code>Node</code> 对象的方法</p>
 <ul>
 <li>
@@ -639,7 +654,7 @@
 <p>返回 Boolean，来表示该元素是否包含有子节点</p>
 </li>
 </ul>
-<h1 id=事件>事件</h1>
+<h2 id=事件>事件</h2>
 <p>HTML DOM 允许您在事件发生时执行代码。</p>
 <p>当 HTML 元素”有事情发生“时，浏览器就会生成事件：</p>
 <ul>
@@ -651,8 +666,8 @@
 <li>当 HTML 表单被提交时</li>
 <li>当用户触发按键时</li>
 </ul>
-<h2 id=创建事件>创建事件</h2>
-<h3 id=在元素中创建>在元素中创建</h3>
+<h3 id=创建事件>创建事件</h3>
+<h4 id=在元素中创建>在元素中创建</h4>
 <p>如需在用户点击某个元素时执行代码，把 JavaScript 代码添加到 HTML 事件属性中</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -678,7 +693,7 @@
 <span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=使用-dom-分配事件>使用 DOM 分配事件</h3>
+</div><h4 id=使用-dom-分配事件>使用 DOM 分配事件</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -691,7 +706,7 @@
 <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=事件类型>事件类型</h2>
+</div><h3 id=事件类型>事件类型</h3>
 <ul>
 <li>
 <p><em><strong>onload</strong></em></p>
@@ -1024,16 +1039,16 @@ Last name: <span class=p>&lt;</span><span class=nt>input</span> <span class=na>t
 </tr>
 </tbody>
 </table>
-<h1 id=对象>对象</h1>
+<h2 id=对象>对象</h2>
 <p>EventTarget &lt;- Node &lt;- Element &lt;- Document</p>
-<h2 id=node>Node</h2>
+<h3 id=node>Node</h3>
 <p><strong><code>Node</code></strong> 是一个接口，各种类型的 DOM API 对象会从这个接口继承。它允许我们使用相似的方式对待这些不同类型的对象；比如, 继承同一组方法，或者用同样的方式测试。</p>
-<h2 id=element>Element</h2>
+<h3 id=element>Element</h3>
 <p><strong><code>Element</code></strong> 是一个通用性非常强的基类，所有 <code>Document</code>对象下的对象都继承自它。这个接口描述了所有相同种类的元素所普遍具有的方法和属性</p>
-<h2 id=document>Document</h2>
+<h3 id=document>Document</h3>
 <p><code>Document</code> 接口表示任何在浏览器中载入的网页，并作为网页内容的入口，也就是 DOM 树</p>
 <p><code>Document</code> 接口描述了任何类型的文档的通用属性与方法。</p>
-<h3 id=属性>属性</h3>
+<h4 id=属性>属性</h4>
 <ul>
 <li>
 <p><em><strong>.body</strong></em></p>
@@ -1053,23 +1068,23 @@ Last name: <span class=p>&lt;</span><span class=nt>input</span> <span class=na>t
 <p>返回标题</p>
 </li>
 </ul>
-<h3 id=方法>方法</h3>
+<h4 id=方法>方法</h4>
 <ul>
 <li>
 <p><em><strong>.write()</strong></em></p>
 <p>向文档流中写入内容</p>
 </li>
 </ul>
-<h2 id=nodelist>NodeList</h2>
+<h3 id=nodelist>NodeList</h3>
 <p><code>NodeList</code> 对象是节点的集合，通常是由属性，如<code>Node.childNodes</code> 和 方法，如<code>document.querySelectorAll</code> 返回的。</p>
 <p><code>NodeList</code> <strong>不是一个数组</strong>，是一个类似数组的对象 (<em>Like Array Object</em>)。虽然 <code>NodeList</code> 不是一个数组，但是可以使用 <code>forEach()</code> 来迭代，也可以用下标直接访问</p>
 <p>在一些情况下，<code>NodeList</code> 是一个实时集合，也就是说，如果文档中的节点树发生变化，<code>NodeList</code> 也会随之变化</p>
-<h3 id=属性-1>属性</h3>
+<h4 id=属性-1>属性</h4>
 <ul>
 <li><em><strong>NodeList.length</strong></em>
 <code>NodeList</code> 中包含的节点个数。</li>
 </ul>
-<h3 id=遍历>遍历</h3>
+<h4 id=遍历>遍历</h4>
 <p>使用 length 属性来循环节点列表</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1106,16 +1121,16 @@ Last name: <span class=p>&lt;</span><span class=nt>input</span> <span class=na>t
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=domtokenlist>DOMTokenList</h2>
+</div><h3 id=domtokenlist>DOMTokenList</h3>
 <p><code>DOMTokenList</code> 接口表示一组空格分隔的标记（tokens），主要用于操作 <code>classList</code></p>
-<h3 id=属性-2>属性</h3>
+<h4 id=属性-2>属性</h4>
 <ul>
 <li>
 <p><em><strong>.length</strong></em></p>
 <p>一个整数，表示存储在该对象里值的个数</p>
 </li>
 </ul>
-<h3 id=方法-1>方法</h3>
+<h4 id=方法-1>方法</h4>
 <ul>
 <li><em><strong>.contains(token)</strong></em>
 是否包括指定字符串，返回 <code>bool</code></li>
@@ -1126,7 +1141,7 @@ Last name: <span class=p>&lt;</span><span class=nt>input</span> <span class=na>t
 <li><em><strong>.replace(oldToken, newToken)</strong></em>
 使用 <code>newToken</code> 替换 <code>token</code> 。</li>
 </ul>
-<h3 id=修改空格和重复的特性>修改空格和重复的特性</h3>
+<h4 id=修改空格和重复的特性>修改空格和重复的特性</h4>
 <p>修改 <code>DOMTokenList</code> 的方法（例如 <code>DOMTokenList.add()</code>）会自动去除多余的空格（Whitespace）和列表中的重复项目</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1147,10 +1162,10 @@ Last name: <span class=p>&lt;</span><span class=nt>input</span> <span class=na>t
 </code></pre></td></tr></table>
 </div>
 </div><p>输出：span classList is &ldquo;d e f x&rdquo;</p>
-<h2 id=window>Window</h2>
+<h3 id=window>Window</h3>
 <p><code>Window</code> 对象表示浏览器中打开的窗口，如果文档包含框架（frame 或 iframe 标签），浏览器会为 HTML 文档创建一个 <code>window</code> 对象，并为每个框架创建一个额外的 <code>window</code> 对象。</p>
-<h3 id=属性-3>属性</h3>
-<h3 id=方法-2>方法</h3>
+<h4 id=属性-3>属性</h4>
+<h4 id=方法-2>方法</h4>
 <ul>
 <li>
 <p><em><strong>.alert()</strong></em></p>
@@ -1527,7 +1542,7 @@ Last name: <span class=p>&lt;</span><span class=nt>input</span> <span class=na>t
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 0001-01-01</span>
+<span>更新于 2021-10-23</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -1539,13 +1554,13 @@ Last name: <span class=p>&lt;</span><span class=nt>input</span> <span class=na>t
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/javascript/>JavaScript</a>,&nbsp;<a href=/Notes/tags/%E5%89%8D%E7%AB%AF/>前端</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/frontend/javascript/typescript/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/frontend/javascript/basicgrammar/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/frontend/javascript/basicgrammar/ class=prev rel=prev title="JavaScript 基本语法"><i class="fas fa-angle-left fa-fw"></i>JavaScript 基本语法</a>
+<a href=/Notes/posts/frontend/html/ class=next rel=next title=HTML>HTML<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

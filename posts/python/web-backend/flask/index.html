@@ -4,17 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
-<meta property="og:description" content="认识 例子 初始化 1 2 3 4 5 6 7 8 9 10 from flask import Flask app = Flask(__name__) @app.route('/') def hello_world(): return 'Hello, World!' app.run(debug=True) # 自动以调试方式运行 若想要在命令行中控制运行 1 2 $ set FLASK_APP=hello.py $ flask run 若想要其他机器访问">
+<title>Flask - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Flask">
+<meta property="og:description" content="Flask 例子 初始化 1 2 3 4 5 6 7 8 9 10 from flask import Flask app = Flask(__name__) @app.route('/') def hello_world(): return 'Hello, World!' app.run(debug=True) # 自动以调试方式运行 若想要在命令行中控制运行 1 2 $ set FLASK_APP=hello.py $ flask run 若想要其他机器访问 1">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/web-backend/flask/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-10-23T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content>
-<meta name=twitter:description content="认识 例子 初始化 1 2 3 4 5 6 7 8 9 10 from flask import Flask app = Flask(__name__) @app.route('/') def hello_world(): return 'Hello, World!' app.run(debug=True) # 自动以调试方式运行 若想要在命令行中控制运行 1 2 $ set FLASK_APP=hello.py $ flask run 若想要其他机器访问">
+<meta name=twitter:title content="Flask">
+<meta name=twitter:description content="Flask 例子 初始化 1 2 3 4 5 6 7 8 9 10 from flask import Flask app = Flask(__name__) @app.route('/') def hello_world(): return 'Hello, World!' app.run(debug=True) # 自动以调试方式运行 若想要在命令行中控制运行 1 2 $ set FLASK_APP=hello.py $ flask run 若想要其他机器访问 1">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/flask/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/sqlalchemy/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/fastapi/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/flask\/"},"genre":"posts","wordcount":1417,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/flask\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/flask/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/frontend/html/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/fastapi/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Flask","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/flask\/"},"genre":"posts","keywords":"Python, 后端","wordcount":1416,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/flask\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2021-10-23T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -80,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1417 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">Flask</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1416 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -90,6 +92,8 @@
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#例子>例子</a>
 <ul>
 <li><a href=#初始化>初始化</a></li>
 <li><a href=#路由>路由</a>
@@ -103,10 +107,12 @@
 <li><a href=#cookies>Cookies</a></li>
 <li><a href=#sessions>Sessions</a></li>
 </ul>
+</li>
+</ul>
 </nav></div>
-</div><div class=content id=content><h1 id=认识>认识</h1>
-<h1 id=例子>例子</h1>
-<h2 id=初始化>初始化</h2>
+</div><div class=content id=content><h1 id=flask>Flask</h1>
+<h2 id=例子>例子</h2>
+<h3 id=初始化>初始化</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -153,7 +159,7 @@ $ flask run
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>app</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>host</span><span class=o>=</span><span class=mf>0.0.0.0</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=路由>路由</h2>
+</div><h3 id=路由>路由</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -222,7 +228,7 @@ $ flask run
 </tr>
 </tbody>
 </table>
-<h3 id=唯一的-url-与重定向>唯一的 URL 与重定向</h3>
+<h4 id=唯一的-url-与重定向>唯一的 URL 与重定向</h4>
 <p>以下两条规则的不同之处在于是否使用尾部的斜杠。:</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -252,7 +258,7 @@ $ flask run
 <p><code>about</code> 的 URL 没有尾部斜杠，因此其行为表现与<strong>一个文件</strong>类似。如果访问这个 URL 时添加了尾部斜杠就会得到一个 404 错误。这样可以<strong>保持 URL 唯一</strong>，并帮助 搜索引擎避免重复索引同一页面。</p>
 </li>
 </ul>
-<h3 id=flask-http方法>Flask HTTP方法</h3>
+<h4 id=flask-http方法>Flask HTTP方法</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -306,7 +312,7 @@ $ flask run
 </tr>
 </tbody>
 </table>
-<h3 id=重定向>重定向</h3>
+<h4 id=重定向>重定向</h4>
 <p>网页跳转</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -324,7 +330,7 @@ $ flask run
     <span class=k>return</span> <span class=n>redirect</span><span class=p>(</span><span class=s2>&#34;https://www.bilibili.com&#34;</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=post>POST</h3>
+</div><h4 id=post>POST</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -355,7 +361,7 @@ $ flask run
         <span class=k>return</span> <span class=s2>&#34;Request failed!&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=cookies>Cookies</h2>
+</div><h3 id=cookies>Cookies</h3>
 <p>要访问 cookies ，可以使用 <code>cookies</code> 属性。可以使用响应 对象 的 <code>set_cookie</code> 方法来设置 cookies 。</p>
 <p>请求对象的 <code>cookies</code> 属性是一个包含了客户端传输的所有 cookies 的字典。</p>
 <p>在 Flask 中，如果使用会话（Session），那么就不要直接使用 cookies ，因为会话比较安全一些。</p>
@@ -401,7 +407,7 @@ $ flask run
     <span class=k>return</span> <span class=n>resp</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=sessions>Sessions</h2>
+</div><h3 id=sessions>Sessions</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -556,7 +562,7 @@ $ flask run
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 0001-01-01</span>
+<span>更新于 2021-10-23</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -568,13 +574,13 @@ $ flask run
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E5%90%8E%E7%AB%AF/>后端</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/python/web-backend/sqlalchemy/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/web-backend/fastapi/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/frontend/html/ class=prev rel=prev title=HTML><i class="fas fa-angle-left fa-fw"></i>HTML</a>
+<a href=/Notes/posts/python/web-backend/fastapi/ class=next rel=next title=FastAPI>FastAPI<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

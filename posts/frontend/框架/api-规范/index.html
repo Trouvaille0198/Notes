@@ -4,17 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
-<meta property="og:description" content="Filtering 如果记录数量很多，服务器不可能都将它们返回给用户。API 应该 提供参数，过滤返回结果。下面是一些常见的参数。 ?limit=10：指定返回记录">
+<title>API 规范 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="API 规范">
+<meta property="og:description" content="API 规范 Filtering 如果记录数量很多，服务器不可能都将它们返回给用户。API 应该 提供参数，过滤返回结果。下面是一些常见的参数。 ?limit=10：指定返">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/api-%E8%A7%84%E8%8C%83/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-12-11T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-12-11T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content>
-<meta name=twitter:description content="Filtering 如果记录数量很多，服务器不可能都将它们返回给用户。API 应该 提供参数，过滤返回结果。下面是一些常见的参数。 ?limit=10：指定返回记录">
+<meta name=twitter:title content="API 规范">
+<meta name=twitter:description content="API 规范 Filtering 如果记录数量很多，服务器不可能都将它们返回给用户。API 应该 提供参数，过滤返回结果。下面是一些常见的参数。 ?limit=10：指定返">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/api-%E8%A7%84%E8%8C%83/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/pinia/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/yarn/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/%E6%A1%86%E6%9E%B6\/api-%E8%A7%84%E8%8C%83\/"},"genre":"posts","wordcount":3120,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/%E6%A1%86%E6%9E%B6\/api-%E8%A7%84%E8%8C%83\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/api-%E8%A7%84%E8%8C%83/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/git/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/javascript/typescript/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"API 规范","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/%E6%A1%86%E6%9E%B6\/api-%E8%A7%84%E8%8C%83\/"},"genre":"posts","keywords":"API, 前端, 后端","wordcount":3123,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/%E6%A1%86%E6%9E%B6\/api-%E8%A7%84%E8%8C%83\/","datePublished":"2021-12-11T00:00:00+00:00","dateModified":"2021-12-11T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -80,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3120 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">API 规范</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E5%89%8D%E7%AB%AF/><i class="far fa-folder fa-fw"></i>前端</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-11>2021-12-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3123 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -100,7 +102,8 @@
 <li><a href=#其他细节>其他细节</a></li>
 </ul>
 </nav></div>
-</div><div class=content id=content><h2 id=filtering>Filtering</h2>
+</div><div class=content id=content><h1 id=api-规范>API 规范</h1>
+<h2 id=filtering>Filtering</h2>
 <blockquote>
 <p>如果记录数量很多，服务器不可能都将它们返回给用户。API <code>应该</code> 提供参数，过滤返回结果。下面是一些常见的参数。</p>
 </blockquote>
@@ -608,7 +611,7 @@ Server: example.com
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 0001-01-01</span>
+<span>更新于 2021-12-11</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -620,13 +623,13 @@ Server: example.com
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/api/>API</a>,&nbsp;<a href=/Notes/tags/%E5%89%8D%E7%AB%AF/>前端</a>,&nbsp;<a href=/Notes/tags/%E5%90%8E%E7%AB%AF/>后端</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/pinia/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/frontend/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/yarn/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/git/ class=prev rel=prev title="Git 教程"><i class="fas fa-angle-left fa-fw"></i>Git 教程</a>
+<a href=/Notes/posts/frontend/javascript/typescript/ class=next rel=next title="TypeScript 基本语法">TypeScript 基本语法<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

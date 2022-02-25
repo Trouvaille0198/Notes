@@ -4,17 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
-<meta property="og:description" content="认识 运行 1 uvicorn main:app --reload main：main.py 文件（一个 Python「模块」）。 app：在 main.py 文件中通过 app = FastAPI() 创建的对象。 --reload：让服务器">
+<title>FastAPI - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="FastAPI">
+<meta property="og:description" content="FastAPI 认识 运行 1 uvicorn main:app --reload main：main.py 文件（一个 Python「模块」）。 app：在 main.py 文件中通过 app = FastAPI() 创建的对象。 --reload：让服务">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/web-backend/fastapi/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-10-23T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content>
-<meta name=twitter:description content="认识 运行 1 uvicorn main:app --reload main：main.py 文件（一个 Python「模块」）。 app：在 main.py 文件中通过 app = FastAPI() 创建的对象。 --reload：让服务器">
+<meta name=twitter:title content="FastAPI">
+<meta name=twitter:description content="FastAPI 认识 运行 1 uvicorn main:app --reload main：main.py 文件（一个 Python「模块」）。 app：在 main.py 文件中通过 app = FastAPI() 创建的对象。 --reload：让服务">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/fastapi/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/flask/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/django/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/fastapi\/"},"genre":"posts","wordcount":9883,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/fastapi\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/fastapi/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/flask/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/django/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"FastAPI","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/fastapi\/"},"genre":"posts","keywords":"Python, 后端","wordcount":9884,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/fastapi\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2021-10-23T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -80,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 9883 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">FastAPI</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 9884 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 20 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -91,9 +93,13 @@
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
+<li><a href=#认识>认识</a>
+<ul>
 <li><a href=#运行>运行</a></li>
 <li><a href=#查看-api-文档>查看 API 文档</a></li>
 </ul>
+</li>
+<li><a href=#特性>特性</a>
 <ul>
 <li><a href=#基本格式>基本格式</a></li>
 <li><a href=#路径参数>路径参数</a></li>
@@ -160,11 +166,11 @@
 </li>
 <li><a href=#响应-response>响应 response</a>
 <ul>
-<li><a href=#响应模型-response_model>响应模型 response_model</a>
-<ul>
+<li><a href=#响应模型-response_model>响应模型 response_model</a></li>
 <li><a href=#过滤默认值>过滤默认值</a></li>
 <li><a href=#指定返回的数据>指定返回的数据</a></li>
-<li><a href=#多个模型>多个模型</a></li>
+<li><a href=#多个模型>多个模型</a>
+<ul>
 <li><a href=#union>Union</a></li>
 <li><a href=#列表形式的响应模型>列表形式的响应模型</a></li>
 <li><a href=#任意-dict-构成的响应>任意 dict 构成的响应</a></li>
@@ -191,13 +197,19 @@
 </ul>
 </li>
 </ul>
+</li>
+<li><a href=#orm>ORM</a>
 <ul>
 <li><a href=#目录格式>目录格式</a></li>
 </ul>
+</li>
+<li><a href=#跨域资源共享>跨域资源共享</a>
 <ul>
 <li><a href=#源>源</a></li>
 <li><a href=#corsmiddleware>CORSMiddleware</a></li>
 </ul>
+</li>
+<li><a href=#文件结构>文件结构</a>
 <ul>
 <li><a href=#路径分离-apirouter>路径分离 APIRouter</a></li>
 <li><a href=#主体>主体</a></li>
@@ -216,9 +228,12 @@
 </li>
 <li><a href=#测试>测试</a></li>
 </ul>
+</li>
+</ul>
 </nav></div>
-</div><div class=content id=content><h1 id=认识>认识</h1>
-<h2 id=运行>运行</h2>
+</div><div class=content id=content><h1 id=fastapi>FastAPI</h1>
+<h2 id=认识>认识</h2>
+<h3 id=运行>运行</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -232,11 +247,11 @@
 <li><code>app</code>：在 <code>main.py</code> 文件中通过 <code>app = FastAPI()</code> 创建的对象。</li>
 <li><code>--reload</code>：让服务器在更新代码后重新启动。仅在开发时使用该选项</li>
 </ul>
-<h2 id=查看-api-文档>查看 API 文档</h2>
+<h3 id=查看-api-文档>查看 API 文档</h3>
 <p>交互式文档：<code>url/docs</code></p>
 <p>可选的文档：<code>url/redoc</code></p>
-<h1 id=特性>特性</h1>
-<h2 id=基本格式>基本格式</h2>
+<h2 id=特性>特性</h2>
+<h3 id=基本格式>基本格式</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -259,7 +274,7 @@
     <span class=k>return</span> <span class=p>{</span><span class=s2>&#34;message&#34;</span><span class=p>:</span> <span class=s2>&#34;Hello World&#34;</span><span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=路径参数>路径参数</h2>
+</div><h3 id=路径参数>路径参数</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -282,7 +297,7 @@
 </div>
 </div><p>关于路径顺序：</p>
 <p>由于路径操作是按<strong>顺序</strong>依次运行的，你需要确保路径 <code>/users/me</code> 声明在路径 <code>/users/{user_id}</code>之前</p>
-<h2 id=枚举>枚举</h2>
+<h3 id=枚举>枚举</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -325,7 +340,7 @@
 
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=查询参数>查询参数</h2>
+</div><h3 id=查询参数>查询参数</h3>
 <p>声明不属于路径参数的其他函数参数时，它们将被自动解释为"查询字符串"参数</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -360,7 +375,7 @@
 <pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>http://127.0.0.1:8000/items/?skip<span class=o>=</span>0<span class=p>&amp;</span><span class=nv>limit</span><span class=o>=</span><span class=m>10</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=可选参数>可选参数</h3>
+</div><h4 id=可选参数>可选参数</h4>
 <p>通过同样的方式，你可以将它们的默认值设置为 <code>None</code> 来声明可选查询参数：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -389,7 +404,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>在这个例子中，函数参数 <code>q</code> 将是可选的，并且默认值为 <code>None</code>。</p>
-<h3 id=必需不必需与可选>必需、不必需与可选</h3>
+<h4 id=必需不必需与可选>必需、不必需与可选</h4>
 <p>当你想让一个查询参数成为必需的，不声明任何默认值就可以</p>
 <p>如果你不想添加一个特定的值，而只是想使该参数成为可选的，则将默认值设置为 <code>None</code></p>
 <div class=highlight><div class=chroma>
@@ -415,7 +430,7 @@
 <li><code>skip</code>，一个默认值为 <code>0</code> 的 <code>int</code> 类型参数。意味着不必须传入，但是会存在</li>
 <li><code>limit</code>，一个可选的 <code>int</code> 类型参数。意味着不传入就不存在</li>
 </ul>
-<h3 id=查询参数列表>查询参数列表</h3>
+<h4 id=查询参数列表>查询参数列表</h4>
 <p>当你使用 <code>Query</code> 显式地定义查询参数时，你还可以声明它去接收一组值，或换句话来说，接收多个值</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -446,10 +461,10 @@
 </div>
 </div><p>在这种情况下，将不会检查列表的内容。</p>
 <p>例如，<code>List[int]</code> 将检查（并记录到文档）列表的内容必须是整数。但是单独的 <code>list</code> 不会。</p>
-<h2 id=请求体-request>请求体 request</h2>
+<h3 id=请求体-request>请求体 request</h3>
 <p><strong>请求体</strong>是客户端发送给 API 的数据。<strong>响应体</strong>是 API 发送给客户端的数据。</p>
 <p>你的 API 几乎总是要发送<strong>响应</strong>体。但是客户端并不总是需要发送<strong>请求</strong>体。</p>
-<h3 id=模板>模板</h3>
+<h4 id=模板>模板</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -501,7 +516,7 @@
 <p>将模型声明为参数</p>
 </li>
 </ol>
-<h3 id=访问模型属性>访问模型属性</h3>
+<h4 id=访问模型属性>访问模型属性</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -522,7 +537,7 @@
     <span class=k>return</span> <span class=n>item_dict</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=请求体加参数>请求体加参数</h3>
+</div><h4 id=请求体加参数>请求体加参数</h4>
 <p>你可以同时声明路径参数和请求体。</p>
 <p><strong>FastAPI</strong> 将识别出与路径参数匹配的函数参数应<strong>从路径中获取</strong>，而声明为 Pydantic 模型的函数参数应<strong>从请求体中获取</strong>。</p>
 <div class=highlight><div class=chroma>
@@ -562,8 +577,8 @@
 <li>如果参数属于<strong>单一类型</strong>（比如 <code>int</code>、<code>float</code>、<code>str</code>、<code>bool</code> 等）它将被解释为<strong>查询</strong>参数。</li>
 <li>如果参数的类型被声明为一个 <strong>Pydantic 模型</strong>，它将被解释为<strong>请求体</strong>。</li>
 </ul>
-<h3 id=多个请求体>多个请求体</h3>
-<h4 id=多个请求体-1>多个请求体</h4>
+<h4 id=多个请求体>多个请求体</h4>
+<h5 id=多个请求体-1>多个请求体</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -650,7 +665,7 @@
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=添加额外请求体-body>添加额外请求体 <code>body</code></h4>
+</div><h5 id=添加额外请求体-body>添加额外请求体 <code>body</code></h5>
 <p>为了扩展先前的模型，你可能决定除了 <code>item</code> 和 <code>user</code> 之外，还想在同一请求体中具有另一个键 <code>importance</code>。</p>
 <p>你可以使用 <code>Body</code> 指示 <strong>FastAPI</strong> 将其作为请求体的另一个键进行处理</p>
 <div class=highlight><div class=chroma>
@@ -748,7 +763,7 @@
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=嵌入单个请求体参数>嵌入单个请求体参数</h4>
+</div><h5 id=嵌入单个请求体参数>嵌入单个请求体参数</h5>
 <p>假设你只有一个来自 Pydantic 模型 <code>Item</code> 的请求体参数 <code>item</code>。</p>
 <p>默认情况下，<strong>FastAPI</strong> 将直接期望这样的请求体。</p>
 <p>但是，如果你希望它期望一个拥有 <code>item</code> 键并在值中包含模型内容的 JSON，就像在声明额外的请求体参数时所做的那样，则可以使用一个特殊的 <code>Body</code> 参数 <code>embed</code>：</p>
@@ -847,7 +862,7 @@
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=总结>总结</h4>
+</div><h5 id=总结>总结</h5>
 <ul>
 <li>
 <p>你可以添加多个请求体参数到路径操作函数中，<strong>即使一个请求只能有一个请求体</strong>。</p>
@@ -862,7 +877,7 @@
 <p>你还可以指示 <strong>FastAPI</strong> 在仅声明了一个请求体参数的情况下，将原本的请求体嵌入到一个键中。</p>
 </li>
 </ul>
-<h3 id=请求体字段>请求体字段</h3>
+<h4 id=请求体字段>请求体字段</h4>
 <p>与使用 <code>Query</code>、<code>Path</code> 和 <code>Body</code> 在<em>路径操作函数</em>中声明额外的校验和元数据的方式相同，你可以使用 Pydantic 的 <code>Field</code> 在 Pydantic 模型内部声明校验和元数据。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -897,9 +912,9 @@
 <p>实际上，<code>Query</code>、<code>Path</code> 和其他你将在之后看到的类，创建的是由一个共同的 <code>Params</code> 类派生的子类的对象，该共同类本身又是 Pydantic 的 <code>FieldInfo</code> 类的子类。</p>
 <p>请记住当你从 <code>fastapi</code> 导入 <code>Query</code>、<code>Path</code> 等对象时，他们实际上是返回特殊类的函数。</p>
 </blockquote>
-<h3 id=嵌套模型>嵌套模型</h3>
+<h4 id=嵌套模型>嵌套模型</h4>
 <p>使用 <strong>FastAPI</strong>，你可以定义、校验、记录文档并使用任意深度嵌套的模型（归功于 Pydantic）。</p>
-<h4 id=list>List</h4>
+<h5 id=list>List</h5>
 <p>最普通的写法是</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -937,7 +952,7 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>tags</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>str</span><span class=p>]</span> <span class=o>=</span> <span class=p>[]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=set>Set</h4>
+</div><h5 id=set>Set</h5>
 <p>使用 <code>Set</code> 好处多多</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -966,7 +981,7 @@
 <p>并且还会被相应地标注 / 记录文档。</p>
 </li>
 </ul>
-<h4 id=嵌套类型>嵌套类型</h4>
+<h5 id=嵌套类型>嵌套类型</h5>
 <p>Pydantic 模型的每个属性都具有类型。</p>
 <p>但是这个类型本身可以是另一个 Pydantic 模型。</p>
 <p>因此，你可以声明拥有特定属性名称、类型和校验的深度嵌套的 JSON 对象。</p>
@@ -1030,7 +1045,7 @@
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=特殊的类型和校验>特殊的类型和校验</h4>
+</div><h5 id=特殊的类型和校验>特殊的类型和校验</h5>
 <p>除了普通的单一值类型（如 <code>str</code>、<code>int</code>、<code>float</code> 等）外，你还可以使用从 <code>str</code> 继承的更复杂的单一值类型。</p>
 <p>例如，在 <code>Image</code> 模型中我们有一个 <code>url</code> 字段，我们可以把它声明为 Pydantic 的 <code>HttpUrl</code>，而不是 <code>str</code></p>
 <div class=highlight><div class=chroma>
@@ -1054,7 +1069,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>该字符串将被检查是否为有效的 URL，并在 JSON Schema / OpenAPI 文档中进行记录。</p>
-<h4 id=带有一组子模型的属性>带有一组子模型的属性</h4>
+<h5 id=带有一组子模型的属性>带有一组子模型的属性</h5>
 <p>你还可以将 Pydantic 模型用作 <code>list</code>、<code>set</code> 等的子类型：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1163,7 +1178,7 @@
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=深度嵌套模型>深度嵌套模型</h4>
+</div><h5 id=深度嵌套模型>深度嵌套模型</h5>
 <p>你可以定义任意深度的嵌套模型</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1209,7 +1224,7 @@
     <span class=n>items</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=n>Item</span><span class=p>]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=纯列表请求体>纯列表请求体</h4>
+</div><h5 id=纯列表请求体>纯列表请求体</h5>
 <p>如果你期望的 JSON 请求体的最外层是一个 JSON <code>array</code>（即 Python <code>list</code>），则可以在路径操作函数的参数中声明此类型，就像声明 Pydantic 模型一样：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1258,7 +1273,7 @@
     <span class=k>return</span> <span class=n>images</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=任意-dict-构成的请求体>任意 <code>dict</code> 构成的请求体</h4>
+</div><h5 id=任意-dict-构成的请求体>任意 <code>dict</code> 构成的请求体</h5>
 <p>你也可以将请求体声明为使用某类型的键和其他类型值的 <code>dict</code>。</p>
 <p>无需事先知道有效的字段/属性（在使用 Pydantic 模型的场景）名称是什么。</p>
 <p>如果你想接收一些尚且未知的键，这将很有用。</p>
@@ -1294,8 +1309,8 @@
 <p>这意味着，即使你的 API 客户端只能将字符串作为键发送，只要这些字符串内容仅包含整数，Pydantic 就会对其进行转换并校验。</p>
 <p>然后你接收的名为 <code>weights</code> 的 <code>dict</code> 实际上将具有 <code>int</code> 类型的键和 <code>float</code> 类型的值。</p>
 </blockquote>
-<h3 id=模型示例>模型示例</h3>
-<h4 id=config-和-schema_extra><code>Config</code> 和 <code>schema_extra</code></h4>
+<h4 id=模型示例>模型示例</h4>
+<h5 id=config-和-schema_extra><code>Config</code> 和 <code>schema_extra</code></h5>
 <p>可以使用 <code>Config</code> 和 <code>schema_extra</code> 为 Pydantic 模型声明一个示例</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1336,7 +1351,7 @@
 </div><blockquote>
 <p>传递的那些额外参数不会添加任何验证，只会添加注释，用于文档的目的。</p>
 </blockquote>
-<h4 id=example><code>example</code></h4>
+<h5 id=example><code>example</code></h5>
 <p>或者使用 <code>example</code> 为单个字段添加示例</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1361,7 +1376,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>不过这样写感觉蛮麻烦的&mldr;</p>
-<h4 id=body-等的额外参数><code>Body</code> 等的额外参数</h4>
+<h5 id=body-等的额外参数><code>Body</code> 等的额外参数</h5>
 <p>可以通过传递额外信息给 <code>Field</code> 同样的方式操作<code>Path</code>, <code>Query</code>, <code>Body</code>等。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1414,7 +1429,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>感觉也没必要</p>
-<h3 id=文件请求>文件请求</h3>
+<h4 id=文件请求>文件请求</h4>
 <p>To receive uploaded files, install python-multipart</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1513,8 +1528,8 @@
     <span class=k>return</span> <span class=p>{</span><span class=s2>&#34;filenames&#34;</span><span class=p>:</span> <span class=p>[</span><span class=n>file</span><span class=o>.</span><span class=n>filename</span> <span class=k>for</span> <span class=n>file</span> <span class=ow>in</span> <span class=n>files</span><span class=p>]}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=校验>校验</h2>
-<h3 id=对查询参数的校验>对查询参数的校验</h3>
+</div><h3 id=校验>校验</h3>
+<h4 id=对查询参数的校验>对查询参数的校验</h4>
 <p>除了可以设置参数是否可选，还能对参数设置其他的约束条件</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1575,7 +1590,7 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>q</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Query</span><span class=p>(</span><span class=o>...</span><span class=p>,</span> <span class=n>min_length</span><span class=o>=</span><span class=mi>3</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=声明更多元数据>声明更多元数据</h3>
+</div><h4 id=声明更多元数据>声明更多元数据</h4>
 <p>你可以添加更多有关该参数的信息。</p>
 <p>这些信息将包含在生成的 OpenAPI 模式中，并由文档用户界面和外部工具所使用</p>
 <p><strong>添加 title 与 description</strong></p>
@@ -1597,7 +1612,7 @@
     <span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=别名参数>别名参数</h3>
+</div><h4 id=别名参数>别名参数</h4>
 <p>要添加含有 &ldquo;<code>-</code>&rdquo; 之类被 python 所禁止的变量名，可以用 <code>alias</code> 参数声明一个别名，该别名将用于在 URL 中查找查询参数值：</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1608,7 +1623,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>可以传入类似 <code>http://127.0.0.1:8000/items/?item-query=foobaritems</code> 的参数了</p>
-<h3 id=弃用参数>弃用参数</h3>
+<h4 id=弃用参数>弃用参数</h4>
 <p>现在假设你不再喜欢此参数。</p>
 <p>你不得不将其保留一段时间，因为有些客户端正在使用它，但你希望文档清楚地将其展示为已弃用。</p>
 <p>那么将参数 <code>deprecated=True</code> 传入 <code>Query</code></p>
@@ -1638,7 +1653,7 @@
     <span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=对路径参数的校验>对路径参数的校验</h3>
+</div><h4 id=对路径参数的校验>对路径参数的校验</h4>
 <p>首先，从 <code>fastapi</code> 导入 <code>Path</code></p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1705,7 +1720,7 @@
     <span class=c1># ...</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=数值校验>数值校验</h3>
+</div><h4 id=数值校验>数值校验</h4>
 <ul>
 <li><code>gt</code>：大于（<code>g</code>reater <code>t</code>han）</li>
 <li><code>ge</code>：大于等于（<code>g</code>reater than or <code>e</code>qual）</li>
@@ -1730,7 +1745,7 @@
     <span class=c1># ...</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=cookie-参数>Cookie 参数</h2>
+</div><h3 id=cookie-参数>Cookie 参数</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1756,7 +1771,7 @@
 <p><code>Cookie</code> 、<code>Path</code> 、<code>Query</code> 是兄弟类，它们都继承自公共的 <code>Param</code> 类</p>
 <p>但请记住，当你从 <code>fastapi</code> 导入的 <code>Query</code>、<code>Path</code>、<code>Cookie</code> 或其他参数声明函数，这些实际上是返回特殊类的函数。</p>
 </blockquote>
-<h2 id=header-参数>Header 参数</h2>
+<h3 id=header-参数>Header 参数</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1778,7 +1793,7 @@
     <span class=k>return</span> <span class=p>{</span><span class=s2>&#34;User-Agent&#34;</span><span class=p>:</span> <span class=n>user_agent</span><span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=特性-1>特性</h3>
+</div><h4 id=特性-1>特性</h4>
 <p>默认情况下, <code>Header</code> 将把参数名称的字符从下划线 (<code>_</code>) 转换为连字符 (<code>-</code>) 来提取并记录 headers</p>
 <p>同时，HTTP headers 是大小写不敏感的，因此，因此可以使用标准Python样式(也称为 &ldquo;snake_case&rdquo;)声明它们</p>
 <p>若需要禁用下划线到连字符的自动转换</p>
@@ -1790,7 +1805,7 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>Header</span><span class=p>(</span><span class=kc>None</span><span class=p>,</span> <span class=n>convert_underscores</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=接受重复值>接受重复值</h3>
+</div><h4 id=接受重复值>接受重复值</h4>
 <p>相同的 header 具有多个值时，可以在类型声明中使用一个 list 来定义这些情况</p>
 <p>比如，为了声明一个 <code>X-Token</code> header 可以出现多次，你可以这样写</p>
 <div class=highlight><div class=chroma>
@@ -1835,8 +1850,8 @@
 <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=响应-response>响应 response</h2>
-<h3 id=响应模型-response_model>响应模型 response_model</h3>
+</div><h3 id=响应-response>响应 response</h3>
+<h4 id=响应模型-response_model>响应模型 response_model</h4>
 <p>使用 <code>response_model</code> 参数来声明用于响应的模型，也就是要向前端返回的数据类型</p>
 <p>这样做的主要目的是<strong>确保私有数据在返回时被过滤掉</strong></p>
 <p>FastAPI 将使用此 <code>response_model</code> 来：</p>
@@ -2065,7 +2080,7 @@
 <span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=union>Union</h4>
+</div><h5 id=union>Union</h5>
 <p>你可以将一个响应声明为两种类型的 <code>Union</code>，这意味着该响应将是两种类型中的任何一种。</p>
 <p>这将在 OpenAPI 中使用 <code>anyOf</code> 进行定义。</p>
 <div class=highlight><div class=chroma>
@@ -2135,7 +2150,7 @@
 </div><blockquote>
 <p>定义一个 Union 类型时，首先包括最详细的类型，然后是不太详细的类型。在上面的示例中，更详细的 PlaneItem 位于 Union[PlaneItem，CarItem] 中的 CarItem 之前</p>
 </blockquote>
-<h4 id=列表形式的响应模型>列表形式的响应模型</h4>
+<h5 id=列表形式的响应模型>列表形式的响应模型</h5>
 <p>可以用同样的方式声明由对象列表构成的响应</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2177,7 +2192,7 @@
     <span class=k>return</span> <span class=n>items</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=任意-dict-构成的响应>任意 dict 构成的响应</h4>
+</div><h5 id=任意-dict-构成的响应>任意 dict 构成的响应</h5>
 <p>你还可以使用一个任意的普通 <code>dict</code> 声明响应，仅声明键和值的类型，而不使用 Pydantic 模型。</p>
 <p>如果你事先不知道有效的字段/属性名称（对于 Pydantic 模型是必需的），这将很有用。</p>
 <p>在这种情况下，你可以使用 <code>typing.Dict</code>：</p>
@@ -2203,7 +2218,7 @@
     <span class=k>return</span> <span class=p>{</span><span class=s2>&#34;foo&#34;</span><span class=p>:</span> <span class=mf>2.3</span><span class=p>,</span> <span class=s2>&#34;bar&#34;</span><span class=p>:</span> <span class=mf>3.4</span><span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=响应状态码>响应状态码</h3>
+</div><h4 id=响应状态码>响应状态码</h4>
 <p>可以在路径操作器中使用 <code>status_code</code> 参数来声明用于响应的 HTTP 状态码</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2213,7 +2228,7 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=nd>@app</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s2>&#34;/items/&#34;</span><span class=p>,</span> <span class=n>status_code</span><span class=o>=</span><span class=mi>201</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=简介>简介</h4>
+</div><h5 id=简介>简介</h5>
 <ul>
 <li><code>100</code> 及以上状态码用于「消息」响应。你很少直接使用它们。具有这些状态代码的响应不能带有响应体。</li>
 <li><code>200</code> 及以上状态码用于「成功」响应。这些是你最常使用的。
@@ -2232,7 +2247,7 @@
 </li>
 <li><code>500</code> 及以上状态码用于服务器端错误。你几乎永远不会直接使用它们。当你的应用程序代码或服务器中的某些部分出现问题时，它将自动返回这些状态代码之一</li>
 </ul>
-<h4 id=便捷变量>便捷变量</h4>
+<h5 id=便捷变量>便捷变量</h5>
 <p>可以使用来自 <code>fastapi.status</code> 的便捷变量</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2247,7 +2262,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>仅仅是为了自动补全&mldr;</p>
-<h3 id=表单数据>表单数据</h3>
+<h4 id=表单数据>表单数据</h4>
 <p>When you need to receive form fields instead of JSON, you can use <code>Form</code>.</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2269,7 +2284,7 @@
     <span class=k>return</span> <span class=p>{</span><span class=s2>&#34;username&#34;</span><span class=p>:</span> <span class=n>username</span><span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=文件响应>文件响应</h3>
+</div><h4 id=文件响应>文件响应</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -2302,7 +2317,7 @@
     <span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=错误处理>错误处理</h3>
+</div><h4 id=错误处理>错误处理</h4>
 <p>使用 <code>HTTPException</code> 来向前端返回错误请求</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2334,8 +2349,8 @@
     <span class=k>return</span> <span class=p>{</span><span class=s2>&#34;item&#34;</span><span class=p>:</span> <span class=n>items</span><span class=p>[</span><span class=n>item_id</span><span class=p>]}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=路径修饰器的其他参数>路径修饰器的其他参数</h2>
-<h3 id=tags>tags</h3>
+</div><h3 id=路径修饰器的其他参数>路径修饰器的其他参数</h3>
+<h4 id=tags>tags</h4>
 <p>传递 list 或 str 参数</p>
 <p>Tags will be added to the OpenAPI schema and used by the automatic documentation interfaces</p>
 <div class=highlight><div class=chroma>
@@ -2370,7 +2385,7 @@
     <span class=k>return</span> <span class=p>[{</span><span class=s2>&#34;username&#34;</span><span class=p>:</span> <span class=s2>&#34;johndoe&#34;</span><span class=p>}]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=summary-and-description>Summary and description</h3>
+</div><h4 id=summary-and-description>Summary and description</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -2393,7 +2408,7 @@
     <span class=k>return</span> <span class=n>item</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=description-from-docstring>Description from docstring</h3>
+</div><h4 id=description-from-docstring>Description from docstring</h4>
 <p>You can write Markdown in the docstring, it will be interpreted and displayed correctly</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2425,7 +2440,7 @@
     <span class=k>return</span> <span class=n>item</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=response-description>Response description</h3>
+</div><h4 id=response-description>Response description</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -2447,7 +2462,7 @@
 </div><blockquote>
 <p>Notice that <code>response_description</code> refers specifically to the response, the <code>description</code> refers to the <em>path operation</em> in general.</p>
 </blockquote>
-<h3 id=deprecated>deprecated</h3>
+<h4 id=deprecated>deprecated</h4>
 <p>标记已废弃的 API</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2461,9 +2476,9 @@
     <span class=k>return</span> <span class=p>[{</span><span class=s2>&#34;item_id&#34;</span><span class=p>:</span> <span class=s2>&#34;Foo&#34;</span><span class=p>}]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=orm>ORM</h1>
+</div><h2 id=orm>ORM</h2>
 <p>使用 sqlalchemy</p>
-<h2 id=目录格式>目录格式</h2>
+<h3 id=目录格式>目录格式</h3>
 <p>数据库操作 Demo：https://www.jianshu.com/p/ca0d29b6e127</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2487,9 +2502,9 @@
     └── schemas.py 
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=跨域资源共享>跨域资源共享</h1>
+</div><h2 id=跨域资源共享>跨域资源共享</h2>
 <p>跨域资源共享指浏览器中运行的前端拥有与后端通信的 JavaScript 代码，而后端处于与前端不同的「源」的情况。</p>
-<h2 id=源>源</h2>
+<h3 id=源>源</h3>
 <p>源是协议（<code>http</code>，<code>https</code>）、域（<code>myapp.com</code>，<code>localhost</code>，<code>localhost.tiangolo.com</code>）以及端口（<code>80</code>、<code>443</code>、<code>8080</code>）的组合。</p>
 <p>因此，这些都是不同的源：</p>
 <ul>
@@ -2500,7 +2515,7 @@
 <p>即使它们都在 <code>localhost</code> 中，但是它们使用不同的协议或者端口，所以它们都是不同的「源」。</p>
 <p>后端必须有一个「允许的源」列表，才能接收来自前端的请求</p>
 <p>可以使用 <code>"*"</code>（一个「通配符」）声明这个列表，表示全部都是允许的，但为了一切都能正常工作，最好显式地指定允许的源</p>
-<h2 id=corsmiddleware>CORSMiddleware</h2>
+<h3 id=corsmiddleware>CORSMiddleware</h3>
 <p>你可以在 <strong>FastAPI</strong> 应用中使用 <code>CORSMiddleware</code> 来配置它。</p>
 <ul>
 <li>导入 <code>CORSMiddleware</code>。</li>
@@ -2575,7 +2590,7 @@
 <li><code>expose_headers</code> - 指示可以被浏览器访问的响应头。默认为 <code>[]</code>。</li>
 <li><code>max_age</code> - 设定浏览器缓存 CORS 响应的最长时间，单位是秒。默认为 <code>600</code>。</li>
 </ul>
-<h1 id=文件结构>文件结构</h1>
+<h2 id=文件结构>文件结构</h2>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -2606,7 +2621,7 @@
 │       └── admin.py
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=路径分离-apirouter>路径分离 APIRouter</h2>
+</div><h3 id=路径分离-apirouter>路径分离 APIRouter</h3>
 <p>可以将 <code>APIRouter</code> 视为一个「迷你 <code>FastAPI</code>」类</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2680,7 +2695,7 @@
     <span class=k>return</span> <span class=p>{</span><span class=s2>&#34;name&#34;</span><span class=p>:</span> <span class=n>fake_items_db</span><span class=p>[</span><span class=n>item_id</span><span class=p>][</span><span class=s2>&#34;name&#34;</span><span class=p>],</span> <span class=s2>&#34;item_id&#34;</span><span class=p>:</span> <span class=n>item_id</span><span class=p>}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=主体>主体</h2>
+</div><h3 id=主体>主体</h3>
 <p>主题通常位于项目根目录，名字为 <code>main.py</code></p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2750,9 +2765,9 @@
 </code></pre></td></tr></table>
 </div>
 </div></blockquote>
-<h2 id=依赖项>依赖项</h2>
-<h3 id=声明依赖项>声明依赖项</h3>
-<h4 id=函数式>函数式</h4>
+<h3 id=依赖项>依赖项</h3>
+<h4 id=声明依赖项>声明依赖项</h4>
+<h5 id=函数式>函数式</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -2790,7 +2805,7 @@
 </div><p>只能传给 Depends 一个参数。</p>
 <p>且该参数必须是可调用对象，比如函数。</p>
 <p>该函数接收的参数和<em>路径操作函数</em>的参数一样</p>
-<h4 id=对象式>对象式</h4>
+<h5 id=对象式>对象式</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -2865,7 +2880,7 @@
 <pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>commons: CommonQueryParams = Depends()
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=子依赖项>子依赖项</h3>
+</div><h4 id=子依赖项>子依赖项</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -2932,7 +2947,7 @@
 <blockquote>
 <p>如果在同一个<em>路径操作</em> 多次声明了同一个依赖项，例如，多个依赖项共用一个子依赖项，<strong>FastAPI</strong> 在处理同一请求时，只调用一次该子依赖项。</p>
 </blockquote>
-<h3 id=路径操作装饰器依赖项>路径操作装饰器依赖项</h3>
+<h4 id=路径操作装饰器依赖项>路径操作装饰器依赖项</h4>
 <p>有时，我们并不需要在<em>路径操作函数</em>中使用依赖项的返回值。或者说，有些依赖项不返回值，但仍要执行或解析该依赖项。</p>
 <p>对于这种情况，不必在声明<em>路径操作函数</em>的参数时使用 <code>Depends</code>，而是可以在<em>路径操作装饰器</em>中添加一个由 <code>dependencies</code> 组成的 <code>list</code>。</p>
 <div class=highlight><div class=chroma>
@@ -2980,7 +2995,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>路径操作装饰器依赖项（以下简称为**“路径装饰器依赖项”**）的执行或解析方式和普通依赖项一样，但就算这些依赖项会返回值，它们的值也不会传递给<em>路径操作函数</em>。</p>
-<h3 id=全局依赖项>全局依赖项</h3>
+<h4 id=全局依赖项>全局依赖项</h4>
 <p>有时，我们要为整个应用添加依赖项</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -2991,7 +3006,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>一些在应用程序的好几个地方所使用的依赖项，可以放在它们自己的 <code>dependencies</code> 模块（<code>app/dependencies.py</code>）中</p>
-<h2 id=测试>测试</h2>
+<h3 id=测试>测试</h3>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -3051,7 +3066,7 @@
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 0001-01-01</span>
+<span>更新于 2021-10-23</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -3063,13 +3078,13 @@
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E5%90%8E%E7%AB%AF/>后端</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/python/web-backend/flask/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/web-backend/django/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/python/web-backend/flask/ class=prev rel=prev title=Flask><i class="fas fa-angle-left fa-fw"></i>Flask</a>
+<a href=/Notes/posts/python/web-backend/django/ class=next rel=next title=Django>Django<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

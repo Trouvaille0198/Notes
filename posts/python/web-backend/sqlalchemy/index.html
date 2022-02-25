@@ -4,17 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
-<meta property="og:description" content="认识 ORM：Object Relational Mapping（对象关系映射）将数据库中的表与类构建映射 简洁易读：将数据表抽象为对象（数据模型），更直观易读 可移植">
+<title>SQLAlchemy - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="SQLAlchemy">
+<meta property="og:description" content="SQLAlchemy 认识 ORM：Object Relational Mapping（对象关系映射）将数据库中的表与类构建映射 简洁易读：将数据表抽象为对象（数据模型），更直观易读 可移">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/web-backend/sqlalchemy/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-10-23T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content>
-<meta name=twitter:description content="认识 ORM：Object Relational Mapping（对象关系映射）将数据库中的表与类构建映射 简洁易读：将数据表抽象为对象（数据模型），更直观易读 可移植">
+<meta name=twitter:title content="SQLAlchemy">
+<meta name=twitter:description content="SQLAlchemy 认识 ORM：Object Relational Mapping（对象关系映射）将数据库中的表与类构建映射 简洁易读：将数据表抽象为对象（数据模型），更直观易读 可移">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/sqlalchemy/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/flask/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/sqlalchemy\/"},"genre":"posts","wordcount":3914,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/sqlalchemy\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/sqlalchemy/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/database/sqlite/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/linux/useful/screen/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"SQLAlchemy","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/sqlalchemy\/"},"genre":"posts","keywords":"Python, 后端, 数据库, ORM","wordcount":3915,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/sqlalchemy\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2021-10-23T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -80,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3914 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">SQLAlchemy</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3915 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -91,6 +93,7 @@
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
+<li><a href=#认识>认识</a></li>
 <li><a href=#快速入门>快速入门</a>
 <ul>
 <li><a href=#创建引擎>创建引擎</a></li>
@@ -142,7 +145,8 @@
 </li>
 </ul>
 </nav></div>
-</div><div class=content id=content><h1 id=认识>认识</h1>
+</div><div class=content id=content><h1 id=sqlalchemy>SQLAlchemy</h1>
+<h2 id=认识>认识</h2>
 <p>ORM：Object Relational Mapping（对象关系映射）将数据库中的表与类构建映射</p>
 <ul>
 <li>简洁易读：将数据表抽象为对象（数据模型），更直观易读</li>
@@ -1725,7 +1729,7 @@ sqlite3: Total time for 100000 records 0.165791988373 sec
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 0001-01-01</span>
+<span>更新于 2021-10-23</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -1737,13 +1741,13 @@ sqlite3: Total time for 100000 records 0.165791988373 sec
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E5%90%8E%E7%AB%AF/>后端</a>,&nbsp;<a href=/Notes/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/>数据库</a>,&nbsp;<a href=/Notes/tags/orm/>ORM</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/python/%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/web-backend/flask/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/database/sqlite/ class=prev rel=prev title=SQLite><i class="fas fa-angle-left fa-fw"></i>SQLite</a>
+<a href=/Notes/posts/linux/useful/screen/ class=next rel=next title=screen>screen<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>
