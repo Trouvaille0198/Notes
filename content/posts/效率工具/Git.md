@@ -1,13 +1,24 @@
-# 安装
+---
+title: "Git 教程"
+date: 2022-02-25
+draft: false
+author: "MelonCholi"
+tags: [Git,快速入门]
+categories: [效率工具]
+---
 
-## 设置名字、邮箱
+# Git
+
+## 安装
+
+### 设置名字、邮箱
 
 ```shell
 $ git config --global user.name "Your Name"
 $ git config --global user.email "email@example.com"
 ```
 
-## 创建版本库（**repository**）
+### 创建版本库（**repository**）
 
 - 创建空目录
 
@@ -25,9 +36,9 @@ $ pwd
 $ git init
 ```
 
-# 文件操作
+## 文件操作
 
-## 添加文件
+### 添加文件
 
 把文件往 Git 版本库里添加的时候，是分两步执行的：
 
@@ -47,7 +58,7 @@ $ git add <filename>
 $ git commit -m <message>
 ```
 
-## 查看信息
+### 查看信息
 
 1. 查看仓库当前状态
 
@@ -80,7 +91,7 @@ $ git log
 $ git log --pretty=oneline //简单显示
 ```
 
-## 修改文件
+### 修改文件
 
 1. 退回上一版本
 
@@ -130,9 +141,9 @@ $ git rm <filename>
 
 别忘了`git commit`
 
-# 远程仓库操作
+## 远程仓库操作
 
-## 创建SSH Key
+### 创建SSH Key
 
 ```shell
 $ ssh-keygen -t rsa -C "youremail@example.com"
@@ -140,19 +151,19 @@ $ ssh-keygen -t rsa -C "youremail@example.com"
 
 可以在用户主目录里找到`.ssh`目录，里面有`id_rsa`和`id_rsa.pub`两个文件，这两个就是SSH Key的秘钥对，`id_rsa`是私钥，不能泄露出去，`id_rsa.pub`是公钥，可以放心地告诉任何人
 
-## 关联远程仓库
+### 关联远程仓库
 
 ```shell
 $ git remote add origin git@github.com:GitHub-name/Repo-name.git
 ```
 
-## 初次推送
+### 初次推送
 
 ```shell
 $ git push -u origin master
 ```
 
-## 将本地库推送至远程库
+### 将本地库推送至远程库
 
 ```shell
 $ git push origin master
@@ -164,13 +175,13 @@ $ git push origin master
 $ git push -f origin master
 ```
 
-## 将远程库克隆至本地库
+### 将远程库克隆至本地库
 
 ```shell
 $ git clone git@github.com:GitHub-name/Repo-name.git
 ```
 
-# 分支操作
+## 分支操作
 
 分支共有5种类型
 
@@ -180,37 +191,37 @@ $ git clone git@github.com:GitHub-name/Repo-name.git
 4. release，预发布版本，介于develop和master之间的一个版本，主要用于测试
 5. hotfix，修复补丁，用于修复master上的bug，直接作用于master
 
-## 创建并切换到新的分支
+### 创建并切换到新的分支
 
 ```shell
 $ git switch -c <name>
 ```
 
-## 创建新的分支
+### 创建新的分支
 
 ```shell
 $ git branch <name>
 ```
 
-## 切换到已有的分支
+### 切换到已有的分支
 
 ```shell
 $ git switch <name>
 ```
 
-## 查看分支
+### 查看分支
 
 ```shell
 $ git branch
 ```
 
-## 合并某分支到当前分支
+### 合并某分支到当前分支
 
 ```shell
 $ git merge <name>
 ```
 
-## 删除分支
+### 删除分支
 
 ```shell
 $ git branch -d <name>
@@ -222,39 +233,39 @@ $ git branch -d <name>
 $ git branch -D <name>
 ```
 
-## 查看分支的合并情况
+### 查看分支的合并情况
 
 ```shell
 $ git log --graph --pretty=oneline --abbrev-commit
 ```
 
-## 分支策略
+### 分支策略
 
 在实际开发中，我们应该按照几个基本原则进行分支管理：
 
-首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+首先，master 分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
 
-那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
+那在哪干活呢？干活都在 dev 分支上，也就是说，dev 分支是不稳定的，到某个时候，比如 1.0 版本发布时，再把 dev 分支合并到 master 上，在 master 分支发布 1.0 版本；
 
-你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+你和你的小伙伴们每个人都在 dev 分支上干活，每个人都有自己的分支，时不时地往 dev 分支上合并就可以了。
 
 所以，团队合作的分支看起来就像这样：
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/111.png" alt="111" style="zoom:150%;" />
 
-## 暂存工作现场
+### 暂存工作现场
 
 ```shell
 $ git stash
 ```
 
-## 查看暂存的工作现场
+### 查看暂存的工作现场
 
 ```shell
 $ git stash list
 ```
 
-## 恢复暂存现场
+### 恢复暂存现场
 
 ```shell
 $ git stash pop
@@ -266,13 +277,13 @@ $ git stash pop
 $ git stash apply stash@{0}
 ```
 
-## 复制一个特定的提交到当前分支
+### 复制一个特定的提交到当前分支
 
 ```shell
 $ git cherry-pick <id>
 ```
 
-## 整理分支
+### 整理分支
 
 ```shell
 $ git rebase
@@ -282,9 +293,9 @@ rebase操作可以把本地未push的分叉提交历史整理成直线；
 
 rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比
 
-# 多人协作
+## 多人协作
 
-## 查看远程库的信息
+### 查看远程库的信息
 
 ```shell
 $ git remote
@@ -296,13 +307,13 @@ $ git remote
 $ git remote -v
 ```
 
-## 推送分支
+### 推送分支
 
 ```shell
 $ git push origin <branch-name>
 ```
 
-## 在本地创建和远程分支对应的分支
+### 在本地创建和远程分支对应的分支
 
 ```shell
 $ git checkout -b <branch-name> origin/<branch-name>
@@ -310,7 +321,7 @@ $ git checkout -b <branch-name> origin/<branch-name>
 
 分支名字最好一样
 
-## 将远程库最新的提交抓下来
+### 将远程库最新的提交抓下来
 
 ```shell
 $ git pull
@@ -324,7 +335,7 @@ $ git branch --set-upstream-to <branch-name> origin/<branch-name>
 $ git pull origin <branch-name>
 ```
 
-## 主要步骤
+### 主要步骤
 
 多人协作的工作模式通常是这样：
 
@@ -334,7 +345,7 @@ $ git pull origin <branch-name>
 2. 如果合并有冲突，则解决冲突，并在本地提交；
 3. 没有冲突或者解决掉冲突后，再用`git push origin <branch-name>`推送就能成功！
 
-## fork 相关操作
+### fork 相关操作
 
 添加一个将被同步给 fork 远程的上游仓库
 
@@ -354,9 +365,9 @@ git fetch upstream
 git merge upstream/master
 ```
 
-# 标签操作
+## 标签操作
 
-## 创建标签
+### 创建标签
 
 切换到需要打标签的分支上，然后用以下命令创建标签
 
@@ -376,19 +387,19 @@ $ git tag <tag-name> <id>
 $ git tag -a <tag-name> -m "message" <id>
 ```
 
-## 查看标签
+### 查看标签
 
 ```shell
 $ git tag
 ```
 
-## 查看标签详细信息
+### 查看标签详细信息
 
 ```shell
 $ git show <tag-name>
 ```
 
-## 删除标签
+### 删除标签
 
 ```shell 
 $ git tag -d <tag-name>
@@ -400,7 +411,7 @@ $ git tag -d <tag-name>
 $ git push origin :refs/tags/<tag-name>
 ```
 
-## 推送标签至远程库
+### 推送标签至远程库
 
 ```shell
 $ git push origin <tag-name>
@@ -412,19 +423,19 @@ $ git push origin <tag-name>
 $ git push origin --tags
 ```
 
-# 个性化
+## 个性化
 
-## 显示更丰富的颜色
+### 显示更丰富的颜色
 
 ```shell
 $ git config --global color.ui true
 ```
 
-## 配置别名
+### 配置别名
 
 $ git config --global alias.<simple-name> <origin-name>
 
-## 忽略特殊文件
+### 忽略特殊文件
 
 ```shell
 $ touch .gitignore
@@ -434,19 +445,19 @@ $ touch .gitignore
 
 别忘了提交`.gitignore`
 
-## 删库跑路
+### 删库跑路
 
 ```shell
 $ rm .git -rf
 ```
 
-# 规范
+## 规范
 
-## GitFlow
+### GitFlow
 
 ![img](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/o_git-workflow-release-cycle-4maintenance.png)
 
-### 分支命名规范
+#### 分支命名规范
 
 - master：也称 main，存储正式发布的产品。
     - 这个分支上的产品要求随时处于可部署状态。
@@ -466,7 +477,7 @@ $ rm .git -rf
 
 ![](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/21810c5662374b2bb10e11e307e83d7c~tplv-k3u1fbpfcp-watermark.image)
 
-## commit 规范
+### commit 规范
 
 ```
 <type>(<scope>): <subject>
@@ -492,7 +503,7 @@ subject：概括提交内容
 
 详见：https://www.cnblogs.com/daysme/p/7722474.html
 
-## 其他
+### 其他
 
 识别大小写
 

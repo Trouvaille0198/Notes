@@ -1,3 +1,12 @@
+---
+title: "Offer 3"
+date: 2022-02-25
+draft: false
+author: "MelonCholi"
+tags: [查找,算法]
+categories: [刷题]
+---
+
 # 剑指 Offer 03. 数组中重复的数字
 
 `easy` `search`

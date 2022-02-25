@@ -1,4 +1,15 @@
-# FlowChart
+---
+title: "mermaid"
+date: 2022-02-25
+draft: false
+author: "MelonCholi"
+tags: [快速入门]
+categories: [效率工具]
+---
+
+# mermaid
+
+## FlowChart
 
 ````
 ```mermaid
@@ -7,7 +18,7 @@
 ```
 ````
 
-## 方向
+### 方向
 
 * TB 从上到下
 * BT 从下到上
@@ -20,7 +31,7 @@ graph TD
 Up-->Down
 ```
 
-## 基本图形
+### 基本图形
 
 -  [带文本的矩形]
 -  [(带文本的圆角矩形)
@@ -50,7 +61,7 @@ graph TD
     E((带文本的圆形))
 ```
 
-## 结点间连接
+### 结点间连接
 
 - A --> B   A带箭头指向B
 - A --- B   A不带箭头指向B
@@ -93,7 +104,7 @@ graph TB
     end
 ```
 
-## 1.4子流程图
+### 子流程图
 
 ````
 ```mermaid
@@ -117,7 +128,7 @@ graph TB
     end
 ```
 
-## Demo
+### Demo
 
 ```
 ```mermaid
@@ -151,7 +162,7 @@ graph LR
     printB --> stop
 ```
 
-# Class Diagram
+## Class Diagram
 
 ````
 ```mermaid
@@ -203,7 +214,7 @@ graph LR
       }
 ```
 
-## 定义类
+### 定义类
 
 1. 使用关键字 `class`
 2. 使用关系符 `<|--` 定义两个类的关系
@@ -214,7 +225,7 @@ classDiagram
     Vehicle <|-- Car
 ```
 
-## 定义属性、方法
+### 定义属性、方法
 
 Mermaid distinguishes between attributes and functions/methods based on if the **parenthesis** `()` are present or not
 
@@ -288,7 +299,7 @@ Square : +getMessages() List~string~
 > - `*` Abstract e.g.: `someAbstractMethod()*`
 > - `$` Static e.g.: `someStaticMethod()$`
 
-## 类关系
+### 类关系
 
 ```
 [classA][Arrow][ClassB]:LabelText
@@ -317,7 +328,7 @@ classM <|.. classN
 classO .. classP :I'm a label
 ```
 
-# Entity Relationship Diagrams
+## Entity Relationship Diagrams
 
 ```
 erDiagram

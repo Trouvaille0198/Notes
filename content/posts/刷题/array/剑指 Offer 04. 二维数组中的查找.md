@@ -1,3 +1,12 @@
+---
+title: "offer 4"
+date: 2022-02-25
+draft: false
+author: "MelonCholi"
+tags: [查找]
+categories: [刷题]
+---
+
 # 剑指 Offer 04. 二维数组中的查找
 
 `mid` `search`
