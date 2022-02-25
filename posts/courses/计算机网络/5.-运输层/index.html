@@ -4,17 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
+<title>计算机网络 第五章 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="计算机网络 第五章">
 <meta property="og:description" content="运输层 运输层协议概述 进程之间的通信 概念 运输层属于面向通信部分的最高层，也是用户功能中的最底层 网络层提供了主机间的逻辑通信，运输层为应用进程间">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.-%E8%BF%90%E8%BE%93%E5%B1%82/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-10-23T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content>
+<meta name=twitter:title content="计算机网络 第五章">
 <meta name=twitter:description content="运输层 运输层协议概述 进程之间的通信 概念 运输层属于面向通信部分的最高层，也是用户功能中的最底层 网络层提供了主机间的逻辑通信，运输层为应用进程间">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.-%E8%BF%90%E8%BE%93%E5%B1%82/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.-%E7%BD%91%E7%BB%9C%E5%B1%82/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C\/5.-%E8%BF%90%E8%BE%93%E5%B1%82\/"},"genre":"posts","wordcount":5684,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C\/5.-%E8%BF%90%E8%BE%93%E5%B1%82\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/5.-%E8%BF%90%E8%BE%93%E5%B1%82/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.-%E7%BD%91%E7%BB%9C%E5%B1%82/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/2.-%E7%89%A9%E7%90%86%E5%B1%82/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"计算机网络 第五章","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C\/5.-%E8%BF%90%E8%BE%93%E5%B1%82\/"},"genre":"posts","keywords":"计算机网络","wordcount":5684,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C\/5.-%E8%BF%90%E8%BE%93%E5%B1%82\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2021-10-23T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -80,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5684 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">计算机网络 第五章</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/><i class="far fa-folder fa-fw"></i>专业课</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5684 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 12 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -341,7 +343,7 @@
 <p>使用这样的确认和重传机制，就可以在不可靠的传输网络上实现可靠通信</p>
 <h4 id=信道利用率>信道利用率</h4>
 <img src=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210525081826275.png alt=image-20210525081826275 style=zoom:40%>
-<p>信道利用率 $$U=\frac{T_D}{T_D+RTT+T_A}$$</p>
+<p>信道利用率 $U=\frac{T_D}{T_D+RTT+T_A}$</p>
 <h4 id=流水线运输>流水线运输</h4>
 <p>发送方可连续发送多个分组，不必每发完一个分组就停顿下来等待对方的确认。这样可使信道上一直有数据不间断地传送</p>
 <p>由于信道上一直有数据不间断地传送，这种传输方式可获得很高的信道利用率。</p>
@@ -379,7 +381,7 @@
 <li>当接收到一个有差错的分组时，丢弃该分组和它以后的所有分组，让它们在发送端超时，然后重复发送已发送过的最后一个确认分组。</li>
 </ul>
 <h4 id=发送窗口的最大值>发送窗口的最大值</h4>
-<p>当用 n 比特进行分组的编号时，接收窗口 W~R~ = 1；只有在发送窗口 $$W_T \le 2^n - 1$$ 时，连续 ARQ 协议才能正确运行</p>
+<p>当用 n 比特进行分组的编号时，接收窗口 W~R~ = 1；只有在发送窗口 $W_T \le 2^n - 1$ 时，连续 ARQ 协议才能正确运行</p>
 <p>例：当 n = 3 时，发送窗口的最大值是 7 而不是 8</p>
 <p>用反例证明：</p>
 <p>若发送窗口大小为 8 ，则分组编号为 0 - 7</p>
@@ -387,7 +389,7 @@
 <li>状态 1: 所有确认分组都到达了发送端，此时发送端又发送 8 个新分组，编号为 0~7 ，接收端认为是新分组</li>
 <li>状态 2: 所有确认分组丢失，发送端超时后重发 0~7 号分组，接收端同样将其当作新分组接收（实际是重传的旧分组）。</li>
 </ul>
-<p>小窗口 ARQ 信道利用率 $$U=\frac{n\times T_D}{T_D+RTT+T_A}$$ ，大窗口信道利用率为 1</p>
+<p>小窗口 ARQ 信道利用率 $U=\frac{n\times T_D}{T_D+RTT+T_A}$ ，大窗口信道利用率为 1</p>
 <p>通常连续 ARQ 的接收窗口大小 Wr 为1</p>
 <h4 id=选择重传-arq-协议>选择重传 ARQ 协议</h4>
 <p>连续 ARQ 协议的问题 ：当线路的出错率高时，将出错帧之后的所有帧都丢弃掉，重传这些帧会带来效率上的大幅度降低。</p>
@@ -667,7 +669,7 @@
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 0001-01-01</span>
+<span>更新于 2021-10-23</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -679,13 +681,13 @@
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/>计算机网络</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/courses/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.-%E7%BD%91%E7%BB%9C%E5%B1%82/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/4.-%E7%BD%91%E7%BB%9C%E5%B1%82/ class=prev rel=prev title="计算机网络 第四章"><i class="fas fa-angle-left fa-fw"></i>计算机网络 第四章</a>
+<a href=/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/2.-%E7%89%A9%E7%90%86%E5%B1%82/ class=next rel=next title="计算机网络 第二章">计算机网络 第二章<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

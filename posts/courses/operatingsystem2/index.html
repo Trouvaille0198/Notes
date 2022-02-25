@@ -8,15 +8,15 @@
 <meta property="og:description" content="操作系统二 存储器管理 40% 文件管理（含实验，重点是系统调用部分） 35% 存储器管理 （内存分配：分配和去配，地址映射：抽象和映射，内存保护：隔离和共享，">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/courses/operatingsystem2/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-02-25T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-02-25T00:00:00+00:00">
+<meta property="article:published_time" content="2022-02-03T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-02-03T00:00:00+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="操作系统（2）">
 <meta name=twitter:description content="操作系统二 存储器管理 40% 文件管理（含实验，重点是系统调用部分） 35% 存储器管理 （内存分配：分配和去配，地址映射：抽象和映射，内存保护：隔离和共享，">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/operatingsystem2/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E4%B8%80/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/vim/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统（2）","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operatingsystem2\/"},"genre":"posts","wordcount":12163,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operatingsystem2\/","datePublished":"2022-02-25T00:00:00+00:00","dateModified":"2022-02-25T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/operatingsystem2/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/cpp/stl/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统（2）","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operatingsystem2\/"},"genre":"posts","keywords":"OS","wordcount":12155,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operatingsystem2\/","datePublished":"2022-02-03T00:00:00+00:00","dateModified":"2022-02-03T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -84,7 +84,7 @@
 <div class=toc-content id=toc-content-auto></div>
 </div><article class="page single"><h1 class="single-title animated flipInX">操作系统（2）</h1><div class=post-meta>
 <div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/><i class="far fa-folder fa-fw"></i>专业课</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-25>2022-02-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 12163 字&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-03>2022-02-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 12155 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 25 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -1349,11 +1349,11 @@ $$
 <p>$b$：每次读/写的字节数</p>
 <p>$N$：一条磁道上的字节数</p>
 <ul>
-<li>寻道时间： $$T_s=m×n+s$$</li>
-<li>旋转延迟时间： $$T_τ=\frac{1}{2r}$$</li>
-<li>传输时间： $$T_t=\frac{b}{rN}$$（读取一个扇区的时间）</li>
+<li>寻道时间： $T_s=m×n+s$</li>
+<li>旋转延迟时间： $T_τ=\frac{1}{2r}$</li>
+<li>传输时间： $T_t=\frac{b}{rN}$（读取一个扇区的时间）</li>
 </ul>
-<p>平均访问时间： $$T_a=T_s+T_τ+T_t$$</p>
+<p>平均访问时间： $T_a=T_s+T_τ+T_t$</p>
 <h4 id=磁盘调度算法>磁盘调度算法</h4>
 <h5 id=先来先服务-fcfs>先来先服务 FCFS</h5>
 <p>效果很差，未优化，平均寻道时间长</p>
@@ -1630,7 +1630,7 @@ $$
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-25</span>
+<span>更新于 2022-02-03</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -1642,13 +1642,13 @@ $$
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/os/>OS</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/courses/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E4%B8%80/ class=prev rel=prev title=数据库原理（1）><i class="fas fa-angle-left fa-fw"></i>数据库原理（1）</a>
-<a href=/Notes/posts/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/vim/ class=next rel=next title="Vim 教程">Vim 教程<i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/cpp/stl/ class=prev rel=prev title=STL><i class="fas fa-angle-left fa-fw"></i>STL</a>
+<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/ class=next rel=next title="Go net 标准库">Go net 标准库<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

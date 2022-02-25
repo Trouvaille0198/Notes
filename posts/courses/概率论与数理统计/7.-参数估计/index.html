@@ -4,17 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
-<meta property="og:description" content="参数估计 统计推断的基本问题分为两类：一是估计问题，另一个是假设检验。本章主要讨论总体参数的点估计和区间估计。 点估计 用总体 $$\Bbb X$$ 的一个样本来估计">
+<title>概率论 第七章 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="概率论 第七章">
+<meta property="og:description" content="参数估计 统计推断的基本问题分为两类：一是估计问题，另一个是假设检验。本章主要讨论总体参数的点估计和区间估计。 点估计 用总体 $\Bbb X$ 的一个样本来估计">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/7.-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-10-23T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content>
-<meta name=twitter:description content="参数估计 统计推断的基本问题分为两类：一是估计问题，另一个是假设检验。本章主要讨论总体参数的点估计和区间估计。 点估计 用总体 $$\Bbb X$$ 的一个样本来估计">
+<meta name=twitter:title content="概率论 第七章">
+<meta name=twitter:description content="参数估计 统计推断的基本问题分为两类：一是估计问题，另一个是假设检验。本章主要讨论总体参数的点估计和区间估计。 点估计 用总体 $\Bbb X$ 的一个样本来估计">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/7.-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/8.-%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/6.-%E6%A0%B7%E6%9C%AC%E5%8F%8A%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1\/7.-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1\/"},"genre":"posts","wordcount":2695,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1\/7.-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/7.-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/3.-%E5%A4%9A%E7%BB%B4%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/1.-%E6%A6%82%E5%BF%B5/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"概率论 第七章","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1\/7.-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1\/"},"genre":"posts","keywords":"概率论与数理统计","wordcount":2575,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1\/7.-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2021-10-23T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -80,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2695 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">概率论 第七章</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/><i class="far fa-folder fa-fw"></i>专业课</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2575 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -141,15 +143,15 @@
 </div><div class=content id=content><h1 id=参数估计>参数估计</h1>
 <p>统计推断的基本问题分为两类：一是估计问题，另一个是假设检验。本章主要讨论总体参数的点估计和区间估计。</p>
 <h2 id=点估计>点估计</h2>
-<p>用总体 $$\Bbb X$$ 的一个样本来估计总体未知参数的方法称为<strong>点估计法</strong></p>
+<p>用总体 $\Bbb X$ 的一个样本来估计总体未知参数的方法称为<strong>点估计法</strong></p>
 <h3 id=术语>术语</h3>
-<p>设 $$X_1,X_2,\ldots,X_n$$ 是来自总体 $$\Bbb X$$ 的一个样本，点估计法就是要构建一个合适的统计量$$\hat{\theta}(X_1,X_2,\ldots,X_n)$$用它的观察值$$\hat{\theta}(x_1,x_2,\ldots,x_n)$$作为未知参数$$\theta$$的近似值，有</p>
+<p>设 $X_1,X_2,\ldots,X_n$ 是来自总体 $\Bbb X$ 的一个样本，点估计法就是要构建一个合适的统计量$\hat{\theta}(X_1,X_2,\ldots,X_n)$用它的观察值$\hat{\theta}(x_1,x_2,\ldots,x_n)$作为未知参数$\theta$的近似值，有</p>
 <ul>
 <li>
-<p>估计量：$$\hat{\theta}(X_1,X_2,\ldots,X_n)$$</p>
+<p>估计量：$\hat{\theta}(X_1,X_2,\ldots,X_n)$</p>
 </li>
 <li>
-<p>估计值：$$\hat{\theta}(x_1,x_2,\ldots,x_n)$$</p>
+<p>估计值：$\hat{\theta}(x_1,x_2,\ldots,x_n)$</p>
 </li>
 </ul>
 <p>估计量和估计值统称为估计</p>
@@ -157,20 +159,20 @@
 <p>用样本矩作为相应的总体矩的估计方法称为矩估计法</p>
 <p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210223095556527.png data-srcset="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210223095556527.png, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210223095556527.png 1.5x, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210223095556527.png 2x" data-sizes=auto alt=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210223095556527.png title=image-20210223095556527></p>
 <h4 id=方法>方法</h4>
-<p>设$$\theta_1,\theta_2,\ldots,\theta_k$$为带估计的参数，用$$\Theta$$表示带估计参数组成的向量，即$$\Theta=(\theta_1,\theta_2,\ldots,\theta_k)$$</p>
+<p>设$\theta_1,\theta_2,\ldots,\theta_k$为带估计的参数，用$\Theta$表示带估计参数组成的向量，即$\Theta=(\theta_1,\theta_2,\ldots,\theta_k)$</p>
 <ul>
-<li>$$\Bbb X$$ 为连续型总体，其概率密度为 $$f(x,\Theta)$$，总体的前 $$k$$ 阶矩为</li>
+<li>$\Bbb X$ 为连续型总体，其概率密度为 $f(x,\Theta)$，总体的前 $k$ 阶矩为</li>
 </ul>
 <p>$$
 \mu_l(\Theta)=E(X^l)=\int_{-\infty}^{+\infty}x^lf(x,\Theta)dx\quad l=1,2,\ldots,k
 $$</p>
 <ul>
-<li>$$\Bbb X$$ 为离散型总体，其分布律为 $$P{X=x_i}=p_i(\Theta),i=1,2,\ldots,k$$，总体的前 $$k$$ 阶矩为</li>
+<li>$\Bbb X$ 为离散型总体，其分布律为 $P{X=x_i}=p_i(\Theta),i=1,2,\ldots,k$，总体的前 $k$ 阶矩为</li>
 </ul>
 <p>$$
 \mu_l(\Theta)=E(X^l)=\sum\limits_{i=1}^{\infty}(x_i)^lp_i(\Theta)\quad l=1,2,\ldots,k
 $$</p>
-<p>设$$X_1,X_2,\ldots,X_n$$为来自总体$$\Bbb X$$的一个样本，它的前$$k$$阶样本矩观察值为
+<p>设$X_1,X_2,\ldots,X_n$为来自总体$\Bbb X$的一个样本，它的前$k$阶样本矩观察值为
 $$
 a_l=\cfrac{1}{n}\sum\limits_{i=1}^nx_i^l\quad (l=1,2,\ldots,k)
 $$</p>
@@ -183,7 +185,7 @@ $$
 \ \ \mu_k(\theta_1,\theta_2,\ldots,\theta_k)=a_k
 \end{cases}
 $$</p>
-<p>最后求解方程（组），即可获得未知参数$$\theta_1,\theta_2,\ldots,\theta_k$$的<strong>估计值</strong>为
+<p>最后求解方程（组），即可获得未知参数$\theta_1,\theta_2,\ldots,\theta_k$的<strong>估计值</strong>为
 $$
 \hat{\theta}_l=\theta_l(a_1,a_2,\ldots,a_k)\quad (l=1,2,\ldots,k)
 $$
@@ -196,28 +198,28 @@ $$</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210111100234564.png alt=image-20210111100234564 style=zoom:50%>
 <h4 id=结论>结论</h4>
 <ol>
-<li>总体期望可以由样本均值（一阶中心矩）表示，$$\overline{X} 或 A_1$$</li>
-<li>总体方差可以由样本二阶中心矩表示，$$A_2$$</li>
+<li>总体期望可以由样本均值（一阶中心矩）表示，$\overline{X} 或 A_1$</li>
+<li>总体方差可以由样本二阶中心矩表示，$A_2$</li>
 </ol>
 <h3 id=最大似然估计法>最大似然估计法</h3>
-<p>设 $$\theta_1,\theta_2,\ldots,\theta_k$$ 为带估计的参数，用$$\Theta$$表示带估计参数组成的向量，即$$\Theta=(\theta_1,\theta_2,\ldots,\theta_k)$$</p>
-<p>设$$x_1,x_2,\ldots,x_n$$是一组抽样值，这意味着$${X_1=x_1,X_2=x_2,\ldots,X_n=x_n}$$是一个大概率事件。</p>
-<p>最大似然估计法就是要确定未知参数的值，使得$$P{X_1=x_1,X_2=x_2,\ldots,X_n=x_n}$$（这其中含有未知参数）为最大。</p>
+<p>设 $\theta_1,\theta_2,\ldots,\theta_k$ 为带估计的参数，用$\Theta$表示带估计参数组成的向量，即$\Theta=(\theta_1,\theta_2,\ldots,\theta_k)$</p>
+<p>设$x_1,x_2,\ldots,x_n$是一组抽样值，这意味着${X_1=x_1,X_2=x_2,\ldots,X_n=x_n}$是一个大概率事件。</p>
+<p>最大似然估计法就是要确定未知参数的值，使得$P{X_1=x_1,X_2=x_2,\ldots,X_n=x_n}$（这其中含有未知参数）为最大。</p>
 <h4 id=方法-1>方法</h4>
 <ul>
-<li>$$\Bbb X$$ 为离散型总体，其分布律为 $$P{X=x_i}=p_i(\Theta),i=1,2,\ldots,k$$，设$$x_1,x_2,\ldots,x_n$$是一组抽样值</li>
+<li>$\Bbb X$ 为离散型总体，其分布律为 $P{X=x_i}=p_i(\Theta),i=1,2,\ldots,k$，设$x_1,x_2,\ldots,x_n$是一组抽样值</li>
 </ul>
 <p>$$
 P{X_1=x_1,X_2=x_2,\ldots,X_n=x_n}=\prod\limits_{i=1}^np_i(\Theta),令\
 L(x_1,x_2,\ldots,x_n;\Theta)=\prod\limits_{i=1}^np_i(\Theta)
 $$</p>
 <ul>
-<li>$$\Bbb X$$ 为连续型总体，其概率密度为 $$f(x,\Theta)$$，设$$x_1,x_2,\ldots,x_n$$是一组抽样值</li>
+<li>$\Bbb X$ 为连续型总体，其概率密度为 $f(x,\Theta)$，设$x_1,x_2,\ldots,x_n$是一组抽样值</li>
 </ul>
 <p>$$
 P{X_1=x_1,X_2=x_2,\ldots,X_n=x_n}\approx\prod\limits_{i=1}^nf(x_i;\Theta)
 $$</p>
-<p>​ 其中$$\prod\limits_{i=1}^ndx_i$$与未知参数$$\Theta$$无关
+<p>​ 其中$\prod\limits_{i=1}^ndx_i$与未知参数$\Theta$无关
 $$
 L(x_1,x_2,\ldots,x_n;\Theta)=\prod\limits_{i=1}^nf(x_i;\Theta)
 $$
@@ -225,13 +227,13 @@ $$
 $$
 L=(x_1,x_2,\ldots,x_n;\theta_1,\theta_2,\ldots,\theta_k)
 $$</p>
-<p>为<strong>似然函数</strong>，其自变量为$$\theta_1,\theta_2,\ldots,\theta_k$$。</p>
+<p>为<strong>似然函数</strong>，其自变量为$\theta_1,\theta_2,\ldots,\theta_k$。</p>
 <p>最大似然估计就是要确定参数取何值时似然函数达到最大值。</p>
 <p>通常利用对数似然函数来求，即求
 $$
 \cfrac{\partial}{\partial\theta_i}lnL(x_1,x_2,\ldots,x_n;\theta_1,\theta_2,\ldots,\theta_k)=0\qquad(i=1,2,\ldots,k)
 $$
-来求得未知参数的估计值$$\hat\theta_1,\hat\theta_2,\ldots,\hat\theta_k$$，再将其估计值改为估计量</p>
+来求得未知参数的估计值$\hat\theta_1,\hat\theta_2,\ldots,\hat\theta_k$，再将其估计值改为估计量</p>
 <h4 id=例-1>例</h4>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210111102238736.png alt=image-20210111102238736 style=zoom:50%>
 <h4 id=步骤>步骤</h4>
@@ -251,88 +253,88 @@ $$</p>
 $$</p>
 <h2 id=估计量的评选标准>估计量的评选标准</h2>
 <h3 id=无偏性>无偏性</h3>
-<p>若估计量 $$\hat\theta=\hat\theta(X_1,X_2,\ldots,X_n)$$ 的数学期望 $$E(\hat\theta)$$ 存在，且对任意 $$\theta\in \Theta$$ 有
+<p>若估计量 $\hat\theta=\hat\theta(X_1,X_2,\ldots,X_n)$ 的数学期望 $E(\hat\theta)$ 存在，且对任意 $\theta\in \Theta$ 有
 $$
 E(\hat\theta)=\theta
 $$
-则称$$\hat\theta$$是$$\theta$$的<strong>无偏估计量</strong></p>
+则称$\hat\theta$是$\theta$的<strong>无偏估计量</strong></p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210111102716666.png alt=image-20210111102716666 style=zoom:50%>
 <h3 id=有效性>有效性</h3>
-<p>设$$\hat\theta_1=\hat\theta_1(X_1,X_2,\ldots,X_n)$$与$$\hat\theta_2=\hat\theta_2(X_1,X_2,\ldots,X_n)$$都是$$\theta$$的无偏估计量，若对任意的$$\theta\in \Theta$$，有
+<p>设$\hat\theta_1=\hat\theta_1(X_1,X_2,\ldots,X_n)$与$\hat\theta_2=\hat\theta_2(X_1,X_2,\ldots,X_n)$都是$\theta$的无偏估计量，若对任意的$\theta\in \Theta$，有
 $$
 D(\hat\theta_1)\le D(\hat\theta_2)
 $$
-则称 $$\hat\theta_1$$ 较 $$\hat\theta_2$$ 有效</p>
+则称 $\hat\theta_1$ 较 $\hat\theta_2$ 有效</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210111103649707.png alt=image-20210111103649707 style=zoom:50%>
 <h3 id=相合性>相合性</h3>
-<p>设 $$\hat\theta=\hat\theta(X_1,X_2,\ldots,X_n)$$ 是参数 $$\theta$$ 的估计量，若对于任意的 $$\theta\in \Theta$$，对于任意 $$\varepsilon>0$$ 有
+<p>设 $\hat\theta=\hat\theta(X_1,X_2,\ldots,X_n)$ 是参数 $\theta$ 的估计量，若对于任意的 $\theta\in \Theta$，对于任意 $\varepsilon>0$ 有
 $$
 \lim\limits_{n\rightarrow\infty}P{|\hat\theta-\theta|&lt;\varepsilon}=1
 $$
-则称 $$\hat\theta$$ 是 $$\theta$$ 的<strong>相合估计量</strong></p>
+则称 $\hat\theta$ 是 $\theta$ 的<strong>相合估计量</strong></p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210111104315266.png alt=image-20210111104315266 style=zoom:50%>
 <h2 id=区间估计>区间估计</h2>
 <h3 id=置信区间>置信区间</h3>
-<p>设总体 $$\Bbb X$$ 的分布含有一个未知参数 $$\theta$$，对于给定的 $$\alpha(0&lt;\alpha&lt;1)$$，由来自 $$\Bbb X$$ 的样本 $$X_1,X_2,\ldots,X_n$$ 确定的两个统计量$$\underline\theta=\underline\theta(X_1,X_2,\ldots,X_n)$$ 和 $$\overline\theta=\overline\theta(X_1,X_2,\ldots,X_n)$$，对任意 $$\theta\in\Theta$$ 都有
+<p>设总体 $\Bbb X$ 的分布含有一个未知参数 $\theta$，对于给定的 $\alpha(0&lt;\alpha&lt;1)$，由来自 $\Bbb X$ 的样本 $X_1,X_2,\ldots,X_n$ 确定的两个统计量$\underline\theta=\underline\theta(X_1,X_2,\ldots,X_n)$ 和 $\overline\theta=\overline\theta(X_1,X_2,\ldots,X_n)$，对任意 $\theta\in\Theta$ 都有
 $$
 P{\underline\theta&lt;\theta&lt;\overline\theta}\ge 1-\alpha
 $$
-则称随机区间 $$(\underline\theta,\overline\theta)$$为 $$\theta$$ 的一个置信水平为 $$1-\alpha$$ 的<strong>置信区间</strong>，</p>
+则称随机区间 $(\underline\theta,\overline\theta)$为 $\theta$ 的一个置信水平为 $1-\alpha$ 的<strong>置信区间</strong>，</p>
 <ul>
 <li>
-<p>$$\underline\theta$$：双侧置信下限</p>
+<p>$\underline\theta$：双侧置信下限</p>
 </li>
 <li>
-<p>$$\overline\theta$$：双侧置信上限</p>
+<p>$\overline\theta$：双侧置信上限</p>
 </li>
 <li>
-<p>$$1-\alpha$$：置信水平</p>
+<p>$1-\alpha$：置信水平</p>
 </li>
 </ul>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210113101008116.png alt=image-20210113101008116 style=zoom:50%>
 <h3 id=区间估计-1>区间估计</h3>
-<p>求出一个合适的置信水平为 $$1-\alpha$$ 的置信区间，使得该区间包含参数 $$\theta$$ 真值的可信程度为置信水平 $$1-\alpha$$</p>
+<p>求出一个合适的置信水平为 $1-\alpha$ 的置信区间，使得该区间包含参数 $\theta$ 真值的可信程度为置信水平 $1-\alpha$</p>
 <h4 id=步骤-1>步骤</h4>
 <ol>
-<li>寻求一个样本 $$X_1,X_2,\ldots,X_n$$ 和 $$\theta$$ 的函数 $$W=W(X_1,X_2,\ldots,X_n,\theta)$$，使其分布是已知（但该分布与$$\theta$$无关），（通常称这个$$W$$为<strong>枢轴量</strong>）</li>
-<li>对给定的置信水平 $$1-\alpha$$，由<strong>双侧分位点</strong>确定 $$a$$ 和 $$b$$，使得</li>
+<li>寻求一个样本 $X_1,X_2,\ldots,X_n$ 和 $\theta$ 的函数 $W=W(X_1,X_2,\ldots,X_n,\theta)$，使其分布是已知（但该分布与$\theta$无关），（通常称这个$W$为<strong>枢轴量</strong>）</li>
+<li>对给定的置信水平 $1-\alpha$，由<strong>双侧分位点</strong>确定 $a$ 和 $b$，使得</li>
 </ol>
 <p>$$
 P{a&lt;W(X_1,X_2,\ldots,X_n,\theta)&lt;b}=1-\alpha
 $$</p>
 <ol start=3>
-<li>由 $$a&lt;W(X_1,X_2,\ldots,X_n,\theta)$$ 得出 $$\underline\theta&lt;\theta&lt;\overline\theta$$，则 $$(\underline\theta,\overline\theta)$$ 为所求的 $$\theta$$ 的置信水平为 $$1-\alpha$$ 的置信区间</li>
+<li>由 $a&lt;W(X_1,X_2,\ldots,X_n,\theta)$ 得出 $\underline\theta&lt;\theta&lt;\overline\theta$，则 $(\underline\theta,\overline\theta)$ 为所求的 $\theta$ 的置信水平为 $1-\alpha$ 的置信区间</li>
 </ol>
 <h2 id=正态总体均值与方差的区间估计>正态总体均值与方差的区间估计</h2>
 <h3 id=单个总体的情况>单个总体的情况</h3>
 <ol>
-<li>方差$$\sigma^2$$已知的条件下均值$$\mu$$的置信区间（略）</li>
-<li>方差$$\sigma^2$$未知的条件下均值$$\mu$$的置信区间</li>
+<li>方差$\sigma^2$已知的条件下均值$\mu$的置信区间（略）</li>
+<li>方差$\sigma^2$未知的条件下均值$\mu$的置信区间</li>
 </ol>
 <p>$$
 (\overline X\pm\cfrac{S}{\sqrt{n}}t_{\alpha/2}(n-1))
 $$</p>
 <ol start=3>
-<li>方差$$\sigma^2$$的置信区间</li>
+<li>方差$\sigma^2$的置信区间</li>
 </ol>
 <p>$$
 (\cfrac{(n-1)S^2}{\chi^2_{\alpha/2}(n-1)},\cfrac{(n-1)S^2}{\chi^2_{1-\alpha/2}(n-1)})
 $$</p>
 <h3 id=两个总体的情况>两个总体的情况</h3>
 <ol>
-<li>$$\sigma_1^2,\sigma_2^2$$已知，$$\mu_1-\mu_2$$的区间估计，枢轴量为</li>
+<li>$\sigma_1^2,\sigma_2^2$已知，$\mu_1-\mu_2$的区间估计，枢轴量为</li>
 </ol>
 <p>$$
 Z=\cfrac{\overline X-\overline Y-(\mu_1-\mu_2)}{\sqrt{\cfrac{\sigma_1^2}{n_1}+\cfrac{\sigma_2^2}{n_2}}}\sim N(0,1)
 $$</p>
 <ol start=2>
-<li>$$\sigma_1^2,\sigma_2^2$$未知，$$\mu_1-\mu_2$$的区间估计，枢轴量为</li>
+<li>$\sigma_1^2,\sigma_2^2$未知，$\mu_1-\mu_2$的区间估计，枢轴量为</li>
 </ol>
 <p>$$
 t=\cfrac{\overline X-\overline Y-(\mu_1-\mu_2)}{S_w\sqrt{\cfrac{1}{n_1}+\cfrac{1}{n_2}}}\sim t(n_1+n_2-2)
 $$</p>
 <ol start=3>
-<li>$$\mu_1,\mu_2$$未知，$$\cfrac{\sigma_1^2}{\sigma_2^2}$$的区间估计，枢轴量为</li>
+<li>$\mu_1,\mu_2$未知，$\cfrac{\sigma_1^2}{\sigma_2^2}$的区间估计，枢轴量为</li>
 </ol>
 <p>$$
 F=\cfrac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2}\sim F(n_1-1,n_2-1)
@@ -347,7 +349,7 @@ $$</p>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 0001-01-01</span>
+<span>更新于 2021-10-23</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -359,13 +361,13 @@ $$</p>
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/>概率论与数理统计</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/8.-%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/6.-%E6%A0%B7%E6%9C%AC%E5%8F%8A%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/3.-%E5%A4%9A%E7%BB%B4%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/ class=prev rel=prev title="概率论 第三章"><i class="fas fa-angle-left fa-fw"></i>概率论 第三章</a>
+<a href=/Notes/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/1.-%E6%A6%82%E5%BF%B5/ class=next rel=next title="概率论 第一章">概率论 第一章<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

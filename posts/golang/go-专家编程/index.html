@@ -8,15 +8,15 @@
 <meta property="og:description" content="进阶 编译原理 Token -> 语法树 AST -> 中间码 -> 机器码 词法与语法分析 词法分析的作用就是解析源代码文件，它将文件中的字符串序列转换成 Token 序列，方便后面的处理和">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-02-25T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-02-25T00:00:00+00:00">
+<meta property="article:published_time" content="2022-02-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-02-23T00:00:00+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Go 专家编程">
 <meta name=twitter:description content="进阶 编译原理 Token -> 语法树 AST -> 中间码 -> 机器码 词法与语法分析 词法分析的作用就是解析源代码文件，它将文件中的字符串序列转换成 Token 序列，方便后面的处理和">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/go-test/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 专家编程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B\/"},"genre":"posts","wordcount":45851,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B\/","datePublished":"2022-02-25T00:00:00+00:00","dateModified":"2022-02-25T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E4%B8%80/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/useful/%E5%85%AB%E8%82%A1%E6%96%87/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 专家编程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B\/"},"genre":"posts","wordcount":45851,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B\/","datePublished":"2022-02-23T00:00:00+00:00","dateModified":"2022-02-23T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -84,7 +84,7 @@
 <div class=toc-content id=toc-content-auto></div>
 </div><article class="page single"><h1 class="single-title animated flipInX">Go 专家编程</h1><div class=post-meta>
 <div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-25>2022-02-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 45851 字&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-23>2022-02-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 45851 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 92 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -2643,7 +2643,7 @@
 <p>上面说到 P 的个数默认等于 CPU 核数，每个 M 必须持有一个 P 才可以执行 G，一般情况下 M 的个数会略大于 P 的个数，这多出来的 M 将会在 G 产生系统调用时发挥作用。</p>
 <p>类似线程池，Go 也提供一个 M 的池子，需要时从池子中获取，用完放回池子，不够用时就再创建一个。</p>
 <p>当 M 运行的某个 G 产生系统调用时，如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png title=img></p>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220225204556983.png alt=image-20220225204556983 style=zoom:80%>
 <p>如图所示，M0 中的 G0 执行了 syscall，然后就创建了一个 M1(也有可能本身就存在，没创建)，<strong>当 G0 即将进入系统调用时，M0 将释放 P，进而某个空闲的 M1 获取 P，继续执行 P 队列中剩下的 G</strong>。而 M0 由于陷入系统调用而进被阻塞，M1<strong>接管</strong> M0 的工作，只要 P 不空闲，就可以保证充分利用 CPU。</p>
 <p>M1 的来源有可能是 M 的缓存池，也可能是新建的。当 G0 系统调用结束后，跟据 M0 是否能获取到 P，将会将 G0 做不同的处理：</p>
 <ol>
@@ -2652,7 +2652,7 @@
 </ol>
 <h4 id=工作量窃取>工作量窃取</h4>
 <p>多个 P 中维护的 G 队列有可能是不均衡的，比如下图：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png title=img></p>
+<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-05-goroutine_steal.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-05-goroutine_steal.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-05-goroutine_steal.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-05-goroutine_steal.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-05-goroutine_steal.png title=img></p>
 <p>竖线左侧中右边的 P 已经将 G 全部执行完，然后去查询全局队列，全局队列中也没有 G，而另一个 M 中除了正在运行的 G 外，队列中还有 3 个 G 待运行。此时，空闲的 P 会将其他 P 中的 G 偷取一部分过来，一般每次偷取一半。偷取完如右图所示。</p>
 <h4 id=gomaxprocs-设置对性能的影响>GOMAXPROCS 设置对性能的影响</h4>
 <p>一般来讲，程序运行时就将 GOMAXPROCS 大小设置为 CPU 核数，可让 Go 程序充分利用 CPU。 在某些 IO 密集型的应用里，这个值可能并不意味着性能最好。</p>
@@ -5368,7 +5368,7 @@
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-25</span>
+<span>更新于 2022-02-23</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -5385,8 +5385,8 @@
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/golang/basicgrammar/ class=prev rel=prev title="Go 基础语法"><i class="fas fa-angle-left fa-fw"></i>Go 基础语法</a>
-<a href=/Notes/posts/golang/go-test/ class=next rel=next title="Go test 教程">Go test 教程<i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/courses/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E4%B8%80/ class=prev rel=prev title=数据库原理（1）><i class="fas fa-angle-left fa-fw"></i>数据库原理（1）</a>
+<a href=/Notes/posts/useful/%E5%85%AB%E8%82%A1%E6%96%87/ class=next rel=next title=面试八股文>面试八股文<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>

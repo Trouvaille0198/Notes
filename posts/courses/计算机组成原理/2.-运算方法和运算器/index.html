@@ -4,17 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
+<title>计组 第二章 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="计组 第二章">
 <meta property="og:description" content="运算方法和运算器 定点加法、减法运算 补码加法 [x+y]补=[x]补+[y]补 符号位运算丢进位 补码减法 减法变成加法来做 -y 的补码 = y 的补码所有位取">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/2.-%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-10-23T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content>
+<meta name=twitter:title content="计组 第二章">
 <meta name=twitter:description content="运算方法和运算器 定点加法、减法运算 补码加法 [x+y]补=[x]补+[y]补 符号位运算丢进位 补码减法 减法变成加法来做 -y 的补码 = y 的补码所有位取">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/2.-%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/3.-%E5%AD%98%E5%82%A8%E5%99%A8/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/1.-%E6%A6%82%E8%AE%BA/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86\/2.-%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8\/"},"genre":"posts","wordcount":1301,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86\/2.-%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/2.-%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/5.-%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/3.-%E5%AD%98%E5%82%A8%E5%99%A8/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"计组 第二章","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86\/2.-%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8\/"},"genre":"posts","keywords":"计算机组成原理","wordcount":1287,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86\/2.-%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2021-10-23T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -80,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1301 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">计组 第二章</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/><i class="far fa-folder fa-fw"></i>专业课</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1287 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -186,8 +188,8 @@
 <table>
 <thead>
 <tr>
-<th>$$S_{f1}$$</th>
-<th>$$S_{f2}$$</th>
+<th>$S_{f1}$</th>
+<th>$S_{f2}$</th>
 <th>判断</th>
 </tr>
 </thead>
@@ -214,7 +216,7 @@
 </tr>
 </tbody>
 </table>
-<p>​ $$S_{f1},S_{f2}$$为结果的双符号，关系为异或</p>
+<p>​ $S_{f1},S_{f2}$为结果的双符号，关系为异或</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201208084831460.png alt=image-20201208084831460 style=zoom:50%>
 <ol start=2>
 <li>单符号位法</li>
@@ -222,8 +224,8 @@
 <table>
 <thead>
 <tr>
-<th>$$C_f$$</th>
-<th>$$C_0$$</th>
+<th>$C_f$</th>
+<th>$C_0$</th>
 <th>判断</th>
 </tr>
 </thead>
@@ -250,7 +252,7 @@
 </tr>
 </tbody>
 </table>
-<p>​ 其中$$C_f$$为符号位产生的进位，$$C_0$$为最高有效位产生的进位</p>
+<p>​ 其中$C_f$为符号位产生的进位，$C_0$为最高有效位产生的进位</p>
 <h2 id=定点乘法除法运算>定点乘法、除法运算</h2>
 <h3 id=原码并行乘法>原码并行乘法</h3>
 <ol>
@@ -318,12 +320,12 @@
 <ul>
 <li>就近舍入（0舍1入）：类似”四舍五入”，丢弃的最高位为1，进1</li>
 <li>朝0舍入：截尾</li>
-<li>朝$$+\infty$$舍入：正数多余位不全为”0”，进1；负数，截尾</li>
-<li>朝$$-\infty$$舍入：负数多余位不全为”0”，进1；正数，截尾</li>
+<li>朝$+\infty$舍入：正数多余位不全为”0”，进1；负数，截尾</li>
+<li>朝$-\infty$舍入：负数多余位不全为”0”，进1；正数，截尾</li>
 </ul>
 <h3 id=溢出判断和处理>溢出判断和处理</h3>
 <ul>
-<li>阶码上溢，一般将其认为是$$+\infty$$和$$-\infty$$ 。</li>
+<li>阶码上溢，一般将其认为是$+\infty$和$-\infty$ 。</li>
 <li>阶码下溢，则数值为0</li>
 </ul>
 <h2 id=浮点乘法除法运算>浮点乘法，除法运算</h2>
@@ -419,7 +421,7 @@ $$
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 0001-01-01</span>
+<span>更新于 2021-10-23</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -431,13 +433,13 @@ $$
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/>计算机组成原理</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/3.-%E5%AD%98%E5%82%A8%E5%99%A8/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/1.-%E6%A6%82%E8%AE%BA/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/5.-%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8/ class=prev rel=prev title="计组 第五章"><i class="fas fa-angle-left fa-fw"></i>计组 第五章</a>
+<a href=/Notes/posts/courses/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/3.-%E5%AD%98%E5%82%A8%E5%99%A8/ class=next rel=next title="计组 第三章">计组 第三章<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>
