@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title> - 我的全新 Hugo 网站</title><meta name="Description" content=""><meta property="og:title" content="" />
+<meta property="og:description" content="gopacket 1 go get github.com/google/gopacket pcap 处理 查看版本 1 2 version := pcap.Version() fmt.Println(version) 测试（Win10 x64） Npcap version 1.00, based on libpcap version 1.9.1 网络接口 类型：pcap.Interface 1 2 3 4 5 6 7 8 9 10 11" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/gopacket/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="gopacket 1 go get github.com/google/gopacket pcap 处理 查看版本 1 2 version := pcap.Version() fmt.Println(version) 测试（Win10 x64） Npcap version 1.00, based on libpcap version 1.9.1 网络接口 类型：pcap.Interface 1 2 3 4 5 6 7 8 9 10 11"/>
+<meta name="application-name" content="我的全新 Hugo 网站">
+<meta name="apple-mobile-web-app-title" content="我的全新 Hugo 网站"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/gopacket/" /><link rel="prev" href="http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/" /><link rel="next" href="http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/unicode/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E7%BD%91%E7%BB%9C\/gopacket\/"
+        },"genre": "posts","wordcount":  5294 ,
+        "url": "http:\/\/example.org\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E7%BD%91%E7%BB%9C\/gopacket\/","publisher": {
+            "@type": "Organization",
+            "name": "作者"},"author": {
+                "@type": "Person",
+                "name": "作者"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">伤心肠粉</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">伤心肠粉</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5294 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 11 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#pcap-处理">pcap 处理</a>
+      <ul>
+        <li><a href="#查看版本">查看版本</a></li>
+        <li><a href="#网络接口">网络接口</a></li>
+        <li><a href="#实时捕获">实时捕获</a></li>
+        <li><a href="#打开-pcap">打开 pcap</a></li>
+        <li><a href="#创建一个数据包源">创建一个数据包源</a></li>
+        <li><a href="#读取数据包">读取数据包</a></li>
+        <li><a href="#设置过滤器">设置过滤器</a></li>
+        <li><a href="#创建一个-pcap-用于写入">创建一个 pcap 用于写入</a></li>
+        <li><a href="#写入数据包">写入数据包</a></li>
+      </ul>
+    </li>
+    <li><a href="#packet-处理">packet 处理</a>
+      <ul>
+        <li><a href="#列出所有层">列出所有层</a></li>
+        <li><a href="#分析某层的数据">分析某层的数据</a>
+          <ul>
+            <li><a href="#ipv4">IPv4</a></li>
+            <li><a href="#tcp">TCP</a></li>
+            <li><a href="#单独的解码器">单独的解码器</a></li>
+            <li><a href="#懒惰解码lazy-decoding">懒惰解码（Lazy Decoding）</a></li>
+            <li><a href="#nocopy-解码">NoCopy 解码</a></li>
+            <li><a href="#快速解码">快速解码</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#自定义层数据">自定义层数据</a>
+      <ul>
+        <li><a href="#注册自定义的层">注册自定义的层</a></li>
+        <li><a href="#定义层的结构">定义层的结构</a></li>
+        <li><a href="#定义解码器">定义解码器</a></li>
+        <li><a href="#对自定义的层进行解码">对自定义的层进行解码</a></li>
+      </ul>
+    </li>
+    <li><a href="#创建与发送">创建与发送</a>
+      <ul>
+        <li><a href="#创建">创建</a></li>
+        <li><a href="#发送数据包">发送数据包</a></li>
+        <li><a href="#流和端点flow-and-endpoint">流和端点（Flow and Endpoint）</a></li>
+      </ul>
+    </li>
+    <li><a href="#例子">例子</a>
+      <ul>
+        <li><a href="#枚举本地网络设备">枚举本地网络设备</a></li>
+        <li><a href="#打开一个设备进行实时捕获">打开一个设备进行实时捕获</a></li>
+        <li><a href="#写入到-pcap-文件">写入到 pcap 文件</a></li>
+        <li><a href="#打开-pcap-文件">打开 pcap 文件</a></li>
+        <li><a href="#设置过滤器-1">设置过滤器</a></li>
+        <li><a href="#解码-packet-的各层">解码 packet 的各层</a></li>
+        <li><a href="#创建和发送-packet">创建和发送 packet</a></li>
+        <li><a href="#更多创建和解码-packet-的例子">更多创建和解码 packet 的例子</a></li>
+        <li><a href="#定制层">定制层</a></li>
+        <li><a href="#更快地解码-packet">更快地解码 packet</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="gopacket">gopacket</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">go get github.com/google/gopacket
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="pcap-处理">pcap 处理</h2>
+<h3 id="查看版本">查看版本</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">version</span> <span class="o">:=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">Version</span><span class="p">()</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">version</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>测试（Win10 x64）
+<code>Npcap version 1.00, based on libpcap version 1.9.1</code></p>
+<h3 id="网络接口">网络接口</h3>
+<p>类型：<code>pcap.Interface</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Interface</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span>        <span class="kt">string</span>
+	<span class="nx">Description</span> <span class="kt">string</span>
+	<span class="nx">Flags</span>       <span class="kt">uint32</span>
+	<span class="nx">Addresses</span>   <span class="p">[]</span><span class="nx">InterfaceAddress</span>
+<span class="p">}</span>
+<span class="kd">type</span> <span class="nx">InterfaceAddress</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">IP</span>        <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span>
+	<span class="nx">Netmask</span>   <span class="nx">net</span><span class="p">.</span><span class="nx">IPMask</span> <span class="c1">// Netmask may be nil if we were unable to retrieve it.
+</span><span class="c1"></span>	<span class="nx">Broadaddr</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span>     <span class="c1">// Broadcast address for this IP may be nil
+</span><span class="c1"></span>	<span class="nx">P2P</span>       <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span>     <span class="c1">// P2P destination address for this IP may be nil
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>查找网络设备</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">devices</span> <span class="p">[]</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Interface</span>
+<span class="nx">devices</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">FindAllDevs</span><span class="p">()</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">devices</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="实时捕获">实时捕获</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenLive</span><span class="p">(</span><span class="s">&#34;\\Device\\NPF_{5C9384EF-DEBA-43A6-AE6A-5D10C952C481}&#34;</span><span class="p">,</span> <span class="nb">int32</span><span class="p">(</span><span class="mi">65535</span><span class="p">),</span> <span class="kc">true</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>pcap.OpenLive</code> 参数：</p>
+<ul>
+<li>设备名：<code>pcap.FindAllDevs()</code> 返回的设备的 Name</li>
+<li><code>snaplen</code>：捕获一个数据包的多少个字节，一般来说对任何情况 65535 是一个好的实践，如果不关注全部内容，只关注数据包头，可以设置成 1024</li>
+<li><code>promisc</code>：设置网卡是否工作在混杂模式，即是否接收目的地址不为本机的包</li>
+<li><code>timeout</code>：设置抓到包返回的超时。如果设置成 30s，那么每 30s 才会刷新一次数据包；设置成负数，会立刻刷新数据包，即不做等待</li>
+</ul>
+<p>要记得释放掉 handle</p>
+<h3 id="打开-pcap">打开 pcap</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">handle</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenOffline</span><span class="p">(</span><span class="s">&#34;dump.pcap&#34;</span><span class="p">)</span>
+<span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="创建一个数据包源">创建一个数据包源</h3>
+<p>通过监听设备的实时流量或者来自文件的数据包，我们可以得到一个 handle，通过这个 handle 得到一个数据包源 packetSource。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">packetSource</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacketSource</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">LinkType</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>利用 <code>handle.LinkType()</code> 就不用知道链路类型了。</p>
+<h3 id="读取数据包">读取数据包</h3>
+<p>读取一个数据包：<code>packet, _ := packetSource.NextPacket()</code></p>
+<p>获得一个可以读取数据包的 channel 来读取全部数据包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">packet</span> <span class="o">:=</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span>
+<span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packet</span><span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">packet</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="设置过滤器">设置过滤器</h3>
+<p>使用 BPF 语法即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">handle</span><span class="p">.</span><span class="nf">SetBPFFilter</span><span class="p">(</span><span class="s">&#34;tcp and port 80&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="创建一个-pcap-用于写入">创建一个 pcap 用于写入</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">dumpFile</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;dump.pcap&#34;</span><span class="p">)</span>
+<span class="k">defer</span> <span class="nx">dumpFile</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+<span class="nx">packetWriter</span> <span class="o">:=</span> <span class="nx">pcapgo</span><span class="p">.</span><span class="nf">NewWriter</span><span class="p">(</span><span class="nx">dumpFile</span><span class="p">)</span>
+<span class="nx">packetWriter</span><span class="p">.</span><span class="nf">WriteFileHeader</span><span class="p">(</span><span class="mi">65535</span><span class="p">,</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LinkTypeEthernet</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>packetWriter.WriteFileHeader</code> 的参数是 snaplen 和链路类型</p>
+<h3 id="写入数据包">写入数据包</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">packet</span> <span class="o">:=</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span>
+<span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packet</span><span class="p">{</span>
+    <span class="nx">packetWriter</span><span class="p">.</span><span class="nf">WritePacket</span><span class="p">(</span><span class="nx">packet</span><span class="p">.</span><span class="nf">Metadata</span><span class="p">().</span><span class="nx">CaptureInfo</span><span class="p">,</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Data</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="packet-处理">packet 处理</h2>
+<h3 id="列出所有层">列出所有层</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">layer</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layers</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nf">LayerType</span><span class="p">())</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nf">LayerContents</span><span class="p">())</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">layer</span><span class="p">.</span><span class="nf">LayerPayload</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>layer.LayerType()</code>：这层的类型</li>
+<li><code>layer.LayerContents()</code>：当前层的内容</li>
+<li><code>layer.LayerPayload()</code>：当前层承载的 payload（不包括当前层）</li>
+</ul>
+<h3 id="分析某层的数据">分析某层的数据</h3>
+<h4 id="ipv4">IPv4</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">ipLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeIPv4</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">ipLayer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="nx">ip</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">ipLayer</span><span class="p">.(</span><span class="o">*</span><span class="nx">layers</span><span class="p">.</span><span class="nx">IPv4</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">ip</span><span class="p">.</span><span class="nx">SrcIP</span><span class="p">,</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">DstIP</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">ip</span><span class="p">.</span><span class="nx">Protocol</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="tcp">TCP</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">tcpLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeTCP</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">tcpLayer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="nx">ip</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">tcpLayer</span><span class="p">.(</span><span class="o">*</span><span class="nx">layers</span><span class="p">.</span><span class="nx">TCP</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">ip</span><span class="p">.</span><span class="nx">SrcPort</span><span class="p">,</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">DstPort</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里有一些需要注意的：</p>
+<ul>
+<li><code>tcpLayer</code> 是通过接口 <code>packet.Layer</code> 返回的一个 <code>Layer</code>，一个指向 <code>layers.TCP</code> 的指针</li>
+<li><code>tcp</code> 是 <code>layers.TCP</code> 这个具体类型的指针，也可以说 <code>tcp</code> 是真实的 tcp 层数据</li>
+</ul>
+<h4 id="单独的解码器">单独的解码器</h4>
+<p>可以从多个起点对数据包进行解码。可以解码没有完整数据的数据包。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Decode an ethernet packet
+</span><span class="c1"></span><span class="nx">ethP</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span><span class="nx">packet</span><span class="p">,</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Default</span><span class="p">)</span>
+<span class="c1">// Decode an IPv6 header and everything it contains
+</span><span class="c1"></span><span class="nx">ipP</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span><span class="nx">packet</span><span class="p">,</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeIPv6</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Default</span><span class="p">)</span>
+<span class="c1">// Decode a TCP header and its payload
+</span><span class="c1"></span><span class="nx">tcpP</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span><span class="nx">packet</span><span class="p">,</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeTCP</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Default</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="懒惰解码lazy-decoding">懒惰解码（Lazy Decoding）</h4>
+<p>创建一个 packet 包，但是不立刻解码，只有后面需要用的时候再解码。</p>
+<p>比如第二行解码 IPv4 层，如果有的话，就解码 IPv4 层，然后不做进一步处理（不解码后续的层）；如果没有会解码整个 packet 来寻找 IPv4 层。
+<code>packet.Layers()</code> 会解码所有层并且返回，已经解码的层不会再次做解码。</p>
+<p>注意：这种方式并不是并发安全的，对 Layers 的每次调用可能会改变数据包。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">packet</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span><span class="nx">myPacketData</span><span class="p">,</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Lazy</span><span class="p">)</span>
+<span class="nx">ip4</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeIPv4</span><span class="p">)</span>
+<span class="c1">// Decode all layers and return them.  The layers up to the first IPv4 layer
+</span><span class="c1">// are already decoded, and will not require decoding a second time.
+</span><span class="c1"></span><span class="nx">layers</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layers</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="nocopy-解码">NoCopy 解码</h4>
+<p>上述两种解码方式会复制切片，对切片的字节进行更改不会影响数据包本身。如果可以保证不修改切片，可以使用 NoCopy。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="k">for</span> <span class="nx">data</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">myByteSliceChannel</span> <span class="p">{</span> 
+	<span class="nx">p</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">NoCopy</span><span class="p">)</span>
+	<span class="nf">doSomethingWithPacket</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="快速解码">快速解码</h4>
+<p>不会创建新的内存结构。会重用内存结构，所以只能用于预定义好层的结构。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">eth</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span>
+    <span class="kd">var</span> <span class="nx">ip4</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">IPv4</span>
+    <span class="kd">var</span> <span class="nx">tcp</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">TCP</span>
+    <span class="nx">parser</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewDecodingLayerParser</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">eth</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">ip4</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">tcp</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">decodedLayers</span> <span class="p">[]</span><span class="nx">gopacket</span><span class="p">.</span><span class="nx">LayerType</span>
+    <span class="nx">parser</span><span class="p">.</span><span class="nf">DecodeLayers</span><span class="p">(</span><span class="nx">packet</span><span class="p">.</span><span class="nf">Data</span><span class="p">(),</span> <span class="o">&amp;</span><span class="nx">decodedLayers</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">layerType</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">decodedLayers</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">layerType</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="自定义层数据">自定义层数据</h2>
+<h3 id="注册自定义的层">注册自定义的层</h3>
+<p><code>gopacket.RegisterLayerType()</code>：传入一个独有的 id，和层类型对应的 Metadata，包括有名字和对应的解码器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">MyLayerType</span> <span class="p">=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">RegisterLayerType</span><span class="p">(</span><span class="mi">12345</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">LayerTypeMetadata</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;MyLayerType&#34;</span><span class="p">,</span> <span class="nx">Decoder</span><span class="p">:</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">DecodeFunc</span><span class="p">(</span><span class="nx">decodeMyLayer</span><span class="p">)})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="定义层的结构">定义层的结构</h3>
+<p>要实现三个方法。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">MyLayer</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">MyHeader</span>  <span class="p">[]</span><span class="kt">byte</span>
+	<span class="nx">MyPayload</span> <span class="p">[]</span><span class="kt">byte</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">MyLayer</span><span class="p">)</span> <span class="nf">LayerType</span><span class="p">()</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">LayerType</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">MyLayerType</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">MyLayer</span><span class="p">)</span> <span class="nf">LayerContents</span><span class="p">()</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">m</span><span class="p">.</span><span class="nx">MyHeader</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">MyLayer</span><span class="p">)</span> <span class="nf">LayerPayload</span><span class="p">()</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">m</span><span class="p">.</span><span class="nx">MyPayload</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="定义解码器">定义解码器</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">decodeMyLayer</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">p</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">PacketBuilder</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+	<span class="nx">p</span><span class="p">.</span><span class="nf">AddLayer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">MyLayer</span><span class="p">{</span><span class="nx">data</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">4</span><span class="p">:]})</span>
+	<span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nf">NextDecoder</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="对自定义的层进行解码">对自定义的层进行解码</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">pkt</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span><span class="nx">packet</span><span class="p">.</span><span class="nf">Data</span><span class="p">(),</span> <span class="nx">MyLayerType</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Default</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="创建与发送">创建与发送</h2>
+<h3 id="创建">创建</h3>
+<p>创建一个新的序列化缓冲区；然后把所有层序列化到缓冲区中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">buffer</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewSerializeBuffer</span><span class="p">()</span>
+<span class="nx">options</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">SerializeOptions</span><span class="p">{}</span>
+<span class="nx">gopacket</span><span class="p">.</span><span class="nf">SerializeLayers</span><span class="p">(</span><span class="nx">buffer</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">{},</span> <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">IPv4</span><span class="p">{},</span> <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">TCP</span><span class="p">{},</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">Payload</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="mi">65</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">67</span><span class="p">}))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="发送数据包">发送数据包</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">handle</span><span class="p">.</span><span class="nf">WritePacketData</span><span class="p">(</span><span class="nx">buffer</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="流和端点flow-and-endpoint">流和端点（Flow and Endpoint）</h3>
+<p>注意：这个地方官方文档感觉有坑</p>
+<ul>
+<li><code>pkt.NetworkLayer().NetworkFlow()</code>：取网络层，网络流，IP 地址</li>
+<li><code>pkt.TransportLayer().TransportFlow()</code>：取传输层，传输端点，端口</li>
+<li><code>interestingFlow</code>：定义好端点，对网络数据做匹配</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">pkt</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span><span class="nx">packet</span><span class="p">.</span><span class="nf">Data</span><span class="p">(),</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">,</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Lazy</span><span class="p">)</span>
+<span class="nx">netFlow</span> <span class="o">:=</span> <span class="nx">pkt</span><span class="p">.</span><span class="nf">NetworkLayer</span><span class="p">().</span><span class="nf">NetworkFlow</span><span class="p">()</span>
+<span class="nx">src</span><span class="p">,</span> <span class="nx">dst</span> <span class="o">:=</span> <span class="nx">netFlow</span><span class="p">.</span><span class="nf">Endpoints</span><span class="p">()</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">dst</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Done.&#34;</span><span class="p">)</span>
+
+<span class="nx">tcpFlow</span> <span class="o">:=</span> <span class="nx">pkt</span><span class="p">.</span><span class="nf">TransportLayer</span><span class="p">().</span><span class="nf">TransportFlow</span><span class="p">()</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">tcpFlow</span><span class="p">.</span><span class="nf">Endpoints</span><span class="p">())</span>
+<span class="nx">interestingFlow</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">FlowFromEndpoints</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nf">NewUDPPortEndpoint</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="nx">layers</span><span class="p">.</span><span class="nf">NewUDPPortEndpoint</span><span class="p">(</span><span class="mi">500</span><span class="p">))</span>
+<span class="k">if</span> <span class="nx">t</span> <span class="o">:=</span> <span class="nx">pkt</span><span class="p">.</span><span class="nf">TransportLayer</span><span class="p">();</span> <span class="nx">t</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">t</span><span class="p">.</span><span class="nf">TransportFlow</span><span class="p">()</span> <span class="o">==</span> <span class="nx">interestingFlow</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Found that UDP flow I was looking for!&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="例子">例子</h2>
+<h3 id="枚举本地网络设备">枚举本地网络设备</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;log&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 得到所有的(网络)设备
+</span><span class="c1"></span>    <span class="nx">devices</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">FindAllDevs</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 打印设备信息
+</span><span class="c1"></span>    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Devices found:&#34;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">device</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">devices</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;\nName: &#34;</span><span class="p">,</span> <span class="nx">device</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Description: &#34;</span><span class="p">,</span> <span class="nx">device</span><span class="p">.</span><span class="nx">Description</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Devices addresses: &#34;</span><span class="p">,</span> <span class="nx">device</span><span class="p">.</span><span class="nx">Description</span><span class="p">)</span>
+        <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">address</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">device</span><span class="p">.</span><span class="nx">Addresses</span> <span class="p">{</span>
+            <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;- IP address: &#34;</span><span class="p">,</span> <span class="nx">address</span><span class="p">.</span><span class="nx">IP</span><span class="p">)</span>
+            <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;- Subnet mask: &#34;</span><span class="p">,</span> <span class="nx">address</span><span class="p">.</span><span class="nx">Netmask</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="打开一个设备进行实时捕获">打开一个设备进行实时捕获</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+    <span class="s">&#34;log&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">device</span>       <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;eth0&#34;</span>
+    <span class="nx">snapshot_len</span> <span class="kt">int32</span>  <span class="p">=</span> <span class="mi">1024</span>
+    <span class="nx">promiscuous</span>  <span class="kt">bool</span>   <span class="p">=</span> <span class="kc">false</span>
+    <span class="nx">err</span>          <span class="kt">error</span>
+    <span class="nx">timeout</span>      <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="p">=</span> <span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+    <span class="nx">handle</span>       <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Open device
+</span><span class="c1"></span>    <span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenLive</span><span class="p">(</span><span class="nx">device</span><span class="p">,</span> <span class="nx">snapshot_len</span><span class="p">,</span> <span class="nx">promiscuous</span><span class="p">,</span> <span class="nx">timeout</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span><span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+    <span class="c1">// Use the handle as a packet source to process all packets
+</span><span class="c1"></span>    <span class="nx">packetSource</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacketSource</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">LinkType</span><span class="p">())</span>
+    <span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Process packet here
+</span><span class="c1"></span>        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">packet</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="写入到-pcap-文件">写入到 pcap 文件</h3>
+<p>为了写入到 pcap 格式的文件中，我们需要 <code>gopacket/pcapgo</code>，它包含一个 <code>Writer</code>，还有两个有用的辅助函数：<code>WriteFileHeader()</code> 和  <code>WritePacket()</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;os&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+
+	<span class="s">&#34;github.com/google/gopacket&#34;</span>
+	<span class="s">&#34;github.com/google/gopacket/layers&#34;</span>
+	<span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+	<span class="s">&#34;github.com/google/gopacket/pcapgo&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="p">(</span>
+	<span class="nx">deviceName</span>  <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;eth0&#34;</span>
+	<span class="nx">snapshotLen</span> <span class="kt">int32</span>  <span class="p">=</span> <span class="mi">1024</span>
+	<span class="nx">promiscuous</span> <span class="kt">bool</span>   <span class="p">=</span> <span class="kc">false</span>
+	<span class="nx">err</span>         <span class="kt">error</span>
+	<span class="nx">timeout</span>     <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+	<span class="nx">handle</span>      <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span>
+	<span class="nx">packetCount</span> <span class="kt">int</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// Open output pcap file and write header 
+</span><span class="c1"></span>	<span class="nx">f</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;test.pcap&#34;</span><span class="p">)</span>
+	<span class="nx">w</span> <span class="o">:=</span> <span class="nx">pcapgo</span><span class="p">.</span><span class="nf">NewWriter</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+	<span class="nx">w</span><span class="p">.</span><span class="nf">WriteFileHeader</span><span class="p">(</span><span class="nx">snapshotLen</span><span class="p">,</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LinkTypeEthernet</span><span class="p">)</span>
+	<span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+	<span class="c1">// Open the device for capturing
+</span><span class="c1"></span>	<span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenLive</span><span class="p">(</span><span class="nx">deviceName</span><span class="p">,</span> <span class="nx">snapshotLen</span><span class="p">,</span> <span class="nx">promiscuous</span><span class="p">,</span> <span class="nx">timeout</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Error opening device %s: %v&#34;</span><span class="p">,</span> <span class="nx">deviceName</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+	<span class="c1">// Start processing packets
+</span><span class="c1"></span>	<span class="nx">packetSource</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacketSource</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">LinkType</span><span class="p">())</span>
+	<span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span> <span class="p">{</span>
+		<span class="c1">// Process packet here
+</span><span class="c1"></span>		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">packet</span><span class="p">)</span>
+		<span class="nx">w</span><span class="p">.</span><span class="nf">WritePacket</span><span class="p">(</span><span class="nx">packet</span><span class="p">.</span><span class="nf">Metadata</span><span class="p">().</span><span class="nx">CaptureInfo</span><span class="p">,</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Data</span><span class="p">())</span>
+		<span class="nx">packetCount</span><span class="o">++</span>
+		
+		<span class="c1">// Only capture 100 and then stop
+</span><span class="c1"></span>		<span class="k">if</span> <span class="nx">packetCount</span> <span class="p">&gt;</span> <span class="mi">100</span> <span class="p">{</span>
+			<span class="k">break</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="打开-pcap-文件">打开 pcap 文件</h3>
+<p>除了打开一个设备实时捕获以外，我们还可以读取 pcap 文件进行离线分析。你可以通过 tcpdump 捕获一个文件来测试。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Capture packets to test.pcap file</span>
+sudo tcpdump -w test.pcap
+</code></pre></td></tr></table>
+</div>
+</div><p>打开这个文件，遍历其中的 packet</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="c1">// Use tcpdump to create a test file
+</span><span class="c1">// tcpdump -w test.pcap
+</span><span class="c1">// or use the example above for writing pcap files
+</span><span class="c1"></span>
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+    <span class="s">&#34;log&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">pcapFile</span> <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;test.pcap&#34;</span>
+    <span class="nx">handle</span>   <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span>
+    <span class="nx">err</span>      <span class="kt">error</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Open file instead of device
+</span><span class="c1"></span>    <span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenOffline</span><span class="p">(</span><span class="nx">pcapFile</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+    <span class="c1">// Loop through packets in file
+</span><span class="c1"></span>    <span class="nx">packetSource</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacketSource</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">LinkType</span><span class="p">())</span>
+    <span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">packet</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="设置过滤器-1">设置过滤器</h3>
+<p>下面的代码仅仅返回端口 80 上的 packet</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+    <span class="s">&#34;log&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">device</span>       <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;eth0&#34;</span>
+    <span class="nx">snapshot_len</span> <span class="kt">int32</span>  <span class="p">=</span> <span class="mi">1024</span>
+    <span class="nx">promiscuous</span>  <span class="kt">bool</span>   <span class="p">=</span> <span class="kc">false</span>
+    <span class="nx">err</span>          <span class="kt">error</span>
+    <span class="nx">timeout</span>      <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="p">=</span> <span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+    <span class="nx">handle</span>       <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Open device
+</span><span class="c1"></span>    <span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenLive</span><span class="p">(</span><span class="nx">device</span><span class="p">,</span> <span class="nx">snapshot_len</span><span class="p">,</span> <span class="nx">promiscuous</span><span class="p">,</span> <span class="nx">timeout</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+    <span class="c1">// Set filter
+</span><span class="c1"></span>    <span class="kd">var</span> <span class="nx">filter</span> <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;tcp and port 80&#34;</span>
+    <span class="nx">err</span> <span class="p">=</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">SetBPFFilter</span><span class="p">(</span><span class="nx">filter</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Only capturing TCP port 80 packets.&#34;</span><span class="p">)</span>
+
+    <span class="nx">packetSource</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacketSource</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">LinkType</span><span class="p">())</span>
+    <span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// Do something with a packet here.
+</span><span class="c1"></span>        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">packet</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="解码-packet-的各层">解码 packet 的各层</h3>
+<p>我们可以获取原始数据包，并尝试将其强制转换为已知格式。它与不同的层兼容，因此我们可以轻松访问ethernet、IP 和 TCP 层。</p>
+<p><code>layers</code> 包是 gopacket 的 Go 库中的新功能，在底层 libpcap 库中不存在。它是 gopacket 库的非常有用的一部分。它允许我们轻松地识别数据包是否包含特定类型的层。这个代码示例将演示如何使用 layers 包来查看包是否是 ethernet、IP 和 TCP，以及如何轻松访问这些头中的元素。</p>
+<p>找到 <code>payload</code> (有效载荷) 取决于涉及的所有层。每个协议都是不同的，必须相应地进行处理。这就是 layers 包的强大之处。gopacket 的作者花了很多时间为许多已知层（ethernet、IP、UDP和TCP）创建 layer 类型。其中<code>payload</code> (有效负载) 是应用程序层的一部分。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/layers&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+    <span class="s">&#34;log&#34;</span>
+    <span class="s">&#34;strings&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">device</span>      <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;eth0&#34;</span>
+    <span class="nx">snapshotLen</span> <span class="kt">int32</span>  <span class="p">=</span> <span class="mi">1024</span>
+    <span class="nx">promiscuous</span> <span class="kt">bool</span>   <span class="p">=</span> <span class="kc">false</span>
+    <span class="nx">err</span>         <span class="kt">error</span>
+    <span class="nx">timeout</span>     <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="p">=</span> <span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+    <span class="nx">handle</span>      <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Open device
+</span><span class="c1"></span>    <span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenLive</span><span class="p">(</span><span class="nx">device</span><span class="p">,</span> <span class="nx">snapshotLen</span><span class="p">,</span> <span class="nx">promiscuous</span><span class="p">,</span> <span class="nx">timeout</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span><span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+    <span class="nx">packetSource</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacketSource</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">LinkType</span><span class="p">())</span>
+    <span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">printPacketInfo</span><span class="p">(</span><span class="nx">packet</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">printPacketInfo</span><span class="p">(</span><span class="nx">packet</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Packet</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Let&#39;s see if the packet is an ethernet packet
+</span><span class="c1"></span>    <span class="nx">ethernetLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">ethernetLayer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Ethernet layer detected.&#34;</span><span class="p">)</span>
+        <span class="nx">ethernetPacket</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">ethernetLayer</span><span class="p">.(</span><span class="o">*</span><span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Source MAC: &#34;</span><span class="p">,</span> <span class="nx">ethernetPacket</span><span class="p">.</span><span class="nx">SrcMAC</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Destination MAC: &#34;</span><span class="p">,</span> <span class="nx">ethernetPacket</span><span class="p">.</span><span class="nx">DstMAC</span><span class="p">)</span>
+        <span class="c1">// Ethernet type is typically IPv4 but could be ARP or other
+</span><span class="c1"></span>        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Ethernet type: &#34;</span><span class="p">,</span> <span class="nx">ethernetPacket</span><span class="p">.</span><span class="nx">EthernetType</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Let&#39;s see if the packet is IP (even though the ether type told us)
+</span><span class="c1"></span>    <span class="nx">ipLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeIPv4</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">ipLayer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;IPv4 layer detected.&#34;</span><span class="p">)</span>
+        <span class="nx">ip</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">ipLayer</span><span class="p">.(</span><span class="o">*</span><span class="nx">layers</span><span class="p">.</span><span class="nx">IPv4</span><span class="p">)</span>
+
+        <span class="c1">// IP layer variables:
+</span><span class="c1"></span>        <span class="c1">// Version (Either 4 or 6)
+</span><span class="c1"></span>        <span class="c1">// IHL (IP Header Length in 32-bit words)
+</span><span class="c1"></span>        <span class="c1">// TOS, Length, Id, Flags, FragOffset, TTL, Protocol (TCP?),
+</span><span class="c1"></span>        <span class="c1">// Checksum, SrcIP, DstIP
+</span><span class="c1"></span>        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;From %s to %s\n&#34;</span><span class="p">,</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">SrcIP</span><span class="p">,</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">DstIP</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Protocol: &#34;</span><span class="p">,</span> <span class="nx">ip</span><span class="p">.</span><span class="nx">Protocol</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Let&#39;s see if the packet is TCP
+</span><span class="c1"></span>    <span class="nx">tcpLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeTCP</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">tcpLayer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;TCP layer detected.&#34;</span><span class="p">)</span>
+        <span class="nx">tcp</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">tcpLayer</span><span class="p">.(</span><span class="o">*</span><span class="nx">layers</span><span class="p">.</span><span class="nx">TCP</span><span class="p">)</span>
+
+        <span class="c1">// TCP layer variables:
+</span><span class="c1"></span>        <span class="c1">// SrcPort, DstPort, Seq, Ack, DataOffset, Window, Checksum, Urgent
+</span><span class="c1"></span>        <span class="c1">// Bool flags: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR, NS
+</span><span class="c1"></span>        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;From port %d to %d\n&#34;</span><span class="p">,</span> <span class="nx">tcp</span><span class="p">.</span><span class="nx">SrcPort</span><span class="p">,</span> <span class="nx">tcp</span><span class="p">.</span><span class="nx">DstPort</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Sequence number: &#34;</span><span class="p">,</span> <span class="nx">tcp</span><span class="p">.</span><span class="nx">Seq</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Iterate over all layers, printing out each layer type
+</span><span class="c1"></span>    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;All packet layers:&#34;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">layer</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layers</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;- &#34;</span><span class="p">,</span> <span class="nx">layer</span><span class="p">.</span><span class="nf">LayerType</span><span class="p">())</span>
+    <span class="p">}</span>
+
+    <span class="c1">// When iterating through packet.Layers() above,
+</span><span class="c1"></span>    <span class="c1">// if it lists Payload layer then that is the same as
+</span><span class="c1"></span>    <span class="c1">// this applicationLayer. applicationLayer contains the payload
+</span><span class="c1"></span>    <span class="nx">applicationLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">ApplicationLayer</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nx">applicationLayer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Application layer/Payload found.&#34;</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%s\n&#34;</span><span class="p">,</span> <span class="nx">applicationLayer</span><span class="p">.</span><span class="nf">Payload</span><span class="p">())</span>
+
+        <span class="c1">// Search for a string inside the payload
+</span><span class="c1"></span>        <span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">applicationLayer</span><span class="p">.</span><span class="nf">Payload</span><span class="p">()),</span> <span class="s">&#34;HTTP&#34;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HTTP found!&#34;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Check for errors
+</span><span class="c1"></span>    <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">ErrorLayer</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Error decoding some part of the packet:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="创建和发送-packet">创建和发送 packet</h3>
+<p>下面这个例子做了几个事情。首先，它将演示如何使用网络设备发送原始字节。这样，您就可以像串行连接(<code>serial connection</code>) 一样使用它来发送数据。这对于真正的低层的数据传输很有用，但是如果你想与一个应用程序交互，你可能想建立硬件和软件都能识别的包。</p>
+<p>接下来，它将演示如何使用 ethernet、IP 和 TCP 层创建数据包。所有的东西都是默认的和空的，所以它实际上不做任何事情。</p>
+<p>为了完成它，我们创建了另一个数据包，但实际上为 ethernet 层填充了一些 MAC 地址，为 IPv4 填充了一些 IP 地址，为 TCP 层填充了一些端口号。您应该看到如何用它伪造数据包和模拟设备。</p>
+<p>TCP 层结构具有可读取或设置的 SYN, FIN, and ACK 布尔标志。这有利于控制和模糊 TCP 握手、会话和端口扫描。</p>
+<p>pcap 库提供了一个发送字节的简单方法，但是 gopacket 中的 layers 包帮助我们为各个层创建字节结构。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;github.com/google/gopacket&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/layers&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+    <span class="s">&#34;log&#34;</span>
+    <span class="s">&#34;net&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">device</span>       <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;eth0&#34;</span>
+    <span class="nx">snapshot_len</span> <span class="kt">int32</span>  <span class="p">=</span> <span class="mi">1024</span>
+    <span class="nx">promiscuous</span>  <span class="kt">bool</span>   <span class="p">=</span> <span class="kc">false</span>
+    <span class="nx">err</span>          <span class="kt">error</span>
+    <span class="nx">timeout</span>      <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="p">=</span> <span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+    <span class="nx">handle</span>       <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span>
+    <span class="nx">buffer</span>       <span class="nx">gopacket</span><span class="p">.</span><span class="nx">SerializeBuffer</span>
+    <span class="nx">options</span>      <span class="nx">gopacket</span><span class="p">.</span><span class="nx">SerializeOptions</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Open device
+</span><span class="c1"></span>    <span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenLive</span><span class="p">(</span><span class="nx">device</span><span class="p">,</span> <span class="nx">snapshot_len</span><span class="p">,</span> <span class="nx">promiscuous</span><span class="p">,</span> <span class="nx">timeout</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span><span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+    <span class="c1">// Send raw bytes over wire
+</span><span class="c1"></span>    <span class="nx">rawBytes</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">}</span>
+    <span class="nx">err</span> <span class="p">=</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">WritePacketData</span><span class="p">(</span><span class="nx">rawBytes</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Create a properly formed packet, just with
+</span><span class="c1"></span>    <span class="c1">// empty details. Should fill out MAC addresses,
+</span><span class="c1"></span>    <span class="c1">// IP addresses, etc.
+</span><span class="c1"></span>    <span class="nx">buffer</span> <span class="p">=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewSerializeBuffer</span><span class="p">()</span>
+    <span class="nx">gopacket</span><span class="p">.</span><span class="nf">SerializeLayers</span><span class="p">(</span><span class="nx">buffer</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span>
+        <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">{},</span>
+        <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">IPv4</span><span class="p">{},</span>
+        <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">TCP</span><span class="p">{},</span>
+        <span class="nx">gopacket</span><span class="p">.</span><span class="nf">Payload</span><span class="p">(</span><span class="nx">rawBytes</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="nx">outgoingPacket</span> <span class="o">:=</span> <span class="nx">buffer</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">()</span>
+    <span class="c1">// Send our packet
+</span><span class="c1"></span>    <span class="nx">err</span> <span class="p">=</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">WritePacketData</span><span class="p">(</span><span class="nx">outgoingPacket</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// This time lets fill out some information
+</span><span class="c1"></span>    <span class="nx">ipLayer</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">IPv4</span><span class="p">{</span>
+        <span class="nx">SrcIP</span><span class="p">:</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span><span class="p">{</span><span class="mi">127</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span>
+        <span class="nx">DstIP</span><span class="p">:</span> <span class="nx">net</span><span class="p">.</span><span class="nx">IP</span><span class="p">{</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">},</span>
+    <span class="p">}</span>
+    <span class="nx">ethernetLayer</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">{</span>
+        <span class="nx">SrcMAC</span><span class="p">:</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">{</span><span class="mh">0xFF</span><span class="p">,</span> <span class="mh">0xAA</span><span class="p">,</span> <span class="mh">0xFA</span><span class="p">,</span> <span class="mh">0xAA</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">,</span> <span class="mh">0xAA</span><span class="p">},</span>
+        <span class="nx">DstMAC</span><span class="p">:</span> <span class="nx">net</span><span class="p">.</span><span class="nx">HardwareAddr</span><span class="p">{</span><span class="mh">0xBD</span><span class="p">,</span> <span class="mh">0xBD</span><span class="p">,</span> <span class="mh">0xBD</span><span class="p">,</span> <span class="mh">0xBD</span><span class="p">,</span> <span class="mh">0xBD</span><span class="p">,</span> <span class="mh">0xBD</span><span class="p">},</span>
+    <span class="p">}</span>
+    <span class="nx">tcpLayer</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">TCP</span><span class="p">{</span>
+        <span class="nx">SrcPort</span><span class="p">:</span> <span class="nx">layers</span><span class="p">.</span><span class="nf">TCPPort</span><span class="p">(</span><span class="mi">4321</span><span class="p">),</span>
+        <span class="nx">DstPort</span><span class="p">:</span> <span class="nx">layers</span><span class="p">.</span><span class="nf">TCPPort</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="c1">// And create the packet with the layers
+</span><span class="c1"></span>    <span class="nx">buffer</span> <span class="p">=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewSerializeBuffer</span><span class="p">()</span>
+    <span class="nx">gopacket</span><span class="p">.</span><span class="nf">SerializeLayers</span><span class="p">(</span><span class="nx">buffer</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span>
+        <span class="nx">ethernetLayer</span><span class="p">,</span>
+        <span class="nx">ipLayer</span><span class="p">,</span>
+        <span class="nx">tcpLayer</span><span class="p">,</span>
+        <span class="nx">gopacket</span><span class="p">.</span><span class="nf">Payload</span><span class="p">(</span><span class="nx">rawBytes</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="nx">outgoingPacket</span> <span class="p">=</span> <span class="nx">buffer</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="更多创建和解码-packet-的例子">更多创建和解码 packet 的例子</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/layers&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// If we don&#39;t have a handle to a device or a file, but we have a bunch
+</span><span class="c1"></span>    <span class="c1">// of raw bytes, we can try to decode them in to packet information
+</span><span class="c1"></span>
+    <span class="c1">// NewPacket() takes the raw bytes that make up the packet as the first parameter
+</span><span class="c1"></span>    <span class="c1">// The second parameter is the lowest level layer you want to decode. It will
+</span><span class="c1"></span>    <span class="c1">// decode that layer and all layers on top of it. The third layer
+</span><span class="c1"></span>    <span class="c1">// is the type of decoding: default(all at once), lazy(on demand), and NoCopy
+</span><span class="c1"></span>    <span class="c1">// which will not create a copy of the buffer
+</span><span class="c1"></span>
+    <span class="c1">// Create an packet with ethernet, IP, TCP, and payload layers
+</span><span class="c1"></span>    <span class="c1">// We are creating one we know will be decoded properly but
+</span><span class="c1"></span>    <span class="c1">// your byte source could be anything. If any of the packets
+</span><span class="c1"></span>    <span class="c1">// come back as nil, that means it could not decode it in to
+</span><span class="c1"></span>    <span class="c1">// the proper layer (malformed or incorrect packet type)
+</span><span class="c1"></span>    <span class="nx">payload</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+    <span class="nx">options</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">SerializeOptions</span><span class="p">{}</span>
+    <span class="nx">buffer</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewSerializeBuffer</span><span class="p">()</span>
+    <span class="nx">gopacket</span><span class="p">.</span><span class="nf">SerializeLayers</span><span class="p">(</span><span class="nx">buffer</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span>
+        <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span><span class="p">{},</span>
+        <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">IPv4</span><span class="p">{},</span>
+        <span class="o">&amp;</span><span class="nx">layers</span><span class="p">.</span><span class="nx">TCP</span><span class="p">{},</span>
+        <span class="nx">gopacket</span><span class="p">.</span><span class="nf">Payload</span><span class="p">(</span><span class="nx">payload</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="nx">rawBytes</span> <span class="o">:=</span> <span class="nx">buffer</span><span class="p">.</span><span class="nf">Bytes</span><span class="p">()</span>
+
+    <span class="c1">// Decode an ethernet packet
+</span><span class="c1"></span>    <span class="nx">ethPacket</span> <span class="o">:=</span>
+        <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span>
+            <span class="nx">rawBytes</span><span class="p">,</span>
+            <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">,</span>
+            <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Default</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1">// with Lazy decoding it will only decode what it needs when it needs it
+</span><span class="c1"></span>    <span class="c1">// This is not concurrency safe. If using concurrency, use default
+</span><span class="c1"></span>    <span class="nx">ipPacket</span> <span class="o">:=</span>
+        <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span>
+            <span class="nx">rawBytes</span><span class="p">,</span>
+            <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeIPv4</span><span class="p">,</span>
+            <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Lazy</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1">// With the NoCopy option, the underlying slices are referenced
+</span><span class="c1"></span>    <span class="c1">// directly and not copied. If the underlying bytes change so will
+</span><span class="c1"></span>    <span class="c1">// the packet
+</span><span class="c1"></span>    <span class="nx">tcpPacket</span> <span class="o">:=</span>
+        <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span>
+            <span class="nx">rawBytes</span><span class="p">,</span>
+            <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeTCP</span><span class="p">,</span>
+            <span class="nx">gopacket</span><span class="p">.</span><span class="nx">NoCopy</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">ethPacket</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">ipPacket</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">tcpPacket</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="定制层">定制层</h3>
+<p>下一个程序将演示如何创建您自己的层。这有助于实现当前不包含在 gopacket layers 包中的协议。如果您想创建自己的 <code>l33t</code> 协议，甚至不使用 TCP/IP 或 ethernet，那么它也很有用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span><span class="lnt">96
+</span><span class="lnt">97
+</span><span class="lnt">98
+</span><span class="lnt">99
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket&#34;</span>
+<span class="p">)</span>
+
+<span class="c1">// Create custom layer structure
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">CustomLayer</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="c1">// This layer just has two bytes at the front
+</span><span class="c1"></span>    <span class="nx">SomeByte</span>    <span class="kt">byte</span>
+    <span class="nx">AnotherByte</span> <span class="kt">byte</span>
+    <span class="nx">restOfData</span>  <span class="p">[]</span><span class="kt">byte</span>
+<span class="p">}</span>
+
+<span class="c1">// Register the layer type so we can use it
+</span><span class="c1">// The first argument is an ID. Use negative
+</span><span class="c1">// or 2000+ for custom layers. It must be unique
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">CustomLayerType</span> <span class="p">=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">RegisterLayerType</span><span class="p">(</span>
+    <span class="mi">2001</span><span class="p">,</span>
+    <span class="nx">gopacket</span><span class="p">.</span><span class="nx">LayerTypeMetadata</span><span class="p">{</span>
+        <span class="s">&#34;CustomLayerType&#34;</span><span class="p">,</span>
+        <span class="nx">gopacket</span><span class="p">.</span><span class="nf">DecodeFunc</span><span class="p">(</span><span class="nx">decodeCustomLayer</span><span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="c1">// When we inquire about the type, what type of layer should
+</span><span class="c1">// we say it is? We want it to return our custom layer type
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="nx">CustomLayer</span><span class="p">)</span> <span class="nf">LayerType</span><span class="p">()</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">LayerType</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">CustomLayerType</span>
+<span class="p">}</span>
+
+<span class="c1">// LayerContents returns the information that our layer
+</span><span class="c1">// provides. In this case it is a header layer so
+</span><span class="c1">// we return the header information
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="nx">CustomLayer</span><span class="p">)</span> <span class="nf">LayerContents</span><span class="p">()</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{</span><span class="nx">l</span><span class="p">.</span><span class="nx">SomeByte</span><span class="p">,</span> <span class="nx">l</span><span class="p">.</span><span class="nx">AnotherByte</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// LayerPayload returns the subsequent layer built
+</span><span class="c1">// on top of our layer or raw payload
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">l</span> <span class="nx">CustomLayer</span><span class="p">)</span> <span class="nf">LayerPayload</span><span class="p">()</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">l</span><span class="p">.</span><span class="nx">restOfData</span>
+<span class="p">}</span>
+
+<span class="c1">// Custom decode function. We can name it whatever we want
+</span><span class="c1">// but it should have the same arguments and return value
+</span><span class="c1">// When the layer is registered we tell it to use this decode function
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">decodeCustomLayer</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">p</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nx">PacketBuilder</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="c1">// AddLayer appends to the list of layers that the packet has
+</span><span class="c1"></span>    <span class="nx">p</span><span class="p">.</span><span class="nf">AddLayer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">CustomLayer</span><span class="p">{</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nx">data</span><span class="p">[</span><span class="mi">2</span><span class="p">:]})</span>
+
+    <span class="c1">// The return value tells the packet what layer to expect
+</span><span class="c1"></span>    <span class="c1">// with the rest of the data. It could be another header layer,
+</span><span class="c1"></span>    <span class="c1">// nothing, or a payload layer.
+</span><span class="c1"></span>
+    <span class="c1">// nil means this is the last layer. No more decoding
+</span><span class="c1"></span>    <span class="c1">// return nil
+</span><span class="c1"></span>
+    <span class="c1">// Returning another layer type tells it to decode
+</span><span class="c1"></span>    <span class="c1">// the next layer with that layer&#39;s decoder function
+</span><span class="c1"></span>    <span class="c1">// return p.NextDecoder(layers.LayerTypeEthernet)
+</span><span class="c1"></span>
+    <span class="c1">// Returning payload type means the rest of the data
+</span><span class="c1"></span>    <span class="c1">// is raw payload. It will set the application layer
+</span><span class="c1"></span>    <span class="c1">// contents with the payload
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nf">NextDecoder</span><span class="p">(</span><span class="nx">gopacket</span><span class="p">.</span><span class="nx">LayerTypePayload</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// If you create your own encoding and decoding you can essentially
+</span><span class="c1"></span>    <span class="c1">// create your own protocol or implement a protocol that is not
+</span><span class="c1"></span>    <span class="c1">// already defined in the layers package. In our example we are just
+</span><span class="c1"></span>    <span class="c1">// wrapping a normal ethernet packet with our own layer.
+</span><span class="c1"></span>    <span class="c1">// Creating your own protocol is good if you want to create
+</span><span class="c1"></span>    <span class="c1">// some obfuscated binary data type that was difficult for others
+</span><span class="c1"></span>    <span class="c1">// to decode
+</span><span class="c1"></span>
+    <span class="c1">// Finally, decode your packets:
+</span><span class="c1"></span>    <span class="nx">rawBytes</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{</span><span class="mh">0xF0</span><span class="p">,</span> <span class="mh">0x0F</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">66</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">68</span><span class="p">}</span>
+    <span class="nx">packet</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacket</span><span class="p">(</span>
+        <span class="nx">rawBytes</span><span class="p">,</span>
+        <span class="nx">CustomLayerType</span><span class="p">,</span>
+        <span class="nx">gopacket</span><span class="p">.</span><span class="nx">Default</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Created packet out of raw bytes.&#34;</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">packet</span><span class="p">)</span>
+
+    <span class="c1">// Decode the packet as our custom layer
+</span><span class="c1"></span>    <span class="nx">customLayer</span> <span class="o">:=</span> <span class="nx">packet</span><span class="p">.</span><span class="nf">Layer</span><span class="p">(</span><span class="nx">CustomLayerType</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">customLayer</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Packet was successfully decoded with custom layer decoder.&#34;</span><span class="p">)</span>
+        <span class="nx">customLayerContent</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">customLayer</span><span class="p">.(</span><span class="o">*</span><span class="nx">CustomLayer</span><span class="p">)</span>
+        <span class="c1">// Now we can access the elements of the custom struct
+</span><span class="c1"></span>        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Payload: &#34;</span><span class="p">,</span> <span class="nx">customLayerContent</span><span class="p">.</span><span class="nf">LayerPayload</span><span class="p">())</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;SomeByte element:&#34;</span><span class="p">,</span> <span class="nx">customLayerContent</span><span class="p">.</span><span class="nx">SomeByte</span><span class="p">)</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;AnotherByte element:&#34;</span><span class="p">,</span> <span class="nx">customLayerContent</span><span class="p">.</span><span class="nx">AnotherByte</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="更快地解码-packet">更快地解码 packet</h3>
+<p>如果我们知道需要什么层，我们可以使用已有的结构来存储 packet 信息，而不是为每个 packet 创建新的结构，既浪费内存又浪费时间。使用 <code>DecodingLayerParser</code> 可以更快一点。这就像 marshalling/unmarshalling 数据一样。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/layers&#34;</span>
+    <span class="s">&#34;github.com/google/gopacket/pcap&#34;</span>
+    <span class="s">&#34;log&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">device</span>       <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;eth0&#34;</span>
+    <span class="nx">snapshot_len</span> <span class="kt">int32</span>  <span class="p">=</span> <span class="mi">1024</span>
+    <span class="nx">promiscuous</span>  <span class="kt">bool</span>   <span class="p">=</span> <span class="kc">false</span>
+    <span class="nx">err</span>          <span class="kt">error</span>
+    <span class="nx">timeout</span>      <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span> <span class="p">=</span> <span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+    <span class="nx">handle</span>       <span class="o">*</span><span class="nx">pcap</span><span class="p">.</span><span class="nx">Handle</span>
+    <span class="c1">// Will reuse these for each packet
+</span><span class="c1"></span>    <span class="nx">ethLayer</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">Ethernet</span>
+    <span class="nx">ipLayer</span>  <span class="nx">layers</span><span class="p">.</span><span class="nx">IPv4</span>
+    <span class="nx">tcpLayer</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">TCP</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Open device
+</span><span class="c1"></span>    <span class="nx">handle</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">pcap</span><span class="p">.</span><span class="nf">OpenLive</span><span class="p">(</span><span class="nx">device</span><span class="p">,</span> <span class="nx">snapshot_len</span><span class="p">,</span> <span class="nx">promiscuous</span><span class="p">,</span> <span class="nx">timeout</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">defer</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+
+    <span class="nx">packetSource</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewPacketSource</span><span class="p">(</span><span class="nx">handle</span><span class="p">,</span> <span class="nx">handle</span><span class="p">.</span><span class="nf">LinkType</span><span class="p">())</span>
+    <span class="k">for</span> <span class="nx">packet</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">packetSource</span><span class="p">.</span><span class="nf">Packets</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">parser</span> <span class="o">:=</span> <span class="nx">gopacket</span><span class="p">.</span><span class="nf">NewDecodingLayerParser</span><span class="p">(</span>
+            <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeEthernet</span><span class="p">,</span>
+            <span class="o">&amp;</span><span class="nx">ethLayer</span><span class="p">,</span>
+            <span class="o">&amp;</span><span class="nx">ipLayer</span><span class="p">,</span>
+            <span class="o">&amp;</span><span class="nx">tcpLayer</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="nx">foundLayerTypes</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">gopacket</span><span class="p">.</span><span class="nx">LayerType</span><span class="p">{}</span>
+
+        <span class="nx">err</span> <span class="o">:=</span> <span class="nx">parser</span><span class="p">.</span><span class="nf">DecodeLayers</span><span class="p">(</span><span class="nx">packet</span><span class="p">.</span><span class="nf">Data</span><span class="p">(),</span> <span class="o">&amp;</span><span class="nx">foundLayerTypes</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+            <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Trouble decoding layers: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">layerType</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">foundLayerTypes</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="nx">layerType</span> <span class="o">==</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeIPv4</span> <span class="p">{</span>
+                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;IPv4: &#34;</span><span class="p">,</span> <span class="nx">ipLayer</span><span class="p">.</span><span class="nx">SrcIP</span><span class="p">,</span> <span class="s">&#34;-&gt;&#34;</span><span class="p">,</span> <span class="nx">ipLayer</span><span class="p">.</span><span class="nx">DstIP</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="nx">layerType</span> <span class="o">==</span> <span class="nx">layers</span><span class="p">.</span><span class="nx">LayerTypeTCP</span> <span class="p">{</span>
+                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;TCP Port: &#34;</span><span class="p">,</span> <span class="nx">tcpLayer</span><span class="p">.</span><span class="nx">SrcPort</span><span class="p">,</span> <span class="s">&#34;-&gt;&#34;</span><span class="p">,</span> <span class="nx">tcpLayer</span><span class="p">.</span><span class="nx">DstPort</span><span class="p">)</span>
+                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;TCP SYN:&#34;</span><span class="p">,</span> <span class="nx">tcpLayer</span><span class="p">.</span><span class="nx">SYN</span><span class="p">,</span> <span class="s">&#34; | ACK:&#34;</span><span class="p">,</span> <span class="nx">tcpLayer</span><span class="p">.</span><span class="nx">ACK</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 0001-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw"></i></a>
+            <a href="/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/unicode/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":40},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

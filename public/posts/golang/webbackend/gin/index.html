@@ -1,0 +1,2174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title> - 我的全新 Hugo 网站</title><meta name="Description" content=""><meta property="og:title" content="" />
+<meta property="og:description" content="gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API, but with performance up to 40 times faster than Martini. 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import &#34;github.com/gin-gonic/gin&#34; func main() { r := gin.Default() r.GET(&#34;/ping&#34;, func(c *gin.Context) { c.JSON(200, gin.H{ &#34;message&#34;: &#34;pong&#34;, }) }) r.Run() // listen and serve on 0.0.0.0:8080 } Quick Start Installation" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/golang/webbackend/gin/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="gin Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API, but with performance up to 40 times faster than Martini. 1 2 3 4 5 6 7 8 9 10 11 12 13 package main import &#34;github.com/gin-gonic/gin&#34; func main() { r := gin.Default() r.GET(&#34;/ping&#34;, func(c *gin.Context) { c.JSON(200, gin.H{ &#34;message&#34;: &#34;pong&#34;, }) }) r.Run() // listen and serve on 0.0.0.0:8080 } Quick Start Installation"/>
+<meta name="application-name" content="我的全新 Hugo 网站">
+<meta name="apple-mobile-web-app-title" content="我的全新 Hugo 网站"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/golang/webbackend/gin/" /><link rel="prev" href="http://example.org/posts/golang/%E5%91%BD%E5%90%8D%E5%92%8C%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" /><link rel="next" href="http://example.org/posts/games/%E6%96%87%E6%98%8E%E5%85%AD/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/golang\/webbackend\/gin\/"
+        },"genre": "posts","wordcount":  4318 ,
+        "url": "http:\/\/example.org\/posts\/golang\/webbackend\/gin\/","publisher": {
+            "@type": "Organization",
+            "name": "作者"},"author": {
+                "@type": "Person",
+                "name": "作者"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">伤心肠粉</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">伤心肠粉</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4318 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#quick-start">Quick Start</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#特性">特性</a></li>
+        <li><a href="#路由">路由</a>
+          <ul>
+            <li><a href="#路径参数">路径参数</a></li>
+            <li><a href="#查询参数">查询参数</a></li>
+            <li><a href="#获取-post-参数">获取 POST 参数</a></li>
+            <li><a href="#map-参数-字典参数">Map 参数 (字典参数)</a></li>
+            <li><a href="#重定向-redirect">重定向 Redirect</a></li>
+            <li><a href="#分组路由-grouping-routes">分组路由 Grouping Routes</a></li>
+          </ul>
+        </li>
+        <li><a href="#上传文件">上传文件</a>
+          <ul>
+            <li><a href="#单个文件">单个文件</a></li>
+            <li><a href="#多个文件">多个文件</a></li>
+          </ul>
+        </li>
+        <li><a href="#html-模板-template">HTML 模板 Template</a></li>
+      </ul>
+    </li>
+    <li><a href="#中间件-middleware">中间件 Middleware</a></li>
+    <li><a href="#热加载调试-hot-reload">热加载调试 Hot Reload</a></li>
+    <li><a href="#examples">Examples</a>
+      <ul>
+        <li><a href="#using-http-method">Using HTTP method</a></li>
+        <li><a href="#parameters-in-path">Parameters in path</a></li>
+        <li><a href="#query-string-parameters">Query string parameters</a></li>
+        <li><a href="#multiparturlencoded-form">Multipart/Urlencoded form</a></li>
+        <li><a href="#query-and-post-form">Query and post form</a></li>
+        <li><a href="#map-as-querystring-or-postform-parameters">Map as querystring or postform parameters</a></li>
+        <li><a href="#multiparturlencoded-binding">Multipart/Urlencoded binding</a></li>
+        <li><a href="#upload-files">Upload Files</a>
+          <ul>
+            <li><a href="#single-file">Single File</a></li>
+            <li><a href="#multiple-files">Multiple Files</a></li>
+          </ul>
+        </li>
+        <li><a href="#grouping-routes">Grouping routes</a></li>
+        <li><a href="#blank-gin-without-middleware-by-default">Blank Gin without middleware by default</a></li>
+        <li><a href="#using-middleware">Using middleware</a></li>
+        <li><a href="#custom-recovery-behavior">Custom Recovery behavior</a></li>
+        <li><a href="#how-to-write-log-file">How to write log file</a></li>
+        <li><a href="#custom-log-file">Custom log file</a></li>
+        <li><a href="#controlling-log-output-coloring">Controlling Log output coloring</a></li>
+        <li><a href="#model-binding-and-validation">Model binding and validation</a>
+          <ul>
+            <li><a href="#sample-request">Sample request</a></li>
+            <li><a href="#skip-validate">Skip validate</a></li>
+          </ul>
+        </li>
+        <li><a href="#custom-validators">Custom validators</a></li>
+        <li><a href="#only-bind-query-string">Only bind query string</a></li>
+        <li><a href="#bind-query-string-or-post-data">Bind query string or post data</a></li>
+        <li><a href="#bind-uri">Bind Uri</a></li>
+        <li><a href="#bind-header">Bind Header</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="gin">gin</h1>
+<p>Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API, but with performance up to 40 times faster than Martini.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/ping&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+			<span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;pong&#34;</span><span class="p">,</span>
+		<span class="p">})</span>
+	<span class="p">})</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span> <span class="c1">// listen and serve on 0.0.0.0:8080
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="quick-start">Quick Start</h2>
+<h3 id="installation">Installation</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ go get -u github.com/gin-gonic/gin
+</code></pre></td></tr></table>
+</div>
+</div><p>Import it in your code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">import</span> <span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>(Optional) Import <code>net/http</code>. This is required for example if using constants such as <code>http.StatusOK</code>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">import</span> <span class="s">&#34;net/http&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="特性">特性</h3>
+<ul>
+<li><strong>快速</strong>：路由不使用反射，基于 Radix 树，内存占用少。</li>
+<li><strong>中间件</strong>：HTTP 请求，可先经过一系列中间件处理，例如：Logger，Authorization，GZIP 等。这个特性和 NodeJs 的 <code>Koa</code> 框架很像。中间件机制也极大地提高了框架的可扩展性。</li>
+<li><strong>异常处理</strong>：服务始终可用，不会宕机。Gin 可以捕获 panic，并恢复。而且有极为便利的机制处理 HTTP 请求过程中发生的错误。</li>
+<li><strong>JSON</strong>：Gin 可以解析并验证请求的 JSON。这个特性对 <code>Restful API</code> 的开发尤其有用。</li>
+<li><strong>路由分组</strong>：例如将需要授权和不需要授权的 API 分组，不同版本的 API 分组。而且分组可嵌套，且性能不受影响。</li>
+<li><strong>渲染内置</strong>：原生支持 JSON，XML 和 HTML 的渲染。</li>
+</ul>
+<h3 id="路由">路由</h3>
+<h4 id="路径参数">路径参数</h4>
+<p><code>/user/:name/*role</code>，<code>:</code> 代表动态参数，<code>*</code> 代表可选。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 匹配 /user/geektutu
+</span><span class="c1"></span><span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/user/:name&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">name</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">)</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="s">&#34;Hello %s&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// $ curl http://localhost:9999/user/geektutu
+</span><span class="c1">// Hello geektutu
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="查询参数">查询参数</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 匹配users?name=xxx&amp;role=xxx，role可选
+</span><span class="c1"></span><span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/users&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">name</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Query</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">)</span>		              <span class="c1">// 获取查询参数
+</span><span class="c1"></span>	<span class="nx">role</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">DefaultQuery</span><span class="p">(</span><span class="s">&#34;role&#34;</span><span class="p">,</span> <span class="s">&#34;teacher&#34;</span><span class="p">)</span> <span class="c1">// 获取并设置查询默认参数 
+</span><span class="c1"></span>	<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="s">&#34;%s is a %s&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">role</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// $ curl &#34;http://localhost:9999/users?name=Tom&amp;role=student&#34;
+</span><span class="c1">// Tom is a student
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="获取-post-参数">获取 POST 参数</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// POST
+</span><span class="c1"></span><span class="nx">r</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/form&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">username</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">)</span>
+	<span class="nx">password</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">DefaultPostForm</span><span class="p">(</span><span class="s">&#34;password&#34;</span><span class="p">,</span> <span class="s">&#34;000000&#34;</span><span class="p">)</span> <span class="c1">// 可设置默认值
+</span><span class="c1"></span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+		<span class="s">&#34;username&#34;</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
+		<span class="s">&#34;password&#34;</span><span class="p">:</span> <span class="nx">password</span><span class="p">,</span>
+	<span class="p">})</span>
+<span class="p">})</span>
+
+<span class="c1">// $ curl http://localhost:9999/form  -X POST -d &#39;username=geektutu&amp;password=1234&#39;
+</span><span class="c1">// {&#34;password&#34;:&#34;1234&#34;,&#34;username&#34;:&#34;geektutu&#34;}
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="map-参数-字典参数">Map 参数 (字典参数)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">r</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/post&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">ids</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">QueryMap</span><span class="p">(</span><span class="s">&#34;ids&#34;</span><span class="p">)</span>
+	<span class="nx">names</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostFormMap</span><span class="p">(</span><span class="s">&#34;names&#34;</span><span class="p">)</span>
+
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+		<span class="s">&#34;ids&#34;</span><span class="p">:</span>   <span class="nx">ids</span><span class="p">,</span>
+		<span class="s">&#34;names&#34;</span><span class="p">:</span> <span class="nx">names</span><span class="p">,</span>
+	<span class="p">})</span>
+<span class="p">})</span>
+
+<span class="c1">// $ curl -g &#34;http://localhost:9999/post?ids[Jack]=001&amp;ids[Tom]=002&#34; -X POST -d &#39;names[a]=Sam&amp;names[b]=David&#39;
+</span><span class="c1">// {&#34;ids&#34;:{&#34;Jack&#34;:&#34;001&#34;,&#34;Tom&#34;:&#34;002&#34;},&#34;names&#34;:{&#34;a&#34;:&#34;Sam&#34;,&#34;b&#34;:&#34;David&#34;}}
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="重定向-redirect">重定向 Redirect</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/redirect&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nf">Redirect</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusMovedPermanently</span><span class="p">,</span> <span class="s">&#34;/index&#34;</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/goindex&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span> <span class="p">=</span> <span class="s">&#34;/&#34;</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">HandleContext</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// $ curl -i http://localhost:9999/redirect
+</span><span class="c1"></span>
+<span class="c1">// HTTP/1.1 301 Moved Permanently
+</span><span class="c1">// Content-Type: text/html; charset=utf-8
+</span><span class="c1">// Location: /
+</span><span class="c1">// Date: Thu, 08 Aug 2019 17:22:14 GMT
+</span><span class="c1">// Content-Length: 36
+</span><span class="c1"></span>
+<span class="c1">// &lt;a href=&#34;/&#34;&gt;Moved Permanently&lt;/a&gt;.
+</span><span class="c1"></span>
+<span class="c1">// $ curl &#34;http://localhost:9999/goindex&#34;
+</span><span class="c1">// Who are you?
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="分组路由-grouping-routes">分组路由 Grouping Routes</h4>
+<p>如果有一组路由，前缀都是 <code>/api/v1</code> 开头，是否每个路由都需要加上 <code>/api/v1</code> 这个前缀呢？答案是不需要，分组路由可以解决这个问题。</p>
+<p>利用分组路由还可以更好地实现权限控制，例如将需要<strong>登录鉴权</strong>的路由放到同一分组中去，简化权限控制。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// group routes 分组路由
+</span><span class="c1"></span><span class="nx">defaultHandler</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+		<span class="s">&#34;path&#34;</span><span class="p">:</span> <span class="nx">c</span><span class="p">.</span><span class="nf">FullPath</span><span class="p">(),</span>
+	<span class="p">})</span>
+<span class="p">}</span>
+<span class="c1">// group: v1
+</span><span class="c1"></span><span class="nx">v1</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/v1&#34;</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nx">v1</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/posts&#34;</span><span class="p">,</span> <span class="nx">defaultHandler</span><span class="p">)</span>
+	<span class="nx">v1</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/series&#34;</span><span class="p">,</span> <span class="nx">defaultHandler</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// group: v2
+</span><span class="c1"></span><span class="nx">v2</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/v2&#34;</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="nx">v2</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/posts&#34;</span><span class="p">,</span> <span class="nx">defaultHandler</span><span class="p">)</span>
+	<span class="nx">v2</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/series&#34;</span><span class="p">,</span> <span class="nx">defaultHandler</span><span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="c1">// $ curl http://localhost:9999/v1/posts
+</span><span class="c1">// {&#34;path&#34;:&#34;/v1/posts&#34;}
+</span><span class="c1">// $ curl http://localhost:9999/v2/posts
+</span><span class="c1">// {&#34;path&#34;:&#34;/v2/posts&#34;}
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="上传文件">上传文件</h3>
+<h4 id="单个文件">单个文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">r</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/upload1&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">file</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">FormFile</span><span class="p">(</span><span class="s">&#34;file&#34;</span><span class="p">)</span>
+	<span class="c1">// c.SaveUploadedFile(file, dst)
+</span><span class="c1"></span>	<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="s">&#34;%s uploaded!&#34;</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="多个文件">多个文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">r</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/upload2&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// Multipart form
+</span><span class="c1"></span>	<span class="nx">form</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">MultipartForm</span><span class="p">()</span>
+	<span class="nx">files</span> <span class="o">:=</span> <span class="nx">form</span><span class="p">.</span><span class="nx">File</span><span class="p">[</span><span class="s">&#34;upload[]&#34;</span><span class="p">]</span>
+
+	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">file</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">files</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">)</span>
+		<span class="c1">// c.SaveUploadedFile(file, dst)
+</span><span class="c1"></span>	<span class="p">}</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="s">&#34;%d files uploaded!&#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">files</span><span class="p">))</span>
+<span class="p">})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="html-模板-template">HTML 模板 Template</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">student</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span> <span class="kt">string</span>
+	<span class="nx">Age</span>  <span class="kt">int8</span>
+<span class="p">}</span>
+
+<span class="nx">r</span><span class="p">.</span><span class="nf">LoadHTMLGlob</span><span class="p">(</span><span class="s">&#34;templates/*&#34;</span><span class="p">)</span>
+
+<span class="nx">stu1</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">student</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;Geektutu&#34;</span><span class="p">,</span> <span class="nx">Age</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span>
+<span class="nx">stu2</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">student</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;Jack&#34;</span><span class="p">,</span> <span class="nx">Age</span><span class="p">:</span> <span class="mi">22</span><span class="p">}</span>
+<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/arr&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">HTML</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="s">&#34;arr.tmpl&#34;</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+		<span class="s">&#34;title&#34;</span><span class="p">:</span>  <span class="s">&#34;Gin&#34;</span><span class="p">,</span>
+		<span class="s">&#34;stuArr&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="nx">student</span><span class="p">{</span><span class="nx">stu1</span><span class="p">,</span> <span class="nx">stu2</span><span class="p">},</span>
+	<span class="p">})</span>
+<span class="p">})</span>
+
+
+<span class="p">&lt;!</span><span class="o">--</span> <span class="nx">templates</span><span class="o">/</span><span class="nx">arr</span><span class="p">.</span><span class="nx">tmpl</span> <span class="o">--</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nx">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nx">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;</span><span class="nx">hello</span><span class="p">,</span> <span class="p">{{.</span><span class="nx">title</span><span class="p">}}&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+    <span class="p">{{</span><span class="k">range</span> <span class="err">$</span><span class="nx">index</span><span class="p">,</span> <span class="err">$</span><span class="nx">ele</span> <span class="o">:=</span> <span class="p">.</span><span class="nx">stuArr</span> <span class="p">}}</span>
+    <span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;{{</span> <span class="err">$</span><span class="nx">index</span> <span class="p">}}:</span> <span class="p">{{</span> <span class="err">$</span><span class="nx">ele</span><span class="p">.</span><span class="nx">Name</span> <span class="p">}}</span> <span class="nx">is</span> <span class="p">{{</span> <span class="err">$</span><span class="nx">ele</span><span class="p">.</span><span class="nx">Age</span> <span class="p">}}</span> <span class="nx">years</span> <span class="nx">old</span><span class="p">&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+    <span class="p">{{</span> <span class="nx">end</span> <span class="p">}}</span>
+<span class="p">&lt;</span><span class="o">/</span><span class="nx">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="o">/</span><span class="nx">html</span><span class="p">&gt;</span>
+
+
+<span class="err">$</span> <span class="nx">curl</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//localhost:9999/arr
+</span><span class="c1"></span>
+<span class="p">&lt;</span><span class="nx">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nx">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;</span><span class="nx">hello</span><span class="p">,</span> <span class="nx">Gin</span><span class="p">&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;</span><span class="mi">0</span><span class="p">:</span> <span class="nx">Geektutu</span> <span class="nx">is</span> <span class="mi">20</span> <span class="nx">years</span> <span class="nx">old</span><span class="p">&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nx">p</span><span class="p">&gt;</span><span class="mi">1</span><span class="p">:</span> <span class="nx">Jack</span> <span class="nx">is</span> <span class="mi">22</span> <span class="nx">years</span> <span class="nx">old</span><span class="p">&lt;</span><span class="o">/</span><span class="nx">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="o">/</span><span class="nx">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="o">/</span><span class="nx">html</span><span class="p">&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Gin 默认使用模板 Go 语言标准库的模板 <code>text/template</code> 和 <code>html/template</code>，语法与标准库一致，支持各种复杂场景的渲染。</li>
+</ul>
+<h2 id="中间件-middleware">中间件 Middleware</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 作用于全局
+</span><span class="c1"></span><span class="nx">r</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nf">Logger</span><span class="p">())</span>
+<span class="nx">r</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nf">Recovery</span><span class="p">())</span>
+
+<span class="c1">// 作用于单个路由
+</span><span class="c1"></span><span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/benchmark&#34;</span><span class="p">,</span> <span class="nf">MyBenchLogger</span><span class="p">(),</span> <span class="nx">benchEndpoint</span><span class="p">)</span>
+
+<span class="c1">// 作用于某个组
+</span><span class="c1"></span><span class="nx">authorized</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">)</span>
+<span class="nx">authorized</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nf">AuthRequired</span><span class="p">())</span>
+<span class="p">{</span>
+	<span class="nx">authorized</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/login&#34;</span><span class="p">,</span> <span class="nx">loginEndpoint</span><span class="p">)</span>
+	<span class="nx">authorized</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/submit&#34;</span><span class="p">,</span> <span class="nx">submitEndpoint</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如何自定义中间件呢？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Logger</span><span class="p">()</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">t</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">()</span>
+		<span class="c1">// 给Context实例设置一个值
+</span><span class="c1"></span>		<span class="nx">c</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;geektutu&#34;</span><span class="p">,</span> <span class="s">&#34;1111&#34;</span><span class="p">)</span>
+		<span class="c1">// 请求前
+</span><span class="c1"></span>		<span class="nx">c</span><span class="p">.</span><span class="nf">Next</span><span class="p">()</span>
+		<span class="c1">// 请求后
+</span><span class="c1"></span>		<span class="nx">latency</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Since</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Print</span><span class="p">(</span><span class="nx">latency</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="热加载调试-hot-reload">热加载调试 Hot Reload</h2>
+<p>Python 的 <code>Flask</code> 框架，有 <em>debug</em> 模式，启动时传入 <em>debug=True</em> 就可以热加载 (Hot Reload, Live Reload) 了。即更改源码，保存后，自动触发更新，浏览器上刷新即可。免去了杀进程、重新启动之苦。</p>
+<p>Gin 原生不支持，但有很多额外的库可以支持。例如</p>
+<ul>
+<li>github.com/codegangsta/gin</li>
+<li>github.com/pilu/fresh</li>
+</ul>
+<p>这次，我们采用 <em>github.com/pilu/fresh</em> 。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">go get -v -u github.com/pilu/fresh
+</code></pre></td></tr></table>
+</div>
+</div><p>安装好后，只需要将<code>go run main.go</code>命令换成<code>fresh</code>即可。每次更改源文件，代码将自动重新编译 (Auto Compile)。</p>
+<h2 id="examples">Examples</h2>
+<h3 id="using-http-method">Using HTTP method</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// Creates a gin router with default middleware:
+</span><span class="c1"></span>	<span class="c1">// logger and recovery (crash-free) middleware
+</span><span class="c1"></span>	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">router</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/someGet&#34;</span><span class="p">,</span> <span class="nx">getting</span><span class="p">)</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/somePost&#34;</span><span class="p">,</span> <span class="nx">posting</span><span class="p">)</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">PUT</span><span class="p">(</span><span class="s">&#34;/somePut&#34;</span><span class="p">,</span> <span class="nx">putting</span><span class="p">)</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">DELETE</span><span class="p">(</span><span class="s">&#34;/someDelete&#34;</span><span class="p">,</span> <span class="nx">deleting</span><span class="p">)</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">PATCH</span><span class="p">(</span><span class="s">&#34;/somePatch&#34;</span><span class="p">,</span> <span class="nx">patching</span><span class="p">)</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">HEAD</span><span class="p">(</span><span class="s">&#34;/someHead&#34;</span><span class="p">,</span> <span class="nx">head</span><span class="p">)</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">OPTIONS</span><span class="p">(</span><span class="s">&#34;/someOptions&#34;</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+
+	<span class="c1">// By default it serves on :8080 unless a
+</span><span class="c1"></span>	<span class="c1">// PORT environment variable was defined.
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
+	<span class="c1">// router.Run(&#34;:3000&#34;) for a hard coded port
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="parameters-in-path">Parameters in path</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="c1">// This handler will match /user/john but will not match /user/ or /user
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/user/:name&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">name</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">)</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="s">&#34;Hello %s&#34;</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="c1">// However, this one will match /user/john/ and also /user/john/send
+</span><span class="c1"></span>	<span class="c1">// If no other routers match /user/john, it will redirect to /user/john/
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/user/:name/*action&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">name</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;name&#34;</span><span class="p">)</span>
+		<span class="nx">action</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Param</span><span class="p">(</span><span class="s">&#34;action&#34;</span><span class="p">)</span>
+		<span class="nx">message</span> <span class="o">:=</span> <span class="nx">name</span> <span class="o">+</span> <span class="s">&#34; is &#34;</span> <span class="o">+</span> <span class="nx">action</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>*</code> 代表可选。</p>
+<h3 id="query-string-parameters">Query string parameters</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="c1">// Query string parameters are parsed using the existing underlying request object.
+</span><span class="c1"></span>	<span class="c1">// The request responds to a url matching:  /welcome?firstname=Jane&amp;lastname=Doe
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/welcome&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">firstname</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">DefaultQuery</span><span class="p">(</span><span class="s">&#34;firstname&#34;</span><span class="p">,</span> <span class="s">&#34;Guest&#34;</span><span class="p">)</span> <span class="c1">// set default value
+</span><span class="c1"></span>		<span class="nx">lastname</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Query</span><span class="p">(</span><span class="s">&#34;lastname&#34;</span><span class="p">)</span> <span class="c1">// shortcut for c.Request.URL.Query().Get(&#34;lastname&#34;)
+</span><span class="c1"></span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="s">&#34;Hello %s %s&#34;</span><span class="p">,</span> <span class="nx">firstname</span><span class="p">,</span> <span class="nx">lastname</span><span class="p">)</span>
+	<span class="p">})</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="multiparturlencoded-form">Multipart/Urlencoded form</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/form_post&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">message</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostForm</span><span class="p">(</span><span class="s">&#34;message&#34;</span><span class="p">)</span>
+		<span class="nx">nick</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">DefaultPostForm</span><span class="p">(</span><span class="s">&#34;nick&#34;</span><span class="p">,</span> <span class="s">&#34;anonymous&#34;</span><span class="p">)</span> <span class="c1">// set default value
+</span><span class="c1"></span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+			<span class="s">&#34;status&#34;</span><span class="p">:</span>  <span class="s">&#34;posted&#34;</span><span class="p">,</span>
+			<span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="nx">message</span><span class="p">,</span>
+			<span class="s">&#34;nick&#34;</span><span class="p">:</span>    <span class="nx">nick</span><span class="p">,</span>
+		<span class="p">})</span>
+	<span class="p">})</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="query-and-post-form">Query and post form</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">POST /post?id<span class="o">=</span>1234<span class="p">&amp;</span><span class="nv">page</span><span class="o">=</span><span class="m">1</span> HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+<span class="nv">name</span><span class="o">=</span>manu<span class="p">&amp;</span><span class="nv">message</span><span class="o">=</span>this_is_great
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">func main<span class="o">()</span> <span class="o">{</span>
+	router :<span class="o">=</span> gin.Default<span class="o">()</span>
+
+	router.POST<span class="o">(</span><span class="s2">&#34;/post&#34;</span>, func<span class="o">(</span>c *gin.Context<span class="o">)</span> <span class="o">{</span>
+
+		id :<span class="o">=</span> c.Query<span class="o">(</span><span class="s2">&#34;id&#34;</span><span class="o">)</span>
+		page :<span class="o">=</span> c.DefaultQuery<span class="o">(</span><span class="s2">&#34;page&#34;</span>, <span class="s2">&#34;0&#34;</span><span class="o">)</span>
+		name :<span class="o">=</span> c.PostForm<span class="o">(</span><span class="s2">&#34;name&#34;</span><span class="o">)</span>
+		message :<span class="o">=</span> c.PostForm<span class="o">(</span><span class="s2">&#34;message&#34;</span><span class="o">)</span>
+
+		fmt.Printf<span class="o">(</span><span class="s2">&#34;id: %s; page: %s; name: %s; message: %s&#34;</span>, id, page, name, message<span class="o">)</span>
+	<span class="o">})</span>
+	router.Run<span class="o">(</span><span class="s2">&#34;:8080&#34;</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">id: 1234<span class="p">;</span> page: 1<span class="p">;</span> name: manu<span class="p">;</span> message: this_is_great
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="map-as-querystring-or-postform-parameters">Map as querystring or postform parameters</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">POST /post?ids<span class="o">[</span>a<span class="o">]=</span>1234<span class="p">&amp;</span>ids<span class="o">[</span>b<span class="o">]=</span>hello HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+names<span class="o">[</span>first<span class="o">]=</span>thinkerou<span class="p">&amp;</span>names<span class="o">[</span>second<span class="o">]=</span>tianou
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/post&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+
+		<span class="nx">ids</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">QueryMap</span><span class="p">(</span><span class="s">&#34;ids&#34;</span><span class="p">)</span>
+		<span class="nx">names</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">PostFormMap</span><span class="p">(</span><span class="s">&#34;names&#34;</span><span class="p">)</span>
+
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;ids: %v; names: %v&#34;</span><span class="p">,</span> <span class="nx">ids</span><span class="p">,</span> <span class="nx">names</span><span class="p">)</span>
+	<span class="p">})</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">ids: map<span class="o">[</span>b:hello a:1234<span class="o">]</span>, names: map<span class="o">[</span>second:tianou first:thinkerou<span class="o">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="multiparturlencoded-binding">Multipart/Urlencoded binding</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">LoginForm</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">User</span>     <span class="kt">string</span> <span class="s">`form:&#34;user&#34; binding:&#34;required&#34;`</span>
+	<span class="nx">Password</span> <span class="kt">string</span> <span class="s">`form:&#34;password&#34; binding:&#34;required&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/login&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// you can bind multipart form with explicit binding declaration:
+</span><span class="c1"></span>		<span class="c1">// c.ShouldBindWith(&amp;form, binding.Form)
+</span><span class="c1"></span>		<span class="c1">// or you can simply use autobinding with ShouldBind method:
+</span><span class="c1"></span>		<span class="kd">var</span> <span class="nx">form</span> <span class="nx">LoginForm</span>
+		<span class="c1">// in this case proper binding will be automatically selected
+</span><span class="c1"></span>		<span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBind</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">form</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="nx">form</span><span class="p">.</span><span class="nx">User</span> <span class="o">==</span> <span class="s">&#34;user&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">form</span><span class="p">.</span><span class="nx">Password</span> <span class="o">==</span> <span class="s">&#34;password&#34;</span> <span class="p">{</span>
+				<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;status&#34;</span><span class="p">:</span> <span class="s">&#34;you are logged in&#34;</span><span class="p">})</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">401</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;status&#34;</span><span class="p">:</span> <span class="s">&#34;unauthorized&#34;</span><span class="p">})</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">})</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Test it with:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ curl -v --form <span class="nv">user</span><span class="o">=</span>user --form <span class="nv">password</span><span class="o">=</span>password http://localhost:8080/login
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="upload-files">Upload Files</h3>
+<h4 id="single-file">Single File</h4>
+<blockquote>
+<p>The filename is always optional and must not be used blindly by the application: path information should be stripped, and conversion to the server file system rules should be done.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+	<span class="c1">// Set a lower memory limit for multipart forms (default is 32 MiB)
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nx">MaxMultipartMemory</span> <span class="p">=</span> <span class="mi">8</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span>  <span class="c1">// 8 MiB
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/upload&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// single file
+</span><span class="c1"></span>		<span class="nx">file</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">FormFile</span><span class="p">(</span><span class="s">&#34;file&#34;</span><span class="p">)</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">)</span>
+
+		<span class="c1">// Upload the file to specific dst.
+</span><span class="c1"></span>		<span class="nx">c</span><span class="p">.</span><span class="nf">SaveUploadedFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">dst</span><span class="p">)</span>
+
+		<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;&#39;%s&#39; uploaded!&#34;</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">))</span>
+	<span class="p">})</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>How to <code>curl</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">curl -X POST http://localhost:8080/upload <span class="se">\
+</span><span class="se"></span>  -F <span class="s2">&#34;file=@/Users/appleboy/test.zip&#34;</span> <span class="se">\
+</span><span class="se"></span>  -H <span class="s2">&#34;Content-Type: multipart/form-data&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="multiple-files">Multiple Files</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+	<span class="c1">// Set a lower memory limit for multipart forms (default is 32 MiB)
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nx">MaxMultipartMemory</span> <span class="p">=</span> <span class="mi">8</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span>  <span class="c1">// 8 MiB
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/upload&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// Multipart form
+</span><span class="c1"></span>		<span class="nx">form</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">MultipartForm</span><span class="p">()</span>
+		<span class="nx">files</span> <span class="o">:=</span> <span class="nx">form</span><span class="p">.</span><span class="nx">File</span><span class="p">[</span><span class="s">&#34;upload[]&#34;</span><span class="p">]</span>
+
+		<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">file</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">files</span> <span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">)</span>
+
+			<span class="c1">// Upload the file to specific dst.
+</span><span class="c1"></span>			<span class="nx">c</span><span class="p">.</span><span class="nf">SaveUploadedFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">dst</span><span class="p">)</span>
+		<span class="p">}</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%d files uploaded!&#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">files</span><span class="p">)))</span>
+	<span class="p">})</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>How to <code>curl</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">curl -X POST http://localhost:8080/upload <span class="se">\
+</span><span class="se"></span>  -F <span class="s2">&#34;upload[]=@/Users/appleboy/test1.zip&#34;</span> <span class="se">\
+</span><span class="se"></span>  -F <span class="s2">&#34;upload[]=@/Users/appleboy/test2.zip&#34;</span> <span class="se">\
+</span><span class="se"></span>  -H <span class="s2">&#34;Content-Type: multipart/form-data&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="grouping-routes">Grouping routes</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="c1">// Simple group: v1
+</span><span class="c1"></span>	<span class="nx">v1</span> <span class="o">:=</span> <span class="nx">router</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/v1&#34;</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="nx">v1</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/login&#34;</span><span class="p">,</span> <span class="nx">loginEndpoint</span><span class="p">)</span>
+		<span class="nx">v1</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/submit&#34;</span><span class="p">,</span> <span class="nx">submitEndpoint</span><span class="p">)</span>
+		<span class="nx">v1</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/read&#34;</span><span class="p">,</span> <span class="nx">readEndpoint</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="c1">// Simple group: v2
+</span><span class="c1"></span>	<span class="nx">v2</span> <span class="o">:=</span> <span class="nx">router</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/v2&#34;</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="nx">v2</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/login&#34;</span><span class="p">,</span> <span class="nx">loginEndpoint</span><span class="p">)</span>
+		<span class="nx">v2</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/submit&#34;</span><span class="p">,</span> <span class="nx">submitEndpoint</span><span class="p">)</span>
+		<span class="nx">v2</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/read&#34;</span><span class="p">,</span> <span class="nx">readEndpoint</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="blank-gin-without-middleware-by-default">Blank Gin without middleware by default</h3>
+<p>Use</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>instead of</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Default With the Logger and Recovery middleware already attached
+</span><span class="c1"></span><span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="using-middleware">Using middleware</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// Creates a router without any middleware by default
+</span><span class="c1"></span>	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+
+	<span class="c1">// Global middleware
+</span><span class="c1"></span>	<span class="c1">// Logger middleware will write the logs to gin.DefaultWriter even if you set with GIN_MODE=release.
+</span><span class="c1"></span>	<span class="c1">// By default gin.DefaultWriter = os.Stdout
+</span><span class="c1"></span>	<span class="nx">r</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nf">Logger</span><span class="p">())</span>
+
+	<span class="c1">// Recovery middleware recovers from any panics and writes a 500 if there was one.
+</span><span class="c1"></span>	<span class="nx">r</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nf">Recovery</span><span class="p">())</span>
+
+	<span class="c1">// Per route middleware, you can add as many as you desire.
+</span><span class="c1"></span>	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/benchmark&#34;</span><span class="p">,</span> <span class="nf">MyBenchLogger</span><span class="p">(),</span> <span class="nx">benchEndpoint</span><span class="p">)</span>
+
+	<span class="c1">// Authorization group
+</span><span class="c1"></span>	<span class="c1">// authorized := r.Group(&#34;/&#34;, AuthRequired())
+</span><span class="c1"></span>	<span class="c1">// exactly the same as:
+</span><span class="c1"></span>	<span class="nx">authorized</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">)</span>
+	<span class="c1">// per group middleware! in this case we use the custom created
+</span><span class="c1"></span>	<span class="c1">// AuthRequired() middleware just in the &#34;authorized&#34; group.
+</span><span class="c1"></span>	<span class="nx">authorized</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nf">AuthRequired</span><span class="p">())</span>
+	<span class="p">{</span>
+		<span class="nx">authorized</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/login&#34;</span><span class="p">,</span> <span class="nx">loginEndpoint</span><span class="p">)</span>
+		<span class="nx">authorized</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/submit&#34;</span><span class="p">,</span> <span class="nx">submitEndpoint</span><span class="p">)</span>
+		<span class="nx">authorized</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/read&#34;</span><span class="p">,</span> <span class="nx">readEndpoint</span><span class="p">)</span>
+
+		<span class="c1">// nested group
+</span><span class="c1"></span>		<span class="nx">testing</span> <span class="o">:=</span> <span class="nx">authorized</span><span class="p">.</span><span class="nf">Group</span><span class="p">(</span><span class="s">&#34;testing&#34;</span><span class="p">)</span>
+		<span class="nx">testing</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/analytics&#34;</span><span class="p">,</span> <span class="nx">analyticsEndpoint</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="c1">// Listen and serve on 0.0.0.0:8080
+</span><span class="c1"></span>	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="custom-recovery-behavior">Custom Recovery behavior</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// Creates a router without any middleware by default
+</span><span class="c1"></span>	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nf">Logger</span><span class="p">())</span>
+
+	<span class="c1">// Recovery middleware recovers from any panics and writes a 500 if there was one.
+</span><span class="c1"></span>	<span class="nx">r</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nf">CustomRecovery</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">recovered</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="nx">err</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">recovered</span><span class="p">.(</span><span class="kt">string</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;error: %s&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">))</span>
+		<span class="p">}</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">AbortWithStatus</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
+	<span class="p">}))</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/panic&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// panic with a string -- the custom middleware could save this to a database or report it to the user
+</span><span class="c1"></span>		<span class="nb">panic</span><span class="p">(</span><span class="s">&#34;foo&#34;</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="s">&#34;ohai&#34;</span><span class="p">)</span>
+	<span class="p">})</span>
+
+	<span class="c1">// Listen and serve on 0.0.0.0:8080
+</span><span class="c1"></span>	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="how-to-write-log-file">How to write log file</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Disable Console Color, you don&#39;t need console color when writing the logs to file.
+</span><span class="c1"></span>    <span class="nx">gin</span><span class="p">.</span><span class="nf">DisableConsoleColor</span><span class="p">()</span>
+
+    <span class="c1">// Logging to a file.
+</span><span class="c1"></span>    <span class="nx">f</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;gin.log&#34;</span><span class="p">)</span>
+    <span class="nx">gin</span><span class="p">.</span><span class="nx">DefaultWriter</span> <span class="p">=</span> <span class="nx">io</span><span class="p">.</span><span class="nf">MultiWriter</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+
+    <span class="c1">// Use the following code if you need to write the logs to file and console at the same time.
+</span><span class="c1"></span>    <span class="c1">// gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+</span><span class="c1"></span>
+    <span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+    <span class="nx">router</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/ping&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#34;pong&#34;</span><span class="p">)</span>
+    <span class="p">})</span>
+
+    <span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="custom-log-file">Custom log file</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+	<span class="c1">// LoggerWithFormatter middleware will write the logs to gin.DefaultWriter
+</span><span class="c1"></span>	<span class="c1">// By default gin.DefaultWriter = os.Stdout
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nf">LoggerWithFormatter</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">param</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">LogFormatterParams</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+		<span class="c1">// your custom format
+</span><span class="c1"></span>		<span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s - [%s] \&#34;%s %s %s %d %s \&#34;%s\&#34; %s\&#34;\n&#34;</span><span class="p">,</span>
+				<span class="nx">param</span><span class="p">.</span><span class="nx">ClientIP</span><span class="p">,</span>
+				<span class="nx">param</span><span class="p">.</span><span class="nx">TimeStamp</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">RFC1123</span><span class="p">),</span>
+				<span class="nx">param</span><span class="p">.</span><span class="nx">Method</span><span class="p">,</span>
+				<span class="nx">param</span><span class="p">.</span><span class="nx">Path</span><span class="p">,</span>
+				<span class="nx">param</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Proto</span><span class="p">,</span>
+				<span class="nx">param</span><span class="p">.</span><span class="nx">StatusCode</span><span class="p">,</span>
+				<span class="nx">param</span><span class="p">.</span><span class="nx">Latency</span><span class="p">,</span>
+				<span class="nx">param</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nf">UserAgent</span><span class="p">(),</span>
+				<span class="nx">param</span><span class="p">.</span><span class="nx">ErrorMessage</span><span class="p">,</span>
+		<span class="p">)</span>
+	<span class="p">}))</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nf">Recovery</span><span class="p">())</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/ping&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#34;pong&#34;</span><span class="p">)</span>
+	<span class="p">})</span>
+	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Sample Output</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">::1 - [Fri, 07 Dec 2018 17:04:38 JST] &#34;GET /ping HTTP/1.1 200 122.767µs &#34;Mozilla/5.0 (Macint
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="controlling-log-output-coloring">Controlling Log output coloring</h3>
+<p>By default, logs output on console should be colorized depending on the detected TTY.</p>
+<p>Never colorize logs:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Disable log&#39;s color
+</span><span class="c1"></span>    <span class="nx">gin</span><span class="p">.</span><span class="nf">DisableConsoleColor</span><span class="p">()</span>
+    
+    <span class="c1">// Creates a gin router with default middleware:
+</span><span class="c1"></span>    <span class="c1">// logger and recovery (crash-free) middleware
+</span><span class="c1"></span>    <span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+    
+    <span class="nx">router</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/ping&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#34;pong&#34;</span><span class="p">)</span>
+    <span class="p">})</span>
+    
+    <span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Always colorize logs:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Force log&#39;s color
+</span><span class="c1"></span>    <span class="nx">gin</span><span class="p">.</span><span class="nf">ForceConsoleColor</span><span class="p">()</span>
+    
+    <span class="c1">// Creates a gin router with default middleware:
+</span><span class="c1"></span>    <span class="c1">// logger and recovery (crash-free) middleware
+</span><span class="c1"></span>    <span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+    
+    <span class="nx">router</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/ping&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#34;pong&#34;</span><span class="p">)</span>
+    <span class="p">})</span>
+    
+    <span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="model-binding-and-validation">Model binding and validation</h3>
+<p>To bind a request body into a type, use model binding. We currently support binding of JSON, XML, YAML and standard form values (foo=bar&amp;boo=baz).</p>
+<p>Gin uses <a href="https://github.com/go-playground/validator" target="_blank" rel="noopener noreffer"><strong>go-playground/validator/v10</strong></a> for validation. Check the full docs on tags usage <a href="https://pkg.go.dev/github.com/go-playground/validator/v10#hdr-Baked_In_Validators_and_Tags" target="_blank" rel="noopener noreffer">here</a>.</p>
+<p>Note that you need to set the corresponding binding tag on all fields you want to bind. For example, when binding from JSON, set <code>json:&quot;fieldname&quot;</code>.</p>
+<p>Also, Gin provides two sets of methods for binding:</p>
+<ul>
+<li>
+<p>Type</p>
+<p>- Must bind</p>
+<ul>
+<li><strong>Methods</strong> - <code>Bind</code>, <code>BindJSON</code>, <code>BindXML</code>, <code>BindQuery</code>, <code>BindYAML</code></li>
+<li><strong>Behavior</strong> - These methods use <code>MustBindWith</code> under the hood. If there is a binding error, the request is aborted with <code>c.AbortWithError(400, err).SetType(ErrorTypeBind)</code>. This sets the response status code to 400 and the <code>Content-Type</code> header is set to <code>text/plain; charset=utf-8</code>. Note that if you try to set the response code after this, it will result in a warning <code>[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 400 with 422</code>. If you wish to have greater control over the behavior, consider using the <code>ShouldBind</code> equivalent method.</li>
+</ul>
+</li>
+<li>
+<p>Type</p>
+<p>- Should bind</p>
+<ul>
+<li><strong>Methods</strong> - <code>ShouldBind</code>, <code>ShouldBindJSON</code>, <code>ShouldBindXML</code>, <code>ShouldBindQuery</code>, <code>ShouldBindYAML</code></li>
+<li><strong>Behavior</strong> - These methods use <code>ShouldBindWith</code> under the hood. If there is a binding error, the error is returned and it is the developer’s responsibility to handle the request and error appropriately.</li>
+</ul>
+</li>
+</ul>
+<p>When using the Bind-method, Gin tries to infer the binder depending on the Content-Type header. If you are sure what you are binding, you can use <code>MustBindWith</code> or <code>ShouldBindWith</code>.</p>
+<p>You can also specify that specific fields are required. If a field is decorated with <code>binding:&quot;required&quot;</code> and has an empty value when binding, an error will be returned.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// Binding from JSON
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Login</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">User</span>     <span class="kt">string</span> <span class="s">`form:&#34;user&#34; json:&#34;user&#34; xml:&#34;user&#34;  binding:&#34;required&#34;`</span>
+	<span class="nx">Password</span> <span class="kt">string</span> <span class="s">`form:&#34;password&#34; json:&#34;password&#34; xml:&#34;password&#34; binding:&#34;required&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="c1">// Example for binding JSON ({&#34;user&#34;: &#34;manu&#34;, &#34;password&#34;: &#34;123&#34;})
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/loginJSON&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">json</span> <span class="nx">Login</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBindJSON</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">json</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
+			<span class="k">return</span>
+		<span class="p">}</span>
+		
+		<span class="k">if</span> <span class="nx">json</span><span class="p">.</span><span class="nx">User</span> <span class="o">!=</span> <span class="s">&#34;manu&#34;</span> <span class="o">||</span> <span class="nx">json</span><span class="p">.</span><span class="nx">Password</span> <span class="o">!=</span> <span class="s">&#34;123&#34;</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;status&#34;</span><span class="p">:</span> <span class="s">&#34;unauthorized&#34;</span><span class="p">})</span>
+			<span class="k">return</span>
+		<span class="p">}</span> 
+		
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;status&#34;</span><span class="p">:</span> <span class="s">&#34;you are logged in&#34;</span><span class="p">})</span>
+	<span class="p">})</span>
+
+	<span class="c1">// Example for binding XML (
+</span><span class="c1"></span>	<span class="c1">//	&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+</span><span class="c1"></span>	<span class="c1">//	&lt;root&gt;
+</span><span class="c1"></span>	<span class="c1">//		&lt;user&gt;manu&lt;/user&gt;
+</span><span class="c1"></span>	<span class="c1">//		&lt;password&gt;123&lt;/password&gt;
+</span><span class="c1"></span>	<span class="c1">//	&lt;/root&gt;)
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/loginXML&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">xml</span> <span class="nx">Login</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBindXML</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">xml</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
+			<span class="k">return</span>
+		<span class="p">}</span>
+		
+		<span class="k">if</span> <span class="nx">xml</span><span class="p">.</span><span class="nx">User</span> <span class="o">!=</span> <span class="s">&#34;manu&#34;</span> <span class="o">||</span> <span class="nx">xml</span><span class="p">.</span><span class="nx">Password</span> <span class="o">!=</span> <span class="s">&#34;123&#34;</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;status&#34;</span><span class="p">:</span> <span class="s">&#34;unauthorized&#34;</span><span class="p">})</span>
+			<span class="k">return</span>
+		<span class="p">}</span> 
+		
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;status&#34;</span><span class="p">:</span> <span class="s">&#34;you are logged in&#34;</span><span class="p">})</span>
+	<span class="p">})</span>
+
+	<span class="c1">// Example for binding a HTML form (user=manu&amp;password=123)
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">POST</span><span class="p">(</span><span class="s">&#34;/loginForm&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">form</span> <span class="nx">Login</span>
+		<span class="c1">// This will infer what binder to use depending on the content-type header.
+</span><span class="c1"></span>		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBind</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">form</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
+			<span class="k">return</span>
+		<span class="p">}</span>
+		
+		<span class="k">if</span> <span class="nx">form</span><span class="p">.</span><span class="nx">User</span> <span class="o">!=</span> <span class="s">&#34;manu&#34;</span> <span class="o">||</span> <span class="nx">form</span><span class="p">.</span><span class="nx">Password</span> <span class="o">!=</span> <span class="s">&#34;123&#34;</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;status&#34;</span><span class="p">:</span> <span class="s">&#34;unauthorized&#34;</span><span class="p">})</span>
+			<span class="k">return</span>
+		<span class="p">}</span> 
+		
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;status&#34;</span><span class="p">:</span> <span class="s">&#34;you are logged in&#34;</span><span class="p">})</span>
+	<span class="p">})</span>
+
+	<span class="c1">// Listen and serve on 0.0.0.0:8080
+</span><span class="c1"></span>	<span class="nx">router</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8080&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="sample-request">Sample request</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ curl -v -X POST <span class="se">\
+</span><span class="se"></span>  http://localhost:8080/loginJSON <span class="se">\
+</span><span class="se"></span>  -H <span class="s1">&#39;content-type: application/json&#39;</span> <span class="se">\
+</span><span class="se"></span>  -d <span class="s1">&#39;{ &#34;user&#34;: &#34;manu&#34; }&#39;</span>
+&gt; POST /loginJSON HTTP/1.1
+&gt; Host: localhost:8080
+&gt; User-Agent: curl/7.51.0
+&gt; Accept: */*
+&gt; content-type: application/json
+&gt; Content-Length: <span class="m">18</span>
+&gt;
+* upload completely sent off: <span class="m">18</span> out of <span class="m">18</span> bytes
+&lt; HTTP/1.1 <span class="m">400</span> Bad Request
+&lt; Content-Type: application/json<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>utf-8
+&lt; Date: Fri, <span class="m">04</span> Aug <span class="m">2017</span> 03:51:31 GMT
+&lt; Content-Length: <span class="m">100</span>
+&lt;
+<span class="o">{</span><span class="s2">&#34;error&#34;</span>:<span class="s2">&#34;Key: &#39;Login.Password&#39; Error:Field validation for &#39;Password&#39; failed on the &#39;required&#39; tag&#34;</span><span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="skip-validate">Skip validate</h4>
+<p>When running the above example using the above the <code>curl</code> command, it returns error. Because the example use <code>binding:&quot;required&quot;</code> for <code>Password</code>. If use <code>binding:&quot;-&quot;</code> for <code>Password</code>, then it will not return error when running the above example again.</p>
+<h3 id="custom-validators">Custom validators</h3>
+<p>It is also possible to register custom validators. See the <a href="https://github.com/gin-gonic/examples/tree/master/struct-lvl-validations" target="_blank" rel="noopener noreffer">example code</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;net/http&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+
+	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+	<span class="s">&#34;github.com/gin-gonic/gin/binding&#34;</span>
+	<span class="s">&#34;github.com/go-playground/validator/v10&#34;</span>
+<span class="p">)</span>
+
+<span class="c1">// Booking contains binded and validated data.
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Booking</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">CheckIn</span>  <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span> <span class="s">`form:&#34;check_in&#34; binding:&#34;required,bookabledate&#34; time_format:&#34;2006-01-02&#34;`</span>
+	<span class="nx">CheckOut</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span> <span class="s">`form:&#34;check_out&#34; binding:&#34;required,gtfield=CheckIn,bookabledate&#34; time_format:&#34;2006-01-02&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">bookableDate</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">Func</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">fl</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">FieldLevel</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+	<span class="nx">date</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">fl</span><span class="p">.</span><span class="nf">Field</span><span class="p">().</span><span class="nf">Interface</span><span class="p">().(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">)</span>
+	<span class="k">if</span> <span class="nx">ok</span> <span class="p">{</span>
+		<span class="nx">today</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">()</span>
+		<span class="k">if</span> <span class="nx">today</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="kc">false</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="kc">true</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">route</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+
+	<span class="k">if</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">binding</span><span class="p">.</span><span class="nx">Validator</span><span class="p">.</span><span class="nf">Engine</span><span class="p">().(</span><span class="o">*</span><span class="nx">validator</span><span class="p">.</span><span class="nx">Validate</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+		<span class="nx">v</span><span class="p">.</span><span class="nf">RegisterValidation</span><span class="p">(</span><span class="s">&#34;bookabledate&#34;</span><span class="p">,</span> <span class="nx">bookableDate</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">route</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/bookable&#34;</span><span class="p">,</span> <span class="nx">getBookable</span><span class="p">)</span>
+	<span class="nx">route</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8085&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">getBookable</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">b</span> <span class="nx">Booking</span>
+	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBindWith</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">b</span><span class="p">,</span> <span class="nx">binding</span><span class="p">.</span><span class="nx">Query</span><span class="p">);</span> <span class="nx">err</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span> <span class="s">&#34;Booking dates are valid!&#34;</span><span class="p">})</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">()})</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="err">$</span> <span class="nx">curl</span> <span class="s">&#34;localhost:8085/bookable?check_in=2118-04-16&amp;check_out=2118-04-17&#34;</span>
+<span class="p">{</span><span class="s">&#34;message&#34;</span><span class="p">:</span><span class="s">&#34;Booking dates are valid!&#34;</span><span class="p">}</span>
+
+<span class="err">$</span> <span class="nx">curl</span> <span class="s">&#34;localhost:8085/bookable?check_in=2118-03-10&amp;check_out=2118-03-09&#34;</span>
+<span class="p">{</span><span class="s">&#34;error&#34;</span><span class="p">:</span><span class="s">&#34;Key: &#39;Booking.CheckOut&#39; Error:Field validation for &#39;CheckOut&#39; failed on the &#39;gtfield&#39; tag&#34;</span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><a href="https://github.com/go-playground/validator/releases/tag/v8.7" target="_blank" rel="noopener noreffer">Struct level validations</a> can also be registered this way. See the <a href="https://github.com/gin-gonic/examples/tree/master/struct-lvl-validations" target="_blank" rel="noopener noreffer">struct-lvl-validation example</a> to learn more.</p>
+<h3 id="only-bind-query-string">Only bind query string</h3>
+<p><code>ShouldBindQuery</code> function only binds the query params and not the post data. See the <a href="https://github.com/gin-gonic/gin/issues/742#issuecomment-315953017" target="_blank" rel="noopener noreffer">detail information</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;log&#34;</span>
+
+	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span>    <span class="kt">string</span> <span class="s">`form:&#34;name&#34;`</span>
+	<span class="nx">Address</span> <span class="kt">string</span> <span class="s">`form:&#34;address&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">route</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+	<span class="nx">route</span><span class="p">.</span><span class="nf">Any</span><span class="p">(</span><span class="s">&#34;/testing&#34;</span><span class="p">,</span> <span class="nx">startPage</span><span class="p">)</span>
+	<span class="nx">route</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8085&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">startPage</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">person</span> <span class="nx">Person</span>
+	<span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBindQuery</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">person</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;====== Only Bind By Query String ======&#34;</span><span class="p">)</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">Address</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#34;Success&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="bind-query-string-or-post-data">Bind query string or post data</h3>
+<p>See the <a href="https://github.com/gin-gonic/gin/issues/742#issuecomment-264681292" target="_blank" rel="noopener noreffer">detail information</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;time&#34;</span>
+
+	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Name</span>     <span class="kt">string</span>    <span class="s">`form:&#34;name&#34;`</span>
+	<span class="nx">Address</span>  <span class="kt">string</span>    <span class="s">`form:&#34;address&#34;`</span>
+	<span class="nx">Birthday</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span> <span class="s">`form:&#34;birthday&#34; time_format:&#34;2006-01-02&#34; time_utc:&#34;1&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">route</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+	<span class="nx">route</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/testing&#34;</span><span class="p">,</span> <span class="nx">startPage</span><span class="p">)</span>
+	<span class="nx">route</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8085&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">startPage</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">person</span> <span class="nx">Person</span>
+	<span class="c1">// If `GET`, only `Form` binding engine (`query`) used.
+</span><span class="c1"></span>	<span class="c1">// If `POST`, first checks the `content-type` for `JSON` or `XML`, then uses `Form` (`form-data`).
+</span><span class="c1"></span>	<span class="c1">// See more at https://github.com/gin-gonic/gin/blob/master/binding/binding.go#L48
+</span><span class="c1"></span>	<span class="k">if</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBind</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">person</span><span class="p">)</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">Address</span><span class="p">)</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">Birthday</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="nx">c</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#34;Success&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Test it with:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ curl -X GET <span class="s2">&#34;localhost:8085/testing?name=appleboy&amp;address=xyz&amp;birthday=1992-03-15&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="bind-uri">Bind Uri</h3>
+<p>See the <a href="https://github.com/gin-gonic/gin/issues/846" target="_blank" rel="noopener noreffer">detail information</a>.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+
+<span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">ID</span>   <span class="kt">string</span> <span class="s">`uri:&#34;id&#34; binding:&#34;required,uuid&#34;`</span>
+	<span class="nx">Name</span> <span class="kt">string</span> <span class="s">`uri:&#34;name&#34; binding:&#34;required&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">route</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+	<span class="nx">route</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/:name/:id&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">person</span> <span class="nx">Person</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBindUri</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">person</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;msg&#34;</span><span class="p">:</span> <span class="nx">err</span><span class="p">})</span>
+			<span class="k">return</span>
+		<span class="p">}</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;name&#34;</span><span class="p">:</span> <span class="nx">person</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="s">&#34;uuid&#34;</span><span class="p">:</span> <span class="nx">person</span><span class="p">.</span><span class="nx">ID</span><span class="p">})</span>
+	<span class="p">})</span>
+	<span class="nx">route</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="s">&#34;:8088&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Test it with:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">$ curl -v localhost:8088/thinkerou/987fbc97-4bed-5078-9f07-9141ba07c9f3
+$ curl -v localhost:8088/thinkerou/not-uuid
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="bind-header">Bind Header</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">type</span> <span class="nx">testHeader</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Rate</span>   <span class="kt">int</span>    <span class="s">`header:&#34;Rate&#34;`</span>
+	<span class="nx">Domain</span> <span class="kt">string</span> <span class="s">`header:&#34;Domain&#34;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nf">Default</span><span class="p">()</span>
+	<span class="nx">r</span><span class="p">.</span><span class="nf">GET</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">h</span> <span class="o">:=</span> <span class="nx">testHeader</span><span class="p">{}</span>
+
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">ShouldBindHeader</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">h</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+		<span class="p">}</span>
+
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%#v\n&#34;</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span>
+		<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;Rate&#34;</span><span class="p">:</span> <span class="nx">h</span><span class="p">.</span><span class="nx">Rate</span><span class="p">,</span> <span class="s">&#34;Domain&#34;</span><span class="p">:</span> <span class="nx">h</span><span class="p">.</span><span class="nx">Domain</span><span class="p">})</span>
+	<span class="p">})</span>
+
+	<span class="nx">r</span><span class="p">.</span><span class="nf">Run</span><span class="p">()</span>
+
+<span class="c1">// client
+</span><span class="c1">// curl -H &#34;rate:300&#34; -H &#34;domain:music&#34; 127.0.0.1:8080/
+</span><span class="c1">// output
+</span><span class="c1">// {&#34;Domain&#34;:&#34;music&#34;,&#34;Rate&#34;:300}
+</span><span class="c1">//
+</span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 0001-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/golang/%E5%91%BD%E5%90%8D%E5%92%8C%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw"></i></a>
+            <a href="/posts/games/%E6%96%87%E6%98%8E%E5%85%AD/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":40},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

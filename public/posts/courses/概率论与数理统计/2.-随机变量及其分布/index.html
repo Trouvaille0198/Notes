@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title> - 我的全新 Hugo 网站</title><meta name="Description" content=""><meta property="og:title" content="" />
+<meta property="og:description" content="随机变量及其分布 随机变量 定义：设随机试验的样本空间为 $$S$$，把试验的每一个可能的结果 $$e\in S$$ 与一 个 实数 $$X(e)$$ 对应起来，则称这种定义在S上的一个实" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/2.-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="随机变量及其分布 随机变量 定义：设随机试验的样本空间为 $$S$$，把试验的每一个可能的结果 $$e\in S$$ 与一 个 实数 $$X(e)$$ 对应起来，则称这种定义在S上的一个实"/>
+<meta name="application-name" content="我的全新 Hugo 网站">
+<meta name="apple-mobile-web-app-title" content="我的全新 Hugo 网站"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/2.-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/" /><link rel="prev" href="http://example.org/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/3.-%E5%A4%9A%E7%BB%B4%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/" /><link rel="next" href="http://example.org/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/1.-%E6%A6%82%E5%BF%B5/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/courses\/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1\/2.-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83\/"
+        },"genre": "posts","wordcount":  2943 ,
+        "url": "http:\/\/example.org\/posts\/courses\/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1\/2.-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83\/","publisher": {
+            "@type": "Organization",
+            "name": "作者"},"author": {
+                "@type": "Person",
+                "name": "作者"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">伤心肠粉</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">伤心肠粉</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2943 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#随机变量">随机变量</a></li>
+    <li><a href="#离散型随机变量及其概率分布">离散型随机变量及其概率分布</a>
+      <ul>
+        <li><a href="#定义">定义</a>
+          <ul>
+            <li><a href="#离散型随机变量">离散型随机变量</a></li>
+            <li><a href="#概率分布">概率分布</a></li>
+          </ul>
+        </li>
+        <li><a href="#常见的三个离散型随机变量">常见的三个离散型随机变量</a>
+          <ul>
+            <li><a href="#0-1-或二值分布">(0-1) 或二值分布</a></li>
+            <li><a href="#二项分布">二项分布</a></li>
+            <li><a href="#泊松-possion-分布">泊松 (Possion) 分布</a></li>
+          </ul>
+        </li>
+        <li><a href="#例">例</a></li>
+      </ul>
+    </li>
+    <li><a href="#随机变量的分布函数">随机变量的分布函数</a>
+      <ul>
+        <li><a href="#定义-1">定义</a></li>
+        <li><a href="#特征">特征</a></li>
+        <li><a href="#性质">性质</a></li>
+        <li><a href="#离散型随机变量的分布函数常数">离散型随机变量的分布函数（常数）</a></li>
+        <li><a href="#例-1">例</a></li>
+      </ul>
+    </li>
+    <li><a href="#连续型随机变量及其概率密度">连续型随机变量及其概率密度</a>
+      <ul>
+        <li><a href="#定义-2">定义</a></li>
+        <li><a href="#性质-1">性质</a></li>
+        <li><a href="#常见的三个连续型随机变量">常见的三个连续型随机变量</a>
+          <ul>
+            <li><a href="#均匀分布">均匀分布</a></li>
+            <li><a href="#指数分布">指数分布</a></li>
+            <li><a href="#正态分布">正态分布</a></li>
+          </ul>
+        </li>
+        <li><a href="#正态分布详解">正态分布详解</a></li>
+        <li><a href="#例-2">例</a></li>
+      </ul>
+    </li>
+    <li><a href="#随机变量的函数的分布">随机变量的函数的分布</a>
+      <ul>
+        <li><a href="#随机变量函数的概念">随机变量函数的概念</a></li>
+        <li><a href="#离散型随机变量的函数的分布">离散型随机变量的函数的分布</a></li>
+        <li><a href="#连续型随机变量的函数的分布">连续型随机变量的函数的分布</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="随机变量及其分布">随机变量及其分布</h1>
+<h2 id="随机变量">随机变量</h2>
+<p>定义：设随机试验的样本空间为 $$S$$，把试验的每一个可能的结果 $$e\in S$$ 与一 个</p>
+<p>实数 $$X(e)$$ 对应起来，则称这种定义在<em>S</em>上的一个实值单值映射 $$X=X(e)$$ 为随机变量(Random Variables)</p>
+<p>引入随机变量后，就可将对随机事件及其概率的研究转化为对随机变量及其取值规律的研究</p>
+<h2 id="离散型随机变量及其概率分布">离散型随机变量及其概率分布</h2>
+<h3 id="定义">定义</h3>
+<h4 id="离散型随机变量">离散型随机变量</h4>
+<p>设$$X$$为一个随机变量，如果它的全部可能取值只有有限个或可数无穷个，则称$$X$$为一个<strong>离散型随机变量</strong></p>
+<h4 id="概率分布">概率分布</h4>
+<p>设离散型随机变量<em>X</em>所有可能取值为$$x_i(i=1,2,\ldots,n 或i=1,2,\ldots)$$，称$$P{X=x_i}=p_i(i=1,2,\ldots,n 或i=1,2,\ldots)$$为$$X$$的<strong>概率分布或分布律</strong></p>
+<p>分布律可以更直观地用以下表格的形式来描述</p>
+<table>
+<thead>
+<tr>
+<th>$$X$$</th>
+<th>$$x_1$$</th>
+<th>$$x_2$$</th>
+<th>&hellip;</th>
+<th>$$x_n$$</th>
+<th>&hellip;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$$p_i$$</td>
+<td>$$p_1$$</td>
+<td>$$p_2$$</td>
+<td>&hellip;</td>
+<td>$$p_n$$</td>
+<td>&hellip;</td>
+</tr>
+</tbody>
+</table>
+<p>其中$$p_i$$满足</p>
+<ul>
+<li>$$p_i \ge 0$$</li>
+<li>$$\sum\limits_{i=1}^{n(\infty)}p_i=1$$</li>
+</ul>
+<h3 id="常见的三个离散型随机变量">常见的三个离散型随机变量</h3>
+<h4 id="0-1-或二值分布">(0-1) 或二值分布</h4>
+<p>$$
+P{X=k}=p^k(1-p)^{1-k}\qquad k=0,1(0&lt;p&lt;1)
+$$</p>
+<h4 id="二项分布">二项分布</h4>
+<p>n 次实验发生了 k 次，每次实验独立，或是放回抽样
+$$
+P{X=k}=C_n^kp^k(1-p)^{n-k}\qquad k=0,1,2,\ldots,n
+$$</p>
+<p>记作 $$X\sim B(n,p)$$，$$X$$ 即为即为 $$n$$ 重贝努利试 验中 $$A$$ 发生的次数</p>
+<h4 id="泊松-possion-分布">泊松 (Possion) 分布</h4>
+<p>$$
+P{X=k}=e^{-\lambda}\cfrac{\lambda^k}{k!}\qquad \lambda&gt;0,k=0,1,2,\ldots
+$$</p>
+<p>记作 $$X\sim \pi(\lambda)$$</p>
+<p>例</p>
+<ul>
+<li>某医院在一天的急诊病人数;</li>
+<li>某一个时间间隔内某地区发生的交通事故的次数;</li>
+<li>在一个时间间隔内某种放射性物质发出经过计数器的<em>α</em> 粒子数</li>
+</ul>
+<p><strong>泊松定理</strong>：当 <em>n</em> 很大，<em>p</em> 很小时有近似式：
+$$
+C_n^kp^k(1-p)^{n-k}\approx e^{-\lambda}\cfrac{\lambda^k}{k!}
+$$
+有时可将较难计算的二项分布转化为泊松分布去计算</p>
+<p>补充：<strong>超几何分布</strong></p>
+<p>N 个样本中有 $$N_1$$ 类和 $$N_2$$ 类，从中（不放回地）取 $$n$$ 个，取出 $$N_1$$ 的个数设为 $$k$$
+$$
+P(X=k)=\cfrac{C_{N_1}^kC_{N_2}^{n-k}}{C_N^n}
+$$
+当 N 很大，n 很小时，不放回近似为放回，超几何分布近似为二项分布</p>
+<h3 id="例">例</h3>
+<ol>
+<li>
+<p>某人进行射击，设每次射击的命中率为 0*.*02,独立射击 400 次，试求至少击中两次的概率</p>
+<p>设击中的次数为 X，则 $$X\sim B(400,0.02)$$，因此所求概率为（近似为泊松定理计算）
+$$
+P{X \ge 2}=1-P{X&lt;2}=1-P{X=0}-P{X=1}=0.9972
+$$</p>
+</li>
+<li>
+<p>某公司生产一种产品 300 件，废品率为 0*.*01,问在这 300 件产品中废品数大于 5 的概率是多少？</p>
+<p>设 300 件产品中废品数为 X，则 $$X \sim B(300,0.01)$$，因此所求概率为
+$$
+P{X \ge 5}=1-\sum\limits_{k=0}^5C_{300}^k(0.01)^k(0.99)^{300-k}\approx 1-\sum\limits_{k=0}^5 \cfrac{e^{-3}3^k}{k!}=0.083918
+$$</p>
+</li>
+</ol>
+<h2 id="随机变量的分布函数">随机变量的分布函数</h2>
+<h3 id="定义-1">定义</h3>
+<p>设$$X$$是一个随机变量，$$x$$是任意实数，称函数
+$$
+F(x)=P{X \le x}\qquad -\infty&lt;x&lt;\infty
+$$
+为$$X$$的分布函数</p>
+<h3 id="特征">特征</h3>
+<ul>
+<li>
+<p>$$P{X \le a}=F(a)$$</p>
+</li>
+<li>
+<p>$$P{X &gt; a}=1-F(a)$$</p>
+</li>
+<li>
+<p>$$P{a&lt;X\le b}=F(b)-F(a)$$</p>
+</li>
+<li>
+<p>$$P{X = a}=F(a+0)-F(a-0)=F(a)-F(a-0)$$</p>
+</li>
+</ul>
+<p>注意，$$P{a\le X\le b}\neq F(b)-F(a)$$，而是$$P{a\le X\le b}=F(b)-F(a-0)$$</p>
+<h3 id="性质">性质</h3>
+<ul>
+<li>
+<p>$$F(x)$$是一个不减函数</p>
+</li>
+<li>
+<p>$$0\le F(x)\le 1$$，且$$\lim\limits_{x\rightarrow -\infty}F(x)\triangleq F(-\infty)=0\qquad\lim\limits_{x\rightarrow +\infty}F(x)\triangleq F(+\infty)=1$$</p>
+</li>
+<li>
+<p>$$F(x)$$是右连续的，即$$F(x+0)=F(x)$$</p>
+</li>
+<li>
+<p>若一个函数具有以上性质，则它一定是某个随机变量的分布函数</p>
+</li>
+</ul>
+<h3 id="离散型随机变量的分布函数常数">离散型随机变量的分布函数（常数）</h3>
+<p>设离散型随机变量<em>X</em>的分布律为$$P{X=x_k}=p_k\qquad k=1,2,\ldots$$</p>
+<p>则<em>X</em>的分布函数为（x以内，分布函数为所有概率之和）
+$$
+F(x)=P{X \le x}=\sum\limits_{x_k\le  x}P{X=k}=\sum\limits_{x_k \le x}p_k
+$$
+即当$$x_{k-1}\le x&lt;x_k$$时，$$F(x)=\sum\limits_{i-1}^{k-1}p_i$$（在x附近，分布函数为其概率）</p>
+<h3 id="例-1">例</h3>
+<ol>
+<li>设随机变量$$X$$的分布函数为</li>
+</ol>
+<p>$$
+F(x)=A+B\arctan x,\qquad -\infty&lt;x&lt;\infty
+$$</p>
+<p>​		试求：（1）系数<em>A</em>和<em>B</em>； （2）$$X$$落在$$(-1,1]$$内的概率</p>
+<ol start="2">
+<li>设随机变量<em>X</em>的分布律为</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><em>X</em></th>
+<th>-1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$$p_i$$</td>
+<td>1/4</td>
+<td>1/2</td>
+<td>1/4</td>
+</tr>
+</tbody>
+</table>
+<p>​		求<em>X</em>的分布函数，并求$$P{X\le \cfrac{1}{2}},P{\cfrac{3}{2}&lt;X\le \cfrac{5}{2} }$$</p>
+<p>解：前值为1/4，后值为1/2</p>
+<h2 id="连续型随机变量及其概率密度">连续型随机变量及其概率密度</h2>
+<h3 id="定义-2">定义</h3>
+<p>如果对随机变量$$X$$的分布函数$$F(x)$$，存在一个非负可积函$$f(x)$$,使得对任意的$$x$$，有
+$$
+F(x)=P{X\le x}=\int_{-\infty}^x f(t)dt 
+$$
+则称$$X$$为一个连续型随机变量，称$$f(x)$$为$$X$$的概率密度函数,简称<strong>概率密度</strong>(Probability densities)</p>
+<p>注：连续型随机变量的分布函数为<strong>连续函数</strong>，所以对任意$$a$$，有$$P{X=a}=0$$</p>
+<h3 id="性质-1">性质</h3>
+<ul>
+<li>$$f(x)\ge 0$$</li>
+<li>$$\int_{-\infty}^{+\infty}f(x)dx=1$$</li>
+<li>$$f(x)=F'(x)$$</li>
+</ul>
+<p>$$
+P{X\le a}=\int_{-\infty}^{a}f(x)dx,\quad P{X&gt;b}=\int_b^{+\infty}f(x)dx \
+P{a&lt;x\le b}=\int_a^b f(x)dx
+$$</p>
+<p>注意：分布函数与概率密度函数的区别，例如$$F(x)\le1$$成立，但$$f(x)\le 1,\int_{-\infty}^{+\infty}F(x)dx=1$$不成立！</p>
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207112804555.png" alt="image-20201207112804555" style="zoom: 45%;" />
+<h3 id="常见的三个连续型随机变量">常见的三个连续型随机变量</h3>
+<h4 id="均匀分布">均匀分布</h4>
+<p>$$
+f(x)=\begin{cases}
+\  \cfrac{1}{b-a}\qquad a&lt;x&lt;b
+\ \ 0\qquad\qquad 其他
+\end{cases}
+$$</p>
+<p>记为$$X\sim U(a,b)$$</p>
+<p><strong>分布函数</strong>
+$$
+F(x)=\begin{cases}
+\  0 \qquad\qquad x&lt;a
+\ \cfrac{x-a}{b-a}\qquad a\le x&lt;b
+\ \ a\qquad\qquad x\ge b
+\end{cases}
+$$</p>
+<p>汽车站等车时间</p>
+<p>针落地与某直线的倾斜角</p>
+<h4 id="指数分布">指数分布</h4>
+<p>$$
+f(x)=\begin{cases}
+\ \lambda e^{-\lambda x}\qquad x\ge 0
+\ \ 0\qquad\qquad 其他
+\end{cases}\quad(\lambda&gt;0)
+$$</p>
+<p>记为$$X\sim e(\lambda)$$</p>
+<p><strong>分布函数</strong>
+$$
+F(x)=\begin{cases}
+\ 1- e^{-\lambda x}\qquad x&gt; 0
+\ \ 0\qquad\qquad \quad 其他
+\end{cases}\quad
+$$</p>
+<p>指数分布具有无记忆性，即
+$$
+P{X&gt;t}=p{X&gt;s+t|X&gt;s}
+$$
+新生的物品（生物）能存活 t 年的以上概率 = 已经活了 s 年的物品（生物）再存活 t 年以上的概率</p>
+<p>电话系统通话时间</p>
+<p>消耗性产品的寿命</p>
+<p>生物寿命</p>
+<h4 id="正态分布">正态分布</h4>
+<p>$$
+f(x)=\cfrac{1}{\sqrt{2\pi}\sigma}e^{-\cfrac{(x-\mu)^2}{2\sigma^2}},\quad -\infty&lt;x&lt;+\infty
+$$</p>
+<p>记为$$X\sim N(\mu,\sigma^2)$$</p>
+<p>性质</p>
+<ul>
+<li>
+<p>$$\mu$$ 为均值，控制图像位置，$$\sigma$$ 为方差，控制图像高低（陡缓）</p>
+</li>
+<li>
+<p>$$y=f(x)$$ 以 $$x=\mu$$ 为对称轴，呈钟形曲线</p>
+</li>
+<li>
+<p>概率最大值在 $$x=\mu$$ 时取到，值为 $$\cfrac{1}{\sqrt{2\pi}\sigma}$$</p>
+</li>
+</ul>
+<p><strong>分布函数</strong>
+$$
+F(x)=\cfrac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^x   e^{-\cfrac{(t-\mu)^2}{2\sigma^2}}dt
+$$
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://trou.oss-cn-shanghai.aliyuncs.com/img/%e5%9b%be%e7%89%872.png"
+        data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/%e5%9b%be%e7%89%872.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/%e5%9b%be%e7%89%872.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/%e5%9b%be%e7%89%872.png 2x"
+        data-sizes="auto"
+        alt="https://trou.oss-cn-shanghai.aliyuncs.com/img/图片2.png"
+        title="图片2" /></p>
+<h3 id="正态分布详解">正态分布详解</h3>
+<p>对正态分布随机变量$$X$$，若$$\mu=0,\sigma=1$$，则称$$X$$服从标准正态分布，其分布函数和概率密分别用$$\Phi(x)$$和$$\phi(x)$$表示，即
+$$
+\Phi(x)=\cfrac{1}{\sqrt{2\pi}}\int_{-\infty}^xe^{-\cfrac{t^2}{2}}dt,\quad\phi(x)=\cfrac{1}{\sqrt{2\pi}}e^{-\cfrac{x^2}{2}}
+\ \Phi(0)=\cfrac{1}{2},\quad \Phi(x)=1-\Phi(-x)
+$$</p>
+<ul>
+<li>
+<p>定理1：设$$X\sim N(\mu,\sigma^2)$$，则$$Y=\cfrac{X-\mu}{\sigma}~N(0,1)$$。因此有（标准化）</p>
+<ul>
+<li>$$P{X\le a}=P{\cfrac{X-\mu}{\sigma}\le \cfrac{a-\mu}{\sigma} }=\Phi(\cfrac{a-\mu}{\sigma})$$</li>
+<li>$$P{X&gt;b}=P{\cfrac{X-\mu}{\sigma}&gt; \cfrac{b-\mu}{\sigma} }=1-\Phi(\cfrac{b-\mu}{\sigma})$$</li>
+<li>$$P{a&lt;X\le b}=P{\ \cfrac{a-\mu}{\sigma} &lt;\cfrac{X-\mu}{\sigma}\le \cfrac{b-\mu}{\sigma} }=\Phi(\cfrac{b-\mu}{\sigma})-\Phi(\cfrac{a-\mu}{\sigma})$$</li>
+</ul>
+<p>当$$a&gt;0$$时，$$\Phi(a)$$的值往往是通过查表得到，当$$a&lt;0$$时，先利用$$\Phi(a)=1-\Phi(-a)$$，再查表得到。</p>
+</li>
+</ul>
+<p>$$p{|x-\mu|&lt;\sigma}=0.6826$$</p>
+<p>$$p{|x-\mu|&lt;2\sigma}=0.9544$$</p>
+<p>$$p{|x-\mu|&lt;3\sigma}=0.9974$$</p>
+<h3 id="例-2">例</h3>
+<ol>
+<li>
+<p>某元件的寿命$$X$$服从指数分布，其参数为$$\lambda=\cfrac{1}{1000}$$，求3个这样的元件用1000小时时，至少已有一个损坏的概率</p>
+<p>解：一个元件使用1000小时时损坏的概率为</p>
+</li>
+</ol>
+<p>$$
+P{X\le 1000}=1-e^{-1}
+$$</p>
+<p>​		用$$Y$$表示3个元件中使用1000小时时损坏的元件数，则$$Y\sim B(3,1-e^{-1})$$，因此所求概率为
+$$
+P{Y\ge 1}=1-P{Y=0}=1-C_3^0(1-e^{-1})^0(e^{-1})^3=1-e^{-3}
+$$</p>
+<ol start="2">
+<li>
+<p>设$$X\sim N(1,4)$$</p>
+<p>（1）求$$P{x\le 5},\ P{0&lt;X\le 1.6},\ P{|X-1|\le 2}$$</p>
+<p>（2）设$$d$$满足$$P{X&gt;d}\ge 0.9$$，问$$d$$至少为多少</p>
+<p>解：</p>
+<p>（1）标准化，查表。</p>
+</li>
+</ol>
+<h2 id="随机变量的函数的分布">随机变量的函数的分布</h2>
+<h3 id="随机变量函数的概念">随机变量函数的概念</h3>
+<p>如果存在一个函数$$g(\sdot)$$，使得随机变量$$X,Y$$满足：$$Y=g(X)$$，则称随机变量$$Y$$是随机变量$$X$$的函数。</p>
+<h3 id="离散型随机变量的函数的分布">离散型随机变量的函数的分布</h3>
+<p>设离散型随机变量$$X$$的分布律为：
+$$
+P{X=x_i}=p_i,\qquad i=1,2,\ldots
+$$
+显然，$$X$$的随机变量函数$$Y=g(X)$$也是离散型随机变量，且$$Y$$的分布律为
+$$
+P{Y=y_i}=\sum\limits_{g(x_i)=y_i}p_i\qquad j=1,2,\ldots
+$$</p>
+<h3 id="连续型随机变量的函数的分布">连续型随机变量的函数的分布</h3>
+<p>设$$X$$的概率密度为$$f_X(x),Y=g(X)$$，则$$Y$$的分布函数为
+$$
+F_Y(y)=P{Y\le y}=P{g(X)\le y}=\int_{C_y}f(x)dx
+$$
+其中$$C_y={x\mid g(x)\le y}$$</p>
+<p>方法：$$F_Y(x)\rightarrow F_X(x)$$，两边求导，$$f_Y(x)\leftarrow f_X(x)$$</p>
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209112458852.png" alt="image-20201209112458852" style="zoom: 50%;" />
+<ul>
+<li>
+<p>定理</p>
+<p>设随机变量$$X$$概率密度为$$f_X(x)$$，函数$$y=g(x)$$处处可导，且$$g'(x)&gt;0$$（或$$g'(x)&lt;0$$），则$$Y=g(X)$$也是连续型随机变量，其概率密度为
+$$
+f_Y(y)=\begin{cases}
+\ f_X(h(y))|h'(y)| \qquad \alpha&lt;y&lt;\beta
+\ \ 0\qquad\qquad \qquad\qquad 其他
+\end{cases}\quad
+$$
+其中$$x=h(y)$$为$$y=g(x)$$的反函数</p>
+<p>当$$f(x)$$在$$(-\infty,+\infty)$$上非零时
+$$
+\alpha=min(g(-\infty),g(+\infty)),\beta=max(g(-\infty),g(+\infty))
+$$</p>
+<p>当$$f(x)$$在$$[a,b]$$上非零时</p>
+</li>
+</ul>
+<p>$$
+\alpha=min(g(a),g(b)),\beta=max(g(a),g(b))
+$$</p>
+<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209113429793.png" alt="image-20201209113429793" style="zoom:50%;" />
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 0001-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/3.-%E5%A4%9A%E7%BB%B4%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%8F%8A%E5%85%B6%E5%88%86%E5%B8%83/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw"></i></a>
+            <a href="/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/1.-%E6%A6%82%E5%BF%B5/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":40},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

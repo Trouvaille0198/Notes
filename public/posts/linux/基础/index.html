@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title> - 我的全新 Hugo 网站</title><meta name="Description" content=""><meta property="og:title" content="" />
+<meta property="og:description" content="基础
+目录结构
+Linux 文件系统是一个目录树的结构，文件系统结构从一个根目录开始，根目录下可以有任意多个文件和子目录，子目录中又可以有任意多个文件和子目录
+
+
+bin：存放二进制可执行文件(ls,cat,mkdir 等)
+boot：存放用于系统引导时使用的各种文件
+dev：用于存放设备文件
+etc：存放系统配置文件
+home：存放所有用户文件的根目录
+lib：存放跟文件系统中的程序运行所需要的共享库及内核模块
+mnt:系统管理员安装临时文件系统的安装点
+opt:额外安装的可选应用程序包所放置的位置
+proc:虚拟文件系统，存放当前内存的映射
+root：超级用户目录
+sbin：存放二进制可执行文件，只有 root 才能访问
+tmp：用于存放各种临时文件
+usr：用于存放系统应用程序，比较重要的目录 /usr/local——本地管理员软件安装目录
+var：用于存放运行时需要改变数据的文件
+
+文件类型
+
+
+普通文件  -
+
+
+目录 d
+
+
+符号链接  l
+
+
+硬链接： 与普通文件没什么不同，inode 都指向同一个文件在硬盘中的区块
+
+
+软链接： 保存了其代表的文件的绝对路径，是另外一种文件，在硬盘上有独立的区块，访问时替换自身路径 (可理解为快捷方式)。
+
+
+
+
+字符设备文件  c
+
+
+块设备文件  b
+
+
+套接字  s
+
+
+命名管道 p
+
+
+命令
+格式
+cmd [options] [arguments]
+命令名称 [-选项] [参数]
+
+命令名：描述命令功能的英文单词或缩写，必不可少；
+[-选项]：执行该命令的限定参数或功能参数；
+[参数]：执行该命令的所必需对象，如文件、目录等；
+
+选项和参数都作为 Shell 命令执行时的输入，它们之间用空格分隔开
+一般来说，后面跟的选项如果单字符选项前使用一个减号 -；单词选项前使用两个减号 --
+[ ] 表示语法上可有可无
+可执行文件的分类
+内置命令：出于效率的考虑，将一些常用命令的解释程序构造在 Shell 内部。
+外置命令：存放在 /bin、/sbin 目录下的命令
+实用程序：存放在 /usr/bin、/usr/sbin、/usr/share、/usr/local/bin 等目录下的实用程序
+用户程序：用户程序经过编译生成可执行文件后，可作为 Shell 命令运行
+Shell 脚本：由 Shell 语言编写的批处理文件，可作为 Shell 命令运行
+登陆操作
+登陆提示信息的意义
+
+
+1
+
+
+[root@localhost~ ]#
+
+
+
+
+root：当前用户的账号
+
+
+localhost：主机名
+
+
+~ ：用户当前所在的目录。 如果现在要创建一个文件的话，会被保存在这个目录下。
+
+~ 为用户的主目录，即专属于该用户的目录
+root 用户的主目录为：/root 
+Linux 系统每创建一个普通用户，就会在 /home 这个目录下创建一个对应的 目录，并且是以用户名命名的。
+
+比如：普通用户 user 的主目录是：/home/user ；普通用户 test 的主目录为：/home/test
+
+
+
+
+
+#：root 用户的命令提示符
+
+
+$：普通用户的命令提示符
+
+
+命令
+pwd
+（print working dirctory）
+
+
+功能：显示用户当前所处的工作目录（当前工作目录）
+
+
+格式：pwd [选项]
+
+
+man
+（manual）
+
+
+功能：显示命令的使用说明手册。
+
+
+格式：man 命令名 
+
+
+通常 man 显示的命令帮助格式包含以下4部分：
+
+
+NAME : 命令名称；
+
+
+SYNOPSIS : 语法大纲；
+
+
+DESCRIPTION : 描述说明；
+
+
+OPTIONS : 选项
+
+
+man 命令查询控制手册时,给出了一些功能键设置：
+
+
+空格键 ：显示手册页的下一屏
+
+
+回车键 ：一次滚动手册页的一行
+
+
+q 键 ：退出 man 命令
+
+
+cat
+（concatenate）
+功能一
+
+
+功能：显示文件信息，可与输入输出重定向配合使用。
+
+
+格式：cat [选项] fileName 
+
+
+常用选项
+
+-n：由 1 开始对所有输出行进行编号显示。
+
+
+
+实例
+
+查看刚刚的 record 文件
+
+$ cat record 
+
+
+对 /etc/passwd 文件进行编号显示
+
+$ cat –n /etc/passwd
+
+
+
+
+
+功能二
+
+
+功能：建立小型文件
+
+
+格式
+
+
+
+
+1
+2
+3
+
+
+  cat &gt; fileName
+  …            // 输入信息
+  Ctrl&#43;d       // 存盘并退出 
+
+
+
+
+
+
+实例
+
+
+建立一个名为 m1 的文件，内容为：echo cat is not a cat!
+
+
+
+
+1
+2
+3
+4
+
+
+  $ cat &gt; m1    //创建文件 
+  echo cat is not a cat! 
+  Ctrl&#43;d
+  $ cat m1      //显示文件
+
+
+
+
+
+
+功能三
+
+
+功能：合并文件。
+
+
+格式：cat file1 file2 &gt; newFileName
+
+
+实例：将 m1,m2 合并为 m3
+
+
+建立一个名为m1的文件，内容为：echo cat is not a cat!
+
+
+建立一个名为m2的文件，内容为：date 的结果。
+
+
+
+
+1
+2
+3
+4
+5
+6
+7
+
+
+  $ date &gt; m2     //创建文件 
+
+  $ cat m2        //显示文件 
+
+  $ cat m1 m2 &gt;m3 //合并文件 
+
+  $ cat m3        //显示文件
+
+
+
+
+
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/linux/%E5%9F%BA%E7%A1%80/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="基础
+目录结构
+Linux 文件系统是一个目录树的结构，文件系统结构从一个根目录开始，根目录下可以有任意多个文件和子目录，子目录中又可以有任意多个文件和子目录
+
+
+bin：存放二进制可执行文件(ls,cat,mkdir 等)
+boot：存放用于系统引导时使用的各种文件
+dev：用于存放设备文件
+etc：存放系统配置文件
+home：存放所有用户文件的根目录
+lib：存放跟文件系统中的程序运行所需要的共享库及内核模块
+mnt:系统管理员安装临时文件系统的安装点
+opt:额外安装的可选应用程序包所放置的位置
+proc:虚拟文件系统，存放当前内存的映射
+root：超级用户目录
+sbin：存放二进制可执行文件，只有 root 才能访问
+tmp：用于存放各种临时文件
+usr：用于存放系统应用程序，比较重要的目录 /usr/local——本地管理员软件安装目录
+var：用于存放运行时需要改变数据的文件
+
+文件类型
+
+
+普通文件  -
+
+
+目录 d
+
+
+符号链接  l
+
+
+硬链接： 与普通文件没什么不同，inode 都指向同一个文件在硬盘中的区块
+
+
+软链接： 保存了其代表的文件的绝对路径，是另外一种文件，在硬盘上有独立的区块，访问时替换自身路径 (可理解为快捷方式)。
+
+
+
+
+字符设备文件  c
+
+
+块设备文件  b
+
+
+套接字  s
+
+
+命名管道 p
+
+
+命令
+格式
+cmd [options] [arguments]
+命令名称 [-选项] [参数]
+
+命令名：描述命令功能的英文单词或缩写，必不可少；
+[-选项]：执行该命令的限定参数或功能参数；
+[参数]：执行该命令的所必需对象，如文件、目录等；
+
+选项和参数都作为 Shell 命令执行时的输入，它们之间用空格分隔开
+一般来说，后面跟的选项如果单字符选项前使用一个减号 -；单词选项前使用两个减号 --
+[ ] 表示语法上可有可无
+可执行文件的分类
+内置命令：出于效率的考虑，将一些常用命令的解释程序构造在 Shell 内部。
+外置命令：存放在 /bin、/sbin 目录下的命令
+实用程序：存放在 /usr/bin、/usr/sbin、/usr/share、/usr/local/bin 等目录下的实用程序
+用户程序：用户程序经过编译生成可执行文件后，可作为 Shell 命令运行
+Shell 脚本：由 Shell 语言编写的批处理文件，可作为 Shell 命令运行
+登陆操作
+登陆提示信息的意义
+
+
+1
+
+
+[root@localhost~ ]#
+
+
+
+
+root：当前用户的账号
+
+
+localhost：主机名
+
+
+~ ：用户当前所在的目录。 如果现在要创建一个文件的话，会被保存在这个目录下。
+
+~ 为用户的主目录，即专属于该用户的目录
+root 用户的主目录为：/root 
+Linux 系统每创建一个普通用户，就会在 /home 这个目录下创建一个对应的 目录，并且是以用户名命名的。
+
+比如：普通用户 user 的主目录是：/home/user ；普通用户 test 的主目录为：/home/test
+
+
+
+
+
+#：root 用户的命令提示符
+
+
+$：普通用户的命令提示符
+
+
+命令
+pwd
+（print working dirctory）
+
+
+功能：显示用户当前所处的工作目录（当前工作目录）
+
+
+格式：pwd [选项]
+
+
+man
+（manual）
+
+
+功能：显示命令的使用说明手册。
+
+
+格式：man 命令名 
+
+
+通常 man 显示的命令帮助格式包含以下4部分：
+
+
+NAME : 命令名称；
+
+
+SYNOPSIS : 语法大纲；
+
+
+DESCRIPTION : 描述说明；
+
+
+OPTIONS : 选项
+
+
+man 命令查询控制手册时,给出了一些功能键设置：
+
+
+空格键 ：显示手册页的下一屏
+
+
+回车键 ：一次滚动手册页的一行
+
+
+q 键 ：退出 man 命令
+
+
+cat
+（concatenate）
+功能一
+
+
+功能：显示文件信息，可与输入输出重定向配合使用。
+
+
+格式：cat [选项] fileName 
+
+
+常用选项
+
+-n：由 1 开始对所有输出行进行编号显示。
+
+
+
+实例
+
+查看刚刚的 record 文件
+
+$ cat record 
+
+
+对 /etc/passwd 文件进行编号显示
+
+$ cat –n /etc/passwd
+
+
+
+
+
+功能二
+
+
+功能：建立小型文件
+
+
+格式
+
+
+
+
+1
+2
+3
+
+
+  cat &gt; fileName
+  …            // 输入信息
+  Ctrl&#43;d       // 存盘并退出 
+
+
+
+
+
+
+实例
+
+
+建立一个名为 m1 的文件，内容为：echo cat is not a cat!
+
+
+
+
+1
+2
+3
+4
+
+
+  $ cat &gt; m1    //创建文件 
+  echo cat is not a cat! 
+  Ctrl&#43;d
+  $ cat m1      //显示文件
+
+
+
+
+
+
+功能三
+
+
+功能：合并文件。
+
+
+格式：cat file1 file2 &gt; newFileName
+
+
+实例：将 m1,m2 合并为 m3
+
+
+建立一个名为m1的文件，内容为：echo cat is not a cat!
+
+
+建立一个名为m2的文件，内容为：date 的结果。
+
+
+
+
+1
+2
+3
+4
+5
+6
+7
+
+
+  $ date &gt; m2     //创建文件 
+
+  $ cat m2        //显示文件 
+
+  $ cat m1 m2 &gt;m3 //合并文件 
+
+  $ cat m3        //显示文件
+
+
+
+
+
+
+"/>
+<meta name="application-name" content="我的全新 Hugo 网站">
+<meta name="apple-mobile-web-app-title" content="我的全新 Hugo 网站"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/linux/%E5%9F%BA%E7%A1%80/" /><link rel="prev" href="http://example.org/posts/linux/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" /><link rel="next" href="http://example.org/posts/linux/vi-%E7%BC%96%E8%BE%91%E5%99%A8/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/linux\/%E5%9F%BA%E7%A1%80\/"
+        },"genre": "posts","wordcount":  2499 ,
+        "url": "http:\/\/example.org\/posts\/linux\/%E5%9F%BA%E7%A1%80\/","publisher": {
+            "@type": "Organization",
+            "name": "作者"},"author": {
+                "@type": "Person",
+                "name": "作者"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">伤心肠粉</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">伤心肠粉</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2499 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#目录结构">目录结构</a></li>
+    <li><a href="#文件类型">文件类型</a></li>
+    <li><a href="#命令">命令</a>
+      <ul>
+        <li><a href="#格式">格式</a></li>
+        <li><a href="#可执行文件的分类">可执行文件的分类</a></li>
+      </ul>
+    </li>
+    <li><a href="#登陆操作">登陆操作</a>
+      <ul>
+        <li><a href="#登陆提示信息的意义">登陆提示信息的意义</a></li>
+        <li><a href="#命令-1">命令</a>
+          <ul>
+            <li><a href="#pwd">pwd</a></li>
+            <li><a href="#man">man</a></li>
+            <li><a href="#cat">cat</a>
+              <ul>
+                <li><a href="#功能一">功能一</a></li>
+                <li><a href="#功能二">功能二</a></li>
+                <li><a href="#功能三">功能三</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#heading"></a></li>
+      </ul>
+    </li>
+    <li><a href="#通配符与特殊符号">通配符与特殊符号</a>
+      <ul>
+        <li><a href="#通配符">通配符</a></li>
+        <li><a href="#例">例</a></li>
+        <li><a href="#特殊符号">特殊符号</a>
+          <ul>
+            <li><a href="#分号-">分号 <code>;</code></a></li>
+            <li><a href="#符号-">符号 <code>&amp;</code></a></li>
+            <li><a href="#转移符号-">转移符号 <code>\</code></a></li>
+            <li><a href="#管道-">管道 <code>|</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#重定向">重定向</a>
+      <ul>
+        <li><a href="#概念">概念</a></li>
+        <li><a href="#输出重定向附加输出重定向">输出重定向、附加输出重定向</a></li>
+        <li><a href="#输入重定向">输入重定向</a></li>
+        <li><a href="#错误输出重定向">错误输出重定向</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="基础">基础</h1>
+<h2 id="目录结构">目录结构</h2>
+<p>Linux 文件系统是一个<strong>目录树的结构</strong>，文件系统结构从一个根目录开始，根目录下可以有任意多个文件和子目录，子目录中又可以有任意多个文件和子目录</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/d0c50-linux2bfile2bsystem2bhierarchy.jpg"
+        data-srcset="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/d0c50-linux2bfile2bsystem2bhierarchy.jpg, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/d0c50-linux2bfile2bsystem2bhierarchy.jpg 1.5x, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/d0c50-linux2bfile2bsystem2bhierarchy.jpg 2x"
+        data-sizes="auto"
+        alt="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/d0c50-linux2bfile2bsystem2bhierarchy.jpg"
+        title="img" /></p>
+<ul>
+<li><strong>bin：存放二进制可执行文件(ls,cat,mkdir 等)</strong></li>
+<li>boot：存放用于系统引导时使用的各种文件</li>
+<li>dev：用于存放设备文件</li>
+<li><strong>etc：存放系统配置文件</strong></li>
+<li>home：存放所有用户文件的根目录</li>
+<li>lib：存放跟文件系统中的程序运行所需要的共享库及内核模块</li>
+<li>mnt:系统管理员安装临时文件系统的安装点</li>
+<li><strong>opt:额外安装的可选应用程序包所放置的位置</strong></li>
+<li>proc:虚拟文件系统，存放当前内存的映射</li>
+<li><strong>root：超级用户目录</strong></li>
+<li>sbin：存放二进制可执行文件，只有 root 才能访问</li>
+<li>tmp：用于存放各种临时文件</li>
+<li><strong>usr：用于存放系统应用程序</strong>，比较重要的目录 /usr/local——本地管理员软件安装目录</li>
+<li>var：用于存放运行时需要改变数据的文件</li>
+</ul>
+<h2 id="文件类型">文件类型</h2>
+<ul>
+<li>
+<p><strong>普通文件</strong>  <code>-</code></p>
+</li>
+<li>
+<p><strong>目录</strong> <code>d</code></p>
+</li>
+<li>
+<p><strong>符号链接</strong>  <code>l</code></p>
+<ul>
+<li>
+<p>硬链接： 与普通文件没什么不同，inode 都指向同一个文件在硬盘中的区块</p>
+</li>
+<li>
+<p>软链接： 保存了其代表的文件的绝对路径，是另外一种文件，在硬盘上有独立的区块，访问时替换自身路径 (可理解为快捷方式)。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>字符设备文件  <code>c</code></p>
+</li>
+<li>
+<p>块设备文件  <code>b</code></p>
+</li>
+<li>
+<p>套接字  <code>s</code></p>
+</li>
+<li>
+<p>命名管道 <code>p</code></p>
+</li>
+</ul>
+<h2 id="命令">命令</h2>
+<h3 id="格式">格式</h3>
+<p><code>cmd [options] [arguments]</code></p>
+<p><strong>命令名称 [-选项] [参数]</strong></p>
+<ul>
+<li>命令名：描述命令功能的英文单词或缩写，必不可少；</li>
+<li>[-选项]：执行该命令的限定参数或功能参数；</li>
+<li>[参数]：执行该命令的所必需对象，如文件、目录等；</li>
+</ul>
+<p>选项和参数都作为 Shell 命令执行时的输入，它们之间用空格分隔开</p>
+<p>一般来说，后面跟的选项如果单字符选项前使用一个减号 <code>-</code>；单词选项前使用两个减号 <code>--</code></p>
+<p><code>[ ]</code> 表示语法上可有可无</p>
+<h3 id="可执行文件的分类">可执行文件的分类</h3>
+<p>内置命令：出于效率的考虑，将一些常用命令的解释程序构造在 Shell 内部。</p>
+<p>外置命令：存放在 /bin、/sbin 目录下的命令</p>
+<p>实用程序：存放在 /usr/bin、/usr/sbin、/usr/share、/usr/local/bin 等目录下的实用程序</p>
+<p>用户程序：用户程序经过编译生成可执行文件后，可作为 Shell 命令运行</p>
+<p>Shell 脚本：由 Shell 语言编写的批处理文件，可作为 Shell 命令运行</p>
+<h2 id="登陆操作">登陆操作</h2>
+<h3 id="登陆提示信息的意义">登陆提示信息的意义</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span>root@localhost~ <span class="o">]</span><span class="c1">#</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>root：当前用户的账号</p>
+</li>
+<li>
+<p>localhost：主机名</p>
+</li>
+<li>
+<p>~ ：用户当前所在的目录。 如果现在要创建一个文件的话，会被保存在这个目录下。</p>
+<ul>
+<li><code>~</code> 为用户的主目录，即专属于该用户的目录</li>
+<li>root 用户的主目录为：<code>/root </code></li>
+<li>Linux 系统每创建一个普通用户，就会在 <code>/home</code> 这个目录下创建一个对应的 目录，并且是以用户名命名的。
+<ul>
+<li>比如：普通用户 user 的主目录是：<code>/home/user</code> ；普通用户 test 的主目录为：<code>/home/test</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>#：root 用户的命令提示符</p>
+</li>
+<li>
+<p>$：普通用户的命令提示符</p>
+</li>
+</ul>
+<h3 id="命令-1">命令</h3>
+<h4 id="pwd">pwd</h4>
+<p>（print working dirctory）</p>
+<ul>
+<li>
+<p>功能：显示用户当前所处的工作目录（当前工作目录）</p>
+</li>
+<li>
+<p>格式：<code>pwd [选项]</code></p>
+</li>
+</ul>
+<h4 id="man">man</h4>
+<p>（manual）</p>
+<ul>
+<li>
+<p>功能：显示命令的使用说明手册。</p>
+</li>
+<li>
+<p>格式：<code>man 命令名 </code></p>
+</li>
+</ul>
+<p>通常 man 显示的命令帮助格式包含以下4部分：</p>
+<ul>
+<li>
+<p>NAME : 命令名称；</p>
+</li>
+<li>
+<p>SYNOPSIS : 语法大纲；</p>
+</li>
+<li>
+<p>DESCRIPTION : 描述说明；</p>
+</li>
+<li>
+<p>OPTIONS : 选项</p>
+</li>
+</ul>
+<p>man 命令查询控制手册时,给出了一些功能键设置：</p>
+<ul>
+<li>
+<p>空格键 ：显示手册页的下一屏</p>
+</li>
+<li>
+<p>回车键 ：一次滚动手册页的一行</p>
+</li>
+<li>
+<p>q 键 ：退出 man 命令</p>
+</li>
+</ul>
+<h4 id="cat">cat</h4>
+<p>（concatenate）</p>
+<h5 id="功能一">功能一</h5>
+<ul>
+<li>
+<p>功能：显示文件信息，可与输入输出重定向配合使用。</p>
+</li>
+<li>
+<p>格式：<code>cat [选项] fileName </code></p>
+</li>
+<li>
+<p>常用选项</p>
+<ul>
+<li>-n：由 1 开始对所有输出行进行编号显示。</li>
+</ul>
+</li>
+<li>
+<p>实例</p>
+<ul>
+<li>查看刚刚的 record 文件
+<ul>
+<li><code>$ cat record </code></li>
+</ul>
+</li>
+<li>对 <code>/etc/passwd</code> 文件进行编号显示
+<ul>
+<li><code>$ cat –n /etc/passwd</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="功能二">功能二</h5>
+<ul>
+<li>
+<p>功能：建立小型文件</p>
+</li>
+<li>
+<p>格式</p>
+<ul>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">  cat &gt; fileName
+  …            // 输入信息
+  Ctrl+d       // 存盘并退出 
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>实例</p>
+<ul>
+<li>
+<p>建立一个名为 m1 的文件，内容为：echo cat is not a cat!</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">  $ cat &gt; m1    //创建文件 
+  <span class="nb">echo</span> cat is not a cat! 
+  Ctrl+d
+  $ cat m1      //显示文件
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h5 id="功能三">功能三</h5>
+<ul>
+<li>
+<p>功能：合并文件。</p>
+</li>
+<li>
+<p>格式：<code>cat file1 file2 &gt; newFileName</code></p>
+</li>
+<li>
+<p>实例：将 m1,m2 合并为 m3</p>
+<ul>
+<li>
+<p>建立一个名为m1的文件，内容为：echo cat is not a cat!</p>
+</li>
+<li>
+<p>建立一个名为m2的文件，内容为：date 的结果。</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">  $ date &gt; m2     //创建文件 
+
+  $ cat m2        //显示文件 
+
+  $ cat m1 m2 &gt;m3 //合并文件 
+
+  $ cat m3        //显示文件
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+<h3 id="heading"></h3>
+<ul>
+<li>功能：分屏显示文件内容。首先显示一屏后若还有内容，按 Enter 键再显示下 一行，按 Space 键显示下一屏，按 Q 退出。</li>
+<li>格式：<code>more 文件路径</code></li>
+</ul>
+<h2 id="通配符与特殊符号">通配符与特殊符号</h2>
+<h3 id="通配符">通配符</h3>
+<p><code>*</code>：匹配任何字符和任何数目的字符</p>
+<p><code>?</code>：匹配单一数目的任何字符</p>
+<p><code>[]</code>：匹配 [] 之内的任意一个字符，[] 指定一个符号的取值范围</p>
+<p><code>[!]</code>：匹配除了 [!] 之外的任意一个字符，! 表示非的意思</p>
+<h3 id="例">例</h3>
+<ul>
+<li>列出 <code>/etc</code> 目录下的所有扩展名为 <code>conf</code> 的配置文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ ls /etc/*.conf
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>列出 <code>/etc</code> 目录下所有文件名由 3 个字母构成的配置文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ ls /etc/???.conf
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>列出 <code>/etc</code> 目录下所有以 a、b 或者 c 开头的配置文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ ls /etc/<span class="o">[</span>abc<span class="o">]</span>*.conf
+
+$ ls /etc/<span class="o">[</span>a-c<span class="o">]</span>*.conf
+
+$ ls /etc/<span class="o">[</span>!d-z<span class="o">]</span>*.conf
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="特殊符号">特殊符号</h3>
+<h4 id="分号-">分号 <code>;</code></h4>
+<p>用于隔开多条命令并使它们能够连续执行。 输出的结果是多个命令连续执行后的输出结果</p>
+<h4 id="符号-">符号 <code>&amp;</code></h4>
+<p>用于指定当前命令在后台执行</p>
+<p><strong>实例</strong></p>
+<p>拷贝一个大文件 file 时需要占用较长的时间，将拷贝工作放到后台执行</p>
+<p>执行时返回的显示结果是该命令的作业号和进程 PID 号</p>
+<p>执行完毕会在前台提示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ cp file /tmp/filetmp <span class="p">&amp;</span> 
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="转移符号-">转移符号 <code>\</code></h4>
+<p>通配符和特殊符号在 shell 中被解释为某种含义和功能，当要表示这些符号的本身时，需要使用转义符号 \</p>
+<p><strong>实例</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ <span class="nb">echo</span> <span class="se">\\</span>
+$ <span class="nb">echo</span> <span class="se">\&amp;</span>
+$ <span class="nb">echo</span> <span class="se">\*\&amp;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="管道-">管道 <code>|</code></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ 命令1 <span class="p">|</span> 命令2 <span class="p">|</span> 命令3 <span class="p">|</span> … <span class="p">|</span> 命令n
+</code></pre></td></tr></table>
+</div>
+</div><p>将多个简单的命令集合在一起，用以完成较复杂的功能</p>
+<p><strong>实例</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ cal <span class="p">|</span> wc -l           // 对当前月的日历输出结果进行行数的统计 
+$ ls -al /etc <span class="p">|</span> more    //由于/etc目录下的文件和子目录的数目很多，将 结果传送给more分页显示。
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="重定向">重定向</h2>
+<h3 id="概念">概念</h3>
+<p>Shell 中不使用系统的标准输入、标准输出或者标准错误输出端口，重新进行指定的情况称为输入输出重定向</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204426450.png"
+        data-srcset="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204426450.png, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204426450.png 1.5x, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204426450.png 2x"
+        data-sizes="auto"
+        alt="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204426450.png"
+        title="image-20210620204426450" /></p>
+<h3 id="输出重定向附加输出重定向">输出重定向、附加输出重定向</h3>
+<p><strong>目的</strong>：保存命令输出的结果</p>
+<p><strong>格式</strong></p>
+<ul>
+<li>
+<p>输出重定向：命令 &gt; 重定向文件（覆盖原文件的内容）</p>
+</li>
+<li>
+<p>附加输出重定向：命令 &raquo; 重定向文件（在指定文件的末尾追加命令结果）</p>
+</li>
+</ul>
+<p><strong>例</strong></p>
+<p><code>date &gt; record</code>        #将date的结果重定向输出到record文件中</p>
+<p><code>who &gt;&gt;record</code>        #将who的结果附加重定向输出到record中</p>
+<h3 id="输入重定向">输入重定向</h3>
+<p><strong>目的</strong>：把命令的标准输入重新定向到指定文件中</p>
+<p><strong>格式</strong>：命令 &lt; 重定向文件</p>
+<p><strong>例</strong></p>
+<p>用输入重定向的方式查看 record 的内容。</p>
+<p><code>cat &lt; record </code>      // 与 cat record 命令完全相同</p>
+<h3 id="错误输出重定向">错误输出重定向</h3>
+<p><strong>目的</strong>：保存错误内容</p>
+<p><strong>格式</strong>：命令 2&gt; 重定向文件</p>
+<p><strong>例</strong></p>
+<p>敲一个错误的命令，ls lsm，通过错误输出重定向，将错误信息保存到文件 err 中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ls lsm        //输入错误的命令 
+
+ls lsm 2&gt; err  //错误输出重定向 
+
+cat err       //查看err内容
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 0001-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/linux/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw"></i></a>
+            <a href="/posts/linux/vi-%E7%BC%96%E8%BE%91%E5%99%A8/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":40},"comment":{},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
