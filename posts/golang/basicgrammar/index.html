@@ -7,7 +7,7 @@
 <title>Go 基础语法 - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content="Go 基础语法">
 <meta property="og:description" content="Golang 安装 下载地址：https://go.dev/dl/ 使用 Linux 1 2 3 4 5 6 $ wget https://studygolang.com/dl/golang/go1.13.6.linux-amd64.tar.gz $ tar -zxvf go1.13.6.linux-amd64.tar.gz $ sudo mv go /usr/local/ $ go version go version go1.13.6 linux/amd64 从 Go 1.11 版本开始，Go 提供了 Go Modules 的">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/"><meta property="article:section" content="posts">
+<meta property="og:url" content="https://trouvaille0198.github.io/posts/golang/basicgrammar/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-25T00:00:00+00:00">
 <meta property="article:modified_time" content="2022-02-25T00:00:00+00:00">
 <meta name=twitter:card content="summary">
@@ -16,15 +16,15 @@
 <meta name=application-name content="我的全新 Hugo 网站">
 <meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/markdown/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 基础语法","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/"},"genre":"posts","wordcount":19418,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/","datePublished":"2022-02-25T00:00:00+00:00","dateModified":"2022-02-25T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/posts/golang/basicgrammar/><link rel=prev href=https://trouvaille0198.github.io/posts/markdown/><link rel=next href=https://trouvaille0198.github.io/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 基础语法","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/posts\/golang\/basicgrammar\/"},"genre":"posts","wordcount":19418,"url":"https:\/\/trouvaille0198.github.io\/posts\/golang\/basicgrammar\/","datePublished":"2022-02-25T00:00:00+00:00","dateModified":"2022-02-25T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
-<a href=/Notes/ title="我的全新 Hugo 网站">伤心肠粉</a>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
 </div>
 <div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
 <i class="fas fa-search fa-fw"></i>
@@ -45,7 +45,7 @@
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
-<a href=/Notes/ title="我的全新 Hugo 网站">伤心肠粉</a>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
 </div>
 <div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
@@ -67,7 +67,7 @@
 <a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
-</div><a class=menu-item href=/Notes/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a></div>
 </div>
@@ -83,7 +83,7 @@
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
 </div><article class="page single"><h1 class="single-title animated flipInX">Go 基础语法</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div>
 <div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-25>2022-02-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 19418 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 39 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
@@ -1223,7 +1223,7 @@ mkdir mymath
 </li>
 <li>
 <p>指向底层数组的指针：指向数组中 <code>slice</code> 指定的开始位置</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.2.slice2.png title=img></p>
 </li>
 </ul>
 </li>
@@ -2430,7 +2430,7 @@ mkdir mymath
 <p>有时一个包会被多个包同时导入，那么它只会被导入一次（例如很多包可能都会用到 <code>fmt</code> 包，但它只会被导入一次，因为没有必要导入多次）。</p>
 <p>当一个包被导入时，如果该包还导入了其它的包，那么会先将其它包导入进来，然后再对这些包中的包级常量和变量进行初始化，接着执行 <code>init</code> 函数（如果有的话），依次类推。</p>
 <p>等所有被导入的包都加载完毕了，就会开始对 <code>main</code> 包中的包级常量和变量进行初始化，然后执行 <code>main</code> 包中的 <code>init</code> 函数（如果存在的话），最后执行 <code>main</code> 函数。下图详细地解释了整个执行过程：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2.3.init.png title=img></p>
 <h3 id=import>import</h3>
 <h4 id=点操作>点操作</h4>
 <div class=highlight><div class=chroma>
@@ -4336,11 +4336,11 @@ require rsc.io/quote v3.1.0+incompatible
 <div class=post-info-more>
 <section class=post-tags></section>
 <section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/markdown/ class=prev rel=prev title="Hi~ 我是一个帮助文档"><i class="fas fa-angle-left fa-fw"></i>Hi~ 我是一个帮助文档</a>
-<a href=/Notes/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/ class=next rel=next title="Go 专家编程">Go 专家编程<i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/posts/markdown/ class=prev rel=prev title="Hi~ 我是一个帮助文档"><i class="fas fa-angle-left fa-fw"></i>Hi~ 我是一个帮助文档</a>
+<a href=/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/ class=next rel=next title="Go 专家编程">Go 专家编程<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>
@@ -4352,5 +4352,5 @@ require rsc.io/quote v3.1.0+incompatible
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
 </html>

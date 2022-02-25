@@ -7,7 +7,7 @@
 <title>Go 专家编程 - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content="Go 专家编程">
 <meta property="og:description" content="进阶 编译原理 Token -> 语法树 AST -> 中间码 -> 机器码 词法与语法分析 词法分析的作用就是解析源代码文件，它将文件中的字符串序列转换成 Token 序列，方便后面的处理和">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/"><meta property="article:section" content="posts">
+<meta property="og:url" content="https://trouvaille0198.github.io/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-25T00:00:00+00:00">
 <meta property="article:modified_time" content="2022-02-25T00:00:00+00:00">
 <meta name=twitter:card content="summary">
@@ -16,15 +16,15 @@
 <meta name=application-name content="我的全新 Hugo 网站">
 <meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/go-test/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 专家编程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B\/"},"genre":"posts","wordcount":45851,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B\/","datePublished":"2022-02-25T00:00:00+00:00","dateModified":"2022-02-25T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/posts/golang/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B/><link rel=prev href=https://trouvaille0198.github.io/posts/golang/basicgrammar/><link rel=next href=https://trouvaille0198.github.io/posts/golang/go-test/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 专家编程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/posts\/golang\/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B\/"},"genre":"posts","wordcount":45851,"url":"https:\/\/trouvaille0198.github.io\/posts\/golang\/go-%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B\/","datePublished":"2022-02-25T00:00:00+00:00","dateModified":"2022-02-25T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
-<a href=/Notes/ title="我的全新 Hugo 网站">伤心肠粉</a>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
 </div>
 <div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
 <i class="fas fa-search fa-fw"></i>
@@ -45,7 +45,7 @@
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
-<a href=/Notes/ title="我的全新 Hugo 网站">伤心肠粉</a>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
 </div>
 <div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
@@ -67,7 +67,7 @@
 <a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
-</div><a class=menu-item href=/Notes/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a></div>
 </div>
@@ -83,7 +83,7 @@
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
 </div><article class="page single"><h1 class="single-title animated flipInX">Go 专家编程</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div>
 <div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-25>2022-02-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 45851 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 92 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
@@ -943,19 +943,19 @@
 <h4 id=使用-make-创建-slice>使用 make 创建 Slice</h4>
 <p>使用 make 来创建 Slice 时，可以同时指定长度和容量，创建时底层会分配一个数组，数组的长度即容量。</p>
 <p>例如，语句 <code>slice := make([]int, 5, 10)</code> 所创建的 Slice，结构如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png title=img></p>
 <p>该 Slice 长度为 5，即可以使用下标 slice[0] ~ slice[4] 来操作里面的元素，capacity 为 10，表示后续向 slice 添加新的元素时可以不必重新分配内存，直接使用预留内存即可。</p>
 <h4 id=使用数组创建slice>使用数组创建Slice</h4>
 <p>使用数组来创建 Slice 时，Slice 将与原数组<strong>共用一部分内存</strong>。</p>
 <p>例如，语句 <code>slice := array[5:7]</code> 所创建的 Slice，结构如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png title=img></p>
 <p>切片从数组 array[5] 开始，到数组 array[7] 结束（不含 array[7]），即切片长度为 2，数组后面的内容都作为切片的预留内存，即 capacity 为 5。</p>
 <p>数组和切片操作可能作用于同一块内存，这也是使用过程中需要注意的地方。</p>
 <h4 id=slice-扩容>Slice 扩容</h4>
 <p>使用 append 向 Slice 追加元素时，如果 Slice 空间不足，将会触发 Slice 扩容</p>
 <p>扩容实际上重新一配一块更大的内存，将原 Slice 数据拷贝进新 Slice，然后返回新 Slice，扩容后再将数据追加进去。</p>
 <p>例如，当向一个 capacity 为 5，且 length 也为 5 的 Slice 再次追加 1 个元素时，就会发生扩容，如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png title=img></p>
 <p>扩容操作只关心容量，会把原 Slice 数据拷贝到新 Slice，<strong>追加数据由 <code>append()</code> 在扩容结束后完成</strong>。</p>
 <p>上图可见，扩容后新的 Slice 长度仍然是 5，但容量由 5 提升到了 10，原 Slice 的数据也都拷贝到了新 Slice 指向的数组中。</p>
 <p>扩容容量的选择遵循以下规则：</p>
@@ -1045,7 +1045,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>下图展示一个拥有 4 个 bucket 的 map：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-01-struct.png title=img></p>
 <p>本例中, <code>hmap.B=2</code>， 而 <code>hmap.buckets</code> 长度是 2^B^ 为 4。元素经过哈希运算后会落到某个 bucket 中进行存储。查找过程类似。</p>
 <p>bucket 很多时候被翻译为桶，所谓的<strong>哈希桶</strong>实际上就是 bucket。</p>
 <h4 id=bucket-数据结构>bucket 数据结构</h4>
@@ -1074,11 +1074,11 @@
 </ul>
 <p>注意：上述中 data 和 overflow 并不是在结构体中显示定义的，而是直接通过指针运算进行访问的。</p>
 <p>下图展示 bucket 存放 8 个 key-value 对：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png title=img></p>
 <h4 id=哈希冲突>哈希冲突</h4>
 <p>当有两个或以上数量的键被哈希到了同一个 bucket 时，我们称这些键发生了冲突。Go 使用链地址法来解决键冲突。 由于每个 bucket 可以存放 8 个键值对，所以同一个 bucket 存放超过 8 个键值对时就会再创建一个键值对，用类似链表的方式将 bucket 连接起来。</p>
 <p>下图展示产生冲突后的map：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png title=img></p>
 <p>bucket 数据结构指示下一个 bucket 的指针称为 overflow bucket，意为当前 bucket 盛不下而溢出的部分。事实上哈希冲突并不是好事情，它降低了存取效率，好的哈希算法可以保证哈希值的随机性，但冲突过多也是要控制的，后面会再详细介绍。</p>
 <h4 id=负载因子>负载因子</h4>
 <p>负载因子用于衡量一个哈希表冲突情况，公式为：</p>
@@ -1111,18 +1111,18 @@
 <h5 id=增量扩容>增量扩容</h5>
 <p>当负载因子过大时，就新建一个 bucket，新的 bucket 长度是原来的 2 倍，然后旧 bucket 数据搬迁到新的 bucket。 考虑到如果 map 存储了数以亿计的 key-value，一次性搬迁将会造成比较大的延时，Go 采用逐步搬迁策略，即每次访问 map 时都会触发一次搬迁，每次搬迁 2 个键值对。</p>
 <p>下图展示了包含一个 bucket 满载的 map (为了描述方便，图中 bucket 省略了 value 区域):</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-04-struct_sketch.png title=img></p>
 <p>当前 map 存储了 7 个键值对，只有 1 个 bucket。此时负载因子为 7。再次插入数据时将会触发扩容操作，扩容之后再将新插入键写入新的 bucket。</p>
 <p>当第 8 个键值对插入时，将会触发扩容，扩容后示意图如下：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png title=img></p>
 <p>hmap 数据结构中 oldbuckets 成员指身原 bucket，而 buckets 指向了新申请的 bucket。新的键值对被插入新的bucket 中。 后续对 map 的访问操作会触发迁移，将 oldbuckets 中的键值对逐步的搬迁过来。当 oldbuckets 中的键值对全部搬迁完毕后，删除 oldbuckets。</p>
 <p>搬迁完成后的示意图如下：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-06-struct_sketch.png title=img></p>
 <p>数据搬迁过程中原 bucket 中的键值对将存在于新 bucket 的前面，新插入的键值对将存在于新 bucket 的后面。 实际搬迁过程中比较复杂，将在后续源码分析中详细介绍。</p>
 <h5 id=等量扩容>等量扩容</h5>
 <p>所谓等量扩容，实际上并不是扩大容量，buckets数量不变，重新做一遍类似增量扩容的搬迁动作，把松散的键值对重新排列一次，以使 bucket 的使用率更高，进而保证更快的存取。</p>
 <p>在极端场景下，比如不断的增删，而键值对正好集中在一小部分的 bucket，这样会造成 overflow 的 bucket 数量增多，但负载因子又不高，从而无法执行增量搬迁的情况，如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png title=img></p>
 <p>上图可见，overflow 的 buckt 中大部分是空的，访问效率会很差。此时进行一次等量扩容，即 buckets 数量不变，经过重新组织后 overflow 的 bucket 数量会减少，即节省了空间又会提高访问效率。</p>
 <h4 id=查找过程>查找过程</h4>
 <p>查找过程如下：</p>
@@ -1460,7 +1460,7 @@
 <li>拷贝数据 (切片中数据拷贝到新申请的内存空间)</li>
 </ol>
 <p>转换示意图：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png title=img></p>
 <h5 id=string-转-byte>string 转 []byte</h5>
 <p>string 也可以方便的转成 byte 切片，如下所示：</p>
 <div class=highlight><div class=chroma>
@@ -1481,7 +1481,7 @@
 <li>将 string 拷贝到切片</li>
 </ul>
 <p>转换示意图：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png title=img></p>
 <h5 id=字符串拼接>字符串拼接</h5>
 <p>字符串可以很方便的拼接，像下面这样：</p>
 <div class=highlight><div class=chroma>
@@ -2385,7 +2385,7 @@
 </ul>
 <p>我们看到 <code>Mutex.state</code> 是 32 位的整型变量，内部实现时把该变量分成四份，用于记录 Mutex 的四种状态。</p>
 <p>下图展示 Mutex 的内存布局：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png title=img></p>
 <ul>
 <li>Locked: 表示该 Mutex 是否已被锁定
 <ul>
@@ -2424,20 +2424,20 @@
 <h4 id=加解锁过程>加解锁过程</h4>
 <h5 id=简单加锁>简单加锁</h5>
 <p>假定当前只有一个协程在加锁，没有其他协程干扰，那么过程如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png title=img></p>
 <p>加锁过程会去判断 Locked 标志位是否为 0，如果是 0 则把 Locked 位置 1，代表加锁成功。</p>
 <p>从上图可见，加锁成功后，只是 Locked 位置 1，其他状态位没发生变化。</p>
 <h5 id=加锁被阻塞>加锁被阻塞</h5>
 <p>假定加锁时，锁已被其他协程占用了，此时加锁过程如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png title=img></p>
 <p>从上图可看到，当协程 B 对一个已被占用的锁再次加锁时，Waiter 计数器增加了 1，此时协程 B 将被阻塞，直到Locked 值变为 0 后才会被唤醒。</p>
 <h5 id=简单解锁>简单解锁</h5>
 <p>假定解锁时，没有其他协程阻塞，此时解锁过程如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png title=img></p>
 <p>由于没有其他协程阻塞等待加锁，所以此时解锁时只需要把 Locked 位置为 0 即可，不需要释放信号量。</p>
 <h5 id=解锁并唤醒协程>解锁并唤醒协程</h5>
 <p>假定解锁时，有 1 个或多个协程阻塞，此时解锁过程如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png title=img></p>
 <p>协程 A 解锁过程分为两个步骤</p>
 <ul>
 <li>Locked 位置 0</li>
@@ -2539,7 +2539,7 @@
 <li>阻塞等待所有读操作结束（如果有的话）</li>
 </ul>
 <p>所以 <code>func (rw *RWMutex) Lock()</code> 接口实现流程如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-01-lock.png title=img></p>
 <h4 id=unlock-实现逻辑><code>Unlock()</code> 实现逻辑</h4>
 <p>解除写锁定要做两件事：</p>
 <ul>
@@ -2547,7 +2547,7 @@
 <li>解除互斥锁</li>
 </ul>
 <p>所以 <code>func (rw *RWMutex) Unlock()</code> 接口实现流程如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-02-unlock.png title=img></p>
 <h4 id=rlock-实现逻辑><code>RLock()</code> 实现逻辑</h4>
 <p>读锁定需要做两件事：</p>
 <ul>
@@ -2555,7 +2555,7 @@
 <li>阻塞等待写操作结束（如果有的话）</li>
 </ul>
 <p>所以 <code>func (rw *RWMutex) RLock()</code> 接口实现流程如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-03-rlock.png title=img></p>
 <h4 id=runlock-实现逻辑><code>RUnlock()</code> 实现逻辑</h4>
 <p>解除读锁定需要做两件事：</p>
 <ul>
@@ -2563,7 +2563,7 @@
 <li>唤醒等待写操作的协程（如果有的话）</li>
 </ul>
 <p>所以<code>func (rw *RWMutex) RUnlock()</code>接口实现流程如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-04-runlock.png title=img></p>
 <p>注意：即便有协程阻塞等待写操作，并不是所有的解除读锁定操作都会唤醒该协程，而是最后一个解除读锁定的协程才会释放信号量将该协程唤醒，因为只有当所有读操作的协程释放锁后才可以唤醒协程。</p>
 <h4 id=场景分析>场景分析</h4>
 <p>上面我们简单看了下 4 个接口实现原理，接下来我们看一下是如何解决前面提到的几个问题的。</p>
@@ -2583,7 +2583,7 @@
 <p>写操作到来时，会把 <code>RWMutex.readerCount</code> 值拷贝到 <code>RWMutex.readerWait</code> 中，用于标记排在写操作前面的读者个数。</p>
 <p>前面的读操作结束后，除了会递减 RWMutex.readerCount，还会递减 RWMutex.readerWait 值，当 RWMutex.readerWait 值变为 0 时唤醒写操作。</p>
 <p>所以以，写操作就相当于把一段连续的读操作划分成两部分，前面的读操作结束后唤醒写操作，写操作结束后唤醒后面的读操作。如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/rwmutex-05-lock_not_starving.png title=img></p>
 <h4 id=关于源码>关于源码</h4>
 <p>源码地址注解：https://github.com/RainbowMango/GoComments</p>
 <h2 id=goroutine>Goroutine</h2>
@@ -2593,12 +2593,12 @@
 <h3 id=线程池的缺陷>线程池的缺陷</h3>
 <p>我们知道，在高并发应用中频繁创建线程会造成不必要的开销，所以有了线程池。线程池中预先保存一定数量的线程，而新任务将不再以创建线程的方式去执行，而是将任务发布到任务队列，线程池中的线程不断的从任务队列中取出任务并执行，可以有效的减少线程创建和销毁所带来的开销。</p>
 <p>下图展示一个典型的线程池：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-01-threadpool.png title=img></p>
 <p>为了方便下面的叙述，我们把任务队列中的每一个任务称作 G，而 G 往往代表一个函数。 线程池中的 worker 线程不断的从任务队列中取出任务并执行。而 worker 线程的调度则交给操作系统进行调度。</p>
 <p>如果 worker 线程执行的 G 任务中发生系统调用，则操作系统会将该线程置为阻塞状态，也意味着该线程在怠工，也意味着消费任务队列的 worker 线程变少了，也就是说线程池消费任务队列的能力变弱了。</p>
 <p>如果任务队列中的大部分任务都会进行系统调用，则会让这种状态恶化，大部分 worker 线程进入阻塞状态，从而任务队列中的任务产生堆积。</p>
 <p>解决这个问题的一个思路就是重新审视线程池中线程的数量，增加线程池中线程数量可以一定程度上提高消费能力，但随着线程数量增多，由于过多线程争抢 CPU，消费能力会有上限，甚至出现消费能力下降。 如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-02-threadpoolcapacity.png title=img></p>
 <h3 id=goroutine-调度器>Goroutine 调度器</h3>
 <p>线程数过多，意味着操作系统会不断的切换线程，频繁的上下文切换就成了性能瓶颈。</p>
 <p>Go 提供一种机制，可以在线程中自己实现调度，上下文切换更轻量，从而达到了线程数少，而并发数并不少的效果。而线程中调度的就是 Goroutine.</p>
@@ -2630,7 +2630,7 @@
 <p>M 必须拥有 P 才可以执行 G 中的代码，P 含有一个包含多个 G 的队列，P 可以调度 G 交由 M 执行。</p>
 <p>换句话来说：一个 M 会对应一个内核线程，一个 M 也会连接一个上下文 P，一个上下文 P 相当于一个“处理器”，一个上下文连接一个或者多个 Goroutine。</p>
 <p>其关系如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-03-goroutine_m_p_g.png title=img></p>
 <p>称为 <strong>MPG 模型</strong></p>
 <p>图中 M 是交给操作系统调度的线程，M 持有一个 P，P 将 G 调度进 M 中执行。P 同时还维护着一个包含 G 的队列（图中灰色部分），可以按照一定的策略将 G 调度到 M 中执行。</p>
 <p>P 的个数在程序启动时决定，默认情况下等同于 CPU 的核数，由于 M 必须持有一个 P 才可以运行 Go 代码，所以同时运行的 M 个数，也即线程数一般等同于 CPU 的个数，以达到尽可能的使用 CPU 而又不至于产生过多的线程切换开销。</p>
@@ -2643,7 +2643,7 @@
 <p>上面说到 P 的个数默认等于 CPU 核数，每个 M 必须持有一个 P 才可以执行 G，一般情况下 M 的个数会略大于 P 的个数，这多出来的 M 将会在 G 产生系统调用时发挥作用。</p>
 <p>类似线程池，Go 也提供一个 M 的池子，需要时从池子中获取，用完放回池子，不够用时就再创建一个。</p>
 <p>当 M 运行的某个 G 产生系统调用时，如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png title=img></p>
 <p>如图所示，M0 中的 G0 执行了 syscall，然后就创建了一个 M1(也有可能本身就存在，没创建)，<strong>当 G0 即将进入系统调用时，M0 将释放 P，进而某个空闲的 M1 获取 P，继续执行 P 队列中剩下的 G</strong>。而 M0 由于陷入系统调用而进被阻塞，M1<strong>接管</strong> M0 的工作，只要 P 不空闲，就可以保证充分利用 CPU。</p>
 <p>M1 的来源有可能是 M 的缓存池，也可能是新建的。当 G0 系统调用结束后，跟据 M0 是否能获取到 P，将会将 G0 做不同的处理：</p>
 <ol>
@@ -2652,7 +2652,7 @@
 </ol>
 <h4 id=工作量窃取>工作量窃取</h4>
 <p>多个 P 中维护的 G 队列有可能是不均衡的，比如下图：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png title=img></p>
 <p>竖线左侧中右边的 P 已经将 G 全部执行完，然后去查询全局队列，全局队列中也没有 G，而另一个 M 中除了正在运行的 G 外，队列中还有 3 个 G 待运行。此时，空闲的 P 会将其他 P 中的 G 偷取一部分过来，一般每次偷取一半。偷取完如右图所示。</p>
 <h4 id=gomaxprocs-设置对性能的影响>GOMAXPROCS 设置对性能的影响</h4>
 <p>一般来讲，程序运行时就将 GOMAXPROCS 大小设置为 CPU 核数，可让 Go 程序充分利用 CPU。 在某些 IO 密集型的应用里，这个值可能并不意味着性能最好。</p>
@@ -2675,7 +2675,7 @@
 <li>多个线程同时申请小内存时，<strong>从各自的缓存分配</strong>，访问的是不同的地址空间，从而无需加锁，把内存并发访问的粒度进一步降低了，这是快速分配内存的第三个层次。</li>
 </ol>
 <p>下面就简单介绍下 TCMalloc，细致程度够我们理解 Go 的内存管理即可。</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-17a205c8fdfe0d21ab06f469df72b2fe_b.jpg title=img></p>
 <p>结合上图，介绍 TCMalloc 的几个重要概念：</p>
 <ul>
 <li><strong>Page</strong></li>
@@ -2717,7 +2717,7 @@
 </ul>
 <p>如下图所示，分别是 1 页 Page 的 Span 链表，2 页 Page 的 Span 链表等，最后是 <strong>large span set</strong>，这个是用来保存中大对象的。</p>
 <p>毫无疑问，PageHeap 也是要加锁的。</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-8987e2cd5a39e7218b7a5c7689a1da7d_b.jpg title=img></p>
 <p>前文提到了小、中、大对象，Go 内存管理中也有类似的概念，我们看一眼 TCMalloc 的定义：</p>
 <ul>
 <li>
@@ -2767,7 +2767,7 @@
 <p>mheap 与 TCMalloc 中的 PageHeap 类似，它是<strong>堆内存的抽象</strong>，把从 OS 申请出的内存页组织成 Span，并保存起来。</p>
 <p>当 mcentral 的 Span 不够用时会向 mheap 申请内存，而 mheap 的 Span 不够用时会向 OS 申请内存。mheap 向 OS 的内存申请是按页来的，然后把申请来的内存页生成 Span 组织起来，同样也是需要加锁访问的。</p>
 <p>但是 mheap 与 PageHeap也有不同点：mheap 把 Span 组织成了<strong>树结构</strong>，而不是链表，并且还是 2 棵树，然后把 Span 分配到 heapArena 进行管理，它包含地址映射和 span 是否包含指针等位图，这样做的主要原因是为了更高效的利用内存：分配、回收和再利用。</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg title=img></p>
 <ol>
 <li><strong>object size</strong>：代码里简称 <code>size</code>，指申请内存的对象大小。</li>
 <li><strong>size class</strong>：代码里简称 <code>class</code>，它是 size 的级别，相当于把 size 归类到一定大小的区间段，比如 size[1,8] 属于 size class 1，size(8,16] 属于 size class 2。</li>
@@ -2777,7 +2777,7 @@
 <h4 id=内存分配>内存分配</h4>
 <p>Go 中的内存分类并不像 TCMalloc 那样分成小、中、大对象，但是它的小对象里又细分了一个 Tiny 对象，Tiny 对象指大小在 1Byte 到 16Byte 之间并且不包含指针的对象。</p>
 <p>小对象和大对象只用大小划定，无其他区分。</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg data-srcset="https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg, https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg 1.5x, https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg 2x" data-sizes=auto alt=https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg data-srcset="https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg, https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg 1.5x, https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg 2x" data-sizes=auto alt=https://pic4.zhimg.com/v2-14196cbb8fc199f5257fd94617210557_b.jpg title=img></p>
 <p>小对象是在 mcache 中分配的，而大对象是直接从 mheap 分配的，从小对象的内存分配看起。</p>
 <h5 id=概览>概览</h5>
 <p>针对待分配对象的大小不同有不同的分配逻辑：</p>
@@ -2797,7 +2797,7 @@
 <li>从该 span 中获取到空闲对象地址并返回</li>
 </ol>
 <h5 id=小对象的内存分配>小对象的内存分配</h5>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg data-srcset="https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg, https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg 1.5x, https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg 2x" data-sizes=auto alt=https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg data-srcset="https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg, https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg 1.5x, https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg 2x" data-sizes=auto alt=https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg title=img></p>
 <p>大小转换这一小节，我们介绍了转换表，size class 从 1 到 66 共 66 个，代码中 _NumSizeClasses=67 代表了实际使用的 size class 数量，即 67 个，从 0 到 67，size class 0 实际并未使用到。</p>
 <p>上文提到 1 个 size class 对应 2 个 span class：</p>
 <div class=highlight><div class=chroma>
@@ -2867,7 +2867,7 @@
 <li><strong>从 span 分配对象空间</strong></li>
 </ul>
 <p>Span 可以按对象大小切成很多份，这些都可以从映射表上计算出来，以 size class 3 对应的 span 为例，span 大小是 8KB，每个对象实际所占空间为 32Byte，这个 span 就被分成了 256 块，可以根据 span 的起始地址计算出每个对象块的内存地址。</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg data-srcset="https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg, https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg 1.5x, https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg 2x" data-sizes=auto alt=https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg data-srcset="https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg, https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg 1.5x, https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg 2x" data-sizes=auto alt=https://pic1.zhimg.com/v2-550affb9cbc1aaf2107bea68c865a7a8_b.jpg title=img></p>
 <p>随着内存的分配，span 中的对象内存块，有些被占用，有些未被占用，比如上图，整体代表 1 个 span，蓝色块代表已被占用内存，绿色块代表未被占用内存。当分配内存时，只要快速找到第一个可用的绿色块，并计算出内存地址即可，如果需要还可以对内存块数据清零。</p>
 <p>当 span 内的所有内存块都被占用时，没有剩余空间继续分配对象，mcache 会向 mcentral申请 1 个 span，mcache 拿到 span 后继续分配对象。</p>
 <ul>
@@ -2879,7 +2879,7 @@
 <li><strong>empty</strong>：这个链表里的 span，所有的 span 都不确定里面是否有空闲的对象空间。当一个 span 交给 mcache 的时候，就会加入到 empty 链表。</li>
 </ol>
 <p>这两个东西名称一直有点绕，建议直接把 empty 理解为没有对象空间就好了。</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg data-srcset="https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg, https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg 1.5x, https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg 2x" data-sizes=auto alt=https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg data-srcset="https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg, https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg 1.5x, https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg 2x" data-sizes=auto alt=https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg title=img></p>
 <p>mcache 向 mcentral 申请 span 时，mcentral 会先从 nonempty 搜索满足条件的 span，如果没有找到再从emtpy 搜索满足条件的 span，然后把找到的 span 交给 mcache。</p>
 <ul>
 <li><strong>mheap 的 span 管理</strong></li>
@@ -2890,7 +2890,7 @@
 <li>scav：scav 中保存的是空闲并且已经垃圾回收的 span。</li>
 </ol>
 <p>如果是垃圾回收导致的 span 释放，span 会被加入到 scav，否则加入到 free，比如刚从 OS 申请的的内存也组成的 Span。</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg data-srcset="https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg, https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg 1.5x, https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg 2x" data-sizes=auto alt=https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg data-srcset="https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg, https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg 1.5x, https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg 2x" data-sizes=auto alt=https://pic2.zhimg.com/v2-8ea07667cf64b61f2ffafb301b16bee1_b.jpg title=img></p>
 <p>mheap 中还有 arenas，由一组 heapArena 组成，每一个 heapArena 都包含了连续的 pagesPerArena 个 span，这个主要是为 mheap 管理 span 和垃圾回收服务。mheap 本身是一个全局变量，它里面的数据，也都是从 OS 直接申请来的内存，并不在 mheap 所管理的那部分内存以内。</p>
 <ul>
 <li><strong>mcentral 向 mheap 申请 span</strong></li>
@@ -2933,7 +2933,7 @@
 <h4 id=相关数据结构>相关数据结构</h4>
 <p>为了方便自主管理内存，做法便是先向系统申请一块内存，然后将内存切割成小块，通过一定的内存分配算法管理内存。</p>
 <p>以 64 位系统为例，Golang 程序启动时会向系统申请的内存如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/memory-04-mheap.png title=img></p>
 <p>预申请的内存划分为 spans、bitmap、arena 三部分。其中 arena 即为所谓的堆区，应用中需要的内存从这里分配。其中 spans 和 bitmap 是为了管理 arena 区而存在的。</p>
 <ul>
 <li>arena 的大小为 512G，为了方便管理把 arena 区域划分成一个个的 page，每个 page 为 8KB，一共有 512GB/8KB 个页；</li>
@@ -3303,13 +3303,13 @@
 <h5 id=垃圾回收原理-1>垃圾回收原理</h5>
 <p>简单的说，垃圾回收的核心就是以供后续内存分配时使用。</p>
 <p>下图展示了一段内存，内存中即有已分配掉的内存，也有未分配的内存，垃圾回收的目标就是把那些已经分配的但没有对象引用的内存找出来并回收掉：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-01-overview.png title=img></p>
 <p>上图中，内存块 1、2、4 号位上的内存块已被分配（数字 1 代表已被分配，0 未分配）。</p>
 <p>变量 a, b 为一指针，指向内存的 1、2 号位。内存块的 4 号位曾经被使用过，但现在没有任何对象引用了，就需要被回收掉。</p>
 <p>垃圾回收开始时从 root 对象开始扫描，把 root 对象引用的内存标记为"被引用"，考虑到内存块中存放的可能是指针，所以还需要递归的进行标记，全部标记完成后，只保留被标记的内存，未被标记的全部标识为未分配即完成了回收。</p>
 <h5 id=内存标记-mark>内存标记 (Mark)</h5>
 <p>前面介绍内存分配时，介绍过 span 数据结构，span 中维护了一个个内存块，并由一个位图 allocBits 表示每个内存块的分配情况。在 span 数据结构中还有另一个位图 gcmarkBits 用于标记内存块被引用情况。</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-02-span_mark.png title=img></p>
 <p>如上图所示，allocBits 记录了每块内存分配情况，而 gcmarkBits 记录了每块内存标记情况。标记阶段对每块内存进行标记，有对象引用的的内存标记为 1 (如图中灰色所示)，没有引用到的保持默认为 0。</p>
 <p>allocBits 和 gcmarkBits 数据结构是完全一样的，标记结束就是内存回收，回收时将 allocBits 指向 gcmarkBits，则代表标记过的才是存活的，gcmarkBits 则会在下次标记时重新分配内存，非常的巧妙。</p>
 <h5 id=三色标记法>三色标记法</h5>
@@ -3321,14 +3321,14 @@
 <li>白色：对象未被标记，gcmarkBits 对应的位为 0（该对象将会在本次 GC 中被清理）</li>
 </ul>
 <p>例如，当前内存中有 A~F 一共 6 个对象，根对象 a，b 本身为栈上分配的局部变量，根对象a、b分别引用了对象A、B, 而 B 对象又引用了对象 D，则 GC 开始前各对象的状态如下图所示:</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png title=img></p>
 <p>初始状态下所有对象都是白色的。</p>
 <p>接着开始扫描根对象 a、b:</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-04-root_scan_end.png title=img></p>
 <p>由于根对象引用了对象 A、B，那么 A、B 变为灰色对象，接下来就开始分析灰色对象，分析 A 时，A 没有引用其他对象很快就转入黑色，B 引用了 D，则 B 转入黑色的同时还需要将 D 转为灰色，进行接下来的分析。如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png title=img></p>
 <p>上图中灰色对象只有 D，由于 D 没有引用其他对象，所以 D 转入黑色。标记过程结束：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png data-srcset="http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png 1.5x, http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png 2x" data-sizes=auto alt=http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png title=img></p>
 <p>最终，黑色的对象会被保留下来，白色对象会被回收掉。</p>
 <h5 id=stop-the-world>Stop The World</h5>
 <p>印度电影《苏丹》中有句描述摔跤的一句台词是：“所谓摔跤，就是把对手控制住，然后摔倒他。”</p>
@@ -3892,7 +3892,7 @@
 <li>semaphore：信号量</li>
 </ul>
 <p>考虑到字节是否对齐，三者出现的位置不同，为简单起见，依照字节已对齐情况下，三者在内存中的位置如下所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wg-01-layout.png title=img></p>
 <p>WaitGroup 对外提供三个接口：</p>
 <ul>
 <li><code>Add(delta int)</code>：将 delta 值加到 counter 中</li>
@@ -4029,7 +4029,7 @@
 <p>每个 Goroutine 在执行之前，都要先知道程序当前的执行状态，通常将这些执行状态封装在一个 Context 变量中，传递给要执行的 Goroutine 中。</p>
 <p>context 实际上只定义了接口，凡是实现该接口的类都可称为是一种 context，官方包中实现了几个常用的 context，分别可用于不同的场景。</p>
 <p>典型的使用场景如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png title=img></p>
 <p>上图中由于 goroutine派生出子 goroutine，而子 goroutine 又继续派生新的 goroutine，这种情况下使用 WaitGroup 就不太容易，因为子 goroutine 个数不容易确定。而使用 context 就可以很容易实现。</p>
 <h4 id=接口定义-1>接口定义</h4>
 <p>源码包中 <code>src/context/context.go:Context</code> 定义了该接口：</p>
@@ -4148,7 +4148,7 @@
 </ul>
 <p>context 包中实现 Context 接口的 struct，除了 <code>emptyCtx</code> 外，还有 <code>cancelCtx</code>、<code>timerCtx</code> 和 <code>valueCtx</code> 三种，正是基于这三种 context 实例，实现了上述 4 种类型的 context。</p>
 <p>context 包中各 context 类型之间的关系，如下图所示：</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png title=img></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png title=img></p>
 <p>struct cancelCtx、timerCtx、valueCtx 都继承于 Context，下面分别介绍这三个 struct。</p>
 <h4 id=cancelctx>cancelCtx</h4>
 <p>源码包中 <code>src/context/context.go:cancelCtx</code> 定义了该类型 context：</p>
@@ -5382,11 +5382,11 @@
 <div class=post-info-more>
 <section class=post-tags></section>
 <section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/golang/basicgrammar/ class=prev rel=prev title="Go 基础语法"><i class="fas fa-angle-left fa-fw"></i>Go 基础语法</a>
-<a href=/Notes/posts/golang/go-test/ class=next rel=next title="Go test 教程">Go test 教程<i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/posts/golang/basicgrammar/ class=prev rel=prev title="Go 基础语法"><i class="fas fa-angle-left fa-fw"></i>Go 基础语法</a>
+<a href=/posts/golang/go-test/ class=next rel=next title="Go test 教程">Go test 教程<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>
@@ -5398,5 +5398,5 @@
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
 </html>
