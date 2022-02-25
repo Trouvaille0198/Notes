@@ -1,14 +1,27 @@
-# 概述
+---
+title: "screen"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [Linux,快速入门]
+categories: [Linux]
+---
+
+
+
+# screen
+
+## 概述
 
 Screen是一款由GNU计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。GNU Screen可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。
 
 在Screen环境下，所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。
 
-# 语法
+## 语法
 
 screen \[-AmRvx -ls -wipe] \[-d <作业名称>] \[-h <行数>] \[-r <作业名称>] \[-s ] \[-S <作业名称>]
 
-## 参数说明
+### 参数说明
 
 -A 　                       将所有的视窗都调整为目前终端机的大小。
 -d <作业名称> 　  将指定的 screen 作业离线。
@@ -23,7 +36,7 @@ screen \[-AmRvx -ls -wipe] \[-d <作业名称>] \[-h <行数>] \[-r <作业名�
 -ls 或 --list 　         显示目前所有的 screen 作业。
 -wipe 　                 检查目前所有的 screen 作业，并删除已经无法使用的 screen 作业。
 
-## 常用命令
+### 常用命令
 
 `screen -S yourname`                 新建一个叫 yourname 的 session
 `screen -ls`                                  列出当前所有的 session

@@ -1,3 +1,12 @@
+---
+title: "Vue2"
+date: 2021-11-30
+author: MelonCholi
+draft: false
+tags: [前端,快速入门,Vue]
+categories: [前端]
+---
+
 # Vue2
 
 ## 认识

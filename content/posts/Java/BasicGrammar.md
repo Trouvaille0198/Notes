@@ -1,4 +1,14 @@
+---
+title: "Java 基础语法"
+date: 2021-10-23
+author: MelonCholi
+draft: true
+tags: [Java]
+categories: [Java]
+---
+
 # 程序基础
+
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/662E827A-FA32-4464-B0BD-40087F429E98.jpg" alt="img" style="zoom:77%;" />
 
 ## 程序基本结构

@@ -1,10 +1,19 @@
-# 基本知识
+---
+title: "Vuetify"
+date: 2021-11-30
+author: MelonCholi
+draft: false
+tags: [归档,前端,快速入门,Vue]
+categories: [前端]
+---
 
-## 简介
+# Vuetify
 
-## 引入
+## 基本知识
 
-### CDN
+### 引入
+
+#### CDN
 
 ```html
 <!DOCTYPE html>
@@ -36,7 +45,7 @@
 </html>
 ```
 
-### 使用 Vue CLI
+#### 使用 Vue CLI
 
 ```bash
 vue create my-app
@@ -56,7 +65,7 @@ vue add vuetify
 vue ui
 ```
 
-### Electron 用法
+#### Electron 用法
 
 要在 Electron 中使用 Vuetify ，需通过 Vue CLI 添加 electron-builder 插件。
 
@@ -69,7 +78,7 @@ yarn electron:build
 yarn electron:serve
 ```
 
-## 布局
+### 布局
 
 Vuetify有两个主要布局组件， `v-app` 和 `v-main`
 
@@ -94,7 +103,7 @@ export default {
 </script>
 ```
 
-### v-app
+#### v-app
 
 `v-app` 组件是应用程序的根节点，直接替换默认的 Vue 入口 `<div id="app">`
 
@@ -106,7 +115,7 @@ export default {
 
 `v-app` 只应该在应用中渲染**一次**。
 
-### v-main
+#### v-main
 
 `v-main` 组件是替换 `main` HTML 元素和应用程序的根节点 **内容** 的语义替代
 
@@ -114,11 +123,11 @@ export default {
 
 它会根据你指定的**应用**组件的结构而动态调整大小
 
-### 默认应用标记
+#### 默认应用标记
 
 只要设置 **app** 属性，你可以将布局元素放在任何地方
 
-## 通用属性
+### 通用属性
 
 | Name                                                                   | Type             | Default   | Description                       |
 | ---------------------------------------------------------------------- | ---------------- | --------- | --------------------------------- |
@@ -132,7 +141,7 @@ export default {
 |                                                                        |                  |           |                                   |
 |                                                                        |                  |           |                                   |
 
-# 应用组件
+## 应用组件
 
 这些组件通常被用作布局元素。它们可以混合和匹配，并且每个特定组件在任何时候都只能存在**一个**
 
@@ -144,7 +153,7 @@ export default {
 - v-navigation-drawer：可以放置在应用的左边或右边，并且可以配置在 `v-app-bar` 的旁边或下面。
 - v-system-bar：总是放在应用顶部，优先级高于 `v-app-bar`
 
-## v-app-bar
+### v-app-bar
 
 `v-app-bar` 组件对于任何图形用户界面（GUI）都至关重要，因为它通常是站点导航的主要来源
 
@@ -154,7 +163,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 `v-app-bar` 组件用于应用程序范围内的操作和信息
 
-### API
+#### API
 
 | Name               | Type    | Default | Description                                                         |
 | ------------------ | ------- | ------- | ------------------------------------------------------------------- |
@@ -165,9 +174,9 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                    |         |         |                                                                     |
 |                    |         |         |                                                                     |
 
-### 子组件
+#### 子组件
 
-#### v-app-bar-nav-icon
+##### v-app-bar-nav-icon
 
 专门为与 `v-toolbar` 和 `v-app-bar` 一起使用而创建的样式化图标按钮组件
 
@@ -177,17 +186,17 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 <v-app-bar-nav-icon></v-app-bar-nav-icon>
 ```
 
-#### v-app-bar-title
+##### v-app-bar-title
 
 修改过的 v-toolbar-title 组件 ，用于配合 `shrink-on-scroll` 属性使用
 
-## v-bottom-navigation
+### v-bottom-navigation
 
-## v-footer
+### v-footer
 
 `v-footer` 组件用于显示用户可能想要从网站中的任何页面都能访问到的公共信息
 
-## v-navition-drawer
+### v-navition-drawer
 
 （导航抽屉）
 
@@ -201,7 +210,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 通常使用 **nav** 属性将抽屉与 [v-list](https://vuetifyjs.com/zh-Hans/components/lists/) 组件配对
 
-### API
+#### API
 
 | Name                                                                                            | Type             | Default   | Description                                                          |
 | ----------------------------------------------------------------------------------------------- | ---------------- | --------- | -------------------------------------------------------------------- |
@@ -210,15 +219,15 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [permanent](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-permanent)             | boolean          | false     | 不管屏幕尺寸如何，抽屉都可以看到                                     |
 | [src](https://vuetifyjs.com/zh-Hans/api/v-navigation-drawer/#props-src)                         | string \| object | undefined | 指定 [v-img](https://vuetifyjs.com/components/images) 作为组件背景。 |
 
-## v-system-bar
+### v-system-bar
 
-# 多功能组件
+## 多功能组件
 
-## v-cards
+### v-cards
 
 卡中有4个基本组件。 `v-card-title`, `v-card-subtitle`, `v-card-text` 和 `v-card-actions`
 
-### API
+#### API
 
 | Name                                                                 | Type              | Default   | Description                                                                                                                                                                                                                                                           |
 | -------------------------------------------------------------------- | ----------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -231,25 +240,25 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [loading](https://vuetifyjs.com/zh-Hans/api/v-card/#props-loading)   | boolean \| string | false     | 显示线性进度条。可以是指定将哪种颜色应用于进度条的字符串（任何 material 色彩——主要（primary）, 次要（secondary）, 成功（success）, 信息（info），警告（warning），错误（error）），或者使用组件的布尔值 **color**（由色彩属性设置——如果它被组件支持的话）还可以是原色 |
 |                                                                      |                   |           |                                                                                                                                                                                                                                                                       |
 
-### 子组件
+#### 子组件
 
-#### v-card-actions
+##### v-card-actions
 
 用于为卡片放置 **动作** 的容器，如 v-btn 或 v-menu
 
-#### v-card-text
+##### v-card-text
 
 主要用于卡片中的 **文本内容**
 
-#### v-card-subtitle
+##### v-card-subtitle
 
 为卡片字幕提供默认的 **字体大小** 和 **填充**
 
-#### v-card-title
+##### v-card-title
 
 为卡片字幕提供默认的 **字体大小** 和 **填充**
 
-## v-tool-bar
+### v-tool-bar
 
 `v-toolbar `组件对于任何 gui 都是至关重要的，因为它通常是站点导航的主要来源。 工具栏组件与 `<a href="/components/navigation drawers">, v-navigation-drawer` 和 `v-card` 配合使用非常有效
 
@@ -268,7 +277,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 </template>
 ```
 
-### API
+#### API
 
 | Name                                                                      | Type             | Default   | Description                                                        |
 | ------------------------------------------------------------------------- | ---------------- | --------- | ------------------------------------------------------------------ |
@@ -277,17 +286,17 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [collapse](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-collapse)   | boolean          | false     | 将工具栏置于折叠状态，以减小其最大宽度                             |
 | [dense](https://vuetifyjs.com/zh-Hans/api/v-toolbar/#props-dense)         | boolean          | false     | 将工具栏内容的高度降低到 48px                                      |
 
-### 子组件
+#### 子组件
 
-#### v-toolbar-items
+##### v-toolbar-items
 
 允许 `v-btn` 扩展全高度
 
-#### v-toolbar-title
+##### v-toolbar-title
 
 用于显示标题
 
-## v-list
+### v-list
 
 `v-list` 组件用于显示信息。 它可以包含头像、内容、操作、列表组标题等等。 列表以易于在集合中识别特定项目的方式显示内容。 它们为组织一组文本和图像提供了一致的样式
 
@@ -325,7 +334,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210407125112331.png" alt="image-20210407125112331" style="zoom:80%;" />
 
-### API
+#### API
 
 | Name                                                       | Type    | Default | Description                                                                                                                                      |
 | ---------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -337,9 +346,9 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [nav](https://vuetifyjs.com/zh-Hans/api/v-list/#props-nav) | boolean | false   | 另一种样式可以减小 `v-list-item` 的宽度并圆角化。 通常与 **[v-navigation-drawer](https://vuetifyjs.com/components/navigation-drawers)** 一起使用 |
 |                                                            |         |         |                                                                                                                                                  |
 
-### 子组件
+#### 子组件
 
-#### v-list-item
+##### v-list-item
 
 装载列表项子组件
 
@@ -351,35 +360,35 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                                   |                  |           |                                                                     |
 |                                                                   |                  |           |                                                                     |
 
-#### v-list-item-content
+##### v-list-item-content
 
 装载文字组件
 
-#### v-list-item-icon
+##### v-list-item-icon
 
 装载图标组件
 
-#### v-list-item-title
+##### v-list-item-title
 
 列表元素标题
 
-#### v-list-item-subtitle
+##### v-list-item-subtitle
 
 列表元素副标题
 
-#### v-list-item-action
+##### v-list-item-action
 
 装载动作组件
 
-#### v-list-item-avatar
+##### v-list-item-avatar
 
 装载头像类型的图片组件 img
 
-# 小型组件
+## 小型组件
 
-## v-btn
+### v-btn
 
-### API
+#### API
 
 | Name                                                                  | Type             | Default   | Description                                                                             |
 | --------------------------------------------------------------------- | ---------------- | --------- | --------------------------------------------------------------------------------------- |
@@ -398,7 +407,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [value](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-value)         | any              | undefined | 控制组件可见还是隐藏                                                                    |
 | [text](https://vuetifyjs.com/zh-Hans/api/v-btn/#props-text)           | boolean          | false     | Makes the background transparent                                                        |
 
-## v-icon
+### v-icon
 
 可以在按钮内部使用
 
@@ -418,7 +427,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 </v-btn>
 ```
 
-### API
+#### API
 
 | Name                                                               | Type    | Default | Description                                                            |
 | ------------------------------------------------------------------ | ------- | ------- | ---------------------------------------------------------------------- |
@@ -429,9 +438,9 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [right](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-right)     | boolean | false   | 当按钮放置在另一个元素或文本的**右边**时，对按钮内的图标应用适当的间距 |
 | [left](https://vuetifyjs.com/zh-Hans/api/v-icon/#props-left)       | boolean | false   | 当按钮放置在另一个元素或文本的**左边**时，对按钮内的图标应用适当的间距 |
 
-## v-img
+### v-img
 
-### API
+#### API
 
 | Name                                                                        | Type             | Default   | Description                                                          |
 | --------------------------------------------------------------------------- | ---------------- | --------- | -------------------------------------------------------------------- |
@@ -445,13 +454,13 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                                             |                  |           |                                                                      |
 |                                                                             |                  |           |                                                                      |
 
-## v-pagination
+### v-pagination
 
 `v-pagination` 组件用于分离长数据集，以便用户消化信息。 根据提供的数据量，分页组件将自动缩放
 
 分页默认根据设置的 **length** 属性显示页数，两边有 **prev** 和 **next** 按钮帮助导航
 
-### API
+#### API
 
 | Name                                                                         | Type   | Default | Description              |
 | ---------------------------------------------------------------------------- | ------ | ------- | ------------------------ |
@@ -462,11 +471,11 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                                              |        |         |                          |
 |                                                                              |        |         |                          |
 
-## v-snackbar
+### v-snackbar
 
 `v-snackbar` 以最简单的形式向用户显示一个临时且可关闭的通知
 
-### API
+#### API
 
 | Name                                                                   | Type             | Default | Description                                                                                                                                      |
 | ---------------------------------------------------------------------- | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -474,11 +483,11 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                                        |                  |         |                                                                                                                                                  |
 |                                                                        |                  |         |                                                                                                                                                  |
 
-# 大型组件
+## 大型组件
 
-## v-date-picker
+### v-date-picker
 
-### API
+#### API
 
 | Name                                                                              | Type    | Default   | Description                                                 |
 | --------------------------------------------------------------------------------- | ------- | --------- | ----------------------------------------------------------- |
@@ -491,9 +500,9 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                                                   |         |           |                                                             |
 |                                                                                   |         |           |                                                             |
 
-## v-time-picker
+### v-time-picker
 
-### API
+#### API
 
 | Name                                                                            | Type    | Default | Description                                                 |
 | ------------------------------------------------------------------------------- | ------- | ------- | ----------------------------------------------------------- |
@@ -501,13 +510,13 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [scrollable](https://vuetifyjs.com/zh-Hans/api/v-time-picker/#props-scrollable) | boolean | false   | 允许通过鼠标滚动更改 小时/分钟                              |
 |                                                                                 |         |         |                                                             |
 
-# 表单组件
+## 表单组件
 
-## v-text-field
+### v-text-field
 
 使用 v-model 绑定输入值，同时可以设置默认值
 
-### API
+#### API
 
 | Name                                                                                           | Type                        | Default   | Description                                                                                                                                                                                                       |
 | ---------------------------------------------------------------------------------------------- | --------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -531,13 +540,13 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [type](https://vuetifyjs.com/zh-Hans/api/v-text-field/#props-type)                             | string                      | 'text'    | 设置输入类型                                                                                                                                                                                                      |
 |                                                                                                |                             |           |                                                                                                                                                                                                                   |
 
-## v-radio
+### v-radio
 
 单选按钮。虽然 `v-radio` 可以单独使用，但它最好与 `v-radio-group` 一起使用。 在 `v-radio-group` 上使用 **v-model**，可以访问组内所选单选按钮的值
 
 ![image-20210411174334808](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210411174334808.png)
 
-###  API
+####  API
 
 | Name                                                                  | Type    | Default   | Description                                          |
 | --------------------------------------------------------------------- | ------- | --------- | ---------------------------------------------------- |
@@ -547,11 +556,11 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [label](https://vuetifyjs.com/zh-Hans/api/v-radio/#props-label)       | string  | undefined | 设置输入标签                                         |
 |                                                                       |         |           |                                                      |
 
-## v-checbox
+### v-checbox
 
 `v-checbox` 组件为用户提供了在两个不同的值之间选择的能力。 它们与开关(switch) 非常相似，可用于复杂的表格和核对清单
 
-### API
+#### API
 
 | Name                                                                           | Type    | Default   | Description                                      |
 | ------------------------------------------------------------------------------ | ------- | --------- | ------------------------------------------------ |
@@ -565,13 +574,13 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                                                |         |           |                                                  |
 |                                                                                |         |           |                                                  |
 
-### v-simple-checbox
+#### v-simple-checbox
 
-## v-select
+### v-select
 
 下拉框
 
-### API
+#### API
 
 | Name                                                                           | Type                        | Default   | Description                                                                                                          |
 | ------------------------------------------------------------------------------ | --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------- |
@@ -587,9 +596,9 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                                                |                             |           |                                                                                                                      |
 |                                                                                |                             |           |                                                                                                                      |
 
-## v-switch
+### v-switch
 
-### API
+#### API
 
 | Name                                                                         | Type    | Default   | Description                      |
 | ---------------------------------------------------------------------------- | ------- | --------- | -------------------------------- |
@@ -600,9 +609,9 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                                              |         |           |                                  |
 |                                                                              |         |           |                                  |
 
-## v-slider
+### v-slider
 
-### API
+#### API
 
 | Name                                                                             | Type              | Default   | Description                                                                                |
 | -------------------------------------------------------------------------------- | ----------------- | --------- | ------------------------------------------------------------------------------------------ |
@@ -621,7 +630,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [tick-labels](https://vuetifyjs.com/zh-Hans/api/v-slider/#props-tick-labels)     | array             | []        | 与 Array 一起提供时，将尝试按索引顺序将标签映射到每个步骤                                  |
 |                                                                                  |                   |           |                                                                                            |
 
-## v-file-input
+### v-file-input
 
 `v-file-input`组件的核心是一个基于` v-text-field` 拓展的基本容器
 
@@ -629,7 +638,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 当 **show-size** 属性和 **counter** 一同启用时，会下输入框下方显示文件总数和大小
 
-### API
+#### API
 
 | Name                                                                                     | Type              | Default   | Description                                                                                                                                                                     |
 | ---------------------------------------------------------------------------------------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -642,11 +651,11 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [chips](https://vuetifyjs.com/zh-Hans/api/v-file-input/#props-chips)                     | boolean           | false     | 改变一个已选择项为小纸片（chips）的显示方式                                                                                                                                     |
 | [show-size](https://vuetifyjs.com/zh-Hans/api/v-file-input/#props-show-size)             | boolean \| number | false     | 设置所选文件的显示大小                                                                                                                                                          |
 
-## v-textarea
+### v-textarea
 
 `v-textarea ` 最简单的形式是多行文本字段，对于大量文本非常有用
 
-### API
+#### API
 
 与 `v-text-feild` 类似
 
@@ -656,21 +665,21 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [rows](https://vuetifyjs.com/zh-Hans/api/v-textarea/#props-rows)           | number \| string | 5       | 默认行数           |
 |                                                                            |                  |         |                    |
 
-## v-form
+### v-form
 
 
 
-# 网格系统
+## 网格系统
 
 （Grid System）
 
-##  7.1 v-container
+###  7.1 v-container
 
 `v-container` 提供了将你的网站内容居中和水平填充的功能。 你还可以使用 **fluid** 属性将容器在所有视口和设备尺寸上完全扩展。 
 
 - **fill-height** 将使整个内容 **相对于 page** 居中
 
-## v-row
+### v-row
 
 `v-row` 是 `v-col` 的容器组件。 它使用 flex 属性来控制其内栏的布局和流
 
@@ -682,7 +691,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 | [justify](https://vuetifyjs.com/zh-Hans/api/v-row/#props-justify) | string | undefined | 应用 [justify-content](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content) css 属性。可用选项是 **start**, **center**, **end**, **space-between** 和 **space-around** |
 |                                                                   |        |           |                                                                                                                                                                                     |
 
-## v-col
+### v-col
 
 `v-col` 包裹内容，它必须是 `v-row` 的直接子代
 
@@ -694,15 +703,15 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 |                                                               |                             |         |                                                                 |
 |                                                               |                             |         |                                                                 |
 
-## v-spacer
+### v-spacer
 
 `v-spacer` 是一个基本而又通用的间隔组件，用于分配父子组件之间的剩余宽度
 
-# 组
+## 组
 
-# 样式
+## 样式
 
-## 颜色
+### 颜色
 
 每种颜色都会被转换为 **background** 和 **text** 变体
 
@@ -722,9 +731,9 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 改变文本明暗 `text--darken-2`
 
-## 文本
+### 文本
 
-### 字体强调
+#### 字体强调
 
 ```html
 <template>
@@ -756,7 +765,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ![image-20210406170957036](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210406170957036.png)
 
-### 字体大小
+#### 字体大小
 
 **格式**
 
@@ -779,7 +788,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 - `caption`
 - `overline`
 
-### 文本对齐
+#### 文本对齐
 
 **自动对齐**
 
@@ -797,7 +806,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210406214448457.png" alt="image-20210406214448457" style="zoom: 80%;" />
 
-### 不透明度
+#### 不透明度
 
 `text--primary` 与默认文本具有相同的不透明度。
 
@@ -807,7 +816,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210406214558337.png" alt="image-20210406214558337" style="zoom: 80%;" />
 
-### 装饰线
+#### 装饰线
 
 移除文本装饰线
 
@@ -825,7 +834,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ``.text-decoration-line-through` 
 
-### 转换大小写
+#### 转换大小写
 
 `.text-lowercase`：小写
 
@@ -833,7 +842,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 `.text-capitalize`：单词首字母大写
 
-## 间距
+### 间距
 
 **格式**：**{property}{direction}-{size}**
 
@@ -893,9 +902,9 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 - `n16` - 设置 `margin` 为 -64px
 - `auto` - 设置间距为 **auto**
 
-## 显示辅助
+### 显示辅助
 
-### 设置显示元素
+#### 设置显示元素
 
 **格式：hidden-{breakpoint}-{condition}**
 

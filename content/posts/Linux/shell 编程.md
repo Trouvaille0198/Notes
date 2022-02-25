@@ -1,3 +1,12 @@
+---
+title: "Linux shell 编程"
+date: 2021-11-23
+author: MelonCholi
+draft: false
+tags: [Linux,shell]
+categories: [Linux]
+---
+
 # shell 编程
 
 ## 认识

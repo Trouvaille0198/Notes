@@ -1,6 +1,17 @@
-# 认识
+---
+title: "Django"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [Python,后端]
+categories: [Python]
+---
 
-## 概念
+# Django
+
+## 认识
+
+### 概念
 
 ![1](https://mdn.mozillademos.org/files/13931/basic-django.png)
 
@@ -83,7 +94,7 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-# urls
+## urls
 
 `urls.py`：URLconf 文件
 
@@ -98,9 +109,9 @@ urlpatterns = [
 ]
 ```
 
-# Models
+## Models
 
-## 认识
+### 认识
 
 - **ORM**
 
@@ -115,7 +126,7 @@ urlpatterns = [
 
     模型是真实数据的简单明确的描述。它包含了储存的数据所必要的字段和行为
 
-# views
+## views
 
 每个视图必须要做的只有两件事：返回一个包含被请求页面内容的 [`HttpResponse`](https://docs.djangoproject.com/zh-hans/3.2/ref/request-response/#django.http.HttpResponse) 对象，或者抛出一个异常，比如 [`Http404`](https://docs.djangoproject.com/zh-hans/3.2/topics/http/views/#django.http.Http404) 。至于你还想干些什么，随便你。
 

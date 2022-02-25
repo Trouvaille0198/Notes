@@ -1,4 +1,13 @@
-# 基本语法
+---
+title: "Python 基础语法"
+date: 2021-12-22
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
+# 基础语法
 
 ## 认识
 

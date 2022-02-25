@@ -1,6 +1,17 @@
-# 简介
+---
+title: "JavaScript DOM"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [JavaScript,前端]
+categories: [前端]
+---
 
-## 概念
+# DOM
+
+## 简介
+
+### 概念
 
 文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口
 
@@ -12,7 +23,7 @@
 
 DOM 把以上内容都看作对象
 
-## 节点思想
+### 节点思想
 
 根据 W3C 的 HTML DOM 标准，HTML 文档中的所有内容都是节点：
 
@@ -22,9 +33,9 @@ DOM 把以上内容都看作对象
 - 每个 HTML 属性是属性节点
 - 注释是注释节点
 
-# DOM 属性
+## DOM 属性
 
-## 元素属性
+### 元素属性
 
 以下为 `Node` 对象的属性
 
@@ -116,7 +127,7 @@ var atts = para.attributes;
 
     返回当前元素的标签名
 
-## 元素定位
+### 元素定位
 
 以下为 `Node` 对象的属性
 
@@ -144,14 +155,14 @@ var atts = para.attributes;
 
     返回孩子节点的 `NodeList`
 
-## 根节点
+### 根节点
 
 这里有两个特殊的属性，可以访问全部文档：
 
 - `document.documentElement` - 全部文档
 - `document.body` - 文档的主体
 
-# DOM 方法
+## DOM 方法
 
 | 方法                     | 描述                                                            |
 | :----------------------- | :-------------------------------------------------------------- |
@@ -168,7 +179,7 @@ var atts = para.attributes;
 | getAttribute()           | 返回指定的属性值。                                              |
 | setAttribute()           | 把指定属性设置或修改为指定的值。                                |
 
-## 访问
+### 访问
 
 以下为 `Document` 对象的方法
 
@@ -198,11 +209,11 @@ document.getElementsByTagName("p");
 
     返回上下文中的根节点
 
-## 修改
+### 修改
 
-### 创建
+#### 创建
 
-#### 创建内容
+##### 创建内容
 
 创建元素内容的最简单的方法是使用 innerHTML 属性
 
@@ -210,13 +221,13 @@ document.getElementsByTagName("p");
 document.getElementById("p1").innerHTML="New text!";
 ```
 
-#### 改变样式
+##### 改变样式
 
 ```javascript
 document.getElementById("p2").style.color="blue";
 ```
 
-#### 创建元素
+##### 创建元素
 
 先创建该元素（元素节点），然后把它追加到已有的元素上
 
@@ -254,7 +265,7 @@ var para=document.createElement("p");
 var node=document.createTextNode("This is a new paragraph.");
 ```
 
-### 添加
+#### 添加
 
 以下为 `Node` 对象的方法
 
@@ -269,7 +280,7 @@ element.appendChild(para);
 
     在指定的已有子节点之前插入新的子节点
 
-### 删除
+#### 删除
 
 - ***removeChild()***
 
@@ -286,7 +297,7 @@ var child=document.getElementById("p1");
 child.parentNode.removeChild(child);
 ```
 
-### 替换
+#### 替换
 
 - ***replaceChild(newnode,oldnode)***
 
@@ -296,7 +307,7 @@ child.parentNode.removeChild(child);
 parent.replaceChild(newChild,oldChild);
 ```
 
-## 其他
+### 其他
 
 以下为 `Node` 对象的方法
 
@@ -316,7 +327,7 @@ parent.replaceChild(newChild,oldChild);
 
     返回 Boolean，来表示该元素是否包含有子节点
 
-# 事件
+## 事件
 
 HTML DOM 允许您在事件发生时执行代码。
 
@@ -330,9 +341,9 @@ HTML DOM 允许您在事件发生时执行代码。
 - 当 HTML 表单被提交时
 - 当用户触发按键时
 
-## 创建事件
+### 创建事件
 
-### 在元素中创建
+#### 在元素中创建
 
 如需在用户点击某个元素时执行代码，把 JavaScript 代码添加到 HTML 事件属性中
 
@@ -348,7 +359,7 @@ onclick=JavaScript
 </html>
 ```
 
-### 使用 DOM 分配事件
+#### 使用 DOM 分配事件
 
 ```html
 <script>
@@ -356,7 +367,7 @@ document.getElementById("myBtn").onclick=function(){displayDate()};
 </script>
 ```
 
-## 事件类型
+### 事件类型
 
 - ***onload***
 
@@ -525,25 +536,25 @@ function keydown(event){
 | [onsubmit](https://www.w3school.com.cn/jsref/event_onsubmit.asp)       | 确认按钮被点击。                     |
 | [onunload](https://www.w3school.com.cn/jsref/event_onunload.asp)       | 用户退出页面。                       |
 
-# 对象
+## 对象
 
 EventTarget <- Node <- Element <- Document
 
-## Node
+### Node
 
 **`Node`** 是一个接口，各种类型的 DOM API 对象会从这个接口继承。它允许我们使用相似的方式对待这些不同类型的对象；比如, 继承同一组方法，或者用同样的方式测试。
 
-## Element
+### Element
 
 **`Element`** 是一个通用性非常强的基类，所有 `Document`对象下的对象都继承自它。这个接口描述了所有相同种类的元素所普遍具有的方法和属性
 
-## Document
+### Document
 
 `Document` 接口表示任何在浏览器中载入的网页，并作为网页内容的入口，也就是 DOM 树
 
 `Document` 接口描述了任何类型的文档的通用属性与方法。
 
-### 属性
+#### 属性
 
 - ***.body***
 
@@ -563,13 +574,13 @@ EventTarget <- Node <- Element <- Document
 
     返回标题
 
-### 方法
+#### 方法
 
 - ***.write()***
 
     向文档流中写入内容
 
-## NodeList
+### NodeList
 
 `NodeList` 对象是节点的集合，通常是由属性，如`Node.childNodes` 和 方法，如`document.querySelectorAll` 返回的。
 
@@ -577,12 +588,12 @@ EventTarget <- Node <- Element <- Document
 
 在一些情况下，`NodeList` 是一个实时集合，也就是说，如果文档中的节点树发生变化，`NodeList` 也会随之变化
 
-### 属性
+#### 属性
 
 - ***NodeList.length***
     `NodeList` 中包含的节点个数。
 
-### 遍历
+#### 遍历
 
 使用 length 属性来循环节点列表
 
@@ -605,17 +616,17 @@ for (var checkbox of list) {
 }
 ```
 
-## DOMTokenList
+### DOMTokenList
 
 `DOMTokenList` 接口表示一组空格分隔的标记（tokens），主要用于操作 `classList`
 
-### 属性
+#### 属性
 
 - ***.length***
 
     一个整数，表示存储在该对象里值的个数
 
-### 方法
+#### 方法
 
 - ***.contains(token)***
     是否包括指定字符串，返回 `bool`
@@ -626,7 +637,7 @@ for (var checkbox of list) {
 - ***.replace(oldToken, newToken)***
     使用 `newToken` 替换 `token` 。
 
-### 修改空格和重复的特性
+#### 修改空格和重复的特性
 
 修改 `DOMTokenList` 的方法（例如 `DOMTokenList.add()`）会自动去除多余的空格（Whitespace）和列表中的重复项目
 
@@ -641,13 +652,13 @@ span.textContent = `span classList is "${classes}"`;
 
 输出：span classList is "d e f x"
 
-## Window
+### Window
 
 `Window` 对象表示浏览器中打开的窗口，如果文档包含框架（frame 或 iframe 标签），浏览器会为 HTML 文档创建一个 `window` 对象，并为每个框架创建一个额外的 `window` 对象。
 
-### 属性
+#### 属性
 
-### 方法
+#### 方法
 
 - ***.alert()***
 

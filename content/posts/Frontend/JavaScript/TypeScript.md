@@ -1,3 +1,12 @@
+---
+title: "TypeScript 基本语法"
+date: 2021-12-15
+author: MelonCholi
+draft: false
+tags: [TypeScript,JavaScript,前端,快速入门]
+categories: [前端]
+---
+
 # TypeScript
 
 ## 简介

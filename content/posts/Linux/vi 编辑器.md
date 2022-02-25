@@ -1,3 +1,12 @@
+---
+title: "Linux vi 编辑器"
+date: 2021-11-27
+author: MelonCholi
+draft: false
+tags: [Linux,Vim]
+categories: [Linux]
+---
+
 # vi 编辑器
 
 ## 启动

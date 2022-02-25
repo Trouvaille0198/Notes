@@ -1,3 +1,12 @@
+---
+title: "flex 布局"
+date: 2022-01-08
+author: MelonCholi
+draft: false
+tags: [CSS,前端]
+categories: [前端]
+---
+
 # flex 布局
 
 https://css-tricks.com/snippets/css/a-guide-to-flexbox/

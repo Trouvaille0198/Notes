@@ -1,3 +1,12 @@
+---
+title: "Tailwind"
+date: 2022-01-17
+author: MelonCholi
+draft: false
+tags: [CSS,前端,快速入门]
+categories: [前端]
+---
+
 # Tailwind
 
 ## 要点

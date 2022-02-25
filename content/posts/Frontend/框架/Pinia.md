@@ -1,3 +1,12 @@
+---
+title: "Pinia"
+date: 2021-12-08
+author: MelonCholi
+draft: false
+tags: [前端,快速入门]
+categories: [前端]
+---
+
 # Pinia
 
 Pinia (pronounced like `/peenya/` in English) is the closest word to *piña* (*pineapple* in Spanish) that is a valid package name. A pineapple is in reality a group of individual flowers that join together to create a multiple fruit. Similar to stores, each one is born individually, but they are all connected at the end. It's also a delicious tropical fruit indigenous to South America.

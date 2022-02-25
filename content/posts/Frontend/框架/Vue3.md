@@ -1,3 +1,12 @@
+---
+title: "Vue3"
+date: 2021-12-22
+author: MelonCholi
+draft: false
+tags: [前端,快速入门,Vue]
+categories: [前端]
+---
+
 # Vue3
 
 官方文档是最好的教程：https://v3.cn.vuejs.org/guide/

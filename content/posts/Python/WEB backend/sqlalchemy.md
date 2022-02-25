@@ -1,4 +1,15 @@
-# 认识
+---
+title: "SQLAlchemy"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [Python,后端,数据库,ORM]
+categories: [Python]
+---
+
+# SQLAlchemy
+
+## 认识
 
 ORM：Object Relational Mapping（对象关系映射）将数据库中的表与类构建映射
 

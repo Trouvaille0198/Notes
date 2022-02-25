@@ -1,3 +1,14 @@
+---
+title: "诗"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [现代诗]
+categories: [其他]
+---
+
+# 诗
+
 听惯莫名来的雨
 
 只道又不知是谁的眼泪

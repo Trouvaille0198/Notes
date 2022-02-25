@@ -1,3 +1,12 @@
+---
+title: "offer 11"
+date: 2022-02-20
+draft: false
+author: "MelonCholi"
+tags: [算法,二分]
+categories: [刷题]
+---
+
 # 剑指 Offer 11. 旋转数组的最小数字
 
 `easy` `binary search`

@@ -1,3 +1,14 @@
+---
+title: "Linux 上的环境安装"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [Linux,快速入门]
+categories: [Linux]
+---
+
+
+
 # 环境安装
 
 ## Node.js

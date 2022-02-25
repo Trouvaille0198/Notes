@@ -1,8 +1,17 @@
-# 认识
+---
+title: "Flask"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [Python,后端]
+categories: [Python]
+---
 
-# 例子
+# Flask
 
-## 初始化
+## 例子
+
+### 初始化
 
 ```python
 from flask import Flask
@@ -30,7 +39,7 @@ $ flask run
 app.run(host=0.0.0.0)
 ```
 
-## 路由
+### 路由
 
 ```python
 @app.route('/')
@@ -60,7 +69,7 @@ def json(data):
 | `path`   | 类似 `string` ，但可以包含斜杠      |
 | `uuid`   | 接受 UUID 字符串                    |
 
-### 唯一的 URL 与重定向
+#### 唯一的 URL 与重定向
 
 以下两条规则的不同之处在于是否使用尾部的斜杠。:
 
@@ -78,7 +87,7 @@ def about():
 
 - `about` 的 URL 没有尾部斜杠，因此其行为表现与**一个文件**类似。如果访问这个 URL 时添加了尾部斜杠就会得到一个 404 错误。这样可以**保持 URL 唯一**，并帮助 搜索引擎避免重复索引同一页面。
 
-### Flask HTTP方法
+#### Flask HTTP方法
 
 ```python
 from flask import request
@@ -98,7 +107,7 @@ def login():
 | 3    | PUT    | 从客户端向服务器传送的数据取代指定的文档的内容。                                                                                         |
 | 4    | DELETE | 请求服务器删除指定的页面。                                                                                                               |
 
-### 重定向
+#### 重定向
 
 网页跳转
 
@@ -110,7 +119,7 @@ def index():
     return redirect("https://www.bilibili.com")
 ```
 
-### POST
+#### POST
 
 ```python
 @app.route('/test/post', methods=['POST'])
@@ -127,7 +136,7 @@ def post():
         return "Request failed!"
 ```
 
-## Cookies
+### Cookies
 
 要访问 cookies ，可以使用 `cookies` 属性。可以使用响应 对象 的 `set_cookie` 方法来设置 cookies 。
 
@@ -159,7 +168,7 @@ def index():
     return resp
 ```
 
-## Sessions
+### Sessions
 
 ```python
 from . import admin

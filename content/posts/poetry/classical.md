@@ -1,3 +1,14 @@
+---
+title: "诗"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [古体诗]
+categories: [其他]
+---
+
+# 诗
+
 长安紫陌芙蓉阙
 
 马嵬坡下白练雪

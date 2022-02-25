@@ -1,3 +1,12 @@
+---
+title: "offer 21"
+date: 2022-02-20
+draft: false
+author: "MelonCholi"
+tags: [算法,双指针]
+categories: [刷题]
+---
+
 # 剑指 Offer 21. 调整数组顺序使奇数位于偶数前面
 
 `easy` `双指针`
