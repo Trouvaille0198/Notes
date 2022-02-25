@@ -1,0 +1,230 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="vi 编辑器 启动 vi [选项] [filename] 工作模式 1、命令模式：键盘接受的任何字符都被当作命令来解释，不会出现在屏幕上。 2、输入模式（编辑模式）：输入的任何字">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/linux/vi-%E7%BC%96%E8%BE%91%E5%99%A8/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="vi 编辑器 启动 vi [选项] [filename] 工作模式 1、命令模式：键盘接受的任何字符都被当作命令来解释，不会出现在屏幕上。 2、输入模式（编辑模式）：输入的任何字">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/linux/vi-%E7%BC%96%E8%BE%91%E5%99%A8/><link rel=prev href=http://example.org/posts/linux/%E5%9F%BA%E7%A1%80/><link rel=next href=http://example.org/posts/linux/useful/screen/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/linux\/vi-%E7%BC%96%E8%BE%91%E5%99%A8\/"},"genre":"posts","wordcount":1054,"url":"http:\/\/example.org\/posts\/linux\/vi-%E7%BC%96%E8%BE%91%E5%99%A8\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1054 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#启动>启动</a></li>
+<li><a href=#工作模式>工作模式</a></li>
+<li><a href=#进入插入入模式的方法从命令模式>进入插入入模式的方法（从命令模式）</a></li>
+<li><a href=#删除字符命令模式>删除字符（命令模式）</a></li>
+<li><a href=#查找字符串命令模式>查找字符串（命令模式）</a></li>
+<li><a href=#其他命令模式命令>其他命令模式命令</a></li>
+<li><a href=#文本块操作底行命令模式>文本块操作（底行命令模式）</a></li>
+<li><a href=#保存和退出底行命令模式>保存和退出（底行命令模式）</a></li>
+<li><a href=#编写c语言程序>编写C语言程序</a>
+<ul>
+<li><a href=#gcc-编译器>gcc 编译器</a></li>
+<li><a href=#编译步骤>编译步骤</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=vi-编辑器>vi 编辑器</h1>
+<h2 id=启动>启动</h2>
+<p><strong>vi [选项] [filename]</strong></p>
+<h2 id=工作模式>工作模式</h2>
+<p>1、命令模式：键盘接受的任何字符都被当作命令来解释，不会出现在屏幕上。</p>
+<p>2、输入模式（编辑模式）：输入的任何字母都被当做文件内容显示在屏幕上；</p>
+<p>3、底行命令模式：在屏幕底部显示“：”，等待用户输入命令。</p>
+<h2 id=进入插入入模式的方法从命令模式>进入插入入模式的方法（从命令模式）</h2>
+<p>i 从当前的光标位置，开始输入字符</p>
+<p>I 光标移动到当前行的行首，开始输入字符</p>
+<p>a 从当前的光标的下一个位置，开始输入字符</p>
+<p>A 光标移动到当前行的行尾，开始输入字符</p>
+<p>o 光标所在行之下新增一行</p>
+<p>O 光标所在行之上新增一行</p>
+<h2 id=删除字符命令模式>删除字符（命令模式）</h2>
+<p>x：删除光标所在的字符</p>
+<p>nx：从光标开始，向右删除n个字符</p>
+<p>X：删除光标前面的那个字符</p>
+<p>nX：从光标之前的那个字符开始，向左删除n个字符</p>
+<p>dd：删除光标所在的整行</p>
+<p>D：从光标开始删除到行尾</p>
+<h2 id=查找字符串命令模式>查找字符串（命令模式）</h2>
+<p>/ 字符串： 光标从当前位置开始向文件尾部查找，如果找到，光标停留在该 字符串的首字母上；</p>
+<p>？字符串：光标从当前位置开始向文件 头部查找，如果找到，光标停留该字 符串的首字母上；</p>
+<p>n: 继续查找满足条件的字符串</p>
+<p>N：改变方向查找，继续查找满足条件的字符串</p>
+<h2 id=其他命令模式命令>其他命令模式命令</h2>
+<p>1、u : 撤销上一步操作</p>
+<p>2、. :重复上一步操作</p>
+<h2 id=文本块操作底行命令模式>文本块操作（底行命令模式）</h2>
+<dl>
+<dt>: set nu //每一行前面出现行号</dt>
+<dd>
+<p>set nonu //不显示行号</p>
+</dd>
+<dd>
+<p>n1,n2 co n3 //将从n1行-n2行之间(包括n1,n2行本身）的所有文本复制到第n3行之下</p>
+</dd>
+<dd>
+<p>n1,n2 m n3 //将从n1行-n2行之间(包括n1,n2行本身）的所有文本移动到第n3行之下</p>
+</dd>
+<dd>
+<p>n1,n2 d //删除从n1行-n2行之间(包括n1,n2行本身）的所有文本</p>
+</dd>
+<dd>
+<p>n1,n2 s/字符串1/字符串2/g //将从n1行-n2行之间(包括n1,n2行本身）的所有字符串1， 用字符串2替换</p>
+</dd>
+</dl>
+<h2 id=保存和退出底行命令模式>保存和退出（底行命令模式）</h2>
+<p>w 文件路径：保存文件</p>
+<p>wq：保存文件并退出编辑器</p>
+<p>q：退出编辑器</p>
+<p>q!: 不保存文件直接退出编辑器</p>
+<h2 id=编写c语言程序>编写C语言程序</h2>
+<h3 id=gcc-编译器>gcc 编译器</h3>
+<p><strong>功能</strong>：调用 C 编译器，执行该命令后，将完成预处理、编译、优化、连接并最终生成可执行代码。</p>
+<p><strong>格式</strong>：gcc [option] file-list</p>
+<p>源代码文件要求带扩展名（*.c）</p>
+<p>可执行代码默认存储在a.out文件中 Linux操作系统 4</p>
+<p><strong>常用选项</strong></p>
+<p>-ansi ：只支持 ANSI 标准的 C 语法</p>
+<p>-c：只生成目标文件（扩展名为 .o）,不进行连接</p>
+<p>-o &lt;file>：指定可执行文件名为 &lt;file>，不是默认的a.out</p>
+<p>-O[level]:进行优化</p>
+<h3 id=编译步骤>编译步骤</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>vi hello.c      // 用 vi 编辑器编写程序代码，存储成*.c文件（hello.c） 
+
+gcc hello.c     // 用 gcc 不带参数编译  或 gcc -o hello hello.c  //用gcc带参数编译
+
+ls            	// 用 ls 查看可执行文件 a.out 
+
+./a.out         // 执行该文件         或 ./hello            //执行该文件
+</code></pre></td></tr></table>
+</div>
+</div></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/linux/%E5%9F%BA%E7%A1%80/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/linux/useful/screen/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>

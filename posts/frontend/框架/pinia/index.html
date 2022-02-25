@@ -1,0 +1,959 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="Pinia Pinia (pronounced like /peenya/ in English) is the closest word to piña (pineapple in Spanish) that is a valid package name. A pineapple is in reality a group of individual flowers that join together to create a multiple fruit. Similar to stores, each one is born individually, but they are all connected at the end. It&rsquo;s also a delicious tropical fruit indigenous to South America. Not">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/frontend/%E6%A1%86%E6%9E%B6/pinia/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="Pinia Pinia (pronounced like /peenya/ in English) is the closest word to piña (pineapple in Spanish) that is a valid package name. A pineapple is in reality a group of individual flowers that join together to create a multiple fruit. Similar to stores, each one is born individually, but they are all connected at the end. It&rsquo;s also a delicious tropical fruit indigenous to South America. Not">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/frontend/%E6%A1%86%E6%9E%B6/pinia/><link rel=prev href=http://example.org/posts/frontend/%E6%A1%86%E6%9E%B6/vue2/><link rel=next href=http://example.org/posts/frontend/%E6%A1%86%E6%9E%B6/api-%E8%A7%84%E8%8C%83/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/frontend\/%E6%A1%86%E6%9E%B6\/pinia\/"},"genre":"posts","wordcount":2071,"url":"http:\/\/example.org\/posts\/frontend\/%E6%A1%86%E6%9E%B6\/pinia\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2071 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#认识>认识</a>
+<ul>
+<li><a href=#安装>安装</a></li>
+</ul>
+</li>
+<li><a href=#store>Store</a>
+<ul>
+<li><a href=#defining-a-store>Defining a Store</a></li>
+<li><a href=#using-the-store>Using the store</a></li>
+</ul>
+</li>
+<li><a href=#state>State</a>
+<ul>
+<li><a href=#accessing>Accessing</a></li>
+<li><a href=#resetting>Resetting</a></li>
+<li><a href=#mutating>Mutating</a></li>
+<li><a href=#replacing>Replacing</a></li>
+<li><a href=#subscribing>Subscribing</a></li>
+</ul>
+</li>
+<li><a href=#getters>Getters</a>
+<ul>
+<li><a href=#accessing-other-getters>Accessing other getters</a></li>
+<li><a href=#accessing-other-stores-getters>Accessing other stores getters</a></li>
+</ul>
+</li>
+<li><a href=#actions>Actions</a>
+<ul>
+<li><a href=#accessing-other-stores-actions>Accessing other stores actions</a></li>
+<li><a href=#file-structure>File Structure</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=pinia>Pinia</h1>
+<p>Pinia (pronounced like <code>/peenya/</code> in English) is the closest word to <em>piña</em> (<em>pineapple</em> in Spanish) that is a valid package name. A pineapple is in reality a group of individual flowers that join together to create a multiple fruit. Similar to stores, each one is born individually, but they are all connected at the end. It&rsquo;s also a delicious tropical fruit indigenous to South America.</p>
+<p>Not all applications need access to a global state, but if yours need one, Pinia will make your life easier.</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>import</span> <span class=p>{</span> <span class=nx>defineStore</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;pinia&#39;</span>
+
+<span class=kr>export</span> <span class=kr>const</span> <span class=nx>todos</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;todos&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>state</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>({</span>
+    <span class=cm>/** @type { text: string, id: number, isFinished: boolean }[] */</span>
+    <span class=nx>todos</span><span class=o>:</span> <span class=p>[],</span>
+    <span class=cm>/** @type {&#39;all&#39; | &#39;finished&#39; | &#39;unfinished&#39;} */</span>
+    <span class=nx>filter</span><span class=o>:</span> <span class=s1>&#39;all&#39;</span><span class=p>,</span>
+    <span class=c1>// type will be automatically inferred to number
+</span><span class=c1></span>    <span class=nx>nextId</span>: <span class=kt>0</span><span class=p>,</span>
+  <span class=p>}),</span>
+  <span class=nx>getters</span><span class=o>:</span> <span class=p>{</span>
+    <span class=nx>finishedTodos</span><span class=p>(</span><span class=nx>state</span><span class=p>)</span> <span class=p>{</span>
+      <span class=c1>// autocompletion! ✨
+</span><span class=c1></span>      <span class=k>return</span> <span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>.</span><span class=nx>filter</span><span class=p>((</span><span class=nx>todo</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>todo</span><span class=p>.</span><span class=nx>isFinished</span><span class=p>)</span>
+    <span class=p>},</span>
+    <span class=nx>unfinishedTodos</span><span class=p>(</span><span class=nx>state</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>return</span> <span class=nx>state</span><span class=p>.</span><span class=nx>todos</span><span class=p>.</span><span class=nx>filter</span><span class=p>((</span><span class=nx>todo</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=o>!</span><span class=nx>todo</span><span class=p>.</span><span class=nx>isFinished</span><span class=p>)</span>
+    <span class=p>},</span>
+    <span class=cm>/**
+</span><span class=cm>     * @returns { text: string, id: number, isFinished: boolean }[]
+</span><span class=cm>     */</span>
+    <span class=nx>filteredTodos</span><span class=p>(</span><span class=nx>state</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>if</span> <span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>filter</span> <span class=o>===</span> <span class=s1>&#39;finished&#39;</span><span class=p>)</span> <span class=p>{</span>
+        <span class=c1>// call other getters with autocompletion ✨
+</span><span class=c1></span>        <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>finishedTodos</span>
+      <span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=nx>filter</span> <span class=o>===</span> <span class=s1>&#39;unfinished&#39;</span><span class=p>)</span> <span class=p>{</span>
+        <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>unfinishedTodos</span>
+      <span class=p>}</span>
+      <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>todos</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+  <span class=nx>actions</span><span class=o>:</span> <span class=p>{</span>
+    <span class=c1>// any amount of arguments, return a promise or not
+</span><span class=c1></span>    <span class=nx>addTodo</span><span class=p>(</span><span class=nx>text</span><span class=p>)</span> <span class=p>{</span>
+      <span class=c1>// you can directly mutate the state
+</span><span class=c1></span>      <span class=k>this</span><span class=p>.</span><span class=nx>todos</span><span class=p>.</span><span class=nx>push</span><span class=p>({</span> <span class=nx>text</span><span class=p>,</span> <span class=nx>id</span>: <span class=kt>this.nextId</span><span class=o>++</span><span class=p>,</span> <span class=nx>isFinished</span>: <span class=kt>false</span> <span class=p>})</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=认识>认识</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>import</span> <span class=p>{</span> <span class=nx>createPinia</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;pinia&#39;</span><span class=p>;</span>
+
+<span class=nx>app</span><span class=p>.</span><span class=nx>use</span><span class=p>(</span><span class=nx>createPinia</span><span class=p>());</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>start by creating a store</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=c1>// stores/counter.js
+</span><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>defineStore</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;pinia&#39;</span>
+
+<span class=kr>export</span> <span class=kr>const</span> <span class=nx>useCounterStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;counter&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>state</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>({</span> <span class=nx>count</span>: <span class=kt>0</span> <span class=p>})</span>
+  
+  <span class=nx>actions</span><span class=o>:</span> <span class=p>{</span>
+    <span class=nx>increment() {</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>count</span><span class=o>++</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>use it in a component</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>import</span> <span class=p>{</span> <span class=nx>useCounterStore</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/stores/counter&#39;</span>
+
+<span class=kr>export</span> <span class=k>default</span> <span class=p>{</span>
+  <span class=nx>setup() {</span>
+    <span class=kr>const</span> <span class=nx>counter</span> <span class=o>=</span> <span class=nx>useCounterStore</span><span class=p>()</span>
+
+    <span class=nx>counter</span><span class=p>.</span><span class=nx>count</span><span class=o>++</span>
+    <span class=c1>// with autocompletion ✨
+</span><span class=c1></span>    <span class=nx>counter</span><span class=p>.</span><span class=nx>$patch</span><span class=p>({</span> <span class=nx>count</span>: <span class=kt>counter.count</span> <span class=o>+</span> <span class=mi>1</span> <span class=p>})</span>
+    <span class=c1>// or using an action instead
+</span><span class=c1></span>    <span class=nx>counter</span><span class=p>.</span><span class=nx>increment</span><span class=p>()</span>
+  <span class=p>},</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>You can even use a function (similar to a component <code>setup()</code>) to define a Store for more advanced use cases:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>export</span> <span class=kr>const</span> <span class=nx>useCounterStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;counter&#39;</span><span class=p>,</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+  <span class=kr>const</span> <span class=nx>count</span> <span class=o>=</span> <span class=nx>ref</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+  <span class=kd>function</span> <span class=nx>increment() {</span>
+    <span class=nx>count</span><span class=p>.</span><span class=nx>value</span><span class=o>++</span>
+  <span class=p>}</span>
+
+  <span class=k>return</span> <span class=p>{</span> <span class=nx>count</span><span class=p>,</span> <span class=nx>increment</span> <span class=p>}</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=安装>安装</h3>
+<p>安装需要 @next 因为 Pinia 2 处于 beta 阶段, Pinia 2 是对应 Vue3 的版本</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 使用 npm</span>
+npm install pinia@next
+<span class=c1># 使用 yarn</span>
+yarn add pinia@next
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=store>Store</h2>
+<p>A Store (like Pinia) is an entity holding state and business logic that isn&rsquo;t bound to your Component tree.</p>
+<p>In other words, it hosts global state.</p>
+<p>It&rsquo;s a bit like a component that is always there and that everybody can read off and write to.</p>
+<p>It has three concepts, the <strong>state, getters and actions</strong> and it&rsquo;s safe to assume these concepts are the equivalent of <strong>data, computed and methods</strong> in components.</p>
+<h3 id=defining-a-store>Defining a Store</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>import</span> <span class=p>{</span> <span class=nx>defineStore</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;pinia&#39;</span>
+
+<span class=c1>// useStore could be anything like useUser, useCart
+</span><span class=c1>// the first argument is a unique id of the store across your application
+</span><span class=c1></span><span class=kr>export</span> <span class=kr>const</span> <span class=nx>useStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;main&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=c1>// other options...
+</span><span class=c1></span><span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=using-the-store>Using the store</h3>
+<p>We are <em>defining</em> a store because the store won&rsquo;t be created until <code>useStore()</code> is called inside of <code>setup()</code>:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>import</span> <span class=p>{</span> <span class=nx>useStore</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;@/stores/counter&#39;</span>
+
+<span class=kr>export</span> <span class=k>default</span> <span class=p>{</span>
+  <span class=nx>setup() {</span>
+    <span class=kr>const</span> <span class=nx>store</span> <span class=o>=</span> <span class=nx>useStore</span><span class=p>()</span>
+
+    <span class=k>return</span> <span class=p>{</span>
+      <span class=c1>// you can return the whole store instance to use it in the template
+</span><span class=c1></span>      <span class=nx>store</span><span class=p>,</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Note that <code>store</code> is an object wrapped with <code>reactive</code>, meaning there is no need to write <code>.value</code> after getters but, like <code>props</code> in <code>setup</code>, <strong>we cannot destructure (解构) it</strong>:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>export</span> <span class=k>default</span> <span class=nx>defineComponent</span><span class=p>({</span>
+  <span class=nx>setup() {</span>
+    <span class=kr>const</span> <span class=nx>store</span> <span class=o>=</span> <span class=nx>useStore</span><span class=p>()</span>
+    <span class=c1>// ❌ This won&#39;t work because it breaks reactivity
+</span><span class=c1></span>    <span class=c1>// it&#39;s the same as destructuring from `props`
+</span><span class=c1></span>    <span class=kr>const</span> <span class=p>{</span> <span class=nx>name</span><span class=p>,</span> <span class=nx>doubleCount</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>store</span>
+
+    <span class=nx>name</span> <span class=c1>// &#34;eduardo&#34;
+</span><span class=c1></span>    <span class=nx>doubleCount</span> <span class=c1>// 2
+</span><span class=c1></span>
+    <span class=k>return</span> <span class=p>{</span>
+      <span class=c1>// will always be &#34;eduardo&#34;
+</span><span class=c1></span>      <span class=nx>name</span><span class=p>,</span>
+      <span class=c1>// will always be 2
+</span><span class=c1></span>      <span class=nx>doubleCount</span><span class=p>,</span>
+      <span class=c1>// this one will be reactive
+</span><span class=c1></span>      <span class=nx>doubleValue</span>: <span class=kt>computed</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=nx>store</span><span class=p>.</span><span class=nx>doubleCount</span><span class=p>),</span>
+      <span class=p>}</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>In order to extract properties from the store while keeping its reactivity, you need to use <code>storeToRefs()</code>. It will create refs for any reactive property. This is useful when you are only using state from the store but not calling any action:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>import</span> <span class=p>{</span> <span class=nx>storeToRefs</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;pinia&#39;</span>
+
+<span class=kr>export</span> <span class=k>default</span> <span class=nx>defineComponent</span><span class=p>({</span>
+  <span class=nx>setup() {</span>
+    <span class=kr>const</span> <span class=nx>store</span> <span class=o>=</span> <span class=nx>useStore</span><span class=p>()</span>
+    <span class=c1>// `name` and `doubleCount` are reactive refs
+</span><span class=c1></span>    <span class=c1>// This will also create refs for properties added by plugins
+</span><span class=c1></span>    <span class=c1>// but skip any action or non reactive (non ref/reactive) property
+</span><span class=c1></span>    <span class=kr>const</span> <span class=p>{</span> <span class=nx>name</span><span class=p>,</span> <span class=nx>doubleCount</span> <span class=p>}</span> <span class=o>=</span> <span class=nx>storeToRefs</span><span class=p>(</span><span class=nx>store</span><span class=p>)</span>
+
+    <span class=k>return</span> <span class=p>{</span>
+      <span class=nx>name</span><span class=p>,</span>
+      <span class=nx>doubleCount</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=state>State</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>import</span> <span class=p>{</span> <span class=nx>defineStore</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;pinia&#39;</span>
+
+<span class=kr>const</span> <span class=nx>useStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;storeId&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=c1>// arrow function recommended for full type inference
+</span><span class=c1></span>  <span class=nx>state</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+    <span class=k>return</span> <span class=p>{</span>
+      <span class=c1>// all these properties will have their type inferred automatically
+</span><span class=c1></span>      <span class=nx>counter</span>: <span class=kt>0</span><span class=p>,</span>
+      <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;Eduardo&#39;</span><span class=p>,</span>
+      <span class=nx>isAdmin</span>: <span class=kt>true</span><span class=p>,</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=accessing>Accessing</h3>
+<p>By default, you can directly read and write to the state by accessing it through the <code>store</code> instance:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>const</span> <span class=nx>store</span> <span class=o>=</span> <span class=nx>useStore</span><span class=p>()</span>
+
+<span class=nx>store</span><span class=p>.</span><span class=nx>counter</span><span class=o>++</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=resetting>Resetting</h3>
+<p>You can <em>reset</em> the state to its initial value by calling the <code>$reset()</code> method on the store:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>const</span> <span class=nx>store</span> <span class=o>=</span> <span class=nx>useStore</span><span class=p>()</span>
+
+<span class=nx>store</span><span class=p>.</span><span class=nx>$reset</span><span class=p>()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=mutating>Mutating</h3>
+<p>Apart from directly mutating the store with <code>store.counter++</code>, you can also call the <code>$patch</code> method. It allows you to apply multiple changes at the same time with a partial <code>state</code> object:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=nx>store</span><span class=p>.</span><span class=nx>$patch</span><span class=p>({</span>
+  <span class=nx>counter</span>: <span class=kt>store.counter</span> <span class=o>+</span> <span class=mi>1</span><span class=p>,</span>
+  <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;Abalam&#39;</span><span class=p>,</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>However, some mutations are really hard or costly to apply with this syntax: any collection modification (e.g. pushing, removing, splicing an element from an array) requires you to create a new collection. Because of this, the <code>$patch</code> method also accepts a function to group this kind of mutations that are difficult to apply with a patch object:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=nx>cartStore</span><span class=p>.</span><span class=nx>$patch</span><span class=p>((</span><span class=nx>state</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+  <span class=nx>state</span><span class=p>.</span><span class=nx>items</span><span class=p>.</span><span class=nx>push</span><span class=p>({</span> <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;shoes&#39;</span><span class=p>,</span> <span class=nx>quantity</span>: <span class=kt>1</span> <span class=p>})</span>
+  <span class=nx>state</span><span class=p>.</span><span class=nx>hasChanged</span> <span class=o>=</span> <span class=kc>true</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The main difference here is that <code>$patch()</code> allows you to group multiple changes into one single entry in the devtools. Note <strong>both, direct changes to <code>state</code> and <code>$patch()</code> appear in the devtools</strong> and can be time travelled (not yet in Vue 3).</p>
+<h3 id=replacing>Replacing</h3>
+<p>You can replace the whole state of a store by setting its <code>$state</code> property to a new object:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=nx>store</span><span class=p>.</span><span class=nx>$state</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>counter</span>: <span class=kt>666</span><span class=p>,</span> <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;Paimon&#39;</span> <span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>You can also replace the whole state of your application by changing the <code>state</code> of the <code>pinia</code> instance. This is used during SSR for hydration</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=nx>pinia</span><span class=p>.</span><span class=nx>state</span><span class=p>.</span><span class=nx>value</span> <span class=o>=</span> <span class=p>{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=subscribing>Subscribing</h3>
+<p>You can watch the state and its changes through the <code>$subscribe()</code> method of a store, similar to Vuex&rsquo;s subscribe method. The advantage of using <code>$subscribe()</code> over a regular <code>watch()</code> is that <em>subscriptions</em> will trigger only once after <em>patches</em> (e.g. when using the function version from above).</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=nx>cartStore</span><span class=p>.</span><span class=nx>$subscribe</span><span class=p>((</span><span class=nx>mutation</span><span class=p>,</span> <span class=nx>state</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+  <span class=c1>// import { MutationType } from &#39;pinia&#39;
+</span><span class=c1></span>  <span class=nx>mutation</span><span class=p>.</span><span class=kr>type</span> <span class=c1>// &#39;direct&#39; | &#39;patch object&#39; | &#39;patch function&#39;
+</span><span class=c1></span>  <span class=c1>// same as cartStore.$id
+</span><span class=c1></span>  <span class=nx>mutation</span><span class=p>.</span><span class=nx>storeId</span> <span class=c1>// &#39;cart&#39;
+</span><span class=c1></span>  <span class=c1>// only available with mutation.type === &#39;patch object&#39;
+</span><span class=c1></span>  <span class=nx>mutation</span><span class=p>.</span><span class=nx>payload</span> <span class=c1>// patch object passed to cartStore.$patch()
+</span><span class=c1></span>
+  <span class=c1>// persist the whole state to the local storage whenever it changes
+</span><span class=c1></span>  <span class=nx>localStorage</span><span class=p>.</span><span class=nx>setItem</span><span class=p>(</span><span class=s1>&#39;cart&#39;</span><span class=p>,</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>(</span><span class=nx>state</span><span class=p>))</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=getters>Getters</h2>
+<p>Getters are exactly the equivalent of computed values for the state of a Store. They can be defined with the <code>getters</code> property in <code>defineStore()</code>. They receive the <code>state</code> as the first parameter <strong>to encourage</strong> the usage of arrow function:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>export</span> <span class=kr>const</span> <span class=nx>useStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;main&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>state</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>({</span>
+    <span class=nx>counter</span>: <span class=kt>0</span><span class=p>,</span>
+  <span class=p>}),</span>
+  <span class=nx>getters</span><span class=o>:</span> <span class=p>{</span>
+    <span class=nx>doubleCount</span><span class=o>:</span> <span class=p>(</span><span class=nx>state</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>state</span><span class=p>.</span><span class=nx>counter</span> <span class=o>*</span> <span class=mi>2</span><span class=p>,</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Most of the time, getters will only rely on the state, however, they might need to use other getters. Because of this, we can get access to the <em>whole store instance</em> through <code>this</code> when defining a regular function <strong>but it is necessary to define the type of the return type (in TypeScript)</strong>. This is due to a known limitation in TypeScript and <strong>doesn&rsquo;t affect getters defined with an arrow function nor getters not using <code>this</code></strong>:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>export</span> <span class=kr>const</span> <span class=nx>useStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;main&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>state</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>({</span>
+    <span class=nx>counter</span>: <span class=kt>0</span><span class=p>,</span>
+  <span class=p>}),</span>
+  <span class=nx>getters</span><span class=o>:</span> <span class=p>{</span>
+    <span class=c1>// automatically infers the return type as a number
+</span><span class=c1></span>    <span class=nx>doubleCount</span><span class=p>(</span><span class=nx>state</span><span class=p>)</span> <span class=p>{</span>
+      <span class=k>return</span> <span class=nx>state</span><span class=p>.</span><span class=nx>counter</span> <span class=o>*</span> <span class=mi>2</span>
+    <span class=p>},</span>
+    <span class=c1>// the return type **must** be explicitly set
+</span><span class=c1></span>    <span class=nx>doublePlusOne</span><span class=p>()</span><span class=o>:</span> <span class=kt>number</span> <span class=p>{</span>
+      <span class=c1>// autocompletion and typings for the whole store ✨
+</span><span class=c1></span>      <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>counter</span> <span class=o>*</span> <span class=mi>2</span> <span class=o>+</span> <span class=mi>1</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Then you can access the getter directly on the store instance:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-vue data-lang=vue><span class=p>&lt;</span><span class=nt>template</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span><span class=nx>Double</span> <span class=nx>count</span> <span class=nx>is</span> <span class=p>{{</span> <span class=nx>store</span><span class=p>.</span><span class=nx>doubleCount</span> <span class=p>}}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>template</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=kr>export</span> <span class=k>default</span> <span class=p>{</span>
+  <span class=nx>setup</span><span class=p>()</span> <span class=p>{</span>
+    <span class=kr>const</span> <span class=nx>store</span> <span class=o>=</span> <span class=nx>useStore</span><span class=p>()</span>
+
+    <span class=k>return</span> <span class=p>{</span> <span class=nx>store</span> <span class=p>}</span>
+  <span class=p>},</span>
+<span class=p>}</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=accessing-other-getters>Accessing other getters</h3>
+<p>As with computed properties, you can combine multiple getters. Access any other getter via <code>this</code>. Even if you are not using TypeScript, you can hint your IDE for types with the JSDoc:</p>
+<blockquote>
+<p>绷不住了</p>
+</blockquote>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>export</span> <span class=kr>const</span> <span class=nx>useStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;main&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>state</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>({</span>
+    <span class=nx>counter</span>: <span class=kt>0</span><span class=p>,</span>
+  <span class=p>}),</span>
+  <span class=nx>getters</span><span class=o>:</span> <span class=p>{</span>
+    <span class=c1>// type is automatically inferred because we are not using `this`
+</span><span class=c1></span>    <span class=nx>doubleCount</span><span class=o>:</span> <span class=p>(</span><span class=nx>state</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>state</span><span class=p>.</span><span class=nx>counter</span> <span class=o>*</span> <span class=mi>2</span><span class=p>,</span>
+    <span class=c1>// here we need to add the type ourselves (using JSDoc in JS). We can also
+</span><span class=c1></span>    <span class=c1>// use this to document the getter
+</span><span class=c1></span>    <span class=cm>/**
+</span><span class=cm>     * Returns the counter value times two plus one.
+</span><span class=cm>     *
+</span><span class=cm>     * @returns {number}
+</span><span class=cm>     */</span>
+    <span class=nx>doubleCountPlusOne() {</span>
+      <span class=c1>// autocompletion ✨
+</span><span class=c1></span>      <span class=k>return</span> <span class=k>this</span><span class=p>.</span><span class=nx>doubleCount</span> <span class=o>+</span> <span class=mi>1</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=accessing-other-stores-getters>Accessing other stores getters</h3>
+<p>To use another store getters, you can directly <em>use it</em> inside of the <em>getter</em>:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>import</span> <span class=p>{</span> <span class=nx>useOtherStore</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./other-store&#39;</span>
+
+<span class=kr>export</span> <span class=kr>const</span> <span class=nx>useStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;main&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>state</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>({</span>
+    <span class=c1>// ...
+</span><span class=c1></span>  <span class=p>}),</span>
+  <span class=nx>getters</span><span class=o>:</span> <span class=p>{</span>
+    <span class=nx>otherGetter</span><span class=p>(</span><span class=nx>state</span><span class=p>)</span> <span class=p>{</span>
+      <span class=kr>const</span> <span class=nx>otherStore</span> <span class=o>=</span> <span class=nx>useOtherStore</span><span class=p>()</span>
+      <span class=k>return</span> <span class=nx>state</span><span class=p>.</span><span class=nx>localData</span> <span class=o>+</span> <span class=nx>otherStore</span><span class=p>.</span><span class=nx>data</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=actions>Actions</h2>
+<p>Actions are the equivalent of <a href=https://v3.vuejs.org/guide/data-methods.html#methods target=_blank rel="noopener noreffer">methods</a> in components. They can be defined with the <code>actions</code> property in <code>defineStore()</code> and <strong>they are perfect to define business logic</strong>:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>export</span> <span class=kr>const</span> <span class=nx>useStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;main&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>state</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>({</span>
+    <span class=nx>counter</span>: <span class=kt>0</span><span class=p>,</span>
+  <span class=p>}),</span>
+  <span class=nx>actions</span><span class=o>:</span> <span class=p>{</span>
+    <span class=nx>increment() {</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>counter</span><span class=o>++</span>
+    <span class=p>},</span>
+    <span class=nx>randomizeCounter() {</span>
+      <span class=k>this</span><span class=p>.</span><span class=nx>counter</span> <span class=o>=</span> <span class=nb>Math</span><span class=p>.</span><span class=nx>round</span><span class=p>(</span><span class=mi>100</span> <span class=o>*</span> <span class=nb>Math</span><span class=p>.</span><span class=nx>random</span><span class=p>())</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Actions are invoked like methods:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>export</span> <span class=k>default</span> <span class=nx>defineComponent</span><span class=p>({</span>
+  <span class=nx>setup() {</span>
+    <span class=kr>const</span> <span class=nx>main</span> <span class=o>=</span> <span class=nx>useMainStore</span><span class=p>()</span>
+    <span class=c1>// call the action as a method of the store
+</span><span class=c1></span>    <span class=nx>main</span><span class=p>.</span><span class=nx>randomizeCounter</span><span class=p>()</span>
+
+    <span class=k>return</span> <span class=p>{}</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=accessing-other-stores-actions>Accessing other stores actions</h3>
+<p>To use another store, you can directly <em>use it</em> inside of the <em>action</em>:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-ts data-lang=ts><span class=kr>import</span> <span class=p>{</span> <span class=nx>useAuthStore</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;./auth-store&#39;</span>
+
+<span class=kr>export</span> <span class=kr>const</span> <span class=nx>useSettingsStore</span> <span class=o>=</span> <span class=nx>defineStore</span><span class=p>(</span><span class=s1>&#39;settings&#39;</span><span class=p>,</span> <span class=p>{</span>
+  <span class=nx>state</span><span class=o>:</span> <span class=p>()</span> <span class=o>=&gt;</span> <span class=p>({</span>
+    <span class=c1>// ...
+</span><span class=c1></span>  <span class=p>}),</span>
+  <span class=nx>actions</span><span class=o>:</span> <span class=p>{</span>
+    <span class=kr>async</span> <span class=nx>fetchUserPreferences</span><span class=p>(</span><span class=nx>preferences</span><span class=p>)</span> <span class=p>{</span>
+      <span class=kr>const</span> <span class=nx>auth</span> <span class=o>=</span> <span class=nx>useAuthStore</span><span class=p>()</span>
+      <span class=k>if</span> <span class=p>(</span><span class=nx>auth</span><span class=p>.</span><span class=nx>isAuthenticated</span><span class=p>)</span> <span class=p>{</span>
+        <span class=k>this</span><span class=p>.</span><span class=nx>preferences</span> <span class=o>=</span> <span class=k>await</span> <span class=nx>fetchPreferences</span><span class=p>()</span>
+      <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+        <span class=k>throw</span> <span class=k>new</span> <span class=nb>Error</span><span class=p>(</span><span class=s1>&#39;User must be authenticated&#39;</span><span class=p>)</span>
+      <span class=p>}</span>
+    <span class=p>},</span>
+  <span class=p>},</span>
+<span class=p>})</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=file-structure>File Structure</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># Pinia equivalent, note ids match previous namespaces</span>
+src
+└── stores
+    ├── index.js          <span class=c1># (Optional) Initializes Pinia, does not import stores</span>
+    ├── module1.js        <span class=c1># &#39;module1&#39; id</span>
+    ├── nested-module2.js <span class=c1># &#39;nested/module3&#39; id</span>
+    ├── nested-module3.js <span class=c1># &#39;nested/module2&#39; id</span>
+    └── nested.js         <span class=c1># &#39;nested&#39; id</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/frontend/%E6%A1%86%E6%9E%B6/vue2/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/frontend/%E6%A1%86%E6%9E%B6/api-%E8%A7%84%E8%8C%83/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>

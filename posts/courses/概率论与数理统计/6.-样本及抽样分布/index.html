@@ -1,0 +1,387 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="样本及抽样分布 数理统计的基本概念 总体与个体 总体（母体）：具有一定共性的研究对象的全体，记为 $$\Bbb{X}$$ 个体：构成总体的每一个成员 总体的容量：个体的个数">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/6.-%E6%A0%B7%E6%9C%AC%E5%8F%8A%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="样本及抽样分布 数理统计的基本概念 总体与个体 总体（母体）：具有一定共性的研究对象的全体，记为 $$\Bbb{X}$$ 个体：构成总体的每一个成员 总体的容量：个体的个数">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/6.-%E6%A0%B7%E6%9C%AC%E5%8F%8A%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83/><link rel=prev href=http://example.org/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/7.-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1/><link rel=next href=http://example.org/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/5.-%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/courses\/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1\/6.-%E6%A0%B7%E6%9C%AC%E5%8F%8A%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83\/"},"genre":"posts","wordcount":2254,"url":"http:\/\/example.org\/posts\/courses\/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1\/6.-%E6%A0%B7%E6%9C%AC%E5%8F%8A%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2254 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#数理统计的基本概念>数理统计的基本概念</a>
+<ul>
+<li><a href=#总体与个体>总体与个体</a></li>
+<li><a href=#样本与样本分布>样本与样本分布</a></li>
+<li><a href=#统计量>统计量</a>
+<ul>
+<li><a href=#定义>定义</a></li>
+<li><a href=#常见的统计量及其观察值分布>常见的统计量及其观察值分布</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href=#抽样分布>抽样分布</a>
+<ul>
+<li><a href=#概念>概念</a></li>
+<li><a href=#分类>分类</a>
+<ul>
+<li><a href=#chi-2-分布>$$\chi ^2$$ 分布</a></li>
+<li><a href=#t-分布>$$t$$ 分布</a></li>
+<li><a href=#f-分布>$$F$$ 分布</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href=#分位数>分位数</a>
+<ul>
+<li><a href=#概念-1>概念</a></li>
+<li><a href=#常见分布的分位点>常见分布的分位点</a>
+<ul>
+<li><a href=#标准正态分布>标准正态分布</a></li>
+<li><a href=#chi2-分布>$$\chi^2$$ 分布</a></li>
+<li><a href=#t-分布-1>$$t$$ 分布</a></li>
+<li><a href=#f-分布-1>$$F$$ 分布</a></li>
+</ul>
+</li>
+<li><a href=#总结>总结</a></li>
+</ul>
+</li>
+<li><a href=#正态总体的样本均值与样本方差的分布>正态总体的样本均值与样本方差的分布</a>
+<ul>
+<li><a href=#定理一>定理一</a></li>
+<li><a href=#定理二>定理二</a></li>
+<li><a href=#定理三>定理三</a></li>
+<li><a href=#定理四>定理四</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=样本及抽样分布>样本及抽样分布</h1>
+<h2 id=数理统计的基本概念>数理统计的基本概念</h2>
+<h3 id=总体与个体>总体与个体</h3>
+<ul>
+<li>总体（母体）：具有一定共性的研究对象的全体，记为 $$\Bbb{X}$$</li>
+<li>个体：构成总体的每一个成员</li>
+<li>总体的容量：个体的个数</li>
+</ul>
+<h3 id=样本与样本分布>样本与样本分布</h3>
+<ul>
+<li>抽样：按一定的原则从$$\Bbb{X}$$中抽取若干个体</li>
+<li>样本：被抽出的部分个体（相互独立且同分布），记作$$X_1,X_2,\ldots,X_n$$</li>
+<li>总体分布：每一个个体可以看作一个随机变量，这个随机变量的分布即为总体分布</li>
+<li>样本容量：样本是一组随机变量$$X_1,X_2,\ldots,X_n$$，$$n$$即为样本容量</li>
+<li>样本值：对样本进行一次观察得到的一组观察值$$x_1,x_2,\ldots,x_n$$</li>
+<li>样本分布：样本$$(X_1,X_2,\ldots,X_n)$$的概率分布，有</li>
+</ul>
+<p>$$
+F(x_1,x_2,\ldots,x_n)=F(x_1)F(x_2)\ldots F(x_n)\
+f(x)=f(x_1)f(x_2)\ldots f(x_n)
+$$</p>
+<h3 id=统计量>统计量</h3>
+<h4 id=定义>定义</h4>
+<p>设 $$X_1,X_2,\ldots,X_n$$ 是来自总体 $$\Bbb{X}$$ 的一个样本，称此样本的任一<strong>不含总体分布未知参数</strong>的函数为该样本的统计量</p>
+<p>统计量是随机变量，不是一个数</p>
+<h4 id=常见的统计量及其观察值分布>常见的统计量及其观察值分布</h4>
+<ul>
+<li>样本均值</li>
+</ul>
+<p>$$
+\overline{X}=\cfrac{1}{n}\sum\limits_{i=1}^{n}X_i\
+\overline{x}=\cfrac{1}{n}\sum\limits_{i=1}^{n}x_i
+$$</p>
+<ul>
+<li>样本方差</li>
+</ul>
+<p>$$
+S^2=\cfrac{1}{n-1}\sum\limits_{i=1}^{n}(X_i-\overline{X})^2=\cfrac{1}{n-1}(\sum\limits_{i=1}^{n}X_i^2-n\overline{X}^2)\
+s^2=\frac{1}{n-1}\sum\limits_{i-1}^n(x_i-\overline{x})^2
+$$</p>
+<ul>
+<li>样本标准差</li>
+</ul>
+<p>$$
+S=\sqrt{\cfrac{1}{n-1}\sum\limits_{i=1}^{n}(X_i-\overline{X})^2}\
+s=\sqrt{\frac{1}{n-1}\sum\limits_{i-1}^n(x_i-\overline{x})^2}
+$$</p>
+<ul>
+<li>样本k阶（原点）矩</li>
+</ul>
+<p>$$
+A_k=\cfrac{1}{n}\sum\limits_{i=1}^nX_i^k\qquad k=1,2,\ldots\
+a_k=\cfrac{1}{n}\sum\limits_{i=1}^nx_i^k
+$$</p>
+<ul>
+<li>样本k阶中心矩</li>
+</ul>
+<p>$$
+B_k=\cfrac{1}{n}\sum\limits_{i=1}^n(X_i-\overline{X})^k\qquad k=2,3,\ldots\
+b_k=\cfrac{1}{n}\sum\limits_{i=1}^n(x_i-\overline{x})^k
+$$</p>
+<h2 id=抽样分布>抽样分布</h2>
+<h3 id=概念>概念</h3>
+<p>称统计量的分布为抽样分布（统计分布）</p>
+<h3 id=分类>分类</h3>
+<h4 id=chi-2-分布>$$\chi ^2$$ 分布</h4>
+<ul>
+<li>定义</li>
+</ul>
+<p>设 $$X_1,X_2,\ldots,X_n$$ 是来自总体 $$N(0,1)$$ 的样本，则称统计量
+$$
+\chi^2=X_1^2+X_2^2+\ldots+X_n^2=\sum\limits_{i=1}^{n}X_i^2
+$$
+服从自由度为 $$n$$ 的 $$\chi^2$$ 分布，记作 $$\chi^2\sim \chi^2(n)$$</p>
+<ul>
+<li>性质
+<ul>
+<li>$$\chi_1^2+\chi_2^2\sim \chi^2(n_1+n_2)$$</li>
+<li>$$E(\chi^2)=n\qquad D(\chi^2)=2n$$</li>
+<li>图形特征（扩展）
+<ul>
+<li>单峰曲线，在 n-2 时取到最大值</li>
+<li>不对称，n 越大越对称</li>
+<li>当 n 很大时可用正态分布来近似</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104111808290.png alt=image-20210104111808290 style=zoom:67%>
+<h4 id=t-分布>$$t$$ 分布</h4>
+<p>设$$X\sim N(0,1),Y\sim \chi^2(n)$$，且 $$X,Y$$ 相互独立，则称统计量
+$$
+t=\cfrac{X}{\sqrt{Y/n}}
+$$
+服从自由度为 $$n$$ 的 $$t$$ 分布（学生氏分布），记作 $$t\sim t(n)$$</p>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104112030093.png alt=image-20210104112030093 style=zoom:67%>
+<h4 id=f-分布>$$F$$ 分布</h4>
+<p>设 $$U\sim \chi^2(n_1),V\sim \chi^2(n_2)$$，且 $$U,V$$ 相互独立，则称统计量
+$$
+F=\cfrac{U/n_1}{V/n_2}
+$$
+服从自由度为 $$(n_1,n_2)$$的 $$F$$ 分布，记作 $$F\sim F(n_1,n_2)$$</p>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104112110879.png alt=image-20210104112110879 style=zoom:67%>
+<h2 id=分位数>分位数</h2>
+<p>（Quantile）</p>
+<h3 id=概念-1>概念</h3>
+<p>对随机变量$$X,0&lt;\alpha&lt;1$$</p>
+<ul>
+<li>若$$P{X>t_\alpha}=\alpha$$，则称$$t_\alpha$$为$$X$$的<strong>上$$\alpha$$分位点</strong></li>
+<li>若$$P({X&lt;t_{\alpha_1}}\cup{X>t_{\alpha_2}})=\alpha(\alpha_1+\alpha_2=1)$$，则称$$t_{\alpha_1}$$和$$t_{\alpha_2}$$为$$X$$的<strong>双侧$$\alpha$$分位点</strong></li>
+</ul>
+<p>通常取$$\alpha_2=\alpha/2,\alpha_1=1-\alpha/2$$</p>
+<h3 id=常见分布的分位点>常见分布的分位点</h3>
+<h4 id=标准正态分布>标准正态分布</h4>
+<p>设 $$X\sim N(0,1)$$，若数 $$z_\alpha$$ 满足
+$$
+P{X>z_\alpha}=\alpha,0&lt;\alpha&lt;1
+$$
+则称 $$z_\alpha$$ 为标准正态分布的上 $$\alpha$$ 分位点</p>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104105159982.png alt=image-20210104105159982 style=zoom:50%>
+<h4 id=chi2-分布>$$\chi^2$$ 分布</h4>
+<p>设$$\mathcal{X}^2\sim X^2(n)$$，若数$${\mathcal X_\alpha^2}(n)$$满足
+$$
+P{\mathcal{X}^2>X_\alpha^2(n)}=\alpha,0&lt;\alpha&lt;1
+$$
+则称$${\mathcal{X}_\alpha^2}(n)$$为$$\mathcal{X^2}(n)$$分布的上$$\alpha$$分位点</p>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104112014969.png alt=image-20210104112014969 style=zoom:67%>
+<h4 id=t-分布-1>$$t$$ 分布</h4>
+<p>设 $$t\sim t(n)$$，若数 $$t_\alpha(n)$$ 满足
+$$
+P{t>t_\alpha(n)}=\alpha,0&lt;\alpha&lt;1
+$$
+则称 $$t_\alpha(n)$$ 为 $$t(n)$$分布的上 $$\alpha$$ 分位点</p>
+<ul>
+<li>有$$t_{1-\alpha}(n)=-t_\alpha(n)$$</li>
+</ul>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104112042351.png alt=image-20210104112042351 style=zoom:67%>
+<h4 id=f-分布-1>$$F$$ 分布</h4>
+<p>设 $$F\sim F(n_1,n_2)$$，若数 $$F_\alpha(n_1,n_2)$$ 满足
+$$
+P{F>F_\alpha(n_1,n_2)}=\alpha,0&lt;\alpha&lt;1
+$$
+则称 $$F_\alpha(n_1,n_2)$$ 为$$F$$分布的上 $$\alpha$$ 分位点</p>
+<ul>
+<li>有$$F_\alpha(n_1,n_2)=\cfrac{1}{F_{1-\alpha}(n_2,n_1)}$$</li>
+</ul>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210104112123618.png alt=image-20210104112123618 style=zoom:67%>
+<h3 id=总结>总结</h3>
+<table>
+<thead>
+<tr>
+<th>分布名</th>
+<th>上 $$\alpha$$ 分位点</th>
+<th>双侧 $$\alpha$$ 分位点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准正态分布</td>
+<td>$$z_\alpha$$</td>
+<td>$$\pm z_{\alpha/2}$$</td>
+</tr>
+<tr>
+<td>$$\mathcal X^2$$ 分布</td>
+<td>$${\mathcal X_\alpha^2}(n)$$</td>
+<td>$${\mathcal X}^2_{\alpha/2}(n)\{\mathcal X}^2_{1-\alpha/2}(n)$$</td>
+</tr>
+<tr>
+<td>$$t$$ 分布</td>
+<td>$$t_\alpha(n)$$</td>
+<td>$$\pm t_{\alpha/2}(n)$$</td>
+</tr>
+<tr>
+<td>$$F$$ 分布</td>
+<td>$$F_\alpha(n_1,n_2)$$</td>
+<td>$$F_{\alpha/2}(n_1,n_2)\F_{1-\alpha/2}(n_1,n_2)$$</td>
+</tr>
+</tbody>
+</table>
+<h2 id=正态总体的样本均值与样本方差的分布>正态总体的样本均值与样本方差的分布</h2>
+<p>设总体$$\Bbb X$$的均值为$$\mu$$，方差为$$\sigma^2$$，$$X_1,X_2,\ldots,X_n$$是来自$$\Bbb X$$的一个样本，$$\overline{X}$$和$$S^2$$分别为该样本的样本均值和样本方差，则
+$$
+E(\overline{X})=\mu,D(\overline{X})=\cfrac{\sigma^2}{n}\
+E(S^2)=\sigma^2
+$$</p>
+<h3 id=定理一>定理一</h3>
+<p>设总体$$\Bbb X$$的分布为$$N(\mu,\sigma^2)$$，$$X_1,X_2,\ldots,X_n$$是来自$$\Bbb X$$的一个样本，$$\overline{X}$$为该样本的样本均值，则
+$$
+(1) \quad \overline{X}\sim N(\mu,\sigma^2/n)\qquad (2)\quad\cfrac{\overline{X}-\mu}{\sigma/\sqrt{n}}\sim N(0,1)
+$$</p>
+<h3 id=定理二>定理二</h3>
+<p>设总体$$\Bbb X$$的分布为$$N(\mu,\sigma^2)$$，$$X_1,X_2,\ldots,X_n$$是来自$$\Bbb X$$的一个样本，$$\overline{X}$$和$$S^2$$分别为该样本的样本均值和样本方差，则
+$$
+(1)\quad\cfrac{n-1}{\sigma^2}S^2\sim\chi^2(n-1)\qquad(2)\quad\overline{X}与S^2相互独立
+$$
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210106100451265.png alt=image-20210106100451265 style=zoom:50%></p>
+<h3 id=定理三>定理三</h3>
+<p>设总体$$\Bbb X$$的分布为$$N(\mu,\sigma^2)$$，$$X_1,X_2,\ldots,X_n$$是来自$$\Bbb X$$的一个样本，$$\overline{X}$$和$$S^2$$分别为该样本的样本均值和样本方差，则
+$$
+\cfrac{\overline{X}-\mu}{S/\sqrt{n}}\sim t(n-1)
+$$</p>
+<h3 id=定理四>定理四</h3>
+<p>设 $$X_1,X_2,\ldots,X_{n1}$$ 与 $$Y_1,Y_2,\ldots,Y_{n2}$$ 分别是来自两个相互独立的正态总体 $$N(\mu_1,\sigma^2_1)$$ 和 $$N(\mu_2,\sigma^2_2)$$ 的样本，$$\overline{X}$$ 和$$ \overline{Y}$$ 分别为这两个样本的样本均值，$$S_1^2$$ 和 $$S_2^2$$ 分别为这两个样本的样本方差，则
+$$
+(1)\quad\cfrac{(\overline{X}-\overline{Y})-(\mu_1-\mu_2)}{\sqrt{\sigma_1^2/n_1+\sigma_2^2/n_2}}\sim N(0,1)\qquad(2)\quad\cfrac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2}\sim F(n_1-1,n_2-1)</p>
+<p>\(3)当\sigma^2_1=\sigma^2_2=\sigma^2时，\quad\cfrac{(\overline{X}-\overline{Y})-(\mu_1-\mu_2)}{S_w\sqrt{\cfrac{1}{n_1}+\cfrac{1}{n_2}}}\sim t(n_1+n_2-2)
+\其中S_w=\sqrt{\cfrac{(n_1-1)S_1^2+(n_2-1)S^2_2}{n_1+n_2-2}}
+$$
+例</p>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210106101917339.png alt=image-20210106101917339 style=zoom:50%></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/7.-%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/courses/%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1/5.-%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B%E4%B8%8E%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>

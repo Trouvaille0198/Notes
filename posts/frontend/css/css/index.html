@@ -1,0 +1,2407 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="基本知识 简介 层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现 HTML（标准通用标记语言的一个应用）或 XML（标准通用标">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/frontend/css/css/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="基本知识 简介 层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现 HTML（标准通用标记语言的一个应用）或 XML（标准通用标">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/frontend/css/css/><link rel=prev href=http://example.org/posts/frontend/css/flex/><link rel=next href=http://example.org/posts/database/sqlite/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/frontend\/css\/css\/"},"genre":"posts","wordcount":7944,"url":"http:\/\/example.org\/posts\/frontend\/css\/css\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7944 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 16 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#简介>简介</a></li>
+<li><a href=#语法>语法</a></li>
+<li><a href=#引入方式>引入方式</a>
+<ul>
+<li><a href=#内联样式表>内联样式表</a></li>
+<li><a href=#内部样式表>内部样式表</a></li>
+<li><a href=#外部样式表>外部样式表</a></li>
+</ul>
+</li>
+<li><a href=#emmet-语法>Emmet 语法</a>
+<ul>
+<li><a href=#快速生成-html-语法>快速生成 HTML 语法</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href=#标签选择器>标签选择器</a></li>
+<li><a href=#类选择器>类选择器</a></li>
+<li><a href=#id-选择器>id 选择器</a></li>
+<li><a href=#通配符选择器>通配符选择器</a></li>
+<li><a href=#聚合选择器>聚合选择器</a></li>
+<li><a href=#特定选择器>特定选择器</a></li>
+<li><a href=#子元素选择器>子元素选择器</a></li>
+<li><a href=#属性选择器>属性选择器</a></li>
+<li><a href=#选择器查询表>选择器查询表</a></li>
+</ul>
+<ul>
+<li><a href=#字体-font-family>字体 font-family</a></li>
+<li><a href=#大小-font-size>大小 font-size</a>
+<ul>
+<li><a href=#属性值>属性值</a></li>
+<li><a href=#长度单位>长度单位</a>
+<ul>
+<li><a href=#绝对单位>绝对单位</a></li>
+<li><a href=#相对单位>相对单位</a></li>
+</ul>
+</li>
+<li><a href=#用em来设置字体大小>用em来设置字体大小</a></li>
+<li><a href=#使用百分比和em组合>使用百分比和EM组合</a></li>
+</ul>
+</li>
+<li><a href=#样式-font-style>样式 font-style</a></li>
+<li><a href=#粗细-font-weight>粗细 font-weight</a></li>
+<li><a href=#小型大写字母字体-font-variant>小型大写字母字体 font-variant</a></li>
+<li><a href=#字体复合属性-font>字体复合属性 font</a></li>
+</ul>
+<ul>
+<li><a href=#颜色-color>颜色 color</a></li>
+<li><a href=#对齐方式-text-align>对齐方式 text-align</a></li>
+<li><a href=#修饰-text-decoration>修饰 text-decoration</a></li>
+<li><a href=#首行文本缩进-text-indent>首行文本缩进 text-indent</a></li>
+<li><a href=#控制大小写-text-transform>控制大小写 text-transform</a></li>
+<li><a href=#字符间距-letter-spacing>字符间距 letter-spacing</a></li>
+<li><a href=#字间距-word-spacing>字间距 word-spacing</a></li>
+<li><a href=#行间距-line-height>行间距 line-height</a></li>
+<li><a href=#文字阴影-text-shadow>文字阴影 text-shadow</a></li>
+</ul>
+<ul>
+<li><a href=#颜色-background-color>颜色 background-color</a></li>
+<li><a href=#图像-background-image>图像 background-image</a></li>
+<li><a href=#图像重复设置-background-repeat>图像重复设置 background-repeat</a></li>
+<li><a href=#图像固定或滚动-background-attachment>图像固定或滚动 background-attachment</a></li>
+<li><a href=#图像起始位置-background-position>图像起始位置 background-position</a></li>
+<li><a href=#背景复合属性>背景复合属性</a></li>
+</ul>
+<ul>
+<li><a href=#图像替代-list-style-image>图像替代 list-style-image</a></li>
+<li><a href=#标记位置-list-style-position>标记位置 list-style-position</a></li>
+<li><a href=#标记类型-list-style-type>标记类型 list-style-type</a></li>
+<li><a href=#列表复合属性-list-style>列表复合属性 list-style</a></li>
+</ul>
+<ul>
+<li><a href=#边框属性-border>边框属性 border</a></li>
+<li><a href=#折叠边框-border-collapse>折叠边框 border-collapse</a></li>
+<li><a href=#表格宽度和高度-width-和-height>表格宽度和高度 Width 和 height</a></li>
+<li><a href=#表格文字对齐-text-align-和-vertical-align>表格文字对齐 text-align 和 vertical-align</a></li>
+<li><a href=#表格填充-padding>表格填充 padding</a></li>
+<li><a href=#表格颜色-color>表格颜色 color</a></li>
+<li><a href=#position>position</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=基本知识>基本知识</h1>
+<h2 id=简介>简介</h2>
+<p>层叠样式表(英文全称：Cascading Style Sheets)是一种用来表现 HTML（标准通用标记语言的一个应用）或 XML（标准通用标记语言的一个子集）等文件样式的计算机语言</p>
+<h2 id=语法>语法</h2>
+<p>选择器{声明}</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>selector</span> <span class=p>{</span> <span class=n>property</span><span class=p>:</span> <span class=n>value</span> <span class=p>}</span>
+
+<span class=c>/* Example */</span>
+<span class=nt>div</span> <span class=p>{</span>
+      <span class=k>font-size</span><span class=p>:</span> <span class=mi>100</span><span class=kt>px</span><span class=p>;</span>
+      <span class=k>color</span><span class=p>:</span> <span class=kc>red</span><span class=p>;</span>
+    <span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>选择器（Selector）：浏览器根据选择器决定哪些html元素受css样式的影响</p>
+</li>
+<li>
+<p>属性（Property）：是你要改变的样式名</p>
+</li>
+<li>
+<p>值（Value ）：将值分配给属性</p>
+</li>
+</ul>
+<p>注意</p>
+<ol>
+<li>
+<p>每个属性用；分开。</p>
+</li>
+<li>
+<p>CSS注释以 <strong>/*</strong> 开始, 以 <strong>*/</strong> 结束</p>
+</li>
+</ol>
+<h2 id=引入方式>引入方式</h2>
+<p>优先级：内联样式 > 内部样式 > 外部样式</p>
+<p>注意：如果外部样式放在内部样式的后面，则外部样式将覆盖内部样式</p>
+<h3 id=内联样式表>内联样式表</h3>
+<p>Inline style，也叫行内式</p>
+<p>在元素标签内部的style属性中设定CSS格式</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=o>&lt;</span><span class=nt>div</span> <span class=nt>style</span><span class=o>=</span><span class=s2>&#34;color: red; font-size: 12px;&#34;</span><span class=o>&gt;</span><span class=nt>起飞</span><span class=o>&lt;/</span><span class=nt>div</span><span class=o>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=内部样式表>内部样式表</h3>
+<p>Internal style sheet，也叫嵌入式</p>
+<p>将所有 CSS 代码抽取出来，单独放到一个 <code>&lt;style></code> 标签中</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=o>&lt;</span><span class=nt>style</span><span class=o>&gt;</span>
+<span class=nt>div</span> <span class=p>{</span>
+    <span class=k>border</span><span class=p>:</span> <span class=mi>2</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>green</span><span class=p>;</span>
+    <span class=k>font-size</span><span class=p>:</span> <span class=mi>100</span><span class=kt>px</span><span class=p>;</span>
+    <span class=k>color</span><span class=p>:</span> <span class=kc>green</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=o>&lt;/</span><span class=nt>style</span><span class=o>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=外部样式表>外部样式表</h3>
+<p>External style sheet，也叫链接式</p>
+<p>样式单独写到 CSS 文件中，把文件引入到 HTML 页面中使用</p>
+<p>建立步驟</p>
+<ol>
+<li>新建一个后缀名为 .css 样式的文件，把 CSS 代码放入其中</li>
+<li>用&lt;link>标签引入文件</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=o>&lt;</span><span class=nt>link</span> <span class=nt>rel</span><span class=o>=</span><span class=s2>&#34;stylesheet&#34;</span> <span class=nt>type</span><span class=o>=</span><span class=s2>&#34;text/css&#34;</span> <span class=nt>href</span><span class=o>=</span><span class=s2>&#34;css文件路径&#34;</span><span class=o>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=emmet-语法>Emmet 语法</h2>
+<h3 id=快速生成-html-语法>快速生成 HTML 语法</h3>
+<ul>
+<li>生成标签：写标签名，按 tab</li>
+<li>生成多个相同标签：标签名 *num，按 tab</li>
+<li>生成父子级标签：用 >，如 ul>li</li>
+<li>生成兄弟级标签：用 +，如 div+p</li>
+</ul>
+<h1 id=选择器>选择器</h1>
+<p>ID 选择器 > 类选择器 > 标签选择器</p>
+<h2 id=标签选择器>标签选择器</h2>
+<p>也叫元素选择器，selector 为标签名</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>div</span> <span class=p>{</span>
+  <span class=k>border</span><span class=p>:</span> <span class=mi>1</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>blue</span><span class=p>;</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mi>10</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>color</span><span class=p>:</span> <span class=kc>blue</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=类选择器>类选择器</h2>
+<p>以一个点 &ldquo;.&rdquo; 号显示</p>
+<p>任何标签都可以添加一个或多个 class 属性（类名间用空格分开），并且 class 属性是可以相同的</p>
+<p>类选择器实现差异化选择不同标签</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>class_name</span> <span class=p>{</span>
+  <span class=k>border</span><span class=p>:</span> <span class=mi>10</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>green</span><span class=p>;</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mi>30</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>color</span><span class=p>:</span> <span class=kc>green</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>可以单独设置拥有 class 名的特定标签的样式</strong></li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>h1</span><span class=p>.</span><span class=nc>black</span> <span class=p>{</span>
+   <span class=k>color</span><span class=p>:</span> <span class=mh>#000000</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上述规则仅将 <strong>class</strong> 属性设置为 black 的 <code>&lt;h1></code> 元素呈现为黑色</p>
+<ul>
+<li><strong>可以单独设置位于拥有 class 名的标签内部的标签的样式</strong></li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>black</span> <span class=nt>h1</span> <span class=p>{</span>
+   <span class=k>color</span><span class=p>:</span> <span class=mh>#000000</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在此示例中，当所有 <code>&lt;h1></code> 位于 id 属性设置为 black 的标签中时，这些标题将以黑色显示</p>
+<h2 id=id-选择器>id 选择器</h2>
+<p>以 &ldquo;#&rdquo; 来定义</p>
+<p>任何标签都可以添加 id 属性，并且一个页面的 id 应该保持<strong>唯一性</strong></p>
+<p>只能调用一次，一般用于页面唯一性的元素上</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>#</span><span class=nn>id_name</span> <span class=p>{</span>
+  <span class=k>border</span><span class=p>:</span> <span class=mi>5</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>red</span><span class=p>;</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mi>20</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>color</span><span class=p>:</span> <span class=kc>red</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=通配符选择器>通配符选择器</h2>
+<p>使用 “*” 定义，表示选取页面中所有的元素（标签）</p>
+<p>不需要调用，作用于全局</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=o>*</span> <span class=p>{</span>
+  <span class=k>border</span><span class=p>:</span> <span class=mi>10</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>green</span><span class=p>;</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mi>30</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>color</span><span class=p>:</span> <span class=kc>green</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=聚合选择器>聚合选择器</h2>
+<p>可以将样式应用于许多选择器，只需用逗号分隔</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>h1</span><span class=o>,</span> <span class=nt>h2</span><span class=o>,</span> <span class=nt>h3</span> <span class=p>{</span>
+   <span class=k>color</span><span class=p>:</span> <span class=mh>#36C</span><span class=p>;</span>
+   <span class=k>font-weight</span><span class=p>:</span> <span class=kc>normal</span><span class=p>;</span>
+   <span class=k>letter-spacing</span><span class=p>:</span> <span class=mf>.4</span><span class=kt>em</span><span class=p>;</span>
+   <span class=k>margin-bottom</span><span class=p>:</span> <span class=mi>1</span><span class=kt>em</span><span class=p>;</span>
+   <span class=k>text-transform</span><span class=p>:</span> <span class=kc>lowercase</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=p>#</span><span class=nn>content</span><span class=o>,</span> <span class=p>#</span><span class=nn>footer</span><span class=o>,</span> <span class=p>#</span><span class=nn>supplement</span> <span class=p>{</span>
+   <span class=k>position</span><span class=p>:</span> <span class=kc>absolute</span><span class=p>;</span>
+   <span class=k>left</span><span class=p>:</span> <span class=mi>510</span><span class=kt>px</span><span class=p>;</span>
+   <span class=k>width</span><span class=p>:</span> <span class=mi>200</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=特定选择器>特定选择器</h2>
+<p>假设仅当样式规则位于特定元素内时，才希望将其应用于特定元素</p>
+<p>如以下示例所示，样式规则仅在 <code>&lt;em></code> 元素位于 <code>&lt;ul></code> 标签内时才适用</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>ul</span> <span class=nt>em</span> <span class=p>{</span>
+   <span class=k>color</span><span class=p>:</span> <span class=mh>#000000</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=子元素选择器>子元素选择器</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>body</span> <span class=o>&gt;</span> <span class=nt>p</span> <span class=p>{</span>
+   <span class=k>color</span><span class=p>:</span> <span class=mh>#000000</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>&lt;body></code> 元素的直接 <code>&lt;p></code> 子元素将呈现为黑色</p>
+<h2 id=属性选择器>属性选择器</h2>
+<p>将样式应用于具有特定属性的 HTML 元素</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>input</span><span class=o>[</span><span class=nt>type</span><span class=o>=</span><span class=s2>&#34;text&#34;</span><span class=o>]</span> <span class=p>{</span>
+   <span class=k>color</span><span class=p>:</span> <span class=mh>#000000</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上述样式规则将匹配所有具有 type 属性值为 text 的输入元素</p>
+<p>以下规则适用于属性选择器</p>
+<ul>
+<li><code>p [lang]</code> - 选择有 lang 属性的所有段落元素。</li>
+<li><code>p [lang ="fr"]</code> - 选择其 lang 属性的值为" fr"的所有段落元素。</li>
+<li><code>p [lang~="fr"]</code> - 选择所有 lang 属性包含单词" fr"的段落元素。</li>
+<li><code>p [lang|="en"]</code> - 选择其 lang 属性包含的值完全为" en"或以"en-&ldquo;开始的所有段落元素。</li>
+</ul>
+<h2 id=选择器查询表>选择器查询表</h2>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>例子</th>
+<th>例子描述</th>
+<th>CSS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.<em>class</em></td>
+<td>.intro</td>
+<td>选择 class=&ldquo;intro&rdquo; 的所有元素。</td>
+<td>1</td>
+</tr>
+<tr>
+<td>#<em>id</em></td>
+<td>#firstname</td>
+<td>选择 id=&ldquo;firstname&rdquo; 的所有元素。</td>
+<td>1</td>
+</tr>
+<tr>
+<td>*</td>
+<td>*</td>
+<td>选择所有元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td><em>element</em></td>
+<td>p</td>
+<td>选择所有 &lt;p> 元素。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><em>element</em>, <em>element</em></td>
+<td>div,p</td>
+<td>选择所有 &lt;div> 元素和所有 &lt;p> 元素。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><em>element</em> <em>element</em></td>
+<td>div p</td>
+<td>选择 &lt;div> 元素内部的所有 &lt;p> 元素。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><em>element</em> > <em>element</em></td>
+<td>div>p</td>
+<td>选择父元素为 &lt;div> 元素的所有 &lt;p> 元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td><em>element</em> + <em>element</em></td>
+<td>div+p</td>
+<td>选择紧接在 &lt;div> 元素之后的所有 &lt;p> 元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td>[<em>attribute</em>]</td>
+<td>[target]</td>
+<td>选择带有 target 属性所有元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td>[<em>attribute</em>=<em>value</em>]</td>
+<td>[target=_blank]</td>
+<td>选择 target="_blank&rdquo; 的所有元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td>[<em>attribute</em>~=<em>value</em>]</td>
+<td>[title~=flower]</td>
+<td>选择 title 属性包含单词 &ldquo;flower&rdquo; 的所有元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td>[<em>attribute</em>|=<em>value</em>]</td>
+<td>[lang|=en]</td>
+<td>选择 lang 属性值以 &ldquo;en&rdquo; 开头并用“-”分隔的字符串的所有元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td>:link</td>
+<td>a:link</td>
+<td>选择所有未被访问的链接。</td>
+<td>1</td>
+</tr>
+<tr>
+<td>:visited</td>
+<td>a:visited</td>
+<td>选择所有已被访问的链接。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_active.asp target=_blank rel="noopener noreffer">:active</a></td>
+<td>a:active</td>
+<td>选择活动链接。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_hover.asp target=_blank rel="noopener noreffer">:hover</a></td>
+<td>a:hover</td>
+<td>选择鼠标指针位于其上的链接。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_focus.asp target=_blank rel="noopener noreffer">:focus</a></td>
+<td>input:focus</td>
+<td>选择获得焦点的 input 元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_first-letter.asp target=_blank rel="noopener noreffer">:first-letter</a></td>
+<td>p:first-letter</td>
+<td>选择每个 &lt;p> 元素的首字母。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_first-line.asp target=_blank rel="noopener noreffer">:first-line</a></td>
+<td>p:first-line</td>
+<td>选择每个 &lt;p> 元素的首行。</td>
+<td>1</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_first-child.asp target=_blank rel="noopener noreffer">:first-child</a></td>
+<td>p:first-child</td>
+<td>选择属于父元素的第一个子元素的每个 &lt;p> 元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_before.asp target=_blank rel="noopener noreffer">:before</a></td>
+<td>p:before</td>
+<td>在每个 &lt;p> 元素的内容之前插入内容。</td>
+<td>2</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_after.asp target=_blank rel="noopener noreffer">:after</a></td>
+<td>p:after</td>
+<td>在每个 &lt;p> 元素的内容之后插入内容。</td>
+<td>2</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_lang.asp target=_blank rel="noopener noreffer">:lang(<em>language</em>)</a></td>
+<td>p:lang(it)</td>
+<td>选择带有以 &ldquo;it&rdquo; 开头的 lang 属性值的每个 &lt;p> 元素。</td>
+<td>2</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_gen_sibling.asp target=_blank rel="noopener noreffer"><em>element1</em>~<em>element2</em></a></td>
+<td>p~ul</td>
+<td>选择前面有 &lt;p> 元素的每个 &lt;ul> 元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td>[<a href=https://www.w3school.com.cn/cssref/selector_attr_begin.asp target=_blank rel="noopener noreffer"><em>attribute</em>^=<em>value</em>]</a></td>
+<td>a[src^=&ldquo;https&rdquo;]</td>
+<td>选择其 src 属性值以 &ldquo;https&rdquo; 开头的每个 &lt;a> 元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td>[<a href=https://www.w3school.com.cn/cssref/selector_attr_end.asp target=_blank rel="noopener noreffer"><em>attribute</em>$=<em>value</em>]</a></td>
+<td>a[src$=".pdf"]</td>
+<td>选择其 src 属性以 &ldquo;.pdf&rdquo; 结尾的所有 &lt;a> 元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td>[<a href=https://www.w3school.com.cn/cssref/selector_attr_contain.asp target=_blank rel="noopener noreffer"><em>attribute</em>*=<em>value</em>]</a></td>
+<td>a[src*=&ldquo;abc&rdquo;]</td>
+<td>选择其 src 属性中包含 &ldquo;abc&rdquo; 子串的每个 &lt;a> 元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_first-of-type.asp target=_blank rel="noopener noreffer">:first-of-type</a></td>
+<td>p:first-of-type</td>
+<td>匹配同类型(&lt;p>)中的<strong>第一个</strong>同级兄弟(含自己) &lt;p> 元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_last-of-type.asp target=_blank rel="noopener noreffer">:last-of-type</a></td>
+<td>p:last-of-type</td>
+<td>匹配同类型(&lt;p>)中的<strong>最后一个</strong>同级兄弟(含自己) &lt;p> 元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_only-of-type.asp target=_blank rel="noopener noreffer">:only-of-type</a></td>
+<td>p:only-of-type</td>
+<td>选择属于其父元素<strong>唯一的</strong> &lt;p> 元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_only-child.asp target=_blank rel="noopener noreffer">:only-child</a></td>
+<td>p:only-child</td>
+<td>选择属于其父元素的唯一子元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_nth-child.asp target=_blank rel="noopener noreffer">:nth-child(<em>n</em>)</a></td>
+<td>p:nth-child(2)</td>
+<td>选择属于p的父元素的第二个子元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_nth-last-child.asp target=_blank rel="noopener noreffer">:nth-last-child(<em>n</em>)</a></td>
+<td>p:nth-last-child(2)</td>
+<td>同上，从最后一个子元素开始计数。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_nth-of-type.asp target=_blank rel="noopener noreffer">:nth-of-type(<em>n</em>)</a></td>
+<td>p:nth-of-type(2)</td>
+<td>选择属于p的父元素第二个同类（这里是p）元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_nth-last-of-type.asp target=_blank rel="noopener noreffer">:nth-last-of-type(<em>n</em>)</a></td>
+<td>p:nth-last-of-type(2)</td>
+<td>同上，但是从最后一个子元素开始计数。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_last-child.asp target=_blank rel="noopener noreffer">:last-child</a></td>
+<td>p:last-child</td>
+<td>选择属于其父元素最后一个子元素每个 &lt;p> 元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_root.asp target=_blank rel="noopener noreffer">:root</a></td>
+<td>:root</td>
+<td>选择文档的根元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_empty.asp target=_blank rel="noopener noreffer">:empty</a></td>
+<td>p:empty</td>
+<td>选择没有子元素的每个 &lt;p> 元素（包括文本节点）。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_target.asp target=_blank rel="noopener noreffer">:target</a></td>
+<td>#news:target</td>
+<td>选择当前活动的 #news 元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_enabled.asp target=_blank rel="noopener noreffer">:enabled</a></td>
+<td>input:enabled</td>
+<td>选择每个启用的 &lt;input> 元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_disabled.asp target=_blank rel="noopener noreffer">:disabled</a></td>
+<td>input:disabled</td>
+<td>选择每个禁用的 &lt;input> 元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_checked.asp target=_blank rel="noopener noreffer">:checked</a></td>
+<td>input:checked</td>
+<td>选择每个被选中的 &lt;input> 元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_not.asp target=_blank rel="noopener noreffer">:not(<em>selector</em>)</a></td>
+<td>:not(p)</td>
+<td>选择非 &lt;p> 元素的每个元素。</td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href=https://www.w3school.com.cn/cssref/selector_selection.asp target=_blank rel="noopener noreffer">::selection</a></td>
+<td>::selection</td>
+<td>选择被用户选取的元素部分。</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<h1 id=字体属性>字体属性</h1>
+<p>（Font）</p>
+<p>CSS 字体属性定义字体，加粗，大小，文字样式</p>
+<h2 id=字体-font-family>字体 font-family</h2>
+<ul>
+<li>
+<p>font - family 属性指定一个元素的字体。</p>
+</li>
+<li>
+<p>font-family 可以把多个字体名称作为一个"回退"系统来保存。如果浏览器不支持第一个字体，则会尝试下一个</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>p</span> <span class=p>{</span>
+  <span class=k>font-family</span><span class=p>:</span> <span class=s2>&#34;Times New Roman&#34;</span><span class=p>,</span> <span class=n>Georgia</span><span class=p>,</span> <span class=n>Serif</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>有两种类型的字体系列名称</p>
+<ul>
+<li><strong>family-name</strong> - 指定的系列名称：具体字体的名称，比如：&ldquo;times&rdquo;、&ldquo;courier&rdquo;、&ldquo;arial&rdquo;</li>
+<li><strong>generic-family</strong> - 通常字体系列名称：比如：&ldquo;serif&rdquo;、&ldquo;sans-serif&rdquo;、&ldquo;cursive&rdquo;、&ldquo;fantasy&rdquo;、&ldquo;monospace</li>
+</ul>
+<p>注意</p>
+<ul>
+<li>每个值用逗号分开</li>
+<li>如果字体名称包含空格，它必须加上引号；在HTML中使用"style"属性时，必须使用单引号</li>
+</ul>
+<h2 id=大小-font-size>大小 font-size</h2>
+<p>font-size 属性用于设置字体大小</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>p</span> <span class=p>{</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mi>18</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=属性值>属性值</h3>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>xx-small x-small small medium large x-large xx-large</td>
+<td style=text-align:left>把字体的尺寸设置为不同的尺寸，从 xx-small 到 xx-large。默认值：medium。</td>
+</tr>
+<tr>
+<td style=text-align:left>smaller</td>
+<td style=text-align:left>把 font-size 设置为比父元素更小的尺寸。</td>
+</tr>
+<tr>
+<td style=text-align:left>larger</td>
+<td style=text-align:left>把 font-size 设置为比父元素更大的尺寸。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>length</em></td>
+<td style=text-align:left>把 font-size 设置为一个固定的值。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>%</em></td>
+<td style=text-align:left>把 font-size 设置为基于父元素的一个百分比值。</td>
+</tr>
+</tbody>
+</table>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=c>/* &lt;absolute-size&gt;，绝对大小值 */</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>xx-small</span><span class=o>;</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>x-small</span><span class=o>;</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>small</span><span class=o>;</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>medium</span><span class=o>;</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>large</span><span class=o>;</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>x-large</span><span class=o>;</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>xx-large</span><span class=o>;</span>
+
+<span class=c>/* &lt;relative-size&gt;，相对大小值 */</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>larger</span><span class=o>;</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>smaller</span><span class=o>;</span>
+
+<span class=c>/* &lt;length&gt;，长度值 */</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>12px</span><span class=o>;</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>0</span><span class=p>.</span><span class=nc>8em</span><span class=o>;</span>
+
+<span class=c>/* &lt;percentage&gt;，百分比值 */</span>
+<span class=nt>font-size</span><span class=o>:</span> <span class=nt>80</span><span class=o>%;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=长度单位>长度单位</h3>
+<h4 id=绝对单位>绝对单位</h4>
+<p>1 <code>in</code>=2.54<code>cm</code>=25.4<code>mm</code>=72<code>pt</code>=6<code>pc</code>。</p>
+<p>各种单位的含义：</p>
+<ul>
+<li><code>in</code>：英寸Inches (1 英寸 = 2.54 厘米)</li>
+<li><code>cm</code>：厘米Centimeters</li>
+<li><code>mm</code>：毫米Millimeters</li>
+<li><code>pt</code>：点Points，或者叫英镑 (1点 = 1/72英寸)</li>
+<li><code>pc</code>：皮卡Picas (1 皮卡 = 12 点)</li>
+</ul>
+<h4 id=相对单位>相对单位</h4>
+<ul>
+<li><code>px</code>：像素</li>
+<li><code>em</code>：印刷单位相当于12个点</li>
+</ul>
+<h3 id=用em来设置字体大小>用em来设置字体大小</h3>
+<p>为了避免Internet Explorer 中无法调整文本的问题，许多开发者使用 em 单位代替像素。</p>
+<p>em的尺寸单位由W3C建议。</p>
+<p>1em和当前字体大小相等。在浏览器中默认的文字大小是16px，因此有<strong>px/16=em</strong></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>h1</span> <span class=p>{</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mf>2.5</span><span class=kt>em</span><span class=p>;</span>
+<span class=p>}</span> <span class=c>/* 40px/16=2.5em */</span>
+<span class=nt>h2</span> <span class=p>{</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mf>1.875</span><span class=kt>em</span><span class=p>;</span>
+<span class=p>}</span> <span class=c>/* 30px/16=1.875em */</span>
+<span class=nt>p</span> <span class=p>{</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mf>0.875</span><span class=kt>em</span><span class=p>;</span>
+<span class=p>}</span> <span class=c>/* 14px/16=0.875em */</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=使用百分比和em组合>使用百分比和EM组合</h3>
+<p>在所有浏览器的解决方案中，设置 &lt;body>元素的默认字体大小的是百分比</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>body</span> <span class=p>{</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h1</span> <span class=p>{</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mf>2.5</span><span class=kt>em</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h2</span> <span class=p>{</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mf>1.875</span><span class=kt>em</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>p</span> <span class=p>{</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mf>0.875</span><span class=kt>em</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=样式-font-style>样式 font-style</h2>
+<p>font-style属性指定文本的字体样式</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>p</span> <span class=p>{</span>
+  <span class=k>font-style</span><span class=p>:</span> <span class=kc>italic</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>normal</td>
+<td style=text-align:left>默认值。浏览器显示一个标准的字体样式。</td>
+</tr>
+<tr>
+<td style=text-align:left>italic</td>
+<td style=text-align:left>浏览器会显示一个斜体的字体样式。</td>
+</tr>
+<tr>
+<td style=text-align:left>oblique</td>
+<td style=text-align:left>浏览器会显示一个倾斜的字体样式。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=粗细-font-weight>粗细 font-weight</h2>
+<p>font-weight 属性设置文本的粗细</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>p</span><span class=p>.</span><span class=nc>normal</span> <span class=p>{</span>
+  <span class=k>font-weight</span><span class=p>:</span> <span class=kc>normal</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nt>p</span><span class=p>.</span><span class=nc>thick</span> <span class=p>{</span>
+  <span class=k>font-weight</span><span class=p>:</span> <span class=kc>bold</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nt>p</span><span class=p>.</span><span class=nc>thicker</span> <span class=p>{</span>
+  <span class=k>font-weight</span><span class=p>:</span> <span class=mi>900</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>normal</td>
+<td style=text-align:left>默认值。定义标准的字符。</td>
+</tr>
+<tr>
+<td style=text-align:left>bold</td>
+<td style=text-align:left>定义粗体字符。</td>
+</tr>
+<tr>
+<td style=text-align:left>bolder</td>
+<td style=text-align:left>定义更粗的字符。</td>
+</tr>
+<tr>
+<td style=text-align:left>lighter</td>
+<td style=text-align:left>定义更细的字符。</td>
+</tr>
+<tr>
+<td style=text-align:left>100 200 300 400 500 600 700</td>
+<td style=text-align:left>定义由细到粗的字符。400 等同于 normal，而 700 等同于 bold。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=小型大写字母字体-font-variant>小型大写字母字体 font-variant</h2>
+<p>font-variant 属性设置小型大写字母的字体显示文本，这意味着所有的小写字母均会被转换为大写，但是所有使用小型大写字体的字母与其余文本相比，其字体尺寸更小</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>p</span> <span class=p>{</span>
+  <span class=k>font-variant</span><span class=p>:</span> <span class=kc>small-caps</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>normal</td>
+<td style=text-align:left>默认值。浏览器会显示一个标准的字体。</td>
+</tr>
+<tr>
+<td style=text-align:left>small-caps</td>
+<td style=text-align:left>浏览器会显示小型大写字母的字体。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=字体复合属性-font>字体复合属性 font</h2>
+<p>font 简写属性在一个声明中设置所有字体属性。</p>
+<p>可设置的属性是（按顺序）： &ldquo;font-style font-variant font-weight font-size/line-height font-family&rdquo;</p>
+<p>font-size和font-family的值是必需的。如果缺少了其他值，默认值将被插入，如果有默认值的话</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>p</span><span class=p>.</span><span class=nc>ex1</span> <span class=p>{</span>
+  <span class=k>font</span><span class=p>:</span> <span class=mi>15</span><span class=kt>px</span> <span class=n>arial</span><span class=p>,</span> <span class=kc>sans-serif</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nt>p</span><span class=p>.</span><span class=nc>ex2</span> <span class=p>{</span>
+  <span class=k>font</span><span class=p>:</span> <span class=kc>italic</span> <span class=kc>bold</span> <span class=mi>12</span><span class=kt>px</span><span class=o>/</span><span class=mi>30</span><span class=kt>px</span> <span class=n>Georgia</span><span class=p>,</span> <span class=kc>serif</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=文本>文本</h1>
+<p>Text</p>
+<h2 id=颜色-color>颜色 color</h2>
+<p>color属性指定文本的颜色</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>body</span> <span class=p>{</span>
+  <span class=k>color</span><span class=p>:</span> <span class=kc>red</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h1</span> <span class=p>{</span>
+  <span class=k>color</span><span class=p>:</span> <span class=mh>#00ff00</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>p</span> <span class=p>{</span>
+  <span class=k>color</span><span class=p>:</span> <span class=nb>rgb</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>255</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+<th style=text-align:left>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><em>颜色名称</em></td>
+<td style=text-align:left>颜色的名称，比如red, blue, brown, lightseagreen等，不区分大小写。</td>
+<td style=text-align:left>color:red; 红色 color:black; 黑色 color:gray; 灰色 color:white; 白色 color:purple; 紫色</td>
+</tr>
+<tr>
+<td style=text-align:left><em>十六进制</em></td>
+<td style=text-align:left>十六进制符号 #RRGGBB 和 #RGB（比如 #ff0000）。"#&rdquo; 后跟 6 位或者 3 位十六进制字符（0-9, A-F）。</td>
+<td style=text-align:left>#f03 #F03 #ff0033 #FF0033</td>
+</tr>
+<tr>
+<td style=text-align:left><em>RGB</em></td>
+<td style=text-align:left>函数格式为 rgb(R,G,B)，取值可以是 0-255 的整数或百分比。</td>
+<td style=text-align:left>rgb(255,0,51) rgb(255, 0, 51) rgb(100%,0%,20%) rgb(100%, 0%, 20%)</td>
+</tr>
+</tbody>
+</table>
+<h2 id=对齐方式-text-align>对齐方式 text-align</h2>
+<p>text-align属性指定元素文本的水平对齐方式。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>h1</span> <span class=p>{</span>
+  <span class=k>text-align</span><span class=p>:</span> <span class=kc>center</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h2</span> <span class=p>{</span>
+  <span class=k>text-align</span><span class=p>:</span> <span class=kc>left</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h3</span> <span class=p>{</span>
+  <span class=k>text-align</span><span class=p>:</span> <span class=kc>right</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>left</td>
+<td style=text-align:left>把文本排列到左边。默认值：由浏览器决定。</td>
+</tr>
+<tr>
+<td style=text-align:left>right</td>
+<td style=text-align:left>把文本排列到右边。</td>
+</tr>
+<tr>
+<td style=text-align:left>center</td>
+<td style=text-align:left>把文本排列到中间。</td>
+</tr>
+<tr>
+<td style=text-align:left>justify</td>
+<td style=text-align:left>实现两端对齐文本效果。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=修饰-text-decoration>修饰 text-decoration</h2>
+<p>text-decoration 属性规定添加到文本的修饰，下划线、上划线、删除线等</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>h1</span><span class=p>.</span><span class=nc>under</span> <span class=p>{</span>
+  <span class=k>text-decoration</span><span class=p>:</span> <span class=kc>underline</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h1</span><span class=p>.</span><span class=nc>over</span> <span class=p>{</span>
+  <span class=k>text-decoration</span><span class=p>:</span> <span class=kc>overline</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>p</span><span class=p>.</span><span class=nc>line</span> <span class=p>{</span>
+  <span class=k>text-decoration</span><span class=p>:</span> <span class=kc>line-through</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>p</span><span class=p>.</span><span class=nc>blink</span> <span class=p>{</span>
+  <span class=k>text-decoration</span><span class=p>:</span> <span class=kc>blink</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>a</span><span class=p>.</span><span class=nc>none</span> <span class=p>{</span>
+  <span class=k>text-decoration</span><span class=p>:</span> <span class=kc>none</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>p</span><span class=p>.</span><span class=nc>underover</span> <span class=p>{</span>
+  <span class=k>text-decoration</span><span class=p>:</span> <span class=kc>underline</span> <span class=kc>overline</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h3</span> <span class=p>{</span>
+  <span class=k>text-decoration</span><span class=p>:</span> <span class=kc>underline</span> <span class=kc>wavy</span> <span class=kc>red</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>text-decoration 属性是以下三种属性的简写：</p>
+<ul>
+<li>text-decoration-line</li>
+<li>text-decoration-color</li>
+<li>text-decoration-style</li>
+</ul>
+<p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>none</td>
+<td style=text-align:left>默认。定义标准的文本。</td>
+</tr>
+<tr>
+<td style=text-align:left>underline</td>
+<td style=text-align:left>定义文本下的一条线。</td>
+</tr>
+<tr>
+<td style=text-align:left>overline</td>
+<td style=text-align:left>定义文本上的一条线。</td>
+</tr>
+<tr>
+<td style=text-align:left>line-through</td>
+<td style=text-align:left>定义穿过文本下的一条线。</td>
+</tr>
+<tr>
+<td style=text-align:left>blink</td>
+<td style=text-align:left>定义闪烁的文本。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=首行文本缩进-text-indent>首行文本缩进 text-indent</h2>
+<p>text-indent 属性规定文本块中首行文本的缩进。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-CSS data-lang=CSS><span class=nt>p</span> <span class=p>{</span>
+  <span class=k>text-indent</span><span class=p>:</span> <span class=mi>50</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><em>length</em></td>
+<td style=text-align:left>定义固定的缩进。默认值：0。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>%</em></td>
+<td style=text-align:left>定义基于父元素宽度的百分比的缩进。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=控制大小写-text-transform>控制大小写 text-transform</h2>
+<p>text-transform 属性控制文本的大小写。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>h1</span> <span class=p>{</span>
+  <span class=k>text-transform</span><span class=p>:</span> <span class=kc>uppercase</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h2</span> <span class=p>{</span>
+  <span class=k>text-transform</span><span class=p>:</span> <span class=kc>capitalize</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>p</span> <span class=p>{</span>
+  <span class=k>text-transform</span><span class=p>:</span> <span class=kc>lowercase</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>none</td>
+<td style=text-align:left>默认。定义带有小写字母和大写字母的标准的文本。</td>
+</tr>
+<tr>
+<td style=text-align:left>capitalize</td>
+<td style=text-align:left>文本中的每个单词以大写字母开头。</td>
+</tr>
+<tr>
+<td style=text-align:left>uppercase</td>
+<td style=text-align:left>定义仅有大写字母。</td>
+</tr>
+<tr>
+<td style=text-align:left>lowercase</td>
+<td style=text-align:left>定义无大写字母，仅有小写字母。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=字符间距-letter-spacing>字符间距 letter-spacing</h2>
+<p>letter-spacing 属性增加或减少字符间的空白（字符间距）</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>h1</span> <span class=p>{</span>
+  <span class=k>letter-spacing</span><span class=p>:</span> <span class=mi>2</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>h2</span> <span class=p>{</span>
+  <span class=k>letter-spacing</span><span class=p>:</span> <span class=mi>-3</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>normal</td>
+<td style=text-align:left>默认。规定字符间没有额外的空间。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>length</em></td>
+<td style=text-align:left>定义字符间的固定空间（允许使用负值）。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=字间距-word-spacing>字间距 word-spacing</h2>
+<p>word-spacing属性增加或减少字与字之间的空白。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>p</span> <span class=p>{</span>
+  <span class=k>word-spacing</span><span class=p>:</span> <span class=mi>30</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>normal</td>
+<td style=text-align:left>默认。定义单词间的标准空间。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>length</em></td>
+<td style=text-align:left>定义单词间的固定空间。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=行间距-line-height>行间距 line-height</h2>
+<p>line-height 设置以百分比计的行高</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>p</span><span class=p>.</span><span class=nc>small</span> <span class=p>{</span>
+  <span class=k>line-height</span><span class=p>:</span> <span class=mi>90</span><span class=kt>%</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>p</span><span class=p>.</span><span class=nc>big</span> <span class=p>{</span>
+  <span class=k>line-height</span><span class=p>:</span> <span class=mi>200</span><span class=kt>%</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>normal</td>
+<td style=text-align:left>默认。设置合理的行间距。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>number</em></td>
+<td style=text-align:left>设置数字，此数字会与当前的字体尺寸相乘来设置行间距。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>length</em></td>
+<td style=text-align:left>设置固定的行间距。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>%</em></td>
+<td style=text-align:left>基于当前字体尺寸的百分比行间距。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=文字阴影-text-shadow>文字阴影 text-shadow</h2>
+<p>text-shadow 属性应用于阴影文本</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>h1</span> <span class=p>{</span>
+  <span class=k>text-shadow</span><span class=p>:</span> <span class=mi>2</span><span class=kt>px</span> <span class=mi>2</span><span class=kt>px</span> <span class=mh>#ff0000</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>语法</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>text-shadow: h-shadow v-shadow blur color;
+</code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><em>h-shadow</em></td>
+<td style=text-align:left>必需。水平阴影的位置。允许负值。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>v-shadow</em></td>
+<td style=text-align:left>必需。垂直阴影的位置。允许负值。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>blur</em></td>
+<td style=text-align:left>可选。模糊的距离。</td>
+</tr>
+<tr>
+<td style=text-align:left><em>color</em></td>
+<td style=text-align:left>可选。阴影的颜色。</td>
+</tr>
+</tbody>
+</table>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>h1</span> <span class=na>style</span><span class=o>=</span><span class=s>&#34;text-shadow:0 0 3px #FF0000;&#34;</span><span class=p>&gt;</span>Text-shadow with neon glow<span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 style="text-shadow:0 0 3px red">Text-shadow with neon glow</h1>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>h1</span> <span class=na>style</span><span class=o>=</span><span class=s>&#34;text-shadow:2px 2px 8px #FF0000;&#34;</span><span class=p>&gt;</span>Text-shadow with neon glow<span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 style="text-shadow:2px 2px 8px red">Text-shadow with neon glow</h1>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>h1</span> <span class=na>style</span><span class=o>=</span><span class=s>&#34;color:white; text-shadow:2px 2px 4px #000000;&#34;</span><span class=p>&gt;</span>Text-shadow with neon glow<span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 style="color:#fff;text-shadow:2px 2px 4px #000">Text-shadow with neon glow</h1>
+<h1 id=背景>背景</h1>
+<p>Backgrounds</p>
+<h2 id=颜色-background-color>颜色 background-color</h2>
+<p>background-color属性设置一个元素的背景颜色。</p>
+<p>元素的背景是元素的总大小，包括填充和边界（但不包括边距）</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>body</span> <span class=p>{</span>
+    <span class=k>background-color</span><span class=p>:</span> <span class=kc>yellow</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nt>h1</span> <span class=p>{</span>
+    <span class=k>background-color</span><span class=p>:</span> <span class=mh>#00ff00</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=nt>p</span> <span class=p>{</span>
+    <span class=k>background-color</span><span class=p>:</span> <span class=nb>rgb</span><span class=p>(</span><span class=mi>255</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>255</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><em>color</em></td>
+<td style=text-align:left>指定背景颜色。在<a href=https://www.runoob.com/css/css-colors-legal.html target=_blank rel="noopener noreffer">CSS颜色值</a>近可能的寻找一个颜色值的完整列表。</td>
+</tr>
+<tr>
+<td style=text-align:left>transparent</td>
+<td style=text-align:left>指定背景颜色应该是透明的。这是默认</td>
+</tr>
+</tbody>
+</table>
+<h2 id=图像-background-image>图像 background-image</h2>
+<p>background-image 属性设置一个元素的背景图像。</p>
+<p>元素的背景是元素的总大小，包括填充和边界（但不包括边距）。</p>
+<p>默认情况下，background-image放置在元素的左上角，并重复垂直和水平方向。</p>
+<p>提示：请设置一种可用的背景颜色，这样的话，假如背景图像不可用，可以使用背景色带代替。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>body</span> <span class=p>{</span>
+    <span class=k>background-image</span><span class=p>:</span> <span class=nb>url</span><span class=p>(</span><span class=s1>&#39;paper.gif&#39;</span><span class=p>);</span>
+    <span class=k>background-color</span><span class=p>:</span> <span class=mh>#cccccc</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>url(<em>&lsquo;URL&rsquo;</em>)</td>
+<td style=text-align:left>图像的URL</td>
+</tr>
+<tr>
+<td style=text-align:left>none</td>
+<td style=text-align:left>无图像背景会显示。这是默认</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.runoob.com/cssref/func-linear-gradient.html target=_blank rel="noopener noreffer">linear-gradient()</a></td>
+<td style=text-align:left>创建一个线性渐变的 &ldquo;图像&rdquo;(从上到下)</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.runoob.com/cssref/func-radial-gradient.html target=_blank rel="noopener noreffer">radial-gradient()</a></td>
+<td style=text-align:left>用径向渐变创建 &ldquo;图像&rdquo;。 (center to edges)</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.runoob.com/cssref/func-repeating-linear-gradient.html target=_blank rel="noopener noreffer">repeating-linear-gradient()</a></td>
+<td style=text-align:left>创建重复的线性渐变 &ldquo;图像&rdquo;。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.runoob.com/cssref/func-repeating-radial-gradient.html target=_blank rel="noopener noreffer">repeating-radial-gradient()</a></td>
+<td style=text-align:left>创建重复的径向渐变 &ldquo;图像&rdquo;</td>
+</tr>
+</tbody>
+</table>
+<h2 id=图像重复设置-background-repeat>图像重复设置 background-repeat</h2>
+<p>设置如何平铺对象的 background-image 属性。</p>
+<p>默认情况下，重复background-image的垂直和水平方向。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>body</span> <span class=p>{</span>
+    <span class=k>background-image</span><span class=p>:</span> <span class=nb>url</span><span class=p>(</span><span class=s1>&#39;paper.gif&#39;</span><span class=p>);</span>
+    <span class=k>background-repeat</span><span class=p>:</span> <span class=kc>repeat-y</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>repeat</td>
+<td style=text-align:left>背景图像将向垂直和水平方向重复。（默认）</td>
+</tr>
+<tr>
+<td style=text-align:left>repeat-x</td>
+<td style=text-align:left>只有水平位置会重复背景图像</td>
+</tr>
+<tr>
+<td style=text-align:left>repeat-y</td>
+<td style=text-align:left>只有垂直位置会重复背景图像</td>
+</tr>
+<tr>
+<td style=text-align:left>no-repeat</td>
+<td style=text-align:left>background-image不会重复，即显示图片原长</td>
+</tr>
+</tbody>
+</table>
+<h2 id=图像固定或滚动-background-attachment>图像固定或滚动 background-attachment</h2>
+<p>background-attachment设置背景图像是否固定或者随着页面的其余部分滚动。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>body</span>
+<span class=p>{</span>
+    <span class=k>background-image</span><span class=p>:</span><span class=nb>url</span><span class=p>(</span><span class=s1>&#39;smiley.gif&#39;</span><span class=p>);</span>
+    <span class=k>background-repeat</span><span class=p>:</span><span class=kc>no-repeat</span><span class=p>;</span>
+    <span class=k>background-attachment</span><span class=p>:</span><span class=kc>fixed</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>scroll</td>
+<td style=text-align:left>背景图片随着页面的滚动而滚动，这是默认的。</td>
+</tr>
+<tr>
+<td style=text-align:left>fixed</td>
+<td style=text-align:left>背景图片不会随着页面的滚动而滚动。</td>
+</tr>
+<tr>
+<td style=text-align:left>local</td>
+<td style=text-align:left>背景图片会随着元素内容的滚动而滚动。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=图像起始位置-background-position>图像起始位置 background-position</h2>
+<p>background-position属性设置背景图像的起始位置。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>body</span> <span class=p>{</span>
+    <span class=k>background-image</span><span class=p>:</span> <span class=nb>url</span><span class=p>(</span><span class=s1>&#39;smiley.gif&#39;</span><span class=p>);</span>
+    <span class=k>background-repeat</span><span class=p>:</span> <span class=kc>no-repeat</span><span class=p>;</span>
+    <span class=k>background-attachment</span><span class=p>:</span> <span class=kc>fixed</span><span class=p>;</span>
+    <span class=k>background-position</span><span class=p>:</span> <span class=kc>center</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>left top， left center， left bottom， right top， right center， right bottom， center top， center center， center bottom</td>
+<td style=text-align:left>如果仅指定一个关键字，其他值将会是"center"</td>
+</tr>
+<tr>
+<td style=text-align:left><em>x% y%</em></td>
+<td style=text-align:left>第一个值是水平位置，第二个值是垂直。左上角是0％0％。右下角是100％100％。如果仅指定了一个值，其他值将是50％。 。默认值为：0％0％</td>
+</tr>
+<tr>
+<td style=text-align:left><em>xpos ypos</em></td>
+<td style=text-align:left>第一个值是水平位置，第二个值是垂直。左上角是0。单位可以是像素（0px0px）或任何其他 <a href=https://www.runoob.com/try/css-units.html target=_blank rel="noopener noreffer">CSS单位</a>。如果仅指定了一个值，其他值将是50％。你可以混合使用％和positions</td>
+</tr>
+</tbody>
+</table>
+<h2 id=背景复合属性>背景复合属性</h2>
+<p>背景缩写属性可以在一个声明中设置所有的背景属性。</p>
+<p>可以设置的属性分别是：background-color、background-position、background-size、background-repeat、background-origin、background-clip、background-attachment 和 background-image。</p>
+<p>各值之间用空格分隔，不分先后顺序。可以只有其中的某些值</p>
+<blockquote>
+<p>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</p>
+</blockquote>
+<p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>说明</th>
+<th style=text-align:left>CSS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><em><a href=https://www.runoob.com/cssref/pr-background-color.html target=_blank rel="noopener noreffer">background-color</a></em></td>
+<td style=text-align:left>指定要使用的背景颜色</td>
+<td style=text-align:left>1</td>
+</tr>
+<tr>
+<td style=text-align:left><em><a href=https://www.runoob.com/cssref/pr-background-position.html target=_blank rel="noopener noreffer">background-position</a></em></td>
+<td style=text-align:left>指定背景图像的位置</td>
+<td style=text-align:left>1</td>
+</tr>
+<tr>
+<td style=text-align:left><em><a href=https://www.runoob.com/cssref/css3-pr-background-size.html target=_blank rel="noopener noreffer">background-size</a></em></td>
+<td style=text-align:left>指定背景图片的大小</td>
+<td style=text-align:left>3</td>
+</tr>
+<tr>
+<td style=text-align:left><em><a href=https://www.runoob.com/cssref/pr-background-repeat.html target=_blank rel="noopener noreffer">background-repeat</a></em></td>
+<td style=text-align:left>指定如何重复背景图像</td>
+<td style=text-align:left>1</td>
+</tr>
+<tr>
+<td style=text-align:left><em><a href=https://www.runoob.com/cssref/css3-pr-background-origin.html target=_blank rel="noopener noreffer">background-origin</a></em></td>
+<td style=text-align:left>指定背景图像的定位区域</td>
+<td style=text-align:left>3</td>
+</tr>
+<tr>
+<td style=text-align:left><em><a href=https://www.runoob.com/cssref/css3-pr-background-clip.html target=_blank rel="noopener noreffer">background-clip</a></em></td>
+<td style=text-align:left>指定背景图像的绘画区域</td>
+<td style=text-align:left>3</td>
+</tr>
+<tr>
+<td style=text-align:left><em><a href=https://www.runoob.com/cssref/pr-background-attachment.html target=_blank rel="noopener noreffer">background-attachment</a></em></td>
+<td style=text-align:left>设置背景图像是否固定或者随着页面的其余部分滚动。</td>
+<td style=text-align:left>1</td>
+</tr>
+<tr>
+<td style=text-align:left><em><a href=https://www.runoob.com/cssref/pr-background-image.html target=_blank rel="noopener noreffer">background-image</a></em></td>
+<td style=text-align:left>指定要使用的一个或多个背景图像</td>
+<td style=text-align:left></td>
+</tr>
+</tbody>
+</table>
+<h1 id=链接>链接</h1>
+<p>链接的样式，可以用任何CSS属性（如颜色，字体，背景等）</p>
+<p>特别的链接，可以有不同的样式，这取决于他们是什么状态</p>
+<p>这四个链接状态是：</p>
+<ul>
+<li>a:link - 正常，未访问过的链接</li>
+<li>a:visited - 用户已访问过的链接</li>
+<li>a:hover - 当用户鼠标放在链接上时</li>
+<li>a:active - 链接被点击的那一刻</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=c>/* 未访问链接*/</span>
+<span class=nt>a</span><span class=p>:</span><span class=nd>link</span> <span class=p>{</span>
+    <span class=k>color</span><span class=p>:</span> <span class=mh>#000000</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=c>/* 已访问链接 */</span>
+<span class=nt>a</span><span class=p>:</span><span class=nd>visited</span> <span class=p>{</span>
+    <span class=k>color</span><span class=p>:</span> <span class=mh>#00FF00</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=c>/* 鼠标移动到链接上 */</span>
+<span class=nt>a</span><span class=p>:</span><span class=nd>hover</span> <span class=p>{</span>
+    <span class=k>color</span><span class=p>:</span> <span class=mh>#FF00FF</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=c>/* 鼠标点击时 */</span>
+<span class=nt>a</span><span class=p>:</span><span class=nd>active</span> <span class=p>{</span>
+    <span class=k>color</span><span class=p>:</span> <span class=mh>#0000FF</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>规则</p>
+<p>四种状态<strong>必须按照固定的顺序写</strong>，也就是所谓的“爱恨原则”（LoVe/HAte）：</p>
+<blockquote>
+<p>a:link 、a:visited 、a:hover 、a:active</p>
+</blockquote>
+<h1 id=列表>列表</h1>
+<p>CSS 列表属性作用如下：</p>
+<ul>
+<li>设置不同的列表项标记为有序列表</li>
+<li>设置不同的列表项标记为无序列表</li>
+<li>设置列表项标记为图像</li>
+</ul>
+<h2 id=图像替代-list-style-image>图像替代 list-style-image</h2>
+<p>list-style-image 属性使用图像来替换列表项的标记。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>ul</span> <span class=p>{</span>
+    <span class=k>list-style-image</span><span class=p>:</span> <span class=nb>url</span><span class=p>(</span><span class=s1>&#39;sqpurple.gif&#39;</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><em>URL</em></td>
+<td style=text-align:left>图像的路径。</td>
+</tr>
+<tr>
+<td style=text-align:left>none</td>
+<td style=text-align:left>默认。无图形被显示。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=标记位置-list-style-position>标记位置 list-style-position</h2>
+<p>list-style-position 属性指示如何相对于对象的内容绘制列表项标记</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>ul</span> <span class=p>{</span>
+    <span class=k>list-style-position</span><span class=p>:</span> <span class=kc>inside</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>inside</td>
+<td style=text-align:left>列表项目标记放置在文本以内，且环绕文本根据标记对齐。</td>
+</tr>
+<tr>
+<td style=text-align:left>outside</td>
+<td style=text-align:left>默认值。保持标记位于文本的左侧。列表项目标记放置在文本以外，且环绕文本不根据标记对齐。</td>
+</tr>
+</tbody>
+</table>
+<p>该列表的 list-style-position 的值是 "inside"：</p>
+<ul class=inside style=list-style-position:inside>
+<li>Earl Grey Tea - 一种黑颜色的茶</li>
+<li>Jasmine Tea - 一种神奇的“全功能”茶</li>
+<li>Honeybush Tea - 一种令人愉快的果味茶</li>
+</ul>
+<p>该列表的 list-style-position 的值是 "outside"：</p>
+<ul class=outside style=list-style-position:outside>
+<li>Earl Grey Tea - 一种黑颜色的茶</li>
+<li>Jasmine Tea - 一种神奇的“全功能”茶</li>
+<li>Honeybush Tea - 一种令人愉快的果味茶</li>
+</ul>
+<h2 id=标记类型-list-style-type>标记类型 list-style-type</h2>
+<p>list-style-type 属性设置列表项标记的类型</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>ul</span><span class=p>.</span><span class=nc>circle</span> <span class=p>{</span>
+    <span class=k>list-style-type</span><span class=p>:</span> <span class=kc>circle</span>
+<span class=p>}</span>
+
+<span class=nt>ul</span><span class=p>.</span><span class=nc>square</span> <span class=p>{</span>
+    <span class=k>list-style-type</span><span class=p>:</span> <span class=kc>square</span>
+<span class=p>}</span>
+
+<span class=nt>ol</span><span class=p>.</span><span class=nc>upper-roman</span> <span class=p>{</span>
+    <span class=k>list-style-type</span><span class=p>:</span> <span class=kc>upper-roman</span>
+<span class=p>}</span>
+
+<span class=nt>ol</span><span class=p>.</span><span class=nc>lower-alpha</span> <span class=p>{</span>
+    <span class=k>list-style-type</span><span class=p>:</span> <span class=kc>lower-alpha</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>none</td>
+<td style=text-align:left>无标记。</td>
+</tr>
+<tr>
+<td style=text-align:left>disc</td>
+<td style=text-align:left>默认。标记是实心圆。</td>
+</tr>
+<tr>
+<td style=text-align:left>circle</td>
+<td style=text-align:left>标记是空心圆。</td>
+</tr>
+<tr>
+<td style=text-align:left>square</td>
+<td style=text-align:left>标记是实心方块。</td>
+</tr>
+<tr>
+<td style=text-align:left>decimal</td>
+<td style=text-align:left>标记是数字。</td>
+</tr>
+<tr>
+<td style=text-align:left>decimal-leading-zero</td>
+<td style=text-align:left>0开头的数字标记。(01, 02, 03, 等。)</td>
+</tr>
+<tr>
+<td style=text-align:left>lower-roman</td>
+<td style=text-align:left>小写罗马数字(i, ii, iii, iv, v, 等。)</td>
+</tr>
+<tr>
+<td style=text-align:left>upper-roman</td>
+<td style=text-align:left>大写罗马数字(I, II, III, IV, V, 等。)</td>
+</tr>
+<tr>
+<td style=text-align:left>lower-alpha</td>
+<td style=text-align:left>小写英文字母The marker is lower-alpha (a, b, c, d, e, 等。)</td>
+</tr>
+<tr>
+<td style=text-align:left>upper-alpha</td>
+<td style=text-align:left>大写英文字母The marker is upper-alpha (A, B, C, D, E, 等。)</td>
+</tr>
+<tr>
+<td style=text-align:left>lower-greek</td>
+<td style=text-align:left>小写希腊字母(alpha, beta, gamma, 等。)</td>
+</tr>
+<tr>
+<td style=text-align:left>lower-latin</td>
+<td style=text-align:left>小写拉丁字母(a, b, c, d, e, 等。)</td>
+</tr>
+<tr>
+<td style=text-align:left>upper-latin</td>
+<td style=text-align:left>大写拉丁字母(A, B, C, D, E, 等。)</td>
+</tr>
+<tr>
+<td style=text-align:left>hebrew</td>
+<td style=text-align:left>传统的希伯来编号方式</td>
+</tr>
+<tr>
+<td style=text-align:left>armenian</td>
+<td style=text-align:left>传统的亚美尼亚编号方式</td>
+</tr>
+<tr>
+<td style=text-align:left>georgian</td>
+<td style=text-align:left>传统的乔治亚编号方式(an, ban, gan, 等。)</td>
+</tr>
+<tr>
+<td style=text-align:left>cjk-ideographic</td>
+<td style=text-align:left>简单的表意数字</td>
+</tr>
+<tr>
+<td style=text-align:left>hiragana</td>
+<td style=text-align:left>标记是：a, i, u, e, o, ka, ki, 等。（日文平假名字符）</td>
+</tr>
+<tr>
+<td style=text-align:left>katakana</td>
+<td style=text-align:left>标记是：A, I, U, E, O, KA, KI, 等。（日文片假名字符）</td>
+</tr>
+<tr>
+<td style=text-align:left>hiragana-iroha</td>
+<td style=text-align:left>标记是：i, ro, ha, ni, ho, he, to, 等。（日文平假名序号）</td>
+</tr>
+<tr>
+<td style=text-align:left>katakana-iroha</td>
+<td style=text-align:left>标记是：I, RO, HA, NI, HO, HE, TO, 等。（日文片假名序号）</td>
+</tr>
+</tbody>
+</table>
+<p>无序列表实例:</p>
+<ul class=a style=list-style-type:circle>
+<li>Coffee</li>
+<li>Tea</li>
+<li>Coca Cola</li>
+</ul>
+<ul class=b style=list-style-type:square>
+<li>Coffee</li>
+<li>Tea</li>
+<li>Coca Cola</li>
+</ul>
+<p>有序列表实例:</p>
+<ol class=c style=list-style-type:upper-roman>
+<li>Coffee</li>
+<li>Tea</li>
+<li>Coca Cola</li>
+</ol>
+<ol class=d style=list-style-type:lower-alpha>
+<li>Coffee</li>
+<li>Tea</li>
+<li>Coca Cola</li>
+</ol>
+<h2 id=列表复合属性-list-style>列表复合属性 list-style</h2>
+<p>list-style 简写属性在一个声明中设置所有的列表属性</p>
+<p>可以设置的属性（按顺序）： list-style-type, list-style-position, list-style-image.</p>
+<p>可以不设置其中的某个值，比如 &ldquo;list-style:circle inside;&rdquo; 也是允许的。未设置的属性会使用其默认值</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>ul</span> <span class=p>{</span>
+    <span class=k>list-style</span><span class=p>:</span> <span class=kc>square</span> <span class=nb>url</span><span class=p>(</span><span class=s2>&#34;sqpurple.gif&#34;</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>属性值</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>值</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><em>list-style-type</em></td>
+<td style=text-align:left>设置列表项标记的类型</td>
+</tr>
+<tr>
+<td style=text-align:left><em>list-style-position</em></td>
+<td style=text-align:left>设置在何处放置列表项标记</td>
+</tr>
+<tr>
+<td style=text-align:left><em>list-style-image</em></td>
+<td style=text-align:left>使用图像来替换列表项的标记</td>
+</tr>
+<tr>
+<td style=text-align:left><em>initial</em></td>
+<td style=text-align:left>将这个属性设置为默认值</td>
+</tr>
+</tbody>
+</table>
+<h1 id=表格>表格</h1>
+<h2 id=边框属性-border>边框属性 border</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>table</span><span class=o>,</span> <span class=nt>th</span><span class=o>,</span> <span class=nt>td</span>
+<span class=p>{</span>
+    <span class=k>border</span><span class=p>:</span> <span class=mi>1</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>black</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在上面的例子中的表格有双边框。这是因为表和 th/ td 元素有独立的边界。</p>
+<p>为了显示一个表的单个边框，使用 border-collapse 属性。</p>
+<h2 id=折叠边框-border-collapse>折叠边框 border-collapse</h2>
+<p>border-collapse 属性设置表格的边框是否被折叠成一个单一的边框或隔开</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>table</span>
+<span class=p>{</span>
+    <span class=k>border-collapse</span><span class=p>:</span><span class=kc>collapse</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>table</span><span class=o>,</span><span class=nt>th</span><span class=o>,</span> <span class=nt>td</span>
+<span class=p>{</span>
+    <span class=k>border</span><span class=p>:</span> <span class=mi>1</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>black</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=表格宽度和高度-width-和-height>表格宽度和高度 Width 和 height</h2>
+<p>Width和height属性定义表格的宽度和高度。</p>
+<p>下面的例子是设置 100％的宽度，50 像素的 th 元素的高度的表格</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>table</span>
+<span class=p>{</span>
+    <span class=k>width</span><span class=p>:</span><span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>th</span>
+<span class=p>{</span>
+    <span class=k>height</span><span class=p>:</span><span class=mi>50</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=表格文字对齐-text-align-和-vertical-align>表格文字对齐 text-align 和 vertical-align</h2>
+<p>表格中的文本对齐和垂直对齐属性。</p>
+<p>text-align 属性设置水平对齐方式，向左，右，或中心</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>td</span>
+<span class=p>{</span>
+    <span class=k>text-align</span><span class=p>:</span><span class=kc>right</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>垂直对齐属性 vertical-align 设置垂直对齐，比如顶部，底部或中间</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>td</span>
+<span class=p>{</span>
+    <span class=k>height</span><span class=p>:</span><span class=mi>50</span><span class=kt>px</span><span class=p>;</span>
+    <span class=k>vertical-align</span><span class=p>:</span><span class=kc>bottom</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=表格填充-padding>表格填充 padding</h2>
+<p>如果在表的内容中控制空格之间的边框，应使用 td 和 th 元素的填充属性 padding</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>td</span>
+<span class=p>{</span>
+    <span class=k>padding</span><span class=p>:</span><span class=mi>15</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=表格颜色-color>表格颜色 color</h2>
+<p>下面的例子指定边框的颜色，和th元素的文本和背景颜色</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=nt>table</span><span class=o>,</span> <span class=nt>td</span><span class=o>,</span> <span class=nt>th</span>
+<span class=p>{</span>
+    <span class=k>border</span><span class=p>:</span><span class=mi>1</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>green</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nt>th</span>
+<span class=p>{</span>
+    <span class=k>background-color</span><span class=p>:</span><span class=kc>green</span><span class=p>;</span>
+    <span class=k>color</span><span class=p>:</span><span class=kc>white</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210913153944537.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210913153944537.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210913153944537.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210913153944537.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210913153944537.png title=image-20210913153944537></p>
+<h2 id=position>position</h2>
+<ul>
+<li><strong>static</strong>（静态定位）：默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。</li>
+<li><strong>relative</strong>（相对定位）：生成相对定位的元素，通过 top,bottom,left,right 的设置相对于其正常（原先本身）位置进行定位。可通过 z-index 进行层次分级。　　</li>
+<li><strong>absolute</strong>（绝对定位）：生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 &ldquo;left&rdquo;, &ldquo;top&rdquo;, &ldquo;right&rdquo; 以及 &ldquo;bottom&rdquo; 属性进行规定。可通过z-index进行层次分级。</li>
+<li><strong>fixed</strong>（固定定位）：生成绝对定位的元素，相对于浏览器窗口进行定位。元素的位置通过 &ldquo;left&rdquo;, &ldquo;top&rdquo;, &ldquo;right&rdquo; 以及 &ldquo;bottom&rdquo; 属性进行规定。可通过z-index进行层次分级。</li>
+</ul>
+</div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/frontend/css/flex/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/database/sqlite/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>

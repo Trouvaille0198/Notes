@@ -1,0 +1,457 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="cobra cobra既是一个用于创建强大现代 CLI 应用程序的库，也是一个生成应用程序和命令文件的程序。cobra 被用在很多 go 语言的项目中，比如 Kuber">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/cobra/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="cobra cobra既是一个用于创建强大现代 CLI 应用程序的库，也是一个生成应用程序和命令文件的程序。cobra 被用在很多 go 语言的项目中，比如 Kuber">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/cobra/><link rel=prev href=http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/context/><link rel=next href=http://example.org/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/sql/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/cobra\/"},"genre":"posts","wordcount":1128,"url":"http:\/\/example.org\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/cobra\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1128 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#概念>概念</a></li>
+<li><a href=#创建-cobra-应用>创建 cobra 应用</a></li>
+<li><a href=#创建-rootcmd><strong>创建 rootCmd</strong></a></li>
+<li><a href=#创建其他命令><strong>创建其他命令</strong></a></li>
+<li><a href=#创建-flag><strong>创建 flag</strong></a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=cobra>cobra</h1>
+<p>cobra既是一个用于创建强大现代 CLI 应用程序的库，也是一个生成应用程序和命令文件的程序。cobra 被用在很多 go 语言的项目中，比如 Kubernetes、Docker、Istio、ETCD、Hugo、Github CLI 等等</p>
+<h2 id=概念>概念</h2>
+<p>cobra 中有个重要的概念，分别是 commands、arguments 和 flags。</p>
+<ul>
+<li>commands 代表行为</li>
+<li>arguments 就是命令行参数 (或者称为位置参数)</li>
+<li>flags 代表对行为的改变 (也就是常说的命令行选项)。</li>
+</ul>
+<p>执行命令行程序时的一般格式为：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>APPNAME COMMAND ARG --FLAG
+</code></pre></td></tr></table>
+</div>
+</div><p>比如下面的例子：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># server是 commands，port 是 flag</span>
+hugo server --port<span class=o>=</span><span class=m>1313</span>
+
+<span class=c1># clone 是 commands，URL 是 arguments，brae 是 flag</span>
+git clone URL --bare
+</code></pre></td></tr></table>
+</div>
+</div><p>如果是一个简单的程序 (功能单一的程序)，使用 commands 的方式可能会很啰嗦，但是像 git、docker 等应用，把这些本就很复杂的功能划分为子命令的形式，会方便使用 (对程序的设计者来说又何尝不是如此)。</p>
+<h2 id=创建-cobra-应用>创建 cobra 应用</h2>
+<p>安装 cobra 包：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ go get -u github.com/spf13/cobra/cobra
+</code></pre></td></tr></table>
+</div>
+</div><p>然后就可以用 cobra 程序生成应用程序框架了：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>$ cobra init &lt;appname&gt;
+</code></pre></td></tr></table>
+</div>
+</div><p>此时的程序并没有什么功能，执行它只会输出一些默认的提示信息</p>
+<p>cobra 推荐的项目结构如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>+ cmd/
+    root.go
+    add.go
+    your.go
+    commands.go
+    here.go
+  main.go
+</code></pre></td></tr></table>
+</div>
+</div><p>所有命令放在项目根目录下的 cmd 目录中。其中，默认命令（即不输入任何命令）为 root.go</p>
+<p>cobra 应用的 main.go 非常简单，通常如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
+
+<span class=kn>import</span> <span class=p>(</span>
+    <span class=s>&#34;{pathToYourApp}/cmd&#34;</span>
+<span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>cmd</span><span class=p>.</span><span class=nf>Execute</span><span class=p>()</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=创建-rootcmd><strong>创建 rootCmd</strong></h2>
+<p>root.go的内容如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>cmd</span>
+
+<span class=kn>import</span> <span class=p>(</span>
+    <span class=s>&#34;fmt&#34;</span>
+    <span class=s>&#34;os&#34;</span>
+
+    <span class=s>&#34;github.com/spf13/cobra&#34;</span>
+<span class=p>)</span>
+
+<span class=kd>var</span> <span class=nx>rootCmd</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>cobra</span><span class=p>.</span><span class=nx>Command</span><span class=p>{</span>
+    <span class=nx>Use</span><span class=p>:</span>   <span class=s>&#34;demo&#34;</span><span class=p>,</span>
+    <span class=nx>Short</span><span class=p>:</span> <span class=s>&#34;A cobra demo&#34;</span><span class=p>,</span>
+    <span class=nx>Long</span><span class=p>:</span>  <span class=s>`A cobra demo. xxx...`</span><span class=p>,</span>
+    <span class=nx>Run</span><span class=p>:</span> <span class=kd>func</span><span class=p>(</span><span class=nx>cmd</span> <span class=o>*</span><span class=nx>cobra</span><span class=p>.</span><span class=nx>Command</span><span class=p>,</span> <span class=nx>args</span> <span class=p>[]</span><span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;execute root cmd.&#34;</span><span class=p>)</span>
+    <span class=p>},</span>
+<span class=p>}</span>
+
+<span class=kd>func</span> <span class=nf>Execute</span><span class=p>()</span> <span class=p>{</span>
+    <span class=k>if</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>rootCmd</span><span class=p>.</span><span class=nf>Execute</span><span class=p>();</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintln</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stderr</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+        <span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>此时，执行 <code>go run main.go --help</code>，可以看到以下输出：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>A</span> <span class=nx>cobra</span> <span class=nx>demo</span><span class=p>.</span> <span class=nx>xxx</span><span class=o>...</span>
+
+<span class=nx>Usage</span><span class=p>:</span>
+  <span class=nx>demo</span> <span class=p>[</span><span class=nx>flags</span><span class=p>]</span>
+
+<span class=nx>Flags</span><span class=p>:</span>
+  <span class=o>-</span><span class=nx>h</span><span class=p>,</span> <span class=o>--</span><span class=nx>help</span>   <span class=nx>help</span> <span class=k>for</span> <span class=nx>demo</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>直接执行 <code>go run main.go</code> 会打印 <code>execute root cmd.</code>。</p>
+<h2 id=创建其他命令><strong>创建其他命令</strong></h2>
+<p>我们再创建一个 <code>print</code> 命令。一般每个命令在 <code>cmd</code> 下都有一个自己的文件。只需要在 <code>cmd</code> 下再新建一个 <code>print.go</code>，内容如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>cmd</span>
+
+<span class=kn>import</span> <span class=p>(</span>
+    <span class=s>&#34;fmt&#34;</span>
+
+    <span class=s>&#34;github.com/spf13/cobra&#34;</span>
+<span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>init</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>rootCmd</span><span class=p>.</span><span class=nf>AddCommand</span><span class=p>(</span><span class=nx>printCmd</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>printCmd</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>cobra</span><span class=p>.</span><span class=nx>Command</span><span class=p>{</span>
+    <span class=nx>Use</span><span class=p>:</span>   <span class=s>&#34;print&#34;</span><span class=p>,</span>
+    <span class=nx>Short</span><span class=p>:</span> <span class=s>&#34;print something&#34;</span><span class=p>,</span>
+    <span class=nx>Long</span><span class=p>:</span>  <span class=s>&#34;print something, xxx&#34;</span><span class=p>,</span>
+    <span class=nx>Run</span><span class=p>:</span> <span class=kd>func</span><span class=p>(</span><span class=nx>cmd</span> <span class=o>*</span><span class=nx>cobra</span><span class=p>.</span><span class=nx>Command</span><span class=p>,</span> <span class=nx>args</span> <span class=p>[]</span><span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;execute print cmd&#34;</span><span class=p>)</span>
+    <span class=p>},</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>此时再执行 <code>go run main.go --help</code> 可以看到已经增加了 <code>print</code> 命令：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>A cobra demo. xxx...
+
+Usage:
+  demo [flags]
+  demo [command]
+
+Available Commands:
+  help    Help about any command
+  print       print something
+
+Flags:
+  -h, --help   help for demo
+
+Use &#34;demo [command] --help&#34; for more information about a command.
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=创建-flag><strong>创建 flag</strong></h2>
+<p>在执行 <code>print</code> 命令时，我们想传递一些参数，来指定打印的内容，这时我们就需要增加 flags。</p>
+<p>flags 分为 <code>persistent flag</code> 和 <code>local flags</code>。<code>persistent flag</code> 可以分配给当前命令及其所有子命令，而<code>local flags</code> 只应用于当前命令。</p>
+<p>这里给 <code>print</code> 命令增加一个 <code>local flags</code>：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>cmd</span>
+
+<span class=kn>import</span> <span class=p>(</span>
+    <span class=s>&#34;fmt&#34;</span>
+
+    <span class=s>&#34;github.com/spf13/cobra&#34;</span>
+<span class=p>)</span>
+
+<span class=kd>func</span> <span class=nf>init</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>rootCmd</span><span class=p>.</span><span class=nf>AddCommand</span><span class=p>(</span><span class=nx>printCmd</span><span class=p>)</span>
+
+    <span class=nx>printCmd</span><span class=p>.</span><span class=nf>Flags</span><span class=p>().</span><span class=nf>StringVarP</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>Msg</span><span class=p>,</span> <span class=s>&#34;message&#34;</span><span class=p>,</span> <span class=s>&#34;m&#34;</span><span class=p>,</span> <span class=s>&#34;default message&#34;</span><span class=p>,</span> <span class=s>&#34;message to be printed&#34;</span><span class=p>)</span>
+<span class=p>}</span>
+
+<span class=kd>var</span> <span class=nx>Msg</span> <span class=kt>string</span>
+<span class=kd>var</span> <span class=nx>printCmd</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>cobra</span><span class=p>.</span><span class=nx>Command</span><span class=p>{</span>
+    <span class=nx>Use</span><span class=p>:</span>   <span class=s>&#34;print&#34;</span><span class=p>,</span>
+    <span class=nx>Short</span><span class=p>:</span> <span class=s>&#34;print something&#34;</span><span class=p>,</span>
+    <span class=nx>Long</span><span class=p>:</span>  <span class=s>&#34;print something, xxx&#34;</span><span class=p>,</span>
+    <span class=nx>Run</span><span class=p>:</span> <span class=kd>func</span><span class=p>(</span><span class=nx>cmd</span> <span class=o>*</span><span class=nx>cobra</span><span class=p>.</span><span class=nx>Command</span><span class=p>,</span> <span class=nx>args</span> <span class=p>[]</span><span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>Msg</span><span class=p>)</span>
+    <span class=p>},</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这时再使用 <code>go run main.go print</code> 会打印默认内容<code>default message</code>，也可以使用 <code>-m</code> 或 <code>--message</code> 来指定要打印的内容了。</p>
+</div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/context/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/sql/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>

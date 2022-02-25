@@ -1,0 +1,304 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="实验二 问题描述 编写程序，实现图像的实数倍放大 实验分析 采用复制行/列可以实现整数倍的放大图像，采用删除行/列可以实现整数倍的缩小图像，但两种方">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/ex/ex2/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="实验二 问题描述 编写程序，实现图像的实数倍放大 实验分析 采用复制行/列可以实现整数倍的放大图像，采用删除行/列可以实现整数倍的缩小图像，但两种方">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/ex/ex2/><link rel=prev href=http://example.org/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/ex/ex3/><link rel=next href=http://example.org/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/ex/ex1/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/homework\/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86\/ex\/ex2\/"},"genre":"posts","wordcount":893,"url":"http:\/\/example.org\/posts\/homework\/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86\/ex\/ex2\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 893 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#问题描述>问题描述</a></li>
+<li><a href=#实验分析>实验分析</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href=#计算新像素在原图的对应位置>计算新像素在原图的对应位置</a></li>
+<li><a href=#为这些对应位置赋灰度值>为这些对应位置赋灰度值</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href=#实现>实现</a>
+<ul>
+<li><a href=#代码>代码</a></li>
+<li><a href=#示例>示例</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=实验二>实验二</h1>
+<h2 id=问题描述>问题描述</h2>
+<p>编写程序，实现图像的实数倍放大</p>
+<h2 id=实验分析>实验分析</h2>
+<p>采用复制行/列可以实现整数倍的放大图像，采用删除行/列可以实现整数倍的缩小图像，但两种方法都无法实现任意倍数和任意位置的放大和缩小图像</p>
+<p>步骤</p>
+<ul>
+<li>计算新的像素在原图的对应位置；</li>
+<li>为这些对应位置赋灰度值。</li>
+</ul>
+<h5 id=计算新像素在原图的对应位置>计算新像素在原图的对应位置</h5>
+<p>f(x,y) 表示输出图像，g(u,v) 表示输入图像。几何运算（图像的放大或缩小也是图像的几何运算）可定义为：</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://img-blog.csdnimg.cn/2020032123500391.png data-srcset="https://img-blog.csdnimg.cn/2020032123500391.png, https://img-blog.csdnimg.cn/2020032123500391.png 1.5x, https://img-blog.csdnimg.cn/2020032123500391.png 2x" data-sizes=auto alt=https://img-blog.csdnimg.cn/2020032123500391.png title=https://img-blog.csdnimg.cn/2020032123500391.png></p>
+<ul>
+<li>如果令：$u_0 = a(x,y) = x$; $v_0 = b(x,y) = y$
+<ul>
+<li>那么仅仅是把 g 拷贝到 f 而不加任何改动的恒等运算。</li>
+</ul>
+</li>
+<li>如果令：$u_0 = a(x,y) = x + x_0$; $v_0 = b(x,y) = y + y_0$
+<ul>
+<li>那么得到平移运算，其中点 (x~0~,y~0~) 被平移到原点</li>
+</ul>
+</li>
+<li>如果令：$u_0 = a(x,y) = x/c$; $v_0 = b(x,y) = y/d$
+<ul>
+<li>那么会使图像在 x 轴方向放大 c 倍，在 y 轴放大 d 倍。</li>
+<li>例如：将一幅 200x200 的图像 g(u,v) 放大 1.5 倍，那么将得到 300x300 的新图像 f(x,y)。</li>
+<li>产生新图像的过程，实际就是为 300x300 的像素赋值的过程。</li>
+<li>假如为 f(150,150) 赋值 $f(150,150) = g(150/1.5,150/1.5) = g(100,100)$;</li>
+<li>假如为 f(100,100) 赋值 $f(100,100) = g(100/1.5,100/1.5) = g(66.7,66.7)$</li>
+<li>由于图像像素都是在整数坐标中，所以没有坐标值为 (66.7,66.7) 的像素。所以要采用<strong>插值</strong>的方法给其赋值。</li>
+</ul>
+</li>
+</ul>
+<h5 id=为这些对应位置赋灰度值>为这些对应位置赋灰度值</h5>
+<p>因为 (u~0~, v~0~) 不一定要在坐标点上，故需要插值求 g(u~0~, v~0~)；</p>
+<ul>
+<li><strong>最近邻内插</strong>
+<ul>
+<li>取点 (u~0~, v~0~) 最近的整数坐标 (u, v)。在上述例子中，为了求 (66.7, 66.7) 的灰度值，则用 (67, 67) 的灰度值来做插值</li>
+</ul>
+</li>
+<li><strong>双线性插值</strong>
+<ul>
+<li>根据四个邻点的灰度值通过插值计算 g(u~0~, v~0~)</li>
+</ul>
+</li>
+<li><strong>更多邻点的内插</strong>
+<ul>
+<li>更高次内插，这种方法往往能取得更为精确的结果，但是相应的计算量也会更大）</li>
+</ul>
+</li>
+</ul>
+<p>使用最邻近插值法实现图像的缩放，比较简单方便；cv2 中同样也提供了图像缩放的函数 <code>resize</code></p>
+<h2 id=实现>实现</h2>
+<h3 id=代码>代码</h3>
+<p><code>show_scale1</code> 函数调用了 <code>cv2.resize</code></p>
+<p><code>show_scale2</code> 函数手动实现了以便最邻近插值</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=c1># ex2 图像的实数倍放大，并且实现图像的规定长度和宽度缩放.</span>
+<span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+<span class=kn>import</span> <span class=nn>cv2</span>
+<span class=n>file_path</span> <span class=o>=</span> <span class=sa>r</span><span class=s2>&#34;D:\Repo\PythonLearning\cv2Learning\assets\seg.png&#34;</span>
+
+
+<span class=k>def</span> <span class=nf>show_scale1</span><span class=p>(</span><span class=n>file_path</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>x_scale</span><span class=p>:</span> <span class=nb>float</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=n>y_scale</span><span class=p>:</span> <span class=nb>float</span> <span class=o>=</span> <span class=mi>1</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>    按照规定长度和宽度缩放图像
+</span><span class=s2>    :param file_path: 图片路径 
+</span><span class=s2>    :param x_scale: 水平缩放倍数
+</span><span class=s2>    :param y_scale: 垂直缩放倍数
+</span><span class=s2>    &#34;&#34;&#34;</span>
+    <span class=n>img</span> <span class=o>=</span> <span class=n>cv2</span><span class=o>.</span><span class=n>imread</span><span class=p>(</span><span class=n>file_path</span><span class=p>)</span>
+    <span class=n>img</span> <span class=o>=</span> <span class=n>cv2</span><span class=o>.</span><span class=n>resize</span><span class=p>(</span><span class=n>img</span><span class=p>,</span> <span class=n>dsize</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>fx</span><span class=o>=</span><span class=n>x_scale</span><span class=p>,</span> <span class=n>fy</span><span class=o>=</span><span class=n>y_scale</span><span class=p>)</span>
+    <span class=n>cv2</span><span class=o>.</span><span class=n>imshow</span><span class=p>(</span><span class=s1>&#39;img&#39;</span><span class=p>,</span> <span class=n>img</span><span class=p>)</span>
+    <span class=k>if</span> <span class=n>cv2</span><span class=o>.</span><span class=n>waitKey</span><span class=p>()</span> <span class=o>==</span> <span class=nb>ord</span><span class=p>(</span><span class=s1>&#39;q&#39;</span><span class=p>):</span>
+        <span class=n>cv2</span><span class=o>.</span><span class=n>destroyAllWindows</span><span class=p>()</span>
+
+
+<span class=k>def</span> <span class=nf>show_scale2</span><span class=p>(</span><span class=n>file_path</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>x_scale</span><span class=p>:</span> <span class=nb>float</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=n>y_scale</span><span class=p>:</span> <span class=nb>float</span> <span class=o>=</span> <span class=mi>1</span><span class=p>):</span>
+    <span class=n>img</span> <span class=o>=</span> <span class=n>cv2</span><span class=o>.</span><span class=n>imread</span><span class=p>(</span><span class=n>file_path</span><span class=p>)</span>
+    <span class=n>cv2</span><span class=o>.</span><span class=n>imshow</span><span class=p>(</span><span class=s1>&#39;ori&#39;</span><span class=p>,</span> <span class=n>img</span><span class=p>)</span>
+
+    <span class=n>ori_height</span><span class=p>,</span> <span class=n>ori_width</span> <span class=o>=</span> <span class=n>img</span><span class=o>.</span><span class=n>shape</span><span class=p>[:</span><span class=mi>2</span><span class=p>]</span>  <span class=c1># 将图片尺寸记录下来</span>
+    <span class=n>tar_height</span> <span class=o>=</span> <span class=nb>round</span><span class=p>(</span><span class=n>ori_height</span><span class=o>*</span><span class=n>x_scale</span><span class=p>)</span>
+    <span class=n>tar_width</span> <span class=o>=</span> <span class=nb>round</span><span class=p>(</span><span class=n>ori_width</span><span class=o>*</span><span class=n>y_scale</span><span class=p>)</span>
+
+    <span class=n>new_img</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>(</span><span class=n>shape</span><span class=o>=</span><span class=p>(</span><span class=n>tar_height</span><span class=p>,</span> <span class=n>tar_width</span><span class=p>,</span> <span class=mi>3</span><span class=p>),</span> <span class=n>dtype</span><span class=o>=</span><span class=n>np</span><span class=o>.</span><span class=n>uint8</span><span class=p>)</span>
+    <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>tar_height</span><span class=p>):</span>
+        <span class=k>for</span> <span class=n>y</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>tar_width</span><span class=p>):</span>
+            <span class=n>src_x</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>x</span><span class=o>/</span><span class=n>x_scale</span><span class=p>)</span>
+            <span class=n>src_y</span> <span class=o>=</span> <span class=nb>int</span><span class=p>(</span><span class=n>y</span><span class=o>/</span><span class=n>y_scale</span><span class=p>)</span>
+            <span class=k>if</span> <span class=n>src_x</span> <span class=o>&lt;</span> <span class=n>ori_height</span> <span class=ow>and</span> <span class=n>src_y</span> <span class=o>&lt;</span> <span class=n>ori_width</span><span class=p>:</span>
+                <span class=n>new_img</span><span class=p>[</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>]</span> <span class=o>=</span> <span class=n>img</span><span class=p>[</span><span class=n>src_x</span><span class=p>,</span> <span class=n>src_y</span><span class=p>]</span>
+    <span class=n>cv2</span><span class=o>.</span><span class=n>imshow</span><span class=p>(</span><span class=s1>&#39;final&#39;</span><span class=p>,</span> <span class=n>new_img</span><span class=p>)</span>
+    <span class=k>if</span> <span class=n>cv2</span><span class=o>.</span><span class=n>waitKey</span><span class=p>()</span> <span class=o>==</span> <span class=nb>ord</span><span class=p>(</span><span class=s1>&#39;q&#39;</span><span class=p>):</span>
+        <span class=n>cv2</span><span class=o>.</span><span class=n>destroyAllWindows</span><span class=p>()</span>
+
+
+<span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+    <span class=n>show_scale2</span><span class=p>(</span><span class=n>file_path</span><span class=p>,</span> <span class=mf>2.31</span><span class=p>,</span> <span class=mf>3.34</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=示例>示例</h3>
+<p>实现了纵向 2.31 倍、横向 3.34 倍的图像放大</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211103185257086.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211103185257086.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211103185257086.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211103185257086.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211103185257086.png title=image-20211103185257086></p>
+</div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/ex/ex3/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/ex/ex1/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>

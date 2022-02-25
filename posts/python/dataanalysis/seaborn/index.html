@@ -1,0 +1,706 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="基本知识 概念 seaborn 是基于 matplotlib 的图形可视化 python 包。它提供了一种高度交互式界面，便于用户能够做出各种有吸引力的统计图表。 Seaborn 是在 matplotlib 的基础上进行了更高级的 API">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/python/dataanalysis/seaborn/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="基本知识 概念 seaborn 是基于 matplotlib 的图形可视化 python 包。它提供了一种高度交互式界面，便于用户能够做出各种有吸引力的统计图表。 Seaborn 是在 matplotlib 的基础上进行了更高级的 API">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/python/dataanalysis/seaborn/><link rel=prev href=http://example.org/posts/python/machinelearning/sklearn/><link rel=next href=http://example.org/posts/python/dataanalysis/pandas/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/python\/dataanalysis\/seaborn\/"},"genre":"posts","wordcount":2291,"url":"http:\/\/example.org\/posts\/python\/dataanalysis\/seaborn\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2291 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#概念>概念</a></li>
+<li><a href=#层级-api>层级 API</a></li>
+<li><a href=#声明样式>声明样式</a>
+<ul>
+<li><a href=#参数>参数</a></li>
+</ul>
+</li>
+<li><a href=#通用参数>通用参数</a></li>
+<li><a href=#保存>保存</a></li>
+</ul>
+<ul>
+<li><a href=#函数>函数</a></li>
+<li><a href=#例>例</a></li>
+</ul>
+<ul>
+<li><a href=#函数-1>函数</a></li>
+<li><a href=#参数说明>参数说明</a></li>
+<li><a href=#例-1>例</a>
+<ul>
+<li><a href=#散点图>散点图</a></li>
+<li><a href=#分布图>分布图</a>
+<ul>
+<li><a href=#箱线图>箱线图</a></li>
+<li><a href=#增强箱线图>增强箱线图</a></li>
+<li><a href=#小提琴图>小提琴图</a></li>
+</ul>
+</li>
+<li><a href=#估计图>估计图</a>
+<ul>
+<li><a href=#点线图>点线图</a></li>
+<li><a href=#条形图>条形图</a></li>
+<li><a href=#计数条形图>计数条形图</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href=#displot-单变量分布>displot() 单变量分布</a>
+<ul>
+<li><a href=#参数说明-1>参数说明</a></li>
+<li><a href=#例-2>例</a></li>
+</ul>
+</li>
+<li><a href=#jointplot-双变量分布>jointplot() 双变量分布</a></li>
+<li><a href=#pairplot-两两对比分布>pairplot() 两两对比分布</a></li>
+</ul>
+<ul>
+<li><a href=#regplot-线性回归>regplot 线性回归</a></li>
+<li><a href=#lmplot-分类回归>lmplot 分类回归</a></li>
+</ul>
+<ul>
+<li><a href=#heatmap-热力图>heatmap() 热力图</a></li>
+<li><a href=#clustermap-分层聚类热图>clustermap() 分层聚类热图</a></li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=基本知识>基本知识</h1>
+<h2 id=概念>概念</h2>
+<p>seaborn 是基于 matplotlib 的图形可视化 python 包。它提供了一种高度交互式界面，便于用户能够做出各种有吸引力的统计图表。</p>
+<p>Seaborn 是在 matplotlib 的基础上进行了更高级的 API 封装，从而使得作图更加容易，在大多数情况下使用 seaborn 能做出很具有吸引力的图，而使用 matplotlib 就能制作具有更多特色的图。应该把 Seaborn 视为 matplotlib 的补充，而不是替代物。同时它能高度兼容 numpy 与 pandas 数据结构以及 scipy 与 statsmodels 等统计模式</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>seaborn</span> <span class=k>as</span> <span class=nn>sns</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=层级-api>层级 API</h2>
+<p>Seaborn 中的 API 分为 Figure-level 和 Axes-level 两种</p>
+<p>Axes-level 的函数可以实现与 Matplotlib 更灵活和紧密的结合，而 Figure-level 则更像是「懒人函数」，适合于快速应用</p>
+<h2 id=声明样式>声明样式</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>set</span><span class=p>()</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=参数>参数</h3>
+<ul>
+<li><em>context</em>
+<ul>
+<li>控制着默认的画幅大小，分别有 <code>{paper, notebook, talk, poster}</code> 四个值。</li>
+<li>其中，<code>poster > talk > notebook > paper</code>。</li>
+</ul>
+</li>
+<li><em>style</em>
+<ul>
+<li>控制默认样式，分别有 <code>{darkgrid, whitegrid, dark, white, ticks}</code></li>
+</ul>
+</li>
+<li><em>palette</em>
+<ul>
+<li>预设的调色板。分别有 <code>{deep, muted, bright, pastel, dark, colorblind}</code> 等</li>
+</ul>
+</li>
+<li><em>font</em>
+<ul>
+<li>用于设置字体</li>
+<li><em>font_scale</em> ：设置字体大小</li>
+<li><em>color_codes</em>： 不使用调色板而采用先前的 <code>'r'</code> 等色彩缩写。</li>
+</ul>
+</li>
+</ul>
+<p>默认参数</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>set</span><span class=p>(</span><span class=n>context</span><span class=o>=</span><span class=s1>&#39;notebook&#39;</span><span class=p>,</span> <span class=n>style</span><span class=o>=</span><span class=s1>&#39;darkgrid&#39;</span><span class=p>,</span> <span class=n>palette</span><span class=o>=</span><span class=s1>&#39;deep&#39;</span><span class=p>,</span> <span class=n>font</span><span class=o>=</span><span class=s1>&#39;sans-serif&#39;</span><span class=p>,</span> <span class=n>font_scale</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>color_codes</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>rc</span><span class=o>=</span><span class=kc>None</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=通用参数>通用参数</h2>
+<p><strong>sns.图名(x=&lsquo;X轴 列名&rsquo;, y=&lsquo;Y轴 列名&rsquo;, data=原始数据df对象)</strong></p>
+<p><strong>sns.图名(x=np.array, y=np.array[, &mldr;])</strong></p>
+<p>数据必须以长格式的 DataFrame 传入，同时变量通过<code>x</code>, <code>y</code>及其他参数指定。</p>
+<ul>
+<li><em>x, y</em>：<em>data</em> 中的变量名</li>
+<li><em>data</em>：长格式的 DataFrame，每列是一个变量，每行是一个观察值。</li>
+<li><em>hue</em>： <em>data</em> 中的名称，可选
+<ul>
+<li>将会产生具有不同颜色的元素的变量进行分组</li>
+<li><em>palette</em>：色盘名，列表，或者字典，可选
+<ul>
+<li>用于 <em>hue</em> 变量的不同级别的颜色</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>size</em>：<em>data</em> 中的名称，可选
+<ul>
+<li>将会产生具有不同尺寸的元素的变量进行分组</li>
+</ul>
+</li>
+<li><em>style</em>：<em>data</em>中的名称，可选
+<ul>
+<li>将会产生具有不同风格的元素的变量进行分组</li>
+</ul>
+</li>
+<li><em>row</em>, <em>col</em>：<em>data</em> 中的变量名，可选
+<ul>
+<li>确定网格的分面的类别变量</li>
+<li><em>col_wrap</em>：int，可选
+<ul>
+<li>以此宽度“包裹”列变量，以便列分面跨越多行。与 <em>row</em> 分面不兼容</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>color：控制颜色</li>
+<li>bins：条形图的条数</li>
+<li>palette：颜色列表</li>
+</ul>
+<h2 id=保存>保存</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>ax</span> <span class=o>=</span> <span class=n>sns</span><span class=o>.</span><span class=n>distplot</span><span class=p>(</span><span class=n>x</span><span class=p>)</span> <span class=c1># 画图</span>
+
+<span class=c1># fig = ax.get_figure() # 获取图片</span>
+
+<span class=n>fig</span><span class=o>.</span><span class=n>savefig</span><span class=p>(</span><span class=n>path</span><span class=p>,</span> <span class=n>dpi</span> <span class=o>=</span> <span class=mi>400</span><span class=p>)</span> <span class=c1># 保存图片</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id=关联图>关联图</h1>
+<p>（Relational plots）</p>
+<p>关联图用于呈现数据之间的关系，主要有散点图和条形图 2 种样式</p>
+<p>两个连续型变量之间的关系</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:center>关联性分析</th>
+<th style=text-align:center>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:center>relplot</td>
+<td style=text-align:center>绘制关系图</td>
+</tr>
+<tr>
+<td style=text-align:center>scatterplot</td>
+<td style=text-align:center>多维度分析散点图</td>
+</tr>
+<tr>
+<td style=text-align:center>lineplot</td>
+<td style=text-align:center>多维度分析线形图</td>
+</tr>
+</tbody>
+</table>
+<h2 id=函数>函数</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>seaborn</span><span class=o>.</span><span class=n>relplot</span><span class=p>(</span> <span class=n>kind</span><span class=o>=</span><span class=s1>&#39;scatter&#39;</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><em>kind</em>参数选择要使用的基础轴级函数：</p>
+<ul>
+<li>散点图
+<ul>
+<li><em>scatterplot()</em>：通过 <code>kind="scatter"</code> 访问；默认为此</li>
+</ul>
+</li>
+<li>折线图
+<ul>
+<li><em>lineplot()</em>：通过 <code>kind="line"</code> 访问</li>
+</ul>
+</li>
+</ul>
+<h2 id=例>例</h2>
+<p>以鸢尾花数据集为例</p>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122121854899.png alt=image-20210122121854899 style=zoom:67%>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>relplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s1>&#39;sepal_length&#39;</span><span class=p>,</span><span class=n>y</span><span class=o>=</span><span class=s1>&#39;sepal_width&#39;</span><span class=p>,</span><span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>,</span><span class=n>hue</span><span class=o>=</span><span class=s1>&#39;species&#39;</span><span class=p>)</span> <span class=c1># 默认散点图</span>
+
+<span class=n>sns</span><span class=o>.</span><span class=n>relplot</span><span class=p>(</span><span class=n>kind</span><span class=o>=</span><span class=s1>&#39;line&#39;</span><span class=p>,</span><span class=n>x</span><span class=o>=</span><span class=s1>&#39;sepal_length&#39;</span><span class=p>,</span><span class=n>y</span><span class=o>=</span><span class=s1>&#39;sepal_width&#39;</span><span class=p>,</span><span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>,</span><span class=n>hue</span><span class=o>=</span><span class=s1>&#39;species&#39;</span><span class=p>)</span> <span class=c1># 折线图</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151004252.png alt=image-20210122151004252 style=zoom:67%>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151011958.png alt=image-20210122151011958 style=zoom:67%>
+<h1 id=类别图>类别图</h1>
+<p>（categorical plots）</p>
+<p>类别图呈现单个数据与类别之间的关系</p>
+<p>针对一个离散型变量与一个连续型变量之间的关系</p>
+<h2 id=函数-1>函数</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>seaborn</span><span class=o>.</span><span class=n>catplot</span><span class=p>(</span> <span class=n>kind</span><span class=o>=</span><span class=s1>&#39;strip&#39;</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>类别图的 Figure-level 接口是 <code>catplot</code>。而 <code>catplot</code> 实际上是如下 Axes-level 绘图 API 的集合：</p>
+<ul>
+<li>分类散点图
+<ul>
+<li><em>stripplot()</em>：(<code>kind="strip"</code>)</li>
+<li><em>swarmplot()</em>：(<code>kind="swarm"</code>)</li>
+</ul>
+</li>
+<li>分类分布图
+<ul>
+<li><em>boxplot()</em>：(<code>kind="box"</code>)</li>
+<li><em>boxenplot()</em>：(<code>kind="boxen"</code>)</li>
+<li><em>violinplot()</em> (<code>kind="violin"</code>)</li>
+</ul>
+</li>
+<li>分类估计图
+<ul>
+<li><em>pointplot()</em>： (<code>kind="point"</code>)</li>
+<li><em>barplot()</em>：(<code>kind="bar"</code>)</li>
+<li><em>countplot()</em>：(<code>kind="count"</code>)</li>
+</ul>
+</li>
+</ul>
+<h2 id=参数说明>参数说明</h2>
+<ol>
+<li><code>hue=</code> 参数可以给图像引入另一个维度。如果一个数据集有多个类别，<code>hue=</code> 参数就可以让数据点有更好的区分</li>
+<li>计数条形图只传入一个分类参数</li>
+<li><em>jitter</em>：表示抖动的程度(仅沿类別轴)。当很多数据点重叠时，可以指定抖动的数量或者设为True使用默认值。</li>
+</ol>
+<h2 id=例-1>例</h2>
+<h3 id=散点图>散点图</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>catplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151541023.png alt=image-20210122151541023 style=zoom:67%>
+<p><code>kind="swarm"</code> 可以让散点按照 beeswarm 的方式防止重叠，可以更好地观测数据分布</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>catplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;swarm&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151628884.png alt=image-20210122151628884 style=zoom:67%>
+<h3 id=分布图>分布图</h3>
+<h4 id=箱线图>箱线图</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>catplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;box&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151848523.png alt=image-20210122151848523 style=zoom:67%>
+<h4 id=增强箱线图>增强箱线图</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>catplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;boxen&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122151907621.png alt=image-20210122151907621 style=zoom:67%>
+<h4 id=小提琴图>小提琴图</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>catplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;violin&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img class=lazyload src=/svg/loading.min.svg data-src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152044634.png data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152044634.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152044634.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152044634.png 2x" data-sizes=auto alt=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152044634.png title=image-20210122152044634></p>
+<h3 id=估计图>估计图</h3>
+<h4 id=点线图>点线图</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>catplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;point&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152518957.png alt=image-20210122152518957 style=zoom:67%>
+<h4 id=条形图>条形图</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>catplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;bar&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152541817.png alt=image-20210122152541817 style=zoom:67%>
+<h4 id=计数条形图>计数条形图</h4>
+<p>只传入一个分类参数</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>catplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;count&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122152611043.png alt=image-20210122152611043 style=zoom:67%>
+<h1 id=分布图-1>分布图</h1>
+<p>（Distribution plots）</p>
+<p>分布图主要是用于可视化变量的分布情况，一般分为单变量分布和多变量分布。当然这里的多变量多指二元变量，更多的变量无法绘制出直观的可视化图形</p>
+<h2 id=displot-单变量分布>displot() 单变量分布</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>displot</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=n>hist</span><span class=p>,</span> <span class=n>data</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>该方法将会绘制直方图，拟合核密度估计图，或二者兼有</p>
+<p>该方法主要做单变量分布，但同样可以传入 <em>y</em> 参数</p>
+<p>可以引入 <em>hue</em> 进行分类</p>
+<ul>
+<li>直方图
+<ul>
+<li><em>histplot()</em>：通过 <code>kind='hist'</code> 访问</li>
+</ul>
+</li>
+<li>核密度估计图
+<ul>
+<li><em>kdeplot()</em>：通过 <code>kind='kde'</code> 访问</li>
+</ul>
+</li>
+</ul>
+<h3 id=参数说明-1>参数说明</h3>
+<p><em>bins</em>：用于控制条形的数量。</p>
+<p><em>kdeplot</em> 中：</p>
+<ul>
+<li><em>multiple</em>：{“layer”, “stack”, “fill”}
+<ul>
+<li>Method for drawing multiple elements when semantic mapping creates subsets. Only relevant with univariate data</li>
+</ul>
+</li>
+</ul>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122170112089.png alt=image-20210122170112089 style=zoom:67%>
+<h3 id=例-2>例</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>displot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=n>iris</span><span class=p>[</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>],</span><span class=n>kind</span><span class=o>=</span><span class=s1>&#39;kde&#39;</span><span class=p>,</span><span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span> <span class=c1># 核密度估计图</span>
+<span class=n>sns</span><span class=o>.</span><span class=n>displot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=n>iris</span><span class=p>[</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>],</span><span class=n>kind</span><span class=o>=</span><span class=s1>&#39;hist&#39;</span><span class=p>,</span><span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>,</span><span class=n>hue</span><span class=o>=</span><span class=s1>&#39;species&#39;</span><span class=p>)</span> <span class=c1># 直方图</span>
+<span class=n>sns</span><span class=o>.</span><span class=n>displot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=n>iris</span><span class=p>[</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>],</span><span class=n>kde</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span><span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span> <span class=c1># 直方图加核密度估计图</span>
+<span class=n>sns</span><span class=o>.</span><span class=n>displot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=n>iris</span><span class=p>[</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>],</span><span class=n>kind</span><span class=o>=</span><span class=s1>&#39;kde&#39;</span><span class=p>,</span><span class=n>hue</span><span class=o>=</span><span class=s1>&#39;species&#39;</span><span class=p>,</span><span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span> <span class=c1># 分类的核密度估计图</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122170404372.png alt=image-20210122170404372 style=zoom:67%>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122170410738.png alt=image-20210122170410738 style=zoom:67%>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122170416675.png alt=image-20210122170416675 style=zoom:67%>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122170422635.png alt=image-20210122170422635 style=zoom:67%>
+<h2 id=jointplot-双变量分布>jointplot() 双变量分布</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>jointplot</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>,</span> <span class=n>data</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>该方法绘制二元变量之间的关系，它并不是一个 Figure-level 接口，但其支持 <code>kind=</code> 参数指定绘制出不同样式的分布图，默认为scatter</p>
+<ul>
+<li><em>kind</em>：{‘scatter’, ‘kde’, ‘hist’, ‘reg’,’hex’}</li>
+</ul>
+<p>例</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>jointplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;sepal_width&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>,</span><span class=n>hue</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>)</span> 	<span class=c1># 散点对比图</span>
+<span class=n>sns</span><span class=o>.</span><span class=n>jointplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;sepal_width&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;kde&#34;</span><span class=p>,</span><span class=n>hue</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>)</span>  	<span class=c1># 核密度估计对比图</span>
+<span class=n>sns</span><span class=o>.</span><span class=n>jointplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;sepal_width&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;hex&#34;</span><span class=p>)</span>	 	<span class=c1># 六边形计数图</span>
+<span class=n>sns</span><span class=o>.</span><span class=n>jointplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;sepal_width&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;reg&#34;</span><span class=p>)</span>  	<span class=c1># 回归拟合图</span>
+<span class=n>sns</span><span class=o>.</span><span class=n>jointplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;sepal_width&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>,</span> <span class=n>kind</span><span class=o>=</span><span class=s2>&#34;hist&#34;</span><span class=p>,</span><span class=n>hue</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>)</span> 	<span class=c1># 直方对比图</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155633769.png alt=image-20210122155633769 style=zoom:67%>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155756830.png alt=image-20210122155756830 style=zoom:67%>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155050779.png alt=image-20210122155050779 style=zoom:67%>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155058342.png alt=image-20210122155058342 style=zoom:67%>
+<img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155729225.png alt=image-20210122155729225 style=zoom:67%>
+<h2 id=pairplot-两两对比分布>pairplot() 两两对比分布</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>pairplot</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>该方法支持一次性将数据集中的特征变量两两对比绘图。默认情况下，对角线上是单变量分布图，而其他则是二元变量分布图</p>
+<p>例</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>pairplot</span><span class=p>(</span><span class=n>iris</span><span class=p>,</span><span class=n>hue</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img class=lazyload src=/svg/loading.min.svg data-src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155340104.png data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155340104.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155340104.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155340104.png 2x" data-sizes=auto alt=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122155340104.png title=image-20210122155340104></p>
+<h1 id=回归图>回归图</h1>
+<p>（Regression plots）</p>
+<h2 id=regplot-线性回归>regplot 线性回归</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>regplot</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>,</span> <span class=n>data</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用该方法绘制回归图时，只需要指定自变量和因变量即可，它会自动完成线性回归拟合</p>
+<p>无<code>hue</code>参数</p>
+<p>例</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>regplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;petal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;petal_width&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122160432232.png alt=image-20210122160432232 style=zoom:67%>
+<h2 id=lmplot-分类回归>lmplot 分类回归</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>lmplot</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>,</span> <span class=n>hue</span><span class=p>,</span> <span class=n>data</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>该方法支持引入第三维度进行对比，也就是可以用<code>hue</code>参数</p>
+<p>例</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>lmplot</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=s2>&#34;sepal_length&#34;</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s2>&#34;sepal_width&#34;</span><span class=p>,</span> <span class=n>hue</span><span class=o>=</span><span class=s2>&#34;species&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122160656660.png alt=image-20210122160656660 style=zoom:67%>
+<h1 id=矩阵图>矩阵图</h1>
+<p>（Matrix plots）</p>
+<h2 id=heatmap-热力图>heatmap() 热力图</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>heatmap</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>必须传入二维数组类型的 <em>data</em></p>
+<p>例</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>sns</span><span class=o>.</span><span class=n>heatmap</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>rand</span><span class=p>(</span><span class=mi>10</span><span class=p>,</span> <span class=mi>10</span><span class=p>))</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122161503663.png alt=image-20210122161503663 style=zoom:80%>
+<h2 id=clustermap-分层聚类热图>clustermap() 分层聚类热图</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>seaborn</span><span class=o>.</span><span class=n>clustermap</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><em>data</em>：2D array-like</p>
+<p>例</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>iris</span><span class=o>.</span><span class=n>pop</span><span class=p>(</span><span class=s2>&#34;species&#34;</span><span class=p>)</span>
+
+<span class=n>sns</span><span class=o>.</span><span class=n>clustermap</span><span class=p>(</span><span class=n>iris</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210122161932756.png alt=image-20210122161932756 style=zoom:67%>
+<h1 id=技巧>技巧</h1>
+<ol>
+<li>设置颜色</li>
+</ol>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/python/machinelearning/sklearn/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/python/dataanalysis/pandas/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>

@@ -1,0 +1,1986 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="实验三 第八组 19120198 孙天野 函数详解 fork() 创建一个子进程 返回 在子进程中，返回 0 在父进程中，返回新创建子进程的进程 ID 创建失败则返回 -1 wait() 1 pid_t wait(int *stat_loc); // 获取子进程">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/homework/os/semester1/ex3/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="实验三 第八组 19120198 孙天野 函数详解 fork() 创建一个子进程 返回 在子进程中，返回 0 在父进程中，返回新创建子进程的进程 ID 创建失败则返回 -1 wait() 1 pid_t wait(int *stat_loc); // 获取子进程">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/homework/os/semester1/ex3/><link rel=prev href=http://example.org/posts/homework/os/semester1/ex6/><link rel=next href=http://example.org/posts/homework/os/semester1/ex1/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/homework\/os\/semester1\/ex3\/"},"genre":"posts","wordcount":8453,"url":"http:\/\/example.org\/posts\/homework\/os\/semester1\/ex3\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8453 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 17 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#函数详解>函数详解</a>
+<ul>
+<li><a href=#fork>fork()</a></li>
+<li><a href=#wait>wait()</a></li>
+<li><a href=#setbuf>setbuf()</a></li>
+<li><a href=#perror>perror()</a></li>
+<li><a href=#exec>exec</a>
+<ul>
+<li><a href=#execl>execl()</a></li>
+<li><a href=#execlp>execlp()</a></li>
+</ul>
+</li>
+<li><a href=#宏>宏</a></li>
+<li><a href=#管道操作>管道操作</a>
+<ul>
+<li><a href=#pipe>pipe()</a></li>
+<li><a href=#wirte>wirte()</a></li>
+<li><a href=#read>read()</a></li>
+<li><a href=#lockf>lockf()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href=#第一题>第一题</a></li>
+<li><a href=#第二题>第二题</a>
+<ul>
+<li><a href=#实现>实现</a></li>
+<li><a href=#思考>思考</a></li>
+</ul>
+</li>
+<li><a href=#第三题>第三题</a>
+<ul>
+<li><a href=#实现-1>实现</a></li>
+<li><a href=#思考-1>思考</a></li>
+</ul>
+</li>
+<li><a href=#第四题>第四题</a>
+<ul>
+<li><a href=#实现-2>实现</a></li>
+<li><a href=#思考-2>思考</a></li>
+</ul>
+</li>
+<li><a href=#第五题>第五题</a>
+<ul>
+<li><a href=#实现-3>实现</a></li>
+<li><a href=#思考-3>思考</a></li>
+</ul>
+</li>
+<li><a href=#第六题>第六题</a>
+<ul>
+<li><a href=#实现-4>实现</a></li>
+<li><a href=#思考-4>思考</a></li>
+</ul>
+</li>
+<li><a href=#第七题>第七题</a>
+<ul>
+<li><a href=#实现-5>实现</a></li>
+<li><a href=#思考-5>思考</a></li>
+</ul>
+</li>
+<li><a href=#第八题>第八题</a>
+<ul>
+<li><a href=#client>Client</a></li>
+<li><a href=#server>Server</a></li>
+<li><a href=#思考-6>思考</a></li>
+</ul>
+</li>
+<li><a href=#第九题>第九题</a>
+<ul>
+<li><a href=#实现-6>实现</a></li>
+<li><a href=#思考-7>思考</a></li>
+</ul>
+</li>
+<li><a href=#第十题>第十题</a></li>
+<li><a href=#研究并讨论>研究并讨论</a></li>
+<li><a href=#实验一题目>实验一题目</a>
+<ul>
+<li><a href=#思考题>思考题</a></li>
+<li><a href=#讨论题>讨论题</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=实验三>实验三</h1>
+<p>第八组 19120198 孙天野</p>
+<h2 id=函数详解>函数详解</h2>
+<h3 id=fork>fork()</h3>
+<p>创建一个子进程</p>
+<p>返回</p>
+<ul>
+<li>在子进程中，返回 0</li>
+<li>在父进程中，返回新创建子进程的进程 ID</li>
+<li>创建失败则返回 -1</li>
+</ul>
+<h3 id=wait>wait()</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=n>pid_t</span> <span class=nf>wait</span><span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=n>stat_loc</span><span class=p>);</span> <span class=c1>// 获取子进程退出状态并返回死掉的子进程ID
+</span></code></pre></td></tr></table>
+</div>
+</div><p>父进程调用 <code>wait()</code> 后，将发生堵塞，直到它的一个子进程退出或收到信号为止</p>
+<ul>
+<li>如果只有一个子进程被终止，那么 <code>wait()</code> 返回被终止的子进程的进程 ID。</li>
+<li>如果多个子进程被终止，那么 <code>wait()</code> 将获取任意子进程的进程 ID</li>
+</ul>
+<p>子进程可能由于以下原因而终止：</p>
+<ul>
+<li>调用 <code>exit()</code>；</li>
+<li>接收到 main 进程的 return 值；</li>
+<li>接收一个信号（来自操作系统或另一个进程），该信号的默认操作是终止。</li>
+</ul>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20210209165024692.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20210209165024692.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20210209165024692.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20210209165024692.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20210209165024692.png title=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20210209165024692.png></p>
+<p>父进程调用 <code>wait()</code> 时传一个整型变量地址给函数。内核将子进程的退出状态保存在这个变量中。</p>
+<ul>
+<li>如果子进程调用 <code>exit()</code> 退出，那么内核把 <code>exit()</code> 的返回值存放到这个整数变量中；</li>
+<li>如果进程是被杀死的，那么内核将<strong>信号序号</strong>存放在这个变量中。</li>
+<li>这个整数由 3 部分组成，8 个 bit 记录子进程 <code>exit()</code> 值，7 个 bit 记录信号序号，另一个 bit 用来指明发生错误并产生了内核映像（core dump）</li>
+<li>如果进程没有子进程，那么 <code>wait()</code> 返回 <code>-1</code></li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=c1>// C program to demonstrate working of wait() 
+</span><span class=c1></span><span class=cp>#include</span><span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span><span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span><span class=cpf>&lt;sys/wait.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span><span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp></span>
+<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>pid_t</span> <span class=n>cpid</span><span class=p>;</span>
+    <span class=kt>int</span> <span class=n>status</span><span class=p>;</span>
+    <span class=kt>int</span> <span class=n>high_8</span><span class=p>,</span> <span class=n>low_7</span><span class=p>,</span> <span class=n>bit_7</span><span class=p>;</span>
+
+    <span class=k>if</span> <span class=p>(</span><span class=n>fork</span><span class=p>()</span><span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=p>{</span>   
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;this is child process, the id is %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>());</span>
+        <span class=n>exit</span><span class=p>(</span><span class=mi>18</span><span class=p>);</span>                                       <span class=cm>/* terminate child */</span>
+    <span class=p>}</span>
+    <span class=k>else</span>
+    <span class=p>{</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;status is %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>status</span><span class=p>);</span>
+        <span class=n>cpid</span> <span class=o>=</span> <span class=n>wait</span><span class=p>(</span><span class=o>&amp;</span><span class=n>status</span><span class=p>);</span>                           <span class=cm>/* reaping parent */</span>
+        <span class=n>high_8</span> <span class=o>=</span> <span class=n>status</span> <span class=o>&gt;&gt;</span> <span class=mi>8</span><span class=p>;</span>                           <span class=cm>/* 1111 1111 0000 0000 */</span>
+        <span class=n>low_7</span>  <span class=o>=</span> <span class=n>status</span> <span class=o>&amp;</span> <span class=mh>0x7F</span><span class=p>;</span>                         <span class=cm>/* 0000 0000 0111 1111 */</span>
+        <span class=n>bit_7</span>  <span class=o>=</span> <span class=n>status</span> <span class=o>&amp;</span> <span class=mh>0x80</span><span class=p>;</span>                         <span class=cm>/* 0000 0000 1000 0000 */</span>
+
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;status is %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>status</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;high_8 is %d, low_7 is %d, bit_7 is %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>high_8</span><span class=p>,</span> <span class=n>low_7</span><span class=p>,</span> <span class=n>bit_7</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Parent pid = %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>());</span> 
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child pid = %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>cpid</span><span class=p>);</span> 
+  
+    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span> 
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>status is 0
+this is child process, the id is 5412
+status is 4608
+high_8 is 18, low_7 is 0, bit_7 is 0
+Parent pid = 5411
+Child pid = 5412
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=setbuf>setbuf()</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>void</span> <span class=n>setbuf</span><span class=p>(</span><span class=n>FILE</span> <span class=o>*</span><span class=n>stream</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=n>buffer</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>定义流 stream 应如何缓冲。该函数应在与流 stream 相关的文件被打开时，且还未发生任何输入或输出操作之前被调用一次。</p>
+<h3 id=perror>perror()</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>void</span> <span class=nf>perror</span> <span class=p>(</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span> <span class=n>str</span> <span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>头文件 <code>#include&lt;stdio.h></code></p>
+<p>将上一个函数发生错误的原因输出到标准设备</p>
+<h3 id=exec>exec</h3>
+<p>头文件 <code>&lt;unistd.h></code></p>
+<h4 id=execl>execl()</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>int</span> <span class=nf>execl</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>path</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>arg</span><span class=p>,</span> <span class=p>...);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>参数</p>
+<ul>
+<li>
+<p><em>path</em>：要启动程序的名称，包括路径名</p>
+</li>
+<li>
+<p><em>arg</em>：启动程序所带的参数，一般第一个参数为要执行命令名，不是带路径且 arg 必须以 NULL 结束（<code>(char *)0)</code> 也可）</p>
+</li>
+</ul>
+<p>返回值</p>
+<ul>
+<li>成功返回 0，失败返回 -1</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=n>execl</span><span class=p>(</span><span class=s>&#34;/bin/ls&#34;</span><span class=p>,</span> <span class=s>&#34;ls&#34;</span><span class=p>,</span> <span class=s>&#34;-l&#34;</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=execlp>execlp()</h4>
+<p>多了个 p，表示第一个参数 path 不用输入完整路径，只有给出命令名即可，它会在环境变量 PATH 当中查找命令</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=n>execlp</span><span class=p>(</span><span class=s>&#34;ls&#34;</span><span class=p>,</span> <span class=s>&#34;ls&#34;</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=宏>宏</h3>
+<p><code>WEXITSTATUS(status)</code>：子级退出时的返回代码</p>
+<h3 id=管道操作>管道操作</h3>
+<p>头文件 <code>#include&lt;unistd.h></code></p>
+<h4 id=pipe>pipe()</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>int</span> <span class=nf>pipe</span><span class=p>(</span><span class=kt>int</span> <span class=n>fd</span><span class=p>[</span><span class=mi>2</span><span class=p>]);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>用于创建一个管道，以实现进程间的通信</p>
+<p>参数</p>
+<ul>
+<li><em>fd</em>：大小为 2 的一个数组类型的指针</li>
+</ul>
+<p>返回</p>
+<ul>
+<li>成功时返回 0，并将一对打开的文件描述符值填入 fd 参数指向的数组</li>
+<li>失败时返回 -1 并设置 errno</li>
+</ul>
+<p>通过 pipe 函数创建的这两个文件描述符 fd[0] 和 fd[1] 分别构成管道的两端，往 fd[1] 写入的数据可以从 fd[0] 读出。并且 fd[1] 一端只能进行写操作，fd[0] 一端只能进行读操作，不能反过来使用。要实现双向数据传输，可以使用两个管道。</p>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20190109183935451.png style=zoom:50%>
+<h4 id=wirte>wirte()</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>char</span> <span class=n>buf</span><span class=p>[]</span> <span class=o>=</span> <span class=s>&#34;I am mike&#34;</span><span class=p>;</span>
+<span class=c1>// 往管道写端写数据
+</span><span class=c1></span><span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>buf</span><span class=p>,</span> <span class=n>strlen</span><span class=p>(</span><span class=n>buf</span><span class=p>));</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=read>read()</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>char</span> <span class=n>str</span><span class=p>[</span><span class=mi>50</span><span class=p>]</span> <span class=o>=</span> <span class=p>{</span><span class=mi>0</span><span class=p>};</span>
+<span class=c1>// 从管道里读数据
+</span><span class=c1></span><span class=n>read</span><span class=p>(</span><span class=n>fd_pipe</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>str</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=n>str</span><span class=p>));</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=lockf>lockf()</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=kt>int</span> <span class=nf>lockf</span><span class=p>(</span><span class=kt>int</span> <span class=n>fd</span><span class=p>,</span> <span class=kt>int</span> <span class=n>cmd</span><span class=p>,</span> <span class=n>off_t</span> <span class=n>len</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>参数</p>
+<ul>
+<li><em>fd</em>：打开文件的文件描述符</li>
+<li><em>cmd</em>：指定要采取的操作的控制值
+<ul>
+<li># define F_ULOCK 0 //解锁</li>
+<li># define F_LOCK 1 //互斥锁定区域</li>
+<li># define F_TLOCK 2 //测试互斥锁定区域</li>
+<li># define F_TEST 3 //测试区域</li>
+</ul>
+</li>
+<li><em>len</em>：要锁定或解锁的连续字节数</li>
+</ul>
+<h2 id=第一题>第一题</h2>
+<p>显示进程标识、组标识、用户标识</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp></span>
+<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Pid: %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>());</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Gid: %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getgid</span><span class=p>());</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Uid: %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getuid</span><span class=p>());</span>
+    <span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+    <span class=kt>char</span> <span class=n>ch</span><span class=p>;</span>
+    <span class=k>while</span> <span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;quit? [Y/N]</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>fflush</span><span class=p>(</span><span class=n>stdin</span><span class=p>);</span>
+        <span class=n>scanf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>ch</span><span class=p>);</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>ch</span> <span class=o>==</span> <span class=sc>&#39;Y&#39;</span> <span class=o>||</span> <span class=n>ch</span> <span class=o>==</span> <span class=sc>&#39;y&#39;</span><span class=p>)</span>
+        <span class=p>{</span>
+            <span class=k>break</span><span class=p>;</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>Pid: 1075
+Gid: 1000
+Uid: 1000
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=第二题>第二题</h2>
+<p>创建子进程</p>
+<h3 id=实现>实现</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp></span><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>status</span><span class=p>;</span>
+    <span class=kt>int</span> <span class=n>ppid</span><span class=p>;</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>fork</span><span class=p>())</span>
+    <span class=p>{</span>
+        <span class=n>pid</span> <span class=o>=</span> <span class=n>wait</span><span class=p>(</span><span class=o>&amp;</span><span class=n>status</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;It&#39;s a parent process.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;The child process, ID number %d, is finished.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=k>else</span>
+    <span class=p>{</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;It&#39;s a child process.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+        <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>It&#39;s a child process.
+It&#39;s a parent process.
+The child process, ID number -1, is finished.
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=思考>思考</h3>
+<p><strong>子进程是如何产生的？ 又是如何结束的？</strong></p>
+<p>父进程<strong>调用 <code>fork()</code> 来创建子进程</strong>，此时两个进程同时进行；</p>
+<ul>
+<li>在父进程中，<code>fork()</code> 返回子进程的 pid，故运行 <code>if</code> 语句内的代码块，<code>wait()</code> 函数使父进程阻塞（直到子进程结束）并且返回子进程 pid；</li>
+<li>在子进程中，<code>fork()</code> 返回 0，故运行 <code>else</code> 语句内的代码块，<strong><code>exit()</code> 函数终止子进程</strong></li>
+<li>父进程收到子进程结束的信号后，继续执行剩余的代码段</li>
+</ul>
+<p><strong>子进程被创建后它的运行环境是怎样建立的？</strong></p>
+<p><code>fork()</code> 调用后，内核会为子进程分配对应的虚拟内存空间，同时它的正文段，数据段，堆栈端都是指向了父进程的物理空间，实现物理空间共享，并且内容可读，一旦某个进程修改这个共享的物理空间的内容，就会复制到子进程自己的物理空间。</p>
+<h2 id=第三题>第三题</h2>
+<p>循环创建子进程</p>
+<h3 id=实现-1>实现</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp></span><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>i</span><span class=p>,</span> <span class=n>j</span><span class=p>,</span> <span class=n>status</span><span class=p>;</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;My pid is %d, my father’s pid is % d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>(),</span> <span class=n>getppid</span><span class=p>());</span>
+    <span class=k>for</span> <span class=p>(</span><span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>3</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>fork</span><span class=p>())</span>
+        <span class=p>{</span>
+            <span class=n>j</span> <span class=o>=</span> <span class=n>wait</span><span class=p>(</span><span class=o>&amp;</span><span class=n>status</span><span class=p>);</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Pid %d: The child %d is finished.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>(),</span> <span class=n>j</span><span class=p>);</span>
+        <span class=p>}</span>
+        <span class=k>else</span>
+        <span class=p>{</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Loop %d: pid = %d ppid = %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>i</span> <span class=o>+</span> <span class=mi>1</span><span class=p>,</span> <span class=n>getpid</span><span class=p>(),</span> <span class=n>getppid</span><span class=p>());</span>
+            <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span> <span class=c1>//如果只想通过循环建立三个子进程，加上这句话
+</span><span class=c1></span>        <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=n>My</span> <span class=n>pid</span> <span class=n>is</span> <span class=mi>9690</span><span class=p>,</span> <span class=n>my</span> <span class=n>father</span><span class=err>’</span><span class=n>s</span> <span class=n>pid</span> <span class=n>is</span>  <span class=mi>296</span>
+<span class=n>Loop</span> <span class=mi>1</span><span class=o>:</span> <span class=n>pid</span> <span class=o>=</span> <span class=mi>9691</span> <span class=n>ppid</span> <span class=o>=</span> <span class=mi>9690</span>
+<span class=n>Pid</span> <span class=mi>9690</span><span class=o>:</span> <span class=n>The</span> <span class=n>child</span> <span class=mi>9691</span> <span class=n>is</span> <span class=n>finished</span><span class=p>.</span>
+<span class=n>Loop</span> <span class=mi>2</span><span class=o>:</span> <span class=n>pid</span> <span class=o>=</span> <span class=mi>9692</span> <span class=n>ppid</span> <span class=o>=</span> <span class=mi>9690</span>
+<span class=n>Pid</span> <span class=mi>9690</span><span class=o>:</span> <span class=n>The</span> <span class=n>child</span> <span class=mi>9692</span> <span class=n>is</span> <span class=n>finished</span><span class=p>.</span>
+<span class=n>Loop</span> <span class=mi>3</span><span class=o>:</span> <span class=n>pid</span> <span class=o>=</span> <span class=mi>9693</span> <span class=n>ppid</span> <span class=o>=</span> <span class=mi>9690</span>
+<span class=n>Pid</span> <span class=mi>9690</span><span class=o>:</span> <span class=n>The</span> <span class=n>child</span> <span class=mi>9693</span> <span class=n>is</span> <span class=n>finished</span><span class=p>.</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=思考-1>思考</h3>
+<p><strong>画出进程家族树</strong></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>296───9690─┬─9691─┬─9692───9693
+		   │      └─9694       
+		   ├─9695───9696
+		   │	  
+		   └─9697	  		  
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>子进程的运行环境是怎样建立的？</strong></p>
+<p>父进程调用<code>fork()</code> 后，内核会为子进程分配对应的虚拟内存空间。</p>
+<p><strong>反复运行此程序会出现什么情况？</strong></p>
+<p>进程号在递增</p>
+<p>原因：Linux 的缓存机制。但是 pid 不会一直递增下去，通常在 <code>/proc/sys/kernel/pid_max</code> 里会存储一个最大值；如果达到这个最大值，系统会重复使用较小的 pid</p>
+<p><strong>修改程序，是运行结果呈单分支结构</strong></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/wait.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp></span><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>i</span><span class=p>,</span> <span class=n>j</span><span class=p>,</span> <span class=n>status</span><span class=p>;</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;My pid is %d, my father’s pid is % d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>(),</span> <span class=n>getppid</span><span class=p>());</span>
+    <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+    <span class=k>for</span> <span class=p>(</span><span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>3</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>fork</span><span class=p>())</span>
+        <span class=p>{</span>
+            <span class=n>j</span> <span class=o>=</span> <span class=n>wait</span><span class=p>(</span><span class=o>&amp;</span><span class=n>status</span><span class=p>);</span>
+            <span class=n>i</span> <span class=o>=</span> <span class=n>WEXITSTATUS</span><span class=p>(</span><span class=n>status</span><span class=p>);</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Pid %d: The child %d is finished.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>(),</span> <span class=n>j</span><span class=p>);</span>
+        <span class=p>}</span>
+        <span class=k>else</span>
+        <span class=p>{</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Loop %d: pid = %d ppid = %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>i</span> <span class=o>+</span> <span class=mi>1</span><span class=p>,</span> <span class=n>getpid</span><span class=p>(),</span> <span class=n>getppid</span><span class=p>());</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+    <span class=n>exit</span><span class=p>(</span><span class=n>i</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>My pid is 9690, my father’s pid is  296
+Loop 1: pid = 9691 ppid = 9690
+Loop 2: pid = 9692 ppid = 9691
+Loop 3: pid = 9693 ppid = 9692
+Pid 9692: The child 29003 is finished.
+Pid 9691: The child 29002 is finished.
+Pid 9690: The child 29001 is finished.
+</code></pre></td></tr></table>
+</div>
+</div><p>进程树</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>296───9690───9691───9692───9693
+</code></pre></td></tr></table>
+</div>
+</div><p>解释：</p>
+<ul>
+<li>
+<p><code>exit(i);</code> 语句使得子进程结束时，将循环次数标志 <code>i</code> 返回</p>
+</li>
+<li>
+<p><code>i = WEXITSTATUS(status);</code> 接收了子进程的 <code>i</code> 值，帮助父进程跳出循环</p>
+</li>
+</ul>
+<h2 id=第四题>第四题</h2>
+<p>子进程系统调用执行不同程序</p>
+<h3 id=实现-2>实现</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp></span>
+<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>childPid1</span><span class=p>,</span> <span class=n>childPid2</span><span class=p>,</span> <span class=n>childPid3</span><span class=p>;</span>
+    <span class=kt>int</span> <span class=n>pid</span><span class=p>,</span> <span class=n>status</span><span class=p>;</span>
+    <span class=n>setbuf</span><span class=p>(</span><span class=n>stdout</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span>
+    <span class=c1>// 创建子进程1
+</span><span class=c1></span>    <span class=n>childPid1</span> <span class=o>=</span> <span class=n>fork</span><span class=p>();</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>childPid1</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=c1>// 运行子进程1的内容
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>execlp</span><span class=p>(</span><span class=s>&#34;echo&#34;</span><span class=p>,</span> <span class=s>&#34;echo&#34;</span><span class=p>,</span> <span class=s>&#34;Child process 1 is running~&#34;</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span> <span class=c1>// 启动其他程序
+</span><span class=c1></span>    
+        <span class=n>perror</span><span class=p>(</span><span class=s>&#34;exec1 error.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=c1>// 创建子进程2
+</span><span class=c1></span>    <span class=n>childPid2</span> <span class=o>=</span> <span class=n>fork</span><span class=p>();</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>childPid2</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=c1>// 运行子进程2的内容
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>execlp</span><span class=p>(</span><span class=s>&#34;date&#34;</span><span class=p>,</span> <span class=s>&#34;date&#34;</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span> <span class=c1>// 启动其他程序
+</span><span class=c1></span>        <span class=n>perror</span><span class=p>(</span><span class=s>&#34;exec2 error.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>exit</span><span class=p>(</span><span class=mi>2</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=c1>// 创建子进程3
+</span><span class=c1></span>    <span class=n>childPid3</span> <span class=o>=</span> <span class=n>fork</span><span class=p>();</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>childPid3</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=c1>// 运行子进程2的内容
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>execlp</span><span class=p>(</span><span class=s>&#34;ls&#34;</span><span class=p>,</span> <span class=s>&#34;ls&#34;</span><span class=p>,</span> <span class=s>&#34;-l&#34;</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span> <span class=c1>// 启动其他程序
+</span><span class=c1></span>        <span class=n>perror</span><span class=p>(</span><span class=s>&#34;exec3 error.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>exit</span><span class=p>(</span><span class=mi>3</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=n>puts</span><span class=p>(</span><span class=s>&#34;Parent process is waiting for child process return!&#34;</span><span class=p>);</span>
+    <span class=k>while</span> <span class=p>((</span><span class=n>pid</span> <span class=o>=</span> <span class=n>wait</span><span class=p>(</span><span class=o>&amp;</span><span class=n>status</span><span class=p>))</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=c1>// 等待子进程结束
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>childPid1</span> <span class=o>==</span> <span class=n>pid</span><span class=p>)</span>
+            <span class=c1>// 若子进程1结束
+</span><span class=c1></span>            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child process 1 terminated with status %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=p>(</span><span class=n>status</span> <span class=o>&gt;&gt;</span> <span class=mi>8</span><span class=p>));</span>
+        <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=n>childPid2</span> <span class=o>==</span> <span class=n>pid</span><span class=p>)</span>
+            <span class=c1>// 若子进程2结束
+</span><span class=c1></span>            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child process 2 terminated with status %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=p>(</span><span class=n>status</span> <span class=o>&gt;&gt;</span> <span class=mi>8</span><span class=p>));</span>
+        <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=n>childPid3</span> <span class=o>==</span> <span class=n>pid</span><span class=p>)</span>
+            <span class=c1>// 若子进程3结束
+</span><span class=c1></span>            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child process 3 terminated with status %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=p>(</span><span class=n>status</span> <span class=o>&gt;&gt;</span> <span class=mi>8</span><span class=p>));</span>
+        <span class=k>else</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Wrong!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=n>puts</span><span class=p>(</span><span class=s>&#34;All child processes terminated.&#34;</span><span class=p>);</span>
+    <span class=n>puts</span><span class=p>(</span><span class=s>&#34;Parent proccess terminated.&#34;</span><span class=p>);</span>
+    <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>Parent process is waiting for child process return!
+Child process 1 is running~
+Sat Sep 25 13:18:42 CST 2021
+Child process 1 terminated with status 0
+Child process 2 terminated with status 0
+total 40
+-rw-r--r-- 1 loulou loulou   176 Sep 24 15:25 t1.c
+-rw-r--r-- 1 loulou loulou   377 Sep 24 15:25 t2.c
+-rw-r--r-- 1 loulou loulou   505 Sep 24 17:38 t3.c
+-rw-r--r-- 1 loulou loulou   552 Sep 24 17:44 t3_1.c
+-rw-r--r-- 1 loulou loulou  1606 Sep 25 13:18 t4.c
+-rwxr-xr-x 1 loulou loulou 17040 Sep 25 13:18 t4.o
+Child process 3 terminated with status 0
+All child processes terminated.
+Parent proccess terminated.
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=思考-2>思考</h3>
+<p><strong>子进程运行其他程序后，进程运行环境怎样变化？</strong></p>
+<p>子进程运行其他程序后，此进程被程序替代，因此进程号不会改变</p>
+<p><strong>反复运行程序的情况？</strong></p>
+<p>三个子进程结束的顺序不确定；尽管子进程的开始顺序是写死在代码里的，它们的结束顺序却由程序运行时间所决定</p>
+<h2 id=第五题>第五题</h2>
+<p>子进程继承父进程</p>
+<h3 id=实现-3>实现</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/types.h&gt;</span><span class=cp>
+</span><span class=cp></span><span class=kt>int</span> <span class=n>global</span> <span class=o>=</span> <span class=mi>4</span><span class=p>;</span>
+<span class=kt>void</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>pid_t</span> <span class=n>pid</span><span class=p>;</span>
+    <span class=kt>int</span> <span class=n>vari</span> <span class=o>=</span> <span class=mi>5</span><span class=p>;</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Before fork.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+    <span class=k>if</span> <span class=p>((</span><span class=n>pid</span> <span class=o>=</span> <span class=n>fork</span><span class=p>())</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=c1>// 若创建失败
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Fork error!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=n>pid</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=c1>// 子进程执行
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>global</span><span class=o>++</span><span class=p>;</span>
+        <span class=n>vari</span><span class=o>--</span><span class=p>;</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child %d changed the vari and gobal.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>());</span>
+    <span class=p>}</span>
+    <span class=k>else</span>
+    <span class=c1>// 父进程执行
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Parent %d did not change the vari and global.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>());</span>
+    <span class=p>}</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;pid=%d, global=%d, vari=%d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>(),</span> <span class=n>global</span><span class=p>,</span> <span class=n>vari</span><span class=p>);</span>
+    <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>Before fork.
+Parent 1463 did not change the vari and global.
+pid=1463, global=4, vari=5
+Child 1464 changed the vari and gobal.
+pid=1464, global=5, vari=4
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=思考-3>思考</h3>
+<p><strong>子进程被创建后，对父进程的运行环境有影响吗？</strong></p>
+<p>没有影响。子进程在创建时，从父进程复制了代码段与数据段，相互独立。可以看到子进程的局部变量和全局变量修改后，父进程并没有发生相应的改动</p>
+<h2 id=第六题>第六题</h2>
+<p>父进程创建两个子进程，父子之间利用管道进行通信</p>
+<h3 id=实现-4>实现</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span><span class=cp></span><span class=kt>void</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>i</span><span class=p>,</span> <span class=n>r</span><span class=p>,</span> <span class=n>j</span><span class=p>,</span> <span class=n>k</span><span class=p>,</span> <span class=n>l</span><span class=p>,</span> <span class=n>p1</span><span class=p>,</span> <span class=n>p2</span><span class=p>,</span> <span class=n>fd</span><span class=p>[</span><span class=mi>2</span><span class=p>];</span>
+    <span class=kt>char</span> <span class=n>buf</span><span class=p>[</span><span class=mi>50</span><span class=p>],</span> <span class=n>s</span><span class=p>[</span><span class=mi>50</span><span class=p>];</span>
+    <span class=n>pipe</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>                   <span class=c1>// 建立一个管道fd
+</span><span class=c1></span>    <span class=k>while</span> <span class=p>((</span><span class=n>p1</span> <span class=o>=</span> <span class=n>fork</span><span class=p>())</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=c1>// 创建子进程1
+</span><span class=c1></span>        <span class=p>;</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>p1</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=c1>// 子进程1执行
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>lockf</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span> <span class=c1>// 管道写入端加锁
+</span><span class=c1></span>        <span class=n>sprintf</span><span class=p>(</span><span class=n>buf</span><span class=p>,</span> <span class=s>&#34;Child process p1 is sending messages!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child process p1!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>buf</span><span class=p>,</span> <span class=mi>50</span><span class=p>);</span> <span class=c1>// 写入管道
+</span><span class=c1></span>        <span class=n>lockf</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>    <span class=c1>// 管道写入端解锁
+</span><span class=c1></span>        <span class=n>sleep</span><span class=p>(</span><span class=mi>4</span><span class=p>);</span>
+        <span class=n>j</span> <span class=o>=</span> <span class=n>getpid</span><span class=p>();</span>
+        <span class=n>k</span> <span class=o>=</span> <span class=n>getppid</span><span class=p>();</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;P1 %d is waken up. My parent procees ID is %d.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>j</span><span class=p>,</span> <span class=n>k</span><span class=p>);</span>
+        <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=k>else</span>
+    <span class=p>{</span>
+        <span class=k>while</span> <span class=p>((</span><span class=n>p2</span> <span class=o>=</span> <span class=n>fork</span><span class=p>())</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+            <span class=p>;</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>p2</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+        <span class=p>{</span>
+            <span class=n>lockf</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span> <span class=c1>// 管道写入端加锁
+</span><span class=c1></span>            <span class=n>sprintf</span><span class=p>(</span><span class=n>buf</span><span class=p>,</span> <span class=s>&#34;Child process p2 is sending messages!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child process p2!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+            <span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>buf</span><span class=p>,</span> <span class=mi>50</span><span class=p>);</span> <span class=c1>// 写入管道
+</span><span class=c1></span>            <span class=n>lockf</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>    <span class=c1>// 管道写入端解锁
+</span><span class=c1></span>            <span class=n>sleep</span><span class=p>(</span><span class=mi>4</span><span class=p>);</span>
+            <span class=n>j</span> <span class=o>=</span> <span class=n>getpid</span><span class=p>();</span>
+            <span class=n>k</span> <span class=o>=</span> <span class=n>getppid</span><span class=p>();</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;P2 %d is waken up. My parent procees ID is %d.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>j</span><span class=p>,</span> <span class=n>k</span><span class=p>);</span>
+            <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+        <span class=p>}</span>
+        <span class=k>else</span>
+        <span class=p>{</span>
+            <span class=n>l</span> <span class=o>=</span> <span class=n>getpid</span><span class=p>();</span>
+            <span class=n>wait</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span> <span class=c1>// 父进程等待被唤醒
+</span><span class=c1></span>            <span class=k>if</span> <span class=p>((</span><span class=n>r</span> <span class=o>=</span> <span class=n>read</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>s</span><span class=p>,</span> <span class=mi>50</span><span class=p>))</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+                <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Can&#39;t read pipe.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+            <span class=k>else</span>
+                <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Parent %d: %s </span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>l</span><span class=p>,</span> <span class=n>s</span><span class=p>);</span>
+            <span class=n>wait</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+            <span class=k>if</span> <span class=p>((</span><span class=n>r</span> <span class=o>=</span> <span class=n>read</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>s</span><span class=p>,</span> <span class=mi>50</span><span class=p>))</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+                <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Can&#39;t read pipe.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+            <span class=k>else</span>
+                <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Parent %d: %s </span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>l</span><span class=p>,</span> <span class=n>s</span><span class=p>);</span>
+            <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+        <span class=p>}</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>Child process p1!
+Child process p2!
+P1 2186 is waken up. My parent procees ID is 2185.
+P2 2187 is waken up. My parent procees ID is 2185.
+Parent 2185: Child process p1 is sending messages!
+ 
+Parent 2185: Child process p2 is sending messages!
+ 
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=思考-4>思考</h3>
+<p><strong>什么是管道？</strong></p>
+<p>能够连接一个写进程和一个读进程，并允许他们能够互相通信的一个共享文件</p>
+<p><strong>进程如何利用管道进行通信？</strong></p>
+<p>用写进程从管道的入端将数据写入管道，用读进程从管道的出端读取数据</p>
+<p><strong>修改睡眠时机、睡眠长度，会有什么变化？</strong></p>
+<p>进程唤醒的时间会被改变。因为睡眠时机、睡眠长度影响进程开始与结束时间</p>
+<p><strong>加锁、解锁起什么作用？不用它行吗？</strong></p>
+<p>加锁、解锁避免资源共享冲突问题，不用它会导致数据读写发生冲突</p>
+<h2 id=第七题>第七题</h2>
+<p>父子进程利用管道通信；父进程撤销进程，先于子进程结束</p>
+<h3 id=实现-5>实现</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span><span class=cp></span><span class=kt>void</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>i</span><span class=p>,</span> <span class=n>r</span><span class=p>,</span> <span class=n>j</span><span class=p>,</span> <span class=n>k</span><span class=p>,</span> <span class=n>l</span><span class=p>,</span> <span class=n>p1</span><span class=p>,</span> <span class=n>p2</span><span class=p>,</span> <span class=n>fd</span><span class=p>[</span><span class=mi>2</span><span class=p>];</span>
+    <span class=kt>char</span> <span class=n>buf</span><span class=p>[</span><span class=mi>50</span><span class=p>],</span> <span class=n>s</span><span class=p>[</span><span class=mi>50</span><span class=p>];</span>
+    <span class=n>pipe</span><span class=p>(</span><span class=n>fd</span><span class=p>);</span>           <span class=c1>// 建立一个管道fd
+</span><span class=c1></span>    <span class=n>lockf</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span> <span class=c1>// 管道写入端加锁
+</span><span class=c1></span>    <span class=n>sprintf</span><span class=p>(</span><span class=n>buf</span><span class=p>,</span> <span class=s>&#34;Parent process is sending messages!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Parent process!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+    <span class=n>write</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=n>buf</span><span class=p>,</span> <span class=mi>50</span><span class=p>);</span> <span class=c1>// 写入管道
+</span><span class=c1></span>    <span class=n>lockf</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>    <span class=c1>// 管道写入端解锁
+</span><span class=c1></span>
+    <span class=k>while</span> <span class=p>((</span><span class=n>p1</span> <span class=o>=</span> <span class=n>fork</span><span class=p>())</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span> <span class=c1>// 创建子进程1
+</span><span class=c1></span>        <span class=p>;</span>
+    <span class=k>if</span> <span class=p>(</span><span class=n>p1</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=c1>// 子进程1执行
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>l</span> <span class=o>=</span> <span class=n>getpid</span><span class=p>();</span>
+        <span class=k>if</span> <span class=p>((</span><span class=n>r</span> <span class=o>=</span> <span class=n>read</span><span class=p>(</span><span class=n>fd</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>s</span><span class=p>,</span> <span class=mi>50</span><span class=p>))</span> <span class=o>==</span> <span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Can&#39;t read pipe.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=k>else</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child %d: %s </span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>l</span><span class=p>,</span> <span class=n>s</span><span class=p>);</span>
+        <span class=n>sleep</span><span class=p>(</span><span class=mi>5</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child process terminated!&#34;</span><span class=p>);</span>
+        <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=k>else</span>
+    <span class=c1>// 父进程
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Parent process terminated!&#34;</span><span class=p>);</span>
+        <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span> <span class=c1>// 撤销父进程
+</span><span class=c1></span>    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>Parent process!
+Child 2542: Parent process is sending messages!
+Parent process terminated! 
+Child process terminated!
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=思考-5>思考</h3>
+<p><strong>系统如何处理孤儿进程？</strong></p>
+<p>孤儿进程将被 init 进程（进程号为 1）所收养，并由 init 进程对它们完成状态收集工作</p>
+<h2 id=第八题>第八题</h2>
+<p>客户进程向服务器进程发出信号，服务器进程接受作出应答，再向客户返回消息</p>
+<h3 id=client>Client</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/types.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/ipc.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/msg.h&gt;</span><span class=cp>
+</span><span class=cp></span>
+<span class=cp>#define MSGKEY 75
+</span><span class=cp></span><span class=k>struct</span> <span class=n>msgform</span>
+<span class=p>{</span>
+    <span class=kt>long</span> <span class=n>mtype</span><span class=p>;</span>
+    <span class=kt>char</span> <span class=n>mtext</span><span class=p>[</span><span class=mi>256</span><span class=p>];</span>
+<span class=p>}</span> <span class=n>msg</span><span class=p>;</span>
+
+<span class=kt>void</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=k>struct</span> <span class=n>msgform</span> <span class=n>msg</span><span class=p>;</span>
+    <span class=kt>int</span> <span class=n>msgqid</span><span class=p>,</span> <span class=n>pid</span><span class=p>,</span> <span class=o>*</span><span class=n>pint</span><span class=p>;</span>
+
+    <span class=n>msgqid</span> <span class=o>=</span> <span class=n>msgget</span><span class=p>(</span><span class=n>MSGKEY</span><span class=p>,</span> <span class=mo>0777</span><span class=p>);</span>
+    <span class=n>pid</span> <span class=o>=</span> <span class=n>getpid</span><span class=p>();</span>
+    <span class=n>pint</span> <span class=o>=</span> <span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=p>)</span><span class=n>msg</span><span class=p>.</span><span class=n>mtext</span><span class=p>;</span>
+    <span class=o>*</span><span class=n>pint</span> <span class=o>=</span> <span class=n>pid</span><span class=p>;</span>
+    <span class=n>msg</span><span class=p>.</span><span class=n>mtype</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+    <span class=n>msgsnd</span><span class=p>(</span><span class=n>msgqid</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>msg</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>),</span> <span class=mi>0</span><span class=p>);</span>
+
+    <span class=n>msgrcv</span><span class=p>(</span><span class=n>msgqid</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>msg</span><span class=p>,</span> <span class=mi>256</span><span class=p>,</span> <span class=n>pid</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Client: receive from pid %d.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=o>*</span><span class=n>pint</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=server>Server</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/types.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/ipc.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/msg.h&gt;</span><span class=cp>
+</span><span class=cp></span>
+<span class=cp>#define MSGKEY 75
+</span><span class=cp></span><span class=k>struct</span> <span class=n>msgform</span>
+<span class=p>{</span>
+    <span class=kt>long</span> <span class=n>mtype</span><span class=p>;</span>
+    <span class=kt>char</span> <span class=n>mtext</span><span class=p>[</span><span class=mi>256</span><span class=p>];</span>
+<span class=p>}</span> <span class=n>msg</span><span class=p>;</span>
+
+<span class=kt>int</span> <span class=n>msgqid</span><span class=p>;</span>
+
+<span class=kt>void</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>i</span><span class=p>,</span> <span class=n>pid</span><span class=p>,</span> <span class=o>*</span><span class=n>pint</span><span class=p>;</span>
+    <span class=k>extern</span> <span class=n>cleanup</span><span class=p>();</span>
+    <span class=k>for</span> <span class=p>(</span><span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>20</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span> <span class=c1>// 设置软中断信号的处理程序
+</span><span class=c1></span>        <span class=n>signal</span><span class=p>(</span><span class=n>i</span><span class=p>,</span> <span class=n>cleanup</span><span class=p>);</span>
+    <span class=n>msgqid</span> <span class=o>=</span> <span class=n>msgget</span><span class=p>(</span><span class=n>MSGKEY</span><span class=p>,</span> <span class=mo>0777</span> <span class=o>|</span> <span class=n>IPC_CREAT</span><span class=p>);</span>
+    <span class=k>for</span> <span class=p>(;;)</span>
+    <span class=p>{</span>
+        <span class=n>msgrcv</span><span class=p>(</span><span class=n>msgqid</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>msg</span><span class=p>,</span> <span class=mi>256</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+        <span class=n>pint</span> <span class=o>=</span> <span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=p>)</span><span class=n>msg</span><span class=p>.</span><span class=n>mtext</span><span class=p>;</span>
+        <span class=n>pid</span> <span class=o>=</span> <span class=o>*</span><span class=n>pint</span><span class=p>;</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Server: receive from pid %d.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>pid</span><span class=p>);</span>
+        <span class=n>msg</span><span class=p>.</span><span class=n>mtype</span> <span class=o>=</span> <span class=n>pid</span><span class=p>;</span>
+        <span class=o>*</span><span class=n>pint</span> <span class=o>=</span> <span class=n>getpid</span><span class=p>();</span>
+        <span class=n>msgsnd</span><span class=p>(</span><span class=n>msgqid</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>msg</span><span class=p>,</span> <span class=k>sizeof</span><span class=p>(</span><span class=kt>int</span><span class=p>),</span> <span class=mi>0</span><span class=p>);</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=n>cleanup</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>msgctl</span><span class=p>(</span><span class=n>msgqid</span><span class=p>,</span> <span class=n>IPC_RMID</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+    <span class=n>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=思考-6>思考</h3>
+<p><strong>服务者程序和客户程序还可以用什么机制来实现？</strong></p>
+<p>服务者程序和客户程序还可以利用 socket 进行通信</p>
+<h2 id=第九题>第九题</h2>
+<p>父进程设定软中断信号处理程序，向子进程发软中断信号；子进程收到信号后执行相应处理程序。</p>
+<h3 id=实现-6>实现</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;stdlib.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/types.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;sys/wait.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span><span class=cp></span>
+<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>i</span><span class=p>,</span> <span class=n>j</span><span class=p>,</span> <span class=n>k</span><span class=p>;</span>
+    <span class=kt>int</span> <span class=n>func</span><span class=p>();</span>
+    <span class=n>signal</span><span class=p>(</span><span class=mi>18</span><span class=p>,</span> <span class=n>func</span><span class=p>());</span> <span class=c1>// 设置18号信号的处理程序
+</span><span class=c1></span>    <span class=k>if</span> <span class=p>(</span><span class=n>i</span> <span class=o>=</span> <span class=n>fork</span><span class=p>())</span>
+    <span class=c1>// 父进程
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>j</span> <span class=o>=</span> <span class=n>kill</span><span class=p>(</span><span class=n>i</span><span class=p>,</span> <span class=mi>18</span><span class=p>);</span> <span class=c1>// 向子进程发送信号
+</span><span class=c1></span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Parent: signal 18 has been sent to child %d,returned %d.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>i</span><span class=p>,</span> <span class=n>j</span><span class=p>);</span>
+        <span class=n>k</span> <span class=o>=</span> <span class=n>wait</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;After wait %d,Parent %d: finished.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>k</span><span class=p>,</span> <span class=n>getpid</span><span class=p>());</span>
+    <span class=p>}</span>
+    <span class=k>else</span>
+    <span class=c1>// 子进程
+</span><span class=c1></span>    <span class=p>{</span>
+        <span class=n>sleep</span><span class=p>(</span><span class=mi>10</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Child %d: A signal from my parent is received.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>getpid</span><span class=p>());</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=n>func</span><span class=p>()</span> <span class=cm>/*处理程序*/</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>m</span><span class=p>;</span>
+    <span class=n>m</span> <span class=o>=</span> <span class=n>getpid</span><span class=p>();</span>
+    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;I am Process %d: This is signal 18 processing function.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>m</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-text data-lang=text>I am Process 4465: This is signal 18 processing function.
+Parent: signal 18 has been sent to child 4466,returned 0.
+After wait 4466,Parent 4465: finished.
+</code></pre></td></tr></table>
+</div>
+</div><p><code>signal</code> 函数将 18 号处理程序与 <code>func</code> 函数绑定；在父进程调用 <code>j = kill(i, 18);</code>，表示向子进程发送 18 号处理程序的中断信号，子进程响应信号，直接打断 <code>sleep()</code> 并执行相应 <code>func</code> 程序</p>
+<h3 id=思考-7>思考</h3>
+<p><strong>软中断与硬中断有什么区别？</strong></p>
+<p>硬中断由外部硬件产生；软中断由执行中断指令产生的</p>
+<p>硬中断可以直接中断 CPU，它会引起内核中相关的代码被触发；软中断并不会直接的中断 CPU，也只有当前正在运行的代码（或者是进程）才会产生软中断</p>
+<p>硬中断可以被屏蔽；软中断不可被屏蔽</p>
+<p>Linux 内核将中断函数需要处理的任务分为两部分，一部分在中断处理函数中执行，此时系统关闭中断；另外一部分在软件中断中执行，此时开启中断，允许系统响应外部中断。当中断发生时，使用硬中断处理那些短时间就可以完成的工作，而将那些处理事件比较长的工作，放到中断之后来完成，也就是软中断来完成。</p>
+<h2 id=第十题>第十题</h2>
+<p>用信号量机制编写一个解决生产者——消费者问题的程序</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span><span class=cp>#include</span> <span class=cpf>&lt;windows.h&gt;</span><span class=cp>
+</span><span class=cp></span>
+<span class=cp>#define BUFFER_SIZE 10
+</span><span class=cp></span><span class=kt>int</span> <span class=n>buffer</span><span class=p>[</span><span class=n>BUFFER_SIZE</span><span class=p>];</span>
+<span class=kt>int</span> <span class=n>in</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+<span class=kt>int</span> <span class=n>out</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+<span class=k>typedef</span> <span class=kt>int</span> <span class=n>Semaphore</span><span class=p>;</span>
+<span class=n>Semaphore</span>   <span class=n>full</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+<span class=n>Semaphore</span>   <span class=n>empty</span> <span class=o>=</span> <span class=n>BUFFER_SIZE</span><span class=p>;</span>
+<span class=n>Semaphore</span>   <span class=n>mutex</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+<span class=cp>#define PRODUCER    0
+</span><span class=cp>#define CONSUMER    1
+</span><span class=cp></span><span class=kt>int</span> <span class=n>count</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span>
+<span class=c1>//记录型信号量的wait操作
+</span><span class=c1></span><span class=kt>void</span> <span class=nf>waitS</span><span class=p>(</span><span class=kt>int</span> <span class=n>type</span><span class=p>,</span> <span class=n>Semaphore</span> <span class=o>*</span><span class=n>s</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=k>while</span> <span class=p>(</span><span class=o>*</span><span class=n>s</span> <span class=o>==</span> <span class=mi>0</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>type</span> <span class=o>==</span> <span class=n>PRODUCER</span><span class=p>)</span>
+        <span class=p>{</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Producer is waiting for empty</span><span class=se>\n\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=p>}</span>
+        <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=n>type</span> <span class=o>==</span> <span class=n>CONSUMER</span><span class=p>)</span>
+        <span class=p>{</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Consumer is waiting for full</span><span class=se>\n\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=p>}</span>
+        <span class=n>Sleep</span><span class=p>(</span><span class=mi>30</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=p>(</span><span class=o>*</span><span class=n>s</span><span class=p>)</span><span class=o>--</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=c1>//互斥型信号量的wait操作，number用于指示是生产者还是消费者
+</span><span class=c1></span><span class=kt>void</span> <span class=nf>waitM</span><span class=p>(</span><span class=kt>int</span> <span class=n>type</span><span class=p>,</span> <span class=n>Semaphore</span> <span class=o>*</span><span class=n>s</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=k>if</span> <span class=p>(</span><span class=o>*</span><span class=n>s</span> <span class=o>==</span> <span class=mi>1</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=p>(</span><span class=o>*</span><span class=n>s</span><span class=p>)</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+    <span class=p>}</span>
+    <span class=k>else</span>
+    <span class=p>{</span>
+        <span class=k>if</span> <span class=p>(</span><span class=n>type</span> <span class=o>==</span> <span class=n>PRODUCER</span><span class=p>)</span>
+        <span class=p>{</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Producer is waiting for mutex</span><span class=se>\n\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=p>}</span>
+        <span class=k>else</span> <span class=k>if</span> <span class=p>(</span><span class=n>type</span> <span class=o>==</span> <span class=n>CONSUMER</span><span class=p>)</span>
+        <span class=p>{</span>
+            <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Consumer is waiting for mutex</span><span class=se>\n\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=p>}</span>
+        <span class=n>Sleep</span><span class=p>(</span><span class=mi>30</span><span class=p>);</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+
+<span class=c1>//记录型信号量的signal操作
+</span><span class=c1></span><span class=kt>void</span> <span class=nf>signalS</span><span class=p>(</span><span class=n>Semaphore</span> <span class=o>*</span><span class=n>s</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=p>(</span><span class=o>*</span><span class=n>s</span><span class=p>)</span><span class=o>++</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=c1>//互斥型信号量的signal操作
+</span><span class=c1></span><span class=kt>void</span> <span class=nf>signalM</span><span class=p>(</span><span class=n>Semaphore</span> <span class=o>*</span><span class=n>s</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=o>*</span><span class=n>s</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=c1>//生产者
+</span><span class=c1></span><span class=kt>int</span>  <span class=nf>producer</span><span class=p>(</span><span class=n>LPVOID</span> <span class=n>lpThreadParameter</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>nextp</span><span class=p>;</span>
+    <span class=k>while</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=n>nextp</span> <span class=o>=</span> <span class=n>count</span><span class=o>++</span><span class=p>;</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Produce an item.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>waitS</span><span class=p>(</span><span class=n>PRODUCER</span><span class=p>,</span><span class=o>&amp;</span><span class=n>empty</span><span class=p>);</span>
+        <span class=n>waitM</span><span class=p>(</span><span class=n>PRODUCER</span><span class=p>,</span><span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Producer write to buffer.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>buffer</span><span class=p>[</span><span class=n>in</span><span class=p>]</span> <span class=o>=</span> <span class=n>nextp</span><span class=p>;</span>
+        <span class=n>in</span> <span class=o>=</span> <span class=p>(</span><span class=o>++</span><span class=n>in</span><span class=p>)</span> <span class=o>%</span> <span class=n>BUFFER_SIZE</span><span class=p>;</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;After producing: in = %d, out = %d, full = %d, empty = %d.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=n>in</span><span class=p>,</span><span class=n>out</span><span class=p>,</span><span class=n>full</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=n>empty</span><span class=p>);</span>
+        <span class=n>signalM</span><span class=p>(</span><span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+        <span class=n>signalS</span><span class=p>(</span><span class=o>&amp;</span><span class=n>full</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Producer left critical section.</span><span class=se>\n\n</span><span class=s>&#34;</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=c1>//消费者
+</span><span class=c1></span><span class=kt>int</span> <span class=nf>consumer</span><span class=p>(</span><span class=n>LPVOID</span> <span class=n>lpThreadParameter</span><span class=p>)</span>
+<span class=p>{</span>
+    <span class=kt>int</span> <span class=n>nextc</span><span class=p>;</span>
+    <span class=k>while</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+    <span class=p>{</span>
+        <span class=n>waitS</span><span class=p>(</span><span class=n>CONSUMER</span><span class=p>,</span><span class=o>&amp;</span><span class=n>full</span><span class=p>);</span>
+        <span class=n>waitM</span><span class=p>(</span><span class=n>CONSUMER</span><span class=p>,</span><span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Consumer read from buffer.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+        <span class=n>nextc</span> <span class=o>=</span> <span class=n>buffer</span><span class=p>[</span><span class=n>out</span><span class=p>];</span>
+        <span class=n>out</span> <span class=o>=</span> <span class=p>(</span><span class=o>++</span><span class=n>out</span><span class=p>)</span> <span class=o>%</span> <span class=n>BUFFER_SIZE</span><span class=p>;</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;After consemer leaves critical section in = %d, out = %d, full = %d, empty = %d.</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span><span class=n>in</span><span class=p>,</span><span class=n>out</span><span class=p>,</span><span class=n>full</span><span class=p>,</span><span class=n>empty</span><span class=o>+</span><span class=mi>1</span><span class=p>);</span>
+        <span class=n>signalM</span><span class=p>(</span><span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+        <span class=n>signalS</span><span class=p>(</span><span class=o>&amp;</span><span class=n>empty</span><span class=p>);</span>
+        <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Consume an item: %d.</span><span class=se>\n\n</span><span class=s>&#34;</span><span class=p>,</span><span class=n>nextc</span><span class=p>);</span>
+    <span class=p>}</span>
+    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+<span class=p>{</span>
+    <span class=n>HANDLE</span>  <span class=n>hProducer</span><span class=p>,</span><span class=n>hConsumer</span><span class=p>;</span>
+
+    <span class=c1>//创建生产者和消费者线程并立即运行
+</span><span class=c1></span>    <span class=n>hProducer</span> <span class=o>=</span> <span class=n>CreateThread</span><span class=p>(</span><span class=nb>NULL</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=n>producer</span><span class=p>,</span><span class=nb>NULL</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=nb>NULL</span><span class=p>);</span>
+
+    <span class=n>hConsumer</span> <span class=o>=</span> <span class=n>CreateThread</span><span class=p>(</span><span class=nb>NULL</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=n>consumer</span><span class=p>,</span><span class=nb>NULL</span><span class=p>,</span><span class=mi>0</span><span class=p>,</span><span class=nb>NULL</span><span class=p>);</span>
+
+    <span class=n>Sleep</span><span class=p>(</span><span class=mi>500</span><span class=p>);</span>
+
+    <span class=n>TerminateThread</span><span class=p>(</span><span class=n>hProducer</span><span class=p>,</span><span class=mi>0</span><span class=p>);</span>
+    <span class=n>TerminateThread</span><span class=p>(</span><span class=n>hConsumer</span><span class=p>,</span><span class=mi>0</span><span class=p>);</span>
+
+
+    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=研究并讨论>研究并讨论</h2>
+<p><strong>讨论 Linux 系统进程运行时的机制和特点，系统通过什么来管理进程？</strong></p>
+<p>Linux 中将进程抽象为文件，一个进程被描述为一类数据结构；系统通过优先级决定进程运行顺序，通过 pid 标记所有进程，提供 <code>ps</code>、<code>top</code> 等命令接口供用户修改进程状态，使用用户堆栈和系统堆栈控制用户态和核心态之间的互相转换，使用管道、信号量等传统的进程通信方式</p>
+<p><strong>C 语言中是如何使用 Linux 提供的功能的？</strong></p>
+<p>Linux 在 C 语言中提供了一系列<strong>系统调用</strong>接口给编程人员使用</p>
+<p>如 <code>fork()</code> 函数用来创建子进程；<code>execl()</code> 函数用来使用 shell 命令等</p>
+<p><strong>什么是进程？它是如何产生的？</strong></p>
+<p>进程是<strong>进程实体</strong>的运行过程，是系统进行资源分配和调度的一个独立单位</p>
+<p>执行程序时，会产生相应的进程</p>
+<p><strong>进程控制如何实现？</strong></p>
+<p>系统为了控制进程，设计出一种数据结构——进程控制块 PCB，其中记录了操作系统所需的、用于描述进程当前情况以及控制进程运行的全部信息。</p>
+<p><strong>进程通信方式各有什么特点？</strong></p>
+<ul>
+<li>共享存储器系统
+<ul>
+<li>基于共享数据结构、共享存储区的通信方式</li>
+<li>仅适用于传递相对少量的数据，通信效率低，属于低级通信）</li>
+</ul>
+</li>
+<li>管道通信系统
+<ul>
+<li>互斥：当一个进程正在对 pipe 执行读/写操作时，其它进程必须等待</li>
+<li>同步，当一个进程将一定数量的数据写入，然后就去睡眠等待，直到读进程将数据取走，再去唤醒。读进程与之类似</li>
+<li>需要确定对方是否存在</li>
+</ul>
+</li>
+<li>消息传递系统
+<ul>
+<li>进程间的数据交换以格式化的消息为单位</li>
+</ul>
+</li>
+<li>客户机服务器系统
+<ul>
+<li>基于 socket 协议</li>
+</ul>
+</li>
+</ul>
+<p><strong>管道通信如何实现？该通信方式可以用在何处？</strong></p>
+<p>管道的实质是一个内核缓冲区，进程以先进先出的方式从缓冲区存取数据：管道一端的进程顺序地将进程数据写入缓冲区，另一端的进程则顺序地读取数据。</p>
+<p>管道通信通常用于两个进程之间的相互通信</p>
+<p><strong>什么是软中断？软中断信号通信如何实现？</strong></p>
+<p>软中断是 CPU 根据软件的某条指令或者软件对标志寄存器的某个标志位的设置而产生</p>
+<h2 id=实验一题目>实验一题目</h2>
+<h3 id=思考题>思考题</h3>
+<ol>
+<li><strong>思考：你的用户名、用户标识、组名、组标识是什么？当前你处在系统的哪个位置中？现在有哪些用户和你一块儿共享系统？</strong></li>
+</ol>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100008892.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100008892.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100008892.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100008892.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100008892.png title=image-20210914100008892></p>
+<p>​ 当前处于 <code>/mnt/d/Repo</code> 目录下。loulou 与 root 用户一起共享系统文件操作命令</p>
+<ol start=2>
+<li>
+<p><strong>思考：文件链接是什么意思？有什么作用？</strong></p>
+<p>文件链接指在文件之间创建链接。以此来给某个文件指定一个可以访问它的名称。对于这个新文件名，我们可以指定不同的访问权限来控制对信息的共享和安全性的问题。如果是目录链接，用户则可以直接进入被链接的目录，省去路径操作。此外，删除链接也不会破坏原先的目录</p>
+</li>
+<li>
+<p><strong>思考：Linux 文件类型有哪几种？文件的存取控制模式如何描述？</strong></p>
+<p>主要有普通文件（~）、目录文件（d）、块设备特别文件（b）、字符设备特别文件（c）、命令管道文件（p）这几类。存取控制模式指对不同用户分配不同的操作权。分为三种：写、读、执行。</p>
+</li>
+<li>
+<p><strong>思考：执行了上述操作后，若想再修该文件，看能不能执行。为什么？</strong></p>
+<p>不能执行。因为文件所属用户不是当前登录的用户。</p>
+</li>
+<li>
+<p><strong>思考：系统如何管理系统中的多个进程？进程的家族关系是怎样体现的？有什么用？</strong></p>
+<p>Linux 使用 task_struct 数据结构表示每个进程，利用任务向量这个指针数组来指向每一个 task。进程的家族关系是进程家族树来体现，通过继承体系从系统的任何一个进程发现并查找到指定的其它进程，通过不断指向子进程即可遍历所有进程。</p>
+</li>
+</ol>
+<h3 id=讨论题>讨论题</h3>
+<ol>
+<li>
+<p><strong>Linux 系统命令很多，在手头资料不全时，如何查看命令格式？</strong></p>
+<p><code>命令名 --help</code> 或 <code>man 命令名</code></p>
+</li>
+<li>
+<p><strong>Linux 系统用什么方式管理多个用户操作？如何管理用户文件，隔离用户空间？用命令及结果举例说明。</strong></p>
+<p>用户是 Linux 系统最底层的安全设备，属于权限问题，系统要回收权力。系统用户即系统的使用者，用户管理是对文件进行管理，用户的存在是为了回收权力。利用用户和用户组管理实现不同用户分配不同权限</p>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211022110012624.png alt=image-20211022110012624 style=zoom:50%>
+<p>利用 chown 来修改文件权限，使得只有指定的用户才可以访问。</p>
+</li>
+<li>
+<p><strong>用什么方式查看你的进程的管理参数？这些参数怎样体现父子关系？当结束一个父 进程后其子进程如何处理？用命令及结果举例说明。</strong></p>
+<p>一个父进程后其子进程如何处理？用命令及结果举例说明。</p>
+<p><code>ps -ef</code> 根据 PID 和 PPID 可以得知其父子关系。若父进程比子进程先终止，则该父进程的所有子进程的父进程都变为 init 进程。其执行顺序大致如下：在一个进程终止时，内核逐个检查所有活动进程，以判断它是否是正要终止的进程的子进程，如果是，则该进程的父进程 ID 就更改为 1（init 进程的 ID)</p>
+</li>
+<li>
+<p><strong>Linux 系统“文件”的含义是什么？它的文件有几种类型？如何标识的？</strong></p>
+<p>Linux 世界中的所有、任意、一切东西都可以通过文件的方式访问、管理，这种文件的设计是一种面向对象的设计思想。普通文件（~）、目录文件（d）、块设备特别文件（b）、字符设备特别文件（c）、命令管道文件（p）、链接文件（l）、套接字文件（s）等。</p>
+</li>
+<li>
+<p><strong>Linux 系统的可执行命令主要放在什么地方？找出你的计算机中所有存放系统的可 执行命令的目录位置。</strong></p>
+<p>/bin 一般用户即可使用</p>
+<p>/usr/bin /usr/sbin/ /usr/local/sbin 管理员可以使用</p>
+</li>
+<li>
+<p><strong>Linux 系统得设备是如何管理的？在什么地方可以找到描述设备的信息？</strong></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>fdisk  -l                  <span class=c1>##列出磁盘分区信息(真实存在的设备)</span>
+blkid                      <span class=c1>##列出系统中可以使用的设备id</span>
+cat /proc/partition        <span class=c1>##系统内核可以识别的设备</span>
+df                         <span class=c1>##系统正在挂载的设备（显示挂载点）</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>画出 Linux 根文件系统的框架结构。描述各目录的主要作用。你的用户主目录在哪里？</strong></p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204722807.png data-srcset="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204722807.png, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204722807.png 1.5x, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204722807.png 2x" data-sizes=auto alt=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210620204722807.png title=image-20210620204722807></p>
+<ul>
+<li>
+<p><code>/</code> ：linux 系统目录树的起点</p>
+</li>
+<li>
+<p><code>bin</code>：命令文件目录，也称二进制目录</p>
+</li>
+<li>
+<p><code>boot</code>：存放系统的内核文件和引导装载程序文件</p>
+</li>
+<li>
+<p><code>dev</code>：设备文件目录，存放所有的设备文件，例如 cdrom 为光盘设备</p>
+</li>
+<li>
+<p><code>etc</code>：存放系统配置文件，如 password 文件</p>
+</li>
+<li>
+<p><code>home</code>：包含系统中各个用户的主目录，子目录名即为各用户名</p>
+</li>
+<li>
+<p><code>lib</code>：存放各种编程语言库</p>
+</li>
+<li>
+<p><code>media</code>：系统设置的自动挂载点，如u盘的自动挂载点</p>
+</li>
+<li>
+<p><code>opt</code>：表示可选择的意思，有些软件包会被安装在这里;</p>
+</li>
+<li>
+<p><code>usr</code>：最大的目录之一，很多系统中，该目录是作为独立的分区挂载的，该目录中主要存放不经常变化的数据，以及系统下安装的应用程序目录</p>
+</li>
+<li>
+<p><code>mnt</code>：主要用来临时挂载文件系统，为某些设备默认提供挂载点 （WSL 中 windows 系统的文件会被挂载在这个目录）</p>
+</li>
+<li>
+<p><code>proc</code>：虚拟文件系统，该目录中的文件是内存中的映像。</p>
+</li>
+<li>
+<p><code>sbin</code>：保存系统管理员或者 root 用户的命令文件。</p>
+</li>
+<li>
+<p><code>tmp</code>：存放临时文件</p>
+</li>
+<li>
+<p><code>var</code>：通常保存经常变化的内容，如系统日志、邮件文件等</p>
+</li>
+<li>
+<p><code>root</code>：系统管理员主目录</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Linux 系统的 Shell 是什么？请查找这方面的资料，说明不同版本的Shell的特点。 下面每一项说明的是哪类文件。</strong></p>
+<p>Shell 是脚本中命令的解释器，Linux 系统的 shell 作为操作系统的外壳，为用户提供使用操作系统的接口。它是命令语言、命令解释程序及程序设计语言的统称。shell 是用户和 Linux 内核之间的接口程序，当从 shell 或其他程序向 Linux 传递命令时，内核会做出相应的反应。shell是一个命令语言解释器，它拥有自己内建的 shell 命令集，shell 也能被系统中其他应用程序所调用。用户在提示符下输入的命令都由 shell 先解释然后传给 Linux 核心。</p>
+<p>① bash 是 Linux 标准默认的 shell，内部命令一共有 40 个。它可以使用类似 DOS 下面的 doskey 的功能，用方向键查阅和快速输入并修改命令。自动通过查找匹配的方式给出以某字符串开头的命令。包含了自身的帮助功能，你只要在提示符下面键入help就可以得到相关的帮助。</p>
+<p>② sh 是 Unix 标准默认的 shell。</p>
+<p>③ ash 是 Linux中 占用系统资源最少的一个小 shell，它只包含 24 个内部命令，因而使用起来很不方便。</p>
+<p>④ csh 是 Linux 比较大的内核，共有 52 个内部命令。该 shell 其实是指向 /bin/tcsh 这样的一个 shell，也就是说，csh 其实就是 tcsh。</p>
+<p>⑤ ksh 共有 42 条内部命令。该 shell 最大的优点是几乎和商业发行版的 ksh 完全兼容，这样就可以在不用花钱购买商业版本的情况下尝试商业版本的性能了。</p>
+<p><img class=lazyload src=/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100201952.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100201952.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100201952.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100201952.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210914100201952.png title=image-20210914100201952></p>
+<p>目录文件：5、7</p>
+<p>字设备特别文件：3、6</p>
+<p>块设备特别文件：4</p>
+<p>普通文件：1、8</p>
+<p>链接文件：2</p>
+</li>
+</ol>
+</div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/homework/os/semester1/ex6/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/homework/os/semester1/ex1/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>

@@ -1,0 +1,647 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="time time 包提供了时间的显示和测量用的函数。日历的计算采用的是公历。 一些对象 时间类型 Time time.Time 代表一个纳秒精度的时间点。 程序中应使用 Time 类型值来保存和传递">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/time/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="time time 包提供了时间的显示和测量用的函数。日历的计算采用的是公历。 一些对象 时间类型 Time time.Time 代表一个纳秒精度的时间点。 程序中应使用 Time 类型值来保存和传递">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/time/><link rel=prev href=http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/container/><link rel=next href=http://example.org/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/rand/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/time\/"},"genre":"posts","wordcount":2884,"url":"http:\/\/example.org\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/time\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2884 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#一些对象>一些对象</a>
+<ul>
+<li><a href=#时间类型-time>时间类型 Time</a>
+<ul>
+<li><a href=#内部结构>内部结构</a></li>
+<li><a href=#timenow><code>time.Now()</code></a></li>
+</ul>
+</li>
+<li><a href=#时间戳>时间戳</a></li>
+<li><a href=#时间间隔-duration-对象>时间间隔 Duration 对象</a></li>
+</ul>
+</li>
+<li><a href=#时间操作>时间操作</a>
+<ul>
+<li><a href=#add>Add</a></li>
+<li><a href=#sub>Sub</a></li>
+<li><a href=#equal>Equal</a></li>
+<li><a href=#before>Before</a></li>
+<li><a href=#after>After</a></li>
+</ul>
+</li>
+<li><a href=#定时器>定时器</a></li>
+<li><a href=#时间格式化>时间格式化</a>
+<ul>
+<li><a href=#解析字符串格式的时间>解析字符串格式的时间</a></li>
+<li><a href=#获取整点的-time-实例>获取整点的 Time 实例</a></li>
+</ul>
+</li>
+<li><a href=#时区>时区</a>
+<ul>
+<li><a href=#local-如何表示本地时区>Local 如何表示本地时区？</a></li>
+<li><a href=#获得特定时区的实例>获得特定时区的实例</a></li>
+<li><a href=#其他方法>其他方法</a>
+<ul>
+<li><a href=#timesleep><code>time.Sleep()</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=time>time</h1>
+<p>time 包提供了时间的显示和测量用的函数。日历的计算采用的是公历。</p>
+<h2 id=一些对象>一些对象</h2>
+<h3 id=时间类型-time>时间类型 Time</h3>
+<p><code>time.Time</code> 代表一个纳秒精度的时间点。</p>
+<ul>
+<li>程序中应使用 Time 类型值来保存和传递时间，而不是指针。就是说，表示时间的变量和字段，应为 time.Time 类型，而不是 *time.Time. 类型。</li>
+<li>一个 Time 类型值可以被多个 go 协程同时使用。</li>
+<li>时间点可以使用 Before、After 和 Equal 方法进行比较。Sub 方法让两个时间点相减，生成一个 Duration 类型值（代表时间段）。Add 方法给一个时间点加上一个时间段，生成一个新的 Time 类型时间点。</li>
+<li>通过 <code>==</code> 比较 Time 时，Location 信息也会参与比较，因此 Time 不应该作为 map 的 key。</li>
+</ul>
+<h4 id=内部结构>内部结构</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Time</span> <span class=kd>struct</span> <span class=p>{</span>
+    <span class=c1>// sec gives the number of seconds elapsed since
+</span><span class=c1></span>    <span class=c1>// January 1, year 1 00:00:00 UTC.
+</span><span class=c1></span>    <span class=nx>sec</span> <span class=kt>int64</span>
+
+    <span class=c1>// nsec specifies a non-negative nanosecond
+</span><span class=c1></span>    <span class=c1>// offset within the second named by Seconds.
+</span><span class=c1></span>    <span class=c1>// It must be in the range [0, 999999999].
+</span><span class=c1></span>    <span class=nx>nsec</span> <span class=kt>int32</span>
+
+    <span class=c1>// loc specifies the Location that should be used to
+</span><span class=c1></span>    <span class=c1>// determine the minute, hour, month, day, and year
+</span><span class=c1></span>    <span class=c1>// that correspond to this Time.
+</span><span class=c1></span>    <span class=c1>// Only the zero Time has a nil Location.
+</span><span class=c1></span>    <span class=c1>// In that case it is interpreted to mean UTC.
+</span><span class=c1></span>    <span class=nx>loc</span> <span class=o>*</span><span class=nx>Location</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=timenow><code>time.Now()</code></h4>
+<p>我们可以通过 <code>time.Now()</code> 函数获取当前的时间对象，然后获取时间对象的年月日时分秒等信息。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// Now returns the current local time.
+</span><span class=c1></span><span class=kd>func</span> <span class=nf>Now</span><span class=p>()</span> <span class=nx>Time</span> <span class=p>{</span>
+    <span class=nx>sec</span><span class=p>,</span> <span class=nx>nsec</span> <span class=o>:=</span> <span class=nf>now</span><span class=p>()</span>
+    <span class=k>return</span> <span class=nx>Time</span><span class=p>{</span><span class=nx>sec</span> <span class=o>+</span> <span class=nx>unixToInternal</span><span class=p>,</span> <span class=nx>nsec</span><span class=p>,</span> <span class=nx>Local</span><span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>now()</code> 的具体实现在 <code>runtime</code> 包中，以 linux/amd64 为例，在 sys_linux_amd64.s 中的 <code>time · now</code>，这是汇编实现的</p>
+<blockquote>
+<p>回到 <code>time.Now()</code> 的实现，现在我们得到了 sec 和 nsec，从 <code>Time{sec + unixToInternal, nsec, Local}</code> 这句可以看出，Time 结构的 sec 并非 Unix 时间戳，实际上，加上的 <code>unixToInternal</code> 是 1-1-1 到 1970-1-1 经历的秒数。也就是 <code>Time</code> 中的 <strong>sec 是从 1-1-1 算起的秒数</strong>，而不是 Unix 时间戳。</p>
+</blockquote>
+<p>示例代码如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>timeDemo</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>now</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span> <span class=c1>//获取当前时间
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;current time:%v\n&#34;</span><span class=p>,</span> <span class=nx>now</span><span class=p>)</span>
+
+    <span class=nx>year</span> <span class=o>:=</span> <span class=nx>now</span><span class=p>.</span><span class=nf>Year</span><span class=p>()</span>     <span class=c1>//年
+</span><span class=c1></span>    <span class=nx>month</span> <span class=o>:=</span> <span class=nx>now</span><span class=p>.</span><span class=nf>Month</span><span class=p>()</span>   <span class=c1>//月
+</span><span class=c1></span>    <span class=nx>day</span> <span class=o>:=</span> <span class=nx>now</span><span class=p>.</span><span class=nf>Day</span><span class=p>()</span>       <span class=c1>//日
+</span><span class=c1></span>    <span class=nx>hour</span> <span class=o>:=</span> <span class=nx>now</span><span class=p>.</span><span class=nf>Hour</span><span class=p>()</span>     <span class=c1>//小时
+</span><span class=c1></span>    <span class=nx>minute</span> <span class=o>:=</span> <span class=nx>now</span><span class=p>.</span><span class=nf>Minute</span><span class=p>()</span> <span class=c1>//分钟
+</span><span class=c1></span>    <span class=nx>second</span> <span class=o>:=</span> <span class=nx>now</span><span class=p>.</span><span class=nf>Second</span><span class=p>()</span> <span class=c1>//秒
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%d-%02d-%02d %02d:%02d:%02d\n&#34;</span><span class=p>,</span> <span class=nx>year</span><span class=p>,</span> <span class=nx>month</span><span class=p>,</span> <span class=nx>day</span><span class=p>,</span> <span class=nx>hour</span><span class=p>,</span> <span class=nx>minute</span><span class=p>,</span> <span class=nx>second</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=时间戳>时间戳</h3>
+<p>时间戳是自 1970 年 1 月 1 日（08:00:00GMT）至当前时间的总毫秒数。它也被称为 Unix 时间戳（UnixTimestamp）。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>time</span><span class=p>.</span><span class=nx>Time</span><span class=p>.</span><span class=nf>Unix</span><span class=p>()</span> <span class=c1>//得到 Unix 时间戳；
+</span><span class=c1></span><span class=nx>time</span><span class=p>.</span><span class=nx>Time</span><span class=p>.</span><span class=nf>UnixNano</span><span class=p>()</span> <span class=c1>//得到 Unix 时间戳的纳秒表示；
+</span></code></pre></td></tr></table>
+</div>
+</div><p>基于时间对象获取时间戳的示例代码如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>timestampDemo</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>now</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>            <span class=c1>//获取当前时间
+</span><span class=c1></span>    <span class=nx>timestamp1</span> <span class=o>:=</span> <span class=nx>now</span><span class=p>.</span><span class=nf>Unix</span><span class=p>()</span>     <span class=c1>//时间戳
+</span><span class=c1></span>    <span class=nx>timestamp2</span> <span class=o>:=</span> <span class=nx>now</span><span class=p>.</span><span class=nf>UnixNano</span><span class=p>()</span> <span class=c1>//纳秒时间戳
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;current timestamp1:%v\n&#34;</span><span class=p>,</span> <span class=nx>timestamp1</span><span class=p>)</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;current timestamp2:%v\n&#34;</span><span class=p>,</span> <span class=nx>timestamp2</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用 <code>time.Unix()</code> 函数可以将时间戳转为时间格式。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>timestampDemo2</span><span class=p>(</span><span class=nx>timestamp</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>timeObj</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Unix</span><span class=p>(</span><span class=nx>timestamp</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span> <span class=c1>//将时间戳转为时间格式
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>timeObj</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=时间间隔-duration-对象>时间间隔 Duration 对象</h3>
+<p>time.Duration 是 time 包定义的一个类型，它代表两个时间点之间经过的时间，以纳秒为单位。time.Duration 表示一段时间间隔，可表示的最长时间段大约 290 年。</p>
+<p>time 包中定义的时间间隔类型的常量如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>const</span> <span class=p>(</span>
+    <span class=nx>Nanosecond</span>  <span class=nx>Duration</span> <span class=p>=</span> <span class=mi>1</span>
+    <span class=nx>Microsecond</span>          <span class=p>=</span> <span class=mi>1000</span> <span class=o>*</span> <span class=nx>Nanosecond</span>
+    <span class=nx>Millisecond</span>          <span class=p>=</span> <span class=mi>1000</span> <span class=o>*</span> <span class=nx>Microsecond</span>
+    <span class=nx>Second</span>               <span class=p>=</span> <span class=mi>1000</span> <span class=o>*</span> <span class=nx>Millisecond</span>
+    <span class=nx>Minute</span>               <span class=p>=</span> <span class=mi>60</span> <span class=o>*</span> <span class=nx>Second</span>
+    <span class=nx>Hour</span>                 <span class=p>=</span> <span class=mi>60</span> <span class=o>*</span> <span class=nx>Minute</span>
+<span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>例如：time.Duration 表示 1 纳秒，time.Second 表示 1 秒。</p>
+<h2 id=时间操作>时间操作</h2>
+<h3 id=add>Add</h3>
+<p>我们在日常的编码过程中可能会遇到要求时间 + 时间间隔的需求，Go 语言的时间对象有提供 Add 方法如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=nx>Time</span><span class=p>)</span> <span class=nf>Add</span><span class=p>(</span><span class=nx>d</span> <span class=nx>Duration</span><span class=p>)</span> <span class=nx>Time</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>举个例子，求一个小时之后的时间：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>now</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+    <span class=nx>later</span> <span class=o>:=</span> <span class=nx>now</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Hour</span><span class=p>)</span> <span class=c1>// 当前时间加1小时后的时间
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>later</span><span class=p>)</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=sub>Sub</h3>
+<p>求两个时间之间的差值：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=nx>Time</span><span class=p>)</span> <span class=nf>Sub</span><span class=p>(</span><span class=nx>u</span> <span class=nx>Time</span><span class=p>)</span> <span class=nx>Duration</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>返回一个时间段 t-u。如果结果超出了 Duration 可以表示的最大值/最小值，将返回最大值/最小值。</p>
+<p>要获取时间点 t-d（d 为 Duration），可以使用 t.Add(-d)。</p>
+<h3 id=equal>Equal</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=nx>Time</span><span class=p>)</span> <span class=nf>Equal</span><span class=p>(</span><span class=nx>u</span> <span class=nx>Time</span><span class=p>)</span> <span class=kt>bool</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>判断两个时间是否相同，会考虑时区的影响，因此不同时区标准的时间也可以正确比较。</p>
+<p>本方法和用 t==u 不同，这种方法还会比较<strong>地点和时区信息</strong>。</p>
+<h3 id=before>Before</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=nx>Time</span><span class=p>)</span> <span class=nf>Before</span><span class=p>(</span><span class=nx>u</span> <span class=nx>Time</span><span class=p>)</span> <span class=kt>bool</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果 t 代表的时间点在 u 之前，返回真；否则返回假。</p>
+<h3 id=after>After</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=nx>Time</span><span class=p>)</span> <span class=nf>After</span><span class=p>(</span><span class=nx>u</span> <span class=nx>Time</span><span class=p>)</span> <span class=kt>bool</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果 t 代表的时间点在 u 之后，返回真；否则返回假。</p>
+<h2 id=定时器>定时器</h2>
+<p>定时器是进程规划自己在未来某一时刻接获通知的一种机制</p>
+<p>使用 <code>time.Tick</code> (时间间隔) 来设置定时器，定时器的本质上是一个通道（channel）。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>tickDemo</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>ticker</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Tick</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span> <span class=c1>//定义一个1秒间隔的定时器
+</span><span class=c1></span>    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>ticker</span> <span class=p>{</span>
+        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>i</span><span class=p>)</span><span class=c1>//每秒都会执行的任务
+</span><span class=c1></span>    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=时间格式化>时间格式化</h2>
+<p>时间类型有一个自带的方法 Format 进行格式化，需要注意的是 Go 语言中格式化时间模板不是常见的 <code>Y-m-d H:M:S</code>，而是使用 Go 的诞生时间 2006 年 1月 2 号15 点 04 分（记忆口诀为 2006 1 2 3 4）。也许这就是技术人员的浪漫叭。</p>
+<p>补充：如果想格式化为 12 小时方式，需指定 PM。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>formatDemo</span><span class=p>()</span> <span class=p>{</span>
+    <span class=nx>now</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+    <span class=c1>// 格式化的模板为Go的出生时间2006年1月2号15点04分 Mon Jan
+</span><span class=c1></span>    <span class=c1>// 24小时制
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>now</span><span class=p>.</span><span class=nf>Format</span><span class=p>(</span><span class=s>&#34;2006-01-02 15:04:05.000 Mon Jan&#34;</span><span class=p>))</span>
+    <span class=c1>// 12小时制
+</span><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>now</span><span class=p>.</span><span class=nf>Format</span><span class=p>(</span><span class=s>&#34;2006-01-02 03:04:05.000 PM Mon Jan&#34;</span><span class=p>))</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>now</span><span class=p>.</span><span class=nf>Format</span><span class=p>(</span><span class=s>&#34;2006/01/02 15:04&#34;</span><span class=p>))</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>now</span><span class=p>.</span><span class=nf>Format</span><span class=p>(</span><span class=s>&#34;15:04 2006/01/02&#34;</span><span class=p>))</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>now</span><span class=p>.</span><span class=nf>Format</span><span class=p>(</span><span class=s>&#34;2006/01/02&#34;</span><span class=p>))</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=解析字符串格式的时间>解析字符串格式的时间</h3>
+<p><code>time.Parse</code> 和 <code>time.ParseInLocation</code> 被用来解析时间串</p>
+<p>一般的，我们应该总是使用 <code>time.ParseInLocation</code> 来解析时间，并给第三个参数传递 <code>time.Local</code></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>now</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>now</span><span class=p>)</span>
+<span class=c1>// 加载时区
+</span><span class=c1></span><span class=nx>loc</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>LoadLocation</span><span class=p>(</span><span class=s>&#34;Asia/Shanghai&#34;</span><span class=p>)</span>
+<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+    <span class=k>return</span>
+<span class=p>}</span>
+<span class=c1>// 按照指定时区和指定格式解析字符串时间
+</span><span class=c1></span><span class=nx>timeObj</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>ParseInLocation</span><span class=p>(</span><span class=s>&#34;2006/01/02 15:04:05&#34;</span><span class=p>,</span> <span class=s>&#34;2019/08/04 14:15:20&#34;</span><span class=p>,</span> <span class=nx>loc</span><span class=p>)</span>
+<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+    <span class=k>return</span>
+<span class=p>}</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>timeObj</span><span class=p>)</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>timeObj</span><span class=p>.</span><span class=nf>Sub</span><span class=p>(</span><span class=nx>now</span><span class=p>))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=获取整点的-time-实例>获取整点的 Time 实例</h3>
+<p>比如，有这么个需求：获取当前时间整点的 <code>Time</code> 实例。例如，当前时间是 15:54:23，需要的是 15:00:00。我们可以这么做：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>t</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>ParseInLocation</span><span class=p>(</span><span class=s>&#34;2006-01-02 15:04:05&#34;</span><span class=p>,</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>Format</span><span class=p>(</span><span class=s>&#34;2006-01-02 15:00:00&#34;</span><span class=p>),</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Local</span><span class=p>)</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>t</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>实际上，<code>time</code> 包给我们提供了专门的方法，功能更强大，性能也更好，这就是 <strong><code>Round</code> 和 <code>Trunate</code></strong>，它们区别，一个是取最接近的，一个是向下取整。</p>
+<p>使用示例：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>t</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>ParseInLocation</span><span class=p>(</span><span class=s>&#34;2006-01-02 15:04:05&#34;</span><span class=p>,</span> <span class=s>&#34;2016-06-13 15:34:39&#34;</span><span class=p>,</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Local</span><span class=p>)</span>
+<span class=c1>// 整点（向下取整）
+</span><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nf>Truncate</span><span class=p>(</span><span class=mi>1</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Hour</span><span class=p>))</span>
+<span class=c1>// 整点（最接近）
+</span><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nf>Round</span><span class=p>(</span><span class=mi>1</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Hour</span><span class=p>))</span>
+
+<span class=c1>// 整分（向下取整）
+</span><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nf>Truncate</span><span class=p>(</span><span class=mi>1</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Minute</span><span class=p>))</span>
+<span class=c1>// 整分（最接近）
+</span><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nf>Round</span><span class=p>(</span><span class=mi>1</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Minute</span><span class=p>))</span>
+
+<span class=nx>t2</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>ParseInLocation</span><span class=p>(</span><span class=s>&#34;2006-01-02 15:04:05&#34;</span><span class=p>,</span> <span class=nx>t</span><span class=p>.</span><span class=nf>Format</span><span class=p>(</span><span class=s>&#34;2006-01-02 15:00:00&#34;</span><span class=p>),</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Local</span><span class=p>)</span>
+<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>t2</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=时区>时区</h2>
+<p>不同国家（有时甚至是同一个国家内的不同地区）使用不同的时区。对于要输入和输出时间的程序来说，必须对系统所处的时区加以考虑。Go 语言使用 <code>Location</code> 来表示地区相关的时区，一个 Location 可能表示多个时区。</p>
+<p><code>time</code> 包提供了 Location 的两个实例：<code>Local</code> 和 <code>UTC</code>。<code>Local</code> 代表当前系统本地时区；<code>UTC</code> 代表通用协调时间，也就是零时区。<code>time</code> 包默认（为显示提供时区）使用 <code>UTC</code> 时区。</p>
+<h3 id=local-如何表示本地时区>Local 如何表示本地时区？</h3>
+<p>时区信息既浩繁又多变，Unix 系统以标准格式存于文件中，这些文件位于 /usr/share/zoneinfo，而本地时区可以通过 /etc/localtime 获取，这是一个符号链接，指向 /usr/share/zoneinfo 中某一个时区。如：/usr/share/zoneinfo/Asia/Shanghai。</p>
+<p>因此，在初始化 Local 时，通过读取 /etc/localtime 可以获取到系统本地时区。</p>
+<p>当然，如果设置了环境变量 <code>TZ</code>，则会优先使用它。</p>
+<p>相关代码：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>tz</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>syscall</span><span class=p>.</span><span class=nf>Getenv</span><span class=p>(</span><span class=s>&#34;TZ&#34;</span><span class=p>)</span>
+<span class=k>switch</span> <span class=p>{</span>
+<span class=k>case</span> <span class=p>!</span><span class=nx>ok</span><span class=p>:</span>
+    <span class=nx>z</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nf>loadZoneFile</span><span class=p>(</span><span class=s>&#34;&#34;</span><span class=p>,</span> <span class=s>&#34;/etc/localtime&#34;</span><span class=p>)</span>
+    <span class=k>if</span> <span class=nx>err</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+        <span class=nx>localLoc</span> <span class=p>=</span> <span class=o>*</span><span class=nx>z</span>
+        <span class=nx>localLoc</span><span class=p>.</span><span class=nx>name</span> <span class=p>=</span> <span class=s>&#34;Local&#34;</span>
+        <span class=k>return</span>
+    <span class=p>}</span>
+<span class=k>case</span> <span class=nx>tz</span> <span class=o>!=</span> <span class=s>&#34;&#34;</span> <span class=o>&amp;&amp;</span> <span class=nx>tz</span> <span class=o>!=</span> <span class=s>&#34;UTC&#34;</span><span class=p>:</span>
+    <span class=k>if</span> <span class=nx>z</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nf>loadLocation</span><span class=p>(</span><span class=nx>tz</span><span class=p>);</span> <span class=nx>err</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+        <span class=nx>localLoc</span> <span class=p>=</span> <span class=o>*</span><span class=nx>z</span>
+        <span class=k>return</span>
+    <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=获得特定时区的实例>获得特定时区的实例</h3>
+<p>函数 <code>LoadLocation</code> 可以根据名称获取特定时区的实例。</p>
+<p>函数声明如下：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>LoadLocation</span><span class=p>(</span><span class=nx>name</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=o>*</span><span class=nx>Location</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果 name 是 "" 或 &ldquo;UTC&rdquo;，返回 UTC；如果 name 是 &ldquo;Local&rdquo;，返回 Local；否则 name 应该是 IANA 时区数据库里有记录的地点名（该数据库记录了地点和对应的时区），如 &ldquo;America/New_York&rdquo;。</p>
+<p>LoadLocation 函数需要的时区数据库可能不是所有系统都提供，特别是非 Unix 系统。此时 <code>LoadLocation</code> 会查找环境变量 ZONEINFO 指定目录或解压该变量指定的 zip 文件（如果有该环境变量）；然后查找 Unix 系统的惯例时区数据安装位置，最后查找 <code>$GOROOT/lib/time/zoneinfo.zip</code>。</p>
+<p>可以在 Unix 系统下的 /usr/share/zoneinfo 中找到所有的名称。</p>
+<blockquote>
+<p>通常，我们使用 <code>time.Local</code> 即可，偶尔可能会需要使用 <code>UTC</code>。在解析时间时，心中一定记得有时区这么回事。当你发现时间出现莫名的情况时，很可能是因为时区的问题，特别是当时间相差 8 小时时。</p>
+</blockquote>
+<h3 id=其他方法>其他方法</h3>
+<h4 id=timesleep><code>time.Sleep()</code></h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>Sleep</span><span class=p>(</span><span class=nx>d</span> <span class=nx>Duration</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>例：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// Calling Sleep method 
+</span><span class=c1></span><span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mi>8</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span> 
+
+<span class=c1>// Printed after sleep is over 
+</span><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Sleep Over.....&#34;</span><span class=p>)</span> 
+</code></pre></td></tr></table>
+</div>
+</div></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/container/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/rand/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>

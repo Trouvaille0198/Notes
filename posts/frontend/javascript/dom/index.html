@@ -1,0 +1,1561 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title> - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content>
+<meta property="og:description" content="简介 概念 文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口 文档">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/posts/frontend/javascript/dom/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="简介 概念 文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口 文档">
+<meta name=application-name content="我的全新 Hugo 网站">
+<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=http://example.org/posts/frontend/javascript/dom/><link rel=prev href=http://example.org/posts/frontend/javascript/typescript/><link rel=next href=http://example.org/posts/frontend/javascript/basicgrammar/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/example.org\/posts\/frontend\/javascript\/dom\/"},"genre":"posts","wordcount":4337,"url":"http:\/\/example.org\/posts\/frontend\/javascript\/dom\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu>
+<div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div>
+</div>
+</div>
+</header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+</div>
+<div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div>
+</div>
+<div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div>
+<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/tags/ title>标签</a><a class=menu-item href=/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div>
+</div>
+</header>
+<div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div>
+</div>
+<div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div>
+</div>
+<main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2>
+<div class=toc-content id=toc-content-auto></div>
+</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4337 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+</div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div>
+<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#概念>概念</a></li>
+<li><a href=#节点思想>节点思想</a></li>
+</ul>
+<ul>
+<li><a href=#元素属性>元素属性</a></li>
+<li><a href=#元素定位>元素定位</a></li>
+<li><a href=#根节点>根节点</a></li>
+</ul>
+<ul>
+<li><a href=#访问>访问</a></li>
+<li><a href=#修改>修改</a>
+<ul>
+<li><a href=#创建>创建</a>
+<ul>
+<li><a href=#创建内容>创建内容</a></li>
+<li><a href=#改变样式>改变样式</a></li>
+<li><a href=#创建元素>创建元素</a></li>
+</ul>
+</li>
+<li><a href=#添加>添加</a></li>
+<li><a href=#删除>删除</a></li>
+<li><a href=#替换>替换</a></li>
+</ul>
+</li>
+<li><a href=#其他>其他</a></li>
+</ul>
+<ul>
+<li><a href=#创建事件>创建事件</a>
+<ul>
+<li><a href=#在元素中创建>在元素中创建</a></li>
+<li><a href=#使用-dom-分配事件>使用 DOM 分配事件</a></li>
+</ul>
+</li>
+<li><a href=#事件类型>事件类型</a></li>
+</ul>
+<ul>
+<li><a href=#node>Node</a></li>
+<li><a href=#element>Element</a></li>
+<li><a href=#document>Document</a>
+<ul>
+<li><a href=#属性>属性</a></li>
+<li><a href=#方法>方法</a></li>
+</ul>
+</li>
+<li><a href=#nodelist>NodeList</a>
+<ul>
+<li><a href=#属性-1>属性</a></li>
+<li><a href=#遍历>遍历</a></li>
+</ul>
+</li>
+<li><a href=#domtokenlist>DOMTokenList</a>
+<ul>
+<li><a href=#属性-2>属性</a></li>
+<li><a href=#方法-1>方法</a></li>
+<li><a href=#修改空格和重复的特性>修改空格和重复的特性</a></li>
+</ul>
+</li>
+<li><a href=#window>Window</a>
+<ul>
+<li><a href=#属性-3>属性</a></li>
+<li><a href=#方法-2>方法</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div><div class=content id=content><h1 id=简介>简介</h1>
+<h2 id=概念>概念</h2>
+<p>文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口</p>
+<ul>
+<li>
+<p>文档：一个页面就是一个文档，用 document 表示</p>
+</li>
+<li>
+<p>元素：页面中所有标签都是元素，用 element 表示</p>
+</li>
+<li>
+<p>节点：网页中所有内容都是节点（标签，属性，文本，注释等），用 node 表示</p>
+</li>
+</ul>
+<p>DOM 把以上内容都看作对象</p>
+<h2 id=节点思想>节点思想</h2>
+<p>根据 W3C 的 HTML DOM 标准，HTML 文档中的所有内容都是节点：</p>
+<ul>
+<li>整个文档是一个文档节点</li>
+<li>每个 HTML 元素是元素节点</li>
+<li>HTML 元素内的文本是文本节点</li>
+<li>每个 HTML 属性是属性节点</li>
+<li>注释是注释节点</li>
+</ul>
+<h1 id=dom-属性>DOM 属性</h1>
+<h2 id=元素属性>元素属性</h2>
+<p>以下为 <code>Node</code> 对象的属性</p>
+<ul>
+<li>
+<p><em><strong>.nodeName</strong></em></p>
+<p>nodeName 属性规定节点的名称。</p>
+<ul>
+<li>nodeName 是只读的</li>
+<li>元素节点的 nodeName 与标签名相同</li>
+<li>属性节点的 nodeName 与属性名相同</li>
+<li>文本节点的 nodeName 始终是 #text</li>
+<li>文档节点的 nodeName 始终是 #document</li>
+</ul>
+</li>
+<li>
+<p><em><strong>.nodeValue</strong></em></p>
+<p>nodeValue 属性规定节点的值。</p>
+<ul>
+<li>元素节点的 nodeValue 是 undefined 或 null</li>
+<li>文本节点的 nodeValue 是文本本身</li>
+<li>属性节点的 nodeValue 是属性值</li>
+</ul>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>p</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;intro&#34;</span><span class=p>&gt;</span>Hello World!<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=nx>x</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;intro&#34;</span><span class=p>);</span>
+<span class=nb>document</span><span class=p>.</span><span class=nx>write</span><span class=p>(</span><span class=nx>x</span><span class=p>.</span><span class=nx>firstChild</span><span class=p>.</span><span class=nx>nodeValue</span><span class=p>);</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>nodeType</strong></em></p>
+<p>nodeType 属性返回节点的类型。nodeType 是只读的</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>元素类型</th>
+<th style=text-align:left>NodeType</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>元素</td>
+<td style=text-align:left>1</td>
+</tr>
+<tr>
+<td style=text-align:left>属性</td>
+<td style=text-align:left>2</td>
+</tr>
+<tr>
+<td style=text-align:left>文本</td>
+<td style=text-align:left>3</td>
+</tr>
+<tr>
+<td style=text-align:left>注释</td>
+<td style=text-align:left>8</td>
+</tr>
+<tr>
+<td style=text-align:left>文档</td>
+<td style=text-align:left>9</td>
+</tr>
+</tbody>
+</table>
+<p>以下为 <code>Element</code> 的属性</p>
+<ul>
+<li>
+<p><em><strong>.innerHTML</strong></em></p>
+<p>innerHTML 属性可用于获取或改变任意 HTML 元素，包括 &lt;html> 和 &lt;body></p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>p</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;intro&#34;</span><span class=p>&gt;</span>Hello World!<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=kd>var</span> <span class=nx>txt</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;intro&#34;</span><span class=p>).</span><span class=nx>innerHTML</span><span class=p>;</span>
+<span class=nb>document</span><span class=p>.</span><span class=nx>write</span><span class=p>(</span><span class=nx>txt</span><span class=p>);</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>.attributes</strong></em></p>
+<p>返回该元素所有属性节点的一个实时集合</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>var</span> <span class=nx>para</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementsByTagName</span><span class=p>(</span><span class=s2>&#34;p&#34;</span><span class=p>)[</span><span class=mi>0</span><span class=p>];</span>
+<span class=kd>var</span> <span class=nx>atts</span> <span class=o>=</span> <span class=nx>para</span><span class=p>.</span><span class=nx>attributes</span><span class=p>;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>.classList</strong></em></p>
+<p>返回一个元素的类属性的实时 <code>DOMTokenList</code> 集合。</p>
+</li>
+<li>
+<p><em><strong>.className</strong></em></p>
+<p>获取或设置指定元素的class属性的值，返回以空格分隔的字符串</p>
+</li>
+<li>
+<p><em><strong>.tagName</strong></em></p>
+<p>返回当前元素的标签名</p>
+</li>
+</ul>
+<h2 id=元素定位>元素定位</h2>
+<p>以下为 <code>Node</code> 对象的属性</p>
+<ul>
+<li>
+<p><em><strong>.parentNode</strong></em></p>
+<p>返回父节点，若无则返回 <code>null</code></p>
+</li>
+<li>
+<p><em><strong>.firstChild</strong></em></p>
+<p>返回第一个孩子节点</p>
+</li>
+<li>
+<p><em><strong>.lastChild</strong></em></p>
+<p>返回最后一个孩子节点</p>
+</li>
+<li>
+<p><em><strong>.nextSibling</strong></em></p>
+<p>返回下一个兄弟</p>
+</li>
+<li>
+<p><em><strong>.previousSibling</strong></em></p>
+<p>返回前一个兄弟</p>
+</li>
+<li>
+<p><em><strong>.childNodes</strong></em></p>
+<p>返回孩子节点的 <code>NodeList</code></p>
+</li>
+</ul>
+<h2 id=根节点>根节点</h2>
+<p>这里有两个特殊的属性，可以访问全部文档：</p>
+<ul>
+<li><code>document.documentElement</code> - 全部文档</li>
+<li><code>document.body</code> - 文档的主体</li>
+</ul>
+<h1 id=dom-方法>DOM 方法</h1>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>方法</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>getElementById()</td>
+<td style=text-align:left>返回带有指定 ID 的元素。</td>
+</tr>
+<tr>
+<td style=text-align:left>getElementsByTagName()</td>
+<td style=text-align:left>返回包含带有指定标签名称的所有元素的节点列表（集合/节点数组）。</td>
+</tr>
+<tr>
+<td style=text-align:left>getElementsByClassName()</td>
+<td style=text-align:left>返回包含带有指定类名的所有元素的节点列表。</td>
+</tr>
+<tr>
+<td style=text-align:left>appendChild()</td>
+<td style=text-align:left>把新的子节点添加到指定节点。</td>
+</tr>
+<tr>
+<td style=text-align:left>removeChild()</td>
+<td style=text-align:left>删除子节点。</td>
+</tr>
+<tr>
+<td style=text-align:left>replaceChild()</td>
+<td style=text-align:left>替换子节点。</td>
+</tr>
+<tr>
+<td style=text-align:left>insertBefore()</td>
+<td style=text-align:left>在指定的子节点前面插入新的子节点。</td>
+</tr>
+<tr>
+<td style=text-align:left>createAttribute()</td>
+<td style=text-align:left>创建属性节点。</td>
+</tr>
+<tr>
+<td style=text-align:left>createElement()</td>
+<td style=text-align:left>创建元素节点。</td>
+</tr>
+<tr>
+<td style=text-align:left>createTextNode()</td>
+<td style=text-align:left>创建文本节点。</td>
+</tr>
+<tr>
+<td style=text-align:left>getAttribute()</td>
+<td style=text-align:left>返回指定的属性值。</td>
+</tr>
+<tr>
+<td style=text-align:left>setAttribute()</td>
+<td style=text-align:left>把指定属性设置或修改为指定的值。</td>
+</tr>
+</tbody>
+</table>
+<h2 id=访问>访问</h2>
+<p>以下为 <code>Document</code> 对象的方法</p>
+<ul>
+<li>
+<p><em><strong>getElementById()</strong></em></p>
+<p>返回带有指定 ID 的元素</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;intro&#34;</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>getElementsByTagName()</strong></em></p>
+<p>返回带有指定标签名的所有元素</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nb>document</span><span class=p>.</span><span class=nx>getElementsByTagName</span><span class=p>(</span><span class=s2>&#34;p&#34;</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>getElementsByClassName()</strong></em></p>
+<p>返回带有相同类名的所有 HTML 元素</p>
+</li>
+</ul>
+<p>以下为 <code>Node</code> 对象的方法</p>
+<ul>
+<li>
+<p><em><strong>.getRootNode()</strong></em></p>
+<p>返回上下文中的根节点</p>
+</li>
+</ul>
+<h2 id=修改>修改</h2>
+<h3 id=创建>创建</h3>
+<h4 id=创建内容>创建内容</h4>
+<p>创建元素内容的最简单的方法是使用 innerHTML 属性</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=n>document</span><span class=o>.</span><span class=na>getElementById</span><span class=o>(</span><span class=s>&#34;p1&#34;</span><span class=o>).</span><span class=na>innerHTML</span><span class=o>=</span><span class=s>&#34;New text!&#34;</span><span class=o>;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=改变样式>改变样式</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;p2&#34;</span><span class=p>).</span><span class=nx>style</span><span class=p>.</span><span class=nx>color</span><span class=o>=</span><span class=s2>&#34;blue&#34;</span><span class=p>;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=创建元素>创建元素</h4>
+<p>先创建该元素（元素节点），然后把它追加到已有的元素上</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;d1&#34;</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>p</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;p1&#34;</span><span class=p>&gt;</span>This is a paragraph.<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>p</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;p2&#34;</span><span class=p>&gt;</span>This is another paragraph.<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=kd>var</span> <span class=nx>para</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>createElement</span><span class=p>(</span><span class=s2>&#34;p&#34;</span><span class=p>);</span>
+<span class=kd>var</span> <span class=nx>node</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>createTextNode</span><span class=p>(</span><span class=s2>&#34;This is new.&#34;</span><span class=p>);</span>
+<span class=nx>para</span><span class=p>.</span><span class=nx>appendChild</span><span class=p>(</span><span class=nx>node</span><span class=p>);</span>
+
+<span class=kd>var</span> <span class=nx>element</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;d1&#34;</span><span class=p>);</span>
+<span class=nx>element</span><span class=p>.</span><span class=nx>appendChild</span><span class=p>(</span><span class=nx>para</span><span class=p>);</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>以下为 <code>Document</code> 对象的方法</p>
+<ul>
+<li>
+<p><em><strong>createElement()</strong></em></p>
+<p>创建元素节点</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>var</span> <span class=nx>para</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>createElement</span><span class=p>(</span><span class=s2>&#34;p&#34;</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>createTextNode()</strong></em></p>
+<p>创建文本节点</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>var</span> <span class=nx>node</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>createTextNode</span><span class=p>(</span><span class=s2>&#34;This is a new paragraph.&#34;</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=添加>添加</h3>
+<p>以下为 <code>Node</code> 对象的方法</p>
+<ul>
+<li>
+<p><em><strong>appendChild()</strong></em></p>
+<p>添加孩子节点，将新元素作为父元素的最后一个子元素进行添加</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nx>element</span><span class=p>.</span><span class=nx>appendChild</span><span class=p>(</span><span class=nx>para</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>insertBefore(newItem,existingItem)</strong></em></p>
+<p>在指定的已有子节点之前插入新的子节点</p>
+</li>
+</ul>
+<h3 id=删除>删除</h3>
+<ul>
+<li>
+<p><em><strong>removeChild()</strong></em></p>
+<p>删除指定的子节点，为 <code>Node</code> 对象的方法</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nx>parent</span><span class=p>.</span><span class=nx>removeChild</span><span class=p>(</span><span class=nx>child</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>​ 在不直接引用父元素的情况下删除某个元素：找需要删除的子元素，然后使用 parentNode 属性来查找其父元素</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>var</span> <span class=nx>child</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;p1&#34;</span><span class=p>);</span>
+<span class=nx>child</span><span class=p>.</span><span class=nx>parentNode</span><span class=p>.</span><span class=nx>removeChild</span><span class=p>(</span><span class=nx>child</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=替换>替换</h3>
+<ul>
+<li>
+<p><em><strong>replaceChild(newnode,oldnode)</strong></em></p>
+<p>替换一个子节点为指定节点，为 <code>Node</code> 对象的方法</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nx>parent</span><span class=p>.</span><span class=nx>replaceChild</span><span class=p>(</span><span class=nx>newChild</span><span class=p>,</span><span class=nx>oldChild</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=其他>其他</h2>
+<p>以下为 <code>Node</code> 对象的方法</p>
+<ul>
+<li>
+<p><em><strong>.contains()</strong></em></p>
+<p>返回 Boolean，来表示传入的节点是否为该节点的后代节点</p>
+<p><code>node.contains( otherNode )</code></p>
+</li>
+<li>
+<p><em><strong>.cloneNode()</strong></em></p>
+<p>返回调用该方法的节点的一个副本</p>
+<p><code>var dupNode = node.cloneNode();</code></p>
+</li>
+<li>
+<p><em><strong>.hasChildNodes()</strong></em></p>
+<p>返回 Boolean，来表示该元素是否包含有子节点</p>
+</li>
+</ul>
+<h1 id=事件>事件</h1>
+<p>HTML DOM 允许您在事件发生时执行代码。</p>
+<p>当 HTML 元素”有事情发生“时，浏览器就会生成事件：</p>
+<ul>
+<li>当用户点击鼠标时</li>
+<li>当网页已加载时</li>
+<li>当图片已加载时</li>
+<li>当鼠标移动到元素上时</li>
+<li>当输入字段被改变时</li>
+<li>当 HTML 表单被提交时</li>
+<li>当用户触发按键时</li>
+</ul>
+<h2 id=创建事件>创建事件</h2>
+<h3 id=在元素中创建>在元素中创建</h3>
+<p>如需在用户点击某个元素时执行代码，把 JavaScript 代码添加到 HTML 事件属性中</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html>onclick=JavaScript
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>h1</span> <span class=na>onclick</span><span class=o>=</span><span class=s>&#34;this.innerHTML=&#39;hello!&#39;&#34;</span><span class=p>&gt;</span>请点击这段文本!<span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=使用-dom-分配事件>使用 DOM 分配事件</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;myBtn&#34;</span><span class=p>).</span><span class=nx>onclick</span><span class=o>=</span><span class=kd>function</span><span class=p>(){</span><span class=nx>displayDate</span><span class=p>()};</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=事件类型>事件类型</h2>
+<ul>
+<li>
+<p><em><strong>onload</strong></em></p>
+<p>用户进入界面</p>
+<p>onload 事件可用于检查访客的浏览器类型和版本，以便基于这些信息来加载不同版本的网页</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>body</span> <span class=na>onload</span><span class=o>=</span><span class=s>&#34;checkCookies()&#34;</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>onunload</strong></em></p>
+<p>用户离开界面</p>
+</li>
+<li>
+<p><em><strong>onchange</strong></em></p>
+<p>onchange 事件常用于输入字段的验证。当用户改变输入字段的内容时，运行对应 js 语句。</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;fname&#34;</span> <span class=na>onchange</span><span class=o>=</span><span class=s>&#34;upperCase()&#34;</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>onmouseover</strong></em></p>
+<p>鼠标指针移动到元素上时</p>
+</li>
+<li>
+<p><em><strong>onmouseout</strong></em></p>
+<p>鼠标指针离开元素时</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>div</span> 
+<span class=na>onmouseover</span><span class=o>=</span><span class=s>&#34;mOver(this)&#34;</span> 
+<span class=na>onmouseout</span><span class=o>=</span><span class=s>&#34;mOut(this)&#34;</span> 
+<span class=na>style</span><span class=o>=</span><span class=s>&#34;background-color:yellow;width:200px;height:50px;padding-top:25px;text-align:center;&#34;</span><span class=p>&gt;</span>
+Mouse Over Me
+<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=kd>function</span> <span class=nx>mOver</span><span class=p>(</span><span class=nx>obj</span><span class=p>)</span>
+<span class=p>{</span>
+<span class=nx>obj</span><span class=p>.</span><span class=nx>innerHTML</span><span class=o>=</span><span class=s2>&#34;谢谢你&#34;</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>mOut</span><span class=p>(</span><span class=nx>obj</span><span class=p>)</span>
+<span class=p>{</span>
+<span class=nx>obj</span><span class=p>.</span><span class=nx>innerHTML</span><span class=o>=</span><span class=s2>&#34;把鼠标指针移动到上面&#34;</span>
+<span class=p>}</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>onmousedown</strong></em></p>
+<p>鼠标被点击时</p>
+</li>
+<li>
+<p><em><strong>onmouseup</strong></em></p>
+<p>鼠标松开时</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>div</span> 
+<span class=na>onmousedown</span><span class=o>=</span><span class=s>&#34;mDown(this)&#34;</span> 
+<span class=na>onmouseup</span><span class=o>=</span><span class=s>&#34;mUp(this)&#34;</span> 
+<span class=na>style</span><span class=o>=</span><span class=s>&#34;background-color:#D94A38;width:200px;height:50px;padding-top:25px;text-align:center;&#34;</span><span class=p>&gt;</span>
+点击这里
+<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=kd>function</span> <span class=nx>mDown</span><span class=p>(</span><span class=nx>obj</span><span class=p>)</span>
+<span class=p>{</span>
+<span class=nx>obj</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>backgroundColor</span><span class=o>=</span><span class=s2>&#34;#1ec5e5&#34;</span><span class=p>;</span>
+<span class=nx>obj</span><span class=p>.</span><span class=nx>innerHTML</span><span class=o>=</span><span class=s2>&#34;松开鼠标&#34;</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>mUp</span><span class=p>(</span><span class=nx>obj</span><span class=p>)</span>
+<span class=p>{</span>
+<span class=nx>obj</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>backgroundColor</span><span class=o>=</span><span class=s2>&#34;#D94A38&#34;</span><span class=p>;</span>
+<span class=nx>obj</span><span class=p>.</span><span class=nx>innerHTML</span><span class=o>=</span><span class=s2>&#34;谢谢你&#34;</span>
+<span class=p>}</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>onclick</strong></em></p>
+<p>一次鼠标点击过程完成时</p>
+</li>
+<li>
+<p><em><strong>ondblclick</strong></em></p>
+<p>一次鼠标双击过程完成时</p>
+</li>
+<li>
+<p><em><strong>onfocus</strong></em></p>
+<p>元素获得焦点时</p>
+<p>在本例中，当输入框获得焦点时，其背景颜色将改变</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span><span class=p>&gt;</span>
+<span class=kd>function</span> <span class=nx>setStyle</span><span class=p>(</span><span class=nx>x</span><span class=p>)</span>
+<span class=p>{</span>
+<span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=nx>x</span><span class=p>).</span><span class=nx>style</span><span class=p>.</span><span class=nx>background</span><span class=o>=</span><span class=s2>&#34;yellow&#34;</span>
+<span class=p>}</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+
+First name: <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span>
+<span class=na>onfocus</span><span class=o>=</span><span class=s>&#34;setStyle(this.id)&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;fname&#34;</span> <span class=p>/&gt;</span>
+<span class=p>&lt;</span><span class=nt>br</span> <span class=p>/&gt;</span>
+Last name: <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text&#34;</span>
+<span class=na>onfocus</span><span class=o>=</span><span class=s>&#34;setStyle(this.id)&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;lname&#34;</span> <span class=p>/&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>onkeydown</strong></em></p>
+<p>某个按键被按下时</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=c1>//键盘监听
+</span><span class=c1></span><span class=nb>document</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s2>&#34;keydown&#34;</span><span class=p>,</span><span class=nx>keydown</span><span class=p>);</span>
+<span class=c1>//参数1：表示事件，keydown:键盘向下按；参数2：表示要触发的事件
+</span><span class=c1></span><span class=kd>function</span> <span class=nx>keydown</span><span class=p>(</span><span class=nx>event</span><span class=p>){</span>
+<span class=c1>//表示键盘监听所触发的事件，同时传递传递参数event
+</span><span class=c1></span>    <span class=nb>document</span><span class=p>.</span><span class=nx>write</span><span class=p>(</span><span class=nx>event</span><span class=p>.</span><span class=nx>keyCode</span><span class=p>);</span><span class=c1>//keyCode表示键盘编码
+</span><span class=c1></span><span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>onkeyup</strong></em></p>
+<p>某个按键松开时</p>
+</li>
+<li>
+<p><em><strong>onkeypress</strong></em></p>
+<p>某个按键被被按下并松开时</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>属性</th>
+<th style=text-align:left>此事件发生在何时&mldr;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onabort.asp target=_blank rel="noopener noreffer">onabort</a></td>
+<td style=text-align:left>图像的加载被中断。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onblur.asp target=_blank rel="noopener noreffer">onblur</a></td>
+<td style=text-align:left>元素失去焦点。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onchange.asp target=_blank rel="noopener noreffer">onchange</a></td>
+<td style=text-align:left>域的内容被改变。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onclick.asp target=_blank rel="noopener noreffer">onclick</a></td>
+<td style=text-align:left>当用户点击某个对象时调用的事件句柄。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_ondblclick.asp target=_blank rel="noopener noreffer">ondblclick</a></td>
+<td style=text-align:left>当用户双击某个对象时调用的事件句柄。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onerror.asp target=_blank rel="noopener noreffer">onerror</a></td>
+<td style=text-align:left>在加载文档或图像时发生错误。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onfocus.asp target=_blank rel="noopener noreffer">onfocus</a></td>
+<td style=text-align:left>元素获得焦点。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onkeydown.asp target=_blank rel="noopener noreffer">onkeydown</a></td>
+<td style=text-align:left>某个键盘按键被按下。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onkeypress.asp target=_blank rel="noopener noreffer">onkeypress</a></td>
+<td style=text-align:left>某个键盘按键被按下并松开。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onkeyup.asp target=_blank rel="noopener noreffer">onkeyup</a></td>
+<td style=text-align:left>某个键盘按键被松开。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onload.asp target=_blank rel="noopener noreffer">onload</a></td>
+<td style=text-align:left>一张页面或一幅图像完成加载。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onmousedown.asp target=_blank rel="noopener noreffer">onmousedown</a></td>
+<td style=text-align:left>鼠标按钮被按下。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onmousemove.asp target=_blank rel="noopener noreffer">onmousemove</a></td>
+<td style=text-align:left>鼠标被移动。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onmouseout.asp target=_blank rel="noopener noreffer">onmouseout</a></td>
+<td style=text-align:left>鼠标从某元素移开。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onmouseover.asp target=_blank rel="noopener noreffer">onmouseover</a></td>
+<td style=text-align:left>鼠标移到某元素之上。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onmouseup.asp target=_blank rel="noopener noreffer">onmouseup</a></td>
+<td style=text-align:left>鼠标按键被松开。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onreset.asp target=_blank rel="noopener noreffer">onreset</a></td>
+<td style=text-align:left>重置按钮被点击。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onresize.asp target=_blank rel="noopener noreffer">onresize</a></td>
+<td style=text-align:left>窗口或框架被重新调整大小。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onselect.asp target=_blank rel="noopener noreffer">onselect</a></td>
+<td style=text-align:left>文本被选中。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onsubmit.asp target=_blank rel="noopener noreffer">onsubmit</a></td>
+<td style=text-align:left>确认按钮被点击。</td>
+</tr>
+<tr>
+<td style=text-align:left><a href=https://www.w3school.com.cn/jsref/event_onunload.asp target=_blank rel="noopener noreffer">onunload</a></td>
+<td style=text-align:left>用户退出页面。</td>
+</tr>
+</tbody>
+</table>
+<h1 id=对象>对象</h1>
+<p>EventTarget &lt;- Node &lt;- Element &lt;- Document</p>
+<h2 id=node>Node</h2>
+<p><strong><code>Node</code></strong> 是一个接口，各种类型的 DOM API 对象会从这个接口继承。它允许我们使用相似的方式对待这些不同类型的对象；比如, 继承同一组方法，或者用同样的方式测试。</p>
+<h2 id=element>Element</h2>
+<p><strong><code>Element</code></strong> 是一个通用性非常强的基类，所有 <code>Document</code>对象下的对象都继承自它。这个接口描述了所有相同种类的元素所普遍具有的方法和属性</p>
+<h2 id=document>Document</h2>
+<p><code>Document</code> 接口表示任何在浏览器中载入的网页，并作为网页内容的入口，也就是 DOM 树</p>
+<p><code>Document</code> 接口描述了任何类型的文档的通用属性与方法。</p>
+<h3 id=属性>属性</h3>
+<ul>
+<li>
+<p><em><strong>.body</strong></em></p>
+<p>返回当前文档中的 <code>&lt;body></code> 元素或者 <code>&lt;frameset></code> 元素</p>
+</li>
+<li>
+<p><em><strong>.scripts</strong></em></p>
+<p>返回一个 <code>HTMLCollection</code> 对象,包含了当前文档中所有 &lt;script> 元素的集合</p>
+<p><code>var scriptList = document.scripts;</code></p>
+</li>
+<li>
+<p><em><strong>.URL</strong></em></p>
+<p>返回 url</p>
+</li>
+<li>
+<p><em><strong>.title</strong></em></p>
+<p>返回标题</p>
+</li>
+</ul>
+<h3 id=方法>方法</h3>
+<ul>
+<li>
+<p><em><strong>.write()</strong></em></p>
+<p>向文档流中写入内容</p>
+</li>
+</ul>
+<h2 id=nodelist>NodeList</h2>
+<p><code>NodeList</code> 对象是节点的集合，通常是由属性，如<code>Node.childNodes</code> 和 方法，如<code>document.querySelectorAll</code> 返回的。</p>
+<p><code>NodeList</code> <strong>不是一个数组</strong>，是一个类似数组的对象 (<em>Like Array Object</em>)。虽然 <code>NodeList</code> 不是一个数组，但是可以使用 <code>forEach()</code> 来迭代，也可以用下标直接访问</p>
+<p>在一些情况下，<code>NodeList</code> 是一个实时集合，也就是说，如果文档中的节点树发生变化，<code>NodeList</code> 也会随之变化</p>
+<h3 id=属性-1>属性</h3>
+<ul>
+<li><em><strong>NodeList.length</strong></em>
+<code>NodeList</code> 中包含的节点个数。</li>
+</ul>
+<h3 id=遍历>遍历</h3>
+<p>使用 length 属性来循环节点列表</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=nx>x</span><span class=o>=</span><span class=nb>document</span><span class=p>.</span><span class=nx>getElementsByTagName</span><span class=p>(</span><span class=s2>&#34;p&#34;</span><span class=p>);</span>
+
+<span class=k>for</span> <span class=p>(</span><span class=nx>i</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span><span class=nx>i</span><span class=o>&lt;</span><span class=nx>x</span><span class=p>.</span><span class=nx>length</span><span class=p>;</span><span class=nx>i</span><span class=o>++</span><span class=p>)</span>
+<span class=p>{</span>
+<span class=nb>document</span><span class=p>.</span><span class=nx>write</span><span class=p>(</span><span class=nx>x</span><span class=p>[</span><span class=nx>i</span><span class=p>].</span><span class=nx>innerHTML</span><span class=p>);</span>
+<span class=nb>document</span><span class=p>.</span><span class=nx>write</span><span class=p>(</span><span class=s2>&#34;&lt;br /&gt;&#34;</span><span class=p>);</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>for&mldr;of 循环同样能正确的遍历 <code>NodeList</code> 对象：</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>var</span> <span class=nx>list</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>querySelectorAll</span><span class=p>(</span><span class=s1>&#39;input[type=checkbox]&#39;</span><span class=p>);</span>
+<span class=k>for</span> <span class=p>(</span><span class=kd>var</span> <span class=nx>checkbox</span> <span class=k>of</span> <span class=nx>list</span><span class=p>)</span> <span class=p>{</span>
+  <span class=nx>checkbox</span><span class=p>.</span><span class=nx>checked</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id=domtokenlist>DOMTokenList</h2>
+<p><code>DOMTokenList</code> 接口表示一组空格分隔的标记（tokens），主要用于操作 <code>classList</code></p>
+<h3 id=属性-2>属性</h3>
+<ul>
+<li>
+<p><em><strong>.length</strong></em></p>
+<p>一个整数，表示存储在该对象里值的个数</p>
+</li>
+</ul>
+<h3 id=方法-1>方法</h3>
+<ul>
+<li><em><strong>.contains(token)</strong></em>
+是否包括指定字符串，返回 <code>bool</code></li>
+<li><em><strong>.add(token)</strong></em>
+添加一个或多个标记（<code>token</code>）到 <code>DOMTokenList</code> 列表中。</li>
+<li><em><strong>.remove(token)</strong></em>
+移除一个或多个标记（<code>token</code>）。</li>
+<li><em><strong>.replace(oldToken, newToken)</strong></em>
+使用 <code>newToken</code> 替换 <code>token</code> 。</li>
+</ul>
+<h3 id=修改空格和重复的特性>修改空格和重复的特性</h3>
+<p>修改 <code>DOMTokenList</code> 的方法（例如 <code>DOMTokenList.add()</code>）会自动去除多余的空格（Whitespace）和列表中的重复项目</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=o>&lt;</span><span class=nx>span</span> <span class=kr>class</span><span class=o>=</span><span class=s2>&#34;    d   d e f&#34;</span><span class=o>&gt;&lt;</span><span class=err>/span&gt;</span>
+
+<span class=kd>let</span> <span class=nx>span</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;span&#34;</span><span class=p>);</span>
+<span class=kd>let</span> <span class=nx>classes</span> <span class=o>=</span> <span class=nx>span</span><span class=p>.</span><span class=nx>classList</span><span class=p>;</span>
+<span class=nx>span</span><span class=p>.</span><span class=nx>classList</span><span class=p>.</span><span class=nx>add</span><span class=p>(</span><span class=s2>&#34;x&#34;</span><span class=p>);</span>
+<span class=nx>span</span><span class=p>.</span><span class=nx>textContent</span> <span class=o>=</span> <span class=sb>`span classList is &#34;</span><span class=si>${</span><span class=nx>classes</span><span class=si>}</span><span class=sb>&#34;`</span><span class=p>;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出：span classList is &ldquo;d e f x&rdquo;</p>
+<h2 id=window>Window</h2>
+<p><code>Window</code> 对象表示浏览器中打开的窗口，如果文档包含框架（frame 或 iframe 标签），浏览器会为 HTML 文档创建一个 <code>window</code> 对象，并为每个框架创建一个额外的 <code>window</code> 对象。</p>
+<h3 id=属性-3>属性</h3>
+<h3 id=方法-2>方法</h3>
+<ul>
+<li>
+<p><em><strong>.alert()</strong></em></p>
+<p>显示带有一条指定消息和一个 OK 按钮的警告框</p>
+<p><code>window.alert(message);</code></p>
+</li>
+<li>
+<p><em><strong>.open()</strong></em></p>
+<p>打开一个新的浏览器窗口或查找一个已命名的窗口</p>
+<p><code>window.open(URL,name,features,replace)</code></p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>参数</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>URL</td>
+<td style=text-align:left>一个可选的字符串，声明了要在新窗口中显示的文档的 URL。如果省略了这个参数，或者它的值是空字符串，那么新窗口就不会显示任何文档。</td>
+</tr>
+<tr>
+<td style=text-align:left>name</td>
+<td style=text-align:left>一个可选的字符串，该字符串是一个由逗号分隔的特征列表，其中包括数字、字母和下划线，该字符声明了新窗口的名称。这个名称可以用作标记 &lt;a> 和 &lt;form> 的属性 target 的值。如果该参数指定了一个已经存在的窗口，那么 open() 方法就不再创建一个新窗口，而只是返回对指定窗口的引用。在这种情况下，features 将被忽略。</td>
+</tr>
+<tr>
+<td style=text-align:left>features</td>
+<td style=text-align:left>一个可选的字符串，声明了新窗口要显示的标准浏览器的特征。如果省略该参数，新窗口将具有所有标准特征。</td>
+</tr>
+<tr>
+<td style=text-align:left>replace</td>
+<td style=text-align:left>一个可选的布尔值。规定了装载到窗口的 URL 是在窗口的浏览历史中创建一个新条目，还是替换浏览历史中的当前条目。支持下面的值：true - URL 替换浏览历史中的当前条目。false - URL 在浏览历史中创建新的条目。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span><span class=p>&gt;</span>
+        <span class=kd>function</span> <span class=nx>open_win</span><span class=p>()</span> <span class=p>{</span>
+            <span class=nb>window</span><span class=p>.</span><span class=nx>open</span><span class=p>(</span><span class=s2>&#34;http://www.w3school.com.cn&#34;</span><span class=p>)</span>
+        <span class=p>}</span>
+    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+
+    <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>button</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;Open Window&#34;</span> <span class=na>onclick</span><span class=o>=</span><span class=s>&#34;open_win()&#34;</span> <span class=p>/&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>.close()</strong></em></p>
+<p>关闭浏览器窗口</p>
+</li>
+<li>
+<p><em><strong>.confirm(message)</strong></em></p>
+<p>如果用户点击确定按钮，则 <code>confirm()</code> 返回 true。如果点击取消按钮，则 <code>confirm()</code> 返回 false</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span><span class=p>&gt;</span>
+        <span class=kd>function</span> <span class=nx>disp_confirm</span><span class=p>()</span> <span class=p>{</span>
+            <span class=kd>var</span> <span class=nx>r</span> <span class=o>=</span> <span class=nx>confirm</span><span class=p>(</span><span class=s2>&#34;Press a button&#34;</span><span class=p>)</span>
+            <span class=k>if</span> <span class=p>(</span><span class=nx>r</span> <span class=o>==</span> <span class=kc>true</span><span class=p>)</span> <span class=p>{</span>
+                <span class=nb>document</span><span class=p>.</span><span class=nx>write</span><span class=p>(</span><span class=s2>&#34;You pressed OK!&#34;</span><span class=p>)</span>
+            <span class=p>}</span>
+            <span class=k>else</span> <span class=p>{</span>
+                <span class=nb>document</span><span class=p>.</span><span class=nx>write</span><span class=p>(</span><span class=s2>&#34;You pressed Cancel!&#34;</span><span class=p>)</span>
+            <span class=p>}</span>
+        <span class=p>}</span>
+    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+
+    <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;button&#34;</span> <span class=na>onclick</span><span class=o>=</span><span class=s>&#34;disp_confirm()&#34;</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;Display a confirm box&#34;</span> <span class=p>/&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>.moveBy()</strong></em></p>
+<p>相对窗口的当前坐标把它移动指定的像素</p>
+<p><code>window.moveBy(x,y)</code></p>
+<p>下面的例子将把窗口相对其当前位置移动 50 个像素</p>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span><span class=p>&gt;</span>
+        <span class=kd>function</span> <span class=nx>moveWin</span><span class=p>()</span> <span class=p>{</span>
+            <span class=nx>myWindow</span><span class=p>.</span><span class=nx>moveBy</span><span class=p>(</span><span class=mi>50</span><span class=p>,</span> <span class=mi>50</span><span class=p>)</span>
+        <span class=p>}</span>
+    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+
+    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span><span class=p>&gt;</span>
+        <span class=nx>myWindow</span> <span class=o>=</span> <span class=nb>window</span><span class=p>.</span><span class=nx>open</span><span class=p>(</span><span class=s1>&#39;&#39;</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>,</span> <span class=s1>&#39;width=200,height=100&#39;</span><span class=p>)</span>
+        <span class=nx>myWindow</span><span class=p>.</span><span class=nb>document</span><span class=p>.</span><span class=nx>write</span><span class=p>(</span><span class=s2>&#34;This is &#39;myWindow&#39;&#34;</span><span class=p>)</span>
+    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+
+    <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;button&#34;</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;Move &#39;myWindow&#39;&#34;</span> <span class=na>onclick</span><span class=o>=</span><span class=s>&#34;moveWin()&#34;</span> <span class=p>/&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>.moveTo()</strong></em></p>
+<p>把窗口的左上角移动到一个指定的坐标</p>
+<p><code>window.moveTo(x,y)</code></p>
+</li>
+<li>
+<p><em><strong>.print()</strong></em></p>
+<p>打印当前窗口的内容</p>
+</li>
+<li>
+<p><em><strong>.prompt()</strong></em></p>
+<p>显示可提示用户进行输入的对话框</p>
+<p>如果用户单击提示框的取消按钮，则返回 null。如果用户单击确认按钮，则返回输入字段当前显示的文本。</p>
+<p><code>prompt(text,defaultText)</code></p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>参数</th>
+<th style=text-align:left>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>text</td>
+<td style=text-align:left>可选。要在对话框中显示的纯文本（而不是 HTML 格式的文本）。</td>
+</tr>
+<tr>
+<td style=text-align:left>defaultText</td>
+<td style=text-align:left>可选。默认的输入文本。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>head</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span><span class=p>&gt;</span>
+        <span class=kd>function</span> <span class=nx>disp_prompt</span><span class=p>()</span> <span class=p>{</span>
+            <span class=kd>var</span> <span class=nx>name</span> <span class=o>=</span> <span class=nx>prompt</span><span class=p>(</span><span class=s2>&#34;Please enter your name&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>)</span>
+            <span class=k>if</span> <span class=p>(</span><span class=nx>name</span> <span class=o>!=</span> <span class=kc>null</span> <span class=o>&amp;&amp;</span> <span class=nx>name</span> <span class=o>!=</span> <span class=s2>&#34;&#34;</span><span class=p>)</span> <span class=p>{</span>
+                <span class=nb>document</span><span class=p>.</span><span class=nx>write</span><span class=p>(</span><span class=s2>&#34;Hello &#34;</span> <span class=o>+</span> <span class=nx>name</span> <span class=o>+</span> <span class=s2>&#34;!&#34;</span><span class=p>)</span>
+            <span class=p>}</span>
+        <span class=p>}</span>
+    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>head</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+
+    <span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;button&#34;</span> <span class=na>onclick</span><span class=o>=</span><span class=s>&#34;disp_prompt()&#34;</span> <span class=na>value</span><span class=o>=</span><span class=s>&#34;Display a prompt box&#34;</span> <span class=p>/&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><em><strong>.resizeBy(width,height)</strong></em></p>
+<p>根据指定的像素来调整窗口的大小</p>
+</li>
+<li>
+<p><em><strong>.resizeTo(width,height)</strong></em></p>
+<p>把窗口大小调整为指定的宽度和高度</p>
+</li>
+<li>
+<p><em><strong>.scrollBy()</strong></em></p>
+<p>把内容滚动指定的像素数</p>
+<p><code>scrollBy(xnum,ynum)</code></p>
+</li>
+<li>
+<p><em><strong>.scrollTo()</strong></em></p>
+<p>把内容滚动到指定的坐标</p>
+<p><code>scrollTo(xpos,ypos)</code></p>
+</li>
+<li>
+<p><em><strong>setTimeOut()</strong></em></p>
+<p>在指定的毫秒数后调用函数或计算表达式</p>
+<p><code>setTimeout(code,millisec)</code></p>
+<p><code>setTimeout()</code> 只执行 code 一次。如果要多次调用，请使用 <code>setInterval()</code> 或者让 code 自身再次调用 <code>setTimeout()</code></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>timedMsg</span><span class=p>()</span> <span class=p>{</span>
+            <span class=kd>var</span> <span class=nx>t</span> <span class=o>=</span> <span class=nx>setTimeout</span><span class=p>(</span><span class=s2>&#34;alert(&#39;5 seconds!&#39;)&#34;</span><span class=p>,</span> <span class=mi>5000</span><span class=p>)</span>
+        <span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><em><strong>setInterval()</strong></em></p>
+<p>按照指定的周期（以毫秒计）来调用函数或计算表达式</p>
+<p><code>setInterval(code,millisec[,"lang"])</code></p>
+<p>返回一个可以传递给 <code>Window.clearInterval() </code>从而取消对 code 的周期性执行的值</p>
+<p>此方法会不停地调用函数，直到 <code>clearInterval()</code> 被调用或窗口被关闭。</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>html</span><span class=p>&gt;</span>
+
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>p</span> <span class=na>id</span><span class=o>=</span><span class=s>&#39;clock&#39;</span><span class=p>&gt;&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>script</span> <span class=na>language</span><span class=o>=</span><span class=s>javascript</span><span class=p>&gt;</span>
+        <span class=kd>var</span> <span class=kr>int</span> <span class=o>=</span> <span class=nx>self</span><span class=p>.</span><span class=nx>setInterval</span><span class=p>(</span><span class=s2>&#34;clock()&#34;</span><span class=p>,</span> <span class=mi>50</span><span class=p>)</span>
+        <span class=kd>function</span> <span class=nx>clock</span><span class=p>()</span> <span class=p>{</span>
+            <span class=kd>var</span> <span class=nx>t</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Date</span><span class=p>()</span>
+            <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;clock&#34;</span><span class=p>).</span><span class=nx>innerHTML</span> <span class=o>=</span> <span class=nx>t</span>
+        <span class=p>}</span>
+    <span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>form</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>button</span> <span class=na>onclick</span><span class=o>=</span><span class=s>&#34;int=window.clearInterval(int)&#34;</span><span class=p>&gt;</span>
+        Stop interval<span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
+
+<span class=p>&lt;/</span><span class=nt>html</span><span class=p>&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><em><strong>clearInterval()</strong></em></p>
+<p>取消由<code> setInterval()</code> 设置的 timeout</p>
+<p><code>clearInterval(id_of_setinterval)</code></p>
+<p>id_of_setinterval：由 <code>setInterval()</code> 返回的 ID 值</p>
+</li>
+</ul>
+</div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 0001-01-01</span>
+</div>
+<div class=post-info-license></div>
+</div>
+<div class=post-info-line>
+<div class=post-info-md></div>
+<div class=post-info-share>
+<span></span>
+</div>
+</div>
+</div>
+<div class=post-info-more>
+<section class=post-tags></section>
+<section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span>
+</section>
+</div>
+<div class=post-nav><a href=/posts/frontend/javascript/typescript/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/posts/frontend/javascript/basicgrammar/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+</main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
+</div>
+</footer></div>
+<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=stylesheet href=/lib/katex/copy-tex.min.css><script type=text/javascript src=/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/lib/lunr/lunr.min.js></script><script type=text/javascript src=/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js></script><script type=text/javascript src=/lib/katex/auto-render.min.js></script><script type=text/javascript src=/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/js/theme.min.js></script></body>
+</html>
