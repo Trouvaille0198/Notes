@@ -18,7 +18,7 @@ func reverseLeftWords(s string, n int) string {
 
 ## 三次倒转
 
-三次反转即可得到所求答案，空间复杂度降低为O(1)，属于是原地旋转
+三次反转即可得到所求答案，空间复杂度降低为 O(1)，属于是原地旋转
 
 ```go
 // reverse 倒转字节数组 s将会被修改
@@ -35,9 +35,9 @@ func reverse(s []byte) {
 // 三次倒转
 func reverseLeftWords2(s string, n int) string {
    bytes := []byte(s)
-   reverse(bytes[:n])
-   reverse(bytes[n:])
-   reverse(bytes)
+   reverse(bytes[:n]) // 左边部分转
+   reverse(bytes[n:]) // 右边部分转
+   reverse(bytes)     // z
    return string(bytes)
 }
 ```

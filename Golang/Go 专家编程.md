@@ -334,7 +334,7 @@ type slice struct {
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-03-slice_expand.png)
 
-扩容操作只关心容量，会把原 Slice 数据拷贝到新 Slice，**追加数据由 `append() `在扩容结束后完成**。
+扩容操作只关心容量，会把原 Slice 数据拷贝到新 Slice，**追加数据由 `append()` 在扩容结束后完成**。
 
 上图可见，扩容后新的 Slice 长度仍然是 5，但容量由 5 提升到了 10，原 Slice 的数据也都拷贝到了新 Slice 指向的数组中。
 
@@ -3569,16 +3569,16 @@ func main() {
 
 官方对此有个非常简明的介绍，两句话耐人寻味：
 
-1. 反射提供一种让程序检查自身结构的能力
-2. 反射是困惑的源泉
+1. **反射提供一种让程序检查自身结构的能力**
+2. **反射是困惑的源泉**
 
-第1条，再精确点的描述是“反射是一种检查interface变量的底层类型和值的机制”。 第2条，很有喜感的自嘲，不过往后看就笑不出来了，因为你很可能产生困惑.
+第 1 条，再精确点的描述是 “反射是一种检查 interface 变量的底层类型和值的机制”。 第 2 条，很有喜感的自嘲，不过往后看就笑不出来了，因为你很可能产生困惑.
 
 想深入了解反射，必须深入理解类型和接口概念。下面开始复习一下这些基础概念。
 
-## 2.1 关于静态类型
+### 关于静态类型
 
-你肯定知道Go是静态类型语言，比如"int"、"float32"、"[]byte"等等。每个变量都有一个静态类型，且在编译时就确定了。 那么考虑一下如下一种类型声明:
+你肯定知道 Go 是静态类型语言，比如 "int"、"float32"、"[]byte" 等等。每个变量都有一个静态类型，且在编译时就确定了。 那么考虑一下如下一种类型声明:
 
 ```go
 type Myint int
@@ -3587,13 +3587,13 @@ var i int
 var j Myint
 ```
 
-Q: i 和j 类型相同吗？ A：i 和j类型是不同的。 二者拥有不同的静态类型，没有类型转换的话是不可以互相赋值的，尽管二者底层类型是一样的。
+Q: i 和 j 类型相同吗？ A：i 和 j 类型是不同的。 二者拥有不同的静态类型，没有类型转换的话是不可以互相赋值的，尽管二者底层类型是一样的。
 
-## 2.2 特殊的静态类型interface
+#### 特殊的静态类型 interface
 
-interface类型是一种特殊的类型，它代表方法集合。 它可以存放任何实现了其方法的值。
+interface 类型是一种特殊的类型，它代表方法集合。 它可以存放任何实现了其方法的值。
 
-经常被拿来举例的是io包里的这两个接口类型：
+经常被拿来举例的是 io 包里的这两个接口类型：
 
 ```go
 // Reader is the interface that wraps the basic Read method.
@@ -3607,19 +3607,21 @@ type Writer interface {
 }
 ```
 
-任何类型，比如某struct，只要实现了其中的Read()方法就被认为是实现了Reader接口，只要实现了Write()方法，就被认为是实现了Writer接口，不过方法参数和返回值要跟接口声明的一致。
+任何类型，比如某 struct，只要实现了其中的 `Read()` 方法就被认为是实现了 Reader 接口，只要实现了 `Write()` 方法，就被认为是实现了 Writer 接口，不过方法参数和返回值要跟接口声明的一致。
 
 接口类型的变量可以存储任何实现该接口的值。
 
-## 2.3 特殊的interface类型
+#### 特殊的 interface 类型
 
-最特殊的interface类型为空interface类型，即`interface {}`，前面说了，interface用来表示一组方法集合，所有实现该方法集合的类型都被认为是实现了该接口。那么空interface类型的方法集合为空，也就是说所有类型都可以认为是实现了该接口。
+最特殊的 interface 类型为空 interface 类型，即 `interface {}`
 
-一个类型实现空interface并不重要，重要的是一个空interface类型变量可以存放所有值，记住是所有值，这才是最最重要的。 这也是有些人认为Go是动态类型的原因，这是个错觉。
+interface 类型的方法集合为空，也就是说所有类型都可以认为是实现了该接口。
 
-## 2.4 interface类型是如何表示的
+一个类型实现空 interface 并不重要，重要的是一个空 interface 类型变量可以存放所有值，记住是所有值，这才是最最重要的。 这也是有些人认为 Go 是动态类型的原因，这是个错觉。
 
-前面讲了，interface类型的变量可以存放任何实现了该接口的值。还是以上面的`io.Reader`为例进行说明，`io.Reader`是一个接口类型，`os.OpenFile()`方法返回一个`File`结构体类型变量，该结构体类型实现了`io.Reader`的方法，那么`io.Reader`类型变量就可以用来接收该返回值。如下所示：
+#### interface 类型是如何表示的
+
+前面讲了，interface 类型的变量可以存放任何实现了该接口的值。还是以上面的 `io.Reader` 为例进行说明，`io.Reader` 是一个接口类型，`os.OpenFile()` 方法返回一个 `File` 结构体类型变量，该结构体类型实现了`io.Reader` 的方法，那么 `io.Reader` 类型变量就可以用来接收该返回值。如下所示：
 
 ```go
 var r io.Reader
@@ -3630,29 +3632,31 @@ if err != nil {
 r = tty
 ```
 
-那么问题来了。 Q： r的类型是什么？ A: r的类型始终是`io.Reader`interface类型，无论其存储什么值。
+那么问题来了。 Q： r 的类型是什么？ A: r 的类型始终是 `io.Reader` interface 类型，无论其存储什么值。
 
-Q：那`File`类型体现在哪里？ A：r保存了一个(value, type)对来表示其所存储值的信息。 value即为r所持有元素的值，type即为所持有元素的底层类型
+Q：那 `File` 类型体现在哪里？ A：r 保存了一个 (value, type) 对来表示其所存储值的信息。 value 即为 r 所持有元素的值，type 即为所持有元素的底层类型
 
-Q：如何将r转换成另一个类型结构体变量？比如转换成`io.Writer` A：使用类型断言，如`w = r.(io.Writer)`. 意思是如果r所持有的元素如果同样实现了io.Writer接口,那么就把值传递给w。
+Q：如何将 r 转换成另一个类型结构体变量？比如转换成 `io.Writer` A：使用类型断言，如 `w = r.(io.Writer)`. 意思是如果 r 所持有的元素如果同样实现了 io.Writer 接口,那么就把值传递给 w。
 
-# 3. 反射三定律
+### 反射三定律
 
-前面之所以讲类型，是为了引出interface，之所以讲interface是想说interface类型有个(value，type)对，而反射就是检查interface的这个(value, type)对的。具体一点说就是Go提供一组方法提取interface的value，提供另一组方法提取interface的type.
+前面之所以讲类型，是为了引出 interface，之所以讲 interface 是想说 **interface 类型有个 (value，type) 对，而反射就是检查 interface 的这个 (value, type) 对的**。
+
+具体一点说就是 **Go 提供一组方法提取 interface 的 value，提供另一组方法提取 interface 的 type.**
 
 官方提供了三条定律来说明反射，比较清晰，下面也按照这三定律来总结。
 
 反射包里有两个接口类型要先了解一下.
 
-- `reflect.Type` 提供一组接口处理interface的类型，即（value, type）中的type
-- `reflect.Value`提供一组接口处理interface的值,即(value, type)中的value
+- `reflect.Type` 提供一组接口处理 interface 的类型，即（value, type）中的 type
+- `reflect.Value` 提供一组接口处理interface的值，即 (value, type) 中的 value
 
 下面会提到反射对象，所谓反射对象即反射包里提供的两种类型的对象。
 
 - `reflect.Type` 类型对象
-- `reflect.Value`类型对象
+- `reflect.Value` 类型对象
 
-## 3.1 反射第一定律：反射可以将interface类型变量转换成反射对象
+#### 反射第一定律：反射可以将 interface 类型变量转换成反射对象
 
 下面示例，看看是如何通过反射获取一个变量的值和类型的：
 
@@ -3681,13 +3685,13 @@ type: float64
 value: 3.4
 ```
 
-注意：反射是针对interface类型变量的，其中`TypeOf()`和`ValueOf()`接受的参数都是`interface{}`类型的，也即x值是被转成了interface传入的。
+注意：反射是针对 interface 类型变量的，其中 `TypeOf()` 和 `ValueOf()` 接受的参数都是 `interface{}` 类型的，也即 x 值是被转成了 interface 传入的。
 
-除了`reflect.TypeOf()`和`reflect.ValueOf()`，还有其他很多方法可以操作，本文先不过多介绍，否则一不小心会会引起困惑。
+除了 `reflect.TypeOf()` 和 `reflect.ValueOf()`，还有其他很多方法可以操作，本文先不过多介绍，否则一不小心会会引起困惑。
 
-## 3.2 反射第二定律：反射可以将反射对象还原成interface对象
+#### 反射第二定律：反射可以将反射对象还原成 interface 对象
 
-之所以叫'反射'，反射对象与interface对象是可以互相转化的。看以下例子：
+之所以叫'反射'，反射对象与 interface 对象是可以互相转化的。看以下例子：
 
 ```go
 package main
@@ -3707,11 +3711,11 @@ func main() {
 }
 ```
 
-对象x转换成反射对象v，v又通过Interface()接口转换成interface对象，interface对象通过.(float64)类型断言获取float64类型的值。
+对象 x 转换成反射对象 v，v 又通过 `Interface()` 接口转换成 interface 对象，interface 对象通过 `.(float64)` 类型断言获取 float64 类型的值。
 
-## 3.3 反射第三定律：反射对象可修改，value值必须是可设置的
+#### 反射第三定律：反射对象可修改，value 值必须是可设置的
 
-通过反射可以将interface类型变量转换成反射对象，可以使用该反射对象设置其持有的值。在介绍何谓反射对象可修改前，先看一下失败的例子：
+通过反射可以将 interface 类型变量转换成反射对象，可以使用该反射对象设置其持有的值。在介绍何谓反射对象可修改前，先看一下失败的例子：
 
 ```go
 package main
@@ -3727,21 +3731,21 @@ func main() {
 }
 ```
 
-如下代码，通过反射对象v设置新值，会出现panic。报错如下：
+如下代码，通过反射对象 v 设置新值，会出现 panic。报错如下：
 
 ```go
 panic: reflect: reflect.Value.SetFloat using unaddressable value
 ```
 
-错误原因即是v是不可修改的。
+错误原因即是 v 是不可修改的。
 
 反射对象是否可修改取决于其所存储的值，回想一下函数传参时是传值还是传址就不难理解上例中为何失败了。
 
-上例中，传入reflect.ValueOf()函数的其实是x的值，而非x本身。即通过v修改其值是无法影响x的，也即是无效的修改，所以golang会报错。
+上例中，**传入 `reflect.ValueOf()` 函数的其实是 x 的值，而非 x 本身**。即通过 v 修改其值是无法影响 x 的，也即是无效的修改，所以 golang 会报错。
 
-想到此处，即可明白，如果构建v时使用x的地址就可实现修改了，但此时v代表的是指针地址，我们要设置的是指针所指向的内容，也即我们想要修改的是`*v`。 那怎么通过v修改x的值呢？
+想到此处，即可明白，如果构建 v 时使用 x 的地址就可实现修改了，但此时 v 代表的是指针地址，我们要设置的是指针所指向的内容，也即我们想要修改的是 `*v`。 那怎么通过 v 修改 x 的值呢？
 
-`reflect.Value`提供了`Elem()`方法，可以获得指针向指向的`value`。看如下代码：
+`reflect.Value` 提供了 `Elem()` 方法，可以获得指针向指向的 `value`。看如下代码：
 
 ```go
 package main
@@ -3765,9 +3769,234 @@ func main() {
 x : 7.1
 ```
 
-## 4. 总结
+### 总结
 
 结合官方博客及本文，至少可以对反射理解个大概，还有很多方法没有涉及。 对反射的深入理解，个人觉得还需要继续看的内容：
 
 - 参考业界，尤其是开源框架中是如何使用反射的
 - 研究反射实现原理，探究其性能优化的手段
+
+## 语法糖
+
+### 简短变量声明 `:=`
+
+#### 题目
+
+##### 一
+
+问：下面代码输出什么？
+
+```go
+func fun1() {
+    i := 0
+    i, j := 1, 2
+    fmt.Printf("i = %d, j = %d\n", i, j)
+}
+```
+
+程序输出如下：
+
+```go
+i = 1, j = 2
+```
+
+再进一步想一下，前一个语句中已经声明了 i, 为什么还可以再次声明呢？
+
+##### 二
+
+问：下面代码为什么不能通过编译？
+
+```go
+func fun2(i int) {
+    i := 0
+    fmt.Println(i)
+}
+```
+
+不能通过编译原因是形参已经声明了变量 i，使用 `:=` 再次声明是不允许的。
+
+再进一步想一下，编译时会报 "no new variable on left side of :=" 错误，该怎么理解？
+
+##### 三
+
+问：下面代码输出什么？
+
+```go
+func fun3() {
+    i, j := 0, 0
+    if true {
+        j, k := 1, 1
+        fmt.Printf("j = %d, k = %d\n", j, k)
+    }
+    fmt.Printf("i = %d, j = %d\n", i, j)
+}
+```
+
+程序输出如下：
+
+```go
+j = 1, k = 1
+i = 0, j = 0
+```
+
+这里要注意的是，block `if` 中声明的 j，与上面的 j 属于不同的作用域。
+
+#### 规则
+
+##### 多变量赋值可能会重新声明
+
+我们知道使用 `:=` 一次可以声明多个变量，像下面这样：
+
+```go
+field1, offset := nextField(str, 0)
+```
+
+上面代码定义了两个变量，并用函数返回值进行赋值。
+
+如果这两个变量中的一个再次出现在 `:=` 左侧就会重新声明。像下面这样，offset 被重新声明：
+
+```go
+field1, offset := nextField(str, 0)
+field2, offset := nextField(str, offset)
+```
+
+**重新声明并没有什么问题，它并没有引入新的变量，只是把变量的值改变了**，但要明白，这是 Go 提供的一个语法糖。
+
+- 当 `:=` 左侧存在新变量时（如 field2），那么已声明的变量（如 offset）则会**被重新声明**，不会有其他额外副作用。
+- 当 `:=` 左侧没有新变量是不允许的，编译会提示 `no new variable on left side of :=`。
+
+我们所说的重新声明不会引入问题要满足一个前提，变量声明要在同一个作用域中出现。
+
+如果出现在不同的作用域，那很可能就创建了新的同名变量，同一函数不同作用域的同名变量往往不是预期做法，很容易引入缺陷。关于作用域的这个问题，我们在本节后面介绍。
+
+##### 不能用于函数外部
+
+简短变量场景只能用于函数中，**使用 `:=` 来声明和初始化全局变量是行不通的。**
+
+比如，像下面这样：
+
+```go
+package sugar
+import fmt
+
+rule := "Short variable declarations" // syntax error: non-declaration statement outside function body
+```
+
+这里的编译错误提示 `syntax error: non-declaration statement outside function body`，表示非声明语句不能出现在函数外部。可以理解成 `:=` 实际上会拆分成两个语句，即声明和赋值。赋值语句不能出现在函数外部的。
+
+#### 变量作用域
+
+几乎所有的工程师都了解变量作用域，但是由于 `:=` 使用过于频繁的话，还是有可能掉进陷阱里。
+
+```go
+func Redeclare() {
+    field, err:= nextField()   // 1号err
+
+    if field == 1{
+        field, err:= nextField()     //　2号err
+        newField, err := nextField() //  3号err
+        ...
+    }
+    ...
+}
+```
+
+注意上面声明的三个 err 变量。 2 号 err 与 1 号 err 不属于同一个作用域，`:=` 声明了新的变量，所以 2 号 err 与 1 号 err 属于两个变量。 2 号 err 与 3 号 err 属于同一个作用域，`:=` 重新声明了 err 但没创建新的变量，所以 2 号err 与 3 号 err 是同一个变量。
+
+如果误把 2 号 err 与 1 号 err 混淆，就很容易产生意想不到的错误。
+
+### 可变参函数
+
+可变参函数是指函数的某个参数可有可无，即这个参数个数可以是 0 个或多个。 声明可变参数函数的方式是在参数类型前加上 `...` 前缀。
+
+比如 `fmt` 包中的 `Println`:
+
+```go
+func Println(a ...interface{})
+```
+
+#### 函数特征
+
+我们先写一个可变参函数：
+
+```go
+func Greeting(prefix string, who ...string) {
+    if who == nil {
+        fmt.Printf("Nobody to say hi.")
+        return
+    }
+
+    for _, people := range who{
+        fmt.Printf("%s %s\n", prefix, people)
+    }
+}
+```
+
+`Greeting` 函数负责给指定的人打招呼，其参数 `who` 为可变参数。
+
+这个函数几乎把可变参函数的特征全部表现出来了：
+
+- 可变参数必须在函数参数列表的尾部，即最后一个（如放前面会引起编译时歧义）；
+- 可变参数在函数内部是**作为切片来解析的**；
+- 可变参数可以不填，不填时函数内部当成 `nil` 切片处理；
+- 可变参数必须是相同类型的（如果需要是不同类型的可以定义为 `interface{}` 类型）；
+
+#### 使用举例
+
+我们使用 `testing` 包中的 Example 函数来说明上面 `Greeting` 函数（函数位于 sugar 包中）用法。
+
+##### 不传值
+
+调用可变参函数时，可变参部分是可以不传值的，例如：
+
+```go
+func ExampleGreetingWithoutParameter() {
+    sugar.Greeting("nobody")
+    // OutPut:
+    // Nobody to say hi.
+}
+```
+
+这里没有传递第二个参数。可变参数不传递的话，默认为 nil。
+
+##### 传递多个参数
+
+调用可变参函数时，可变参数部分可以传递多个值，例如：
+
+```go
+func ExampleGreetingWithParameter() {
+    sugar.Greeting("hello:", "Joe", "Anna", "Eileen")
+    // OutPut:
+    // hello: Joe
+    // hello: Anna
+    // hello: Eileen
+}
+```
+
+可变参数可以有多个。多个参数将会生成一个切片传入，函数内部按照切片来处理。
+
+##### 传递切片
+
+调用可变参函数时，可变参数部分可以直接传递一个切片。参数部分需要使用 `slice...` 来表示切片。例如：
+
+```go
+func ExampleGreetingWithSlice() {
+    guest := []string{"Joe", "Anna", "Eileen"}
+    sugar.Greeting("hello:", guest...)
+    // OutPut:
+    // hello: Joe
+    // hello: Anna
+    // hello: Eileen
+}
+```
+
+此时需要注意的一点是，切片传入时不会生成新的切片，也就是说函数内部使用的切片与传入的切片共享相同的存储空间。
+
+说得再直白一点就是，**如果函数内部修改了切片，可能会影响外部调用的函数。**
+
+#### 总结
+
+- 可变参数必须要位于函数列表尾部；
+- 可变参数是被当作切片来处理的；
+- 函数调用时，可变参数可以不填；
+- 函数调用时，可变参数可以填入切片；
