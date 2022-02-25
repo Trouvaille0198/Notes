@@ -1,10 +1,17 @@
+---
+title: "操作系统（2）"
+date: 2022-02-25
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [专业课]
+---
+
 # 操作系统二
 
 存储器管理 40%
 
 文件管理（含实验，重点是系统调用部分） 35%
-
-
 
 ## 存储器管理
 
