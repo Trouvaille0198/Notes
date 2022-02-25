@@ -1,3 +1,12 @@
+---
+title: "Go math/rand 标准库"
+date: 2021-12-23
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # rand
 
 ## math/rand

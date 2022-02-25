@@ -1,3 +1,12 @@
+---
+title: "Go flag 库"
+date: 2022-02-05
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # flag
 
 Go 语言内置的 flag 包实现了命令行参数的解析，flag 包使得开发命令行工具更为简单。

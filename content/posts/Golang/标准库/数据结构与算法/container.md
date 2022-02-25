@@ -1,3 +1,12 @@
+---
+title: "Go container 标准库"
+date: 2021-12-15
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # container
 
 该包实现了三个复杂的数据结构：堆，链表，环。 这个包就意味着你使用这三个数据结构的时候不需要再费心从头开始写算法了。

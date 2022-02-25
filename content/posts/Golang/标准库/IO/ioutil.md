@@ -1,3 +1,12 @@
+---
+title: "Go ioutil 标准库"
+date: 2022-01-04
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # ioutil
 
 虽然 io 包提供了不少类型、方法和函数，但有时候使用起来不是那么方便。比如读取一个文件中的所有内容。为此，标准库中提供了一些常用、方便的 IO 操作函数。

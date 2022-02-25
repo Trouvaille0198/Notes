@@ -1,3 +1,12 @@
+---
+title: "MongoDB"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [数据库,快速入门]
+categories: [数据库]
+---
+
 # MongoDB
 
 ## 认识

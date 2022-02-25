@@ -1,3 +1,12 @@
+---
+title: "Go bytes 标准库"
+date: 2021-12-15
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # bytes
 
 该包定义了一些操作 byte slice 的便利操作。

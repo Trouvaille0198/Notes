@@ -1,3 +1,12 @@
+---
+title: "数据结构"
+date: 2021-11-25
+draft: false
+author: "MelonCholi"
+tags: [数据结构,算法]
+categories: [专业课]
+---
+
 #  数据结构
 
 ## 定义

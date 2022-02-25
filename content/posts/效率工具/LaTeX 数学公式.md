@@ -1,6 +1,6 @@
 ---
 title: "LaTeX 数学公式"
-date: 2022-02-25
+date: 2021-10-23
 draft: false
 author: "MelonCholi"
 tags: [LaTeX,快速入门]

@@ -1,3 +1,12 @@
+---
+title: "Go fmt 标准库"
+date: 2022-02-04
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # fmt
 
 fmt 包实现了格式化I/O函数，类似于 C 的 printf 和 scanf；格式“占位符”衍生自 C，但比 C 更简单。

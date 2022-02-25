@@ -1,3 +1,12 @@
+---
+title: "操作系统（1）"
+date: 2022-1-21
+draft: false
+author: "MelonCholi"
+tags: [OS]
+categories: [专业课]
+---
+
 # 操作系统一
 
 ## 操作系统引论

@@ -1,6 +1,6 @@
 ---
 title: "mermaid"
-date: 2022-02-25
+date: 2021-12-07
 draft: false
 author: "MelonCholi"
 tags: [快速入门]

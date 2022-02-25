@@ -1,3 +1,12 @@
+---
+title: "Go os 标准库"
+date: 2021-12-25
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # os
 
 **`os` 包提供了平台无关的操作系统功能接口。**

@@ -1,4 +1,14 @@
+---
+title: "C# 基础语法"
+date: 2021-10-23
+draft: false
+author: "MelonCholi"
+tags: [快速入门]
+categories: [C#]
+---
+
 # BasicGrammar
+
 ## 认识
 
 ### 简介

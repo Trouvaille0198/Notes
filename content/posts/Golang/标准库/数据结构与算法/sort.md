@@ -1,3 +1,12 @@
+---
+title: "Go sort 标准库"
+date: 2021-12-23
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # sort
 
 该包实现了四种基本排序算法：插入排序、归并排序、堆排序和快速排序。 

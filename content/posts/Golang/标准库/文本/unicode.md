@@ -1,3 +1,12 @@
+---
+title: "Go Unicode 标准库"
+date: 2021-12-15
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # unicode
 
 由于 UTF-8 的作者 Ken Thompson 同时也是 go 语言的创始人，所以说，在字符支持方面，几乎没有语言的理解会高于 go 了。 go 对 unicode 的支持包含三个包 :

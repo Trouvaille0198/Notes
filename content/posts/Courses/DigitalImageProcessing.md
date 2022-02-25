@@ -1,3 +1,12 @@
+---
+title: "数字图像整理"
+date: 2021-11-25
+draft: false
+author: "MelonCholi"
+tags: [Python]
+categories: [专业课]
+---
+
 # 数字图像处理
 
 ## 数字图像基础

@@ -1,3 +1,12 @@
+---
+title: "Go time 标准库"
+date: 2021-12-16
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # time
 
 time 包提供了时间的显示和测量用的函数。日历的计算采用的是公历。

@@ -1,6 +1,6 @@
 ---
 title: "Vim 教程"
-date: 2022-02-25
+date: 2021-10-23
 draft: false
 author: "MelonCholi"
 tags: [Vim,快速入门]

@@ -1,3 +1,12 @@
+---
+title: "Go sql 标准库"
+date: 2021-12-31
+draft: false
+author: "MelonCholi"
+tags: [数据库]
+categories: [Golang]
+---
+
 # database
 
 Go 使用 SQL 与类 SQL 数据库的惯例是通过标准库 [database/sql](http://golang.org/pkg/database/sql/)。这是一个对关系型数据库的通用抽象，它提供了标准的、轻量的、面向行的接口

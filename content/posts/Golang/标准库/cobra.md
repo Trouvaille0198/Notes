@@ -1,3 +1,12 @@
+---
+title: "Go cobra 库"
+date: 2022-02-08
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # cobra
 
 cobra既是一个用于创建强大现代 CLI 应用程序的库，也是一个生成应用程序和命令文件的程序。cobra 被用在很多 go 语言的项目中，比如 Kubernetes、Docker、Istio、ETCD、Hugo、Github CLI 等等

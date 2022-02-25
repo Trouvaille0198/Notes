@@ -1,3 +1,12 @@
+---
+title: "Go GORM"
+date: 2022-02-14
+draft: false
+author: "MelonCholi"
+tags: [数据库,后端,框架]
+categories: [Golang]
+---
+
 # gorm
 
 官方文档：https://gorm.io/zh_CN/docs

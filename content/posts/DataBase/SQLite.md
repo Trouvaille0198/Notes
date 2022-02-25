@@ -1,4 +1,14 @@
+---
+title: "SQLite"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [数据库,快速入门]
+categories: [数据库]
+---
+
 # SQLite
+
 ## 认识
 
 SQLite 是一个进程内的库，实现了自给自足的、无服务器的、零配置的、事务性的 SQL 数据库引擎。

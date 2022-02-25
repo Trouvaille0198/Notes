@@ -1,6 +1,6 @@
 ---
 title: "Go 专家编程"
-date: 2022-02-25
+date: 2022-02-23
 draft: false
 author: "MelonCholi"
 tags: []
@@ -1898,7 +1898,7 @@ P 的个数在程序启动时决定，默认情况下等同于 CPU 的核数，�
 
 当 M 运行的某个 G 产生系统调用时，如下图所示：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-04-goroutine_syscall.png)
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220225204556983.png" alt="image-20220225204556983" style="zoom: 80%;" />
 
 如图所示，M0 中的 G0 执行了 syscall，然后就创建了一个 M1(也有可能本身就存在，没创建)，**当 G0 即将进入系统调用时，M0 将释放 P，进而某个空闲的 M1 获取 P，继续执行 P 队列中剩下的 G**。而 M0 由于陷入系统调用而进被阻塞，M1**接管** M0 的工作，只要 P 不空闲，就可以保证充分利用 CPU。
 
@@ -1911,7 +1911,7 @@ M1 的来源有可能是 M 的缓存池，也可能是新建的。当 G0 系统�
 
 多个 P 中维护的 G 队列有可能是不均衡的，比如下图：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/goroutine-05-goroutine_steal.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/goroutine-05-goroutine_steal.png)
 
 竖线左侧中右边的 P 已经将 G 全部执行完，然后去查询全局队列，全局队列中也没有 G，而另一个 M 中除了正在运行的 G 外，队列中还有 3 个 G 待运行。此时，空闲的 P 会将其他 P 中的 G 偷取一部分过来，一般每次偷取一半。偷取完如右图所示。
 

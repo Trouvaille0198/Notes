@@ -1,3 +1,12 @@
+---
+title: "Go filepath 标准库"
+date: 2021-12-16
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # filepath
 
 `path/filepath` 包涉及到路径操作时，路径分隔符使用 `os.PathSeparator`。

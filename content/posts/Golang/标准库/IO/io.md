@@ -1,3 +1,12 @@
+---
+title: "Go io 标准库"
+date: 2021-12-23
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # io
 
 https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter01/01.1.html

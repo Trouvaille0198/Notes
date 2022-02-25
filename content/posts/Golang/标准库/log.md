@@ -1,3 +1,12 @@
+---
+title: "Go log 标准库"
+date: 2022-02-08
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # log
 
 Go 语言内置的 log 包实现了简单的日志服务。

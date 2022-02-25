@@ -1,3 +1,12 @@
+---
+title: "Go strings 标准库"
+date: 2022-02-11
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # strings
 
 由于 string 类型可以看成是一种特殊的 slice 类型，因此获取长度可以用内置的函数 len；同时支持 切片 操作，因此，子串获取很容易。

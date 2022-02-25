@@ -1,3 +1,12 @@
+---
+title: "关于 MySQL 的一些笔记"
+date: 2021-12-23
+author: MelonCholi
+draft: false
+tags: [数据库,快速入门,MySQL]
+categories: [数据库]
+---
+
 # MySQL 学习笔记
 
 ## 登录和退出 MySQL 服务器
