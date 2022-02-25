@@ -1,3 +1,12 @@
+---
+title: "Go 基础语法"
+date: 2022-02-25
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # Golang
 
 ## 安装

@@ -1,3 +1,12 @@
+---
+title: "Go test 教程"
+date: 2022-02-25
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [Golang]
+---
+
 # go test
 
 Go语言提供了go test 命令行工具，使用该工具可以很方便的进行测试。

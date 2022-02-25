@@ -1,13 +1,13 @@
-name: github pages
+name: Github Pages
 
 on:
   push:
     branches:
-      - master # Set a branch to deploy
+      - master # Set a branch name to trigger deployment
 
 jobs:
   deploy:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -18,7 +18,7 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: "latest"
-          # extended: true
+          extended: true # Use Hugo extended
 
       - name: Build
         run: hugo --minify
@@ -28,3 +28,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+          force_orphan: true
