@@ -4,24 +4,24 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>操作系统（2） - 我的全新 Hugo 网站</title><meta name=Description content><meta property="og:title" content="操作系统（2）">
+<title>操作系统（2） - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="操作系统（2）">
 <meta property="og:description" content="操作系统二 存储器管理 40% 文件管理（含实验，重点是系统调用部分） 35% 存储器管理 （内存分配：分配和去配，地址映射：抽象和映射，内存保护：隔离和共享，">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/posts/courses/operatingsystem2/"><meta property="article:section" content="posts">
+<meta property="og:url" content="/posts/courses/operatingsystem2/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-25T00:00:00+00:00">
 <meta property="article:modified_time" content="2022-02-25T00:00:00+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="操作系统（2）">
 <meta name=twitter:description content="操作系统二 存储器管理 40% 文件管理（含实验，重点是系统调用部分） 35% 存储器管理 （内存分配：分配和去配，地址映射：抽象和映射，内存保护：隔离和共享，">
-<meta name=application-name content="我的全新 Hugo 网站">
-<meta name=apple-mobile-web-app-title content="我的全新 Hugo 网站"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<meta name=application-name content="伤心肠粉的酱油碟子">
+<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/posts/courses/operatingsystem2/><link rel=prev href=https://trouvaille0198.github.io/posts/courses/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E4%B8%80/><link rel=next href=https://trouvaille0198.github.io/posts/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/vim/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统（2）","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/posts\/courses\/operatingsystem2\/"},"genre":"posts","wordcount":12163,"url":"https:\/\/trouvaille0198.github.io\/posts\/courses\/operatingsystem2\/","datePublished":"2022-02-25T00:00:00+00:00","dateModified":"2022-02-25T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=/posts/courses/operatingsystem2/><link rel=prev href=/posts/courses/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86%E4%B8%80/><link rel=next href=/posts/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/vim/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统（2）","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"\/posts\/courses\/operatingsystem2\/"},"genre":"posts","wordcount":12163,"url":"\/posts\/courses\/operatingsystem2\/","datePublished":"2022-02-25T00:00:00+00:00","dateModified":"2022-02-25T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
-<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+<a href=/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
 </div>
 <div class=menu>
 <div class=menu-inner><a class=menu-item href=/posts/> 文章 </a><a class=menu-item href=/tags/> 标签 </a><a class=menu-item href=/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
@@ -45,7 +45,7 @@
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
-<a href=/ title="我的全新 Hugo 网站">伤心肠粉</a>
+<a href=/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
 </div>
 <div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
