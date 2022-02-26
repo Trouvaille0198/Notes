@@ -4,17 +4,19 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
-<meta property="og:description" content="分类与创建 Series Series是一种类似于以为NumPy数组的对象，它由一组数据（各种NumPy数据类型）和与之相关的一组数据标签（即索引）组成的">
+<title>pandas - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="pandas">
+<meta property="og:description" content="pandas 分类与创建 Series Series是一种类似于以为NumPy数组的对象，它由一组数据（各种NumPy数据类型）和与之相关的一组数据标签（即索引）组成">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/pandas/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2021-10-23T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content>
-<meta name=twitter:description content="分类与创建 Series Series是一种类似于以为NumPy数组的对象，它由一组数据（各种NumPy数据类型）和与之相关的一组数据标签（即索引）组成的">
+<meta name=twitter:title content="pandas">
+<meta name=twitter:description content="pandas 分类与创建 Series Series是一种类似于以为NumPy数组的对象，它由一组数据（各种NumPy数据类型）和与之相关的一组数据标签（即索引）组成">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/pandas/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/seaborn/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/numpy/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/dataanalysis\/pandas\/"},"genre":"posts","wordcount":5009,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/dataanalysis\/pandas\/","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/pandas/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/numpy/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"pandas","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/dataanalysis\/pandas\/"},"genre":"posts","keywords":"Python, 数据分析","wordcount":5005,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/dataanalysis\/pandas\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2021-10-23T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -80,9 +82,9 @@
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2>
 <div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5009 字&nbsp;
+</div><article class="page single"><h1 class="single-title animated flipInX">pandas</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5005 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -90,6 +92,8 @@
 <span><i class="details-icon fas fa-angle-right"></i></span>
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#分类与创建>分类与创建</a>
 <ul>
 <li><a href=#series>Series</a>
 <ul>
@@ -100,13 +104,15 @@
 <li><a href=#dataframe>DataFrame</a>
 <ul>
 <li><a href=#从具有索引标签的字典数据创建>从具有索引标签的字典数据创建</a></li>
-<li><a href=#从numpy-数组创建>从numpy 数组创建</a></li>
+<li><a href=#从-numpy-数组创建>从 numpy 数组创建</a></li>
 <li><a href=#通过其他dataframe来创建>通过其他DataFrame来创建</a></li>
 <li><a href=#从csv文件创建>从csv文件创建</a></li>
 <li><a href=#用series创建>用Series创建</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li><a href=#审视>审视</a>
 <ul>
 <li><a href=#访问-1>访问</a>
 <ul>
@@ -156,6 +162,8 @@
 </ul>
 </li>
 </ul>
+</li>
+<li><a href=#预处理>预处理</a>
 <ul>
 <li><a href=#数据清理>数据清理</a>
 <ul>
@@ -171,7 +179,7 @@
 </li>
 <li><a href=#数据表合并>数据表合并</a>
 <ul>
-<li><a href=#321-merge>3.2.1<code> .merge()</code></a></li>
+<li><a href=#merge><code>.merge()</code></a></li>
 <li><a href=#concat><code>.concat()</code></a></li>
 </ul>
 </li>
@@ -200,17 +208,24 @@
 </ul>
 </li>
 </ul>
+</li>
+<li><a href=#导入与到导出>导入与到导出</a>
 <ul>
 <li><a href=#导入数据>导入数据</a></li>
 <li><a href=#导出数据>导出数据</a></li>
 </ul>
+</li>
+<li><a href=#例>例</a></li>
+<li><a href=#预览-dataframe>预览 DataFrame</a></li>
+</ul>
 </nav></div>
-</div><div class=content id=content><h1 id=分类与创建>分类与创建</h1>
-<h2 id=series>Series</h2>
+</div><div class=content id=content><h1 id=pandas>pandas</h1>
+<h2 id=分类与创建>分类与创建</h2>
+<h3 id=series>Series</h3>
 <p>Series是一种类似于以为NumPy数组的对象，它由一组数据（各种NumPy数据类型）和与之相关的一组数据标签（即索引）组成的。可以用index和values分别规定索引和值。如果不规定索引，会自动创建 0 到 N-1 索引。</p>
 <p>Series是1维的数据，拥有的索引，一般以竖行形式输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207200644867.png alt=image-20201207200644867 style=zoom:50%>
-<h3 id=创建>创建</h3>
+<h4 id=创建>创建</h4>
 <p>Series可以方便的通过list，array还有dict来构建</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -314,7 +329,7 @@
 <span class=n>dtype</span><span class=p>:</span> <span class=n>int64</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=访问>访问</h3>
+</div><h4 id=访问>访问</h4>
 <p>下标方式访问</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -333,9 +348,9 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>ser4</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=dataframe>DataFrame</h2>
+</div><h3 id=dataframe>DataFrame</h3>
 <p>DataFrame是一种表格型结构，含有一组有序的列，每一列可以是不同的数据类型。既有行索引，又有列索引<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/J$F`0{7$G@6E@1QX3O3$X{Q.png" alt=img style=zoom:67%></p>
-<h3 id=从具有索引标签的字典数据创建>从具有索引标签的字典数据创建</h3>
+<h4 id=从具有索引标签的字典数据创建>从具有索引标签的字典数据创建</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -360,7 +375,7 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205444467.png alt=image-20201207205444467 style=zoom:80%>
-<h3 id=从numpy-数组创建>从numpy 数组创建</h3>
+<h4 id=从-numpy-数组创建>从 numpy 数组创建</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -389,7 +404,7 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205853449.png alt=image-20201207205853449 style=zoom:80%>
-<h3 id=通过其他dataframe来创建>通过其他DataFrame来创建</h3>
+<h4 id=通过其他dataframe来创建>通过其他DataFrame来创建</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -402,7 +417,7 @@
 </div>
 </div><p>输出</p>
 <p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png 2x" data-sizes=auto alt=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png title=image-20201207205620990></p>
-<h3 id=从csv文件创建>从csv文件创建</h3>
+<h4 id=从csv文件创建>从csv文件创建</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -413,7 +428,7 @@
 <span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>read_csv</span><span class=p>(</span><span class=s1>&#39;test.csv&#39;</span><span class=p>,</span> <span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;gbk&#39;</span><span class=p>,</span> <span class=n>sep</span><span class=o>=</span><span class=s1>&#39;;&#39;</span><span class=p>)</span> 	<span class=c1>#分隔符为“；”，编码格式为gbk</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=用series创建>用Series创建</h3>
+</div><h4 id=用series创建>用Series创建</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -437,13 +452,13 @@
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205642638.png alt=image-20201207205642638 style=zoom:80%>
 <p>这玩意可以看做是多个Series的组合。DataFrame的不同列可以是不同的数据类型,如果以Series数组来创建DataFrame，每个Series将成为一行，而不是一列</p>
-<h1 id=审视>审视</h1>
-<h2 id=访问-1>访问</h2>
+<h2 id=审视>审视</h2>
+<h3 id=访问-1>访问</h3>
 <p>以下图为例</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207222452955.png alt=image-20201207222452955 style=zoom:80%>
 <p>col，index为列号和行号</p>
 <p>colName，indexName为具体值</p>
-<h3 id=dfcolname><code>df[colName]</code></h3>
+<h4 id=dfcolname><code>df[colName]</code></h4>
 <p>根据列名，并以 Series 的形式返回列</p>
 <p>若列名为默认的数字时，colName 可以被视为 col（其中就col可以表示为列表形式和切片形式）</p>
 <div class=highlight><div class=chroma>
@@ -475,7 +490,7 @@
 <span class=n>df</span><span class=p>[</span><span class=s1>&#39;5&#39;</span><span class=p>:</span><span class=s1>&#39;7&#39;</span><span class=p>]</span>  <span class=c1># 行名称为5的行至行名称为7的行</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=dfcolnameindexname><code>df[colName][indexName]</code></h3>
+</div><h4 id=dfcolnameindexname><code>df[colName][indexName]</code></h4>
 <p>更精准的访问（几列几行）</p>
 <p>若列名为默认的数字时，colName可以被视为col（其中就col可以表示为列表形式和切片形式）</p>
 <div class=highlight><div class=chroma>
@@ -495,7 +510,7 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=mf>0.5</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=-dfilocindex-col><code> df.iloc[index, col]</code></h3>
+</div><h4 id=-dfilocindex-col><code> df.iloc[index, col]</code></h4>
 <p>其中index，col可以表示为列表形式和切片形式，当只传入一个参数时，该参数默认为index</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -515,7 +530,7 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207224248457.png alt=image-20201207224248457 style=zoom:65%>
-<h3 id=dflocindexnamecolname><code>df.loc[indexName,colName]</code></h3>
+<h4 id=dflocindexnamecolname><code>df.loc[indexName,colName]</code></h4>
 <p><code>df.iloc</code>只能选取数据表里实际有的行和列，而<code>df.loc</code>可以选取没有的行和列，赋值后就可以添加新行或者列</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -531,9 +546,9 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207230245814.png alt=image-20201207230245814 style=zoom:70%>
-<h3 id=dfixinco><code>df.ix[in,co]</code></h3>
+<h4 id=dfixinco><code>df.ix[in,co]</code></h4>
 <p>ix是loc和iloc的混合，既能按索引标签提取，也能按位置进行数 据提取</p>
-<h3 id=筛选>筛选</h3>
+<h4 id=筛选>筛选</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -574,7 +589,7 @@
 <span class=n>Name</span><span class=p>:</span> <span class=n>A</span><span class=p>,</span> <span class=n>dtype</span><span class=p>:</span> <span class=nb>bool</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=dfquery><em><strong>df.query()</strong></em></h4>
+</div><h5 id=dfquery><em><strong>df.query()</strong></em></h5>
 <p>以下表为例</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -647,8 +662,8 @@
 <span class=mi>4</span>  <span class=mi>5</span>  <span class=mi>2</span>  <span class=mi>2</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=查看>查看</h2>
-<h3 id=查看行数列数>查看行数、列数</h3>
+</div><h3 id=查看>查看</h3>
+<h4 id=查看行数列数>查看行数、列数</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -666,7 +681,7 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=p>(</span><span class=mi>4</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=查看整体信息>查看整体信息</h3>
+</div><h4 id=查看整体信息>查看整体信息</h4>
 <p>使用info函数查看数据表的整体信息，包括数据维度、列名称、数据格式和所占空间等信息</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -717,7 +732,7 @@
 <span class=n>memory</span> <span class=n>usage</span><span class=p>:</span> <span class=mf>352.0</span><span class=o>+</span> <span class=nb>bytes</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=查看数据格式><strong>查看数据格式</strong></h3>
+</div><h4 id=查看数据格式><strong>查看数据格式</strong></h4>
 <p>使用dtypes函数来返回数据格式</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -762,7 +777,7 @@
 <span class=n>dtype</span><span class=p>(</span><span class=s1>&#39;O&#39;</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=查看缺失值>查看缺失值</h3>
+</div><h4 id=查看缺失值>查看缺失值</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -799,7 +814,7 @@
 <span class=n>Name</span><span class=p>:</span> <span class=n>h</span><span class=p>,</span> <span class=n>dtype</span><span class=p>:</span> <span class=nb>bool</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=查看唯一值>查看唯一值</h3>
+</div><h4 id=查看唯一值>查看唯一值</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -817,7 +832,7 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>array</span><span class=p>([</span><span class=s1>&#39;cat&#39;</span><span class=p>,</span> <span class=mf>2.5</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=s1>&#39;yes&#39;</span><span class=p>],</span> <span class=n>dtype</span><span class=o>=</span><span class=nb>object</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=查看数据表数值><strong>查看数据表数值</strong></h3>
+</div><h4 id=查看数据表数值><strong>查看数据表数值</strong></h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -845,7 +860,7 @@
       <span class=n>dtype</span><span class=o>=</span><span class=nb>object</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=查看行列名称>查看行、列名称</h3>
+</div><h4 id=查看行列名称>查看行、列名称</h4>
 <p>返回 Index 对象</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -868,7 +883,7 @@
 <span class=n>Index</span><span class=p>([</span><span class=s1>&#39;A&#39;</span><span class=p>,</span> <span class=s1>&#39;B&#39;</span><span class=p>,</span> <span class=s1>&#39;C&#39;</span><span class=p>,</span> <span class=s1>&#39;D&#39;</span><span class=p>],</span> <span class=n>dtype</span><span class=o>=</span><span class=s1>&#39;object&#39;</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=查看前后n行数据>查看前后n行数据</h3>
+</div><h4 id=查看前后n行数据>查看前后n行数据</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -879,7 +894,7 @@
 <span class=n>df</span><span class=o>.</span><span class=n>tail</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=显示全部数据>显示全部数据</h3>
+</div><h4 id=显示全部数据>显示全部数据</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -894,10 +909,10 @@
 <span class=n>pd</span><span class=o>.</span><span class=n>set_option</span><span class=p>(</span><span class=s1>&#39;display.max_columns&#39;</span><span class=p>,</span><span class=kc>None</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=统计>统计</h2>
+</div><h3 id=统计>统计</h3>
 <p>以下图为例</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209203305092.png alt=image-20201209203305092 style=zoom:80%>
-<h3 id=对数据的统计汇总>对数据的统计汇总</h3>
+<h4 id=对数据的统计汇总>对数据的统计汇总</h4>
 <p>只会统计数值型数据</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -909,8 +924,8 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209203341244.png alt=image-20201209203341244 style=zoom:75%>
-<h3 id=排序>排序</h3>
-<h4 id=dfsort_values>df.sort_values</h4>
+<h4 id=排序>排序</h4>
+<h5 id=dfsort_values>df.sort_values</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -925,7 +940,7 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209205226758.png alt=image-20201209205226758 style=zoom:60%>
-<h4 id=dfsort_index>df.sort_index</h4>
+<h5 id=dfsort_index>df.sort_index</h5>
 <p>按索引排序</p>
 <ul>
 <li><em>axis</em>：0（跨行），1（跨列）</li>
@@ -941,9 +956,9 @@
 </div>
 </div><p>输出（此处index设置为了’A’）</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212247769.png alt=image-20201209212247769 style=zoom:67%>
-<h3 id=统计函数>统计函数</h3>
+<h4 id=统计函数>统计函数</h4>
 <p>返回 Series</p>
-<h4 id=maxmin>max()、min()</h4>
+<h5 id=maxmin>max()、min()</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -976,7 +991,7 @@
 <span class=n>dtype</span><span class=p>:</span> <span class=n>float64</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=stdvar>std()、var()</h4>
+</div><h5 id=stdvar>std()、var()</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -1037,7 +1052,7 @@
 <span class=n>dtype</span><span class=p>:</span> <span class=n>float64</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=median>median()</h4>
+</div><h5 id=median>median()</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1058,7 +1073,7 @@
 <span class=n>dtype</span><span class=p>:</span> <span class=n>float64</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=idxmaxidxmin>idxmax()、idxmin()</h4>
+</div><h5 id=idxmaxidxmin>idxmax()、idxmin()</h5>
 <p>求索引位置</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1120,7 +1135,7 @@
 <span class=n>dtype</span><span class=p>:</span> <span class=nb>object</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=其他>其他</h4>
+</div><h5 id=其他>其他</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1131,12 +1146,12 @@
 <span class=n>df</span><span class=o>.</span><span class=n>count</span><span class=p>()</span>		<span class=c1>#返回每一列中的非空值的个数</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=预处理>预处理</h1>
-<h2 id=数据清理>数据清理</h2>
+</div><h2 id=预处理>预处理</h2>
+<h3 id=数据清理>数据清理</h3>
 <p>所有函数，均返回 DataFrame 副本，不赋值不会生效</p>
 <p>以下图为例</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209163600487.png alt=image-20201209163600487 style=zoom:67%>
-<h3 id=缺失值处理>缺失值处理</h3>
+<h4 id=缺失值处理>缺失值处理</h4>
 <ul>
 <li><code>dropna(axis=, how=)</code>：丢弃NaN数据
 <ul>
@@ -1160,7 +1175,7 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209164235597.png alt=image-20201209164235597 style=zoom:67%>
-<h3 id=清理空格><strong>清理空格</strong></h3>
+<h4 id=清理空格><strong>清理空格</strong></h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1169,7 +1184,7 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>df</span><span class=p>[</span><span class=s1>&#39;city&#39;</span><span class=p>]</span><span class=o>=</span><span class=n>df</span><span class=p>[</span><span class=s1>&#39;city&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>map</span><span class=p>(</span><span class=nb>str</span><span class=o>.</span><span class=n>strip</span><span class=p>)</span>	<span class=c1>#清除city字段中的字符空格</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=大小写转换><strong>大小写转换</strong></h3>
+</div><h4 id=大小写转换><strong>大小写转换</strong></h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1180,7 +1195,7 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209164710193.png alt=image-20201209164710193 style=zoom:67%>
-<h3 id=更改数据格式><strong>更改数据格式</strong></h3>
+<h4 id=更改数据格式><strong>更改数据格式</strong></h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1218,7 +1233,7 @@
 <span class=n>Name</span><span class=p>:</span> <span class=n>C</span><span class=p>,</span> <span class=n>dtype</span><span class=p>:</span> <span class=n>int32</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=更改行列名称>更改行列名称</h3>
+</div><h4 id=更改行列名称>更改行列名称</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1237,7 +1252,7 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209165738698.png alt=image-20201209165738698 style=zoom:67%>
-<h3 id=重复值处理>重复值处理</h3>
+<h4 id=重复值处理>重复值处理</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
@@ -1266,7 +1281,7 @@
 <span class=n>df</span><span class=o>.</span><span class=n>drop_duplicates</span><span class=p>(</span><span class=n>inplace</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span> <span class=c1>#就地修改</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=数值修改及替换><strong>数值修改及替换</strong></h3>
+</div><h4 id=数值修改及替换><strong>数值修改及替换</strong></h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1304,7 +1319,7 @@
 <span class=n>Name</span><span class=p>:</span> <span class=n>D</span><span class=p>,</span> <span class=n>dtype</span><span class=p>:</span> <span class=nb>object</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=设置索引列>设置索引列</h3>
+</div><h4 id=设置索引列>设置索引列</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1315,10 +1330,10 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212104774.png alt=image-20201209212104774 style=zoom:67%>
-<h2 id=数据表合并>数据表合并</h2>
+<h3 id=数据表合并>数据表合并</h3>
 <p>以下两张图为例</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209210714655.png alt=image-20201209210714655 style=zoom:65%>
-<h3 id=321-merge>3.2.1<code> .merge()</code></h3>
+<h4 id=merge><code>.merge()</code></h4>
 <p>参数</p>
 <ul>
 <li>on：列名，join用来对齐的那一列的名字，用到这个参数的时候一定要保证左表和右表用来对齐的那一列都有相同的列名</li>
@@ -1341,7 +1356,7 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209211615829.png alt=image-20201209211615829 style=zoom:67%>
-<h3 id=concat><code>.concat()</code></h3>
+<h4 id=concat><code>.concat()</code></h4>
 <p>第一个参数：需要合并的矩阵</p>
 <p>axis：合并维度，0：按行合并，1：按列合并，默认为0</p>
 <p>join：处理非公有 列/行 的方式，inner：去除非公有的 列/行，outer：对非公有的 列/行 进行NaN值填充然后合并</p>
@@ -1358,8 +1373,8 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209213557164.png alt=image-20201209213557164 style=zoom:80%>
-<h2 id=数据分组>数据分组</h2>
-<h3 id=分类汇总>分类汇总</h3>
+<h3 id=数据分组>数据分组</h3>
+<h4 id=分类汇总>分类汇总</h4>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1376,9 +1391,9 @@
 </div>
 </div><p>输出</p>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209222416782.png alt=image-20201209222416782 style=zoom:67%>
-<h2 id=数据增删>数据增删</h2>
+<h3 id=数据增删>数据增删</h3>
 <p>更多：https://www.cnblogs.com/guxh/p/9420610.html</p>
-<h3 id=删除行列>删除行列</h3>
+<h4 id=删除行列>删除行列</h4>
 <img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217130111523.png alt=image-20201217130111523 style=zoom:77%>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1400,7 +1415,7 @@
 <span class=k>del</span> <span class=n>df</span><span class=p>[</span><span class=s1>&#39;id&#39;</span><span class=p>]</span> 					<span class=c1>#删除列（就地删除）</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=增加行>增加行</h3>
+</div><h4 id=增加行>增加行</h4>
 <p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png 2x" data-sizes=auto alt=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png title=image-20201217132418146></p>
 <p>想增加一行，行名称为‘a’，内容为[16, 17, 18, 19]</p>
 <div class=highlight><div class=chroma>
@@ -1427,7 +1442,7 @@
 <span class=n>df</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=c1>#赋值以生效</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=增加列>增加列</h3>
+</div><h4 id=增加列>增加列</h4>
 <p>般涉及到增加列项时，经常会对现有的数据进行遍历运算，获得新增列项的值</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1475,8 +1490,8 @@
 <span class=n>df</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=n>df</span><span class=p>)]</span> <span class=o>=</span> <span class=p>[</span><span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>]</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=数据运算>数据运算</h2>
-<h3 id=算术运算>算术运算</h3>
+</div><h3 id=数据运算>数据运算</h3>
+<h4 id=算术运算>算术运算</h4>
 <ul>
 <li>add(other)</li>
 </ul>
@@ -1499,9 +1514,9 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>data</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>sub</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=逻辑运算>逻辑运算</h3>
+</div><h4 id=逻辑运算>逻辑运算</h4>
 <p>更多被运用到数据筛选中</p>
-<h4 id=符号>符号</h4>
+<h5 id=符号>符号</h5>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -1514,7 +1529,7 @@
 <span class=n>data</span><span class=p>[(</span><span class=n>data</span><span class=p>[</span><span class=s2>&#34;A&#34;</span><span class=p>]</span> <span class=o>&gt;</span> <span class=mi>1</span><span class=p>)</span> <span class=o>&amp;</span> <span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=s2>&#34;A&#34;</span><span class=p>]</span> <span class=o>&lt;</span> <span class=mi>3</span><span class=p>)]</span> 	<span class=c1># 多个逻辑判断</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id=函数>函数</h4>
+</div><h5 id=函数>函数</h5>
 <ul>
 <li><em>query(expr)</em>
 <ul>
@@ -1542,14 +1557,14 @@
 <pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>data</span><span class=p>[</span><span class=n>data</span><span class=p>[</span><span class=s2>&#34;A&#34;</span><span class=p>]</span><span class=o>.</span><span class=n>isin</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>])]</span> <span class=c1># 返回DataFrame副本</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id=自定义运算>自定义运算</h3>
+</div><h4 id=自定义运算>自定义运算</h4>
 <p><em>apply( func, axis=0 )</em>：定义一个对列，最大值-最小值的函数</p>
 <ul>
 <li>func：自定义函数</li>
 <li>axis=0：默认是列，axis=1为行进行运算</li>
 </ul>
-<h1 id=导入与到导出>导入与到导出</h1>
-<h2 id=导入数据>导入数据</h2>
+<h2 id=导入与到导出>导入与到导出</h2>
+<h3 id=导入数据>导入数据</h3>
 <ul>
 <li><em>path</em>：文件路径</li>
 <li><em>sep</em>：分隔符，默认用",&ldquo;隔开</li>
@@ -1576,7 +1591,7 @@
 <span class=n>pd</span><span class=o>.</span><span class=n>read_clipboard</span><span class=p>()</span>						<span class=c1>#从你的粘贴板获取内容，并传给read_table()</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id=导出数据>导出数据</h2>
+</div><h3 id=导出数据>导出数据</h3>
 <ul>
 <li><em>path</em>：文件路径</li>
 <li><em>sep</em>：分隔符，默认用&rdquo;,&ldquo;隔开</li>
@@ -1600,7 +1615,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>转换成 json 格式通常用 <code>df.to_json(filename, orient='records', force_ascii=False)</code></p>
-<h1 id=例>例</h1>
+<h2 id=例>例</h2>
 <ol>
 <li>取出索引为 [3, 4, 8] 行的 animal 和 age 列</li>
 </ol>
@@ -1682,7 +1697,7 @@
 <span class=n>pd</span><span class=o>.</span><span class=n>to_csv</span><span class=p>(</span><span class=n>path</span><span class=p>,</span> <span class=n>index</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id=预览-dataframe>预览 DataFrame</h1>
+</div><h2 id=预览-dataframe>预览 DataFrame</h2>
 <p>一个独立的支持库，pandas_profiling，可以快速预览数据集。</p>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -1716,7 +1731,7 @@
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 0001-01-01</span>
+<span>更新于 2021-10-23</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -1728,13 +1743,13 @@
 </div>
 </div>
 <div class=post-info-more>
-<section class=post-tags></section>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/>数据分析</a></section>
 <section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/python/dataanalysis/seaborn/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/dataanalysis/numpy/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
+<div class=post-nav><a href=/Notes/posts/python/%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/ class=prev rel=prev title="Python 内建函数"><i class="fas fa-angle-left fa-fw"></i>Python 内建函数</a>
+<a href=/Notes/posts/python/dataanalysis/numpy/ class=next rel=next title=numpy>numpy<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
 </main><footer class=footer>
