@@ -3,7 +3,7 @@ title: "Go log 标准库"
 date: 2022-02-08
 draft: false
 author: "MelonCholi"
-tags: []
+tags: [Go 库]
 categories: [Golang]
 ---
 

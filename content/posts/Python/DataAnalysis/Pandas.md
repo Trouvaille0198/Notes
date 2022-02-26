@@ -1,6 +1,17 @@
-# 分类与创建
+---
+title: "pandas"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [Python,数据分析]
+categories: [Python]
+---
 
-## Series
+# pandas
+
+## 分类与创建
+
+### Series
 
 Series是一种类似于以为NumPy数组的对象，它由一组数据（各种NumPy数据类型）和与之相关的一组数据标签（即索引）组成的。可以用index和values分别规定索引和值。如果不规定索引，会自动创建 0 到 N-1 索引。
 
@@ -8,7 +19,7 @@ Series是1维的数据，拥有的索引，一般以竖行形式输出
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207200644867.png" alt="image-20201207200644867" style="zoom:50%;" />
 
-### 创建
+#### 创建
 
 Series可以方便的通过list，array还有dict来构建
 
@@ -66,7 +77,7 @@ peach     150
 dtype: int64
 ```
 
-### 访问
+#### 访问
 
 下标方式访问
 
@@ -80,11 +91,11 @@ index方式访问
 ser4[1]
 ```
 
-## DataFrame
+### DataFrame
 
 DataFrame是一种表格型结构，含有一组有序的列，每一列可以是不同的数据类型。既有行索引，又有列索引<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/J$F`0{7$G@6E@1QX3O3$X{Q.png" alt="img" style="zoom:67%;" />
 
-### 从具有索引标签的字典数据创建
+#### 从具有索引标签的字典数据创建
 
 ```python
 data = {'animal': ['cat', 'cat', 'snake', 'dog', 'dog', 'cat', 'snake', 'cat', 'dog', 'dog'],
@@ -101,7 +112,7 @@ df
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205444467.png" alt="image-20201207205444467" style="zoom:80%;" />
 
-### 从numpy 数组创建
+#### 从 numpy 数组创建
 
 ```python
 df2 = pd.DataFrame(np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]),
@@ -123,7 +134,7 @@ df
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205853449.png" alt="image-20201207205853449" style="zoom:80%;" />
 
-### 通过其他DataFrame来创建
+#### 通过其他DataFrame来创建
 
 ```python
 df3 = df2[["a","b","c"]].copy()
@@ -134,14 +145,14 @@ df3
 
 ![image-20201207205620990](https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png)
 
-### 从csv文件创建
+#### 从csv文件创建
 
 ```python
 df = pd.read_csv('path')
 df = pd.read_csv('test.csv', encoding='gbk', sep=';') 	#分隔符为“；”，编码格式为gbk
 ```
 
-### 用Series创建
+#### 用Series创建
 
 ```python
 s_1 = pd.Series(data['animal'])
@@ -159,9 +170,9 @@ df
 
 这玩意可以看做是多个Series的组合。DataFrame的不同列可以是不同的数据类型,如果以Series数组来创建DataFrame，每个Series将成为一行，而不是一列
 
-# 审视
+## 审视
 
-## 访问
+### 访问
 
 以下图为例
 
@@ -171,7 +182,7 @@ col，index为列号和行号
 
 colName，indexName为具体值
 
-### `df[colName]`
+#### `df[colName]`
 
 根据列名，并以 Series 的形式返回列
 
@@ -196,7 +207,7 @@ df['5':'5']  # 行名称为5的行
 df['5':'7']  # 行名称为5的行至行名称为7的行
 ```
 
-### `df[colName][indexName]`
+#### `df[colName][indexName]`
 
 更精准的访问（几列几行）
 
@@ -212,7 +223,7 @@ df['c']['B']
 0.5
 ```
 
-### ` df.iloc[index, col]`
+#### ` df.iloc[index, col]`
 
 其中index，col可以表示为列表形式和切片形式，当只传入一个参数时，该参数默认为index
 
@@ -228,7 +239,7 @@ df.iloc[[0,3],[2,3,7]]  # 取0和3行，2、3、7列相交数据
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207224248457.png" alt="image-20201207224248457" style="zoom: 65%;" />
 
-### `df.loc[indexName,colName]`
+#### `df.loc[indexName,colName]`
 
 `df.iloc`只能选取数据表里实际有的行和列，而`df.loc`可以选取没有的行和列，赋值后就可以添加新行或者列
 
@@ -242,11 +253,11 @@ df.loc[df['c']=='snake'] 			#选取c列中内容为snake的行数据
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207230245814.png" alt="image-20201207230245814" style="zoom:70%;" />
 
-### `df.ix[in,co]`
+#### `df.ix[in,co]`
 
 ix是loc和iloc的混合，既能按索引标签提取，也能按位置进行数 据提取
 
-### 筛选
+#### 筛选
 
 ```python
 df.loc[df.index[[1,3]], ['d','f']]	#筛选出索引为1，3行的d，f列
@@ -268,7 +279,7 @@ j    False
 Name: A, dtype: bool
 ```
 
-#### ***df.query()***
+##### ***df.query()***
 
 以下表为例
 
@@ -309,9 +320,9 @@ df[df.B == df['C C']] # 查询B列数值和C C列相等的行记录
 4  5  2  2
 ```
 
-## 查看
+### 查看
 
-### 查看行数、列数
+#### 查看行数、列数
 
 ```python
 df.shape
@@ -323,7 +334,7 @@ df.shape
 (4, 10)
 ```
 
-### 查看整体信息
+#### 查看整体信息
 
 使用info函数查看数据表的整体信息，包括数据维度、列名称、数据格式和所占空间等信息
 
@@ -353,7 +364,7 @@ dtypes: object(10)
 memory usage: 352.0+ bytes
 ```
 
-### **查看数据格式**
+#### **查看数据格式**
 
 使用dtypes函数来返回数据格式
 
@@ -380,7 +391,7 @@ dtype: object
 dtype('O')
 ```
 
-### 查看缺失值
+#### 查看缺失值
 
 ```python
 df.isnull()			# 检查数据空值
@@ -403,7 +414,7 @@ D    False
 Name: h, dtype: bool
 ```
 
-### 查看唯一值
+#### 查看唯一值
 
 ```python
 df['a'].unique()	#查看a列中的唯一值
@@ -415,7 +426,7 @@ df['a'].unique()	#查看a列中的唯一值
 array(['cat', 2.5, 1, 'yes'], dtype=object)
 ```
 
-### **查看数据表数值**
+#### **查看数据表数值**
 
 ````python
 df.values
@@ -432,7 +443,7 @@ array([['cat', 'cat', 'snake', 'dog', 'dog', 'cat', 'snake', 'cat',
       dtype=object)
 ```
 
-### 查看行、列名称
+#### 查看行、列名称
 
 返回 Index 对象
 
@@ -448,14 +459,14 @@ Index(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'], dtype='object')
 Index(['A', 'B', 'C', 'D'], dtype='object')
 ```
 
-### 查看前后n行数据
+#### 查看前后n行数据
 
 ```python
 df.head(5)
 df.tail(3)
 ```
 
-### 显示全部数据
+#### 显示全部数据
 
 ```python
 # 设置行不限制数量
@@ -466,13 +477,13 @@ pd.set_option('display.max_columns',None)
 
 
 
-## 统计
+### 统计
 
 以下图为例
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209203305092.png" alt="image-20201209203305092" style="zoom: 80%;" />
 
-### 对数据的统计汇总
+#### 对数据的统计汇总
 
 只会统计数值型数据
 
@@ -484,9 +495,9 @@ df.describe()
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209203341244.png" alt="image-20201209203341244" style="zoom: 75%;" />
 
-### 排序
+#### 排序
 
-#### df.sort_values
+##### df.sort_values
 
 ```python
 df.sort_values(by=['C'])								#按特定列的值升序排序
@@ -498,7 +509,7 @@ df.sort_values(by=['B', 'C'], ascending=[False, True])	#先按B降序，再按C�
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209205226758.png" alt="image-20201209205226758" style="zoom:60%;" />
 
-#### df.sort_index
+##### df.sort_index
 
 按索引排序
 
@@ -515,11 +526,11 @@ df.sort_index(axis=0，ascending=1)		#按索引列升序排序，需要默认的
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212247769.png" alt="image-20201209212247769" style="zoom: 67%;" />
 
-### 统计函数
+#### 统计函数
 
 返回 Series
 
-#### max()、min()
+##### max()、min()
 
 ```python
 # 使用统计函数：0 代表列求结果， 1 代表行求统计结果
@@ -537,7 +548,7 @@ my_price_change 3.41
 dtype: float64
 ```
 
-#### std()、var()
+##### std()、var()
 
 ```python
 # 方差
@@ -569,7 +580,7 @@ my_price_change 	0.800565
 dtype: float64
 ```
 
-#### median()
+##### median()
 
 ```python
 df = pd.DataFrame({'COL1' : [2,3,4,5,4,2],
@@ -581,7 +592,7 @@ COL2 	2.0
 dtype: float64
 ```
 
-#### idxmax()、idxmin()
+##### idxmax()、idxmin()
 
 求索引位置
 
@@ -615,16 +626,16 @@ my_price_change 2015-06-15
 dtype: object
 ```
 
-#### 其他
+##### 其他
 
 ```python
 df.corr()		#返回列与列之间的相关系数
 df.count()		#返回每一列中的非空值的个数
 ```
 
-# 预处理
+## 预处理
 
-## 数据清理
+### 数据清理
 
 所有函数，均返回 DataFrame 副本，不赋值不会生效
 
@@ -632,7 +643,7 @@ df.count()		#返回每一列中的非空值的个数
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209163600487.png" alt="image-20201209163600487" style="zoom:67%;" />
 
-### 缺失值处理
+#### 缺失值处理
 
 - `dropna(axis=, how=)`：丢弃NaN数据
   - axis：0(按行丢弃)，1(按列丢弃)
@@ -649,13 +660,13 @@ df['B'].fillna(df['B'].mean())			#使用price均值对NA进行填充
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209164235597.png" alt="image-20201209164235597" style="zoom:67%;" />
 
-### **清理空格**
+#### **清理空格**
 
 ```python
 df['city']=df['city'].map(str.strip)	#清除city字段中的字符空格
 ```
 
-### **大小写转换**
+#### **大小写转换**
 
 ```python
 df['A'].str.upper()				#city列大小写转换
@@ -665,7 +676,7 @@ df['A'].str.upper()				#city列大小写转换
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209164710193.png" alt="image-20201209164710193" style="zoom:67%;" />
 
-### **更改数据格式**
+#### **更改数据格式**
 
 ```python
 df['C'].astype('int')
@@ -687,7 +698,7 @@ j    1
 Name: C, dtype: int32
 ```
 
-### 更改行列名称
+#### 更改行列名称
 
 ```python
 df.rename(columns={'A': 'Name','C':'Age'})			#更改列名称
@@ -701,7 +712,7 @@ df.index = [...]								    #传入列表以改变行名称
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209165738698.png" alt="image-20201209165738698" style="zoom:67%;" />
 
-### 重复值处理
+#### 重复值处理
 
 ```python
 df.duplicated() 			# 返回一个布尔型的Series,显示各行是否有重复行
@@ -717,7 +728,7 @@ df.drop_duplicates(['k1','k2'])  #删除全部列重复值，返回副本
 df.drop_duplicates(inplace=True) #就地修改
 ```
 
-### **数值修改及替换**
+#### **数值修改及替换**
 
 ```python
 df['D'].replace('yes', 'true')
@@ -739,7 +750,7 @@ j      no
 Name: D, dtype: object
 ```
 
-### 设置索引列
+#### 设置索引列
 
 ```python
 df_inner.set_index('A')
@@ -749,13 +760,13 @@ df_inner.set_index('A')
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212104774.png" alt="image-20201209212104774" style="zoom:67%;" />
 
-## 数据表合并
+### 数据表合并
 
 以下两张图为例
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209210714655.png" alt="image-20201209210714655" style="zoom:65%;" />
 
-### 3.2.1` .merge()`
+#### `.merge()`
 
 参数
 
@@ -774,7 +785,7 @@ df_right=pd.merge(df1,df2,how='right')	#以右表为准,这里等同于outer_df
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209211615829.png" alt="image-20201209211615829" style="zoom:67%;" />
 
-### `.concat()`
+#### `.concat()`
 
 第一个参数：需要合并的矩阵
 
@@ -793,9 +804,9 @@ pd.concat([df1, df2], axis=1, join='inner')				#按列合并
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209213557164.png" alt="image-20201209213557164" style="zoom: 80%;" />
 
-## 数据分组
+### 数据分组
 
-### 分类汇总
+#### 分类汇总
 
 ```python
 df_inner.groupby('city').count()								#对所有列进行计数汇总
@@ -810,11 +821,11 @@ df_inner.groupby('city')['price'].agg([len,np.sum, np.mean])	#对city字段进�
 
 
 
-## 数据增删
+### 数据增删
 
 更多：https://www.cnblogs.com/guxh/p/9420610.html
 
-### 删除行列
+#### 删除行列
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217130111523.png" alt="image-20201217130111523" style="zoom:77%;" />
 
@@ -828,7 +839,7 @@ df.drop(df.columns[0:2],axis=1)	#按列号删除
 del df['id'] 					#删除列（就地删除）
 ```
 
-### 增加行
+#### 增加行
 
 ![image-20201217132418146](https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png)
 
@@ -846,7 +857,7 @@ s = pd.Series([16, 17, 18, 19], index=df.columns, name='5') #添加有name的Ser
 df.append(s) #赋值以生效
 ```
 
-### 增加列
+#### 增加列
 
 般涉及到增加列项时，经常会对现有的数据进行遍历运算，获得新增列项的值
 
@@ -873,9 +884,9 @@ df = pd.concat([df, s], axis=1)
 df[len(df)] = [16, 17, 18, 19]
 ```
 
-## 数据运算
+### 数据运算
 
-### 算术运算
+#### 算术运算
 
 - add(other)
 
@@ -889,11 +900,11 @@ data['A'].add(1)
 data['A'].sub(2)
 ```
 
-### 逻辑运算
+#### 逻辑运算
 
 更多被运用到数据筛选中
 
-#### 符号
+##### 符号
 
 ```python
 data["A"] > 2 								# 返回Series
@@ -901,7 +912,7 @@ data[data["A"] > 2].head() 					# 返回DataFrame副本
 data[(data["A"] > 1) & (data["A"] < 3)] 	# 多个逻辑判断
 ```
 
-#### 函数
+##### 函数
 
 - *query(expr)*
   - expr：查询字符串
@@ -918,16 +929,16 @@ data.query("A<3 & A>1") # 返回DataFrame副本
 data[data["A"].isin([1, 2])] # 返回DataFrame副本
 ```
 
-### 自定义运算
+#### 自定义运算
 
 *apply( func, axis=0 )*：定义一个对列，最大值-最小值的函数
 
 - func：自定义函数
 - axis=0：默认是列，axis=1为行进行运算
 
-# 导入与到导出
+## 导入与到导出
 
-## 导入数据
+### 导入数据
 
 - *path*：文件路径
 - *sep*：分隔符，默认用","隔开
@@ -945,7 +956,7 @@ pd.read_html(url)						#解析URL、字符串或者HTML文件，抽取其中的t
 pd.read_clipboard()						#从你的粘贴板获取内容，并传给read_table()
 ```
 
-## 导出数据
+### 导出数据
 
 - *path*：文件路径
 - *sep*：分隔符，默认用","隔开
@@ -963,7 +974,7 @@ df.to_json(filename)						#以Json格式导出数据到文本文件
 
 转换成 json 格式通常用 `df.to_json(filename, orient='records', force_ascii=False)`
 
-# 例
+## 例
 
 1. 取出索引为 [3, 4, 8] 行的 animal 和 age 列
 
@@ -1009,9 +1020,7 @@ pd.read_csv(path, index_col=0)
 pd.to_csv(path, index=False)
 ```
 
-
-
-# 预览 DataFrame
+## 预览 DataFrame
 
 一个独立的支持库，pandas_profiling，可以快速预览数据集。
 

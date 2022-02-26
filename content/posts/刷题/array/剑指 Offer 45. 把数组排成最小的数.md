@@ -75,7 +75,7 @@ func minNumber2(nums []int) string {
       if l < i-1 {
          quickSort(nums, l, i-1)
       }
-      if r > i+1 {
+      if i+1 < r {
          quickSort(nums, i+1, r)
       }
    }

@@ -3,7 +3,7 @@ title: "Go math 标准库"
 date: 2021-12-22
 draft: false
 author: "MelonCholi"
-tags: []
+tags: [Go 库]
 categories: [Golang]
 ---
 
