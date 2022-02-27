@@ -1,5 +1,5 @@
 ---
-title: "offer 61"
+title: "剑指 Offer 61. 扑克牌中的顺子"
 date: 2022-02-26
 draft: false
 author: "MelonCholi"

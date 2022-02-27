@@ -1,15 +1,15 @@
 ---
-title: "offer 3"
+title: "剑指 Offer 03. 数组中重复的数字"
 date: 2022-02-20
 draft: false
 author: "MelonCholi"
-tags: [算法,查找]
+tags: [算法,数组,查找]
 categories: [刷题]
 ---
 
 # 剑指 Offer 03. 数组中重复的数字
 
-`easy` `search`
+`easy`
 
 https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
 

@@ -1,9 +1,9 @@
 ---
-title: "offer 4"
+title: "剑指 Offer 04. 二维数组中的查找"
 date: 2022-02-20
 draft: false
 author: "MelonCholi"
-tags: [算法,查找]
+tags: [算法,数组,查找]
 categories: [刷题]
 ---
 
@@ -61,7 +61,7 @@ func findNumberIn2DArray(matrix [][]int, target int) bool {
 
 如下图所示，我们将矩阵逆时针旋转 45° ，并将其转化为图形式，发现其类似于 二叉搜索树 ，即对于每个元素，其左分支元素更小、右分支元素更大。因此，通过从 “根节点” 开始搜索，遇到比 target 大的元素就向左，反之向右，即可找到目标值 target 。
 
-![Picture1.png](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/6584ea93812d27112043d203ea90e4b0950117d45e0452d0c630fcb247fbc4af-Picture1.png)
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220227151607027.png" alt="image-20220227151607027" style="zoom: 33%;" />
 
 算法流程：
 

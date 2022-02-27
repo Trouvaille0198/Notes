@@ -1,3 +1,12 @@
+---
+title: "剑指 Offer 12. 矩阵中的路径"
+date: 2022-02-20
+draft: false
+author: "MelonCholi"
+tags: [算法,回溯]
+categories: [刷题]
+---
+
 # 剑指 Offer 12. 矩阵中的路径
 
 `mid`

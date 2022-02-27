@@ -1,15 +1,15 @@
 ---
-title: "offer 11"
+title: "剑指 Offer 11. 旋转数组的最小数字"
 date: 2022-02-20
 draft: false
 author: "MelonCholi"
-tags: [算法,二分]
+tags: [算法,数组,二分]
 categories: [刷题]
 ---
 
 # 剑指 Offer 11. 旋转数组的最小数字
 
-`easy` `binary search`
+`easy`
 
 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
 
@@ -32,8 +32,8 @@ categories: [刷题]
 ## 二分
 
 - middle > high：代表最小值一定在 middle 右侧，所以 low 移到 middle + 1 的位置。
-- middle < high：代表最小值一定在 middle 左侧或者就是 middle，所以 high移到 middle 的位置。
-- middle 既不大于 low 指针的值，也不小于 high指针的值，代表着 middlemiddle 可能等于 low 指针的值，或者 high 指针的值，我们这时候只能让 high 指针递减，来一个一个找最小值了。
+- middle < high：代表最小值一定在 middle 左侧**或者就是 middle**，所以 high移到 middle 的位置。
+- middle 既不大于 low 指针的值，也不小于 high 指针的值，代表着 middle 可能等于 low 指针的值，或者 high 指针的值，我们这时候只能**让 high 指针递减**，来一个一个找最小值了。
 
 ```go
 // 二分

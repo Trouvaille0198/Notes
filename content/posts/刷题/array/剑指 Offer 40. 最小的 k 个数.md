@@ -1,5 +1,5 @@
 ---
-title: "offer 40"
+title: "剑指 Offer 40. 最小的 k 个数"
 date: 2022-02-26
 draft: false
 author: "MelonCholi"
@@ -7,7 +7,7 @@ tags: [算法,排序]
 categories: [刷题]
 ---
 
-# 剑指 Offer 40. 最小的k个数
+# 剑指 Offer 40. 最小的 k 个数
 
 `easy`
 
@@ -32,7 +32,6 @@ categories: [刷题]
 排序后取前 k 个数，很笨！
 
 ```go
-
 func getLeastNumbers(arr []int, k int) []int {
 	sort.Ints(arr)
 	return arr[:k]

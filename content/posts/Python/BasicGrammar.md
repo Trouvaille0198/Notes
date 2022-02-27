@@ -1205,7 +1205,7 @@ dicts = {i: ' ' for i in punctuation}
 
 3. 矩阵转置
 
-    ![image-20210530153535372](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210530153535372.png)
+    ![image-20210530153535372](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210530153535372.png)
 
 4. 获取当前路径
 

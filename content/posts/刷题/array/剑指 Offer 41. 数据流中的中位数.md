@@ -1,5 +1,5 @@
 ---
-title: "offer 41"
+title: "剑指 Offer 41. 数据流中的中位数"
 date: 2022-02-26
 draft: false
 author: "MelonCholi"
