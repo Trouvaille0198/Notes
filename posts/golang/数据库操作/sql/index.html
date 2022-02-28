@@ -9,14 +9,14 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/sql/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-12-31T00:00:00+00:00">
-<meta property="article:modified_time" content="2021-12-31T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-02-28T12:23:28+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Go sql 标准库">
 <meta name=twitter:description content="database Go 使用 SQL 与类 SQL 数据库的惯例是通过标准库 database/sql。这是一个对关系型数据库的通用抽象，它提供了标准的、轻量的、面向行的接口 1 2">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/sql/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/ioutil/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go sql 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C\/sql\/"},"genre":"posts","keywords":"数据库","wordcount":9455,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C\/sql\/","datePublished":"2021-12-31T00:00:00+00:00","dateModified":"2021-12-31T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/sql/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/%E5%AE%9E%E7%94%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E8%AF%AD/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/ioutil/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go sql 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C\/sql\/"},"genre":"posts","keywords":"数据库","wordcount":9455,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C\/sql\/","datePublished":"2021-12-31T00:00:00+00:00","dateModified":"2022-02-28T12:23:28+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -1860,7 +1860,7 @@ Uid is 6, username is testTx, department is PD, created at 2019-02-21
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2021-12-31</span>
+<span>更新于 2022-02-28</span>
 </div>
 <div class=post-info-license></div>
 </div>
@@ -1877,7 +1877,7 @@ Uid is 6, username is testTx, department is PD, created at 2019-02-21
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
 </section>
 </div>
-<div class=post-nav><a href=/Notes/posts/courses/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/ class=prev rel=prev title=软件工程><i class="fas fa-angle-left fa-fw"></i>软件工程</a>
+<div class=post-nav><a href=/Notes/posts/courses/%E5%AE%9E%E7%94%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E8%AF%AD/ class=prev rel=prev title=实用计算机英语><i class="fas fa-angle-left fa-fw"></i>实用计算机英语</a>
 <a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/ioutil/ class=next rel=next title="Go ioutil 标准库">Go ioutil 标准库<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>

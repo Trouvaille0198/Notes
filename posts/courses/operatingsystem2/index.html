@@ -5,18 +5,18 @@
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
 <title>操作系统（2） - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="操作系统（2）">
-<meta property="og:description" content="操作系统二 存储器管理 40% 文件管理（含实验，重点是系统调用部分） 35% 存储器管理 （内存分配：分配和去配，地址映射：抽象和映射，内存保护：隔离和共享，">
+<meta property="og:description" content="操作系统二 判断 20*1 单选 20*1 填空 20*1 简答、综合 两个答题各有三个小题 共 4 存储器管理 40% 文件管理（含实验，命令 + 系统调用部分） 35% 命令在上学期实验里，也要看">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/courses/operatingsystem2/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-03T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-02-03T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-02-28T20:22:55+08:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="操作系统（2）">
-<meta name=twitter:description content="操作系统二 存储器管理 40% 文件管理（含实验，重点是系统调用部分） 35% 存储器管理 （内存分配：分配和去配，地址映射：抽象和映射，内存保护：隔离和共享，">
+<meta name=twitter:description content="操作系统二 判断 20*1 单选 20*1 填空 20*1 简答、综合 两个答题各有三个小题 共 4 存储器管理 40% 文件管理（含实验，命令 + 系统调用部分） 35% 命令在上学期实验里，也要看">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/operatingsystem2/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/1.-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统（2）","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operatingsystem2\/"},"genre":"posts","keywords":"OS","wordcount":12155,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operatingsystem2\/","datePublished":"2022-02-03T00:00:00+00:00","dateModified":"2022-02-03T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/operatingsystem2/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/1.-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统（2）","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operatingsystem2\/"},"genre":"posts","keywords":"OS","wordcount":12217,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operatingsystem2\/","datePublished":"2022-02-03T00:00:00+00:00","dateModified":"2022-02-28T20:22:55+08:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
 <body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
@@ -84,7 +84,7 @@
 <div class=toc-content id=toc-content-auto></div>
 </div><article class="page single"><h1 class="single-title animated flipInX">操作系统（2）</h1><div class=post-meta>
 <div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/><i class="far fa-folder fa-fw"></i>专业课</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-03>2022-02-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 12155 字&nbsp;
+<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-03>2022-02-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 12217 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 25 分钟&nbsp;</div>
 </div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
@@ -93,7 +93,7 @@
 </div>
 <div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#存储器管理>存储器管理</a>
+<li><a href=#第四章-存储器管理>第四章 存储器管理</a>
 <ul>
 <li><a href=#存储器的层次结构>存储器的层次结构</a>
 <ul>
@@ -202,7 +202,7 @@
 <li><a href=#本章结构>本章结构</a></li>
 </ul>
 </li>
-<li><a href=#虚拟存储器>虚拟存储器</a>
+<li><a href=#第五章-虚拟存储器>第五章 虚拟存储器</a>
 <ul>
 <li><a href=#虚拟存储器概述>虚拟存储器概述</a>
 <ul>
@@ -271,7 +271,7 @@
 </li>
 </ul>
 </li>
-<li><a href=#输入输出系统>输入输出系统</a>
+<li><a href=#第六章-输入输出系统>第六章 输入输出系统</a>
 <ul>
 <li><a href=#io-系统的功能模型接口>IO 系统的功能、模型、接口</a>
 <ul>
@@ -326,7 +326,7 @@
 </li>
 </ul>
 </li>
-<li><a href=#文件管理>文件管理</a>
+<li><a href=#第七章-文件管理>第七章 文件管理</a>
 <ul>
 <li><a href=#文件和文件系统>文件和文件系统</a>
 <ul>
@@ -392,9 +392,16 @@
 </ul>
 </nav></div>
 </div><div class=content id=content><h1 id=操作系统二>操作系统二</h1>
+<p>判断 20*1</p>
+<p>单选 20*1</p>
+<p>填空 20*1</p>
+<p>简答、综合 两个答题各有三个小题 共 4</p>
 <p>存储器管理 40%</p>
-<p>文件管理（含实验，重点是系统调用部分） 35%</p>
-<h2 id=存储器管理>存储器管理</h2>
+<p>文件管理（含实验，命令 + 系统调用部分） 35%</p>
+<ul>
+<li>命令在上学期实验里，也要看</li>
+</ul>
+<h2 id=第四章-存储器管理>第四章 存储器管理</h2>
 <p>（内存分配：分配和去配，地址映射：抽象和映射，内存保护：隔离和共享，内存扩充：存储扩充）</p>
 <img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211203080528359.png alt=image-20211203080528359 style=zoom:50%>
 <p>1、3、5 <strong>重要</strong>，2、4 自学</p>
@@ -586,7 +593,7 @@
 </li>
 </ul>
 <blockquote>
-<p>以下三节为连续分配存储管理方式的分配算法</p>
+<p>以下三节为连续分配存储管理方式的<strong>分配算法</strong></p>
 </blockquote>
 <h4 id=基于顺序搜索的动态分区分配算法-><strong>基于顺序搜索的动态分区分配算法</strong> ☆</h4>
 <p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211203090529707.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211203090529707.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211203090529707.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211203090529707.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211203090529707.png title=image-20211203090529707></p>
@@ -762,7 +769,7 @@ $$
 <p>将内存的物理空间分成若干个块</p>
 <p>在为进程分配内存时，以块为单位，将进程的若干个页装入不相邻的物理块中。（会产生页内碎片）</p>
 <h5 id=地址结构><strong>地址结构</strong></h5>
-<p>将逻辑地址分为：<code>页号 P | 位移量 W</code>位移量即页内偏移地址</p>
+<p>将逻辑地址分为：<code>页号 P | 位移量 W</code> 位移量即页内偏移地址</p>
 <p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211206091010914.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211206091010914.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211206091010914.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211206091010914.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211206091010914.png title=image-20211206091010914></p>
 <p>已知逻辑地址和页面大小，求其页号和页内地址</p>
 <img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211206091247071.png alt=image-20211206091247071 style=zoom:50%>
@@ -779,14 +786,18 @@ $$
 <h5 id=基本的地址变换机构>基本的地址变换机构</h5>
 <p>页表设置一个页表寄存器（PTR），存放页表在内存中的始址和页表的长度</p>
 <p>过程：逻辑地址分割后产生<strong>页号</strong>和<strong>偏移量</strong>，通过<strong>页表寄存器</strong>中<strong>页表长度</strong>判断是否越界中断，如无中断则通过<strong>页表始址</strong>查询页表得到<strong>物理块号</strong>，结合偏移量得到<strong>物理地址</strong></p>
-<p>每次存 / 取要两次访问内存（访问页表、访问内存找到物理地址）</p>
+<p>每次存 / 取要<strong>两次访问内存</strong>（访问页表、访问内存找到物理地址）</p>
+<blockquote>
+<p>页号 * 页表项长度 + 页表始址</p>
+</blockquote>
 <img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211206093439140.png alt=image-20211206093439140 style=zoom:50%>
+<p>TODO：转二进制获取地址</p>
 <h5 id=具有快表的地址变换机构>具有快表的地址变换机构</h5>
 <p><strong>联想寄存器 / 快表</strong>：一个具有并行查询能力的特殊高速缓冲寄存器</p>
 <p>过程：先查快表再查页表</p>
 <img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211206094025706.png alt=image-20211206094025706 style=zoom:50%>
 <h4 id=内存访问的有效时间>内存访问的有效时间</h4>
-<p>设访问内存时间为 tt ，快表查询时间为 λλ ，命中率为 aa ：</p>
+<p>设访问内存时间为 t ，快表查询时间为 λ ，命中率为 a ：</p>
 <ul>
 <li>不使用快表：$EAT=t+tEAT=t+t=2t$</li>
 <li>使用快表： $EAT=aλ+(1−a)(λ+t)+tEAT=aλ+(1−a)(λ+t)+t$</li>
@@ -882,8 +893,7 @@ $$
 </ul>
 </li>
 </ul>
-<h2 id=虚拟存储器>虚拟存储器</h2>
-<p>第五章</p>
+<h2 id=第五章-虚拟存储器>第五章 虚拟存储器</h2>
 <h3 id=虚拟存储器概述>虚拟存储器概述</h3>
 <p>虚存容量由主存辅存的容量之和确定</p>
 <h4 id=局部性原理>局部性原理</h4>
@@ -993,13 +1003,13 @@ $$
 </ul>
 <img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211220084554546.png alt=image-20211220084554546 style=zoom:40%>
 <p><strong>访问内存的有效时间</strong>：</p>
-<p>设访问/更新快表时间 λλ，访问内存需要时间 tt ，缺页中断时间 εε</p>
+<p>设访问/更新快表时间 λ，访问内存需要时间 t ，缺页中断时间 ε</p>
 <ul>
 <li>页面在快表中： EAT=λ+tEAT=λ+t 查快表==>访内存查值</li>
 <li>页面在页表中： EAT=λ+t+λ+tEAT=λ+t+λ+t 查快表==>访内存查页表==>更新快表==>访内存查值</li>
 <li>缺页：EAT=λ+t+ε+λ+tEAT=λ+t+ε+λ+t 快表==>页表==>中断==>更新快表==>内存</li>
 </ul>
-<p>设命中率 aa，缺页率 ff ，则平均访问时间：</p>
+<p>设命中率 a，缺页率 f ，则平均访问时间：</p>
 <p>EAT=a(λ+t)+(1−a)((1−f)(2λ+2t)+f(2λ+2t+ε))=(2−a)(λ+t)+εf(1−a)EAT=a(λ+t)+(1−a)((1−f)(2λ+2t)+f(2λ+2t+ε))=(2−a)(λ+t)+εf(1−a)</p>
 <h3 id=抖动和工作集>抖动和工作集</h3>
 <h4 id=多道程序度与抖动>多道程序度与抖动</h4>
@@ -1074,8 +1084,8 @@ $$
 </ul>
 </li>
 </ul>
-<h2 id=输入输出系统>输入输出系统</h2>
-<p>第六章，概念考核</p>
+<h2 id=第六章-输入输出系统>第六章 输入输出系统</h2>
+<p>概念考核</p>
 <h3 id=io-系统的功能模型接口>IO 系统的功能、模型、接口</h3>
 <p>IO 系统：用于管理诸如打印机扫描仪等 IO 设备，和诸如磁盘驱动器等存储设备</p>
 <h4 id=io-系统的基本功能>IO 系统的基本功能</h4>
@@ -1368,8 +1378,8 @@ $$
 <p>N 个队列间 FCFS，队列内 SCAN。解决高密度磁盘磁壁粘着现象（磁臂停留在某处不动）</p>
 <h5 id=fscan>FSCAN</h5>
 <p>N=2 的 NStepSCAN，当前队列和新增需求队列</p>
-<h2 id=文件管理>文件管理</h2>
-<p>第七章，前三节重要</p>
+<h2 id=第七章-文件管理>第七章 文件管理</h2>
+<p>前三节重要</p>
 <h3 id=文件和文件系统>文件和文件系统</h3>
 <p>文件系统：操作系统中与管理文件有关的软件和数据。</p>
 <h4 id=数据的组成部分数据项记录文件>数据的组成部分：数据项、记录、文件</h4>
@@ -1630,7 +1640,7 @@ $$
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-03</span>
+<span>更新于 2022-02-28</span>
 </div>
 <div class=post-info-license></div>
 </div>
