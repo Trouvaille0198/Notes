@@ -6,7 +6,7 @@
 
 叶子节点是指没有子节点的节点。
 
-<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220223205317253.png" alt="image-20220223205317253" style="zoom: 80%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220223205317253.png" alt="image-20220223205317253" style="zoom: 50%;" />
 
 ## DFS
 
