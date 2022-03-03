@@ -1,0 +1,585 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title>Go runtime/pprof库 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go runtime/pprof库">
+<meta property="og:description" content="runtime/pprof benchmark(基准测试) 可以度量某个函数或方法的性能，也就是说，如果我们知道性能的瓶颈点在哪里，benchmark 是一个非常好的方式">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/pprof/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-03-03T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Go runtime/pprof库">
+<meta name=twitter:description content="runtime/pprof benchmark(基准测试) 可以度量某个函数或方法的性能，也就是说，如果我们知道性能的瓶颈点在哪里，benchmark 是一个非常好的方式">
+<meta name=application-name content="伤心肠粉的酱油碟子">
+<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/pprof/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go runtime/pprof库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/pprof\/"},"genre":"posts","keywords":"Go 库","wordcount":2866,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/pprof\/","datePublished":"2022-03-03T00:00:00+00:00","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
+</div><div class=menu>
+<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div></div></div></header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
+</div><div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go runtime/pprof库</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-03-03>2022-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2866 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#性能分析类型>性能分析类型</a>
+<ul>
+<li><a href=#cpu-性能分析>CPU 性能分析</a></li><li><a href=#内存性能分析>内存性能分析</a></li><li><a href=#阻塞性能分析>阻塞性能分析</a></li><li><a href=#锁性能分析>锁性能分析</a></li></ul></li><li><a href=#cpu-性能分析-1>CPU 性能分析</a>
+<ul>
+<li><a href=#生成-profile>生成 profile</a></li><li><a href=#分析数据>分析数据</a></li></ul></li><li><a href=#内存性能分析-1>内存性能分析</a>
+<ul>
+<li><a href=#生成-profile-1>生成 profile</a></li><li><a href=#分析数据-1>分析数据</a></li></ul></li><li><a href=#benchmark-生成-profile>benchmark 生成 profile</a></li></ul></nav></div></div><div class=content id=content><h1 id=runtimepprof>runtime/pprof</h1><p>benchmark(基准测试) 可以度量某个函数或方法的性能，也就是说，如果我们知道性能的瓶颈点在哪里，benchmark 是一个非常好的方式。但是面对一个未知的程序，如何去分析这个程序的性能，并找到瓶颈点呢？</p><p><a href=https://github.com/google/pprof target=_blank rel="noopener noreffer">pprof</a> 就是用来解决这个问题的。pprof 包含两部分：</p><ul>
+<li>编译到程序中的 <code>runtime/pprof</code> 包</li><li>性能剖析工具 <code>go tool pprof</code></li></ul><h2 id=性能分析类型>性能分析类型</h2><h3 id=cpu-性能分析>CPU 性能分析</h3><p>CPU 性能分析 (CPU profiling) 是最常见的性能分析类型。</p><p>启动 CPU 分析时，运行时 (runtime) 将每隔 10ms 中断一次，<strong>记录此时正在运行的协程 (goroutines) 的堆栈信息。</strong></p><p>程序运行结束后，可以分析记录的数据找到最热代码路径 (hottest code paths)。</p><blockquote>
+<p>Compiler hot paths are code execution paths in the compiler in which most of the execution time is spent, and which are potentially executed very often.
+– <a href=https://english.stackexchange.com/questions/402436/whats-the-meaning-of-hot-codepath-or-hot-code-path target=_blank rel="noopener noreffer">What’s the meaning of “hot codepath”</a></p></blockquote><p>一个函数在性能分析数据中出现的次数越多，说明执行该函数的代码路径 (code path) 花费的时间占总运行时间的比重越大。</p><h3 id=内存性能分析>内存性能分析</h3><p>内存性能分析 (Memory profiling) <strong>记录堆内存分配时的堆栈信息</strong>，忽略栈内存分配信息。</p><p>内存性能分析启用时，默认每 1000 次采样 1 次，这个比例是可以调整的。因为内存性能分析是基于采样的，因此基于内存分析数据来判断程序所有的内存使用情况是很困难的。</p><h3 id=阻塞性能分析>阻塞性能分析</h3><p>阻塞性能分析 (block profiling) 是 Go 特有的。</p><p>阻塞性能分析用来<strong>记录一个协程等待一个共享资源花费的时间</strong>。在判断程序的并发瓶颈时会很有用。阻塞的场景包括：</p><ul>
+<li>在没有缓冲区的信道上发送或接收数据。</li><li>从空的信道上接收数据，或发送数据到满的信道上。</li><li>尝试获得一个已经被其他协程锁住的排它锁。</li></ul><p>一般情况下，当所有的 CPU 和内存瓶颈解决后，才会考虑这一类分析。</p><h3 id=锁性能分析>锁性能分析</h3><p>锁性能分析 (mutex profiling) 与阻塞分析类似，但专注于因为锁竞争导致的等待或延时。</p><h2 id=cpu-性能分析-1>CPU 性能分析</h2><blockquote>
+<p>记录性能数据会对程序的性能产生影响，建议一次只记录一类数据。</p></blockquote><h3 id=生成-profile>生成 profile</h3><p>Go 的运行时性能分析接口都位于 <code>runtime/pprof</code> 包中。只需要调用 <code>runtime/pprof</code> 库即可得到我们想要的数据。</p><p>假设我们实现了这么一个程序，随机生成了 5 组数据，并且使用冒泡排序法排序。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// main.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;math/rand&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;time&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>generate</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>nums</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Int</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>nums</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>bubbleSort</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>nums</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>j</span> <span class=o>:=</span> <span class=mi>1</span><span class=p>;</span> <span class=nx>j</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span><span class=o>-</span><span class=nx>i</span><span class=p>;</span> <span class=nx>j</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span> <span class=p>&lt;</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>j</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>nums</span><span class=p>[</span><span class=nx>j</span><span class=p>],</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>j</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=p>=</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>j</span><span class=o>-</span><span class=mi>1</span><span class=p>],</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>n</span> <span class=o>:=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>5</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>nums</span> <span class=o>:=</span> <span class=nf>generate</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nf>bubbleSort</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>n</span> <span class=o>*=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果我们想度量这个应用程序的 CPU 性能数据，只需要在 main 函数中添加 2 行代码即可：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;math/rand&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;os&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;runtime/pprof&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;time&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>pprof</span><span class=p>.</span><span class=nf>StartCPUProfile</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>pprof</span><span class=p>.</span><span class=nf>StopCPUProfile</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>n</span> <span class=o>:=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>5</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>nums</span> <span class=o>:=</span> <span class=nf>generate</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nf>bubbleSort</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>n</span> <span class=o>*=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>为了简单，直接将数据输出到标准输出 <code>os.Stdout</code>。运行该程序，将输出定向到文件 <code>cpu.pprof</code> 中。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ go run main.go &gt; cpu.pprof
+</span></span></code></pre></td></tr></table></div></div><p>一般来说，不建议将结果直接输出到标准输出，因为如果程序本身有输出，则会相互干扰，直接记录到一个文件中是最好的方式。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>f</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>OpenFile</span><span class=p>(</span><span class=s>&#34;cpu.pprof&#34;</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nx>O_CREATE</span><span class=p>|</span><span class=nx>os</span><span class=p>.</span><span class=nx>O_RDWR</span><span class=p>,</span> <span class=mo>0644</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>f</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>pprof</span><span class=p>.</span><span class=nf>StartCPUProfile</span><span class=p>(</span><span class=nx>f</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>pprof</span><span class=p>.</span><span class=nf>StopCPUProfile</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>n</span> <span class=o>:=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>5</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>nums</span> <span class=o>:=</span> <span class=nf>generate</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nf>bubbleSort</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>n</span> <span class=o>*=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这样只需运行 <code>go run main.go</code> 即可。</p><h3 id=分析数据>分析数据</h3><p>接下来，可以用 <code>go tool pprof</code> 分析这份数据</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ go tool pprof -http=:9999 cpu.pprof
+</span></span></code></pre></td></tr></table></div></div><p>如果提示 Graphviz 没有安装，则通过 <code>brew install graphviz</code>(MAC) 或 <code>apt install graphviz</code> (Ubuntu) 即可。</p><p>访问 <code>localhost:9999</code>，可以看到这样的页面：</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bubble-sort-pprof.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bubble-sort-pprof.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bubble-sort-pprof.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bubble-sort-pprof.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bubble-sort-pprof.jpg title="bubble sort pprof"></p><p>除了在网页中查看分析数据外，我们也可以在命令行中使用交互模式查看。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>tool</span> <span class=nx>pprof</span> <span class=nx>cpu</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span><span class=line><span class=cl><span class=nx>File</span><span class=p>:</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl><span class=nx>Type</span><span class=p>:</span> <span class=nx>cpu</span>
+</span></span><span class=line><span class=cl><span class=nx>Time</span><span class=p>:</span> <span class=nx>Nov</span> <span class=mi>19</span><span class=p>,</span> <span class=mi>2020</span> <span class=nx>at</span> <span class=mi>1</span><span class=p>:</span><span class=mi>43</span><span class=nf>am</span> <span class=p>(</span><span class=nx>CST</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>Duration</span><span class=p>:</span> <span class=mf>16.42</span><span class=nx>s</span><span class=p>,</span> <span class=nx>Total</span> <span class=nx>samples</span> <span class=p>=</span> <span class=mf>14.26</span><span class=nf>s</span> <span class=p>(</span><span class=mf>86.83</span><span class=o>%</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>Entering</span> <span class=nx>interactive</span> <span class=nf>mode</span> <span class=p>(</span><span class=kd>type</span> <span class=s>&#34;help&#34;</span> <span class=k>for</span> <span class=nx>commands</span><span class=p>,</span> <span class=s>&#34;o&#34;</span> <span class=k>for</span> <span class=nx>options</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nx>pprof</span><span class=p>)</span> <span class=nx>top</span>
+</span></span><span class=line><span class=cl><span class=nx>Showing</span> <span class=nx>nodes</span> <span class=nx>accounting</span> <span class=k>for</span> <span class=mf>14.14</span><span class=nx>s</span><span class=p>,</span> <span class=mf>99.16</span><span class=o>%</span> <span class=nx>of</span> <span class=mf>14.26</span><span class=nx>s</span> <span class=nx>total</span>
+</span></span><span class=line><span class=cl><span class=nx>Dropped</span> <span class=mi>34</span> <span class=nf>nodes</span> <span class=p>(</span><span class=nx>cum</span> <span class=o>&lt;=</span> <span class=mf>0.07</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=nx>flat</span>  <span class=nx>flat</span><span class=o>%</span>   <span class=nx>sum</span><span class=o>%</span>        <span class=nx>cum</span>   <span class=nx>cum</span><span class=o>%</span>
+</span></span><span class=line><span class=cl>    <span class=mf>14.14</span><span class=nx>s</span> <span class=mf>99.16</span><span class=o>%</span> <span class=mf>99.16</span><span class=o>%</span>     <span class=mf>14.17</span><span class=nx>s</span> <span class=mf>99.37</span><span class=o>%</span>  <span class=nx>main</span><span class=p>.</span><span class=nx>bubbleSort</span>
+</span></span><span class=line><span class=cl>         <span class=mi>0</span>     <span class=mi>0</span><span class=o>%</span> <span class=mf>99.16</span><span class=o>%</span>     <span class=mf>14.17</span><span class=nx>s</span> <span class=mf>99.37</span><span class=o>%</span>  <span class=nx>main</span><span class=p>.</span><span class=nx>main</span>
+</span></span><span class=line><span class=cl>         <span class=mi>0</span>     <span class=mi>0</span><span class=o>%</span> <span class=mf>99.16</span><span class=o>%</span>     <span class=mf>14.17</span><span class=nx>s</span> <span class=mf>99.37</span><span class=o>%</span>  <span class=nx>runtime</span><span class=p>.</span><span class=nx>main</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以看到 <code>main.bubbleSort</code> 是消耗 CPU 最多的函数。</p><p>还可以按照 <code>cum</code> (累计消耗)排序：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>(pprof) top --cum
+</span></span><span class=line><span class=cl>Showing nodes accounting for 14.14s, 99.16% of 14.26s total
+</span></span><span class=line><span class=cl>Dropped 34 nodes (cum &lt;= 0.07s)
+</span></span><span class=line><span class=cl>      flat  flat%   sum%        cum   cum%
+</span></span><span class=line><span class=cl>    14.14s 99.16% 99.16%     14.17s 99.37%  main.bubbleSort
+</span></span><span class=line><span class=cl>         0     0% 99.16%     14.17s 99.37%  main.main
+</span></span><span class=line><span class=cl>         0     0% 99.16%     14.17s 99.37%  runtime.main
+</span></span></code></pre></td></tr></table></div></div><p><code>help</code> 可以查看所有支持的命令和选项：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>(</span>pprof<span class=o>)</span> <span class=nb>help</span>
+</span></span><span class=line><span class=cl>  Commands:
+</span></span><span class=line><span class=cl>    callgrind        Outputs a graph in callgrind format
+</span></span><span class=line><span class=cl>    comments         Output all profile comments
+</span></span><span class=line><span class=cl>    disasm           Output assembly listings annotated with samples
+</span></span><span class=line><span class=cl>    dot              Outputs a graph in DOT format
+</span></span><span class=line><span class=cl>    eog              Visualize graph through eog
+</span></span><span class=line><span class=cl>    evince           Visualize graph through evince
+</span></span><span class=line><span class=cl>    gif              Outputs a graph image in GIF format
+</span></span><span class=line><span class=cl>    gv               Visualize graph through gv
+</span></span><span class=line><span class=cl>	......
+</span></span></code></pre></td></tr></table></div></div><h2 id=内存性能分析-1>内存性能分析</h2><h3 id=生成-profile-1>生成 profile</h3><p>假设我们实现了这么一个程序，生成长度为 N 的随机字符串，拼接在一起。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/pkg/profile&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;math/rand&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>const</span> <span class=nx>letterBytes</span> <span class=p>=</span> <span class=s>&#34;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>randomString</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>b</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>b</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>b</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>letterBytes</span><span class=p>[</span><span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nx>letterBytes</span><span class=p>))]</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nb>string</span><span class=p>(</span><span class=nx>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>concat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>s</span> <span class=o>+=</span> <span class=nf>randomString</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>s</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>profile</span><span class=p>.</span><span class=nf>Start</span><span class=p>(</span><span class=nx>profile</span><span class=p>.</span><span class=nx>MemProfile</span><span class=p>,</span> <span class=nx>profile</span><span class=p>.</span><span class=nf>MemProfileRate</span><span class=p>(</span><span class=mi>1</span><span class=p>)).</span><span class=nf>Stop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nf>concat</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>接下来，我们使用一个易用性更强的库 <code>pkg/profile</code> 来采集性能数据，<code>pkg/profile</code> 封装了 <code>runtime/pprof</code> 的接口，使用起来更简单。</p><p>比如我们想度量 <code>concat()</code> 的 CPU 性能数据，只需要一行代码即可生成 profile 文件。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/pkg/profile&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>profile</span><span class=p>.</span><span class=nf>Start</span><span class=p>().</span><span class=nf>Stop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nf>concat</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行 <code>go run main.go</code>：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>run</span> <span class=nx>main</span><span class=p>.</span><span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=mi>2020</span><span class=o>/</span><span class=mi>11</span><span class=o>/</span><span class=mi>22</span> <span class=mi>18</span><span class=p>:</span><span class=mi>38</span><span class=p>:</span><span class=mi>29</span> <span class=nx>profile</span><span class=p>:</span> <span class=nx>cpu</span> <span class=nx>profiling</span> <span class=nx>enabled</span><span class=p>,</span> <span class=o>/</span><span class=nx>tmp</span><span class=o>/</span><span class=nx>profile068616584</span><span class=o>/</span><span class=nx>cpu</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span><span class=line><span class=cl><span class=mi>2020</span><span class=o>/</span><span class=mi>11</span><span class=o>/</span><span class=mi>22</span> <span class=mi>18</span><span class=p>:</span><span class=mi>39</span><span class=p>:</span><span class=mi>12</span> <span class=nx>profile</span><span class=p>:</span> <span class=nx>cpu</span> <span class=nx>profiling</span> <span class=nx>disabled</span><span class=p>,</span> <span class=o>/</span><span class=nx>tmp</span><span class=o>/</span><span class=nx>profile068616584</span><span class=o>/</span><span class=nx>cpu</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span></code></pre></td></tr></table></div></div><p>CPU profile 文件已经在 tmp 目录生成，得到 profile 文件后，就可以像之前一样，用 <code>go tool pprof</code> 命令，在浏览器或命令行进行分析了。</p><p>接下来将使用类似的方式，进行采集内存数据，同样地，只需简单地修改 main 函数即可。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>func main() {
+</span></span><span class=line><span class=cl>	defer profile.Start(profile.MemProfile, profile.MemProfileRate(1)).Stop()
+</span></span><span class=line><span class=cl>	concat(100)
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>运行 <code>go run main.go</code>:</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>run</span> <span class=nx>main</span><span class=p>.</span><span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=mi>2020</span><span class=o>/</span><span class=mi>11</span><span class=o>/</span><span class=mi>22</span> <span class=mi>18</span><span class=p>:</span><span class=mi>59</span><span class=p>:</span><span class=mo>04</span> <span class=nx>profile</span><span class=p>:</span> <span class=nx>memory</span> <span class=nx>profiling</span> <span class=nf>enabled</span> <span class=p>(</span><span class=nx>rate</span> <span class=mi>1</span><span class=p>),</span> <span class=o>/</span><span class=nx>tmp</span><span class=o>/</span><span class=nx>profile215959616</span><span class=o>/</span><span class=nx>mem</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span><span class=line><span class=cl><span class=mi>2020</span><span class=o>/</span><span class=mi>11</span><span class=o>/</span><span class=mi>22</span> <span class=mi>18</span><span class=p>:</span><span class=mi>59</span><span class=p>:</span><span class=mo>04</span> <span class=nx>profile</span><span class=p>:</span> <span class=nx>memory</span> <span class=nx>profiling</span> <span class=nx>disabled</span><span class=p>,</span> <span class=o>/</span><span class=nx>tmp</span><span class=o>/</span><span class=nx>profile215959616</span><span class=o>/</span><span class=nx>mem</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=分析数据-1>分析数据</h3><p>接下来，我们在浏览器中分析内存性能数据：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>go</span> <span class=nx>tool</span> <span class=nx>pprof</span> <span class=o>-</span><span class=nx>http</span><span class=p>=:</span><span class=mi>9999</span> <span class=o>/</span><span class=nx>tmp</span><span class=o>/</span><span class=nx>profile215959616</span><span class=o>/</span><span class=nx>mem</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/concat-mem-pprof.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/concat-mem-pprof.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/concat-mem-pprof.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/concat-mem-pprof.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/concat-mem-pprof.jpg title="concat memory pprof"></p><p>从这张图中，我们可以看到 <code>concat</code> 消耗了 524k 内存，<code>randomString</code> 仅消耗了 22k 内存。</p><p>理论上，<code>concat</code> 函数仅仅是将 <code>randomString</code> 生成的字符串拼接起来，消耗的内存应该和 <code>randomString</code> 一致，但怎么会产生 20 倍的差异呢？这和 Go 语言字符串内存分配的方式有关系。</p><p>字符串是不可变的，因为将两个字符串拼接时，相当于是产生新的字符串，如果当前的空间不足以容纳新的字符串，则会申请更大的空间，将新字符串完全拷贝过去，这消耗了 2 倍的内存空间。在这 100 次拼接的过程中，会产生多次字符串拷贝，从而消耗大量的内存。</p><p>那有什么好的方式呢？使用 <code>strings.Builder</code> 替换 <code>+</code> 进行字符串拼接，将有效地降低内存消耗。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>concat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>s</span> <span class=nx>strings</span><span class=p>.</span><span class=nx>Builder</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>s</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nf>randomString</span><span class=p>(</span><span class=nx>n</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>s</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>接下来，重新运行 <code>go run main.go</code>：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>run</span> <span class=nx>main</span><span class=p>.</span><span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=mi>2020</span><span class=o>/</span><span class=mi>11</span><span class=o>/</span><span class=mi>22</span> <span class=mi>19</span><span class=p>:</span><span class=mi>17</span><span class=p>:</span><span class=mi>55</span> <span class=nx>profile</span><span class=p>:</span> <span class=nx>memory</span> <span class=nx>profiling</span> <span class=nf>enabled</span> <span class=p>(</span><span class=nx>rate</span> <span class=mi>1</span><span class=p>),</span> <span class=o>/</span><span class=nx>tmp</span><span class=o>/</span><span class=nx>profile061547314</span><span class=o>/</span><span class=nx>mem</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span><span class=line><span class=cl><span class=mi>2020</span><span class=o>/</span><span class=mi>11</span><span class=o>/</span><span class=mi>22</span> <span class=mi>19</span><span class=p>:</span><span class=mi>17</span><span class=p>:</span><span class=mi>55</span> <span class=nx>profile</span><span class=p>:</span> <span class=nx>memory</span> <span class=nx>profiling</span> <span class=nx>disabled</span><span class=p>,</span> <span class=o>/</span><span class=nx>tmp</span><span class=o>/</span><span class=nx>profile061547314</span><span class=o>/</span><span class=nx>mem</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用交互模式，查看内存消耗情况：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>tool</span> <span class=nx>pprof</span> <span class=o>/</span><span class=nx>tmp</span><span class=o>/</span><span class=nx>profile061547314</span><span class=o>/</span><span class=nx>mem</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span><span class=line><span class=cl><span class=nx>File</span><span class=p>:</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl><span class=nx>Type</span><span class=p>:</span> <span class=nx>inuse_space</span>
+</span></span><span class=line><span class=cl><span class=nx>Time</span><span class=p>:</span> <span class=nx>Nov</span> <span class=mi>22</span><span class=p>,</span> <span class=mi>2020</span> <span class=nx>at</span> <span class=mi>7</span><span class=p>:</span><span class=mi>17</span><span class=nf>pm</span> <span class=p>(</span><span class=nx>CST</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>Entering</span> <span class=nx>interactive</span> <span class=nf>mode</span> <span class=p>(</span><span class=kd>type</span> <span class=s>&#34;help&#34;</span> <span class=k>for</span> <span class=nx>commands</span><span class=p>,</span> <span class=s>&#34;o&#34;</span> <span class=k>for</span> <span class=nx>options</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=nx>pprof</span><span class=p>)</span> <span class=nx>top</span> <span class=o>--</span><span class=nx>cum</span>
+</span></span><span class=line><span class=cl><span class=nx>Showing</span> <span class=nx>nodes</span> <span class=nx>accounting</span> <span class=k>for</span> <span class=mf>71.22</span><span class=nx>kB</span><span class=p>,</span> <span class=mf>89.01</span><span class=o>%</span> <span class=nx>of</span> <span class=mf>80.01</span><span class=nx>kB</span> <span class=nx>total</span>
+</span></span><span class=line><span class=cl><span class=nx>Dropped</span> <span class=mi>25</span> <span class=nf>nodes</span> <span class=p>(</span><span class=nx>cum</span> <span class=o>&lt;=</span> <span class=mf>0.40</span><span class=nx>kB</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>Showing</span> <span class=nx>top</span> <span class=mi>10</span> <span class=nx>nodes</span> <span class=nx>out</span> <span class=nx>of</span> <span class=mi>50</span>
+</span></span><span class=line><span class=cl>      <span class=nx>flat</span>  <span class=nx>flat</span><span class=o>%</span>   <span class=nx>sum</span><span class=o>%</span>        <span class=nx>cum</span>   <span class=nx>cum</span><span class=o>%</span>
+</span></span><span class=line><span class=cl>         <span class=mi>0</span>     <span class=mi>0</span><span class=o>%</span>     <span class=mi>0</span><span class=o>%</span>    <span class=mf>71.88</span><span class=nx>kB</span> <span class=mf>89.84</span><span class=o>%</span>  <span class=nx>main</span><span class=p>.</span><span class=nx>main</span>
+</span></span><span class=line><span class=cl>         <span class=mi>0</span>     <span class=mi>0</span><span class=o>%</span>     <span class=mi>0</span><span class=o>%</span>    <span class=mf>71.88</span><span class=nx>kB</span> <span class=mf>89.84</span><span class=o>%</span>  <span class=nx>runtime</span><span class=p>.</span><span class=nx>main</span>
+</span></span><span class=line><span class=cl>         <span class=mi>0</span>     <span class=mi>0</span><span class=o>%</span>     <span class=mi>0</span><span class=o>%</span>    <span class=mf>67.64</span><span class=nx>kB</span> <span class=mf>84.54</span><span class=o>%</span>  <span class=nx>main</span><span class=p>.</span><span class=nx>concat</span>
+</span></span><span class=line><span class=cl>   <span class=mf>45.77</span><span class=nx>kB</span> <span class=mf>57.20</span><span class=o>%</span> <span class=mf>57.20</span><span class=o>%</span>    <span class=mf>45.77</span><span class=nx>kB</span> <span class=mf>57.20</span><span class=o>%</span>  <span class=nx>strings</span><span class=p>.(</span><span class=o>*</span><span class=nx>Builder</span><span class=p>).</span><span class=nx>WriteString</span>
+</span></span><span class=line><span class=cl>   <span class=mf>21.88</span><span class=nx>kB</span> <span class=mf>27.34</span><span class=o>%</span> <span class=mf>84.54</span><span class=o>%</span>    <span class=mf>21.88</span><span class=nx>kB</span> <span class=mf>27.34</span><span class=o>%</span>  <span class=nx>main</span><span class=p>.</span><span class=nx>randomString</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，使用 <code>strings.Builder</code> 后，<code>concat</code> 内存消耗降为了原来的 1/8 。</p><h2 id=benchmark-生成-profile>benchmark 生成 profile</h2><p>除了直接在命令行中查看测试的结果外，也可以生成 profile 文件，使用 <code>go tool pprof</code> 分析。</p><p><code>testing</code> 支持生成 CPU、memory 和 block 的 profile 文件。</p><ul>
+<li><code>-cpuprofile=$FILE</code></li><li><code>-memprofile=$FILE</code>, <code>-memprofilerate=N</code> 调整记录速率为原来的 1/N。</li><li><code>-blockprofile=$FILE</code></li></ul><p>在介绍 benchmark 如何使用，我们举了下面这个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fib</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>n</span> <span class=o>==</span> <span class=mi>0</span> <span class=o>||</span> <span class=nx>n</span> <span class=o>==</span> <span class=mi>1</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nx>n</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nf>fib</span><span class=p>(</span><span class=nx>n</span><span class=o>-</span><span class=mi>2</span><span class=p>)</span> <span class=o>+</span> <span class=nf>fib</span><span class=p>(</span><span class=nx>n</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkFib</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>n</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>n</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>fib</span><span class=p>(</span><span class=mi>30</span><span class=p>)</span> <span class=c1>// run fib(30) b.N times
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>只需要在 <code>go test</code> 添加 <code>-cpuprofile</code> 参数即可生成 <code>BenchmarkFib</code> 对应的 CPU profile 文件：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>bench</span><span class=p>=</span><span class=s>&#34;Fib$&#34;</span> <span class=o>-</span><span class=nx>cpuprofile</span><span class=p>=</span><span class=nx>cpu</span><span class=p>.</span><span class=nx>pprof</span> <span class=p>.</span>
+</span></span><span class=line><span class=cl><span class=nx>goos</span><span class=p>:</span> <span class=nx>linux</span>
+</span></span><span class=line><span class=cl><span class=nx>goarch</span><span class=p>:</span> <span class=nx>amd64</span>
+</span></span><span class=line><span class=cl><span class=nx>pkg</span><span class=p>:</span> <span class=nx>example</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkFib</span><span class=o>-</span><span class=mi>8</span>               <span class=mi>196</span>           <span class=mi>6071636</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>2.046</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><p>用例执行完毕后，当前目录多出了一个 <code>cpu.pprof</code> 文件，接下来就可以使用 <code>go tool pprof</code> 命令进行分析了。</p><p>使用 <code>-text</code> 选项可以直接将结果以文本形式打印出来。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>tool</span> <span class=nx>pprof</span> <span class=o>-</span><span class=nx>text</span> <span class=nx>cpu</span><span class=p>.</span><span class=nx>pprof</span>
+</span></span><span class=line><span class=cl><span class=nx>File</span><span class=p>:</span> <span class=nx>example</span><span class=p>.</span><span class=nx>test</span>
+</span></span><span class=line><span class=cl><span class=nx>Type</span><span class=p>:</span> <span class=nx>cpu</span>
+</span></span><span class=line><span class=cl><span class=nx>Time</span><span class=p>:</span> <span class=nx>Nov</span> <span class=mi>22</span><span class=p>,</span> <span class=mi>2020</span> <span class=nx>at</span> <span class=mi>7</span><span class=p>:</span><span class=mi>52</span><span class=nf>pm</span> <span class=p>(</span><span class=nx>CST</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>Duration</span><span class=p>:</span> <span class=mf>2.01</span><span class=nx>s</span><span class=p>,</span> <span class=nx>Total</span> <span class=nx>samples</span> <span class=p>=</span> <span class=mf>1.77</span><span class=nf>s</span> <span class=p>(</span><span class=mf>87.96</span><span class=o>%</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>Showing</span> <span class=nx>nodes</span> <span class=nx>accounting</span> <span class=k>for</span> <span class=mf>1.77</span><span class=nx>s</span><span class=p>,</span> <span class=mi>100</span><span class=o>%</span> <span class=nx>of</span> <span class=mf>1.77</span><span class=nx>s</span> <span class=nx>total</span>
+</span></span><span class=line><span class=cl>      <span class=nx>flat</span>  <span class=nx>flat</span><span class=o>%</span>   <span class=nx>sum</span><span class=o>%</span>        <span class=nx>cum</span>   <span class=nx>cum</span><span class=o>%</span>
+</span></span><span class=line><span class=cl>     <span class=mf>1.76</span><span class=nx>s</span> <span class=mf>99.44</span><span class=o>%</span> <span class=mf>99.44</span><span class=o>%</span>      <span class=mf>1.76</span><span class=nx>s</span> <span class=mf>99.44</span><span class=o>%</span>  <span class=nx>example</span><span class=p>.</span><span class=nx>fib</span>
+</span></span><span class=line><span class=cl>     <span class=mf>0.01</span><span class=nx>s</span>  <span class=mf>0.56</span><span class=o>%</span>   <span class=mi>100</span><span class=o>%</span>      <span class=mf>0.01</span><span class=nx>s</span>  <span class=mf>0.56</span><span class=o>%</span>  <span class=nx>runtime</span><span class=p>.</span><span class=nx>futex</span>
+</span></span><span class=line><span class=cl>         <span class=mi>0</span>     <span class=mi>0</span><span class=o>%</span>   <span class=mi>100</span><span class=o>%</span>      <span class=mf>1.76</span><span class=nx>s</span> <span class=mf>99.44</span><span class=o>%</span>  <span class=nx>example</span><span class=p>.</span><span class=nx>BenchmarkFib</span>
+</span></span><span class=line><span class=cl>         <span class=mi>0</span>     <span class=mi>0</span><span class=o>%</span>   <span class=mi>100</span><span class=o>%</span>      <span class=mf>0.01</span><span class=nx>s</span>  <span class=mf>0.56</span><span class=o>%</span>  <span class=nx>runtime</span><span class=p>.</span><span class=nx>findrunnable</span>
+</span></span></code></pre></td></tr></table></div></div><p>pprof 支持多种输出格式（图片、文本、Web等），直接在命令行中运行 <code>go tool pprof</code> 即可看到所有支持的选项：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ go tool pprof
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Details:
+</span></span><span class=line><span class=cl>  Output formats (select at most one):
+</span></span><span class=line><span class=cl>    -dot             Outputs a graph in DOT format
+</span></span><span class=line><span class=cl>    -png             Outputs a graph image in PNG format
+</span></span><span class=line><span class=cl>	-text            Outputs top entries in text form
+</span></span><span class=line><span class=cl>    -tree            Outputs a text rendering of call graph
+</span></span><span class=line><span class=cl>    -web             Visualize graph through web browser
+</span></span><span class=line><span class=cl>	...
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
+<span></span>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a></section><section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
+</section></div><div class=post-nav><a href=/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/ class=prev rel=prev title="Go 进阶"><i class="fas fa-angle-left fa-fw"></i>Go 进阶</a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

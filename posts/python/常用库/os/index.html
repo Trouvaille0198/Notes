@@ -8,21 +8,19 @@
 <meta property="og:description" content="简介 os模块提供了多数操作系统的功能接口函数。当os模块被导入后，它会自适应于不同的操作系统平台，根据不同的平台进行相应的操作，在pytho">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/os/"><meta property="article:section" content="posts">
-<meta property="article:modified_time" content="2022-02-28T12:23:28+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content>
 <meta name=twitter:description content="简介 os模块提供了多数操作系统的功能接口函数。当os模块被导入后，它会自适应于不同的操作系统平台，根据不同的平台进行相应的操作，在pytho">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/os/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pygtrans/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/os\/"},"genre":"posts","wordcount":920,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/os\/","dateModified":"2022-02-28T12:23:28+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/os/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pygtrans/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/os\/"},"genre":"posts","wordcount":920,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/os\/","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -37,20 +35,14 @@
 </span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a>
-</div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -62,94 +54,40 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 920 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 920 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#osgetcwd>os.getcwd()</a></li>
-<li><a href=#oslistdirpath>os.listdir(path)</a></li>
-<li><a href=#ospathabspathpath>os.path.abspath(path):</a></li>
-<li><a href=#ospathsplitpath>os.path.split(path)</a></li>
-<li><a href=#ospathjoinpath1path2>os.path.join(path1,path2,&mldr;)</a></li>
-<li><a href=#ospathdirnamepath>os.path.dirname(path)</a></li>
-<li><a href=#ospathbasenamepath>os.path.basename(path)</a></li>
-<li><a href=#ospathisfilepath>os.path.isfile(path)</a></li>
-<li><a href=#ospathisdirpath>os.path.isdir(path)</a></li>
-<li><a href=#ospathexistspath>os.path.exists(path)</a></li>
-</ul>
-<ul>
-<li><a href=#ospathgetsizepath>os.path.getsize(path)</a></li>
-<li><a href=#ospathgetmtimepath>os.path.getmtime(path)</a></li>
-<li><a href=#ospathgetatimepath>os.path.getatime(path)</a></li>
-<li><a href=#ospathgetctimepath>os.path.getctime(path)</a></li>
-<li><a href=#osstat>os.stat()</a></li>
-</ul>
-<ul>
-<li><a href=#oschdirpath>os.chdir(path)</a></li>
-<li><a href=#osmkdirpath>os.mkdir(path)</a></li>
-<li><a href=#osrmdirpath>os.rmdir(path)</a></li>
-<li><a href=#osremovepath>os.remove(path)</a></li>
-<li><a href=#osmakedirspath>os.makedirs(path)</a></li>
-<li><a href=#osremovedirspath>os.removedirs(path)</a></li>
-<li><a href=#osrenameoldname-newname>os.rename(oldname, newname)</a></li>
-<li><a href=#ossystemcmd>os.system(cmd)</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><h1 id=简介>简介</h1>
-<p>os模块提供了多数操作系统的功能接口函数。当os模块被导入后，它会自适应于不同的操作系统平台，根据不同的平台进行相应的操作，在python编程时，经常和文件、目录打交道，这时就离不了os模块</p>
-<div class=highlight><div class=chroma>
+<li><a href=#osgetcwd>os.getcwd()</a></li><li><a href=#oslistdirpath>os.listdir(path)</a></li><li><a href=#ospathabspathpath>os.path.abspath(path):</a></li><li><a href=#ospathsplitpath>os.path.split(path)</a></li><li><a href=#ospathjoinpath1path2>os.path.join(path1,path2,&mldr;)</a></li><li><a href=#ospathdirnamepath>os.path.dirname(path)</a></li><li><a href=#ospathbasenamepath>os.path.basename(path)</a></li><li><a href=#ospathisfilepath>os.path.isfile(path)</a></li><li><a href=#ospathisdirpath>os.path.isdir(path)</a></li><li><a href=#ospathexistspath>os.path.exists(path)</a></li></ul><ul>
+<li><a href=#ospathgetsizepath>os.path.getsize(path)</a></li><li><a href=#ospathgetmtimepath>os.path.getmtime(path)</a></li><li><a href=#ospathgetatimepath>os.path.getatime(path)</a></li><li><a href=#ospathgetctimepath>os.path.getctime(path)</a></li><li><a href=#osstat>os.stat()</a></li></ul><ul>
+<li><a href=#oschdirpath>os.chdir(path)</a></li><li><a href=#osmkdirpath>os.mkdir(path)</a></li><li><a href=#osrmdirpath>os.rmdir(path)</a></li><li><a href=#osremovepath>os.remove(path)</a></li><li><a href=#osmakedirspath>os.makedirs(path)</a></li><li><a href=#osremovedirspath>os.removedirs(path)</a></li><li><a href=#osrenameoldname-newname>os.rename(oldname, newname)</a></li><li><a href=#ossystemcmd>os.system(cmd)</a></li></ul></nav></div></div><div class=content id=content><h1 id=简介>简介</h1><p>os模块提供了多数操作系统的功能接口函数。当os模块被导入后，它会自适应于不同的操作系统平台，根据不同的平台进行相应的操作，在python编程时，经常和文件、目录打交道，这时就离不了os模块</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>os</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id=文件路径操作>文件路径操作</h1>
-<h2 id=osgetcwd>os.getcwd()</h2>
-<p>查看当前路径（get current dictory）</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>os</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=文件路径操作>文件路径操作</h1><h2 id=osgetcwd>os.getcwd()</h2><p>查看当前路径（get current dictory）</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>getcwd</span><span class=p>()</span>
-<span class=o>&lt;&lt;</span>
-	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>repo</span><span class=se>\\</span><span class=s1>PythonLearning</span><span class=se>\\</span><span class=s1>Jupyter</span><span class=se>\\</span><span class=s1>LearningTest&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=oslistdirpath>os.listdir(path)</h2>
-<p>列举 path 目录下所有文件，返回列表</p>
-<p>无参数时，默认为当前路径</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>getcwd</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>repo</span><span class=se>\\</span><span class=s1>PythonLearning</span><span class=se>\\</span><span class=s1>Jupyter</span><span class=se>\\</span><span class=s1>LearningTest&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=oslistdirpath>os.listdir(path)</h2><p>列举 path 目录下所有文件，返回列表</p><p>无参数时，默认为当前路径</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -159,37 +97,25 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>listdir</span><span class=p>(</span><span class=s2>&#34;..&#34;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=p>[</span><span class=s1>&#39;.ipynb_checkpoints&#39;</span><span class=p>,</span>
- 	<span class=s1>&#39;CrawlerTest.ipynb&#39;</span><span class=p>,</span>
- 	<span class=s1>&#39;MatplotlibTest.ipynb&#39;</span><span class=p>,</span>
- 	<span class=s1>&#39;NumpyTest.ipynb&#39;</span><span class=p>,</span>
- 	<span class=s1>&#39;osTest.ipynb&#39;</span><span class=p>,</span>
- 	<span class=s1>&#39;PandasTest.ipynb&#39;</span><span class=p>]</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathabspathpath>os.path.abspath(path):</h2>
-<p>返回 path 的绝对路径</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>listdir</span><span class=p>(</span><span class=s2>&#34;..&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>[</span><span class=s1>&#39;.ipynb_checkpoints&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl> 	<span class=s1>&#39;CrawlerTest.ipynb&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl> 	<span class=s1>&#39;MatplotlibTest.ipynb&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl> 	<span class=s1>&#39;NumpyTest.ipynb&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl> 	<span class=s1>&#39;osTest.ipynb&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl> 	<span class=s1>&#39;PandasTest.ipynb&#39;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathabspathpath>os.path.abspath(path):</h2><p>返回 path 的绝对路径</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>abspath</span><span class=p>(</span><span class=s1>&#39;..&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>repo</span><span class=se>\\</span><span class=s1>PythonLearning</span><span class=se>\\</span><span class=s1>Jupyter&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathsplitpath>os.path.split(path)</h2>
-<p>将路径分解为（文件夹,文件名），返回的是元组类型</p>
-<p>若路径字符串最后一个字符是\，则只有文件夹部分有值；若路径字符串中均无\，则只有文件名部分有值</p>
-<p>单纯地分析路径</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>abspath</span><span class=p>(</span><span class=s1>&#39;..&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>repo</span><span class=se>\\</span><span class=s1>PythonLearning</span><span class=se>\\</span><span class=s1>Jupyter&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathsplitpath>os.path.split(path)</h2><p>将路径分解为（文件夹,文件名），返回的是元组类型</p><p>若路径字符串最后一个字符是\，则只有文件夹部分有值；若路径字符串中均无\，则只有文件名部分有值</p><p>单纯地分析路径</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -200,23 +126,17 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>Hello.py&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span><span class=p>,</span> <span class=s1>&#39;Hello.py&#39;</span><span class=p>)</span>
-<span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;.&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=p>(</span><span class=s1>&#39;&#39;</span><span class=p>,</span> <span class=s1>&#39;.&#39;</span><span class=p>)</span>
-<span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathjoinpath1path2>os.path.join(path1,path2,&mldr;)</h2>
-<p>将 path 进行组合，返回组合后的路径</p>
-<p>若其中有绝对路径，则之前的 path 将被删除</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>Hello.py&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span><span class=p>,</span> <span class=s1>&#39;Hello.py&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;.&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>(</span><span class=s1>&#39;&#39;</span><span class=p>,</span> <span class=s1>&#39;.&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathjoinpath1path2>os.path.join(path1,path2,&mldr;)</h2><p>将 path 进行组合，返回组合后的路径</p><p>若其中有绝对路径，则之前的 path 将被删除</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -224,35 +144,23 @@
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest&#39;</span><span class=p>,</span> <span class=s1>&#39;ostest&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span>
-<span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>b&#39;</span><span class=p>,</span> <span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>a&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>a&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathdirnamepath>os.path.dirname(path)</h2>
-<p>返回 path 中的文件夹部分，结果不包含 &lsquo;\&rsquo;</p>
-<p>单纯地分析路径</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest&#39;</span><span class=p>,</span> <span class=s1>&#39;ostest&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>b&#39;</span><span class=p>,</span> <span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>a&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>a&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathdirnamepath>os.path.dirname(path)</h2><p>返回 path 中的文件夹部分，结果不包含 &lsquo;\&rsquo;</p><p>单纯地分析路径</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>dirname</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>hello.py&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathbasenamepath>os.path.basename(path)</h2>
-<p>返回 path 中的文件名</p>
-<p>单纯地分析路径</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>dirname</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>hello.py&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathbasenamepath>os.path.basename(path)</h2><p>返回 path 中的文件名</p><p>单纯地分析路径</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -260,19 +168,14 @@
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>basename</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>hello.py&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=s1>&#39;hello.py&#39;</span>
-<span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>basename</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=s1>&#39;&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathisfilepath>os.path.isfile(path)</h2>
-<p>判断 path 是否是一个存在的文件，返回布尔类型</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>basename</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>hello.py&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;hello.py&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>basename</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathisfilepath>os.path.isfile(path)</h2><p>判断 path 是否是一个存在的文件，返回布尔类型</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -282,21 +185,16 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isfile</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>Hello.py&#39;</span><span class=p>)</span> 
-<span class=c1>#尽管是格式正确的路径，凭空存在的话会返回False</span>
-<span class=o>&lt;&lt;</span>
-	<span class=kc>False</span>
-<span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isfile</span><span class=p>(</span><span class=s1>&#39;C:</span><span class=se>\\</span><span class=s1>Users</span><span class=se>\\</span><span class=s1>13759</span><span class=se>\\</span><span class=s1>shopName_2015.csv&#39;</span><span class=p>)</span>
-<span class=c1>#应输入存在于本计算机上的路径</span>
-<span class=o>&lt;&lt;</span>
-	<span class=kc>True</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathisdirpath>os.path.isdir(path)</h2>
-<p>判断 path 是否为一个存在的目录，返回布尔类型</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isfile</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest</span><span class=se>\\</span><span class=s1>Hello.py&#39;</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl><span class=c1>#尽管是格式正确的路径，凭空存在的话会返回False</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isfile</span><span class=p>(</span><span class=s1>&#39;C:</span><span class=se>\\</span><span class=s1>Users</span><span class=se>\\</span><span class=s1>13759</span><span class=se>\\</span><span class=s1>shopName_2015.csv&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#应输入存在于本计算机上的路径</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=kc>True</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathisdirpath>os.path.isdir(path)</h2><p>判断 path 是否为一个存在的目录，返回布尔类型</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -308,23 +206,18 @@
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isdir</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span><span class=p>)</span> 
-<span class=c1>#尽管是格式正确的路径，凭空存在的话会返回False</span>
-<span class=o>&lt;&lt;</span>
-	<span class=kc>False</span>
-<span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isdir</span><span class=p>(</span><span class=n>os</span><span class=o>.</span><span class=n>getcwd</span><span class=p>())</span>
-<span class=o>&lt;&lt;</span>
-	<span class=kc>True</span>
-<span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isdir</span><span class=p>(</span><span class=s1>&#39;.&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span> 
-	<span class=kc>True</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathexistspath>os.path.exists(path)</h2>
-<p>检验 path 是否存在，返回布尔类型</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isdir</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>pythontest</span><span class=se>\\</span><span class=s1>ostest&#39;</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl><span class=c1>#尽管是格式正确的路径，凭空存在的话会返回False</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isdir</span><span class=p>(</span><span class=n>os</span><span class=o>.</span><span class=n>getcwd</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>isdir</span><span class=p>(</span><span class=s1>&#39;.&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span> 
+</span></span><span class=line><span class=cl>	<span class=kc>True</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathexistspath>os.path.exists(path)</h2><p>检验 path 是否存在，返回布尔类型</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -332,147 +225,81 @@
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>exists</span><span class=p>(</span><span class=s1>&#39;.&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=kc>True</span>
-<span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>exists</span><span class=p>(</span><span class=s1>&#39;C:</span><span class=se>\\</span><span class=s1>Users</span><span class=se>\\</span><span class=s1>13759</span><span class=se>\\</span><span class=s1>shopName_2015.csv&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=kc>True</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id=查看文件信息>查看文件信息</h1>
-<h2 id=ospathgetsizepath>os.path.getsize(path)</h2>
-<p>查看文件大小 ，单位为字节 (Byte)</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>exists</span><span class=p>(</span><span class=s1>&#39;.&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>exists</span><span class=p>(</span><span class=s1>&#39;C:</span><span class=se>\\</span><span class=s1>Users</span><span class=se>\\</span><span class=s1>13759</span><span class=se>\\</span><span class=s1>shopName_2015.csv&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=kc>True</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=查看文件信息>查看文件信息</h1><h2 id=ospathgetsizepath>os.path.getsize(path)</h2><p>查看文件大小 ，单位为字节 (Byte)</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>getsize</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>repo</span><span class=se>\\</span><span class=s1>PythonLearning</span><span class=se>\\</span><span class=s1>Jupyter</span><span class=se>\\</span><span class=s1>LearningTest</span><span class=se>\\</span><span class=s1>NumpyTest.ipynb&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=mi>3499</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathgetmtimepath>os.path.getmtime(path)</h2>
-<p>查看文件或文件夹的最后修改时间（modify time），从新纪元到访问时的秒数</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>getsize</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>repo</span><span class=se>\\</span><span class=s1>PythonLearning</span><span class=se>\\</span><span class=s1>Jupyter</span><span class=se>\\</span><span class=s1>LearningTest</span><span class=se>\\</span><span class=s1>NumpyTest.ipynb&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=mi>3499</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathgetmtimepath>os.path.getmtime(path)</h2><p>查看文件或文件夹的最后修改时间（modify time），从新纪元到访问时的秒数</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>getmtime</span><span class=p>(</span><span class=s1>&#39;NumpyTest.ipynb&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=mf>1609932700.1095462</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathgetatimepath>os.path.getatime(path)</h2>
-<p>文件或文件夹的最后访问时间（access time），从新纪元到访问时的秒数</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>getmtime</span><span class=p>(</span><span class=s1>&#39;NumpyTest.ipynb&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=mf>1609932700.1095462</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathgetatimepath>os.path.getatime(path)</h2><p>文件或文件夹的最后访问时间（access time），从新纪元到访问时的秒数</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>getatime</span><span class=p>(</span><span class=s1>&#39;NumpyTest.ipynb&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=mf>1610524866.1898422</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=ospathgetctimepath>os.path.getctime(path)</h2>
-<p>文件或文件夹的创建时间（change time），从新纪元到访问时的秒数</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>getatime</span><span class=p>(</span><span class=s1>&#39;NumpyTest.ipynb&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=mf>1610524866.1898422</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ospathgetctimepath>os.path.getctime(path)</h2><p>文件或文件夹的创建时间（change time），从新纪元到访问时的秒数</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>getctime</span><span class=p>(</span><span class=s1>&#39;NumpyTest.ipynb&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=mf>1609920794.9881816</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=osstat>os.stat()</h2>
-<p>获取文件或目录信息</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>getctime</span><span class=p>(</span><span class=s1>&#39;NumpyTest.ipynb&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=mf>1609920794.9881816</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=osstat>os.stat()</h2><p>获取文件或目录信息</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>stat</span><span class=p>(</span><span class=s1>&#39;.&#39;</span><span class=p>)</span>
-<span class=o>&lt;&lt;</span>
-	<span class=n>os</span><span class=o>.</span><span class=n>stat_result</span><span class=p>(</span><span class=n>st_mode</span><span class=o>=</span><span class=mi>16895</span><span class=p>,</span> <span class=n>st_ino</span><span class=o>=</span><span class=mi>1688849860358640</span><span class=p>,</span> <span class=n>st_dev</span><span class=o>=</span><span class=mi>1957125357</span><span class=p>,</span> <span class=n>st_nlink</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>st_uid</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>st_gid</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>st_size</span><span class=o>=</span><span class=mi>4096</span><span class=p>,</span> <span class=n>st_atime</span><span class=o>=</span><span class=mi>1610524887</span><span class=p>,</span> <span class=n>st_mtime</span><span class=o>=</span><span class=mi>1609680144</span><span class=p>,</span> <span class=n>st_ctime</span><span class=o>=</span><span class=mi>1607355357</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id=文件操作>文件操作</h1>
-<h2 id=oschdirpath>os.chdir(path)</h2>
-<p>（change dir）转到指定 path，相当于cd</p>
-<h2 id=osmkdirpath>os.mkdir(path)</h2>
-<p>创建path指定的目录，可以写相对路径也可以写绝对路径</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>stat</span><span class=p>(</span><span class=s1>&#39;.&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
+</span></span><span class=line><span class=cl>	<span class=n>os</span><span class=o>.</span><span class=n>stat_result</span><span class=p>(</span><span class=n>st_mode</span><span class=o>=</span><span class=mi>16895</span><span class=p>,</span> <span class=n>st_ino</span><span class=o>=</span><span class=mi>1688849860358640</span><span class=p>,</span> <span class=n>st_dev</span><span class=o>=</span><span class=mi>1957125357</span><span class=p>,</span> <span class=n>st_nlink</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>st_uid</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>st_gid</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>st_size</span><span class=o>=</span><span class=mi>4096</span><span class=p>,</span> <span class=n>st_atime</span><span class=o>=</span><span class=mi>1610524887</span><span class=p>,</span> <span class=n>st_mtime</span><span class=o>=</span><span class=mi>1609680144</span><span class=p>,</span> <span class=n>st_ctime</span><span class=o>=</span><span class=mi>1607355357</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=文件操作>文件操作</h1><h2 id=oschdirpath>os.chdir(path)</h2><p>（change dir）转到指定 path，相当于cd</p><h2 id=osmkdirpath>os.mkdir(path)</h2><p>创建path指定的目录，可以写相对路径也可以写绝对路径</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>os</span><span class=o>.</span><span class=n>mkdir</span><span class=p>(</span><span class=s1>&#39;aaa&#39;</span><span class=p>)</span>
-<span class=n>os</span><span class=o>.</span><span class=n>mkdir</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>repo</span><span class=se>\\</span><span class=s1>PythonLearning</span><span class=se>\\</span><span class=s1>aaa&#39;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=osrmdirpath>os.rmdir(path)</h2>
-<p>删除path指定的目录，可以写相对路径也可以写绝对路径</p>
-<h2 id=osremovepath>os.remove(path)</h2>
-<p>删除path指定的文件</p>
-<h2 id=osmakedirspath>os.makedirs(path)</h2>
-<p>生成多层<strong>递归</strong>目录</p>
-<h2 id=osremovedirspath>os.removedirs(path)</h2>
-<p>递归删除空目录（危险！）</p>
-<h2 id=osrenameoldname-newname>os.rename(oldname, newname)</h2>
-<p>重命名文件或目录</p>
-<h2 id=ossystemcmd>os.system(cmd)</h2>
-<p>执行shell命令。返回值是脚本的退出状态码，0代表成功，1代表不成功</p>
-</div><div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>mkdir</span><span class=p>(</span><span class=s1>&#39;aaa&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>mkdir</span><span class=p>(</span><span class=s1>&#39;D:</span><span class=se>\\</span><span class=s1>repo</span><span class=se>\\</span><span class=s1>PythonLearning</span><span class=se>\\</span><span class=s1>aaa&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=osrmdirpath>os.rmdir(path)</h2><p>删除path指定的目录，可以写相对路径也可以写绝对路径</p><h2 id=osremovepath>os.remove(path)</h2><p>删除path指定的文件</p><h2 id=osmakedirspath>os.makedirs(path)</h2><p>生成多层<strong>递归</strong>目录</p><h2 id=osremovedirspath>os.removedirs(path)</h2><p>递归删除空目录（危险！）</p><h2 id=osrenameoldname-newname>os.rename(oldname, newname)</h2><p>重命名文件或目录</p><h2 id=ossystemcmd>os.system(cmd)</h2><p>执行shell命令。返回值是脚本的退出状态码，0代表成功，1代表不成功</p></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-28</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pygtrans/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+</section></div><div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pygtrans/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
-</html>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

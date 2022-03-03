@@ -8,21 +8,19 @@
 <meta property="og:description" content="概述 wordcloud 是优秀的词云展示第三方库，以词语为基本单位，通过图形可视化的方式，更加直观和艺术的展示文本 示例 1 2 3 4 5 6 7 8 9 10 11 12 13 14 from matplotlib import pyplot as plt">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/wordcloud/"><meta property="article:section" content="posts">
-<meta property="article:modified_time" content="2022-02-28T12:23:28+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content>
 <meta name=twitter:description content="概述 wordcloud 是优秀的词云展示第三方库，以词语为基本单位，通过图形可视化的方式，更加直观和艺术的展示文本 示例 1 2 3 4 5 6 7 8 9 10 11 12 13 14 from matplotlib import pyplot as plt">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/wordcloud/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/cv2/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/tkinter/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%8F%AF%E8%A7%86%E5%8C%96\/wordcloud\/"},"genre":"posts","wordcount":742,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%8F%AF%E8%A7%86%E5%8C%96\/wordcloud\/","dateModified":"2022-02-28T12:23:28+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/wordcloud/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/cv2/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/tkinter/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%8F%AF%E8%A7%86%E5%8C%96\/wordcloud\/"},"genre":"posts","wordcount":742,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%8F%AF%E8%A7%86%E5%8C%96\/wordcloud\/","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -37,20 +35,14 @@
 </span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a>
-</div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -62,48 +54,26 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 742 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 742 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
 <li><a href=#wordcloud>WordCloud</a>
 <ul>
-<li><a href=#参数>参数</a></li>
-<li><a href=#方法>方法</a></li>
-</ul>
-</li>
-</ul>
-</nav></div>
-</div><div class=content id=content><h1 id=概述>概述</h1>
-<p>wordcloud 是优秀的词云展示第三方库，以词语为基本单位，通过图形可视化的方式，更加直观和艺术的展示文本</p>
-<p>示例</p>
-<div class=highlight><div class=chroma>
+<li><a href=#参数>参数</a></li><li><a href=#方法>方法</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=概述>概述</h1><p>wordcloud 是优秀的词云展示第三方库，以词语为基本单位，通过图形可视化的方式，更加直观和艺术的展示文本</p><p>示例</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -119,26 +89,22 @@
 </span><span class=lnt>12
 </span><span class=lnt>13
 </span><span class=lnt>14
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>matplotlib</span> <span class=kn>import</span> <span class=n>pyplot</span> <span class=k>as</span> <span class=n>plt</span>
-<span class=kn>from</span> <span class=nn>wordcloud</span> <span class=kn>import</span> <span class=n>WordCloud</span>
- 
-<span class=n>string</span> <span class=o>=</span> <span class=s1>&#39;Importance of relative word frequencies for font-size. With relative_scaling=0, only word-ranks are considered. With relative_scaling=1, a word that is twice as frequent will have twice the size. If you want to consider the word frequencies and not only their rank, relative_scaling around .5 often looks good.&#39;</span>
-<span class=n>font</span> <span class=o>=</span> <span class=sa>r</span><span class=s1>&#39;C:\Windows\Fonts\FZSTK.TTF&#39;</span>
-<span class=n>wc</span> <span class=o>=</span> <span class=n>WordCloud</span><span class=p>(</span><span class=n>font_path</span><span class=o>=</span><span class=n>font</span><span class=p>,</span> <span class=c1>#如果是中文必须要添加这个，否则会显示成框框</span>
-               <span class=n>background_color</span><span class=o>=</span><span class=s1>&#39;white&#39;</span><span class=p>,</span>
-               <span class=n>width</span><span class=o>=</span><span class=mi>1000</span><span class=p>,</span>
-               <span class=n>height</span><span class=o>=</span><span class=mi>800</span><span class=p>,</span>
-               <span class=p>)</span><span class=o>.</span><span class=n>generate</span><span class=p>(</span><span class=n>string</span><span class=p>)</span>
-<span class=n>wc</span><span class=o>.</span><span class=n>to_file</span><span class=p>(</span><span class=s1>&#39;ss.png&#39;</span><span class=p>)</span> <span class=c1>#保存图片</span>
-<span class=n>plt</span><span class=o>.</span><span class=n>imshow</span><span class=p>(</span><span class=n>wc</span><span class=p>)</span>  <span class=c1>#用plt显示图片</span>
-<span class=n>plt</span><span class=o>.</span><span class=n>axis</span><span class=p>(</span><span class=s1>&#39;off&#39;</span><span class=p>)</span> <span class=c1>#不显示坐标轴</span>
-<span class=n>plt</span><span class=o>.</span><span class=n>show</span><span class=p>()</span> <span class=c1>#显示图片</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png data-srcset="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png 1.5x, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png 2x" data-sizes=auto alt=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png title=image-20210130210417201></p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>matplotlib</span> <span class=kn>import</span> <span class=n>pyplot</span> <span class=k>as</span> <span class=n>plt</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>wordcloud</span> <span class=kn>import</span> <span class=n>WordCloud</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=n>string</span> <span class=o>=</span> <span class=s1>&#39;Importance of relative word frequencies for font-size. With relative_scaling=0, only word-ranks are considered. With relative_scaling=1, a word that is twice as frequent will have twice the size. If you want to consider the word frequencies and not only their rank, relative_scaling around .5 often looks good.&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>font</span> <span class=o>=</span> <span class=sa>r</span><span class=s1>&#39;C:\Windows\Fonts\FZSTK.TTF&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wc</span> <span class=o>=</span> <span class=n>WordCloud</span><span class=p>(</span><span class=n>font_path</span><span class=o>=</span><span class=n>font</span><span class=p>,</span> <span class=c1>#如果是中文必须要添加这个，否则会显示成框框</span>
+</span></span><span class=line><span class=cl>               <span class=n>background_color</span><span class=o>=</span><span class=s1>&#39;white&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>               <span class=n>width</span><span class=o>=</span><span class=mi>1000</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>               <span class=n>height</span><span class=o>=</span><span class=mi>800</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>               <span class=p>)</span><span class=o>.</span><span class=n>generate</span><span class=p>(</span><span class=n>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>wc</span><span class=o>.</span><span class=n>to_file</span><span class=p>(</span><span class=s1>&#39;ss.png&#39;</span><span class=p>)</span> <span class=c1>#保存图片</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>imshow</span><span class=p>(</span><span class=n>wc</span><span class=p>)</span>  <span class=c1>#用plt显示图片</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>axis</span><span class=p>(</span><span class=s1>&#39;off&#39;</span><span class=p>)</span> <span class=c1>#不显示坐标轴</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>show</span><span class=p>()</span> <span class=c1>#显示图片</span>
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png data-srcset="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png 1.5x, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png 2x" data-sizes=auto alt=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130210417201.png title=image-20210130210417201></p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -162,102 +128,58 @@
 </span><span class=lnt>20
 </span><span class=lnt>21
 </span><span class=lnt>22
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>filename</span> <span class=o>=</span> <span class=sa>r</span><span class=s1>&#39;D:\Repo\Jupyter\Crawler\Result\心灵奇旅短评.txt&#39;</span>
-<span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;UTF-8&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>file_project</span><span class=p>:</span>
-    <span class=n>text</span> <span class=o>=</span> <span class=n>file_project</span><span class=o>.</span><span class=n>read</span><span class=p>()</span>
-<span class=n>cut</span> <span class=o>=</span> <span class=n>jieba</span><span class=o>.</span><span class=n>cut</span><span class=p>(</span><span class=n>text</span><span class=p>)</span>   <span class=c1>#text为你需要分词的字符串/句子</span>
-<span class=n>chinese</span> <span class=o>=</span> <span class=s1>&#39; &#39;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>cut</span><span class=p>)</span>  <span class=c1>#将分开的词用空格连接</span>
-
-<span class=n>font</span> <span class=o>=</span> <span class=sa>r</span><span class=s1>&#39;C:\Windows\Fonts\msyhbd.ttc&#39;</span>
-<span class=n>img</span> <span class=o>=</span> <span class=n>Image</span><span class=o>.</span><span class=n>open</span><span class=p>(</span><span class=sa>r</span><span class=s1>&#39;D:\Repo\Jupyter\Data\22.png&#39;</span><span class=p>)</span> <span class=c1>#打开图片</span>
-<span class=n>img_array</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>(</span><span class=n>img</span><span class=p>)</span> <span class=c1>#将图片装换为数组</span>
-<span class=n>wc</span> <span class=o>=</span> <span class=n>WordCloud</span><span class=p>(</span>
-    <span class=n>font_path</span><span class=o>=</span><span class=n>font</span><span class=p>,</span>
-    <span class=n>background_color</span><span class=o>=</span><span class=s1>&#39;white&#39;</span><span class=p>,</span>
-    <span class=n>width</span><span class=o>=</span><span class=mi>10000</span><span class=p>,</span>
-    <span class=n>height</span><span class=o>=</span><span class=mi>8000</span><span class=p>,</span>
-    <span class=n>mask</span><span class=o>=</span><span class=n>img_array</span><span class=p>,</span>
-<span class=p>)</span>
-<span class=n>wc</span><span class=o>.</span><span class=n>generate_from_text</span><span class=p>(</span><span class=n>chinese</span><span class=p>)</span><span class=c1>#绘制图片</span>
-<span class=n>plt</span><span class=o>.</span><span class=n>imshow</span><span class=p>(</span><span class=n>wc</span><span class=p>)</span>
-<span class=n>plt</span><span class=o>.</span><span class=n>axis</span><span class=p>(</span><span class=s1>&#39;off&#39;</span><span class=p>)</span>
-<span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>()</span>
-<span class=n>plt</span><span class=o>.</span><span class=n>show</span><span class=p>()</span>  <span class=c1>#显示图片</span>
-<span class=n>wc</span><span class=o>.</span><span class=n>to_file</span><span class=p>(</span><span class=sa>r</span><span class=s1>&#39;new.png&#39;</span><span class=p>)</span>  <span class=c1>#保存图片</span>
-</code></pre></td></tr></table>
-</div>
-</div><img src=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130212211268.png alt=image-20210130212211268 style=zoom:67%>
-<h1 id=对象>对象</h1>
-<h2 id=wordcloud>WordCloud</h2>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>filename</span> <span class=o>=</span> <span class=sa>r</span><span class=s1>&#39;D:\Repo\Jupyter\Crawler\Result\心灵奇旅短评.txt&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>filename</span><span class=p>,</span><span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;UTF-8&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>file_project</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>text</span> <span class=o>=</span> <span class=n>file_project</span><span class=o>.</span><span class=n>read</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>cut</span> <span class=o>=</span> <span class=n>jieba</span><span class=o>.</span><span class=n>cut</span><span class=p>(</span><span class=n>text</span><span class=p>)</span>   <span class=c1>#text为你需要分词的字符串/句子</span>
+</span></span><span class=line><span class=cl><span class=n>chinese</span> <span class=o>=</span> <span class=s1>&#39; &#39;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>cut</span><span class=p>)</span>  <span class=c1>#将分开的词用空格连接</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>font</span> <span class=o>=</span> <span class=sa>r</span><span class=s1>&#39;C:\Windows\Fonts\msyhbd.ttc&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>img</span> <span class=o>=</span> <span class=n>Image</span><span class=o>.</span><span class=n>open</span><span class=p>(</span><span class=sa>r</span><span class=s1>&#39;D:\Repo\Jupyter\Data\22.png&#39;</span><span class=p>)</span> <span class=c1>#打开图片</span>
+</span></span><span class=line><span class=cl><span class=n>img_array</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>(</span><span class=n>img</span><span class=p>)</span> <span class=c1>#将图片装换为数组</span>
+</span></span><span class=line><span class=cl><span class=n>wc</span> <span class=o>=</span> <span class=n>WordCloud</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>font_path</span><span class=o>=</span><span class=n>font</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>background_color</span><span class=o>=</span><span class=s1>&#39;white&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>width</span><span class=o>=</span><span class=mi>10000</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>height</span><span class=o>=</span><span class=mi>8000</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>mask</span><span class=o>=</span><span class=n>img_array</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>wc</span><span class=o>.</span><span class=n>generate_from_text</span><span class=p>(</span><span class=n>chinese</span><span class=p>)</span><span class=c1>#绘制图片</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>imshow</span><span class=p>(</span><span class=n>wc</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>axis</span><span class=p>(</span><span class=s1>&#39;off&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>plt</span><span class=o>.</span><span class=n>show</span><span class=p>()</span>  <span class=c1>#显示图片</span>
+</span></span><span class=line><span class=cl><span class=n>wc</span><span class=o>.</span><span class=n>to_file</span><span class=p>(</span><span class=sa>r</span><span class=s1>&#39;new.png&#39;</span><span class=p>)</span>  <span class=c1>#保存图片</span>
+</span></span></code></pre></td></tr></table></div></div><img src=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210130212211268.png alt=image-20210130212211268 style=zoom:67%>
+<h1 id=对象>对象</h1><h2 id=wordcloud>WordCloud</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>wordcloud</span> <span class=kn>import</span> <span class=n>WordCloud</span>
-</code></pre></td></tr></table>
-</div>
-</div><p><em><strong>WordCloud()</strong></em></p>
-<ul>
-<li>词云对象，Word cloud object for generating and drawing</li>
-</ul>
-<h3 id=参数>参数</h3>
-<ul>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>wordcloud</span> <span class=kn>import</span> <span class=n>WordCloud</span>
+</span></span></code></pre></td></tr></table></div></div><p><em><strong>WordCloud()</strong></em></p><ul>
+<li>词云对象，Word cloud object for generating and drawing</li></ul><h3 id=参数>参数</h3><ul>
 <li>
-<p><em>font_path</em>：字体路径，string，Font path to the font that will be used (OTF or TTF).</p>
-</li>
-<li>
-<p><em>width</em>：int (default=400)，Width of the canvas</p>
-</li>
-<li>
-<p><em>height</em>：int (default=200)，Height of the canvas.</p>
-</li>
-<li>
-<p><em>background_color</em>：color value (default=”black”)，Background color for the word cloud image.</p>
-</li>
-<li>
-<p><em>mask</em>：nd-array or None (default=None)，传入转换为数组后的图片作为底片，必须白底</p>
-</li>
-</ul>
-<h3 id=方法>方法</h3>
-<p><em>.generate(text)</em>：向 WordCloud 对象中加载文本 txt，Generate wordcloud from text.</p>
-<p><em>.to_file(filename)</em>：将词云输出为图像文件，.png 或 .jpg 格式，Export to image file.</p>
-<p><em>.to_array()</em>：将词云转换成 numpy array 对象，Convert to numpy array.</p>
-</div><div class=post-footer id=post-footer>
+<p><em>font_path</em>：字体路径，string，Font path to the font that will be used (OTF or TTF).</p></li><li>
+<p><em>width</em>：int (default=400)，Width of the canvas</p></li><li>
+<p><em>height</em>：int (default=200)，Height of the canvas.</p></li><li>
+<p><em>background_color</em>：color value (default=”black”)，Background color for the word cloud image.</p></li><li>
+<p><em>mask</em>：nd-array or None (default=None)，传入转换为数组后的图片作为底片，必须白底</p></li></ul><h3 id=方法>方法</h3><p><em>.generate(text)</em>：向 WordCloud 对象中加载文本 txt，Generate wordcloud from text.</p><p><em>.to_file(filename)</em>：将词云输出为图像文件，.png 或 .jpg 格式，Export to image file.</p><p><em>.to_array()</em>：将词云转换成 numpy array 对象，Convert to numpy array.</p></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-28</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/Notes/posts/python/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/cv2/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/tkinter/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+</section></div><div class=post-nav><a href=/Notes/posts/python/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/cv2/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/tkinter/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
-</html>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

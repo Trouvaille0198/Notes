@@ -8,21 +8,19 @@
 <meta property="og:description" content="faker 认识 faker 主要用来创建伪数据，使用 faker 包，无需再手动生成或者手写随机数来生成数据，只需要调用 faker 提供的方法，即可完成数据的生成。 创建 通过工厂函数来">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/faker/"><meta property="article:section" content="posts">
-<meta property="article:modified_time" content="2022-02-28T12:23:28+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content>
 <meta name=twitter:description content="faker 认识 faker 主要用来创建伪数据，使用 faker 包，无需再手动生成或者手写随机数来生成数据，只需要调用 faker 提供的方法，即可完成数据的生成。 创建 通过工厂函数来">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/faker/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/getpot/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/datetime/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/faker\/"},"genre":"posts","wordcount":1185,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/faker\/","dateModified":"2022-02-28T12:23:28+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/faker/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/getpot/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/datetime/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/faker\/"},"genre":"posts","wordcount":1185,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/faker\/","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -37,20 +35,14 @@
 </span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a>
-</div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -62,170 +54,72 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1185 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1185 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#认识>认识</a></li>
-<li><a href=#创建>创建</a>
+<li><a href=#认识>认识</a></li><li><a href=#创建>创建</a>
 <ul>
-<li><a href=#通过工厂函数来创建>通过工厂函数来创建</a></li>
-<li><a href=#通过构造函数来创建>通过构造函数来创建</a></li>
-<li><a href=#本地化>本地化</a>
+<li><a href=#通过工厂函数来创建>通过工厂函数来创建</a></li><li><a href=#通过构造函数来创建>通过构造函数来创建</a></li><li><a href=#本地化>本地化</a>
 <ul>
-<li><a href=#可选择的文化信息>可选择的文化信息</a></li>
-<li><a href=#本地化特有属性>本地化特有属性</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href=#属性>属性</a>
+<li><a href=#可选择的文化信息>可选择的文化信息</a></li><li><a href=#本地化特有属性>本地化特有属性</a></li></ul></li></ul></li><li><a href=#属性>属性</a>
 <ul>
-<li><a href=#人名类>人名类</a></li>
-<li><a href=#身份信息类>身份信息类</a></li>
-<li><a href=#地区名称类>地区名称类</a></li>
-<li><a href=#日期时间类>日期时间类</a></li>
-</ul>
-</li>
-<li><a href=#进阶>进阶</a>
+<li><a href=#人名类>人名类</a></li><li><a href=#身份信息类>身份信息类</a></li><li><a href=#地区名称类>地区名称类</a></li><li><a href=#日期时间类>日期时间类</a></li></ul></li><li><a href=#进阶>进阶</a>
 <ul>
-<li><a href=#使用复合对象>使用复合对象</a></li>
-</ul>
-</li>
-</ul>
-</nav></div>
-</div><div class=content id=content><h1 id=faker>faker</h1>
-<h2 id=认识>认识</h2>
-<p>faker 主要用来创建伪数据，使用 faker 包，无需再手动生成或者手写随机数来生成数据，只需要调用 faker 提供的方法，即可完成数据的生成。</p>
-<h2 id=创建>创建</h2>
-<h3 id=通过工厂函数来创建>通过工厂函数来创建</h3>
-<div class=highlight><div class=chroma>
+<li><a href=#使用复合对象>使用复合对象</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=faker>faker</h1><h2 id=认识>认识</h2><p>faker 主要用来创建伪数据，使用 faker 包，无需再手动生成或者手写随机数来生成数据，只需要调用 faker 提供的方法，即可完成数据的生成。</p><h2 id=创建>创建</h2><h3 id=通过工厂函数来创建>通过工厂函数来创建</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>faker</span> <span class=kn>import</span> <span class=n>Factory</span>
-
-<span class=n>fake1</span> <span class=o>=</span> <span class=n>Factory</span><span class=o>.</span><span class=n>create</span><span class=p>()</span> <span class=c1># 通过工厂函数来创建</span>
-
-<span class=n>fake1</span><span class=o>.</span><span class=n>name</span><span class=p>()</span> <span class=c1># 调用方法-随机生成一个姓名</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=通过构造函数来创建>通过构造函数来创建</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>faker</span> <span class=kn>import</span> <span class=n>Factory</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake1</span> <span class=o>=</span> <span class=n>Factory</span><span class=o>.</span><span class=n>create</span><span class=p>()</span> <span class=c1># 通过工厂函数来创建</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake1</span><span class=o>.</span><span class=n>name</span><span class=p>()</span> <span class=c1># 调用方法-随机生成一个姓名</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=通过构造函数来创建>通过构造函数来创建</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>faker</span> <span class=kn>import</span> <span class=n>Faker</span> <span class=c1># 主要使用的是Factory类，而导入Faker，会同时导入Factory</span>
-
-<span class=n>fake2</span> <span class=o>=</span> <span class=n>Faker</span><span class=p>()</span> <span class=c1># 通过构造函数来创建</span>
-
-<span class=n>fake2</span><span class=o>.</span><span class=n>address</span><span class=p>()</span> <span class=c1># 调用方法-随机生成一个地址</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=本地化>本地化</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>faker</span> <span class=kn>import</span> <span class=n>Faker</span> <span class=c1># 主要使用的是Factory类，而导入Faker，会同时导入Factory</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake2</span> <span class=o>=</span> <span class=n>Faker</span><span class=p>()</span> <span class=c1># 通过构造函数来创建</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake2</span><span class=o>.</span><span class=n>address</span><span class=p>()</span> <span class=c1># 调用方法-随机生成一个地址</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=本地化>本地化</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>fake</span> <span class=o>=</span> <span class=n>Faker</span><span class=p>(</span><span class=n>locale</span><span class=o>=</span><span class=s1>&#39;zh_CN&#39;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>faker 接受的本地化参数 <code>locale</code>，创建的对象会生成对应语言的数据，如果没有找到对应的语言，会使用默认的 &ldquo;en_US&rdquo;</p>
-<h4 id=可选择的文化信息>可选择的文化信息</h4>
-<p>ar_EG - Arabic (Egypt)</p>
-<p>ar_PS - Arabic (Palestine)</p>
-<p>ar_SA - Arabic (Saudi Arabia)</p>
-<p>bg_BG - Bulgarian</p>
-<p>cs_CZ - Czech</p>
-<p>de_DE - German</p>
-<p>dk_DK - Danish</p>
-<p>el_GR - Greek</p>
-<p>en_AU - English (Australia)</p>
-<p>en_CA - English (Canada)</p>
-<p>en_GB - English (Great Britain)</p>
-<p>en_US - English (United States)</p>
-<p>es_ES - Spanish (Spain)</p>
-<p>es_MX - Spanish (Mexico)</p>
-<p>et_EE - Estonian</p>
-<p>fa_IR - Persian (Iran)</p>
-<p>fi_FI - Finnish</p>
-<p>fr_FR - French</p>
-<p>hi_IN - Hindi</p>
-<p>hr_HR - Croatian</p>
-<p>hu_HU - Hungarian</p>
-<p>it_IT - Italian</p>
-<p>ja_JP - Japanese</p>
-<p>ko_KR - Korean</p>
-<p>lt_LT - Lithuanian</p>
-<p>lv_LV - Latvian</p>
-<p>ne_NP - Nepali</p>
-<p>nl_NL - Dutch (Netherlands)</p>
-<p>no_NO - Norwegian</p>
-<p>pl_PL - Polish</p>
-<p>pt_BR - Portuguese (Brazil)</p>
-<p>pt_PT - Portuguese (Portugal)</p>
-<p>ru_RU - Russian</p>
-<p>sl_SI - Slovene</p>
-<p>sv_SE - Swedish</p>
-<p>tr_TR - Turkish</p>
-<p>uk_UA - Ukrainian</p>
-<p>zh_CN - Chinese (China)</p>
-<p>zh_TW - Chinese (Taiwan)</p>
-<h4 id=本地化特有属性>本地化特有属性</h4>
-<p>详见 <a href=https://www.cnblogs.com/hellangels333/p/9039784.html target=_blank rel="noopener noreffer">https://www.cnblogs.com/hellangels333/p/9039784.html</a></p>
-<h2 id=属性>属性</h2>
-<p>更多：https://www.cnblogs.com/pywen/p/14245369.html</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>fake</span> <span class=o>=</span> <span class=n>Faker</span><span class=p>(</span><span class=n>locale</span><span class=o>=</span><span class=s1>&#39;zh_CN&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>faker 接受的本地化参数 <code>locale</code>，创建的对象会生成对应语言的数据，如果没有找到对应的语言，会使用默认的 &ldquo;en_US&rdquo;</p><h4 id=可选择的文化信息>可选择的文化信息</h4><p>ar_EG - Arabic (Egypt)</p><p>ar_PS - Arabic (Palestine)</p><p>ar_SA - Arabic (Saudi Arabia)</p><p>bg_BG - Bulgarian</p><p>cs_CZ - Czech</p><p>de_DE - German</p><p>dk_DK - Danish</p><p>el_GR - Greek</p><p>en_AU - English (Australia)</p><p>en_CA - English (Canada)</p><p>en_GB - English (Great Britain)</p><p>en_US - English (United States)</p><p>es_ES - Spanish (Spain)</p><p>es_MX - Spanish (Mexico)</p><p>et_EE - Estonian</p><p>fa_IR - Persian (Iran)</p><p>fi_FI - Finnish</p><p>fr_FR - French</p><p>hi_IN - Hindi</p><p>hr_HR - Croatian</p><p>hu_HU - Hungarian</p><p>it_IT - Italian</p><p>ja_JP - Japanese</p><p>ko_KR - Korean</p><p>lt_LT - Lithuanian</p><p>lv_LV - Latvian</p><p>ne_NP - Nepali</p><p>nl_NL - Dutch (Netherlands)</p><p>no_NO - Norwegian</p><p>pl_PL - Polish</p><p>pt_BR - Portuguese (Brazil)</p><p>pt_PT - Portuguese (Portugal)</p><p>ru_RU - Russian</p><p>sl_SI - Slovene</p><p>sv_SE - Swedish</p><p>tr_TR - Turkish</p><p>uk_UA - Ukrainian</p><p>zh_CN - Chinese (China)</p><p>zh_TW - Chinese (Taiwan)</p><h4 id=本地化特有属性>本地化特有属性</h4><p>详见 <a href=https://www.cnblogs.com/hellangels333/p/9039784.html target=_blank rel="noopener noreffer">https://www.cnblogs.com/hellangels333/p/9039784.html</a></p><h2 id=属性>属性</h2><p>更多：https://www.cnblogs.com/pywen/p/14245369.html</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>faker</span> <span class=kn>import</span> <span class=n>Faker</span>
-
-<span class=n>fake</span> <span class=o>=</span> <span class=n>Faker</span><span class=p>()</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=人名类>人名类</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>faker</span> <span class=kn>import</span> <span class=n>Faker</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span> <span class=o>=</span> <span class=n>Faker</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=人名类>人名类</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -236,21 +130,17 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>fake</span><span class=o>.</span><span class=n>name</span><span class=p>()</span> <span class=c1># 人名</span>
-<span class=n>fake</span><span class=o>.</span><span class=n>name_male</span><span class=p>()</span> <span class=c1># 男子名</span>
-<span class=n>fake</span><span class=o>.</span><span class=n>name_femal</span><span class=p>()</span> <span class=c1># 女子名</span>
-
-<span class=c1># &#39;Mallory Walker&#39;</span>
-<span class=c1># Melissa Arias</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>first_name</span><span class=p>()</span> <span class=c1># 名</span>
-<span class=n>fake</span><span class=o>.</span><span class=n>last_name</span><span class=p>()</span> <span class=c1># 姓</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=身份信息类>身份信息类</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>name</span><span class=p>()</span> <span class=c1># 人名</span>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>name_male</span><span class=p>()</span> <span class=c1># 男子名</span>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>name_femal</span><span class=p>()</span> <span class=c1># 女子名</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># &#39;Mallory Walker&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># Melissa Arias</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>first_name</span><span class=p>()</span> <span class=c1># 名</span>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>last_name</span><span class=p>()</span> <span class=c1># 姓</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=身份信息类>身份信息类</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -285,45 +175,41 @@
 </span><span class=lnt>31
 </span><span class=lnt>32
 </span><span class=lnt>33
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>fake</span><span class=o>.</span><span class=n>ssn</span><span class=p>()</span> <span class=c1># 身份证号</span>
-<span class=c1># &#39;220112193612070575&#39;</span>
-<span class=c1># &#39;391-38-4757&#39;</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>phone_number</span><span class=p>()</span> <span class=c1># 手机号码</span>
-<span class=c1># &#39;070-1015-0220&#39;</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>ipv4_private</span><span class=p>()</span> <span class=c1># ip地址</span>
-<span class=c1># &#39;10.112.246.54&#39;</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>profile</span><span class=p>()</span> <span class=c1># 个人配置信息</span>
-
-<span class=s1>&#39;&#39;&#39;{&#39;job&#39;: &#39;电脑操作员/打字员&#39;, &#39;company&#39;: &#39;网新恒天传媒有限公司&#39;, &#39;ssn&#39;: &#39;37132220000210765X&#39;, &#39;residence&#39;: &#39;湖北省婷婷市永川马街Y座 292199&#39;, &#39;current_location&#39;: (Decimal(&#39;40.609137&#39;), Decimal(&#39;14.068631&#39;)), &#39;blood_group&#39;: &#39;B-&#39;, &#39;website&#39;: [&#39;https://minma.cn/&#39;, &#39;https://www.liu.cn/&#39;], &#39;username&#39;: &#39;luoli&#39;, &#39;name&#39;: &#39;钟帆&#39;, &#39;sex&#39;: &#39;F&#39;, &#39;address&#39;: &#39;河北省巢湖市高坪邵街r座 998657&#39;, &#39;mail&#39;: &#39;min70@gmail.com&#39;, &#39;birthdate&#39;: datetime.date(1948, 6, 7)}&#39;&#39;&#39;</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>job</span><span class=p>()</span> <span class=c1># 工作名</span>
-<span class=c1># 公認会計士</span>
-<span class=c1># 售前/售后技术支持工程师</span>
-<span class=c1># Electrical engineer</span>
-<span class=c1># Herpetologist</span>
-<span class=c1># 电子技术研发工程师</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>password</span><span class=p>()</span> <span class=c1># 随机密码</span>
-<span class=c1># 5%8TIiwbL3</span>
-<span class=c1># SIf7xvOg%0</span>
-<span class=c1># trD2!1ZlM)</span>
-<span class=c1># ngPHeq1_!3</span>
-<span class=c1># @OpYOrqt1B</span>
-<span class=c1># I4P^(yaD!c</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>uuid4</span><span class=p>()</span> <span class=c1># 随机UUID</span>
-<span class=c1># bcc48179-b9e3-4da2-a8e9-95681650e56f</span>
-<span class=c1># 47ee89a8-f845-48af-8894-4d6a28cbfdc8</span>
-<span class=c1># 1f3b9a27-8870-48bd-9861-5d3fedc7f972</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=地区名称类>地区名称类</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>ssn</span><span class=p>()</span> <span class=c1># 身份证号</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;220112193612070575&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;391-38-4757&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>phone_number</span><span class=p>()</span> <span class=c1># 手机号码</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;070-1015-0220&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>ipv4_private</span><span class=p>()</span> <span class=c1># ip地址</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;10.112.246.54&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>profile</span><span class=p>()</span> <span class=c1># 个人配置信息</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;&#39;&#39;{&#39;job&#39;: &#39;电脑操作员/打字员&#39;, &#39;company&#39;: &#39;网新恒天传媒有限公司&#39;, &#39;ssn&#39;: &#39;37132220000210765X&#39;, &#39;residence&#39;: &#39;湖北省婷婷市永川马街Y座 292199&#39;, &#39;current_location&#39;: (Decimal(&#39;40.609137&#39;), Decimal(&#39;14.068631&#39;)), &#39;blood_group&#39;: &#39;B-&#39;, &#39;website&#39;: [&#39;https://minma.cn/&#39;, &#39;https://www.liu.cn/&#39;], &#39;username&#39;: &#39;luoli&#39;, &#39;name&#39;: &#39;钟帆&#39;, &#39;sex&#39;: &#39;F&#39;, &#39;address&#39;: &#39;河北省巢湖市高坪邵街r座 998657&#39;, &#39;mail&#39;: &#39;min70@gmail.com&#39;, &#39;birthdate&#39;: datetime.date(1948, 6, 7)}&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>job</span><span class=p>()</span> <span class=c1># 工作名</span>
+</span></span><span class=line><span class=cl><span class=c1># 公認会計士</span>
+</span></span><span class=line><span class=cl><span class=c1># 售前/售后技术支持工程师</span>
+</span></span><span class=line><span class=cl><span class=c1># Electrical engineer</span>
+</span></span><span class=line><span class=cl><span class=c1># Herpetologist</span>
+</span></span><span class=line><span class=cl><span class=c1># 电子技术研发工程师</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>password</span><span class=p>()</span> <span class=c1># 随机密码</span>
+</span></span><span class=line><span class=cl><span class=c1># 5%8TIiwbL3</span>
+</span></span><span class=line><span class=cl><span class=c1># SIf7xvOg%0</span>
+</span></span><span class=line><span class=cl><span class=c1># trD2!1ZlM)</span>
+</span></span><span class=line><span class=cl><span class=c1># ngPHeq1_!3</span>
+</span></span><span class=line><span class=cl><span class=c1># @OpYOrqt1B</span>
+</span></span><span class=line><span class=cl><span class=c1># I4P^(yaD!c</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>uuid4</span><span class=p>()</span> <span class=c1># 随机UUID</span>
+</span></span><span class=line><span class=cl><span class=c1># bcc48179-b9e3-4da2-a8e9-95681650e56f</span>
+</span></span><span class=line><span class=cl><span class=c1># 47ee89a8-f845-48af-8894-4d6a28cbfdc8</span>
+</span></span><span class=line><span class=cl><span class=c1># 1f3b9a27-8870-48bd-9861-5d3fedc7f972</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=地区名称类>地区名称类</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -361,66 +247,57 @@
 </span><span class=lnt>34
 </span><span class=lnt>35
 </span><span class=lnt>36
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>fake</span><span class=o>.</span><span class=n>address</span><span class=p>()</span> <span class=c1># 街道，好像是假的</span>
-<span class=c1># &#39;千葉県新島村二つ室20丁目17番16号 雷門パレス775&#39;</span>
-<span class=c1># &#39;38987 Henry Lights Suite 406\nNataliefurt, PA 10973&#39;</span>
-<span class=c1># &#39;辽宁省关岭县清河淮安街D座 373511&#39;</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>company</span><span class=p>()</span> <span class=c1># 公司名称</span>
-<span class=c1># &#39;恒聪百汇科技有限公司&#39;</span>
-<span class=c1># &#39;Cruz-Martin&#39;</span>
-<span class=c1># &#39;森運輸合同会社&#39;</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>city</span><span class=p>()</span> <span class=c1># 城市，真实</span>
-<span class=c1># &#39;Stewartborough&#39;</span>
-<span class=c1># &#39;昭島市&#39;</span>
-<span class=c1># &#39;East Jacob&#39;</span>
-<span class=c1># &#39;杭州市&#39;</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>city_suffix</span><span class=p>()</span> <span class=c1># 各地城市后缀</span>
-<span class=c1># &#39;chester&#39;</span>
-<span class=c1># &#39;burgh&#39;</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>country</span><span class=p>()</span> <span class=c1># 国家，会以所选地区的语言来展示</span>
-<span class=c1># リビア国</span>
-<span class=c1># Korea</span>
-<span class=c1># Jersey</span>
-<span class=c1># 瓜德罗普岛</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>current_country</span><span class=p>()</span> <span class=c1># fake对象所在地区的国家</span>
-<span class=c1># Japan</span>
-<span class=c1># United States</span>
-<span class=c1># People&#39;s Republic of China</span>
-
-<span class=n>fake</span><span class=o>.</span><span class=n>country_code</span><span class=p>()</span> <span class=c1># 国家编码</span>
-<span class=n>fake</span><span class=o>.</span><span class=n>current_country_code</span><span class=p>()</span> <span class=c1># 对象所在国家编码</span>
-<span class=c1># SV</span>
-<span class=c1># NR</span>
-<span class=c1># RS</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=日期时间类>日期时间类</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>address</span><span class=p>()</span> <span class=c1># 街道，好像是假的</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;千葉県新島村二つ室20丁目17番16号 雷門パレス775&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;38987 Henry Lights Suite 406\nNataliefurt, PA 10973&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;辽宁省关岭县清河淮安街D座 373511&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>company</span><span class=p>()</span> <span class=c1># 公司名称</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;恒聪百汇科技有限公司&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;Cruz-Martin&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;森運輸合同会社&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>city</span><span class=p>()</span> <span class=c1># 城市，真实</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;Stewartborough&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;昭島市&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;East Jacob&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;杭州市&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>city_suffix</span><span class=p>()</span> <span class=c1># 各地城市后缀</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;chester&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># &#39;burgh&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>country</span><span class=p>()</span> <span class=c1># 国家，会以所选地区的语言来展示</span>
+</span></span><span class=line><span class=cl><span class=c1># リビア国</span>
+</span></span><span class=line><span class=cl><span class=c1># Korea</span>
+</span></span><span class=line><span class=cl><span class=c1># Jersey</span>
+</span></span><span class=line><span class=cl><span class=c1># 瓜德罗普岛</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>current_country</span><span class=p>()</span> <span class=c1># fake对象所在地区的国家</span>
+</span></span><span class=line><span class=cl><span class=c1># Japan</span>
+</span></span><span class=line><span class=cl><span class=c1># United States</span>
+</span></span><span class=line><span class=cl><span class=c1># People&#39;s Republic of China</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>country_code</span><span class=p>()</span> <span class=c1># 国家编码</span>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>current_country_code</span><span class=p>()</span> <span class=c1># 对象所在国家编码</span>
+</span></span><span class=line><span class=cl><span class=c1># SV</span>
+</span></span><span class=line><span class=cl><span class=c1># NR</span>
+</span></span><span class=line><span class=cl><span class=c1># RS</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=日期时间类>日期时间类</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>fake</span><span class=o>.</span><span class=n>date</span><span class=p>(</span><span class=n>pattern</span><span class=o>=</span><span class=s1>&#39;%Y-%m-</span><span class=si>%d</span><span class=s1>&#39;</span><span class=p>,</span> <span class=n>end_datetime</span><span class=o>=</span><span class=kc>None</span><span class=p>)</span> <span class=c1># 日期</span>
-<span class=c1># 1982-02-13</span>
-<span class=c1># 1989-10-24</span>
-<span class=c1># 2018-01-12</span>
-<span class=c1># 2005-04-27</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=进阶>进阶</h2>
-<h3 id=使用复合对象>使用复合对象</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>date</span><span class=p>(</span><span class=n>pattern</span><span class=o>=</span><span class=s1>&#39;%Y-%m-</span><span class=si>%d</span><span class=s1>&#39;</span><span class=p>,</span> <span class=n>end_datetime</span><span class=o>=</span><span class=kc>None</span><span class=p>)</span> <span class=c1># 日期</span>
+</span></span><span class=line><span class=cl><span class=c1># 1982-02-13</span>
+</span></span><span class=line><span class=cl><span class=c1># 1989-10-24</span>
+</span></span><span class=line><span class=cl><span class=c1># 2018-01-12</span>
+</span></span><span class=line><span class=cl><span class=c1># 2005-04-27</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=进阶>进阶</h2><h3 id=使用复合对象>使用复合对象</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -443,64 +320,44 @@
 </span><span class=lnt>19
 </span><span class=lnt>20
 </span><span class=lnt>21
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>OrderedDict</span>
-
-<span class=kn>from</span> <span class=nn>faker</span> <span class=kn>import</span> <span class=n>Faker</span>
-
-<span class=c1># Generate a name based on the provided weights</span>
-<span class=c1># en_US - 16.67% of the time (1 / (1 + 2 + 3))</span>
-<span class=c1># en_PH - 33.33% of the time (2 / (1 + 2 + 3))</span>
-<span class=c1># ja_JP - 50.00% of the time (3 / (1 + 2 + 3))</span>
-<span class=n>locales</span> <span class=o>=</span> <span class=n>OrderedDict</span><span class=p>(</span>
-    <span class=p>[</span>
-        <span class=p>(</span><span class=s2>&#34;en-US&#34;</span><span class=p>,</span> <span class=mi>1</span><span class=p>),</span>
-        <span class=p>(</span><span class=s2>&#34;zh_CN&#34;</span><span class=p>,</span> <span class=mi>2</span><span class=p>),</span>
-        <span class=p>(</span><span class=s2>&#34;ja_JP&#34;</span><span class=p>,</span> <span class=mi>3</span><span class=p>),</span>
-    <span class=p>]</span>
-<span class=p>)</span>
-<span class=n>fake</span> <span class=o>=</span> <span class=n>Faker</span><span class=p>(</span><span class=n>locales</span><span class=p>)</span>
-
-<span class=c1># usage</span>
-<span class=n>fake</span><span class=o>.</span><span class=n>phone_number</span><span class=p>()</span>
-<span class=n>fake</span><span class=p>[</span><span class=s1>&#39;en-US&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>name</span><span class=p>()</span>
-<span class=n>fake</span><span class=p>[</span><span class=s1>&#39;ja_JP&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>zipcode</span><span class=p>()</span>
-</code></pre></td></tr></table>
-</div>
-</div></div><div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>OrderedDict</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>faker</span> <span class=kn>import</span> <span class=n>Faker</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Generate a name based on the provided weights</span>
+</span></span><span class=line><span class=cl><span class=c1># en_US - 16.67% of the time (1 / (1 + 2 + 3))</span>
+</span></span><span class=line><span class=cl><span class=c1># en_PH - 33.33% of the time (2 / (1 + 2 + 3))</span>
+</span></span><span class=line><span class=cl><span class=c1># ja_JP - 50.00% of the time (3 / (1 + 2 + 3))</span>
+</span></span><span class=line><span class=cl><span class=n>locales</span> <span class=o>=</span> <span class=n>OrderedDict</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;en-US&#34;</span><span class=p>,</span> <span class=mi>1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;zh_CN&#34;</span><span class=p>,</span> <span class=mi>2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>(</span><span class=s2>&#34;ja_JP&#34;</span><span class=p>,</span> <span class=mi>3</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>fake</span> <span class=o>=</span> <span class=n>Faker</span><span class=p>(</span><span class=n>locales</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># usage</span>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=o>.</span><span class=n>phone_number</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=p>[</span><span class=s1>&#39;en-US&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>name</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>fake</span><span class=p>[</span><span class=s1>&#39;ja_JP&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>zipcode</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-28</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/getpot/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/datetime/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+</section></div><div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/getpot/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/datetime/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
-</html>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

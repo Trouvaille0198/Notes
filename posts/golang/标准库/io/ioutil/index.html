@@ -9,21 +9,19 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/ioutil/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-01-04T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-02-28T12:23:28+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Go ioutil 标准库">
 <meta name=twitter:description content="ioutil 虽然 io 包提供了不少类型、方法和函数，但有时候使用起来不是那么方便。比如读取一个文件中的所有内容。为此，标准库中提供了一些常用、方便的 IO 操作">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/ioutil/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/sql/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/css/flex/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go ioutil 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/ioutil\/"},"genre":"posts","keywords":"Go 库, io","wordcount":1462,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/ioutil\/","datePublished":"2022-01-04T00:00:00+00:00","dateModified":"2022-02-28T12:23:28+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/ioutil/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/sql/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/css/flex/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go ioutil 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/ioutil\/"},"genre":"posts","keywords":"Go 库, io","wordcount":1462,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/ioutil\/","datePublished":"2022-01-04T00:00:00+00:00","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -38,20 +36,14 @@
 </span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a>
-</div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -63,82 +55,40 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX">Go ioutil 标准库</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-04>2022-01-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1462 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go ioutil 标准库</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-04>2022-01-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1462 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#nopcloser-函数>NopCloser 函数</a></li>
-<li><a href=#readall-函数>ReadAll 函数</a></li>
-<li><a href=#readdir-函数>ReadDir 函数</a></li>
-<li><a href=#readfile-函数>ReadFile 函数</a></li>
-<li><a href=#writefile-函数>WriteFile 函数</a></li>
-<li><a href=#tempdir-函数>TempDir 函数</a></li>
-<li><a href=#tempfile-函数>TempFile 函数</a></li>
-<li><a href=#discard-变量>Discard 变量</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><h1 id=ioutil>ioutil</h1>
-<p>虽然 io 包提供了不少类型、方法和函数，但有时候使用起来不是那么方便。比如读取一个文件中的所有内容。为此，标准库中提供了一些常用、方便的 IO 操作函数。</p>
-<h2 id=nopcloser-函数>NopCloser 函数</h2>
-<p>有时候我们需要传递一个 io.ReadCloser 的实例，而我们现在有一个 io.Reader 的实例，比如：strings.Reader ，这个时候 NopCloser 就派上用场了。它包装一个 io.Reader，返回一个 io.ReadCloser ，而相应的 Close 方法啥也不做，只是返回 nil。</p>
-<p>比如，在标准库 net/http 包中的 NewRequest，接收一个 io.Reader 的 body，而实际上，Request 的 Body 的类型是 io.ReadCloser，因此，代码内部进行了判断，如果传递的 io.Reader 也实现了 io.ReadCloser 接口，则转换，否则通过ioutil.NopCloser 包装转换一下。相关代码如下：</p>
-<div class=highlight><div class=chroma>
+<li><a href=#nopcloser-函数>NopCloser 函数</a></li><li><a href=#readall-函数>ReadAll 函数</a></li><li><a href=#readdir-函数>ReadDir 函数</a></li><li><a href=#readfile-函数>ReadFile 函数</a></li><li><a href=#writefile-函数>WriteFile 函数</a></li><li><a href=#tempdir-函数>TempDir 函数</a></li><li><a href=#tempfile-函数>TempFile 函数</a></li><li><a href=#discard-变量>Discard 变量</a></li></ul></nav></div></div><div class=content id=content><h1 id=ioutil>ioutil</h1><p>虽然 io 包提供了不少类型、方法和函数，但有时候使用起来不是那么方便。比如读取一个文件中的所有内容。为此，标准库中提供了一些常用、方便的 IO 操作函数。</p><h2 id=nopcloser-函数>NopCloser 函数</h2><p>有时候我们需要传递一个 io.ReadCloser 的实例，而我们现在有一个 io.Reader 的实例，比如：strings.Reader ，这个时候 NopCloser 就派上用场了。它包装一个 io.Reader，返回一个 io.ReadCloser ，而相应的 Close 方法啥也不做，只是返回 nil。</p><p>比如，在标准库 net/http 包中的 NewRequest，接收一个 io.Reader 的 body，而实际上，Request 的 Body 的类型是 io.ReadCloser，因此，代码内部进行了判断，如果传递的 io.Reader 也实现了 io.ReadCloser 接口，则转换，否则通过ioutil.NopCloser 包装转换一下。相关代码如下：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>rc</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>body</span><span class=p>.(</span><span class=nx>io</span><span class=p>.</span><span class=nx>ReadCloser</span><span class=p>)</span>
-<span class=k>if</span> <span class=p>!</span><span class=nx>ok</span> <span class=o>&amp;&amp;</span> <span class=nx>body</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
-    <span class=nx>rc</span> <span class=p>=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>NopCloser</span><span class=p>(</span><span class=nx>body</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=readall-函数>ReadAll 函数</h2>
-<p>很多时候，我们需要一次性读取 io.Reader 中的数据。考虑到读取所有数据的需求比较多，Go 提供了 ReadAll 这个函数，用来从io.Reader 中一次读取所有数据。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>rc</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>body</span><span class=p>.(</span><span class=nx>io</span><span class=p>.</span><span class=nx>ReadCloser</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>!</span><span class=nx>ok</span> <span class=o>&amp;&amp;</span> <span class=nx>body</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>rc</span> <span class=p>=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>NopCloser</span><span class=p>(</span><span class=nx>body</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=readall-函数>ReadAll 函数</h2><p>很多时候，我们需要一次性读取 io.Reader 中的数据。考虑到读取所有数据的需求比较多，Go 提供了 ReadAll 这个函数，用来从io.Reader 中一次读取所有数据。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>ReadAll</span><span class=p>(</span><span class=nx>r</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span><span class=p>)</span> <span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>阅读该函数的源码发现，它是通过 bytes.Buffer 中的 <a href="http://docscn.studygolang.com/src/bytes/buffer.go?s=5385:5444#L144" target=_blank rel="noopener noreffer">ReadFrom</a> 来实现读取所有数据的。该函数成功调用后会返回 err == nil 而不是 err == EOF。(成功读取完毕应该为 err == io.EOF，这里返回 nil 由于该函数成功期望 err == io.EOF，符合无错误不处理的理念)</p>
-<h2 id=readdir-函数>ReadDir 函数</h2>
-<p>笔试题：编写程序输出某目录下的所有文件（包括子目录）</p>
-<p>是否见过这样的笔试题？</p>
-<p>在 Go 中如何输出目录下的所有文件呢？首先，我们会想到查 os 包，看 File 类型是否提供了相关方法</p>
-<p>在 ioutil 中提供了一个方便的函数：ReadDir，它<strong>读取目录并返回排好序的文件和子目录名</strong>（ []os.FileInfo ）</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>ReadAll</span><span class=p>(</span><span class=nx>r</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span><span class=p>)</span> <span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>阅读该函数的源码发现，它是通过 bytes.Buffer 中的 <a href="http://docscn.studygolang.com/src/bytes/buffer.go?s=5385:5444#L144" target=_blank rel="noopener noreffer">ReadFrom</a> 来实现读取所有数据的。该函数成功调用后会返回 err == nil 而不是 err == EOF。(成功读取完毕应该为 err == io.EOF，这里返回 nil 由于该函数成功期望 err == io.EOF，符合无错误不处理的理念)</p><h2 id=readdir-函数>ReadDir 函数</h2><p>笔试题：编写程序输出某目录下的所有文件（包括子目录）</p><p>是否见过这样的笔试题？</p><p>在 Go 中如何输出目录下的所有文件呢？首先，我们会想到查 os 包，看 File 类型是否提供了相关方法</p><p>在 ioutil 中提供了一个方便的函数：ReadDir，它<strong>读取目录并返回排好序的文件和子目录名</strong>（ []os.FileInfo ）</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -164,150 +114,89 @@
 </span><span class=lnt>22
 </span><span class=lnt>23
 </span><span class=lnt>24
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-    <span class=nx>dir</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nx>Args</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
-    <span class=nf>listAll</span><span class=p>(</span><span class=nx>dir</span><span class=p>,</span><span class=mi>0</span><span class=p>)</span>
-<span class=p>}</span>
-
-<span class=kd>func</span> <span class=nf>listAll</span><span class=p>(</span><span class=nx>path</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>curHier</span> <span class=kt>int</span><span class=p>){</span>
-    <span class=nx>fileInfos</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>ReadDir</span><span class=p>(</span><span class=nx>path</span><span class=p>)</span>
-    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span><span class=p>{</span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>err</span><span class=p>);</span> <span class=k>return</span><span class=p>}</span>
-
-    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>info</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>fileInfos</span><span class=p>{</span>
-        <span class=k>if</span> <span class=nx>info</span><span class=p>.</span><span class=nf>IsDir</span><span class=p>(){</span>
-            <span class=k>for</span> <span class=nx>tmpHier</span> <span class=o>:=</span> <span class=nx>curHier</span><span class=p>;</span> <span class=nx>tmpHier</span> <span class=p>&gt;</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>tmpHier</span><span class=o>--</span><span class=p>{</span>
-                <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;|\t&#34;</span><span class=p>)</span>
-            <span class=p>}</span>
-            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>info</span><span class=p>.</span><span class=nf>Name</span><span class=p>(),</span><span class=s>&#34;\\&#34;</span><span class=p>)</span>
-            <span class=nf>listAll</span><span class=p>(</span><span class=nx>path</span> <span class=o>+</span> <span class=s>&#34;/&#34;</span> <span class=o>+</span> <span class=nx>info</span><span class=p>.</span><span class=nf>Name</span><span class=p>(),</span><span class=nx>curHier</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>
-        <span class=p>}</span><span class=k>else</span><span class=p>{</span>
-            <span class=k>for</span> <span class=nx>tmpHier</span> <span class=o>:=</span> <span class=nx>curHier</span><span class=p>;</span> <span class=nx>tmpHier</span> <span class=p>&gt;</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>tmpHier</span><span class=o>--</span><span class=p>{</span>
-                <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;|\t&#34;</span><span class=p>)</span>
-            <span class=p>}</span>
-            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>info</span><span class=p>.</span><span class=nf>Name</span><span class=p>())</span>
-        <span class=p>}</span>
-    <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=readfile-函数>ReadFile 函数</h2>
-<p>ReadFile 读取整个文件的内容，由于这种需求很常见，因此 Go 提供了 ReadFile 函数，方便使用。</p>
-<p>ReadFile 的实现和 ReadAll 类似，不过，ReadFile 会先判断文件的大小，给 bytes.Buffer 一个<strong>预定义容量</strong>，避免额外分配内存。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>dir</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nx>Args</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=nf>listAll</span><span class=p>(</span><span class=nx>dir</span><span class=p>,</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>listAll</span><span class=p>(</span><span class=nx>path</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>curHier</span> <span class=kt>int</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fileInfos</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>ReadDir</span><span class=p>(</span><span class=nx>path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span><span class=p>{</span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>err</span><span class=p>);</span> <span class=k>return</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>info</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>fileInfos</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nx>info</span><span class=p>.</span><span class=nf>IsDir</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=nx>tmpHier</span> <span class=o>:=</span> <span class=nx>curHier</span><span class=p>;</span> <span class=nx>tmpHier</span> <span class=p>&gt;</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>tmpHier</span><span class=o>--</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;|\t&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>info</span><span class=p>.</span><span class=nf>Name</span><span class=p>(),</span><span class=s>&#34;\\&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nf>listAll</span><span class=p>(</span><span class=nx>path</span> <span class=o>+</span> <span class=s>&#34;/&#34;</span> <span class=o>+</span> <span class=nx>info</span><span class=p>.</span><span class=nf>Name</span><span class=p>(),</span><span class=nx>curHier</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span><span class=k>else</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=nx>tmpHier</span> <span class=o>:=</span> <span class=nx>curHier</span><span class=p>;</span> <span class=nx>tmpHier</span> <span class=p>&gt;</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>tmpHier</span><span class=o>--</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;|\t&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>info</span><span class=p>.</span><span class=nf>Name</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=readfile-函数>ReadFile 函数</h2><p>ReadFile 读取整个文件的内容，由于这种需求很常见，因此 Go 提供了 ReadFile 函数，方便使用。</p><p>ReadFile 的实现和 ReadAll 类似，不过，ReadFile 会先判断文件的大小，给 bytes.Buffer 一个<strong>预定义容量</strong>，避免额外分配内存。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>ReadFile</span><span class=p>(</span><span class=nx>filename</span> <span class=kt>string</span><span class=p>)</span> <span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>ReadFile 从 filename 指定的文件中读取数据并返回文件的内容。成功的调用返回的err 为 nil 而非 EOF。因为本函数定义为读取整个文件，它不会将读取返回的 EOF 视为应报告的错误。(同 ReadAll )</p>
-<blockquote>
-<p>ReadFile 源码中先获取了文件的大小，当大小 &lt; 1e9 时，才会用到文件的大小。按源码中注释的说法是 FileInfo 不会很精确地得到文件大小。</p>
-</blockquote>
-<h2 id=writefile-函数>WriteFile 函数</h2>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>ReadFile</span><span class=p>(</span><span class=nx>filename</span> <span class=kt>string</span><span class=p>)</span> <span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>ReadFile 从 filename 指定的文件中读取数据并返回文件的内容。成功的调用返回的err 为 nil 而非 EOF。因为本函数定义为读取整个文件，它不会将读取返回的 EOF 视为应报告的错误。(同 ReadAll )</p><blockquote>
+<p>ReadFile 源码中先获取了文件的大小，当大小 &lt; 1e9 时，才会用到文件的大小。按源码中注释的说法是 FileInfo 不会很精确地得到文件大小。</p></blockquote><h2 id=writefile-函数>WriteFile 函数</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>WriteFile</span><span class=p>(</span><span class=nx>filename</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>data</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>perm</span> <span class=nx>os</span><span class=p>.</span><span class=nx>FileMode</span><span class=p>)</span> <span class=kt>error</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>WriteFile 将 data 写入 filename 文件中，当文件不存在时会根据 perm 指定的权限进行创建一个,文件存在时会先清空文件内容。</p>
-<p>对于 perm 参数，一般可以指定为：0666</p>
-<h2 id=tempdir-函数>TempDir 函数</h2>
-<p>操作系统中一般都会提供临时目录，比如 linux 下的 /tmp 目录（通过 <code>os.TempDir()</code> 可以获取到)。</p>
-<p>有时候，我们自己需要创建临时目录，比如 Go 工具链源码中（src/cmd/go/build.go），通过 TempDir 创建一个临时目录，用于存放编译过程的临时文件：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>WriteFile</span><span class=p>(</span><span class=nx>filename</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>data</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>perm</span> <span class=nx>os</span><span class=p>.</span><span class=nx>FileMode</span><span class=p>)</span> <span class=kt>error</span>
+</span></span></code></pre></td></tr></table></div></div><p>WriteFile 将 data 写入 filename 文件中，当文件不存在时会根据 perm 指定的权限进行创建一个,文件存在时会先清空文件内容。</p><p>对于 perm 参数，一般可以指定为：0666</p><h2 id=tempdir-函数>TempDir 函数</h2><p>操作系统中一般都会提供临时目录，比如 linux 下的 /tmp 目录（通过 <code>os.TempDir()</code> 可以获取到)。</p><p>有时候，我们自己需要创建临时目录，比如 Go 工具链源码中（src/cmd/go/build.go），通过 TempDir 创建一个临时目录，用于存放编译过程的临时文件：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>b</span><span class=p>.</span><span class=nx>work</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>TempDir</span><span class=p>(</span><span class=s>&#34;&#34;</span><span class=p>,</span> <span class=s>&#34;go-build&#34;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>第一个参数如果为空，表明在系统默认的临时目录（ os.TempDir ）中创建临时目录；第二个参数指定临时目录名的前缀，该函数返回临时目录的路径。</p>
-<h2 id=tempfile-函数>TempFile 函数</h2>
-<p>相应的，TempFile 用于创建临时文件。如 gofmt 命令的源码中创建临时文件：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>b</span><span class=p>.</span><span class=nx>work</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>TempDir</span><span class=p>(</span><span class=s>&#34;&#34;</span><span class=p>,</span> <span class=s>&#34;go-build&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>第一个参数如果为空，表明在系统默认的临时目录（ os.TempDir ）中创建临时目录；第二个参数指定临时目录名的前缀，该函数返回临时目录的路径。</p><h2 id=tempfile-函数>TempFile 函数</h2><p>相应的，TempFile 用于创建临时文件。如 gofmt 命令的源码中创建临时文件：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>f1</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>TempFile</span><span class=p>(</span><span class=s>&#34;&#34;</span><span class=p>,</span> <span class=s>&#34;gofmt&#34;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>参数和 ioutil.TempDir 参数含义类似。</p>
-<p>注意：创建者创建的临时文件和临时目录要负责删除这些临时目录和文件。如删除临时文件：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>f1</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>ioutil</span><span class=p>.</span><span class=nf>TempFile</span><span class=p>(</span><span class=s>&#34;&#34;</span><span class=p>,</span> <span class=s>&#34;gofmt&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>参数和 ioutil.TempDir 参数含义类似。</p><p>注意：创建者创建的临时文件和临时目录要负责删除这些临时目录和文件。如删除临时文件：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
-    <span class=nx>f</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
-    <span class=nx>os</span><span class=p>.</span><span class=nf>Remove</span><span class=p>(</span><span class=nx>f</span><span class=p>.</span><span class=nf>Name</span><span class=p>())</span>
-<span class=p>}()</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=discard-变量>Discard 变量</h2>
-<p>Discard 对应的类型（<code>type devNull int</code>）实现了 io.Writer 接口，同时，为了优化 io.Copy 到 Discard，避免不必要的工作，它也实现了 io.ReaderFrom 接口。</p>
-<p>devNull 在实现 io.Writer 接口时，只是简单的返回</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>f</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>os</span><span class=p>.</span><span class=nf>Remove</span><span class=p>(</span><span class=nx>f</span><span class=p>.</span><span class=nf>Name</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=p>}()</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=discard-变量>Discard 变量</h2><p>Discard 对应的类型（<code>type devNull int</code>）实现了 io.Writer 接口，同时，为了优化 io.Copy 到 Discard，避免不必要的工作，它也实现了 io.ReaderFrom 接口。</p><p>devNull 在实现 io.Writer 接口时，只是简单的返回</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=p>(</span><span class=nx>devNull</span><span class=p>)</span> <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=kt>int</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=nx>p</span><span class=p>),</span> <span class=kc>nil</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>而 ReadFrom 的实现是读取内容到一个 buf 中，最大也就 8192 字节，其他的会丢弃（当然，这个也不会读取）。</p>
-<blockquote>
-<p>又是一些我看不懂的东西。。</p>
-</blockquote>
-</div><div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>devNull</span><span class=p>)</span> <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=kt>int</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=nx>p</span><span class=p>),</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>而 ReadFrom 的实现是读取内容到一个 buf 中，最大也就 8192 字节，其他的会丢弃（当然，这个也不会读取）。</p><blockquote>
+<p>又是一些我看不懂的东西。。</p></blockquote></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-28</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a>,&nbsp;<a href=/Notes/tags/io/>io</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a>,&nbsp;<a href=/Notes/tags/io/>io</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/Notes/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/sql/ class=prev rel=prev title="Go sql 标准库"><i class="fas fa-angle-left fa-fw"></i>Go sql 标准库</a>
-<a href=/Notes/posts/frontend/css/flex/ class=next rel=next title="flex 布局">flex 布局<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+</section></div><div class=post-nav><a href=/Notes/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/sql/ class=prev rel=prev title="Go sql 标准库"><i class="fas fa-angle-left fa-fw"></i>Go sql 标准库</a>
+<a href=/Notes/posts/frontend/css/flex/ class=next rel=next title="flex 布局">flex 布局<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
-</html>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

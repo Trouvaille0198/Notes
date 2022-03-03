@@ -9,21 +9,19 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/1.-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-01-26T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-02-28T12:23:28+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="1. 两数之和">
 <meta name=twitter:description content="1. 两数之和 easy 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。 你可以假设每种">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/1.-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/2.-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/courses/operatingsystem2/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"1. 两数之和","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E5%88%B7%E9%A2%98\/array\/1.-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C\/"},"genre":"posts","keywords":"算法, 数组","wordcount":357,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E5%88%B7%E9%A2%98\/array\/1.-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C\/","datePublished":"2022-01-26T00:00:00+00:00","dateModified":"2022-02-28T12:23:28+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/1.-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/2.-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/courses/operating-system/operatingsystem2/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"1. 两数之和","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E5%88%B7%E9%A2%98\/array\/1.-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C\/"},"genre":"posts","keywords":"算法, 数组","wordcount":357,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E5%88%B7%E9%A2%98\/array\/1.-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C\/","datePublished":"2022-01-26T00:00:00+00:00","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -38,20 +36,14 @@
 </span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a>
-</div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -63,48 +55,24 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX">1. 两数之和</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E5%88%B7%E9%A2%98/><i class="far fa-folder fa-fw"></i>刷题</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-26>2022-01-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 357 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">1. 两数之和</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E5%88%B7%E9%A2%98/><i class="far fa-folder fa-fw"></i>刷题</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-26>2022-01-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 357 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#两重循环>两重循环</a></li>
-<li><a href=#哈希表>哈希表</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><h1 id=1-两数之和>1. 两数之和</h1>
-<p><code>easy</code></p>
-<p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
-<p>你可以按任意顺序返回答案。</p>
-<h2 id=两重循环>两重循环</h2>
-<p>时间复杂度 O(n^2^)，空间复杂度 O(1)</p>
-<div class=highlight><div class=chroma>
+<li><a href=#两重循环>两重循环</a></li><li><a href=#哈希表>哈希表</a></li></ul></nav></div></div><div class=content id=content><h1 id=1-两数之和>1. 两数之和</h1><p><code>easy</code></p><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。</p><p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p><p>你可以按任意顺序返回答案。</p><h2 id=两重循环>两重循环</h2><p>时间复杂度 O(n^2^)，空间复杂度 O(1)</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -112,17 +80,14 @@
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
-    <span class=k>def</span> <span class=nf>twoSum</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span> <span class=n>target</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]:</span>
-        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>nums</span><span class=p>)):</span>
-            <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=nb>len</span><span class=p>(</span><span class=n>nums</span><span class=p>)):</span>
-                <span class=k>if</span> <span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>+</span><span class=n>nums</span><span class=p>[</span><span class=n>j</span><span class=p>]</span><span class=o>==</span><span class=n>target</span><span class=p>:</span>
-                    <span class=k>return</span> <span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>j</span><span class=p>]</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>twoSum</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span> <span class=n>target</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>nums</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span><span class=nb>len</span><span class=p>(</span><span class=n>nums</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>+</span><span class=n>nums</span><span class=p>[</span><span class=n>j</span><span class=p>]</span><span class=o>==</span><span class=n>target</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=k>return</span> <span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>j</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -134,24 +99,18 @@
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>twoSum</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>target</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
-    <span class=k>for</span> <span class=nx>i</span><span class=p>,</span><span class=nx>num1</span><span class=o>:=</span><span class=k>range</span> <span class=nx>nums</span><span class=p>{</span>
-        <span class=k>for</span> <span class=nx>j</span><span class=p>,</span><span class=nx>num2</span><span class=o>:=</span><span class=k>range</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>:]{</span>
-            <span class=k>if</span> <span class=nx>num1</span><span class=o>+</span><span class=nx>num2</span><span class=o>==</span><span class=nx>target</span><span class=p>{</span>
-                <span class=k>return</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=nx>i</span><span class=p>,</span><span class=nx>j</span><span class=o>+</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>}</span>
-            <span class=p>}</span>
-        <span class=p>}</span>
-    <span class=p>}</span>
-    <span class=k>return</span> <span class=kc>nil</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=哈希表>哈希表</h2>
-<p>键为数组中各元素的值，哈希表的值为数组中该值出现的位置</p>
-<p>在哈希表中是否存在 <code>target - nums[i]</code> 的键，若存在则说明这两数相加结果为 target，返回结果。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>twoSum</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>target</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>i</span><span class=p>,</span><span class=nx>num1</span><span class=o>:=</span><span class=k>range</span> <span class=nx>nums</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nx>j</span><span class=p>,</span><span class=nx>num2</span><span class=o>:=</span><span class=k>range</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>:]{</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=nx>num1</span><span class=o>+</span><span class=nx>num2</span><span class=o>==</span><span class=nx>target</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=nx>i</span><span class=p>,</span><span class=nx>j</span><span class=o>+</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=哈希表>哈希表</h2><p>键为数组中各元素的值，哈希表的值为数组中该值出现的位置</p><p>在哈希表中是否存在 <code>target - nums[i]</code> 的键，若存在则说明这两数相加结果为 target，返回结果。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -160,18 +119,15 @@
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
-    <span class=k>def</span> <span class=nf>twoSum</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span> <span class=n>target</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]:</span>
-        <span class=n>d</span><span class=o>=</span><span class=p>{}</span>
-        <span class=k>for</span> <span class=n>i</span><span class=p>,</span><span class=n>num</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>nums</span><span class=p>):</span>
-            <span class=k>if</span> <span class=n>target</span><span class=o>-</span><span class=n>num</span> <span class=ow>in</span> <span class=n>d</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span> 
-                <span class=k>return</span> <span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>d</span><span class=p>[</span><span class=n>target</span><span class=o>-</span><span class=n>num</span><span class=p>]]</span>
-            <span class=n>d</span><span class=p>[</span><span class=n>num</span><span class=p>]</span><span class=o>=</span><span class=n>i</span>
-</code></pre></td></tr></table>
-</div>
-</div><div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>twoSum</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>],</span> <span class=n>target</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=n>d</span><span class=o>=</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span><span class=p>,</span><span class=n>num</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>nums</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>target</span><span class=o>-</span><span class=n>num</span> <span class=ow>in</span> <span class=n>d</span><span class=o>.</span><span class=n>keys</span><span class=p>():</span> 
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>d</span><span class=p>[</span><span class=n>target</span><span class=o>-</span><span class=n>num</span><span class=p>]]</span>
+</span></span><span class=line><span class=cl>            <span class=n>d</span><span class=p>[</span><span class=n>num</span><span class=p>]</span><span class=o>=</span><span class=n>i</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -186,56 +142,36 @@
 </span><span class=lnt>11
 </span><span class=lnt>12
 </span><span class=lnt>13
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>twoSum</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>target</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
-    <span class=nx>prevNums</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span><span class=kt>int</span><span class=p>{}</span>
-	<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>num1</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>nums</span> <span class=p>{</span>
-		<span class=nx>num2</span> <span class=o>:=</span> <span class=nx>target</span> <span class=o>-</span> <span class=nx>num1</span>
-		<span class=nx>j</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>prevNums</span><span class=p>[</span><span class=nx>num2</span><span class=p>]</span>
-		<span class=k>if</span> <span class=nx>ok</span> <span class=p>{</span>
-			<span class=k>return</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=nx>j</span><span class=p>,</span> <span class=nx>i</span><span class=p>}</span>
-		<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
-			<span class=nx>prevNums</span><span class=p>[</span><span class=nx>num1</span><span class=p>]</span> <span class=p>=</span> <span class=nx>i</span>
-		<span class=p>}</span>
-	<span class=p>}</span>
-	<span class=k>return</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{}</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div></div><div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>twoSum</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>target</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>prevNums</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span><span class=kt>int</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>num1</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>nums</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>num2</span> <span class=o>:=</span> <span class=nx>target</span> <span class=o>-</span> <span class=nx>num1</span>
+</span></span><span class=line><span class=cl>		<span class=nx>j</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>prevNums</span><span class=p>[</span><span class=nx>num2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>ok</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=nx>j</span><span class=p>,</span> <span class=nx>i</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>prevNums</span><span class=p>[</span><span class=nx>num1</span><span class=p>]</span> <span class=p>=</span> <span class=nx>i</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-28</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E7%AE%97%E6%B3%95/>算法</a>,&nbsp;<a href=/Notes/tags/%E6%95%B0%E7%BB%84/>数组</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E7%AE%97%E6%B3%95/>算法</a>,&nbsp;<a href=/Notes/tags/%E6%95%B0%E7%BB%84/>数组</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/Notes/posts/%E5%88%B7%E9%A2%98/array/2.-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/ class=prev rel=prev title="2. 两数相加"><i class="fas fa-angle-left fa-fw"></i>2. 两数相加</a>
-<a href=/Notes/posts/courses/operatingsystem2/ class=next rel=next title=操作系统（2）>操作系统（2）<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+</section></div><div class=post-nav><a href=/Notes/posts/%E5%88%B7%E9%A2%98/array/2.-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/ class=prev rel=prev title="2. 两数相加"><i class="fas fa-angle-left fa-fw"></i>2. 两数相加</a>
+<a href=/Notes/posts/courses/operating-system/operatingsystem2/ class=next rel=next title=操作系统（2）>操作系统（2）<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
-</html>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

@@ -8,21 +8,19 @@
 <meta property="og:description" content="认识 输出日志 导入 1 import logging 初始化 级别排序 CRITICAL > ERROR > WARNING > INFO > DEBUG 级别 何时使用 DEBUG 细节信息，仅当诊断问题时适用。 INFO 确认程序按预期运行 WARNING 表明有已经或即将发生">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/logging/"><meta property="article:section" content="posts">
-<meta property="article:modified_time" content="2022-02-28T12:23:28+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content>
 <meta name=twitter:description content="认识 输出日志 导入 1 import logging 初始化 级别排序 CRITICAL > ERROR > WARNING > INFO > DEBUG 级别 何时使用 DEBUG 细节信息，仅当诊断问题时适用。 INFO 确认程序按预期运行 WARNING 表明有已经或即将发生">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/logging/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/iohttp/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/logging\/"},"genre":"posts","wordcount":2047,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/logging\/","dateModified":"2022-02-28T12:23:28+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/logging/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/iohttp/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/logging\/"},"genre":"posts","wordcount":2047,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/logging\/","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -37,20 +35,14 @@
 </span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a>
-</div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -62,183 +54,64 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2047 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2047 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#导入>导入</a></li>
-<li><a href=#初始化>初始化</a>
+<li><a href=#导入>导入</a></li><li><a href=#初始化>初始化</a>
 <ul>
-<li><a href=#级别排序>级别排序</a></li>
-<li><a href=#创建实例>创建实例</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><a href=#全局配置-basicconfig>全局配置 <em><strong>basicConfig()</strong></em></a></li>
-<li><a href=#对实例的配置>对实例的配置</a></li>
-<li><a href=#调用外部配置文件-fileconfig>调用外部配置文件 <em><strong>fileConfig()</strong></em></a></li>
-<li><a href=#字典配置-dictconfig>字典配置 <em><strong>dictConfig()</strong></em></a></li>
-</ul>
-<ul>
-<li><a href=#api>API</a></li>
-<li><a href=#filehandler>FileHandler</a></li>
-<li><a href=#streamhandler>StreamHandler</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><h1 id=认识>认识</h1>
-<p>输出日志</p>
-<h2 id=导入>导入</h2>
-<div class=highlight><div class=chroma>
+<li><a href=#级别排序>级别排序</a></li><li><a href=#创建实例>创建实例</a></li></ul></li></ul><ul>
+<li><a href=#全局配置-basicconfig>全局配置 <em><strong>basicConfig()</strong></em></a></li><li><a href=#对实例的配置>对实例的配置</a></li><li><a href=#调用外部配置文件-fileconfig>调用外部配置文件 <em><strong>fileConfig()</strong></em></a></li><li><a href=#字典配置-dictconfig>字典配置 <em><strong>dictConfig()</strong></em></a></li></ul><ul>
+<li><a href=#api>API</a></li><li><a href=#filehandler>FileHandler</a></li><li><a href=#streamhandler>StreamHandler</a></li></ul></nav></div></div><div class=content id=content><h1 id=认识>认识</h1><p>输出日志</p><h2 id=导入>导入</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>logging</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=初始化>初始化</h2>
-<h3 id=级别排序>级别排序</h3>
-<p><strong>CRITICAL > ERROR > WARNING > INFO > DEBUG</strong></p>
-<table>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=初始化>初始化</h2><h3 id=级别排序>级别排序</h3><p><strong>CRITICAL > ERROR > WARNING > INFO > DEBUG</strong></p><table>
 <thead>
 <tr>
-<th style=text-align:left>级别</th>
-<th style=text-align:left>何时使用</th>
-</tr>
-</thead>
-<tbody>
+<th style=text-align:left>级别</th><th style=text-align:left>何时使用</th></tr></thead><tbody>
 <tr>
-<td style=text-align:left><code>DEBUG</code></td>
-<td style=text-align:left>细节信息，仅当诊断问题时适用。</td>
-</tr>
-<tr>
-<td style=text-align:left><code>INFO</code></td>
-<td style=text-align:left>确认程序按预期运行</td>
-</tr>
-<tr>
-<td style=text-align:left><code>WARNING</code></td>
-<td style=text-align:left>表明有已经或即将发生的意外（例如：磁盘空间不足）。程序仍按预期进行</td>
-</tr>
-<tr>
-<td style=text-align:left><code>ERROR</code></td>
-<td style=text-align:left>由于严重的问题，程序的某些功能已经不能正常执行</td>
-</tr>
-<tr>
-<td style=text-align:left><code>CRITICAL</code></td>
-<td style=text-align:left>严重的错误，表明程序已不能继续执行</td>
-</tr>
-</tbody>
-</table>
-<h3 id=创建实例>创建实例</h3>
-<p>使用模块级记录器</p>
-<p><code>Logger</code> 是一个记录器类</p>
-<div class=highlight><div class=chroma>
+<td style=text-align:left><code>DEBUG</code></td><td style=text-align:left>细节信息，仅当诊断问题时适用。</td></tr><tr>
+<td style=text-align:left><code>INFO</code></td><td style=text-align:left>确认程序按预期运行</td></tr><tr>
+<td style=text-align:left><code>WARNING</code></td><td style=text-align:left>表明有已经或即将发生的意外（例如：磁盘空间不足）。程序仍按预期进行</td></tr><tr>
+<td style=text-align:left><code>ERROR</code></td><td style=text-align:left>由于严重的问题，程序的某些功能已经不能正常执行</td></tr><tr>
+<td style=text-align:left><code>CRITICAL</code></td><td style=text-align:left>严重的错误，表明程序已不能继续执行</td></tr></tbody></table><h3 id=创建实例>创建实例</h3><p>使用模块级记录器</p><p><code>Logger</code> 是一个记录器类</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>这意味着记录器名称跟踪包或模块的层次结构，并且直观地从记录器名称显示记录事件的位置。</p>
-<h1 id=配置>配置</h1>
-<h2 id=全局配置-basicconfig>全局配置 <em><strong>basicConfig()</strong></em></h2>
-<p>默认情况下，没有为任何日志记录消息设置目标。 你可以使用 <code>basicConfig()</code> 指定目标</p>
-<p>通过使用默认的 <code>Formatter</code> 创建一个 <code>StreamHandler</code> 并将其加入根日志记录器来为日志记录系统执行基本配置。 如果没有为根日志记录器定义处理程序则 debug(), info(), warning(), error() 和 critical() 等函数将自动调用 basicConfig()</p>
-<p><strong>参数</strong></p>
-<ul>
-<li><em>filename</em>：指定日志文件名</li>
-<li><em>filemode</em>：指定日志文件的打开模式，&lsquo;w&rsquo; 或者 &lsquo;a&rsquo;，默认为 &lsquo;a&rsquo;</li>
-<li><em>format</em>：指定输出的格式和内容</li>
-</ul>
-<table>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>这意味着记录器名称跟踪包或模块的层次结构，并且直观地从记录器名称显示记录事件的位置。</p><h1 id=配置>配置</h1><h2 id=全局配置-basicconfig>全局配置 <em><strong>basicConfig()</strong></em></h2><p>默认情况下，没有为任何日志记录消息设置目标。 你可以使用 <code>basicConfig()</code> 指定目标</p><p>通过使用默认的 <code>Formatter</code> 创建一个 <code>StreamHandler</code> 并将其加入根日志记录器来为日志记录系统执行基本配置。 如果没有为根日志记录器定义处理程序则 debug(), info(), warning(), error() 和 critical() 等函数将自动调用 basicConfig()</p><p><strong>参数</strong></p><ul>
+<li><em>filename</em>：指定日志文件名</li><li><em>filemode</em>：指定日志文件的打开模式，&lsquo;w&rsquo; 或者 &lsquo;a&rsquo;，默认为 &lsquo;a&rsquo;</li><li><em>format</em>：指定输出的格式和内容</li></ul><table>
 <thead>
 <tr>
-<th style=text-align:left>参数</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
+<th style=text-align:left>参数</th><th>作用</th></tr></thead><tbody>
 <tr>
-<td style=text-align:left>%(levelno)s</td>
-<td>日志级别的数值</td>
-</tr>
-<tr>
-<td style=text-align:left>%(levelname)s</td>
-<td>日志级别的名称</td>
-</tr>
-<tr>
-<td style=text-align:left>%(pathname)s</td>
-<td>当前执行程序的路径，其实就是sys.argv[0]</td>
-</tr>
-<tr>
-<td style=text-align:left>%(filename)s</td>
-<td>当前执行程序名</td>
-</tr>
-<tr>
-<td style=text-align:left>%(funcName)s</td>
-<td>当前函数</td>
-</tr>
-<tr>
-<td style=text-align:left>%(lineno)d</td>
-<td>当前行号</td>
-</tr>
-<tr>
-<td style=text-align:left>%(asctime)s</td>
-<td>时间</td>
-</tr>
-<tr>
-<td style=text-align:left>%(thread)d</td>
-<td>线程 ID</td>
-</tr>
-<tr>
-<td style=text-align:left>%(threadName)s</td>
-<td>线程名称</td>
-</tr>
-<tr>
-<td style=text-align:left>%(process)d</td>
-<td>进程 ID</td>
-</tr>
-<tr>
-<td style=text-align:left>%(message)s</td>
-<td>日志信息</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><em>datefmt</em>：指定时间格式，同 time.strftime()</li>
-<li><em>level</em>：设置日志级别，默认为 logging.WARNNING</li>
-<li><em>stream</em>：指定将日志的输出流，可以指定输出到 sys.stderr，sys.stdout 或者文件，默认输出到 sys.stderr，与 filename 不兼容</li>
-</ul>
-<p><strong>例</strong></p>
-<div class=highlight><div class=chroma>
+<td style=text-align:left>%(levelno)s</td><td>日志级别的数值</td></tr><tr>
+<td style=text-align:left>%(levelname)s</td><td>日志级别的名称</td></tr><tr>
+<td style=text-align:left>%(pathname)s</td><td>当前执行程序的路径，其实就是sys.argv[0]</td></tr><tr>
+<td style=text-align:left>%(filename)s</td><td>当前执行程序名</td></tr><tr>
+<td style=text-align:left>%(funcName)s</td><td>当前函数</td></tr><tr>
+<td style=text-align:left>%(lineno)d</td><td>当前行号</td></tr><tr>
+<td style=text-align:left>%(asctime)s</td><td>时间</td></tr><tr>
+<td style=text-align:left>%(thread)d</td><td>线程 ID</td></tr><tr>
+<td style=text-align:left>%(threadName)s</td><td>线程名称</td></tr><tr>
+<td style=text-align:left>%(process)d</td><td>进程 ID</td></tr><tr>
+<td style=text-align:left>%(message)s</td><td>日志信息</td></tr></tbody></table><ul>
+<li><em>datefmt</em>：指定时间格式，同 time.strftime()</li><li><em>level</em>：设置日志级别，默认为 logging.WARNNING</li><li><em>stream</em>：指定将日志的输出流，可以指定输出到 sys.stderr，sys.stdout 或者文件，默认输出到 sys.stderr，与 filename 不兼容</li></ul><p><strong>例</strong></p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -249,38 +122,28 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>logging</span>
-<span class=n>logging</span><span class=o>.</span><span class=n>basicConfig</span><span class=p>(</span><span class=n>level</span><span class=o>=</span><span class=n>logging</span><span class=o>.</span><span class=n>DEBUG</span><span class=p>,</span>
-                    <span class=nb>format</span><span class=o>=</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
-<span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
-
-<span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;Start print log&#34;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s2>&#34;Do something&#34;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>warning</span><span class=p>(</span><span class=s2>&#34;Something maybe fail.&#34;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;Finish&#34;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>输出</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl><span class=n>logging</span><span class=o>.</span><span class=n>basicConfig</span><span class=p>(</span><span class=n>level</span><span class=o>=</span><span class=n>logging</span><span class=o>.</span><span class=n>DEBUG</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                    <span class=nb>format</span><span class=o>=</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;Start print log&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s2>&#34;Do something&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>warning</span><span class=p>(</span><span class=s2>&#34;Something maybe fail.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;Finish&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>2021-04-27 11:23:53,973 - INFO - Start print log
-2021-04-27 11:23:53,973 - DEBUG - Do something
-2021-04-27 11:23:53,973 - WARNING - Something maybe fail.
-2021-04-27 11:23:53,973 - INFO - Finish
-</code></pre></td></tr></table>
-</div>
-</div><p>对 <a href=https://docs.python.org/zh-cn/3/library/logging.html#logging.basicConfig target=_blank rel="noopener noreffer"><code>basicConfig()</code></a> 的调用应该在 <a href=https://docs.python.org/zh-cn/3/library/logging.html#logging.debug target=_blank rel="noopener noreffer"><code>debug()</code></a> ， <a href=https://docs.python.org/zh-cn/3/library/logging.html#logging.info target=_blank rel="noopener noreffer"><code>info()</code></a> 等的前面。因为它被设计为一次性的配置，只有第一次调用会进行操作，随后的调用不会产生有效操作。</p>
-<h2 id=对实例的配置>对实例的配置</h2>
-<p>对记录器类进行配置，实际上都是 <code>Logger</code> 类的成员函数</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>2021-04-27 11:23:53,973 - INFO - Start print log
+</span></span><span class=line><span class=cl>2021-04-27 11:23:53,973 - DEBUG - Do something
+</span></span><span class=line><span class=cl>2021-04-27 11:23:53,973 - WARNING - Something maybe fail.
+</span></span><span class=line><span class=cl>2021-04-27 11:23:53,973 - INFO - Finish
+</span></span></code></pre></td></tr></table></div></div><p>对 <a href=https://docs.python.org/zh-cn/3/library/logging.html#logging.basicConfig target=_blank rel="noopener noreffer"><code>basicConfig()</code></a> 的调用应该在 <a href=https://docs.python.org/zh-cn/3/library/logging.html#logging.debug target=_blank rel="noopener noreffer"><code>debug()</code></a> ， <a href=https://docs.python.org/zh-cn/3/library/logging.html#logging.info target=_blank rel="noopener noreffer"><code>info()</code></a> 等的前面。因为它被设计为一次性的配置，只有第一次调用会进行操作，随后的调用不会产生有效操作。</p><h2 id=对实例的配置>对实例的配置</h2><p>对记录器类进行配置，实际上都是 <code>Logger</code> 类的成员函数</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -307,96 +170,50 @@
 </span><span class=lnt>23
 </span><span class=lnt>24
 </span><span class=lnt>25
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>logging</span>
-
-<span class=c1># create logger</span>
-<span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>DEBUG</span><span class=p>)</span>
-
-<span class=c1># create console handler and set level to debug</span>
-<span class=n>ch</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>StreamHandler</span><span class=p>()</span>
-<span class=n>ch</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>DEBUG</span><span class=p>)</span>
-
-<span class=c1># create formatter</span>
-<span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
-
-<span class=c1># add formatter to ch</span>
-<span class=n>ch</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
-
-<span class=c1># add ch to logger</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>ch</span><span class=p>)</span>
-
-<span class=c1># &#39;application&#39; code</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s1>&#39;debug message&#39;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s1>&#39;info message&#39;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>warning</span><span class=p>(</span><span class=s1>&#39;warn message&#39;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>error</span><span class=p>(</span><span class=s1>&#39;error message&#39;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>critical</span><span class=p>(</span><span class=s1>&#39;critical message&#39;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><ul>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># create logger</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>DEBUG</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># create console handler and set level to debug</span>
+</span></span><span class=line><span class=cl><span class=n>ch</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>StreamHandler</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>ch</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>DEBUG</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># create formatter</span>
+</span></span><span class=line><span class=cl><span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># add formatter to ch</span>
+</span></span><span class=line><span class=cl><span class=n>ch</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># add ch to logger</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>ch</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># &#39;application&#39; code</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s1>&#39;debug message&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s1>&#39;info message&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>warning</span><span class=p>(</span><span class=s1>&#39;warn message&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>error</span><span class=p>(</span><span class=s1>&#39;error message&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>critical</span><span class=p>(</span><span class=s1>&#39;critical message&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ul>
 <li>
-<p><em><strong>setLevel(level)</strong></em></p>
-<p>设置记录器级别，高于 level 会被输出</p>
-<ul>
-<li><em>level</em>：级别，默认为 <code>logging.WARNING</code></li>
-</ul>
-<table>
+<p><em><strong>setLevel(level)</strong></em></p><p>设置记录器级别，高于 level 会被输出</p><ul>
+<li><em>level</em>：级别，默认为 <code>logging.WARNING</code></li></ul><table>
 <thead>
 <tr>
-<th style=text-align:left>级别</th>
-<th style=text-align:left>数值</th>
-</tr>
-</thead>
-<tbody>
+<th style=text-align:left>级别</th><th style=text-align:left>数值</th></tr></thead><tbody>
 <tr>
-<td style=text-align:left><code>CRITICAL</code></td>
-<td style=text-align:left>50</td>
-</tr>
-<tr>
-<td style=text-align:left><code>ERROR</code></td>
-<td style=text-align:left>40</td>
-</tr>
-<tr>
-<td style=text-align:left><code>WARNING</code></td>
-<td style=text-align:left>30</td>
-</tr>
-<tr>
-<td style=text-align:left><code>INFO</code></td>
-<td style=text-align:left>20</td>
-</tr>
-<tr>
-<td style=text-align:left><code>DEBUG</code></td>
-<td style=text-align:left>10</td>
-</tr>
-<tr>
-<td style=text-align:left><code>NOTSET</code></td>
-<td style=text-align:left>0</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p><em><strong>addHandler(hdlr)</strong></em></p>
-<p>将指定的处理器 hdlr 添加到此记录器</p>
-</li>
-<li>
-<p><em><strong>removeHandler(hdlr)</strong></em></p>
-<p>移除指定处理器</p>
-</li>
-<li>
-<p><em><strong>addFilter(filter)</strong></em></p>
-<p>将指定的过滤器 <em>filter</em> 添加到此记录器</p>
-</li>
-<li>
-<p><em><strong>removeFilter(filter)</strong></em></p>
-<p>移除指定过滤器</p>
-</li>
-</ul>
-<h2 id=调用外部配置文件-fileconfig>调用外部配置文件 <em><strong>fileConfig()</strong></em></h2>
-<div class=highlight><div class=chroma>
+<td style=text-align:left><code>CRITICAL</code></td><td style=text-align:left>50</td></tr><tr>
+<td style=text-align:left><code>ERROR</code></td><td style=text-align:left>40</td></tr><tr>
+<td style=text-align:left><code>WARNING</code></td><td style=text-align:left>30</td></tr><tr>
+<td style=text-align:left><code>INFO</code></td><td style=text-align:left>20</td></tr><tr>
+<td style=text-align:left><code>DEBUG</code></td><td style=text-align:left>10</td></tr><tr>
+<td style=text-align:left><code>NOTSET</code></td><td style=text-align:left>0</td></tr></tbody></table></li><li>
+<p><em><strong>addHandler(hdlr)</strong></em></p><p>将指定的处理器 hdlr 添加到此记录器</p></li><li>
+<p><em><strong>removeHandler(hdlr)</strong></em></p><p>移除指定处理器</p></li><li>
+<p><em><strong>addFilter(filter)</strong></em></p><p>将指定的过滤器 <em>filter</em> 添加到此记录器</p></li><li>
+<p><em><strong>removeFilter(filter)</strong></em></p><p>移除指定过滤器</p></li></ul><h2 id=调用外部配置文件-fileconfig>调用外部配置文件 <em><strong>fileConfig()</strong></em></h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -412,26 +229,22 @@
 </span><span class=lnt>12
 </span><span class=lnt>13
 </span><span class=lnt>14
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>logging</span>
-<span class=kn>import</span> <span class=nn>logging.config</span>
-
-<span class=n>logging</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>fileConfig</span><span class=p>(</span><span class=s1>&#39;logging.conf&#39;</span><span class=p>)</span>
-
-<span class=c1># create logger</span>
-<span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
-
-<span class=c1># &#39;application&#39; code</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s1>&#39;debug message&#39;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s1>&#39;info message&#39;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>warning</span><span class=p>(</span><span class=s1>&#39;warn message&#39;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>error</span><span class=p>(</span><span class=s1>&#39;error message&#39;</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>critical</span><span class=p>(</span><span class=s1>&#39;critical message&#39;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>配置文件例 (.conf)</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging.config</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>logging</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>fileConfig</span><span class=p>(</span><span class=s1>&#39;logging.conf&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># create logger</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># &#39;application&#39; code</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s1>&#39;debug message&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s1>&#39;info message&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>warning</span><span class=p>(</span><span class=s1>&#39;warn message&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>error</span><span class=p>(</span><span class=s1>&#39;error message&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>critical</span><span class=p>(</span><span class=s1>&#39;critical message&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>配置文件例 (.conf)</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -461,40 +274,36 @@
 </span><span class=lnt>26
 </span><span class=lnt>27
 </span><span class=lnt>28
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>[loggers]
-keys=root,simpleExample
-
-[handlers]
-keys=consoleHandler
-
-[formatters]
-keys=simpleFormatter
-
-[logger_root]
-level=DEBUG
-handlers=consoleHandler
-
-[logger_simpleExample]
-level=DEBUG
-handlers=consoleHandler
-qualname=simpleExample
-propagate=0
-
-[handler_consoleHandler]
-class=StreamHandler
-level=DEBUG
-formatter=simpleFormatter
-args=(sys.stdout,)
-
-[formatter_simpleFormatter]
-format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
-datefmt=
-</code></pre></td></tr></table>
-</div>
-</div><p>或使用 YAML 格式</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[loggers]
+</span></span><span class=line><span class=cl>keys=root,simpleExample
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[handlers]
+</span></span><span class=line><span class=cl>keys=consoleHandler
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[formatters]
+</span></span><span class=line><span class=cl>keys=simpleFormatter
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[logger_root]
+</span></span><span class=line><span class=cl>level=DEBUG
+</span></span><span class=line><span class=cl>handlers=consoleHandler
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[logger_simpleExample]
+</span></span><span class=line><span class=cl>level=DEBUG
+</span></span><span class=line><span class=cl>handlers=consoleHandler
+</span></span><span class=line><span class=cl>qualname=simpleExample
+</span></span><span class=line><span class=cl>propagate=0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[handler_consoleHandler]
+</span></span><span class=line><span class=cl>class=StreamHandler
+</span></span><span class=line><span class=cl>level=DEBUG
+</span></span><span class=line><span class=cl>formatter=simpleFormatter
+</span></span><span class=line><span class=cl>args=(sys.stdout,)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[formatter_simpleFormatter]
+</span></span><span class=line><span class=cl>format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+</span></span><span class=line><span class=cl>datefmt=
+</span></span></code></pre></td></tr></table></div></div><p>或使用 YAML 格式</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -514,30 +323,26 @@ datefmt=
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
-</span><span class=w></span><span class=nt>formatters</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>simple</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>format</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#39;</span><span class=w>
-</span><span class=w></span><span class=nt>handlers</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>console</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>class</span><span class=p>:</span><span class=w> </span><span class=l>logging.StreamHandler</span><span class=w>
-</span><span class=w>    </span><span class=nt>level</span><span class=p>:</span><span class=w> </span><span class=l>DEBUG</span><span class=w>
-</span><span class=w>    </span><span class=nt>formatter</span><span class=p>:</span><span class=w> </span><span class=l>simple</span><span class=w>
-</span><span class=w>    </span><span class=nt>stream</span><span class=p>:</span><span class=w> </span><span class=l>ext://sys.stdout</span><span class=w>
-</span><span class=w></span><span class=nt>loggers</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>simpleExample</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>level</span><span class=p>:</span><span class=w> </span><span class=l>DEBUG</span><span class=w>
-</span><span class=w>    </span><span class=nt>handlers</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>console]</span><span class=w>
-</span><span class=w>    </span><span class=nt>propagate</span><span class=p>:</span><span class=w> </span><span class=kc>no</span><span class=w>
-</span><span class=w></span><span class=nt>root</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>level</span><span class=p>:</span><span class=w> </span><span class=l>DEBUG</span><span class=w>
-</span><span class=w>  </span><span class=nt>handlers</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>console]</span><span class=w>
-</span></code></pre></td></tr></table>
-</div>
-</div><p>也可以使用 json 格式</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>formatters</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>simple</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>format</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>handlers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>console</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>class</span><span class=p>:</span><span class=w> </span><span class=l>logging.StreamHandler</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>level</span><span class=p>:</span><span class=w> </span><span class=l>DEBUG</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>formatter</span><span class=p>:</span><span class=w> </span><span class=l>simple</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>stream</span><span class=p>:</span><span class=w> </span><span class=l>ext://sys.stdout</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>loggers</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>simpleExample</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>level</span><span class=p>:</span><span class=w> </span><span class=l>DEBUG</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>handlers</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>console]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>propagate</span><span class=p>:</span><span class=w> </span><span class=kc>no</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>root</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>level</span><span class=p>:</span><span class=w> </span><span class=l>DEBUG</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>handlers</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=l>console]</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>也可以使用 json 格式</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -585,58 +390,54 @@ datefmt=
 </span><span class=lnt>44
 </span><span class=lnt>45
 </span><span class=lnt>46
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=p>{</span>
-    <span class=s2>&#34;version&#34;</span><span class=p>:</span><span class=mi>1</span><span class=p>,</span>
-    <span class=s2>&#34;disable_existing_loggers&#34;</span><span class=p>:</span><span class=n>false</span><span class=p>,</span>
-    <span class=s2>&#34;formatters&#34;</span><span class=p>:{</span>
-        <span class=s2>&#34;simple&#34;</span><span class=p>:{</span>
-            <span class=s2>&#34;format&#34;</span><span class=p>:</span><span class=s2>&#34;</span><span class=si>%(asctime)s</span><span class=s2> - </span><span class=si>%(name)s</span><span class=s2> - </span><span class=si>%(levelname)s</span><span class=s2> - </span><span class=si>%(message)s</span><span class=s2>&#34;</span>
-        <span class=p>}</span>
-    <span class=p>},</span>
-    <span class=s2>&#34;handlers&#34;</span><span class=p>:{</span>
-        <span class=s2>&#34;console&#34;</span><span class=p>:{</span>
-            <span class=s2>&#34;class&#34;</span><span class=p>:</span><span class=s2>&#34;logging.StreamHandler&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;DEBUG&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;formatter&#34;</span><span class=p>:</span><span class=s2>&#34;simple&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;stream&#34;</span><span class=p>:</span><span class=s2>&#34;ext://sys.stdout&#34;</span>
-        <span class=p>},</span>
-        <span class=s2>&#34;info_file_handler&#34;</span><span class=p>:{</span>
-            <span class=s2>&#34;class&#34;</span><span class=p>:</span><span class=s2>&#34;logging.handlers.RotatingFileHandler&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;INFO&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;formatter&#34;</span><span class=p>:</span><span class=s2>&#34;simple&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;filename&#34;</span><span class=p>:</span><span class=s2>&#34;info.log&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;maxBytes&#34;</span><span class=p>:</span><span class=s2>&#34;10485760&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;backupCount&#34;</span><span class=p>:</span><span class=mi>20</span><span class=p>,</span>
-            <span class=s2>&#34;encoding&#34;</span><span class=p>:</span><span class=s2>&#34;utf8&#34;</span>
-        <span class=p>},</span>
-        <span class=s2>&#34;error_file_handler&#34;</span><span class=p>:{</span>
-            <span class=s2>&#34;class&#34;</span><span class=p>:</span><span class=s2>&#34;logging.handlers.RotatingFileHandler&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;ERROR&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;formatter&#34;</span><span class=p>:</span><span class=s2>&#34;simple&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;filename&#34;</span><span class=p>:</span><span class=s2>&#34;errors.log&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;maxBytes&#34;</span><span class=p>:</span><span class=mi>10485760</span><span class=p>,</span>
-            <span class=s2>&#34;backupCount&#34;</span><span class=p>:</span><span class=mi>20</span><span class=p>,</span>
-            <span class=s2>&#34;encoding&#34;</span><span class=p>:</span><span class=s2>&#34;utf8&#34;</span>
-        <span class=p>}</span>
-    <span class=p>},</span>
-    <span class=s2>&#34;loggers&#34;</span><span class=p>:{</span>
-        <span class=s2>&#34;my_module&#34;</span><span class=p>:{</span>
-            <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;ERROR&#34;</span><span class=p>,</span>
-            <span class=s2>&#34;handlers&#34;</span><span class=p>:[</span><span class=s2>&#34;info_file_handler&#34;</span><span class=p>],</span>
-            <span class=s2>&#34;propagate&#34;</span><span class=p>:</span><span class=s2>&#34;no&#34;</span>
-        <span class=p>}</span>
-    <span class=p>},</span>
-    <span class=s2>&#34;root&#34;</span><span class=p>:{</span>
-        <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;INFO&#34;</span><span class=p>,</span>
-        <span class=s2>&#34;handlers&#34;</span><span class=p>:[</span><span class=s2>&#34;console&#34;</span><span class=p>,</span><span class=s2>&#34;info_file_handler&#34;</span><span class=p>,</span><span class=s2>&#34;error_file_handler&#34;</span><span class=p>]</span>
-    <span class=p>}</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>传入到程序中</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;version&#34;</span><span class=p>:</span><span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;disable_existing_loggers&#34;</span><span class=p>:</span><span class=n>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;formatters&#34;</span><span class=p>:{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;simple&#34;</span><span class=p>:{</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;format&#34;</span><span class=p>:</span><span class=s2>&#34;</span><span class=si>%(asctime)s</span><span class=s2> - </span><span class=si>%(name)s</span><span class=s2> - </span><span class=si>%(levelname)s</span><span class=s2> - </span><span class=si>%(message)s</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;handlers&#34;</span><span class=p>:{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;console&#34;</span><span class=p>:{</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;class&#34;</span><span class=p>:</span><span class=s2>&#34;logging.StreamHandler&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;DEBUG&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;formatter&#34;</span><span class=p>:</span><span class=s2>&#34;simple&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;stream&#34;</span><span class=p>:</span><span class=s2>&#34;ext://sys.stdout&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;info_file_handler&#34;</span><span class=p>:{</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;class&#34;</span><span class=p>:</span><span class=s2>&#34;logging.handlers.RotatingFileHandler&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;INFO&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;formatter&#34;</span><span class=p>:</span><span class=s2>&#34;simple&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;filename&#34;</span><span class=p>:</span><span class=s2>&#34;info.log&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;maxBytes&#34;</span><span class=p>:</span><span class=s2>&#34;10485760&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;backupCount&#34;</span><span class=p>:</span><span class=mi>20</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;encoding&#34;</span><span class=p>:</span><span class=s2>&#34;utf8&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;error_file_handler&#34;</span><span class=p>:{</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;class&#34;</span><span class=p>:</span><span class=s2>&#34;logging.handlers.RotatingFileHandler&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;ERROR&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;formatter&#34;</span><span class=p>:</span><span class=s2>&#34;simple&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;filename&#34;</span><span class=p>:</span><span class=s2>&#34;errors.log&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;maxBytes&#34;</span><span class=p>:</span><span class=mi>10485760</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;backupCount&#34;</span><span class=p>:</span><span class=mi>20</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;encoding&#34;</span><span class=p>:</span><span class=s2>&#34;utf8&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;loggers&#34;</span><span class=p>:{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;my_module&#34;</span><span class=p>:{</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;ERROR&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;handlers&#34;</span><span class=p>:[</span><span class=s2>&#34;info_file_handler&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;propagate&#34;</span><span class=p>:</span><span class=s2>&#34;no&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;root&#34;</span><span class=p>:{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;level&#34;</span><span class=p>:</span><span class=s2>&#34;INFO&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;handlers&#34;</span><span class=p>:[</span><span class=s2>&#34;console&#34;</span><span class=p>,</span><span class=s2>&#34;info_file_handler&#34;</span><span class=p>,</span><span class=s2>&#34;error_file_handler&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>传入到程序中</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -664,63 +465,39 @@ datefmt=
 </span><span class=lnt>24
 </span><span class=lnt>25
 </span><span class=lnt>26
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>json</span>
-<span class=kn>import</span> <span class=nn>logging.config</span>
-<span class=kn>import</span> <span class=nn>os</span>
- 
-<span class=k>def</span> <span class=nf>setup_logging</span><span class=p>(</span><span class=n>default_path</span> <span class=o>=</span> <span class=s2>&#34;logging.json&#34;</span><span class=p>,</span><span class=n>default_level</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>,</span><span class=n>env_key</span> <span class=o>=</span> <span class=s2>&#34;LOG_CFG&#34;</span><span class=p>):</span>
-    <span class=n>path</span> <span class=o>=</span> <span class=n>default_path</span>
-    <span class=n>value</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=n>env_key</span><span class=p>,</span><span class=kc>None</span><span class=p>)</span>
-    <span class=k>if</span> <span class=n>value</span><span class=p>:</span>
-        <span class=n>path</span> <span class=o>=</span> <span class=n>value</span>
-    <span class=k>if</span> <span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>exists</span><span class=p>(</span><span class=n>path</span><span class=p>):</span>
-        <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>path</span><span class=p>,</span><span class=s2>&#34;r&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
-            <span class=n>config</span> <span class=o>=</span> <span class=n>json</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>f</span><span class=p>)</span>
-            <span class=n>logging</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>dictConfig</span><span class=p>(</span><span class=n>config</span><span class=p>)</span>
-    <span class=k>else</span><span class=p>:</span>
-        <span class=n>logging</span><span class=o>.</span><span class=n>basicConfig</span><span class=p>(</span><span class=n>level</span> <span class=o>=</span> <span class=n>default_level</span><span class=p>)</span>
- 
-<span class=k>def</span> <span class=nf>func</span><span class=p>():</span>
-    <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;start func&#34;</span><span class=p>)</span>
- 
-    <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;exec func&#34;</span><span class=p>)</span>
- 
-    <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;end func&#34;</span><span class=p>)</span>
- 
-<span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
-    <span class=n>setup_logging</span><span class=p>(</span><span class=n>default_path</span> <span class=o>=</span> <span class=s2>&#34;logging.json&#34;</span><span class=p>)</span>
-    <span class=n>func</span><span class=p>()</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>实际上将 json 格式转化为字典，借用了字典的配置</p>
-<h2 id=字典配置-dictconfig>字典配置 <em><strong>dictConfig()</strong></em></h2>
-<h1 id=处理器-handler>处理器 Handler</h1>
-<p><code>Handler</code> 对象负责将适当的日志消息（基于日志消息的严重性）分派给处理程序的指定目标</p>
-<h2 id=api>API</h2>
-<ul>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>json</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging.config</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>os</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>setup_logging</span><span class=p>(</span><span class=n>default_path</span> <span class=o>=</span> <span class=s2>&#34;logging.json&#34;</span><span class=p>,</span><span class=n>default_level</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>,</span><span class=n>env_key</span> <span class=o>=</span> <span class=s2>&#34;LOG_CFG&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>path</span> <span class=o>=</span> <span class=n>default_path</span>
+</span></span><span class=line><span class=cl>    <span class=n>value</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>getenv</span><span class=p>(</span><span class=n>env_key</span><span class=p>,</span><span class=kc>None</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>value</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>path</span> <span class=o>=</span> <span class=n>value</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>exists</span><span class=p>(</span><span class=n>path</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>path</span><span class=p>,</span><span class=s2>&#34;r&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>config</span> <span class=o>=</span> <span class=n>json</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>f</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>logging</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>dictConfig</span><span class=p>(</span><span class=n>config</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>logging</span><span class=o>.</span><span class=n>basicConfig</span><span class=p>(</span><span class=n>level</span> <span class=o>=</span> <span class=n>default_level</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;start func&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;exec func&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=n>logging</span><span class=o>.</span><span class=n>info</span><span class=p>(</span><span class=s2>&#34;end func&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>setup_logging</span><span class=p>(</span><span class=n>default_path</span> <span class=o>=</span> <span class=s2>&#34;logging.json&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>func</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>实际上将 json 格式转化为字典，借用了字典的配置</p><h2 id=字典配置-dictconfig>字典配置 <em><strong>dictConfig()</strong></em></h2><h1 id=处理器-handler>处理器 Handler</h1><p><code>Handler</code> 对象负责将适当的日志消息（基于日志消息的严重性）分派给处理程序的指定目标</p><h2 id=api>API</h2><ul>
 <li>
-<p><em><strong>setLevel(level)</strong></em></p>
-<p>为处理器设置等级</p>
-</li>
-<li>
-<p><em><strong>setFormatter(fmt)</strong></em></p>
-</li>
-<li>
-<p><em><strong>addFilter(filter)</strong></em></p>
-<p>将指定的过滤器 <em>filter</em> 添加到处理器</p>
-</li>
-<li>
-<p><em><strong>removeFilter(filter)</strong></em></p>
-<p>移除指定过滤器</p>
-</li>
-</ul>
-<h2 id=filehandler>FileHandler</h2>
-<p>要将日志打印到文件中，使用 <code>basicConfig</code> 中的 <code>filename</code> 参数指定日志文件</p>
-<p>更建议使用 <code>FileHandler</code> 实现</p>
-<p>生成实例时，传入日志文件名即可</p>
-<div class=highlight><div class=chroma>
+<p><em><strong>setLevel(level)</strong></em></p><p>为处理器设置等级</p></li><li>
+<p><em><strong>setFormatter(fmt)</strong></em></p></li><li>
+<p><em><strong>addFilter(filter)</strong></em></p><p>将指定的过滤器 <em>filter</em> 添加到处理器</p></li><li>
+<p><em><strong>removeFilter(filter)</strong></em></p><p>移除指定过滤器</p></li></ul><h2 id=filehandler>FileHandler</h2><p>要将日志打印到文件中，使用 <code>basicConfig</code> 中的 <code>filename</code> 参数指定日志文件</p><p>更建议使用 <code>FileHandler</code> 实现</p><p>生成实例时，传入日志文件名即可</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -732,25 +509,18 @@ datefmt=
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>logging</span>
-<span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
-
-<span class=n>handler</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>FileHandler</span><span class=p>(</span><span class=s2>&#34;log.txt&#34;</span><span class=p>)</span>
-<span class=n>handler</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
-<span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
-<span class=n>handler</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
-
-<span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>handler</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=streamhandler>StreamHandler</h2>
-<p>默认的 <code>basicConfig</code> 配置即支持打印日志</p>
-<p>但更建议使用 <code>StreamHandler</code> 实现</p>
-<p>以下例为<strong>同时输出到控制台与文件</strong></p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>handler</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>FileHandler</span><span class=p>(</span><span class=s2>&#34;log.txt&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>handler</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>handler</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>handler</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=streamhandler>StreamHandler</h2><p>默认的 <code>basicConfig</code> 配置即支持打印日志</p><p>但更建议使用 <code>StreamHandler</code> 实现</p><p>以下例为<strong>同时输出到控制台与文件</strong></p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -766,46 +536,32 @@ datefmt=
 </span><span class=lnt>12
 </span><span class=lnt>13
 </span><span class=lnt>14
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>logging</span>
-<span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
-
-<span class=n>fileHdlr</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>FileHandler</span><span class=p>(</span><span class=s2>&#34;log.txt&#34;</span><span class=p>)</span>
-<span class=n>fileHdlr</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
-<span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
-<span class=n>fileHdlr</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
- 
-<span class=n>consoleHdlr</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>StreamHandler</span><span class=p>()</span>
-<span class=n>consoleHdlr</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
- 
-<span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>fileHdlr</span><span class=p>)</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>consoleHdlr</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id=过滤器-filter>过滤器 Filter</h1>
-<p>格式化程序对象配置日志消息的最终顺序、结构和内容</p>
-<p>其构造函数有三个可选参数 —— 消息格式字符串、日期格式字符串和样式指示符</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>fileHdlr</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>FileHandler</span><span class=p>(</span><span class=s2>&#34;log.txt&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>fileHdlr</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>fileHdlr</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=n>consoleHdlr</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>StreamHandler</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>consoleHdlr</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>fileHdlr</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>consoleHdlr</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=过滤器-filter>过滤器 Filter</h1><p>格式化程序对象配置日志消息的最终顺序、结构和内容</p><p>其构造函数有三个可选参数 —— 消息格式字符串、日期格式字符串和样式指示符</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=o>.</span><span class=fm>__init__</span><span class=p>(</span><span class=n>fmt</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>datefmt</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>style</span><span class=o>=</span><span class=s1>&#39;%&#39;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>参数形式与 <code>basicConfig</code> 中的 foramt 参数相同</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=o>.</span><span class=fm>__init__</span><span class=p>(</span><span class=n>fmt</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>datefmt</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>style</span><span class=o>=</span><span class=s1>&#39;%&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>参数形式与 <code>basicConfig</code> 中的 foramt 参数相同</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id=样本>样本</h1>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=样本>样本</h1><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -885,145 +641,117 @@ datefmt=
 </span><span class=lnt>76
 </span><span class=lnt>77
 </span><span class=lnt>78
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>logging</span>
-<span class=kn>import</span> <span class=nn>sys</span>
-<span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>makedirs</span>
-<span class=kn>from</span> <span class=nn>os.path</span> <span class=kn>import</span> <span class=n>dirname</span><span class=p>,</span> <span class=n>exists</span>
-
-<span class=kn>from</span> <span class=nn>cmreslogging.handlers</span> <span class=kn>import</span> <span class=n>CMRESHandler</span>
-
-<span class=n>loggers</span> <span class=o>=</span> <span class=p>{}</span>
-
-<span class=n>LOG_ENABLED</span> <span class=o>=</span> <span class=kc>True</span>  <span class=c1># 是否开启日志</span>
-<span class=n>LOG_TO_CONSOLE</span> <span class=o>=</span> <span class=kc>True</span>  <span class=c1># 是否输出到控制台</span>
-<span class=n>LOG_TO_FILE</span> <span class=o>=</span> <span class=kc>True</span>  <span class=c1># 是否输出到文件</span>
-<span class=n>LOG_TO_ES</span> <span class=o>=</span> <span class=kc>True</span>  <span class=c1># 是否输出到 Elasticsearch</span>
-
-<span class=n>LOG_PATH</span> <span class=o>=</span> <span class=s1>&#39;./runtime.log&#39;</span>  <span class=c1># 日志文件路径</span>
-<span class=n>LOG_LEVEL</span> <span class=o>=</span> <span class=s1>&#39;DEBUG&#39;</span>  <span class=c1># 日志级别</span>
-<span class=n>LOG_FORMAT</span> <span class=o>=</span> <span class=s1>&#39;</span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(asctime)s</span><span class=s1> - process: </span><span class=si>%(process)d</span><span class=s1> - </span><span class=si>%(filename)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(lineno)d</span><span class=s1> - </span><span class=si>%(module)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span>  <span class=c1># 每条日志输出格式</span>
-<span class=n>ELASTIC_SEARCH_HOST</span> <span class=o>=</span> <span class=s1>&#39;eshost&#39;</span>  <span class=c1># Elasticsearch Host</span>
-<span class=n>ELASTIC_SEARCH_PORT</span> <span class=o>=</span> <span class=mi>9200</span>  <span class=c1># Elasticsearch Port</span>
-<span class=n>ELASTIC_SEARCH_INDEX</span> <span class=o>=</span> <span class=s1>&#39;runtime&#39;</span>  <span class=c1># Elasticsearch Index Name</span>
-<span class=n>APP_ENVIRONMENT</span> <span class=o>=</span> <span class=s1>&#39;dev&#39;</span>  <span class=c1># 运行环境，如测试环境还是生产环境</span>
-
-<span class=k>def</span> <span class=nf>get_logger</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=kc>None</span><span class=p>):</span>
-    <span class=s2>&#34;&#34;&#34;
-</span><span class=s2>    get logger by name
-</span><span class=s2>    :param name: name of logger
-</span><span class=s2>    :return: logger
-</span><span class=s2>    &#34;&#34;&#34;</span>
-    <span class=k>global</span> <span class=n>loggers</span>
-
-    <span class=k>if</span> <span class=ow>not</span> <span class=n>name</span><span class=p>:</span> <span class=n>name</span> <span class=o>=</span> <span class=vm>__name__</span>
-
-    <span class=k>if</span> <span class=n>loggers</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>name</span><span class=p>):</span>
-        <span class=k>return</span> <span class=n>loggers</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>name</span><span class=p>)</span>
-
-    <span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=n>name</span><span class=p>)</span>
-    <span class=n>logger</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>LOG_LEVEL</span><span class=p>)</span>
-
-    <span class=c1># 输出到控制台</span>
-    <span class=k>if</span> <span class=n>LOG_ENABLED</span> <span class=ow>and</span> <span class=n>LOG_TO_CONSOLE</span><span class=p>:</span>
-        <span class=n>stream_handler</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>StreamHandler</span><span class=p>(</span><span class=n>sys</span><span class=o>.</span><span class=n>stdout</span><span class=p>)</span>
-        <span class=n>stream_handler</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span><span class=o>=</span><span class=n>LOG_LEVEL</span><span class=p>)</span>
-        <span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=n>LOG_FORMAT</span><span class=p>)</span>
-        <span class=n>stream_handler</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
-        <span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>stream_handler</span><span class=p>)</span>
-
-    <span class=c1># 输出到文件</span>
-    <span class=k>if</span> <span class=n>LOG_ENABLED</span> <span class=ow>and</span> <span class=n>LOG_TO_FILE</span><span class=p>:</span>
-        <span class=c1># 如果路径不存在，创建日志文件文件夹</span>
-        <span class=n>log_dir</span> <span class=o>=</span> <span class=n>dirname</span><span class=p>(</span><span class=n>log_path</span><span class=p>)</span>
-        <span class=k>if</span> <span class=ow>not</span> <span class=n>exists</span><span class=p>(</span><span class=n>log_dir</span><span class=p>):</span> <span class=n>makedirs</span><span class=p>(</span><span class=n>log_dir</span><span class=p>)</span>
-        <span class=c1># 添加 FileHandler</span>
-        <span class=n>file_handler</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>FileHandler</span><span class=p>(</span><span class=n>log_path</span><span class=p>,</span> <span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span>
-        <span class=n>file_handler</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span><span class=o>=</span><span class=n>LOG_LEVEL</span><span class=p>)</span>
-        <span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=n>LOG_FORMAT</span><span class=p>)</span>
-        <span class=n>file_handler</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
-        <span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>file_handler</span><span class=p>)</span>
-
-    <span class=c1># 输出到 Elasticsearch</span>
-    <span class=k>if</span> <span class=n>LOG_ENABLED</span> <span class=ow>and</span> <span class=n>LOG_TO_ES</span><span class=p>:</span>
-        <span class=c1># 添加 CMRESHandler</span>
-        <span class=n>es_handler</span> <span class=o>=</span> <span class=n>CMRESHandler</span><span class=p>(</span><span class=n>hosts</span><span class=o>=</span><span class=p>[{</span><span class=s1>&#39;host&#39;</span><span class=p>:</span> <span class=n>ELASTIC_SEARCH_HOST</span><span class=p>,</span> <span class=s1>&#39;port&#39;</span><span class=p>:</span> <span class=n>ELASTIC_SEARCH_PORT</span><span class=p>}],</span>
-                                  <span class=c1># 可以配置对应的认证权限</span>
-                                  <span class=n>auth_type</span><span class=o>=</span><span class=n>CMRESHandler</span><span class=o>.</span><span class=n>AuthType</span><span class=o>.</span><span class=n>NO_AUTH</span><span class=p>,</span>  
-                                  <span class=n>es_index_name</span><span class=o>=</span><span class=n>ELASTIC_SEARCH_INDEX</span><span class=p>,</span>
-                                  <span class=c1># 一个月分一个 Index</span>
-                                  <span class=n>index_name_frequency</span><span class=o>=</span><span class=n>CMRESHandler</span><span class=o>.</span><span class=n>IndexNameFrequency</span><span class=o>.</span><span class=n>MONTHLY</span><span class=p>,</span>
-                                  <span class=c1># 额外增加环境标识</span>
-                                  <span class=n>es_additional_fields</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;environment&#39;</span><span class=p>:</span> <span class=n>APP_ENVIRONMENT</span><span class=p>}</span>  
-                                  <span class=p>)</span>
-        <span class=n>es_handler</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span><span class=o>=</span><span class=n>LOG_LEVEL</span><span class=p>)</span>
-        <span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=n>LOG_FORMAT</span><span class=p>)</span>
-        <span class=n>es_handler</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
-        <span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>es_handler</span><span class=p>)</span>
-
-    <span class=c1># 保存到全局 loggers</span>
-    <span class=n>loggers</span><span class=p>[</span><span class=n>name</span><span class=p>]</span> <span class=o>=</span> <span class=n>logger</span>
-    <span class=k>return</span> <span class=n>logger</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>使用时，调用定义的方法获取一个 logger，然后 log 对应的内容即可</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>makedirs</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>os.path</span> <span class=kn>import</span> <span class=n>dirname</span><span class=p>,</span> <span class=n>exists</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>cmreslogging.handlers</span> <span class=kn>import</span> <span class=n>CMRESHandler</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loggers</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>LOG_ENABLED</span> <span class=o>=</span> <span class=kc>True</span>  <span class=c1># 是否开启日志</span>
+</span></span><span class=line><span class=cl><span class=n>LOG_TO_CONSOLE</span> <span class=o>=</span> <span class=kc>True</span>  <span class=c1># 是否输出到控制台</span>
+</span></span><span class=line><span class=cl><span class=n>LOG_TO_FILE</span> <span class=o>=</span> <span class=kc>True</span>  <span class=c1># 是否输出到文件</span>
+</span></span><span class=line><span class=cl><span class=n>LOG_TO_ES</span> <span class=o>=</span> <span class=kc>True</span>  <span class=c1># 是否输出到 Elasticsearch</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>LOG_PATH</span> <span class=o>=</span> <span class=s1>&#39;./runtime.log&#39;</span>  <span class=c1># 日志文件路径</span>
+</span></span><span class=line><span class=cl><span class=n>LOG_LEVEL</span> <span class=o>=</span> <span class=s1>&#39;DEBUG&#39;</span>  <span class=c1># 日志级别</span>
+</span></span><span class=line><span class=cl><span class=n>LOG_FORMAT</span> <span class=o>=</span> <span class=s1>&#39;</span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(asctime)s</span><span class=s1> - process: </span><span class=si>%(process)d</span><span class=s1> - </span><span class=si>%(filename)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(lineno)d</span><span class=s1> - </span><span class=si>%(module)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span>  <span class=c1># 每条日志输出格式</span>
+</span></span><span class=line><span class=cl><span class=n>ELASTIC_SEARCH_HOST</span> <span class=o>=</span> <span class=s1>&#39;eshost&#39;</span>  <span class=c1># Elasticsearch Host</span>
+</span></span><span class=line><span class=cl><span class=n>ELASTIC_SEARCH_PORT</span> <span class=o>=</span> <span class=mi>9200</span>  <span class=c1># Elasticsearch Port</span>
+</span></span><span class=line><span class=cl><span class=n>ELASTIC_SEARCH_INDEX</span> <span class=o>=</span> <span class=s1>&#39;runtime&#39;</span>  <span class=c1># Elasticsearch Index Name</span>
+</span></span><span class=line><span class=cl><span class=n>APP_ENVIRONMENT</span> <span class=o>=</span> <span class=s1>&#39;dev&#39;</span>  <span class=c1># 运行环境，如测试环境还是生产环境</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>get_logger</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=kc>None</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    get logger by name
+</span></span></span><span class=line><span class=cl><span class=s2>    :param name: name of logger
+</span></span></span><span class=line><span class=cl><span class=s2>    :return: logger
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>global</span> <span class=n>loggers</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=n>name</span><span class=p>:</span> <span class=n>name</span> <span class=o>=</span> <span class=vm>__name__</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>loggers</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>name</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>loggers</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>logger</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>LOG_LEVEL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 输出到控制台</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>LOG_ENABLED</span> <span class=ow>and</span> <span class=n>LOG_TO_CONSOLE</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>stream_handler</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>StreamHandler</span><span class=p>(</span><span class=n>sys</span><span class=o>.</span><span class=n>stdout</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>stream_handler</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span><span class=o>=</span><span class=n>LOG_LEVEL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=n>LOG_FORMAT</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>stream_handler</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>stream_handler</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 输出到文件</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>LOG_ENABLED</span> <span class=ow>and</span> <span class=n>LOG_TO_FILE</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 如果路径不存在，创建日志文件文件夹</span>
+</span></span><span class=line><span class=cl>        <span class=n>log_dir</span> <span class=o>=</span> <span class=n>dirname</span><span class=p>(</span><span class=n>log_path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=ow>not</span> <span class=n>exists</span><span class=p>(</span><span class=n>log_dir</span><span class=p>):</span> <span class=n>makedirs</span><span class=p>(</span><span class=n>log_dir</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 添加 FileHandler</span>
+</span></span><span class=line><span class=cl>        <span class=n>file_handler</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>FileHandler</span><span class=p>(</span><span class=n>log_path</span><span class=p>,</span> <span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>file_handler</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span><span class=o>=</span><span class=n>LOG_LEVEL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=n>LOG_FORMAT</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>file_handler</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>file_handler</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 输出到 Elasticsearch</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>LOG_ENABLED</span> <span class=ow>and</span> <span class=n>LOG_TO_ES</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 添加 CMRESHandler</span>
+</span></span><span class=line><span class=cl>        <span class=n>es_handler</span> <span class=o>=</span> <span class=n>CMRESHandler</span><span class=p>(</span><span class=n>hosts</span><span class=o>=</span><span class=p>[{</span><span class=s1>&#39;host&#39;</span><span class=p>:</span> <span class=n>ELASTIC_SEARCH_HOST</span><span class=p>,</span> <span class=s1>&#39;port&#39;</span><span class=p>:</span> <span class=n>ELASTIC_SEARCH_PORT</span><span class=p>}],</span>
+</span></span><span class=line><span class=cl>                                  <span class=c1># 可以配置对应的认证权限</span>
+</span></span><span class=line><span class=cl>                                  <span class=n>auth_type</span><span class=o>=</span><span class=n>CMRESHandler</span><span class=o>.</span><span class=n>AuthType</span><span class=o>.</span><span class=n>NO_AUTH</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>                                  <span class=n>es_index_name</span><span class=o>=</span><span class=n>ELASTIC_SEARCH_INDEX</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                                  <span class=c1># 一个月分一个 Index</span>
+</span></span><span class=line><span class=cl>                                  <span class=n>index_name_frequency</span><span class=o>=</span><span class=n>CMRESHandler</span><span class=o>.</span><span class=n>IndexNameFrequency</span><span class=o>.</span><span class=n>MONTHLY</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                                  <span class=c1># 额外增加环境标识</span>
+</span></span><span class=line><span class=cl>                                  <span class=n>es_additional_fields</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;environment&#39;</span><span class=p>:</span> <span class=n>APP_ENVIRONMENT</span><span class=p>}</span>  
+</span></span><span class=line><span class=cl>                                  <span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>es_handler</span><span class=o>.</span><span class=n>setLevel</span><span class=p>(</span><span class=n>level</span><span class=o>=</span><span class=n>LOG_LEVEL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>formatter</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>Formatter</span><span class=p>(</span><span class=n>LOG_FORMAT</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>es_handler</span><span class=o>.</span><span class=n>setFormatter</span><span class=p>(</span><span class=n>formatter</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>logger</span><span class=o>.</span><span class=n>addHandler</span><span class=p>(</span><span class=n>es_handler</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 保存到全局 loggers</span>
+</span></span><span class=line><span class=cl>    <span class=n>loggers</span><span class=p>[</span><span class=n>name</span><span class=p>]</span> <span class=o>=</span> <span class=n>logger</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>logger</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用时，调用定义的方法获取一个 logger，然后 log 对应的内容即可</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>logger</span> <span class=o>=</span> <span class=n>get_logger</span><span class=p>()</span>
-<span class=n>logger</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s1>&#39;this is a message&#39;</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>简单的配置方式</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>logger</span> <span class=o>=</span> <span class=n>get_logger</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span><span class=o>.</span><span class=n>debug</span><span class=p>(</span><span class=s1>&#39;this is a message&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>简单的配置方式</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>import</span> <span class=nn>logging</span>
-<span class=n>logging</span><span class=o>.</span><span class=n>basicConfig</span><span class=p>(</span><span class=n>level</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>,</span><span class=nb>format</span> <span class=o>=</span> <span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
-<span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div></div><div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl><span class=n>logging</span><span class=o>.</span><span class=n>basicConfig</span><span class=p>(</span><span class=n>level</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>INFO</span><span class=p>,</span><span class=nb>format</span> <span class=o>=</span> <span class=s1>&#39;</span><span class=si>%(asctime)s</span><span class=s1> - </span><span class=si>%(name)s</span><span class=s1> - </span><span class=si>%(levelname)s</span><span class=s1> - </span><span class=si>%(message)s</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>logger</span> <span class=o>=</span> <span class=n>logging</span><span class=o>.</span><span class=n>getLogger</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-28</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/iohttp/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+</section></div><div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/iohttp/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
-</html>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

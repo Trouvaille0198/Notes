@@ -1,0 +1,313 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title>Go 进阶 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go 进阶">
+<meta property="og:description" content="Go 进阶 内存对齐 引入 1 2 3 4 5 6 7 type Part1 struct { a bool b int32 c int8 d int64 e byte } 在开始之前，希望你计算一下 Part1 共占用的大小是多少呢？ 1 2 3 4 5 6 7 8 func main() { fmt.Printf(&#34;bool size: %d\n&#34;,">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-03-03T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Go 进阶">
+<meta name=twitter:description content="Go 进阶 内存对齐 引入 1 2 3 4 5 6 7 type Part1 struct { a bool b int32 c int8 d int64 e byte } 在开始之前，希望你计算一下 Part1 共占用的大小是多少呢？ 1 2 3 4 5 6 7 8 func main() { fmt.Printf(&#34;bool size: %d\n&#34;,">
+<meta name=application-name content="伤心肠粉的酱油碟子">
+<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/pprof/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 进阶","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E8%BF%9B%E9%98%B6\/"},"genre":"posts","keywords":"进阶","wordcount":2568,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E8%BF%9B%E9%98%B6\/","datePublished":"2022-03-03T00:00:00+00:00","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
+</div><div class=menu>
+<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div></div></div></header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
+</div><div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go 进阶</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-03-03>2022-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2568 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#内存对齐>内存对齐</a>
+<ul>
+<li><a href=#引入>引入</a></li><li><a href=#定义>定义</a>
+<ul>
+<li><a href=#例>例</a></li><li><a href=#为什么要关心对齐>为什么要关心对齐</a></li><li><a href=#为什么要做对齐>为什么要做对齐</a></li></ul></li><li><a href=#默认系数>默认系数</a>
+<ul>
+<li><a href=#类型的对称系数>类型的对称系数</a></li></ul></li><li><a href=#结构体的整体对齐>结构体的整体对齐</a>
+<ul>
+<li><a href=#对齐规则>对齐规则</a></li><li><a href=#分析流程>分析流程</a>
+<ul>
+<li><a href=#变量对齐>变量对齐</a></li><li><a href=#整体对齐>整体对齐</a></li></ul></li></ul></li><li><a href=#调整字段顺序来优化内存>调整字段顺序来优化内存</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=go-进阶>Go 进阶</h1><h2 id=内存对齐>内存对齐</h2><h3 id=引入>引入</h3><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Part1</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>a</span> <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span> <span class=kt>int32</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span> <span class=kt>int8</span>
+</span></span><span class=line><span class=cl>    <span class=nx>d</span> <span class=kt>int64</span>
+</span></span><span class=line><span class=cl>    <span class=nx>e</span> <span class=kt>byte</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在开始之前，希望你计算一下 <code>Part1</code> 共占用的大小是多少呢？</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;bool size: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=nb>bool</span><span class=p>(</span><span class=kc>true</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;int32 size: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=nb>int32</span><span class=p>(</span><span class=mi>0</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;int8 size: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=nb>int8</span><span class=p>(</span><span class=mi>0</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;int64 size: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=nb>int64</span><span class=p>(</span><span class=mi>0</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;byte size: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=nb>byte</span><span class=p>(</span><span class=mi>0</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;string size: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=s>&#34;EDDYCJY&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出结果：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kt>bool</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=kt>int32</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl><span class=kt>int8</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=kt>int64</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl><span class=kt>byte</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=kt>string</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>16</span>
+</span></span></code></pre></td></tr></table></div></div><p>这么一算，<code>Part1</code> 这一个结构体的占用内存大小为 1+4+1+8+1 = 15 个字节。相信有的小伙伴是这么算的，看上去也没什么毛病</p><p>真实情况是怎么样的呢？我们实际调用看看，如下：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Part1</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>a</span> <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span> <span class=kt>int32</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span> <span class=kt>int8</span>
+</span></span><span class=line><span class=cl>    <span class=nx>d</span> <span class=kt>int64</span>
+</span></span><span class=line><span class=cl>    <span class=nx>e</span> <span class=kt>byte</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>part1</span> <span class=o>:=</span> <span class=nx>Part1</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;part1 size: %d, align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=nx>part1</span><span class=p>),</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=nx>part1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出结果：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>part1</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>32</span><span class=p>,</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>8</span>
+</span></span></code></pre></td></tr></table></div></div><p>最终输出为占用 32 个字节。这与前面所预期的结果完全不一样。</p><p>在这里要提到 “内存对齐” 这一概念，才能够用正确的姿势去计算。</p><h3 id=定义>定义</h3><p>有的小伙伴可能会认为内存读取，就是一个简单的字节数组摆放</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SZHQJK7.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SZHQJK7.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SZHQJK7.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SZHQJK7.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SZHQJK7.png title=img></p><p>上图表示一个坑一个萝卜的内存读取方式。但实际上 CPU 并不会以一个一个字节去读取和写入内存。</p><p>相反 CPU 读取内存是<strong>一块一块读取</strong>的，块的大小可以为 2、4、6、8、16 字节等大小。</p><p>块大小我们称其为<strong>内存访问粒度</strong>。如下图：</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mCFZWe8.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mCFZWe8.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mCFZWe8.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mCFZWe8.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mCFZWe8.png title=img></p><p>在样例中，假设访问粒度为 4。 CPU 是以每 4 个字节大小的访问粒度去读取和写入内存的。这才是正确的姿势</p><h4 id=例>例</h4><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/g1RxUTz.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/g1RxUTz.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/g1RxUTz.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/g1RxUTz.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/g1RxUTz.png title=img></p><p>在上图中，假设从 Index1 开始读取，将会出现很崩溃的问题。因为它的内存访问边界是不对齐的。因此 CPU 会做一些额外的处理工作。如下：</p><ol>
+<li>CPU <strong>首次</strong>读取未对齐地址的第一个内存块，读取 0-3 字节。并移除不需要的字节 0</li><li>CPU <strong>再次</strong>读取未对齐地址的第二个内存块，读取 4-7 字节。并移除不需要的字节 5、6、7 字节</li><li>合并 1-4 字节的数据</li><li>合并后放入寄存器</li></ol><p>从上述流程可得出，不做 “内存对齐” 是一件有点 &ldquo;麻烦&rdquo; 的事。因为它会增加许多耗费时间的动作。</p><p>而假设做了内存对齐，从 Index0 开始读取 4 个字节，只需要读取一次，也不需要额外的运算。这显然高效很多，是标准的<strong>空间换时间</strong>做法。</p><h4 id=为什么要关心对齐>为什么要关心对齐</h4><ul>
+<li>你正在编写的代码在性能（CPU、Memory）方面有一定的要求</li><li>你正在处理向量方面的指令</li><li>某些硬件平台（ARM）体系不支持未对齐的内存访问</li></ul><p>另外作为一个工程师，你也很有必要学习这块知识点哦 :)</p><h4 id=为什么要做对齐>为什么要做对齐</h4><ul>
+<li>平台（移植性）原因：不是所有的硬件平台都能够访问任意地址上的任意数据。例如：特定的硬件平台只允许在特定地址获取特定类型的数据，否则会导致异常情况</li><li>性能原因：若访问未对齐的内存，将会导致 CPU 进行两次内存访问，并且要花费额外的时钟周期来处理对齐及运算。而本身就对齐的内存仅需要一次访问就可以完成读取动作</li></ul><h3 id=默认系数>默认系数</h3><p>在不同平台上的编译器都有自己默认的 “对齐系数”，可通过预编译命令 <code>#pragma pack(n)</code> 进行变更，n 就是代指 “对齐系数”。一般来讲，我们常用的平台的系数如下：</p><ul>
+<li>32 位：4</li><li>64 位：8</li></ul><p>另外要注意，不同硬件平台占用的大小和对齐值都可能是不一样的。因此本文的值不是唯一的，调试的时候需按本机的实际情况考虑</p><h4 id=类型的对称系数>类型的对称系数</h4><p>在 Go 中可以调用 <code>unsafe.Alignof</code> 来返回相应<strong>类型的对齐系数</strong>。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;bool align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=nb>bool</span><span class=p>(</span><span class=kc>true</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;int32 align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=nb>int32</span><span class=p>(</span><span class=mi>0</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;int8 align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=nb>int8</span><span class=p>(</span><span class=mi>0</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;int64 align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=nb>int64</span><span class=p>(</span><span class=mi>0</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;byte align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=nb>byte</span><span class=p>(</span><span class=mi>0</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;string align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=s>&#34;EDDYCJY&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;map align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>string</span><span class=p>{}))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kt>bool</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=kt>int32</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl><span class=kt>int8</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=kt>int64</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl><span class=kt>byte</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=kt>string</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl><span class=kd>map</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>8</span>
+</span></span></code></pre></td></tr></table></div></div><p>通过观察输出结果，可得知基本都是 <code>2^n</code>，最大也不会超过 8。这是因为当前测试（64 位）编译器默认对齐系数是 8，因此最大值不会超过这个数</p><h3 id=结构体的整体对齐>结构体的整体对齐</h3><p>在上小节中，提到了结构体中的成员变量要做字节对齐。那么想当然身为最终结果的结构体，也是需要做字节对齐的</p><h4 id=对齐规则>对齐规则</h4><ul>
+<li>结构体的成员变量，第一个成员变量的偏移量为 0。往后的每个成员变量的对齐值必须为<strong>编译器默认对齐长度</strong>（<code>#pragma pack(n)</code>）或<strong>当前成员变量类型的长度</strong>（<code>unsafe.Sizeof</code>），取<strong>最小值作为当前类型的对齐值</strong>，其偏移量必须为对齐值的整数倍</li><li>结构体本身，对齐值必须为<strong>编译器默认对齐长度</strong>（<code>#pragma pack(n)</code>）或<strong>结构体的所有成员变量类型中的最大长度</strong>，取<strong>最大数的最小整数倍</strong>作为对齐值</li><li>结合以上两点，可得知若<strong>编译器默认对齐长度</strong>（<code>#pragma pack(n)</code>）超过结构体内成员变量的类型最大长度时，默认对齐长度是没有任何意义的</li></ul><h4 id=分析流程>分析流程</h4><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220303194913655.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220303194913655.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220303194913655.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220303194913655.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220303194913655.png title=image-20220303194913655></p><h5 id=变量对齐>变量对齐</h5><ul>
+<li>
+<p>第一个成员 a</p><ul>
+<li>
+<p>类型为 bool</p></li><li>
+<p>大小/对齐值为 1 字节</p></li><li>
+<p>初始地址，偏移量为 0。占用了第 1 位</p></li></ul></li><li>
+<p>第二个成员 b</p><ul>
+<li>
+<p>类型为 int32</p></li><li>
+<p>大小/对齐值为 4 字节</p></li><li>
+<p>根据规则 1，其偏移量必须为 4 的整数倍。确定偏移量为 4，因此 2-4 位为 Padding。而当前数值从第 5 位开始填充，到第 8 位。如下：axxx|bbbb</p></li></ul></li><li>
+<p>第三个成员 c</p><ul>
+<li>
+<p>类型为 int8</p></li><li>
+<p>大小/对齐值为 1 字节</p></li><li>
+<p>根据规则1，其偏移量必须为 1 的整数倍。当前偏移量为 8。不需要额外对齐，填充 1 个字节到第 9 位。如下：axxx|bbbb|c&mldr;</p></li></ul></li><li>
+<p>第四个成员 d</p><ul>
+<li>
+<p>类型为 int64</p></li><li>
+<p>大小/对齐值为 8 字节</p></li><li>
+<p>根据规则 1，其偏移量必须为 8 的整数倍。确定偏移量为 16，因此</p><p>9-16 位为 Padding。而当前数值从第 17 位开始写入，到第 24 位。如下：axxx|bbbb|cxxx|xxxx|dddd|dddd</p></li></ul></li><li>
+<p>第五个成员 e</p><ul>
+<li>
+<p>类型为 byte</p></li><li>
+<p>大小/对齐值为 1 字节</p></li><li>
+<p>根据规则 1，其偏移量必须为 1 的整数倍。当前偏移量为 24。不需要额外对齐，填充 1 个字节到第 25 位。如下：axxx|bbbb|cxxx|xxxx|dddd|dddd|e&mldr;</p></li></ul></li></ul><h5 id=整体对齐>整体对齐</h5><p>在每个成员变量进行对齐后，根据规则 2，整个结构体本身也要进行字节对齐，因为可发现它可能并不是 <code>2^n</code>，不是偶数倍。显然不符合对齐的规则</p><p>根据规则 2，可得出对齐值为 8。现在的偏移量为 25，不是 8 的整倍数。因此确定偏移量为 32。对结构体进行对齐</p><p>axxx|bbbb|cxxx|xxxx|dddd|dddd|exxx|xxxx</p><h3 id=调整字段顺序来优化内存>调整字段顺序来优化内存</h3><p>在上一小节，可得知根据成员变量的类型不同，其结构体的内存会产生对齐等动作。那假设字段顺序不同，会不会有什么变化呢？我们一起来试试吧 :-)</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Part1</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>a</span> <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span> <span class=kt>int32</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span> <span class=kt>int8</span>
+</span></span><span class=line><span class=cl>    <span class=nx>d</span> <span class=kt>int64</span>
+</span></span><span class=line><span class=cl>    <span class=nx>e</span> <span class=kt>byte</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Part2</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>e</span> <span class=kt>byte</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span> <span class=kt>int8</span>
+</span></span><span class=line><span class=cl>    <span class=nx>a</span> <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span> <span class=kt>int32</span>
+</span></span><span class=line><span class=cl>    <span class=nx>d</span> <span class=kt>int64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>part1</span> <span class=o>:=</span> <span class=nx>Part1</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>part2</span> <span class=o>:=</span> <span class=nx>Part2</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;part1 size: %d, align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=nx>part1</span><span class=p>),</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=nx>part1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;part2 size: %d, align: %d\n&#34;</span><span class=p>,</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Sizeof</span><span class=p>(</span><span class=nx>part2</span><span class=p>),</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nf>Alignof</span><span class=p>(</span><span class=nx>part2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>part1</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>32</span><span class=p>,</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl><span class=nx>part2</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>16</span><span class=p>,</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>8</span>
+</span></span></code></pre></td></tr></table></div></div><p>通过结果可以惊喜的发现，只是 “简单” 对成员变量的字段顺序进行改变，就改变了结构体占用大小</p><p>Part1 内存布局：axxx|bbbb|cxxx|xxxx|dddd|dddd|exxx|xxxx</p><p>Part2 内存布局：ecax|bbbb|dddd|dddd</p><p>通过<strong>调整结构体内成员变量的字段顺序</strong>可以达到缩小结构体占用大小的的效果，因为它巧妙地减少了 Padding 的存在，让它们更 “紧凑” 了。这一点对于加深 Go 的内存布局印象和大对象的优化非常有帮助。</p></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
+<span></span>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E8%BF%9B%E9%98%B6/>进阶</a></section><section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
+</section></div><div class=post-nav><a href=/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/ class=prev rel=prev title="Go 高性能编程"><i class="fas fa-angle-left fa-fw"></i>Go 高性能编程</a>
+<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/pprof/ class=next rel=next title="Go runtime/pprof库">Go runtime/pprof库<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

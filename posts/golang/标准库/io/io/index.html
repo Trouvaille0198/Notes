@@ -9,21 +9,19 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/io/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-12-23T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-02-28T12:23:28+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Go io 标准库">
 <meta name=twitter:description content="io https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter01/01.1.html io 包为 I/O 原语提供了基本的接口。它主要包装了这些原语的已有实现。 由于这些被接口包装的 I/O 原语是由不同的低级操作实现，因此，在另有声明之前不该">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/io/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/rand/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/os/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go io 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/io\/"},"genre":"posts","keywords":"Go 库, io","wordcount":4452,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/io\/","datePublished":"2021-12-23T00:00:00+00:00","dateModified":"2022-02-28T12:23:28+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/io/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/rand/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/os/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go io 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/io\/"},"genre":"posts","keywords":"Go 库, io","wordcount":4452,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/io\/","datePublished":"2021-12-23T00:00:00+00:00","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -38,20 +36,14 @@
 </span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a>
-</div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -63,128 +55,56 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX">Go io 标准库</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-23>2021-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4452 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go io 标准库</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-23>2021-12-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4452 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
 <li><a href=#reader-接口>Reader 接口</a>
 <ul>
-<li><a href=#例>例</a></li>
-</ul>
-</li>
-<li><a href=#writer-接口>Writer 接口</a>
+<li><a href=#例>例</a></li></ul></li><li><a href=#writer-接口>Writer 接口</a>
 <ul>
-<li><a href=#例-1>例</a></li>
-<li><a href=#实现了-ioreader-接口或-iowriter-接口的类型>实现了 io.Reader 接口或 io.Writer 接口的类型</a></li>
-<li><a href=#关于-osstdin-与-osstdout>关于 os.Stdin 与 os.Stdout</a></li>
-</ul>
-</li>
-<li><a href=#readerat-接口>ReaderAt 接口</a>
+<li><a href=#例-1>例</a></li><li><a href=#实现了-ioreader-接口或-iowriter-接口的类型>实现了 io.Reader 接口或 io.Writer 接口的类型</a></li><li><a href=#关于-osstdin-与-osstdout>关于 os.Stdin 与 os.Stdout</a></li></ul></li><li><a href=#readerat-接口>ReaderAt 接口</a>
 <ul>
-<li><a href=#例-2>例</a></li>
-</ul>
-</li>
-<li><a href=#writerat-接口>WriterAt 接口</a>
+<li><a href=#例-2>例</a></li></ul></li><li><a href=#writerat-接口>WriterAt 接口</a>
 <ul>
-<li><a href=#例-3>例</a></li>
-</ul>
-</li>
-<li><a href=#readerfrom-接口>ReaderFrom 接口</a>
+<li><a href=#例-3>例</a></li></ul></li><li><a href=#readerfrom-接口>ReaderFrom 接口</a>
 <ul>
-<li><a href=#例-4>例</a></li>
-</ul>
-</li>
-<li><a href=#writerto-接口>WriterTo 接口</a>
+<li><a href=#例-4>例</a></li></ul></li><li><a href=#writerto-接口>WriterTo 接口</a>
 <ul>
-<li><a href=#例-5>例</a></li>
-</ul>
-</li>
-<li><a href=#seeker-接口>Seeker 接口</a>
+<li><a href=#例-5>例</a></li></ul></li><li><a href=#seeker-接口>Seeker 接口</a>
 <ul>
-<li><a href=#例-6>例</a></li>
-<li><a href=#关于-whence>关于 whence</a></li>
-</ul>
-</li>
-<li><a href=#closer-接口>Closer 接口</a></li>
-<li><a href=#其他接口>其他接口</a>
+<li><a href=#例-6>例</a></li><li><a href=#关于-whence>关于 whence</a></li></ul></li><li><a href=#closer-接口>Closer 接口</a></li><li><a href=#其他接口>其他接口</a>
 <ul>
-<li><a href=#一些复合接口>一些复合接口</a></li>
-</ul>
-</li>
-<li><a href=#sectionreader-类型>SectionReader 类型</a></li>
-<li><a href=#limitedreader-类型>LimitedReader 类型</a>
+<li><a href=#一些复合接口>一些复合接口</a></li></ul></li><li><a href=#sectionreader-类型>SectionReader 类型</a></li><li><a href=#limitedreader-类型>LimitedReader 类型</a>
 <ul>
-<li><a href=#例-7>例</a></li>
-</ul>
-</li>
-<li><a href=#copy-函数>Copy 函数</a>
+<li><a href=#例-7>例</a></li></ul></li><li><a href=#copy-函数>Copy 函数</a>
 <ul>
-<li><a href=#例-8>例</a></li>
-</ul>
-</li>
-<li><a href=#copyn-函数>CopyN 函数</a>
+<li><a href=#例-8>例</a></li></ul></li><li><a href=#copyn-函数>CopyN 函数</a>
 <ul>
-<li><a href=#例-9>例</a></li>
-</ul>
-</li>
-<li><a href=#writestring-函数>WriteString 函数</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><h1 id=io>io</h1>
-<p><a href=https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter01/01.1.html target=_blank rel="noopener noreffer">https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter01/01.1.html</a></p>
-<p>io 包为 I/O 原语提供了基本的接口。它主要包装了这些原语的已有实现。</p>
-<p>由于这些被接口包装的 I/O 原语是由不同的低级操作实现，因此，在另有声明之前不该假定它们的并发执行是安全的。</p>
-<p>在 io 包中最重要的两个接口：Reader 和 Writer 接口。</p>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja title=图片描述></p>
-<h2 id=reader-接口>Reader 接口</h2>
-<div class=highlight><div class=chroma>
+<li><a href=#例-9>例</a></li></ul></li><li><a href=#writestring-函数>WriteString 函数</a></li></ul></nav></div></div><div class=content id=content><h1 id=io>io</h1><p><a href=https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter01/01.1.html target=_blank rel="noopener noreffer">https://books.studygolang.com/The-Golang-Standard-Library-by-Example/chapter01/01.1.html</a></p><p>io 包为 I/O 原语提供了基本的接口。它主要包装了这些原语的已有实现。</p><p>由于这些被接口包装的 I/O 原语是由不同的低级操作实现，因此，在另有声明之前不该假定它们的并发执行是安全的。</p><p>在 io 包中最重要的两个接口：Reader 和 Writer 接口。</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVbdzja title=图片描述></p><h2 id=reader-接口>Reader 接口</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Reader</span> <span class=kd>interface</span> <span class=p>{</span>
-    <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Read 将 len(p) 个字节<strong>读取到 p 中</strong>。</p>
-<p>它返回读取的字节数 n（0 &lt;= n &lt;= len(p)） 以及任何遇到的错误。</p>
-<p>如果资源内容已全部读取完毕，应该返回 <code>io.EOF</code> 错误。</p>
-<blockquote>
-<p>即使 Read 返回的 n &lt; len(p)，它也会在调用过程中占用 len(p) 个字节作为暂存空间。</p>
-<p>若可读取的数据不到 len(p) 个字节，Read 会返回可用数据，而不是等待更多数据。</p>
-</blockquote>
-<h3 id=例>例</h3>
-<p>所有实现了 Read 方法的类型都满足 io.Reader 接口，也就是说，在所有需要 io.Reader 的地方，都可以传递实现了 Read() 方法的类型的实例。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Reader</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Read 将 len(p) 个字节<strong>读取到 p 中</strong>。</p><p>它返回读取的字节数 n（0 &lt;= n &lt;= len(p)） 以及任何遇到的错误。</p><p>如果资源内容已全部读取完毕，应该返回 <code>io.EOF</code> 错误。</p><blockquote>
+<p>即使 Read 返回的 n &lt; len(p)，它也会在调用过程中占用 len(p) 个字节作为暂存空间。</p><p>若可读取的数据不到 len(p) 个字节，Read 会返回可用数据，而不是等待更多数据。</p></blockquote><h3 id=例>例</h3><p>所有实现了 Read 方法的类型都满足 io.Reader 接口，也就是说，在所有需要 io.Reader 的地方，都可以传递实现了 Read() 方法的类型的实例。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -194,21 +114,16 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>reader</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span><span class=p>,</span> <span class=nx>num</span> <span class=kt>int</span><span class=p>)</span> <span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-    <span class=nx>p</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>num</span><span class=p>)</span>
-    <span class=nx>n</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>reader</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>p</span><span class=p>)</span>
-    <span class=k>if</span> <span class=nx>n</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
-        <span class=k>return</span> <span class=nx>p</span><span class=p>[:</span><span class=nx>n</span><span class=p>],</span> <span class=kc>nil</span>
-    <span class=p>}</span>
-    <span class=k>return</span> <span class=nx>p</span><span class=p>,</span> <span class=nx>err</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>ReadFrom 函数将 io.Reader 作为参数，也就是说，ReadFrom 可以<strong>从任意的地方读取数据</strong>，只要来源实现了 io.Reader 接口。</p>
-<p>比如，我们可以从标准输入、文件、字符串等读取数据，示例代码如下：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>reader</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span><span class=p>,</span> <span class=nx>num</span> <span class=kt>int</span><span class=p>)</span> <span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>p</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>num</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>n</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>reader</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>p</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>n</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nx>p</span><span class=p>[:</span><span class=nx>n</span><span class=p>],</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>p</span><span class=p>,</span> <span class=nx>err</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>ReadFrom 函数将 io.Reader 作为参数，也就是说，ReadFrom 可以<strong>从任意的地方读取数据</strong>，只要来源实现了 io.Reader 接口。</p><p>比如，我们可以从标准输入、文件、字符串等读取数据，示例代码如下：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -218,114 +133,60 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// 从标准输入读取
-</span><span class=c1></span><span class=nx>data</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>,</span> <span class=mi>11</span><span class=p>)</span>
-
-<span class=c1>// 从普通文件读取，其中 file 是 os.File 的实例
-</span><span class=c1></span><span class=nx>data</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>file</span><span class=p>,</span> <span class=mi>9</span><span class=p>)</span>
-
-<span class=c1>// 从字符串读取
-</span><span class=c1></span><span class=nx>data</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;from string&#34;</span><span class=p>),</span> <span class=mi>12</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>io.EOF 变量的定义：<code>var EOF = errors.New("EOF")</code>，是 error 类型。</p>
-<p>根据 reader 接口的说明，在 n > 0 且数据被读完了的情况下，返回的 error 有可能是 EOF 也有可能是 nil。</p>
-</blockquote>
-<h2 id=writer-接口>Writer 接口</h2>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 从标准输入读取
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>data</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>,</span> <span class=mi>11</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 从普通文件读取，其中 file 是 os.File 的实例
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>data</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>file</span><span class=p>,</span> <span class=mi>9</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 从字符串读取
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>data</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;from string&#34;</span><span class=p>),</span> <span class=mi>12</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote>
+<p>io.EOF 变量的定义：<code>var EOF = errors.New("EOF")</code>，是 error 类型。</p><p>根据 reader 接口的说明，在 n > 0 且数据被读完了的情况下，返回的 error 有可能是 EOF 也有可能是 nil。</p></blockquote><h2 id=writer-接口>Writer 接口</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Writer</span> <span class=kd>interface</span> <span class=p>{</span>
-    <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Write 将 len(p) 个字节<strong>从 p 中写入到基本数据流中</strong>。</p>
-<p>它返回从 p 中被写入的字节数 n（0 &lt;= n &lt;= len(p)）以及任何遇到的引起写入提前停止的错误。若 Write 返回的 <code>n &lt; len(p)</code>，它就必须返回一个非 nil 的错误</p>
-<p>同样的，所有实现了Write方法的类型都实现了 io.Writer 接口。</p>
-<h3 id=例-1>例</h3>
-<p>这里，我们通过标准库的例子来学习。</p>
-<p>在 fmt 标准库中，有一组函数：Fprint/Fprintf/Fprintln，它们接收一个 io.Wrtier 类型参数（第一个参数），也就是说它们将数据格式化输出到 io.Writer 中。</p>
-<p>我们以 fmt.Fprintln 为例</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Writer</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Write 将 len(p) 个字节<strong>从 p 中写入到基本数据流中</strong>。</p><p>它返回从 p 中被写入的字节数 n（0 &lt;= n &lt;= len(p)）以及任何遇到的引起写入提前停止的错误。若 Write 返回的 <code>n &lt; len(p)</code>，它就必须返回一个非 nil 的错误</p><p>同样的，所有实现了Write方法的类型都实现了 io.Writer 接口。</p><h3 id=例-1>例</h3><p>这里，我们通过标准库的例子来学习。</p><p>在 fmt 标准库中，有一组函数：Fprint/Fprintf/Fprintln，它们接收一个 io.Wrtier 类型参数（第一个参数），也就是说它们将数据格式化输出到 io.Writer 中。</p><p>我们以 fmt.Fprintln 为例</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>Println</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
-    <span class=k>return</span> <span class=nf>Fprintln</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=nx>a</span><span class=o>...</span><span class=p>)</span> <span class=c1>//os.Stdout实现了Writer
-</span><span class=c1></span><span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>很显然，fmt.Println 会将内容输出到标准输出中。</p>
-<h3 id=实现了-ioreader-接口或-iowriter-接口的类型>实现了 io.Reader 接口或 io.Writer 接口的类型</h3>
-<blockquote>
-<p>实现了 io.Reader 或 io.Writer 接口的函数参数是一个接口类型</p>
-</blockquote>
-<ul>
-<li>os.File 同时实现了 io.Reader 和 io.Writer</li>
-<li>strings.Reader 实现了 io.Reader</li>
-<li>bufio.Reader/Writer 分别实现了 io.Reader 和 io.Writer</li>
-<li>bytes.Buffer 同时实现了 io.Reader 和 io.Writer</li>
-<li>bytes.Reader 实现了 io.Reader</li>
-<li>compress/gzip.Reader/Writer 分别实现了 io.Reader 和 io.Writer</li>
-<li>crypto/cipher.StreamReader/StreamWriter 分别实现了 io.Reader 和 io.Writer</li>
-<li>crypto/tls.Conn 同时实现了 io.Reader 和 io.Writer</li>
-<li>encoding/csv.Reader/Writer 分别实现了 io.Reader 和 io.Writer</li>
-<li>mime/multipart.Part 实现了 io.Reader</li>
-<li>net/conn 分别实现了 io.Reader 和 io.Writer(Conn接口定义了Read/Write)</li>
-</ul>
-<p>以上类型中，常用的类型有：os.File、strings.Reader、bufio.Reader/Writer、bytes.Buffer、bytes.Reader</p>
-<h3 id=关于-osstdin-与-osstdout>关于 os.Stdin 与 os.Stdout</h3>
-<p>我们还看到 os.Stdin/Stdout 这样的代码，它们似乎分别实现了 io.Reader/io.Writer 接口。实际上在 os 包中有这样的代码：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Println</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nf>Fprintln</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=nx>a</span><span class=o>...</span><span class=p>)</span> <span class=c1>//os.Stdout实现了Writer
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>很显然，fmt.Println 会将内容输出到标准输出中。</p><h3 id=实现了-ioreader-接口或-iowriter-接口的类型>实现了 io.Reader 接口或 io.Writer 接口的类型</h3><blockquote>
+<p>实现了 io.Reader 或 io.Writer 接口的函数参数是一个接口类型</p></blockquote><ul>
+<li>os.File 同时实现了 io.Reader 和 io.Writer</li><li>strings.Reader 实现了 io.Reader</li><li>bufio.Reader/Writer 分别实现了 io.Reader 和 io.Writer</li><li>bytes.Buffer 同时实现了 io.Reader 和 io.Writer</li><li>bytes.Reader 实现了 io.Reader</li><li>compress/gzip.Reader/Writer 分别实现了 io.Reader 和 io.Writer</li><li>crypto/cipher.StreamReader/StreamWriter 分别实现了 io.Reader 和 io.Writer</li><li>crypto/tls.Conn 同时实现了 io.Reader 和 io.Writer</li><li>encoding/csv.Reader/Writer 分别实现了 io.Reader 和 io.Writer</li><li>mime/multipart.Part 实现了 io.Reader</li><li>net/conn 分别实现了 io.Reader 和 io.Writer(Conn接口定义了Read/Write)</li></ul><p>以上类型中，常用的类型有：os.File、strings.Reader、bufio.Reader/Writer、bytes.Buffer、bytes.Reader</p><h3 id=关于-osstdin-与-osstdout>关于 os.Stdin 与 os.Stdout</h3><p>我们还看到 os.Stdin/Stdout 这样的代码，它们似乎分别实现了 io.Reader/io.Writer 接口。实际上在 os 包中有这样的代码：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>var</span> <span class=p>(</span>
-    <span class=nx>Stdin</span>  <span class=p>=</span> <span class=nf>NewFile</span><span class=p>(</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>syscall</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>),</span> <span class=s>&#34;/dev/stdin&#34;</span><span class=p>)</span>
-    <span class=nx>Stdout</span> <span class=p>=</span> <span class=nf>NewFile</span><span class=p>(</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>syscall</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>),</span> <span class=s>&#34;/dev/stdout&#34;</span><span class=p>)</span>
-    <span class=nx>Stderr</span> <span class=p>=</span> <span class=nf>NewFile</span><span class=p>(</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>syscall</span><span class=p>.</span><span class=nx>Stderr</span><span class=p>),</span> <span class=s>&#34;/dev/stderr&#34;</span><span class=p>)</span>
-<span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>也就是说，Stdin/Stdout/Stderr 只是三个特殊的文件类型的标识（即都是 os.File 的实例），自然也实现了 io.Reader 和 io.Writer。</p>
-<h2 id=readerat-接口>ReaderAt 接口</h2>
-<p>可以通过该接口从指定偏移量处开始读取数据。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Stdin</span>  <span class=p>=</span> <span class=nf>NewFile</span><span class=p>(</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>syscall</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>),</span> <span class=s>&#34;/dev/stdin&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Stdout</span> <span class=p>=</span> <span class=nf>NewFile</span><span class=p>(</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>syscall</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>),</span> <span class=s>&#34;/dev/stdout&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Stderr</span> <span class=p>=</span> <span class=nf>NewFile</span><span class=p>(</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>syscall</span><span class=p>.</span><span class=nx>Stderr</span><span class=p>),</span> <span class=s>&#34;/dev/stderr&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>也就是说，Stdin/Stdout/Stderr 只是三个特殊的文件类型的标识（即都是 os.File 的实例），自然也实现了 io.Reader 和 io.Writer。</p><h2 id=readerat-接口>ReaderAt 接口</h2><p>可以通过该接口从指定偏移量处开始读取数据。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>ReaderAt</span> <span class=kd>interface</span> <span class=p>{</span>
-    <span class=nf>ReadAt</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>off</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>ReadAt 从基本输入源的<strong>偏移量 off</strong> 处开始，将 len(p) 个字节读取到 p 中。</p>
-<p>它返回读取的字节数 n（0 &lt;= n &lt;= len(p)）以及任何遇到的错误。</p>
-<blockquote>
-<p>当 ReadAt 返回的 n &lt; len(p) 时，它就会返回一个 非nil 的错误来解释 为什么没有返回更多的字节。在这一点上，ReadAt 比 Read 更严格。</p>
-<p>即使 ReadAt 返回的 n &lt; len(p)，它也会在调用过程中使用 p 的全部作为暂存空间。若可读取的数据不到 len(p) 字节，ReadAt 就会阻塞,直到所有数据都可用或一个错误发生。 在这一点上 ReadAt 不同于 Read。</p>
-</blockquote>
-<h3 id=例-2>例</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>ReaderAt</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ReadAt</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>off</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>ReadAt 从基本输入源的<strong>偏移量 off</strong> 处开始，将 len(p) 个字节读取到 p 中。</p><p>它返回读取的字节数 n（0 &lt;= n &lt;= len(p)）以及任何遇到的错误。</p><blockquote>
+<p>当 ReadAt 返回的 n &lt; len(p) 时，它就会返回一个 非nil 的错误来解释 为什么没有返回更多的字节。在这一点上，ReadAt 比 Read 更严格。</p><p>即使 ReadAt 返回的 n &lt; len(p)，它也会在调用过程中使用 p 的全部作为暂存空间。若可读取的数据不到 len(p) 字节，ReadAt 就会阻塞,直到所有数据都可用或一个错误发生。 在这一点上 ReadAt 不同于 Read。</p></blockquote><h3 id=例-2>例</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -334,46 +195,29 @@
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>reader</span> <span class=o>:=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>)</span>
-<span class=nx>p</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>6</span><span class=p>)</span>
-<span class=nx>n</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>reader</span><span class=p>.</span><span class=nf>ReadAt</span><span class=p>(</span><span class=nx>p</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
-<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
-    <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
-<span class=p>}</span>
-<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s, %d\n&#34;</span><span class=p>,</span> <span class=nx>p</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>输出：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>reader</span> <span class=o>:=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>p</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>6</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>n</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>reader</span><span class=p>.</span><span class=nf>ReadAt</span><span class=p>(</span><span class=nx>p</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s, %d\n&#34;</span><span class=p>,</span> <span class=nx>p</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>语言, 6
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=writerat-接口>WriterAt 接口</h2>
-<p>可以通过该接口将数据写入到数据流的特定偏移量之后。</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>语言, 6
+</span></span></code></pre></td></tr></table></div></div><h2 id=writerat-接口>WriterAt 接口</h2><p>可以通过该接口将数据写入到数据流的特定偏移量之后。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>WriterAt</span> <span class=kd>interface</span> <span class=p>{</span>
-    <span class=nf>WriteAt</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>off</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>WriteAt 从 p 中将 len(p) 个字节写入到偏移量 off 处的基本数据流中。</p>
-<p>它返回从 p 中被写入的字节数 n（0 &lt;= n &lt;= len(p)）以及任何遇到的引起写入提前停止的错误。</p>
-<p>若 WriteAt 返回的 n &lt; len(p)，它就必须返回一个 非nil 的错误。</p>
-<h3 id=例-3>例</h3>
-<p>通过简单示例来演示 WriteAt 方法的使用（os.File 实现了 WriterAt 接口）：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>WriterAt</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>WriteAt</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>off</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>WriteAt 从 p 中将 len(p) 个字节写入到偏移量 off 处的基本数据流中。</p><p>它返回从 p 中被写入的字节数 n（0 &lt;= n &lt;= len(p)）以及任何遇到的引起写入提前停止的错误。</p><p>若 WriteAt 返回的 n &lt; len(p)，它就必须返回一个 非nil 的错误。</p><h3 id=例-3>例</h3><p>通过简单示例来演示 WriteAt 方法的使用（os.File 实现了 WriterAt 接口）：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -386,42 +230,28 @@
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>file</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Create</span><span class=p>(</span><span class=s>&#34;writeAt.txt&#34;</span><span class=p>)</span>
-<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
-    <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
-<span class=p>}</span>
-<span class=k>defer</span> <span class=nx>file</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
-<span class=nx>file</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;Golang中文社区——这里是多余&#34;</span><span class=p>)</span>
-<span class=nx>n</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>file</span><span class=p>.</span><span class=nf>WriteAt</span><span class=p>([]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>),</span> <span class=mi>24</span><span class=p>)</span>
-<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
-    <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
-<span class=p>}</span>
-<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>打开文件 WriteAt.txt，内容将是：<code>Golang中文社区——Go语言中文网</code>。</p>
-<p><strong>分析</strong>：</p>
-<p><code>file.WriteString("Golang中文社区——这里是多余")</code> 往文件中写入 <code>Golang中文社区——这里是多余</code>，之后 <code>file.WriteAt([]byte("Go语言中文网"), 24)</code> 在文件流的 offset=24 处写入 <code>Go语言中文网</code>（会覆盖该位置的内容）。</p>
-<h2 id=readerfrom-接口>ReaderFrom 接口</h2>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>file</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Create</span><span class=p>(</span><span class=s>&#34;writeAt.txt&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>defer</span> <span class=nx>file</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nx>file</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;Golang中文社区——这里是多余&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>n</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>file</span><span class=p>.</span><span class=nf>WriteAt</span><span class=p>([]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>),</span> <span class=mi>24</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>打开文件 WriteAt.txt，内容将是：<code>Golang中文社区——Go语言中文网</code>。</p><p><strong>分析</strong>：</p><p><code>file.WriteString("Golang中文社区——这里是多余")</code> 往文件中写入 <code>Golang中文社区——这里是多余</code>，之后 <code>file.WriteAt([]byte("Go语言中文网"), 24)</code> 在文件流的 offset=24 处写入 <code>Go语言中文网</code>（会覆盖该位置的内容）。</p><h2 id=readerfrom-接口>ReaderFrom 接口</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>ReaderFrom</span> <span class=kd>interface</span> <span class=p>{</span>
-    <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>r</span> <span class=nx>Reader</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>ReadFrom 从 r 中读取数据，直到 EOF 或发生错误。其返回值 n 为读取的字节数。除 io.EOF 之外，在读取过程中遇到的任何错误也将被返回。</p>
-<p>如果 ReaderFrom 可用，Copy 函数就会使用它。</p>
-<h3 id=例-4>例</h3>
-<p>下面的例子简单的实现将文件中的数据全部读取（显示在标准输出）：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>ReaderFrom</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>r</span> <span class=nx>Reader</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>ReadFrom 从 r 中读取数据，直到 EOF 或发生错误。其返回值 n 为读取的字节数。除 io.EOF 之外，在读取过程中遇到的任何错误也将被返回。</p><p>如果 ReaderFrom 可用，Copy 函数就会使用它。</p><h3 id=例-4>例</h3><p>下面的例子简单的实现将文件中的数据全部读取（显示在标准输出）：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -431,116 +261,69 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>file</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=s>&#34;writeAt.txt&#34;</span><span class=p>)</span> <span class=c1>// file实现了Reader
-</span><span class=c1></span><span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
-    <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
-<span class=p>}</span>
-<span class=k>defer</span> <span class=nx>file</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
-<span class=nx>writer</span> <span class=o>:=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewWriter</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>)</span> <span class=c1>// writer实现了ReaderFrom
-</span><span class=c1></span><span class=nx>writer</span><span class=p>.</span><span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>file</span><span class=p>)</span>
-<span class=nx>writer</span><span class=p>.</span><span class=nf>Flush</span><span class=p>()</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>当然，我们可以通过 ioutil 包的 ReadFile 函数获取文件全部内容。其实，跟踪一下 ioutil.ReadFile 的源码，会发现其实也是通过 ReadFrom 方法实现（用的是 bytes.Buffer，它实现了 ReaderFrom 接口）。</p>
-<blockquote>
-<p>如果不通过 ReadFrom 接口来做这件事，而是使用 io.Reader 接口，我们有两种思路：</p>
-<ol>
-<li>先获取文件的大小（File 的 Stat 方法），之后定义一个该大小的 []byte，通过 Read 一次性读取</li>
-<li>定义一个小的 []byte，不断的调用 Read 方法直到遇到 EOF，将所有读取到的 []byte 连接到一起</li>
-</ol>
-</blockquote>
-<h2 id=writerto-接口>WriterTo 接口</h2>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>file</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=s>&#34;writeAt.txt&#34;</span><span class=p>)</span> <span class=c1>// file实现了Reader
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>defer</span> <span class=nx>file</span><span class=p>.</span><span class=nf>Close</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nx>writer</span> <span class=o>:=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewWriter</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>)</span> <span class=c1>// writer实现了ReaderFrom
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>writer</span><span class=p>.</span><span class=nf>ReadFrom</span><span class=p>(</span><span class=nx>file</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>writer</span><span class=p>.</span><span class=nf>Flush</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>当然，我们可以通过 ioutil 包的 ReadFile 函数获取文件全部内容。其实，跟踪一下 ioutil.ReadFile 的源码，会发现其实也是通过 ReadFrom 方法实现（用的是 bytes.Buffer，它实现了 ReaderFrom 接口）。</p><blockquote>
+<p>如果不通过 ReadFrom 接口来做这件事，而是使用 io.Reader 接口，我们有两种思路：</p><ol>
+<li>先获取文件的大小（File 的 Stat 方法），之后定义一个该大小的 []byte，通过 Read 一次性读取</li><li>定义一个小的 []byte，不断的调用 Read 方法直到遇到 EOF，将所有读取到的 []byte 连接到一起</li></ol></blockquote><h2 id=writerto-接口>WriterTo 接口</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>WriterTo</span> <span class=kd>interface</span> <span class=p>{</span>
-    <span class=nf>WriteTo</span><span class=p>(</span><span class=nx>w</span> <span class=nx>Writer</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>WriteTo 将数据写入 w 中，直到没有数据可写或发生错误。其返回值 n 为写入的字节数。 在写入过程中遇到的任何错误也将被返回。</p>
-<p>如果 WriterTo 可用，Copy 函数就会使用它。</p>
-<h3 id=例-5>例</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>WriterTo</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>WriteTo</span><span class=p>(</span><span class=nx>w</span> <span class=nx>Writer</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>WriteTo 将数据写入 w 中，直到没有数据可写或发生错误。其返回值 n 为写入的字节数。 在写入过程中遇到的任何错误也将被返回。</p><p>如果 WriterTo 可用，Copy 函数就会使用它。</p><h3 id=例-5>例</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>reader</span> <span class=o>:=</span> <span class=nx>bytes</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>([]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>))</span> <span class=c1>// reader实现了WriterTo
-</span><span class=c1></span><span class=nx>reader</span><span class=p>.</span><span class=nf>WriteTo</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><blockquote>
-<p>ReaderFrom 和 WriterTo 接口实质上传递了 Reader 和 Writer 的数据</p>
-<p>数据源 -> Reader (写入到 p) -> ReaderFrom</p>
-<p>WriterTo -> Writer (从 p 中写出) -> 数据流</p>
-</blockquote>
-<h2 id=seeker-接口>Seeker 接口</h2>
-<p>Seek 方法是用于设置偏移量的，这样可以从某个特定位置开始操作数据流</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>reader</span> <span class=o>:=</span> <span class=nx>bytes</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>([]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>))</span> <span class=c1>// reader实现了WriterTo
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>reader</span><span class=p>.</span><span class=nf>WriteTo</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote>
+<p>ReaderFrom 和 WriterTo 接口实质上传递了 Reader 和 Writer 的数据</p><p>数据源 -> Reader (写入到 p) -> ReaderFrom</p><p>WriterTo -> Writer (从 p 中写出) -> 数据流</p></blockquote><h2 id=seeker-接口>Seeker 接口</h2><p>Seek 方法是用于设置偏移量的，这样可以从某个特定位置开始操作数据流</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Seeker</span> <span class=kd>interface</span> <span class=p>{</span>
-    <span class=nf>Seek</span><span class=p>(</span><span class=nx>offset</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>whence</span> <span class=kt>int</span><span class=p>)</span> <span class=p>(</span><span class=nx>ret</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Seek 设置下一次 Read 或 Write 的偏移量为 offset</p>
-<p>它的解释取决于 whence</p>
-<ul>
-<li>0 表示相对于文件的起始处</li>
-<li>1 表示相对于当前的偏移</li>
-<li>2 表示相对于其结尾处。</li>
-</ul>
-<p>Seek 返回新的偏移量和一个错误，如果有的话。</p>
-<p>听起来和 ReaderAt/WriteAt 接口有些类似，不过 Seeker 接口更灵活，可以更好的控制读写数据流的位置。</p>
-<h3 id=例-6>例</h3>
-<p>获取倒数第二个字符（需要考虑 UTF-8 编码，这里的代码只是一个示例）</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Seeker</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Seek</span><span class=p>(</span><span class=nx>offset</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>whence</span> <span class=kt>int</span><span class=p>)</span> <span class=p>(</span><span class=nx>ret</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Seek 设置下一次 Read 或 Write 的偏移量为 offset</p><p>它的解释取决于 whence</p><ul>
+<li>0 表示相对于文件的起始处</li><li>1 表示相对于当前的偏移</li><li>2 表示相对于其结尾处。</li></ul><p>Seek 返回新的偏移量和一个错误，如果有的话。</p><p>听起来和 ReaderAt/WriteAt 接口有些类似，不过 Seeker 接口更灵活，可以更好的控制读写数据流的位置。</p><h3 id=例-6>例</h3><p>获取倒数第二个字符（需要考虑 UTF-8 编码，这里的代码只是一个示例）</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>reader</span> <span class=o>:=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>)</span>
-<span class=nx>reader</span><span class=p>.</span><span class=nf>Seek</span><span class=p>(</span><span class=o>-</span><span class=mi>6</span><span class=p>,</span> <span class=nx>io</span><span class=p>.</span><span class=nx>SeekEnd</span><span class=p>)</span>
-<span class=nx>r</span><span class=p>,</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>reader</span><span class=p>.</span><span class=nf>ReadRune</span><span class=p>()</span>
-<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%c\n&#34;</span><span class=p>,</span> <span class=nx>r</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=关于-whence>关于 whence</h3>
-<p>whence 的值，在 io 包中定义了相应的常量，应该使用这些常量</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>reader</span> <span class=o>:=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>reader</span><span class=p>.</span><span class=nf>Seek</span><span class=p>(</span><span class=o>-</span><span class=mi>6</span><span class=p>,</span> <span class=nx>io</span><span class=p>.</span><span class=nx>SeekEnd</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>r</span><span class=p>,</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>reader</span><span class=p>.</span><span class=nf>ReadRune</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%c\n&#34;</span><span class=p>,</span> <span class=nx>r</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=关于-whence>关于 whence</h3><p>whence 的值，在 io 包中定义了相应的常量，应该使用这些常量</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>const</span> <span class=p>(</span>
-  <span class=nx>SeekStart</span>   <span class=p>=</span> <span class=mi>0</span> <span class=c1>// seek relative to the origin of the file
-</span><span class=c1></span>  <span class=nx>SeekCurrent</span> <span class=p>=</span> <span class=mi>1</span> <span class=c1>// seek relative to the current offset
-</span><span class=c1></span>  <span class=nx>SeekEnd</span>     <span class=p>=</span> <span class=mi>2</span> <span class=c1>// seek relative to the end
-</span><span class=c1></span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>而原先 os 包中的常量已经被标注为Deprecated</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>const</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>SeekStart</span>   <span class=p>=</span> <span class=mi>0</span> <span class=c1>// seek relative to the origin of the file
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>SeekCurrent</span> <span class=p>=</span> <span class=mi>1</span> <span class=c1>// seek relative to the current offset
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>SeekEnd</span>     <span class=p>=</span> <span class=mi>2</span> <span class=c1>// seek relative to the end
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>而原先 os 包中的常量已经被标注为Deprecated</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -548,55 +331,34 @@
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=c1>// Deprecated: Use io.SeekStart, io.SeekCurrent, and io.SeekEnd.
-</span><span class=c1></span><span class=kd>const</span> <span class=p>(</span>
-  <span class=nx>SEEK_SET</span> <span class=kt>int</span> <span class=p>=</span> <span class=mi>0</span> <span class=c1>// seek relative to the origin of the file
-</span><span class=c1></span>  <span class=nx>SEEK_CUR</span> <span class=kt>int</span> <span class=p>=</span> <span class=mi>1</span> <span class=c1>// seek relative to the current offset
-</span><span class=c1></span>  <span class=nx>SEEK_END</span> <span class=kt>int</span> <span class=p>=</span> <span class=mi>2</span> <span class=c1>// seek relative to the end
-</span><span class=c1></span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=closer-接口>Closer 接口</h2>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Deprecated: Use io.SeekStart, io.SeekCurrent, and io.SeekEnd.
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>const</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>SEEK_SET</span> <span class=kt>int</span> <span class=p>=</span> <span class=mi>0</span> <span class=c1>// seek relative to the origin of the file
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>SEEK_CUR</span> <span class=kt>int</span> <span class=p>=</span> <span class=mi>1</span> <span class=c1>// seek relative to the current offset
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nx>SEEK_END</span> <span class=kt>int</span> <span class=p>=</span> <span class=mi>2</span> <span class=c1>// seek relative to the end
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=closer-接口>Closer 接口</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>Closer</span> <span class=kd>interface</span> <span class=p>{</span>
-    <span class=nf>Close</span><span class=p>()</span> <span class=kt>error</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>该接口比较简单，只有一个 Close() 方法，用于关闭数据流。</p>
-<p>文件 (os.File)、归档（压缩包）、数据库连接、Socket 等需要手动关闭的资源都实现了 Closer 接口。</p>
-<p>实际编程中，经常将 Close 方法的调用放在 defer 语句中。</p>
-<h2 id=其他接口>其他接口</h2>
-<h3 id=一些复合接口>一些复合接口</h3>
-<p>ReadCloser、ReadSeeker、ReadWriteCloser、ReadWriteSeeker、ReadWriter、WriteCloser 和 WriteSeeker 接口</p>
-<p>这些接口是上面介绍的接口的两个或三个组合而成的新接口。例如 ReadWriter 接口：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Closer</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Close</span><span class=p>()</span> <span class=kt>error</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>该接口比较简单，只有一个 Close() 方法，用于关闭数据流。</p><p>文件 (os.File)、归档（压缩包）、数据库连接、Socket 等需要手动关闭的资源都实现了 Closer 接口。</p><p>实际编程中，经常将 Close 方法的调用放在 defer 语句中。</p><h2 id=其他接口>其他接口</h2><h3 id=一些复合接口>一些复合接口</h3><p>ReadCloser、ReadSeeker、ReadWriteCloser、ReadWriteSeeker、ReadWriter、WriteCloser 和 WriteSeeker 接口</p><p>这些接口是上面介绍的接口的两个或三个组合而成的新接口。例如 ReadWriter 接口：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>ReadWriter</span> <span class=kd>interface</span> <span class=p>{</span>
-    <span class=nx>Reader</span>
-    <span class=nx>Writer</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>这是 Reader 接口和 Writer 接口的简单组合（内嵌）。</p>
-<p>这些接口的作用是：有些时候同时需要某两个接口的所有功能，即必须同时实现了某两个接口的类型才能够被传入使用。可见，io 包中有大量的“小接口”，这样方便组合为“大接口”。</p>
-<h2 id=sectionreader-类型>SectionReader 类型</h2>
-<p>SectionReader 是一个 struct（没有任何导出的字段），实现了 Read, Seek 和 ReadAt，同时，内嵌了 ReaderAt 接口。结构定义如下：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>ReadWriter</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Reader</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Writer</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这是 Reader 接口和 Writer 接口的简单组合（内嵌）。</p><p>这些接口的作用是：有些时候同时需要某两个接口的所有功能，即必须同时实现了某两个接口的类型才能够被传入使用。可见，io 包中有大量的“小接口”，这样方便组合为“大接口”。</p><h2 id=sectionreader-类型>SectionReader 类型</h2><p>SectionReader 是一个 struct（没有任何导出的字段），实现了 Read, Seek 和 ReadAt，同时，内嵌了 ReaderAt 接口。结构定义如下：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -604,49 +366,30 @@
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>SectionReader</span> <span class=kd>struct</span> <span class=p>{</span>
-    <span class=nx>r</span>     <span class=nx>ReaderAt</span>    <span class=c1>// 该类型最终的 Read/ReadAt 最终都是通过 r 的 ReadAt 实现
-</span><span class=c1></span>    <span class=nx>base</span>  <span class=kt>int64</span>        <span class=c1>// NewSectionReader 会将 base 设置为 off
-</span><span class=c1></span>    <span class=nx>off</span>   <span class=kt>int64</span>        <span class=c1>// 从 r 中的 off 偏移处开始读取数据
-</span><span class=c1></span>    <span class=nx>limit</span> <span class=kt>int64</span>        <span class=c1>// limit - off = SectionReader 流的长度
-</span><span class=c1></span><span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>该类型读取数据流中部分数据。看一下</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>SectionReader</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>r</span>     <span class=nx>ReaderAt</span>    <span class=c1>// 该类型最终的 Read/ReadAt 最终都是通过 r 的 ReadAt 实现
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>base</span>  <span class=kt>int64</span>        <span class=c1>// NewSectionReader 会将 base 设置为 off
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>off</span>   <span class=kt>int64</span>        <span class=c1>// 从 r 中的 off 偏移处开始读取数据
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>limit</span> <span class=kt>int64</span>        <span class=c1>// limit - off = SectionReader 流的长度
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>该类型读取数据流中部分数据。看一下</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>NewSectionReader</span><span class=p>(</span><span class=nx>r</span> <span class=nx>ReaderAt</span><span class=p>,</span> <span class=nx>off</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>n</span> <span class=kt>int64</span><span class=p>)</span> <span class=o>*</span><span class=nx>SectionReader</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>的文档说明就知道了：NewSectionReader 返回一个 SectionReader，它从 r 中的偏移量 off 处读取 n 个字节后以 EOF 停止。</p>
-<p>也就是说，SectionReader 只是内部（内嵌）ReaderAt 表示的数据流的一部分：从 off 开始后的 n 个字节。</p>
-<p>这个类型的作用是：方便重复操作某一段 (section) 数据流；或者同时需要 ReadAt 和 Seek 的功能。</p>
-<h2 id=limitedreader-类型>LimitedReader 类型</h2>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>NewSectionReader</span><span class=p>(</span><span class=nx>r</span> <span class=nx>ReaderAt</span><span class=p>,</span> <span class=nx>off</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>n</span> <span class=kt>int64</span><span class=p>)</span> <span class=o>*</span><span class=nx>SectionReader</span>
+</span></span></code></pre></td></tr></table></div></div><p>的文档说明就知道了：NewSectionReader 返回一个 SectionReader，它从 r 中的偏移量 off 处读取 n 个字节后以 EOF 停止。</p><p>也就是说，SectionReader 只是内部（内嵌）ReaderAt 表示的数据流的一部分：从 off 开始后的 n 个字节。</p><p>这个类型的作用是：方便重复操作某一段 (section) 数据流；或者同时需要 ReadAt 和 Seek 的功能。</p><h2 id=limitedreader-类型>LimitedReader 类型</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>type</span> <span class=nx>LimitedReader</span> <span class=kd>struct</span> <span class=p>{</span>
-    <span class=nx>R</span> <span class=nx>Reader</span> <span class=c1>// underlying reader，最终的读取操作通过 R.Read 完成
-</span><span class=c1></span>    <span class=nx>N</span> <span class=kt>int64</span>  <span class=c1>// max bytes remaining
-</span><span class=c1></span><span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>从 R 读取但将返回的数据量限制为 N 字节。每调用一次 Read 都将更新 N 来反应新的剩余数量。</p>
-<p>也就是说，最多只能返回 N 字节数据。</p>
-<p>LimitedReader 只实现了 Read 方法（Reader 接口）。</p>
-<h3 id=例-7>例</h3>
-<p>使用示例如下：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>LimitedReader</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>R</span> <span class=nx>Reader</span> <span class=c1>// underlying reader，最终的读取操作通过 R.Read 完成
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>N</span> <span class=kt>int64</span>  <span class=c1>// max bytes remaining
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>从 R 读取但将返回的数据量限制为 N 字节。每调用一次 Read 都将更新 N 来反应新的剩余数量。</p><p>也就是说，最多只能返回 N 字节数据。</p><p>LimitedReader 只实现了 Read 方法（Reader 接口）。</p><h3 id=例-7>例</h3><p>使用示例如下：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -656,63 +399,36 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>content</span> <span class=o>:=</span> <span class=s>&#34;This Is LimitReader Example&#34;</span>
-<span class=nx>reader</span> <span class=o>:=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>content</span><span class=p>)</span> <span class=c1>//reader实现了Reader
-</span><span class=c1></span><span class=nx>limitReader</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>io</span><span class=p>.</span><span class=nx>LimitedReader</span><span class=p>{</span><span class=nx>R</span><span class=p>:</span> <span class=nx>reader</span><span class=p>,</span> <span class=nx>N</span><span class=p>:</span> <span class=mi>8</span><span class=p>}</span>
-<span class=k>for</span> <span class=nx>limitReader</span><span class=p>.</span><span class=nx>N</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
-    <span class=nx>tmp</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
-    <span class=nx>limitReader</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>tmp</span><span class=p>)</span>
-    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=nx>tmp</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>输出：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>content</span> <span class=o>:=</span> <span class=s>&#34;This Is LimitReader Example&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>reader</span> <span class=o>:=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>content</span><span class=p>)</span> <span class=c1>//reader实现了Reader
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>limitReader</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>io</span><span class=p>.</span><span class=nx>LimitedReader</span><span class=p>{</span><span class=nx>R</span><span class=p>:</span> <span class=nx>reader</span><span class=p>,</span> <span class=nx>N</span><span class=p>:</span> <span class=mi>8</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>limitReader</span><span class=p>.</span><span class=nx>N</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>tmp</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>limitReader</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>tmp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=nx>tmp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>This Is
-</code></pre></td></tr></table>
-</div>
-</div><p>可见，通过该类型可以达到 <em>只允许读取一定长度数据</em> 的目的。</p>
-<p>在 io 包中，LimitReader 函数的实现其实就是调用 LimitedReader：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>This Is
+</span></span></code></pre></td></tr></table></div></div><p>可见，通过该类型可以达到 <em>只允许读取一定长度数据</em> 的目的。</p><p>在 io 包中，LimitReader 函数的实现其实就是调用 LimitedReader：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>LimitReader</span><span class=p>(</span><span class=nx>r</span> <span class=nx>Reader</span><span class=p>,</span> <span class=nx>n</span> <span class=kt>int64</span><span class=p>)</span> <span class=nx>Reader</span> <span class=p>{</span> <span class=k>return</span> <span class=o>&amp;</span><span class=nx>LimitedReader</span><span class=p>{</span><span class=nx>r</span><span class=p>,</span> <span class=nx>n</span><span class=p>}</span> <span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=copy-函数>Copy 函数</h2>
-<p>Copy 函数的签名：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>LimitReader</span><span class=p>(</span><span class=nx>r</span> <span class=nx>Reader</span><span class=p>,</span> <span class=nx>n</span> <span class=kt>int64</span><span class=p>)</span> <span class=nx>Reader</span> <span class=p>{</span> <span class=k>return</span> <span class=o>&amp;</span><span class=nx>LimitedReader</span><span class=p>{</span><span class=nx>r</span><span class=p>,</span> <span class=nx>n</span><span class=p>}</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=copy-函数>Copy 函数</h2><p>Copy 函数的签名：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>Copy</span><span class=p>(</span><span class=nx>dst</span> <span class=nx>Writer</span><span class=p>,</span> <span class=nx>src</span> <span class=nx>Reader</span><span class=p>)</span> <span class=p>(</span><span class=nx>written</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Copy 将 src 复制到 dst，直到在 src 上到达 EOF 或发生错误。它返回复制的字节数，如果有错误的话，还会返回在复制时遇到的第一个错误。</p>
-<p>成功的 Copy 返回 err == nil，而非 err == EOF。由于 Copy 被定义为从 src 读取直到 EOF 为止，因此它不会将来自 Read 的 EOF 当做错误来报告。</p>
-<p>若 dst 实现了 ReaderFrom 接口，其复制操作可通过调用 dst.ReadFrom(src) 实现。此外，若 src 实现了 WriterTo 接口，其复制操作可通过调用 src.WriteTo(dst) 实现。</p>
-<h3 id=例-8>例</h3>
-<p>代码：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Copy</span><span class=p>(</span><span class=nx>dst</span> <span class=nx>Writer</span><span class=p>,</span> <span class=nx>src</span> <span class=nx>Reader</span><span class=p>)</span> <span class=p>(</span><span class=nx>written</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>Copy 将 src 复制到 dst，直到在 src 上到达 EOF 或发生错误。它返回复制的字节数，如果有错误的话，还会返回在复制时遇到的第一个错误。</p><p>成功的 Copy 返回 err == nil，而非 err == EOF。由于 Copy 被定义为从 src 读取直到 EOF 为止，因此它不会将来自 Read 的 EOF 当做错误来报告。</p><p>若 dst 实现了 ReaderFrom 接口，其复制操作可通过调用 dst.ReadFrom(src) 实现。此外，若 src 实现了 WriterTo 接口，其复制操作可通过调用 src.WriteTo(dst) 实现。</p><h3 id=例-8>例</h3><p>代码：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>io</span><span class=p>.</span><span class=nf>Copy</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>))</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>直接将内容输出（写入 Stdout 中）。</p>
-<p>我们甚至可以这么做：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>io</span><span class=p>.</span><span class=nf>Copy</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>直接将内容输出（写入 Stdout 中）。</p><p>我们甚至可以这么做：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -726,96 +442,55 @@
 </span><span class=lnt>10
 </span><span class=lnt>11
 </span><span class=lnt>12
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kn>package</span> <span class=nx>main</span>
-
-<span class=kn>import</span> <span class=p>(</span>
-    <span class=s>&#34;fmt&#34;</span>
-    <span class=s>&#34;io&#34;</span>
-    <span class=s>&#34;os&#34;</span>
-<span class=p>)</span>
-
-<span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
-    <span class=nx>io</span><span class=p>.</span><span class=nf>Copy</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>)</span>
-    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Got EOF -- bye&#34;</span><span class=p>)</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>执行：<code>echo "Hello, World" | go run main.go</code></p>
-<h2 id=copyn-函数>CopyN 函数</h2>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;io&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;os&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>io</span><span class=p>.</span><span class=nf>Copy</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Got EOF -- bye&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>执行：<code>echo "Hello, World" | go run main.go</code></p><h2 id=copyn-函数>CopyN 函数</h2><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>CopyN</span><span class=p>(</span><span class=nx>dst</span> <span class=nx>Writer</span><span class=p>,</span> <span class=nx>src</span> <span class=nx>Reader</span><span class=p>,</span> <span class=nx>n</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=nx>written</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>CopyN 将 n 个字节 (或到一个error) 从 src 复制到 dst。 它返回复制的字节数以及在复制时遇到的最早的错误。当且仅当 err == nil 时，written == n 。</p>
-<p>若 dst 实现了 ReaderFrom 接口，复制操作也就会使用它来实现。</p>
-<h3 id=例-9>例</h3>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>CopyN</span><span class=p>(</span><span class=nx>dst</span> <span class=nx>Writer</span><span class=p>,</span> <span class=nx>src</span> <span class=nx>Reader</span><span class=p>,</span> <span class=nx>n</span> <span class=kt>int64</span><span class=p>)</span> <span class=p>(</span><span class=nx>written</span> <span class=kt>int64</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>CopyN 将 n 个字节 (或到一个error) 从 src 复制到 dst。 它返回复制的字节数以及在复制时遇到的最早的错误。当且仅当 err == nil 时，written == n 。</p><p>若 dst 实现了 ReaderFrom 接口，复制操作也就会使用它来实现。</p><h3 id=例-9>例</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=nx>io</span><span class=p>.</span><span class=nf>CopyN</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>),</span> <span class=mi>8</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>会输出：</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>io</span><span class=p>.</span><span class=nf>CopyN</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=s>&#34;Go语言中文网&#34;</span><span class=p>),</span> <span class=mi>8</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>会输出：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>Go语言
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=writestring-函数>WriteString 函数</h2>
-<p>这是为了方便写入 string 类型提供的函数</p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Go语言
+</span></span></code></pre></td></tr></table></div></div><h2 id=writestring-函数>WriteString 函数</h2><p>这是为了方便写入 string 类型提供的函数</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>WriteString</span><span class=p>(</span><span class=nx>w</span> <span class=nx>Writer</span><span class=p>,</span> <span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>WriteString 将 s 的内容写入 w 中，当 w 实现了 WriteString 方法时，会直接调用该方法，否则执行 w.Write([]byte(s))。</p>
-</div><div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>WriteString</span><span class=p>(</span><span class=nx>w</span> <span class=nx>Writer</span><span class=p>,</span> <span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>WriteString 将 s 的内容写入 w 中，当 w 实现了 WriteString 方法时，会直接调用该方法，否则执行 w.Write([]byte(s))。</p></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-28</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a>,&nbsp;<a href=/Notes/tags/io/>io</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a>,&nbsp;<a href=/Notes/tags/io/>io</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/rand/ class=prev rel=prev title="Go math/rand 标准库"><i class="fas fa-angle-left fa-fw"></i>Go math/rand 标准库</a>
-<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/os/ class=next rel=next title="Go os 标准库">Go os 标准库<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+</section></div><div class=post-nav><a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/rand/ class=prev rel=prev title="Go math/rand 标准库"><i class="fas fa-angle-left fa-fw"></i>Go math/rand 标准库</a>
+<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/os/ class=next rel=next title="Go os 标准库">Go os 标准库<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
-</html>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

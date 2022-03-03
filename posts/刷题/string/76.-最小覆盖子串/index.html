@@ -9,21 +9,19 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/string/76.-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-26T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-02-28T12:23:28+00:00">
+<meta property="article:modified_time" content="2022-03-03T15:14:02+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="76. 最小覆盖子串">
 <meta name=twitter:description content="76. 最小覆盖子串 hard 给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 &#34;&#34; 。 注意">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/string/76.-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/7.-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"76. 最小覆盖子串","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E5%88%B7%E9%A2%98\/string\/76.-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2\/"},"genre":"posts","keywords":"算法, 字符串, 滑动窗口","wordcount":576,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E5%88%B7%E9%A2%98\/string\/76.-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2\/","datePublished":"2022-02-26T00:00:00+00:00","dateModified":"2022-02-28T12:23:28+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head>
-<body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem('theme')?localStorage.getItem('theme')==='dark':''==='auto'?window.matchMedia('(prefers-color-scheme: dark)').matches:''==='dark')&&document.body.setAttribute('theme','dark')</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/string/76.-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/7.-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"76. 最小覆盖子串","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E5%88%B7%E9%A2%98\/string\/76.-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2\/"},"genre":"posts","keywords":"算法, 字符串, 滑动窗口","wordcount":576,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E5%88%B7%E9%A2%98\/string\/76.-%E6%9C%80%E5%B0%8F%E8%A6%86%E7%9B%96%E5%AD%90%E4%B8%B2\/","datePublished":"2022-02-26T00:00:00+00:00","dateModified":"2022-03-03T15:14:02+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu>
+</div><div class=menu>
 <div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
@@ -38,20 +36,14 @@
 </span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
 </a>
-</div>
-</div>
-</div>
-</header><header class=mobile id=header-mobile>
+</div></div></div></header><header class=mobile id=header-mobile>
 <div class=header-container>
 <div class=header-wrapper>
 <div class=header-title>
 <a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div>
-<div class=menu-toggle id=menu-toggle-mobile>
+</div><div class=menu-toggle id=menu-toggle-mobile>
 <span></span><span></span><span></span>
-</div>
-</div>
-<div class=menu id=menu-mobile><div class=search-wrapper>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
 <div class="search mobile" id=search-mobile>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
@@ -63,87 +55,50 @@
 <span class="search-button search-loading" id=search-loading-mobile>
 <i class="fas fa-spinner fa-fw fa-spin"></i>
 </span>
-</div>
-<a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
 取消
 </a>
 </div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
 <i class="fas fa-adjust fa-fw"></i>
-</a></div>
-</div>
-</header>
-<div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div>
-</div>
-<div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div>
-</div>
-<main class=main>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2>
-<div class=toc-content id=toc-content-auto></div>
-</div><article class="page single"><h1 class="single-title animated flipInX">76. 最小覆盖子串</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E5%88%B7%E9%A2%98/><i class="far fa-folder fa-fw"></i>刷题</a></span></div>
-<div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-26>2022-02-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 576 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
-</div><div class="details toc" id=toc-static kept>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">76. 最小覆盖子串</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E5%88%B7%E9%A2%98/><i class="far fa-folder fa-fw"></i>刷题</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-26>2022-02-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 576 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
-</div>
-<div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
 <ul>
-<li><a href=#滑动窗口>滑动窗口</a></li>
-</ul>
-</nav></div>
-</div><div class=content id=content><h1 id=76-最小覆盖子串>76. 最小覆盖子串</h1>
-<p><code>hard</code></p>
-<p>给你一个字符串 <code>s</code> 、一个字符串 <code>t</code> 。返回 <code>s</code> 中涵盖 <code>t</code> 所有字符的最小子串。如果 <code>s</code> 中不存在涵盖 <code>t</code> 所有字符的子串，则返回空字符串 <code>""</code> 。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>对于 <code>t</code> 中重复字符，我们寻找的子字符串中该字符数量必须不少于 <code>t</code> 中该字符数量。</li>
-<li>如果 <code>s</code> 中存在这样的子串，我们保证它是唯一的答案。</li>
-</ul>
-<p><strong>示例 1：</strong></p>
-<div class=highlight><div class=chroma>
+<li><a href=#滑动窗口>滑动窗口</a></li></ul></nav></div></div><div class=content id=content><h1 id=76-最小覆盖子串>76. 最小覆盖子串</h1><p><code>hard</code></p><p>给你一个字符串 <code>s</code> 、一个字符串 <code>t</code> 。返回 <code>s</code> 中涵盖 <code>t</code> 所有字符的最小子串。如果 <code>s</code> 中不存在涵盖 <code>t</code> 所有字符的子串，则返回空字符串 <code>""</code> 。</p><p><strong>注意：</strong></p><ul>
+<li>对于 <code>t</code> 中重复字符，我们寻找的子字符串中该字符数量必须不少于 <code>t</code> 中该字符数量。</li><li>如果 <code>s</code> 中存在这样的子串，我们保证它是唯一的答案。</li></ul><p><strong>示例 1：</strong></p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>输入：s = &#34;ADOBECODEBANC&#34;, t = &#34;ABC&#34;
-输出：&#34;BANC&#34;
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>示例 2：</strong></p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>输入：s = &#34;ADOBECODEBANC&#34;, t = &#34;ABC&#34;
+</span></span><span class=line><span class=cl>输出：&#34;BANC&#34;
+</span></span></code></pre></td></tr></table></div></div><p><strong>示例 2：</strong></p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>输入：s = &#34;a&#34;, t = &#34;a&#34;
-输出：&#34;a&#34;
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>示例 3:</strong></p>
-<div class=highlight><div class=chroma>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>输入：s = &#34;a&#34;, t = &#34;a&#34;
+</span></span><span class=line><span class=cl>输出：&#34;a&#34;
+</span></span></code></pre></td></tr></table></div></div><p><strong>示例 3:</strong></p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>输入: s = &#34;a&#34;, t = &#34;aa&#34;
-输出: &#34;&#34;
-解释: t 中两个字符 &#39;a&#39; 均应包含在 s 的子串中，
-因此没有符合条件的子字符串，返回空字符串。
-</code></pre></td></tr></table>
-</div>
-</div><h2 id=滑动窗口>滑动窗口</h2>
-<p>典型的滑动窗口思路，窗口扩展时寻找可行解，窗口收缩时优化可行解。</p>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220222013719279.png alt=image-20220222013719279 style=zoom:67%>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>输入: s = &#34;a&#34;, t = &#34;aa&#34;
+</span></span><span class=line><span class=cl>输出: &#34;&#34;
+</span></span><span class=line><span class=cl>解释: t 中两个字符 &#39;a&#39; 均应包含在 s 的子串中，
+</span></span><span class=line><span class=cl>因此没有符合条件的子字符串，返回空字符串。
+</span></span></code></pre></td></tr></table></div></div><h2 id=滑动窗口>滑动窗口</h2><p>典型的滑动窗口思路，窗口扩展时寻找可行解，窗口收缩时优化可行解。</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220222013719279.png alt=image-20220222013719279 style=zoom:67%>
 <img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220222013827787.png alt=image-20220222013827787 style=zoom:67%>
 <div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -195,91 +150,71 @@
 </span><span class=lnt>46
 </span><span class=lnt>47
 </span><span class=lnt>48
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=kd>func</span> <span class=nf>minWindow</span><span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>t</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
-   <span class=k>if</span> <span class=nx>s</span> <span class=o>==</span> <span class=nx>t</span> <span class=p>{</span>
-      <span class=k>return</span> <span class=nx>s</span>
-   <span class=p>}</span>
-   <span class=nx>hash</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>byte</span><span class=p>]</span><span class=kt>int</span><span class=p>)</span> <span class=c1>// 记录目标字母及其个数 作为需求
-</span><span class=c1></span>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>t</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
-      <span class=nx>hash</span><span class=p>[</span><span class=nx>t</span><span class=p>[</span><span class=nx>i</span><span class=p>]]</span><span class=o>++</span>
-   <span class=p>}</span>
-   <span class=nx>reL</span><span class=p>,</span> <span class=nx>reR</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span> <span class=c1>// 目标的左右边界
-</span><span class=c1></span>   <span class=nx>minLen</span> <span class=o>:=</span> <span class=nx>math</span><span class=p>.</span><span class=nx>MaxInt</span>
-   <span class=nx>left</span><span class=p>,</span> <span class=nx>right</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span>
-   <span class=nx>sum</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>t</span><span class=p>)</span> <span class=c1>// 记录总数 为0时代表全命中
-</span><span class=c1></span>
-   <span class=k>for</span> <span class=nx>right</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=p>{</span>
-      <span class=k>if</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>right</span><span class=p>]];</span> <span class=nx>ok</span> <span class=p>{</span>
-         <span class=c1>// 存在
-</span><span class=c1></span>         <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>right</span><span class=p>]]</span><span class=o>--</span>
-         <span class=k>if</span> <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>right</span><span class=p>]]</span> <span class=o>&gt;=</span> <span class=mi>0</span> <span class=p>{</span>
-            <span class=c1>// 变成负数时sum不用减少 因为已经满足
-</span><span class=c1></span>            <span class=nx>sum</span><span class=o>--</span>
-         <span class=p>}</span>
-      <span class=p>}</span>
-
-      <span class=k>if</span> <span class=nx>sum</span> <span class=o>==</span> <span class=mi>0</span> <span class=p>{</span>
-         <span class=c1>// 全部命中
-</span><span class=c1></span>         <span class=k>for</span> <span class=nx>left</span> <span class=o>&lt;=</span> <span class=nx>right</span> <span class=p>{</span>
-            <span class=c1>// left右移 直到不满足全命中
-</span><span class=c1></span>            <span class=k>if</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>left</span><span class=p>]];</span> <span class=nx>ok</span> <span class=p>{</span>
-               <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>left</span><span class=p>]]</span><span class=o>++</span>
-               <span class=k>if</span> <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>left</span><span class=p>]]</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
-                  <span class=c1>// 需求得不到满足了
-</span><span class=c1></span>                  <span class=k>if</span> <span class=nx>minLen</span> <span class=p>&gt;</span> <span class=nx>right</span><span class=o>-</span><span class=nx>left</span><span class=o>+</span><span class=mi>1</span> <span class=p>{</span>
-                     <span class=c1>// 刷新最短值
-</span><span class=c1></span>                     <span class=nx>reR</span><span class=p>,</span> <span class=nx>reL</span> <span class=p>=</span> <span class=nx>right</span><span class=p>,</span> <span class=nx>left</span>
-                     <span class=nx>minLen</span> <span class=p>=</span> <span class=nx>right</span> <span class=o>-</span> <span class=nx>left</span> <span class=o>+</span> <span class=mi>1</span>
-                  <span class=p>}</span>
-                  <span class=nx>sum</span><span class=o>++</span>
-                  <span class=nx>left</span><span class=o>++</span> <span class=c1>// 正式地++ 破坏全命中状态
-</span><span class=c1></span>                  <span class=k>break</span>
-               <span class=p>}</span>
-            <span class=p>}</span>
-            <span class=nx>left</span><span class=o>++</span> <span class=c1>// 注意 先判断再++
-</span><span class=c1></span>         <span class=p>}</span>
-      <span class=p>}</span>
-      <span class=nx>right</span><span class=o>++</span>
-   <span class=p>}</span>
-   <span class=k>return</span> <span class=nx>s</span><span class=p>[</span><span class=nx>reL</span> <span class=p>:</span> <span class=nx>reR</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span>
-<span class=p>}</span>
-</code></pre></td></tr></table>
-</div>
-</div></div><div class=post-footer id=post-footer>
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>minWindow</span><span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>t</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>s</span> <span class=o>==</span> <span class=nx>t</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=nx>s</span>
+</span></span><span class=line><span class=cl>   <span class=p>}</span>
+</span></span><span class=line><span class=cl>   <span class=nx>hash</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>byte</span><span class=p>]</span><span class=kt>int</span><span class=p>)</span> <span class=c1>// 记录目标字母及其个数 作为需求
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>t</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>hash</span><span class=p>[</span><span class=nx>t</span><span class=p>[</span><span class=nx>i</span><span class=p>]]</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>   <span class=p>}</span>
+</span></span><span class=line><span class=cl>   <span class=nx>reL</span><span class=p>,</span> <span class=nx>reR</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span> <span class=c1>// 目标的左右边界
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>minLen</span> <span class=o>:=</span> <span class=nx>math</span><span class=p>.</span><span class=nx>MaxInt</span>
+</span></span><span class=line><span class=cl>   <span class=nx>left</span><span class=p>,</span> <span class=nx>right</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>   <span class=nx>sum</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>t</span><span class=p>)</span> <span class=c1>// 记录总数 为0时代表全命中
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>right</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>right</span><span class=p>]];</span> <span class=nx>ok</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>         <span class=c1>// 存在
+</span></span></span><span class=line><span class=cl><span class=c1></span>         <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>right</span><span class=p>]]</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>         <span class=k>if</span> <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>right</span><span class=p>]]</span> <span class=o>&gt;=</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// 变成负数时sum不用减少 因为已经满足
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nx>sum</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>         <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=nx>sum</span> <span class=o>==</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>         <span class=c1>// 全部命中
+</span></span></span><span class=line><span class=cl><span class=c1></span>         <span class=k>for</span> <span class=nx>left</span> <span class=o>&lt;=</span> <span class=nx>right</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// left右移 直到不满足全命中
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>if</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>left</span><span class=p>]];</span> <span class=nx>ok</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>               <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>left</span><span class=p>]]</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>               <span class=k>if</span> <span class=nx>hash</span><span class=p>[</span><span class=nx>s</span><span class=p>[</span><span class=nx>left</span><span class=p>]]</span> <span class=p>&gt;</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                  <span class=c1>// 需求得不到满足了
+</span></span></span><span class=line><span class=cl><span class=c1></span>                  <span class=k>if</span> <span class=nx>minLen</span> <span class=p>&gt;</span> <span class=nx>right</span><span class=o>-</span><span class=nx>left</span><span class=o>+</span><span class=mi>1</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                     <span class=c1>// 刷新最短值
+</span></span></span><span class=line><span class=cl><span class=c1></span>                     <span class=nx>reR</span><span class=p>,</span> <span class=nx>reL</span> <span class=p>=</span> <span class=nx>right</span><span class=p>,</span> <span class=nx>left</span>
+</span></span><span class=line><span class=cl>                     <span class=nx>minLen</span> <span class=p>=</span> <span class=nx>right</span> <span class=o>-</span> <span class=nx>left</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>                  <span class=p>}</span>
+</span></span><span class=line><span class=cl>                  <span class=nx>sum</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>                  <span class=nx>left</span><span class=o>++</span> <span class=c1>// 正式地++ 破坏全命中状态
+</span></span></span><span class=line><span class=cl><span class=c1></span>                  <span class=k>break</span>
+</span></span><span class=line><span class=cl>               <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=nx>left</span><span class=o>++</span> <span class=c1>// 注意 先判断再++
+</span></span></span><span class=line><span class=cl><span class=c1></span>         <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=nx>right</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>   <span class=p>}</span>
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>s</span><span class=p>[</span><span class=nx>reL</span> <span class=p>:</span> <span class=nx>reR</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-02-28</span>
-</div>
-<div class=post-info-license></div>
-</div>
-<div class=post-info-line>
-<div class=post-info-md></div>
-<div class=post-info-share>
+<span>更新于 2022-03-03</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
 <span></span>
-</div>
-</div>
-</div>
-<div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E7%AE%97%E6%B3%95/>算法</a>,&nbsp;<a href=/Notes/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/>字符串</a>,&nbsp;<a href=/Notes/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/>滑动窗口</a></section>
-<section>
+</div></div></div><div class=post-info-more>
+<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E7%AE%97%E6%B3%95/>算法</a>,&nbsp;<a href=/Notes/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/>字符串</a>,&nbsp;<a href=/Notes/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/>滑动窗口</a></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section>
-</div>
-<div class=post-nav><a href=/Notes/posts/%E5%88%B7%E9%A2%98/array/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0/ class=prev rel=prev title="剑指 Offer 40. 最小的 k 个数"><i class="fas fa-angle-left fa-fw"></i>剑指 Offer 40. 最小的 k 个数</a>
-<a href=/Notes/posts/%E5%88%B7%E9%A2%98/array/7.-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/ class=next rel=next title="7. 整数反转">7. 整数反转<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-</article></div>
-</main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div>
-</div>
-</footer></div>
-<div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+</section></div><div class=post-nav><a href=/Notes/posts/%E5%88%B7%E9%A2%98/array/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0/ class=prev rel=prev title="剑指 Offer 40. 最小的 k 个数"><i class="fas fa-angle-left fa-fw"></i>剑指 Offer 40. 最小的 k 个数</a>
+<a href=/Notes/posts/%E5%88%B7%E9%A2%98/array/7.-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/ class=next rel=next title="7. 整数反转">7. 整数反转<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>
 <i class="fas fa-comment fa-fw"></i>
 </a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body>
-</html>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
