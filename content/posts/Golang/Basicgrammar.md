@@ -9,6 +9,8 @@ categories: [Golang]
 
 # Golang
 
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SyctY6Q.png)
+
 ## 安装
 
 下载地址：https://go.dev/dl/
@@ -2332,6 +2334,10 @@ Ahoy, world!
 
 ## 一些技巧和特性
 
+### 零散的特性
+
+Go 的相对路径是相对于**执行命令时的目录**
+
 ### 分组声明
 
 在Go语言中，同时声明多个常量、变量，或者导入多个包时，可采用分组的方式进行声明。
@@ -2568,3 +2574,79 @@ var _ json.Marshaler = (*RawMessage)(nil)
 
 - `make` 的作用是初始化内置的数据结构，也就是我们在前面提到的切片、哈希表和 Channel
 - `new` 的作用是根据传入的类型分配一片内存空间并返回指向这片内存空间的指针
+
+### 解决 Go 的相对路径问题
+
+#### 获取当前可执行文件路径
+
+将配置文件的相对路径与`GetAppPath()`的结果相拼接，可解决 `go build main.go` 的可执行文件跨目录执行的问题（如：`go build ./src/gin-blog/main.go`）
+
+```go
+import (
+    "path/filepath"
+    "os"
+    "os/exec"
+    "string"
+)
+
+func GetAppPath() string {
+    file, _ := exec.LookPath(os.Args[0])
+    path, _ := filepath.Abs(file)
+    index := strings.LastIndex(path, string(os.PathSeparator))
+
+    return path[:index]
+}
+```
+
+但是这种方式，对于 `go run` 依旧无效。因为 `go run` 执行时会将文件放到 `/tmp/go-build...` 目录下，编译并运行：
+
+> Run compiles and runs the main package comprising the named Go source files.
+>
+> A Go source file is defined to be a file ending in a literal ".go" suffix.
+
+通过传递参数指定路径，可解决 `go run` 的问题
+
+```go
+package main
+
+import (
+    "flag"
+    "fmt"
+)
+
+func main() {
+    var appPath string
+    flag.StringVar(&appPath, "app-path", "app-path")
+    flag.Parse()
+    fmt.Printf("App path: %s", appPath)
+}
+```
+
+```go
+go run main.go --app-path "Your project address"
+```
+
+#### 增加 `os.Getwd()` 进行多层判断
+
+参见 [beego](https://github.com/astaxie/beego/blob/master/config.go#L133-L146) 读取 `app.conf` 的代码
+
+该写法可兼容 `go build` 和在项目根目录执行 `go run` ，但是若跨目录执行 `go run` 就不行
+
+#### 配置全局系统变量
+
+我们可以通过 `os.Getenv` 来获取系统全局变量，然后与相对路径进行拼接
+
+1、 设置项目工作区
+
+简单来说，就是设置项目（应用）的工作路径，然后与配置文件、日志文件等相对路径进行拼接，达到相对的绝对路径来保证路径一致
+
+参见 [gogs](https://github.com/gogits/gogs/blob/master/pkg/setting/setting.go#L351) 读取 `GOGS_WORK_DIR` 进行拼接的代码
+
+2、 利用系统自带变量
+
+简单来说就是通过系统自带的全局变量，例如 `$HOME` 等，将配置文件存放在 `$HOME/conf`或`/etc/conf` 下
+
+这样子就能更加固定的存放配置文件，**不需要额外去设置一个环境变量**
+
+> `go test` 在一些场景下也会遇到路径问题，因为`go test`只能够在当前目录执行，所以在执行测试用例的时候，你的执行目录已经是测试目录了
+

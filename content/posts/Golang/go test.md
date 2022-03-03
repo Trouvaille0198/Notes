@@ -184,11 +184,30 @@ FAIL        command-line-arguments        0.002s
 
 开发者可以根据实际需要选择合适的日志。
 
-## 性能测试
+## 性能测试 Benchmark
 
 性能测试，也称**基准测试**，可以测试一段程序的性能，可以得到时间消耗、内存使用情况的报告。
 
 Go 语言中提供了基准测试框架，使用方法类似于单元测试，使用者无须准备高精度的计时器和各种分析工具，基准测试本身即可以打印出非常标准的测试报告。
+
+### 快速浏览
+
+1. 进行性能测试时，尽可能保持测试环境的稳定
+2. 实现 benchmark 测试
+    • 位于 `_test.go` 文件中
+    • 函数名以 `Benchmark` 开头
+    • 参数为 `b *testing.B`
+    • `b.ResetTimer()` 可重置定时器
+    • `b.StopTimer()` 暂停计时
+    • `b.StartTimer()` 开始计时
+3. 执行 benchmark 测试
+    • `go test -bench .` 执行当前测试
+    • `b.N` 决定用例需要执行的次数
+    • `-bench` 可传入正则，匹配用例
+    • `-cpu` 可改变 CPU 核数
+    • `-benchtime` 可指定执行时间或具体次数
+    • `-count` 可设置 benchmark 轮数
+    • `-benchmem` 可查看内存分配量和分配次数
 
 ### 规范
 
@@ -233,7 +252,7 @@ ok          command-line-arguments        0.700s
 
 基准测试框架对一个测试用例的默认测试时间是 1 秒。开始测试时，当以 Benchmark 开头的基准测试用例函数返回时还不到 1 秒，那么 testing.B 中的 N 值将按 1、2、5、10、20、50……递增，同时以递增后的值重新调用基准测试用例函数。
 
-#### 自定义测试时间
+#### 自定义测试时间 `-benchtime`
 
 通过 `-benchtime` 参数可以自定义测试时间，例如：
 
@@ -244,6 +263,23 @@ goarch: amd64
 Benchmark_Add-4           10000000000                 0.33 ns/op
 PASS
 ok          command-line-arguments        3.380s
+```
+
+`-benchtime` 的值除了是时间外，还可以是具体的次数。例如，执行 30 次可以用 `-benchtime=30x`
+
+#### 测试 CPU 核数 `-cpu`
+
+`-cpu` 支持传入一个列表作为参数，例如：
+
+```go
+$ go test -bench='Fib$' -cpu=2,4 .
+goos: darwin
+goarch: amd64
+pkg: example
+BenchmarkFib-2               206           5774888 ns/op
+BenchmarkFib-4               205           5799426 ns/op
+PASS
+ok      example 3.563s
 ```
 
 ####  测试内存 `-benchmem`
@@ -300,6 +336,57 @@ func BenchmarkAddTimerControl(b *testing.B) {
 从 `Benchmark()` 函数开始，Timer 就开始计数。`StopTimer()` 可以停止这个计数过程，做一些耗时的操作，通过 `StartTimer()` 重新开始计时。`ResetTimer()` 可以重置计数器的数据。
 
 **计数器内部不仅包含耗时数据，还包括内存分配的数据。**
+
+#### 测试不同的数据
+
+不同的函数复杂度不同，O(1)，O(n)，O(n^2) 等，**利用 benchmark 验证复杂度一个简单的方式**，是构造不同的输入。对刚才的 benchmark 稍作改造，便能够达到目的。
+
+```go
+// generate_test.go
+package main
+
+import (
+	"math/rand"
+	"testing"
+	"time"
+)
+
+func generate(n int) []int {
+	rand.Seed(time.Now().UnixNano())
+	nums := make([]int, 0)
+	for i := 0; i < n; i++ {
+		nums = append(nums, rand.Int())
+	}
+	return nums
+}
+func benchmarkGenerate(i int, b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		generate(i)
+	}
+}
+
+func BenchmarkGenerate1000(b *testing.B)    { benchmarkGenerate(1000, b) }
+func BenchmarkGenerate10000(b *testing.B)   { benchmarkGenerate(10000, b) }
+func BenchmarkGenerate100000(b *testing.B)  { benchmarkGenerate(100000, b) }
+func BenchmarkGenerate1000000(b *testing.B) { benchmarkGenerate(1000000, b) }
+```
+
+这里，我们实现一个辅助函数 `benchmarkGenerate` 允许传入参数 i，并构造了 4 个不同输入的 benchmark 用例。运行结果如下：
+
+```go
+$ go test -bench .                                                       
+goos: darwin
+goarch: amd64
+pkg: example
+BenchmarkGenerate1000-8            34048             34643 ns/op
+BenchmarkGenerate10000-8            4070            295642 ns/op
+BenchmarkGenerate100000-8            403           3230415 ns/op
+BenchmarkGenerate1000000-8            39          32083701 ns/op
+PASS
+ok      example 6.597s
+```
+
+通过测试结果可以发现，输入变为原来的 10 倍，函数每次调用的时长也差不多是原来的 10 倍，这说明复杂度是线性的。
 
 ## 示例测试
 
