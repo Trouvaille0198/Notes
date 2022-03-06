@@ -8,14 +8,14 @@
 <meta property="og:description" content="认识 输出日志 导入 1 import logging 初始化 级别排序 CRITICAL > ERROR > WARNING > INFO > DEBUG 级别 何时使用 DEBUG 细节信息，仅当诊断问题时适用。 INFO 确认程序按预期运行 WARNING 表明有已经或即将发生">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/logging/"><meta property="article:section" content="posts">
-<meta property="article:modified_time" content="2022-03-04T15:51:17+00:00">
+<meta property="article:modified_time" content="2022-03-06T07:10:05+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content>
 <meta name=twitter:description content="认识 输出日志 导入 1 import logging 初始化 级别排序 CRITICAL > ERROR > WARNING > INFO > DEBUG 级别 何时使用 DEBUG 细节信息，仅当诊断问题时适用。 INFO 确认程序按预期运行 WARNING 表明有已经或即将发生">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/logging/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/iohttp/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/logging\/"},"genre":"posts","wordcount":2047,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/logging\/","dateModified":"2022-03-04T15:51:17+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/logging/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/loguru/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/iohttp/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/logging\/"},"genre":"posts","wordcount":2047,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/logging\/","dateModified":"2022-03-06T07:10:05+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -740,7 +740,7 @@
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-03-04</span>
+<span>更新于 2022-03-06</span>
 </div><div class=post-info-license></div></div><div class=post-info-line>
 <div class=post-info-md></div><div class=post-info-share>
 <span></span>

@@ -9,14 +9,14 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/filepath/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-12-16T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-04T15:51:17+00:00">
+<meta property="article:modified_time" content="2022-03-06T07:10:05+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Go filepath 标准库">
 <meta name=twitter:description content="filepath path/filepath 包涉及到路径操作时，路径分隔符使用 os.PathSeparator。 不同系统，路径表示方式有所不同，比如 Unix 和 Windows 差别很大。本包能够处理所有">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/filepath/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/time/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/vue3/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go filepath 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/filepath\/"},"genre":"posts","keywords":"Go 库","wordcount":3511,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/filepath\/","datePublished":"2021-12-16T00:00:00+00:00","dateModified":"2022-03-04T15:51:17+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/filepath/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/time/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/vue3/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go filepath 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/filepath\/"},"genre":"posts","keywords":"Go 库","wordcount":3511,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F\/filepath\/","datePublished":"2021-12-16T00:00:00+00:00","dateModified":"2022-03-06T07:10:05+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -240,7 +240,7 @@
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-03-04</span>
+<span>更新于 2022-03-06</span>
 </div><div class=post-info-license></div></div><div class=post-info-line>
 <div class=post-info-md></div><div class=post-info-share>
 <span></span>

@@ -9,14 +9,14 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-03-03T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-04T15:51:17+00:00">
+<meta property="article:modified_time" content="2022-03-06T07:10:05+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Go 进阶">
 <meta name=twitter:description content="Go 进阶 内存对齐 引入 1 2 3 4 5 6 7 type Part1 struct { a bool b int32 c int8 d int64 e byte } 在开始之前，希望你计算一下 Part1 共占用的大小是多少呢？ 1 2 3 4 5 6 7 8 func main() { fmt.Printf(&#34;bool size: %d\n&#34;,">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/pprof/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 进阶","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E8%BF%9B%E9%98%B6\/"},"genre":"posts","keywords":"进阶","wordcount":2568,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E8%BF%9B%E9%98%B6\/","datePublished":"2022-03-03T00:00:00+00:00","dateModified":"2022-03-04T15:51:17+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/pprof/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 进阶","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E8%BF%9B%E9%98%B6\/"},"genre":"posts","keywords":"进阶","wordcount":7512,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E8%BF%9B%E9%98%B6\/","datePublished":"2022-03-03T00:00:00+00:00","dateModified":"2022-03-06T07:10:05+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -65,8 +65,8 @@
 <div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go 进阶</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-03-03>2022-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2568 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-03-03>2022-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7512 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 15 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
@@ -82,7 +82,25 @@
 <ul>
 <li><a href=#对齐规则>对齐规则</a></li><li><a href=#分析流程>分析流程</a>
 <ul>
-<li><a href=#变量对齐>变量对齐</a></li><li><a href=#整体对齐>整体对齐</a></li></ul></li></ul></li><li><a href=#调整字段顺序来优化内存>调整字段顺序来优化内存</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=go-进阶>Go 进阶</h1><h2 id=内存对齐>内存对齐</h2><h3 id=引入>引入</h3><div class=highlight><div class=chroma>
+<li><a href=#变量对齐>变量对齐</a></li><li><a href=#整体对齐>整体对齐</a></li></ul></li></ul></li><li><a href=#调整字段顺序来优化内存>调整字段顺序来优化内存</a></li></ul></li><li><a href=#边界检查消除>边界检查消除</a>
+<ul>
+<li><a href=#例子-1>例子 1</a></li><li><a href=#例子-2>例子 2</a></li><li><a href=#例子-3>例子 3</a></li><li><a href=#例子-4>例子 4</a></li><li><a href=#例子-5>例子 5</a></li><li><a href=#总结>总结</a></li></ul></li><li><a href=#延迟函数调用>延迟函数调用</a>
+<ul>
+<li><a href=#一个延迟调用可以修改包含此延迟调用的最内层函数的返回值>一个延迟调用可以修改包含此延迟调用的最内层函数的返回值</a></li><li><a href=#延迟函数调用的必要性和好处>延迟函数调用的必要性和好处</a></li><li><a href=#star-协程和延迟调用的实参的估值时刻>:star: 协程和延迟调用的实参的估值时刻</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href=#顺便说一句使用-timesleep-调用来做并发同步不是一个好的方法-如果上面这个程序运行在一个满负荷运行的电脑上此程序可能在新启动的协程可能还未得到执行机会的时候就已经退出了>顺便说一句，使用 <code>time.Sleep</code> 调用来做并发同步不是一个好的方法。 如果上面这个程序运行在一个满负荷运行的电脑上，此程序可能在新启动的协程可能还未得到执行机会的时候就已经退出了。</a></li></ul></li></ul></li></ul></li></ul></li><li><a href=#恐慌panic和恢复recover>恐慌（panic）和恢复（recover）</a>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href=#对于官方标准编译器来说很多致命性错误比如堆栈溢出和内存不足不能被恢复它们一旦产生程序将崩溃>对于官方标准编译器来说，很多致命性错误（比如堆栈溢出和内存不足）不能被恢复。它们一旦产生，程序将崩溃。</a></li></ul></li></ul></li></ul></li><li><a href=#一些恐慌恢复用例>一些恐慌/恢复用例</a></li><li><a href=#详解恐慌和恢复原理>详解恐慌和恢复原理</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=go-进阶>Go 进阶</h1><h2 id=内存对齐>内存对齐</h2><h3 id=引入>引入</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -292,11 +310,788 @@
 </span></code></pre></td><td class=lntd>
 <pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>part1</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>32</span><span class=p>,</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>8</span>
 </span></span><span class=line><span class=cl><span class=nx>part2</span> <span class=nx>size</span><span class=p>:</span> <span class=mi>16</span><span class=p>,</span> <span class=nx>align</span><span class=p>:</span> <span class=mi>8</span>
-</span></span></code></pre></td></tr></table></div></div><p>通过结果可以惊喜的发现，只是 “简单” 对成员变量的字段顺序进行改变，就改变了结构体占用大小</p><p>Part1 内存布局：axxx|bbbb|cxxx|xxxx|dddd|dddd|exxx|xxxx</p><p>Part2 内存布局：ecax|bbbb|dddd|dddd</p><p>通过<strong>调整结构体内成员变量的字段顺序</strong>可以达到缩小结构体占用大小的的效果，因为它巧妙地减少了 Padding 的存在，让它们更 “紧凑” 了。这一点对于加深 Go 的内存布局印象和大对象的优化非常有帮助。</p></div><div class=post-footer id=post-footer>
+</span></span></code></pre></td></tr></table></div></div><p>通过结果可以惊喜的发现，只是 “简单” 对成员变量的字段顺序进行改变，就改变了结构体占用大小</p><p>Part1 内存布局：axxx|bbbb|cxxx|xxxx|dddd|dddd|exxx|xxxx</p><p>Part2 内存布局：ecax|bbbb|dddd|dddd</p><p>通过<strong>调整结构体内成员变量的字段顺序</strong>可以达到缩小结构体占用大小的的效果，因为它巧妙地减少了 Padding 的存在，让它们更 “紧凑” 了。这一点对于加深 Go 的内存布局印象和大对象的优化非常有帮助。</p><h2 id=边界检查消除>边界检查消除</h2><p>Go 是一个内存安全的语言。在数组和切片的索引和子切片操作中，Go 运行时将检查操作中使用的下标是否越界。 如果下标越界，一个恐慌将产生，以防止这样的操作破坏内存安全。这样的检查称为<strong>边界检查</strong>。</p><p>边界检查使得我们的代码能够安全地运行；但是另一方面，也使得我们的代码运行效率略微降低。</p><p>从 Go 官方工具链 1.7 开始，官方标准编译器使用了一个新的基于 SSA（single-assignment form，静态单赋值形式）的后端。 SSA 使得 Go 编译器可以有效利用诸如 <a href=https://en.wikipedia.org/wiki/Bounds-checking_elimination target=_blank rel="noopener noreffer">BCE</a>（bounds check elimination，边界检查消除）和 <a href=https://en.wikipedia.org/wiki/Common_subexpression_elimination target=_blank rel="noopener noreffer">CSE</a>（common subexpression elimination，公共子表达式消除）等优化：</p><ul>
+<li>BCE 可以避免很多不必要的边界检查</li><li>CSE 可以避免很多重复表达式的计算，从而使得编译器编译出的程序执行效率更高。</li></ul><p>有时候这些优化的效果非常明显。</p><p>本文将展示一些例子来解释边界检查消除在官方标准编译器 1.7+ 中的表现。</p><p>对于 Go 官方工具链 1.7+，我们可以使用编译器选项 <code>-gcflags="-d=ssa/check_bce/debug=1"</code> 来列出哪些代码行仍然需要边界检查。</p><h3 id=例子-1>例子 1</h3><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// example1.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f1</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=c1>// 第5行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=c1>// 第6行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=c1>// 第7行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f2</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=c1>// 第11行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=c1>// 第12行： 边界检查消除了！
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=c1>// 第13行： 边界检查消除了！
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f3</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>index</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>index</span><span class=p>]</span> <span class=c1>// 第17行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>index</span><span class=p>]</span> <span class=c1>// 第18行： 边界检查消除了！
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f4</span><span class=p>(</span><span class=nx>a</span> <span class=p>[</span><span class=mi>5</span><span class=p>]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>a</span><span class=p>[</span><span class=mi>4</span><span class=p>]</span> <span class=c1>// 第22行： 边界检查消除了！
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ go run -gcflags<span class=o>=</span><span class=s2>&#34;-d=ssa/check_bce/debug=1&#34;</span> example1.go
+</span></span><span class=line><span class=cl>./example1.go:5: Found IsInBounds
+</span></span><span class=line><span class=cl>./example1.go:6: Found IsInBounds
+</span></span><span class=line><span class=cl>./example1.go:7: Found IsInBounds
+</span></span><span class=line><span class=cl>./example1.go:11: Found IsInBounds
+</span></span><span class=line><span class=cl>./example1.go:17: Found IsInBounds
+</span></span></code></pre></td></tr></table></div></div><p>我们可以看到函数 <code>f2</code> 中的第 <em>12</em> 行和第 <em>13</em> 行不再需要边界检查了，因为第 <em>11</em> 行的检查确保了第 <em>12</em> 行和第 <em>13</em> 行中使用的下标肯定不会越界。</p><p>但是，函数 <code>f1</code> 中的三行仍然都需要边界检查，因为第 <em>5</em> 行中的边界检查不能保证第 <em>6</em> 行和第 <em>7</em> 行中的下标没有越界，第 <em>6</em> 行中的边界检查也不能保证第第 <em>7</em> 行中的下标没有越界。</p><p>在函数 <code>f3</code> 中，编译器知道如果第一个 <code>s[index]</code> 是安全的，则第二个 <code>s[index]</code> 是无需边界检查的。</p><p>编译器也正确地认为函数 <code>f4</code> 中的唯一一行（第 <em>22</em> 行）是无需边界检查的。</p><h3 id=例子-2>例子 2</h3><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// example2.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f5</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>s</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>i</span><span class=p>:</span><span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[:</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f6</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>i</span><span class=p>:</span><span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[:</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f7</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=o>-</span> <span class=mi>1</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&gt;=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span><span class=o>--</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=c1>// line22
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>i</span><span class=p>:</span><span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f8</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>index</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>index</span> <span class=o>&gt;=</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span> <span class=nx>index</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>index</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>index</span><span class=p>:</span><span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f9</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mi>2</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	    <span class=nx>_</span><span class=p>,</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=nx>s</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=nx>s</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>run</span> <span class=o>-</span><span class=nx>gcflags</span><span class=p>=</span><span class=s>&#34;-d=ssa/check_bce/debug=1&#34;</span> <span class=nx>example2</span><span class=p>.</span><span class=k>go</span>
+</span></span></code></pre></td></tr></table></div></div><p>官方标准编译器消除了上例程序中的所有边界检查。</p><blockquote>
+<p>注意：在 Go 官方工具链 1.11 之前，官方标准编译器没有足够聪明到认为第 <em>22</em> 行是不需要边界检查的。</p></blockquote><h3 id=例子-3>例子 3</h3><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// example3.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;math/rand&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fa</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>index</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=mi>7</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[:</span><span class=nx>index</span><span class=p>]</span> <span class=c1>// 第9行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>index</span><span class=p>:]</span> <span class=c1>// 第10行： 边界检查消除了！
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fb</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>index</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[:</span><span class=nx>index</span><span class=p>]</span> <span class=c1>// 第14行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>index</span><span class=p>:]</span> <span class=c1>// 第15行： 需要边界检查（不够智能？）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fc</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[:</span><span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>	<span class=nx>index</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=mi>7</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[:</span><span class=nx>index</span><span class=p>]</span> <span class=c1>// 第22行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>index</span><span class=p>:]</span> <span class=c1>// 第23行： 需要边界检查（不够智能？）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ go run -gcflags<span class=o>=</span><span class=s2>&#34;-d=ssa/check_bce/debug=1&#34;</span> example3.go
+</span></span><span class=line><span class=cl>./example3.go:9: Found IsSliceInBounds
+</span></span><span class=line><span class=cl>./example3.go:14: Found IsSliceInBounds
+</span></span><span class=line><span class=cl>./example3.go:15: Found IsSliceInBounds
+</span></span><span class=line><span class=cl>./example3.go:22: Found IsSliceInBounds
+</span></span><span class=line><span class=cl>./example3.go:23: Found IsSliceInBounds
+</span></span></code></pre></td></tr></table></div></div><p>噢，仍然有这么多的边界检查！</p><p>但是等等，为什么官方标准编译器认为第 <em>10</em> 行不需要边界检查，却认为第 <em>15</em> 和第 <em>23</em> 行仍旧需要边界检查呢？ 是标准编译器不够智能吗？</p><p>事实上，这里标准编译器做得对。原因是<strong>一个子切片表达式中的起始下标可能会大于基础切片的长度</strong>。</p><p>让我们先看一个简单的使用了子切片的例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s0</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// len(s0) == 5, cap(s0) == 10
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=nx>index</span> <span class=o>:=</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 在Go中，对于一个子切片表达式s[a:b]，a和b须满足
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 0 &lt;= a &lt;= b &lt;= cap(s);否则，将产生一个恐慌。
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s0</span><span class=p>[:</span><span class=nx>index</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 上一行是安全的不能保证下一行是无需边界检查的。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 事实上，下一行将产生一个恐慌，因为起始下标
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// index大于终止下标（即切片s0的长度）。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s0</span><span class=p>[</span><span class=nx>index</span><span class=p>:]</span> <span class=c1>// panic
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>所以 <strong>如果<code>s[:index]</code>是安全的，则<code>s[index:]</code>是无需边界检查的</strong> 这条论述只有在 <code>len(s)</code> 和 <code>cap(s)</code> 相等的情况下才正确。这就是函数 <code>fb</code> 和 <code>fc</code> 中的代码仍旧需要边界检查的原因。</p><p>而在例子 3 中，标准编译器成功地检测到在函数 <code>fa</code> 中 <code>len(s)</code> 和 <code>cap(s)</code> 是相等的。</p><h3 id=例子-4>例子 4</h3><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// example4.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;math/rand&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fb2</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>index</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>index</span><span class=p>:]</span> <span class=c1>// 第7行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[:</span><span class=nx>index</span><span class=p>]</span> <span class=c1>// 第8行： 边界检查消除了！
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fc2</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[:</span><span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>	<span class=nx>index</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=mi>7</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[</span><span class=nx>index</span><span class=p>:]</span> <span class=c1>// 第15行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s</span><span class=p>[:</span><span class=nx>index</span><span class=p>]</span> <span class=c1>// 第16行： 边界检查消除了！
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>run</span> <span class=o>-</span><span class=nx>gcflags</span><span class=p>=</span><span class=s>&#34;-d=ssa/check_bce/debug=1&#34;</span> <span class=nx>example4</span><span class=p>.</span><span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=o>/</span><span class=nx>example4</span><span class=p>.</span><span class=k>go</span><span class=p>:</span><span class=mi>7</span><span class=p>:</span><span class=mi>7</span><span class=p>:</span> <span class=nx>Found</span> <span class=nx>IsSliceInBounds</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=o>/</span><span class=nx>example4</span><span class=p>.</span><span class=k>go</span><span class=p>:</span><span class=mi>15</span><span class=p>:</span><span class=mi>7</span><span class=p>:</span> <span class=nx>Found</span> <span class=nx>IsSliceInBounds</span>
+</span></span></code></pre></td></tr></table></div></div><p>在此例子中，标准编译器成功推断出：</p><ul>
+<li>在函数 <code>fb2</code> 中，如果第 <em>7</em> 行是安全的，则第 <em>8</em> 行是无需边界检查的；</li><li>在函数 <code>fc2</code> 中，如果第 <em>15</em> 行是安全的，则第 <em>16</em> 行是无需边界检查的。</li></ul><p>注意：Go 官方工具链 1.9 之前中的标准编译器没有出推断出第 <em>8</em> 行不需要边界检查。</p><h3 id=例子-5>例子 5</h3><p>当前版本的标准编译器并非足够智能到可以消除到一切应该消除的边界检查。 有时候，我们需要给标准编译器一些暗示来帮助标准编译器将这些不必要的边界检查消除掉。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// example5.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fd</span><span class=p>(</span><span class=nx>is</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>bs</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>is</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=mi>256</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>n</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>bs</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>_</span> <span class=p>=</span> <span class=nx>is</span><span class=p>[</span><span class=nx>n</span><span class=p>]</span> <span class=c1>// 第7行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fd2</span><span class=p>(</span><span class=nx>is</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>bs</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>is</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=mi>256</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>is</span> <span class=p>=</span> <span class=nx>is</span><span class=p>[:</span><span class=mi>256</span><span class=p>]</span> <span class=c1>// 第14行： 一个暗示
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>n</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>bs</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>_</span> <span class=p>=</span> <span class=nx>is</span><span class=p>[</span><span class=nx>n</span><span class=p>]</span> <span class=c1>// 第16行： 边界检查消除了！
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fe</span><span class=p>(</span><span class=nx>isa</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>isb</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>isa</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mh>0xFFF</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>n</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>isb</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>_</span> <span class=p>=</span> <span class=nx>isa</span><span class=p>[</span><span class=nx>n</span> <span class=o>&amp;</span> <span class=mh>0xFFF</span><span class=p>]</span> <span class=c1>// 第24行： 需要边界检查
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fe2</span><span class=p>(</span><span class=nx>isa</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>isb</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>isa</span><span class=p>)</span> <span class=p>&gt;</span> <span class=mh>0xFFF</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>isa</span> <span class=p>=</span> <span class=nx>isa</span><span class=p>[:</span><span class=mh>0xFFF</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=c1>// 第31行： 一个暗示
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>n</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>isb</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>_</span> <span class=p>=</span> <span class=nx>isa</span><span class=p>[</span><span class=nx>n</span> <span class=o>&amp;</span> <span class=mh>0xFFF</span><span class=p>]</span> <span class=c1>// 第33行： 边界检查消除了！
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>run</span> <span class=o>-</span><span class=nx>gcflags</span><span class=p>=</span><span class=s>&#34;-d=ssa/check_bce/debug=1&#34;</span> <span class=nx>example5</span><span class=p>.</span><span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=o>/</span><span class=nx>example5</span><span class=p>.</span><span class=k>go</span><span class=p>:</span><span class=mi>7</span><span class=p>:</span> <span class=nx>Found</span> <span class=nx>IsInBounds</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=o>/</span><span class=nx>example5</span><span class=p>.</span><span class=k>go</span><span class=p>:</span><span class=mi>24</span><span class=p>:</span> <span class=nx>Found</span> <span class=nx>IsInBounds</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=总结>总结</h3><p>本文上面列出的例子并没有涵盖标准编译器支持的所有边界检查消除的情形。本文列出的仅仅是一些常见的情形。</p><p>尽管标准编译器中的边界检查消除特性依然不是 100% 完美，但是对很多常见的情形，它确实很有效。 自从标准编译器支持此特性以来，在每个版本更新中，此特性都在不断地改进增强。 无需质疑，在以后的版本中，标准编译器会更加得智能，以至于上面第 5 个例子中提供给编译器的暗示有可能将变得不再必要。</p><h2 id=延迟函数调用>延迟函数调用</h2><blockquote>
+<p>deferred function call</p></blockquote><p>在Go中，一个函数调用可以跟在一个 <code>defer</code> 关键字后面，形成一个延迟函数调用。 和协程调用类似，<strong>被延迟的函数调用的所有返回值必须全部被舍弃。</strong></p><p>当一个函数调用被延迟后，它不会立即被执行。它将被推入由当前协程维护的一个延迟调用堆栈。 当一个函数调用（可能是也可能不是一个延迟调用）返回并进入它的<a href=https://gfw.go101.org/article/function-declarations-and-calls.html#exiting-phase target=_blank rel="noopener noreffer">退出阶段</a>后，所有在此函数调用中已经被推入的延迟调用将被按照它们被推入堆栈的顺序逆序执行。 当所有这些延迟调用执行完毕后，此函数调用也就真正退出了。</p><p>下面这个例子展示了如何使用延迟调用函数。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;The third line.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;The second line.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;The first line.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出结果：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>The first line.
+</span></span><span class=line><span class=cl>The second line.
+</span></span><span class=line><span class=cl>The third line.
+</span></span></code></pre></td></tr></table></div></div><p>事实上，每个协程维护着两个调用堆栈。</p><ul>
+<li>一个是正常的函数调用堆栈。在此堆栈中，相邻的两个调用存在着调用关系。晚进入堆栈的调用被早进入堆栈的调用所调用。 此堆栈中最早被推入的调用是对应协程的启动调用。</li><li>另一个堆栈是上面提到的延迟调用堆栈。处于延迟调用堆栈中的任意两个调用之间不存在调用关系。</li></ul><p>下面是另一个略微复杂一点的使用了延迟调用的例子程序。此程序将按照自然数的顺序打印出 0 到 9 十个数字。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;9&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;0&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;8&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;1&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=kc>false</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>defer</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;not reachable&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>defer</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;7&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;3&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;5&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;6&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}()</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;4&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;2&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;not reachable&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=一个延迟调用可以修改包含此延迟调用的最内层函数的返回值>一个延迟调用可以修改包含此延迟调用的最内层函数的返回值</h3><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Triple</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>(</span><span class=nx>r</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>r</span> <span class=o>+=</span> <span class=nx>n</span> <span class=c1>// 修改返回值
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>n</span> <span class=o>+</span> <span class=nx>n</span> <span class=c1>// &lt;=&gt; r = n + n; return
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nf>Triple</span><span class=p>(</span><span class=mi>5</span><span class=p>))</span> <span class=c1>// 15
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=延迟函数调用的必要性和好处>延迟函数调用的必要性和好处</h3><p>事实上，上面的几个使用了延迟函数调用的例子中的延迟函数调用并非绝对必要。 但是延迟调用对于下面将要介绍的恐慌 / 恢复特性是必要的。</p><p>另外延迟函数调用可以帮助我们写出更整洁和更鲁棒的代码。</p><h3 id=star-协程和延迟调用的实参的估值时刻>:star: 协程和延迟调用的实参的估值时刻</h3><p>一个协程调用或者延迟调用的实参是在此调用发生时被估值的。更具体地说，</p><ul>
+<li>
+<p>对于一个<strong>延迟函数调用</strong>，它的实参是在此调用<strong>被推入延迟调用堆栈</strong>的时候被估值的。</p></li><li>
+<p>对于一个<strong>协程调用</strong>，它的实参是在此协程<strong>被创建</strong>的时候估值的。</p></li><li>
+<p>一个<strong>匿名函数</strong>体内的表达式是在此函数被<strong>执行</strong>的时候才会被逐个估值的，不管此函数是被普通调用还是延迟 / 协程调用。</p></li></ul><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>3</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>defer</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;a:&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span> <span class=c1>// 推入堆栈时被估值
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>3</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;b:&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span> <span class=c1>// 执行时被估值
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=p>}()</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行之，将得到如下结果：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>a: 2
+</span></span><span class=line><span class=cl>a: 1
+</span></span><span class=line><span class=cl>a: 0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>b: 3
+</span></span><span class=line><span class=cl>b: 3
+</span></span><span class=line><span class=cl>b: 3
+</span></span></code></pre></td></tr></table></div></div><p>第一个匿名函数中的循环打印出 <code>2</code>、<code>1</code> 和 <code>0</code> 这个序列，但是第二个匿名函数中的循环打印出三个 <code>3</code>。 因为第一个循环中的 <code>i</code> 是在 <code>fmt.Println</code> 函数调用被推入延迟调用堆栈的时候估的值，而第二个循环中的 <code>i</code> 是在第二个匿名函数调用的退出阶段估的值（此时循环变量 <code>i</code> 的值已经变为 <code>3</code>）。</p><p>我们可以对第二个循环略加修改（使用两种方法），使得它和第一个循环打印出相同的结果。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>3</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>defer</span> <span class=kd>func</span><span class=p>(</span><span class=nx>i</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 此i为形参i，非实参循环变量i。
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;b:&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}(</span><span class=nx>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>或者</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>3</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>i</span> <span class=o>:=</span> <span class=nx>i</span> <span class=c1>// 在下面的调用中，左i遮挡了右i。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// &lt;=&gt; var i = i
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 此i为上面的左i，非循环变量i。
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;b:&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>同样的估值时刻规则也<strong>适用于协程调用</strong>。下面这个例子程序将打印出 <code>123 789</code>。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;time&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>a</span> <span class=p>=</span> <span class=mi>123</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=kd>func</span><span class=p>(</span><span class=nx>x</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span> <span class=c1>// x在创建时被估值
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>x</span><span class=p>,</span> <span class=nx>a</span><span class=p>)</span> <span class=c1>// 123 789
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}(</span><span class=nx>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>a</span> <span class=p>=</span> <span class=mi>789</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mi>2</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote>
+<h6 id=顺便说一句使用-timesleep-调用来做并发同步不是一个好的方法-如果上面这个程序运行在一个满负荷运行的电脑上此程序可能在新启动的协程可能还未得到执行机会的时候就已经退出了>顺便说一句，使用 <code>time.Sleep</code> 调用来做并发同步不是一个好的方法。 如果上面这个程序运行在一个满负荷运行的电脑上，此程序可能在新启动的协程可能还未得到执行机会的时候就已经退出了。</h6></blockquote><h2 id=恐慌panic和恢复recover>恐慌（panic）和恢复（recover）</h2><p>Go 不支持异常抛出和捕获，而是<strong>推荐使用返回值显式返回错误</strong>。 不过，Go 支持一套和异常抛出 / 捕获类似的机制。此机制称为恐慌 / 恢复（panic/recover）机制。</p><p>我们可以调用内置函数 <code>panic</code> 来产生一个恐慌以使当前协程进入恐慌状况。</p><p>进入恐慌状况是另一种使当前函数调用开始返回的途径。 <strong>一旦一个函数调用产生一个恐慌，此函数调用将立即进入它的退出阶段，在此函数调用中被推入堆栈的延迟调用将按照它们被推入的顺序逆序执行。</strong></p><p>通过在一个延迟函数调用之中调用内置函数 <code>recover</code>，当前协程中的一个恐慌可以被消除，从而使得当前协程重新进入正常状况。</p><p><strong>在一个处于恐慌状况的协程退出之前，其中的恐慌不会蔓延到其它协程；如果一个协程在恐慌状况下退出，它将使整个程序崩溃。</strong></p><p>内置函数 <code>panic</code> 和 <code>recover</code> 的声明原型如下：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nb>panic</span><span class=p>(</span><span class=nx>v</span> <span class=kd>interface</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nb>recover</span><span class=p>()</span> <span class=kd>interface</span><span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在一个 <code>panic</code> 函数调用中，我们可以传任何实参值。</p><p>一个 <code>recover</code> 函数的返回值为其所恢复的恐慌在产生时被一个 <code>panic</code> 函数调用所消费的参数。</p><p>下面这个例子展示了如何产生一个恐慌和如何消除一个恐慌。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;正常退出&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;嗨！&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>v</span> <span class=o>:=</span> <span class=nb>recover</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;恐慌被恢复了：&#34;</span><span class=p>,</span> <span class=nx>v</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>	<span class=nb>panic</span><span class=p>(</span><span class=s>&#34;拜拜！&#34;</span><span class=p>)</span> <span class=c1>// 产生一个恐慌
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;执行不到这里&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>它的输出结果：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>嗨！
+</span></span><span class=line><span class=cl>恐慌被恢复了： 拜拜！
+</span></span><span class=line><span class=cl>正常退出
+</span></span></code></pre></td></tr></table></div></div><p>下面的例子在一个新协程里面产生了一个恐慌，并且此协程在恐慌状况下退出，所以整个程序崩溃了。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;time&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;hi!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nb>panic</span><span class=p>(</span><span class=mi>123</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行之，输出如下：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>hi!
+</span></span><span class=line><span class=cl>panic: 123
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>goroutine 5 [running]:
+</span></span><span class=line><span class=cl>...
+</span></span></code></pre></td></tr></table></div></div><p>Go运行时（runtime）会在若干情形下产生恐慌，比如一个整数被 0 除的时候。下面这个程序将崩溃退出。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=o>:=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>a</span><span class=o>/</span><span class=nx>b</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>它的输出：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>panic: runtime error: integer divide by zero
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>goroutine 1 [running]:
+</span></span><span class=line><span class=cl>...
+</span></span></code></pre></td></tr></table></div></div><p>一般说来，<strong>恐慌用来表示正常情况下不应该发生的逻辑错误</strong>。 如果这样的一个错误在运行时刻发生了，则它肯定是由于某个 bug 引起的。 另一方面，非逻辑错误是现实中难以避免的错误，它们不应该导致恐慌。 我们必须正确地对待和处理非逻辑错误。</p><blockquote>
+<h6 id=对于官方标准编译器来说很多致命性错误比如堆栈溢出和内存不足不能被恢复它们一旦产生程序将崩溃>对于官方标准编译器来说，很多致命性错误（比如堆栈溢出和内存不足）不能被恢复。它们一旦产生，程序将崩溃。</h6></blockquote><h3 id=一些恐慌恢复用例>一些恐慌/恢复用例</h3><h3 id=详解恐慌和恢复原理>详解恐慌和恢复原理</h3></div><div class=post-footer id=post-footer>
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-03-04</span>
+<span>更新于 2022-03-06</span>
 </div><div class=post-info-license></div></div><div class=post-info-line>
 <div class=post-info-md></div><div class=post-info-share>
 <span></span>
