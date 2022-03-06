@@ -187,3 +187,11 @@ Tailwind 会将这些样式自动移到与 `@tailwind components` 相同的位�
 
 - 默认的外边距 (margin) 已移除
 - 默认启用 `box-border`，即为元素规定的高度或宽度将包括元素的 `border` 和 `padding`
+
+## 常用
+
+overflow-hidden
+
+font-bold
+
+h-full w-full
