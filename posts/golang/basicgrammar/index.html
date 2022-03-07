@@ -5,18 +5,18 @@
 <meta name=robots content="noodp">
 <meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
 <title>Go 基础语法 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go 基础语法">
-<meta property="og:description" content="Golang 安装 下载地址：https://go.dev/dl/ 使用 Linux 1 2 3 4 5 6 $ wget https://studygolang.com/dl/golang/go1.13.6.linux-amd64.tar.gz $ tar -zxvf go1.13.6.linux-amd64.tar.gz $ sudo mv go /usr/local/ $ go version go version go1.13.6 linux/amd64 从 Go 1.11 版本开始，Go 提供了 Go Modules 的">
+<meta property="og:description" content="Golang Go is an open source programming language supported by Google Easy to learn and get started with Built-in concurrency and a robust standard library Growing ecosystem of partners, communities, and tools 安装 下载地址：https://go.dev/dl/ 使用 Linux 1 2 3 4 5 6 $ wget https://studygolang.com/dl/golang/go1.13.6.linux-amd64.tar.gz $">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-02-08T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-06T08:20:50+00:00">
+<meta property="article:modified_time" content="2022-03-07T06:27:40+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Go 基础语法">
-<meta name=twitter:description content="Golang 安装 下载地址：https://go.dev/dl/ 使用 Linux 1 2 3 4 5 6 $ wget https://studygolang.com/dl/golang/go1.13.6.linux-amd64.tar.gz $ tar -zxvf go1.13.6.linux-amd64.tar.gz $ sudo mv go /usr/local/ $ go version go version go1.13.6 linux/amd64 从 Go 1.11 版本开始，Go 提供了 Go Modules 的">
+<meta name=twitter:description content="Golang Go is an open source programming language supported by Google Easy to learn and get started with Built-in concurrency and a robust standard library Growing ecosystem of partners, communities, and tools 安装 下载地址：https://go.dev/dl/ 使用 Linux 1 2 3 4 5 6 $ wget https://studygolang.com/dl/golang/go1.13.6.linux-amd64.tar.gz $">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/frontend/css/tailwind/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/courses/operating-system/os2/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 基础语法","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/"},"genre":"posts","wordcount":20036,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/","datePublished":"2022-02-08T00:00:00+00:00","dateModified":"2022-03-06T08:20:50+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 基础语法","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/"},"genre":"posts","wordcount":20384,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/","datePublished":"2022-02-08T00:00:00+00:00","dateModified":"2022-03-07T06:27:40+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -65,8 +65,8 @@
 <div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go 基础语法</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-08>2022-02-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 20036 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 40 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-08>2022-02-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 20384 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 41 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
 <span><i class="details-icon fas fa-angle-right"></i></span>
@@ -84,7 +84,7 @@
 <ul>
 <li><a href=#基本操作>基本操作</a></li><li><a href=#更新依赖>更新依赖</a></li></ul></li></ul></li><li><a href=#数据类型>数据类型</a>
 <ul>
-<li><a href=#变量-variable>变量 Variable</a></li><li><a href=#常量>常量</a></li><li><a href=#简单类型>简单类型</a></li><li><a href=#字符串>字符串</a>
+<li><a href=#变量-variable>变量 Variable</a></li><li><a href=#常量>常量</a></li><li><a href=#内置基本类型>内置基本类型</a></li><li><a href=#字符串>字符串</a>
 <ul>
 <li><a href=#utf-8>utf-8</a></li><li><a href=#特性>特性</a></li><li><a href=#处理中文>处理中文</a></li><li><a href=#修改字符串>修改字符串</a></li></ul></li><li><a href=#错误类型>错误类型</a></li><li><a href=#数据类型之间的转换>数据类型之间的转换</a></li><li><a href=#数组-array>数组 array</a></li><li><a href=#切片-slice>切片 slice</a>
 <ul>
@@ -114,7 +114,8 @@
 <ul>
 <li><a href=#从开头位置删除>从开头位置删除</a></li><li><a href=#从中间位置删除>从中间位置删除</a></li><li><a href=#从尾部删除>从尾部删除</a></li></ul></li><li><a href=#类型选择>类型选择</a></li><li><a href=#判断-map-中是否存在某键>判断 map 中是否存在某键</a></li><li><a href=#init-函数>init 函数</a></li><li><a href=#runtimecaller>runtime.Caller()</a></li><li><a href=#使用空白标识符进行接口检查>使用空白标识符进行接口检查</a></li><li><a href=#make-和-new-的区别><code>make</code> 和 <code>new</code> 的区别</a></li><li><a href=#解决-go-的相对路径问题>解决 Go 的相对路径问题</a>
 <ul>
-<li><a href=#获取当前可执行文件路径>获取当前可执行文件路径</a></li><li><a href=#增加-osgetwd-进行多层判断>增加 <code>os.Getwd()</code> 进行多层判断</a></li><li><a href=#配置全局系统变量>配置全局系统变量</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=golang>Golang</h1><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SyctY6Q.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SyctY6Q.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SyctY6Q.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SyctY6Q.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SyctY6Q.png title=img></p><h2 id=安装>安装</h2><p>下载地址：https://go.dev/dl/</p><p>使用 Linux</p><div class=highlight><div class=chroma>
+<li><a href=#获取当前可执行文件路径>获取当前可执行文件路径</a></li><li><a href=#增加-osgetwd-进行多层判断>增加 <code>os.Getwd()</code> 进行多层判断</a></li><li><a href=#配置全局系统变量>配置全局系统变量</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=golang>Golang</h1><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png data-srcset="https://booklovinmamas.com/wp-content/uploads/2017/09/go.png, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 1.5x, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 2x" data-sizes=auto alt=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png title=img></p><ul>
+<li>Go is an open source programming language supported by Google</li><li>Easy to learn and get started with</li><li>Built-in concurrency and a robust standard library</li><li>Growing ecosystem of partners, communities, and tools</li></ul><h2 id=安装>安装</h2><p>下载地址：https://go.dev/dl/</p><p>使用 Linux</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -425,28 +426,10 @@
 </span></span><span class=line><span class=cl><span class=kd>const</span> <span class=nx>MaxThread</span> <span class=p>=</span> <span class=mi>10</span>
 </span></span><span class=line><span class=cl><span class=kd>const</span> <span class=nx>prefix</span> <span class=p>=</span> <span class=s>&#34;astaxie_&#34;</span>
 </span></span></code></pre></td></tr></table></div></div><blockquote>
-<p>Go 常量和一般程序语言不同的是，可以指定相当多的小数位数 (例如 200 位)， 若指定给 float32 自动缩短为 32bit，指定给 float64 自动缩短为 64bit</p></blockquote><h3 id=简单类型>简单类型</h3><ul>
-<li>
-<p>**空值：**nil</p></li><li>
-<p><strong>整型类型</strong>： int (取决于操作系统), int8, int16, int32, int64, uint8, uint16, …</p><ul>
-<li><code>rune</code> 是 <code>int32</code> 的别称，<code>byte</code> 是 <code>uint8</code> 的别称</li><li>这些类型的变量之间不允许互相赋值或操作</li><li>尽管 int 的长度是 32 bit, 但 int 与 int32 并不可以互用</li></ul></li><li>
-<p><strong>浮点数类型</strong>：float32, float64</p></li><li>
-<p><strong>字节类型</strong>：byte (等价于 uint8)</p></li><li>
-<p><strong>字符串类型</strong>：string</p></li><li>
-<p><strong>布尔值类型</strong>：bool，(true 或 false)</p></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>a</span> <span class=kt>int8</span> <span class=p>=</span> <span class=mi>10</span>
-</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>c1</span> <span class=kt>byte</span> <span class=p>=</span> <span class=sc>&#39;a&#39;</span>
-</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>b</span> <span class=kt>float32</span> <span class=p>=</span> <span class=mf>12.2</span>
-</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>msg</span> <span class=p>=</span> <span class=s>&#34;Hello World&#34;</span>
-</span></span><span class=line><span class=cl><span class=nx>ok</span> <span class=o>:=</span> <span class=kc>false</span>
-</span></span></code></pre></td></tr></table></div></div><p>Go 还支持<strong>复数</strong>。它的默认类型是 <code>complex128</code>（64 位实数 + 64 位虚数）。如果需要小一些的，也有<code>complex64</code> (32 位实数 + 32 位虚数)。复数的形式为 <code>RE + IMi</code>，其中 <code>RE</code> 是实数部分，<code>IM</code> 是虚数部分，而最后的 <code>i</code> 是虚数单位。下面是一个使用复数的例子：</p><div class=highlight><div class=chroma>
+<p>Go 常量和一般程序语言不同的是，可以指定相当多的小数位数 (例如 200 位)， 若指定给 float32 自动缩短为 32bit，指定给 float64 自动缩短为 64bit</p></blockquote><h3 id=内置基本类型>内置基本类型</h3><p>Go 支持如下内置基本类型：</p><ul>
+<li>一种内置<strong>布尔类型</strong>：<code>bool</code>。</li><li>11 种内置<strong>整数类型</strong>：<code>int8</code>、<code>uint8</code>、<code>int16</code>、<code>uint16</code>、<code>int32</code>、<code>uint32</code>、<code>int64</code>、<code>uint64</code>、<code>int</code>、<code>uint</code> 和 <code>uintptr</code>。</li><li>两种内置<strong>浮点数类型</strong>：<code>float32</code> 和 <code>float64</code>。</li><li>两种内置<strong>复数类型</strong>：<code>complex64</code> 和 <code>complex128</code>。</li><li>一种内置<strong>字符串类型</strong>：<code>string</code>。</li></ul><p>内置类型也称为预声明类型</p><p>除了 <code>bool</code> 和 <code>string</code> 类型，其它的 15 种内置基本类型都称为数值类型（整型、浮点数型和复数型）。</p><p>Go 中有两种内置类型别名（type alias）：</p><ul>
+<li><code>byte</code> 是 <code>uint8</code>的内置别名。 它们是同一个类型。</li><li><code>rune</code> 是 <code>int32</code>的内置别名。 它们是同一个类型。</li></ul><p>任一个类型的所有值的尺寸都是相同的，所以一个值的尺寸也常称为它的类型的尺寸。</p><p><code>uintptr</code>、<code>int</code> 以及 <code>uint</code> 类型的值的尺寸依赖于具体编译器实现。</p><ul>
+<li>通常地，在 64 位的架构上，<code>int</code> 和 <code>uint</code> 类型的值是 64 位的；</li><li>在 32 位的架构上，它们是 32 位的。</li><li>编译器必须保证 <code>uintptr</code> 类型的值的尺寸能够存下任意一个内存地址。</li></ul><p>一个 <code>complex64</code> 复数值的实部和虚部都是 <code>float32</code> 类型的值。 一个 <code>complex128</code> 复数值的实部和虚部都是 <code>float64</code> 类型的值。</p><p>复数的形式为 <code>RE + IMi</code>，其中 <code>RE</code> 是实数部分，<code>IM</code> 是虚数部分，而最后的 <code>i</code> 是虚数单位。下面是一个使用复数的例子：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -455,7 +438,7 @@
 <pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>c</span> <span class=kt>complex64</span> <span class=p>=</span> <span class=mi>5</span><span class=o>+</span><span class=m>5i</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Value is: %v&#34;</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span> <span class=c1>//output: (5+5i)
-</span></span></span></code></pre></td></tr></table></div></div><h3 id=字符串>字符串</h3><div class=highlight><div class=chroma>
+</span></span></span></code></pre></td></tr></table></div></div><p>在内存中，所有的浮点数都使用 IEEE-754 格式存储。</p><p>从逻辑上说，一个字符串值表示一段文本。 在内存中，<strong>一个字符串存储为一个字节序列</strong>。 此字节序列体现了此字符串所表示的文本的 UTF-8 编码形式。</p><h3 id=字符串>字符串</h3><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -3317,15 +3300,14 @@
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-03-06</span>
+<span>更新于 2022-03-07</span>
 </div><div class=post-info-license></div></div><div class=post-info-line>
 <div class=post-info-md></div><div class=post-info-share>
 <span></span>
 </div></div></div><div class=post-info-more>
 <section class=post-tags></section><section>
 <span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/frontend/css/tailwind/ class=prev rel=prev title=Tailwind><i class="fas fa-angle-left fa-fw"></i>Tailwind</a>
-<a href=/Notes/posts/courses/operating-system/os2/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+</section></div><div class=post-nav><a href=/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/ class=prev rel=prev title="Go 类型系统"><i class="fas fa-angle-left fa-fw"></i>Go 类型系统</a></div></div></article></div></main><footer class=footer>
 <div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
 <i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论>

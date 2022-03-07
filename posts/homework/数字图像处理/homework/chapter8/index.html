@@ -8,14 +8,14 @@
 <meta property="og:description" content="第八章 (a) 直方图均衡过后，每个灰度级概率趋于相等，使用变长编码毫无优势。 (b) 直方图均衡后，像素点之间仍然存在空间相关性，所以有空间冗余；同时也允">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/homework/chapter8/"><meta property="article:section" content="posts">
-<meta property="article:modified_time" content="2022-03-06T08:20:50+00:00">
+<meta property="article:modified_time" content="2022-03-07T06:27:40+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content>
 <meta name=twitter:description content="第八章 (a) 直方图均衡过后，每个灰度级概率趋于相等，使用变长编码毫无优势。 (b) 直方图均衡后，像素点之间仍然存在空间相关性，所以有空间冗余；同时也允">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/homework/chapter8/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E9%A2%98%E7%9B%AE/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/homework/chapter6/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/homework\/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86\/homework\/chapter8\/"},"genre":"posts","wordcount":288,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/homework\/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86\/homework\/chapter8\/","dateModified":"2022-03-06T08:20:50+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/homework/chapter8/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/%E9%A2%98%E7%9B%AE/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/homework/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/homework/chapter6/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/homework\/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86\/homework\/chapter8\/"},"genre":"posts","wordcount":288,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/homework\/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86\/homework\/chapter8\/","dateModified":"2022-03-07T06:27:40+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -88,7 +88,7 @@ $$
 <div class=post-info>
 <div class=post-info-line>
 <div class=post-info-mod>
-<span>更新于 2022-03-06</span>
+<span>更新于 2022-03-07</span>
 </div><div class=post-info-license></div></div><div class=post-info-line>
 <div class=post-info-md></div><div class=post-info-share>
 <span></span>

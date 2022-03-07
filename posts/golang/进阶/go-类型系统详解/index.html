@@ -1,0 +1,1203 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
+<title>Go 类型系统 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go 类型系统">
+<meta property="og:description" content="Go 类型系统 概述 本文将介绍 Go 中的各个类型种类。Go 类型系统中的各种概念也将被介绍。 概念：基本类型（basic type） 内置字符串类型：stri">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-03-07T00:00:00+00:00">
+<meta property="article:modified_time" content="2022-03-07T06:27:40+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Go 类型系统">
+<meta name=twitter:description content="Go 类型系统 概述 本文将介绍 Go 中的各个类型种类。Go 类型系统中的各种概念也将被介绍。 概念：基本类型（basic type） 内置字符串类型：stri">
+<meta name=application-name content="伤心肠粉的酱油碟子">
+<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/%E9%9D%9E%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%E6%8C%87%E9%92%88/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 类型系统","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3\/"},"genre":"posts","wordcount":16267,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E7%B1%BB%E5%9E%8B%E7%B3%BB%E7%BB%9F%E8%AF%A6%E8%A7%A3\/","datePublished":"2022-03-07T00:00:00+00:00","dateModified":"2022-03-07T06:27:40+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
+<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
+</div><div class=menu>
+<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-desktop>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a>
+</div></div></div></header><header class=mobile id=header-mobile>
+<div class=header-container>
+<div class=header-wrapper>
+<div class=header-title>
+<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
+</div><div class=menu-toggle id=menu-toggle-mobile>
+<span></span><span></span><span></span>
+</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
+<div class="search mobile" id=search-mobile>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
+<i class="fas fa-search fa-fw"></i>
+</a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
+<i class="fas fa-times-circle fa-fw"></i>
+</a>
+<span class="search-button search-loading" id=search-loading-mobile>
+<i class="fas fa-spinner fa-fw fa-spin"></i>
+</span>
+</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
+取消
+</a>
+</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+</a></div></div></header><div class="search-dropdown desktop">
+<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
+<div id=search-dropdown-mobile></div></div><main class=main>
+<div class=container><div class=toc id=toc-auto>
+<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go 类型系统</h1><div class=post-meta>
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-03-07>2022-03-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 16267 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 33 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
+<div class="details-summary toc-title">
+<span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span>
+</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
+<ul>
+<li><a href=#概述>概述</a>
+<ul>
+<li><a href=#概念基本类型basic-type>概念：基本类型（basic type）</a></li><li><a href=#概念组合类型composite-type>概念：组合类型（composite type）</a></li><li><a href=#事实类型的种类>事实：类型的种类</a></li><li><a href=#heavy_check_mark-语法类型定义>:heavy_check_mark: 语法：类型定义</a></li><li><a href=#heavy_check_mark-语法类型别名声明>:heavy_check_mark: 语法：类型别名声明</a></li><li><a href=#概念定义类型和非定义类型>概念：定义类型和非定义类型</a></li><li><a href=#概念有名类型和无名类型>概念：有名类型和无名类型</a></li><li><a href=#heavy_check_mark-概念底层类型>:heavy_check_mark: 概念：底层类型</a></li><li><a href=#事实可比较类型和不可比较类型>事实：可比较类型和不可比较类型</a></li></ul></li><li><a href=#基本类型的字面量表示>基本类型的字面量表示</a>
+<ul>
+<li><a href=#布尔值的字面量形式>布尔值的字面量形式</a></li><li><a href=#整数类型值的字面量形式>整数类型值的字面量形式</a></li><li><a href=#浮点数类型值的字面量形式>浮点数类型值的字面量形式</a></li><li><a href=#虚部字面量形式>虚部字面量形式</a></li><li><a href=#数值字面表示中使用下划线分段来增强可读性>数值字面表示中使用下划线分段来增强可读性</a></li><li><a href=#rune-值的字面量形式>rune 值的字面量形式</a></li><li><a href=#字符串值的字面量形式>字符串值的字面量形式</a></li><li><a href=#基本数值类型字面量的适用范围>基本数值类型字面量的适用范围</a></li></ul></li><li><a href=#字符串>字符串</a>
+<ul>
+<li><a href=#字符串类型的内部结构定义>字符串类型的内部结构定义</a></li><li><a href=#关于字符串的一些简单事实>关于字符串的一些简单事实</a></li><li><a href=#字符串编码和-unicode-码点>字符串编码和 Unicode 码点</a></li><li><a href=#字符串相关的类型转换>字符串相关的类型转换</a>
+<ul>
+<li><a href=#码点切片到字符串的转换>码点切片到字符串的转换</a></li><li><a href=#字符串到码点切片的转换>字符串到码点切片的转换</a></li><li><a href=#字符串到字节切片的转换>字符串到字节切片的转换</a></li><li><a href=#字节切片到字符串的转换>字节切片到字符串的转换</a></li></ul></li><li><a href=#字符串和字节切片之间的转换的编译器优化>字符串和字节切片之间的转换的编译器优化</a></li><li><a href=#使用for-range循环遍历字符串中的码点>使用<code>for-range</code>循环遍历字符串中的码点</a></li><li><a href=#更多字符串衔接方法>更多字符串衔接方法</a></li><li><a href=#语法糖将字符串当作字节切片使用>语法糖：将字符串当作字节切片使用</a></li><li><a href=#更多关于字符串的比较>更多关于字符串的比较</a></li></ul></li><li><a href=#值部>值部</a>
+<ul>
+<li><a href=#go类型分为两大类别category>Go类型分为两大类别（category）</a></li><li><a href=#go中的两种指针类型>Go中的两种指针类型</a></li><li><a href=#第二个分类中的类型的可能的内部实现结构定义>第二个分类中的类型的（可能的）内部实现结构定义</a>
+<ul>
+<li><a href=#映射通道和函数类型的内部定义>映射、通道和函数类型的内部定义</a></li><li><a href=#切片类型的内部定义>切片类型的内部定义</a></li><li><a href=#字符串类型的内部结构>字符串类型的内部结构</a></li><li><a href=#接口类型的内部定义>接口类型的内部定义</a></li></ul></li><li><a href=#在赋值中底层间接值部将不会被复制>在赋值中，底层间接值部将不会被复制</a></li><li><a href=#关于术语引用类型和引用值>关于术语“引用类型”和“引用值”</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=go-类型系统>Go 类型系统</h1><h2 id=概述>概述</h2><p>本文将介绍 Go 中的各个类型种类。Go 类型系统中的各种概念也将被介绍。</p><h3 id=概念基本类型basic-type>概念：基本类型（basic type）</h3><ul>
+<li>内置字符串类型：<code>string</code>.</li><li>内置布尔类型：<code>bool</code>.</li><li>内置数值类型：
+<ul>
+<li><code>int8</code>、<code>uint8</code>（<code>byte</code>）、<code>int16</code>、<code>uint16</code>、<code>int32</code>（<code>rune</code>）、<code>uint32</code>、<code>int64</code>、<code>uint64</code>、<code>int</code>、<code>uint</code>、<code>uintptr</code>。</li><li><code>float32</code>、<code>float64</code>。</li><li><code>complex64</code>、<code>complex128</code>。</li></ul></li></ul><blockquote>
+<p>注意，<code>byte</code> 是 <code>uint8</code> 的一个内置别名，<code>rune</code> 是 <code>int32</code> 的一个内置别名。</p></blockquote><h3 id=概念组合类型composite-type>概念：组合类型（composite type）</h3><p>Go支持下列组合类型：</p><ul>
+<li>指针类型 - 类 C 指针</li><li>结构体类型 - 类 C 结构体</li><li>函数类型 - 函数类型在 Go 中是一种<strong>一等公民</strong>类别</li><li>容器类型，包括:
+<ul>
+<li>数组类型 - 定长容器类型</li><li>切片类型 - 动态长度和容量容器类型</li><li>映射类型（map）- 也常称为字典类型。在标准编译器中映射是使用哈希表实现的。</li></ul></li><li>通道类型 - 通道用来同步并发的协程</li><li>接口类型 - 接口在反射和多态中发挥着重要角色</li></ul><p>非定义组合类型可以用它们各自的字面表示形式来表示。 下面是一些各种不同种类的非定义组合类型字面表示形式的例子（非定义类型将在下面解释）：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 假设T为任意一个类型，Tkey为一个支持比较的类型。
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=nx>T</span>         <span class=c1>// 一个指针类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>[</span><span class=mi>5</span><span class=p>]</span><span class=nx>T</span>       <span class=c1>// 一个元素类型为T、元素个数为5的数组类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>[]</span><span class=nx>T</span>        <span class=c1>// 一个元素类型为T的切片类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>map</span><span class=p>[</span><span class=nx>Tkey</span><span class=p>]</span><span class=nx>T</span> <span class=c1>// 一个键值类型为Tkey、元素类型为T的映射类型
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>// 一个结构体类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>name</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>age</span>  <span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 一个函数类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span><span class=p>(</span><span class=kt>int</span><span class=p>)</span> <span class=p>(</span><span class=kt>bool</span><span class=p>,</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 一个接口类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nf>Method0</span><span class=p>(</span><span class=kt>string</span><span class=p>)</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>	<span class=nf>Method1</span><span class=p>()</span> <span class=p>(</span><span class=kt>int</span><span class=p>,</span> <span class=kt>bool</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 几个通道类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>chan</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=kd>chan</span><span class=o>&lt;-</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;-</span><span class=kd>chan</span> <span class=nx>T</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=事实类型的种类>事实：类型的种类</h3><p>每种上面提到的基本类型和组合类型都对应着一个类型种类（kind）。除了这些种类，今后将要介绍的非类型安全指针类型属于另外一个新的类型种类。</p><p>所以，目前（Go 1.17），Go 有 26 个类型种类。</p><h3 id=heavy_check_mark-语法类型定义>:heavy_check_mark: 语法：类型定义</h3><blockquote>
+<p>type definition declaration</p></blockquote><p>在Go中，我们可以用如下形式来定义新的类型。在此语法中，<code>type</code>为一个关键字。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 定义单个类型。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>NewTypeName</span> <span class=nx>SourceType</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 定义多个类型。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=nx>NewTypeName1</span> <span class=nx>SourceType1</span>
+</span></span><span class=line><span class=cl>	<span class=nx>NewTypeName2</span> <span class=nx>SourceType2</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>新的类型名必须为标识符。但是请注意：包级类型（以及类型别名）的名称不能为 <a href=https://gfw.go101.org/article/packages-and-imports.html#init target=_blank rel="noopener noreffer"><code>init</code></a>。</p><p>上例中的第二个类型声明中包含两个类型描述（type specification）。 如果一个类型声明包含多于一个的类型描述，这些类型描述必须用一对小括号 <code>()</code> 括起来。</p><p>注意：</p><ul>
+<li>一个新定义的类型和它的源类型为两个<strong>不同</strong>的类型。</li><li>在两个不同的类型定义中定义的两个类型肯定为两个不同的类型。</li><li>一个新定义的类型和它的源类型的底层类型一致并且它们的值可以相互<strong>显式转换</strong>。</li><li>类型定义可以出现在函数体内。</li></ul><p>一些类型定义的例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 下面这些新定义的类型和它们的源类型都是基本类型。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=nx>MyInt</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Age</span>   <span class=kt>int</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Text</span>  <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 下面这些新定义的类型和它们的源类型都是组合类型。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>IntPtr</span> <span class=o>*</span><span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Book</span> <span class=kd>struct</span><span class=p>{</span><span class=nx>author</span><span class=p>,</span> <span class=nx>title</span> <span class=kt>string</span><span class=p>;</span> <span class=nx>pages</span> <span class=kt>int</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Convert</span> <span class=kd>func</span><span class=p>(</span><span class=nx>in0</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>in1</span> <span class=kt>bool</span><span class=p>)(</span><span class=nx>out0</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>out1</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>StringArray</span> <span class=p>[</span><span class=mi>5</span><span class=p>]</span><span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>StringSlice</span> <span class=p>[]</span><span class=kt>string</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>f</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 这三个新定义的类型名称只能在此函数内使用。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>type</span> <span class=nx>PersonAge</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>int</span>
+</span></span><span class=line><span class=cl>	<span class=kd>type</span> <span class=nx>MessageQueue</span> <span class=kd>chan</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=kd>type</span> <span class=nx>Reader</span> <span class=kd>interface</span><span class=p>{</span><span class=nf>Read</span><span class=p>([]</span><span class=kt>byte</span><span class=p>)</span> <span class=kt>int</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=heavy_check_mark-语法类型别名声明>:heavy_check_mark: 语法：类型别名声明</h3><blockquote>
+<p>type alias declaration</p></blockquote><p>从 Go 1.9 开始，我们可以使用下面的语法来声明自定义类型别名。此语法和类型定义类似，但是请注意每个类型描述中多了一个等号 <code>=</code>。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span> <span class=p>=</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Age</span>  <span class=p>=</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>table</span> <span class=p>=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Table</span> <span class=p>=</span> <span class=kd>map</span><span class=p>[</span><span class=nx>Name</span><span class=p>]</span><span class=nx>Age</span>
+</span></span></code></pre></td></tr></table></div></div><p>类型别名也必须为标识符。同样地，类型别名可以被声明在函数体内。</p><p>在上面的类型别名声明的例子中，<code>Name</code> 是内置类型 <code>string</code> 的一个别名，它们表示同一个类型。</p><p>事实上，文字表示形式 <code>map[string]int</code> 和 <code>map[Name]Age</code> 也表示同一类型。 所以，<code>table</code> 和 <code>Table</code> 一样表示同一个类型。</p><blockquote>
+<p>注意，尽管两个别名 <code>table</code> 和 <code>Table</code> 表示同一个类型，但 <code>Table</code> 是导出的，所以它可以被其它包引入使用，而<code>table</code> 却不可以。</p></blockquote><p>类型别名声明在重构一些大的 Go 项目等场合很有用。 在通常编程中，类型定义声明使用得更广泛。</p><h3 id=概念定义类型和非定义类型>概念：定义类型和非定义类型</h3><blockquote>
+<p>defined type and undefined type</p></blockquote><p>一个定义类型是一个在某个类型定义声明中定义的类型。</p><p>所有的基本类型都是定义类型。一个非定义类型一定是一个组合类型。</p><p>在下面的例子中，别名 <code>C</code> 和类型字面表示 <code>[]string</code> 都表示同一个非定义类型。 类型 <code>A</code> 和别名 <code>B</code> 均表示同一个定义类型。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>A</span> <span class=p>[]</span><span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>B</span> <span class=p>=</span> <span class=nx>A</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>C</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>string</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=概念有名类型和无名类型>概念：有名类型和无名类型</h3><blockquote>
+<p>named type and unnamed type</p></blockquote><p>在 Go 1.9 之前，<strong>有名类型</strong>这一术语准确地定义在 Go 白皮本中。它曾被定义为一个有名字的类型。 随着 Go 1.9 中引入的类型别名新特性，此术语被从白皮书中删除了，原因是它可能会造成一些理解上的困惑。 比如，一些类型字面表示（比如上一节出现中的别名 <code>C</code>）是一个标识符（即一个名称），但是它们所表示的类型（比如 <code>[]string</code>）在 Go 1.9 之前却被称为无名类型。</p><p>为了避免出现这样的困惑，从 Go 1.9 开始，一个新的术语<strong>定义类型</strong>被引入来填补移除<strong>有名类型</strong>后的空白。 然而此举也给一些概念解释造成了<a href=https://github.com/golang/go/issues/22005 target=_blank rel="noopener noreffer">新的</a><a href=https://github.com/golang/go/issues/32496 target=_blank rel="noopener noreffer">障碍</a>，或者形成了一些<a href=https://github.com/golang/example/tree/master/gotypes#named-types target=_blank rel="noopener noreffer">尴尬的局面</a>。 为了避免这些尴尬的此文将遵守如下原则：</p><ul>
+<li>一个类型别名将不会被称为一个类型，尽管我们常说它表示着一个类型。</li><li>术语<strong>有名类型</strong>和<strong>定义类型</strong>将被视为完全相同的概念。（同样地，<strong>无名类型</strong>和<strong>非定义类型</strong>亦为同一概念。） 换句话说，当提到 “一个类型别名 <code>T</code> 是一个有名类型”，其实际意义是类型别名 <code>T</code> 表示着一个有名类型。 如果 <code>T</code> 表示着一个无名类型，则我们不应该说 <code>T</code> 是一个有名类型，即使别名 <code>T</code> 它本身拥有一个名字。</li><li>当我们提及一个类型名（称），它可能是一个定义类型的名称，也可能是一个类型别名的名称。</li></ul><h3 id=heavy_check_mark-概念底层类型>:heavy_check_mark: 概念：底层类型</h3><blockquote>
+<p>underlying type</p></blockquote><p>在 Go 中，<strong>每个类型都有一个底层类型</strong>。规则：</p><ul>
+<li>一个内置类型的底层类型为它自己。</li><li><code>unsafe</code> 标准库包中定义的 <code>Pointer</code> 类型的底层类型是它自己。
+<ul>
+<li>至少我们可以认为是这样。事实上，关于<code>unsafe.Pointer</code> 类型的底层类型，官方文档中并没有清晰的说明。我们也可以认为 <code>unsafe.Pointer</code> 类型的底层类型为 <code>*T</code>，其中 <code>T</code> 表示一个任意类型。</li></ul></li><li>一个非定义类型（必为一个组合类型）的底层类型为它自己。</li><li>在一个类型声明中，新声明的类型和源类型共享底层类型。</li></ul><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 这四个类型的底层类型均为内置类型int。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=nx>MyInt</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Age</span>   <span class=nx>MyInt</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 下面这三个新声明的类型的底层类型各不相同。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=nx>IntSlice</span>   <span class=p>[]</span><span class=kt>int</span>   <span class=c1>// 底层类型为[]int
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>MyIntSlice</span> <span class=p>[]</span><span class=nx>MyInt</span> <span class=c1>// 底层类型为[]MyInt
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>AgeSlice</span>   <span class=p>[]</span><span class=nx>Age</span>   <span class=c1>// 底层类型为[]Age
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 类型[]Age、Ages和AgeSlice的底层类型均为[]Age。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>Ages</span> <span class=nx>AgeSlice</span>
+</span></span></code></pre></td></tr></table></div></div><p>如何溯源一个声明的类型的底层类型？规则很简单，<strong>在溯源过程中，当遇到一个内置类型或者非定义类型时，溯源结束。</strong> 以上面这几个声明的类型为例，下面是它们的底层类型的溯源过程：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>MyInt → int
+</span></span><span class=line><span class=cl>Age → MyInt → int
+</span></span><span class=line><span class=cl>IntSlice → []int
+</span></span><span class=line><span class=cl>MyIntSlice → []MyInt → []int
+</span></span><span class=line><span class=cl>AgeSlice → []Age → []MyInt → []int
+</span></span><span class=line><span class=cl>Ages → AgeSlice → []Age → []MyInt → []int
+</span></span></code></pre></td></tr></table></div></div><p>在 Go 中，</p><ul>
+<li>底层类型为内置类型 <code>bool</code> 的类型称为<strong>布尔类型</strong>；</li><li>底层类型为任一内置整数类型的类型称为<strong>整数类型</strong>；</li><li>底层类型为内置类型 <code>float32</code> 或者 <code>float64</code> 的类型称为<strong>浮点数类型</strong>；</li><li>底层类型为内置类型 <code>complex64</code> 或 <code>complex128</code> 的类型称为<strong>复数类型</strong>；</li><li>整数类型、浮点数类型和复数类型统称为<strong>数字值类型</strong>；</li><li>底层类型为内置类型 <code>string</code> 的类型称为<strong>字符串类型</strong>。</li></ul><h3 id=事实可比较类型和不可比较类型>事实：可比较类型和不可比较类型</h3><p>目前（Go 1.17），下面这些类型的值不支持（使用 <code>==</code> 和 <code>!=</code> 运算标识符）比较。这些类型称为不可比较类型。</p><ul>
+<li>切片类型</li><li>映射类型</li><li>函数类型</li><li>任何包含有不可比较类型的字段的结构体类型</li><li>任何元素类型为不可比较类型的数组类型。</li></ul><p>其它类型称为可比较类型。</p><p><strong>映射类型的键值类型必须为可比较类型。</strong></p><h2 id=基本类型的字面量表示>基本类型的字面量表示</h2><blockquote>
+<p>这一节不是很重要。。</p></blockquote><p>一个值的字面形式称为一个字面量，它表示此值在代码中文字体现形式（和内存中的表现形式相对应）。一个值可能会有很多种字面量形式。</p><h3 id=布尔值的字面量形式>布尔值的字面量形式</h3><p>Go白皮书没有定义布尔类型值字面量形式。 我们可以将 <code>false</code> 和 <code>true</code> 这两个预声明的有名常量当作布尔类型的字面量形式。 但是，我们应该知道，从严格意义上说，它们不属于字面量。有名常量声明将在下一篇文章中介绍和详细解释。</p><p>布尔类型的零值可以使用预声明的 <code>false</code> 来表示。</p><h3 id=整数类型值的字面量形式>整数类型值的字面量形式</h3><p>整数类型值有四种字面量形式：十进制形式（decimal）、八进制形式（octal）、十六进制形式（hex）和二进制形式（binary）。 比如，下面的三个字面量均表示十进制的15：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=mh>0xF</span> <span class=c1>// 十六进制表示（必须使用0x或者0X开头）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mh>0XF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mo>017</span> <span class=c1>// 八进制表示（必须使用0、0o或者0O开头）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>0</span><span class=nx>o17</span>
+</span></span><span class=line><span class=cl><span class=mi>0</span><span class=nx>O17</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mb>0b1111</span> <span class=c1>// 二进制表示（必须使用0b或者0B开头）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>0</span><span class=nx>B1111</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mi>15</span>  <span class=c1>// 十进制表示（必须不能用0开头）
+</span></span></span></code></pre></td></tr></table></div></div><p>（注意：二进制形式和以 <code>0o</code> 或 <code>0O</code> 开头的八进制形式从 Go 1.13 开始才支持。）</p><p>下面的程序打印出两个 <code>true</code>。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nb>println</span><span class=p>(</span><span class=mi>15</span> <span class=o>==</span> <span class=mo>017</span><span class=p>)</span> <span class=c1>// true
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nb>println</span><span class=p>(</span><span class=mi>15</span> <span class=o>==</span> <span class=mh>0xF</span><span class=p>)</span> <span class=c1>// true
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>整数类型的零值的字面量一般使用 <code>0</code> 表示。 当然，<code>00</code> 和 <code>0x0</code> 等也是合法的整数类型零值的字面量形式。</p><h3 id=浮点数类型值的字面量形式>浮点数类型值的字面量形式</h3><p>一个浮点数的完整十进制字面量形式可能包含一个十进制整数部分、一个小数点、一个十进制小数部分和一个以 10为 底数的整数指数部分。</p><p>整数指数部分由字母 <code>e</code> 或者 <code>E</code> 带一个十进制的整数字面量组成（<code>xEn</code> 表示 <code>x</code> 乘以 <code>10n</code> 的意思，而 <code>xE-n</code> 表示 <code>x</code> 除以 <code>10n</code> 的意思）。 常常地，某些部分可以根据情况省略掉。一些例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=mf>1.23</span>
+</span></span><span class=line><span class=cl><span class=mf>01.23</span> <span class=c1>// == 1.23
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>.23</span>
+</span></span><span class=line><span class=cl><span class=mf>1.</span>
+</span></span><span class=line><span class=cl><span class=c1>// 一个e或者E随后的数值是指数值（底数为10）。
+</span></span></span><span class=line><span class=cl><span class=c1>// 指数值必须为一个可以带符号的十进制整数字面量。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>1.23e2</span>  <span class=c1>// == 123.0
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>123E2</span>   <span class=c1>// == 12300.0
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>123.</span><span class=nx>E</span><span class=o>+</span><span class=mi>2</span> <span class=c1>// == 12300.0
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>1e-1</span>    <span class=c1>// == 0.1
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>.1e0</span>    <span class=c1>// == 0.1
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>0010e-2</span> <span class=c1>// == 0.1
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>0e+5</span>    <span class=c1>// == 0.0
+</span></span></span></code></pre></td></tr></table></div></div><p>从 Go 1.13 开始，Go 也支持另一种浮点数字面量形式：十六进制浮点数字面量。 在一个十六进制浮点数字面量中</p><ul>
+<li>一个十六进制浮点数字面量必须以一个以 2 为底数的整数指数部分。 这样的一个整数指数部分由字母 <code>p</code> 或者 <code>P</code> 带一个十进制的整数字面量组成（<code>yPn</code> 表示 <code>y</code> 乘以 <code>2n</code> 的意思，而 <code>yP-n</code> 表示 <code>y</code> 除以 <code>2n</code> 的意思）。</li><li>和整数的十六进制字面量一样，一个十六进制浮点数字面量也必须使用 <code>0x</code> 或者 <code>0X</code> 开头。 和整数的十六进制字面量不同的是，一个十六进制浮点数字面量可以包括一个小数点和一个十六进制小数部分。</li></ul><p>一些合法的浮点数的十六进制字面量例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=mh>0x1</span><span class=nx>p</span><span class=o>-</span><span class=mi>2</span>     <span class=c1>// == 1.0/4 = 0.25
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mh>0x2</span><span class=p>.</span><span class=nx>p10</span>    <span class=c1>// == 2.0 * 1024 == 2048.0
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mh>0x1</span><span class=p>.</span><span class=nx>Fp</span><span class=o>+</span><span class=mi>0</span>   <span class=c1>// == 1+15.0/16 == 1.9375
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>0</span><span class=nx>X</span><span class=mf>.8</span><span class=nx>p1</span>     <span class=c1>// == 8.0/16 * 2 == 1.0
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mh>0X1FFF</span><span class=nx>P</span><span class=o>-</span><span class=mi>16</span> <span class=c1>// == 0.1249847412109375
+</span></span></span></code></pre></td></tr></table></div></div><p>而下面这几个均是不合法的浮点数的十六进制字面量。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=mi>0</span><span class=nx>x</span><span class=p>.</span><span class=nx>p1</span>    <span class=c1>// 整数部分表示必须包含至少一个数字
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>1</span><span class=nx>p</span><span class=o>-</span><span class=mi>2</span>     <span class=c1>// p指数形式只能出现在浮点数的十六进制字面量中
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mh>0x1</span><span class=mf>.5e-2</span> <span class=c1>// e和E不能出现在十六进制浮点数字面量的指数部分中
+</span></span></span></code></pre></td></tr></table></div></div><p>注意：下面这个表示是合法的，但是它不是浮点数的十六进制字面量。事实上，它是一个减法算术表达式。其中的 <code>e</code> 为是十进制中的 <code>14</code>，<code>0x15e</code> 为一个整数十六进制字面量，<code>-2</code> 并不是此整数十六进制字面量的一部分。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=mh>0x15e</span><span class=o>-</span><span class=mi>2</span> <span class=c1>// == 0x15e - 2 (整数相减表达式)
+</span></span></span></code></pre></td></tr></table></div></div><p>浮点类型的零值的标准字面量形式为 <code>0.0</code>。 当然其它很多形式也是合法的，比如 <code>0.</code>、<code>.0</code>、<code>0e0</code> 和 <code>0x0p0</code> 等。</p><h3 id=虚部字面量形式>虚部字面量形式</h3><p>一个虚部值的字面量形式由一个浮点数字面量或者一个整数字面量和其后跟随的一个小写的字母 <code>i</code> 组成。 在 Go1.13 之前，如果虚部中 <code>i</code> 前的部分为一个整数字面量，则其必须为并且总是被视为十进制形式。 一些例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=m>1.23i</span>
+</span></span><span class=line><span class=cl><span class=m>1.i</span>
+</span></span><span class=line><span class=cl><span class=m>.23i</span>
+</span></span><span class=line><span class=cl><span class=m>123i</span>
+</span></span><span class=line><span class=cl><span class=m>0123i</span>   <span class=c1>// == 123i（兼容性使然。见下）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>1.23E2</span><span class=nx>i</span> <span class=c1>// == 123i
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=m>1e-1i</span>
+</span></span><span class=line><span class=cl><span class=m>011i</span>   <span class=c1>// == 11i（兼容性使然。见下）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=m>00011i</span> <span class=c1>// == 11i（兼容性使然。见下）
+</span></span></span><span class=line><span class=cl><span class=c1>// 下面这几行从Go 1.13开始才能编译通过。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>0</span><span class=nx>o11i</span>    <span class=c1>// == 9i
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mh>0x11</span><span class=nx>i</span>    <span class=c1>// == 17i
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mb>0b11</span><span class=nx>i</span>    <span class=c1>// == 3i
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>0</span><span class=nx>X</span><span class=mf>.8</span><span class=nx>p</span><span class=o>-</span><span class=m>0i</span> <span class=c1>// == 0.5i
+</span></span></span></code></pre></td></tr></table></div></div><p>注意：在 Go 1.13 之前，虚部字面量中字母 <code>i</code> 前的部分只能为浮点数字面量。 为了兼容老的 Go 版本，从 Go 1.13 开始，一些虚部字面量中表现为（不以 <code>0o</code> 和 <code>0O</code> 开头的）八进制形式的整数字面量仍被视为浮点数字面量。 比如上例中的 <code>011i</code>、<code>0123i</code> 和 <code>00011i</code>。</p><p>虚部字面量用来表示复数的虚部。下面是一些复数值的字面量形式：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=mi>1</span> <span class=o>+</span> <span class=m>2i</span>       <span class=c1>// == 1.0 + 2.0i
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>1.</span> <span class=o>-</span> <span class=m>.1i</span>     <span class=c1>// == 1.0 + -0.1i
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=m>1.23i</span> <span class=o>-</span> <span class=mf>7.89</span> <span class=c1>// == -7.89 + 1.23i
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=m>1.23i</span>        <span class=c1>// == 0.0 + 1.23i
+</span></span></span></code></pre></td></tr></table></div></div><p>复数零值的标准字面表示为 <code>0.0+0.0i</code>。 当然 <code>0i</code>、<code>.0i</code>、<code>0+0i</code> 等表示也是合法的。</p><h3 id=数值字面表示中使用下划线分段来增强可读性>数值字面表示中使用下划线分段来增强可读性</h3><p>从 Go 1.13 开始，<strong>下划线 <code>_</code> 可以出现在整数、浮点数和虚部数字面量中，以用做分段符以增强可读性。</strong></p><p>但是要注意，在一个数值字面表示中，一个下划线 <code>_</code> 不能出现在此字面表示的首尾，并且其两侧的字符必须为（相应进制的）数字字符或者进制表示头。</p><p>一些合法和不合法使用下划线的例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 合法的使用下划线的例子
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>6_9</span>          <span class=c1>// == 69
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>0</span><span class=nx>_33_77_22</span>   <span class=c1>// == 0337722
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mh>0x_Bad_Face</span>  <span class=c1>// == 0xBadFace
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mh>0X_1F_FF</span><span class=nx>P</span><span class=o>-</span><span class=mi>16</span> <span class=c1>// == 0X1FFFP-16
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mb>0b1011_0111</span> <span class=o>+</span> <span class=mh>0xA_B</span><span class=p>.</span><span class=nx>Fp2i</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 非法的使用下划线的例子
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>_69</span>        <span class=c1>// 下划线不能出现在首尾
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>69_</span>        <span class=c1>// 下划线不能出现在首尾
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>6__9</span>       <span class=c1>// 下划线不能相连
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>0</span><span class=nx>_xBadFace</span> <span class=c1>// x不是一个合法的八进制数字
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mi>1_</span><span class=mf>.5</span>       <span class=c1>// .不是一个合法的十进制数字
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=mf>1.</span><span class=nx>_5</span>       <span class=c1>// .不是一个合法的十进制数字
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=rune-值的字面量形式>rune 值的字面量形式</h3><p>上面已经提到，<code>rune</code> 类型是 <code>int32</code> 类型的别名。 因此，rune 类型（泛指）是特殊的整数类型。 一个 rune 值可以用上面已经介绍的整数类型的字面量形式表示。 另一方面，很多各种整数类型的值也可以用本小节介绍的rune 字面量形式来表示。</p><p>在 Go 中，一个 rune 值表示一个 Unicode 码点。 一般说来，我们可以将一个 Unicode 码点看作是一个 Unicode 字符。 但是，我们也应该知道，有些 Unicode 字符由多个 Unicode 码点组成。 每个英文或中文 Unicode 字符值含有一个 Unicode 码点。</p><p>一个 rune 字面量由若干包在一对单引号中的字符组成。 包在单引号中的字符序列表示一个 Unicode 码点值。 rune 字面量形式有几个变种，其中最常用的一种变种是将一个 rune 值对应的 Unicode 字符直接包在一对单引号中。比如：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=sc>&#39;a&#39;</span> <span class=c1>// 一个英文字符
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=sc>&#39;π&#39;</span>
+</span></span><span class=line><span class=cl><span class=sc>&#39;众&#39;</span> <span class=c1>// 一个中文字符
+</span></span></span></code></pre></td></tr></table></div></div><p>下面这些 rune 字面量形式的变种和 <code>'a'</code> 是等价的 （字符 <code>a</code> 的 Unicode 值是 97）。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=sc>&#39;\141&#39;</span>   <span class=c1>// 141是97的八进制表示
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=sc>&#39;\x61&#39;</span>   <span class=c1>// 61是97的十六进制表示
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=sc>&#39;\u0061&#39;</span>
+</span></span><span class=line><span class=cl><span class=sc>&#39;\U00000061&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意：<code>\</code> 之后必须跟随三个八进制数字字符（0-7）表示一个 byte 值， <code>\x</code> 之后必须跟随两个十六进制数字字符（0-9，a-f 和 A-F）表示一个 byte 值， <code>\u</code> 之后必须跟随四个十六进制数字字符表示一个 rune 值（此 run 值的高四位都为 0）， <code>\U</code> 之后必须跟随八个十六进制数字字符表示一个 rune 值。 这些八进制和十六进制的数字字符序列表示的整数必须是一个合法的 Unicode 码点值，否则编译将失败。</p><p>下面这些 <code>println</code> 函数调用都将打印出 <code>true</code>。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nb>println</span><span class=p>(</span><span class=sc>&#39;a&#39;</span> <span class=o>==</span> <span class=mi>97</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nb>println</span><span class=p>(</span><span class=sc>&#39;a&#39;</span> <span class=o>==</span> <span class=sc>&#39;\141&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nb>println</span><span class=p>(</span><span class=sc>&#39;a&#39;</span> <span class=o>==</span> <span class=sc>&#39;\x61&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nb>println</span><span class=p>(</span><span class=sc>&#39;a&#39;</span> <span class=o>==</span> <span class=sc>&#39;\u0061&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nb>println</span><span class=p>(</span><span class=sc>&#39;a&#39;</span> <span class=o>==</span> <span class=sc>&#39;\U00000061&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nb>println</span><span class=p>(</span><span class=mh>0x61</span> <span class=o>==</span> <span class=sc>&#39;\x61&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nb>println</span><span class=p>(</span><span class=sc>&#39;\u4f17&#39;</span> <span class=o>==</span> <span class=sc>&#39;众&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>事实上，在日常编程中，这四种rune字面量形式的变种很少用来表示 rune 值。 它们多用做字符串的双引号字面量形式中的转义字符（详见下一小节）。</p><p>如果一个 rune 字面量中被单引号包起来的部分含有两个字符， 并且第一个字符是 <code>\</code>，第二个字符不是 <code>x</code>、 <code>u</code> 和 <code>U</code>，那么这两个字符将被转义为一个特殊字符。 目前支持的转义组合为：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>\a   (rune值：0x07) 铃声字符
+</span></span><span class=line><span class=cl>\b   (rune值：0x08) 退格字符（backspace）
+</span></span><span class=line><span class=cl>\f   (rune值：0x0C) 换页符（form feed）
+</span></span><span class=line><span class=cl>\n   (rune值：0x0A) 换行符（line feed or newline）
+</span></span><span class=line><span class=cl>\r   (rune值：0x0D) 回车符（carriage return）
+</span></span><span class=line><span class=cl>\t   (rune值：0x09) 水平制表符（horizontal tab）
+</span></span><span class=line><span class=cl>\v   (rune值：0x0b) 竖直制表符（vertical tab）
+</span></span><span class=line><span class=cl>\\   (rune值：0x5c) 一个反斜杠（backslash）
+</span></span><span class=line><span class=cl>\&#39;   (rune值：0x27) 一个单引号（single quote）
+</span></span></code></pre></td></tr></table></div></div><p>其中，<code>\n</code> 在日常编程中用得最多。</p><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nb>println</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>)</span> <span class=c1>// 10
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nb>println</span><span class=p>(</span><span class=sc>&#39;\r&#39;</span><span class=p>)</span> <span class=c1>// 13
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nb>println</span><span class=p>(</span><span class=sc>&#39;\&#39;&#39;</span><span class=p>)</span> <span class=c1>// 39
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=nb>println</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span> <span class=o>==</span> <span class=mi>10</span><span class=p>)</span>     <span class=c1>// true
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nb>println</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span> <span class=o>==</span> <span class=sc>&#39;\x0A&#39;</span><span class=p>)</span> <span class=c1>// true
+</span></span></span></code></pre></td></tr></table></div></div><p>rune 类型的零值常用 <code>'\000'</code>、<code>'\x00'</code> 或 <code>'\u0000'</code> 等来表示。</p><h3 id=字符串值的字面量形式>字符串值的字面量形式</h3><p>在 Go 中，字符串值是 UTF-8 编码的， 甚至所有的 Go 源代码都必须是 UTF-8 编码的。</p><p>Go 字符串的字面量形式有两种。 一种是解释型字面表示（interpreted string literal，双引号风格）。 另一种是直白字面表示（raw string literal，反引号风格）。 下面的两个字符串表示形式是等价的：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 解释形式
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>&#34;Hello\nworld!\n\&#34;你好世界\&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 直白形式
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>`Hello
+</span></span></span><span class=line><span class=cl><span class=s>world!
+</span></span></span><span class=line><span class=cl><span class=s>&#34;你好世界&#34;`</span>
+</span></span></code></pre></td></tr></table></div></div><p>在上面的解释形式（双引号风格）的字符串字面量中，每个 <code>\n</code> 将被转义为一个换行符，每个 <code>\"</code> 将被转义为一个双引号字符。 双引号风格的字符串字面量中支持的转义字符和 rune 字面量基本一致，除了一个例外：双引号风格的字符串字面量中支持 <code>\"</code> 转义，但不支持 <code>\'</code> 转义；而 rune 字面量则刚好相反。</p><p>以 <code>\</code>、<code>\x</code>、<code>\u</code> 和 <code>\U</code> 开头的 rune 字面量（不包括两个单引号）也可以出现在双引号风格的字符串字面量中。比如：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 这几个字符串字面量是等价的。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>&#34;\141\142\143&#34;</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;\x61\x62\x63&#34;</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;\x61b\x63&#34;</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;abc&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 这几个字符串字面量是等价的。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>&#34;\u4f17\xe4\xba\xba&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// “众”的Unicode值为4f17，它的UTF-8
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=c1>// 编码为三个字节：0xe4 0xbc 0x97。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>&#34;\xe4\xbc\x97\u4eba&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=c1>// “人”的Unicode值为4eba，它的UTF-8
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=c1>// 编码为三个字节：0xe4 0xba 0xba。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=s>&#34;\xe4\xbc\x97\xe4\xba\xba&#34;</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;众人&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 UTF-8 编码中，一个 Unicode 码点（rune）可能由 1 到 4 个字节组成。 每个英文字母的 UTF-8 编码只需要一个字节；每个中文字符的 UTF-8 编码需要三个字节。</p><p>直白反引号风格的字面表示中是不支持转义字符的。 除了首尾两个反引号，直白反引号风格的字面表示中不能包含反引号。 为了跨平台兼容性，直白反引号风格的字面表示中的回车符（Unicode 码点为 <code>0x0D</code>） 将被忽略掉。</p><p>字符串类型的零值在代码里用 <code>""</code> 或 `` 表示。</p><h3 id=基本数值类型字面量的适用范围>基本数值类型字面量的适用范围</h3><p>一个数值型的字面量只有在不需要舍入时，才能用来表示一个整数基本类型的值。 比如，<code>1.0</code> 可以表示任何基本整数类型的值，但 <code>1.01</code> 却不可以。 当一个数值型的字面量用来表示一个非整数基本类型的值时，舍入（或者精度丢失）是允许的。</p><p>每种数值类型有一个能够表示的数值范围。 如果一个字面量超出了一个类型能够表示的数值范围（溢出），则在编译时刻，此字面量不能用来表示此类型的值。</p><p>下表是一些例子：</p><table>
+<thead>
+<tr>
+<th style=text-align:center>字面表示</th><th style=text-align:center>此字面表示可以表示哪些类型的值（在编译时刻）</th></tr></thead><tbody>
+<tr>
+<td style=text-align:center><code>256</code></td><td style=text-align:center>除了 int8 和 uint8 类型外的所有的基本数值类型。</td></tr><tr>
+<td style=text-align:center><code>255</code></td><td style=text-align:center>除了 int8 类型外的所有的基本数值类型。</td></tr><tr>
+<td style=text-align:center><code>-123</code></td><td style=text-align:center>除了无符号整数类型外的所有的基本数值类型。</td></tr><tr>
+<td style=text-align:center><code>123</code></td><td style=text-align:center>所有的基本数值类型。</td></tr><tr>
+<td style=text-align:center><code>123.000</code></td><td style=text-align:center></td></tr><tr>
+<td style=text-align:center><code>1.23e2</code></td><td style=text-align:center></td></tr><tr>
+<td style=text-align:center><code>'a'</code></td><td style=text-align:center></td></tr><tr>
+<td style=text-align:center><code>1.0+0i</code></td><td style=text-align:center></td></tr><tr>
+<td style=text-align:center><code>1.23</code></td><td style=text-align:center>所有浮点数和复数基本数值类型。</td></tr><tr>
+<td style=text-align:center><code>0x10000000000000000</code> (16 zeros)</td><td style=text-align:center></td></tr><tr>
+<td style=text-align:center><code>3.5e38</code></td><td style=text-align:center>除了 float32 和 complex64 类型外的所有浮点数和复数基本数值类型。</td></tr><tr>
+<td style=text-align:center><code>1+2i</code></td><td style=text-align:center>所有复数基本数值类型。</td></tr><tr>
+<td style=text-align:center><code>2e+308</code></td><td style=text-align:center>无。</td></tr></tbody></table><p>注意几个溢出的例子：</p><ul>
+<li>字面量 <code>0x10000000000000000</code> 需要 65 个比特才能表示，所以在运行时刻，任何基本整数类型都不能精确表示此字面量。</li><li>在 IEEE-754 标准中，最大的可以精确表示的 float32 类型数值为 <code>3.40282346638528859811704183484516925440e+38</code>，所以 <code>3.5e38</code> 不能表示任何 float32 和 complex64 类型的值。</li><li>在 IEEE-754 标准中，最大的可以精确表示的 float64 类型数值为 <code>1.797693134862315708145274237317043567981e+308</code>，因此 <code>2e+308</code> 不能表示任何基本数值类型的值。</li><li>尽管 <code>0x10000000000000000</code> 可以用来表示 float32 类型的值，但是它不能被任何 float32 类型的值所精确表示。上面已经提到了，当使用字面量来表示非整数基本数值类型的时候，精度丢失是允许的（但溢出是不允许的）。</li></ul><h2 id=字符串>字符串</h2><p>和很多其它编程语言一样，字符串类型是 Go 中的一种重要类型。本文将列举出关于字符串的各种事实。</p><h3 id=字符串类型的内部结构定义>字符串类型的内部结构定义</h3><p>对于标准编译器，字符串类型的内部结构声明如下：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_string</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>elements</span> <span class=o>*</span><span class=kt>byte</span> <span class=c1>// 引用着底层的字节
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>len</span>      <span class=kt>int</span>   <span class=c1>// 字符串中的字节数
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>从这个声明来看，我们可以将一个字符串的内部定义看作为一个字节序列。 事实上，我们确实可以把一个字符串看作是一个元素类型为 <code>byte</code> 的（且元素不可修改的）切片。</p><p>注意，前面的文章已经提到过多次，<code>byte</code> 是内置类型 <code>uint8</code> 的一个别名。</p><h3 id=关于字符串的一些简单事实>关于字符串的一些简单事实</h3><p>从前面的若干文章，我们已经了解到下列关于字符串的一些事实：</p><ul>
+<li>字符串值（和布尔以及各种数值类型的值）可以被用做常量。</li><li>Go 支持两种风格的字符串字面量表示形式：双引号风格（解释型字面表示）和反引号风格（直白字面表示）。</li><li>字符串类型的零值为空字符串。一个空字符串在字面上可以用 <code>""</code> 或者 `` 来表示。</li><li>我们可以用运算符 <code>+</code> 和 <code>+=</code> 来衔接字符串。</li><li>字符串类型都是可比较类型。
+<ul>
+<li>同一个字符串类型的值可以用 <code>==</code> 和 <code>!=</code> 比较运算符来比较，也可以用 <code>></code>、<code>&lt;</code>、<code>>=</code> 和 <code>&lt;=</code> 比较运算符来比较。</li><li>当比较两个字符串值的时候，<strong>它们的底层字节将逐一进行比较</strong>。</li><li><strong>如果一个字符串是另一个字符串的前缀，并且另一个字符串较长，则另一个字符串为两者中的较大者。</strong></li></ul></li></ul><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>const</span> <span class=nx>World</span> <span class=p>=</span> <span class=s>&#34;world&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>hello</span> <span class=p>=</span> <span class=s>&#34;hello&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 衔接字符串。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>var</span> <span class=nx>helloWorld</span> <span class=p>=</span> <span class=nx>hello</span> <span class=o>+</span> <span class=s>&#34; &#34;</span> <span class=o>+</span> <span class=nx>World</span>
+</span></span><span class=line><span class=cl>	<span class=nx>helloWorld</span> <span class=o>+=</span> <span class=s>&#34;!&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>helloWorld</span><span class=p>)</span> <span class=c1>// hello world!
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 比较字符串。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>hello</span> <span class=o>==</span> <span class=s>&#34;hello&#34;</span><span class=p>)</span>   <span class=c1>// true
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>hello</span> <span class=p>&gt;</span> <span class=nx>helloWorld</span><span class=p>)</span> <span class=c1>// false
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>更多关于字符串类型和值的事实：</p><ul>
+<li>字符串值的内容（即底层字节）是不可更改的。 字符串值的长度也是不可独立被更改的。 一个可寻址的字符串只能通过将另一个字符串赋值给它来整体修改它。</li><li>表达式 <code>aString[i]</code> 是不可寻址的。换句话说，<code>aString[i]</code> 不可被修改。</li><li>对于标准编译器来说，一个字符串的赋值完成之后，此赋值中的目标值和源值将共享底层字节。 一个子切片表达式 <code>aString[start:end]</code> 的估值结果也将和基础字符串 <code>aString</code> 共享一部分底层字节。</li></ul><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;strings&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>helloWorld</span> <span class=p>=</span> <span class=s>&#34;hello world!&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>hello</span> <span class=p>=</span> <span class=nx>helloWorld</span><span class=p>[:</span><span class=mi>5</span><span class=p>]</span> <span class=c1>// 取子字符串
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 104是英文字符h的ASCII（和Unicode）码。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>hello</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span>         <span class=c1>// 104
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%T \n&#34;</span><span class=p>,</span> <span class=nx>hello</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span> <span class=c1>// uint8
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=c1>// hello[0]是不可寻址和不可修改的，所以下面
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 两行编译不通过。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=cm>/*
+</span></span></span><span class=line><span class=cl><span class=cm>	hello[0] = &#39;H&#39;         // error
+</span></span></span><span class=line><span class=cl><span class=cm>	fmt.Println(&amp;hello[0]) // error
+</span></span></span><span class=line><span class=cl><span class=cm>	*/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 下一条语句将打印出：5 12 true
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nx>hello</span><span class=p>),</span> <span class=nb>len</span><span class=p>(</span><span class=nx>helloWorld</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>			<span class=nx>strings</span><span class=p>.</span><span class=nf>HasPrefix</span><span class=p>(</span><span class=nx>helloWorld</span><span class=p>,</span> <span class=nx>hello</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=字符串编码和-unicode-码点>字符串编码和 Unicode 码点</h3><p>Unicode 标准为全球各种人类语言中的每个字符制定了一个独一无二的值。 但 Unicode 标准中的基本单位不是字符，而是<strong>码点</strong>（code point）。大多数的码点实际上就对应着一个字符。 但也有少数一些字符是由多个码点组成的。</p><p>码点值在 Go 中用 rune 值来表示。</p><p>在 UTF-8 编码中，一个码点值可能由 1 到 4 个字节组成。 比如，每个英语码点值（均对应一个英语字符）均由一个字节组成，而每个中文字符（均对应一个中文字符）均由三个字节组成。</p><h3 id=字符串相关的类型转换>字符串相关的类型转换</h3><p>我们已经了解到整数可以被显式转换为字符串类型（但是反之不行）。</p><p>这里介绍两种新的字符串相关的类型转换规则：</p><ol>
+<li>一个字符串值可以被显式转换为一个字节切片（byte slice），反之亦然。</li><li>一个字符串值可以被显式转换为一个码点切片（rune slice），反之亦然。</li></ol><h4 id=码点切片到字符串的转换>码点切片到字符串的转换</h4><ul>
+<li>码点切片中的每个码点值将被 UTF-8 编码为一到四个字节至结果字符串中。</li><li>如果一个码点值是一个不合法的 Unicode 码点值
+<ul>
+<li>则它将被视为 Unicode 替换字符（码点）值 <code>0xFFFD</code>（Unicode replacement character）。</li><li>替换字符值 <code>0xFFFD</code> 将被 UTF-8 编码为三个字节 <code>0xef 0xbf 0xbd</code>。</li></ul></li></ul><h4 id=字符串到码点切片的转换>字符串到码点切片的转换</h4><ul>
+<li>此字符串中存储的字节序列将被解读为一个一个码点的 UTF-8 编码序列。</li><li>非法的 UTF-8 编码字节序列将被转化为 Unicode 替换字符值 <code>0xFFFD</code>。</li></ul><h4 id=字符串到字节切片的转换>字符串到字节切片的转换</h4><ul>
+<li>结果切片中的底层字节序列是此字符串中存储的字节序列的一份<strong>深复制</strong>。 即 Go 运行时将为结果切片开辟一块足够大的内存来容纳被复制过来的所有字节。</li><li>当此字符串的长度较长时，此转换开销是比较大的。</li></ul><h4 id=字节切片到字符串的转换>字节切片到字符串的转换</h4><p>同样</p><ul>
+<li>此字节切片中的字节序列也将被深复制到结果字符串中。</li><li>当此字节切片的长度较长时，此转换开销同样是比较大的。</li></ul><blockquote>
+<p>在这两种转换中，必须使用深复制的原因是字节切片中的字节元素是可修改的，但是字符串中的字节是不可修改的，所以一个字节切片和一个字符串是不能共享底层字节序列的。</p></blockquote><p>请注意，在字符串和字节切片之间的转换中，</p><ul>
+<li>非法的 UTF-8 编码字节序列将被保持原样不变。</li><li>标准编译器做了一些优化，从而使得这些转换在某些情形下将不用深复制。 这样的情形将在下一节中介绍。</li></ul><p>Go 并不支持字节切片和码点切片之间的直接转换。我们可以用下面列出的方法来实现这样的转换：</p><ul>
+<li>利用字符串做为中间过渡。这种方法相对方便但效率较低，因为需要做两次深复制。</li><li>使用 unicode/utf8 标准库包中的函数来实现这些转换。 这种方法效率较高，但使用起来不太方便。</li><li>使用 <code>bytes</code> 标准库包中的 <code>Runes</code> 函数来将一个字节切片转换为码点切片。 但此包中没有将码点切片转换为字节切片的函数。</li></ul><p>一个展示了上述各种转换的例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;bytes&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;unicode/utf8&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Runes2Bytes</span><span class=p>(</span><span class=nx>rs</span> <span class=p>[]</span><span class=kt>rune</span><span class=p>)</span> <span class=p>[]</span><span class=kt>byte</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>r</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>rs</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>n</span> <span class=o>+=</span> <span class=nx>utf8</span><span class=p>.</span><span class=nf>RuneLen</span><span class=p>(</span><span class=nx>r</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>n</span><span class=p>,</span> <span class=nx>bs</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>,</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>r</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>rs</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>n</span> <span class=o>+=</span> <span class=nx>utf8</span><span class=p>.</span><span class=nf>EncodeRune</span><span class=p>(</span><span class=nx>bs</span><span class=p>[</span><span class=nx>n</span><span class=p>:],</span> <span class=nx>r</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>bs</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;颜色感染是一个有趣的游戏。&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=nx>bs</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=c1>// string -&gt; []byte
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>s</span> <span class=p>=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>bs</span><span class=p>)</span>  <span class=c1>// []byte -&gt; string
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>rs</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>rune</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=c1>// string -&gt; []rune
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>s</span> <span class=p>=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>rs</span><span class=p>)</span>  <span class=c1>// []rune -&gt; string
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>rs</span> <span class=p>=</span> <span class=nx>bytes</span><span class=p>.</span><span class=nf>Runes</span><span class=p>(</span><span class=nx>bs</span><span class=p>)</span> <span class=c1>// []byte -&gt; []rune
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>bs</span> <span class=p>=</span> <span class=nf>Runes2Bytes</span><span class=p>(</span><span class=nx>rs</span><span class=p>)</span> <span class=c1>// []rune -&gt; []byte
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=字符串和字节切片之间的转换的编译器优化>字符串和字节切片之间的转换的编译器优化</h3><p>上面已经提到了字符串和字节切片之间的转换将深复制它们的底层字节序列。 标准编译器做了一些优化，从而在某些情形下避免了深复制。 至少这些优化在当前（Go 官方工具链 1.17）是存在的。 这样的情形包括：</p><ul>
+<li>一个 <code>for-range</code> 循环中跟随 <code>range</code> 关键字的从字符串到字节切片的转换；</li><li>一个在映射元素<strong>读取</strong>索引语法中被用做键值的从字节切片到字符串的转换（注意：对修改写入索引语法无效）；</li><li>一个字符串比较表达式中被用做比较值的从字节切片到字符串的转换；</li><li>一个（至少有一个被衔接的字符串值为非空字符串常量的）字符串衔接表达式中的从字节切片到字符串的转换。</li></ul><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>str</span> <span class=p>=</span> <span class=s>&#34;world&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 这里，转换[]byte(str)将不需要一个深复制。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>b</span> <span class=o>:=</span> <span class=k>range</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=s>&#34;:&#34;</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>key</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>{</span><span class=sc>&#39;k&#39;</span><span class=p>,</span> <span class=sc>&#39;e&#39;</span><span class=p>,</span> <span class=sc>&#39;y&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>m</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>string</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 这个string(key)转换仍然需要深复制。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>m</span><span class=p>[</span><span class=nb>string</span><span class=p>(</span><span class=nx>key</span><span class=p>)]</span> <span class=p>=</span> <span class=s>&#34;value&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 这里的转换string(key)将不需要一个深复制。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 即使key是一个包级变量，此优化仍然有效。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>m</span><span class=p>[</span><span class=nb>string</span><span class=p>(</span><span class=nx>key</span><span class=p>)])</span> <span class=c1>// value
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意：在最后一行中，如果在估值<code>string(key)</code>的时候有数据竞争的情况，则这行的输出有可能并不是<code>value</code>。 但是，无论如何，此行都不会造成恐慌（即使有数据竞争的情况发生）。</p><p>另一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;testing&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>x</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>{</span><span class=mi>1023</span><span class=p>:</span> <span class=sc>&#39;x&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>y</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>{</span><span class=mi>1023</span><span class=p>:</span> <span class=sc>&#39;y&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fc</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 下面的四个转换都不需要深复制。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nb>string</span><span class=p>(</span><span class=nx>x</span><span class=p>)</span> <span class=o>!=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>y</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>s</span> <span class=p>=</span> <span class=p>(</span><span class=s>&#34; &#34;</span> <span class=o>+</span> <span class=nb>string</span><span class=p>(</span><span class=nx>x</span><span class=p>)</span> <span class=o>+</span> <span class=nb>string</span><span class=p>(</span><span class=nx>y</span><span class=p>))[</span><span class=mi>1</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>fd</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 两个在比较表达式中的转换不需要深复制，
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 但两个字符串衔接中的转换仍需要深复制。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 请注意此字符串衔接和fc中的衔接的差别。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nb>string</span><span class=p>(</span><span class=nx>x</span><span class=p>)</span> <span class=o>!=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>y</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>s</span> <span class=p>=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>x</span><span class=p>)</span> <span class=o>+</span> <span class=nb>string</span><span class=p>(</span><span class=nx>y</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>testing</span><span class=p>.</span><span class=nf>AllocsPerRun</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=nx>fc</span><span class=p>))</span> <span class=c1>// 1
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>testing</span><span class=p>.</span><span class=nf>AllocsPerRun</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=nx>fd</span><span class=p>))</span> <span class=c1>// 3
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=使用for-range循环遍历字符串中的码点>使用<code>for-range</code>循环遍历字符串中的码点</h3><p><code>for-range</code>循环控制中的<code>range</code>关键字后可以跟随一个字符串，用来遍历此字符串中的码点（而非字节元素）。 字符串中非法的UTF-8编码字节序列将被解读为Unicode替换码点值<code>0xFFFD</code>。</p><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;éक्षिaπ囧&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>rn</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>s</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%2v: 0x%x %v \n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>rn</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>rn</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>此程序的输出如下：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl> 0: 0x65 e
+</span></span><span class=line><span class=cl> 1: 0x301 ́
+</span></span><span class=line><span class=cl> 3: 0x915 क
+</span></span><span class=line><span class=cl> 6: 0x94d ्
+</span></span><span class=line><span class=cl> 9: 0x937 ष
+</span></span><span class=line><span class=cl>12: 0x93f ि
+</span></span><span class=line><span class=cl>15: 0x61 a
+</span></span><span class=line><span class=cl>16: 0x3c0 π
+</span></span><span class=line><span class=cl>18: 0x56e7 囧
+</span></span><span class=line><span class=cl>21
+</span></span></code></pre></td></tr></table></div></div><p>从此输出结果可以看出：</p><ol>
+<li>下标循环变量的值并非连续。原因是下标循环变量为字符串中字节的下标，而一个码点可能需要多个字节进行UTF-8编码。</li><li>第一个字符<code>é</code>由两个码点（共三字节）组成，其中一个码点需要两个字节进行UTF-8编码。</li><li>第二个字符<code>क्षि</code>由四个码点（共12字节）组成，每个码点需要三个字节进行UTF-8编码。</li><li>英语字符<code>a</code>由一个码点组成，此码点只需一个字节进行UTF-8编码。</li><li>字符<code>π</code>由一个码点组成，此码点只需两个字节进行UTF-8编码。</li><li>汉字<code>囧</code>由一个码点组成，此码点只需三个字节进行UTF-8编码。</li></ol><p>那么如何遍历一个字符串中的字节呢？使用传统<code>for</code>循环：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;éक्षिaπ囧&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;第%v个字节为0x%x\n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>s</span><span class=p>[</span><span class=nx>i</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>当然，我们也可以利用前面介绍的编译器优化来使用<code>for-range</code>循环遍历一个字符串中的字节元素。 对于官方标准编译器来说，此方法比刚展示的方法效率更高。</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;éक्षिaπ囧&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 这里，[]byte(s)不需要深复制底层字节。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>b</span> <span class=o>:=</span> <span class=k>range</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;The byte at index %v: 0x%x \n&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>从上面几个例子可以看出，<code>len(s)</code>将返回字符串<code>s</code>中的字节数。 <code>len(s)</code>的时间复杂度为<code>*O*(1)</code>。 如何得到一个字符串中的码点数呢？使用刚介绍的<code>for-range</code>循环来统计一个字符串中的码点数是一种方法，使用<code>unicode/utf8</code>标准库包中的<a href=https://golang.google.cn/pkg/unicode/utf8/#RuneCountInString target=_blank rel="noopener noreffer">RuneCountInString</a>是另一种方法。 这两种方法的效率基本一致。第三种方法为使用<code>len([]rune(s）)</code>来获取字符串<code>s</code>中码点数。标准编译器从1.11版本开始，对此表达式做了优化以避免一个不必要的深复制，从而使得它的效率和前两种方法一致。 注意，这三种方法的时间复杂度均为<code>*O*(n)</code>。</p><h3 id=更多字符串衔接方法>更多字符串衔接方法</h3><p>除了使用<code>+</code>运算符来衔接字符串，我们也可以用下面的方法来衔接字符串：</p><ul>
+<li><code>fmt</code>标准库包中的<code>Sprintf</code>/<code>Sprint</code>/<code>Sprintln</code>函数可以用来衔接各种类型的值的字符串表示，当然也包括字符串类型的值。</li><li>使用<code>strings</code>标准库包中的<code>Join</code>函数。</li><li><code>bytes</code>标准库包提供的<code>Buffer</code>类型可以用来构建一个字节切片，然后我们可以将此字节切片转换为一个字符串。</li><li>从Go 1.10开始，<code>strings</code>标准库包中的<code>Builder</code>类型可以用来拼接字符串。 和<code>bytes.Buffer</code>类型类似，此类型内部也维护着一个字节切片，但是它在将此字节切片转换为字符串时避免了底层字节的深复制。</li></ul><p>标准编译器对使用<code>+</code>运算符的字符串衔接做了特别的优化。 所以，一般说来，在被衔接的字符串的数量是已知的情况下，使用<code>+</code>运算符进行字符串衔接是比较高效的。</p><h3 id=语法糖将字符串当作字节切片使用>语法糖：将字符串当作字节切片使用</h3><p>在<a href=https://gfw.go101.org/article/container.html target=_blank rel="noopener noreffer">上一篇文章</a>中，我们了解到内置函数<code>copy</code>和<code>append</code>可以用来复制和添加切片元素。 事实上，做为一个特例，如果这两个函数的调用中的第一个实参为一个字节切片的话，那么第二个实参可以是一个字符串。 （对于<code>append</code>函数调用，字符串实参后必须跟随三个点<code>...</code>。） 换句话说，在此特例中，字符串可以当作字节切片来使用。</p><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>hello</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;Hello &#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>world</span> <span class=o>:=</span> <span class=s>&#34;world!&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// helloWorld := append(hello, []byte(world)...) // 正常的语法
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>helloWorld</span> <span class=o>:=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>hello</span><span class=p>,</span> <span class=nx>world</span><span class=o>...</span><span class=p>)</span>            <span class=c1>// 语法糖
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>helloWorld</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>helloWorld2</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>hello</span><span class=p>)</span> <span class=o>+</span> <span class=nb>len</span><span class=p>(</span><span class=nx>world</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=nb>copy</span><span class=p>(</span><span class=nx>helloWorld2</span><span class=p>,</span> <span class=nx>hello</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// copy(helloWorld2[len(hello):], []byte(world)) // 正常的语法
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nb>copy</span><span class=p>(</span><span class=nx>helloWorld2</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=nx>hello</span><span class=p>):],</span> <span class=nx>world</span><span class=p>)</span>            <span class=c1>// 语法糖
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>helloWorld2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=更多关于字符串的比较>更多关于字符串的比较</h3><p>上面已经提到了比较两个字符串事实上逐个比较这两个字符串中的字节。 Go编译器一般会做出如下的优化：</p><ul>
+<li>对于<code>==</code>和<code>!=</code>比较，如果这两个字符串的长度不相等，则这两个字符串肯定不相等（无需进行字节比较）。</li><li>如果这两个字符串底层引用着字符串切片的指针相等，则比较结果等同于比较这两个字符串的长度。</li></ul><p>所以两个相等的字符串的比较的时间复杂度取决于它们底层引用着字符串切片的指针是否相等。 如果相等，则对它们的比较的时间复杂度为<code>*O*(1)</code>，否则时间复杂度为<code>*O*(n)</code>。</p><p>上面已经提到了，对于标准编译器，一个字符串赋值完成之后，目标字符串和源字符串将共享同一个底层字节序列。 所以比较这两个字符串的代价很小。</p><p>一个例子：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;time&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>bs</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>1</span><span class=o>&lt;&lt;</span><span class=mi>26</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s0</span> <span class=o>:=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>bs</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s1</span> <span class=o>:=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>bs</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s2</span> <span class=o>:=</span> <span class=nx>s1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// s0、s1和s2是三个相等的字符串。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// s0的底层字节序列是bs的一个深复制。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// s1的底层字节序列也是bs的一个深复制。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// s0和s1底层字节序列为两个不同的字节序列。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// s2和s1共享同一个底层字节序列。
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=nx>startTime</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s0</span> <span class=o>==</span> <span class=nx>s1</span>
+</span></span><span class=line><span class=cl>	<span class=nx>duration</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>Sub</span><span class=p>(</span><span class=nx>startTime</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;duration for (s0 == s1):&#34;</span><span class=p>,</span> <span class=nx>duration</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>startTime</span> <span class=p>=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>s1</span> <span class=o>==</span> <span class=nx>s2</span>
+</span></span><span class=line><span class=cl>	<span class=nx>duration</span> <span class=p>=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>Sub</span><span class=p>(</span><span class=nx>startTime</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;duration for (s1 == s2):&#34;</span><span class=p>,</span> <span class=nx>duration</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出如下：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>duration for (s0 == s1): 10.462075ms
+</span></span><span class=line><span class=cl>duration for (s1 == s2): 136ns
+</span></span></code></pre></td></tr></table></div></div><p>1ms 等于 1000000ns！所以请尽量避免比较两个很长的不共享底层字节序列的相等的（或者几乎相等的）字符串。</p><h2 id=值部>值部</h2><p>此篇文章后续的若干文章将介绍Go中更多的类型。为了更容易和更深刻地理解那些类型，最好先阅读一下本文。</p><h3 id=go类型分为两大类别category>Go类型分为两大类别（category）</h3><p>Go可以被看作是一门C语言血统的语言，这可以通过此前的<a href=https://gfw.go101.org/article/pointer.html target=_blank rel="noopener noreffer">指针</a>和<a href=https://gfw.go101.org/article/struct.html target=_blank rel="noopener noreffer">结构体</a>两篇文章得以验证。 Go中的指针和结构体类型的内存结构和C语言很类似。</p><p>另一方面，Go也可以被看作是C语言的一个扩展框架。 在C中，值的内存结构都是很透明的；但在Go中，对于某些类型的值，其内存结构却不是很透明。 在C中，每个值在内存中只占据一个<a href=https://gfw.go101.org/article/memory-block.html target=_blank rel="noopener noreffer">内存块</a>（一段连续内存）；但是，一些Go类型的值可能占据多个内存块。</p><p>以后，我们称一个Go值分布在不同内存块上的部分为此值的各个值部（value part）。 一个分布在多个内存块上的值含有一个直接值部和若干被此直接值部<a href=https://gfw.go101.org/article/pointer.html#references target=_blank rel="noopener noreffer">引用着</a>的间接值部。</p><p>上面的段落描述了两个类别的Go类型。下表将列出这两个类别（category）中的类型（type）种类（kind）：</p><table>
+<thead>
+<tr>
+<th style=text-align:center>每个值在内存中只分布在一个内存块上的类型</th><th style=text-align:center>每个值在内存中会分布在多个内存块上的类型</th></tr></thead><tbody>
+<tr>
+<td style=text-align:center><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png title=单值部></td><td style=text-align:center><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png title=多值部></td></tr><tr>
+<td style=text-align:center>布尔类型 各种数值类型 指针类型 非类型安全指针类型 结构体类型 数组类型</td><td style=text-align:center>切片类型 映射类型 通道类型 函数类型 接口类型 字符串类型</td></tr></tbody></table><p>表中列出的很多类型将在后续文章中逐一详细讲解。本文的目的就是为了给后续的讲解做一个铺垫。</p><p>注意：</p><ul>
+<li>接口类型和字符串类型值是否包含间接部分取决于具体编译器实现。 如果不使用今后将介绍的非类型安全途径，我们无法从这两类类型的值的外在表现来判定它们的值是否含有间接部分。 在《Go语言101》中，我们认为这两类类型的值是可能包含间接值部的。</li><li>同样地，函数类型的值是否包含间接部分几乎也是不可能验证的。 在《Go语言101》中，我们认为函数值是可能包含间接值部的。</li></ul><p>通过封装了很多具体的实现细节，第二个类别中的类型给Go编程带来了很大的便利。 不同的编译器实现会采用不同的内部结构来实现这些类型，但是这些类型的值的外在表现必须满足Go白皮书中的要求。 此分类中的类型对于编程来说并非是很基础的类型。 我们可以使用第一个分类中的类型来实现此分类中的类型。 但是，通过将一些常用或者很独特的功能封装到此第二个分类中的类型里，使用Go编程的效率将得到大大提升，体验将得到大大增强。</p><p>另一方面，这些封装同时也隐藏了这些类型的值的内部结构，使得Go程序员不能对这些类型有一个更全局更深刻的认识。有时候这会对更好地理解Go带来了一些障碍。</p><p>为了帮助Go程序员更好的理解第二个分类中的类型和它们的值，本文余下的内容将对这些类型的内在实现做一个简单介绍。 这些实现的细节将不会在本文中谈及。本文的介绍主要基于（但并不完全符合）官方标准编译器的实现。</p><h3 id=go中的两种指针类型>Go中的两种指针类型</h3><p>在继续下面的内容之前，我们先了解一下Go中的两种指针类型并明确一下“引用”这个词的含义。</p><p>我们已经在<a href=https://gfw.go101.org/article/pointer.html target=_blank rel="noopener noreffer">上上篇文章</a>中了解了Go中的指针。 那篇文章中所介绍的指针属于类型安全的指针。事实上，Go还支持另一种称为<a href=https://gfw.go101.org/article/unsafe.html target=_blank rel="noopener noreffer">非类型安全的指针类型</a>。 非类型安全的指针类型提供在<code>unsafe</code>标准库包中。 非类型安全指针类型通常使用<code>unsafe.Pointer</code>来表示。 <code>unsafe.Pointer</code>类似于C语言中的<code>void*</code>。</p><p>在《Go语言101》中的大多数文章中，如果没有特别说明，当一个指针类型被谈及，它表示一个类型安全指针。 但是在本文的余下内容中，当一个指针被谈及，它可能表示一个类型安全指针，也可能表示一个非类型安全指针。</p><p>一个指针值存储着另一个值的地址，除非此指针值是一个nil空指针。 我们可以说此指针<a href=https://gfw.go101.org/article/pointer.html#references target=_blank rel="noopener noreffer">引用着</a>另外一个值，或者说另外一个值正被此指针所引用。 一个值可能被间接引用，比如</p><ul>
+<li>如果一个结构体值<code>a</code>含有一个指针字段<code>b</code>并且这个指针字段<code>b</code>引用着另外一个值<code>c</code>，那么我们可以说结构体值<code>a</code>也引用着值<code>c</code>。</li><li>如果一个值<code>x</code>（直接或者间接地）引用着另一个值<code>y</code>，并且值<code>y</code>（直接或者间接地）引用着第三个值<code>z</code>，则我们可以说值<code>x</code>间接地引用着值<code>z</code>。</li></ul><p>以后，我们将一个含有（直接或者间接）指针字段的结构体类型称为一个<strong>指针包裹类型</strong>，将一个含有（直接或者间接）指针的类型称为<strong>指针持有者类型</strong>。 指针类型和指针包裹类型都属于指针持有者类型。元素类型为指针持有者类型的数组类型也是指针持有者类型（数组将在下一篇文章中介绍）。</p><h3 id=第二个分类中的类型的可能的内部实现结构定义>第二个分类中的类型的（可能的）内部实现结构定义</h3><p>为了更好地理解第二个分类中的类型的值的运行时刻行为，我们可以认为这些类型在内部是使用第一个分类中的类型来定义的（如下所示）。 如果你以前并没有很多使用过Go中各种类型的经验，目前你不必深刻地理解这些定义。 对这些定义拥有一个粗糙的印象足够对理解后续文章中将要讲解的类型有所帮助。 你可以在今后有了更多的Go编程经验之后再重读一下本文。</p><h4 id=映射通道和函数类型的内部定义>映射、通道和函数类型的内部定义</h4><p>映射、通道和函数类型的内部定义很相似：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 映射类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>_map</span> <span class=o>*</span><span class=nx>hashtableImpl</span> <span class=c1>// 目前，官方标准编译器是使用
+</span></span></span><span class=line><span class=cl><span class=c1></span>                         <span class=c1>// 哈希表来实现映射的。
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>// 通道类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>_channel</span> <span class=o>*</span><span class=nx>channelImpl</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 函数类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>_function</span> <span class=o>*</span><span class=nx>functionImpl</span>
+</span></span></code></pre></td></tr></table></div></div><p>从这些定义，我们可以看出来，这三个种类的类型的内部结构其实是一个指针类型。 或者说，这些类型的值的直接部分在内部是一个指针。 这些类型的每个值的直接部分引用着它的具体实现的底层间接部分。</p><h4 id=切片类型的内部定义>切片类型的内部定义</h4><p>切片类型的内部定义：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_slice</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>elements</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nx>Pointer</span> <span class=c1>// 引用着底层的元素
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>len</span>      <span class=kt>int</span>            <span class=c1>// 当前的元素个数
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>cap</span>      <span class=kt>int</span>            <span class=c1>// 切片的容量
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>从这个定义可以看出来，一个切片类型在内部可以看作是一个指针包裹类型。 每个非零切片值包含着一个底层间接部分用来存储此切片的元素。 一个切片值的底层元素序列（间接部分）被此切片值的<code>elements</code>字段所引用。</p><h4 id=字符串类型的内部结构>字符串类型的内部结构</h4><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_string</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>elements</span> <span class=o>*</span><span class=kt>byte</span> <span class=c1>// 引用着底层的byte元素
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>len</span>      <span class=kt>int</span>   <span class=c1>// 字符串的长度
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>从此定义可以看出，每个字符串类型在内部也可以看作是一个指针包裹类型。 每个非零字符串值含有一个指针字段 <code>elements</code>。 这个指针字段引用着此字符串值的底层字节元素序列。</p><h4 id=接口类型的内部定义>接口类型的内部定义</h4><p>我们可以认为接口类型在内部是如下定义的：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_interface</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>dynamicType</span>  <span class=o>*</span><span class=nx>_type</span>         <span class=c1>// 引用着接口值的动态类型
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>dynamicValue</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nx>Pointer</span> <span class=c1>// 引用着接口值的动态值
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>从这个定义来看，接口类型也可以看作是一个指针包裹类型。一个接口类型含有两个指针字段。 每个非零接口值的（两个）间接部分分别存储着此接口值的动态类型和动态值。 这两个间接部分被此接口值的直接字段<code>dynamicType</code>和<code>dynamicValue</code>所引用。</p><p>事实上，上面这个内部定义只用于表示空接口类型的值。空接口类型没有指定任何方法。 后面的<a href=https://gfw.go101.org/article/interface.html target=_blank rel="noopener noreffer">接口</a>一文详细解释了接口类型和值。 非空接口类型的内部定义如下：</p><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_interface</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>dynamicTypeInfo</span> <span class=o>*</span><span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>dynamicType</span> <span class=o>*</span><span class=nx>_type</span>       <span class=c1>// 引用着接口值的动态类型
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>methods</span>     <span class=p>[]</span><span class=o>*</span><span class=nx>_function</span> <span class=c1>// 引用着动态类型的对应方法列表
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>dynamicValue</span> <span class=nx>unsafe</span><span class=p>.</span><span class=nx>Pointer</span> <span class=c1>// 引用着动态值
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>一个非空接口类型的值的<code>dynamicTypeInfo</code>字段的<code>methods</code>字段引用着一个方法列表。 此列表中的每一项为此接口值的动态类型上定义的一个方法，此方法对应着此接口类型所指定的一个的同原型的方法。</p><h3 id=在赋值中底层间接值部将不会被复制>在赋值中，底层间接值部将不会被复制</h3><p>现在我们了解了第二个分类中的类型的内部结构是一个指针持有（指针或者指针包裹）类型。 这对于我们理解Go中的值复制行为有很大帮助。</p><p>在Go中，每个赋值操作（包括函数调用传参等）都是一个值的浅复制过程（假设源值和目标值的类型相同）。 换句话说，在一个赋值操作中，只有源值的直接部分被复制给了目标值。 如果源值含有间接部分，则在此赋值操作完成之后，目标值和源值的直接部分将引用着相同的间接部分。 换句话说，两个值将共享底层的间接值部，如下图所示：</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/value-parts-multiple.png title=值复制></p><p>事实上，对于字符串值和接口值的赋值，上述描述在理论上并非百分百正确。 <a href=https://golang.google.cn/doc/faq#pass_by_value target=_blank rel="noopener noreffer">官方FAQ</a>明确说明了在一个接口值的赋值中，接口的底层动态值将被复制到目标值。 但是，因为一个接口值的动态值是只读的，所以在接口值的赋值中，官方标准编译器并没有复制底层的动态值。这可以被视为是一个编译器优化。 对于字符串值的赋值，道理是一样的。所以对于官方标准编译器来说，上一段的描述是100%正确的。</p><p>因为一个间接值部可能并不专属于任何一个值，所以在使用<code>unsafe.Sizeof</code>函数计算一个值的尺寸的时候，此值的间接部分所占内存空间未被计算在内。</p><h3 id=关于术语引用类型和引用值>关于术语“引用类型”和“引用值”</h3><p>“引用”这个术语在Go社区中使用得有些混乱。很多Go程序员在Go编程中可能由此产生了一些困惑。 一些文档或者网络文章，包括一些<a href=https://golang.google.cn/doc/faq#references target=_blank rel="noopener noreffer">官方文档</a>，把“引用”（reference）看作是“值”（value）的一个对立面。 《Go语言101》强烈不推荐这种定义。在这一点上，本人不想争论什么。这里仅仅列出一些肯定错误地使用了“引用”这个术语的例子：</p><ul>
+<li>在Go中，只有切片、映射、通道和函数类型属于<em><strong>引用类型*</strong>。 （如果我们确实需要</em>**引用类型***这个术语，那么我们不应把其它指针持有者类型排除在引用类型之外。）</li><li>一些函数调用的参数是通过引用来传递的。 （对不起，在Go中，所有的函数调用的参数都是通过值复制<strong>直接值部</strong>的方式来传递的。）</li></ul><p>我并不是想说**<em>引用类型*<strong>这个术语在Go中是完全没有价值的， 我只是想表达这个术语是完全没有必要的，并且它常常在Go的使用中导致一些困惑。我推荐使用指针持有者类型来代替这个术语。 另外，我个人的观点是最好将</strong></em>引用***这个词限定到只表示值之间的关系，把它当作一个动词或者名词来使用，永远不要把它当作一个形容词来使用。 这样将在使用Go的过程中避免很多困惑。</p></div><div class=post-footer id=post-footer>
+<div class=post-info>
+<div class=post-info-line>
+<div class=post-info-mod>
+<span>更新于 2022-03-07</span>
+</div><div class=post-info-license></div></div><div class=post-info-line>
+<div class=post-info-md></div><div class=post-info-share>
+<span></span>
+</div></div></div><div class=post-info-more>
+<section class=post-tags></section><section>
+<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
+</section></div><div class=post-nav><a href=/Notes/posts/golang/%E8%BF%9B%E9%98%B6/%E9%9D%9E%E7%B1%BB%E5%9E%8B%E5%AE%89%E5%85%A8%E6%8C%87%E9%92%88/ class=prev rel=prev title="Go 非类型安全指针"><i class="fas fa-angle-left fa-fw"></i>Go 非类型安全指针</a>
+<a href=/Notes/posts/golang/basicgrammar/ class=next rel=next title="Go 基础语法">Go 基础语法<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
+<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
+<i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论>
+<i class="fas fa-comment fa-fw"></i>
+</a>
+</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
