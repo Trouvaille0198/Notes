@@ -9,7 +9,12 @@ categories: [Golang]
 
 # Golang
 
-![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/SyctY6Q.png)
+![img](https://booklovinmamas.com/wp-content/uploads/2017/09/go.png)
+
+- Go is an open source programming language supported by Google
+- Easy to learn and get started with
+- Built-in concurrency and a robust standard library
+- Growing ecosystem of partners, communities, and tools
 
 ## 安装
 
@@ -426,34 +431,46 @@ const prefix = "astaxie_"
 
 > Go 常量和一般程序语言不同的是，可以指定相当多的小数位数 (例如 200 位)， 若指定给 float32 自动缩短为 32bit，指定给 float64 自动缩短为 64bit
 
-### 简单类型
+### 内置基本类型
 
-- **空值：**nil
-- **整型类型**： int (取决于操作系统), int8, int16, int32, int64, uint8, uint16, …
-    - `rune` 是 `int32` 的别称，`byte` 是 `uint8` 的别称
-    - 这些类型的变量之间不允许互相赋值或操作
-    - 尽管 int 的长度是 32 bit, 但 int 与 int32 并不可以互用
-    
-- **浮点数类型**：float32, float64
-- **字节类型**：byte (等价于 uint8)
-- **字符串类型**：string
-- **布尔值类型**：bool，(true 或 false)
+Go 支持如下内置基本类型：
 
-```go
-var a int8 = 10
-var c1 byte = 'a'
-var b float32 = 12.2
-var msg = "Hello World"
-ok := false
-```
+- 一种内置**布尔类型**：`bool`。
+- 11 种内置**整数类型**：`int8`、`uint8`、`int16`、`uint16`、`int32`、`uint32`、`int64`、`uint64`、`int`、`uint` 和 `uintptr`。
+- 两种内置**浮点数类型**：`float32` 和 `float64`。
+- 两种内置**复数类型**：`complex64` 和 `complex128`。
+- 一种内置**字符串类型**：`string`。
 
-Go 还支持**复数**。它的默认类型是 `complex128`（64 位实数 + 64 位虚数）。如果需要小一些的，也有`complex64` (32 位实数 + 32 位虚数)。复数的形式为 `RE + IMi`，其中 `RE` 是实数部分，`IM` 是虚数部分，而最后的 `i` 是虚数单位。下面是一个使用复数的例子：
+内置类型也称为预声明类型
+
+除了 `bool` 和 `string` 类型，其它的 15 种内置基本类型都称为数值类型（整型、浮点数型和复数型）。
+
+Go 中有两种内置类型别名（type alias）：
+
+- `byte` 是 `uint8`的内置别名。 它们是同一个类型。
+- `rune` 是 `int32`的内置别名。 它们是同一个类型。
+
+任一个类型的所有值的尺寸都是相同的，所以一个值的尺寸也常称为它的类型的尺寸。
+
+`uintptr`、`int` 以及 `uint` 类型的值的尺寸依赖于具体编译器实现。 
+
+- 通常地，在 64 位的架构上，`int` 和 `uint` 类型的值是 64 位的；
+- 在 32 位的架构上，它们是 32 位的。 
+- 编译器必须保证 `uintptr` 类型的值的尺寸能够存下任意一个内存地址。
+
+一个 `complex64` 复数值的实部和虚部都是 `float32` 类型的值。 一个 `complex128` 复数值的实部和虚部都是 `float64` 类型的值。
+
+复数的形式为 `RE + IMi`，其中 `RE` 是实数部分，`IM` 是虚数部分，而最后的 `i` 是虚数单位。下面是一个使用复数的例子：
 
 ```go
 var c complex64 = 5+5i
 
 fmt.Printf("Value is: %v", c) //output: (5+5i)
 ```
+
+在内存中，所有的浮点数都使用 IEEE-754 格式存储。
+
+从逻辑上说，一个字符串值表示一段文本。 在内存中，**一个字符串存储为一个字节序列**。 此字节序列体现了此字符串所表示的文本的 UTF-8 编码形式。 
 
 ### 字符串
 
