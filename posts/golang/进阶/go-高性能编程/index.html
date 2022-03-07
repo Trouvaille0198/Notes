@@ -9,14 +9,14 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2022-03-03T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-07T06:27:40+00:00">
+<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Go 高性能编程">
 <meta name=twitter:description content="Go 高性能编程 常用数据结构 字符串高效拼接 在 Go 语言中，字符串 (string) 是不可变的，拼接字符串事实上是创建了一个新的字符串对象。 如果代码中存在大量的字符串">
 <meta name=application-name content="伤心肠粉的酱油碟子">
 <meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/others/%E5%89%91%E6%8C%87-offer-15.-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 高性能编程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B\/"},"genre":"posts","keywords":"进阶","wordcount":6833,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B\/","datePublished":"2022-03-03T00:00:00+00:00","dateModified":"2022-03-07T06:27:40+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/others/%E5%89%91%E6%8C%87-offer-15.-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 高性能编程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B\/"},"genre":"posts","keywords":"进阶","wordcount":6816,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E8%BF%9B%E9%98%B6\/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B\/","datePublished":"2022-03-03T00:00:00+00:00","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
 <div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
 <div class=header-wrapper>
 <div class=header-title>
@@ -65,7 +65,7 @@
 <div id=search-dropdown-mobile></div></div><main class=main>
 <div class=container><div class=toc id=toc-auto>
 <h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go 高性能编程</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-03-03>2022-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6833 字&nbsp;
+<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-03-03>2022-03-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6816 字&nbsp;
 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 14 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
 <div class="details-summary toc-title">
 <span>目录</span>
@@ -92,7 +92,7 @@
 <ul>
 <li><a href=#arrayslice>array/slice</a></li><li><a href=#map>map</a></li><li><a href=#channel>channel</a></li></ul></li><li><a href=#for-和-range-的性能比较-1>for 和 range 的性能比较</a>
 <ul>
-<li><a href=#int>[]int</a></li><li><a href=#struct>[]struct</a></li><li><a href=#int-和-struct-的性能差异>[]int 和 []struct{} 的性能差异</a></li><li><a href=#struct-1>[]*struct</a></li></ul></li><li><a href=#总结>总结</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=go-高性能编程>Go 高性能编程</h1><h2 id=常用数据结构>常用数据结构</h2><h3 id=字符串高效拼接>字符串高效拼接</h3><p>在 Go 语言中，字符串 (string) 是不可变的，拼接字符串事实上是创建了一个新的字符串对象。</p><p><strong>如果代码中存在大量的字符串拼接，对性能会产生严重的影响。</strong></p><h4 id=常见的拼接方式>常见的拼接方式</h4><p>为了避免编译器优化，我们首先实现一个生成长度为 n 的随机字符串的函数。</p><div class=highlight><div class=chroma>
+<li><a href=#int><code>[]int</code></a></li><li><a href=#struct>[]struct</a></li><li><a href=#int-和-struct-的性能差异><code>[]int</code> 和 <code>[]struct{}</code> 的性能差异</a></li><li><a href=#struct-1><code>[]*struct{}</code></a></li></ul></li><li><a href=#总结>总结</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=go-高性能编程>Go 高性能编程</h1><h2 id=常用数据结构>常用数据结构</h2><h3 id=字符串高效拼接>字符串高效拼接</h3><p>在 Go 语言中，字符串 (string) 是不可变的，拼接字符串事实上是创建了一个新的字符串对象。</p><p><strong>如果代码中存在大量的字符串拼接，对性能会产生严重的影响。</strong></p><h4 id=常见的拼接方式>常见的拼接方式</h4><p>为了避免编译器优化，我们首先实现一个生成长度为 n 的随机字符串的函数。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -160,13 +160,13 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>func builderConcat(n int, str string) string {
-</span></span><span class=line><span class=cl>	var builder strings.Builder
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; n; i++ {
-</span></span><span class=line><span class=cl>		builder.WriteString(str)
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>	return builder.String()
-</span></span><span class=line><span class=cl>}
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>builderConcat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>str</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>builder</span> <span class=nx>strings</span><span class=p>.</span><span class=nx>Builder</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>builder</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>builder</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><ul>
 <li>使用 <code>bytes.Buffer</code></li></ul><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
@@ -711,7 +711,7 @@
 </span></span><span class=line><span class=cl>    <span class=nx>slice_test</span><span class=p>.</span><span class=k>go</span><span class=p>:</span><span class=mi>76</span><span class=p>:</span> <span class=mf>0.15</span> <span class=nx>MB</span>
 </span></span><span class=line><span class=cl><span class=nx>PASS</span>
 </span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>0.723</span><span class=nx>s</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=for-和-range-的性能比较>for 和 range 的性能比较</h3><h4 id=range-的简单回顾>range 的简单回顾</h4><p>Go 语言中，range 可以用来很方便地遍历数组(array)、切片(slice)、字典(map)和信道(chan)</p><h5 id=arrayslice>array/slice</h5><div class=highlight><div class=chroma>
+</span></span></code></pre></td></tr></table></div></div><h3 id=for-和-range-的性能比较>for 和 range 的性能比较</h3><h4 id=range-的简单回顾>range 的简单回顾</h4><p>Go 语言中，range 可以用来很方便地遍历数组 (array)、切片 (slice)、字典 (map) 和信道 (chan)</p><h5 id=arrayslice>array/slice</h5><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -719,11 +719,11 @@
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>words := []string{&#34;Go&#34;, &#34;语言&#34;, &#34;高性能&#34;, &#34;编程&#34;}
-</span></span><span class=line><span class=cl>for i, s := range words {
-</span></span><span class=line><span class=cl>    words = append(words, &#34;test&#34;)
-</span></span><span class=line><span class=cl>    fmt.Println(i, s)
-</span></span><span class=line><span class=cl>}
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>words</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span><span class=s>&#34;Go&#34;</span><span class=p>,</span> <span class=s>&#34;语言&#34;</span><span class=p>,</span> <span class=s>&#34;高性能&#34;</span><span class=p>,</span> <span class=s>&#34;编程&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>s</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>words</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>words</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>words</span><span class=p>,</span> <span class=s>&#34;test&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -736,15 +736,15 @@
 </span></span><span class=line><span class=cl>2 高性能
 </span></span><span class=line><span class=cl>3 编程
 </span></span></code></pre></td></tr></table></div></div><ul>
-<li>变量 words 在循环开始前，仅会计算一次，如果在循环中修改切片的长度不会改变本次循环的次数。</li><li>迭代过程中，每次迭代的下标和值被赋值给变量 i 和 s，第二个参数 s 是可选的。</li><li>针对 nil 切片，迭代次数为 0。</li></ul><p>range 还有另一种只遍历下标的写法，这种写法与 for 几乎没什么差异了。</p><div class=highlight><div class=chroma>
+<li>变量 words 在循环开始前，仅会计算一次，如果<strong>在循环中修改切片的长度不会改变本次循环的次数</strong>。</li><li>迭代过程中，每次迭代的下标和值被赋值给变量 i 和 s，第二个参数 s 是可选的。</li><li>针对 nil 切片，迭代次数为 0。</li></ul><p>range 还有另一种只遍历下标的写法，这种写法与 for 几乎没什么差异了。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>for i := range words {
-</span></span><span class=line><span class=cl>	fmt.Println(i, words[i])
-</span></span><span class=line><span class=cl>}
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>words</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>words</span><span class=p>[</span><span class=nx>i</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>输出也是一样的：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -769,16 +769,16 @@
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>m := map[string]int{
-</span></span><span class=line><span class=cl>    &#34;one&#34;:   1,
-</span></span><span class=line><span class=cl>    &#34;two&#34;:   2,
-</span></span><span class=line><span class=cl>    &#34;three&#34;: 3,
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>for k, v := range m {
-</span></span><span class=line><span class=cl>    delete(m, &#34;two&#34;)
-</span></span><span class=line><span class=cl>    m[&#34;four&#34;] = 4
-</span></span><span class=line><span class=cl>    fmt.Printf(&#34;%v: %v\n&#34;, k, v)
-</span></span><span class=line><span class=cl>}
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>m</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;one&#34;</span><span class=p>:</span>   <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;two&#34;</span><span class=p>:</span>   <span class=mi>2</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;three&#34;</span><span class=p>:</span> <span class=mi>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>k</span><span class=p>,</span> <span class=nx>v</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>m</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>delete</span><span class=p>(</span><span class=nx>m</span><span class=p>,</span> <span class=s>&#34;two&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>m</span><span class=p>[</span><span class=s>&#34;four&#34;</span><span class=p>]</span> <span class=p>=</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%v: %v\n&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>,</span> <span class=nx>v</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>输出结果为：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -789,7 +789,7 @@
 </span></span><span class=line><span class=cl>four: 4
 </span></span><span class=line><span class=cl>three: 3
 </span></span></code></pre></td></tr></table></div></div><ul>
-<li>和切片不同的是，迭代过程中，删除还未迭代到的键值对，则该键值对不会被迭代。</li><li>在迭代过程中，如果创建新的键值对，那么新增键值对，可能被迭代，也可能不会被迭代。</li><li>针对 nil 字典，迭代次数为 0</li></ul><h5 id=channel>channel</h5><div class=highlight><div class=chroma>
+<li>和切片不同的是，<strong>迭代过程中，删除还未迭代到的键值对，则该键值对不会被迭代。</strong></li><li>在迭代过程中，<strong>如果创建新的键值对，那么新增键值对，可能被迭代，也可能不会被迭代。</strong></li><li>针对 nil 字典，迭代次数为 0</li></ul><h5 id=channel>channel</h5><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -803,19 +803,19 @@
 </span><span class=lnt>10
 </span><span class=lnt>11
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ch := make(chan string)
-</span></span><span class=line><span class=cl>go func() {
-</span></span><span class=line><span class=cl>    ch &lt;- &#34;Go&#34;
-</span></span><span class=line><span class=cl>    ch &lt;- &#34;语言&#34;
-</span></span><span class=line><span class=cl>    ch &lt;- &#34;高性能&#34;
-</span></span><span class=line><span class=cl>    ch &lt;- &#34;编程&#34;
-</span></span><span class=line><span class=cl>    close(ch)
-</span></span><span class=line><span class=cl>}()
-</span></span><span class=line><span class=cl>for n := range ch {
-</span></span><span class=line><span class=cl>    fmt.Println(n)
-</span></span><span class=line><span class=cl>}
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=s>&#34;Go&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=s>&#34;语言&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=s>&#34;高性能&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=s>&#34;编程&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>close</span><span class=p>(</span><span class=nx>ch</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}()</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>ch</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><ul>
-<li>发送给信道(channel) 的值可以使用 for 循环迭代，直到信道被关闭。</li><li>如果是 nil 信道，循环将永远阻塞。</li></ul><h4 id=for-和-range-的性能比较-1>for 和 range 的性能比较</h4><h5 id=int>[]int</h5><div class=highlight><div class=chroma>
+<li>发送给信道 (channel) 的值可以使用 for 循环迭代，直到信道被关闭。</li><li>如果是 nil 信道，循环将永远阻塞。</li></ul><h4 id=for-和-range-的性能比较-1>for 和 range 的性能比较</h4><h5 id=int><code>[]int</code></h5><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -849,37 +849,37 @@
 </span><span class=lnt>30
 </span><span class=lnt>31
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>func generateWithCap(n int) []int {
-</span></span><span class=line><span class=cl>	rand.Seed(time.Now().UnixNano())
-</span></span><span class=line><span class=cl>	nums := make([]int, 0, n)
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; n; i++ {
-</span></span><span class=line><span class=cl>		nums = append(nums, rand.Int())
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>	return nums
-</span></span><span class=line><span class=cl>}
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>generateWithCap</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>nums</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Int</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>nums</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>func BenchmarkForIntSlice(b *testing.B) {
-</span></span><span class=line><span class=cl>	nums := generateWithCap(1024 * 1024)
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; b.N; i++ {
-</span></span><span class=line><span class=cl>		len := len(nums)
-</span></span><span class=line><span class=cl>		var tmp int
-</span></span><span class=line><span class=cl>		for k := 0; k &lt; len; k++ {
-</span></span><span class=line><span class=cl>			tmp = nums[k]
-</span></span><span class=line><span class=cl>		}
-</span></span><span class=line><span class=cl>		_ = tmp
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkForIntSlice</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=nf>generateWithCap</span><span class=p>(</span><span class=mi>1024</span> <span class=o>*</span> <span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>len</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>k</span> <span class=p>&lt;</span> <span class=nx>len</span><span class=p>;</span> <span class=nx>k</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>k</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>func BenchmarkRangeIntSlice(b *testing.B) {
-</span></span><span class=line><span class=cl>	nums := generateWithCap(1024 * 1024)
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; b.N; i++ {
-</span></span><span class=line><span class=cl>		var tmp int
-</span></span><span class=line><span class=cl>		for _, num := range nums {
-</span></span><span class=line><span class=cl>			tmp = num
-</span></span><span class=line><span class=cl>		}
-</span></span><span class=line><span class=cl>		_ = tmp
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkRangeIntSlice</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=nf>generateWithCap</span><span class=p>(</span><span class=mi>1024</span> <span class=o>*</span> <span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>num</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>nums</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>num</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>运行结果如下：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -896,7 +896,7 @@
 </span></span><span class=line><span class=cl>BenchmarkForIntSlice-8              3603            324512 ns/op
 </span></span><span class=line><span class=cl>BenchmarkRangeIntSlice-8            3591            322744 ns/op
 </span></span></code></pre></td></tr></table></div></div><ul>
-<li><code>generateWithCap</code> 用于生成长度为 n 元素类型为 int 的切片。</li><li>从最终的结果可以看到，遍历 []int 类型的切片，for 与 range 性能几乎没有区别。</li></ul><h5 id=struct>[]struct</h5><p>那如果是稍微复杂一点的 <code>[]struct</code> 类型呢？</p><div class=highlight><div class=chroma>
+<li><code>generateWithCap</code> 用于生成长度为 n 元素类型为 int 的切片。</li><li>从最终的结果可以看到，遍历 <code>[]int</code> 类型的切片，for 与 range 性能几乎没有区别。</li></ul><h5 id=struct>[]struct</h5><p>那如果是稍微复杂一点的 <code>[]struct</code> 类型呢？</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -937,44 +937,44 @@
 </span><span class=lnt>37
 </span><span class=lnt>38
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>type Item struct {
-</span></span><span class=line><span class=cl>	id  int
-</span></span><span class=line><span class=cl>	val [4096]byte
-</span></span><span class=line><span class=cl>}
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Item</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>id</span>  <span class=kt>int</span>
+</span></span><span class=line><span class=cl>	<span class=nx>val</span> <span class=p>[</span><span class=mi>4096</span><span class=p>]</span><span class=kt>byte</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>func BenchmarkForStruct(b *testing.B) {
-</span></span><span class=line><span class=cl>	var items [1024]Item
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; b.N; i++ {
-</span></span><span class=line><span class=cl>		length := len(items)
-</span></span><span class=line><span class=cl>		var tmp int
-</span></span><span class=line><span class=cl>		for k := 0; k &lt; length; k++ {
-</span></span><span class=line><span class=cl>			tmp = items[k].id
-</span></span><span class=line><span class=cl>		}
-</span></span><span class=line><span class=cl>		_ = tmp
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkForStruct</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>items</span> <span class=p>[</span><span class=mi>1024</span><span class=p>]</span><span class=nx>Item</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>length</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>items</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>k</span> <span class=p>&lt;</span> <span class=nx>length</span><span class=p>;</span> <span class=nx>k</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>items</span><span class=p>[</span><span class=nx>k</span><span class=p>].</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>func BenchmarkRangeIndexStruct(b *testing.B) {
-</span></span><span class=line><span class=cl>	var items [1024]Item
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; b.N; i++ {
-</span></span><span class=line><span class=cl>		var tmp int
-</span></span><span class=line><span class=cl>		for k := range items {
-</span></span><span class=line><span class=cl>			tmp = items[k].id
-</span></span><span class=line><span class=cl>		}
-</span></span><span class=line><span class=cl>		_ = tmp
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkRangeIndexStruct</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>items</span> <span class=p>[</span><span class=mi>1024</span><span class=p>]</span><span class=nx>Item</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>items</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>items</span><span class=p>[</span><span class=nx>k</span><span class=p>].</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>func BenchmarkRangeStruct(b *testing.B) {
-</span></span><span class=line><span class=cl>	var items [1024]Item
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; b.N; i++ {
-</span></span><span class=line><span class=cl>		var tmp int
-</span></span><span class=line><span class=cl>		for _, item := range items {
-</span></span><span class=line><span class=cl>			tmp = item.id
-</span></span><span class=line><span class=cl>		}
-</span></span><span class=line><span class=cl>		_ = tmp
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkRangeStruct</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>items</span> <span class=p>[</span><span class=mi>1024</span><span class=p>]</span><span class=nx>Item</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>item</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>items</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>item</span><span class=p>.</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>先看下 Benchmark 的结果：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
@@ -985,15 +985,15 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ go test -bench=Struct$ .
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ go <span class=nb>test</span> -bench<span class=o>=</span>Struct$ .
 </span></span><span class=line><span class=cl>goos: darwin
 </span></span><span class=line><span class=cl>goarch: amd64
 </span></span><span class=line><span class=cl>pkg: example/hpg-range
-</span></span><span class=line><span class=cl>BenchmarkForStruct-8             3769580               324 ns/op
-</span></span><span class=line><span class=cl>BenchmarkRangeIndexStruct-8      3597555               330 ns/op
-</span></span><span class=line><span class=cl>BenchmarkRangeStruct-8              2194            467411 ns/op
+</span></span><span class=line><span class=cl>BenchmarkForStruct-8             <span class=m>3769580</span>               <span class=m>324</span> ns/op
+</span></span><span class=line><span class=cl>BenchmarkRangeIndexStruct-8      <span class=m>3597555</span>               <span class=m>330</span> ns/op
+</span></span><span class=line><span class=cl>BenchmarkRangeStruct-8              <span class=m>2194</span>            <span class=m>467411</span> ns/op
 </span></span></code></pre></td></tr></table></div></div><ul>
-<li>仅遍历下标的情况下，for 和 range 的性能几乎是一样的。</li><li><code>items</code> 的每一个元素的类型是一个结构体类型 <code>Item</code>，<code>Item</code> 由两个字段构成，一个类型是 int，一个是类型是 <code>[4096]byte</code>，也就是说每个 <code>Item</code> 实例需要申请约 4KB 的内存。</li><li>在这个例子中，for 的性能大约是 range (同时遍历下标和值) 的 2000 倍。</li></ul><h5 id=int-和-struct-的性能差异>[]int 和 []struct{} 的性能差异</h5><p>与 for 不同的是，<code>range</code> 对每个迭代值都创建了一个拷贝。因此如果每次迭代的值内存占用很小的情况下，for 和 range 的性能几乎没有差异，但是如果每个迭代值内存占用很大，例如上面的例子中，每个结构体需要占据 4KB 的内存，这种情况下差距就非常明显了。</p><p>我们可以用一个非常简单的例子来证明 range 迭代时，返回的是拷贝。</p><div class=highlight><div class=chroma>
+<li>仅遍历下标的情况下，for 和 range 的性能几乎是一样的。</li><li><code>items</code> 的每一个元素的类型是一个结构体类型 <code>Item</code>，<code>Item</code> 由两个字段构成，一个类型是 int，一个是类型是 <code>[4096]byte</code>，也就是说每个 <code>Item</code> 实例需要申请约 4KB 的内存。</li><li>在这个例子中，for 的性能大约是 range (同时遍历下标和值) 的 2000 倍。</li></ul><h5 id=int-和-struct-的性能差异><code>[]int</code> 和 <code>[]struct{}</code> 的性能差异</h5><p>与 for 不同的是，<code>range</code> 对每个迭代值都创建了一个拷贝。因此如果每次迭代的值内存占用很小的情况下，for 和 range 的性能几乎没有差异，但是如果每个迭代值内存占用很大，例如上面的例子中，每个结构体需要占据 4KB 的内存，这种情况下差距就非常明显了。</p><p>我们可以用一个非常简单的例子来证明 range 迭代时，返回的是拷贝。</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
@@ -1004,16 +1004,16 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>persons := []struct{ no int }{{no: 1}, {no: 2}, {no: 3}}
-</span></span><span class=line><span class=cl>for _, s := range persons {
-</span></span><span class=line><span class=cl>    s.no += 10
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>for i := 0; i &lt; len(persons); i++ {
-</span></span><span class=line><span class=cl>    persons[i].no += 100
-</span></span><span class=line><span class=cl>}
-</span></span><span class=line><span class=cl>fmt.Println(persons) // [{101} {102} {103}]
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li><code>persons</code> 是一个长度为 3 的切片，每个元素是一个结构体。</li><li>使用 <code>range</code> 迭代时，试图将每个结构体的 no 字段增加 10，但修改无效，因为 range 返回的是拷贝。</li><li>使用 <code>for</code> 迭代时，将每个结构体的 no 字段增加 100，修改有效。</li></ul><h5 id=struct-1>[]*struct</h5><p>那如果切片中是指针，而不是结构体呢？</p><div class=highlight><div class=chroma>
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>persons</span> <span class=o>:=</span> <span class=p>[]</span><span class=kd>struct</span><span class=p>{</span> <span class=nx>no</span> <span class=kt>int</span> <span class=p>}{{</span><span class=nx>no</span><span class=p>:</span> <span class=mi>1</span><span class=p>},</span> <span class=p>{</span><span class=nx>no</span><span class=p>:</span> <span class=mi>2</span><span class=p>},</span> <span class=p>{</span><span class=nx>no</span><span class=p>:</span> <span class=mi>3</span><span class=p>}}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>s</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>persons</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>s</span><span class=p>.</span><span class=nx>no</span> <span class=o>+=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>persons</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>persons</span><span class=p>[</span><span class=nx>i</span><span class=p>].</span><span class=nx>no</span> <span class=o>+=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>persons</span><span class=p>)</span> <span class=c1>// [{101} {102} {103}]
+</span></span></span></code></pre></td></tr></table></div></div><ul>
+<li><code>persons</code> 是一个长度为 3 的切片，每个元素是一个结构体。</li><li>使用 <code>range</code> 迭代时，试图将每个结构体的 no 字段增加 10，但修改无效，因为 range 返回的是拷贝。</li><li>使用 <code>for</code> 迭代时，将每个结构体的 no 字段增加 100，修改有效。</li></ul><h5 id=struct-1><code>[]*struct{}</code></h5><p>那如果切片中是指针，而不是结构体呢？</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -1046,36 +1046,36 @@
 </span><span class=lnt>29
 </span><span class=lnt>30
 </span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>func generateItems(n int) []*Item {
-</span></span><span class=line><span class=cl>	items := make([]*Item, 0, n)
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; n; i++ {
-</span></span><span class=line><span class=cl>		items = append(items, &amp;Item{id: i})
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>	return items
-</span></span><span class=line><span class=cl>}
+<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>generateItems</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Item</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>items</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=o>*</span><span class=nx>Item</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>items</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>items</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>Item</span><span class=p>{</span><span class=nx>id</span><span class=p>:</span> <span class=nx>i</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>items</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>func BenchmarkForPointer(b *testing.B) {
-</span></span><span class=line><span class=cl>	items := generateItems(1024)
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; b.N; i++ {
-</span></span><span class=line><span class=cl>		length := len(items)
-</span></span><span class=line><span class=cl>		var tmp int
-</span></span><span class=line><span class=cl>		for k := 0; k &lt; length; k++ {
-</span></span><span class=line><span class=cl>			tmp = items[k].id
-</span></span><span class=line><span class=cl>		}
-</span></span><span class=line><span class=cl>		_ = tmp
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkForPointer</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>items</span> <span class=o>:=</span> <span class=nf>generateItems</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>length</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>items</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>k</span> <span class=p>&lt;</span> <span class=nx>length</span><span class=p>;</span> <span class=nx>k</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>items</span><span class=p>[</span><span class=nx>k</span><span class=p>].</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>func BenchmarkRangePointer(b *testing.B) {
-</span></span><span class=line><span class=cl>	items := generateItems(1024)
-</span></span><span class=line><span class=cl>	for i := 0; i &lt; b.N; i++ {
-</span></span><span class=line><span class=cl>		var tmp int
-</span></span><span class=line><span class=cl>		for _, item := range items {
-</span></span><span class=line><span class=cl>			tmp = item.id
-</span></span><span class=line><span class=cl>		}
-</span></span><span class=line><span class=cl>		_ = tmp
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkRangePointer</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>items</span> <span class=o>:=</span> <span class=nf>generateItems</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>item</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>items</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>item</span><span class=p>.</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div><p>运行结果如下：</p><div class=highlight><div class=chroma>
 <table class=lntable><tr><td class=lntd>
 <pre tabindex=0 class=chroma><code><span class=lnt>1
