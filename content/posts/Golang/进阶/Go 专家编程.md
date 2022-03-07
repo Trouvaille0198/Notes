@@ -68,7 +68,7 @@ Token -> 语法树 AST -> 中间码 -> 机器码
 
 ### chan
 
-`src/runtime/chan.go:hchan`定义了 channel 的数据结构：
+`src/runtime/chan.go:hchan` 定义了 channel 的数据结构：
 
 ```go
 type hchan struct {
@@ -405,6 +405,8 @@ sliceB := sliceA[0:5]
 
 ### map
 
+![hmap-and-buckets](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/hmap-and-buckets.png)
+
 Golang 的 map 使用哈希表作为底层实现，一个哈希表里可以有多个哈希表节点，也即 bucket，而每个 bucket 就保存了 map 中的一个或一组键值对。
 
 map 数据结构由 `runtime/map.go/hmap` 定义:
@@ -443,10 +445,20 @@ type bmap struct {
 每个 bucket 可以存储 8 个键值对。
 
 - `tophash` 是个长度为 8 的数组，哈希值相同的键（准确的说是哈希值低位相同的键）存入当前 bucket 时会将哈希值的高位存储在该数组中，以方便后续匹配。
-- data 区存放的是 key-value 数据，存放顺序是 key/key/key/...value/value/value，如此存放是为了节省字节对齐带来的空间浪费。
-- overflow 指针指向的是下一个 bucket，据此将所有冲突的键连接起来。
+- `data `区存放的是 key-value 数据，存放顺序是 key/key/key/...value/value/value，如此存放是为了节省字节对齐带来的空间浪费。
+- `overflow` 指针指向的是下一个 bucket，据此将所有冲突的键连接起来。
 
-注意：上述中 data 和 overflow 并不是在结构体中显示定义的，而是直接通过指针运算进行访问的。
+注意：上述中 data 和 overflow 并不是在结构体中显示定义的，而是直接通过指针运算（计算内存地址）进行访问的。我们能根据编译期间的 [`cmd/compile/internal/gc.bmap`](https://draveness.me/golang/tree/cmd/compile/internal/gc.bmap) 函数重建它的结构：
+
+```go
+type bmap struct {
+    topbits  [8]uint8
+    keys     [8]keytype
+    values   [8]valuetype
+    pad      uintptr
+    overflow uintptr
+}
+```
 
 下图展示 bucket 存放 8 个 key-value 对：
 
@@ -454,13 +466,13 @@ type bmap struct {
 
 #### 哈希冲突
 
-当有两个或以上数量的键被哈希到了同一个 bucket 时，我们称这些键发生了冲突。Go 使用链地址法来解决键冲突。 由于每个 bucket 可以存放 8 个键值对，所以同一个 bucket 存放超过 8 个键值对时就会再创建一个键值对，用类似链表的方式将 bucket 连接起来。
+当有两个或以上数量的键被哈希到了同一个 bucket 时，我们称这些键发生了冲突。Go 使用链地址法（拉链法）来解决键冲突。 由于每个 bucket 可以存放 8 个键值对，所以同一个 bucket 存放超过 8 个键值对时就会再创建一个键值对，用类似链表的方式将 bucket 连接起来。
 
 下图展示产生冲突后的map：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png)
 
-bucket 数据结构指示下一个 bucket 的指针称为 overflow bucket，意为当前 bucket 盛不下而溢出的部分。事实上哈希冲突并不是好事情，它降低了存取效率，好的哈希算法可以保证哈希值的随机性，但冲突过多也是要控制的，后面会再详细介绍。
+bucket 数据结构指示下一个 bucket 的指针称为 overflow bucket（溢出桶），意为当前 bucket 盛不下而溢出的部分。事实上哈希冲突并不是好事情，它降低了存取效率，好的哈希算法可以保证哈希值的随机性，但冲突过多也是要控制的，后面会再详细介绍。
 
 #### 负载因子
 
@@ -515,7 +527,7 @@ hmap 数据结构中 oldbuckets 成员指身原 bucket，而 buckets 指向了�
 
 ##### 等量扩容
 
-所谓等量扩容，实际上并不是扩大容量，buckets数量不变，重新做一遍类似增量扩容的搬迁动作，把松散的键值对重新排列一次，以使 bucket 的使用率更高，进而保证更快的存取。 
+所谓等量扩容，实际上并不是扩大容量，buckets 数量不变，重新做一遍类似增量扩容的搬迁动作，把松散的键值对重新排列一次，以使 bucket 的使用率更高，进而保证更快的存取。 
 
 在极端场景下，比如不断的增删，而键值对正好集中在一小部分的 bucket，这样会造成 overflow 的 bucket 数量增多，但负载因子又不高，从而无法执行增量搬迁的情况，如下图所示：
 
@@ -551,9 +563,9 @@ Go 的 struct 声明允许字段附带 `Tag` 来对字段做一些标记。
 
 该 `Tag` 不仅仅是一个字符串那么简单，因为其主要用于反射场景，`reflect` 包中提供了操作 `Tag` 的方法，所以 `Tag` 写法也要遵循一定的规则。
 
-常见的tag用法，主要是JSON数据解析、ORM映射等。
+常见的 tag 用法，主要是 JSON 数据解析、ORM 映射等。
 
-#### Tag的本质
+#### Tag 的本质
 
 ##### Tag 规则
 
@@ -563,7 +575,7 @@ Go 的 struct 声明允许字段附带 `Tag` 来对字段做一些标记。
 - `value`：以双引号标记的字符串
 - 注意：冒号前后不能有空格
 
-如下代码所示，如此写没有实际意义，仅用于说明`Tag`规则
+如下代码所示，如此写没有实际意义，仅用于说明 `Tag` 规则
 
 ```go
 type Server struct {
@@ -3645,7 +3657,7 @@ r = tty
 
 Q：那 `File` 类型体现在哪里？ A：r 保存了一个 (value, type) 对来表示其所存储值的信息。 value 即为 r 所持有元素的值，type 即为所持有元素的底层类型
 
-Q：如何将 r 转换成另一个类型结构体变量？比如转换成 `io.Writer` A：使用类型断言，如 `w = r.(io.Writer)`. 意思是如果 r 所持有的元素如果同样实现了 io.Writer 接口,那么就把值传递给 w。
+Q：如何将 r 转换成另一个类型结构体变量？比如转换成 `io.Writer` A：使用类型断言，如 `w = r.(io.Writer)`. 意思是如果 r 所持有的元素如果同样实现了 io.Writer 接口，那么就把值传递给 w。
 
 ### 反射三定律
 
@@ -3658,7 +3670,7 @@ Q：如何将 r 转换成另一个类型结构体变量？比如转换成 `io.Wr
 反射包里有两个接口类型要先了解一下.
 
 - `reflect.Type` 提供一组接口处理 interface 的类型，即（value, type）中的 type
-- `reflect.Value` 提供一组接口处理interface的值，即 (value, type) 中的 value
+- `reflect.Value` 提供一组接口处理 interface 的值，即 (value, type) 中的 value
 
 下面会提到反射对象，所谓反射对象即反射包里提供的两种类型的对象。
 
