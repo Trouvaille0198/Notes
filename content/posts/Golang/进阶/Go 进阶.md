@@ -5,6 +5,7 @@ draft: false
 author: "MelonCholi"
 tags: [进阶]
 categories: [Golang]
+featuredImage: https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/wp7041166.jpg
 ---
 
 # Go 进阶

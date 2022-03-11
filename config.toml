@@ -14,6 +14,7 @@ enableEmoji = true
 theme = "LoveIt"
 
 enableGitInfo = true
+summaryLength = 40
 
 # 设置自动更新修改时间
 [frontmatter]
@@ -34,8 +35,7 @@ auto = true
 # 是否显示代码块的复制按钮
 copy = true
 # 默认展开显示的代码行数
-maxShownLines = 40
-# 文章页面的分享信息设置
+maxShownLines = 45
 
 [params.page.math]
 enable = true
@@ -60,7 +60,7 @@ contentLength = 4000
 # 搜索框的占位提示语
 placeholder = ""
 # 最大结果数目
-maxResultLength = 10
+maxResultLength = 30
 # 结果内容片段长度
 snippetLength = 50
 # 搜索结果中高亮部分的 HTML 标签
@@ -127,7 +127,7 @@ disclaimer = ""
 [params.home.posts]
 enable = true
 # 主页每页显示文章数量
-paginate = 6
+paginate = 4
 # 被 params.page 中的 hiddenFromHomePage 替代
 # 当你没有在文章前置参数中设置 "hiddenFromHomePage" 时的默认行为
 defaultHiddenFromHomePage = false
@@ -149,7 +149,7 @@ post = ""
 url = "posts/"
 # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
 title = ""
-weight = 1
+weight = 3
 [[menu.main]]
 identifier = "tags"
 name = "标签"
@@ -165,7 +165,7 @@ post = ""
 pre = ""
 title = ""
 url = "categories/"
-weight = 3
+weight = 1
 
 # Hugo 解析文档的配置
 [markup]
@@ -195,3 +195,5 @@ unsafe = true
 [markup.tableOfContents]
 endLevel = 6
 startLevel = 2
+[outputs]
+home = ["HTML", "RSS", "JSON"]

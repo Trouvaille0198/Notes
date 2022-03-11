@@ -5,6 +5,7 @@ draft: false
 author: "MelonCholi"
 tags: []
 categories: [Golang]
+featuredImage: https://booklovinmamas.com/wp-content/uploads/2017/09/go.png
 ---
 
 # Golang
