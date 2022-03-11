@@ -1,122 +1,39 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>Go fmt 标准库 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go fmt 标准库">
-<meta property="og:description" content="fmt fmt 包实现了格式化 I/O 函数，类似于 C 的 printf 和 scanf；格式“占位符”衍生自 C，但比 C 更简单。 以下例子中用到的类型或变量定义： 1 2 3 4 5 6 type Website struct">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/fmt/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-02-04T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Go fmt 标准库">
-<meta name=twitter:description content="fmt fmt 包实现了格式化 I/O 函数，类似于 C 的 printf 和 scanf；格式“占位符”衍生自 C，但比 C 更简单。 以下例子中用到的类型或变量定义： 1 2 3 4 5 6 type Website struct">
-<meta name=application-name content="伤心肠粉的酱油碟子">
-<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/fmt/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/flag/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go fmt 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/fmt\/"},"genre":"posts","keywords":"Go 库, io","wordcount":3098,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/fmt\/","datePublished":"2022-02-04T00:00:00+00:00","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Go fmt 标准库 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go fmt 标准库"><meta property="og:description" content="fmt fmt 包实现了格式化 I/O 函数，类似于 C 的 printf 和 scanf；格式“占位符”衍生自 C，但比 C 更简单。 以下例子中用到的类型或变量定义： 1 2 3 4 5 6 type Website struct"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/fmt/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-02-04T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-11T02:43:10+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Go fmt 标准库"><meta name=twitter:description content="fmt fmt 包实现了格式化 I/O 函数，类似于 C 的 printf 和 scanf；格式“占位符”衍生自 C，但比 C 更简单。 以下例子中用到的类型或变量定义： 1 2 3 4 5 6 type Website struct"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/io/fmt/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/flag/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go fmt 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/fmt\/"},"genre":"posts","keywords":"Go 库, io","wordcount":3098,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/io\/fmt\/","datePublished":"2022-02-04T00:00:00+00:00","dateModified":"2022-03-11T02:43:10+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/posts/>文章 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go fmt 标准库</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-04>2022-02-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3098 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#输出>输出</a>
-<ul>
-<li><a href=#函数类型>函数类型</a>
-<ul>
-<li><a href=#print>Print</a></li><li><a href=#fprint>Fprint</a></li><li><a href=#sprint>Sprint</a></li><li><a href=#errorf>Errorf</a></li></ul></li><li><a href=#格式化占位符>格式化占位符</a>
-<ul>
-<li><a href=#通用占位符>通用占位符</a></li><li><a href=#布尔值>布尔值</a></li><li><a href=#整型>整型</a></li><li><a href=#浮点数与复数>浮点数与复数</a></li><li><a href=#字符串和-byte>字符串和 byte[]</a></li><li><a href=#指针>指针</a></li><li><a href=#宽度标识符>宽度标识符</a></li><li><a href=#其他>其他</a></li></ul></li></ul></li><li><a href=#输入>输入</a>
-<ul>
-<li><a href=#scan>scan</a></li><li><a href=#scanf>scanf</a></li><li><a href=#scanln>scanln</a></li><li><a href=#bufionewreader>bufio.NewReader</a></li><li><a href=#fscan-系列>Fscan 系列</a></li><li><a href=#sscan系列>Sscan系列</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=fmt>fmt</h1><p>fmt 包实现了格式化 I/O 函数，类似于 C 的 printf 和 scanf；格式“占位符”衍生自 C，但比 C 更简单。</p><p>以下例子中用到的类型或变量定义：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go fmt 标准库</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-04>2022-02-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3098 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#输出>输出</a><ul><li><a href=#函数类型>函数类型</a><ul><li><a href=#print>Print</a></li><li><a href=#fprint>Fprint</a></li><li><a href=#sprint>Sprint</a></li><li><a href=#errorf>Errorf</a></li></ul></li><li><a href=#格式化占位符>格式化占位符</a><ul><li><a href=#通用占位符>通用占位符</a></li><li><a href=#布尔值>布尔值</a></li><li><a href=#整型>整型</a></li><li><a href=#浮点数与复数>浮点数与复数</a></li><li><a href=#字符串和-byte>字符串和 byte[]</a></li><li><a href=#指针>指针</a></li><li><a href=#宽度标识符>宽度标识符</a></li><li><a href=#其他>其他</a></li></ul></li></ul></li><li><a href=#输入>输入</a><ul><li><a href=#scan>scan</a></li><li><a href=#scanf>scanf</a></li><li><a href=#scanln>scanln</a></li><li><a href=#bufionewreader>bufio.NewReader</a></li><li><a href=#fscan-系列>Fscan 系列</a></li><li><a href=#sscan系列>Sscan系列</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=fmt>fmt</h1><p>fmt 包实现了格式化 I/O 函数，类似于 C 的 printf 和 scanf；格式“占位符”衍生自 C，但比 C 更简单。</p><p>以下例子中用到的类型或变量定义：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Website</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Website</span> <span class=kd>struct</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>Name</span> <span class=kt>string</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1>// 定义结构体变量
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>site</span> <span class=p>=</span> <span class=nx>Website</span><span class=p>{</span><span class=nx>Name</span><span class=p>:</span><span class=s>&#34;studygolang&#34;</span><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=输出>输出</h2><h3 id=函数类型>函数类型</h3><h4 id=print>Print</h4><p>Print 系列函数会将内容输出到系统的标准输出，区别在于</p><ul>
-<li><code>Print</code> 函数直接输出内容</li><li><code>Printf</code> 函数支持格式化输出字符串</li><li><code>Println</code> 函数会在输出内容的结尾添加一个换行符。</li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h2 id=输出>输出</h2><h3 id=函数类型>函数类型</h3><h4 id=print>Print</h4><p>Print 系列函数会将内容输出到系统的标准输出，区别在于</p><ul><li><code>Print</code> 函数直接输出内容</li><li><code>Printf</code> 函数支持格式化输出字符串</li><li><code>Println</code> 函数会在输出内容的结尾添加一个换行符。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Print</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Print</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Printf</span><span class=p>(</span><span class=nx>format</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Println</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=fprint>Fprint</h4><p>Fprint系列函数会将内容输出到一个io.Writer接口类型的变量w中，我们通常用这个函数往文件中写入内容。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=fprint>Fprint</h4><p>Fprint系列函数会将内容输出到一个io.Writer接口类型的变量w中，我们通常用这个函数往文件中写入内容。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Fprint</span><span class=p>(</span><span class=nx>w</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Writer</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Fprint</span><span class=p>(</span><span class=nx>w</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Writer</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Fprintf</span><span class=p>(</span><span class=nx>w</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Writer</span><span class=p>,</span> <span class=nx>format</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Fprintln</span><span class=p>(</span><span class=nx>w</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Writer</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>例</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -126,8 +43,7 @@
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 向标准输出写入内容
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 向标准输出写入内容
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintln</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span><span class=p>,</span> <span class=s>&#34;向标准输出写入内容&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fileObj</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>OpenFile</span><span class=p>(</span><span class=s>&#34;./xx.txt&#34;</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nx>O_CREATE</span><span class=p>|</span><span class=nx>os</span><span class=p>.</span><span class=nx>O_WRONLY</span><span class=p>|</span><span class=nx>os</span><span class=p>.</span><span class=nx>O_APPEND</span><span class=p>,</span> <span class=mo>0644</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
@@ -137,276 +53,157 @@
 </span></span><span class=line><span class=cl><span class=nx>name</span> <span class=o>:=</span> <span class=s>&#34;枯藤&#34;</span>
 </span></span><span class=line><span class=cl><span class=c1>// 向打开的文件句柄中写入内容
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>fileObj</span><span class=p>,</span> <span class=s>&#34;往文件中写如信息：%s&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=sprint>Sprint</h4><p>Sprint系列函数会把传入的数据生成并返回一个字符串。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=sprint>Sprint</h4><p>Sprint系列函数会把传入的数据生成并返回一个字符串。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Sprint</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=kt>string</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Sprint</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=kt>string</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Sprintf</span><span class=p>(</span><span class=nx>format</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=kt>string</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Sprintln</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=kt>string</span>
-</span></span></code></pre></td></tr></table></div></div><p>例</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>s1</span> <span class=o>:=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Sprint</span><span class=p>(</span><span class=s>&#34;枯藤&#34;</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>s1</span> <span class=o>:=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Sprint</span><span class=p>(</span><span class=s>&#34;枯藤&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>name</span> <span class=o>:=</span> <span class=s>&#34;枯藤&#34;</span>
 </span></span><span class=line><span class=cl><span class=nx>age</span> <span class=o>:=</span> <span class=mi>18</span>
 </span></span><span class=line><span class=cl><span class=nx>s2</span> <span class=o>:=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Sprintf</span><span class=p>(</span><span class=s>&#34;name:%s,age:%d&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=p>,</span> <span class=nx>age</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>s3</span> <span class=o>:=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Sprintln</span><span class=p>(</span><span class=s>&#34;枯藤&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>s1</span><span class=p>,</span> <span class=nx>s2</span><span class=p>,</span> <span class=nx>s3</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=errorf>Errorf</h4><p>Errorf 函数根据 format 参数生成格式化字符串并返回一个包含该字符串的错误。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Errorf</span><span class=p>(</span><span class=nx>format</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=kt>error</span>
-</span></span></code></pre></td></tr></table></div></div><p>通常使用这种方式来自定义错误类型，例如：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>err</span> <span class=o>:=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;这是一个错误&#34;</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=格式化占位符>格式化占位符</h3><p><code>*printf</code> 系列函数都支持 format 格式化参数</p><h4 id=通用占位符>通用占位符</h4><table>
-<thead>
-<tr>
-<th>占位符</th><th>说明</th></tr></thead><tbody>
-<tr>
-<td>%v</td><td>值的默认格式表示</td></tr><tr>
-<td>%+v</td><td>类似 %v，但输出结构体时会添加字段名</td></tr><tr>
-<td>%#v</td><td>值的 Go 语法表示</td></tr><tr>
-<td>%T</td><td>打印值的类型</td></tr><tr>
-<td>%%</td><td>百分号</td></tr></tbody></table><p>例</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=errorf>Errorf</h4><p>Errorf 函数根据 format 参数生成格式化字符串并返回一个包含该字符串的错误。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Errorf</span><span class=p>(</span><span class=nx>format</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=kt>error</span>
+</span></span></code></pre></td></tr></table></div></div><p>通常使用这种方式来自定义错误类型，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>err</span> <span class=o>:=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;这是一个错误&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=格式化占位符>格式化占位符</h3><p><code>*printf</code> 系列函数都支持 format 格式化参数</p><h4 id=通用占位符>通用占位符</h4><table><thead><tr><th>占位符</th><th>说明</th></tr></thead><tbody><tr><td>%v</td><td>值的默认格式表示</td></tr><tr><td>%+v</td><td>类似 %v，但输出结构体时会添加字段名</td></tr><tr><td>%#v</td><td>值的 Go 语法表示</td></tr><tr><td>%T</td><td>打印值的类型</td></tr><tr><td>%%</td><td>百分号</td></tr></tbody></table><p>例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%v\n&#34;</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%v\n&#34;</span><span class=p>,</span> <span class=mi>100</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%v\n&#34;</span><span class=p>,</span> <span class=kc>false</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>o</span> <span class=o>:=</span> <span class=kd>struct</span><span class=p>{</span> <span class=nx>name</span> <span class=kt>string</span> <span class=p>}{</span><span class=s>&#34;枯藤&#34;</span><span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%v\n&#34;</span><span class=p>,</span> <span class=nx>o</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%#v\n&#34;</span><span class=p>,</span> <span class=nx>o</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%T\n&#34;</span><span class=p>,</span> <span class=nx>o</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;100%%\n&#34;</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>100
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>100
 </span></span><span class=line><span class=cl>false
 </span></span><span class=line><span class=cl>{枯藤}
 </span></span><span class=line><span class=cl>struct { name string }{name:&#34;枯藤&#34;}
 </span></span><span class=line><span class=cl>struct { name string }
 </span></span><span class=line><span class=cl>100%
-</span></span></code></pre></td></tr></table></div></div><h4 id=布尔值>布尔值</h4><table>
-<thead>
-<tr>
-<th>占位符</th><th>说明</th></tr></thead><tbody>
-<tr>
-<td>%t</td><td>true 或 false</td></tr></tbody></table><h4 id=整型>整型</h4><table>
-<thead>
-<tr>
-<th>占位符</th><th>说明</th></tr></thead><tbody>
-<tr>
-<td>%b</td><td>表示为二进制</td></tr><tr>
-<td>%c</td><td>该值对应的 unicode 码值</td></tr><tr>
-<td><strong>%d</strong></td><td>表示为十进制</td></tr><tr>
-<td>%o</td><td>表示为八进制</td></tr><tr>
-<td>%x</td><td>表示为十六进制，使用 a-f</td></tr><tr>
-<td>%X</td><td>表示为十六进制，使用 A-F</td></tr><tr>
-<td>%U</td><td>表示为 Unicode 格式：U+1234，等价于 ”U+%04X”</td></tr><tr>
-<td>%q</td><td>该值对应的单引号括起来的 go 语法字符字面值，必要时会采用安全的转义表示</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=布尔值>布尔值</h4><table><thead><tr><th>占位符</th><th>说明</th></tr></thead><tbody><tr><td>%t</td><td>true 或 false</td></tr></tbody></table><h4 id=整型>整型</h4><table><thead><tr><th>占位符</th><th>说明</th></tr></thead><tbody><tr><td>%b</td><td>表示为二进制</td></tr><tr><td>%c</td><td>该值对应的 unicode 码值</td></tr><tr><td><strong>%d</strong></td><td>表示为十进制</td></tr><tr><td>%o</td><td>表示为八进制</td></tr><tr><td>%x</td><td>表示为十六进制，使用 a-f</td></tr><tr><td>%X</td><td>表示为十六进制，使用 A-F</td></tr><tr><td>%U</td><td>表示为 Unicode 格式：U+1234，等价于 ”U+%04X”</td></tr><tr><td>%q</td><td>该值对应的单引号括起来的 go 语法字符字面值，必要时会采用安全的转义表示</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>n</span> <span class=o>:=</span> <span class=mi>65</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>n</span> <span class=o>:=</span> <span class=mi>65</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%b\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%c\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%d\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%o\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%x\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%X\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>    1000001
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>    1000001
 </span></span><span class=line><span class=cl>    A
 </span></span><span class=line><span class=cl>    65
 </span></span><span class=line><span class=cl>    101
 </span></span><span class=line><span class=cl>    41
 </span></span><span class=line><span class=cl>    41
-</span></span></code></pre></td></tr></table></div></div><h4 id=浮点数与复数>浮点数与复数</h4><table>
-<thead>
-<tr>
-<th>占位符</th><th>说明</th></tr></thead><tbody>
-<tr>
-<td>%b</td><td>无小数部分、二进制指数的科学计数法，如 -123456p-78</td></tr><tr>
-<td>%e</td><td>科学计数法，如 -1234.456e+78</td></tr><tr>
-<td>%E</td><td>科学计数法，如 -1234.456E+78</td></tr><tr>
-<td>%f</td><td>有小数部分但无指数部分，如 123.456</td></tr><tr>
-<td>%F</td><td>等价于 %f</td></tr><tr>
-<td><strong>%g</strong></td><td>根据实际情况采用 %e 或 %f 格式（以获得更简洁、准确的输出）</td></tr><tr>
-<td>%G</td><td>根据实际情况采用 %E 或 %F 格式（以获得更简洁、准确的输出）</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=浮点数与复数>浮点数与复数</h4><table><thead><tr><th>占位符</th><th>说明</th></tr></thead><tbody><tr><td>%b</td><td>无小数部分、二进制指数的科学计数法，如 -123456p-78</td></tr><tr><td>%e</td><td>科学计数法，如 -1234.456e+78</td></tr><tr><td>%E</td><td>科学计数法，如 -1234.456E+78</td></tr><tr><td>%f</td><td>有小数部分但无指数部分，如 123.456</td></tr><tr><td>%F</td><td>等价于 %f</td></tr><tr><td><strong>%g</strong></td><td>根据实际情况采用 %e 或 %f 格式（以获得更简洁、准确的输出）</td></tr><tr><td>%G</td><td>根据实际情况采用 %E 或 %F 格式（以获得更简洁、准确的输出）</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>f</span> <span class=o>:=</span> <span class=mf>12.34</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>f</span> <span class=o>:=</span> <span class=mf>12.34</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%b\n&#34;</span><span class=p>,</span> <span class=nx>f</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%e\n&#34;</span><span class=p>,</span> <span class=nx>f</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%E\n&#34;</span><span class=p>,</span> <span class=nx>f</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%f\n&#34;</span><span class=p>,</span> <span class=nx>f</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%g\n&#34;</span><span class=p>,</span> <span class=nx>f</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%G\n&#34;</span><span class=p>,</span> <span class=nx>f</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>6946802425218990p-49
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>6946802425218990p-49
 </span></span><span class=line><span class=cl>1.234000e+01
 </span></span><span class=line><span class=cl>1.234000E+01
 </span></span><span class=line><span class=cl>12.340000
 </span></span><span class=line><span class=cl>12.34
 </span></span><span class=line><span class=cl>12.34
-</span></span></code></pre></td></tr></table></div></div><h4 id=字符串和-byte>字符串和 byte[]</h4><table>
-<thead>
-<tr>
-<th>占位符</th><th>说明</th></tr></thead><tbody>
-<tr>
-<td><strong>%s</strong></td><td>直接输出字符串或者 []byte</td></tr><tr>
-<td>%q</td><td>该值对应的双引号括起来的 go 语法字符串字面值，必要时会采用安全的转义表示</td></tr><tr>
-<td>%x</td><td>每个字节用两字符十六进制数表示（使用 a-f）</td></tr><tr>
-<td>%X</td><td>每个字节用两字符十六进制数表示（使用 A-F）</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=字符串和-byte>字符串和 byte[]</h4><table><thead><tr><th>占位符</th><th>说明</th></tr></thead><tbody><tr><td><strong>%s</strong></td><td>直接输出字符串或者 []byte</td></tr><tr><td>%q</td><td>该值对应的双引号括起来的 go 语法字符串字面值，必要时会采用安全的转义表示</td></tr><tr><td>%x</td><td>每个字节用两字符十六进制数表示（使用 a-f）</td></tr><tr><td>%X</td><td>每个字节用两字符十六进制数表示（使用 A-F）</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;枯藤&#34;</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;枯藤&#34;</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%q\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%x\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%X\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>枯藤
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>枯藤
 </span></span><span class=line><span class=cl>&#34;枯藤&#34;
 </span></span><span class=line><span class=cl>e69eafe897a4
 </span></span><span class=line><span class=cl>E69EAFE897A4
-</span></span></code></pre></td></tr></table></div></div><h4 id=指针>指针</h4><table>
-<thead>
-<tr>
-<th>占位符</th><th>说明</th></tr></thead><tbody>
-<tr>
-<td>%p</td><td>表示为十六进制，并加上前导的 0x</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=指针>指针</h4><table><thead><tr><th>占位符</th><th>说明</th></tr></thead><tbody><tr><td>%p</td><td>表示为十六进制，并加上前导的 0x</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>a</span> <span class=o>:=</span> <span class=mi>18</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>a</span> <span class=o>:=</span> <span class=mi>18</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%p\n&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>a</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%#p\n&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>a</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>0xc000054058
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>0xc000054058
 </span></span><span class=line><span class=cl>c000054058
-</span></span></code></pre></td></tr></table></div></div><h4 id=宽度标识符>宽度标识符</h4><p>宽度通过一个紧跟在百分号后面的十进制数指定，如果未指定宽度，则表示值时除必需之外不作填充。</p><p>精度通过（可选的）宽度后跟点号后跟的十进制数指定。</p><ul>
-<li>如果未指定精度，会使用默认精度；</li><li>如果点号后没有跟数字，表示精度为0。举例如下</li></ul><table>
-<thead>
-<tr>
-<th>占位符</th><th>说明</th></tr></thead><tbody>
-<tr>
-<td>%f</td><td>默认宽度，默认精度</td></tr><tr>
-<td>%9f</td><td>宽度 9，默认精度</td></tr><tr>
-<td>%.2f</td><td>默认宽度，精度 2</td></tr><tr>
-<td>%9.2f</td><td>宽度 9，精度 2</td></tr><tr>
-<td>%9.f</td><td>宽度 9，精度 0</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=宽度标识符>宽度标识符</h4><p>宽度通过一个紧跟在百分号后面的十进制数指定，如果未指定宽度，则表示值时除必需之外不作填充。</p><p>精度通过（可选的）宽度后跟点号后跟的十进制数指定。</p><ul><li>如果未指定精度，会使用默认精度；</li><li>如果点号后没有跟数字，表示精度为0。举例如下</li></ul><table><thead><tr><th>占位符</th><th>说明</th></tr></thead><tbody><tr><td>%f</td><td>默认宽度，默认精度</td></tr><tr><td>%9f</td><td>宽度 9，默认精度</td></tr><tr><td>%.2f</td><td>默认宽度，精度 2</td></tr><tr><td>%9.2f</td><td>宽度 9，精度 2</td></tr><tr><td>%9.f</td><td>宽度 9，精度 0</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>n</span> <span class=o>:=</span> <span class=mf>88.88</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>n</span> <span class=o>:=</span> <span class=mf>88.88</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%f\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%9f\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%.2f\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%9.2f\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%9.f\n&#34;</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>88.880000
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>88.880000
 </span></span><span class=line><span class=cl>88.880000
 </span></span><span class=line><span class=cl>88.88
 </span></span><span class=line><span class=cl>    88.88
 </span></span><span class=line><span class=cl>       89
-</span></span></code></pre></td></tr></table></div></div><h4 id=其他>其他</h4><table>
-<thead>
-<tr>
-<th>占位符</th><th>说明</th></tr></thead><tbody>
-<tr>
-<td>’+’</td><td>总是输出数值的正负号；对 %q（%+q）会生成全部是 ASCII 字符的输出（通过转义）；</td></tr><tr>
-<td>’ ‘</td><td>对数值，正数前加空格而负数前加负号；对字符串采用 %x 或 %X 时（% x 或 % X）会给各打印的字节之间加空格</td></tr><tr>
-<td>’-’</td><td>在输出右边填充空白而不是默认的左边（即从默认的右对齐切换为左对齐）；</td></tr><tr>
-<td>’#’</td><td>八进制数前加 0（%#o），十六进制数前加 0x（%#x）或 0X（%#X），指针去掉前面的 0x（%#p）对 %q（%#q），对 %U（%#U）会输出空格和单引号括起来的 go 字面值；</td></tr><tr>
-<td>‘0’</td><td>使用 0 而不是空格填充，对于数值类型会把填充的 0 放在正负号后面；</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=其他>其他</h4><table><thead><tr><th>占位符</th><th>说明</th></tr></thead><tbody><tr><td>’+’</td><td>总是输出数值的正负号；对 %q（%+q）会生成全部是 ASCII 字符的输出（通过转义）；</td></tr><tr><td>’ ‘</td><td>对数值，正数前加空格而负数前加负号；对字符串采用 %x 或 %X 时（% x 或 % X）会给各打印的字节之间加空格</td></tr><tr><td>’-’</td><td>在输出右边填充空白而不是默认的左边（即从默认的右对齐切换为左对齐）；</td></tr><tr><td>’#’</td><td>八进制数前加 0（%#o），十六进制数前加 0x（%#x）或 0X（%#X），指针去掉前面的 0x（%#p）对 %q（%#q），对 %U（%#U）会输出空格和单引号括起来的 go 字面值；</td></tr><tr><td>‘0’</td><td>使用 0 而不是空格填充，对于数值类型会把填充的 0 放在正负号后面；</td></tr></tbody></table><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -414,8 +211,7 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;枯藤&#34;</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;枯藤&#34;</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%5s\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%-5s\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
@@ -423,32 +219,23 @@
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%-5.7s\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%5.2s\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%05s\n&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>枯藤
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>枯藤
 </span></span><span class=line><span class=cl>   枯藤
 </span></span><span class=line><span class=cl>枯藤
 </span></span><span class=line><span class=cl>   枯藤
 </span></span><span class=line><span class=cl>枯藤
 </span></span><span class=line><span class=cl>   枯藤
 </span></span><span class=line><span class=cl>000枯藤
-</span></span></code></pre></td></tr></table></div></div><h2 id=输入>输入</h2><p>Go 语言 fmt 包下有 fmt.Scan、fmt.Scanf、fmt.Scanln 三个函数，可以在程序运行过程中从标准输入获取用户的输入。</p><p>Scanln 和 Scanf 都会吸收掉上次输入的回车符，所以使用时在前面加一个 <code>fmt.Scanln()</code></p><h3 id=scan>scan</h3><p>fmt.Scan 从标准输入中扫描用户输入的数据，将以空白符分隔的数据分别存入指定的参数。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Scan</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>Scan 从标准输入扫描文本，读取由空白符分隔的值保存到传递给本函数的参数中，换行符视为空白符。</li><li>本函数返回成功扫描的<strong>数据个数</strong>和<strong>遇到的任何错误</strong>。如果读取的数据个数比提供的参数少，会返回一个错误报告原因。</li></ul><p>例如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h2 id=输入>输入</h2><p>Go 语言 fmt 包下有 fmt.Scan、fmt.Scanf、fmt.Scanln 三个函数，可以在程序运行过程中从标准输入获取用户的输入。</p><p>Scanln 和 Scanf 都会吸收掉上次输入的回车符，所以使用时在前面加一个 <code>fmt.Scanln()</code></p><h3 id=scan>scan</h3><p>fmt.Scan 从标准输入中扫描用户输入的数据，将以空白符分隔的数据分别存入指定的参数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Scan</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>Scan 从标准输入扫描文本，读取由空白符分隔的值保存到传递给本函数的参数中，换行符视为空白符。</li><li>本函数返回成功扫描的<strong>数据个数</strong>和<strong>遇到的任何错误</strong>。如果读取的数据个数比提供的参数少，会返回一个错误报告原因。</li></ul><p>例如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -457,8 +244,7 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=p>(</span>
 </span></span><span class=line><span class=cl>        <span class=nx>name</span>    <span class=kt>string</span>
 </span></span><span class=line><span class=cl>        <span class=nx>age</span>     <span class=kt>int</span>
@@ -467,24 +253,15 @@
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Scan</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>name</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>age</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>married</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;扫描结果 name:%s age:%d married:%t \n&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=p>,</span> <span class=nx>age</span><span class=p>,</span> <span class=nx>married</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>将上面的代码编译后在终端执行，在终端依次输入枯藤、18和false使用空格分隔。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>将上面的代码编译后在终端执行，在终端依次输入枯藤、18和false使用空格分隔。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ ./scan_demo 
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ ./scan_demo 
 </span></span><span class=line><span class=cl>枯藤 18 false
 </span></span><span class=line><span class=cl>扫描结果 name:枯藤 age:18 married:false
-</span></span></code></pre></td></tr></table></div></div><h3 id=scanf>scanf</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Scanf</span><span class=p>(</span><span class=nx>format</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>Scanf 从标准输入扫描文本，根据 format 参数指定的格式去读取由空白符分隔的值保存到传递给本函数的参数中。</li><li>本函数返回成功扫描的数据个数和遇到的任何错误。</li></ul><p>例如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=scanf>scanf</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Scanf</span><span class=p>(</span><span class=nx>format</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>Scanf 从标准输入扫描文本，根据 format 参数指定的格式去读取由空白符分隔的值保存到传递给本函数的参数中。</li><li>本函数返回成功扫描的数据个数和遇到的任何错误。</li></ul><p>例如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -493,8 +270,7 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=p>(</span>
 </span></span><span class=line><span class=cl>        <span class=nx>name</span>    <span class=kt>string</span>
 </span></span><span class=line><span class=cl>        <span class=nx>age</span>     <span class=kt>int</span>
@@ -503,33 +279,21 @@
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Scanf</span><span class=p>(</span><span class=s>&#34;1:%s 2:%d 3:%t&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>name</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>age</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>married</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;扫描结果 name:%s age:%d married:%t \n&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=p>,</span> <span class=nx>age</span><span class=p>,</span> <span class=nx>married</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>将上面的代码编译后在终端执行，在终端按照指定的格式依次输入枯藤、18 和 false。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>将上面的代码编译后在终端执行，在终端按照指定的格式依次输入枯藤、18 和 false。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ ./scan_demo 
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ ./scan_demo 
 </span></span><span class=line><span class=cl>1:枯藤 2:18 3:false
 </span></span><span class=line><span class=cl>扫描结果 name:枯藤 age:18 married:false
-</span></span></code></pre></td></tr></table></div></div><p>fmt.Scanf 不同于 fmt.Scan 简单的以空格作为输入数据的分隔符，fmt.Scanf 为输入数据指定了具体的输入内容格式，只有按照格式输入数据才会被扫描并存入对应变量。</p><p>例如，我们还是按照上个示例中以空格分隔的方式输入，fmt.Scanf 就不能正确扫描到输入的数据。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>fmt.Scanf 不同于 fmt.Scan 简单的以空格作为输入数据的分隔符，fmt.Scanf 为输入数据指定了具体的输入内容格式，只有按照格式输入数据才会被扫描并存入对应变量。</p><p>例如，我们还是按照上个示例中以空格分隔的方式输入，fmt.Scanf 就不能正确扫描到输入的数据。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ ./scan_demo 
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ ./scan_demo 
 </span></span><span class=line><span class=cl>枯藤 18 false
 </span></span><span class=line><span class=cl>扫描结果 name: age:0 married:false
-</span></span></code></pre></td></tr></table></div></div><h3 id=scanln>scanln</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Scanln</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>Scanln 类似 Scan，它在<strong>遇到换行时才停止扫描</strong>。最后一个数据后面必须有换行或者到达结束位置。</li><li>本函数返回成功扫描的数据个数和遇到的任何错误。</li></ul><p>具体代码示例如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=scanln>scanln</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Scanln</span><span class=p>(</span><span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>Scanln 类似 Scan，它在<strong>遇到换行时才停止扫描</strong>。最后一个数据后面必须有换行或者到达结束位置。</li><li>本函数返回成功扫描的数据个数和遇到的任何错误。</li></ul><p>具体代码示例如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -538,8 +302,7 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=p>(</span>
 </span></span><span class=line><span class=cl>        <span class=nx>name</span>    <span class=kt>string</span>
 </span></span><span class=line><span class=cl>        <span class=nx>age</span>     <span class=kt>int</span>
@@ -548,66 +311,38 @@
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Scanln</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>name</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>age</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>married</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;扫描结果 name:%s age:%d married:%t \n&#34;</span><span class=p>,</span> <span class=nx>name</span><span class=p>,</span> <span class=nx>age</span><span class=p>,</span> <span class=nx>married</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>将上面的代码编译后在终端执行，在终端依次输入枯藤、18 和 false 使用空格分隔。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>将上面的代码编译后在终端执行，在终端依次输入枯藤、18 和 false 使用空格分隔。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ ./scan_demo 
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ ./scan_demo 
 </span></span><span class=line><span class=cl>枯藤 18 false
 </span></span><span class=line><span class=cl>扫描结果 name:枯藤 age:18 married:false
-</span></span></code></pre></td></tr></table></div></div><p>fmt.Scanln 遇到回车就结束扫描了，这个比较常用。</p><h3 id=bufionewreader>bufio.NewReader</h3><p>有时候我们想完整获取输入的内容，而输入的内容可能包含空格，这种情况下可以使用 bufio 包来实现。示例代码如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>fmt.Scanln 遇到回车就结束扫描了，这个比较常用。</p><h3 id=bufionewreader>bufio.NewReader</h3><p>有时候我们想完整获取输入的内容，而输入的内容可能包含空格，这种情况下可以使用 bufio 包来实现。示例代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>bufioDemo</span><span class=p>()</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>bufioDemo</span><span class=p>()</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>reader</span> <span class=o>:=</span> <span class=nx>bufio</span><span class=p>.</span><span class=nf>NewReader</span><span class=p>(</span><span class=nx>os</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>)</span> <span class=c1>// 从标准输入生成读对象
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Print</span><span class=p>(</span><span class=s>&#34;请输入内容：&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=nx>text</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>reader</span><span class=p>.</span><span class=nf>ReadString</span><span class=p>(</span><span class=sc>&#39;\n&#39;</span><span class=p>)</span> <span class=c1>// 读到换行
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>text</span> <span class=p>=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>TrimSpace</span><span class=p>(</span><span class=nx>text</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%#v\n&#34;</span><span class=p>,</span> <span class=nx>text</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=fscan-系列>Fscan 系列</h3><p>这几个函数功能类似于 fmt.Scan、fmt.Scanf、fmt.Scanln 三个函数，只不过它们从 <strong>io.Reader 中</strong>读取数据。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=fscan-系列>Fscan 系列</h3><p>这几个函数功能类似于 fmt.Scan、fmt.Scanf、fmt.Scanln 三个函数，只不过它们从 <strong>io.Reader 中</strong>读取数据。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Fscan</span><span class=p>(</span><span class=nx>r</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Fscan</span><span class=p>(</span><span class=nx>r</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Fscanln</span><span class=p>(</span><span class=nx>r</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Fscanf</span><span class=p>(</span><span class=nx>r</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span><span class=p>,</span> <span class=nx>format</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=sscan系列>Sscan系列</h3><p>这几个函数功能类似于 fmt.Scan、fmt.Scanf、fmt.Scanln 三个函数，只不过它们从<strong>指定字符串中</strong>读取数据。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=sscan系列>Sscan系列</h3><p>这几个函数功能类似于 fmt.Scan、fmt.Scanf、fmt.Scanln 三个函数，只不过它们从<strong>指定字符串中</strong>读取数据。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Sscan</span><span class=p>(</span><span class=nx>str</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Sscan</span><span class=p>(</span><span class=nx>str</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Sscanln</span><span class=p>(</span><span class=nx>str</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Sscanf</span><span class=p>(</span><span class=nx>str</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>format</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>a</span> <span class=o>...</span><span class=kd>interface</span><span class=p>{})</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2022-03-07</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a>,&nbsp;<a href=/Notes/tags/io/>io</a></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/ class=prev rel=prev title="Go net 标准库"><i class="fas fa-angle-left fa-fw"></i>Go net 标准库</a>
-<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/flag/ class=next rel=next title="Go flag 库">Go flag 库<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-03-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a>,&nbsp;<a href=/Notes/tags/io/>io</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E7%BD%91%E7%BB%9C/net/ class=prev rel=prev title="Go net 标准库"><i class="fas fa-angle-left fa-fw"></i>Go net 标准库</a>
+<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/flag/ class=next rel=next title="Go flag 库">Go flag 库<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

@@ -1,95 +1,25 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>Go Unicode 标准库 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go Unicode 标准库">
-<meta property="og:description" content="unicode 由于 UTF-8 的作者 Ken Thompson 同时也是 go 语言的创始人，所以说，在字符支持方面，几乎没有语言的理解会高于 go 了。 go 对 unicode 的支持包含三个包 : unicode unicode/utf8 unicode/utf16 unicode 包包含基本的">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/unicode/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-12-15T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Go Unicode 标准库">
-<meta name=twitter:description content="unicode 由于 UTF-8 的作者 Ken Thompson 同时也是 go 语言的创始人，所以说，在字符支持方面，几乎没有语言的理解会高于 go 了。 go 对 unicode 的支持包含三个包 : unicode unicode/utf8 unicode/utf16 unicode 包包含基本的">
-<meta name=application-name content="伤心肠粉的酱油碟子">
-<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/unicode/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/api-%E8%A7%84%E8%8C%83/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strconv/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go Unicode 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%96%87%E6%9C%AC\/unicode\/"},"genre":"posts","keywords":"Go 库","wordcount":1872,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%96%87%E6%9C%AC\/unicode\/","datePublished":"2021-12-15T00:00:00+00:00","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Go Unicode 标准库 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go Unicode 标准库"><meta property="og:description" content="unicode 由于 UTF-8 的作者 Ken Thompson 同时也是 go 语言的创始人，所以说，在字符支持方面，几乎没有语言的理解会高于 go 了。 go 对 unicode 的支持包含三个包 : unicode unicode/utf8 unicode/utf16 unicode 包包含基本的"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/unicode/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-12-15T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-11T02:43:10+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Go Unicode 标准库"><meta name=twitter:description content="unicode 由于 UTF-8 的作者 Ken Thompson 同时也是 go 语言的创始人，所以说，在字符支持方面，几乎没有语言的理解会高于 go 了。 go 对 unicode 的支持包含三个包 : unicode unicode/utf8 unicode/utf16 unicode 包包含基本的"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/unicode/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/api-%E8%A7%84%E8%8C%83/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strconv/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go Unicode 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%96%87%E6%9C%AC\/unicode\/"},"genre":"posts","keywords":"Go 库","wordcount":1872,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%96%87%E6%9C%AC\/unicode\/","datePublished":"2021-12-15T00:00:00+00:00","dateModified":"2022-03-11T02:43:10+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/posts/>文章 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go Unicode 标准库</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-15>2021-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1872 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#unicode-包>unicode 包</a></li><li><a href=#utf8-包>utf8 包</a></li><li><a href=#utf16-包>utf16 包</a></li></ul></nav></div></div><div class=content id=content><h1 id=unicode>unicode</h1><p>由于 UTF-8 的作者 Ken Thompson 同时也是 go 语言的创始人，所以说，在字符支持方面，几乎没有语言的理解会高于 go 了。 go 对 unicode 的支持包含三个包 :</p><ul>
-<li>unicode</li><li>unicode/utf8</li><li>unicode/utf16</li></ul><p>unicode 包包含基本的字符判断函数。utf8 包主要负责 rune 和 byte 之间的转换。utf16 包负责 rune 和 uint16 数组之间的转换。</p><p>由于字符的概念有的时候比较模糊，比如字符（小写 a）普通显示为 a，在重音字符中（grave-accented）中显示为à。 这时候字符（character）的概念就有点不准确了，因为 a 和à显然是两个不同的 unicode 编码，但是却代表同一个字符，所以引入了 rune。 <strong>一个 rune 就代表一个 unicode 编码</strong>，所以上面的 a 和à是两个不同的 rune。</p><blockquote>
-<p>go 语言的所有代码都是 UTF8 的，所以如果我们在程序中的字符串都是 utf8 编码的，但是我们的单个字符（单引号扩起来的）却是 unicode 的</p></blockquote><h2 id=unicode-包>unicode 包</h2><p>unicode 包含了对 rune 的判断。这个包把所有 unicode 涉及到的编码进行了分类，使用结构</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go Unicode 标准库</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-15>2021-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1872 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#unicode-包>unicode 包</a></li><li><a href=#utf8-包>utf8 包</a></li><li><a href=#utf16-包>utf16 包</a></li></ul></nav></div></div><div class=content id=content><h1 id=unicode>unicode</h1><p>由于 UTF-8 的作者 Ken Thompson 同时也是 go 语言的创始人，所以说，在字符支持方面，几乎没有语言的理解会高于 go 了。 go 对 unicode 的支持包含三个包 :</p><ul><li>unicode</li><li>unicode/utf8</li><li>unicode/utf16</li></ul><p>unicode 包包含基本的字符判断函数。utf8 包主要负责 rune 和 byte 之间的转换。utf16 包负责 rune 和 uint16 数组之间的转换。</p><p>由于字符的概念有的时候比较模糊，比如字符（小写 a）普通显示为 a，在重音字符中（grave-accented）中显示为à。 这时候字符（character）的概念就有点不准确了，因为 a 和à显然是两个不同的 unicode 编码，但是却代表同一个字符，所以引入了 rune。 <strong>一个 rune 就代表一个 unicode 编码</strong>，所以上面的 a 和à是两个不同的 rune。</p><blockquote><p>go 语言的所有代码都是 UTF8 的，所以如果我们在程序中的字符串都是 utf8 编码的，但是我们的单个字符（单引号扩起来的）却是 unicode 的</p></blockquote><h2 id=unicode-包>unicode 包</h2><p>unicode 包含了对 rune 的判断。这个包把所有 unicode 涉及到的编码进行了分类，使用结构</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>RangeTable</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>RangeTable</span> <span class=kd>struct</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>R16</span>         <span class=p>[]</span><span class=nx>Range16</span>
 </span></span><span class=line><span class=cl>    <span class=nx>R32</span>         <span class=p>[]</span><span class=nx>Range32</span>
 </span></span><span class=line><span class=cl>    <span class=nx>LatinOffset</span> <span class=kt>int</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>来表示这个功能的字符集。这些字符集都集中列表在 table.go 这个源码里面。</p><p>比如控制字符集：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>来表示这个功能的字符集。这些字符集都集中列表在 table.go 这个源码里面。</p><p>比如控制字符集：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -98,8 +28,7 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>_Pc</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>RangeTable</span><span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>_Pc</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>RangeTable</span><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>R16</span><span class=p>:</span> <span class=p>[]</span><span class=nx>Range16</span><span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span><span class=mh>0x005f</span><span class=p>,</span> <span class=mh>0x203f</span><span class=p>,</span> <span class=mi>8160</span><span class=p>},</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span><span class=mh>0x2040</span><span class=p>,</span> <span class=mh>0x2054</span><span class=p>,</span> <span class=mi>20</span><span class=p>},</span>
@@ -108,9 +37,7 @@
 </span></span><span class=line><span class=cl>        <span class=p>{</span><span class=mh>0xff3f</span><span class=p>,</span> <span class=mh>0xff3f</span><span class=p>,</span> <span class=mi>1</span><span class=p>},</span>
 </span></span><span class=line><span class=cl>    <span class=p>},</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>比如对国内开发者很实用的汉字字符集：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>比如对国内开发者很实用的汉字字符集：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -133,8 +60,7 @@
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>_Han</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>RangeTable</span><span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>_Han</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>RangeTable</span><span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>R16</span><span class=p>:</span> <span class=p>[]</span><span class=nx>Range16</span><span class=p>{</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span><span class=mh>0x2e80</span><span class=p>,</span> <span class=mh>0x2e99</span><span class=p>,</span> <span class=mi>1</span><span class=p>},</span>
 </span></span><span class=line><span class=cl>        <span class=p>{</span><span class=mh>0x2e9b</span><span class=p>,</span> <span class=mh>0x2ef3</span><span class=p>,</span> <span class=mi>1</span><span class=p>},</span>
@@ -157,9 +83,7 @@
 </span></span><span class=line><span class=cl>        <span class=p>{</span><span class=mh>0x2f800</span><span class=p>,</span> <span class=mh>0x2fa1d</span><span class=p>,</span> <span class=mi>1</span><span class=p>},</span>
 </span></span><span class=line><span class=cl>    <span class=p>},</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>回到包的函数，我们看到有下面这些判断函数：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>回到包的函数，我们看到有下面这些判断函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -175,8 +99,7 @@
 </span><span class=lnt>14
 </span><span class=lnt>15
 </span><span class=lnt>16
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>IsControl</span><span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>bool</span>  <span class=c1>// 是否控制字符
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>IsControl</span><span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>bool</span>  <span class=c1>// 是否控制字符
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>IsDigit</span><span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>bool</span>  <span class=c1>// 是否阿拉伯数字字符，即 0-9
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>IsGraphic</span><span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>bool</span> <span class=c1>// 是否图形字符
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>IsLetter</span><span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>bool</span> <span class=c1>// 是否字母
@@ -192,9 +115,7 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>IsUpper</span><span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>bool</span> <span class=c1>// 是否大写字符
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>Is</span><span class=p>(</span><span class=nx>rangeTab</span> <span class=o>*</span><span class=nx>RangeTable</span><span class=p>,</span> <span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>bool</span> <span class=c1>// r 是否为 rangeTab 类型的字符
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>In</span><span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>,</span> <span class=nx>ranges</span> <span class=o>...*</span><span class=nx>RangeTable</span><span class=p>)</span> <span class=kt>bool</span>  <span class=c1>// r 是否为 ranges 中任意一个类型的字符
-</span></span></span></code></pre></td></tr></table></div></div><p>看下面这个例子：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></span></code></pre></td></tr></table></div></div><p>看下面这个例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -213,8 +134,7 @@
 </span><span class=lnt>17
 </span><span class=lnt>18
 </span><span class=lnt>19
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>single</span> <span class=o>:=</span> <span class=sc>&#39;\u0015&#39;</span>
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>unicode</span><span class=p>.</span><span class=nf>IsControl</span><span class=p>(</span><span class=nx>single</span><span class=p>))</span>
 </span></span><span class=line><span class=cl>    <span class=nx>single</span> <span class=p>=</span> <span class=sc>&#39;\ufe35&#39;</span>
@@ -233,9 +153,7 @@
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>unicode</span><span class=p>.</span><span class=nf>Is</span><span class=p>(</span><span class=nx>unicode</span><span class=p>.</span><span class=nx>Han</span><span class=p>,</span><span class=nx>han</span><span class=p>))</span>
 </span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>unicode</span><span class=p>.</span><span class=nf>In</span><span class=p>(</span><span class=nx>han</span><span class=p>,</span><span class=nx>unicode</span><span class=p>.</span><span class=nx>Gujarati</span><span class=p>,</span><span class=nx>unicode</span><span class=p>.</span><span class=nx>White_Space</span><span class=p>))</span>
 </span></span><span class=line><span class=cl> <span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出结果：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>输出结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -244,8 +162,7 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>true</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>true</span>
 </span></span><span class=line><span class=cl><span class=nb>false</span>
 </span></span><span class=line><span class=cl><span class=nb>true</span>
 </span></span><span class=line><span class=cl><span class=nb>true</span>
@@ -254,12 +171,7 @@
 </span></span><span class=line><span class=cl><span class=nb>false</span>
 </span></span><span class=line><span class=cl><span class=nb>true</span>
 </span></span><span class=line><span class=cl><span class=nb>false</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=utf8-包>utf8 包</h2><p>utf8 里面的函数就有一些字节和字符的转换。</p><p>判断是否符合 utf8 编码的函数：</p><ul>
-<li><code>func Valid(p []byte) bool</code></li><li><code>func ValidRune(r rune) bool</code></li><li><code>func ValidString(s string) bool</code></li></ul><p>判断 rune 所占字节数：</p><ul>
-<li><code>func RuneLen(r rune) int</code></li></ul><p>判断字节串或者字符串的 rune 数：</p><ul>
-<li><code>func RuneCount(p []byte) int</code></li><li><code>func RuneCountInString(s string) (n int)</code></li></ul><p>编码和解码到 rune：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h2 id=utf8-包>utf8 包</h2><p>utf8 里面的函数就有一些字节和字符的转换。</p><p>判断是否符合 utf8 编码的函数：</p><ul><li><code>func Valid(p []byte) bool</code></li><li><code>func ValidRune(r rune) bool</code></li><li><code>func ValidString(s string) bool</code></li></ul><p>判断 rune 所占字节数：</p><ul><li><code>func RuneLen(r rune) int</code></li></ul><p>判断字节串或者字符串的 rune 数：</p><ul><li><code>func RuneCount(p []byte) int</code></li><li><code>func RuneCountInString(s string) (n int)</code></li></ul><p>编码和解码到 rune：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -268,8 +180,7 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>EncodeRune</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>int</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>EncodeRune</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>int</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>DecodeRune</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>,</span> <span class=nx>size</span> <span class=kt>int</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
@@ -278,11 +189,7 @@
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>DecodeLastRune</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>,</span> <span class=nx>size</span> <span class=kt>int</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>DecodeLastRuneInString</span><span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>,</span> <span class=nx>size</span> <span class=kt>int</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>是否为完整 rune：</p><ul>
-<li><code>func FullRune(p []byte) bool</code></li><li><code>func FullRuneInString(s string) bool</code></li></ul><p>是否为 rune 第一个字节：</p><ul>
-<li><code>func RuneStart(b byte) bool</code></li></ul><p>示例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>是否为完整 rune：</p><ul><li><code>func FullRune(p []byte) bool</code></li><li><code>func FullRuneInString(s string) bool</code></li></ul><p>是否为 rune 第一个字节：</p><ul><li><code>func RuneStart(b byte) bool</code></li></ul><p>示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -306,8 +213,7 @@
 </span><span class=lnt>22
 </span><span class=lnt>23
 </span><span class=lnt>24
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>word</span><span class=o>:=</span><span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;界&#34;</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>word</span><span class=o>:=</span><span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>&#34;界&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>utf8</span><span class=p>.</span><span class=nf>Valid</span><span class=p>(</span><span class=nx>word</span><span class=p>[:</span><span class=mi>2</span><span class=p>]))</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>utf8</span><span class=p>.</span><span class=nf>ValidRune</span><span class=p>(</span><span class=sc>&#39;界&#39;</span><span class=p>))</span>
@@ -331,9 +237,7 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>utf8</span><span class=p>.</span><span class=nf>RuneStart</span><span class=p>(</span><span class=nx>word</span><span class=p>[</span><span class=mi>1</span><span class=p>]))</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>utf8</span><span class=p>.</span><span class=nf>RuneStart</span><span class=p>(</span><span class=nx>word</span><span class=p>[</span><span class=mi>0</span><span class=p>]))</span>
-</span></span></code></pre></td></tr></table></div></div><p>运行结果：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>运行结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -348,8 +252,7 @@
 </span><span class=lnt>13
 </span><span class=lnt>14
 </span><span class=lnt>15
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>false</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>false</span>
 </span></span><span class=line><span class=cl><span class=nb>true</span>
 </span></span><span class=line><span class=cl><span class=nb>true</span>
 </span></span><span class=line><span class=cl><span class=m>3</span>
@@ -364,22 +267,17 @@
 </span></span><span class=line><span class=cl><span class=nb>true</span>
 </span></span><span class=line><span class=cl><span class=nb>false</span>
 </span></span><span class=line><span class=cl><span class=nb>true</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=utf16-包>utf16 包</h2><p>utf16 的包的函数就比较少了。</p><p>将 uint16 和 rune 进行转换</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h2 id=utf16-包>utf16 包</h2><p>utf16 的包的函数就比较少了。</p><p>将 uint16 和 rune 进行转换</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Encode</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>rune</span><span class=p>)</span> <span class=p>[]</span><span class=kt>uint16</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Encode</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>rune</span><span class=p>)</span> <span class=p>[]</span><span class=kt>uint16</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>EncodeRune</span><span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=p>(</span><span class=nx>r1</span><span class=p>,</span> <span class=nx>r2</span> <span class=kt>rune</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Decode</span><span class=p>(</span><span class=nx>s</span> <span class=p>[]</span><span class=kt>uint16</span><span class=p>)</span> <span class=p>[]</span><span class=kt>rune</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>DecodeRune</span><span class=p>(</span><span class=nx>r1</span><span class=p>,</span> <span class=nx>r2</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>rune</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>IsSurrogate</span><span class=p>(</span><span class=nx>r</span> <span class=kt>rune</span><span class=p>)</span> <span class=kt>bool</span> <span class=c1>// 是否为有效代理对
-</span></span></span></code></pre></td></tr></table></div></div><p>unicode 有个基本字符平面和增补平面的概念，基本字符平面只有 65535 个字符，增补平面（有 16 个）加上去就能表示 1114112 个字符。 utf16 就是严格实现了 unicode 的这种编码规范。</p><p>而基本字符和增补平面字符就是一个代理对（Surrogate Pair）。一个代理对可以和一个 rune 进行转换。</p><p>示例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></span></code></pre></td></tr></table></div></div><p>unicode 有个基本字符平面和增补平面的概念，基本字符平面只有 65535 个字符，增补平面（有 16 个）加上去就能表示 1114112 个字符。 utf16 就是严格实现了 unicode 的这种编码规范。</p><p>而基本字符和增补平面字符就是一个代理对（Surrogate Pair）。一个代理对可以和一个 rune 进行转换。</p><p>示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -391,8 +289,7 @@
 </span><span class=lnt>10
 </span><span class=lnt>11
 </span><span class=lnt>12
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>words</span> <span class=o>:=</span><span class=p>[]</span><span class=kt>rune</span><span class=p>{</span><span class=sc>&#39;𝓐&#39;</span><span class=p>,</span><span class=sc>&#39;𝓑&#39;</span><span class=p>}</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>words</span> <span class=o>:=</span><span class=p>[]</span><span class=kt>rune</span><span class=p>{</span><span class=sc>&#39;𝓐&#39;</span><span class=p>,</span><span class=sc>&#39;𝓑&#39;</span><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=nx>u16</span><span class=o>:=</span><span class=nx>utf16</span><span class=p>.</span><span class=nf>Encode</span><span class=p>(</span><span class=nx>words</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>u16</span><span class=p>)</span>
@@ -404,39 +301,20 @@
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>utf16</span><span class=p>.</span><span class=nf>IsSurrogate</span><span class=p>(</span><span class=nx>r1</span><span class=p>))</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>utf16</span><span class=p>.</span><span class=nf>IsSurrogate</span><span class=p>(</span><span class=nx>r2</span><span class=p>))</span>
 </span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>utf16</span><span class=p>.</span><span class=nf>IsSurrogate</span><span class=p>(</span><span class=mi>1234</span><span class=p>))</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出结果：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>输出结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>[</span><span class=m>55349</span> <span class=m>56528</span> <span class=m>55349</span> 56529<span class=o>]</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>[</span><span class=m>55349</span> <span class=m>56528</span> <span class=m>55349</span> 56529<span class=o>]</span>
 </span></span><span class=line><span class=cl><span class=o>[</span><span class=m>120016</span> 120017<span class=o>]</span>
 </span></span><span class=line><span class=cl><span class=m>55349</span> <span class=m>56528</span>
 </span></span><span class=line><span class=cl><span class=m>120016</span>
 </span></span><span class=line><span class=cl><span class=nb>true</span>
 </span></span><span class=line><span class=cl><span class=nb>true</span>
 </span></span><span class=line><span class=cl><span class=nb>false</span>
-</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2022-03-07</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/api-%E8%A7%84%E8%8C%83/ class=prev rel=prev title="API 规范"><i class="fas fa-angle-left fa-fw"></i>API 规范</a>
-<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strconv/ class=next rel=next title="Go strconv 标准库">Go strconv 标准库<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-03-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/frontend/%E6%A1%86%E6%9E%B6/api-%E8%A7%84%E8%8C%83/ class=prev rel=prev title="API 规范"><i class="fas fa-angle-left fa-fw"></i>API 规范</a>
+<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strconv/ class=next rel=next title="Go strconv 标准库">Go strconv 标准库<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

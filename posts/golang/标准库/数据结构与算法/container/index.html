@@ -1,95 +1,25 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>Go container 标准库 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go container 标准库">
-<meta property="og:description" content="container 该包实现了三个复杂的数据结构：堆，链表，环。 这个包就意味着你使用这三个数据结构的时候不需要再费心从头开始写算法了。 堆 这里的堆使用的数据结构">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/container/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-12-15T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="Go container 标准库">
-<meta name=twitter:description content="container 该包实现了三个复杂的数据结构：堆，链表，环。 这个包就意味着你使用这三个数据结构的时候不需要再费心从头开始写算法了。 堆 这里的堆使用的数据结构">
-<meta name=application-name content="伤心肠粉的酱油碟子">
-<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/container/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strconv/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/bytes/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go container 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95\/container\/"},"genre":"posts","keywords":"Go 库","wordcount":1719,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95\/container\/","datePublished":"2021-12-15T00:00:00+00:00","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Go container 标准库 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go container 标准库"><meta property="og:description" content="container 该包实现了三个复杂的数据结构：堆，链表，环。 这个包就意味着你使用这三个数据结构的时候不需要再费心从头开始写算法了。 堆 这里的堆使用的数据结构"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/container/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-12-15T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-11T02:43:10+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Go container 标准库"><meta name=twitter:description content="container 该包实现了三个复杂的数据结构：堆，链表，环。 这个包就意味着你使用这三个数据结构的时候不需要再费心从头开始写算法了。 堆 这里的堆使用的数据结构"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/container/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strconv/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/bytes/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go container 标准库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95\/container\/"},"genre":"posts","keywords":"Go 库","wordcount":1719,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95\/container\/","datePublished":"2021-12-15T00:00:00+00:00","dateModified":"2022-03-11T02:43:10+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/posts/>文章 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go container 标准库</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-15>2021-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1719 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#堆>堆</a></li><li><a href=#链表>链表</a></li><li><a href=#环>环</a></li></ul></nav></div></div><div class=content id=content><h1 id=container>container</h1><p>该包实现了三个复杂的数据结构：堆，链表，环。 这个包就意味着你使用这三个数据结构的时候不需要再费心从头开始写算法了。</p><h2 id=堆>堆</h2><p>这里的堆使用的数据结构是最小二叉树，即根节点比左边子树和右边子树的所有值都小。</p><p>go 的堆包只是实现了一个接口，我们看下它的定义：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go container 标准库</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-15>2021-12-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1719 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#堆>堆</a></li><li><a href=#链表>链表</a></li><li><a href=#环>环</a></li></ul></nav></div></div><div class=content id=content><h1 id=container>container</h1><p>该包实现了三个复杂的数据结构：堆，链表，环。 这个包就意味着你使用这三个数据结构的时候不需要再费心从头开始写算法了。</p><h2 id=堆>堆</h2><p>这里的堆使用的数据结构是最小二叉树，即根节点比左边子树和右边子树的所有值都小。</p><p>go 的堆包只是实现了一个接口，我们看下它的定义：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Interface</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Interface</span> <span class=kd>interface</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>sort</span><span class=p>.</span><span class=nx>Interface</span>
 </span></span><span class=line><span class=cl>    <span class=nf>Push</span><span class=p>(</span><span class=nx>x</span> <span class=kd>interface</span><span class=p>{})</span> <span class=c1>// add x as element Len()
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nf>Pop</span><span class=p>()</span> <span class=kd>interface</span><span class=p>{}</span>   <span class=c1>// remove and return element Len() - 1.
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>可以看出，这个堆结构继承自 sort.Interface, 回顾下 sort.Interface，它需要实现三个方法</p><ul>
-<li><code>Len() int</code></li><li><code>Less(i, j int) bool</code></li><li><code>Swap(i, j int)</code></li></ul><p>加上堆接口定义的两个方法</p><ul>
-<li><code>Push(x interface{})</code></li><li><code>Pop() interface{}</code></li></ul><p>就是说你定义了一个堆，就要实现五个方法，直接拿 package doc 中的 example 做例子：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>可以看出，这个堆结构继承自 sort.Interface, 回顾下 sort.Interface，它需要实现三个方法</p><ul><li><code>Len() int</code></li><li><code>Less(i, j int) bool</code></li><li><code>Swap(i, j int)</code></li></ul><p>加上堆接口定义的两个方法</p><ul><li><code>Push(x interface{})</code></li><li><code>Pop() interface{}</code></li></ul><p>就是说你定义了一个堆，就要实现五个方法，直接拿 package doc 中的 example 做例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -106,8 +36,7 @@
 </span><span class=lnt>15
 </span><span class=lnt>16
 </span><span class=lnt>17
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=kd>type</span> <span class=nx>IntHeap</span> <span class=p>[]</span><span class=kt>int</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=kd>type</span> <span class=nx>IntHeap</span> <span class=p>[]</span><span class=kt>int</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>h</span> <span class=nx>IntHeap</span><span class=p>)</span> <span class=nf>Len</span><span class=p>()</span> <span class=kt>int</span>           <span class=p>{</span> <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=nx>h</span><span class=p>)</span> <span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>h</span> <span class=nx>IntHeap</span><span class=p>)</span> <span class=nf>Less</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>bool</span> <span class=p>{</span> <span class=k>return</span> <span class=nx>h</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>&lt;</span> <span class=nx>h</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span> <span class=p>}</span>
@@ -124,35 +53,23 @@
 </span></span><span class=line><span class=cl>    <span class=o>*</span><span class=nx>h</span> <span class=p>=</span> <span class=nx>old</span><span class=p>[</span><span class=mi>0</span> <span class=p>:</span> <span class=nx>n</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>x</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>那么 IntHeap 就实现了这个堆结构，我们就可以使用堆的方法来对它进行操作：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>那么 IntHeap 就实现了这个堆结构，我们就可以使用堆的方法来对它进行操作：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=nx>h</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>IntHeap</span><span class=p>{</span><span class=mi>2</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>5</span><span class=p>}</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=nx>h</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>IntHeap</span><span class=p>{</span><span class=mi>2</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>5</span><span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=nx>heap</span><span class=p>.</span><span class=nf>Init</span><span class=p>(</span><span class=nx>h</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>heap</span><span class=p>.</span><span class=nf>Push</span><span class=p>(</span><span class=nx>h</span><span class=p>,</span> <span class=mi>3</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nx>heap</span><span class=p>.</span><span class=nf>Pop</span><span class=p>(</span><span class=nx>h</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>具体说下内部实现，是使用最小堆，索引排序从根节点开始，然后左子树，右子树的顺序方式。索引布局如下：</p><blockquote>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>具体说下内部实现，是使用最小堆，索引排序从根节点开始，然后左子树，右子树的顺序方式。索引布局如下：</p><blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>                  0
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>                  0
 </span></span><span class=line><span class=cl>            1            2
 </span></span><span class=line><span class=cl>         3    4       5      6
 </span></span><span class=line><span class=cl>        7 8  9 10   11   
-</span></span></code></pre></td></tr></table></div></div><p>假设 (heap[1]== 小明 ) 它的左子树 (heap[3]== 小黑 ) 和右子树 (heap[4]== 大黄 ) 且 小明 > 小黑 > 大黄 ;</p></blockquote><p>堆内部实现了 down 和 up 函数</p><ul>
-<li>
-<p>down 函数用于将索引 i 处存储的值 ( 设 i=1, 即小明 ) 与它的左子树 ( 小黑 ) 和右子树 ( 大黄 ) 相比 , 将三者最小的值大黄与小明的位置交换，交换后小明继续与交换后的子树 (heap[9]和 heap[10]) 相比，重复以上步骤，直到小明位置不变。</p></li><li>
-<p>up 函数用于将索引 i 处的值 ( 设 i=3, 即小黑 ) 与他的父节点 ( 小明 ) 比较，将两者较小的值放到父节点上，本例中即交换小黑和小明的位置，之后小黑继续与其父节点比较，重复以上步骤，直到小黑位置不变。</p></li></ul><p>假设 heap[11]== 阿花 当从堆中 Pop 一个元素的时候，先把元素和最后一个节点的值 ( 阿花 ) 交换，然后弹出，然后对阿花调用 down，向下保证最小堆。</p><p>当往堆中 Push 一个元素的时候，这个元素插入到最后一个节点，本例中为 heap[12]，即作为 heap[5]的右子树，然后调用 up 函数向上比较。</p><h2 id=链表>链表</h2><p>链表就是一个有 prev 和 next 指针的数组了。它维护两个 type，( 注意，这里不是 interface)</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>假设 (heap[1]== 小明 ) 它的左子树 (heap[3]== 小黑 ) 和右子树 (heap[4]== 大黄 ) 且 小明 > 小黑 > 大黄 ;</p></blockquote><p>堆内部实现了 down 和 up 函数</p><ul><li><p>down 函数用于将索引 i 处存储的值 ( 设 i=1, 即小明 ) 与它的左子树 ( 小黑 ) 和右子树 ( 大黄 ) 相比 , 将三者最小的值大黄与小明的位置交换，交换后小明继续与交换后的子树 (heap[9]和 heap[10]) 相比，重复以上步骤，直到小明位置不变。</p></li><li><p>up 函数用于将索引 i 处的值 ( 设 i=3, 即小黑 ) 与他的父节点 ( 小明 ) 比较，将两者较小的值放到父节点上，本例中即交换小黑和小明的位置，之后小黑继续与其父节点比较，重复以上步骤，直到小黑位置不变。</p></li></ul><p>假设 heap[11]== 阿花 当从堆中 Pop 一个元素的时候，先把元素和最后一个节点的值 ( 阿花 ) 交换，然后弹出，然后对阿花调用 down，向下保证最小堆。</p><p>当往堆中 Push 一个元素的时候，这个元素插入到最后一个节点，本例中为 heap[12]，即作为 heap[5]的右子树，然后调用 up 函数向上比较。</p><h2 id=链表>链表</h2><p>链表就是一个有 prev 和 next 指针的数组了。它维护两个 type，( 注意，这里不是 interface)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -162,8 +79,7 @@
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Element</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Element</span> <span class=kd>struct</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>next</span><span class=p>,</span> <span class=nx>prev</span> <span class=o>*</span><span class=nx>Element</span>  <span class=c1>// 上一个元素和下一个元素
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>list</span> <span class=o>*</span><span class=nx>List</span>  <span class=c1>// 元素所在链表
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>Value</span> <span class=kd>interface</span><span class=p>{}</span>  <span class=c1>// 元素
@@ -173,9 +89,7 @@
 </span></span><span class=line><span class=cl>    <span class=nx>root</span> <span class=nx>Element</span>  <span class=c1>// 链表的根元素
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>len</span>  <span class=kt>int</span>      <span class=c1>// 链表的长度
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>基本使用是先创建 list，然后往 list 中插入值，list 就内部创建一个 Element，并内部设置好 Element 的 next, prev 等。具体可以看下例子：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>基本使用是先创建 list，然后往 list 中插入值，list 就内部创建一个 Element，并内部设置好 Element 的 next, prev 等。具体可以看下例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -197,8 +111,7 @@
 </span><span class=lnt>20
 </span><span class=lnt>21
 </span><span class=lnt>22
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=c1>// This example demonstrates an integer heap built using the heap interface.
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=c1>// This example demonstrates an integer heap built using the heap interface.
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
@@ -220,9 +133,7 @@
 </span></span><span class=line><span class=cl><span class=nx>len</span><span class=p>:</span> <span class=mi>2</span>
 </span></span><span class=line><span class=cl><span class=nx>first</span><span class=p>:</span> <span class=o>&amp;</span><span class=nx>list</span><span class=p>.</span><span class=nx>Element</span><span class=p>{</span><span class=nx>next</span><span class=p>:(</span><span class=o>*</span><span class=nx>list</span><span class=p>.</span><span class=nx>Element</span><span class=p>)(</span><span class=mh>0x2081be1b0</span><span class=p>),</span> <span class=nx>prev</span><span class=p>:(</span><span class=o>*</span><span class=nx>list</span><span class=p>.</span><span class=nx>Element</span><span class=p>)(</span><span class=mh>0x2081be150</span><span class=p>),</span> <span class=nx>list</span><span class=p>:(</span><span class=o>*</span><span class=nx>list</span><span class=p>.</span><span class=nx>List</span><span class=p>)(</span><span class=mh>0x2081be150</span><span class=p>),</span> <span class=nx>Value</span><span class=p>:</span><span class=mi>1</span><span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=nx>second</span><span class=p>:</span> <span class=o>&amp;</span><span class=nx>list</span><span class=p>.</span><span class=nx>Element</span><span class=p>{</span><span class=nx>next</span><span class=p>:(</span><span class=o>*</span><span class=nx>list</span><span class=p>.</span><span class=nx>Element</span><span class=p>)(</span><span class=mh>0x2081be150</span><span class=p>),</span> <span class=nx>prev</span><span class=p>:(</span><span class=o>*</span><span class=nx>list</span><span class=p>.</span><span class=nx>Element</span><span class=p>)(</span><span class=mh>0x2081be180</span><span class=p>),</span> <span class=nx>list</span><span class=p>:(</span><span class=o>*</span><span class=nx>list</span><span class=p>.</span><span class=nx>List</span><span class=p>)(</span><span class=mh>0x2081be150</span><span class=p>),</span> <span class=nx>Value</span><span class=p>:</span><span class=mi>2</span><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>list 对应的方法有：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>list 对应的方法有：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -242,8 +153,7 @@
 </span><span class=lnt>18
 </span><span class=lnt>19
 </span><span class=lnt>20
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Element</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Element</span>
 </span></span><span class=line><span class=cl>    <span class=kd>func</span> <span class=p>(</span><span class=nx>e</span> <span class=o>*</span><span class=nx>Element</span><span class=p>)</span> <span class=nf>Next</span><span class=p>()</span> <span class=o>*</span><span class=nx>Element</span>
 </span></span><span class=line><span class=cl>    <span class=kd>func</span> <span class=p>(</span><span class=nx>e</span> <span class=o>*</span><span class=nx>Element</span><span class=p>)</span> <span class=nf>Prev</span><span class=p>()</span> <span class=o>*</span><span class=nx>Element</span>
 </span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>List</span>
@@ -263,20 +173,15 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>func</span> <span class=p>(</span><span class=nx>l</span> <span class=o>*</span><span class=nx>List</span><span class=p>)</span> <span class=nf>PushFront</span><span class=p>(</span><span class=nx>v</span> <span class=kd>interface</span><span class=p>{})</span> <span class=o>*</span><span class=nx>Element</span>  <span class=c1>// 在队列头部插入元素
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>func</span> <span class=p>(</span><span class=nx>l</span> <span class=o>*</span><span class=nx>List</span><span class=p>)</span> <span class=nf>PushFrontList</span><span class=p>(</span><span class=nx>other</span> <span class=o>*</span><span class=nx>List</span><span class=p>)</span> <span class=c1>// 在队列头部插入接上新队列
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>func</span> <span class=p>(</span><span class=nx>l</span> <span class=o>*</span><span class=nx>List</span><span class=p>)</span> <span class=nf>Remove</span><span class=p>(</span><span class=nx>e</span> <span class=o>*</span><span class=nx>Element</span><span class=p>)</span> <span class=kd>interface</span><span class=p>{}</span> <span class=c1>// 删除某个元素
-</span></span></span></code></pre></td></tr></table></div></div><h2 id=环>环</h2><p>环的结构有点特殊，环的尾部就是头部，所以每个元素实际上就可以代表自身的这个环。 它不需要像 list 一样保持 list 和 element 两个结构，只需要保持一个结构就行。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=环>环</h2><p>环的结构有点特殊，环的尾部就是头部，所以每个元素实际上就可以代表自身的这个环。 它不需要像 list 一样保持 list 和 element 两个结构，只需要保持一个结构就行。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Ring</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Ring</span> <span class=kd>struct</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nx>next</span><span class=p>,</span> <span class=nx>prev</span> <span class=o>*</span><span class=nx>Ring</span>
 </span></span><span class=line><span class=cl>    <span class=nx>Value</span>      <span class=kd>interface</span><span class=p>{}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p>我们初始化环的时候，需要定义好环的大小，然后对环的每个元素进行赋值。环还提供一个 Do 方法，能遍历一遍环，对每个元素执行一个 function。 看下面的例子：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>我们初始化环的时候，需要定义好环的大小，然后对环的每个元素进行赋值。环还提供一个 Do 方法，能遍历一遍环，对每个元素执行一个 function。 看下面的例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -302,8 +207,7 @@
 </span><span class=lnt>24
 </span><span class=lnt>25
 </span><span class=lnt>26
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=c1>// This example demonstrates an integer heap built using the heap interface.
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-golang data-lang=golang><span class=line><span class=cl><span class=c1>// This example demonstrates an integer heap built using the heap interface.
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
@@ -329,9 +233,7 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=nx>output</span><span class=p>:</span>
 </span></span><span class=line><span class=cl><span class=nx>sum</span> <span class=nx>is</span> <span class=mi>6</span>
-</span></span></code></pre></td></tr></table></div></div><p>ring 提供的方法有</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>ring 提供的方法有</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -340,8 +242,7 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Ring</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Ring</span>
 </span></span><span class=line><span class=cl>    <span class=kd>func</span> <span class=nf>New</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=o>*</span><span class=nx>Ring</span>  <span class=c1>// 初始化环
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>func</span> <span class=p>(</span><span class=nx>r</span> <span class=o>*</span><span class=nx>Ring</span><span class=p>)</span> <span class=nf>Do</span><span class=p>(</span><span class=nx>f</span> <span class=kd>func</span><span class=p>(</span><span class=kd>interface</span><span class=p>{}))</span>  <span class=c1>// 循环环进行操作
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>func</span> <span class=p>(</span><span class=nx>r</span> <span class=o>*</span><span class=nx>Ring</span><span class=p>)</span> <span class=nf>Len</span><span class=p>()</span> <span class=kt>int</span> <span class=c1>// 环长度
@@ -350,22 +251,6 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>func</span> <span class=p>(</span><span class=nx>r</span> <span class=o>*</span><span class=nx>Ring</span><span class=p>)</span> <span class=nf>Next</span><span class=p>()</span> <span class=o>*</span><span class=nx>Ring</span> <span class=c1>// 当前元素的下个元素
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>func</span> <span class=p>(</span><span class=nx>r</span> <span class=o>*</span><span class=nx>Ring</span><span class=p>)</span> <span class=nf>Prev</span><span class=p>()</span> <span class=o>*</span><span class=nx>Ring</span> <span class=c1>// 当前元素的上个元素
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>func</span> <span class=p>(</span><span class=nx>r</span> <span class=o>*</span><span class=nx>Ring</span><span class=p>)</span> <span class=nf>Unlink</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=o>*</span><span class=nx>Ring</span> <span class=c1>// 从当前元素开始，删除 n 个元素
-</span></span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2022-03-07</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strconv/ class=prev rel=prev title="Go strconv 标准库"><i class="fas fa-angle-left fa-fw"></i>Go strconv 标准库</a>
-<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/bytes/ class=next rel=next title="Go bytes 标准库">Go bytes 标准库<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
+</span></span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-03-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strconv/ class=prev rel=prev title="Go strconv 标准库"><i class="fas fa-angle-left fa-fw"></i>Go strconv 标准库</a>
+<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/bytes/ class=next rel=next title="Go bytes 标准库">Go bytes 标准库<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

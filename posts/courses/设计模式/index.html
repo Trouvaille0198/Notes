@@ -1,113 +1,15 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>设计模式 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="设计模式">
-<meta property="og:description" content="设计模式 认识 设计模式 定义 设计模式是对软件设计中普遍存在或反复出向的各种问题所提出的解决方案。每一个设计模式系统地被命名、解释和评价了面向对象">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-01-21T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="设计模式">
-<meta name=twitter:description content="设计模式 认识 设计模式 定义 设计模式是对软件设计中普遍存在或反复出向的各种问题所提出的解决方案。每一个设计模式系统地被命名、解释和评价了面向对象">
-<meta name=application-name content="伤心肠粉的酱油碟子">
-<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E7%89%B9%E6%80%A7/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/2.-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"设计模式","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F\/"},"genre":"posts","keywords":"设计模式","wordcount":9184,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F\/","datePublished":"2022-01-21T00:00:00+00:00","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>设计模式 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="设计模式"><meta property="og:description" content="设计模式 认识 设计模式 定义 设计模式是对软件设计中普遍存在或反复出向的各种问题所提出的解决方案。每一个设计模式系统地被命名、解释和评价了面向对象"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-01-21T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-11T02:43:10+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="设计模式"><meta name=twitter:description content="设计模式 认识 设计模式 定义 设计模式是对软件设计中普遍存在或反复出向的各种问题所提出的解决方案。每一个设计模式系统地被命名、解释和评价了面向对象"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E7%89%B9%E6%80%A7/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E5%88%B7%E9%A2%98/array/2.-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"设计模式","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F\/"},"genre":"posts","keywords":"设计模式","wordcount":9184,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F\/","datePublished":"2022-01-21T00:00:00+00:00","dateModified":"2022-03-11T02:43:10+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/posts/>文章 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">设计模式</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/><i class="far fa-folder fa-fw"></i>专业课</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-21>2022-01-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 9184 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 19 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#认识>认识</a>
-<ul>
-<li><a href=#设计模式-1>设计模式</a>
-<ul>
-<li><a href=#定义>定义</a></li><li><a href=#分类>分类</a></li></ul></li><li><a href=#接口>接口</a></li></ul></li><li><a href=#面向对象设计原则>面向对象设计原则</a>
-<ul>
-<li><a href=#开放封闭原则>开放封闭原则</a></li><li><a href=#里氏替换原则>里氏替换原则</a></li><li><a href=#依赖倒置原则>依赖倒置原则</a></li><li><a href=#接口隔离原则>接口隔离原则</a></li><li><a href=#单一职责原则>单一职责原则</a></li></ul></li><li><a href=#创建型模式>创建型模式</a>
-<ul>
-<li><a href=#简单工厂模式>简单工厂模式</a></li><li><a href=#工厂方法模式>工厂方法模式</a></li><li><a href=#抽象工厂模式>抽象工厂模式</a></li><li><a href=#建造者模式>建造者模式</a></li><li><a href=#单例模式>单例模式</a></li><li><a href=#创建型模式概述>创建型模式概述</a></li></ul></li><li><a href=#结构型模式>结构型模式</a>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href=#适配器模式>适配器模式</a></li><li><a href=#桥模式>桥模式</a></li><li><a href=#3-组合模式>3. 组合模式</a></li><li><a href=#4-外观模式>4. 外观模式</a></li><li><a href=#5-代理模式>5. 代理模式</a></li></ul></li></ul></li></ul></li></ul></li><li><a href=#行为型模式>行为型模式</a>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href=#责任链模式>责任链模式</a></li><li><a href=#2-观察者模式>2. 观察者模式</a></li><li><a href=#3-策略模式>3. 策略模式</a></li><li><a href=#4-模板方法模式>4. 模板方法模式</a></li></ul></li></ul></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=设计模式>设计模式</h1><h2 id=认识>认识</h2><h3 id=设计模式-1>设计模式</h3><h4 id=定义>定义</h4><p>设计模式是对软件设计中普遍存在或反复出向的各种问题所提出的解决方案。每一个设计模式系统地被命名、解释和评价了面向对象系统中一个重要和重复出现的设计</p><h4 id=分类>分类</h4><p><strong>创建型模式</strong></p><ul>
-<li>
-<p>隐藏底层模块的逻辑，关注怎么创建对象</p></li><li>
-<p>工厂方法模式、抽象工厂模式、创建者模式、原型模式、单例模式</p></li></ul><p><strong>结构型模式</strong></p><ul>
-<li>
-<p>类之间如何协同工作，应该组成什么结构</p></li><li>
-<p>适配器模式、桥模式、组合模式、装饰模式、外观模式、享元模式、代理模式。</p></li></ul><p><strong>行为型模式</strong></p><ul>
-<li>
-<p>关注行为，也就是方法，应该怎样某些行为</p></li><li>
-<p>解释器模式、责任链模式、命令模式、迭代器模式、中介者模式、备忘录模式、观察者模式、状态模式、策略模式、访问者模式、模板方法模式。</p></li></ul><h3 id=接口>接口</h3><p><strong>定义</strong>：若干抽象方法的集合</p><p><strong>作用</strong>：限制实现接口的类必须按照接口给定的调用方式实现这些方法，对高层模块隐藏了类的内部实现</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">设计模式</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/><i class="far fa-folder fa-fw"></i>专业课</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-21>2022-01-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 9184 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 19 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#认识>认识</a><ul><li><a href=#设计模式-1>设计模式</a><ul><li><a href=#定义>定义</a></li><li><a href=#分类>分类</a></li></ul></li><li><a href=#接口>接口</a></li></ul></li><li><a href=#面向对象设计原则>面向对象设计原则</a><ul><li><a href=#开放封闭原则>开放封闭原则</a></li><li><a href=#里氏替换原则>里氏替换原则</a></li><li><a href=#依赖倒置原则>依赖倒置原则</a></li><li><a href=#接口隔离原则>接口隔离原则</a></li><li><a href=#单一职责原则>单一职责原则</a></li></ul></li><li><a href=#创建型模式>创建型模式</a><ul><li><a href=#简单工厂模式>简单工厂模式</a></li><li><a href=#工厂方法模式>工厂方法模式</a></li><li><a href=#抽象工厂模式>抽象工厂模式</a></li><li><a href=#建造者模式>建造者模式</a></li><li><a href=#单例模式>单例模式</a></li><li><a href=#创建型模式概述>创建型模式概述</a></li></ul></li><li><a href=#结构型模式>结构型模式</a><ul><li><ul><li><ul><li><ul><li><a href=#适配器模式>适配器模式</a></li><li><a href=#桥模式>桥模式</a></li><li><a href=#3-组合模式>3. 组合模式</a></li><li><a href=#4-外观模式>4. 外观模式</a></li><li><a href=#5-代理模式>5. 代理模式</a></li></ul></li></ul></li></ul></li></ul></li><li><a href=#行为型模式>行为型模式</a><ul><li><ul><li><ul><li><ul><li><a href=#责任链模式>责任链模式</a></li><li><a href=#2-观察者模式>2. 观察者模式</a></li><li><a href=#3-策略模式>3. 策略模式</a></li><li><a href=#4-模板方法模式>4. 模板方法模式</a></li></ul></li></ul></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=设计模式>设计模式</h1><h2 id=认识>认识</h2><h3 id=设计模式-1>设计模式</h3><h4 id=定义>定义</h4><p>设计模式是对软件设计中普遍存在或反复出向的各种问题所提出的解决方案。每一个设计模式系统地被命名、解释和评价了面向对象系统中一个重要和重复出现的设计</p><h4 id=分类>分类</h4><p><strong>创建型模式</strong></p><ul><li><p>隐藏底层模块的逻辑，关注怎么创建对象</p></li><li><p>工厂方法模式、抽象工厂模式、创建者模式、原型模式、单例模式</p></li></ul><p><strong>结构型模式</strong></p><ul><li><p>类之间如何协同工作，应该组成什么结构</p></li><li><p>适配器模式、桥模式、组合模式、装饰模式、外观模式、享元模式、代理模式。</p></li></ul><p><strong>行为型模式</strong></p><ul><li><p>关注行为，也就是方法，应该怎样某些行为</p></li><li><p>解释器模式、责任链模式、命令模式、迭代器模式、中介者模式、备忘录模式、观察者模式、状态模式、策略模式、访问者模式、模板方法模式。</p></li></ul><h3 id=接口>接口</h3><p><strong>定义</strong>：若干抽象方法的集合</p><p><strong>作用</strong>：限制实现接口的类必须按照接口给定的调用方式实现这些方法，对高层模块隐藏了类的内部实现</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -143,8 +45,7 @@
 </span><span class=lnt>34
 </span><span class=lnt>35
 </span><span class=lnt>36
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 具有抽象方法的类就是接口类，</span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Payment</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>ABCMeta</span><span class=p>):</span>
@@ -180,9 +81,7 @@
 </span></span><span class=line><span class=cl><span class=n>w</span> <span class=o>=</span> <span class=n>WechatPay</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>a</span><span class=o>.</span><span class=n>pay</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>w</span><span class=o>.</span><span class=n>pay</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=面向对象设计原则>面向对象设计原则</h2><h3 id=开放封闭原则>开放封闭原则</h3><p>一个软件实体如类、模块和函数应该<strong>对扩展开放</strong>，<strong>对修改关闭</strong>。</p><p>即软件实体应该在不修改原代码的情况下进行修改。</p><h3 id=里氏替换原则>里氏替换原则</h3><p>所有引用父类的地方必须能透明地使用其子类的对象</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h2 id=面向对象设计原则>面向对象设计原则</h2><h3 id=开放封闭原则>开放封闭原则</h3><p>一个软件实体如类、模块和函数应该<strong>对扩展开放</strong>，<strong>对修改关闭</strong>。</p><p>即软件实体应该在不修改原代码的情况下进行修改。</p><h3 id=里氏替换原则>里氏替换原则</h3><p>所有引用父类的地方必须能透明地使用其子类的对象</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -200,8 +99,7 @@
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>print_name</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>        <span class=k>pass</span>
 </span></span><span class=line><span class=cl>
@@ -219,12 +117,7 @@
 </span></span></span><span class=line><span class=cl><span class=s2>    :return:
 </span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
 </span></span><span class=line><span class=cl>    <span class=n>u</span><span class=o>.</span><span class=n>print_name</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=依赖倒置原则>依赖倒置原则</h3><ul>
-<li>
-<p>高层模块不应该依赖底层模块，二者都应该依赖抽象。</p></li><li>
-<p>抽象不应该依赖细节，细节应该应该依赖抽象。</p></li></ul><p><strong>要针对接口编程，而不是针对实现编程</strong></p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=依赖倒置原则>依赖倒置原则</h3><ul><li><p>高层模块不应该依赖底层模块，二者都应该依赖抽象。</p></li><li><p>抽象不应该依赖细节，细节应该应该依赖抽象。</p></li></ul><p><strong>要针对接口编程，而不是针对实现编程</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -247,8 +140,7 @@
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 接口，抽象不应该依赖细节</span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Payment</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>ABCMeta</span><span class=p>):</span>
@@ -271,12 +163,7 @@
 </span></span><span class=line><span class=cl><span class=n>w</span> <span class=o>=</span> <span class=n>WechatPay</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>a</span><span class=o>.</span><span class=n>pay</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>w</span><span class=o>.</span><span class=n>pay</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=接口隔离原则>接口隔离原则</h3><ul>
-<li>
-<p>使用多个专门的接口，而不使用单一的总接口</p></li><li>
-<p>高层的代码不应该依赖那些它不需要的接口</p></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=接口隔离原则>接口隔离原则</h3><ul><li><p>使用多个专门的接口，而不使用单一的总接口</p></li><li><p>高层的代码不应该依赖那些它不需要的接口</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -302,8 +189,7 @@
 </span><span class=lnt>24
 </span><span class=lnt>25
 </span><span class=lnt>26
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>LandAnimal</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>ABCMeta</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=nd>@abstractmethod</span>
@@ -329,9 +215,7 @@
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Frog</span><span class=p>(</span><span class=n>LandAnimal</span><span class=p>,</span> <span class=n>WaterAnimal</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>walk</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>        <span class=k>pass</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=单一职责原则>单一职责原则</h3><p>不要存在多于一个导致类变更的原因，一个类只负责一项职责，一个类只做一件事。</p><p><strong>把面向过程的代码放到类中，虽然用到了类，但不是面向对象</strong>。</p><h2 id=创建型模式>创建型模式</h2><h3 id=简单工厂模式>简单工厂模式</h3><p>简单工厂模式不在 23 种设计模式之中，但很重要。</p><p>简单工厂模式不直接向客户端暴露对象创建的细节，而是通过一个<strong>工厂类</strong>来负责创建产品类的实例。</p><p>简单工程模式的角色有：工厂角色、抽象产品角色、具体产品角色</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=单一职责原则>单一职责原则</h3><p>不要存在多于一个导致类变更的原因，一个类只负责一项职责，一个类只做一件事。</p><p><strong>把面向过程的代码放到类中，虽然用到了类，但不是面向对象</strong>。</p><h2 id=创建型模式>创建型模式</h2><h3 id=简单工厂模式>简单工厂模式</h3><p>简单工厂模式不在 23 种设计模式之中，但很重要。</p><p>简单工厂模式不直接向客户端暴露对象创建的细节，而是通过一个<strong>工厂类</strong>来负责创建产品类的实例。</p><p>简单工程模式的角色有：工厂角色、抽象产品角色、具体产品角色</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -372,8 +256,7 @@
 </span><span class=lnt>39
 </span><span class=lnt>40
 </span><span class=lnt>41
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 抽象产品角色，以什么样的表现去使用</span>
@@ -414,9 +297,7 @@
 </span></span><span class=line><span class=cl><span class=n>pf</span> <span class=o>=</span> <span class=n>PaymentFactory</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>p</span> <span class=o>=</span> <span class=n>pf</span><span class=o>.</span><span class=n>create_payment</span><span class=p>(</span><span class=s1>&#39;HuabeiPay&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>p</span><span class=o>.</span><span class=n>pay</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=工厂方法模式>工厂方法模式</h3><p>简单工厂模式只创建一个工厂类，当有新的产品时，需要修改工厂类代码。</p><p>而工厂方法模式的<strong>每个具体产品对应一个具体的工厂类</strong>，不需要修改工厂类代码，并且同时也能满足隐藏对象创建的细节。</p><p>但是工厂方法模式也是有缺点的：每增加一个具体产品类，就必须增加一个相应的具体方法。</p><p>工厂模式方法模式的概念是定义了一个用于创建对象的接口（<strong>工厂接口</strong>），让子类决定实例化哪一个产品类。</p><p>角色有抽象工厂角色、具体工厂角色、抽象产品角色和具体产品角色。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=工厂方法模式>工厂方法模式</h3><p>简单工厂模式只创建一个工厂类，当有新的产品时，需要修改工厂类代码。</p><p>而工厂方法模式的<strong>每个具体产品对应一个具体的工厂类</strong>，不需要修改工厂类代码，并且同时也能满足隐藏对象创建的细节。</p><p>但是工厂方法模式也是有缺点的：每增加一个具体产品类，就必须增加一个相应的具体方法。</p><p>工厂模式方法模式的概念是定义了一个用于创建对象的接口（<strong>工厂接口</strong>），让子类决定实例化哪一个产品类。</p><p>角色有抽象工厂角色、具体工厂角色、抽象产品角色和具体产品角色。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -460,8 +341,7 @@
 </span><span class=lnt>42
 </span><span class=lnt>43
 </span><span class=lnt>44
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 抽象产品角色</span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Payment</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>ABCMeta</span><span class=p>):</span>
@@ -505,9 +385,7 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>hfp</span> <span class=o>=</span> <span class=n>HuabeiFactory</span><span class=p>()</span><span class=o>.</span><span class=n>create_payment</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>hfp</span><span class=o>.</span><span class=n>pay</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>  <span class=c1># 花呗支付了100元!</span>
-</span></span></code></pre></td></tr></table></div></div><p>缺点是每增加一个具体产品类，就必须增加一个相应的具体方法：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>缺点是每增加一个具体产品类，就必须增加一个相应的具体方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -560,8 +438,7 @@
 </span><span class=lnt>51
 </span><span class=lnt>52
 </span><span class=lnt>53
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Payment</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>ABCMeta</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=nd>@abstractmethod</span>
@@ -614,9 +491,7 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>bfp</span> <span class=o>=</span> <span class=n>BankPayFactory</span><span class=p>()</span><span class=o>.</span><span class=n>create_payment</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>bfp</span><span class=o>.</span><span class=n>pay</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>  <span class=c1># 银行支付了100元!</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=抽象工厂模式>抽象工厂模式</h3><p>定义一个工厂类的接口让工厂的子类来创建一系列相关或者相互依赖的对象。</p><p>相比工厂方法模式，<strong>抽象工厂模式中的每一个具体工厂都生产一套产品</strong>。</p><p>下面是生产厂商生产一部手机的例子：生产一部手机如果说只需要手机壳、CPU和操作系统这三个类对象，其中每个类对象都有不同的种类。对每个具体工厂，分别生产一部手机需要的三个对象。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span></span></code></pre></td></tr></table></div></div><h3 id=抽象工厂模式>抽象工厂模式</h3><p>定义一个工厂类的接口让工厂的子类来创建一系列相关或者相互依赖的对象。</p><p>相比工厂方法模式，<strong>抽象工厂模式中的每一个具体工厂都生产一套产品</strong>。</p><p>下面是生产厂商生产一部手机的例子：生产一部手机如果说只需要手机壳、CPU和操作系统这三个类对象，其中每个类对象都有不同的种类。对每个具体工厂，分别生产一部手机需要的三个对象。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
 </span><span class=lnt>  2
 </span><span class=lnt>  3
 </span><span class=lnt>  4
@@ -729,8 +604,7 @@
 </span><span class=lnt>111
 </span><span class=lnt>112
 </span><span class=lnt>113
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># ------抽象的产品------</span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>PhoneShell</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>ABCMeta</span><span class=p>):</span>
@@ -843,12 +717,7 @@
 </span></span></span><span class=line><span class=cl><span class=s2>华为CPU
 </span></span></span><span class=line><span class=cl><span class=s2>IOS系统
 </span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><p>抽象工厂模式的角色有：抽象工厂角色、具体工厂角色、抽象产品角色、具体产品角色和客户端。</p><p>优点</p><ul>
-<li>将客户端和类的具体实现相分离；</li><li><strong>每个工厂创建了一个完整的产品系列</strong>，使得易于交换产品系列；</li><li>有利于产品的一致性，即产品之间的约束关系。</li></ul><p>缺点</p><ul>
-<li><strong>难以支持新种类抽象产品</strong>。</li></ul><h3 id=建造者模式>建造者模式</h3><p>建造者模式是将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p><p>角色</p><ul>
-<li>抽象创建者</li><li>具体创建者</li><li>指挥者</li><li>产品</li></ul><p>建造者模式与抽象工厂模式相似，也用来创建复杂的对象。主要区别是 <strong>建造者模式着重一步步构造一个复杂对象（控制顺序），而抽象工厂模式着重于多个系列的产品对象</strong></p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>抽象工厂模式的角色有：抽象工厂角色、具体工厂角色、抽象产品角色、具体产品角色和客户端。</p><p>优点</p><ul><li>将客户端和类的具体实现相分离；</li><li><strong>每个工厂创建了一个完整的产品系列</strong>，使得易于交换产品系列；</li><li>有利于产品的一致性，即产品之间的约束关系。</li></ul><p>缺点</p><ul><li><strong>难以支持新种类抽象产品</strong>。</li></ul><h3 id=建造者模式>建造者模式</h3><p>建造者模式是将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p><p>角色</p><ul><li>抽象创建者</li><li>具体创建者</li><li>指挥者</li><li>产品</li></ul><p>建造者模式与抽象工厂模式相似，也用来创建复杂的对象。主要区别是 <strong>建造者模式着重一步步构造一个复杂对象（控制顺序），而抽象工厂模式着重于多个系列的产品对象</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -932,8 +801,7 @@
 </span><span class=lnt>82
 </span><span class=lnt>83
 </span><span class=lnt>84
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># ------产品------</span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Player</span><span class=p>:</span>
@@ -1017,9 +885,7 @@
 </span></span><span class=line><span class=cl><span class=n>director</span> <span class=o>=</span> <span class=n>PlayerDirectory</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>p</span> <span class=o>=</span> <span class=n>director</span><span class=o>.</span><span class=n>builder_player</span><span class=p>(</span><span class=n>builder</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>p</span><span class=p>)</span>  <span class=c1># 漂亮的脸蛋,苗条的身材,细细的胳膊,大长腿</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=单例模式>单例模式</h3><p>单例模式保证一个类只有一个实例，并提供一个访问它的全局访问点。</p><p>优点是对唯一实例的受控访问（只有一个实例），单例相当于全局变量，但防止了命名空间被污染（变量命名不会有冲突）。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=单例模式>单例模式</h3><p>单例模式保证一个类只有一个实例，并提供一个访问它的全局访问点。</p><p>优点是对唯一实例的受控访问（只有一个实例），单例相当于全局变量，但防止了命名空间被污染（变量命名不会有冲突）。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1037,8 +903,7 @@
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Singleton</span><span class=p>:</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Singleton</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=ow>not</span> <span class=nb>hasattr</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=s2>&#34;_instance&#34;</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>            <span class=bp>cls</span><span class=o>.</span><span class=n>_instance</span> <span class=o>=</span> <span class=nb>super</span><span class=p>(</span><span class=n>Singleton</span><span class=p>,</span> <span class=bp>cls</span><span class=p>)</span><span class=o>.</span><span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>)</span>
@@ -1056,25 +921,19 @@
 </span></span></span><span class=line><span class=cl><span class=s2>2 2
 </span></span></span><span class=line><span class=cl><span class=s2>139843914173312 139843914173312
 </span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><p>如果实例只出现一次，如：</p><ul>
-<li>日志系统中只需要创建一个日志对象（否则两个日志对象同时操作一个文件就会造成操作冲突）；</li><li>数据库连接池只需要创建一个对象来操作数据库（否则增加系统开销，浪费系统资源）；</li><li>操作系统只需要创建一个文件系统对象来操作文件系统。</li></ul><h3 id=创建型模式概述>创建型模式概述</h3><p>抽象工厂模式和建造者模式相比于简单工厂模式和工厂方法模式而言更加灵活也更加复杂。</p><p>通常情况下，<strong>软件设计以简单工厂模式或工厂方法模式开始</strong>，当发现设计需要更大的灵活性的时候，则向更加复杂的设计模式演化。</p><h2 id=结构型模式>结构型模式</h2><h6 id=适配器模式>适配器模式</h6><p>将一个类的接口转换成客户希望的另外一个接口，适配器使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。<strong><code>实现适配器的两种方式，类适配器使用多继承，对象适配器使用组合</code></strong>。<strong><code>组合就是一个类中放入另一类的对象。</code></strong> 先来看下组合：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>如果实例只出现一次，如：</p><ul><li>日志系统中只需要创建一个日志对象（否则两个日志对象同时操作一个文件就会造成操作冲突）；</li><li>数据库连接池只需要创建一个对象来操作数据库（否则增加系统开销，浪费系统资源）；</li><li>操作系统只需要创建一个文件系统对象来操作文件系统。</li></ul><h3 id=创建型模式概述>创建型模式概述</h3><p>抽象工厂模式和建造者模式相比于简单工厂模式和工厂方法模式而言更加灵活也更加复杂。</p><p>通常情况下，<strong>软件设计以简单工厂模式或工厂方法模式开始</strong>，当发现设计需要更大的灵活性的时候，则向更加复杂的设计模式演化。</p><h2 id=结构型模式>结构型模式</h2><h6 id=适配器模式>适配器模式</h6><p>将一个类的接口转换成客户希望的另外一个接口，适配器使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。<strong><code>实现适配器的两种方式，类适配器使用多继承，对象适配器使用组合</code></strong>。<strong><code>组合就是一个类中放入另一类的对象。</code></strong> 先来看下组合：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>A</span><span class=p>:</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>A</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>	<span class=k>pass</span>
 </span></span><span class=line><span class=cl>	
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>B</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>	<span class=k>def</span> <span class=fm>__init__</span><span class=p>():</span>
 </span></span><span class=line><span class=cl>		<span class=bp>self</span><span class=o>.</span><span class=n>a</span> <span class=o>=</span> <span class=n>A</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><p>类适配器模式使用示例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>类适配器模式使用示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1106,8 +965,7 @@
 </span><span class=lnt>30
 </span><span class=lnt>31
 </span><span class=lnt>32
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 类适配器模式使用示例：</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 类适配器模式使用示例：</span>
 </span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 目标接口</span>
@@ -1139,9 +997,7 @@
 </span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;
 </span></span></span><span class=line><span class=cl><span class=s2>银联支付了100
 </span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><p>对象适配器模式使用示例：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>对象适配器模式使用示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1180,8 +1036,7 @@
 </span><span class=lnt>37
 </span><span class=lnt>38
 </span><span class=lnt>39
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 类适配器模式使用示例：</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 类适配器模式使用示例：</span>
 </span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 目标接口</span>
@@ -1220,9 +1075,7 @@
 </span></span></span><span class=line><span class=cl><span class=s2>苹果支付了100
 </span></span></span><span class=line><span class=cl><span class=s2>银联支付了100
 </span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><p>适配器模式有三种角色，分别是目标接口、待适配的类和适配器。适用场景是：想使用一个已存在的类，而它的接口不符合你的要求。想使用一些已经存在的类，但是不可能对每一个都进行子类化以匹配它们的接口。对象适配器可以适配它的父类接口。</p><h6 id=桥模式>桥模式</h6><p>桥模式是将一个事物的两个维度分离，使其都可以独立地变化。当事物有两个维度的表现，两个维度都可能扩展时使用。优点是：抽象和实现相分离，扩展能力强。如果不使用桥模式，在任何维度进行扩展，需要改好多代码，因为使用到了继承：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>适配器模式有三种角色，分别是目标接口、待适配的类和适配器。适用场景是：想使用一个已存在的类，而它的接口不符合你的要求。想使用一些已经存在的类，但是不可能对每一个都进行子类化以匹配它们的接口。对象适配器可以适配它的父类接口。</p><h6 id=桥模式>桥模式</h6><p>桥模式是将一个事物的两个维度分离，使其都可以独立地变化。当事物有两个维度的表现，两个维度都可能扩展时使用。优点是：抽象和实现相分离，扩展能力强。如果不使用桥模式，在任何维度进行扩展，需要改好多代码，因为使用到了继承：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1242,8 +1095,7 @@
 </span><span class=lnt>18
 </span><span class=lnt>19
 </span><span class=lnt>20
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Shape</span><span class=p>:</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Shape</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>	<span class=k>pass</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Rectangle</span><span class=p>(</span><span class=n>Shape</span><span class=p>):</span>
@@ -1263,9 +1115,7 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>GreenCircle</span><span class=p>(</span><span class=n>Circle</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>	<span class=k>pass</span>
-</span></span></code></pre></td></tr></table></div></div><p>以上代码形状和颜色两个维度是通过类的继承关系紧密结合在一起，是紧耦合。紧耦合是是不可取的，应用桥模式的思想，可以使用组合来实现（松耦合）。如果需要画直线，直接加上直线的类。需要新颜色，直接加上颜色的类。两个维度都可以自由扩展，不需要添加很多代码。这里的角色有抽象、细化抽象、实现者和具体实现者：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>以上代码形状和颜色两个维度是通过类的继承关系紧密结合在一起，是紧耦合。紧耦合是是不可取的，应用桥模式的思想，可以使用组合来实现（松耦合）。如果需要画直线，直接加上直线的类。需要新颜色，直接加上颜色的类。两个维度都可以自由扩展，不需要添加很多代码。这里的角色有抽象、细化抽象、实现者和具体实现者：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1314,8 +1164,7 @@
 </span><span class=lnt>47
 </span><span class=lnt>48
 </span><span class=lnt>49
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 抽象</span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Shape</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>ABCMeta</span><span class=p>):</span>
@@ -1364,9 +1213,7 @@
 </span></span></span><span class=line><span class=cl><span class=s2>画红色的长方形
 </span></span></span><span class=line><span class=cl><span class=s2>画绿色的圆形
 </span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><h6 id=3-组合模式>3. 组合模式</h6><p>将对象组合成树形结构以表示“部分-整体”的层次结构(特别是结构是递归的)，组合模式使得用户对单个对象和组合对象的使用具有一致性。优点是定义了包含基本对象和组合对象的层次结构；简化客户端代码，客户端可以一致地使用组合对象和单个对象；更加容易增加新类型的组件。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h6 id=3-组合模式>3. 组合模式</h6><p>将对象组合成树形结构以表示“部分-整体”的层次结构(特别是结构是递归的)，组合模式使得用户对单个对象和组合对象的使用具有一致性。优点是定义了包含基本对象和组合对象的层次结构；简化客户端代码，客户端可以一致地使用组合对象和单个对象；更加容易增加新类型的组件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1424,8 +1271,7 @@
 </span><span class=lnt>56
 </span><span class=lnt>57
 </span><span class=lnt>58
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 抽象组件</span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Graphic</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>ABCMeta</span><span class=p>):</span>
@@ -1483,9 +1329,7 @@
 </span></span><span class=line><span class=cl><span class=c1># 复合图形</span>
 </span></span><span class=line><span class=cl><span class=n>pic</span> <span class=o>=</span> <span class=n>Picture</span><span class=p>([</span><span class=n>p</span><span class=p>,</span> <span class=n>l1</span><span class=p>,</span> <span class=n>l2</span><span class=p>])</span>
 </span></span><span class=line><span class=cl><span class=n>pic</span><span class=o>.</span><span class=n>draw</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><h6 id=4-外观模式>4. 外观模式</h6><p>外观模式为子系统中的一组接口提供一个一致的界面，外观模式定义了一个高层的接口，这个接口使得这一子系统更加容易使用。外观模式下的角色有外观和子系统类，优点是：减少系统相互依赖，提高灵活性，提高了安全性。下面看一个例子：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h6 id=4-外观模式>4. 外观模式</h6><p>外观模式为子系统中的一组接口提供一个一致的界面，外观模式定义了一个高层的接口，这个接口使得这一子系统更加容易使用。外观模式下的角色有外观和子系统类，优点是：减少系统相互依赖，提高灵活性，提高了安全性。下面看一个例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1530,8 +1374,7 @@
 </span><span class=lnt>43
 </span><span class=lnt>44
 </span><span class=lnt>45
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 子系统类</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 子系统类</span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>CPU</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>run</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;CPU start to run...&#39;</span><span class=p>)</span>
@@ -1576,9 +1419,7 @@
 </span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=n>Computer</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>c</span><span class=o>.</span><span class=n>run</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>c</span><span class=o>.</span><span class=n>stop</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><h6 id=5-代理模式>5. 代理模式</h6><p>为其它对象提供一种代理以控制对这个对象的访问。角色有抽象实体、实体和代理。应用场景有远程代理：为远程的对象提供代理（通过ORM向数据库写值，不用关注数据库是在远程）；虚代理：根据需要创建很大的对象（需要的时候创建对象）；保护代理：控制对原始对象的访问，用于对象有不同的访问权限。下面是不使用虚代理的例子：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h6 id=5-代理模式>5. 代理模式</h6><p>为其它对象提供一种代理以控制对这个对象的访问。角色有抽象实体、实体和代理。应用场景有远程代理：为远程的对象提供代理（通过ORM向数据库写值，不用关注数据库是在远程）；虚代理：根据需要创建很大的对象（需要的时候创建对象）；保护代理：控制对原始对象的访问，用于对象有不同的访问权限。下面是不使用虚代理的例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1607,8 +1448,7 @@
 </span><span class=lnt>27
 </span><span class=lnt>28
 </span><span class=lnt>29
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>class Subject(metaclass=ABCMeta):
 </span></span><span class=line><span class=cl>    @abstractmethod
@@ -1637,9 +1477,7 @@
 </span></span><span class=line><span class=cl>&#34;&#34;&#34;
 </span></span><span class=line><span class=cl>读取文件内容！
 </span></span><span class=line><span class=cl>&#34;&#34;&#34;
-</span></span></code></pre></td></tr></table></div></div><p>使用虚代理的例子：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>使用虚代理的例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1685,8 +1523,7 @@
 </span><span class=lnt>44
 </span><span class=lnt>45
 </span><span class=lnt>46
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>class Subject(metaclass=ABCMeta):
 </span></span><span class=line><span class=cl>    @abstractmethod
@@ -1732,9 +1569,7 @@
 </span></span><span class=line><span class=cl>&#34;&#34;&#34;
 </span></span><span class=line><span class=cl>读取文件内容！
 </span></span><span class=line><span class=cl>&#34;&#34;&#34;
-</span></span></code></pre></td></tr></table></div></div><p>不使用虚代理，只要是实例化 RealSubject 类，就会读取这个文件占用内存。使用虚代理后，可以和根据需要创建对象，用户不调用是不会创建 RealSubject 对象的，节省了内存的开销。如果需要只有读的权限而没有写的权限，可以使用保护代理：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>不使用虚代理，只要是实例化 RealSubject 类，就会读取这个文件占用内存。使用虚代理后，可以和根据需要创建对象，用户不调用是不会创建 RealSubject 对象的，节省了内存的开销。如果需要只有读的权限而没有写的权限，可以使用保护代理：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1782,8 +1617,7 @@
 </span><span class=lnt>46
 </span><span class=lnt>47
 </span><span class=lnt>48
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>class Subject(metaclass=ABCMeta):
 </span></span><span class=line><span class=cl>    @abstractmethod
@@ -1831,9 +1665,7 @@
 </span></span><span class=line><span class=cl>    raise PermissionError(&#39;无写入权限！&#39;)
 </span></span><span class=line><span class=cl>PermissionError: 无写入权限！
 </span></span><span class=line><span class=cl>&#34;&#34;&#34;
-</span></span></code></pre></td></tr></table></div></div><h2 id=行为型模式>行为型模式</h2><h6 id=责任链模式>责任链模式</h6><p>​ 责任链模式的内容：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链并沿着这条链传递该请求，直到有一个对象处理它为止。责任链的角色有抽象处理者、具体处理者和客户端。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h2 id=行为型模式>行为型模式</h2><h6 id=责任链模式>责任链模式</h6><p>​ 责任链模式的内容：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链并沿着这条链传递该请求，直到有一个对象处理它为止。责任链的角色有抽象处理者、具体处理者和客户端。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1881,8 +1713,7 @@
 </span><span class=lnt>46
 </span><span class=lnt>47
 </span><span class=lnt>48
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl># 抽象的处理者
 </span></span><span class=line><span class=cl>class Handler(metaclass=ABCMeta):
@@ -1930,9 +1761,7 @@
 </span></span><span class=line><span class=cl>部门经理职权不足
 </span></span><span class=line><span class=cl>总经理准假20
 </span></span><span class=line><span class=cl>&#34;&#34;&#34;
-</span></span></code></pre></td></tr></table></div></div><p>​ 使用场景：有多个对象可以处理一个请求，哪个对象处理由运行时决定；在不明确接收者的情况下，向多个对象中的一个提交一个请求。优点是降低耦合度，一个对象无需知道是其它哪一个对象处理其请求。</p><h6 id=2-观察者模式>2. 观察者模式</h6><p>​ 观察者模式应用比较广泛，又被称为“发布-订阅”模式。它用来定义对象间一种一对多的依赖关系，当一个对象的状态发生变化时，所有依赖它的对象都得到通知并被自动更新。观察者模式的角色有：抽象主题、具体主题（发布者）、抽象观察者和具体观察者（订阅者）。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>​ 使用场景：有多个对象可以处理一个请求，哪个对象处理由运行时决定；在不明确接收者的情况下，向多个对象中的一个提交一个请求。优点是降低耦合度，一个对象无需知道是其它哪一个对象处理其请求。</p><h6 id=2-观察者模式>2. 观察者模式</h6><p>​ 观察者模式应用比较广泛，又被称为“发布-订阅”模式。它用来定义对象间一种一对多的依赖关系，当一个对象的状态发生变化时，所有依赖它的对象都得到通知并被自动更新。观察者模式的角色有：抽象主题、具体主题（发布者）、抽象观察者和具体观察者（订阅者）。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -2006,8 +1835,7 @@
 </span><span class=lnt>72
 </span><span class=lnt>73
 </span><span class=lnt>74
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import ABCMeta, abstractmethod
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl># 抽象的订阅者
 </span></span><span class=line><span class=cl>class Observer(metaclass=ABCMeta):
@@ -2081,9 +1909,7 @@
 </span></span><span class=line><span class=cl>明天开会！
 </span></span><span class=line><span class=cl>假期放假通知！
 </span></span><span class=line><span class=cl>&#34;&#34;&#34;
-</span></span></code></pre></td></tr></table></div></div><p>​ 使用场景：当一个抽象模型有两个方面，其中一个方面依赖另一个方面。将这两者封装在独立对象中以使它们可以各自独立地改变和复用；当对一个对象的改变需要同时改变其它对象，而不知道具体有多少对象待改变；当一个对象必须通知其它对象，而它又不能假定其它对象是谁。换言之，你不希望这些对象是紧耦合的。优点：目标和观察者之间的抽象耦合最小；支持广播通信。</p><h6 id=3-策略模式>3. 策略模式</h6><p>​ 定义一个个算法，把它们封装起来，并且使它们可以相互替换。本模式使得算法可独立于使用它的客户而变化。角色有：抽象策略、具体策略和上下文。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>​ 使用场景：当一个抽象模型有两个方面，其中一个方面依赖另一个方面。将这两者封装在独立对象中以使它们可以各自独立地改变和复用；当对一个对象的改变需要同时改变其它对象，而不知道具体有多少对象待改变；当一个对象必须通知其它对象，而它又不能假定其它对象是谁。换言之，你不希望这些对象是紧耦合的。优点：目标和观察者之间的抽象耦合最小；支持广播通信。</p><h6 id=3-策略模式>3. 策略模式</h6><p>​ 定义一个个算法，把它们封装起来，并且使它们可以相互替换。本模式使得算法可独立于使用它的客户而变化。角色有：抽象策略、具体策略和上下文。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -2129,8 +1955,7 @@
 </span><span class=lnt>44
 </span><span class=lnt>45
 </span><span class=lnt>46
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import abstractmethod, ABCMeta
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>from abc import abstractmethod, ABCMeta
 </span></span><span class=line><span class=cl>from datetime import datetime
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl># 抽象策略
@@ -2176,9 +2001,7 @@
 </span></span><span class=line><span class=cl>使用较快的策略处理Hello!
 </span></span><span class=line><span class=cl>使用较慢的策略处理Hello!
 </span></span><span class=line><span class=cl>&#34;&#34;&#34;
-</span></span></code></pre></td></tr></table></div></div><p>​ 优点：定义了一些列可重用的算法和行为；消除了一些条件语句；可以提供相同行为的不同实现；缺点：客户必须了解不同的策略。</p><h6 id=4-模板方法模式>4. 模板方法模式</h6><p>​ 内容：定义一个操作中的算法骨架，将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。使用模板方法，需要用到两种角色，分别是抽象类和具体类。抽象类的作用是是定义抽象类（钩子操作），实现一个模板方法作为算法的骨架。具体类的作用实现原子操作。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>​ 优点：定义了一些列可重用的算法和行为；消除了一些条件语句；可以提供相同行为的不同实现；缺点：客户必须了解不同的策略。</p><h6 id=4-模板方法模式>4. 模板方法模式</h6><p>​ 内容：定义一个操作中的算法骨架，将一些步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。使用模板方法，需要用到两种角色，分别是抽象类和具体类。抽象类的作用是是定义抽象类（钩子操作），实现一个模板方法作为算法的骨架。具体类的作用实现原子操作。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -2224,8 +2047,7 @@
 </span><span class=lnt>44
 </span><span class=lnt>45
 </span><span class=lnt>46
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span><span class=p>,</span> <span class=n>abstractmethod</span>
 </span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>time</span> <span class=kn>import</span> <span class=n>sleep</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 抽象类</span>
@@ -2271,22 +2093,6 @@
 </span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>msg</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>MyWindow</span><span class=p>(</span><span class=s2>&#34;Hello...&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>run</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><p>​ 模板方法适用的场景：一次性实现一个算法的不变部分，各个子类中的公共行为应该被提取出来并集中到一个公共父类中以避免代码重复；控制子类扩展。</p></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2022-03-07</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/>设计模式</a></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/python/%E7%89%B9%E6%80%A7/ class=prev rel=prev title="Python 特性"><i class="fas fa-angle-left fa-fw"></i>Python 特性</a>
-<a href=/Notes/posts/%E5%88%B7%E9%A2%98/array/2.-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/ class=next rel=next title="2. 两数相加">2. 两数相加<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
+</span></span></code></pre></td></tr></table></div></div><p>​ 模板方法适用的场景：一次性实现一个算法的不变部分，各个子类中的公共行为应该被提取出来并集中到一个公共父类中以避免代码重复；控制子类扩展。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-03-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/>设计模式</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/%E7%89%B9%E6%80%A7/ class=prev rel=prev title="Python 特性"><i class="fas fa-angle-left fa-fw"></i>Python 特性</a>
+<a href=/Notes/posts/%E5%88%B7%E9%A2%98/array/2.-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/ class=next rel=next title="2. 两数相加">2. 两数相加<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

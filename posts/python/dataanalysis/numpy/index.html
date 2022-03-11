@@ -1,116 +1,23 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>numpy - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="numpy">
-<meta property="og:description" content="numpy 数组基础 属性 ndarray.ndim 数组的轴（维度）的个数。在Python世界中，维度的数量被称为rank（秩） ndarray.shape 数组的维度。这是一个整数的元组，表示每个维度中">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/numpy/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="numpy">
-<meta name=twitter:description content="numpy 数组基础 属性 ndarray.ndim 数组的轴（维度）的个数。在Python世界中，维度的数量被称为rank（秩） ndarray.shape 数组的维度。这是一个整数的元组，表示每个维度中">
-<meta name=application-name content="伤心肠粉的酱油碟子">
-<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/numpy/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/pandas/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/matplotlib/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"numpy","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/dataanalysis\/numpy\/"},"genre":"posts","keywords":"Python, 数据分析","wordcount":2918,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/dataanalysis\/numpy\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>numpy - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="numpy"><meta property="og:description" content="numpy 数组基础 属性 ndarray.ndim 数组的轴（维度）的个数。在Python世界中，维度的数量被称为rank（秩） ndarray.shape 数组的维度。这是一个整数的元组，表示每个维度中"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/numpy/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-10-23T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-11T02:43:10+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="numpy"><meta name=twitter:description content="numpy 数组基础 属性 ndarray.ndim 数组的轴（维度）的个数。在Python世界中，维度的数量被称为rank（秩） ndarray.shape 数组的维度。这是一个整数的元组，表示每个维度中"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/numpy/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/pandas/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/dataanalysis/matplotlib/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"numpy","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/dataanalysis\/numpy\/"},"genre":"posts","keywords":"Python, 数据分析","wordcount":2918,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/dataanalysis\/numpy\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2022-03-11T02:43:10+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/posts/>文章 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">numpy</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2918 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#数组基础>数组基础</a>
-<ul>
-<li><a href=#属性>属性</a></li><li><a href=#创建>创建</a>
-<ul>
-<li><a href=#用列表和元组创建数组>用列表和元组创建数组</a></li><li><a href=#用占位符创建数组>用占位符创建数组</a></li><li><a href=#在一定范围内创建数组>在一定范围内创建数组</a>
-<ul>
-<li><a href=#使用arange函数>使用arange函数</a></li><li><a href=#使用linspace函数>使用linspace函数</a></li></ul></li><li><a href=#创建二维数组>创建二维数组</a></li><li><a href=#随机创建>随机创建</a>
-<ul>
-<li><a href=#使用numpyrandomrand>使用numpy.random.rand()</a></li><li><a href=#使用numpyrandomrandn>使用numpy.random.randn()</a></li></ul></li></ul></li><li><a href=#运算>运算</a>
-<ul>
-<li><a href=#基本运算符>基本运算符</a></li><li><a href=#特殊运算符>特殊运算符</a></li></ul></li><li><a href=#通函数ufunc>通函数（ufunc）</a></li><li><a href=#切片>切片</a>
-<ul>
-<li><a href=#一维数组>一维数组</a></li><li><a href=#多维数组>多维数组</a></li></ul></li><li><a href=#调整数据>调整数据</a>
-<ul>
-<li><a href=#四舍五入>四舍五入</a></li><li><a href=#向下取整>向下取整</a></li><li><a href=#向上取整>向上取整</a></li></ul></li></ul></li><li><a href=#索引进阶>索引进阶</a>
-<ul>
-<li><a href=#花式索引>花式索引</a></li><li><a href=#布尔屏蔽>布尔屏蔽</a></li><li><a href=#where-函数>Where 函数</a></li></ul></li><li><a href=#形状操控>形状操控</a>
-<ul>
-<li><a href=#改变数组的形状>改变数组的形状</a></li><li><a href=#堆叠数组>堆叠数组</a></li><li><a href=#拆分数组>拆分数组</a></li></ul></li><li><a href=#例>例</a></li></ul></nav></div></div><div class=content id=content><h1 id=numpy>numpy</h1><h2 id=数组基础>数组基础</h2><h3 id=属性>属性</h3><ol>
-<li>
-<p><em>ndarray.ndim</em></p><p>数组的轴（维度）的个数。在Python世界中，维度的数量被称为rank（秩）</p></li><li>
-<p><em>ndarray.shape</em></p><p>数组的维度。这是一个整数的元组，表示每个维度中数组的大小。对于有 n 行和 m 列的矩阵，shape 将是 (n,m)。因此，shape 元组的长度就是rank或维度的个数 ndim。</p></li><li>
-<p><em>ndarray.size</em></p><p>数组元素的总数。这等于 shape 的元素的乘积。</p></li><li>
-<p><em>ndarray.dtype</em></p><p>一个描述数组中元素类型的对象。可以使用标准的Python类型创建或指定dtype。另外NumPy提供它自己的类型。例numpy.int32、numpy.int16和numpy.float64。</p></li><li>
-<p><em>ndarray.itemsize</em></p><p>数组中每个元素的字节大小。例如，元素为 float64 类型的数组的 itemsize 为8（=64/8），而 complex32 类型的数组的 itemsize 为4（=32/8）。它等于 ndarray.dtype.itemsize 。</p></li><li>
-<p><em>ndarray.data</em></p><p>该缓冲区包含数组的实际元素。通常，我们不需要使用此属性，因为我们将使用索引访问数组中的元素。</p></li></ol><h3 id=创建>创建</h3><p>概览</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">numpy</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2918 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#数组基础>数组基础</a><ul><li><a href=#属性>属性</a></li><li><a href=#创建>创建</a><ul><li><a href=#用列表和元组创建数组>用列表和元组创建数组</a></li><li><a href=#用占位符创建数组>用占位符创建数组</a></li><li><a href=#在一定范围内创建数组>在一定范围内创建数组</a><ul><li><a href=#使用arange函数>使用arange函数</a></li><li><a href=#使用linspace函数>使用linspace函数</a></li></ul></li><li><a href=#创建二维数组>创建二维数组</a></li><li><a href=#随机创建>随机创建</a><ul><li><a href=#使用numpyrandomrand>使用numpy.random.rand()</a></li><li><a href=#使用numpyrandomrandn>使用numpy.random.randn()</a></li></ul></li></ul></li><li><a href=#运算>运算</a><ul><li><a href=#基本运算符>基本运算符</a></li><li><a href=#特殊运算符>特殊运算符</a></li></ul></li><li><a href=#通函数ufunc>通函数（ufunc）</a></li><li><a href=#切片>切片</a><ul><li><a href=#一维数组>一维数组</a></li><li><a href=#多维数组>多维数组</a></li></ul></li><li><a href=#调整数据>调整数据</a><ul><li><a href=#四舍五入>四舍五入</a></li><li><a href=#向下取整>向下取整</a></li><li><a href=#向上取整>向上取整</a></li></ul></li></ul></li><li><a href=#索引进阶>索引进阶</a><ul><li><a href=#花式索引>花式索引</a></li><li><a href=#布尔屏蔽>布尔屏蔽</a></li><li><a href=#where-函数>Where 函数</a></li></ul></li><li><a href=#形状操控>形状操控</a><ul><li><a href=#改变数组的形状>改变数组的形状</a></li><li><a href=#堆叠数组>堆叠数组</a></li><li><a href=#拆分数组>拆分数组</a></li></ul></li><li><a href=#例>例</a></li></ul></nav></div></div><div class=content id=content><h1 id=numpy>numpy</h1><h2 id=数组基础>数组基础</h2><h3 id=属性>属性</h3><ol><li><p><em>ndarray.ndim</em></p><p>数组的轴（维度）的个数。在Python世界中，维度的数量被称为rank（秩）</p></li><li><p><em>ndarray.shape</em></p><p>数组的维度。这是一个整数的元组，表示每个维度中数组的大小。对于有 n 行和 m 列的矩阵，shape 将是 (n,m)。因此，shape 元组的长度就是rank或维度的个数 ndim。</p></li><li><p><em>ndarray.size</em></p><p>数组元素的总数。这等于 shape 的元素的乘积。</p></li><li><p><em>ndarray.dtype</em></p><p>一个描述数组中元素类型的对象。可以使用标准的Python类型创建或指定dtype。另外NumPy提供它自己的类型。例numpy.int32、numpy.int16和numpy.float64。</p></li><li><p><em>ndarray.itemsize</em></p><p>数组中每个元素的字节大小。例如，元素为 float64 类型的数组的 itemsize 为8（=64/8），而 complex32 类型的数组的 itemsize 为4（=32/8）。它等于 ndarray.dtype.itemsize 。</p></li><li><p><em>ndarray.data</em></p><p>该缓冲区包含数组的实际元素。通常，我们不需要使用此属性，因为我们将使用索引访问数组中的元素。</p></li></ol><h3 id=创建>创建</h3><p>概览</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>])</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>])</span>
 </span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>((</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>))</span>
 </span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>5</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>d</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>linspace</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>2</span><span class=o>*</span><span class=n>np</span><span class=o>.</span><span class=n>pi</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=用列表和元组创建数组>用列表和元组创建数组</h4><p>使用array函数</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=用列表和元组创建数组>用列表和元组创建数组</h4><p>使用array函数</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -118,8 +25,7 @@
 </span><span class=lnt>6
 </span><span class=lnt>7
 </span><span class=lnt>8
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>])</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>])</span>
 </span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([(</span><span class=mf>1.5</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>),</span> <span class=p>(</span><span class=mi>4</span><span class=p>,</span><span class=mi>5</span><span class=p>,</span><span class=mi>6</span><span class=p>)])</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
@@ -127,31 +33,23 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([[</span><span class=mf>1.5</span><span class=p>,</span> <span class=mf>2.</span> <span class=p>,</span> <span class=mf>3.</span> <span class=p>],</span>
 </span></span><span class=line><span class=cl>       		<span class=p>[</span><span class=mf>4.</span> <span class=p>,</span> <span class=mf>5.</span> <span class=p>,</span> <span class=mf>6.</span> <span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><p>数组类型可以在创建时显示指定</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>数组类型可以在创建时显示指定</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>],</span> <span class=p>[</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]],</span> <span class=n>dtype</span><span class=o>=</span><span class=nb>complex</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>],</span> <span class=p>[</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]],</span> <span class=n>dtype</span><span class=o>=</span><span class=nb>complex</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([[</span><span class=mf>1.</span><span class=o>+</span><span class=mf>0.</span><span class=n>j</span><span class=p>,</span> <span class=mf>2.</span><span class=o>+</span><span class=mf>0.</span><span class=n>j</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       		<span class=p>[</span><span class=mf>3.</span><span class=o>+</span><span class=mf>0.</span><span class=n>j</span><span class=p>,</span> <span class=mf>4.</span><span class=o>+</span><span class=mf>0.</span><span class=n>j</span><span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=用占位符创建数组>用占位符创建数组</h4><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=用占位符创建数组>用占位符创建数组</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>((</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>))</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>((</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>))</span>
 </span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>ones</span><span class=p>((</span><span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>),</span> <span class=n>dtype</span><span class=o>=</span><span class=n>np</span><span class=o>.</span><span class=n>int16</span><span class=p>)</span>	<span class=c1># dtype can also be specified</span>
 </span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>empty</span><span class=p>((</span><span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>))</span> 					<span class=c1># uninitialized, output may vary</span>
-</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -164,8 +62,7 @@
 </span><span class=lnt>11
 </span><span class=lnt>12
 </span><span class=lnt>13
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>array</span><span class=p>([[</span><span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>],</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>array</span><span class=p>([[</span><span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       <span class=p>[</span><span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       <span class=p>[</span><span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>,</span> <span class=mf>0.</span><span class=p>]])</span>
 </span></span><span class=line><span class=cl>
@@ -178,92 +75,65 @@
 </span></span><span class=line><span class=cl>        <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>]]],</span> <span class=n>dtype</span><span class=o>=</span><span class=n>int16</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>array</span><span class=p>([[</span><span class=mf>1.5</span><span class=p>,</span> <span class=mf>2.</span> <span class=p>,</span> <span class=mf>3.</span> <span class=p>],</span>
 </span></span><span class=line><span class=cl>       <span class=p>[</span><span class=mf>4.</span> <span class=p>,</span> <span class=mf>5.</span> <span class=p>,</span> <span class=mf>6.</span> <span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=在一定范围内创建数组>在一定范围内创建数组</h4><h5 id=使用arange函数>使用arange函数</h5><p>输入起始，终止，步长来创建数组</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=在一定范围内创建数组>在一定范围内创建数组</h4><h5 id=使用arange函数>使用arange函数</h5><p>输入起始，终止，步长来创建数组</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>10</span><span class=p>,</span> <span class=mi>30</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>10</span><span class=p>,</span> <span class=mi>30</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mf>0.3</span><span class=p>)</span>  <span class=c1># it accepts float arguments</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([</span><span class=mi>10</span><span class=p>,</span> <span class=mi>15</span><span class=p>,</span> <span class=mi>20</span><span class=p>,</span> <span class=mi>25</span><span class=p>])</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([</span><span class=mf>0.</span> <span class=p>,</span> <span class=mf>0.3</span><span class=p>,</span> <span class=mf>0.6</span><span class=p>,</span> <span class=mf>0.9</span><span class=p>,</span> <span class=mf>1.2</span><span class=p>,</span> <span class=mf>1.5</span><span class=p>,</span> <span class=mf>1.8</span><span class=p>])</span>
-</span></span></code></pre></td></tr></table></div></div><h5 id=使用linspace函数>使用linspace函数</h5><p>当arange与浮点参数一起使用时，由于有限的浮点精度，通常不可能预测所获得的元素的数量。出于这个原因，通常最好使用linspace函数来接收我们想要的元素数量的函数，而不是步长（step）</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h5 id=使用linspace函数>使用linspace函数</h5><p>当arange与浮点参数一起使用时，由于有限的浮点精度，通常不可能预测所获得的元素的数量。出于这个原因，通常最好使用linspace函数来接收我们想要的元素数量的函数，而不是步长（step）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>linspace</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>9</span><span class=p>)</span>     <span class=c1># numbers from 0 to 2</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>linspace</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>9</span><span class=p>)</span>     <span class=c1># numbers from 0 to 2</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([</span><span class=mf>0.</span>  <span class=p>,</span> <span class=mf>0.25</span><span class=p>,</span> <span class=mf>0.5</span> <span class=p>,</span> <span class=mf>0.75</span><span class=p>,</span> <span class=mf>1.</span>  <span class=p>,</span> <span class=mf>1.25</span><span class=p>,</span> <span class=mf>1.5</span> <span class=p>,</span> <span class=mf>1.75</span><span class=p>,</span> <span class=mf>2.</span>  <span class=p>])</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=创建二维数组>创建二维数组</h4><p>用.reshape()方法</p><p>创建一个共20个整数、4行5列的二维数组</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=创建二维数组>创建二维数组</h4><p>用.reshape()方法</p><p>创建一个共20个整数、4行5列的二维数组</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=o>.</span><span class=n>reshape</span><span class=p>(</span><span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=o>.</span><span class=n>reshape</span><span class=p>(</span><span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([[</span> <span class=mi>0</span><span class=p>,</span>  <span class=mi>1</span><span class=p>,</span>  <span class=mi>2</span><span class=p>,</span>  <span class=mi>3</span><span class=p>,</span>  <span class=mi>4</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       		<span class=p>[</span> <span class=mi>5</span><span class=p>,</span>  <span class=mi>6</span><span class=p>,</span>  <span class=mi>7</span><span class=p>,</span>  <span class=mi>8</span><span class=p>,</span>  <span class=mi>9</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       		<span class=p>[</span><span class=mi>10</span><span class=p>,</span> <span class=mi>11</span><span class=p>,</span> <span class=mi>12</span><span class=p>,</span> <span class=mi>13</span><span class=p>,</span> <span class=mi>14</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       		<span class=p>[</span><span class=mi>15</span><span class=p>,</span> <span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=随机创建>随机创建</h4><h5 id=使用numpyrandomrand>使用numpy.random.rand()</h5><p><code>numpy.random.rand(d0, d1, …, dn)</code></p><ol>
-<li>
-<p>rand函数根据给定维度生成[0,1)之间的数据，包含0，不包含1</p></li><li>
-<p>dn表示每个维度</p></li><li>
-<p>返回值为指定维度的array</p></li></ol><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=随机创建>随机创建</h4><h5 id=使用numpyrandomrand>使用numpy.random.rand()</h5><p><code>numpy.random.rand(d0, d1, …, dn)</code></p><ol><li><p>rand函数根据给定维度生成[0,1)之间的数据，包含0，不包含1</p></li><li><p>dn表示每个维度</p></li><li><p>返回值为指定维度的array</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>rand</span><span class=p>(</span><span class=mi>4</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>rand</span><span class=p>(</span><span class=mi>4</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([[</span><span class=mf>0.98674795</span><span class=p>,</span> <span class=mf>0.13286586</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       		<span class=p>[</span><span class=mf>0.29918216</span><span class=p>,</span> <span class=mf>0.31617708</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       		<span class=p>[</span><span class=mf>0.11613039</span><span class=p>,</span> <span class=mf>0.06952587</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       		<span class=p>[</span><span class=mf>0.854591</span>  <span class=p>,</span> <span class=mf>0.46243232</span><span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><h5 id=使用numpyrandomrandn>使用numpy.random.randn()</h5><p><code>numpy.random.randn(d0, d1, …, dn)</code></p><ol>
-<li>
-<p>randn函数返回一个或一组样本，具有<strong>标准正态分布</strong>。</p></li><li>
-<p>dn表格每个维度</p></li><li>
-<p>返回值为指定维度的array</p></li><li>
-<p>没有参数时，返回单个数据</p></li></ol><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h5 id=使用numpyrandomrandn>使用numpy.random.randn()</h5><p><code>numpy.random.randn(d0, d1, …, dn)</code></p><ol><li><p>randn函数返回一个或一组样本，具有<strong>标准正态分布</strong>。</p></li><li><p>dn表格每个维度</p></li><li><p>返回值为指定维度的array</p></li><li><p>没有参数时，返回单个数据</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>randn</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=mi>4</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>random</span><span class=o>.</span><span class=n>randn</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=mi>4</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([[</span><span class=o>-</span><span class=mf>1.00153189</span><span class=p>,</span>  <span class=mf>2.24079402</span><span class=p>,</span>  <span class=mf>1.60828566</span><span class=p>,</span> <span class=o>-</span><span class=mf>0.65998837</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       		<span class=p>[</span> <span class=mf>1.98674251</span><span class=p>,</span> <span class=o>-</span><span class=mf>0.33065155</span><span class=p>,</span>  <span class=mf>0.48365328</span><span class=p>,</span>  <span class=mf>0.4008861</span> <span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=运算>运算</h3><h4 id=基本运算符>基本运算符</h4><ol>
-<li>乘积运算符<code>*</code>在NumPy数组中按元素进行运算。矩阵乘积可以使用<code>@</code>运算符或<code>dot</code>函数或方法执行</li></ol><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=运算>运算</h3><h4 id=基本运算符>基本运算符</h4><ol><li>乘积运算符<code>*</code>在NumPy数组中按元素进行运算。矩阵乘积可以使用<code>@</code>运算符或<code>dot</code>函数或方法执行</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -280,8 +150,7 @@
 </span><span class=lnt>15
 </span><span class=lnt>16
 </span><span class=lnt>17
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>A</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>],</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>]])</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>A</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>],</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>]])</span>
 </span></span><span class=line><span class=cl><span class=n>B</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>0</span><span class=p>],</span> <span class=p>[</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]])</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>A</span><span class=o>*</span><span class=n>B</span>
@@ -298,38 +167,29 @@
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([[</span><span class=mi>5</span><span class=p>,</span> <span class=mi>4</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>	       <span class=p>[</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><ol>
-<li>某些操作（例如<code>+=</code>和<code>*=</code>）会更直接更改被操作的矩阵数组而不会创建新矩阵数组</li><li>当使用不同类型的数组进行操作时，结果数组的类型对应于更一般或更精确的数组（称为向上转换的行为）</li></ol><h4 id=特殊运算符>特殊运算符</h4><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><ol><li>某些操作（例如<code>+=</code>和<code>*=</code>）会更直接更改被操作的矩阵数组而不会创建新矩阵数组</li><li>当使用不同类型的数组进行操作时，结果数组的类型对应于更一般或更精确的数组（称为向上转换的行为）</li></ol><h4 id=特殊运算符>特殊运算符</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># dot, sum, min, max, cumsum</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># dot, sum, min, max, cumsum</span>
 </span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>sum</span><span class=p>())</span>  <span class=c1># &gt;&gt;&gt;45</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>min</span><span class=p>())</span>  <span class=c1># &gt;&gt;&gt;0</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>max</span><span class=p>())</span>  <span class=c1># &gt;&gt;&gt;9</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>cumsum</span><span class=p>())</span>  <span class=c1># &gt;&gt;&gt;[ 0  1  3  6 10 15 21 28 36 45]</span>
-</span></span></code></pre></td></tr></table></div></div><p>通过指定axis（列）参数，可以沿数组的指定轴应用操作</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>通过指定axis（列）参数，可以沿数组的指定轴应用操作</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>12</span><span class=p>)</span><span class=o>.</span><span class=n>reshape</span><span class=p>(</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>12</span><span class=p>)</span><span class=o>.</span><span class=n>reshape</span><span class=p>(</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>b</span><span class=o>.</span><span class=n>sum</span><span class=p>(</span><span class=n>axis</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>              <span class=c1># sum of each column</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([</span><span class=mi>12</span><span class=p>,</span> <span class=mi>15</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>21</span><span class=p>])</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=通函数ufunc>通函数（ufunc）</h3><p><a href=https://www.numpy.org.cn/reference/routines/math.html target=_blank rel="noopener noreffer">数学函数合集</a></p><p>NumPy提供熟悉的数学函数，例如sin，cos和exp。在NumPy中，这些被称为“通函数”。在NumPy中，这些函数在数组上按元素进行运算，产生一个数组作为输出</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=通函数ufunc>通函数（ufunc）</h3><p><a href=https://www.numpy.org.cn/reference/routines/math.html target=_blank rel="noopener noreffer">数学函数合集</a></p><p>NumPy提供熟悉的数学函数，例如sin，cos和exp。在NumPy中，这些被称为“通函数”。在NumPy中，这些函数在数组上按元素进行运算，产生一个数组作为输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -353,8 +213,7 @@
 </span><span class=lnt>22
 </span><span class=lnt>23
 </span><span class=lnt>24
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>A</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>A</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>exp</span><span class=p>(</span><span class=n>A</span><span class=p>)</span>  <span class=c1># 以e为底的指数函数</span>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
@@ -378,9 +237,7 @@
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=p>[[</span><span class=mi>19</span> <span class=mi>22</span><span class=p>]</span>
 </span></span><span class=line><span class=cl>	 <span class=p>[</span><span class=mi>43</span> <span class=mi>50</span><span class=p>]]</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=切片>切片</h3><h4 id=一维数组>一维数组</h4><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=切片>切片</h3><h4 id=一维数组>一维数组</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -405,8 +262,7 @@
 </span><span class=lnt>23
 </span><span class=lnt>24
 </span><span class=lnt>25
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span><span class=o>**</span><span class=mi>3</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span><span class=o>**</span><span class=mi>3</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>a</span>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> 
@@ -431,10 +287,7 @@
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([</span>  <span class=mi>729</span><span class=p>,</span>   <span class=mi>512</span><span class=p>,</span>   <span class=mi>343</span><span class=p>,</span>   <span class=mi>216</span><span class=p>,</span>   <span class=mi>125</span><span class=p>,</span> <span class=o>-</span><span class=mi>1000</span><span class=p>,</span>    <span class=mi>27</span><span class=p>,</span> <span class=o>-</span><span class=mi>1000</span><span class=p>,</span>     <span class=mi>1</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>       		<span class=o>-</span><span class=mi>1000</span><span class=p>],</span> <span class=n>dtype</span><span class=o>=</span><span class=n>int32</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=多维数组>多维数组</h4><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210106161435811.png alt=image-20210106161435811 style=zoom:67%>
-<p>多维的数组每个轴可以有一个索引。这些索引以逗号分隔的元组给出</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h4 id=多维数组>多维数组</h4><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210106161435811.png alt=image-20210106161435811 style=zoom:67%><p>多维的数组每个轴可以有一个索引。这些索引以逗号分隔的元组给出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -457,8 +310,7 @@
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>11</span><span class=p>,</span> <span class=mi>12</span><span class=p>,</span> <span class=mi>13</span><span class=p>,</span> <span class=mi>14</span><span class=p>,</span> <span class=mi>15</span><span class=p>],</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>11</span><span class=p>,</span> <span class=mi>12</span><span class=p>,</span> <span class=mi>13</span><span class=p>,</span> <span class=mi>14</span><span class=p>,</span> <span class=mi>15</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>              <span class=p>[</span><span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>,</span> <span class=mi>20</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>              <span class=p>[</span><span class=mi>21</span><span class=p>,</span> <span class=mi>22</span><span class=p>,</span> <span class=mi>23</span><span class=p>,</span> <span class=mi>24</span><span class=p>,</span> <span class=mi>25</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>              <span class=p>[</span><span class=mi>26</span><span class=p>,</span> <span class=mi>27</span><span class=p>,</span> <span class=mi>28</span><span class=p>,</span> <span class=mi>29</span><span class=p>,</span> <span class=mi>30</span><span class=p>],</span> 
@@ -481,12 +333,7 @@
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=p>[:,</span> <span class=mi>1</span><span class=p>])</span>  
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=p>[</span><span class=mi>12</span> <span class=mi>17</span> <span class=mi>22</span> <span class=mi>27</span> <span class=mi>32</span><span class=p>]</span>
-</span></span></code></pre></td></tr></table></div></div><p>三个点（ &mldr; ）表示产生完整索引元组所需的冒号。例如，如果 x 是rank为5的数组（即，它具有5个轴），则</p><p>x[1 , 2 , &mldr;] 相当于 x[1,2, : , : , :]，</p><p>x[… , 3] 等效于 x[: , : , : , : ,3]</p><p>x[4, … ,5, :] 等效于 x[4, : , : , 5, : ]</p><h3 id=调整数据>调整数据</h3><h4 id=四舍五入>四舍五入</h4><p>返回四舍五入后的值，可指定精度</p><p><em><strong>np.around(a, decimals=0, out=None)</strong></em></p><ul>
-<li>
-<p><em>a</em>：输入数组</p></li><li>
-<p><em>decimals</em>：要舍入的小数位数。 默认值为0。 如果为负，整数将四舍五入到小数点左侧的位置</p></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>三个点（ &mldr; ）表示产生完整索引元组所需的冒号。例如，如果 x 是rank为5的数组（即，它具有5个轴），则</p><p>x[1 , 2 , &mldr;] 相当于 x[1,2, : , : , :]，</p><p>x[… , 3] 等效于 x[: , : , : , : ,3]</p><p>x[4, … ,5, :] 等效于 x[4, : , : , 5, : ]</p><h3 id=调整数据>调整数据</h3><h4 id=四舍五入>四舍五入</h4><p>返回四舍五入后的值，可指定精度</p><p><em><strong>np.around(a, decimals=0, out=None)</strong></em></p><ul><li><p><em>a</em>：输入数组</p></li><li><p><em>decimals</em>：要舍入的小数位数。 默认值为0。 如果为负，整数将四舍五入到小数点左侧的位置</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -499,8 +346,7 @@
 </span><span class=lnt>11
 </span><span class=lnt>12
 </span><span class=lnt>13
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=o>-</span><span class=mf>0.746</span><span class=p>,</span> <span class=mf>4.6</span><span class=p>,</span> <span class=mf>9.4</span><span class=p>,</span> <span class=mf>7.447</span><span class=p>,</span> <span class=mf>10.455</span><span class=p>,</span> <span class=mf>11.555</span><span class=p>])</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=o>-</span><span class=mf>0.746</span><span class=p>,</span> <span class=mf>4.6</span><span class=p>,</span> <span class=mf>9.4</span><span class=p>,</span> <span class=mf>7.447</span><span class=p>,</span> <span class=mf>10.455</span><span class=p>,</span> <span class=mf>11.555</span><span class=p>])</span>
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>around</span><span class=p>(</span><span class=n>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
@@ -513,35 +359,27 @@
 </span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>around</span><span class=p>(</span><span class=n>n</span><span class=p>,</span> <span class=n>decimals</span><span class=o>=-</span><span class=mi>1</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=p>[</span> <span class=o>-</span><span class=mf>0.</span>   <span class=mf>0.</span>  <span class=mf>10.</span>  <span class=mf>10.</span>  <span class=mf>10.</span>  <span class=mf>10.</span><span class=p>]</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=向下取整>向下取整</h4><p>返回不大于输入参数的最大整数</p><p><em><strong>np.floor()</strong></em></p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=向下取整>向下取整</h4><p>返回不大于输入参数的最大整数</p><p><em><strong>np.floor()</strong></em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=o>-</span><span class=mf>1.7</span><span class=p>,</span> <span class=o>-</span><span class=mf>2.5</span><span class=p>,</span> <span class=o>-</span><span class=mf>0.2</span><span class=p>,</span> <span class=mf>0.6</span><span class=p>,</span> <span class=mf>1.2</span><span class=p>,</span> <span class=mf>2.7</span><span class=p>,</span> <span class=mi>11</span><span class=p>])</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=o>-</span><span class=mf>1.7</span><span class=p>,</span> <span class=o>-</span><span class=mf>2.5</span><span class=p>,</span> <span class=o>-</span><span class=mf>0.2</span><span class=p>,</span> <span class=mf>0.6</span><span class=p>,</span> <span class=mf>1.2</span><span class=p>,</span> <span class=mf>2.7</span><span class=p>,</span> <span class=mi>11</span><span class=p>])</span>
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>floor</span><span class=p>(</span><span class=n>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=p>[</span> <span class=o>-</span><span class=mf>2.</span>  <span class=o>-</span><span class=mf>3.</span>  <span class=o>-</span><span class=mf>1.</span>   <span class=mf>0.</span>   <span class=mf>1.</span>   <span class=mf>2.</span>  <span class=mf>11.</span><span class=p>]</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=向上取整>向上取整</h4><p>返回输入值的上限</p><p><em><strong>np.ceil()</strong></em></p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=向上取整>向上取整</h4><p>返回输入值的上限</p><p><em><strong>np.ceil()</strong></em></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=o>-</span><span class=mf>1.7</span><span class=p>,</span> <span class=o>-</span><span class=mf>2.5</span><span class=p>,</span> <span class=o>-</span><span class=mf>0.2</span><span class=p>,</span> <span class=mf>0.6</span><span class=p>,</span> <span class=mf>1.2</span><span class=p>,</span> <span class=mf>2.7</span><span class=p>,</span> <span class=mi>11</span><span class=p>])</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>n</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=o>-</span><span class=mf>1.7</span><span class=p>,</span> <span class=o>-</span><span class=mf>2.5</span><span class=p>,</span> <span class=o>-</span><span class=mf>0.2</span><span class=p>,</span> <span class=mf>0.6</span><span class=p>,</span> <span class=mf>1.2</span><span class=p>,</span> <span class=mf>2.7</span><span class=p>,</span> <span class=mi>11</span><span class=p>])</span>
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>ceil</span><span class=p>(</span><span class=n>n</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=p>[</span> <span class=o>-</span><span class=mf>1.</span>  <span class=o>-</span><span class=mf>2.</span>  <span class=o>-</span><span class=mf>0.</span>   <span class=mf>1.</span>   <span class=mf>2.</span>   <span class=mf>3.</span>  <span class=mf>11.</span><span class=p>]</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=索引进阶>索引进阶</h2><h3 id=花式索引>花式索引</h3><p>用想要检索的特定索引序列对数组进行索引。这反过来返回索引的元素的列表。</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h2 id=索引进阶>索引进阶</h2><h3 id=花式索引>花式索引</h3><p>用想要检索的特定索引序列对数组进行索引。这反过来返回索引的元素的列表。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -552,8 +390,7 @@
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Fancy indexing</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Fancy indexing</span>
 </span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>100</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>indices</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=p>]</span>
 </span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>a</span><span class=p>[</span><span class=n>indices</span><span class=p>]</span>
@@ -564,9 +401,7 @@
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>  
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=p>[</span><span class=mi>10</span> <span class=mi>50</span> <span class=mi>90</span><span class=p>]</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=布尔屏蔽>布尔屏蔽</h3><h3 id=where-函数>Where 函数</h3><p>只需要把条件传递给它，它就会返回一个使得条件为真的元素的列表。</p><p>返回索引（下标）</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=布尔屏蔽>布尔屏蔽</h3><h3 id=where-函数>Where 函数</h3><p>只需要把条件传递给它，它就会返回一个使得条件为真的元素的列表。</p><p>返回索引（下标）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -578,8 +413,7 @@
 </span><span class=lnt>10
 </span><span class=lnt>11
 </span><span class=lnt>12
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Where</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Where</span>
 </span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>100</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>where</span><span class=p>(</span><span class=n>a</span> <span class=o>&lt;</span> <span class=mi>50</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>where</span><span class=p>(</span><span class=n>a</span> <span class=o>&gt;=</span> <span class=mi>50</span><span class=p>)[</span><span class=mi>0</span><span class=p>]</span>
@@ -591,18 +425,13 @@
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>c</span><span class=p>)</span>  
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=p>[</span><span class=mi>5</span> <span class=mi>6</span> <span class=mi>7</span> <span class=mi>8</span> <span class=mi>9</span><span class=p>]</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=形状操控>形状操控</h2><h3 id=改变数组的形状>改变数组的形状</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h2 id=形状操控>形状操控</h2><h3 id=改变数组的形状>改变数组的形状</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>2</span><span class=p>,</span>  <span class=mi>8</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>  <span class=mi>6</span><span class=p>],</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>2</span><span class=p>,</span>  <span class=mi>8</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>  <span class=mi>6</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>              <span class=p>[</span><span class=mi>4</span><span class=p>,</span>  <span class=mi>5</span><span class=p>,</span>  <span class=mi>1</span><span class=p>,</span>  <span class=mi>1</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>              <span class=p>[</span><span class=mi>8</span><span class=p>,</span>  <span class=mi>9</span><span class=p>,</span>  <span class=mi>3</span><span class=p>,</span>  <span class=mi>6</span><span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><p>可以使用各种命令更改数组的形状。请注意，以下三个命令（除resize）都返回一个修改后的数组，但不会更改原始数组</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>可以使用各种命令更改数组的形状。请注意，以下三个命令（除resize）都返回一个修改后的数组，但不会更改原始数组</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -633,8 +462,7 @@
 </span><span class=lnt>29
 </span><span class=lnt>30
 </span><span class=lnt>31
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span><span class=o>.</span><span class=n>ravel</span><span class=p>()</span>  			<span class=c1># 展平数组</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span><span class=o>.</span><span class=n>ravel</span><span class=p>()</span>  			<span class=c1># 展平数组</span>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([</span><span class=mi>2</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>9</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>6</span><span class=p>])</span>
 </span></span><span class=line><span class=cl>    
@@ -665,9 +493,7 @@
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>9</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>6</span><span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=堆叠数组>堆叠数组</h3><p>几个数组可以沿不同的轴堆叠在一起</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=堆叠数组>堆叠数组</h3><p>几个数组可以沿不同的轴堆叠在一起</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -683,8 +509,7 @@
 </span><span class=lnt>14
 </span><span class=lnt>15
 </span><span class=lnt>16
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>8</span><span class=p>,</span>  <span class=mi>8</span><span class=p>],</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>8</span><span class=p>,</span>  <span class=mi>8</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>              <span class=p>[</span><span class=mi>0</span><span class=p>,</span>  <span class=mi>0</span><span class=p>]])</span>
 </span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span>  <span class=mi>8</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>              <span class=p>[</span><span class=mi>0</span><span class=p>,</span>  <span class=mi>4</span><span class=p>]])</span>
@@ -700,9 +525,7 @@
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([[</span><span class=mi>8</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>8</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>       <span class=p>[</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>4</span><span class=p>]])</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=拆分数组>拆分数组</h3><p>使用<a href=https://numpy.org/devdocs/reference/generated/numpy.hsplit.html#numpy.hsplit target=_blank rel="noopener noreffer">hsplit</a>，可以沿数组的水平轴拆分数组，方法是指定要返回的形状相等的数组的数量，或者指定应该在其之后进行分割的列</p><p>使用<a href=https://numpy.org/devdocs/reference/generated/numpy.vsplit.html#numpy.vsplit target=_blank rel="noopener noreffer">vsplit</a>沿垂直轴分割</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=拆分数组>拆分数组</h3><p>使用<a href=https://numpy.org/devdocs/reference/generated/numpy.hsplit.html#numpy.hsplit target=_blank rel="noopener noreffer">hsplit</a>，可以沿数组的水平轴拆分数组，方法是指定要返回的形状相等的数组的数量，或者指定应该在其之后进行分割的列</p><p>使用<a href=https://numpy.org/devdocs/reference/generated/numpy.vsplit.html#numpy.vsplit target=_blank rel="noopener noreffer">vsplit</a>沿垂直轴分割</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -722,8 +545,7 @@
 </span><span class=lnt>18
 </span><span class=lnt>19
 </span><span class=lnt>20
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>9</span><span class=p>,</span>  <span class=mi>5</span><span class=p>,</span>  <span class=mi>6</span><span class=p>,</span>  <span class=mi>3</span><span class=p>,</span>  <span class=mi>6</span><span class=p>,</span>  <span class=mi>8</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>  <span class=mi>7</span><span class=p>,</span>  <span class=mi>9</span><span class=p>,</span>  <span class=mi>7</span><span class=p>,</span>  <span class=mi>2</span><span class=p>,</span>  <span class=mi>7</span><span class=p>],</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>9</span><span class=p>,</span>  <span class=mi>5</span><span class=p>,</span>  <span class=mi>6</span><span class=p>,</span>  <span class=mi>3</span><span class=p>,</span>  <span class=mi>6</span><span class=p>,</span>  <span class=mi>8</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>  <span class=mi>7</span><span class=p>,</span>  <span class=mi>9</span><span class=p>,</span>  <span class=mi>7</span><span class=p>,</span>  <span class=mi>2</span><span class=p>,</span>  <span class=mi>7</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>              <span class=p>[</span><span class=mi>1</span><span class=p>,</span>  <span class=mi>4</span><span class=p>,</span>  <span class=mi>9</span><span class=p>,</span>  <span class=mi>2</span><span class=p>,</span>  <span class=mi>2</span><span class=p>,</span>  <span class=mi>1</span><span class=p>,</span>  <span class=mi>0</span><span class=p>,</span>  <span class=mi>6</span><span class=p>,</span>  <span class=mi>2</span><span class=p>,</span>  <span class=mi>2</span><span class=p>,</span>  <span class=mi>4</span><span class=p>,</span>  <span class=mi>0</span><span class=p>]])</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>hsplit</span><span class=p>(</span><span class=n>a</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span>   <span class=c1># 平均分成三份</span>
@@ -743,64 +565,32 @@
 </span></span><span class=line><span class=cl>        <span class=p>[</span><span class=mi>2</span><span class=p>]]),</span>
 </span></span><span class=line><span class=cl> 	 <span class=n>array</span><span class=p>([[</span><span class=mi>6</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>9</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>7</span><span class=p>],</span>
 </span></span><span class=line><span class=cl>        <span class=p>[</span><span class=mi>2</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>0</span><span class=p>]])]</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=例>例</h2><ol>
-<li>打印numpy的版本和配置说明</li></ol><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h2 id=例>例</h2><ol><li>打印numpy的版本和配置说明</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>__version__</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>__version__</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>np</span><span class=o>.</span><span class=n>show_config</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><ol start=2>
-<li>如何找到任何一个数组的内存大小？</li></ol><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>如何找到任何一个数组的内存大小？</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>Z</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>((</span><span class=mi>10</span><span class=p>,</span> <span class=mi>10</span><span class=p>))</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>Z</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>zeros</span><span class=p>((</span><span class=mi>10</span><span class=p>,</span> <span class=mi>10</span><span class=p>))</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;</span><span class=si>%d</span><span class=s2> bytes&#34;</span> <span class=o>%</span> <span class=p>(</span><span class=n>Z</span><span class=o>.</span><span class=n>size</span> <span class=o>*</span> <span class=n>Z</span><span class=o>.</span><span class=n>itemsize</span><span class=p>))</span>
-</span></span></code></pre></td></tr></table></div></div><ol start=3>
-<li>如何从一维数组中提取满足指定条件的元素？</li></ol><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>如何从一维数组中提取满足指定条件的元素？</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Input</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Input</span>
 </span></span><span class=line><span class=cl><span class=n>arr</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>9</span><span class=p>])</span>
 </span></span><span class=line><span class=cl><span class=c1># Solution</span>
 </span></span><span class=line><span class=cl><span class=n>arr</span><span class=p>[</span><span class=n>arr</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>1</span><span class=p>]</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>array</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>9</span><span class=p>])</span>
-</span></span></code></pre></td></tr></table></div></div><ol start=4>
-<li>找到数组[1,2,0,0,4,0]中非0元素的位置索引</li></ol><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>找到数组[1,2,0,0,4,0]中非0元素的位置索引</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>nz</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>nonzero</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>0</span><span class=p>])</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>nz</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>nonzero</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>0</span><span class=p>])</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>nz</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2022-03-07</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/>数据分析</a></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/python/dataanalysis/pandas/ class=prev rel=prev title=pandas><i class="fas fa-angle-left fa-fw"></i>pandas</a>
-<a href=/Notes/posts/python/dataanalysis/matplotlib/ class=next rel=next title=matplotlib>matplotlib<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-03-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/>数据分析</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/dataanalysis/pandas/ class=prev rel=prev title=pandas><i class="fas fa-angle-left fa-fw"></i>pandas</a>
+<a href=/Notes/posts/python/dataanalysis/matplotlib/ class=next rel=next title=matplotlib>matplotlib<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

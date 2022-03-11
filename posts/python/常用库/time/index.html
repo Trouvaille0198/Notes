@@ -1,164 +1,55 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title> - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content>
-<meta property="og:description" content="Time 概念 1 import time **时间戳：**格林威治时间1970年01月01日00分00秒（北京时间1970年01月01日08时00分00秒）起至现在的总秒">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/time/"><meta property="article:section" content="posts">
-<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content>
-<meta name=twitter:description content="Time 概念 1 import time **时间戳：**格林威治时间1970年01月01日00分00秒（北京时间1970年01月01日08时00分00秒）起至现在的总秒">
-<meta name=application-name content="伤心肠粉的酱油碟子">
-<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/time/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/tqdm/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/threading/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/time\/"},"genre":"posts","wordcount":962,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/time\/","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>- 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content><meta property="og:description" content="Time 概念 1 import time **时间戳：**格林威治时间1970年01月01日00分00秒（北京时间1970年01月01日08时00分00秒）起至现在的总秒"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/time/"><meta property="article:section" content="posts"><meta property="article:modified_time" content="2022-03-11T02:43:10+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="Time 概念 1 import time **时间戳：**格林威治时间1970年01月01日00分00秒（北京时间1970年01月01日08时00分00秒）起至现在的总秒"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/time/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/tqdm/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/threading/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/time\/"},"genre":"posts","wordcount":962,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/time\/","dateModified":"2022-03-11T02:43:10+00:00","publisher":{"@type":"Organization","name":"作者"},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/posts/>文章 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 962 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#概念>概念</a></li><li><a href=#时间获取函数><strong>时间获取函数</strong></a>
-<ul>
-<li><a href=#time-1>time()</a></li><li><a href=#ctime>ctime()</a></li><li><a href=#gmtime>gmtime()</a></li><li><a href=#mktime>mktime()</a></li><li><a href=#asctime>asctime()</a></li><li><a href=#localtimeseconds>localtime(seconds)</a></li></ul></li><li><a href=#时间格式化>时间格式化</a>
-<ul>
-<li><a href=#strftimetpl-ts>strftime(tpl, ts)</a></li><li><a href=#strptimetimestr-tpl>strptime(timestr, tpl)</a></li></ul></li><li><a href=#程序计时>程序计时</a>
-<ul>
-<li><a href=#perf_counter>perf_counter()</a></li><li><a href=#sleeps>sleep(s)</a></li></ul></li><li><a href=#例>例</a>
-<ul>
-<li><a href=#秒数化为时间元组>秒数化为时间元组</a></li><li><a href=#各种时间类型的互相转换>各种时间类型的互相转换</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=time>Time</h1><h2 id=概念>概念</h2><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>**时间戳：**格林威治时间1970年01月01日00分00秒（北京时间1970年01月01日08时00分00秒）起至现在的总秒数，是个数字。</li><li>Python中获取时间的常用方法是，先得到时间戳，再将其转换成想要的时间格式。</li><li>**元组struct_time：**日期、时间是包含许多变量的，所以在Python中定义了一个元组struct_time将所有这些变量组合在一起，包括：年、月、日、小时、分钟、秒等。</li></ul><h2 id=时间获取函数><strong>时间获取函数</strong></h2><h3 id=time-1>time()</h3><p>获取当前时间戳，返回浮点数</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>作者</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 962 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#概念>概念</a></li><li><a href=#时间获取函数><strong>时间获取函数</strong></a><ul><li><a href=#time-1>time()</a></li><li><a href=#ctime>ctime()</a></li><li><a href=#gmtime>gmtime()</a></li><li><a href=#mktime>mktime()</a></li><li><a href=#asctime>asctime()</a></li><li><a href=#localtimeseconds>localtime(seconds)</a></li></ul></li><li><a href=#时间格式化>时间格式化</a><ul><li><a href=#strftimetpl-ts>strftime(tpl, ts)</a></li><li><a href=#strptimetimestr-tpl>strptime(timestr, tpl)</a></li></ul></li><li><a href=#程序计时>程序计时</a><ul><li><a href=#perf_counter>perf_counter()</a></li><li><a href=#sleeps>sleep(s)</a></li></ul></li><li><a href=#例>例</a><ul><li><a href=#秒数化为时间元组>秒数化为时间元组</a></li><li><a href=#各种时间类型的互相转换>各种时间类型的互相转换</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=time>Time</h1><h2 id=概念>概念</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>**时间戳：**格林威治时间1970年01月01日00分00秒（北京时间1970年01月01日08时00分00秒）起至现在的总秒数，是个数字。</li><li>Python中获取时间的常用方法是，先得到时间戳，再将其转换成想要的时间格式。</li><li>**元组struct_time：**日期、时间是包含许多变量的，所以在Python中定义了一个元组struct_time将所有这些变量组合在一起，包括：年、月、日、小时、分钟、秒等。</li></ul><h2 id=时间获取函数><strong>时间获取函数</strong></h2><h3 id=time-1>time()</h3><p>获取当前时间戳，返回浮点数</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>	<span class=mf>1610015368.4228694</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=ctime>ctime()</h3><p>获取当前时间并以易读方式表示，返回字符串</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=ctime>ctime()</h3><p>获取当前时间并以易读方式表示，返回字符串</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>ctime</span><span class=p>()</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>ctime</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>	<span class=s1>&#39;Thu Jan  7 18:30:37 2021&#39;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=gmtime>gmtime()</h3><p>获取当前时间并以计算机可处理的格式表示，返回元组struct_time</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=gmtime>gmtime()</h3><p>获取当前时间并以计算机可处理的格式表示，返回元组struct_time</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>gmtime</span><span class=p>()</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>gmtime</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>time</span><span class=o>.</span><span class=n>struct_time</span><span class=p>(</span><span class=n>tm_year</span><span class=o>=</span><span class=mi>2021</span><span class=p>,</span> <span class=n>tm_mon</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>tm_mday</span><span class=o>=</span><span class=mi>7</span><span class=p>,</span> <span class=n>tm_hour</span><span class=o>=</span><span class=mi>10</span><span class=p>,</span> <span class=n>tm_min</span><span class=o>=</span><span class=mi>32</span><span class=p>,</span> <span class=n>tm_sec</span><span class=o>=</span><span class=mi>36</span><span class=p>,</span> <span class=n>tm_wday</span><span class=o>=</span><span class=mi>3</span><span class=p>,</span> <span class=n>tm_yday</span><span class=o>=</span><span class=mi>7</span><span class=p>,</span> <span class=n>tm_isdst</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=mktime>mktime()</h3><p>把时间元组，转换为秒</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=mktime>mktime()</h3><p>把时间元组，转换为秒</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>mktime</span><span class=p>(</span><span class=n>time</span><span class=o>.</span><span class=n>gmtime</span><span class=p>())</span> 
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>mktime</span><span class=p>(</span><span class=n>time</span><span class=o>.</span><span class=n>gmtime</span><span class=p>())</span> 
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>	<span class=mf>1609986979.0</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=asctime>asctime()</h3><p>把时间元组，转换为易读形式</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=asctime>asctime()</h3><p>把时间元组，转换为易读形式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>asctime</span><span class=p>(</span><span class=n>time</span><span class=o>.</span><span class=n>gmtime</span><span class=p>())</span> 
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>asctime</span><span class=p>(</span><span class=n>time</span><span class=o>.</span><span class=n>gmtime</span><span class=p>())</span> 
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>	<span class=s1>&#39;Thu Jan  7 10:36:57 2021&#39;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=localtimeseconds>localtime(seconds)</h3><p>将秒数转化为对应的时间元组</p><h2 id=时间格式化>时间格式化</h2><h3 id=strftimetpl-ts>strftime(tpl, ts)</h3><p>时间元组转字符串</p><ul>
-<li><em>tpl</em>：时间格式化模板字符串，用来定义输出效果</li></ul><table>
-<thead>
-<tr>
-<th>形式</th><th>解释</th></tr></thead><tbody>
-<tr>
-<td>%Y</td><td>年份</td></tr><tr>
-<td>%m</td><td>月份</td></tr><tr>
-<td>%B</td><td>月份名称 January</td></tr><tr>
-<td>%b</td><td>月份名称缩写 Jan</td></tr><tr>
-<td>%d</td><td>日期</td></tr><tr>
-<td>%A</td><td>星期 Monday</td></tr><tr>
-<td>%a</td><td>星期缩写 Mon</td></tr><tr>
-<td>%H</td><td>小时 24</td></tr><tr>
-<td>%h</td><td>小时 12</td></tr><tr>
-<td>%p</td><td>上下午</td></tr><tr>
-<td>%M</td><td>分钟</td></tr><tr>
-<td>%S</td><td>秒</td></tr></tbody></table><ul>
-<li><em>ts</em>：是计算机内部时间类型变量。</li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=localtimeseconds>localtime(seconds)</h3><p>将秒数转化为对应的时间元组</p><h2 id=时间格式化>时间格式化</h2><h3 id=strftimetpl-ts>strftime(tpl, ts)</h3><p>时间元组转字符串</p><ul><li><em>tpl</em>：时间格式化模板字符串，用来定义输出效果</li></ul><table><thead><tr><th>形式</th><th>解释</th></tr></thead><tbody><tr><td>%Y</td><td>年份</td></tr><tr><td>%m</td><td>月份</td></tr><tr><td>%B</td><td>月份名称 January</td></tr><tr><td>%b</td><td>月份名称缩写 Jan</td></tr><tr><td>%d</td><td>日期</td></tr><tr><td>%A</td><td>星期 Monday</td></tr><tr><td>%a</td><td>星期缩写 Mon</td></tr><tr><td>%H</td><td>小时 24</td></tr><tr><td>%h</td><td>小时 12</td></tr><tr><td>%p</td><td>上下午</td></tr><tr><td>%M</td><td>分钟</td></tr><tr><td>%S</td><td>秒</td></tr></tbody></table><ul><li><em>ts</em>：是计算机内部时间类型变量。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -174,8 +65,7 @@
 </span><span class=lnt>14
 </span><span class=lnt>15
 </span><span class=lnt>16
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>t</span><span class=o>=</span><span class=n>time</span><span class=o>.</span><span class=n>gmtime</span><span class=p>()</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>t</span><span class=o>=</span><span class=n>time</span><span class=o>.</span><span class=n>gmtime</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>strftime</span><span class=p>(</span><span class=s2>&#34;%Y-%m-</span><span class=si>%d</span><span class=s2> %H:%M:%S&#34;</span><span class=p>,</span> <span class=n>t</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>	<span class=s1>&#39;2021-01-07 10:40:34&#39;</span>
@@ -191,43 +81,29 @@
 </span></span><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>strftime</span><span class=p>(</span><span class=s2>&#34;%M:%S&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>    <span class=s1>&#39;48:37&#39;</span>
-</span></span></code></pre></td></tr></table></div></div><p>如果strftime没有第二个参数，则默认获取当前时间</p><h3 id=strptimetimestr-tpl>strptime(timestr, tpl)</h3><p>字符串转时间元组</p><p>根据时间字符串以及格式化输出，转换成结构体。</p><ul>
-<li>
-<p><em>timestr</em>：时间字符串</p></li><li>
-<p><em>tpl</em>：时间格式化模板字符串，用来定义输出效果</p></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>如果strftime没有第二个参数，则默认获取当前时间</p><h3 id=strptimetimestr-tpl>strptime(timestr, tpl)</h3><p>字符串转时间元组</p><p>根据时间字符串以及格式化输出，转换成结构体。</p><ul><li><p><em>timestr</em>：时间字符串</p></li><li><p><em>tpl</em>：时间格式化模板字符串，用来定义输出效果</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>timestr</span> <span class=o>=</span> <span class=s1>&#39;2018-01-26 12:55:33&#39;</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>timestr</span> <span class=o>=</span> <span class=s1>&#39;2018-01-26 12:55:33&#39;</span>
 </span></span><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>strptime</span><span class=p>(</span><span class=n>timestr</span><span class=p>,</span> <span class=s2>&#34;%Y-%m-</span><span class=si>%d</span><span class=s2> %H:%M:%S&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>	<span class=n>time</span><span class=o>.</span><span class=n>struct_time</span><span class=p>(</span><span class=n>tm_year</span><span class=o>=</span><span class=mi>2018</span><span class=p>,</span> <span class=n>tm_mon</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>tm_mday</span><span class=o>=</span><span class=mi>26</span><span class=p>,</span> <span class=n>tm_hour</span><span class=o>=</span><span class=mi>12</span><span class=p>,</span> <span class=n>tm_min</span><span class=o>=</span><span class=mi>55</span><span class=p>,</span> <span class=n>tm_sec</span><span class=o>=</span><span class=mi>33</span><span class=p>,</span> <span class=n>tm_wday</span><span class=o>=</span><span class=mi>4</span><span class=p>,</span> <span class=n>tm_yday</span><span class=o>=</span><span class=mi>26</span><span class=p>,</span> <span class=n>tm_isdst</span><span class=o>=-</span><span class=mi>1</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=程序计时>程序计时</h2><h3 id=perf_counter>perf_counter()</h3><p>测量时间，返回一个CPU级别的精确时间计数值，单位为秒</p><p>由于这个计数值起点不确定，连续调用差值才有意义</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h2 id=程序计时>程序计时</h2><h3 id=perf_counter>perf_counter()</h3><p>测量时间，返回一个CPU级别的精确时间计数值，单位为秒</p><p>由于这个计数值起点不确定，连续调用差值才有意义</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>start</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span> 	<span class=p>()</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>start</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span> 	<span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>end</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>perf_counter</span><span class=p>()</span>
 </span></span><span class=line><span class=cl><span class=n>end</span> <span class=o>-</span> <span class=n>start</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>	<span class=mf>4.5900000259280205e-05</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=sleeps>sleep(s)</h3><p>产生时间，s为单位为秒的休眠时间，可以是浮点数，如<code>time.sleep(3.5)</code></p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=例>例</h2><h3 id=秒数化为时间元组>秒数化为时间元组</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=sleeps>sleep(s)</h3><p>产生时间，s为单位为秒的休眠时间，可以是浮点数，如<code>time.sleep(3.5)</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=例>例</h2><h3 id=秒数化为时间元组>秒数化为时间元组</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -237,8 +113,7 @@
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>second_a</span> <span class=o>=</span> <span class=mf>1610524866.1898422</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>second_a</span> <span class=o>=</span> <span class=mf>1610524866.1898422</span>
 </span></span><span class=line><span class=cl><span class=n>struct_a</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>localtime</span><span class=p>(</span><span class=n>second_a</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>asctime</span><span class=p>(</span><span class=n>struct_a</span><span class=p>)</span>
@@ -248,9 +123,7 @@
 </span></span><span class=line><span class=cl><span class=n>time</span><span class=o>.</span><span class=n>strftime</span><span class=p>(</span><span class=s2>&#34;%Y-%m-</span><span class=si>%d</span><span class=s2> %H:%M:%S&#34;</span><span class=p>,</span> <span class=n>struct_a</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=o>&lt;&lt;</span>
 </span></span><span class=line><span class=cl>	<span class=s1>&#39;2021-01-13 16:01:06&#39;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=各种时间类型的互相转换>各种时间类型的互相转换</h3><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=各种时间类型的互相转换>各种时间类型的互相转换</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -286,8 +159,7 @@
 </span><span class=lnt>34
 </span><span class=lnt>35
 </span><span class=lnt>36
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># datetime时间转为字符串</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># datetime时间转为字符串</span>
 </span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>datetime2str</span><span class=p>(</span><span class=n>_datetime</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=n>_str</span> <span class=o>=</span> <span class=n>_datetime</span><span class=o>.</span><span class=n>strftime</span><span class=p>(</span><span class=s2>&#34;%Y-%m-</span><span class=si>%d</span><span class=s2> %H:%M:%S&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>_str</span>
@@ -323,22 +195,6 @@
 </span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>str2datetime</span><span class=p>(</span><span class=n>_str</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=n>_datetime</span> <span class=o>=</span> <span class=n>datetime</span><span class=o>.</span><span class=n>datetime</span><span class=o>.</span><span class=n>strptime</span><span class=p>(</span><span class=n>_str</span><span class=p>,</span> <span class=s2>&#34;%Y-%m-</span><span class=si>%d</span><span class=s2> %H:%M:%S&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>_datetime</span>
-</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2022-03-07</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/tqdm/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/threading/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-03-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/tqdm/ class=prev rel=prev title><i class="fas fa-angle-left fa-fw"></i></a>
+<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/threading/ class=next rel=next title><i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

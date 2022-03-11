@@ -1,383 +1,32 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>操作系统（1） - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="操作系统（1）">
-<meta property="og:description" content="操作系统一 操作系统引论 操作系统概念 定义 计算机系统中的一个系统软件，是程序模块的集合 （有效、合理、方便） 目标 方便性 有效性：提高系统资源利用率、">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/courses/operating-system/operatingsystem1/"><meta property="article:section" content="posts">
-<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="操作系统（1）">
-<meta name=twitter:description content="操作系统一 操作系统引论 操作系统概念 定义 计算机系统中的一个系统软件，是程序模块的集合 （有效、合理、方便） 目标 方便性 有效性：提高系统资源利用率、">
-<meta name=application-name content="伤心肠粉的酱油碟子">
-<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/operating-system/operatingsystem1/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/operating-system/operatingsystem2/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/go-test/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统（1）","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operating-system\/operatingsystem1\/"},"genre":"posts","keywords":"OS","wordcount":13649,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operating-system\/operatingsystem1\/","datePublished":"2022-03-03T23:10:06+08:00","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>操作系统（1） - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="操作系统（1）"><meta property="og:description" content="操作系统一 操作系统引论 操作系统概念 定义 计算机系统中的一个系统软件，是程序模块的集合 （有效、合理、方便） 目标 方便性 有效性：提高系统资源利用率、"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/courses/operating-system/operatingsystem1/"><meta property="article:section" content="posts"><meta property="article:modified_time" content="2022-03-11T02:43:10+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="操作系统（1）"><meta name=twitter:description content="操作系统一 操作系统引论 操作系统概念 定义 计算机系统中的一个系统软件，是程序模块的集合 （有效、合理、方便） 目标 方便性 有效性：提高系统资源利用率、"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/courses/operating-system/operatingsystem1/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/courses/operating-system/operatingsystem2/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/go-test/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"操作系统（1）","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operating-system\/operatingsystem1\/"},"genre":"posts","keywords":"OS","wordcount":13649,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/courses\/operating-system\/operatingsystem1\/","datePublished":"2022-03-03T23:10:06+08:00","dateModified":"2022-03-11T02:43:10+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/posts/>文章 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">操作系统（1）</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/><i class="far fa-folder fa-fw"></i>专业课</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 13649 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 28 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#操作系统引论>操作系统引论</a>
-<ul>
-<li><a href=#操作系统概念>操作系统概念</a>
-<ul>
-<li><a href=#定义>定义</a></li><li><a href=#目标>目标</a></li><li><a href=#作用>作用</a>
-<ul>
-<li><a href=#作为用户与硬件之间的接口>作为用户与硬件之间的接口</a></li><li><a href=#计算机系统资源的管理者>计算机系统资源的管理者</a></li><li><a href=#实现了对计算机资源的抽象>实现了对计算机资源的抽象</a></li></ul></li><li><a href=#推动-os-发展的动力>推动 OS 发展的动力</a></li></ul></li><li><a href=#操作系统的发展过程>操作系统的发展过程</a>
-<ul>
-<li><a href=#多道批处理><strong>多道批处理</strong></a>
-<ul>
-<li><a href=#特点><strong>特点</strong></a></li><li><a href=#需要解决的问题><strong>需要解决的问题</strong></a></li></ul></li><li><a href=#分时系统><strong>分时系统</strong></a>
-<ul>
-<li><a href=#关键问题><strong>关键问题</strong></a></li><li><a href=#特征><strong>特征</strong></a></li></ul></li><li><a href=#实时系统>实时系统</a>
-<ul>
-<li><a href=#实时任务的类型><strong>实时任务的类型</strong></a></li><li><a href=#分时系统和实时系统的比较>分时系统和实时系统的比较</a></li></ul></li><li><a href=#微机操作系统>微机操作系统</a>
-<ul>
-<li><a href=#单用户单任务操作系统>单用户单任务操作系统</a></li><li><a href=#单用户多任务操作系统>单用户多任务操作系统</a></li><li><a href=#多用户多任务操作系统>多用户多任务操作系统</a></li></ul></li></ul></li><li><a href=#操作系统的基本特性>操作系统的基本特性</a>
-<ul>
-<li><a href=#并发>并发</a>
-<ul>
-<li><a href=#引入进程process>引入进程（Process）</a></li><li><a href=#线程threads>线程（Threads）</a></li></ul></li><li><a href=#共享>共享</a></li><li><a href=#虚拟>虚拟</a></li><li><a href=#异步>异步</a></li></ul></li><li><a href=#操作系统的主要功能>操作系统的主要功能</a>
-<ul>
-<li><a href=#处理机管理功能>处理机管理功能</a></li><li><a href=#存储器管理功能>存储器管理功能</a></li><li><a href=#设备管理功能>设备管理功能</a></li><li><a href=#文件管理功能>文件管理功能</a></li><li><a href=#操作系统与用户之间的接口>操作系统与用户之间的接口</a>
-<ul>
-<li><a href=#用户接口>用户接口</a></li><li><a href=#程序接口>程序接口</a></li></ul></li><li><a href=#一些概念>一些概念</a>
-<ul>
-<li><a href=#系统调用>系统调用</a></li><li><a href=#内核>内核</a></li><li><a href=#处理过程>处理过程</a></li><li><a href=#用户态>用户态</a></li><li><a href=#核心态>核心态</a></li><li><a href=#特权指令>特权指令</a></li></ul></li><li><a href=#现代操作系统的新功能>现代操作系统的新功能</a></li></ul></li><li><a href=#操作系统结构设计>操作系统结构设计</a>
-<ul>
-<li><a href=#传统-os-结构>传统 OS 结构</a>
-<ul>
-<li><a href=#无结构操作系统>无结构操作系统</a></li><li><a href=#模块化结构-os>模块化结构 OS</a></li><li><a href=#分层式结构-os>分层式结构 OS</a></li></ul></li><li><a href=#客户--服务器模式>客户 / 服务器模式</a></li><li><a href=#面向对象的程序设计>面向对象的程序设计</a></li><li><a href=#微内核-os-结构>微内核 OS 结构</a>
-<ul>
-<li><a href=#微内核>微内核</a></li><li><a href=#优点>优点</a></li><li><a href=#存在的问题>存在的问题</a></li></ul></li></ul></li></ul></li><li><a href=#进程的描述与控制>进程的描述与控制</a>
-<ul>
-<li><a href=#前驱图和程序执行>前驱图和程序执行</a>
-<ul>
-<li><a href=#前驱图>前驱图</a></li><li><a href=#顺序执行>顺序执行</a>
-<ul>
-<li><a href=#前驱图-1>前驱图</a></li><li><a href=#特征-1>特征</a></li></ul></li><li><a href=#并发执行>并发执行</a>
-<ul>
-<li><a href=#前驱图-2>前驱图</a></li><li><a href=#特征-2>特征</a></li></ul></li></ul></li><li><a href=#进程的描述>进程的描述</a>
-<ul>
-<li><a href=#进程的定义和特征>进程的定义和特征</a>
-<ul>
-<li><a href=#进程定义>进程定义</a></li><li><a href=#进程特征>进程特征</a></li><li><a href=#进程与程序的不同>进程与程序的不同</a></li></ul></li><li><a href=#进程的基本状态及转换>进程的基本状态及转换</a>
-<ul>
-<li><a href=#进程的三种基本状态>进程的三种基本状态</a></li><li><a href=#三种基本状态的转换>三种基本状态的转换</a></li><li><a href=#创建状态和终止状态>创建状态和终止状态</a></li></ul></li><li><a href=#挂起状态和进程状态的转换>挂起状态和进程状态的转换</a>
-<ul>
-<li><a href=#定义-1>定义</a></li><li><a href=#引入挂起状态的原因>引入挂起状态的原因</a></li><li><a href=#引入挂起原语操作后的状态转换>引入挂起原语操作后的状态转换</a></li></ul></li><li><a href=#进程管理中的数据结构-pcb>进程管理中的数据结构 (PCB)</a>
-<ul>
-<li><a href=#pcb-的作用>PCB 的作用</a></li><li><a href=#pcb-中的信息>PCB 中的信息</a></li><li><a href=#pcb-组织方式>PCB 组织方式</a></li></ul></li></ul></li><li><a href=#进程控制>进程控制</a>
-<ul>
-<li><a href=#操作系统内核>操作系统内核</a></li><li><a href=#进程的创建>进程的创建</a>
-<ul>
-<li><a href=#进程的层次结构>进程的层次结构</a></li><li><a href=#进程图>进程图</a></li><li><a href=#引起创建进程的事件>引起创建进程的事件</a></li><li><a href=#进程的创建-1>进程的创建</a></li></ul></li><li><a href=#进程的终止>进程的终止</a>
-<ul>
-<li><a href=#进程终止过程>进程终止过程</a></li></ul></li><li><a href=#进程的阻塞与唤醒>进程的阻塞与唤醒</a>
-<ul>
-<li><a href=#引起进程的阻塞与唤醒的事件>引起进程的阻塞与唤醒的事件</a></li><li><a href=#进程阻塞过程>进程阻塞过程</a></li><li><a href=#进程唤醒过程>进程唤醒过程</a></li><li><a href=#进程的挂起>进程的挂起</a></li><li><a href=#进程的激活>进程的激活</a></li></ul></li></ul></li><li><a href=#进程同步>进程同步</a>
-<ul>
-<li><a href=#基本概念>基本概念</a>
-<ul>
-<li><a href=#两种形式的制约关系><strong>两种形式的制约关系</strong></a></li><li><a href=#临界资源><strong>临界资源</strong></a></li><li><a href=#临界区><strong>临界区</strong></a></li><li><a href=#同步机制应遵循的问题><strong>同步机制应遵循的问题</strong></a></li></ul></li><li><a href=#硬件同步机制><strong>硬件同步机制</strong></a>
-<ul>
-<li><a href=#关中断><strong>关中断</strong></a></li><li><a href=#test-and-set-指令实现互斥><strong>Test-and-Set 指令实现互斥</strong></a></li><li><a href=#利用-swap-指令实现进程互斥><strong>利用 Swap 指令实现进程互斥</strong></a></li></ul></li><li><a href=#信号量机制><strong>信号量机制</strong></a>
-<ul>
-<li><a href=#整型信号量><strong>整型信号量</strong></a></li><li><a href=#记录型信号量><strong>记录型信号量</strong></a></li><li><a href=#and-型信号量><strong>AND 型信号量</strong></a></li><li><a href=#信号量集><strong>信号量集</strong></a></li></ul></li><li><a href=#信号量应用>信号量应用</a>
-<ul>
-<li><a href=#利用信号量实现进程互斥><strong>利用信号量实现进程互斥</strong></a></li><li><a href=#利用信号量实现前趋关系><strong>利用信号量实现前趋关系</strong></a></li></ul></li><li><a href=#管程机制自学>管程机制（自学）</a></li></ul></li><li><a href=#经典进程的同步问题>经典进程的同步问题</a>
-<ul>
-<li><a href=#生产者-消费者问题>生产者-消费者问题</a>
-<ul>
-<li><a href=#记录型信号量-1>记录型信号量</a></li><li><a href=#and-信号量>AND 信号量</a></li></ul></li><li><a href=#哲学家进餐问题>哲学家进餐问题</a>
-<ul>
-<li><a href=#记录型信号量-2>记录型信号量</a></li></ul></li><li><a href=#读者-写者问题>读者-写者问题</a>
-<ul>
-<li><a href=#记录型信号量-3>记录型信号量</a></li><li><a href=#信号量集机制>信号量集机制</a></li></ul></li></ul></li><li><a href=#进程通信>进程通信</a>
-<ul>
-<li><a href=#概念>概念</a></li><li><a href=#进程通信的类型><strong>进程通信的类型</strong></a>
-<ul>
-<li><a href=#共享存储器系统shared-memory-system>共享存储器系统（Shared-Memory System）</a></li><li><a href=#管道通信系统><strong>管道通信系统</strong></a></li><li><a href=#消息传递系统message-passing-system>消息传递系统（Message Passing System）</a></li><li><a href=#客户-服务器系统client-server-system>客户-服务器系统（Client-Server System）</a></li></ul></li><li><a href=#消息传递通信的实现方式>消息传递通信的实现方式</a>
-<ul>
-<li><a href=#直接消息传递系统>直接消息传递系统</a></li><li><a href=#信箱通信>信箱通信</a></li></ul></li></ul></li><li><a href=#线程的基本概念>线程的基本概念</a>
-<ul>
-<li><a href=#线程的引入>线程的引入</a></li><li><a href=#线程与进程的比较><strong>线程与进程的比较</strong></a></li><li><a href=#线程的实现>线程的实现</a></li></ul></li></ul></li><li><a href=#处理机调度与死锁>处理机调度与死锁</a>
-<ul>
-<li><a href=#处理机调度的层次和调度算法的目标>处理机调度的层次和调度算法的目标</a>
-<ul>
-<li><a href=#处理机调度的层次>处理机调度的层次</a></li><li><a href=#处理机调度算法目标>处理机调度算法目标</a>
-<ul>
-<li><a href=#处理机调度算法的共同目标>处理机调度算法的共同目标</a></li><li><a href=#批处理系统的目标><strong>批处理系统的目标</strong></a></li><li><a href=#分时系统的目标><strong>分时系统的目标</strong></a></li><li><a href=#实时系统的目标><strong>实时系统的目标</strong></a></li></ul></li></ul></li><li><a href=#作业与作业调度>作业与作业调度</a>
-<ul>
-<li><a href=#概念-1>概念</a></li><li><a href=#作业运行的三个阶段和三种状态>作业运行的三个阶段和三种状态</a></li><li><a href=#作业调度的主要任务>作业调度的主要任务</a></li><li><a href=#先来先服务-fcfs-调度算法>先来先服务 FCFS 调度算法</a></li><li><a href=#短作业优先-sjf-调度算法>短作业优先 SJF 调度算法</a>
-<ul>
-<li><a href=#最短剩余时间优先-srtf>最短剩余时间优先 SRTF</a></li></ul></li><li><a href=#优先级调度-psa-算法>优先级调度 PSA 算法</a></li><li><a href=#高响应比优先调度-hrrn-算法>高响应比优先调度 HRRN 算法</a></li></ul></li><li><a href=#进程调度>进程调度</a>
-<ul>
-<li><a href=#进程调度的任务><strong>进程调度的任务</strong></a></li><li><a href=#进程调度机制><strong>进程调度机制</strong></a></li><li><a href=#进程调度方式><strong>进程调度方式</strong></a></li><li><a href=#轮转调度-rr-算法>轮转调度 RR 算法</a>
-<ul>
-<li><a href=#调度契机>调度契机</a></li><li><a href=#特点-1>特点</a></li><li><a href=#时间片的选择>时间片的选择</a></li></ul></li><li><a href=#多级反馈队列调度算法-mfq><strong>多级反馈队列调度算法</strong> MFQ</a>
-<ul>
-<li><a href=#描述>描述</a></li><li><a href=#调度算法的性能><strong>调度算法的性能</strong></a></li></ul></li></ul></li><li><a href=#死锁概述>死锁概述</a>
-<ul>
-<li><a href=#定义-2><strong>定义</strong></a></li><li><a href=#资源类型>资源类型</a></li><li><a href=#死锁产生原因><strong>死锁产生原因</strong></a></li><li><a href=#产生死锁的必要条件>产生死锁的必要条件</a></li><li><a href=#处理死锁的方法>处理死锁的方法</a></li><li><a href=#预防死锁><strong>预防死锁</strong></a></li><li><a href=#避免死锁><strong>避免死锁</strong></a>
-<ul>
-<li><a href=#避免死锁与预防死锁的区别>避免死锁与预防死锁的区别</a></li><li><a href=#安全状态与安全序列>安全状态与安全序列</a></li></ul></li><li><a href=#银行家算法避免死锁>==银行家算法避免死锁==</a>
-<ul>
-<li><a href=#四个数据结构>四个数据结构</a></li><li><a href=#银行家算法>银行家算法</a></li><li><a href=#安全性算法>安全性算法</a></li><li><a href=#不足>不足</a></li></ul></li></ul></li><li><a href=#死锁的检测与解除>死锁的检测与解除</a>
-<ul>
-<li><a href=#死锁检测>死锁检测</a>
-<ul>
-<li><a href=#资源分配图><strong>资源分配图</strong></a></li><li><a href=#死锁定理>死锁定理</a></li></ul></li><li><a href=#死锁解除>死锁解除</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=操作系统一>操作系统一</h1><h2 id=操作系统引论>操作系统引论</h2><h3 id=操作系统概念>操作系统概念</h3><h4 id=定义>定义</h4><p>计算机系统中的一个系统软件，是程序模块的集合</p><p>（<strong>有效、合理、方便</strong>）</p><h4 id=目标>目标</h4><ul>
-<li>方便性</li><li>有效性：提高系统资源利用率、提高系统吞吐量</li><li>可扩充性</li><li>开放性：软硬件兼容</li></ul><h4 id=作用>作用</h4><h5 id=作为用户与硬件之间的接口>作为用户与硬件之间的接口</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210909110517642.png alt=image-20210909110517642 style=zoom:50%>
-<h5 id=计算机系统资源的管理者>计算机系统资源的管理者</h5><p>硬件资源</p><p>软件资源</p><h5 id=实现了对计算机资源的抽象>实现了对计算机资源的抽象</h5><p>覆盖了一系列软件（I/O 操作命令、文件管理等）后成为虚机器</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210909111006452.png alt=image-20210909111006452 style=zoom:50%>
-<h4 id=推动-os-发展的动力>推动 OS 发展的动力</h4><ul>
-<li>不断提高计算机资源利用率</li><li>方便用户</li><li>器件的不断更新与迭代</li><li>计算机体系结构的不断发展</li><li>不断提出新的应用需求</li></ul><h3 id=操作系统的发展过程>操作系统的发展过程</h3><ul>
-<li>
-<p><strong>人工操作</strong></p></li><li>
-<p><strong>脱机 / 假脱机（SPOOLing）方式</strong></p><ul>
-<li>事先将装有用户程序和数据的纸带装入纸带输入机，在一台<strong>外围机</strong>的控制下，把纸带（卡片）上的数据（程序）输入到磁带上</li><li>当 CPU 需要这些程序和数据时，再从磁带上高速调入内存。</li><li>当 CPU 需要输出时，先由 CPU 把数据直接从内存高速地输送到磁带上，然后在另一台外围机的控制下，再将磁带上的结果通过相应的输出设备输出。</li></ul></li><li>
-<p><strong>单道批处理</strong></p><ul>
-<li>首先由监督程序将磁带上的第一个作业装入内存，并将运行控制权交给该作业；</li><li>当该作业处理完成时，又把控制权交还给监督程序，再由监督程序吧磁带上的第二个作业调入内存。</li><li>计算机系统就这样自动地一个作业紧接着一个作业地进行处理，直至磁带上的所有作业全部完成</li><li>特点
-<ul>
-<li>自动性、顺序性、单道性（内存中仅有一道程序）</li></ul></li></ul></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210909114014453.png alt=image-20210909114014453 style=zoom:33%>
-<h4 id=多道批处理><strong>多道批处理</strong></h4><p>(并发)</p><p>利用 A 程序的 I/O 操作而暂停执行 CPU 空挡时间，调度 B 程序运行</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210909114004983.png alt=image-20210909114004983 style=zoom:33%>
-<h5 id=特点><strong>特点</strong></h5><ul>
-<li>资源利用率高</li><li>系统吞吐量大</li><li>平均周转时间长（需要排队依次进行处理）</li><li>无交互能力（修改和调试程序不方便）</li></ul><h5 id=需要解决的问题><strong>需要解决的问题</strong></h5><ul>
-<li>处理机争用问题</li><li>内存分配和保护问题</li><li>I/O 设备分配问题</li><li>文件的组织和管理问题</li><li>作业管理问题</li><li>用户与系统的接口问题</li></ul><p>(<strong>多道、单道的比较</strong>)</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png title=image-20211119181802230></p><h4 id=分时系统><strong>分时系统</strong></h4><ul>
-<li>
-<p>人机交互、共享主机</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png title=image-20210910102358257></p></li><li>
-<p>时间片（time slice）：一段很短的时间，用来切割 CPU</p></li></ul><h5 id=关键问题><strong>关键问题</strong></h5><ul>
-<li>系统首先必须能提供<strong>多个终端</strong>，同时给多个用户使用；</li><li>其次，当用户在自己的终端上键入命令时，系统应能<strong>及时接收</strong>、并<strong>及时处理</strong>该命令，再将结果返回给用户。
-<ul>
-<li>
-<p><strong>及时接收</strong></p><ul>
-<li>要做到及时接收多个用户键入的命令或数据，只需在系统中配置一个多路卡即可（多路卡实现分时多路复用，使主机能同时接收各用户从终端上输入的数据）</li><li>此外，还须为每个终端配置一个缓冲区，用来暂存用户键入的命令（或数据）。</li></ul></li><li>
-<p><strong>及时处理</strong></p><ul>
-<li>人-机交互的关键在于，用户键入命令后能对自己的作业机器运行及时地实施控制，或进行修改。因此，各个用户的作业都必须驻留在内存中，并能频繁地获得处理机运行。
-<ul>
-<li>作业直接进入内存</li><li>采用轮转运行方式</li></ul></li></ul></li></ul></li></ul><h5 id=特征><strong>特征</strong></h5><ol>
-<li>
-<p><strong>多路性</strong></p><p>该特性是指系统允许将多台终端同时连接到一台主机上，并按分时原则为每个用户服务。多路性允许多个用户共享一台计算机，显著地提高了资源利用率，降低了使用费用，从而促进了计算机更广泛的应用。</p></li><li>
-<p><strong>独立性</strong></p><p>该特性是指系统提供了这样的用机环境，即每个用户在各自的终端上进行操作，彼此之间互不干扰，给用户的感觉就像是他一人独占主机进行操作。</p></li><li>
-<p><strong>及时性</strong></p><p>该特性是指用户的请求能在很短时间内获得相应。这一时间间隔是根据人们所能接收的等待时间确定的，通常仅为1~3秒钟。</p></li><li>
-<p><strong>交互性</strong></p><p>该特性是指用户可通过终端与系统进行广泛的人机对话。其广泛性表现在：用户可以请求系统提供多方面的服务。</p></li></ol><h4 id=实时系统>实时系统</h4><p>（Real time system）</p><p>计算机对所接收到的信号做出及时或实时的反应</p><p>实时系统是指系统能及时响应外部事件的请求，在规定的时间内完成对该事件的处理，并控制所有实时任务协调一致地运行。</p><h5 id=实时任务的类型><strong>实时任务的类型</strong></h5><ol>
-<li>
-<p><strong>周期性实时任务和非周期性实时任务</strong></p><p>周期性实时任务：外部设备周期性地发出激励信号给计算机，要求它按规定周期循环执行，以便周期性地控制某外部设备。</p><p>非周期性实时任务：无明显周期性，但联系着一个截止时间，或称为最终期限。它可分为：</p><ul>
-<li>开始截止时间：某任务在某时间以前必须开始执行</li><li>完成截止时间：某任务在某时间以前必须完成</li></ul></li><li>
-<p><strong>硬实时任务和软实时任务</strong></p><p>硬实时任务：系统必须满足任务对截止时间的要求</p><p>软实时任务：也联系着一个截止时间，但并不严格，若偶尔错过了任务的截止时间，对系统产生的影响也不会太大。</p></li></ol><h5 id=分时系统和实时系统的比较>分时系统和实时系统的比较</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png title=image-20211120202044455></p><h4 id=微机操作系统>微机操作系统</h4><h5 id=单用户单任务操作系统>单用户单任务操作系统</h5><p>MS-DOS</p><h5 id=单用户多任务操作系统>单用户多任务操作系统</h5><p>Windows XP</p><h5 id=多用户多任务操作系统>多用户多任务操作系统</h5><p>UNIX，Linux</p><h3 id=操作系统的基本特性>操作系统的基本特性</h3><h4 id=并发>并发</h4><p>（Concurrence）多时间在同一时间段内发生</p><p>多道程序宏观上并发，微观上交替执行</p><h5 id=引入进程process>引入进程（Process）</h5><p>未引入进程系统：计算和 I/O 顺序执行</p><p>引入进程系统：为计算程序和 I/O 程序分别建立一个进程，两个进程可并发进行</p><h5 id=线程threads>线程（Threads）</h5><p>比进程更小的单位</p><h4 id=共享>共享</h4><p>（Sharing）系统中的资源可供内存中多个并发执行的进程（线程）<strong>共同使用</strong></p><ul>
-<li>互斥共享（音频设备、打印机）</li><li>同时访问（磁盘文件、可重入代码）</li></ul><h4 id=虚拟>虚拟</h4><p>（Virtual）把一个物理实体变为若干个逻辑上的对应物</p><p>如</p><ul>
-<li>CPU：每个进程的虚处理机</li><li>存储器：每个进程占有的地址空间（指令+数据+堆栈）</li><li>显示设备：多窗口或虚拟终端</li><li>打印设备：将临界资源变成同时访问资源</li></ul><p>方法</p><ul>
-<li>时分复用
-<ul>
-<li>虚拟处理机技术、虚拟设备技术</li></ul></li><li>空分复用
-<ul>
-<li>对存储空间的管理，实际上是内存的分时复用</li></ul></li></ul><h4 id=异步>异步</h4><p>（Asynchronism）</p><p>也称不确定性 / <strong>随机</strong>，指进程的执行顺序和执行时间的不确定性</p><p>并发执行的程序走走停停，不可预知</p><h3 id=操作系统的主要功能>操作系统的主要功能</h3><ul>
-<li><strong>资源管理</strong>
-<ul>
-<li>处理机管理（硬件）</li><li>存储器管理（硬件）</li><li>设备管理（硬件）</li><li>文件管理（软件）</li></ul></li><li><strong>用户接口</strong>
-<ul>
-<li>命令接口</li><li>图形接口</li><li>程序接口</li></ul></li></ul><h4 id=处理机管理功能>处理机管理功能</h4><ul>
-<li>
-<p><strong>进程控制</strong>：创建、撤销、状态迁移</p></li><li>
-<p><strong>进程同步</strong>：互斥访问临界资源</p></li><li>
-<p><strong>进程通信</strong>：进程合作</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png title=image-20210910110604428></p></li><li>
-<p><strong>调度</strong></p><ul>
-<li>作业调度：按照算法为作业分配资源</li><li>进程调度：按照算法先后执行进程</li></ul></li></ul><h4 id=存储器管理功能>存储器管理功能</h4><ul>
-<li>
-<p><strong>内存分配</strong></p><ul>
-<li>为每道程序分配内存空间</li><li>提高存储器利用率，减少内存碎片</li><li>满足正在运行的程序数据动态增长的需要</li><li>分类
-<ul>
-<li>静态分配</li><li>动态分配</li></ul></li></ul></li><li>
-<p><strong>内存保护</strong></p><ul>
-<li>每道程序在自己的内存空间内运行，彼此互不干扰</li><li>不允许用户访问操作系统的程序与数据</li><li>不允许用户转到非共享的其他用户程序</li></ul></li><li>
-<p><strong>地址映射</strong></p><ul>
-<li>能够将地址空间中的逻辑地址转换为内存空间中与之对应的物理地址</li></ul></li><li>
-<p><strong>内存扩充</strong></p><ul>
-<li>借助<strong>虚拟存储技术</strong>，从逻辑上扩充内存容量，使用户所感觉到的内存容量比实际内存容量大得多，以便让更多的用户程序能并发运行。</li><li>功能
-<ul>
-<li>请求调入</li><li>置换</li></ul></li></ul></li></ul><h4 id=设备管理功能>设备管理功能</h4><p><strong>主要任务</strong></p><ul>
-<li>
-<p>完成用户提出的 I/O 请求，并分配 I/O 设备</p></li><li>
-<p>提高 I/O 利用率</p></li></ul><p><strong>主要内容</strong></p><ul>
-<li>缓冲管理
-<ul>
-<li>在 I/O 设备和 CPU 中之间引入缓冲</li></ul></li><li>设备分配</li><li>设备处理</li><li>虚拟设备</li></ul><h4 id=文件管理功能>文件管理功能</h4><ul>
-<li>
-<p><strong>文件存储空间的管理</strong></p><ul>
-<li>为每个文件分配必要的外存空间，提高外存的利用率，进而提高文件系统的存取速度</li></ul></li><li>
-<p><strong>目录管理</strong></p><ul>
-<li>为每个文件建立一个目录项，目录项包括文件名、文件属性、文件在磁盘上的物理位置等，并对众多的目录项加以有效的组织，以实现方便的按名存取</li></ul></li><li>
-<p><strong>文件的读 / 写管理和保护</strong></p><ul>
-<li>
-<p>文件的读 / 写管理</p><p>根据用户请求，从外存中读取数据，或将数据写入外存。</p></li><li>
-<p>文件保护</p><p>放置未经核准的用户存取文件；放置冒名顶替存取文件；放置以不正确的方式存取文件</p></li></ul></li></ul><h4 id=操作系统与用户之间的接口>操作系统与用户之间的接口</h4><h5 id=用户接口>用户接口</h5><p>用户可以通过该接口向作业发出命令以控制作业的运行</p><p>命令接口（联机用户接口、脱机用户接口） + 图形用户接口</p><h5 id=程序接口>程序接口</h5><p>由一组==系统调用==构成，它长得蛮像个库函数（API）</p><p>程序接口是为用户程序在执行中访问系统而设置的，是用户程序取得操作系统服务的唯一途径</p><h4 id=一些概念>一些概念</h4><h5 id=系统调用>系统调用</h5><p><strong>系统调用</strong>是操作系统提供给应用程序 / 编程人员的唯一接口，它使 CPU 状态<strong>从用户态陷入内核态</strong></p><h5 id=内核>内核</h5><p><strong>内核</strong>是一组程序模块，作为可信软件来提供支持进程并发执行的基本功能和基本操作</p><p>它驻留内核空间，运行于和心态，具有访问硬件设备和内存的全部权限，可以执行特权指令。</p><p><strong>它是对操作系统核心功能的抽象概念</strong></p><h5 id=处理过程>处理过程</h5><p>用户使用系统调用（此时用户程序挂起），导致操作系统功能执行（此时从用户态陷入内核态），并返回用户请求的服务，用户程序恢复现场。</p><h5 id=用户态>用户态</h5><p>（user mode）非特权状态、目态</p><p>在此状态下，执行的代码被硬件限定，不能进行某些操作</p><h5 id=核心态>核心态</h5><p>特权状态、管态</p><p>核心态是操作系统内核所运行的模式，运行在该模式的代码，可以无限制地对系统存储、外部设备进行访问。</p><h5 id=特权指令>特权指令</h5><p>管理硬件和系统安全，只能在核心态执行，用户程序不得含有特权指令。</p><h4 id=现代操作系统的新功能>现代操作系统的新功能</h4><p>blabla</p><h3 id=操作系统结构设计>操作系统结构设计</h3><h4 id=传统-os-结构>传统 OS 结构</h4><h5 id=无结构操作系统>无结构操作系统</h5><h5 id=模块化结构-os>模块化结构 OS</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916105916360.png alt=image-20210916105916360 style=zoom:40%>
-<ul>
-<li><strong>模块独立性</strong>
-<ul>
-<li>内聚性
-<ul>
-<li>指模块内部各部分间联系的紧密程度。内聚性越高，模块独立性越强</li></ul></li><li>耦合度
-<ul>
-<li>模块间相互联系和相互影响的程度。耦合度越低，模块独立性越强</li></ul></li></ul></li></ul><h5 id=分层式结构-os>分层式结构 OS</h5><p>在目标系统 A~n~ 和裸机系统 A~0~ 之间，铺设若干个层次的软件 A~1~、A~2~、A~3~、…、A~n-1~，使 A~n~ 通过 A~n-1~、A~n-2~、…、A~2~、A~1~ 层，最终能在 A~0~ 上运行。</p><p>自底向上的分层设计的基本原则是每一步设计都是建立在可靠的基础上，每一层仅能使用期底层所提供的功能和服务</p><h4 id=客户--服务器模式>客户 / 服务器模式</h4><p>（Client / Server Model）</p><p>客户机、服务器、网络系统</p><h4 id=面向对象的程序设计>面向对象的程序设计</h4><h4 id=微内核-os-结构>微内核 OS 结构</h4><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916111002429.png alt=image-20210916111002429 style=zoom:50%>
-<ul>
-<li>
-<p>基于客户服务器模式</p></li><li>
-<p>应用机制与策略分离原理</p><ul>
-<li>
-<p>机制是指实现某一功能的具体执行机构，通常处于系统基层，在微内核操作系统中，将机制放在 OS 的微内核中。</p><p>策略是指在机制的基础上借助于某些参数和算法来实现该功能的优化，或达到不同的功能目标，通常处于系统高层。</p></li></ul></li><li>
-<p>采用面向对象技术</p></li></ul><h5 id=微内核>微内核</h5><ul>
-<li>
-<p>能实现现代 OS 最基本核心功能的小型内核</p></li><li>
-<p>包含</p><ul>
-<li>与硬件处理紧密相关的部分</li><li>一些较基本的功能</li><li>客户与服务器间的通信</li></ul></li><li>
-<p>如</p><ul>
-<li>进程管理</li><li>低级存储器管理</li><li>中断和陷入管理</li></ul></li></ul><h5 id=优点>优点</h5><p><strong>正确性、灵活性、易维护性、可扩充性</strong></p><ul>
-<li>提高系统可扩展性</li><li>提高系统可靠性</li><li>提高可移植性</li><li>提供了对分布式系统的支持</li><li>融入了面向对象技术</li></ul><h5 id=存在的问题>存在的问题</h5><p>效率低：系统在用户态与内核态多次切换（上下文切换频繁）</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916111205827.png alt=image-20210916111205827 style=zoom:50%>
-<h2 id=进程的描述与控制>进程的描述与控制</h2><h3 id=前驱图和程序执行>前驱图和程序执行</h3><h4 id=前驱图>前驱图</h4><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916113103298.png alt=image-20210916113103298 style=zoom:40%>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916113049918.png alt=image-20210916113049918 style=zoom:50%>
-<h4 id=顺序执行>顺序执行</h4><h5 id=前驱图-1>前驱图</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916113230038.png alt=image-20210916113230038 style=zoom:40%>
-<h5 id=特征-1>特征</h5><ul>
-<li>
-<p>顺序性</p></li><li>
-<p>封闭性：程序运行时独占全部资源</p></li><li>
-<p>可再现性</p></li></ul><h4 id=并发执行>并发执行</h4><p>允许多道程序共享资源，次序不确定</p><h5 id=前驱图-2>前驱图</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916113252245.png alt=image-20210916113252245 style=zoom:50%>
-<h5 id=特征-2>特征</h5><ul>
-<li>
-<p>间断性：程序共享系统资源，程序之间会有<strong>相互制约</strong>的关系，出现 “执行——暂停——执行” 的间断性活动规律</p></li><li>
-<p>失去封闭性：程序共享系统资源</p></li><li>
-<p>不可再现性：失去封闭性，导致了不可再现性</p></li></ul><h3 id=进程的描述>进程的描述</h3><p>（Process）</p><h4 id=进程的定义和特征>进程的定义和特征</h4><h5 id=进程定义>进程定义</h5><p><strong>描述性定义</strong></p><p>计算机中的所有程序（软件），按照某种顺序运行，这种运行的<strong>过程</strong>叫做进程</p><p>（一个活动，有程序输入、输出和状态）</p><p><strong>典型定义</strong></p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png title=image-20210923104214178></p><p>==进程是<strong>进程实体</strong>的运行过程，是系统进行资源分配和调度的一个独立单位==</p><p>进程是 CPU 抽象的结果</p><p><strong>进程实体</strong></p><p>进程在计算机系统中的<strong>映像</strong></p><p>它包括</p><ul>
-<li><strong>进程控制块</strong>：（Process Control Block，PCB）系统为了控制进程而设计的数据结构
-<ul>
-<li>进程描述信息</li><li>进程控制信息</li><li>&mldr;</li></ul></li><li><strong>程序段</strong></li><li><strong>相关数据段</strong></li><li><strong>管理用户的用户堆栈和系统堆栈</strong>：可归类到数据段中</li></ul><h5 id=进程特征>进程特征</h5><ul>
-<li><strong>动态性</strong>：“由创建而产生，由调度而执行，由撤销而消亡”，它有一定的生命期</li><li><strong>并发性</strong>：多个进程实体同存于内存中，且能在一段时间内同时运行；引入进程实体的目的就是并发执行</li><li><strong>独立性</strong>：进程实体能够独立运行、获取资源、接受调度</li><li><strong>异步性</strong>：进程按<strong>各自独立</strong>的、<strong>不可预知</strong>的速度向前推进</li></ul><h5 id=进程与程序的不同>进程与程序的不同</h5><ul>
-<li>进程是动态的，程序是静态的</li><li>进程是暂时的，程序时永恒的</li><li><strong>进程包含程序、数据和PCB</strong></li><li>进程可以包含多个程序（调用），同一程序可以对应多个进程（多次执行）</li></ul><h4 id=进程的基本状态及转换>进程的基本状态及转换</h4><h5 id=进程的三种基本状态>进程的三种基本状态</h5><ul>
-<li><strong>就绪状态</strong>（Ready）
-<ul>
-<li>进程被分配到除 CPU 以外的所有必要资源</li><li>按一定的策略可被排成就绪队列</li></ul></li><li><strong>执行状态</strong>（Running）
-<ul>
-<li>占用 CPU 运行</li><li>执行态进程数小于等于 CPU 数</li></ul></li><li><strong>阻塞状态</strong>（Block）
-<ul>
-<li>暂时无法继续执行</li><li>可以排成一个阻塞队列</li></ul></li></ul><h5 id=三种基本状态的转换>三种基本状态的转换</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923110245560.png alt=image-20210923110245560 style=zoom:50%>
-<h5 id=创建状态和终止状态>创建状态和终止状态</h5><ul>
-<li>
-<p>创建状态</p><ul>
-<li>创建进程的过程</li><li>进程刚建立，还未进入就绪队列</li></ul></li><li>
-<p>终止状态</p><ul>
-<li>终止进程的过程</li></ul></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923111929644.png alt=image-20210923111929644 style=zoom:50%>
-<h4 id=挂起状态和进程状态的转换>挂起状态和进程状态的转换</h4><h5 id=定义-1>定义</h5><p>挂起状态（Suspend）：进程从内存转到外存（进入静止状态，不可接受调度）</p><p>执行的进程暂停、就绪的进程不调度</p><h5 id=引入挂起状态的原因>引入挂起状态的原因</h5><ul>
-<li>终端用户的请求</li><li>父进程请求</li><li>负荷调节的需要</li><li>操作系统的需要</li></ul><h5 id=引入挂起原语操作后的状态转换>引入挂起原语操作后的状态转换</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923113602578.png alt=image-20210923113602578 style=zoom:40%>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">操作系统（1）</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/><i class="far fa-folder fa-fw"></i>专业课</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 13649 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 28 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#操作系统引论>操作系统引论</a><ul><li><a href=#操作系统概念>操作系统概念</a><ul><li><a href=#定义>定义</a></li><li><a href=#目标>目标</a></li><li><a href=#作用>作用</a><ul><li><a href=#作为用户与硬件之间的接口>作为用户与硬件之间的接口</a></li><li><a href=#计算机系统资源的管理者>计算机系统资源的管理者</a></li><li><a href=#实现了对计算机资源的抽象>实现了对计算机资源的抽象</a></li></ul></li><li><a href=#推动-os-发展的动力>推动 OS 发展的动力</a></li></ul></li><li><a href=#操作系统的发展过程>操作系统的发展过程</a><ul><li><a href=#多道批处理><strong>多道批处理</strong></a><ul><li><a href=#特点><strong>特点</strong></a></li><li><a href=#需要解决的问题><strong>需要解决的问题</strong></a></li></ul></li><li><a href=#分时系统><strong>分时系统</strong></a><ul><li><a href=#关键问题><strong>关键问题</strong></a></li><li><a href=#特征><strong>特征</strong></a></li></ul></li><li><a href=#实时系统>实时系统</a><ul><li><a href=#实时任务的类型><strong>实时任务的类型</strong></a></li><li><a href=#分时系统和实时系统的比较>分时系统和实时系统的比较</a></li></ul></li><li><a href=#微机操作系统>微机操作系统</a><ul><li><a href=#单用户单任务操作系统>单用户单任务操作系统</a></li><li><a href=#单用户多任务操作系统>单用户多任务操作系统</a></li><li><a href=#多用户多任务操作系统>多用户多任务操作系统</a></li></ul></li></ul></li><li><a href=#操作系统的基本特性>操作系统的基本特性</a><ul><li><a href=#并发>并发</a><ul><li><a href=#引入进程process>引入进程（Process）</a></li><li><a href=#线程threads>线程（Threads）</a></li></ul></li><li><a href=#共享>共享</a></li><li><a href=#虚拟>虚拟</a></li><li><a href=#异步>异步</a></li></ul></li><li><a href=#操作系统的主要功能>操作系统的主要功能</a><ul><li><a href=#处理机管理功能>处理机管理功能</a></li><li><a href=#存储器管理功能>存储器管理功能</a></li><li><a href=#设备管理功能>设备管理功能</a></li><li><a href=#文件管理功能>文件管理功能</a></li><li><a href=#操作系统与用户之间的接口>操作系统与用户之间的接口</a><ul><li><a href=#用户接口>用户接口</a></li><li><a href=#程序接口>程序接口</a></li></ul></li><li><a href=#一些概念>一些概念</a><ul><li><a href=#系统调用>系统调用</a></li><li><a href=#内核>内核</a></li><li><a href=#处理过程>处理过程</a></li><li><a href=#用户态>用户态</a></li><li><a href=#核心态>核心态</a></li><li><a href=#特权指令>特权指令</a></li></ul></li><li><a href=#现代操作系统的新功能>现代操作系统的新功能</a></li></ul></li><li><a href=#操作系统结构设计>操作系统结构设计</a><ul><li><a href=#传统-os-结构>传统 OS 结构</a><ul><li><a href=#无结构操作系统>无结构操作系统</a></li><li><a href=#模块化结构-os>模块化结构 OS</a></li><li><a href=#分层式结构-os>分层式结构 OS</a></li></ul></li><li><a href=#客户--服务器模式>客户 / 服务器模式</a></li><li><a href=#面向对象的程序设计>面向对象的程序设计</a></li><li><a href=#微内核-os-结构>微内核 OS 结构</a><ul><li><a href=#微内核>微内核</a></li><li><a href=#优点>优点</a></li><li><a href=#存在的问题>存在的问题</a></li></ul></li></ul></li></ul></li><li><a href=#进程的描述与控制>进程的描述与控制</a><ul><li><a href=#前驱图和程序执行>前驱图和程序执行</a><ul><li><a href=#前驱图>前驱图</a></li><li><a href=#顺序执行>顺序执行</a><ul><li><a href=#前驱图-1>前驱图</a></li><li><a href=#特征-1>特征</a></li></ul></li><li><a href=#并发执行>并发执行</a><ul><li><a href=#前驱图-2>前驱图</a></li><li><a href=#特征-2>特征</a></li></ul></li></ul></li><li><a href=#进程的描述>进程的描述</a><ul><li><a href=#进程的定义和特征>进程的定义和特征</a><ul><li><a href=#进程定义>进程定义</a></li><li><a href=#进程特征>进程特征</a></li><li><a href=#进程与程序的不同>进程与程序的不同</a></li></ul></li><li><a href=#进程的基本状态及转换>进程的基本状态及转换</a><ul><li><a href=#进程的三种基本状态>进程的三种基本状态</a></li><li><a href=#三种基本状态的转换>三种基本状态的转换</a></li><li><a href=#创建状态和终止状态>创建状态和终止状态</a></li></ul></li><li><a href=#挂起状态和进程状态的转换>挂起状态和进程状态的转换</a><ul><li><a href=#定义-1>定义</a></li><li><a href=#引入挂起状态的原因>引入挂起状态的原因</a></li><li><a href=#引入挂起原语操作后的状态转换>引入挂起原语操作后的状态转换</a></li></ul></li><li><a href=#进程管理中的数据结构-pcb>进程管理中的数据结构 (PCB)</a><ul><li><a href=#pcb-的作用>PCB 的作用</a></li><li><a href=#pcb-中的信息>PCB 中的信息</a></li><li><a href=#pcb-组织方式>PCB 组织方式</a></li></ul></li></ul></li><li><a href=#进程控制>进程控制</a><ul><li><a href=#操作系统内核>操作系统内核</a></li><li><a href=#进程的创建>进程的创建</a><ul><li><a href=#进程的层次结构>进程的层次结构</a></li><li><a href=#进程图>进程图</a></li><li><a href=#引起创建进程的事件>引起创建进程的事件</a></li><li><a href=#进程的创建-1>进程的创建</a></li></ul></li><li><a href=#进程的终止>进程的终止</a><ul><li><a href=#进程终止过程>进程终止过程</a></li></ul></li><li><a href=#进程的阻塞与唤醒>进程的阻塞与唤醒</a><ul><li><a href=#引起进程的阻塞与唤醒的事件>引起进程的阻塞与唤醒的事件</a></li><li><a href=#进程阻塞过程>进程阻塞过程</a></li><li><a href=#进程唤醒过程>进程唤醒过程</a></li><li><a href=#进程的挂起>进程的挂起</a></li><li><a href=#进程的激活>进程的激活</a></li></ul></li></ul></li><li><a href=#进程同步>进程同步</a><ul><li><a href=#基本概念>基本概念</a><ul><li><a href=#两种形式的制约关系><strong>两种形式的制约关系</strong></a></li><li><a href=#临界资源><strong>临界资源</strong></a></li><li><a href=#临界区><strong>临界区</strong></a></li><li><a href=#同步机制应遵循的问题><strong>同步机制应遵循的问题</strong></a></li></ul></li><li><a href=#硬件同步机制><strong>硬件同步机制</strong></a><ul><li><a href=#关中断><strong>关中断</strong></a></li><li><a href=#test-and-set-指令实现互斥><strong>Test-and-Set 指令实现互斥</strong></a></li><li><a href=#利用-swap-指令实现进程互斥><strong>利用 Swap 指令实现进程互斥</strong></a></li></ul></li><li><a href=#信号量机制><strong>信号量机制</strong></a><ul><li><a href=#整型信号量><strong>整型信号量</strong></a></li><li><a href=#记录型信号量><strong>记录型信号量</strong></a></li><li><a href=#and-型信号量><strong>AND 型信号量</strong></a></li><li><a href=#信号量集><strong>信号量集</strong></a></li></ul></li><li><a href=#信号量应用>信号量应用</a><ul><li><a href=#利用信号量实现进程互斥><strong>利用信号量实现进程互斥</strong></a></li><li><a href=#利用信号量实现前趋关系><strong>利用信号量实现前趋关系</strong></a></li></ul></li><li><a href=#管程机制自学>管程机制（自学）</a></li></ul></li><li><a href=#经典进程的同步问题>经典进程的同步问题</a><ul><li><a href=#生产者-消费者问题>生产者-消费者问题</a><ul><li><a href=#记录型信号量-1>记录型信号量</a></li><li><a href=#and-信号量>AND 信号量</a></li></ul></li><li><a href=#哲学家进餐问题>哲学家进餐问题</a><ul><li><a href=#记录型信号量-2>记录型信号量</a></li></ul></li><li><a href=#读者-写者问题>读者-写者问题</a><ul><li><a href=#记录型信号量-3>记录型信号量</a></li><li><a href=#信号量集机制>信号量集机制</a></li></ul></li></ul></li><li><a href=#进程通信>进程通信</a><ul><li><a href=#概念>概念</a></li><li><a href=#进程通信的类型><strong>进程通信的类型</strong></a><ul><li><a href=#共享存储器系统shared-memory-system>共享存储器系统（Shared-Memory System）</a></li><li><a href=#管道通信系统><strong>管道通信系统</strong></a></li><li><a href=#消息传递系统message-passing-system>消息传递系统（Message Passing System）</a></li><li><a href=#客户-服务器系统client-server-system>客户-服务器系统（Client-Server System）</a></li></ul></li><li><a href=#消息传递通信的实现方式>消息传递通信的实现方式</a><ul><li><a href=#直接消息传递系统>直接消息传递系统</a></li><li><a href=#信箱通信>信箱通信</a></li></ul></li></ul></li><li><a href=#线程的基本概念>线程的基本概念</a><ul><li><a href=#线程的引入>线程的引入</a></li><li><a href=#线程与进程的比较><strong>线程与进程的比较</strong></a></li><li><a href=#线程的实现>线程的实现</a></li></ul></li></ul></li><li><a href=#处理机调度与死锁>处理机调度与死锁</a><ul><li><a href=#处理机调度的层次和调度算法的目标>处理机调度的层次和调度算法的目标</a><ul><li><a href=#处理机调度的层次>处理机调度的层次</a></li><li><a href=#处理机调度算法目标>处理机调度算法目标</a><ul><li><a href=#处理机调度算法的共同目标>处理机调度算法的共同目标</a></li><li><a href=#批处理系统的目标><strong>批处理系统的目标</strong></a></li><li><a href=#分时系统的目标><strong>分时系统的目标</strong></a></li><li><a href=#实时系统的目标><strong>实时系统的目标</strong></a></li></ul></li></ul></li><li><a href=#作业与作业调度>作业与作业调度</a><ul><li><a href=#概念-1>概念</a></li><li><a href=#作业运行的三个阶段和三种状态>作业运行的三个阶段和三种状态</a></li><li><a href=#作业调度的主要任务>作业调度的主要任务</a></li><li><a href=#先来先服务-fcfs-调度算法>先来先服务 FCFS 调度算法</a></li><li><a href=#短作业优先-sjf-调度算法>短作业优先 SJF 调度算法</a><ul><li><a href=#最短剩余时间优先-srtf>最短剩余时间优先 SRTF</a></li></ul></li><li><a href=#优先级调度-psa-算法>优先级调度 PSA 算法</a></li><li><a href=#高响应比优先调度-hrrn-算法>高响应比优先调度 HRRN 算法</a></li></ul></li><li><a href=#进程调度>进程调度</a><ul><li><a href=#进程调度的任务><strong>进程调度的任务</strong></a></li><li><a href=#进程调度机制><strong>进程调度机制</strong></a></li><li><a href=#进程调度方式><strong>进程调度方式</strong></a></li><li><a href=#轮转调度-rr-算法>轮转调度 RR 算法</a><ul><li><a href=#调度契机>调度契机</a></li><li><a href=#特点-1>特点</a></li><li><a href=#时间片的选择>时间片的选择</a></li></ul></li><li><a href=#多级反馈队列调度算法-mfq><strong>多级反馈队列调度算法</strong> MFQ</a><ul><li><a href=#描述>描述</a></li><li><a href=#调度算法的性能><strong>调度算法的性能</strong></a></li></ul></li></ul></li><li><a href=#死锁概述>死锁概述</a><ul><li><a href=#定义-2><strong>定义</strong></a></li><li><a href=#资源类型>资源类型</a></li><li><a href=#死锁产生原因><strong>死锁产生原因</strong></a></li><li><a href=#产生死锁的必要条件>产生死锁的必要条件</a></li><li><a href=#处理死锁的方法>处理死锁的方法</a></li><li><a href=#预防死锁><strong>预防死锁</strong></a></li><li><a href=#避免死锁><strong>避免死锁</strong></a><ul><li><a href=#避免死锁与预防死锁的区别>避免死锁与预防死锁的区别</a></li><li><a href=#安全状态与安全序列>安全状态与安全序列</a></li></ul></li><li><a href=#银行家算法避免死锁>==银行家算法避免死锁==</a><ul><li><a href=#四个数据结构>四个数据结构</a></li><li><a href=#银行家算法>银行家算法</a></li><li><a href=#安全性算法>安全性算法</a></li><li><a href=#不足>不足</a></li></ul></li></ul></li><li><a href=#死锁的检测与解除>死锁的检测与解除</a><ul><li><a href=#死锁检测>死锁检测</a><ul><li><a href=#资源分配图><strong>资源分配图</strong></a></li><li><a href=#死锁定理>死锁定理</a></li></ul></li><li><a href=#死锁解除>死锁解除</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=操作系统一>操作系统一</h1><h2 id=操作系统引论>操作系统引论</h2><h3 id=操作系统概念>操作系统概念</h3><h4 id=定义>定义</h4><p>计算机系统中的一个系统软件，是程序模块的集合</p><p>（<strong>有效、合理、方便</strong>）</p><h4 id=目标>目标</h4><ul><li>方便性</li><li>有效性：提高系统资源利用率、提高系统吞吐量</li><li>可扩充性</li><li>开放性：软硬件兼容</li></ul><h4 id=作用>作用</h4><h5 id=作为用户与硬件之间的接口>作为用户与硬件之间的接口</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210909110517642.png alt=image-20210909110517642 style=zoom:50%><h5 id=计算机系统资源的管理者>计算机系统资源的管理者</h5><p>硬件资源</p><p>软件资源</p><h5 id=实现了对计算机资源的抽象>实现了对计算机资源的抽象</h5><p>覆盖了一系列软件（I/O 操作命令、文件管理等）后成为虚机器</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210909111006452.png alt=image-20210909111006452 style=zoom:50%><h4 id=推动-os-发展的动力>推动 OS 发展的动力</h4><ul><li>不断提高计算机资源利用率</li><li>方便用户</li><li>器件的不断更新与迭代</li><li>计算机体系结构的不断发展</li><li>不断提出新的应用需求</li></ul><h3 id=操作系统的发展过程>操作系统的发展过程</h3><ul><li><p><strong>人工操作</strong></p></li><li><p><strong>脱机 / 假脱机（SPOOLing）方式</strong></p><ul><li>事先将装有用户程序和数据的纸带装入纸带输入机，在一台<strong>外围机</strong>的控制下，把纸带（卡片）上的数据（程序）输入到磁带上</li><li>当 CPU 需要这些程序和数据时，再从磁带上高速调入内存。</li><li>当 CPU 需要输出时，先由 CPU 把数据直接从内存高速地输送到磁带上，然后在另一台外围机的控制下，再将磁带上的结果通过相应的输出设备输出。</li></ul></li><li><p><strong>单道批处理</strong></p><ul><li>首先由监督程序将磁带上的第一个作业装入内存，并将运行控制权交给该作业；</li><li>当该作业处理完成时，又把控制权交还给监督程序，再由监督程序吧磁带上的第二个作业调入内存。</li><li>计算机系统就这样自动地一个作业紧接着一个作业地进行处理，直至磁带上的所有作业全部完成</li><li>特点<ul><li>自动性、顺序性、单道性（内存中仅有一道程序）</li></ul></li></ul></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210909114014453.png alt=image-20210909114014453 style=zoom:33%><h4 id=多道批处理><strong>多道批处理</strong></h4><p>(并发)</p><p>利用 A 程序的 I/O 操作而暂停执行 CPU 空挡时间，调度 B 程序运行</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210909114004983.png alt=image-20210909114004983 style=zoom:33%><h5 id=特点><strong>特点</strong></h5><ul><li>资源利用率高</li><li>系统吞吐量大</li><li>平均周转时间长（需要排队依次进行处理）</li><li>无交互能力（修改和调试程序不方便）</li></ul><h5 id=需要解决的问题><strong>需要解决的问题</strong></h5><ul><li>处理机争用问题</li><li>内存分配和保护问题</li><li>I/O 设备分配问题</li><li>文件的组织和管理问题</li><li>作业管理问题</li><li>用户与系统的接口问题</li></ul><p>(<strong>多道、单道的比较</strong>)</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211119181802230.png title=image-20211119181802230></p><h4 id=分时系统><strong>分时系统</strong></h4><ul><li><p>人机交互、共享主机</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910102358257.png title=image-20210910102358257></p></li><li><p>时间片（time slice）：一段很短的时间，用来切割 CPU</p></li></ul><h5 id=关键问题><strong>关键问题</strong></h5><ul><li>系统首先必须能提供<strong>多个终端</strong>，同时给多个用户使用；</li><li>其次，当用户在自己的终端上键入命令时，系统应能<strong>及时接收</strong>、并<strong>及时处理</strong>该命令，再将结果返回给用户。<ul><li><p><strong>及时接收</strong></p><ul><li>要做到及时接收多个用户键入的命令或数据，只需在系统中配置一个多路卡即可（多路卡实现分时多路复用，使主机能同时接收各用户从终端上输入的数据）</li><li>此外，还须为每个终端配置一个缓冲区，用来暂存用户键入的命令（或数据）。</li></ul></li><li><p><strong>及时处理</strong></p><ul><li>人-机交互的关键在于，用户键入命令后能对自己的作业机器运行及时地实施控制，或进行修改。因此，各个用户的作业都必须驻留在内存中，并能频繁地获得处理机运行。<ul><li>作业直接进入内存</li><li>采用轮转运行方式</li></ul></li></ul></li></ul></li></ul><h5 id=特征><strong>特征</strong></h5><ol><li><p><strong>多路性</strong></p><p>该特性是指系统允许将多台终端同时连接到一台主机上，并按分时原则为每个用户服务。多路性允许多个用户共享一台计算机，显著地提高了资源利用率，降低了使用费用，从而促进了计算机更广泛的应用。</p></li><li><p><strong>独立性</strong></p><p>该特性是指系统提供了这样的用机环境，即每个用户在各自的终端上进行操作，彼此之间互不干扰，给用户的感觉就像是他一人独占主机进行操作。</p></li><li><p><strong>及时性</strong></p><p>该特性是指用户的请求能在很短时间内获得相应。这一时间间隔是根据人们所能接收的等待时间确定的，通常仅为1~3秒钟。</p></li><li><p><strong>交互性</strong></p><p>该特性是指用户可通过终端与系统进行广泛的人机对话。其广泛性表现在：用户可以请求系统提供多方面的服务。</p></li></ol><h4 id=实时系统>实时系统</h4><p>（Real time system）</p><p>计算机对所接收到的信号做出及时或实时的反应</p><p>实时系统是指系统能及时响应外部事件的请求，在规定的时间内完成对该事件的处理，并控制所有实时任务协调一致地运行。</p><h5 id=实时任务的类型><strong>实时任务的类型</strong></h5><ol><li><p><strong>周期性实时任务和非周期性实时任务</strong></p><p>周期性实时任务：外部设备周期性地发出激励信号给计算机，要求它按规定周期循环执行，以便周期性地控制某外部设备。</p><p>非周期性实时任务：无明显周期性，但联系着一个截止时间，或称为最终期限。它可分为：</p><ul><li>开始截止时间：某任务在某时间以前必须开始执行</li><li>完成截止时间：某任务在某时间以前必须完成</li></ul></li><li><p><strong>硬实时任务和软实时任务</strong></p><p>硬实时任务：系统必须满足任务对截止时间的要求</p><p>软实时任务：也联系着一个截止时间，但并不严格，若偶尔错过了任务的截止时间，对系统产生的影响也不会太大。</p></li></ol><h5 id=分时系统和实时系统的比较>分时系统和实时系统的比较</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211120202044455.png title=image-20211120202044455></p><h4 id=微机操作系统>微机操作系统</h4><h5 id=单用户单任务操作系统>单用户单任务操作系统</h5><p>MS-DOS</p><h5 id=单用户多任务操作系统>单用户多任务操作系统</h5><p>Windows XP</p><h5 id=多用户多任务操作系统>多用户多任务操作系统</h5><p>UNIX，Linux</p><h3 id=操作系统的基本特性>操作系统的基本特性</h3><h4 id=并发>并发</h4><p>（Concurrence）多时间在同一时间段内发生</p><p>多道程序宏观上并发，微观上交替执行</p><h5 id=引入进程process>引入进程（Process）</h5><p>未引入进程系统：计算和 I/O 顺序执行</p><p>引入进程系统：为计算程序和 I/O 程序分别建立一个进程，两个进程可并发进行</p><h5 id=线程threads>线程（Threads）</h5><p>比进程更小的单位</p><h4 id=共享>共享</h4><p>（Sharing）系统中的资源可供内存中多个并发执行的进程（线程）<strong>共同使用</strong></p><ul><li>互斥共享（音频设备、打印机）</li><li>同时访问（磁盘文件、可重入代码）</li></ul><h4 id=虚拟>虚拟</h4><p>（Virtual）把一个物理实体变为若干个逻辑上的对应物</p><p>如</p><ul><li>CPU：每个进程的虚处理机</li><li>存储器：每个进程占有的地址空间（指令+数据+堆栈）</li><li>显示设备：多窗口或虚拟终端</li><li>打印设备：将临界资源变成同时访问资源</li></ul><p>方法</p><ul><li>时分复用<ul><li>虚拟处理机技术、虚拟设备技术</li></ul></li><li>空分复用<ul><li>对存储空间的管理，实际上是内存的分时复用</li></ul></li></ul><h4 id=异步>异步</h4><p>（Asynchronism）</p><p>也称不确定性 / <strong>随机</strong>，指进程的执行顺序和执行时间的不确定性</p><p>并发执行的程序走走停停，不可预知</p><h3 id=操作系统的主要功能>操作系统的主要功能</h3><ul><li><strong>资源管理</strong><ul><li>处理机管理（硬件）</li><li>存储器管理（硬件）</li><li>设备管理（硬件）</li><li>文件管理（软件）</li></ul></li><li><strong>用户接口</strong><ul><li>命令接口</li><li>图形接口</li><li>程序接口</li></ul></li></ul><h4 id=处理机管理功能>处理机管理功能</h4><ul><li><p><strong>进程控制</strong>：创建、撤销、状态迁移</p></li><li><p><strong>进程同步</strong>：互斥访问临界资源</p></li><li><p><strong>进程通信</strong>：进程合作</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210910110604428.png title=image-20210910110604428></p></li><li><p><strong>调度</strong></p><ul><li>作业调度：按照算法为作业分配资源</li><li>进程调度：按照算法先后执行进程</li></ul></li></ul><h4 id=存储器管理功能>存储器管理功能</h4><ul><li><p><strong>内存分配</strong></p><ul><li>为每道程序分配内存空间</li><li>提高存储器利用率，减少内存碎片</li><li>满足正在运行的程序数据动态增长的需要</li><li>分类<ul><li>静态分配</li><li>动态分配</li></ul></li></ul></li><li><p><strong>内存保护</strong></p><ul><li>每道程序在自己的内存空间内运行，彼此互不干扰</li><li>不允许用户访问操作系统的程序与数据</li><li>不允许用户转到非共享的其他用户程序</li></ul></li><li><p><strong>地址映射</strong></p><ul><li>能够将地址空间中的逻辑地址转换为内存空间中与之对应的物理地址</li></ul></li><li><p><strong>内存扩充</strong></p><ul><li>借助<strong>虚拟存储技术</strong>，从逻辑上扩充内存容量，使用户所感觉到的内存容量比实际内存容量大得多，以便让更多的用户程序能并发运行。</li><li>功能<ul><li>请求调入</li><li>置换</li></ul></li></ul></li></ul><h4 id=设备管理功能>设备管理功能</h4><p><strong>主要任务</strong></p><ul><li><p>完成用户提出的 I/O 请求，并分配 I/O 设备</p></li><li><p>提高 I/O 利用率</p></li></ul><p><strong>主要内容</strong></p><ul><li>缓冲管理<ul><li>在 I/O 设备和 CPU 中之间引入缓冲</li></ul></li><li>设备分配</li><li>设备处理</li><li>虚拟设备</li></ul><h4 id=文件管理功能>文件管理功能</h4><ul><li><p><strong>文件存储空间的管理</strong></p><ul><li>为每个文件分配必要的外存空间，提高外存的利用率，进而提高文件系统的存取速度</li></ul></li><li><p><strong>目录管理</strong></p><ul><li>为每个文件建立一个目录项，目录项包括文件名、文件属性、文件在磁盘上的物理位置等，并对众多的目录项加以有效的组织，以实现方便的按名存取</li></ul></li><li><p><strong>文件的读 / 写管理和保护</strong></p><ul><li><p>文件的读 / 写管理</p><p>根据用户请求，从外存中读取数据，或将数据写入外存。</p></li><li><p>文件保护</p><p>放置未经核准的用户存取文件；放置冒名顶替存取文件；放置以不正确的方式存取文件</p></li></ul></li></ul><h4 id=操作系统与用户之间的接口>操作系统与用户之间的接口</h4><h5 id=用户接口>用户接口</h5><p>用户可以通过该接口向作业发出命令以控制作业的运行</p><p>命令接口（联机用户接口、脱机用户接口） + 图形用户接口</p><h5 id=程序接口>程序接口</h5><p>由一组==系统调用==构成，它长得蛮像个库函数（API）</p><p>程序接口是为用户程序在执行中访问系统而设置的，是用户程序取得操作系统服务的唯一途径</p><h4 id=一些概念>一些概念</h4><h5 id=系统调用>系统调用</h5><p><strong>系统调用</strong>是操作系统提供给应用程序 / 编程人员的唯一接口，它使 CPU 状态<strong>从用户态陷入内核态</strong></p><h5 id=内核>内核</h5><p><strong>内核</strong>是一组程序模块，作为可信软件来提供支持进程并发执行的基本功能和基本操作</p><p>它驻留内核空间，运行于和心态，具有访问硬件设备和内存的全部权限，可以执行特权指令。</p><p><strong>它是对操作系统核心功能的抽象概念</strong></p><h5 id=处理过程>处理过程</h5><p>用户使用系统调用（此时用户程序挂起），导致操作系统功能执行（此时从用户态陷入内核态），并返回用户请求的服务，用户程序恢复现场。</p><h5 id=用户态>用户态</h5><p>（user mode）非特权状态、目态</p><p>在此状态下，执行的代码被硬件限定，不能进行某些操作</p><h5 id=核心态>核心态</h5><p>特权状态、管态</p><p>核心态是操作系统内核所运行的模式，运行在该模式的代码，可以无限制地对系统存储、外部设备进行访问。</p><h5 id=特权指令>特权指令</h5><p>管理硬件和系统安全，只能在核心态执行，用户程序不得含有特权指令。</p><h4 id=现代操作系统的新功能>现代操作系统的新功能</h4><p>blabla</p><h3 id=操作系统结构设计>操作系统结构设计</h3><h4 id=传统-os-结构>传统 OS 结构</h4><h5 id=无结构操作系统>无结构操作系统</h5><h5 id=模块化结构-os>模块化结构 OS</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916105916360.png alt=image-20210916105916360 style=zoom:40%><ul><li><strong>模块独立性</strong><ul><li>内聚性<ul><li>指模块内部各部分间联系的紧密程度。内聚性越高，模块独立性越强</li></ul></li><li>耦合度<ul><li>模块间相互联系和相互影响的程度。耦合度越低，模块独立性越强</li></ul></li></ul></li></ul><h5 id=分层式结构-os>分层式结构 OS</h5><p>在目标系统 A~n~ 和裸机系统 A~0~ 之间，铺设若干个层次的软件 A~1~、A~2~、A~3~、…、A~n-1~，使 A~n~ 通过 A~n-1~、A~n-2~、…、A~2~、A~1~ 层，最终能在 A~0~ 上运行。</p><p>自底向上的分层设计的基本原则是每一步设计都是建立在可靠的基础上，每一层仅能使用期底层所提供的功能和服务</p><h4 id=客户--服务器模式>客户 / 服务器模式</h4><p>（Client / Server Model）</p><p>客户机、服务器、网络系统</p><h4 id=面向对象的程序设计>面向对象的程序设计</h4><h4 id=微内核-os-结构>微内核 OS 结构</h4><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916111002429.png alt=image-20210916111002429 style=zoom:50%><ul><li><p>基于客户服务器模式</p></li><li><p>应用机制与策略分离原理</p><ul><li><p>机制是指实现某一功能的具体执行机构，通常处于系统基层，在微内核操作系统中，将机制放在 OS 的微内核中。</p><p>策略是指在机制的基础上借助于某些参数和算法来实现该功能的优化，或达到不同的功能目标，通常处于系统高层。</p></li></ul></li><li><p>采用面向对象技术</p></li></ul><h5 id=微内核>微内核</h5><ul><li><p>能实现现代 OS 最基本核心功能的小型内核</p></li><li><p>包含</p><ul><li>与硬件处理紧密相关的部分</li><li>一些较基本的功能</li><li>客户与服务器间的通信</li></ul></li><li><p>如</p><ul><li>进程管理</li><li>低级存储器管理</li><li>中断和陷入管理</li></ul></li></ul><h5 id=优点>优点</h5><p><strong>正确性、灵活性、易维护性、可扩充性</strong></p><ul><li>提高系统可扩展性</li><li>提高系统可靠性</li><li>提高可移植性</li><li>提供了对分布式系统的支持</li><li>融入了面向对象技术</li></ul><h5 id=存在的问题>存在的问题</h5><p>效率低：系统在用户态与内核态多次切换（上下文切换频繁）</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916111205827.png alt=image-20210916111205827 style=zoom:50%><h2 id=进程的描述与控制>进程的描述与控制</h2><h3 id=前驱图和程序执行>前驱图和程序执行</h3><h4 id=前驱图>前驱图</h4><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916113103298.png alt=image-20210916113103298 style=zoom:40%>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916113049918.png alt=image-20210916113049918 style=zoom:50%><h4 id=顺序执行>顺序执行</h4><h5 id=前驱图-1>前驱图</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916113230038.png alt=image-20210916113230038 style=zoom:40%><h5 id=特征-1>特征</h5><ul><li><p>顺序性</p></li><li><p>封闭性：程序运行时独占全部资源</p></li><li><p>可再现性</p></li></ul><h4 id=并发执行>并发执行</h4><p>允许多道程序共享资源，次序不确定</p><h5 id=前驱图-2>前驱图</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210916113252245.png alt=image-20210916113252245 style=zoom:50%><h5 id=特征-2>特征</h5><ul><li><p>间断性：程序共享系统资源，程序之间会有<strong>相互制约</strong>的关系，出现 “执行——暂停——执行” 的间断性活动规律</p></li><li><p>失去封闭性：程序共享系统资源</p></li><li><p>不可再现性：失去封闭性，导致了不可再现性</p></li></ul><h3 id=进程的描述>进程的描述</h3><p>（Process）</p><h4 id=进程的定义和特征>进程的定义和特征</h4><h5 id=进程定义>进程定义</h5><p><strong>描述性定义</strong></p><p>计算机中的所有程序（软件），按照某种顺序运行，这种运行的<strong>过程</strong>叫做进程</p><p>（一个活动，有程序输入、输出和状态）</p><p><strong>典型定义</strong></p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923104214178.png title=image-20210923104214178></p><p>==进程是<strong>进程实体</strong>的运行过程，是系统进行资源分配和调度的一个独立单位==</p><p>进程是 CPU 抽象的结果</p><p><strong>进程实体</strong></p><p>进程在计算机系统中的<strong>映像</strong></p><p>它包括</p><ul><li><strong>进程控制块</strong>：（Process Control Block，PCB）系统为了控制进程而设计的数据结构<ul><li>进程描述信息</li><li>进程控制信息</li><li>&mldr;</li></ul></li><li><strong>程序段</strong></li><li><strong>相关数据段</strong></li><li><strong>管理用户的用户堆栈和系统堆栈</strong>：可归类到数据段中</li></ul><h5 id=进程特征>进程特征</h5><ul><li><strong>动态性</strong>：“由创建而产生，由调度而执行，由撤销而消亡”，它有一定的生命期</li><li><strong>并发性</strong>：多个进程实体同存于内存中，且能在一段时间内同时运行；引入进程实体的目的就是并发执行</li><li><strong>独立性</strong>：进程实体能够独立运行、获取资源、接受调度</li><li><strong>异步性</strong>：进程按<strong>各自独立</strong>的、<strong>不可预知</strong>的速度向前推进</li></ul><h5 id=进程与程序的不同>进程与程序的不同</h5><ul><li>进程是动态的，程序是静态的</li><li>进程是暂时的，程序时永恒的</li><li><strong>进程包含程序、数据和PCB</strong></li><li>进程可以包含多个程序（调用），同一程序可以对应多个进程（多次执行）</li></ul><h4 id=进程的基本状态及转换>进程的基本状态及转换</h4><h5 id=进程的三种基本状态>进程的三种基本状态</h5><ul><li><strong>就绪状态</strong>（Ready）<ul><li>进程被分配到除 CPU 以外的所有必要资源</li><li>按一定的策略可被排成就绪队列</li></ul></li><li><strong>执行状态</strong>（Running）<ul><li>占用 CPU 运行</li><li>执行态进程数小于等于 CPU 数</li></ul></li><li><strong>阻塞状态</strong>（Block）<ul><li>暂时无法继续执行</li><li>可以排成一个阻塞队列</li></ul></li></ul><h5 id=三种基本状态的转换>三种基本状态的转换</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923110245560.png alt=image-20210923110245560 style=zoom:50%><h5 id=创建状态和终止状态>创建状态和终止状态</h5><ul><li><p>创建状态</p><ul><li>创建进程的过程</li><li>进程刚建立，还未进入就绪队列</li></ul></li><li><p>终止状态</p><ul><li>终止进程的过程</li></ul></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923111929644.png alt=image-20210923111929644 style=zoom:50%><h4 id=挂起状态和进程状态的转换>挂起状态和进程状态的转换</h4><h5 id=定义-1>定义</h5><p>挂起状态（Suspend）：进程从内存转到外存（进入静止状态，不可接受调度）</p><p>执行的进程暂停、就绪的进程不调度</p><h5 id=引入挂起状态的原因>引入挂起状态的原因</h5><ul><li>终端用户的请求</li><li>父进程请求</li><li>负荷调节的需要</li><li>操作系统的需要</li></ul><h5 id=引入挂起原语操作后的状态转换>引入挂起原语操作后的状态转换</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923113602578.png alt=image-20210923113602578 style=zoom:40%>
 <img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923112854057.png alt=image-20210923112854057 style=zoom:50%>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923113100483.png alt=image-20210923113100483 style=zoom:50%>
-<h4 id=进程管理中的数据结构-pcb>进程管理中的数据结构 (PCB)</h4><h5 id=pcb-的作用>PCB 的作用</h5><ul>
-<li>作为独立运行基本单位的标志</li><li>实现间断性运行的方式</li><li>提供进程管理需要的信息</li><li>提供进程调度所需要的信息</li><li>实现与其它进程通信</li></ul><h5 id=pcb-中的信息>PCB 中的信息</h5><ul>
-<li>进程标识符（编号）</li><li>处理机状态（通用寄存器，计数器，程序状态字 PSW，用户栈指针）</li><li>进程调度信息（进程状态、优先级）</li><li>进程控制信息（程序和数据的地址、进程同步和通信机制（信号量等）、资源清单、链接指针）</li></ul><h5 id=pcb-组织方式>PCB 组织方式</h5><p><strong>线性结构 / 方式</strong></p><p>将所有的 PCB 都组织在一张线性表中，将该表的首址存放在内存的一个专用区域中</p><p><strong>链接结构</strong></p><p>把相同状态进程的 PCB 分别通过 PCB 中的链接字链接成一个队列，这样就可以形成就绪队列、若干个阻塞队列和空白队列等</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923114036634.png alt=image-20210923114036634 style=zoom:40%>
-<p><strong>索引结构</strong></p><p>系统根据所有进程状态的不同，建立几张索引表</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923114025089.png alt=image-20210923114025089 style=zoom:50%>
-<h3 id=进程控制>进程控制</h3><h4 id=操作系统内核>操作系统内核</h4><ol>
-<li><strong>支撑功能</strong>
-<ul>
-<li>中断处理</li><li>时钟管理（时间片）</li><li><strong>原语</strong>操作（由若干条指令组成，在执行过程中不允许被中断）</li></ul></li><li><strong>资源管理功能</strong>
-<ul>
-<li>进程管理</li><li>存储器管理</li><li>设备管理</li></ul></li></ol><h4 id=进程的创建>进程的创建</h4><h5 id=进程的层次结构>进程的层次结构</h5><p>父进程 - 子进程 - 孙进程</p><h5 id=进程图>进程图</h5><p>用于描述进程间关系的一棵有向树。图中的结点代表进程。</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20201122104213.png alt=image-20201122104213788 style=zoom:50%>
-<h5 id=引起创建进程的事件>引起创建进程的事件</h5><ol>
-<li>用户登录</li><li>作业调度</li><li>提供服务</li><li>应用请求</li></ol><h5 id=进程的创建-1>进程的创建</h5><ul>
-<li>申请空白 PCB</li><li>为新进程分配其运行所需的资源</li><li>初始化进程控制块 PCB</li><li>将新进程插入就绪列</li></ul><h4 id=进程的终止>进程的终止</h4><ul>
-<li>正常结束</li><li>异常结束</li><li>外界干预（父进程、操作员或操作系统的干预）</li></ul><h5 id=进程终止过程>进程终止过程</h5><ol>
-<li>根据被终止进程的标识符，从 PCB 集合中<strong>检索</strong>出该进程的 PCB，从中读出该进程的状态</li><li>若被终止进程正处于执行状态，应立即<strong>终止</strong>该进程的执行，并置调度标志为真，用于指示该进程被终止后应重新进行调度</li><li>若该进程还有子孙进程，还应将<strong>子孙进程也终止</strong></li><li>将被终止进程所有全部资源或者<strong>归还</strong>给其父进程，或归还给系统</li><li>将被终止进程从所在<strong>队列</strong>中<strong>移出</strong></li></ol><h4 id=进程的阻塞与唤醒>进程的阻塞与唤醒</h4><h5 id=引起进程的阻塞与唤醒的事件>引起进程的阻塞与唤醒的事件</h5><ul>
-<li>向系统请求共享资源失败</li><li>等待某种操作的完成</li><li>新数据尚未到达</li><li>无新任务可做，等待新任务的到达</li></ul><h5 id=进程阻塞过程>进程阻塞过程</h5><ol>
-<li>
-<p>进程使用阻塞原语 block 自己</p></li><li>
-<p>停止运行并进入阻塞队列</p></li><li>
-<p>调度程序重新调度</p></li></ol><ul>
-<li>
-<p>阻塞原语：block</p></li><li>
-<p>阻塞是进程<strong>自身</strong>的一种<strong>主动</strong>行为。</p></li></ul><h5 id=进程唤醒过程>进程唤醒过程</h5><p>调用唤醒原语 wakeup，将等待该事件的进程唤醒。</p><ol>
-<li>将进程从阻塞队列移出，</li><li>将 PCB 改为就绪，</li><li>加入就绪队列。</li></ol><h5 id=进程的挂起>进程的挂起</h5><p>挂起原语：suspend</p><ol>
-<li>
-<p>检查进程状态，</p></li><li>
-<p>改为对应的静止状态，</p></li><li>
-<p>复制 PCB 到指定内存区域以备查看。</p></li><li>
-<p>指引重新调度</p></li></ol><h5 id=进程的激活>进程的激活</h5><p>挂起原语：active</p><ol>
-<li>
-<p>将进程从外存调入内存，检查状态，改为对应就绪/阻塞状态。</p></li><li>
-<p>如果有抢占机制比较是否抢占。</p></li></ol><h3 id=进程同步>进程同步</h3><h4 id=基本概念>基本概念</h4><p>进程同步机制的主要任务：对多个相关进程在执行次序中进行<strong>协调</strong>，使并发执行的诸进程之间能按照一定的规则（或时序）<strong>共享系统资源</strong>，并能很好地<strong>相互合作</strong>，从而使程序的执行具有可再现性。</p><h5 id=两种形式的制约关系><strong>两种形式的制约关系</strong></h5><p>直接实现<strong>同步</strong>，间接实现<strong>互斥</strong></p><ul>
-<li>
-<p><strong>间接相互制约关系</strong>：互斥</p><p>多个程序在并发执行时，由于<strong>共享系统资源</strong>致使这些执行程序之间形成相互制约的关系。</p></li><li>
-<p><strong>直接相互制约关系</strong>：同步</p><p>源于进程之间的合作关系，前趋图</p></li></ul><h5 id=临界资源><strong>临界资源</strong></h5><p>（Critical Resource）</p><p>系统中一次<strong>只允许一个进程使用</strong>的资源</p><p>诸进程间应采取互斥方式，实现对临界资源的共享。</p><h5 id=临界区><strong>临界区</strong></h5><p>（Critical Section）</p><p>进程中访问临界资源的<strong>代码段</strong></p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210930110843978.png alt=image-20210930110843978 style=zoom:40%>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923113100483.png alt=image-20210923113100483 style=zoom:50%><h4 id=进程管理中的数据结构-pcb>进程管理中的数据结构 (PCB)</h4><h5 id=pcb-的作用>PCB 的作用</h5><ul><li>作为独立运行基本单位的标志</li><li>实现间断性运行的方式</li><li>提供进程管理需要的信息</li><li>提供进程调度所需要的信息</li><li>实现与其它进程通信</li></ul><h5 id=pcb-中的信息>PCB 中的信息</h5><ul><li>进程标识符（编号）</li><li>处理机状态（通用寄存器，计数器，程序状态字 PSW，用户栈指针）</li><li>进程调度信息（进程状态、优先级）</li><li>进程控制信息（程序和数据的地址、进程同步和通信机制（信号量等）、资源清单、链接指针）</li></ul><h5 id=pcb-组织方式>PCB 组织方式</h5><p><strong>线性结构 / 方式</strong></p><p>将所有的 PCB 都组织在一张线性表中，将该表的首址存放在内存的一个专用区域中</p><p><strong>链接结构</strong></p><p>把相同状态进程的 PCB 分别通过 PCB 中的链接字链接成一个队列，这样就可以形成就绪队列、若干个阻塞队列和空白队列等</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923114036634.png alt=image-20210923114036634 style=zoom:40%><p><strong>索引结构</strong></p><p>系统根据所有进程状态的不同，建立几张索引表</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210923114025089.png alt=image-20210923114025089 style=zoom:50%><h3 id=进程控制>进程控制</h3><h4 id=操作系统内核>操作系统内核</h4><ol><li><strong>支撑功能</strong><ul><li>中断处理</li><li>时钟管理（时间片）</li><li><strong>原语</strong>操作（由若干条指令组成，在执行过程中不允许被中断）</li></ul></li><li><strong>资源管理功能</strong><ul><li>进程管理</li><li>存储器管理</li><li>设备管理</li></ul></li></ol><h4 id=进程的创建>进程的创建</h4><h5 id=进程的层次结构>进程的层次结构</h5><p>父进程 - 子进程 - 孙进程</p><h5 id=进程图>进程图</h5><p>用于描述进程间关系的一棵有向树。图中的结点代表进程。</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20201122104213.png alt=image-20201122104213788 style=zoom:50%><h5 id=引起创建进程的事件>引起创建进程的事件</h5><ol><li>用户登录</li><li>作业调度</li><li>提供服务</li><li>应用请求</li></ol><h5 id=进程的创建-1>进程的创建</h5><ul><li>申请空白 PCB</li><li>为新进程分配其运行所需的资源</li><li>初始化进程控制块 PCB</li><li>将新进程插入就绪列</li></ul><h4 id=进程的终止>进程的终止</h4><ul><li>正常结束</li><li>异常结束</li><li>外界干预（父进程、操作员或操作系统的干预）</li></ul><h5 id=进程终止过程>进程终止过程</h5><ol><li>根据被终止进程的标识符，从 PCB 集合中<strong>检索</strong>出该进程的 PCB，从中读出该进程的状态</li><li>若被终止进程正处于执行状态，应立即<strong>终止</strong>该进程的执行，并置调度标志为真，用于指示该进程被终止后应重新进行调度</li><li>若该进程还有子孙进程，还应将<strong>子孙进程也终止</strong></li><li>将被终止进程所有全部资源或者<strong>归还</strong>给其父进程，或归还给系统</li><li>将被终止进程从所在<strong>队列</strong>中<strong>移出</strong></li></ol><h4 id=进程的阻塞与唤醒>进程的阻塞与唤醒</h4><h5 id=引起进程的阻塞与唤醒的事件>引起进程的阻塞与唤醒的事件</h5><ul><li>向系统请求共享资源失败</li><li>等待某种操作的完成</li><li>新数据尚未到达</li><li>无新任务可做，等待新任务的到达</li></ul><h5 id=进程阻塞过程>进程阻塞过程</h5><ol><li><p>进程使用阻塞原语 block 自己</p></li><li><p>停止运行并进入阻塞队列</p></li><li><p>调度程序重新调度</p></li></ol><ul><li><p>阻塞原语：block</p></li><li><p>阻塞是进程<strong>自身</strong>的一种<strong>主动</strong>行为。</p></li></ul><h5 id=进程唤醒过程>进程唤醒过程</h5><p>调用唤醒原语 wakeup，将等待该事件的进程唤醒。</p><ol><li>将进程从阻塞队列移出，</li><li>将 PCB 改为就绪，</li><li>加入就绪队列。</li></ol><h5 id=进程的挂起>进程的挂起</h5><p>挂起原语：suspend</p><ol><li><p>检查进程状态，</p></li><li><p>改为对应的静止状态，</p></li><li><p>复制 PCB 到指定内存区域以备查看。</p></li><li><p>指引重新调度</p></li></ol><h5 id=进程的激活>进程的激活</h5><p>挂起原语：active</p><ol><li><p>将进程从外存调入内存，检查状态，改为对应就绪/阻塞状态。</p></li><li><p>如果有抢占机制比较是否抢占。</p></li></ol><h3 id=进程同步>进程同步</h3><h4 id=基本概念>基本概念</h4><p>进程同步机制的主要任务：对多个相关进程在执行次序中进行<strong>协调</strong>，使并发执行的诸进程之间能按照一定的规则（或时序）<strong>共享系统资源</strong>，并能很好地<strong>相互合作</strong>，从而使程序的执行具有可再现性。</p><h5 id=两种形式的制约关系><strong>两种形式的制约关系</strong></h5><p>直接实现<strong>同步</strong>，间接实现<strong>互斥</strong></p><ul><li><p><strong>间接相互制约关系</strong>：互斥</p><p>多个程序在并发执行时，由于<strong>共享系统资源</strong>致使这些执行程序之间形成相互制约的关系。</p></li><li><p><strong>直接相互制约关系</strong>：同步</p><p>源于进程之间的合作关系，前趋图</p></li></ul><h5 id=临界资源><strong>临界资源</strong></h5><p>（Critical Resource）</p><p>系统中一次<strong>只允许一个进程使用</strong>的资源</p><p>诸进程间应采取互斥方式，实现对临界资源的共享。</p><h5 id=临界区><strong>临界区</strong></h5><p>（Critical Section）</p><p>进程中访问临界资源的<strong>代码段</strong></p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210930110843978.png alt=image-20210930110843978 style=zoom:40%><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>while</span><span class=p>(</span><span class=n>TRUE</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>while</span><span class=p>(</span><span class=n>TRUE</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>	<span class=err>进入区</span>
 </span></span><span class=line><span class=cl>	<span class=err>临界区</span>
 </span></span><span class=line><span class=cl>	<span class=err>退出区</span>
 </span></span><span class=line><span class=cl>	<span class=err>剩余区</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h5 id=同步机制应遵循的问题><strong>同步机制应遵循的问题</strong></h5><ul>
-<li><strong>空闲让进</strong>：无其他进程处于临界区时，允许一个进程进入临界区</li><li><strong>忙则等待</strong>：已有进程进入临界区时，其他进程必须等待</li><li><strong>有限等待</strong>：在有限时间内能进入自己的临界区，以免陷入“死等”状态；保证有限时间内进入临界区</li><li><strong>让权等待</strong>：进程不能进入临界区时应立即<strong>释放处理机</strong>（避免死等资源，即忙等待 Busy waiting）</li></ul><h4 id=硬件同步机制><strong>硬件同步机制</strong></h4><h5 id=关中断><strong>关中断</strong></h5><p>禁止中断发生，不适用于多 CPU</p><p>在进入锁测试之前关闭中断，直到完成锁测试并上锁之后才能打开中断。</p><h5 id=test-and-set-指令实现互斥><strong>Test-and-Set 指令实现互斥</strong></h5><p>疯狂测试 lock，如果开门了就锁门后访问</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h5 id=同步机制应遵循的问题><strong>同步机制应遵循的问题</strong></h5><ul><li><strong>空闲让进</strong>：无其他进程处于临界区时，允许一个进程进入临界区</li><li><strong>忙则等待</strong>：已有进程进入临界区时，其他进程必须等待</li><li><strong>有限等待</strong>：在有限时间内能进入自己的临界区，以免陷入“死等”状态；保证有限时间内进入临界区</li><li><strong>让权等待</strong>：进程不能进入临界区时应立即<strong>释放处理机</strong>（避免死等资源，即忙等待 Busy waiting）</li></ul><h4 id=硬件同步机制><strong>硬件同步机制</strong></h4><h5 id=关中断><strong>关中断</strong></h5><p>禁止中断发生，不适用于多 CPU</p><p>在进入锁测试之前关闭中断，直到完成锁测试并上锁之后才能打开中断。</p><h5 id=test-and-set-指令实现互斥><strong>Test-and-Set 指令实现互斥</strong></h5><p>疯狂测试 lock，如果开门了就锁门后访问</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -392,8 +41,7 @@
 </span><span class=lnt>13
 </span><span class=lnt>14
 </span><span class=lnt>15
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>boolean</span> <span class=nf>TS</span><span class=p>(</span><span class=n>boolean</span> <span class=o>*</span><span class=n>lock</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>boolean</span> <span class=nf>TS</span><span class=p>(</span><span class=n>boolean</span> <span class=o>*</span><span class=n>lock</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>	<span class=n>boolean</span> <span class=n>old</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>	<span class=n>old</span> <span class=o>=</span> <span class=o>*</span><span class=n>lock</span><span class=p>;</span>
@@ -408,9 +56,7 @@
 </span></span><span class=line><span class=cl>	<span class=n>lock</span> <span class=o>=</span> <span class=n>FALSE</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>	<span class=n>remainder</span> <span class=n>section</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span><span class=k>while</span><span class=p>(</span><span class=n>TRUE</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h5 id=利用-swap-指令实现进程互斥><strong>利用 Swap 指令实现进程互斥</strong></h5><p>疯狂交换 key 和 lock，如果 key 变 true了访问</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h5 id=利用-swap-指令实现进程互斥><strong>利用 Swap 指令实现进程互斥</strong></h5><p>疯狂交换 key 和 lock，如果 key 变 true了访问</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -427,8 +73,7 @@
 </span><span class=lnt>15
 </span><span class=lnt>16
 </span><span class=lnt>17
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>swap</span><span class=p>(</span><span class=n>boolean</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=n>boolean</span> <span class=o>*</span><span class=n>b</span><span class=p>)</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=nf>swap</span><span class=p>(</span><span class=n>boolean</span> <span class=o>*</span><span class=n>a</span><span class=p>,</span> <span class=n>boolean</span> <span class=o>*</span><span class=n>b</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>	<span class=n>boolean</span> <span class=n>temp</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>	<span class=n>temp</span> <span class=o>=</span> <span class=o>*</span><span class=n>a</span><span class=p>;</span>
@@ -445,12 +90,7 @@
 </span></span><span class=line><span class=cl>	<span class=n>lock</span> <span class=o>=</span> <span class=n>FALSE</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>	<span class=err>…</span>
 </span></span><span class=line><span class=cl><span class=p>}</span><span class=k>while</span><span class=p>(</span><span class=n>TRUE</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=信号量机制><strong>信号量机制</strong></h4><h5 id=整型信号量><strong>整型信号量</strong></h5><ul>
-<li>
-<p>信号量定义为一个整型量 S</p></li><li>
-<p>两个原子操作 <code>wait(S)</code> 和 <code>signal(S)</code> 被分别称为 P、V 操作。</p></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h4 id=信号量机制><strong>信号量机制</strong></h4><h5 id=整型信号量><strong>整型信号量</strong></h5><ul><li><p>信号量定义为一个整型量 S</p></li><li><p>两个原子操作 <code>wait(S)</code> 和 <code>signal(S)</code> 被分别称为 P、V 操作。</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -461,8 +101,7 @@
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// 只要信号量小于等于0就不断进行测试（忙等），其实是未遵循让权等待的
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// 只要信号量小于等于0就不断进行测试（忙等），其实是未遵循让权等待的
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>wait</span><span class=p>(</span><span class=n>S</span><span class=p>){</span>
 </span></span><span class=line><span class=cl>    <span class=c1>// 探测
 </span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>while</span><span class=p>(</span><span class=n>S</span><span class=o>&lt;=</span><span class=mi>0</span><span class=p>);</span>
@@ -473,9 +112,7 @@
 </span></span><span class=line><span class=cl>    <span class=c1>// 释放
 </span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=n>S</span><span class=o>++</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h5 id=记录型信号量><strong>记录型信号量</strong></h5><p>解决忙等问题</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png title=image-20211009103219127></p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h5 id=记录型信号量><strong>记录型信号量</strong></h5><p>解决忙等问题</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103219127.png title=image-20211009103219127></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -493,8 +130,7 @@
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span><span class=p>{</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>typedef</span> <span class=k>struct</span><span class=p>{</span>
 </span></span><span class=line><span class=cl>	<span class=kt>int</span> <span class=n>value</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>	<span class=k>struct</span> <span class=n>process_control_block</span> <span class=o>*</span><span class=n>list</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span><span class=n>semaphore</span>
@@ -512,19 +148,7 @@
 </span></span><span class=line><span class=cl>	<span class=n>S</span><span class=o>-&gt;</span><span class=n>value</span><span class=o>++</span><span class=p>;</span>
 </span></span><span class=line><span class=cl>	<span class=k>if</span><span class=p>(</span><span class=n>S</span><span class=o>-&gt;</span><span class=n>value</span><span class=o>&lt;=</span><span class=mi>0</span><span class=p>)</span> <span class=n>wakeup</span><span class=p>(</span><span class=n>S</span><span class=o>-&gt;</span><span class=n>list</span><span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>value：代表资源数目的整型变量</li><li>list：一个进程链表指针，用于链接上述所有等待进程。</li><li>S->value：表示资源数量
-<ul>
-<li>S->value 大于等于 0：表示系统中可用资源数</li><li>S->value 小于 0：表示已阻塞进程数</li><li>S->value 初始值为 1：表示互斥信号量（临界资源只有一个）</li><li>S->list：记录阻塞进程信息</li></ul></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210930112406182.png alt=image-20210930112406182 style=zoom:40%>
-<h5 id=and-型信号量><strong>AND 型信号量</strong></h5><p>解决死锁问题</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210930112649045.png alt=image-20210930112649045 style=zoom:40%>
-<p>将进程在整个运行过程中需要的所有资源，<strong>一次性全部分配给进程</strong>，待进程使用完后再一起释放，只要尚有一个资源未能分配给进程，其它所有可能为之分配的资源也不分配给它。</p><h5 id=信号量集><strong>信号量集</strong></h5><p>解决多份资源问题</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210930112919775.png alt=image-20210930112919775 style=zoom:40%>
-<p>进程对信号量 S~i~ 是该资源的分配下限值 t~i~，要求 S~i~≥t~i~，否则不予分配。一旦允许分配，进程对该资源的需求值为 d~i~，即表示资源占用量，进行 S~i~=S~i~-d~i~ 操作。</p><p><em>特殊情况</em></p><ul>
-<li>Swait(S,d,d)：只有一个信号量 S，允许每次申请 d 个资源，当少于 d 时，不予分配</li><li>Swait(S,1,1)：一般的记录型信号量 (S>1) 或互斥信号量 (S=1)</li><li>Swait(S,1,0)：S≥1，允许多个进程进入某特定区；S=0，将阻止任何进程进入特定区</li></ul><h4 id=信号量应用>信号量应用</h4><h5 id=利用信号量实现进程互斥><strong>利用信号量实现进程互斥</strong></h5><p>两个信号量互斥</p><ol>
-<li>
-<p>设 mutex 为<strong>互斥信号量</strong>，其初值为 <strong>1</strong>，取值范围为 (-1,0,1)。当 mutex=1 时，表示两个进程皆未进入需要互斥的临界区；当 mutex=0 时，表示有一个进程进入临界区运行，另外一个必须等待，挂入<strong>阻塞队列</strong>；当 mutex=-1 时，表示有一个进程正在临界区运行，另外一个进程因等待而阻塞在信号量队列中，需要被当前已在临界区运行的进程退出时唤醒。</p></li><li>
-<p><strong>代码描述</strong></p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><ul><li>value：代表资源数目的整型变量</li><li>list：一个进程链表指针，用于链接上述所有等待进程。</li><li>S->value：表示资源数量<ul><li>S->value 大于等于 0：表示系统中可用资源数</li><li>S->value 小于 0：表示已阻塞进程数</li><li>S->value 初始值为 1：表示互斥信号量（临界资源只有一个）</li><li>S->list：记录阻塞进程信息</li></ul></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210930112406182.png alt=image-20210930112406182 style=zoom:40%><h5 id=and-型信号量><strong>AND 型信号量</strong></h5><p>解决死锁问题</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210930112649045.png alt=image-20210930112649045 style=zoom:40%><p>将进程在整个运行过程中需要的所有资源，<strong>一次性全部分配给进程</strong>，待进程使用完后再一起释放，只要尚有一个资源未能分配给进程，其它所有可能为之分配的资源也不分配给它。</p><h5 id=信号量集><strong>信号量集</strong></h5><p>解决多份资源问题</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210930112919775.png alt=image-20210930112919775 style=zoom:40%><p>进程对信号量 S~i~ 是该资源的分配下限值 t~i~，要求 S~i~≥t~i~，否则不予分配。一旦允许分配，进程对该资源的需求值为 d~i~，即表示资源占用量，进行 S~i~=S~i~-d~i~ 操作。</p><p><em>特殊情况</em></p><ul><li>Swait(S,d,d)：只有一个信号量 S，允许每次申请 d 个资源，当少于 d 时，不予分配</li><li>Swait(S,1,1)：一般的记录型信号量 (S>1) 或互斥信号量 (S=1)</li><li>Swait(S,1,0)：S≥1，允许多个进程进入某特定区；S=0，将阻止任何进程进入特定区</li></ul><h4 id=信号量应用>信号量应用</h4><h5 id=利用信号量实现进程互斥><strong>利用信号量实现进程互斥</strong></h5><p>两个信号量互斥</p><ol><li><p>设 mutex 为<strong>互斥信号量</strong>，其初值为 <strong>1</strong>，取值范围为 (-1,0,1)。当 mutex=1 时，表示两个进程皆未进入需要互斥的临界区；当 mutex=0 时，表示有一个进程进入临界区运行，另外一个必须等待，挂入<strong>阻塞队列</strong>；当 mutex=-1 时，表示有一个进程正在临界区运行，另外一个进程因等待而阻塞在信号量队列中，需要被当前已在临界区运行的进程退出时唤醒。</p></li><li><p><strong>代码描述</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -533,8 +157,7 @@
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>semaphore</span> <span class=n>mutex</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>semaphore</span> <span class=n>mutex</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=n>PA</span><span class=p>(){</span>
 </span></span><span class=line><span class=cl>	<span class=k>while</span><span class=p>(</span><span class=mi>1</span><span class=p>){</span>
 </span></span><span class=line><span class=cl>		<span class=n>wait</span><span class=p>(</span><span class=n>mutex</span><span class=p>);</span>
@@ -544,230 +167,30 @@
 </span></span><span class=line><span class=cl>	<span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></td></tr></table></div></div></li></ol><h5 id=利用信号量实现前趋关系><strong>利用信号量实现前趋关系</strong></h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103629277.png alt=image-20211009103629277 style=zoom:50%>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103546729.png alt=image-20211009103546729 style=zoom:50%>
-<h4 id=管程机制自学>管程机制（自学）</h4><p>面向对象的封装</p><p>代表共享资源的数据结构以及由对该共享数据结构实施操作的一组过程所组成的资源管理程序共同构成了一个操作系统的资源管理模块，称之为管程。</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009104409327.png alt=image-20211009104409327 style=zoom:50%>
-<p><strong>组成</strong></p><ul>
-<li>管程的名称</li><li>局部于管程的共享数据结构说明</li><li>对该数据结构进行操作的一组过程</li><li>对局部于管程的共享数据设置初始值的语句</li></ul><p><strong>管程和进程的不同</strong></p><ul>
-<li>进程定义的是私有数据结构 PCB，管程定义的是公共数据结构</li><li>进程是由顺序程序执行有关操作，管程进行同步操作和初始化操作</li><li>进程的设置目的在于实现系统的并发性，管程的设置目的则是解决共享资源互斥使用问题</li><li>进程为主动工作方式，管程为被动工作方式</li><li>进程具有动态性，管程是操作系统中的一个资源管理模块，供进程调用</li></ul><h3 id=经典进程的同步问题>经典进程的同步问题</h3><h4 id=生产者-消费者问题>生产者-消费者问题</h4><p>生产者-消费者问题是相互合作的进程关系的一种抽象</p><h5 id=记录型信号量-1>记录型信号量</h5><p>循环队列</p><p>P 操作互换会引起死锁；V 操作互换不影响</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009110207257.png alt=image-20211009110207257 style=zoom:40%>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009110312917.png alt=image-20211009110312917 style=zoom:40%>
-<h5 id=and-信号量>AND 信号量</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112057216.png alt=image-20211009112057216 style=zoom:40%>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112111746.png alt=image-20211009112111746 style=zoom:40%>
-<h4 id=哲学家进餐问题>哲学家进餐问题</h4><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png title=image-20211009112324618></p><h5 id=记录型信号量-2>记录型信号量</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112813645.png alt=image-20211009112813645 style=zoom:50%>
-<p>避免死锁的方法</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112803159.png alt=image-20211009112803159 style=zoom:50%>
-<h4 id=读者-写者问题>读者-写者问题</h4><p>写者进程与所有其他读者进程互斥</p><p>写者进程互斥</p><h5 id=记录型信号量-3>记录型信号量</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112942528.png alt=image-20211009112942528 style=zoom:40%>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009103546729.png alt=image-20211009103546729 style=zoom:50%><h4 id=管程机制自学>管程机制（自学）</h4><p>面向对象的封装</p><p>代表共享资源的数据结构以及由对该共享数据结构实施操作的一组过程所组成的资源管理程序共同构成了一个操作系统的资源管理模块，称之为管程。</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009104409327.png alt=image-20211009104409327 style=zoom:50%><p><strong>组成</strong></p><ul><li>管程的名称</li><li>局部于管程的共享数据结构说明</li><li>对该数据结构进行操作的一组过程</li><li>对局部于管程的共享数据设置初始值的语句</li></ul><p><strong>管程和进程的不同</strong></p><ul><li>进程定义的是私有数据结构 PCB，管程定义的是公共数据结构</li><li>进程是由顺序程序执行有关操作，管程进行同步操作和初始化操作</li><li>进程的设置目的在于实现系统的并发性，管程的设置目的则是解决共享资源互斥使用问题</li><li>进程为主动工作方式，管程为被动工作方式</li><li>进程具有动态性，管程是操作系统中的一个资源管理模块，供进程调用</li></ul><h3 id=经典进程的同步问题>经典进程的同步问题</h3><h4 id=生产者-消费者问题>生产者-消费者问题</h4><p>生产者-消费者问题是相互合作的进程关系的一种抽象</p><h5 id=记录型信号量-1>记录型信号量</h5><p>循环队列</p><p>P 操作互换会引起死锁；V 操作互换不影响</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009110207257.png alt=image-20211009110207257 style=zoom:40%>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009110312917.png alt=image-20211009110312917 style=zoom:40%><h5 id=and-信号量>AND 信号量</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112057216.png alt=image-20211009112057216 style=zoom:40%>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112111746.png alt=image-20211009112111746 style=zoom:40%><h4 id=哲学家进餐问题>哲学家进餐问题</h4><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112324618.png title=image-20211009112324618></p><h5 id=记录型信号量-2>记录型信号量</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112813645.png alt=image-20211009112813645 style=zoom:50%><p>避免死锁的方法</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112803159.png alt=image-20211009112803159 style=zoom:50%><h4 id=读者-写者问题>读者-写者问题</h4><p>写者进程与所有其他读者进程互斥</p><p>写者进程互斥</p><h5 id=记录型信号量-3>记录型信号量</h5><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009112942528.png alt=image-20211009112942528 style=zoom:40%>
 <img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009113048924.png alt=image-20211009113048924 style=zoom:40%>
 <img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009113101612.png alt=image-20211009113101612 style=zoom:50%>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009113117755.png alt=image-20211009113117755 style=zoom:50%>
-<h5 id=信号量集机制>信号量集机制</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png title=image-20211014101541249></p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101552723.png alt=image-20211014101552723 style=zoom:50%>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101606204.png alt=image-20211014101606204 style=zoom:50%>
-<h3 id=进程通信>进程通信</h3><p>进程通信就是进程之间的信息交换，用于同步和互斥。</p><p>互斥实质上是一种特殊的同步</p><p>进程同步实质上就是一种进程通信</p><h4 id=概念>概念</h4><p><strong>低级进程通信</strong>（信号量）</p><ul>
-<li>效率低</li><li>通信对用户不透明</li><li>P/V 操作称为低级通信原语</li></ul><p><strong>高级进程通信</strong></p><ul>
-<li>
-<p>进程通信 <strong>IPC</strong>（Inter Process Communication）</p></li><li>
-<p>使用方便</p></li><li>
-<p>高效地传送大量数据</p></li></ul><h4 id=进程通信的类型><strong>进程通信的类型</strong></h4><h5 id=共享存储器系统shared-memory-system>共享存储器系统（Shared-Memory System）</h5><p>共享数据结构或存储区</p><ul>
-<li>基于共享数据的通信方式（<strong>数据结构</strong>）</li><li>基于共享存储区的通信方式（<strong>内存</strong>）</li></ul><h5 id=管道通信系统><strong>管道通信系统</strong></h5><p>所谓 “管道”，指用于连接一个读进程和一个写进程以实现它们之间通信的一个<strong>共享文件</strong></p><p>写进程 —> 管道文件 —> 读进程</p><ul>
-<li>以文件为传输介质</li><li>以字符流方式读写</li></ul><h5 id=消息传递系统message-passing-system>消息传递系统（Message Passing System）</h5><p>以格式化的消息（message）为单位</p><ul>
-<li>
-<p>实现方式</p><ul>
-<li>程序员利用系统提供的一组通信命令（原语）进行通信</li></ul></li><li>
-<p>直接通信方式（原语操作）</p></li><li>
-<p>间接通信方式（通过共享中间实体（信箱通））</p></li></ul><h5 id=客户-服务器系统client-server-system>客户-服务器系统（Client-Server System）</h5><ul>
-<li>套接字：分基于文件型和基于网络型</li><li>远程方法调用和远程文件调用</li></ul><h4 id=消息传递通信的实现方式>消息传递通信的实现方式</h4><h5 id=直接消息传递系统>直接消息传递系统</h5><p>发送进程利用 OS 所提供的发送命令（原语），直接把消息发送给目标进程。</p><ol>
-<li>
-<p>直接通信原语</p><ul>
-<li>
-<p>对称寻址方式</p><p><code>send(receiver,message);</code></p><p><code>receive(sender,message);</code></p></li><li>
-<p>非对称寻址方式</p><p><code>send(P,message);</code></p><p><code>receive(id,message);</code></p></li></ul></li><li>
-<p>消息的格式</p></li><li>
-<p>进程的同步方式</p></li><li>
-<p>通信链路</p></li></ol><h5 id=信箱通信>信箱通信</h5><ol>
-<li>信箱的结构
-<ul>
-<li>信箱头：用于存放有关信箱的描述信息</li><li>信箱体：由若干个可以存放消息（或消息头）的信箱格组成，信箱格的数目已经每格的大小是在创建信箱时确定的</li></ul></li><li>信箱通信原语
-<ul>
-<li>邮箱的创建和撤销</li><li>消息的发送和接收</li></ul></li><li>信箱的类型
-<ul>
-<li>私用邮箱</li><li>公用邮箱</li><li>共享邮箱</li></ul></li></ol><h3 id=线程的基本概念>线程的基本概念</h3><h4 id=线程的引入>线程的引入</h4><p>引入线程是为了<strong>减少程序在并发执行时所付出的时空开销，使 OS 具有更好的并发性</strong></p><p>进程是<strong>可拥有资源的独立单位</strong>和<strong>可独立调度和分派的基本单位</strong></p><p>线程：资源共享、调度独立（作为调度和分派的基本单位）</p><h4 id=线程与进程的比较><strong>线程与进程的比较</strong></h4><ul>
-<li>
-<p><strong>调度的基本单位</strong></p><p>进程是能独立运行的基本单位，在每次被调度时，都需要进行上下文切换，开销较大；</p><p>线程切换仅需保存和设置少量寄存器内容，切换代价远低于进程</p></li><li>
-<p><strong>并发性</strong></p><p>都可以并发执行</p></li><li>
-<p><strong>拥有资源</strong></p><p>进程可以拥有资源，并作为系统中拥有资源的一个基本单位；</p><p><strong>线程并不拥有系统资源</strong>，而是仅有一点必不可少的、能保证独立运行的资源；<strong>线程仅拥有隶属进程的资源</strong></p></li><li>
-<p><strong>独立性</strong></p><p>进程间地址空间和资源互相独立；</p><p>线程间共享地址空间和资源</p></li><li>
-<p><strong>系统开销</strong></p><p><strong>进程需要切换上下文</strong>；</p><p>线程没什么资源，开销小</p></li><li>
-<p><strong>支持多处理机系统</strong></p><p>进程必须在单处理机上运行；</p><p>单进程中的多线程可分配到不同处理机上执行</p></li></ul><h4 id=线程的实现>线程的实现</h4><ul>
-<li><strong>内核支持线程</strong>（KST, Kernel Supported Threads）：内核创建，能够并发，用户切换线程需要陷入</li><li><strong>用户级线程</strong>（ULT, User Level Threads）：用户创建，切换不需要陷入，但阻塞后无法调度</li><li>组合模式：两者结合相互利用</li></ul><p>（线程的实现、线程的创建与终止……）</p><h2 id=处理机调度与死锁>处理机调度与死锁</h2><h3 id=处理机调度的层次和调度算法的目标>处理机调度的层次和调度算法的目标</h3><p>调度的实质是一种资源分配，处理机调度是对处理机资源进行分配</p><p><strong>作业</strong>：作业是任务实体，进程是完成任务的执行实体</p><p><strong>周转时间</strong>：从作业提交给用户开始，到作业完成为止的时间间隔（<strong>等待时间与运行时间之和</strong>）</p><p>系统性能：平均作业周转时间</p><p><strong>带权周转时间</strong>：$W_i=\frac{T_i}{T{ki}}$（T~ki~ 为运行时间），大于等于 1（<strong>周转时间与运行时间之比</strong>）</p><p>响应时间：交互式进程从提交一个请求到接受到响应的时间间隔</p><h4 id=处理机调度的层次>处理机调度的层次</h4><p>作业从进入系统成为后备作业开始，直到运行结束退出系统为止，需经历不同级别的调度</p><ul>
-<li>
-<p><strong>高级调度</strong>（作业调度 / 长程调度）</p><ul>
-<li>
-<p>启动、进入系统时</p></li><li>
-<p>决定外存上<strong>后备队列</strong>的哪几个作业调入内存</p></li><li>
-<p>调度对象是作业，主要用于多道批处理系统中。</p></li></ul></li><li>
-<p><strong>中级调度</strong>（内存调度 / 平衡调度）</p><ul>
-<li>
-<p>挂起 / 唤醒，做内外存的对换</p></li><li>
-<p>主要目的是提高内存利用率和系统吞吐量。</p></li></ul></li><li>
-<p><strong>低级调度</strong>（进程 / 线程调度）</p><ul>
-<li>决定<strong>就绪队列</strong>中的哪个进程获得处理机</li><li>调度对象是进程（内核级线程），基本调度</li><li>在多道批处理、分时和实时三种类型的 OS 中，都必须配置这级调度。</li></ul></li></ul><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png title=image-20211123135755253></p><h4 id=处理机调度算法目标>处理机调度算法目标</h4><h5 id=处理机调度算法的共同目标>处理机调度算法的共同目标</h5><ul>
-<li><strong>资源利用率</strong>
-<ul>
-<li>($CPU的利用率=\frac{CPU有效工作时间}{CPU有效工作时间+CPU空闲等待时间}$)</li></ul></li><li><strong>公平性</strong>
-<ul>
-<li>诸进程都获得合理的 CPU 时间，不会发生<strong>进程饥饿</strong>现象</li></ul></li><li><strong>平衡性</strong>
-<ul>
-<li>CPU 都能经常处于忙碌状态；系统资源的平衡性</li></ul></li><li><strong>策略强制执行</strong>
-<ul>
-<li>如安全策略</li></ul></li></ul><h5 id=批处理系统的目标><strong>批处理系统的目标</strong></h5><ul>
-<li><strong>平均周期时间短</strong></li><li><strong>周转时间</strong>：从作业被提交给系统开始，到作业完成为止的这段时间间隔，包括作业在外存后备队列上等待调度的时间，进程在就绪队列上等待进程调度的时间，进程在 CPU 上执行的时间，以及进程等待 I/O 操作完成的时间。
-<ul>
-<li>平均周转时间最短，有效提高系统资源利用率，可使大部分用户满意。</li></ul></li><li>平均周转时间：$ (T=\frac{1}{n}[\sum_{i=1}^{n}{T_i}])$
-<ul>
-<li>平均带权周转时间： $(W=\frac{1}{n}\sum_{i=1}^{n}{\frac{T_i}{T_s}})$</li><li>作业周转时间 $T$，系统为其服务时间 $T_s$</li></ul></li><li><strong>系统吞吐量高</strong>
-<ul>
-<li><strong>吞吐量</strong>：在单位时间内系统所完成的作业数</li></ul></li><li><strong>处理机利用率高</strong></li></ul><h5 id=分时系统的目标><strong>分时系统的目标</strong></h5><ul>
-<li><strong>响应时间快</strong></li><li>响应时间：从用户通过键盘提交一个请求开始，直到屏幕上显示出处理结果为止的一段时间间隔。</li><li><strong>均衡性</strong>
-<ul>
-<li>均衡性：系统响应时间的快慢应与用户所请求服务的复杂性相适应。</li></ul></li></ul><h5 id=实时系统的目标><strong>实时系统的目标</strong></h5><ul>
-<li><strong>截止时间的保证</strong>
-<ul>
-<li>截止时间：某任务必须开始执行的最迟时间，或必须完成的最迟时间</li></ul></li><li><strong>可预测性</strong></li></ul><h3 id=作业与作业调度>作业与作业调度</h3><p>凡是涉及作业的调度算法均是非抢占式的</p><h4 id=概念-1>概念</h4><p><strong>进程</strong>：程序段 + 数据 + PCB</p><p><strong>作业</strong>（Job）：包含程序、数据、作业说明书。</p><p><strong>作业步</strong>：完成作业的每一个加工步骤。</p><p><strong>作业控制块</strong>（JCB Job Control Block）：是作业在系统中存在的标志。</p><h4 id=作业运行的三个阶段和三种状态>作业运行的三个阶段和三种状态</h4><p>输入、后备、执行、完成</p><ol>
-<li>收容阶段（后备状态）：建立 JCB 进入后备队列</li><li>运行阶段（运行状态）：分配资源、进入就绪队列</li><li>完成阶段（完成状态）：完成</li></ol><p>作业最终转化为进程，其中的低级调度不可避免</p><h4 id=作业调度的主要任务>作业调度的主要任务</h4><ol>
-<li>接纳多少个作业（允许多少个作业同时在内存中运行）</li><li>接纳哪些作业（取决于所采用的调度算法）</li></ol><p>选择作业 -> 分配资源 -> 创建进程 -> 作业控制 -> 后续处理</p><h4 id=先来先服务-fcfs-调度算法>先来先服务 FCFS 调度算法</h4><p>（First Coming First Serverd）</p><p>作业调度 √，进程调度 √</p><p>系统按照<strong>作业到达的先后顺序</strong>来进行调度，或者说优先考虑<strong>等待时间最长</strong>的作业，而不管作业所需执行时间的长短</p><p>特点</p><ul>
-<li>
-<p>不可抢占性、实现简单、顾及作业等候时间</p></li><li>
-<p><strong>有利于长作业(进程)，不利于短作业(进程)</strong></p></li><li>
-<p><strong>有利于 CPU 繁忙型作业，不利于 I/O 繁忙型作业</strong></p></li><li>
-<p>效率不高、没有考虑优先级</p></li></ul><h4 id=短作业优先-sjf-调度算法>短作业优先 SJF 调度算法</h4><p>（Short Job First / shortest process first，有时会写作 SJN/SPN，N 表 next）</p><p>作业调度 √，进程调度 √</p><p>以<strong>作业长短</strong>来计算优先级，作业越短，优先级越高。作业的长短是以作业所要求的<strong>运行时间</strong>来衡量的。</p><p>优点</p><ul>
-<li>易于实现</li><li>平均周转时间比 FCFS 小</li></ul><p>缺点：</p><ul>
-<li>
-<p>效率还不是很高</p></li><li>
-<p>必须预知作业的运行时间</p></li><li>
-<p>对长作业非常不利，忽视了长作业的等待时间，出现饥饿现象</p></li><li>
-<p>人-机无法交互</p></li><li>
-<p>未考虑作业的紧迫程度</p></li></ul><h5 id=最短剩余时间优先-srtf>最短剩余时间优先 SRTF</h5><p>（shortest remaining time first）</p><p>SJF 算法的抢占式</p><p>一旦有作业就绪，让其需要的 CPU 时间与当前运行作业剩余时间做判断，小者上 CPU</p><h4 id=优先级调度-psa-算法>优先级调度 PSA 算法</h4><p>（priority-scheduling algorithm）</p><p>作业调度 √，进程调度 √</p><p>基于作业的<strong>紧迫度</strong>，由<strong>外部</strong>赋予作业相应的优先级。</p><p>可以是抢占式，也可以是非抢占式的</p><p>一般为高优先权优先（HPF，highest-priority first）</p><ul>
-<li>使得紧迫的任务得以优先执行</li><li>静态优先级较死板，动态优先级开销大</li></ul><h4 id=高响应比优先调度-hrrn-算法>高响应比优先调度 HRRN 算法</h4><p>（highest response ratio next）</p><p>既考虑等待时间，也考虑运行时间。进程都到之后开始计算优先权。</p><p><strong>动态优先级</strong> ($优先权=\frac{等待时间+要求服务时间}{要求服务时间}=\frac{响应时间}{要求服务时间}=响应比R_p$)</p><ul>
-<li>作业等待时间相同，服务时间越短，优先级越高，利于短作业</li><li>要求服务时间相同，等待时间越长，优先级越高，利于长作业</li><li>作业优先级可以随等待时间的增加而提高</li></ul><p>缺点：每次调度都需进行响应比的计算</p><blockquote>
-<p>响应时间并不是周转时间，响应时间是一种不断变化的过程；周转时间是作业运行结束后得出的结果</p><p>同理，这里的等待时间表示已经等待的时间，是过程；通常意义上的等待时间则是一种结果</p></blockquote><h3 id=进程调度>进程调度</h3><h4 id=进程调度的任务><strong>进程调度的任务</strong></h4><ul>
-<li>保存处理机的现场信息</li><li>按某种算法选取进程</li><li>把处理器分配给进程</li></ul><h4 id=进程调度机制><strong>进程调度机制</strong></h4><ul>
-<li>排队器</li><li>分派器</li><li>上下文切换器</li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028111744790.png alt=image-20211028111744790 style=zoom:50%>
-<h4 id=进程调度方式><strong>进程调度方式</strong></h4><ul>
-<li>非抢占方式：一旦分配给某进程，就一直让它运行下去。
-<ul>
-<li>正在执行的进程运行完毕，或因发生某时间而使其无法再继续运行</li><li>正在执行中的进程因提出 I/O 请求而暂停执行</li><li>进程通信或同步过程中，执行了某种原语操作</li></ul></li><li>抢占方式：允许调度程序根据某种原则，去暂停某个正在执行的进程，将已分配给该进程的处理机重新分配给另一进程
-<ul>
-<li>优先权原则</li><li>短进程优先原则</li><li>时间片原则</li></ul></li></ul><h4 id=轮转调度-rr-算法>轮转调度 RR 算法</h4><p>（round robin）</p><h5 id=调度契机>调度契机</h5><ul>
-<li>一个时间片尚未用完，正在允许的进程便已完成</li><li>在一个时间片用完时，计时器中断处理程序被激活，若进程尚未运行完毕，调度程序将把它送往就绪队列的<strong>末尾</strong>。</li><li>时间片未用完时，进程因 I/O 原因造成了堵塞</li></ul><h5 id=特点-1>特点</h5><ul>
-<li>只能用于调度 CPU 这一类可抢占资源</li><li>作业调度一般不使用轮转，因为它资源特别多，包含有对不可抢占资源的分配</li><li>短作业存在优先权</li><li>长作业上下文切换时间开销大</li></ul><h5 id=时间片的选择>时间片的选择</h5><p>时间片过大 -> 退化成 FCFS</p><p>时间片过小 -> 过多的上下文切换，吞吐量小</p><p>根据系统对<strong>响应时间的要求 R</strong>和<strong>就绪队列中所允许的最大进程数 N~max~</strong> 确定</p><p>这里也有<strong>响应时间</strong>，为用户数目 × 时间片大小</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028112822697.png alt=image-20211028112822697 style=zoom:50%>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028112929043.png alt=image-20211028112929043 style=zoom:40%>
-<h4 id=多级反馈队列调度算法-mfq><strong>多级反馈队列调度算法</strong> MFQ</h4><p>（multileved feedback queue）</p><h5 id=描述>描述</h5><ul>
-<li>设置多个就绪队列（优先级逐个降低，时间片逐个增大）</li><li>每个队列都采用 FCFS 算法，最后一个队列 RR 算法
-<ul>
-<li>若有新进程进入，<strong>加入第一队列末尾</strong></li><li>若进程未在时间片内完成，<strong>则到第二队列末尾</strong></li></ul></li><li>队列按照优先级调度
-<ul>
-<li>随着队列优先级的降低，分配的时间片变长</li></ul></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028113227853.png alt=image-20211028113227853 style=zoom:50%>
-<p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png title=image-20211123143255114></p><h5 id=调度算法的性能><strong>调度算法的性能</strong></h5><ul>
-<li>终端型用户：交互型作业，较小，可以保证在第一队列时间片内完成即可</li><li>短批处理作业用户：稍短的，第一队列完成；稍长的，第二、三队列各执行一个时间片完成，周转时间也较短</li><li>长批处理作业用户：依次在第 1 到 n 个队列中运行，再以轮转的方式运行，不必担心作业长期得不到处理。</li></ul><h3 id=死锁概述>死锁概述</h3><h4 id=定义-2><strong>定义</strong></h4><p>计算机系统中多道程序并发执行时，两个或两个以上的进程由于<strong>竞争系统资源而造成的一种互相等待的现象</strong></p><p>若无外力作用，这组进程将永远不能继续执行</p><h4 id=资源类型>资源类型</h4><ul>
-<li><strong>可重用性资源</strong>（数目相对固定）和<strong>可消耗性资源</strong>（生产创建，消费消耗）</li><li><strong>可抢占性资源</strong>（处理机）和<strong>不可抢占性资源</strong>（打印机）</li></ul><h4 id=死锁产生原因><strong>死锁产生原因</strong></h4><ul>
-<li><strong>竞争不可抢占性资源</strong></li><li><strong>竞争可消耗性资源</strong></li><li><strong>进程推进顺序不当</strong></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102101855181.png alt=image-20211102101855181 style=zoom:50%>
-<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102102335942.png alt=image-20211102102335942 style=zoom:50%>
-<p>如果一组进程中的每一个进程都在等待仅由该组进程中的其它进程才能引发的事件，那么该组进程是<strong>死锁</strong>的。</p><h4 id=产生死锁的必要条件>产生死锁的必要条件</h4><ul>
-<li>互斥条件（Mutual Exclusion）
-<ul>
-<li>资源要求互斥访问</li></ul></li><li>请求和保持条件（Hold and wait）
-<ul>
-<li>提出的请求得不到满足，手头的资源释放不出来</li></ul></li><li>不可抢占条件（No preemption）
-<ul>
-<li>资源只能由占有者资源释放</li></ul></li><li>循环等待条件（Circular wait）
-<ul>
-<li>必有一个进程-资源的环形链，环路中的进程形成等待链</li></ul></li></ul><h4 id=处理死锁的方法>处理死锁的方法</h4><ul>
-<li>不让死锁发生
-<ul>
-<li>预防死锁：静态策略，破坏死锁产生的必要条件</li><li>避免死锁：动态策略，不限制必要条件，而去防止系统进入不安全状态（银行家算法）</li></ul></li><li>让死锁发生
-<ul>
-<li>检测死锁：通过检测机构及时发现死锁，再采取措施（资源分配图）</li><li>解除死锁：当死锁发生，撤销一些进程，回收资源再分配</li></ul></li></ul><h4 id=预防死锁><strong>预防死锁</strong></h4><p>破坏四个必要条件之一</p><ul>
-<li>
-<p>“互斥条件”是设备的固有属性，应加以保证，不能被破坏</p></li><li>
-<p>破坏“请求和保持”条件：进程在中间不会请求新的资源，所有进程在开始前必须<strong>一次性申请</strong>所需全部资源</p><ul>
-<li>简单、安全、易于实现</li><li>资源浪费严重</li><li>进程延迟运行</li></ul></li><li>
-<p>破坏“不可抢占”条件：（不可抢占→可抢占）进程逐个申请资源；一旦进程申请的新资源<strong>不能得到满足时，必须放弃</strong>自己<strong>所有</strong>已有的资源。</p><ul>
-<li>实现复杂、代价高昂</li><li>延长了进程的周转时间，增加系统开销、降低系统吞吐量</li></ul></li><li>
-<p>破坏“循环等待”条件：资源按类型分配序号并排队；规定每个进程必须按<strong>序号递增</strong>的顺序请求资源（而不按自己的使用顺序）</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105103426015.png alt=image-20211105103426015 style=zoom:67%>
-</li></ul><h4 id=避免死锁><strong>避免死锁</strong></h4><p>实质：确保系统不进入不安全状态</p><h5 id=避免死锁与预防死锁的区别>避免死锁与预防死锁的区别</h5><p>预防死锁对进程的资源申请命令施加限制（规定死的）</p><p>避免死锁在进程请求分配资源时进行<strong>动态检查</strong>，并根据检查结果决定分配</p><h5 id=安全状态与安全序列>安全状态与安全序列</h5><p><strong>安全状态</strong>：系统能按某种进程推进顺序（$P_1,P_2,…,P_n$）为每个进程 $P_i$ 分配其所需资源，直至满足每个进程对资源的最大需求，使每个进程都可顺利完成。</p><p>此时（$P_1,P_2,…,P_n$）为<strong>安全序列</strong>。</p><p>若不存在安全序列，则称为<strong>不安全状态</strong>。</p><ul>
-<li>只要处于安全状态，不定不会死锁</li><li>处于不安全状态，也不一定会发生死锁</li><li>发生死锁了，就一定处于不安全状态</li></ul><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png title=image-20211102104315826></p><h4 id=银行家算法避免死锁>==银行家算法避免死锁==</h4><h5 id=四个数据结构>四个数据结构</h5><ul>
-<li>
-<p><strong>可利用资源向量 Available</strong></p><ul>
-<li>一个数组，记录每类资源剩余的量，初始值为每个资源的总量</li></ul></li><li>
-<p><strong>最大需求矩阵 Max</strong></p><ul>
-<li>每一类进程所需的每一类资源总数</li><li>纵资源类型，横坐标进程类型</li></ul></li><li>
-<p><strong>分配矩阵 Allocation</strong></p><ul>
-<li>每一类进程的资源数已分配到的每一类资源量</li></ul></li><li>
-<p><strong>需求矩阵 Need</strong></p><ul>
-<li>每一类进程还需要的每一类资源数</li></ul><p><code>Need[i,j] = Max[i,j] - Allocation[i,j]</code></p></li></ul><p>其他</p><ul>
-<li><code>Request_i[j] = k</code>：进程 P~i~ 申请 R~j~ 资源 k 个</li></ul><h5 id=银行家算法>银行家算法</h5><p>两个判断 -> 试分配 -> 安全性检查</p><ol>
-<li>
-<p><code>if Request_i[j] &lt;= Need[i,j]</code>，便转向步骤 2；否则认为出错。</p></li><li>
-<p><code>if Request_i[j] &lt;= Available[j]</code>，便转向步骤 3；否则表示尚无足够资源，$P_i$ 须等待。</p></li><li>
-<p>系统试探着把资源分配给进程 $P_i$，并修改下面数据结构中的数值：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211009113117755.png alt=image-20211009113117755 style=zoom:50%><h5 id=信号量集机制>信号量集机制</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101541249.png title=image-20211014101541249></p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101552723.png alt=image-20211014101552723 style=zoom:50%>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211014101606204.png alt=image-20211014101606204 style=zoom:50%><h3 id=进程通信>进程通信</h3><p>进程通信就是进程之间的信息交换，用于同步和互斥。</p><p>互斥实质上是一种特殊的同步</p><p>进程同步实质上就是一种进程通信</p><h4 id=概念>概念</h4><p><strong>低级进程通信</strong>（信号量）</p><ul><li>效率低</li><li>通信对用户不透明</li><li>P/V 操作称为低级通信原语</li></ul><p><strong>高级进程通信</strong></p><ul><li><p>进程通信 <strong>IPC</strong>（Inter Process Communication）</p></li><li><p>使用方便</p></li><li><p>高效地传送大量数据</p></li></ul><h4 id=进程通信的类型><strong>进程通信的类型</strong></h4><h5 id=共享存储器系统shared-memory-system>共享存储器系统（Shared-Memory System）</h5><p>共享数据结构或存储区</p><ul><li>基于共享数据的通信方式（<strong>数据结构</strong>）</li><li>基于共享存储区的通信方式（<strong>内存</strong>）</li></ul><h5 id=管道通信系统><strong>管道通信系统</strong></h5><p>所谓 “管道”，指用于连接一个读进程和一个写进程以实现它们之间通信的一个<strong>共享文件</strong></p><p>写进程 —> 管道文件 —> 读进程</p><ul><li>以文件为传输介质</li><li>以字符流方式读写</li></ul><h5 id=消息传递系统message-passing-system>消息传递系统（Message Passing System）</h5><p>以格式化的消息（message）为单位</p><ul><li><p>实现方式</p><ul><li>程序员利用系统提供的一组通信命令（原语）进行通信</li></ul></li><li><p>直接通信方式（原语操作）</p></li><li><p>间接通信方式（通过共享中间实体（信箱通））</p></li></ul><h5 id=客户-服务器系统client-server-system>客户-服务器系统（Client-Server System）</h5><ul><li>套接字：分基于文件型和基于网络型</li><li>远程方法调用和远程文件调用</li></ul><h4 id=消息传递通信的实现方式>消息传递通信的实现方式</h4><h5 id=直接消息传递系统>直接消息传递系统</h5><p>发送进程利用 OS 所提供的发送命令（原语），直接把消息发送给目标进程。</p><ol><li><p>直接通信原语</p><ul><li><p>对称寻址方式</p><p><code>send(receiver,message);</code></p><p><code>receive(sender,message);</code></p></li><li><p>非对称寻址方式</p><p><code>send(P,message);</code></p><p><code>receive(id,message);</code></p></li></ul></li><li><p>消息的格式</p></li><li><p>进程的同步方式</p></li><li><p>通信链路</p></li></ol><h5 id=信箱通信>信箱通信</h5><ol><li>信箱的结构<ul><li>信箱头：用于存放有关信箱的描述信息</li><li>信箱体：由若干个可以存放消息（或消息头）的信箱格组成，信箱格的数目已经每格的大小是在创建信箱时确定的</li></ul></li><li>信箱通信原语<ul><li>邮箱的创建和撤销</li><li>消息的发送和接收</li></ul></li><li>信箱的类型<ul><li>私用邮箱</li><li>公用邮箱</li><li>共享邮箱</li></ul></li></ol><h3 id=线程的基本概念>线程的基本概念</h3><h4 id=线程的引入>线程的引入</h4><p>引入线程是为了<strong>减少程序在并发执行时所付出的时空开销，使 OS 具有更好的并发性</strong></p><p>进程是<strong>可拥有资源的独立单位</strong>和<strong>可独立调度和分派的基本单位</strong></p><p>线程：资源共享、调度独立（作为调度和分派的基本单位）</p><h4 id=线程与进程的比较><strong>线程与进程的比较</strong></h4><ul><li><p><strong>调度的基本单位</strong></p><p>进程是能独立运行的基本单位，在每次被调度时，都需要进行上下文切换，开销较大；</p><p>线程切换仅需保存和设置少量寄存器内容，切换代价远低于进程</p></li><li><p><strong>并发性</strong></p><p>都可以并发执行</p></li><li><p><strong>拥有资源</strong></p><p>进程可以拥有资源，并作为系统中拥有资源的一个基本单位；</p><p><strong>线程并不拥有系统资源</strong>，而是仅有一点必不可少的、能保证独立运行的资源；<strong>线程仅拥有隶属进程的资源</strong></p></li><li><p><strong>独立性</strong></p><p>进程间地址空间和资源互相独立；</p><p>线程间共享地址空间和资源</p></li><li><p><strong>系统开销</strong></p><p><strong>进程需要切换上下文</strong>；</p><p>线程没什么资源，开销小</p></li><li><p><strong>支持多处理机系统</strong></p><p>进程必须在单处理机上运行；</p><p>单进程中的多线程可分配到不同处理机上执行</p></li></ul><h4 id=线程的实现>线程的实现</h4><ul><li><strong>内核支持线程</strong>（KST, Kernel Supported Threads）：内核创建，能够并发，用户切换线程需要陷入</li><li><strong>用户级线程</strong>（ULT, User Level Threads）：用户创建，切换不需要陷入，但阻塞后无法调度</li><li>组合模式：两者结合相互利用</li></ul><p>（线程的实现、线程的创建与终止……）</p><h2 id=处理机调度与死锁>处理机调度与死锁</h2><h3 id=处理机调度的层次和调度算法的目标>处理机调度的层次和调度算法的目标</h3><p>调度的实质是一种资源分配，处理机调度是对处理机资源进行分配</p><p><strong>作业</strong>：作业是任务实体，进程是完成任务的执行实体</p><p><strong>周转时间</strong>：从作业提交给用户开始，到作业完成为止的时间间隔（<strong>等待时间与运行时间之和</strong>）</p><p>系统性能：平均作业周转时间</p><p><strong>带权周转时间</strong>：$W_i=\frac{T_i}{T{ki}}$（T~ki~ 为运行时间），大于等于 1（<strong>周转时间与运行时间之比</strong>）</p><p>响应时间：交互式进程从提交一个请求到接受到响应的时间间隔</p><h4 id=处理机调度的层次>处理机调度的层次</h4><p>作业从进入系统成为后备作业开始，直到运行结束退出系统为止，需经历不同级别的调度</p><ul><li><p><strong>高级调度</strong>（作业调度 / 长程调度）</p><ul><li><p>启动、进入系统时</p></li><li><p>决定外存上<strong>后备队列</strong>的哪几个作业调入内存</p></li><li><p>调度对象是作业，主要用于多道批处理系统中。</p></li></ul></li><li><p><strong>中级调度</strong>（内存调度 / 平衡调度）</p><ul><li><p>挂起 / 唤醒，做内外存的对换</p></li><li><p>主要目的是提高内存利用率和系统吞吐量。</p></li></ul></li><li><p><strong>低级调度</strong>（进程 / 线程调度）</p><ul><li>决定<strong>就绪队列</strong>中的哪个进程获得处理机</li><li>调度对象是进程（内核级线程），基本调度</li><li>在多道批处理、分时和实时三种类型的 OS 中，都必须配置这级调度。</li></ul></li></ul><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123135755253.png title=image-20211123135755253></p><h4 id=处理机调度算法目标>处理机调度算法目标</h4><h5 id=处理机调度算法的共同目标>处理机调度算法的共同目标</h5><ul><li><strong>资源利用率</strong><ul><li>($CPU的利用率=\frac{CPU有效工作时间}{CPU有效工作时间+CPU空闲等待时间}$)</li></ul></li><li><strong>公平性</strong><ul><li>诸进程都获得合理的 CPU 时间，不会发生<strong>进程饥饿</strong>现象</li></ul></li><li><strong>平衡性</strong><ul><li>CPU 都能经常处于忙碌状态；系统资源的平衡性</li></ul></li><li><strong>策略强制执行</strong><ul><li>如安全策略</li></ul></li></ul><h5 id=批处理系统的目标><strong>批处理系统的目标</strong></h5><ul><li><strong>平均周期时间短</strong></li><li><strong>周转时间</strong>：从作业被提交给系统开始，到作业完成为止的这段时间间隔，包括作业在外存后备队列上等待调度的时间，进程在就绪队列上等待进程调度的时间，进程在 CPU 上执行的时间，以及进程等待 I/O 操作完成的时间。<ul><li>平均周转时间最短，有效提高系统资源利用率，可使大部分用户满意。</li></ul></li><li>平均周转时间：$ (T=\frac{1}{n}[\sum_{i=1}^{n}{T_i}])$<ul><li>平均带权周转时间： $(W=\frac{1}{n}\sum_{i=1}^{n}{\frac{T_i}{T_s}})$</li><li>作业周转时间 $T$，系统为其服务时间 $T_s$</li></ul></li><li><strong>系统吞吐量高</strong><ul><li><strong>吞吐量</strong>：在单位时间内系统所完成的作业数</li></ul></li><li><strong>处理机利用率高</strong></li></ul><h5 id=分时系统的目标><strong>分时系统的目标</strong></h5><ul><li><strong>响应时间快</strong></li><li>响应时间：从用户通过键盘提交一个请求开始，直到屏幕上显示出处理结果为止的一段时间间隔。</li><li><strong>均衡性</strong><ul><li>均衡性：系统响应时间的快慢应与用户所请求服务的复杂性相适应。</li></ul></li></ul><h5 id=实时系统的目标><strong>实时系统的目标</strong></h5><ul><li><strong>截止时间的保证</strong><ul><li>截止时间：某任务必须开始执行的最迟时间，或必须完成的最迟时间</li></ul></li><li><strong>可预测性</strong></li></ul><h3 id=作业与作业调度>作业与作业调度</h3><p>凡是涉及作业的调度算法均是非抢占式的</p><h4 id=概念-1>概念</h4><p><strong>进程</strong>：程序段 + 数据 + PCB</p><p><strong>作业</strong>（Job）：包含程序、数据、作业说明书。</p><p><strong>作业步</strong>：完成作业的每一个加工步骤。</p><p><strong>作业控制块</strong>（JCB Job Control Block）：是作业在系统中存在的标志。</p><h4 id=作业运行的三个阶段和三种状态>作业运行的三个阶段和三种状态</h4><p>输入、后备、执行、完成</p><ol><li>收容阶段（后备状态）：建立 JCB 进入后备队列</li><li>运行阶段（运行状态）：分配资源、进入就绪队列</li><li>完成阶段（完成状态）：完成</li></ol><p>作业最终转化为进程，其中的低级调度不可避免</p><h4 id=作业调度的主要任务>作业调度的主要任务</h4><ol><li>接纳多少个作业（允许多少个作业同时在内存中运行）</li><li>接纳哪些作业（取决于所采用的调度算法）</li></ol><p>选择作业 -> 分配资源 -> 创建进程 -> 作业控制 -> 后续处理</p><h4 id=先来先服务-fcfs-调度算法>先来先服务 FCFS 调度算法</h4><p>（First Coming First Serverd）</p><p>作业调度 √，进程调度 √</p><p>系统按照<strong>作业到达的先后顺序</strong>来进行调度，或者说优先考虑<strong>等待时间最长</strong>的作业，而不管作业所需执行时间的长短</p><p>特点</p><ul><li><p>不可抢占性、实现简单、顾及作业等候时间</p></li><li><p><strong>有利于长作业(进程)，不利于短作业(进程)</strong></p></li><li><p><strong>有利于 CPU 繁忙型作业，不利于 I/O 繁忙型作业</strong></p></li><li><p>效率不高、没有考虑优先级</p></li></ul><h4 id=短作业优先-sjf-调度算法>短作业优先 SJF 调度算法</h4><p>（Short Job First / shortest process first，有时会写作 SJN/SPN，N 表 next）</p><p>作业调度 √，进程调度 √</p><p>以<strong>作业长短</strong>来计算优先级，作业越短，优先级越高。作业的长短是以作业所要求的<strong>运行时间</strong>来衡量的。</p><p>优点</p><ul><li>易于实现</li><li>平均周转时间比 FCFS 小</li></ul><p>缺点：</p><ul><li><p>效率还不是很高</p></li><li><p>必须预知作业的运行时间</p></li><li><p>对长作业非常不利，忽视了长作业的等待时间，出现饥饿现象</p></li><li><p>人-机无法交互</p></li><li><p>未考虑作业的紧迫程度</p></li></ul><h5 id=最短剩余时间优先-srtf>最短剩余时间优先 SRTF</h5><p>（shortest remaining time first）</p><p>SJF 算法的抢占式</p><p>一旦有作业就绪，让其需要的 CPU 时间与当前运行作业剩余时间做判断，小者上 CPU</p><h4 id=优先级调度-psa-算法>优先级调度 PSA 算法</h4><p>（priority-scheduling algorithm）</p><p>作业调度 √，进程调度 √</p><p>基于作业的<strong>紧迫度</strong>，由<strong>外部</strong>赋予作业相应的优先级。</p><p>可以是抢占式，也可以是非抢占式的</p><p>一般为高优先权优先（HPF，highest-priority first）</p><ul><li>使得紧迫的任务得以优先执行</li><li>静态优先级较死板，动态优先级开销大</li></ul><h4 id=高响应比优先调度-hrrn-算法>高响应比优先调度 HRRN 算法</h4><p>（highest response ratio next）</p><p>既考虑等待时间，也考虑运行时间。进程都到之后开始计算优先权。</p><p><strong>动态优先级</strong> ($优先权=\frac{等待时间+要求服务时间}{要求服务时间}=\frac{响应时间}{要求服务时间}=响应比R_p$)</p><ul><li>作业等待时间相同，服务时间越短，优先级越高，利于短作业</li><li>要求服务时间相同，等待时间越长，优先级越高，利于长作业</li><li>作业优先级可以随等待时间的增加而提高</li></ul><p>缺点：每次调度都需进行响应比的计算</p><blockquote><p>响应时间并不是周转时间，响应时间是一种不断变化的过程；周转时间是作业运行结束后得出的结果</p><p>同理，这里的等待时间表示已经等待的时间，是过程；通常意义上的等待时间则是一种结果</p></blockquote><h3 id=进程调度>进程调度</h3><h4 id=进程调度的任务><strong>进程调度的任务</strong></h4><ul><li>保存处理机的现场信息</li><li>按某种算法选取进程</li><li>把处理器分配给进程</li></ul><h4 id=进程调度机制><strong>进程调度机制</strong></h4><ul><li>排队器</li><li>分派器</li><li>上下文切换器</li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028111744790.png alt=image-20211028111744790 style=zoom:50%><h4 id=进程调度方式><strong>进程调度方式</strong></h4><ul><li>非抢占方式：一旦分配给某进程，就一直让它运行下去。<ul><li>正在执行的进程运行完毕，或因发生某时间而使其无法再继续运行</li><li>正在执行中的进程因提出 I/O 请求而暂停执行</li><li>进程通信或同步过程中，执行了某种原语操作</li></ul></li><li>抢占方式：允许调度程序根据某种原则，去暂停某个正在执行的进程，将已分配给该进程的处理机重新分配给另一进程<ul><li>优先权原则</li><li>短进程优先原则</li><li>时间片原则</li></ul></li></ul><h4 id=轮转调度-rr-算法>轮转调度 RR 算法</h4><p>（round robin）</p><h5 id=调度契机>调度契机</h5><ul><li>一个时间片尚未用完，正在允许的进程便已完成</li><li>在一个时间片用完时，计时器中断处理程序被激活，若进程尚未运行完毕，调度程序将把它送往就绪队列的<strong>末尾</strong>。</li><li>时间片未用完时，进程因 I/O 原因造成了堵塞</li></ul><h5 id=特点-1>特点</h5><ul><li>只能用于调度 CPU 这一类可抢占资源</li><li>作业调度一般不使用轮转，因为它资源特别多，包含有对不可抢占资源的分配</li><li>短作业存在优先权</li><li>长作业上下文切换时间开销大</li></ul><h5 id=时间片的选择>时间片的选择</h5><p>时间片过大 -> 退化成 FCFS</p><p>时间片过小 -> 过多的上下文切换，吞吐量小</p><p>根据系统对<strong>响应时间的要求 R</strong>和<strong>就绪队列中所允许的最大进程数 N~max~</strong> 确定</p><p>这里也有<strong>响应时间</strong>，为用户数目 × 时间片大小</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028112822697.png alt=image-20211028112822697 style=zoom:50%>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028112929043.png alt=image-20211028112929043 style=zoom:40%><h4 id=多级反馈队列调度算法-mfq><strong>多级反馈队列调度算法</strong> MFQ</h4><p>（multileved feedback queue）</p><h5 id=描述>描述</h5><ul><li>设置多个就绪队列（优先级逐个降低，时间片逐个增大）</li><li>每个队列都采用 FCFS 算法，最后一个队列 RR 算法<ul><li>若有新进程进入，<strong>加入第一队列末尾</strong></li><li>若进程未在时间片内完成，<strong>则到第二队列末尾</strong></li></ul></li><li>队列按照优先级调度<ul><li>随着队列优先级的降低，分配的时间片变长</li></ul></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211028113227853.png alt=image-20211028113227853 style=zoom:50%><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211123143255114.png title=image-20211123143255114></p><h5 id=调度算法的性能><strong>调度算法的性能</strong></h5><ul><li>终端型用户：交互型作业，较小，可以保证在第一队列时间片内完成即可</li><li>短批处理作业用户：稍短的，第一队列完成；稍长的，第二、三队列各执行一个时间片完成，周转时间也较短</li><li>长批处理作业用户：依次在第 1 到 n 个队列中运行，再以轮转的方式运行，不必担心作业长期得不到处理。</li></ul><h3 id=死锁概述>死锁概述</h3><h4 id=定义-2><strong>定义</strong></h4><p>计算机系统中多道程序并发执行时，两个或两个以上的进程由于<strong>竞争系统资源而造成的一种互相等待的现象</strong></p><p>若无外力作用，这组进程将永远不能继续执行</p><h4 id=资源类型>资源类型</h4><ul><li><strong>可重用性资源</strong>（数目相对固定）和<strong>可消耗性资源</strong>（生产创建，消费消耗）</li><li><strong>可抢占性资源</strong>（处理机）和<strong>不可抢占性资源</strong>（打印机）</li></ul><h4 id=死锁产生原因><strong>死锁产生原因</strong></h4><ul><li><strong>竞争不可抢占性资源</strong></li><li><strong>竞争可消耗性资源</strong></li><li><strong>进程推进顺序不当</strong></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102101855181.png alt=image-20211102101855181 style=zoom:50%>
+<img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102102335942.png alt=image-20211102102335942 style=zoom:50%><p>如果一组进程中的每一个进程都在等待仅由该组进程中的其它进程才能引发的事件，那么该组进程是<strong>死锁</strong>的。</p><h4 id=产生死锁的必要条件>产生死锁的必要条件</h4><ul><li>互斥条件（Mutual Exclusion）<ul><li>资源要求互斥访问</li></ul></li><li>请求和保持条件（Hold and wait）<ul><li>提出的请求得不到满足，手头的资源释放不出来</li></ul></li><li>不可抢占条件（No preemption）<ul><li>资源只能由占有者资源释放</li></ul></li><li>循环等待条件（Circular wait）<ul><li>必有一个进程-资源的环形链，环路中的进程形成等待链</li></ul></li></ul><h4 id=处理死锁的方法>处理死锁的方法</h4><ul><li>不让死锁发生<ul><li>预防死锁：静态策略，破坏死锁产生的必要条件</li><li>避免死锁：动态策略，不限制必要条件，而去防止系统进入不安全状态（银行家算法）</li></ul></li><li>让死锁发生<ul><li>检测死锁：通过检测机构及时发现死锁，再采取措施（资源分配图）</li><li>解除死锁：当死锁发生，撤销一些进程，回收资源再分配</li></ul></li></ul><h4 id=预防死锁><strong>预防死锁</strong></h4><p>破坏四个必要条件之一</p><ul><li><p>“互斥条件”是设备的固有属性，应加以保证，不能被破坏</p></li><li><p>破坏“请求和保持”条件：进程在中间不会请求新的资源，所有进程在开始前必须<strong>一次性申请</strong>所需全部资源</p><ul><li>简单、安全、易于实现</li><li>资源浪费严重</li><li>进程延迟运行</li></ul></li><li><p>破坏“不可抢占”条件：（不可抢占→可抢占）进程逐个申请资源；一旦进程申请的新资源<strong>不能得到满足时，必须放弃</strong>自己<strong>所有</strong>已有的资源。</p><ul><li>实现复杂、代价高昂</li><li>延长了进程的周转时间，增加系统开销、降低系统吞吐量</li></ul></li><li><p>破坏“循环等待”条件：资源按类型分配序号并排队；规定每个进程必须按<strong>序号递增</strong>的顺序请求资源（而不按自己的使用顺序）</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105103426015.png alt=image-20211105103426015 style=zoom:67%></li></ul><h4 id=避免死锁><strong>避免死锁</strong></h4><p>实质：确保系统不进入不安全状态</p><h5 id=避免死锁与预防死锁的区别>避免死锁与预防死锁的区别</h5><p>预防死锁对进程的资源申请命令施加限制（规定死的）</p><p>避免死锁在进程请求分配资源时进行<strong>动态检查</strong>，并根据检查结果决定分配</p><h5 id=安全状态与安全序列>安全状态与安全序列</h5><p><strong>安全状态</strong>：系统能按某种进程推进顺序（$P_1,P_2,…,P_n$）为每个进程 $P_i$ 分配其所需资源，直至满足每个进程对资源的最大需求，使每个进程都可顺利完成。</p><p>此时（$P_1,P_2,…,P_n$）为<strong>安全序列</strong>。</p><p>若不存在安全序列，则称为<strong>不安全状态</strong>。</p><ul><li>只要处于安全状态，不定不会死锁</li><li>处于不安全状态，也不一定会发生死锁</li><li>发生死锁了，就一定处于不安全状态</li></ul><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211102104315826.png title=image-20211102104315826></p><h4 id=银行家算法避免死锁>==银行家算法避免死锁==</h4><h5 id=四个数据结构>四个数据结构</h5><ul><li><p><strong>可利用资源向量 Available</strong></p><ul><li>一个数组，记录每类资源剩余的量，初始值为每个资源的总量</li></ul></li><li><p><strong>最大需求矩阵 Max</strong></p><ul><li>每一类进程所需的每一类资源总数</li><li>纵资源类型，横坐标进程类型</li></ul></li><li><p><strong>分配矩阵 Allocation</strong></p><ul><li>每一类进程的资源数已分配到的每一类资源量</li></ul></li><li><p><strong>需求矩阵 Need</strong></p><ul><li>每一类进程还需要的每一类资源数</li></ul><p><code>Need[i,j] = Max[i,j] - Allocation[i,j]</code></p></li></ul><p>其他</p><ul><li><code>Request_i[j] = k</code>：进程 P~i~ 申请 R~j~ 资源 k 个</li></ul><h5 id=银行家算法>银行家算法</h5><p>两个判断 -> 试分配 -> 安全性检查</p><ol><li><p><code>if Request_i[j] &lt;= Need[i,j]</code>，便转向步骤 2；否则认为出错。</p></li><li><p><code>if Request_i[j] &lt;= Available[j]</code>，便转向步骤 3；否则表示尚无足够资源，$P_i$ 须等待。</p></li><li><p>系统试探着把资源分配给进程 $P_i$，并修改下面数据结构中的数值：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>Available</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>=</span> <span class=n>Available</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>-</span> <span class=n>Request_i</span><span class=p>[</span><span class=n>j</span><span class=p>];</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>Available</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>=</span> <span class=n>Available</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>-</span> <span class=n>Request_i</span><span class=p>[</span><span class=n>j</span><span class=p>];</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>Allocation</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>j</span><span class=p>]</span><span class=o>=</span><span class=n>Allocation</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>j</span><span class=p>]</span><span class=o>+</span><span class=n>Request_i</span><span class=p>[</span><span class=n>j</span><span class=p>];</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>Need</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>j</span><span class=p>]</span><span class=o>=</span><span class=n>Need</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>j</span><span class=p>]</span><span class=o>-</span><span class=n>Request_i</span><span class=p>[</span><span class=n>j</span><span class=p>];</span>
-</span></span></code></pre></td></tr></table></div></div></li><li>
-<p>系统执行<strong>安全性算法</strong>，检查此次资源分配后系统是否处于安全状态</p><ul>
-<li>若安全才正式将资源分配 给进程 $P_i$</li><li>否则作废，恢复原来的资源分配状态</li></ul></li></ol><h5 id=安全性算法>安全性算法</h5><ol>
-<li>
-<p>设置两个向量：</p><ul>
-<li>工作向量 <code>Work</code>，表示系统可提供给进程继续运行所需的各类资源数目，初始化 <code>Work=Available</code></li><li><code>Finish</code>，表示系统是否有足够的资源分配给进程，使之运行完成。开始时 <code>Finish[i]=false</code>；当有足够资源分配给进程时，<code>Finish[i]=true</code></li></ul></li><li>
-<p>从进程集合中找到一个能满足下述条件的进程</p><ul>
-<li><code>Finish[i]=false && Need[i,j]≤Work[j] </code></li></ul><p>若找到，执行步骤 3，否则执行 4</p></li><li>
-<p>当进程 $P_i$ 获得资源后，可顺利执行，直至完成，并释放出分配给它的资源，故应执行：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div></li><li><p>系统执行<strong>安全性算法</strong>，检查此次资源分配后系统是否处于安全状态</p><ul><li>若安全才正式将资源分配 给进程 $P_i$</li><li>否则作废，恢复原来的资源分配状态</li></ul></li></ol><h5 id=安全性算法>安全性算法</h5><ol><li><p>设置两个向量：</p><ul><li>工作向量 <code>Work</code>，表示系统可提供给进程继续运行所需的各类资源数目，初始化 <code>Work=Available</code></li><li><code>Finish</code>，表示系统是否有足够的资源分配给进程，使之运行完成。开始时 <code>Finish[i]=false</code>；当有足够资源分配给进程时，<code>Finish[i]=true</code></li></ul></li><li><p>从进程集合中找到一个能满足下述条件的进程</p><ul><li><code>Finish[i]=false && Need[i,j]≤Work[j]</code></li></ul><p>若找到，执行步骤 3，否则执行 4</p></li><li><p>当进程 $P_i$ 获得资源后，可顺利执行，直至完成，并释放出分配给它的资源，故应执行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>Work</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>=</span> <span class=n>Work</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>+</span> <span class=n>Allocation</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>j</span><span class=p>];</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>Work</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>=</span> <span class=n>Work</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>+</span> <span class=n>Allocation</span><span class=p>[</span><span class=n>i</span><span class=p>,</span><span class=n>j</span><span class=p>];</span>
 </span></span><span class=line><span class=cl><span class=n>Finish</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=nb>true</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=n>go</span> <span class=n>to</span> <span class=n>step</span> <span class=mi>2</span>
-</span></span></code></pre></td></tr></table></div></div></li><li>
-<p>如果所有进程的 <code>Finish[i] == true</code> 都满足，则表示系统处于安全状态。</p></li></ol><blockquote>
-<p>步骤 2 中所有类型的资源都要被判断，步骤 3 中所有类型的资源都要被释放，使用循环</p></blockquote><h5 id=不足>不足</h5><ul>
-<li>对资源分配保守</li><li>计算多</li><li>一些情况下缺乏实用性（进程对资源的需求动态、进程数量不确定）</li></ul><h3 id=死锁的检测与解除>死锁的检测与解除</h3><h4 id=死锁检测>死锁检测</h4><h5 id=资源分配图><strong>资源分配图</strong></h5><p>（Resource Allocation Graph）</p><p>若不存在环路，则必然不存在死锁</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105804705.png alt=image-20211105105804705 style=zoom:50%>
-<h5 id=死锁定理>死锁定理</h5><ul>
-<li>从既不阻塞又非独立的进程结点开始简化：<strong>消去请求边和分配边</strong>
-<ul>
-<li>将请求边转换为分配边（如果可以的话）</li></ul></li><li><strong>S 为死锁状态的充分条件是：当且仅当 S 状态的资源分配图是不可完全简化的</strong></li></ul><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png title=image-20211105105954178></p><p><strong>死锁检测的数据结构</strong></p><p>类似银行家算法的数据结构</p><ul>
-<li>可利用资源向量 Available</li><li>不占用资源的进程（<code>Allocation == 0）</code>记入 L 表</li><li>从进程集合中找到一个 <code>Request_i &lt;= Work</code> 的进程
-<ul>
-<li>将其资源分配图简化</li><li>释放资源</li><li>增加工作向量 <code>Work += Allocation</code></li><li>记入 L 表</li></ul></li><li>若不能把所有进程都计入 L 表 -> 状态 S 资源分配图不能被完全简化 -> 死锁</li></ul><h4 id=死锁解除>死锁解除</h4><ul>
-<li>抢占资源（剥夺资源）
-<ul>
-<li>从其他进程剥夺资源给死锁进程</li></ul></li><li>终止（或撤销）进程
-<ol>
-<li>撤销所有死锁进程</li><li>按照某种资源逐个撤销代价最小的进程，直至资源可用</li></ol></li></ul></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2022-03-07</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/os/>OS</a></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/courses/operating-system/operatingsystem2/ class=prev rel=prev title=操作系统（2）><i class="fas fa-angle-left fa-fw"></i>操作系统（2）</a>
-<a href=/Notes/posts/golang/go-test/ class=next rel=next title="Go test 教程">Go test 教程<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>如果所有进程的 <code>Finish[i] == true</code> 都满足，则表示系统处于安全状态。</p></li></ol><blockquote><p>步骤 2 中所有类型的资源都要被判断，步骤 3 中所有类型的资源都要被释放，使用循环</p></blockquote><h5 id=不足>不足</h5><ul><li>对资源分配保守</li><li>计算多</li><li>一些情况下缺乏实用性（进程对资源的需求动态、进程数量不确定）</li></ul><h3 id=死锁的检测与解除>死锁的检测与解除</h3><h4 id=死锁检测>死锁检测</h4><h5 id=资源分配图><strong>资源分配图</strong></h5><p>（Resource Allocation Graph）</p><p>若不存在环路，则必然不存在死锁</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105804705.png alt=image-20211105105804705 style=zoom:50%><h5 id=死锁定理>死锁定理</h5><ul><li>从既不阻塞又非独立的进程结点开始简化：<strong>消去请求边和分配边</strong><ul><li>将请求边转换为分配边（如果可以的话）</li></ul></li><li><strong>S 为死锁状态的充分条件是：当且仅当 S 状态的资源分配图是不可完全简化的</strong></li></ul><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20211105105954178.png title=image-20211105105954178></p><p><strong>死锁检测的数据结构</strong></p><p>类似银行家算法的数据结构</p><ul><li>可利用资源向量 Available</li><li>不占用资源的进程（<code>Allocation == 0）</code>记入 L 表</li><li>从进程集合中找到一个 <code>Request_i &lt;= Work</code> 的进程<ul><li>将其资源分配图简化</li><li>释放资源</li><li>增加工作向量 <code>Work += Allocation</code></li><li>记入 L 表</li></ul></li><li>若不能把所有进程都计入 L 表 -> 状态 S 资源分配图不能被完全简化 -> 死锁</li></ul><h4 id=死锁解除>死锁解除</h4><ul><li>抢占资源（剥夺资源）<ul><li>从其他进程剥夺资源给死锁进程</li></ul></li><li>终止（或撤销）进程<ol><li>撤销所有死锁进程</li><li>按照某种资源逐个撤销代价最小的进程，直至资源可用</li></ol></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-03-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/os/>OS</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/courses/operating-system/operatingsystem2/ class=prev rel=prev title=操作系统（2）><i class="fas fa-angle-left fa-fw"></i>操作系统（2）</a>
+<a href=/Notes/posts/golang/go-test/ class=next rel=next title="Go test 教程">Go test 教程<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

@@ -1,110 +1,31 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>STL - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="STL">
-<meta property="og:description" content="STL list 概述 list 由双向链表（doubly linked list）实现而成，元素也存放在堆中，每个元素都是放在一块内存中，他的内存空间可以是不连续的，通过指针来">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/cpp/stl/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2022-01-25T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="STL">
-<meta name=twitter:description content="STL list 概述 list 由双向链表（doubly linked list）实现而成，元素也存放在堆中，每个元素都是放在一块内存中，他的内存空间可以是不连续的，通过指针来">
-<meta name=application-name content="伤心肠粉的酱油碟子">
-<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/cpp/stl/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/database/mysql/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/database/sqlite/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"STL","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/cpp\/stl\/"},"genre":"posts","keywords":"C\u002b\u002b","wordcount":2524,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/cpp\/stl\/","datePublished":"2022-01-25T00:00:00+00:00","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>STL - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="STL"><meta property="og:description" content="STL list 概述 list 由双向链表（doubly linked list）实现而成，元素也存放在堆中，每个元素都是放在一块内存中，他的内存空间可以是不连续的，通过指针来"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/cpp/stl/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-01-25T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-11T02:43:10+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="STL"><meta name=twitter:description content="STL list 概述 list 由双向链表（doubly linked list）实现而成，元素也存放在堆中，每个元素都是放在一块内存中，他的内存空间可以是不连续的，通过指针来"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/cpp/stl/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/database/mysql/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/database/sqlite/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"STL","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/cpp\/stl\/"},"genre":"posts","keywords":"C\u002b\u002b","wordcount":2524,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/cpp\/stl\/","datePublished":"2022-01-25T00:00:00+00:00","dateModified":"2022-03-11T02:43:10+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/posts/>文章 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">STL</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/cpp/><i class="far fa-folder fa-fw"></i>CPP</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-25>2022-01-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2524 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#list>list</a>
-<ul>
-<li><a href=#概述>概述</a></li><li><a href=#定义及初始化>定义及初始化</a></li><li><a href=#基本操作>基本操作</a>
-<ul>
-<li><a href=#容量函数>容量函数</a></li><li><a href=#添加函数>添加函数</a></li><li><a href=#删除函数>删除函数</a></li><li><a href=#访问函数>访问函数</a></li><li><a href=#其他函数>其他函数</a></li></ul></li><li><a href=#迭代器与算法>迭代器与算法</a></li><li><a href=#总结>总结</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=stl>STL</h1><h2 id=list>list</h2><h3 id=概述>概述</h3><p>list 由双向链表（doubly linked list）实现而成，元素也存放在堆中，每个元素都是放在一块内存中，他的内存空间可以是不连续的，通过指针来进行数据的访问，这个特点使得它的随机存取变得非常没有效率，因此它没有提供 [] 操作符的重载。但是由于链表的特点，它可以很有效率的支持任意地方的插入和删除操作。</p><h3 id=定义及初始化>定义及初始化</h3><p>使用之前必须加相应容器的头文件：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;list&gt; // list属于std命名域的，因此需要通过命名限定，例如using std::list;</span><span class=cp>
-</span></span></span></code></pre></td></tr></table></div></div><p>定义的代码如下：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">STL</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/cpp/><i class="far fa-folder fa-fw"></i>CPP</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-01-25>2022-01-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2524 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#list>list</a><ul><li><a href=#概述>概述</a></li><li><a href=#定义及初始化>定义及初始化</a></li><li><a href=#基本操作>基本操作</a><ul><li><a href=#容量函数>容量函数</a></li><li><a href=#添加函数>添加函数</a></li><li><a href=#删除函数>删除函数</a></li><li><a href=#访问函数>访问函数</a></li><li><a href=#其他函数>其他函数</a></li></ul></li><li><a href=#迭代器与算法>迭代器与算法</a></li><li><a href=#总结>总结</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=stl>STL</h1><h2 id=list>list</h2><h3 id=概述>概述</h3><p>list 由双向链表（doubly linked list）实现而成，元素也存放在堆中，每个元素都是放在一块内存中，他的内存空间可以是不连续的，通过指针来进行数据的访问，这个特点使得它的随机存取变得非常没有效率，因此它没有提供 [] 操作符的重载。但是由于链表的特点，它可以很有效率的支持任意地方的插入和删除操作。</p><h3 id=定义及初始化>定义及初始化</h3><p>使用之前必须加相应容器的头文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;list&gt; // list属于std命名域的，因此需要通过命名限定，例如using std::list;</span><span class=cp>
+</span></span></span></code></pre></td></tr></table></div></div><p>定义的代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=n>list</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>a</span><span class=p>;</span> <span class=c1>// 定义一个int类型的列表a
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=n>list</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>a</span><span class=p>;</span> <span class=c1>// 定义一个int类型的列表a
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>list</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>a</span><span class=p>(</span><span class=mi>10</span><span class=p>);</span> <span class=c1>// 定义一个int类型的列表a，并设置初始大小为10
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>list</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>a</span><span class=p>(</span><span class=mi>10</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span> <span class=c1>// 定义一个int类型的列表a，并设置初始大小为10且初始值都为1
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>list</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>b</span><span class=p>(</span><span class=n>a</span><span class=p>);</span> <span class=c1>// 定义并用列表a初始化列表b
 </span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>deque</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>b</span><span class=p>(</span><span class=n>a</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=o>++</span><span class=n>a</span><span class=p>.</span><span class=n>end</span><span class=p>());</span> <span class=c1>// 将列表a中的第1个元素作为列表b的初始值
-</span></span></span></code></pre></td></tr></table></div></div><p>除此之外，还可以直接使用数组来初始化向量：</p><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></span></code></pre></td></tr></table></div></div><p>除此之外，还可以直接使用数组来初始化向量：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=kt>int</span> <span class=n>n</span><span class=p>[]</span> <span class=o>=</span> <span class=p>{</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span> <span class=p>};</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=kt>int</span> <span class=n>n</span><span class=p>[]</span> <span class=o>=</span> <span class=p>{</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span> <span class=p>};</span>
 </span></span><span class=line><span class=cl><span class=n>list</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span> <span class=n>a</span><span class=p>(</span><span class=n>n</span><span class=p>,</span> <span class=n>n</span> <span class=o>+</span> <span class=mi>5</span><span class=p>);</span> <span class=c1>// 将数组n的前5个元素作为列表a的初值
-</span></span></span></code></pre></td></tr></table></div></div><h3 id=基本操作>基本操作</h3><h4 id=容量函数>容量函数</h4><ul>
-<li>容器大小：<code>lst.size();</code></li><li>容器最大容量：<code>lst.max_size();</code></li><li>更改容器大小：<code>lst.resize();</code></li><li>容器判空：<code>lst.empty();</code></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=基本操作>基本操作</h3><h4 id=容量函数>容量函数</h4><ul><li>容器大小：<code>lst.size();</code></li><li>容器最大容量：<code>lst.max_size();</code></li><li>更改容器大小：<code>lst.resize();</code></li><li>容器判空：<code>lst.empty();</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -126,8 +47,7 @@
 </span><span class=lnt>20
 </span><span class=lnt>21
 </span><span class=lnt>22
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;list&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
@@ -149,10 +69,7 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=添加函数>添加函数</h4><ul>
-<li>头部添加元素：<code>lst.push_front(const T& x);</code></li><li>末尾添加元素：<code>lst.push_back(const T& x);</code></li><li>任意位置插入一个元素：<code>lst.insert(iterator it, const T& x);</code></li><li>任意位置插入 n 个相同元素：<code>lst.insert(iterator it, int n, const T& x);</code></li><li>插入另一个向量的 [forst,last] 间的数据：<code>lst.insert(iterator it, iterator first, iterator last);</code></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h4 id=添加函数>添加函数</h4><ul><li>头部添加元素：<code>lst.push_front(const T& x);</code></li><li>末尾添加元素：<code>lst.push_back(const T& x);</code></li><li>任意位置插入一个元素：<code>lst.insert(iterator it, const T& x);</code></li><li>任意位置插入 n 个相同元素：<code>lst.insert(iterator it, int n, const T& x);</code></li><li>插入另一个向量的 [forst,last] 间的数据：<code>lst.insert(iterator it, iterator first, iterator last);</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -181,8 +98,7 @@
 </span><span class=lnt>27
 </span><span class=lnt>28
 </span><span class=lnt>29
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;list&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
@@ -211,10 +127,7 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=删除函数>删除函数</h4><ul>
-<li>头部删除元素：<code>lst.pop_front();</code></li><li>末尾删除元素：<code>lst.pop_back();</code></li><li>任意位置删除一个元素：<code>lst.erase(iterator it);</code></li><li>删除 [first,last] 之间的元素：<code>lst.erase(iterator first, iterator last);</code></li><li>清空所有元素：<code>lst.clear();</code></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h4 id=删除函数>删除函数</h4><ul><li>头部删除元素：<code>lst.pop_front();</code></li><li>末尾删除元素：<code>lst.pop_back();</code></li><li>任意位置删除一个元素：<code>lst.erase(iterator it);</code></li><li>删除 [first,last] 之间的元素：<code>lst.erase(iterator first, iterator last);</code></li><li>清空所有元素：<code>lst.clear();</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -249,8 +162,7 @@
 </span><span class=lnt>33
 </span><span class=lnt>34
 </span><span class=lnt>35
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;list&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
@@ -285,10 +197,7 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=访问函数>访问函数</h4><ul>
-<li>访问第一个元素：<code>lst.front();</code></li><li>访问最后一个元素：<code>lst.back();</code></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h4 id=访问函数>访问函数</h4><ul><li>访问第一个元素：<code>lst.front();</code></li><li>访问最后一个元素：<code>lst.back();</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -306,8 +215,7 @@
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;list&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
@@ -325,10 +233,7 @@
 </span></span></span><span class=line><span class=cl><span class=c1></span>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=其他函数>其他函数</h4><ul>
-<li>多个元素赋值：<code>lst.assign(int nSize, const T& x); // 类似于初始化时用数组进行赋值</code></li><li>交换两个同类型容器的元素：<code>swap(list&, list&); 或 lst.swap(list&);</code></li><li>合并两个列表的元素（默认升序排列）：<code>lst.merge();</code></li><li>在任意位置拼接入另一个list：<code>lst.splice(iterator it, list&);</code></li><li>删除容器中相邻的重复元素：<code>lst.unique();</code></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h4 id=其他函数>其他函数</h4><ul><li>多个元素赋值：<code>lst.assign(int nSize, const T& x); // 类似于初始化时用数组进行赋值</code></li><li>交换两个同类型容器的元素：<code>swap(list&, list&); 或 lst.swap(list&);</code></li><li>合并两个列表的元素（默认升序排列）：<code>lst.merge();</code></li><li>在任意位置拼接入另一个list：<code>lst.splice(iterator it, list&);</code></li><li>删除容器中相邻的重复元素：<code>lst.unique();</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -395,8 +300,7 @@
 </span><span class=lnt>65
 </span><span class=lnt>66
 </span><span class=lnt>67
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;list&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
@@ -463,10 +367,7 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p><a href=https://www.cnblogs.com/linuxAndMcu/p/10260627.html#_labelTop target=_blank rel="noopener noreffer">回到顶部</a></p><h3 id=迭代器与算法>迭代器与算法</h3><p><strong>1. 迭代器</strong></p><ul>
-<li>开始迭代器指针：<code>lst.begin();</code></li><li>末尾迭代器指针：<code>lst.end();</code> // 指向最后一个元素的下一个位置</li><li>指向常量的开始迭代器指针：<code>lst.cbegin();</code> // 意思就是不能通过这个指针来修改所指的内容，但还是可以通过其他方式修改的，而且指针也是可以移动的。</li><li>指向常量的末尾迭代器指针：<code>lst.cend();</code></li><li>反向迭代器指针，指向最后一个元素：<code>lst.rbegin();</code></li><li>反向迭代器指针，指向第一个元素的前一个元素：<code>lst.rend();</code></li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p><a href=https://www.cnblogs.com/linuxAndMcu/p/10260627.html#_labelTop target=_blank rel="noopener noreffer">回到顶部</a></p><h3 id=迭代器与算法>迭代器与算法</h3><p><strong>1. 迭代器</strong></p><ul><li>开始迭代器指针：<code>lst.begin();</code></li><li>末尾迭代器指针：<code>lst.end();</code> // 指向最后一个元素的下一个位置</li><li>指向常量的开始迭代器指针：<code>lst.cbegin();</code> // 意思就是不能通过这个指针来修改所指的内容，但还是可以通过其他方式修改的，而且指针也是可以移动的。</li><li>指向常量的末尾迭代器指针：<code>lst.cend();</code></li><li>反向迭代器指针，指向最后一个元素：<code>lst.rbegin();</code></li><li>反向迭代器指针，指向第一个元素的前一个元素：<code>lst.rend();</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -488,8 +389,7 @@
 </span><span class=lnt>20
 </span><span class=lnt>21
 </span><span class=lnt>22
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;list&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
@@ -511,28 +411,17 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p><strong>2. 算法</strong></p><ul>
-<li>遍历元素</li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p><strong>2. 算法</strong></p><ul><li>遍历元素</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=n>list</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;::</span><span class=n>iterator</span> <span class=n>it</span><span class=p>;</span>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=n>list</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;::</span><span class=n>iterator</span> <span class=n>it</span><span class=p>;</span>
 </span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span><span class=n>it</span> <span class=o>=</span> <span class=n>lst</span><span class=p>.</span><span class=n>begin</span><span class=p>();</span> <span class=n>it</span> <span class=o>!=</span> <span class=n>lst</span><span class=p>.</span><span class=n>end</span><span class=p>();</span> <span class=n>it</span><span class=o>++</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=o>*</span><span class=n>it</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>元素翻转</li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><ul><li>元素翻转</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;algorithm&gt;</span><span class=cp>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;algorithm&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=n>reverse</span><span class=p>(</span><span class=n>lst</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>lst</span><span class=p>.</span><span class=n>end</span><span class=p>());</span>
-</span></span></code></pre></td></tr></table></div></div><ul>
-<li>元素排序</li></ul><div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><ul><li>元素排序</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -543,8 +432,7 @@
 </span><span class=lnt> 9
 </span><span class=lnt>10
 </span><span class=lnt>11
-</span></code></pre></td><td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;algorithm&gt;</span><span class=cp>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c++ data-lang=c++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;algorithm&gt;</span><span class=cp>
 </span></span></span><span class=line><span class=cl><span class=cp></span><span class=n>sort</span><span class=p>(</span><span class=n>lst</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>lst</span><span class=p>.</span><span class=n>end</span><span class=p>());</span> <span class=c1>// 采用的是从小到大的排序
 </span></span></span><span class=line><span class=cl><span class=c1></span>
 </span></span><span class=line><span class=cl><span class=c1>// 如果想从大到小排序，可以采用先排序后反转的方式，也可以采用下面方法:
@@ -555,23 +443,6 @@
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>sort</span><span class=p>(</span><span class=n>lst</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>lst</span><span class=p>.</span><span class=n>end</span><span class=p>(),</span> <span class=n>Comp</span><span class=p>);</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=总结>总结</h3><p>可以看到，list 与 vector、deque 的用法基本一致，除了以下几处不同：</p><ul>
-<li>list 为双向迭代器，故不支持<code>it+=i</code>；</li><li>list 不支持下标访问和at方法访问。</li></ul></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2022-03-07</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/c++/>C++</a></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/database/mysql/ class=prev rel=prev title="关于 MySQL 的一些笔记"><i class="fas fa-angle-left fa-fw"></i>关于 MySQL 的一些笔记</a>
-<a href=/Notes/posts/database/sqlite/ class=next rel=next title=SQLite>SQLite<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
+</span></span></code></pre></td></tr></table></div></div><h3 id=总结>总结</h3><p>可以看到，list 与 vector、deque 的用法基本一致，除了以下几处不同：</p><ul><li>list 为双向迭代器，故不支持<code>it+=i</code>；</li><li>list 不支持下标访问和at方法访问。</li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-03-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/c++/>C++</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/database/mysql/ class=prev rel=prev title="关于 MySQL 的一些笔记"><i class="fas fa-angle-left fa-fw"></i>关于 MySQL 的一些笔记</a>
+<a href=/Notes/posts/database/sqlite/ class=next rel=next title=SQLite>SQLite<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

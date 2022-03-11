@@ -1,165 +1,31 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=robots content="noodp">
-<meta http-equiv=x-ua-compatible content="IE=edge, chrome=1">
-<title>机器学习 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="机器学习">
-<meta property="og:description" content="基本概念 有了数据，通过某种学习算法，得到模型，进行预测。 数据 数据集（Data Set）：一组记录的集合（一堆西瓜） 样本（Sample）：一个对">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/machinelearning/machinelearning/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2021-10-23T00:00:00+00:00">
-<meta property="article:modified_time" content="2022-03-07T15:08:52+00:00">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="机器学习">
-<meta name=twitter:description content="基本概念 有了数据，通过某种学习算法，得到模型，进行预测。 数据 数据集（Data Set）：一组记录的集合（一堆西瓜） 样本（Sample）：一个对">
-<meta name=application-name content="伤心肠粉的酱油碟子">
-<meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/machinelearning/machinelearning/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/poetry/classical/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/javascript/typescript/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"机器学习","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/machinelearning\/machinelearning\/"},"genre":"posts","keywords":"ml","wordcount":2123,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/machinelearning\/machinelearning\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2022-03-07T15:08:52+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script>
-<div id=mask></div><div class=wrapper><header class=desktop id=header-desktop>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu>
-<div class=menu-inner><a class=menu-item href=/Notes/posts/> 文章 </a><a class=menu-item href=/Notes/tags/> 标签 </a><a class=menu-item href=/Notes/categories/> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>机器学习 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="机器学习"><meta property="og:description" content="基本概念 有了数据，通过某种学习算法，得到模型，进行预测。 数据 数据集（Data Set）：一组记录的集合（一堆西瓜） 样本（Sample）：一个对"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/machinelearning/machinelearning/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-10-23T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-11T02:43:10+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="机器学习"><meta name=twitter:description content="基本概念 有了数据，通过某种学习算法，得到模型，进行预测。 数据 数据集（Data Set）：一组记录的集合（一堆西瓜） 样本（Sample）：一个对"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/machinelearning/machinelearning/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/poetry/classical/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/frontend/javascript/typescript/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"机器学习","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/machinelearning\/machinelearning\/"},"genre":"posts","keywords":"ml","wordcount":2123,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/machinelearning\/machinelearning\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2022-03-11T02:43:10+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/posts/>文章 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/categories/>分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-desktop>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a>
-</div></div></div></header><header class=mobile id=header-mobile>
-<div class=header-container>
-<div class=header-wrapper>
-<div class=header-title>
-<a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a>
-</div><div class=menu-toggle id=menu-toggle-mobile>
-<span></span><span></span><span></span>
-</div></div><div class=menu id=menu-mobile><div class=search-wrapper>
-<div class="search mobile" id=search-mobile>
-<input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索>
-<i class="fas fa-search fa-fw"></i>
-</a>
-<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空>
-<i class="fas fa-times-circle fa-fw"></i>
-</a>
-<span class="search-button search-loading" id=search-loading-mobile>
-<i class="fas fa-spinner fa-fw fa-spin"></i>
-</span>
-</div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>
-取消
-</a>
-</div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i>
-</a></div></div></header><div class="search-dropdown desktop">
-<div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile">
-<div id=search-dropdown-mobile></div></div><main class=main>
-<div class=container><div class=toc id=toc-auto>
-<h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">机器学习</h1><div class=post-meta>
-<div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/machine-learning/><i class="far fa-folder fa-fw"></i>Machine Learning</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2123 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept>
-<div class="details-summary toc-title">
-<span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span>
-</div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents>
-<ul>
-<li><a href=#术语>术语</a></li><li><a href=#一种训练集一种算法>一种训练集，一种算法</a>
-<ul>
-<li><a href=#测试集的选择方法>测试集的选择方法</a></li><li><a href=#性能度量performance-measure>性能度量（Performance Measure）</a>
-<ul>
-<li><a href=#基本公式>基本公式</a></li><li><a href=#查准率与查全率>查准率与查全率</a></li><li><a href=#最优阈值的确定>最优阈值的确定</a></li><li><a href=#n-个二分类实现的多分类问题>n 个二分类实现的多分类问题</a></li></ul></li></ul></li><li><a href=#一种训练集多种算法>一种训练集，多种算法</a>
-<ul>
-<li><a href=#p-r曲线>P-R曲线</a></li></ul></li><li><a href=#roc-与-auc>ROC 与 AUC</a></li></ul></nav></div></div><div class=content id=content><h1 id=基本概念>基本概念</h1><p>有了<strong>数据</strong>，通过某种学习<strong>算法</strong>，得到<strong>模型</strong>，进行<strong>预测</strong>。</p><ul>
-<li>
-<p>数据</p><ul>
-<li>数据集（Data Set）：一组记录的集合（一堆西瓜）</li><li>样本（Sample）：一个对象或事件的描述（一个西瓜）</li><li>特征向量（Feature Vector）：各种属性（Attribute）张成的一个样本空间（Sample Space），各种属性的总合就是维度（Dimensionality）</li></ul></li><li>
-<p>算法</p><ul>
-<li>学习（Learning）或训练（Training）</li></ul></li><li>
-<p>模型（学习器 Learner）</p><ul>
-<li>有监督学习
-<ul>
-<li>分类（Classification）：预测离散值，二分类，多分类</li><li>回归（Regression）：预测连续值</li></ul></li><li>无监督学习
-<ul>
-<li>聚类（Clustering）：机器自动形成簇（Cluster），对应一些潜在的分类</li></ul></li></ul></li><li>
-<p>预测</p><ul>
-<li>测试（Testing）</li><li>测试样本（Testing Sample）</li><li>泛化能力（Generalization）：模型适用于新样本的能力</li></ul></li><li>
-<p>假设空间：将学习过程看作一个在所有假设（Hypothesis）组成的空间中进行搜索的过程，搜索目标是找到与训练集匹配的假设</p></li><li>
-<p>归纳偏好：机器学习算法在学习过程中对某种类型假设的偏好</p><p>原理：奥卡姆剃刀</p></li></ul><h1 id=模型评估与选择>模型评估与选择</h1><h2 id=术语>术语</h2><ul>
-<li>
-<p>过拟合（Overfitting）：将训练样本自身特点当作了潜在样本的一般性质，导致泛化能力下降</p></li><li>
-<p>m：样本数量；Y：正确结果；Y’：预测结果；a：错误数</p></li><li>
-<p>性能度量</p><ul>
-<li>错误率（Error Rate）：$E=\cfrac{a}{m}$</li><li>精度（Accuracy）：$1-E$</li><li>误差（Error）：$|Y-Y&rsquo;|$</li></ul></li><li>
-<p>数据集</p><ul>
-<li>训练集（Training Set）：用于训练模型的集数据集</li><li>测试集（Testing Set）：用于测试模型的数据集</li><li>验证集（Validation Set）：用于评估测试的数据集，用于调参（Parameter tuning）</li></ul><p>步骤：用训练集训练->用验证集看结果->调参->循环。最后在测试集上看结果</p></li></ul><h2 id=一种训练集一种算法>一种训练集，一种算法</h2><h3 id=测试集的选择方法>测试集的选择方法</h3><ol>
-<li>
-<p><strong>留出法</strong></p><p>将数据集D划分为互斥集合，训练集S与测试集T，用T来评估和测试误差。</p><p>要求</p><ul>
-<li>数据划分时保持数据分布的一致性，如分层采样（Stratified Sampling）</li><li>通常三七分，二八分（大部分数据用来训练），或进行多次随机划分，训练出多个模型，最后取平均值。</li></ul></li><li>
-<p><strong>k折交叉验证法</strong></p><p>将数据集D分成k份，每次以k-1个子集作为训练集S来训练，用余下的那一个子集用来测试，重复k次取平均值。</p><p>缺点：太慢太麻烦</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png 2x" data-sizes=auto alt=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png title=image-20201202145257418></p></li><li>
-<p><strong>自助法</strong></p><p>在数据集D中随机挑选样本放入训练集S中，再放回，重复m次（自助采样）。</p><p>此时，D中部分样本会在S中多次出现，部分样本不会出现，不被采到的概率为$(1-\cfrac{1}{m})^m$，取极限约为36.8%，将不出现的样本作为测试集T，这样的测试结果称为包外估计（out-of-bagestimate）。</p><p>缺点：改变了初始数据集的分布，引入估计偏差。</p></li></ol><h3 id=性能度量performance-measure>性能度量（Performance Measure）</h3><h4 id=基本公式>基本公式</h4><p>给定样例集$D={(x_1,y_1),(x_2,y_2),\ldots,(x_m,y_m)}$，其中$y_i$是示例$x_i$的真实标记，要评估学习器$f$的性能，就要把学习器的预测结果$f(x)$与真实标记$y$进行比较。</p><ul>
-<li>均方误差</li></ul><p>$$
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/posts/ title>文章</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/categories/ title>分类</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">机器学习</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/machine-learning/><i class="far fa-folder fa-fw"></i>Machine Learning</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2123 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#术语>术语</a></li><li><a href=#一种训练集一种算法>一种训练集，一种算法</a><ul><li><a href=#测试集的选择方法>测试集的选择方法</a></li><li><a href=#性能度量performance-measure>性能度量（Performance Measure）</a><ul><li><a href=#基本公式>基本公式</a></li><li><a href=#查准率与查全率>查准率与查全率</a></li><li><a href=#最优阈值的确定>最优阈值的确定</a></li><li><a href=#n-个二分类实现的多分类问题>n 个二分类实现的多分类问题</a></li></ul></li></ul></li><li><a href=#一种训练集多种算法>一种训练集，多种算法</a><ul><li><a href=#p-r曲线>P-R曲线</a></li></ul></li><li><a href=#roc-与-auc>ROC 与 AUC</a></li></ul></nav></div></div><div class=content id=content><h1 id=基本概念>基本概念</h1><p>有了<strong>数据</strong>，通过某种学习<strong>算法</strong>，得到<strong>模型</strong>，进行<strong>预测</strong>。</p><ul><li><p>数据</p><ul><li>数据集（Data Set）：一组记录的集合（一堆西瓜）</li><li>样本（Sample）：一个对象或事件的描述（一个西瓜）</li><li>特征向量（Feature Vector）：各种属性（Attribute）张成的一个样本空间（Sample Space），各种属性的总合就是维度（Dimensionality）</li></ul></li><li><p>算法</p><ul><li>学习（Learning）或训练（Training）</li></ul></li><li><p>模型（学习器 Learner）</p><ul><li>有监督学习<ul><li>分类（Classification）：预测离散值，二分类，多分类</li><li>回归（Regression）：预测连续值</li></ul></li><li>无监督学习<ul><li>聚类（Clustering）：机器自动形成簇（Cluster），对应一些潜在的分类</li></ul></li></ul></li><li><p>预测</p><ul><li>测试（Testing）</li><li>测试样本（Testing Sample）</li><li>泛化能力（Generalization）：模型适用于新样本的能力</li></ul></li><li><p>假设空间：将学习过程看作一个在所有假设（Hypothesis）组成的空间中进行搜索的过程，搜索目标是找到与训练集匹配的假设</p></li><li><p>归纳偏好：机器学习算法在学习过程中对某种类型假设的偏好</p><p>原理：奥卡姆剃刀</p></li></ul><h1 id=模型评估与选择>模型评估与选择</h1><h2 id=术语>术语</h2><ul><li><p>过拟合（Overfitting）：将训练样本自身特点当作了潜在样本的一般性质，导致泛化能力下降</p></li><li><p>m：样本数量；Y：正确结果；Y’：预测结果；a：错误数</p></li><li><p>性能度量</p><ul><li>错误率（Error Rate）：$E=\cfrac{a}{m}$</li><li>精度（Accuracy）：$1-E$</li><li>误差（Error）：$|Y-Y&rsquo;|$</li></ul></li><li><p>数据集</p><ul><li>训练集（Training Set）：用于训练模型的集数据集</li><li>测试集（Testing Set）：用于测试模型的数据集</li><li>验证集（Validation Set）：用于评估测试的数据集，用于调参（Parameter tuning）</li></ul><p>步骤：用训练集训练->用验证集看结果->调参->循环。最后在测试集上看结果</p></li></ul><h2 id=一种训练集一种算法>一种训练集，一种算法</h2><h3 id=测试集的选择方法>测试集的选择方法</h3><ol><li><p><strong>留出法</strong></p><p>将数据集D划分为互斥集合，训练集S与测试集T，用T来评估和测试误差。</p><p>要求</p><ul><li>数据划分时保持数据分布的一致性，如分层采样（Stratified Sampling）</li><li>通常三七分，二八分（大部分数据用来训练），或进行多次随机划分，训练出多个模型，最后取平均值。</li></ul></li><li><p><strong>k折交叉验证法</strong></p><p>将数据集D分成k份，每次以k-1个子集作为训练集S来训练，用余下的那一个子集用来测试，重复k次取平均值。</p><p>缺点：太慢太麻烦</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png 2x" data-sizes=auto alt=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202145257418.png title=image-20201202145257418></p></li><li><p><strong>自助法</strong></p><p>在数据集D中随机挑选样本放入训练集S中，再放回，重复m次（自助采样）。</p><p>此时，D中部分样本会在S中多次出现，部分样本不会出现，不被采到的概率为$(1-\cfrac{1}{m})^m$，取极限约为36.8%，将不出现的样本作为测试集T，这样的测试结果称为包外估计（out-of-bagestimate）。</p><p>缺点：改变了初始数据集的分布，引入估计偏差。</p></li></ol><h3 id=性能度量performance-measure>性能度量（Performance Measure）</h3><h4 id=基本公式>基本公式</h4><p>给定样例集$D={(x_1,y_1),(x_2,y_2),\ldots,(x_m,y_m)}$，其中$y_i$是示例$x_i$的真实标记，要评估学习器$f$的性能，就要把学习器的预测结果$f(x)$与真实标记$y$进行比较。</p><ul><li>均方误差</li></ul><p>$$
 E(f;D)=\cfrac{1}{m}\sum\limits_{i=1}^{m}(f(x_i)-y_i)^2
-$$</p><ul>
-<li>对于数据分布$\cal{D}$和概率密度函数$p(\cdot)$，均方误差可描述为</li></ul><p>$$
+$$</p><ul><li>对于数据分布$\cal{D}$和概率密度函数$p(\cdot)$，均方误差可描述为</li></ul><p>$$
 E(f;D)=\int_{x\sim D}(f(x)-y)^2p(x)dx
-$$</p><ul>
-<li>错误率</li></ul><p>$$
+$$</p><ul><li>错误率</li></ul><p>$$
 E(f;D)=\cfrac{1}{m}\sum\limits_{i=1}^{m}\Bbb{I}(f(x_i)\neq y_i)
-$$</p><ul>
-<li>错误精度</li></ul><p>$$
+$$</p><ul><li>错误精度</li></ul><p>$$
 acc(f;D)=1-E(f;D)
-$$</p><h4 id=查准率与查全率>查准率与查全率</h4><ul>
-<li>混淆矩阵</li></ul><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202154655842.png alt=image-20201202154655842 style=zoom:80%>
-<ul>
-<li>查准率$P$（Precision）：预测为正例的结果中有多少是对的，阈值（Threshold）较大（谨慎），查准率往往会高</li></ul><p>$$
+$$</p><h4 id=查准率与查全率>查准率与查全率</h4><ul><li>混淆矩阵</li></ul><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202154655842.png alt=image-20201202154655842 style=zoom:80%><ul><li>查准率$P$（Precision）：预测为正例的结果中有多少是对的，阈值（Threshold）较大（谨慎），查准率往往会高</li></ul><p>$$
 P=\cfrac{TP}{TP+FP}
-$$</p><ul>
-<li>查全率$R$（Recall）：真正的正例有多少被预测出来了，阈值较小（宽松），查全率往往会高</li></ul><p>$$
+$$</p><ul><li>查全率$R$（Recall）：真正的正例有多少被预测出来了，阈值较小（宽松），查全率往往会高</li></ul><p>$$
 R=\cfrac{TP}{TP+FN}
-$$</p><h4 id=最优阈值的确定>最优阈值的确定</h4><ul>
-<li><strong>选取平衡点</strong>（Break-Even Point），简称BEP</li><li><strong>$F1$ 度量</strong>（P与R的调和平均数）</li></ul><p>$$
+$$</p><h4 id=最优阈值的确定>最优阈值的确定</h4><ul><li><strong>选取平衡点</strong>（Break-Even Point），简称BEP</li><li><strong>$F1$ 度量</strong>（P与R的调和平均数）</li></ul><p>$$
 \cfrac{1}{F1}=\cfrac{1}{2}(\cfrac{1}{R}+\cfrac{1}{P}) \
 F1=\cfrac{2\times P\times R}{P+R}=\cfrac{2\times TP}{样例总数+TP-TN}
-$$</p><p>​ 与算术平均与几何平均相比，调和平均更重视最小值</p><ul>
-<li><strong>$F_\beta$ 度量</strong>（加权调和平均）</li></ul><p>$$
+$$</p><p>​ 与算术平均与几何平均相比，调和平均更重视最小值</p><ul><li><strong>$F_\beta$ 度量</strong>（加权调和平均）</li></ul><p>$$
 \cfrac{1}{F_\beta}=\cfrac{1}{1+\beta^2}(\cfrac{1}{P}+\cfrac{\beta^2}{R}) =\cfrac{(1+\beta^2)\times P\times R}{(\beta^2\times P)+R}
-$$</p><p>​ $\beta$度量了查全率相对于查准率的重要性，$\beta>1$时查全率影响更大；$\beta&lt;1$时查准率影响更大</p><h4 id=n-个二分类实现的多分类问题>n 个二分类实现的多分类问题</h4><ul>
-<li>
-<p>先分别计算，再求平均值</p><p>有$(P_1,R_1),(P_2,R_2),\ldots,(P_n,R_n)$</p><ul>
-<li>macro-P 宏查准率：$macro-P=\cfrac{1}{n}\sum\limits_{i=1}^n P_i$</li><li>macro-R 宏查全率：$macro-R=\cfrac{1}{n}\sum\limits_{i=1}^n R_i$</li><li>macro-F1 宏F1：$macro-F1=\cfrac{2\times macroP\times macroR}{macroP+macroR}$</li></ul></li><li>
-<p>先平均再计算</p><ul>
-<li>
-<p>macro-P 宏查准率：$micro-P=\cfrac{\overline{TP}}{\overline{TP}+\overline{FP}}$</p></li><li>
-<p>macro-R 宏查全率：$micro-R=\cfrac{\overline{TP}}{\overline{TP}+\overline{FN}}$</p></li><li>
-<p>macro-F1 宏 F1：$micro-F1=\cfrac{2\times microP\times microR}{microP+microR}$</p></li></ul></li></ul><h2 id=一种训练集多种算法>一种训练集，多种算法</h2><h3 id=p-r曲线>P-R曲线</h3><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202155643356.png alt=image-20201202155643356 style=zoom:67%>
-<p>要比较 ABC 三个模型的好坏</p><ul>
-<li>首先确定 A 和 B 优于 C，AB 间由于交叉不好确定</li><li>对于 AB
-<ul>
-<li>法一：比较面积，但不易估算</li><li>法二：$F1$</li><li>法三：$F\beta$</li></ul></li></ul><h2 id=roc-与-auc>ROC 与 AUC</h2></div><div class=post-footer id=post-footer>
-<div class=post-info>
-<div class=post-info-line>
-<div class=post-info-mod>
-<span>更新于 2022-03-07</span>
-</div><div class=post-info-license></div></div><div class=post-info-line>
-<div class=post-info-md></div><div class=post-info-share>
-<span></span>
-</div></div></div><div class=post-info-more>
-<section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/ml/>ml</a></section><section>
-<span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span>
-</section></div><div class=post-nav><a href=/Notes/posts/poetry/classical/ class=prev rel=prev title=诗><i class="fas fa-angle-left fa-fw"></i>诗</a>
-<a href=/Notes/posts/frontend/javascript/typescript/ class=next rel=next title="TypeScript 基本语法">TypeScript 基本语法<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer>
-<div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部>
-<i class="fas fa-arrow-up fa-fw"></i>
-</a><a href=# id=view-comments class=fixed-button title=查看评论>
-<i class="fas fa-comment fa-fw"></i>
-</a>
-</div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
+$$</p><p>​ $\beta$度量了查全率相对于查准率的重要性，$\beta>1$时查全率影响更大；$\beta&lt;1$时查准率影响更大</p><h4 id=n-个二分类实现的多分类问题>n 个二分类实现的多分类问题</h4><ul><li><p>先分别计算，再求平均值</p><p>有$(P_1,R_1),(P_2,R_2),\ldots,(P_n,R_n)$</p><ul><li>macro-P 宏查准率：$macro-P=\cfrac{1}{n}\sum\limits_{i=1}^n P_i$</li><li>macro-R 宏查全率：$macro-R=\cfrac{1}{n}\sum\limits_{i=1}^n R_i$</li><li>macro-F1 宏F1：$macro-F1=\cfrac{2\times macroP\times macroR}{macroP+macroR}$</li></ul></li><li><p>先平均再计算</p><ul><li><p>macro-P 宏查准率：$micro-P=\cfrac{\overline{TP}}{\overline{TP}+\overline{FP}}$</p></li><li><p>macro-R 宏查全率：$micro-R=\cfrac{\overline{TP}}{\overline{TP}+\overline{FN}}$</p></li><li><p>macro-F1 宏 F1：$micro-F1=\cfrac{2\times microP\times microR}{microP+microR}$</p></li></ul></li></ul><h2 id=一种训练集多种算法>一种训练集，多种算法</h2><h3 id=p-r曲线>P-R曲线</h3><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201202155643356.png alt=image-20201202155643356 style=zoom:67%><p>要比较 ABC 三个模型的好坏</p><ul><li>首先确定 A 和 B 优于 C，AB 间由于交叉不好确定</li><li>对于 AB<ul><li>法一：比较面积，但不易估算</li><li>法二：$F1$</li><li>法三：$F\beta$</li></ul></li></ul><h2 id=roc-与-auc>ROC 与 AUC</h2></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-03-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/ml/>ml</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/poetry/classical/ class=prev rel=prev title=诗><i class="fas fa-angle-left fa-fw"></i>诗</a>
+<a href=/Notes/posts/frontend/javascript/typescript/ class=next rel=next title="TypeScript 基本语法">TypeScript 基本语法<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:40},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:10,noResultsFound:"没有找到结果",snippetLength:50}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
