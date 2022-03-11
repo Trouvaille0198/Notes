@@ -8,6 +8,20 @@
 
 比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
 
+**示例 1：**
+
+```
+输入: s = "abcdefg", k = 2
+输出: "cdefgab"
+```
+
+**示例 2：**
+
+```
+输入: s = "lrloseumgh", k = 6
+输出: "umghlrlose"
+```
+
 ## 语法糖
 
 ```go
@@ -37,7 +51,7 @@ func reverseLeftWords2(s string, n int) string {
    bytes := []byte(s)
    reverse(bytes[:n]) // 左边部分转
    reverse(bytes[n:]) // 右边部分转
-   reverse(bytes)     // z
+   reverse(bytes)     // zheng'ti'z
    return string(bytes)
 }
 ```

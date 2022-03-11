@@ -1,3 +1,13 @@
+---
+title: "剑指 Offer 05. 替换空格"
+date: 2022-02-11
+draft: false
+author: "MelonCholi"
+tags: [算法, 字符串]
+categories: [刷题]
+hiddenFromHomePage: true
+---
+
 # 剑指 Offer 05. 替换空格
 
 请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
@@ -47,8 +57,8 @@ func replaceSpace2(s string) string {
 	// 扩展原有切片
 	tmp := make([]byte, spaceCount*2)
 	b = append(b, tmp...)
-	i := length - 1
-	j := len(b) - 1
+	i := length - 1 // 指向原来最后一位
+	j := len(b) - 1 // 指向现在zui'hou'yi
 	// 从后向前填充
 	for i >= 0 {
 		if b[i] != ' ' {
