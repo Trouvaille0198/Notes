@@ -2978,3 +2978,91 @@ func main() {
 	_ = z == z
 }
 ```
+
+## 默认参数的实现
+
+golang 本身并不支持像 C++ 那样的函数默认参数，不过可以自己实现相关方法达到默认参数的目的；
+
+以下用创建人的个人信息为例，名字必须输入，而邮箱地址和年龄可以不用输入，不输入时使用默认值，示例代码如下：
+
+```go
+package main
+ 
+import (
+	"fmt"
+)
+ 
+type DetailInfo struct {
+	Email string
+	Age   int
+}
+ 
+type Handler interface {
+	parse(detail *DetailInfo)
+}
+ 
+type HandleFunc func(*DetailInfo)
+ 
+func (f HandleFunc) parse(detail *DetailInfo) {
+	f(detail)
+}
+ 
+// 针对不同默认参数设置闭包函数， 这里比较关键，闭包函数=函数+运行环境（可以引用外部函数的变量）
+func WithEmail(email string) HandleFunc {
+	return func(detail *DetailInfo) {
+		detail.Email = email
+	}
+}
+ 
+func WithAge(age int) HandleFunc {
+	return func(detail *DetailInfo) {
+		detail.Age = age
+	}
+}
+ 
+type Persion struct {
+	Name string
+	DetailInfo
+}
+ 
+// 这里的接口类Handler并不是必须的，换成闭包函数HandleFunc类型一样可以
+func newPersion(name string, infos ...Handler) Persion {
+	detail := &DetailInfo{
+		Email: "unkown",
+		Age:   -1}
+	for _, info := range infos {
+		// 接口函数调用闭包函数
+		info.parse(detail)
+	}
+ 
+	return Persion{Name: name, DetailInfo: DetailInfo{Email: detail.Email, Age: detail.Age}}
+}
+ 
+func main() {
+	persion1 := newPersion("小明")
+	fmt.Println("persion1:", persion1)
+	persion2 := newPersion("小红", WithEmail("xiaohong@qq.com"))
+	fmt.Println("persion2:", persion2)
+	persion3 := newPersion("张三", WithAge(18))
+	fmt.Println("persion3:", persion3)
+	persion4 := newPersion("李四", WithEmail("lisi@qq.com"), WithAge(28))
+	fmt.Println("persion3:", persion4)
+}
+```
+
+输出结果：
+
+```
+persion1: {小明 {unkown -1}}
+persion2: {小红 {xiaohong@qq.com -1}}
+persion3: {张三 {unkown 18}}
+persion3: {李四 {lisi@qq.com 28}}
+```
+
+分析：
+
+1. 关键点是用到了**可变参数** `...` 和**闭包函数**；
+
+2. 通过可变参数循环调用闭包函数，给参数赋值；
+
+3. 通过闭包函数特性（可以引用外部函数的变量），给需要设置的参数赋值；

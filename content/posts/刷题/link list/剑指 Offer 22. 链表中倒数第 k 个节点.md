@@ -1,4 +1,13 @@
-# 剑指 Offer 22. 链表中倒数第k个节点
+---
+title: "剑指 Offer 22. 链表中倒数第 k 个节点"
+date: 2022-02-26
+draft: false
+author: "MelonCholi"
+tags: [算法, 链表]
+categories: [算法]
+---
+
+# 剑指 Offer 22. 链表中倒数第 k 个节点
 
 `easy`
 

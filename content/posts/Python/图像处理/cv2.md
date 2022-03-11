@@ -1,3 +1,12 @@
+---
+title: "CV2"
+date: 2022-02-20
+draft: false
+author: "MelonCholi"
+tags: [快速开始, Python, cv2]
+categories: [Python]
+---
+
 # CV2
 
 ## 认识
@@ -9,7 +18,7 @@ pip install opencv-python
 pip install opencv-contrib-python
 ```
 
-## 基本操作
+## 图片的基本操作
 
 ### 图片的加载、显示与保存
 
@@ -562,3 +571,209 @@ plt.show()
     - `cv2.DRAW_MATCHES_FLAGS_DRAW_OVER_OUTIMG`：不创建输出图像矩阵，而是在输出图像上绘制匹配对
     - `cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS`：对每一个特征点绘制带大小和方向的关键点图形
     - `cv2.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS`：单点的特征点不被绘制 
+
+## 其他图片操作
+
+### 添加文字
+
+```python
+import cv2
+img = cv2.imread('caijian.jpg')
+font = cv2.FONT_HERSHEY_SIMPLEX
+
+imgzi = cv2.putText(img, '000', (50, 300), font, 1.2, (255, 255, 255), 2)
+```
+
+***cv2.putText(img, text, org, fontFace, fontScale, color, thickness=None, lineType=None, bottomLeftOrigin=None)***
+
+- *text*：str，文字
+- *org*：tuple[2]，图像中文本字符串的左下角
+- *fontFace*：字体类型，请参见 #HersheyFonts
+- *fontScale*：字体比例因子乘以特定于字体的基本大小
+- *color*：字体颜色
+- *thickness*：线条粗细
+- *lineType*：线型。 请参阅 #LineTypes
+- *bottomLeftOrigin*：如果为 true，则图像数据原点位于左下角。 否则，它位于左上角
+
+进行 putText 操作之后，读取原图像也是具有文字显示的
+
+但是原图的文件并没有被改变
+
+![在这里插入图片描述](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20191025143148996.png)
+
+![在这里插入图片描述](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20191025143220522.png)
+
+![在这里插入图片描述](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20191025144020368.png)
+
+![在这里插入图片描述](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20191025144001417.png)
+
+## 视频的基本操作
+
+```python
+import numpy as np
+import cv2
+
+cap = cv2.VideoCapture('video1.mp4')
+
+while(cap.isOpened()):
+    ret, frame = cap.read()
+    cv2.imshow('frame',frame)
+    # 按下 q 退出播放
+    if cv2.waitKey(1) & 0xFF == ord('q'):	
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+```
+
+### 获取视频
+
+#### 获取本地视频
+
+```python
+cap = cv2.VideoCapture('video1.mp4')
+```
+
+***cv2.VideoCapture(path)***
+
+获取视频的逐帧进行
+
+cap 返回值如下：
+
+```python
+<VideoCapture 000001B6734E1310>
+```
+
+#### 获取摄像头
+
+```python
+cap = cv2.VideoCapture(0)
+...
+cap.release()
+```
+
+***VideoCapture()***
+
+由摄像头输入视频，默认摄像头为 0
+
+在使用 `cv2.VideoCapture()` 时习惯性在最后使用 `cap.release()` 释放视频。
+
+### 读入视频
+
+```python
+ret, frame = cap.read()
+print(ret,frame.shape)
+```
+
+***cap.read()***
+
+返回值为 `retval `和 `image`，分别是一个**布尔值**和**读取的一帧图片**。
+
+`frame.shape` 返回一个**布尔值**和**数组每个维度的值**。显示 True 表示这一帧被成功获取，1920 和 1080 是视频每一帧图片的高和宽，3 是图片的三原色。
+
+```
+True (1920, 1080, 3)
+```
+
+可使用 `cap.get(3)` 和 `cap.get(4)` 验证一下视频宽度和高度：
+
+```python
+cap.get(3)
+
+# Out put: 1080.0
+```
+
+一般在使用 `cap.read()` 时，为避免获取未开始而出现错误，可以使用 `cap.isOpened()` 检查，实现只有在 `cap` 已经开始的情况下读取。
+
+```python
+while cap.isOpened():
+    ret,frame = cap.read()
+    ...
+```
+
+### 播放视频
+
+```python
+cv2.imshow('frame',frame)
+# 按下 q 退出播放
+if cv2.waitKey(1) & 0xFF == ord('q'):	
+    break
+```
+
+***cv2.imshow(text, video)***
+
+这里播放时也可将视频转换为任意模式，如改变去除颜色或 RGB，再进行播放
+
+```python
+gray = cv2.cvtColor(frame,code = cv2.COLOR_BGR2GRAY)
+cv2.imshow('gray_frame',gray)
+```
+
+```python
+RGB_mode = cv2.cvtColor(frame,code = cv2.COLOR_BGR2RGB)
+cv2.imshow('RGB_frame',RGB_mode)
+```
+
+### 保存视频
+
+```python
+import numpy as np
+import cv2
+
+cap = cv2.VideoCapture(0)
+cv2.VideoWriter_fourcc('M','J','P','G')
+
+#设置输出文件的名称格式，指定FourCC编码，帧数，尺寸
+out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480)) # 视频MP4
+
+while(cap.isOpened()):
+    ret, frame = cap.read()
+    if ret==True:
+    	#参数为0时竖直方向翻转图片，-1时水平竖直均翻转，1时水平翻转
+        frame = cv2.flip(frame,1)
+        
+        out.write(frame)
+        cv2.imshow('frame',frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    else:
+        break
+
+cap.release()
+out.release()
+cv2.destroyAllWindows()
+```
+
+***cv2.imwrite()***
+
+### 保存帧图像
+
+```python
+
+def video2image(video_dir,save_dir):
+    cap = cv2.VideoCapture(video_dir) #生成读取视频对象
+    n = 1   #计数
+    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    #获取视频的宽度
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))   #获取视频的高度
+    fps = cap.get(cv2.CAP_PROP_FPS)    #获取视频的帧率
+    fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))    #视频的编码
+    # 定义视频输出
+    #writer = cv2.VideoWriter("teswellvideo_02_result.mp4", fourcc, fps, (width, height))
+    i = 0
+    timeF = int(fps)     #视频帧计数间隔频率
+    while cap.isOpened():
+        ret,frame = cap.read() #按帧读取视频
+        #到视频结尾时终止
+        if ret is False :
+            break
+        #每隔timeF帧进行存储操作
+        if (n % timeF == 0) :
+            i += 1
+            print('保存第 %s 张图像' % i)
+            save_image_dir = os.path.join(save_dir,'%s.jpg' % i)
+            print('save_image_dir: ', save_image_dir)
+            cv2.imwrite(save_image_dir,frame) #保存视频帧图像
+        n = n + 1
+        cv2.waitKey(1) #延时1ms
+```
+
