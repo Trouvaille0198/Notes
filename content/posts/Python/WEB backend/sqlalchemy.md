@@ -487,7 +487,7 @@ query.filter(User.name.match('wendy'))
 query.filter_by(User.name='wang_wu').all() # 查询所有名字为wang_wu的实例
 ```
 
-### 返回列表(List)和单项(Scalar)
+### 返回列表 (List) 和单项 (Scalar)
 
 - `all()` 返回一个列表:
 

@@ -192,6 +192,17 @@ Tailwind 会将这些样式自动移到与 `@tailwind components` 相同的位�
 
 overflow-hidden
 
-font-bold
+font-bold 加粗
 
-h-full w-full
+h-full w-full 满长/满宽（拉伸到与父元素一致）
+
+-m-XXX 重叠
+
+w-2/3 w-1/3 宽占比
+
+- 布局
+    - flex （flex-col）
+        - items-center 居中
+        - justify-XXX 主轴定位
+
+space-x-10 子元素间间距
