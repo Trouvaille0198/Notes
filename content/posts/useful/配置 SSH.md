@@ -1,5 +1,9 @@
 # 客户端
 
+ubuntu ssh 配置：https://blog.csdn.net/netwalk/article/details/12952051
+
+ubuntu ssh 实现无密码登录：https://blog.csdn.net/weixin_33725126/article/details/91726998
+
 ## 配置私钥
 
 ```shell

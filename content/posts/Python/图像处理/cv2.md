@@ -228,6 +228,16 @@ img3 = cv2.cvtColor(img,cv2.COLOR_GRAY2RGB)   #彩色化：灰度图像转为彩
 
 ### 图像的几何变换
 
+#### 平移
+
+```python
+height, width, _ = img.shape
+moving_matrix = np.float64([[1, 0, x_offset], [0, 1, y_offset]])
+moved_img = cv2.warpAffine(img, moving_matrix, (height, width))
+```
+
+#### 缩放
+
 ***cv2.resize(image, dsize, fx, fy, interpolation)***
 
 - 图像缩放，返回缩放后的图像
@@ -248,7 +258,7 @@ img3 = cv2.cvtColor(img,cv2.COLOR_GRAY2RGB)   #彩色化：灰度图像转为彩
     | INTER_CUBIC        | 4x4像素邻域的双三次插值                                      |
     | INTER_LANCZOS4     | 8x8像素邻域的Lanczos插值                                     |
 
-    在缩小时推荐使用 cv2.INTER_AREA，扩大时推荐使用 cv2.INTER_CUBIC 和 cv2.INTER_LINEAR。
+    在缩小时推荐使用 `cv2.INTER_AREA`，扩大时推荐使用 `cv2.INTER_CUBIC` 和 `cv2.INTER_LINEAR`。
 
 将图片放大一倍
 
@@ -258,14 +268,18 @@ img = cv2.resize(img, dsize=None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)
 img = cv2.resize(img, (int(2*width), int(2*height)), interpolation=cv2.INTER_AREA)
 ```
 
-***cv2.flip(img, flipcode)***
+#### 翻转
+
+***cv2.flip(img, flipCode)***
 
 - 图像翻转
 - *img*：原始图像
-- *flipcode*：控制翻转效果
-    - flipcode = 0：沿 x 轴翻转；
-    - flipcode > 0：沿 y 轴翻转；
-    - flipcode < 0：x, y 轴同时翻转
+- *flipCode*：控制翻转效果
+    - flipCode = 0：沿 x 轴翻转；
+    - flipCode > 0：沿 y 轴翻转；
+    - flipCode < 0：x, y 轴同时翻转
+
+#### 仿射变化
 
 ***cv2.getRotationMarix2D(center, angle, scale)***
 
@@ -285,7 +299,7 @@ img = cv2.resize(img, (int(2*width), int(2*height)), interpolation=cv2.INTER_ARE
 - *borderValue*：边界填充值; 默认为 0，可设成 `(255,255,255)`
 - 日常进行仿射变换时，在只设置前三个参数的情况下，如 `cv2.warpAffine(img,M,(rows,cols))` 可以实现基本的仿射变换效果，但可能出现“黑边”现象
 
-图像旋转
+#### 旋转
 
 ```python
 import cv2
@@ -338,8 +352,6 @@ cv2.imshow("Red",r)
 cv2.imshow("Merged",merged)
 cv2.waitKey()
 ```
-
-### 正确的退出方法
 
 ### 实现正常退出
 

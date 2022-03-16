@@ -1,3 +1,13 @@
+---
+title: "剑指 Offer 28. 对称的二叉树"
+date: 2022-02-28
+draft: false
+author: "MelonCholi"
+tags: [算法,树,对称性递归]
+categories: [刷题]
+hiddenFromHomePage: true
+---
+
 # 剑指 Offer 28. 对称的二叉树
 
 `mid`

@@ -1,3 +1,13 @@
+---
+title: "剑指 Offer 32 - II. 从上到下打印二叉树 II"
+date: 2022-02-28
+draft: false
+author: "MelonCholi"
+tags: [算法,树,对称性递归]
+categories: [刷题]
+hiddenFromHomePage: true
+---
+
 # 剑指 Offer 32 - II. 从上到下打印二叉树 II
 
 `easy`
@@ -9,7 +19,7 @@
 给定二叉树: `[3,9,20,null,null,15,7]`,
 
 ```
-  3
+    3
    / \
   9  20
     /  \

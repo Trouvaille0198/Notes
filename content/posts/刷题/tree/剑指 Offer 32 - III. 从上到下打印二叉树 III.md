@@ -66,7 +66,6 @@ func levelOrder(root *TreeNode) [][]int {
 			result = append(result, reversedNodes)
 		} else {
 			result = append(result, curNodes)
-
 		}
 		curCount = nextCount
 		nextCount = 0
