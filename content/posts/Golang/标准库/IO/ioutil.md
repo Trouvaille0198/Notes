@@ -91,7 +91,10 @@ ReadFile 从 filename 指定的文件中读取数据并返回文件的内容。�
 func WriteFile(filename string, data []byte, perm os.FileMode) error
 ```
 
-WriteFile 将 data 写入 filename 文件中，当文件不存在时会根据 perm 指定的权限进行创建一个,文件存在时会先清空文件内容。
+WriteFile 将 data 写入 filename 文件中
+
+- 当文件不存在时会根据 perm 指定的权限进行创建一个
+- 文件存在时会先清空文件内容。
 
 对于 perm 参数，一般可以指定为：0666
 

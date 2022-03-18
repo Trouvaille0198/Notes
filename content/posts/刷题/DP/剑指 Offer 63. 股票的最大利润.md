@@ -57,9 +57,9 @@ func maxProfit(prices []int) int {
 
 ## DP
 
-前*i*日最大利润=max(前(*i*−1)日最大利润,第*i*日价格−前*i*日最低价格)
+前 *i* 日最大利润 = max(前 (*i*−1) 日最大利润, 第 *i* 日价格 − 前 *i* 日最低价格)
 
-dp[i]=max(dp[i−1],prices[i]−min(prices[0:i]))
+dp[i] = max(dp[i−1],prices[i]−min(prices[0:i]))
 
 ```go
 // DP

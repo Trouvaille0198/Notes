@@ -2158,6 +2158,8 @@ func main() {
 10,true
 ```
 
+### 泛型
+
 
 
 ## 并发编程 goroutine

@@ -51,7 +51,7 @@ type Interface interface {
 func Sort(data Interface)
 ```
 
-Sort() 方法惟一的参数就是待排序的数据集合。
+`Sort()` 方法惟一的参数就是待排序的数据集合。
 
 该包还提供了一个方法可以判断数据集合是否已经排好顺序，该方法的内部实现依赖于我们自己实现的 Len() 和 Less() 方法：
 
@@ -141,13 +141,13 @@ func (s StuScores) Less(i, j int) bool {
 
 ### Reverse()
 
-此外，*sort*包提供了 Reverse() 方法，可以允许将数据按 Less() 定义的排序方式逆序排序，而不必修改 Less() 代码。方法定义如下：
+此外，*sort* 包提供了 `Reverse()` 方法，可以允许将数据按 `Less()` 定义的排序方式逆序排序，而不必修改 `Less()` 代码。方法定义如下：
 
 ```go
 func Reverse(data Interface) Interface
 ```
 
-我们可以看到 Reverse() 返回的一个 sort.Interface 接口类型，整个 Reverse() 的内部实现比较有趣：
+我们可以看到 `Reverse()` 返回的一个 `sort.Interface` 接口类型，整个 Reverse() 的内部实现比较有趣：
 
 ```go
 // 定义了一个 reverse 结构类型，嵌入 Interface 接口
@@ -167,7 +167,7 @@ func Reverse(data Interface) Interface {
 }
 ```
 
-了解内部原理后，可以在学生成绩排序示例中使用 Reverse() 来实现成绩升序排序：
+了解内部原理后，可以在学生成绩排序示例中使用 `Reverse()` 来实现成绩升序排序：
 
 ```go
 sort.Sort(sort.Reverse(stus))
@@ -176,7 +176,7 @@ fmt.Println(stus)
 
 ### Search()
 
-最后一个方法：Search()
+最后一个方法：`Search()`
 
 ```go
 func Search(n int, f func(int) bool) int
@@ -186,7 +186,7 @@ func Search(n int, f func(int) bool) int
 
 前提条件 : f(x)(0<=x<i) 均返回 false, f(x)(i<=x<n) 均返回 true。 如果不存在 i 可以使 f(i) 返回 true, 则返回 n。
 
-Search() 函数一个常用的使用方式是搜索元素 x 是否在已经升序排好的切片 s 中：
+`Search()` 函数一个常用的使用方式是搜索元素 x 是否在已经升序排好的切片 s 中：
 
 ```go
 x := 11
@@ -241,7 +241,7 @@ func (p IntSlice) Search(x int) int { return SearchInts(p, x) }
 func Ints(a []int) { Sort(IntSlice(a)) }
 ```
 
-所以，对 []int 切片排序更常使用 sort.Ints()，而不是直接使用 IntSlice 类型：
+所以，对 []int 切片排序更常使用 `sort.Ints()`，而不是直接使用 IntSlice 类型：
 
 ```go
 s := []int{5, 2, 6, 3, 1, 4} // 未排序的切片数据
