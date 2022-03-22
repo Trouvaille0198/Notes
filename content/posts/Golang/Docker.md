@@ -26,7 +26,7 @@ featuredImage: https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/Moby-sha
 
 假设我有一台机器，16G 内存，需要部署三个应用，那么使用虚拟机技术可以这样划分：
 
-![img](https://pic4.zhimg.com/v2-c20cb49c88034e73e09059668b8cecfb_b.jpg)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-c20cb49c88034e73e09059668b8cecfb_b.jpg)
 
 在这台机器上开启三个虚拟机，每个虚拟机上部署一个应用，其中 VM1 占用 2G 内存，VM2 占用 1G 内存，VM3 占用了 4G 内存。
 

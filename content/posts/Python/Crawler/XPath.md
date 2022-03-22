@@ -24,7 +24,7 @@ result = etree.tostring(html)	#result为修正后的HTML代码(bytes类型)
 print(result.decode('utf-8'))	#用decode方法将其转成str类型并输出
 ```
 
- etree模块可以自动修正 HTML 文本
+ etree 模块可以自动修正 HTML 文本
 
 ```html
 <html><body><div>

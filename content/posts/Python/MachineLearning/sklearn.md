@@ -1980,7 +1980,7 @@ print("岭回归_均分误差:", error)
 from sklearn.cluster import KMeans
 ```
 
-K-means（K均值聚类）
+K-means（K 均值聚类）
 
 - 特点：采用迭代式算法，直观易懂并且非常实用
 - 缺点：容易收敛到局部最优解(多次聚类)
