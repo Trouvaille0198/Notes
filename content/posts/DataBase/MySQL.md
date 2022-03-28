@@ -1986,3 +1986,167 @@ INSERT INTO user VALUES (7, '王小花', 1000);
 此时会发生什么呢？由于现在的隔离级别是 **SERIALIZABLE ( 串行化 )** ，串行化的意思就是：假设把所有的事务都放在一个串行的队列中，那么所有的事务都会按照**固定顺序执行**，执行完一个事务后再继续执行下一个事务的**写入操作** ( **这意味着队列中同时只能执行一个事务的写入操作** ) 。
 
 根据这个解释，小王在插入数据时，会出现等待状态，直到小张执行 `COMMIT` 结束它所处的事务，或者出现等待超时。
+
+## 索引优化
+
+所谓索引就是为特定的 mysql 字段进行一些**特定的算法排序**，比如二叉树的算法和哈希算法
+
+- 哈希算法是通过建立特征值，然后根据特征值来快速查找。
+- 而用的最多，并且是 mysql 默认的就是二叉树算法 BTREE，通过 BTREE 算法建立索引的字段，比如扫描 20 行就能得到未使用 BTREE 前扫描了 2^20^ 行的结果。
+
+### 索引的类型
+
+**UNIQUE 唯一索引**
+
+不可以出现相同的值，可以有 NULL 值。
+
+**INDEX 普通索引**
+
+允许出现相同的索引内容。
+
+**PRIMARY KEY 主键索引**
+
+不允许出现相同的值，且不能为 NULL 值，一个表只能有一个 primary_key 索引。
+
+**fulltext index 全文索引**
+
+上述三种索引都是针对列的值发挥作用，但全文索引，可以针对值中的某个单词，比如一篇文章中的某个词，然而并没有什么卵用，因为只有 myisam 以及英文支持，并且效率让人不敢恭维
+
+### 索引的相关操作
+
+#### **索引的创建**
+
+##### `ALTER TABLE`
+
+适用于表创建完毕之后再添加。
+
+`ALTER TABLE 表名 ADD 索引类型 (unique,primary key,fulltext,index)[索引名](字段名)`
+
+```sql
+ALTER TABLE `table_name` ADD INDEX `index_name` (`column_list`) -- 索引名，可要可不要；如果不要，当前的索引名就是该字段名。 
+ALTER TABLE `table_name` ADD UNIQUE (`column_list`) 
+ALTER TABLE `table_name` ADD PRIMARY KEY (`column_list`) 
+ALTER TABLE `table_name` ADD FULLTEXT KEY (`column_list`)
+```
+
+##### `CREATE INDEX`
+
+CREATE INDEX 可对表增加**普通**索引或 **UNIQUE** 索引。
+
+```sql
+--例：只能添加这两种索引 
+CREATE INDEX index_name ON table_name (column_list) 
+CREATE UNIQUE INDEX index_name ON table_name (column_list)
+```
+
+**另外，还可以在建表时添加：**
+
+```sql
+CREATE TABLE `test1` ( 
+  `id` smallint(5) UNSIGNED AUTO_INCREMENT NOT NULL, -- 注意，下面创建了主键索引，这里就不用创建了 
+  `username` varchar(64) NOT NULL COMMENT '用户名', 
+  `nickname` varchar(50) NOT NULL COMMENT '昵称/姓名', 
+  `intro` text, 
+  PRIMARY KEY (`id`),  
+  UNIQUE KEY `unique1` (`username`), -- 索引名称，可要可不要，不要就是和列名一样 
+  KEY `index1` (`nickname`), 
+  FULLTEXT KEY `intro` (`intro`) 
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='后台用户表';
+```
+
+#### 索引的删除
+
+```sql
+DROP INDEX `index_name` ON `talbe_name`  
+ALTER TABLE `table_name` DROP INDEX `index_name` 
+-- 这两句都是等价的,都是删除掉table_name中的索引index_name; 
+
+ALTER TABLE `table_name` DROP PRIMARY KEY -- 删除主键索引，注意主键索引只能用这种方式删除
+```
+
+#### 索引的查看
+
+```sql
+show index from tablename;
+```
+
+#### 索引的更改
+
+更改个毛线，删掉重建一个既可
+
+### 创建索引的技巧
+
+1. 维度高的列创建索引。
+
+2. - 数据列中**不重复值**出现的个数，这个数量越高，维度就越高。
+    - 如数据表中存在 8 行数据 a, b ,c, d, a, b ,c ,d 这个表的维度为 4。
+    - 要为维度高的列创建索引，如性别和年龄，那年龄的维度就高于性别。
+    - 性别这样的列不适合创建索引，因为维度过低。
+
+3. 对 where, on, group by, order by 中出现的列使用索引。
+
+4. 对较小的数据列使用索引，这样会使索引文件更小，同时内存中也可以装载更多的索引键。
+
+5. 为较长的字符串使用前缀索引。
+
+6. 不要过多创建索引，除了增加额外的磁盘空间外，对于DML操作的速度影响很大，因为其每增删改一次就得从新建立索引。
+
+7. 使用组合索引，可以减少文件索引大小，在使用时速度要优于多个单列索引。
+
+### 组合索引
+
+```sql
+ALTER TABLE `myIndex` ADD INDEX `name_city_age` (vc_Name(10),vc_City,i_Age);
+```
+
+上述的步骤就是将 vc_Name,vc_City,i_Age 建到一个索引里
+
+这样一来，在执行这条 SQL 查询语句时：
+
+```sql
+SELECT `i_testID` FROM `myIndex` WHERE `vc_Name`='erquan' AND `vc_City`='郑州' AND `i_Age`=25; -- 关联搜索;
+```
+
+查询速度会比只建立某一个字段的单独索引要快得多
+
+> 如果分别在 vc_Name, vc_City, i_Age 上建立单列索引，让该表有 3 个单列索引，查询的速度将远远低于组合索引。
+>
+> 虽然此时有了三个索引，但 MySQL 只能用到其中的那个它认为似乎是**最有效率**的单列索引，另外两个是用不到的，也就是说还是一个全表扫描的过程。
+
+建立这样的组合索引，其实是相当于分别建立了：
+
+- vc_Name,vc_City,i_Age
+- vc_Name,vc_City
+- vc_Name
+
+为什么没有 vc_City,i_Age 等这样的组合索引呢？这是因为 mysql 组合索引 “最左前缀” 的结果。简单的理解就是只从最左面的开始组合。并不是只要包含这三列的查询都会用到该组合索引，下面的几个 T-SQL 会用到：
+
+```sql
+SELECT * FROM myIndex WHREE vc_Name=”erquan” AND vc_City=”郑州” 
+SELECT * FROM myIndex WHREE vc_Name=”erquan”
+```
+
+而下面几个则不会用到：
+
+```sql
+SELECT * FROM myIndex WHREE i_Age=20 AND vc_City=”郑州” 
+SELECT * FROM myIndex WHREE vc_City=”郑州”
+```
+
+也就是，`name_city_age(vc_Name(10),vc_City,i_Age)` 会**从左到右**进行索引，如果没有左前索引，Mysql 不执行索引查询。
+
+### **前缀索引**
+
+如果索引列长度过长，这种列索引时将会产生很大的索引文件，不便于操作，可以使用前缀索引方式进行索引前缀索引应该控制在一个合适的点，控制在 0.31 黄金值即可（大于这个值就可以创建）。
+
+```sql
+SELECT COUNT(DISTINCT(LEFT(`title`,10)))/COUNT(*) FROM Arctic;
+```
+
+这个值大于 0.31 就可以创建前缀索引，Distinct 去重复
+
+```sql
+ALTER TABLE `user` ADD INDEX `uname`(title(10));
+```
+
+增加前缀索引 SQL，将人名的索引建立在 10，这样可以减少索引文件大小，加快索引查询速度。

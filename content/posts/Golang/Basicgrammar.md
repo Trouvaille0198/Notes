@@ -2545,7 +2545,8 @@ a = a[:i+copy(a[i:], a[i+N:])] // 删除中间N个元素
 #### 从尾部删除
 
 ```go
-a = []int{1, 2, 3}a = a[:len(a)-1] // 删除尾部1个元素
+a = []int{1, 2, 3}
+a = a[:len(a)-1] // 删除尾部1个元素
 a = a[:len(a)-N] // 删除尾部N个元素
 ```
 
@@ -2732,3 +2733,48 @@ go run main.go --app-path "Your project address"
 
 > `go test` 在一些场景下也会遇到路径问题，因为`go test`只能够在当前目录执行，所以在执行测试用例的时候，你的执行目录已经是测试目录了
 
+### 包装错误
+
+使用 `errors.Wrap`
+
+```go
+errors.Wrap(err, "additional message to a given error")
+```
+
+### 不要忘记为 `iota` 指定一种类型
+
+```go
+const (
+    _ = iota
+    testvar         // testvar 将是 int 类型
+)
+```
+
+vs
+
+```go
+type myType int
+const (
+    _ myType = iota
+    testvar         // testvar 将是 myType 类型
+)
+```
+
+#### 防止结构体字段用纯值方式初始化，添加 `_ struct {}` 字段：
+
+当你的结构体要求强制给出所有参数才允许初始化时：
+
+```go
+type Point struct {
+  X, Y float64
+  _    struct{} // to prevent unkeyed literals
+}
+```
+
+上例结构体的初始化，允许有 `Point {X：1，Y：1}` ，但是对于 `Point {1,1}` 则会出现编译错误：
+
+```
+./file.go:1:11: too few values in Point literal
+```
+
+当在你所有的结构体中添加了 `_ struct{}` 后，使用 `go vet` 命令进行检查，（原来声明的方式）就会提示没有足够的参数。

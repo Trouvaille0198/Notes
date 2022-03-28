@@ -112,8 +112,6 @@ mpirun -np 6 ./mpi_hello.o
 
 ![image-20220322194921527](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220322194921527.png)
 
-
-
 ```cpp
 #include <stdio.h>
 #include <stdlib.h>
@@ -131,9 +129,9 @@ int main(int argc,char** argv){
     MPI_Comm comm;
     MPI_Init(NULL,NULL);//初始化
     comm=MPI_COMM_WORLD;
-    MPI_Comm_size(comm,&comm_sz);//得到进程总数
-    MPI_Comm_rank(comm,&my_rank);//得到进程编号
-    read_num(&num_point,my_rank,comm);//读取输入数据
+    MPI_Comm_size(comm,&comm_sz);// 得到进程总数
+    MPI_Comm_rank(comm,&my_rank);// 得到进程编号
+    read_num(&num_point,my_rank,comm);// 读取输入数据
 	begin=MPI_Wtime();
     compute_pi(num_point,&num_in_cycle,&local_num_point,comm_sz,&total_num_in_cycle,comm,my_rank);
 	end=MPI_Wtime();
@@ -143,16 +141,15 @@ int main(int argc,char** argv){
     MPI_Finalize();
     return 0;
 }
- 
+
 void read_num(long long int* num_point,int my_rank,MPI_Comm comm){
     if(my_rank==0){
-        printf("please input num in sqaure \n");
+        printf("请输入正方形中的点数 \n");
         scanf("%lld",num_point);
     }
-    MPI_Bcast(num_point,1,MPI_LONG_LONG,0,comm);
- 
+    MPI_Bcast(num_point,1,MPI_LONG_LONG,0,comm); // 将num_point广播给各个进程
 }
- 
+
 void compute_pi(long long int num_point,long long int* num_in_cycle,long long int* local_num_point,int comm_sz,long long int *total_num_in_cycle,MPI_Comm comm,int my_rank){
     *num_in_cycle=0;
     *local_num_point=num_point/comm_sz;
@@ -167,10 +164,11 @@ void compute_pi(long long int num_point,long long int* num_in_cycle,long long in
         if(distance_squared<=1)
         *num_in_cycle=*num_in_cycle+1;
     }
+    // 求出 num_in_cycle 总和
       MPI_Reduce(num_in_cycle,total_num_in_cycle,1,MPI_LONG_LONG,MPI_SUM,0,comm);
     if(my_rank==0){
         double pi=(double)*total_num_in_cycle/(double)num_point*4;
-        printf("the estimate value of pi is %lf\n",pi);
+        printf("最终pi的值为 %lf\n",pi);
     }
 }
 ```

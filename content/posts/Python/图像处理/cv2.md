@@ -353,6 +353,12 @@ cv2.imshow("Merged",merged)
 cv2.waitKey()
 ```
 
+### 颜色空间转换
+
+***cv2.cvtColor(img, cv2.COLOR_BGR2HSV)***
+
+- 从 RGB 转换为 HSV
+
 ### 实现正常退出
 
 ***cv2.waitkey(delaytime) ->returnvalue***
