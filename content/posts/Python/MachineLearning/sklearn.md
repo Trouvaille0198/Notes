@@ -598,7 +598,7 @@ print("最小值最大值归一化处理的结果：\n", data)
 
 #### 标准化
 
-通过对原始数据进行变换把数据变换到均值为0，标准差为1的范围内
+通过对原始数据进行变换把数据变换到均值为 0，标准差为 1 的范围内
 
 优势
 
@@ -618,8 +618,8 @@ $$
 ***StandardScaler( )***
 
 - *StandardScaler.fit_transform(X)*
-  - X：numpy array 格式的数据[n_samples, n_features]
-  - 返回值：转换后的形状相同的array
+  - X：numpy array 格式的数据 `[n_samples, n_features]`
+  - 返回值：转换后的形状相同的 array
 - *StandardScaler.mean_*
   - 返回值：每一列特征的平均值
 - *StandardScaler.var_*
@@ -631,7 +631,7 @@ $$
 
 - 实例化 StandardScaler
 
-- 通过fit_transform转换
+- 通过 fit_transform 转换
 
 ```python
 import pandas as pd
@@ -864,7 +864,7 @@ print("(主成分分析)PCA降维:\n", data_new)
  [ 6.74943227e+00 -2.68263539e-02  1.07947657e-16]]
 ```
 
-若 n_components 设为0.95
+若 n_components 设为 0.95
 
 ```python
 (主成分分析)PCA降维:

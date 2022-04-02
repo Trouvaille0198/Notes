@@ -115,7 +115,7 @@ chan 内部实现了一个环形队列作为其缓冲区，队列的长度是创
 
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220126151613928.png" alt="image-20220126151613928" style="zoom: 80%;" />
 
-注意，一般情况下 `recvq` 和 `sendq ` **至少有一个为空**。只有一个例外，那就是同一个 goroutine 使用 select 语句向 channel 一边写数据，一边读数据。
+注意，一般情况下 `recvq` 和 `sendq ` **至少有一个为空**。只有一个例外，那就是同一个 goroutine 使用 select 语句向 channel 一边写数据，一边读数据（？
 
 ##### 类型信息
 
@@ -126,7 +126,7 @@ chan 内部实现了一个环形队列作为其缓冲区，队列的长度是创
 
 ##### 锁
 
-一个 channel 同时仅允许被一个 goroutine 读写，为简单起见，后续部分说明读写过程时不再涉及加锁和解锁。
+channel 不支持并发读写，一个 channel 同时仅允许被一个 goroutine 读写，为简单起见，后续部分说明读写过程时不再涉及加锁和解锁。
 
 #### channel 操作
 
@@ -155,7 +155,7 @@ func makechan(t *chantype, size int) *hchan {
 
 1. 如果等待接收队列 `recvq `不为空，说明缓冲区中没有数据或者没有缓冲区，此时直接从 `recvq `取出 G，并把数据写入，最后把该 G 唤醒，结束发送过程；
 2. 如果缓冲区中有空余位置，将数据写入缓冲区，结束发送过程；
-3. 如果缓冲区中没有空余位置，将待发送数据写入 G，将当前 G 加入 `sendq`，进入睡眠，等待被读goroutine 唤醒；
+3. 如果缓冲区中没有空余位置，将待发送数据写入 G，将当前 G 加入 `sendq`，进入睡眠，等待被读 goroutine 唤醒；
 
 简单流程图如下：
 
@@ -178,7 +178,7 @@ func makechan(t *chantype, size int) *hchan {
 
 关闭 channel 时会把 `recvq `中的 G 全部唤醒，本该写入 G 的数据位置为 nil。
 
-把 `sendq` 中的 G 全部唤醒，但这些 G 会 panic。
+把 `sendq` 中的 G 全部唤醒，**但这些 G 会 panic。**
 
 除此之外，panic 出现的常见场景还有：
 
@@ -277,7 +277,7 @@ Get element from chan1: 1
 No element in chan1 and chan2.
 ```
 
-从输出可见，从 channel 中读出数据的顺序是随机的，事实上 select 语句的多个 case 执行顺序是随机的，关于select 的实现原理会有专门章节分析。
+从输出可见，从 channel 中读出数据的顺序是随机的，事实上 select 语句的多个 case 执行顺序是随机的。
 
 通过这个示例想说的是：select 的 case 语句读 channel 不会阻塞，尽管 channel 中没有数据。这是由于 case 语句编译后调用读 channel 时会明确传入不阻塞的参数，此时读不到数据时不会将当前 goroutine 加入到等待队列，而是直接返回。
 
@@ -319,9 +319,9 @@ type slice struct {
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-01-make_slice.png)
 
-该 Slice 长度为 5，即可以使用下标 slice[0] ~ slice[4] 来操作里面的元素，capacity 为 10，表示后续向 slice 添加新的元素时可以不必重新分配内存，直接使用预留内存即可。
+该 Slice 长度为 5，即可以使用下标 `slice[0]` ~ `slice[4]` 来操作里面的元素，capacity 为 10，表示后续向 slice 添加新的元素时可以不必重新分配内存，直接使用预留内存即可。
 
-#### 使用数组创建Slice
+#### 使用数组创建 Slice
 
 使用数组来创建 Slice 时，Slice 将与原数组**共用一部分内存**。
 
@@ -329,7 +329,7 @@ type slice struct {
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/slice-02-create_slice_from_array.png)
 
-切片从数组 array[5] 开始，到数组 array[7] 结束（不含 array[7]），即切片长度为 2，数组后面的内容都作为切片的预留内存，即 capacity 为 5。
+切片从数组 `array[5]` 开始，到数组 `array[7]` 结束（不含 `array[7]`），即切片长度为 2，数组后面的内容都作为切片的预留内存，即 capacity 为 5。
 
 数组和切片操作可能作用于同一块内存，这也是使用过程中需要注意的地方。
 
@@ -369,7 +369,7 @@ type slice struct {
 
 #### 特殊切片
 
-跟据数组或切片生成新的切片一般使用 `slice := array[start:end]` 方式，这种新生成的切片并没有指定切片的容量，实际上新切片的容量是从 start 开始直至 array 的结束。
+跟据数组或切片生成新的切片一般使用 `slice := array[start:end]` 方式，这种新生成的切片并没有指定切片的容量，**实际上新切片的容量是从 start 开始直至 array 的结束。**
 
 比如下面两个切片，长度和容量都是一致的，使用共同的内存地址：
 
@@ -445,7 +445,7 @@ type bmap struct {
 每个 bucket 可以存储 8 个键值对。
 
 - `tophash` 是个长度为 8 的数组，哈希值相同的键（准确的说是哈希值低位相同的键）存入当前 bucket 时会将哈希值的高位存储在该数组中，以方便后续匹配。
-- `data `区存放的是 key-value 数据，存放顺序是 key/key/key/...value/value/value，如此存放是为了节省字节对齐带来的空间浪费。
+- `data` 区存放的是 key-value 数据，存放顺序是 key/key/key/...value/value/value，如此存放是为了节省字节对齐带来的空间浪费。
 - `overflow` 指针指向的是下一个 bucket，据此将所有冲突的键连接起来。
 
 注意：上述中 data 和 overflow 并不是在结构体中显示定义的，而是直接通过指针运算（计算内存地址）进行访问的。我们能根据编译期间的 [`cmd/compile/internal/gc.bmap`](https://draveness.me/golang/tree/cmd/compile/internal/gc.bmap) 函数重建它的结构：
@@ -472,7 +472,7 @@ type bmap struct {
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png)
 
-bucket 数据结构指示下一个 bucket 的指针称为 overflow bucket（溢出桶），意为当前 bucket 盛不下而溢出的部分。事实上哈希冲突并不是好事情，它降低了存取效率，好的哈希算法可以保证哈希值的随机性，但冲突过多也是要控制的，后面会再详细介绍。
+bucket 数据结构指示下一个 bucket 的指针称为 **overflow bucket（溢出桶）**，意为当前 bucket 盛不下而溢出的部分。事实上哈希冲突并不是好事情，它降低了存取效率，好的哈希算法可以保证哈希值的随机性，但冲突过多也是要控制的，后面会再详细介绍。
 
 #### 负载因子
 
@@ -492,7 +492,7 @@ bucket 数据结构指示下一个 bucket 的指针称为 overflow bucket（溢�
 每个哈希表的实现对负载因子容忍程度不同
 
 - 比如 Redis 实现中负载因子大于 1 时就会触发 rehash，而 Go 则在在负载因子达到 6.5 时才会触发 rehash，
-- 因为 Redis 的每个 bucket 只能存 1 个键值对，而 Go 的 bucket 可能存 8 个键值对，所以 Go 可以容忍更高的负载因子。
+- 因为 Redis 的每个 bucket 只能存 1 个键值对，**而 Go 的 bucket 可能存 8 个键值对**，所以 Go 可以容忍更高的负载因子。
 
 #### 渐进式扩容
 

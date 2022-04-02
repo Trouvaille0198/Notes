@@ -2848,7 +2848,7 @@ AVL
 - 在  $$p_n$$ 所指的子树中所有数据元素的关键字都大于 $$k_n$$，而子树 $$p_0$$ 中的所有数据元素的关键字均小于 $$k_1$$
 - $$p_i$$ 所指的子树也是 m 路查找树，$$0\le i\le n$$
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510090656452.png" alt="image-20210510090656452" style="zoom:50%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510090656452.png" alt="image-20210510090656452" style="zoom:50%;" />
 
 ### 定义
 
@@ -2856,9 +2856,9 @@ AVL
 
 失败节点即叶子节点
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510090920715.png" alt="image-20210510090920715" style="zoom:50%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510090920715.png" alt="image-20210510090920715" style="zoom:50%;" />
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510091034784.png" alt="image-20210510091034784" style="zoom: 50%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510091034784.png" alt="image-20210510091034784" style="zoom: 50%;" />
 
 ### 插入
 
@@ -2870,7 +2870,7 @@ AVL
 
 若关键字超出 m-1，结点要分裂
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510092154652.png" alt="image-20210510092154652" style="zoom:50%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510092154652.png" alt="image-20210510092154652" style="zoom:50%;" />
 
 插入是个递归的过程
 
@@ -2878,27 +2878,27 @@ AVL
 
 按照关键字 {35，26，74，60，49，17，41，53，29} 构建 3 阶 B-树
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510092510793.png" alt="image-20210510092510793" style="zoom: 60%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510092510793.png" alt="image-20210510092510793" style="zoom: 60%;" />
 
 ### 删除
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093239533.png" alt="image-20210510093239533" style="zoom:60%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093239533.png" alt="image-20210510093239533" style="zoom:60%;" />
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093539490.png" alt="image-20210510093539490" style="zoom:60%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093539490.png" alt="image-20210510093539490" style="zoom:60%;" />
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093553411.png" alt="image-20210510093553411" style="zoom:60%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093553411.png" alt="image-20210510093553411" style="zoom:60%;" />
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093634951.png" alt="image-20210510093634951" style="zoom:60%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510093634951.png" alt="image-20210510093634951" style="zoom:60%;" />
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510095925874.png" alt="image-20210510095925874" style="zoom:67%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510095925874.png" alt="image-20210510095925874" style="zoom:67%;" />
 
-### B+树
+### B+ 树
 
 #### 定义
 
 叶子结点包含了全部关键字及对应指针
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510100347513.png" alt="image-20210510100347513" style="zoom:50%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210510100347513.png" alt="image-20210510100347513" style="zoom:50%;" />
 
 ## 散列表
 
