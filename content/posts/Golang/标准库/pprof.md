@@ -9,12 +9,137 @@ categories: [Golang]
 
 # runtime/pprof
 
-benchmark(基准测试) 可以度量某个函数或方法的性能，也就是说，如果我们知道性能的瓶颈点在哪里，benchmark 是一个非常好的方式。但是面对一个未知的程序，如何去分析这个程序的性能，并找到瓶颈点呢？
+## 简介
+
+benchmark (基准测试) 可以度量某个函数或方法的性能，也就是说，如果我们知道性能的瓶颈点在哪里，benchmark 是一个非常好的方式。但是面对一个未知的程序，如何去分析这个程序的性能，并找到瓶颈点呢？
 
 [pprof](https://github.com/google/pprof) 就是用来解决这个问题的。pprof 包含两部分：
 
 - 编译到程序中的 `runtime/pprof` 包
 - 性能剖析工具 `go tool pprof`
+
+### pprof 使用模式
+
+- Report generation：报告生成
+- Interactive terminal use：交互式终端
+- Web interface：Web 界面
+
+### 使用方法
+
+第一种，在 go 程序中添加如下代码：
+
+```go
+// 开启 cpu 采集分析：
+pprof.StartCPUProfile(w io.Writer)
+
+// 停止 cpu 采集分析：
+pprof.StopCPUProfile()
+```
+
+- [StartCPUProfile](https://golang.org/pkg/runtime/pprof/#StartCPUProfile) 为当前 process 开启 CPU profiling 。
+- [StopCPUProfile](https://golang.org/pkg/runtime/pprof/#StopCPUProfile) 停止当前的 CPU profile。当所有的 profile 写完了后它才返回。
+
+[WriteHeapProfile](https://golang.org/pkg/runtime/pprof/#WriteHeapProfile) 把内存 heap 相关的内容写入到文件中
+
+```go
+pprof.WriteHeapProfile(w io.Writer)
+```
+
+第二种，在 benchmark 测试的时候
+
+```sh
+go test -cpuprofile cpu.prof -memprofile mem.prof -bench .
+```
+
+第三种，对 http server 采集数据
+
+```bash
+go tool pprof $host/debug/pprof/profile
+```
+
+### 命令
+
+```go
+go tool pprof XXX.pprof
+```
+
+go tool pprof 简单的使用格式为：`go tool pprof [binary] [source]`
+
+- binary： 是应用的二进制文件，用来解析各种符号
+- source： 表示 profile 数据的来源，可以是本地的文件，也可以是 http 地址
+
+### 分析
+
+#### 命令行交互分析
+
+```go
+go tool pprof XXX.pprof
+```
+
+![image-20220406151320945](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220406151320945.png)
+
+| 字段           | 说明                 |
+| -------------- | -------------------- |
+| **Type**：     | 分析类型，这里是 cpu |
+| **Duration**： | 程序执行的时长       |
+
+Duration 下面还有一行提示，这是交互模式（通过输入 help 获取帮助信息，输入 o 获取选项信息）。
+
+可以看出，go 的 pprof 操作还有很多其他命令。
+
+##### top
+
+top 命令：对函数的 cpu 耗时和百分比排序后输出
+
+![image-20220406151420073](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220406151420073.png)
+
+| 字段   | 说明                                                |
+| ------ | --------------------------------------------------- |
+| flat   | 当前函数占用 cpu 耗时                               |
+| flat % | 当前函数占用 cpu 耗时百分比                         |
+| sum%   | 函数占用 cpu 时间累积占比，从小到大一直累积到 100%  |
+| cum    | 当前函数加上调用当前函数的函数占用 cpu 的总耗时     |
+| %cum   | 当前函数加上调用当前函数的函数占用 cpu 的总耗时占比 |
+
+可以在 top 后添加数字，如 `top15`
+
+##### list
+
+list 命令：可以列出函数最耗时的代码部分，格式：list 函数名
+
+![image-20220406152101112](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220406152101112.png)
+
+##### 命令行下直接输出分析数据
+
+在命令行直接输出数据，基本命令格式为：
+
+```sh
+Copygo tool pprof <format> [options] [binary] <source>
+```
+
+输入命令：`go tool pprof -text cpu.pprof` ，输出：
+
+![image-20220406152229881](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220406152229881.png)
+
+#### 可视化分析
+
+图形化分析前，先要安装 graphviz 软件，
+
+- 下载地址：[graphviz 地址](https://graphviz.org/download/)，
+
+下载对应的平台安装包，安装完成后，把执行文件 bin 放入 Path 环境变量中，然后在终端输入 `dot -version` 命令查看是否安装成功
+
+```go
+go tool pprof -http :8080 XXX.pprof
+```
+
+或者进入命令行交互界面输入 `web` 命令，即可打开一张图片
+
+![image-20220406154308834](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220406154308834.png)
+
+1. 每个框代表一个函数，理论上框越大表示占用的 cpu 资源越多
+2. 每个框之间的线条代表函数之间的调用关系，线条上的数字表示函数调用的次数
+3. 每个框中第一行数字表示当前函数占用 cpu 的百分比，第二行数字表示当前函数累计占用 cpu 的百分比
 
 ## 性能分析类型
 
@@ -52,6 +177,8 @@ CPU 性能分析 (CPU profiling) 是最常见的性能分析类型。
 ### 锁性能分析
 
 锁性能分析 (mutex profiling) 与阻塞分析类似，但专注于因为锁竞争导致的等待或延时。
+
+
 
 ## CPU 性能分析
 
@@ -377,7 +504,7 @@ func BenchmarkFib(b *testing.B) {
 只需要在 `go test` 添加 `-cpuprofile` 参数即可生成 `BenchmarkFib` 对应的 CPU profile 文件：
 
 ```go
-$ go test -bench="Fib$" -cpuprofile=cpu.pprof .
+$ go test -cpuprofile cpu.prof -memprofile mem.prof -bench .
 goos: linux
 goarch: amd64
 pkg: example

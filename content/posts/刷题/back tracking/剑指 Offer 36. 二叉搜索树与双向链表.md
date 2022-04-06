@@ -29,8 +29,9 @@ func treeToDoublyList(root *TreeNode) *TreeNode {
 	if root == nil {
 		return nil
 	}
+    var pre, head *TreeNode
+    
 	var inOrder func(root *TreeNode)
-	var pre, head *TreeNode
 	inOrder = func(root *TreeNode) {
 		if root == nil {
 			return
