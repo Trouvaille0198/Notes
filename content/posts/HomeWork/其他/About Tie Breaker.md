@@ -108,3 +108,51 @@
     - dependencies 与 token_validator：用户鉴权工具
     - logger：日志记录类
     - utils：提供常用的工具函数，如时间序列生成算法、随机数生成算法等
+
+## 机器学习的引入
+
+游戏核心架构引入了机器学习方法，便于对游戏参数进行调整和优化。
+
+**球员在某位置的综合能力值算法**通过确定各项能力对于此位置的重要程度来实现。举个例子，前锋对于射门素质要求相当之高，故射门属性权重自然就高；相反，防守拦截能力也就相对不重要。
+
+在游戏设计之初，这些权重都由编程设计人员凭借对于比赛逻辑和战术思想的了解估算而出。这样的估计有着一定的误差。在游戏构建到一定程度时，不准确的综合能力值权重参数给球员生成算法、球队选人算法、转会推荐算法和玩家的评估标准等一系列功能造成了不小的麻烦。后来，我们使用了机器学习中的回归算法，准确快速地揭示了各项属性和位置之间的联系。
+
+我们模拟了数十万场比赛，生成了一个庞大的数据集：在每场比赛中，只有一位球员的属性是随机生成的，其余球员均设置为默认值，这样我们就能通过比赛的最终比分，评估这位球员的能力强弱。通过线性回归算法，对这些样本进行训练，最后得出了一个稳定准确的权重系数。
+
+![image-20220410163357091](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410163357091.png)
+
+![image-20220410163406434](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410163406434.png)
+
+当前，这些样本还可以做更多的事情：
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410170011621.png" alt="image-20220410170011621" style="zoom:50%;" />
+
+前锋的综合能力与射门属性之间的关系，可以看出有明显的正比关系
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410170139800.png" alt="image-20220410170139800" style="zoom:50%;" />
+
+前锋的综合能力与射门属性之间的关系，曲线斜率较之前略小
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410170225581.png" alt="image-20220410170225581" style="zoom:50%;" />
+
+前锋的综合能力与防守属性之间的关系，可以看出两者没有关系
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410203051063.png" alt="image-20220410203051063" style="zoom: 80%;" />
+
+各个阵型失球数分布图，可以看出 4-4-2 阵型的进攻能力冠绝群雄，4-1-4-1 阵型的进攻能力相对不足
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410203228718.png" alt="image-20220410203228718" style="zoom:80%;" />
+
+各个阵型进球数分布图，也印证了进攻与防守难以兼得
+
+以下的箱线图更为清晰：
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410203512367.png" alt="image-20220410203512367" style="zoom:67%;" />
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410203521930.png" alt="image-20220410203521930" style="zoom:67%;" />
+
+最后是各个阵型与净胜球的点估计图
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410204119847.png" alt="image-20220410204119847" style="zoom:67%;" />
+
+可以看到估计值极为接近。只有 0.1 左右的差距，侧面证明了六大阵型设计的合理性。
