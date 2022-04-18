@@ -1,3 +1,12 @@
+---
+title: "Python faker 库"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
 # faker
 
 ## 认识

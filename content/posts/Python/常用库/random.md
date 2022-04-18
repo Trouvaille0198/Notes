@@ -1,8 +1,19 @@
-# 认识
+---
+title: "Python random 库"
+date: 2021-10-23
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
+# random
+
+## 认识
 
 生成各种随机数
 
-## 导入
+### 导入
 
 ```python
 import random
@@ -10,11 +21,11 @@ import random
 
 模块中主要使用 `random` 类
 
-# API
+## API
 
 下述方法均为 `random` 类的成员函数
 
-## 基本
+### 基本
 
 - ***random()***
 
@@ -52,7 +63,7 @@ import random
 
     从序列 seq 中随机获取指定长度 len 的片段并返回
 
-## 分布
+### 分布
 
 - ***normalvariate(mu, sigma)*** 
 
