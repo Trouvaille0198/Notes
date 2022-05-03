@@ -1,0 +1,1344 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Go 泛型 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go 泛型"><meta property="og:description" content="Go 泛型 通过引入类型形参（type parameter）和类型实参（type argu"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/go-%E6%B3%9B%E5%9E%8B/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-02-08T00:00:00+00:00"><meta property="article:modified_time" content="2022-05-03T12:43:41+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Go 泛型"><meta name=twitter:description content="Go 泛型 通过引入类型形参（type parameter）和类型实参（type argu"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/go-%E6%B3%9B%E5%9E%8B/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/context/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/log/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 泛型","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/go-%E6%B3%9B%E5%9E%8B\/"},"genre":"posts","wordcount":11324,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/go-%E6%B3%9B%E5%9E%8B\/","datePublished":"2022-02-08T00:00:00+00:00","dateModified":"2022-05-03T12:43:41+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":''==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:''==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/categories/>分类 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/posts/>文章 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/categories/ title>分类</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/posts/ title>文章</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go 泛型</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-08>2022-02-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 11324 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 23 分钟&nbsp;</div></div><div class=featured-image><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png title=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#泛型类型>泛型类型</a><ul><li><a href=#定义>定义</a></li><li><a href=#实例化>实例化</a></li><li><a href=#其他的泛型类型>其他的泛型类型</a></li><li><a href=#类型形参的互相套用>类型形参的互相套用</a></li><li><a href=#几种语法错误>几种语法错误</a></li><li><a href=#特殊的泛型类型>特殊的泛型类型</a></li><li><a href=#泛型类型的套娃>泛型类型的套娃</a></li><li><a href=#类型约束的两种选择>类型约束的两种选择</a></li><li><a href=#匿名结构体不支持泛型>匿名结构体不支持泛型</a></li></ul></li><li><a href=#泛型-receiver>泛型 receiver</a><ul><li><a href=#基于泛型的队列>基于泛型的队列</a></li><li><a href=#动态判断变量的类型>动态判断变量的类型</a></li></ul></li><li><a href=#泛型函数>泛型函数</a><ul><li><a href=#匿名函数不支持泛型>匿名函数不支持泛型</a></li><li><a href=#方法不支持泛型>方法不支持泛型</a></li></ul></li><li><a href=#变得复杂的接口>变得复杂的接口</a><ul><li><a href=#--指定底层类型-><code>~</code> : 指定底层类型 ✔️</a></li><li><a href=#从方法集-method-set-到类型集-type-set>从方法集 (Method set) 到类型集 (Type set)</a><ul><li><a href=#接口实现-implement-定义的变化>接口实现 (implement) 定义的变化</a></li><li><a href=#类型的并集>类型的并集</a></li><li><a href=#类型的交集>类型的交集</a></li><li><a href=#空集>空集</a></li><li><a href=#空接口和-any->空接口和 any ✔️</a></li><li><a href=#可比较-comparable-和可排序-ordered->可比较 (comparable) 和可排序 (ordered) ✔️</a></li></ul></li><li><a href=#接口两种类型>接口两种类型</a><ul><li><a href=#基本接口-basic-interface>基本接口 (Basic interface)</a></li><li><a href=#一般接口-general-interface>一般接口 (General interface)</a></li></ul></li><li><a href=#泛型接口>泛型接口</a></li><li><a href=#接口定义的种种限制规则>接口定义的种种限制规则</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=go-泛型>Go 泛型</h1><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png alt="File:Go gopher favicon.svg - Wikimedia Commons" style=zoom:23%><p>通过引入<strong>类型形参</strong>（type parameter）和<strong>类型实参</strong>（type argument）这两个概念，我们让一个函数获得了处理多种不同类型数据的能力，这种编程方式被称为<strong>泛型编程</strong>。</p><p>泛型能实现的功能通过<strong>接口 + 反射</strong>也基本能实现，但是它有很多问题：</p><ol><li>用起来麻烦</li><li>失去了编译时的类型检查，不仔细写容易出错</li><li>性能不太理想</li></ol><p>Go 的泛型(或者或类型形参)目前可使用在3个地方</p><ol><li>泛型类型 - 类型定义中带类型形参的类型</li><li>泛型 receiver - 泛型类型的 receiver</li><li>泛型函数 - 带类型形参的函数</li></ol><p>为了实现泛型，Go 引入了一些新的概念：</p><ol><li>类型形参</li><li>类型形参列表</li><li>类型实参</li><li>类型约束</li><li>实例化 - 泛型类型不能直接使用，要使用的话必须传入类型实参进行实例化</li></ol><h2 id=泛型类型>泛型类型</h2><h3 id=定义>定义</h3><blockquote><p>本节涉及四个定义：类型形参、类型实参、类型约束和泛型类型</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 泛型的类型定义
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span><span class=p>|</span><span class=kt>float32</span><span class=p>|</span><span class=kt>float64</span> <span class=p>]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里类型名称 <code>Slice</code> 后带了中括号，对各个部分做一个解说就是：</p><ul><li><code>T</code> 是<strong>类型形参 (Type parameter)</strong>，其代表的具体类型并不确定，类似一个占位符</li><li><code>int|float32|float64</code> 是<strong>类型约束 (Type constraint)</strong><ul><li><code>|</code> 表示“或”</li></ul></li><li><code>T int|float32|float64</code> 是<strong>类型形参列表 (type parameter list)</strong><ul><li>这一整串定义了所有的类型形参 (在这个例子里只有一个类型形参 T）</li></ul></li><li>这里新定义的类型名称叫 <code>Slice[T]</code></li></ul><p>类型定义中带类型形参的类型，称之为<strong>泛型类型(Generic type)</strong></p><h3 id=实例化>实例化</h3><p>泛型类型不能直接拿来使用，必须传入<strong>类型实参 (Type argument)<strong>将其确定为具体的类型之后才可使用。而传入类型实参确定具体类型的操作被称为</strong>实例化(Instantiations)</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 这里传入了类型实参int，泛型类型Slice[T]被实例化为具体的类型 Slice[int]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>a</span> <span class=nx>Slice</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Type Name: %T&#34;</span><span class=p>,</span><span class=nx>a</span><span class=p>)</span>  <span class=c1>//输出：Type Name: Slice[int]
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>// 传入类型实参float32, 将泛型类型Slice[T]实例化为具体的类型 Slice[string]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>b</span> <span class=nx>Slice</span><span class=p>[</span><span class=kt>float32</span><span class=p>]</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>float32</span><span class=p>{</span><span class=mf>1.0</span><span class=p>,</span> <span class=mf>2.0</span><span class=p>,</span> <span class=mf>3.0</span><span class=p>}</span> 
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;Type Name: %T&#34;</span><span class=p>,</span><span class=nx>b</span><span class=p>)</span>  <span class=c1>//输出：Type Name: Slice[float32]
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>// ✗ 错误。因为变量a的类型为Slice[int]，b的类型为Slice[float32]，两者类型不同
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>a</span> <span class=p>=</span> <span class=nx>b</span>  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ✗ 错误。string不在类型约束 int|float32|float64 中，不能用来实例化泛型类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>c</span> <span class=nx>Slice</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span><span class=s>&#34;Hello&#34;</span><span class=p>,</span> <span class=s>&#34;World&#34;</span><span class=p>}</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ✗ 错误。Slice[T]是泛型类型，不可直接使用必须实例化为具体的类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>x</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span><span class=p>]</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>}</span> 
+</span></span></code></pre></td></tr></table></div></div><p>上面只是个最简单的例子，实际上类型形参的数量可以远远不止一个，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// MyMap类型定义了两个类型形参 KEY 和 VALUE。分别为两个形参指定了不同的类型约束
+</span></span></span><span class=line><span class=cl><span class=c1>// 这个泛型类型的名字叫： MyMap[KEY, VALUE]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>MyMap</span><span class=p>[</span><span class=nx>KEY</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>VALUE</span> <span class=kt>float32</span> <span class=p>|</span> <span class=kt>float64</span><span class=p>]</span> <span class=kd>map</span><span class=p>[</span><span class=nx>KEY</span><span class=p>]</span><span class=nx>VALUE</span>  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 用类型实参 string 和 flaot64 替换了类型形参 KEY 、 VALUE，泛型类型被实例化为具体的类型：MyMap[string, float64]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>a</span> <span class=nx>MyMap</span><span class=p>[</span><span class=kt>string</span><span class=p>,</span> <span class=kt>float64</span><span class=p>]</span> <span class=p>=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>float64</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;jack_score&#34;</span><span class=p>:</span> <span class=mf>9.6</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;bob_score&#34;</span><span class=p>:</span>  <span class=mf>8.4</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVcYRiO data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVcYRiO, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVcYRiO 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVcYRiO 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bVcYRiO title=img></p><h3 id=其他的泛型类型>其他的泛型类型</h3><p>所有类型定义都可使用类型形参，所以下面这种<strong>结构体</strong>、<strong>接口</strong>以及<strong>通道</strong>的定义也可以使用类型形参：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 一个泛型类型的结构体。可用 int 或 sring 类型实例化
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>MyStruct</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>string</span><span class=p>]</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>    <span class=nx>Name</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Data</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 一个泛型接口(关于泛型接口在后半部分会详细讲解）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>IPrintData</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>float32</span> <span class=p>|</span> <span class=kt>string</span><span class=p>]</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Print</span><span class=p>(</span><span class=nx>data</span> <span class=nx>T</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 一个泛型通道，可用类型实参 int 或 string 实例化
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>MyChan</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>string</span><span class=p>]</span> <span class=kd>chan</span> <span class=nx>T</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=类型形参的互相套用>类型形参的互相套用</h3><p>类型形参是可以互相套用的，如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>WowStruct</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>float32</span><span class=p>,</span> <span class=nx>S</span> <span class=p>[]</span><span class=nx>T</span><span class=p>]</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Data</span>     <span class=nx>S</span>
+</span></span><span class=line><span class=cl>    <span class=nx>MaxValue</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl>    <span class=nx>MinValue</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个例子看起来有点复杂且难以理解，但实际上只要记住一点：任何泛型类型都必须传入类型实参实例化才可以使用。所以我们这就尝试传入类型实参看看：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>ws</span> <span class=nx>WowStruct</span><span class=p>[</span><span class=kt>int</span><span class=p>,</span> <span class=p>[]</span><span class=kt>int</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=c1>// 泛型类型 WowStuct[T, S] 被实例化后的类型名称就叫 WowStruct[int, []int]
+</span></span></span></code></pre></td></tr></table></div></div><p>上面的代码中，我们为 T 传入了实参 <code>int</code>，然后因为 S 的定义是 <code>[]T</code> ，所以 S 的实参自然是 <code>[]int</code> 。经过实例化之后 <code>WowStruct[T,S]</code> 的定义类似如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 一个存储int类型切片，以及切片中最大、最小值的结构体
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>WowStruct</span><span class=p>[</span><span class=kt>int</span><span class=p>,</span> <span class=p>[]</span><span class=kt>int</span><span class=p>]</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Data</span>     <span class=p>[]</span><span class=kt>int</span>
+</span></span><span class=line><span class=cl>    <span class=nx>MaxValue</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>    <span class=nx>MinValue</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>因为 S 的定义是 []T ，所以 T 一旦决定了的话 S 的实参就不能随便乱传了，下面这样的代码是错误的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 错误。S的定义是[]T，这里T传入了实参int, 所以S的实参应当为 []int 而不能是 []float32
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>ws</span> <span class=o>:=</span> <span class=nx>WowStruct</span><span class=p>[</span><span class=kt>int</span><span class=p>,</span> <span class=p>[]</span><span class=kt>float32</span><span class=p>]{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Data</span><span class=p>:</span>     <span class=p>[]</span><span class=kt>float32</span><span class=p>{</span><span class=mf>1.0</span><span class=p>,</span> <span class=mf>2.0</span><span class=p>,</span> <span class=mf>3.0</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>MaxValue</span><span class=p>:</span> <span class=mi>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>MinValue</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=几种语法错误>几种语法错误</h3><ol><li><p>定义泛型类型的时候，<strong>基础类型不能只有类型形参</strong>，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 错误，类型形参不能单独使用
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>CommonType</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span><span class=p>|</span><span class=kt>string</span><span class=p>|</span><span class=kt>float32</span><span class=p>]</span> <span class=nx>T</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>当类型约束的一些写法会被编译器误认为是表达式时会报错。如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>//✗ 错误。T *int会被编译器误认为是表达式 T乘以int，而不是int指针
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>NewType</span><span class=p>[</span><span class=nx>T</span> <span class=o>*</span><span class=kt>int</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=c1>// 上面代码再编译器眼中：它认为你要定义一个存放切片的数组，数组长度由 T 乘以 int 计算得到
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>NewType</span> <span class=p>[</span><span class=nx>T</span> <span class=o>*</span> <span class=kt>int</span><span class=p>][]</span><span class=nx>T</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//✗ 错误。和上面一样，这里不光*被会认为是乘号，| 还会被认为是按位或操作
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>NewType2</span><span class=p>[</span><span class=nx>T</span> <span class=o>*</span><span class=kt>int</span><span class=p>|</span><span class=o>*</span><span class=kt>float64</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//✗ 错误
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>NewType2</span> <span class=p>[</span><span class=nf>T</span> <span class=p>(</span><span class=kt>int</span><span class=p>)]</span> <span class=p>[]</span><span class=nx>T</span> 
+</span></span></code></pre></td></tr></table></div></div><p>为了避免这种误解，解决办法就是给类型约束包上 <code>interface{}</code> 或加上逗号消除歧义（关于接口具体的用法会在后半篇提及）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>NewType</span><span class=p>[</span><span class=nx>T</span> <span class=kd>interface</span><span class=p>{</span><span class=o>*</span><span class=kt>int</span><span class=p>}]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>NewType2</span><span class=p>[</span><span class=nx>T</span> <span class=kd>interface</span><span class=p>{</span><span class=o>*</span><span class=kt>int</span><span class=p>|</span><span class=o>*</span><span class=kt>float64</span><span class=p>}]</span> <span class=p>[]</span><span class=nx>T</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 如果类型约束中只有一个类型，可以添加个逗号消除歧义
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>NewType3</span><span class=p>[</span><span class=nx>T</span> <span class=o>*</span><span class=kt>int</span><span class=p>,]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//✗ 错误。如果类型约束不止一个类型，加逗号是不行的
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>NewType4</span><span class=p>[</span><span class=nx>T</span> <span class=o>*</span><span class=kt>int</span><span class=p>|</span><span class=o>*</span><span class=kt>float32</span><span class=p>,]</span> <span class=p>[]</span><span class=nx>T</span> 
+</span></span></code></pre></td></tr></table></div></div><p>因为上面逗号的用法限制比较大，这里推荐统一用 <code>interface{}</code> 解决问题</p><p>有一说一很丑陋</p></li></ol><h3 id=特殊的泛型类型>特殊的泛型类型</h3><p>这里讨论种比较特殊的泛型类型，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Wow</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>string</span><span class=p>]</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>a</span> <span class=nx>Wow</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span> <span class=p>=</span> <span class=mi>123</span>     <span class=c1>// 编译正确
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>b</span> <span class=nx>Wow</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span> <span class=p>=</span> <span class=mi>123</span>  <span class=c1>// 编译正确
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>c</span> <span class=nx>Wow</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span> <span class=p>=</span> <span class=s>&#34;hello&#34;</span> <span class=c1>// 编译错误，因为&#34;hello&#34;不能赋值给底层类型int
+</span></span></span></code></pre></td></tr></table></div></div><p>这里虽然使用了类型形参，但因为类型定义是 <code>type Wow[T int|string] int</code> ，所以无论传入什么类型实参，实例化后的新类型的底层类型都是 int 。所以 int 类型的数字 123 可以赋值给变量 a 和 b，但 string 类型的字符串 “hello” 不能赋值给 c</p><p>这个例子没有什么具体意义，但是可以让我们理解泛型类型的实例化的机制</p><h3 id=泛型类型的套娃>泛型类型的套娃</h3><p>泛型和普通的类型一样，可以互相嵌套定义出更加复杂的新类型，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 先定义个泛型类型 Slice[T]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span><span class=p>|</span><span class=kt>string</span><span class=p>|</span><span class=kt>float32</span><span class=p>|</span><span class=kt>float64</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ✗ 错误。泛型类型Slice[T]的类型约束中不包含uint, uint8
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>UintSlice</span><span class=p>[</span><span class=nx>T</span> <span class=kt>uint</span><span class=p>|</span><span class=kt>uint8</span><span class=p>]</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ✓ 正确。基于泛型类型Slice[T]定义了新的泛型类型 FloatSlice[T] 。FloatSlice[T]只接受float32和float64两种类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>FloatSlice</span><span class=p>[</span><span class=nx>T</span> <span class=kt>float32</span><span class=p>|</span><span class=kt>float64</span><span class=p>]</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span><span class=p>]</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// ✓ 正确。基于泛型类型Slice[T]定义的新泛型类型 IntAndStringSlice[T]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>IntAndStringSlice</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span><span class=p>|</span><span class=kt>string</span><span class=p>]</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl><span class=c1>// ✓ 正确 基于IntAndStringSlice[T]套娃定义出的新泛型类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>IntSlice</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span><span class=p>]</span> <span class=nx>IntAndStringSlice</span><span class=p>[</span><span class=nx>T</span><span class=p>]</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 在map中套一个泛型类型Slice[T]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>WowMap</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span><span class=p>|</span><span class=kt>string</span><span class=p>]</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=c1>// 在map中套Slice[T]的另一种写法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>WowMap2</span><span class=p>[</span><span class=nx>T</span> <span class=nx>Slice</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span> <span class=p>|</span> <span class=nx>Slice</span><span class=p>[</span><span class=kt>string</span><span class=p>]]</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=nx>T</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=类型约束的两种选择>类型约束的两种选择</h3><p>观察下面两种类型约束的写法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>WowStruct</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span><span class=p>|</span><span class=kt>string</span><span class=p>]</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Name</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Data</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>WowStruct2</span><span class=p>[</span><span class=nx>T</span> <span class=p>[]</span><span class=kt>int</span><span class=p>|[]</span><span class=kt>string</span><span class=p>]</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Name</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Data</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>仅限于这个例子，这两种写法和实现的功能其实是差不多的，实例化之后结构体相同。但是像下面这种情况的时候，我们使用前一种写法会更好：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 又包含T又包含[]T
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>WowStruct3</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>string</span><span class=p>]</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Data</span>     <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl>    <span class=nx>MaxValue</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl>    <span class=nx>MinValue</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=匿名结构体不支持泛型>匿名结构体不支持泛型</h3><p>我们有时候会经常用到匿名的结构体，并在定义好匿名结构体之后直接初始化：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>testCase</span> <span class=o>:=</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>caseName</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>        <span class=nx>got</span>      <span class=kt>int</span>
+</span></span><span class=line><span class=cl>        <span class=nx>want</span>     <span class=kt>int</span>
+</span></span><span class=line><span class=cl>    <span class=p>}{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>caseName</span><span class=p>:</span> <span class=s>&#34;test OK&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>got</span><span class=p>:</span>      <span class=mi>100</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>want</span><span class=p>:</span>     <span class=mi>100</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>那么匿名结构体能不能使用泛型呢？答案是不能，下面的用法是错误的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>testCase</span> <span class=o>:=</span> <span class=kd>struct</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span><span class=p>|</span><span class=kt>string</span><span class=p>]</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>caseName</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>        <span class=nx>got</span>      <span class=nx>T</span>
+</span></span><span class=line><span class=cl>        <span class=nx>want</span>     <span class=nx>T</span>
+</span></span><span class=line><span class=cl>    <span class=p>}[</span><span class=kt>int</span><span class=p>]{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>caseName</span><span class=p>:</span> <span class=s>&#34;test OK&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>got</span><span class=p>:</span>      <span class=mi>100</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>want</span><span class=p>:</span>     <span class=mi>100</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>所以在使用泛型的时候我们只能放弃使用匿名结构体，对于很多场景来说这会造成麻烦（最主要麻烦集中在单元测试的时候，为泛型做单元测试会非常麻烦，这点我之后的文章将会详细阐述）</p><h2 id=泛型-receiver>泛型 receiver</h2><p>单纯的泛型类型实际上对开发来说用处并不大。但如果将泛型类型和<strong>泛型 receiver</strong> 相结合的话，泛型就有了非常大的实用性了</p><p>允许给泛型类型添加方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MySlice</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>float32</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>MySlice</span><span class=p>[</span><span class=nx>T</span><span class=p>])</span> <span class=nf>Sum</span><span class=p>()</span> <span class=nx>T</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>sum</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>s</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>sum</span> <span class=o>+=</span> <span class=nx>value</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>sum</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个例子为泛型类型 <code>MySlice[T]</code> 添加了一个计算成员总和的方法 <code>Sum()</code> 。注意观察这个方法的定义：</p><ul><li><p>首先看 receiver <code>(s MySlice[T])</code> ，所以我们直接把类型名称 <code>MySlice[T]</code> 写入了 receiver 中</p></li><li><p>然后方法的返回参数我们使用了类型形参 T</p><ul><li>实际上如果有需要的话，<strong>方法的接收参数也可以使用类型形参</strong></li></ul></li><li><p>在方法的定义中，我们也可以使用类型形参 T</p><ul><li>在这个例子里，我们通过 <code>var sum T</code> 定义了一个新的变量 <code>sum</code></li></ul></li></ul><p>对于这个泛型类型 <code>MySlice[T]</code> 我们该如何使用？还记不记得之前强调过很多次的，泛型类型无论如何都需要先用类型实参实例化，所以用法如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s</span> <span class=nx>MySlice</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>s</span><span class=p>.</span><span class=nf>Sum</span><span class=p>())</span> <span class=c1>// 输出：10
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s2</span> <span class=nx>MySlice</span><span class=p>[</span><span class=kt>float32</span><span class=p>]</span> <span class=p>=</span> <span class=p>[]</span><span class=kt>float32</span><span class=p>{</span><span class=mf>1.0</span><span class=p>,</span> <span class=mf>2.0</span><span class=p>,</span> <span class=mf>3.0</span><span class=p>,</span> <span class=mf>4.0</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>s2</span><span class=p>.</span><span class=nf>Sum</span><span class=p>())</span> <span class=c1>// 输出：10.0
+</span></span></span></code></pre></td></tr></table></div></div><p>该如何理解上面的实例化？首先我们用类型实参 int 实例化了泛型类型 <code>MySlice[T]</code>，所以泛型类型定义中的所有 T 都被替换为 int，最终我们可以把代码看作下面这样：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MySlice</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span> <span class=p>[]</span><span class=kt>int</span> <span class=c1>// 实例化后的类型名叫 MyIntSlice[int]
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>// 方法中所有类型形参 T 都被替换为类型实参 int
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>MySlice</span><span class=p>[</span><span class=kt>int</span><span class=p>])</span> <span class=nf>Sum</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>sum</span> <span class=kt>int</span> 
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>s</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>sum</span> <span class=o>+=</span> <span class=nx>value</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>sum</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>用 float32 实例化和用 int 实例化同理</p><p>通过泛型 receiver，泛型的实用性一下子得到了巨大的扩展。在没有泛型之前如果想实现通用的数据结构，诸如：堆、栈、队列、链表之类的话，我们的选择只有两个：</p><ul><li>为每种类型写一个实现</li><li>使用 接口 + 反射</li></ul><p>而有了泛型之后，我们就能非常简单地创建通用数据结构了。接下来用一个更加实用的例子 —— 队列 来讲解</p><h3 id=基于泛型的队列>基于泛型的队列</h3><p>队列是一种先入先出的数据结构，它和现实中排队一样，数据只能从队尾放入、从队首取出，先放入的数据优先被取出来</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 这里类型约束使用了空接口，代表的意思是所有类型都可以用来实例化泛型类型 Queue[T] (关于接口在后半部分会详细介绍）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>Queue</span><span class=p>[</span><span class=nx>T</span> <span class=kd>interface</span><span class=p>{}]</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>elements</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 将数据放入队列尾部
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>q</span> <span class=o>*</span><span class=nx>Queue</span><span class=p>[</span><span class=nx>T</span><span class=p>])</span> <span class=nf>Put</span><span class=p>(</span><span class=nx>value</span> <span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>q</span><span class=p>.</span><span class=nx>elements</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>q</span><span class=p>.</span><span class=nx>elements</span><span class=p>,</span> <span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 从队列头部取出并从头部删除对应数据
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>q</span> <span class=o>*</span><span class=nx>Queue</span><span class=p>[</span><span class=nx>T</span><span class=p>])</span> <span class=nf>Pop</span><span class=p>()</span> <span class=p>(</span><span class=nx>T</span><span class=p>,</span> <span class=kt>bool</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>value</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>q</span><span class=p>.</span><span class=nx>elements</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nx>value</span><span class=p>,</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>value</span> <span class=p>=</span> <span class=nx>q</span><span class=p>.</span><span class=nx>elements</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=nx>q</span><span class=p>.</span><span class=nx>elements</span> <span class=p>=</span> <span class=nx>q</span><span class=p>.</span><span class=nx>elements</span><span class=p>[</span><span class=mi>1</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>value</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>q</span><span class=p>.</span><span class=nx>elements</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 队列大小
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>q</span> <span class=nx>Queue</span><span class=p>[</span><span class=nx>T</span><span class=p>])</span> <span class=nf>Size</span><span class=p>()</span> <span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nb>len</span><span class=p>(</span><span class=nx>q</span><span class=p>.</span><span class=nx>elements</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>为了方便说明，上面是队列非常简单的一种实现方法，没有考虑线程安全等很多问题</p></blockquote><p><code>Queue[T]</code> 因为是泛型类型，所以要使用的话必须实例化，实例化与使用方法如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>q1</span> <span class=nx>Queue</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span>  <span class=c1>// 可存放int类型数据的队列
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>q1</span><span class=p>.</span><span class=nf>Put</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>q1</span><span class=p>.</span><span class=nf>Put</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>q1</span><span class=p>.</span><span class=nf>Put</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>q1</span><span class=p>.</span><span class=nf>Pop</span><span class=p>()</span> <span class=c1>// 1
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>q1</span><span class=p>.</span><span class=nf>Pop</span><span class=p>()</span> <span class=c1>// 2
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>q1</span><span class=p>.</span><span class=nf>Pop</span><span class=p>()</span> <span class=c1>// 3
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>q2</span> <span class=nx>Queue</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span>  <span class=c1>// 可存放string类型数据的队列
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>q2</span><span class=p>.</span><span class=nf>Put</span><span class=p>(</span><span class=s>&#34;A&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>q2</span><span class=p>.</span><span class=nf>Put</span><span class=p>(</span><span class=s>&#34;B&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>q2</span><span class=p>.</span><span class=nf>Put</span><span class=p>(</span><span class=s>&#34;C&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>q2</span><span class=p>.</span><span class=nf>Pop</span><span class=p>()</span> <span class=c1>// &#34;A&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>q2</span><span class=p>.</span><span class=nf>Pop</span><span class=p>()</span> <span class=c1>// &#34;B&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>q2</span><span class=p>.</span><span class=nf>Pop</span><span class=p>()</span> <span class=c1>// &#34;C&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>q3</span> <span class=nx>Queue</span><span class=p>[</span><span class=kd>struct</span><span class=p>{</span><span class=nx>Name</span> <span class=kt>string</span><span class=p>}]</span> 
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>q4</span> <span class=nx>Queue</span><span class=p>[[]</span><span class=kt>int</span><span class=p>]</span> 	<span class=c1>// 可存放[]int切片的队列
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>q5</span> <span class=nx>Queue</span><span class=p>[</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>]</span>  <span class=c1>// 可存放int通道的队列
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>q6</span> <span class=nx>Queue</span><span class=p>[</span><span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span><span class=p>]</span>	<span class=c1>// 可存放接口的队列
+</span></span></span><span class=line><span class=cl><span class=c1>// ......
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=动态判断变量的类型>动态判断变量的类型</h3><p>使用接口的时候经常会用到类型断言或 type swith 来确定接口具体的类型，然后对不同类型做出不同的处理，如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>i</span> <span class=kd>interface</span><span class=p>{}</span> <span class=p>=</span> <span class=mi>123</span>
+</span></span><span class=line><span class=cl><span class=nx>i</span><span class=p>.(</span><span class=kt>int</span><span class=p>)</span> <span class=c1>// 类型断言
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>// type switch
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>switch</span> <span class=nx>i</span><span class=p>.(</span><span class=kd>type</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=kt>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// do something
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>case</span> <span class=kt>string</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// do something
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// do something
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>那么你一定会想到，对于 <code>valut T</code> 这样通过类型形参定义的变量，我们能不能判断具体类型然后对不同类型做出不同处理呢？答案是<strong>不允许</strong>的，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>q</span> <span class=o>*</span><span class=nx>Queue</span><span class=p>[</span><span class=nx>T</span><span class=p>])</span> <span class=nf>Put</span><span class=p>(</span><span class=nx>value</span> <span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>value</span><span class=p>.(</span><span class=kt>int</span><span class=p>)</span> <span class=c1>// 错误。泛型类型定义的变量不能使用类型断言
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 错误。不允许使用type switch 来判断 value 的具体类型
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>switch</span> <span class=nx>value</span><span class=p>.(</span><span class=kd>type</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=kt>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// do something
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>case</span> <span class=kt>string</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// do something
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// do something
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>虽然 type switch 和类型断言不能用，但我们可通过<strong>反射</strong>机制达到目的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>receiver</span> <span class=nx>Queue</span><span class=p>[</span><span class=nx>T</span><span class=p>])</span> <span class=nf>Put</span><span class=p>(</span><span class=nx>value</span> <span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Printf() 可输出变量value的类型(底层就是通过反射实现的)
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%T&#34;</span><span class=p>,</span> <span class=nx>value</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 通过反射可以动态获得变量value的类型从而分情况处理
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>v</span> <span class=o>:=</span> <span class=nx>reflect</span><span class=p>.</span><span class=nf>ValueOf</span><span class=p>(</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>switch</span> <span class=nx>v</span><span class=p>.</span><span class=nf>Kind</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=nx>reflect</span><span class=p>.</span><span class=nx>Int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// do something
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>case</span> <span class=nx>reflect</span><span class=p>.</span><span class=nx>String</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// do something
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这看起来达到了我们的目的，可是当你写出上面这样的代码时候就出现了一个问题：你为了避免使用反射而选择了泛型，结果到头来又为了一些功能在在泛型中使用反射</p><p>当出现这种情况的时候你可能需要重新思考一下，自己的需求是不是真的需要用泛型（毕竟泛型机制本身就很复杂了，再加上反射的复杂度，增加的复杂度并不一定值得）</p><p>当然，这一切选择权都在你自己的手里，根据具体情况斟酌。</p><h2 id=泛型函数>泛型函数</h2><p>写泛型函数也十分简单。假设我们想要写一个计算两个数之和的函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Add</span><span class=p>(</span><span class=nx>a</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>b</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个函数理所当然只能计算int的和，而浮点的计算是不支持的。这时候我们可以像下面这样定义一个泛型函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nx>Add</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>float32</span> <span class=p>|</span> <span class=kt>float64</span><span class=p>](</span><span class=nx>a</span> <span class=nx>T</span><span class=p>,</span> <span class=nx>b</span> <span class=nx>T</span><span class=p>)</span> <span class=nx>T</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这种带类型形参的函数被称为<strong>泛型函数</strong></p><p>和泛型类型一样，泛型函数也是不能直接调用的，要使用泛型函数的话必须传入类型实参之后才能调用。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>Add</span><span class=p>[</span><span class=kt>int</span><span class=p>](</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>)</span> <span class=c1>// 传入类型实参int，计算结果为 3
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>Add</span><span class=p>[</span><span class=kt>float32</span><span class=p>](</span><span class=mf>1.0</span><span class=p>,</span> <span class=mf>2.0</span><span class=p>)</span> <span class=c1>// 传入类型实参float32, 计算结果为 3.0
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=nx>Add</span><span class=p>[</span><span class=kt>string</span><span class=p>](</span><span class=s>&#34;hello&#34;</span><span class=p>,</span> <span class=s>&#34;world&#34;</span><span class=p>)</span> <span class=c1>// 错误。因为泛型函数Add的类型约束中并不包含string
+</span></span></span></code></pre></td></tr></table></div></div><p>或许你会觉得这样每次都要手动指定类型实参太不方便了。所以 Go 还<strong>支持类型实参的自动推导</strong>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nf>Add</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>  		<span class=c1>// 1，2是int类型，编译请自动推导出类型实参T是int
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nf>Add</span><span class=p>(</span><span class=mf>1.0</span><span class=p>,</span> <span class=mf>2.0</span><span class=p>)</span> 	<span class=c1>// 1.0, 2.0 是浮点，编译请自动推导出类型实参T是float32
+</span></span></span></code></pre></td></tr></table></div></div><p>自动推导的写法就好像免去了传入实参的步骤一样，但请记住这仅仅只是编译器帮我们推导出了类型实参，实际上传入实参步骤还是发生了的。</p><h3 id=匿名函数不支持泛型>匿名函数不支持泛型</h3><p>在 Go 中我们经常会使用匿名函数，如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>fn</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>  <span class=c1>// 定义了一个匿名函数并赋值给 fn 
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nf>fn</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>))</span> <span class=c1>// 输出: 3
+</span></span></span></code></pre></td></tr></table></div></div><p>但是匿名函数<strong>不能自己定义类型形参</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 错误，匿名函数不能自己定义类型实参
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>fnGeneric</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>float32</span><span class=p>](</span><span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=nx>T</span><span class=p>)</span> <span class=nx>T</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nf>fnGeneric</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>但是匿名函数可以<strong>使用别处定义好的类型实参</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nx>MyFunc</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>float32</span> <span class=p>|</span> <span class=kt>float64</span><span class=p>](</span><span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 匿名函数可使用已经定义好的类型形参
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>fn2</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>(</span><span class=nx>i</span> <span class=nx>T</span><span class=p>,</span> <span class=nx>j</span> <span class=nx>T</span><span class=p>)</span> <span class=nx>T</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nx>i</span><span class=o>*</span><span class=mi>2</span> <span class=o>-</span> <span class=nx>j</span><span class=o>*</span><span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>fn2</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=方法不支持泛型>方法不支持泛型</h3><p>很不幸，目前 Go 的方法并不支持泛型</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>A</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 不支持泛型方法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>receiver</span> <span class=nx>A</span><span class=p>)</span> <span class=nx>Add</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>float32</span> <span class=p>|</span> <span class=kt>float64</span><span class=p>](</span><span class=nx>a</span> <span class=nx>T</span><span class=p>,</span> <span class=nx>b</span> <span class=nx>T</span><span class=p>)</span> <span class=nx>T</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>但是因为 receiver 支持泛型， 所以如果想在方法中使用泛型的话，目前唯一的办法就是曲线救国，迂回地通过 receiver 使用类型形参：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>A</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>float32</span> <span class=p>|</span> <span class=kt>float64</span><span class=p>]</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 方法可以使用类型定义中的形参 T 
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>receiver</span> <span class=nx>A</span><span class=p>[</span><span class=nx>T</span><span class=p>])</span> <span class=nf>Add</span><span class=p>(</span><span class=nx>a</span> <span class=nx>T</span><span class=p>,</span> <span class=nx>b</span> <span class=nx>T</span><span class=p>)</span> <span class=nx>T</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 用法：
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>a</span> <span class=nx>A</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>a</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>aa</span> <span class=nx>A</span><span class=p>[</span><span class=kt>float32</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>aa</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mf>1.0</span><span class=p>,</span> <span class=mf>2.0</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=变得复杂的接口>变得复杂的接口</h2><p>有时候使用泛型编程时，我们会书写长长的类型约束，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 一个可以容纳所有int,uint以及浮点类型的泛型切片
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=kt>int</span> <span class=p>|</span> <span class=kt>int8</span> <span class=p>|</span> <span class=kt>int16</span> <span class=p>|</span> <span class=kt>int32</span> <span class=p>|</span> <span class=kt>int64</span> <span class=p>|</span> <span class=kt>uint</span> <span class=p>|</span> <span class=kt>uint8</span> <span class=p>|</span> <span class=kt>uint16</span> <span class=p>|</span> <span class=kt>uint32</span> <span class=p>|</span> <span class=kt>uint64</span> <span class=p>|</span> <span class=kt>float32</span> <span class=p>|</span> <span class=kt>float64</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span></code></pre></td></tr></table></div></div><p>理所当然，这种写法是我们无法忍受也难以维护的，而Go支持将类型约束单独拿出来定义到接口中，从而让代码更容易维护：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>IntUintFloat</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=p>|</span> <span class=kt>int8</span> <span class=p>|</span> <span class=kt>int16</span> <span class=p>|</span> <span class=kt>int32</span> <span class=p>|</span> <span class=kt>int64</span> <span class=p>|</span> <span class=kt>uint</span> <span class=p>|</span> <span class=kt>uint8</span> <span class=p>|</span> <span class=kt>uint16</span> <span class=p>|</span> <span class=kt>uint32</span> <span class=p>|</span> <span class=kt>uint64</span> <span class=p>|</span> <span class=kt>float32</span> <span class=p>|</span> <span class=kt>float64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=nx>IntUintFloat</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span></code></pre></td></tr></table></div></div><p>这段代码把类型约束给单独拿出来，写入了接口类型 <code>IntUintFloat</code> 当中。需要指定类型约束的时候直接使用接口 <code>IntUintFloat</code> 即可。</p><p>不过这样的代码依旧不好维护，而接口和接口、接口和普通类型之间也是可以通过 <code>|</code> 进行组合：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Int</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=p>|</span> <span class=kt>int8</span> <span class=p>|</span> <span class=kt>int16</span> <span class=p>|</span> <span class=kt>int32</span> <span class=p>|</span> <span class=kt>int64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Uint</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>uint</span> <span class=p>|</span> <span class=kt>uint8</span> <span class=p>|</span> <span class=kt>uint16</span> <span class=p>|</span> <span class=kt>uint32</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Float</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>float32</span> <span class=p>|</span> <span class=kt>float64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=nx>Int</span> <span class=p>|</span> <span class=nx>Uint</span> <span class=p>|</span> <span class=nx>Float</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span>  <span class=c1>// 使用 &#39;|&#39; 将多个接口类型组合
+</span></span></span></code></pre></td></tr></table></div></div><p>上面的代码中，我们分别定义了 Int, Uint, Float 三个接口类型，并最终在 <code>Slice[T]</code> 的类型约束中通过使用 <code>|</code> 将它们组合到一起。</p><p>同时，在接口里也能直接组合其他接口，所以还可以像下面这样：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>SliceElement</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Int</span> <span class=p>|</span> <span class=nx>Uint</span> <span class=p>|</span> <span class=nx>Float</span> <span class=p>|</span> <span class=kt>string</span> <span class=c1>// 组合了三个接口类型并额外增加了一个 string 类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=nx>SliceElement</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span> 
+</span></span></code></pre></td></tr></table></div></div><h3 id=--指定底层类型-><code>~</code> : 指定底层类型 ✔️</h3><p>上面定义的 <code>Slice[T]</code> 虽然可以达到目的，但是有一个缺点：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s1</span> <span class=nx>Slice</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span> <span class=c1>// 正确 
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyInt</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s2</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>MyInt</span><span class=p>]</span> <span class=c1>// ✗ 错误。MyInt类型底层类型是int但并不是int类型，不符合 Slice[T] 的类型约束
+</span></span></span></code></pre></td></tr></table></div></div><p>这里发生错误的原因是，泛型类型 <code>Slice[T]</code> 允许的是 int 作为类型实参，而不是 MyInt （虽然 MyInt 类型底层类型是 int ，但它依旧不是 int 类型）。</p><p>为了从根本上解决这个问题，Go 新增了一个符号 <code>~</code> ，在类型约束中使用类似 <code>~int</code> 这种写法的话，就代表着<strong>不光是 int ，所有以 int 为底层类型的类型也都可用于实例化</strong>。</p><p>使用 <code>~</code> 对代码进行改写之后如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Int</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Uint</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>uint</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint32</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Float</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>float32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>float64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=nx>Int</span> <span class=p>|</span> <span class=nx>Uint</span> <span class=p>|</span> <span class=nx>Float</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s</span> <span class=nx>Slice</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span> <span class=c1>// 正确
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyInt</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s2</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>MyInt</span><span class=p>]</span>  <span class=c1>// MyInt底层类型是int，所以可以用于实例化
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyMyInt</span> <span class=nx>MyInt</span>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s3</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>MyMyInt</span><span class=p>]</span>  <span class=c1>// 正确。MyMyInt 虽然基于 MyInt ，但底层类型也是int，所以也能用于实例化
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyFloat32</span> <span class=kt>float32</span>  <span class=c1>// 正确
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>s4</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>MyFloat32</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>限制</strong>：使用 <code>~</code> 时有一定的限制：</p><ol><li><code>~</code> 后面的类型不能为接口</li><li><code>~</code> 后面的类型<strong>必须为基本类型</strong></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyInt</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=p>[]</span><span class=kt>byte</span>  <span class=c1>// 正确
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=err>~</span><span class=nx>MyInt</span>   <span class=c1>// 错误，~后的类型必须为基本类型
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=err>~</span><span class=kt>error</span>   <span class=c1>// 错误，~后的类型不能为接口
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=从方法集-method-set-到类型集-type-set>从方法集 (Method set) 到类型集 (Type set)</h3><p>上面的例子中，我们学习到了一种接口的全新写法，而这种写法在 Go1.18 之前是不存在的。如果你比较敏锐的话，一定会隐约认识到这种写法的改变这也一定意味着 Go 语言中 <code>接口(interface)</code> 这个概念发生了非常大的变化。</p><p>是的，在 Go1.18 之前，Go 官方对 <code>接口(interface)</code> 的定义是：接口是一个方法集 (method set)</p><blockquote><p>An interface type specifies a <strong>method set</strong> called its interface</p></blockquote><p>就如下面这个代码一样， <code>ReadWriter</code> 接口定义了一个接口(方法集)，这个集合中包含了 <code>Read()</code> 和 <code>Write()</code> 这两个方法。所有同时定义了这两种方法的类型被视为实现了这一接口。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>ReadWriter</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>但是，我们如果换一个角度来重新思考上面这个接口的话，会发现接口的定义实际上还能这样理解：</p><blockquote><p>我们可以把 <code>ReaderWriter</code> 接口看成代表了一个 <strong>类型的集合</strong>，所有实现了 <code>Read()</code> <code>Writer()</code> 这两个方法的类型都在接口代表的类型集合当中</p></blockquote><p>通过换个角度看待接口，在我们眼中接口的定义就从 <code>方法集(method set)</code> 变为了 <code>类型集(type set)</code>。而 Go1.18 开始就是依据这一点将接口的定义正式更改为了<strong>类型集(Type set)</strong></p><blockquote><p>An interface type defines a <em><strong>type set</strong></em> <em>(一个</em>接口类型定义了一个类型集)</p></blockquote><p>你或许会觉得，这不就是改了下概念上的定义实际上没什么用吗？是的，如果接口功能没变化的话确实如此。但是还记得下面这种用接口来简化类型约束的写法吗：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Float</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>float32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>float64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=nx>Float</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span> 
+</span></span></code></pre></td></tr></table></div></div><p>这就体现出了为什么要更改接口的定义了。用 <strong>类型集</strong> 的概念重新理解上面的代码的话就是：</p><blockquote><p>接口类型 Float 代表了一个 <strong>类型集合</strong>， 所有以 float32 或 float64 为底层类型的类型，都在这一类型集之中</p></blockquote><p>而 <code>type Slice[T Float] []T</code> 中， <strong>类型约束</strong>的真正意思是：</p><blockquote><p><strong>类型约束</strong>指定了类型形参可接受的类型<strong>集合</strong>，只有属于这个集合中的类型才能替换形参用于实例化</p></blockquote><p>如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s</span> <span class=nx>Slice</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span>      <span class=c1>// int 属于类型集 Float ，所以int可以作为类型实参
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>s</span> <span class=nx>Slice</span><span class=p>[</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>]</span> <span class=c1>// chan int 类型不在类型集 Float 中，所以错误
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=接口实现-implement-定义的变化>接口实现 (implement) 定义的变化</h4><p>既然接口定义发生了变化，那么从 Go1.18 开始 <code>接口实现(implement)</code> 的定义自然也发生了变化：</p><p>当满足以下条件时，我们可以说<strong>类型 T 实现了接口 I ( type T implements interface I)</strong>：</p><ul><li>T 不是接口时：类型 T 是接口 I 代表的类型集中的一个<strong>成员</strong> (T is an element of the type set of I)</li><li>T 是接口时： T 接口代表的类型集是 I 代表的类型集的<strong>子集</strong> (Type set of T is a subset of the type set of I)</li></ul><h4 id=类型的并集>类型的并集</h4><p>并集我们已经很熟悉了，之前一直使用的 <code>|</code> 符号就是求类型的并集 (<code>union</code>)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Uint</span> <span class=kd>interface</span> <span class=p>{</span>  <span class=c1>// 类型集 Uint 是 ~uint 和 ~uint8 等类型的并集
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=err>~</span><span class=kt>uint</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=类型的交集>类型的交集</h4><p>接口可以不止书写一行，如果一个接口有多行类型定义，那么取它们之间的 <strong>交集</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>AllInt</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int64</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint32</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Uint</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>uint</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>A</span> <span class=kd>interface</span> <span class=p>{</span> <span class=c1>// 接口A代表的类型集是 AllInt 和 Uint 的交集
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>AllInt</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Uint</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>B</span> <span class=kd>interface</span> <span class=p>{</span> <span class=c1>// 接口B代表的类型集是 AllInt 和 ~int 的交集
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>AllInt</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>上面这个例子中</p><ul><li>接口 A 代表的是 AllInt 与 Uint 的 <strong>交集</strong>，即 <code>~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64</code></li><li>接口 B 代表的则是 AllInt 和 ~int 的<strong>交集</strong>，即 <code>~int</code></li></ul><p>除了上面的交集，下面也是一种交集：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>C</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>很显然，~int 和 int 的交集只有 int 一种类型，所以接口 C 代表的类型集中只有 int 一种类型</p><h4 id=空集>空集</h4><p>当多个类型的交集如下面 <code>Bad</code> 这样为空的时候， <code>Bad</code> 这个接口代表的类型集为一个<strong>空集</strong>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Bad</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span>
+</span></span><span class=line><span class=cl>    <span class=kt>float32</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=c1>// 类型 int 和 float32 没有相交的类型，所以接口 Bad 代表的类型集为空
+</span></span></span></code></pre></td></tr></table></div></div><p><strong>没有任何一种类型属于空集</strong>。虽然 Bad 这样的写法是可以编译的，但实际上并没有什么意义</p><h4 id=空接口和-any->空接口和 any ✔️</h4><p>上面说了空集，接下来说一个特殊的类型集——<code>空接口 interface{}</code> 。因为，Go1.18 开始接口的定义发生了改变，所以 <code>interface{}</code> 的定义也发生了一些变更：</p><blockquote><p>空接口代表了所有类型的集合</p></blockquote><p>所以，对于 Go1.18 之后的空接口应该这样理解：</p><ol><li><p>虽然空接口内没有写入任何的类型，但它代表的是所有类型的集合，而非一个空集</p></li><li><p>类型约束中指定空接口的意思是指定了一个包含所有类型的类型集，并不是类型约束限定了只能使用空接口来做类型形参</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 空接口代表所有类型的集合。写入类型约束意味着所有类型都可拿来做类型实参
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=kd>interface</span><span class=p>{}]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s1</span> <span class=nx>Slice</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span>    <span class=c1>// 正确
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>s2</span> <span class=nx>Slice</span><span class=p>[</span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>string</span><span class=p>]</span>  <span class=c1>// 正确
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>s3</span> <span class=nx>Slice</span><span class=p>[</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>]</span>  <span class=c1>// 正确
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>s4</span> <span class=nx>Slice</span><span class=p>[</span><span class=kd>interface</span><span class=p>{}]</span>  <span class=c1>// 正确
+</span></span></span></code></pre></td></tr></table></div></div></li></ol><p>因为空接口是一个包含了所有类型的类型集，所以我们经常会用到它。于是，Go1.18 开始提供了一个<strong>与空接口 <code>interface{}</code> 等价的新关键词 <code>any</code></strong> ，用来使代码更简单：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Slice</span><span class=p>[</span><span class=nx>T</span> <span class=nx>any</span><span class=p>]</span> <span class=p>[]</span><span class=nx>T</span> <span class=c1>// 代码等价于 type Slice[T interface{}] []T
+</span></span></span></code></pre></td></tr></table></div></div><p>实际上 <code>any</code> 的定义就位于 Go 语言的 <code>builtin.go</code> 文件中（参考如下）， <code>any</code> 实际上就是 <code>interaface{}</code> 的别名 (alias)，两者完全等价</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// any is an alias for interface{} and is equivalent to interface{} in all ways.
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>any</span> <span class=p>=</span> <span class=kd>interface</span><span class=p>{}</span> 
+</span></span></code></pre></td></tr></table></div></div><p>所以从 Go 1.18 开始，所有可以用到空接口的地方其实都可以直接替换为 any，如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>s</span> <span class=p>[]</span><span class=nx>any</span> <span class=c1>// 等价于 var s []interface{}
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>m</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=nx>any</span> <span class=c1>// 等价于 var m map[string]interface{}
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>MyPrint</span><span class=p>(</span><span class=nx>value</span> <span class=nx>any</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果你高兴的话，项目迁移到 Go1.18 之后可以使用下面这行命令直接把整个项目中的空接口全都替换成 any。当然因为并不强制，所以到底是用 <code>interface{}</code> 还是 <code>any</code> 全看自己喜好</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>gofmt</span> <span class=o>-</span><span class=nx>w</span> <span class=o>-</span><span class=nx>r</span> <span class=err>&#39;</span><span class=kd>interface</span><span class=p>{}</span> <span class=o>-</span><span class=p>&gt;</span> <span class=nx>any</span><span class=err>&#39;</span> <span class=p>.</span><span class=o>/...</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>💡 Go 语言项目中就曾经有人提出过把 Go 语言中所有 <code>interface{}</code> 替换成 <code>any</code> 的 <a href="https://link.segmentfault.com/?enc=RCoMS3v%2BV%2FL44OvJADRwiQ%3D%3D.ZRvUGCJTKyfIjtNqp0BaKKYOPErogpQ%2BInFNEKBvVpDbPP47e6dAfcEOmZzWpA73" target=_blank rel="noopener noreffer">issue</a>，然后因为影响范围过大过而且影响因素不确定，理所当然被驳回了</p></blockquote><h4 id=可比较-comparable-和可排序-ordered->可比较 (comparable) 和可排序 (ordered) ✔️</h4><p>对于一些数据类型，我们需要在类型约束中限制只接受能 <code>!=</code> 和 <code>==</code> 对比的类型，如 map：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 错误。因为map中键的类型必须是可进行!=和==比较的类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>MyMap</span><span class=p>[</span><span class=nx>KEY</span> <span class=nx>any</span><span class=p>,</span> <span class=nx>VALUE</span> <span class=nx>any</span><span class=p>]</span> <span class=kd>map</span><span class=p>[</span><span class=nx>KEY</span><span class=p>]</span><span class=nx>VALUE</span> 
+</span></span></code></pre></td></tr></table></div></div><p>所以Go直接内置了一个叫 <code>comparable</code> 的接口，它代表了所有可用 <code>!=</code> 以及 <code>==</code> 对比的类型：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyMap</span><span class=p>[</span><span class=nx>KEY</span> <span class=nx>comparable</span><span class=p>,</span> <span class=nx>VALUE</span> <span class=nx>any</span><span class=p>]</span> <span class=kd>map</span><span class=p>[</span><span class=nx>KEY</span><span class=p>]</span><span class=nx>VALUE</span> <span class=c1>// 正确
+</span></span></span></code></pre></td></tr></table></div></div><p><code>comparable</code> 比较容易引起误解的一点是很多人容易把他与可排序搞混淆。可比较指的是 可以执行 <code>!=</code> <code>==</code> 操作的类型，并没确保这个类型可以执行大小比较（ <code>>,&lt;,&lt;=,>=</code> ）。如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>OhMyStruct</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>a</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>a</span><span class=p>,</span> <span class=nx>b</span> <span class=nx>OhMyStruct</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>a</span> <span class=o>==</span> <span class=nx>b</span> <span class=c1>// 正确。结构体可使用 == 进行比较
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>a</span> <span class=o>!=</span> <span class=nx>b</span> <span class=c1>// 正确
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=nx>a</span> <span class=p>&gt;</span> <span class=nx>b</span> <span class=c1>// 错误。结构体不可比大小
+</span></span></span></code></pre></td></tr></table></div></div><p>而可进行大小比较的类型被称为 <code>Orderd</code> 。目前 Go 语言并没有像 <code>comparable</code> 这样直接内置对应的关键词，所以想要的话需要自己来定义相关接口，比如我们可以参考 Go 官方包 <code>golang.org/x/exp/constraints</code> 如何定义：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Ordered 代表所有可比大小排序的类型
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>Ordered</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Integer</span> <span class=p>|</span> <span class=nx>Float</span> <span class=p>|</span> <span class=err>~</span><span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Integer</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Signed</span> <span class=p>|</span> <span class=nx>Unsigned</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Signed</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>int64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Unsigned</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>uint</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint64</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uintptr</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Float</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>float32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>float64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>💡 这里虽然可以直接使用官方包 <a href="https://link.segmentfault.com/?enc=fUJXUVvWNlWckJHC5B2y2w%3D%3D.SYrmd%2B%2FFGwy4Gyk7MvYIgwWK0D1NdklbRuZEsObjPYBc9kyqZM2jIBF0A1NK%2Fp64" target=_blank rel="noopener noreffer">golang.org/x/exp/constraints</a> ，但因为这个包属于实验性质的 x 包，今后可能会发生非常大变动，所以并不推荐直接使用</p></blockquote><h3 id=接口两种类型>接口两种类型</h3><p>我们接下来再观察一个例子，这个例子是阐述接口是类型集最好的例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>ReadWriter</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>string</span> <span class=p>|</span> <span class=err>~</span><span class=p>[]</span><span class=kt>rune</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>最开始看到这一例子你一定有点懵不太理解它代表的意思，但是没关系，我们用类型集的概念就能比较轻松理解这个接口的意思：</p><blockquote><p>接口类型 <code>ReadWriter</code> 代表了一个类型集合，所有以 <code>string</code> 或 <code>[]rune</code> 为底层类型，并且实现了 <code>Read()</code> <code>Write()</code> 这两个方法的类型都在 <code>ReadWriter </code>代表的类型集当中</p></blockquote><p>如下面代码中，<code>StringReadWriter</code> 存在于接口 <code>ReadWriter</code> 代表的类型集中，而 <code>BytesReadWriter</code> 因为底层类型是 <code>[]byte</code>（既不是 <code>string</code> 也是不 <code>[]rune</code>） ，所以它不属于 <code>ReadWriter</code> 代表的类型集</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 类型 StringReadWriter 实现了接口 Readwriter
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>StringReadWriter</span> <span class=kt>string</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>StringReadWriter</span><span class=p>)</span> <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>StringReadWriter</span><span class=p>)</span> <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//  类型BytesReadWriter 没有实现接口 Readwriter
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>BytesReadWriter</span> <span class=p>[]</span><span class=kt>byte</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>BytesReadWriter</span><span class=p>)</span> <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>s</span> <span class=nx>BytesReadWriter</span><span class=p>)</span> <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> <span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>你一定会说，啊等等，这接口也变得太复杂了把，那我定义一个 <code>ReadWriter</code> 类型的接口变量，然后接口变量赋值的时候不光要考虑到方法的实现，还必须考虑到具体底层类型？心智负担也太大了吧。是的，为了解决这个问题也为了保持 Go 语言的兼容性，Go1.18 开始将接口分为了两种类型</p><ul><li><strong>基本接口 (Basic interface)</strong></li><li><strong>一般接口 (General interface)</strong></li></ul><h4 id=基本接口-basic-interface>基本接口 (Basic interface)</h4><p>接口定义中如果只有方法的话，那么这种接口被称为<strong>基本接口 (Basic interface)</strong>。这种接口就是 Go1.18 之前的接口，用法也基本和 Go1.18 之前保持一致。基本接口大致可以用于如下几个地方：</p><ul><li><p>最常用的，<strong>定义接口变量并赋值</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyError</span> <span class=kd>interface</span> <span class=p>{</span> <span class=c1>// 接口中只有方法，所以是基本接口
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nf>Error</span><span class=p>()</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 用法和 Go1.18之前保持一致
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>err</span> <span class=nx>MyError</span> <span class=p>=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;hello world&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>基本接口因为也代表了一个类型集，所以也可<strong>用在类型约束中</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// io.Reader 和 io.Writer 都是基本接口，也可以用在类型约束中
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>MySlice</span><span class=p>[</span><span class=nx>T</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Reader</span> <span class=p>|</span> <span class=nx>io</span><span class=p>.</span><span class=nx>Writer</span><span class=p>]</span>  <span class=p>[]</span><span class=nx>Slice</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><h4 id=一般接口-general-interface>一般接口 (General interface)</h4><p>如果接口内不光只有方法，还有类型的话，这种接口被称为<strong>一般接口 (General interface)</strong> ，如下例子都是一般接口：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Uint</span> <span class=kd>interface</span> <span class=p>{</span> <span class=c1>// 接口 Uint 中有类型，所以是一般接口
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=err>~</span><span class=kt>uint</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>ReadWriter</span> <span class=kd>interface</span> <span class=p>{</span>  <span class=c1>// ReadWriter 接口既有方法也有类型，所以是一般接口
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=err>~</span><span class=kt>string</span> <span class=p>|</span> <span class=err>~</span><span class=p>[]</span><span class=kt>rune</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>Read</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Write</span><span class=p>(</span><span class=nx>p</span> <span class=p>[]</span><span class=kt>byte</span><span class=p>)</span> <span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>一般接口类型不能用来定义变量，只能用于泛型的类型约束中</strong>。所以以下的用法是错误的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Uint</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>uint</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint8</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint16</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint32</span> <span class=p>|</span> <span class=err>~</span><span class=kt>uint64</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>uintInf</span> <span class=nx>Uint</span> <span class=c1>// 错误。Uint是一般接口，只能用于类型约束，不得用于变量定义
+</span></span></span></code></pre></td></tr></table></div></div><p>这一限制保证了一般接口的使用被限定在了泛型之中，不会影响到 Go1.18 之前的代码，同时也极大减少了书写代码时的心智负担</p><h3 id=泛型接口>泛型接口</h3><p>所有类型的定义中都可以使用类型形参，所以<strong>接口定义自然也可以使用类型形参</strong>，观察下面这两个例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>DataProcessor</span><span class=p>[</span><span class=nx>T</span> <span class=nx>any</span><span class=p>]</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Process</span><span class=p>(</span><span class=nx>oriData</span> <span class=nx>T</span><span class=p>)</span> <span class=p>(</span><span class=nx>newData</span> <span class=nx>T</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Save</span><span class=p>(</span><span class=nx>data</span> <span class=nx>T</span><span class=p>)</span> <span class=kt>error</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>DataProcessor2</span><span class=p>[</span><span class=nx>T</span> <span class=nx>any</span><span class=p>]</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kd>struct</span><span class=p>{</span> <span class=nx>Data</span> <span class=kd>interface</span><span class=p>{}</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>Process</span><span class=p>(</span><span class=nx>data</span> <span class=nx>T</span><span class=p>)</span> <span class=p>(</span><span class=nx>newData</span> <span class=nx>T</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Save</span><span class=p>(</span><span class=nx>data</span> <span class=nx>T</span><span class=p>)</span> <span class=kt>error</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>因为引入了类型形参，所以这两个接口是泛型类型。<strong>而泛型类型要使用的话必须传入类型实参实例化才有意义</strong>。所以我们来尝试实例化一下这两个接口。因为 <code>T</code> 的类型约束是 any，所以可以随便挑一个类型来当实参(比如string)：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>DataProcessor</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 实例化之后的接口定义相当于如下所示：
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>DataProcessor</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Process</span><span class=p>(</span><span class=nx>oriData</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>newData</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Save</span><span class=p>(</span><span class=nx>data</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>error</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>经过实例化之后就好理解了， <code>DataProcessor[string]</code> 因为只有方法，所以它实际上就是个 <strong>基本接口 (Basic interface)</strong>，这个接口包含两个能处理 string 类型的方法。像下面这样实现了这两个能处理 string 类型的方法就算实现了这个接口：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>CSVProcessor</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 注意，方法中 oriData 等的类型是 string
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=nx>CSVProcessor</span><span class=p>)</span> <span class=nf>Process</span><span class=p>(</span><span class=nx>oriData</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>newData</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>...</span><span class=p>.</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=nx>CSVProcessor</span><span class=p>)</span> <span class=nf>Save</span><span class=p>(</span><span class=nx>oriData</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// CSVProcessor实现了接口 DataProcessor[string] ，所以可赋值
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>processor</span> <span class=nx>DataProcessor</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span> <span class=p>=</span> <span class=nx>CSVProcessor</span><span class=p>{}</span>  
+</span></span><span class=line><span class=cl><span class=nx>processor</span><span class=p>.</span><span class=nf>Process</span><span class=p>(</span><span class=s>&#34;name,age\nbob,12\njack,30&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>processor</span><span class=p>.</span><span class=nf>Save</span><span class=p>(</span><span class=s>&#34;name,age\nbob,13\njack,31&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 错误。CSVProcessor没有实现接口 DataProcessor[int]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>processor2</span> <span class=nx>DataProcessor</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span> <span class=p>=</span> <span class=nx>CSVProcessor</span><span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><p>再用同样的方法实例化 <code>DataProcessor2[T]</code> ：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>DataProcessor2</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 实例化后的接口定义可视为
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>DataProcessor2</span><span class=p>[</span><span class=nx>T</span> <span class=kt>string</span><span class=p>]</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kd>struct</span><span class=p>{</span> <span class=nx>Data</span> <span class=kd>interface</span><span class=p>{}</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>Process</span><span class=p>(</span><span class=nx>data</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>newData</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Save</span><span class=p>(</span><span class=nx>data</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>error</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>DataProcessor2[string]</code> 因为带有类型并集所以它是<strong>一般接口(General interface)</strong>，所以实例化之后的这个接口代表的意思是：</p><ol><li>只有实现了 <code>Process(string) string</code> 和 <code>Save(string) error</code> 这两个方法，并且以 <code>int</code> 或 <code>struct{ Data interface{} }</code> 为底层类型的类型才算实现了这个接口</li><li><strong>一般接口 (General interface)</strong> 不能用于变量定义只能用于类型约束，所以接口 <code>DataProcessor2[string]</code> 只是定义了一个用于类型约束的类型集</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// XMLProcessor 虽然实现了接口 DataProcessor2[string] 的两个方法，但是因为它的底层类型是 []byte，所以依旧是未实现 DataProcessor2[string]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>XMLProcessor</span> <span class=p>[]</span><span class=kt>byte</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=nx>XMLProcessor</span><span class=p>)</span> <span class=nf>Process</span><span class=p>(</span><span class=nx>oriData</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>newData</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=nx>XMLProcessor</span><span class=p>)</span> <span class=nf>Save</span><span class=p>(</span><span class=nx>oriData</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// JsonProcessor 实现了接口 DataProcessor2[string] 的两个方法，同时底层类型是 struct{ Data interface{} }。所以实现了接口 DataProcessor2[string]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>JsonProcessor</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Data</span> <span class=kd>interface</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=nx>JsonProcessor</span><span class=p>)</span> <span class=nf>Process</span><span class=p>(</span><span class=nx>oriData</span> <span class=kt>string</span><span class=p>)</span> <span class=p>(</span><span class=nx>newData</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=nx>JsonProcessor</span><span class=p>)</span> <span class=nf>Save</span><span class=p>(</span><span class=nx>oriData</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 错误。DataProcessor2[string]是一般接口不能用于创建变量
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>var</span> <span class=nx>processor</span> <span class=nx>DataProcessor2</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 正确，实例化之后的 DataProcessor2[string] 可用于泛型的类型约束
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>ProcessorList</span><span class=p>[</span><span class=nx>T</span> <span class=nx>DataProcessor2</span><span class=p>[</span><span class=kt>string</span><span class=p>]]</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 正确，接口可以并入其他接口
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>StringProcessor</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>DataProcessor2</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>PrintString</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 错误，带方法的一般接口不能作为类型并集的成员(参考6.5 接口定义的种种限制规则
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>StringProcessor</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>DataProcessor2</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span> <span class=p>|</span> <span class=nx>DataProcessor2</span><span class=p>[[]</span><span class=kt>byte</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>PrintString</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=接口定义的种种限制规则>接口定义的种种限制规则</h3><p>从 Go1.18 开始，在定义类型集 (接口) 的时候增加了非常多十分琐碎的限制规则，其中很多规则都在之前的内容中介绍过了，但剩下还有一些规则因为找不到好的地方介绍，所以在这里统一介绍下：</p><ol><li><p>用 <code>|</code> 连接多个类型的时候，类型之间不能有相交的部分 (即必须是不交集):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyInt</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 错误，MyInt的底层类型是int,和 ~int 有相交的部分
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>_</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=nx>MyInt</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>但是相交的类型中是接口的话，则不受这一限制：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyInt</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=kd>interface</span><span class=p>{</span> <span class=nx>MyInt</span> <span class=p>}</span>  <span class=c1>// 正确
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>interface</span><span class=p>{</span> <span class=err>~</span><span class=kt>int</span> <span class=p>}</span> <span class=p>|</span> <span class=nx>MyInt</span> <span class=c1>// 也正确
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>interface</span><span class=p>{</span> <span class=err>~</span><span class=kt>int</span> <span class=p>}</span> <span class=p>|</span> <span class=kd>interface</span><span class=p>{</span> <span class=nx>MyInt</span> <span class=p>}</span>  <span class=c1>// 也正确
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>类型的并集中不能有类型形参</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyInf</span><span class=p>[</span><span class=nx>T</span> <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kt>string</span><span class=p>]</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>float32</span> <span class=p>|</span> <span class=nx>T</span>  <span class=c1>// 错误。T是类型形参
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyInf2</span><span class=p>[</span><span class=nx>T</span> <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kt>string</span><span class=p>]</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>T</span>  <span class=c1>// 错误
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>接口不能直接或间接地并入自己</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Bad</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Bad</span> <span class=c1>// 错误，接口不能直接并入自己
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Bad2</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Bad1</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Bad1</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Bad2</span> <span class=c1>// 错误，接口Bad1通过Bad2间接并入了自己
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Bad3</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kt>string</span> <span class=p>|</span> <span class=nx>Bad3</span> <span class=c1>// 错误，通过类型的并集并入了自己
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>接口的并集成员个数大于一的时候不能直接或间接并入 <code>comparable</code> 接口</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=nx>type</span> <span class=nx>OK</span> <span class=kr>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>comparable</span> <span class=c1>// 正确。只有一个类型的时候可以使用 comparable
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>type</span> <span class=nx>Bad1</span> <span class=kr>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=p>[]</span><span class=kr>int</span> <span class=o>|</span> <span class=nx>comparable</span> <span class=c1>// 错误，类型并集不能直接并入 comparable 接口
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>type</span> <span class=nx>CmpInf</span> <span class=kr>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>comparable</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>type</span> <span class=nx>Bad2</span> <span class=kr>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>chan</span> <span class=kr>int</span> <span class=o>|</span> <span class=nx>CmpInf</span>  <span class=c1>// 错误，类型并集通过 CmpInf 间接并入了comparable
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>type</span> <span class=nx>Bad3</span> <span class=kr>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>chan</span> <span class=kr>int</span> <span class=o>|</span> <span class=kr>interface</span><span class=p>{</span><span class=nx>comparable</span><span class=p>}</span>  <span class=c1>// 理所当然，这样也是不行的
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>带方法的接口 (无论是基本接口还是一般接口)，都不能写入接口的并集中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>_</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kt>string</span> <span class=p>|</span> <span class=kt>error</span> <span class=c1>// 错误，error是带方法的接口(一般接口) 不能写入并集中
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>DataProcessor</span><span class=p>[</span><span class=nx>T</span> <span class=nx>any</span><span class=p>]</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>string</span> <span class=p>|</span> <span class=err>~</span><span class=p>[]</span><span class=kt>byte</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>Process</span><span class=p>(</span><span class=nx>data</span> <span class=nx>T</span><span class=p>)</span> <span class=p>(</span><span class=nx>newData</span> <span class=nx>T</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Save</span><span class=p>(</span><span class=nx>data</span> <span class=nx>T</span><span class=p>)</span> <span class=kt>error</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 错误，实例化之后的 DataProcessor[string] 是带方法的一般接口，不能写入类型并集
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>_</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kt>string</span> <span class=p>|</span> <span class=nx>DataProcessor</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span> 
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Bad</span><span class=p>[</span><span class=nx>T</span> <span class=nx>any</span><span class=p>]</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=err>~</span><span class=kt>int</span> <span class=p>|</span> <span class=err>~</span><span class=kt>string</span> <span class=p>|</span> <span class=nx>DataProcessor</span><span class=p>[</span><span class=nx>T</span><span class=p>]</span>  <span class=c1>// 也不行
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-05-03</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/context/ class=prev rel=prev title="Go context 标准库"><i class="fas fa-angle-left fa-fw"></i>Go context 标准库</a>
+<a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/log/ class=next rel=next title="Go log 标准库">Go log 标准库<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:45},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
