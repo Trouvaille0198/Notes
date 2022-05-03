@@ -1197,7 +1197,7 @@ PING busybox1 (172.19.0.2): 56 data bytes
 
 https://zhuanlan.zhihu.com/p/150951927#:~:text=Docker%20%28%E4%B8%80%29-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8%201%201.%E6%9C%AC%E5%9C%B0%E9%95%9C%E5%83%8F%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2%EF%BC%9A%20docker%20images%202%202.%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F%E4%BF%A1%E6%81%AF%E6%9F%A5%E8%AF%A2%EF%BC%9A,5.%E9%87%8D%E5%90%AF%E5%AE%B9%E5%99%A8%EF%BC%9A%20docker%20restart%20mysql01%2010%206.%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8%20%E6%9B%B4%E5%A4%9A%E7%BB%93%E6%9E%9C...%20
 
-## 使用 Dockerfile 定制镜像
+## 使用 Dockerfile 定制镜像 :star:
 
 镜像的定制实际上就是定制每一层所添加的配置、文件。如果我们可以把每一层修改、安装、构建、操作的命令都写入一个**脚本**，用这个脚本来构建、定制镜像，那么一些无法重复的问题、镜像构建透明性的问题、体积的问题就都会解决。这个脚本就是 Dockerfile。
 

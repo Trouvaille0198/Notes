@@ -780,6 +780,35 @@ combined := append(sub1, sub2...) // [1, 2, 3, 4, 0, 0, 0]
 >
 > 但当 `slice` 中没有剩余空间（即 `(cap-len) == 0`）时，此时将动态分配新的数组空间。返回的 `slice` 数组指针将指向这个空间，而原数组的内容将保持不变；其它引用此数组的 `slice` 则不受影响。
 
+#### 小例子
+
+```go
+package main
+
+import "fmt"
+
+func fn1() {
+	var arr [5]int = [5]int{1, 2, 3, 4, 5}
+	slice := arr[:3]
+	slice = append(slice, 100) // 直接覆盖原数组的4
+	fmt.Println(slice)         // [1,2,3,100]
+	fmt.Println(arr)           // [1,2,3,100,5]
+}
+
+func fn2() {
+	var arr [5]int = [5]int{1, 2, 3, 4, 5}
+	slice := arr[:3:3]
+	slice = append(slice, 100) // 扩容 分配新内存 不影响原数组
+	fmt.Println(slice)         // [1,2,3,100]
+	fmt.Println(arr)           // [1,2,3,4,5]
+}
+
+func main() {
+	fn1()
+	fn2()
+}
+```
+
 ### 字典 / 键值对，map
 
 map 类似于 java 的 HashMap，Python 的字典 (dict)，是一种存储键值对 (Key-Value) 的数据结构。使用方式和其他语言几乎没有区别。

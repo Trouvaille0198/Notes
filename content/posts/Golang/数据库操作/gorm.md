@@ -718,6 +718,28 @@ db.Clauses(clause.OnConflict{
 
 您还可以查看 [高级查询](https://gorm.io/zh_CN/docs/advanced_query.html) 中的 `FirstOrInit`、`FirstOrCreate`
 
+#### 复合主键
+
+通过将多个字段设为主键，以创建复合主键，例如：
+
+```
+type Product struct {
+  ID           string `gorm:"primaryKey"`
+  LanguageCode string `gorm:"primaryKey"`
+  Code         string
+  Name         string
+}
+```
+
+**注意：**默认情况下，整型 `PrioritizedPrimaryField` 启用了 `AutoIncrement`，要禁用它，您需要为整型字段关闭 `autoIncrement`：
+
+```
+type Product struct {
+  CategoryID uint64 `gorm:"primaryKey;autoIncrement:false"`
+  TypeID     uint64 `gorm:"primaryKey;autoIncrement:false"`
+}
+```
+
 ## 查询
 
 ### 检索单个对象

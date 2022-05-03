@@ -156,3 +156,56 @@ draft: true
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220410204119847.png" alt="image-20220410204119847" style="zoom:67%;" />
 
 可以看到估计值极为接近。只有 0.1 左右的差距，侧面证明了六大阵型设计的合理性。
+
+## 功能模块设计
+
+![image-20220404135450853](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220404135450853.png)
+
+代码结构
+
+- assets：静态文件，如人名库、国家名库
+- core：数据库与ORM框架的相关配置
+- crud：使用对象关系映射模型构建的原子性数据库操作集合
+- game_configs：游戏的参数配置和算法权重配置文件
+    - 如头像生成概率、能力值的地域修正、联赛和俱乐部的初始数据、各个职责能力值的计算公式、token生成密钥等
+    - ![image-20220404135825016](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220404135825016.png)
+
+- logs：日志文件
+- models：ORM模型定义
+    - 负责与对象关系映射模型与数据库的交互转换
+    - ![image-20220404140159339](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220404140159339.png)
+
+- modules：游戏运行的核心模块集合
+
+    - ![image-20220404140339337](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220404140339337.png)
+
+    - computed_data_app：数据对象的计算属性统计模块，负责将数据库中的初始数据构建为成体系的结构化数据，便于展示给用户
+    - game_app：比赛逻辑模块
+        - AI 之间的比赛逻辑和人机比赛逻辑
+            - 数十种动作对抗的函数定义
+            - 五种进攻战术的脚本
+            - 比赛实时数据的记录
+        - 两种球员挑选算法
+        - 根据对手特性调整战术比重的算法
+
+    - generate_app：生成联赛、俱乐部、球、日程表的工厂类模块
+
+    - next_turn_app：推动游戏行进的消息转发模块，负责接受前端请求调用相应的功能
+
+    - transfer_app：球员市场转会模块
+        - AI 间的球员交易、玩家和 AI 俱乐部间的球员交易
+        - 球员合同谈判过程模拟
+
+- routers：提供 API，负责前后端的通信和数据交换
+
+- schemas：数据交换格式的规范化模块，定义了每个数据实体的数据类型
+
+- utils：工具模块
+
+    - ![image-20220404142251723](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220404142251723.png)
+
+    - date：日期生成和计算工具
+    - dependencies 与 token_validator：用户鉴权工具
+    - logger：日志记录类
+    - utils：提供常用的工具函数，如时间序列生成算法、随机数生成算法等
+

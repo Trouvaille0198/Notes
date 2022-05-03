@@ -5,6 +5,7 @@ draft: false
 author: "MelonCholi"
 tags: []
 categories: [Golang]
+featuredImage:https://images.wombo.art/generated/2a2383ea-ca66-4265-93a1-6e837c6fc3c1/final.jpg?Expires=1652185702&Signature=N6WbpbktT0ZJL~CIpDuMj~1R88blsLtQbRWB~smcwwQHTqKxCPGOMkFkDDe0JJJl6XBFqajjbJmj~E70BDWM6u48ucS1B-btQprIkdJ0-O7i~VWF4p~SOxBTmAEQSDbUT17Igk1ww2~fxJIcV-a5-M0a8UpVkcuWUjEGcytkskPRgYn9Dr9JIB6KCg5Ci32n801lsta7JDIoCByiaZlFeHeoWhfkOEDhqs4E6mjaA3wCgAddnRNDndJgeh9cjhVwWQNHjwfi~CLmZarKYBmeksClhZyMiEi7tDY88KOJQmTuR~NGhDGRF2xcfsvY~T0-dD0cdvkpzVHcTAUG3hfbyg__&Key-Pair-Id=K1ZXCNMC55M2IL
 ---
 
 # go test
