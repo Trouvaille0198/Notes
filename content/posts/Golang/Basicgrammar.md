@@ -641,6 +641,10 @@ c := IT(b)
 
 ### 数组 array
 
+- 数组是值。将一个数组赋予另一个数组会复制其所有元素。
+- 特别地，若将某个数组传入某个函数，它将接收到该数组的一份副本而非指针。
+- 数组的大小是其类型的一部分。类型 `[10]int` 和` [20]int` 是不同的。
+
 ```go
 var arr [n]type
 ```
@@ -688,6 +692,8 @@ fmt.Println(arr)  // [101 102 103 104 105]
 ### 切片 slice
 
 数组的长度不能改变，如果想拼接 2 个数组，或是获取子数组，需要使用切片
+
+切片通过对数组进行封装，为数据序列提供了更通用、强大而方便的接口。 除了矩阵变换这类需要明确维度的情况外，**Go 中的大部分数组编程都是通过切片来完成的**。
 
 > Go 和 Python 的切片在底层实现上完全不同
 >
@@ -835,6 +841,7 @@ m1["Tom"] = 18
 - `map` 的长度不固定，和 `slice` 一样，也是一种引用类型
 - 内置的 `len` 函数将返回 `map` 拥有的 `key` 的数量
 - `map` 和其他基本型别不同，它不是 thread-safe，在多个 go-routine 存取时，必须使用 mutex lock 机制
+- 若试图通过映射中不存在的键来取值，就会返回与该映射中项的类型对应的**零值**。
 
 因为 `map` 也是一种引用类型，如果两个 `map` 同时指向一个底层，那么一个改变，另一个也相应的改变：
 
@@ -1073,7 +1080,7 @@ default:
 
 - 在这里，使用了`type` 关键字定义了一个新的类型 Gender。
 - 使用 const 定义了 MALE 和 FEMALE 2 个常量，**Go 语言中没有枚举 (enum) 的概念**，一般可以用常量的方式来模拟枚举。
-- 和其他语言不同的地方在于，Go 语言的 switch 不需要 break，匹配到某个 case，执行完该 case 定义的行为后，默认不会继续往下执行。**如果需要继续往下执行，需要使用 fallthrough**，例如：
+- 和其他语言不同的地方在于，Go 语言的 switch 不需要 break，匹配到某个 case，执行完该 case 定义的行为后，默认不会继续往下执行。**如果需要继续往下执行，需要使用 `fallthrough`**，例如：
 
 ```go
 switch gender {
@@ -1107,6 +1114,8 @@ default:
 }
 ```
 
+#### `switch` 用于判断变量类型
+
 A type `switch` compares types instead of values. You can use this to discover the type of an interface value. In this example, the variable `t` will have the type corresponding to its clause.
 
 ```go
@@ -1124,6 +1133,37 @@ whatAmI := func(i interface{}) {
     whatAmI(1)
     whatAmI("hey")
 ```
+
+#### 啊
+
+break 语句可以使 switch 提前终止。不仅是 switch， 有时候也必须打破层层的循环。在 Go 中，我们只需将标签放置到循环外，然后 “蹦” 到那里即可。下面的例子展示了二者的用法。
+
+```go
+Loop:
+    for n := 0; n < len(src); n += size {
+        switch {
+        case src[n] < sizeOne:
+            if validateOnly {
+                break
+            }
+            size = 1
+            update(src[n])
+
+        case src[n] < sizeTwo:
+            if n+1 >= len(src) {
+                err = errShortInput
+                break Loop // here, jump to Loop tag
+            }
+            if validateOnly {
+                break
+            }
+            size = 2
+            update(src[n] + src[n+1]<<shift)
+        }
+    }
+```
+
+当然，`continue` 语句也能接受一个可选的标签，不过它只能在循环中使用。
 
 ### for 循环
 
@@ -1906,9 +1946,9 @@ https://learnku.com/docs/effective-go/2020/method/6245
 
 > 如果一个 method 的 receiver 是 *T，你可以在一个 T 类型的实例变量 V 上面调用这个 method，而不需要 &V 去调用这个 method
 >
-> 如果一个 method 的 receiver 是 T，你可以在一个 *T 类型的变量 P 上面调用这个 method，而不需要 *P 去调用这个method
+> 如果一个 method 的 receiver 是 T，你可以在一个 *T 类型的变量 P 上面调用这个 method，而不需要 *P 去调用这个 method
 >
-> 但是一切结果取决于 receiver 的类型
+> **但是一切结果取决于 receiver 的类型**
 
 ```go
 type Data struct {
@@ -1992,10 +2032,10 @@ func main() {
 
 #### method 重写
 
-可以在Employee上面定义一个method，重写匿名字段的方法
+可以在 Employee 上面定义一个 method，重写匿名字段的方法
 
 ```go
-//Employee的method重写Human的method
+// Employee的method重写Human的method
 func (e *Employee) SayHi() {
 	fmt.Printf("Hi, I am %s, I work at %s. Call me on %s\n", e.name,
 		e.company, e.phone) //Yes you can split into 2 lines here.
@@ -2186,10 +2226,6 @@ func main() {
 ```
 10,true
 ```
-
-### 泛型
-
-
 
 ## 并发编程 goroutine
 
@@ -2684,8 +2720,12 @@ var _ json.Marshaler = (*RawMessage)(nil)
 
 ### `make` 和 `new` 的区别
 
+可以参考：https://learnku.com/docs/effective-go/2020/data/6243
+
 - `make` 的作用是初始化内置的数据结构，也就是我们在前面提到的切片、哈希表和 Channel
 - `new` 的作用是根据传入的类型分配一片内存空间并返回指向这片内存空间的指针
+    - 表达式 `new(File)` 和 `&File{}` 是等价的。
+
 
 ### 解决 Go 的相对路径问题
 
@@ -2789,7 +2829,7 @@ const (
 )
 ```
 
-#### 防止结构体字段用纯值方式初始化，添加 `_ struct {}` 字段：
+### 防止结构体字段用纯值方式初始化，添加 `_ struct {}` 字段：
 
 当你的结构体要求强制给出所有参数才允许初始化时：
 
@@ -2807,3 +2847,55 @@ type Point struct {
 ```
 
 当在你所有的结构体中添加了 `_ struct{}` 后，使用 `go vet` 命令进行检查，（原来声明的方式）就会提示没有足够的参数。
+
+### 二维数组的创建方法
+
+有时必须分配一个二维数组，例如在处理像素的扫描行时，这种情况就会发生。 我们有两种方式来达到这个目的。
+
+1. 独立地分配每一个切片；
+2. 只分配一个数组， 将各个切片都指向它。
+
+采用哪种方式取决于你的应用。若切片会增长或收缩， 就应该通过独立分配来避免覆盖下一行；若不会，用单次分配来构造对象会更加高效。 
+
+一次一行：
+
+```go
+// 分配底层切片.
+picture := make([][]uint8, YSize) // y每一行的大小
+//循环遍历每一行
+for i := range picture {
+    picture[i] = make([]uint8, XSize)
+}
+```
+
+一次分配，对行进行切片：
+
+```go
+// 分配底层切片
+picture := make([][]uint8, YSize) //  每 y 个单元一行。
+// 分配一个大一些的切片以容纳所有的元素
+pixels := make([]uint8, XSize*YSize) // 指定类型[]uint8, 即便图片是 [][]uint8.
+//循环遍历图片所有行，从剩余像素切片的前面对每一行进行切片。
+for i := range picture {
+    picture[i], pixels = pixels[:XSize], pixels[XSize:]
+}
+```
+
+### 集合的实现
+
+集合可实现成一个值类型为 bool 的映射。将该映射中的项置为 true 可将该值放入集合中，此后通过简单的索引操作即可判断是否存在。
+
+```go
+attended := map[string]bool{
+    "Ann": true,
+    "Joe": true,
+    ...
+}
+
+if attended[person] { // person不在集合中，返回 false
+    fmt.Println(person, "was at the meeting")
+}
+```
+
+
+

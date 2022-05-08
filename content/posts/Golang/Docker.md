@@ -112,7 +112,7 @@ docker 中有这样几个概念：
 
 当我们写完 dockerfile 交给 docker “编译” 时使用这个命令，那么 client 在接收到请求后转发给 docker daemon，接着 docker daemon 根据 dockerfile 创建出“可执行程序” image。
 
-![img](https://pic3.zhimg.com/v2-f16577a98471b4c4b5b1af1036882caa_b.jpg)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-f16577a98471b4c4b5b1af1036882caa_b.jpg)
 
 
 
@@ -120,7 +120,7 @@ docker 中有这样几个概念：
 
 有了“可执行程序” image 后就可以运行程序了，接下来使用命令 `docker run`，docker daemon 接收到该命令后找到具体的 image，然后加载到内存开始执行，image 执行起来就是所谓的 container。
 
-![img](https://pic4.zhimg.com/v2-672b29e2d53d2ab044269b026c6bc473_b.jpg)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-672b29e2d53d2ab044269b026c6bc473_b.jpg)
 
 
 
@@ -136,7 +136,7 @@ docker 中有这样几个概念：
 
 因此，这个命令的实现也很简单，那就是用户通过 docker client 发送命令，docker daemon 接收到命令后向 docker registry 发送 image 下载请求，下载后存放在本地，这样我们就可以使用 image 了。
 
-![img](https://pic3.zhimg.com/v2-dac570abcf7e1776cc266a60c4b19e5e_b.jpg)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-dac570abcf7e1776cc266a60c4b19e5e_b.jpg)
 
 最后，让我们来看一下 docker 的底层实现。
 

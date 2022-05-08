@@ -3042,7 +3042,7 @@ AVL
 
 两两相比，重复，每次循环只确定一个最大/小值
 
-![img](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/849589-20171015223238449-2146169197.gif)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/849589-20171015223238449-2146169197.gif)
 
 #### 实现
 
@@ -3054,8 +3054,8 @@ SeqList<T> BubbleSort(SeqList<T> list)
 {
     for (int i = 0; i < list.GetLength - 1; i++)
         for (int j = 0; j < list.GetLength() - 1 - i; j++)
-            if (list.GetElem(i) > list.GetElem(i + 1))
-                list.ExchangeElem(i, i + 1);
+            if (list.GetElem(j) > list.GetElem(j + 1))
+                list.ExchangeElem(j, j + 1);
 }
 ```
 
@@ -3076,7 +3076,7 @@ SeqList<T> BubbleSort(SeqList<T> list)
 
 任取某个元素作为基准，划分左右子表，再在左右子表中递归快排
 
-<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210517094051933.png" alt="image-20210517094051933" style="zoom:50%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210517094051933.png" alt="image-20210517094051933" style="zoom:50%;" />
 
 ![1](https://images2017.cnblogs.com/blog/849589/201710/849589-20171015230936371-1413523412.gif)
 

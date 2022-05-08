@@ -9,6 +9,8 @@ categories: [Golang]
 
 # Go 高性能编程
 
+https://geektutu.com/post/high-performance-go.html
+
 ## 常用数据结构
 
 ### 字符串高效拼接

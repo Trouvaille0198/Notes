@@ -12,13 +12,9 @@ categories: [其他]
 
 ## 测试图片插入
 
-- 截图插入
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
 
-  <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20201117142654838.png" alt="image-20201117142654838" style="zoom:50%;" />
-
-- 拖动本地图片插入
-
-  <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/download.png" alt="download" style="zoom:50%;" />
+![QQ图片20220505111645](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/QQ%E5%9B%BE%E7%89%8720220505111645.jpg)
 
 
 

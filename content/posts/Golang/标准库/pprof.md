@@ -109,6 +109,10 @@ list 命令：可以列出函数最耗时的代码部分，格式：list 函数�
 
 ![image-20220406152101112](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220406152101112.png)
 
+##### pdf
+
+直接生成 pdf 文件
+
 ##### 命令行下直接输出分析数据
 
 在命令行直接输出数据，基本命令格式为：
@@ -336,7 +340,7 @@ Dropped 34 nodes (cum <= 0.07s)
 	......
 ```
 
-## 内存性能分析
+## 内存性能分析（使用 `pkg/profile`）
 
 ### 生成 profile
 
@@ -401,7 +405,7 @@ CPU profile 文件已经在 tmp 目录生成，得到 profile 文件后，就可
 
 接下来将使用类似的方式，进行采集内存数据，同样地，只需简单地修改 main 函数即可。
 
-```
+```go
 func main() {
 	defer profile.Start(profile.MemProfile, profile.MemProfileRate(1)).Stop()
 	concat(100)
