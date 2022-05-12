@@ -96,7 +96,7 @@ go build -o hello.exe ./main.go  # 指定可执行文件名
 
 - 如果是普通应用包，执行后不会产生任何文件。如果你需要在 `$GOPATH/pkg`下生成相应的文件，那就得执行 `go install`。
 - 如果是 `main` 包，执行后会在当前目录下生成一个可执行文件。如果你需要在 `$GOPATH/bin` 下生成相应的文件，需要执行 `go install`，或者使用 `go build -o 路径/a.exe`。
-- 如果某个项目文件夹下有多个文件，而你只想编译某个文件，就可在`go build`之后加上文件名，例如`go build a.go`；`go build` 命令默认会编译当前目录下的所有go文件。
+- 如果某个项目文件夹下有多个文件，而你只想编译某个文件，就可在`go build`之后加上文件名，例如`go build a.go`；`go build` 命令默认会编译当前目录下的所有 go 文件。
 - 你也可以指定编译输出的文件名。
     - 例如 `go build -o hello.exe ./main.go`
 

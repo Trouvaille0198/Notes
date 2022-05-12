@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # ex2
 
 https://stackoverflow.com/questions/35931736/mpich-cluster-test-error-unable-to-change-wdir

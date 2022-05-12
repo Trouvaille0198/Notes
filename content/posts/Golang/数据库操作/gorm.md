@@ -2309,8 +2309,6 @@ db.Model(&user).Association("Languages").Find(&languages)
 select * from courses as c, selections as sc where sc.student_id = 1 and c.id = sc.co 
 ```
 
-
-
 ```go
 codes := []string{"zh-CN", "en-US", "ja-JP"}
 db.Model(&user).Where("code IN ?", codes).Association("Languages").Find(&languages)
@@ -2320,7 +2318,7 @@ db.Model(&user).Where("code IN ?", codes).Order("code desc").Association("Langua
 
 ##### 添加关联
 
-为 `many to many`、`has many` 添加新的关联；为 `has one`, `belongs to` 替换当前的关联
+为 `many to many`、`has many` 添加新的关联；为 `has one`,  `belongs to` 替换当前的关联
 
 ```go
 db.Model(&user).Association("Languages").Append([]Language{languageZH, languageEN})

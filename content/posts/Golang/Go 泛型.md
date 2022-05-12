@@ -10,7 +10,7 @@ featuredImage: https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-G
 
 # Go 泛型
 
-<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png" alt="File:Go gopher favicon.svg - Wikimedia Commons" style="zoom: 23%;" />
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png" alt="File:Go gopher favicon.svg - Wikimedia Commons" style="zoom:23%;" />
 
 通过引入**类型形参**（type parameter）和**类型实参**（type argument）这两个概念，我们让一个函数获得了处理多种不同类型数据的能力，这种编程方式被称为**泛型编程**。
 
@@ -20,9 +20,7 @@ featuredImage: https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-G
 2. 失去了编译时的类型检查，不仔细写容易出错
 3. 性能不太理想
 
-
-
-Go 的泛型(或者或类型形参)目前可使用在3个地方
+Go 的泛型(或者或类型形参)目前可使用在 3 个地方
 
 1. 泛型类型 - 类型定义中带类型形参的类型
 2. 泛型 receiver - 泛型类型的 receiver

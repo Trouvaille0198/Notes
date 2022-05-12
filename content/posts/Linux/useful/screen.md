@@ -7,8 +7,6 @@ tags: [Linux,快速入门]
 categories: [Linux]
 ---
 
-
-
 # screen
 
 ## 概述

@@ -9,6 +9,10 @@ categories: [效率工具]
 
 # Git
 
+```shell
+git config --global user.email "suntianye@gocyber.world"
+```
+
 ## 安装
 
 ### 设置名字、邮箱
