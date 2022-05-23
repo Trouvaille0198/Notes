@@ -9,7 +9,7 @@ categories: [Golang]
 
 # cobra
 
-cobra既是一个用于创建强大现代 CLI 应用程序的库，也是一个生成应用程序和命令文件的程序。cobra 被用在很多 go 语言的项目中，比如 Kubernetes、Docker、Istio、ETCD、Hugo、Github CLI 等等
+cobra 既是一个用于创建强大现代 CLI 应用程序的库，也是一个生成应用程序和命令文件的程序。cobra 被用在很多 go 语言的项目中，比如 Kubernetes、Docker、Istio、ETCD、Hugo、Github CLI 等等
 
 ## 概念
 
@@ -83,7 +83,7 @@ func main() {
 
 ## **创建 rootCmd**
 
-root.go的内容如下：
+`root.go` 的内容如下：
 
 ```go
 package cmd

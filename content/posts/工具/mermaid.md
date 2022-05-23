@@ -4,7 +4,7 @@ date: 2021-12-07
 draft: false
 author: "MelonCholi"
 tags: [快速入门]
-categories: [效率工具]
+categories: [工具]
 ---
 
 # mermaid

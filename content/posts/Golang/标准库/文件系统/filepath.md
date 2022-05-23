@@ -47,7 +47,7 @@ func Base(path string) string
 
 ### Ext
 
-此外，`Ext` 可以获得路径中文件名的扩展名。
+此外，`Ext` 可以获得路径中，文件名的扩展名。
 
 ```go
 func Ext(path string) string

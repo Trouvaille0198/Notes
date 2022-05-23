@@ -455,6 +455,7 @@ var vm = new Vue({
   data: {
     firstName: 'Foo',
     lastName: 'Bar'
+
   },
   computed: {
     fullName: function () {

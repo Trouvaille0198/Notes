@@ -1295,7 +1295,7 @@ RUN set -x; buildDeps='gcc libc6-dev make wget' \
 
 很多人初学 Docker 制作出了很臃肿的镜像的原因之一，就是忘记了每一层构建的最后一定要清理掉无关文件。
 
-### 构建镜像
+### 构建镜像 `docker `
 
 好了，让我们再回到之前定制的 nginx 镜像的 Dockerfile 来。现在我们明白了这个 Dockerfile 的内容，那么让我们来构建这个镜像吧。
 

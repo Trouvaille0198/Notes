@@ -327,7 +327,7 @@ go run XX.go
 
 第一次执行时，go mod 会自动查找依赖自动下载
 
-> go module 安装 package 的原則是先拉最新的 release tag，若无tag则拉最新的commit
+> go module 安装 package 的原則是先拉最新的 release tag，若无 tag 则拉最新的commit
 >
 > go 会自动生成一个 go.sum 文件来记录 dependency tree
 

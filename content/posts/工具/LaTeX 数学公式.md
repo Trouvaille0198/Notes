@@ -4,7 +4,7 @@ date: 2021-10-23
 draft: false
 author: "MelonCholi"
 tags: [LaTeX,快速入门]
-categories: [效率工具]
+categories: [工具]
 ---
 
 # LaTeX 数学公式

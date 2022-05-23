@@ -4,12 +4,13 @@ date: 2021-10-23
 draft: false
 author: "MelonCholi"
 tags: [Vim,快速入门]
-categories: [效率工具]
+categories: [工具]
+featuredImage: https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/vi-vim-cheat-sheet-sch.gif
 ---
 
 # Vim
 
-![img](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/vi-vim-cheat-sheet-sch.gif)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/vi-vim-cheat-sheet-sch.gif)
 
 ## 模式
 
