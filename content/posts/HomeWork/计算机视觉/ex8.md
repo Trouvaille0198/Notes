@@ -1,3 +1,12 @@
+---
+title: "《计算机视觉》实验八报告"
+date: 2022-05-18
+draft: true
+author: "MelonCholi"
+tags: []
+categories: []
+---
+
 # 《计算机视觉》实验八报告
 
 姓名：孙天野
