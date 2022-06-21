@@ -197,6 +197,12 @@ func tickDemo() {
         fmt.Println(i)//每秒都会执行的任务
     }
 }
+
+// 或
+var ticker *time.Ticker = time.NewTicker(time.Second)
+for {
+    t:=<-ticker.C
+}
 ```
 
 ## 时间格式化

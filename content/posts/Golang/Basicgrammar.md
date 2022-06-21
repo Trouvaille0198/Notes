@@ -58,7 +58,7 @@ func main() {
 
 ### 运行
 
-执行`go run main.go` 或 `go run .`，将会输出
+执行 `go run main.go` 或 `go run .`，将会输出
 
 ```shell
 $ go run .
@@ -250,7 +250,7 @@ pkg/
 		 github.com/
 			  astaxie/
 				   beedb.a
-src/
+src/	
 	mathapp
 		  main.go
 	mymath/
