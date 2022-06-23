@@ -7,8 +7,6 @@ tags: [Linux,快速入门]
 categories: [Linux]
 ---
 
-
-
 # 环境安装
 
 ## Node.js
@@ -51,15 +49,15 @@ categories: [Linux]
 
 ### 安装
 
-下载go源码包
+下载 go 源码包
 
 ```bash
 //下载地址 go官网 https://golang.org/dl/
 cd /opt/
-wget https://dl.google.com/go/go1.11.4.linux-amd64.tar.gz
+sudo wget https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz
 ```
 
-4.解压缩go源码包，确认当前linux系统版本是32位还是64位，再选择go源码包
+解压缩 go 源码包，确认当前 linux 系统版本是 32 位还是 64 位，再选择 go 源码包
 
 ```csharp
 //查看linux多少位
@@ -67,7 +65,7 @@ wget https://dl.google.com/go/go1.11.4.linux-amd64.tar.gz
 x86_64
 
 //决定下载64位
-tar -zxvf go1.11.4.linux-amd64.tar.gz
+sudo tar -zxvf go1.18.3.linux-amd64.tar.gz
 
 //解压缩后go源码路径确保为
 /opt/go/
@@ -77,7 +75,7 @@ tar -zxvf go1.11.4.linux-amd64.tar.gz
 
 ```shell
 sudo chmod -R 777 go/
-sudo chmod -R 777 gocode/
+sudo chmod -R 777 gocode/ # gocode 会在后面生成
 ```
 
 ### 配置环境变量
@@ -93,7 +91,7 @@ $GOPATH
     pkg        编译后生成的，源码文件，如.a
 ```
 
-创建/opt/gocode/{src,bin,pkg}，用于设置GOPATH为/opt/godocer
+创建 /opt/gocode/{src,bin,pkg}，用于设置 GOPATH 为 /opt/godocer
 
 ```bash
 mkdir -p /opt/gocode/{src,bin,pkg}
@@ -104,9 +102,9 @@ mkdir -p /opt/gocode/{src,bin,pkg}
 └── src
 ```
 
-6.设置GOPATH环境变量
+6.设置 GOPATH 环境变量
 
-修改/etc/profile系统环境变量文件，写入GOPATH信息以及go sdk路径
+修改 /etc/profile 系统环境变量文件，写入 GOPATH 信息以及 go sdk 路径
 
 ```bash
 export GOROOT=/opt/go           #Golang源代码目录，安装目录

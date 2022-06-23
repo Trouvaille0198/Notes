@@ -2897,5 +2897,208 @@ if attended[person] { // person不在集合中，返回 false
 }
 ```
 
+### 字符串拼接的 7 种姿势
 
+#### String Concat
+
+简单
+
+```go
+str += "test-string"
+```
+
+#### String Sprintf
+
+```go
+str = fmt.Sprintf("%s%s", str, "test-string")
+```
+
+####  String Join
+
+```go
+str = strings.Join([]string{str, "test-string"}, "")
+```
+
+#### Buffer Write
+
+```go
+buf := new(bytes.Buffer)
+buf.WriteString("test-string")
+str := buf.String()
+```
+
+#### Bytes Append
+
+```go
+var b []byte
+s := "test-string"
+b = append(b, s...)
+str := string(b)
+```
+
+#### String Copy
+
+奇奇怪怪，但是快
+
+```go
+ts := "test-string"
+n := 5
+tsl := len(ts) * n
+bs := make([]byte, tsl)
+bl := 0
+
+for bl < tsl {
+    bl += copy(bs[bl:], ts)
+}
+
+str := string(bs)
+```
+
+#### String Builder
+
+好用
+
+```go
+var builder strings.Builder
+builder.WriteString("test-string")
+str := builder.String()
+```
+
+#### 性能测试
+
+```go
+package main
+
+import (
+    "bytes"
+    "fmt"
+    "strings"
+    "testing"
+)
+
+const (
+    sss = "hello world!"
+    cnt = 10000
+)
+
+var expected = strings.Repeat(sss, cnt)
+
+func BenchmarkStringConcat(b *testing.B) {
+    var result string
+    for n := 0; n < b.N; n++ {
+        var str string
+        for i := 0; i < cnt; i++ {
+            str += sss
+        }
+        result = str
+    }
+    b.StopTimer()
+    if result != expected {
+        b.Errorf("unexpected result; got=%s, want=%s", string(result), expected)
+    }
+}
+
+func BenchmarkStringSprintf(b *testing.B) {
+    var result string
+    for n := 0; n < b.N; n++ {
+        var str string
+        for i := 0; i < cnt; i++ {
+            str = fmt.Sprintf("%s%s", str, sss)
+        }
+        result = str
+    }
+    b.StopTimer()
+    if result != expected {
+        b.Errorf("unexpected result; got=%s, want=%s", string(result), expected)
+    }
+}
+
+func BenchmarkStringJoin(b *testing.B) {
+    var result string
+    for n := 0; n < b.N; n++ {
+        var str string
+        for i := 0; i < cnt; i++ {
+            str = strings.Join([]string{str, sss}, "")
+        }
+        result = str
+    }
+    b.StopTimer()
+    if result != expected {
+        b.Errorf("unexpected result; got=%s, want=%s", string(result), expected)
+    }
+}
+
+func BenchmarkBufferWrite(b *testing.B) {
+    var result string
+    for n := 0; n < b.N; n++ {
+        buf := new(bytes.Buffer)
+        for i := 0; i < cnt; i++ {
+            buf.WriteString(sss)
+        }
+        result = buf.String()
+    }
+    b.StopTimer()
+    if result != expected {
+        b.Errorf("unexpected result; got=%s, want=%s", string(result), expected)
+    }
+}
+
+func BenchmarkBytesAppend(b *testing.B) {
+    var result string
+    for n := 0; n < b.N; n++ {
+        var bbb []byte
+
+        for i := 0; i < cnt; i++ {
+            bbb = append(bbb, sss...)
+        }
+        result = string(bbb)
+    }
+    b.StopTimer()
+    if result != expected {
+        b.Errorf("unexpected result; got=%s, want=%s", string(result), expected)
+    }
+}
+
+func BenchmarkStringCopy(b *testing.B) {
+    var result string
+    for n := 0; n < b.N; n++ {
+        tsl := len(sss) * cnt
+        bs := make([]byte, tsl)
+        bl := 0
+
+        for bl < tsl {
+            bl += copy(bs[bl:], sss)
+        }
+
+        result = string(bs)
+    }
+    b.StopTimer()
+    if result != expected {
+        b.Errorf("unexpected result; got=%s, want=%s", string(result), expected)
+    }
+}
+
+func BenchmarkStringBuilder(b *testing.B) {
+    var result string
+    for n := 0; n < b.N; n++ {
+        var builder strings.Builder
+
+        for i := 0; i < cnt; i++ {
+            builder.WriteString(sss)
+        }
+
+        result = builder.String()
+    }
+    b.StopTimer()
+    if result != expected {
+        b.Errorf("unexpected result; got=%s, want=%s", string(result), expected)
+    }
+}
+```
+
+测试结果:
+
+BenchmarkStringConcat-4               19          61431933 ns/op        632845167 B/op     10005 allocs/op BenchmarkStringSprintf-4              10         109283838 ns/op        1075688336 B/op    29688 allocs/op BenchmarkStringJoin-4                 15          75854431 ns/op        632844905 B/op     10003 allocs/op BenchmarkBufferWrite-4             10743            113597 ns/op          441616 B/op         13 allocs/op BenchmarkBytesAppend-4             15578             73796 ns/op          645104 B/op         24 allocs/op BenchmarkStringCopy-4              21416             55761 ns/op          245760 B/op          2 allocs/op BenchmarkStringBuilder-4           15961             74010 ns/op          522224 B/op         23 allocs/op
+
+从测试结果来看，语法中的字符串拼接操作性能是极其低下的，对于操作频繁的大字符串，我们需考虑用更高效的方式替代。
 
