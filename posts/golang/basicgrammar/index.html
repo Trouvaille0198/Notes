@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Go 基础语法 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go 基础语法"><meta property="og:description" content="Golang Go is an open source programming language supported by Google Easy to learn and get started with Built-in concurrency and a robust standard library Growing ecosystem of partners, communities, and tools 安装 下载地址：h"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-02-08T00:00:00+00:00"><meta property="article:modified_time" content="2022-06-21T16:38:33+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Go 基础语法"><meta name=twitter:description content="Golang Go is an open source programming language supported by Google Easy to learn and get started with Built-in concurrency and a robust standard library Growing ecosystem of partners, communities, and tools 安装 下载地址：h"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/markdown/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/go-test/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 基础语法","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/"},"genre":"posts","wordcount":22381,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/","datePublished":"2022-02-08T00:00:00+00:00","dateModified":"2022-06-21T16:38:33+08:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":""==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:""==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/categories/>分类 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/posts/>文章 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Go 基础语法 - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="Go 基础语法"><meta property="og:description" content="Golang Go is an open source programming language supported by Google Easy to learn and get started with Built-in concurrency and a robust standard library Growing ecosystem of partners, communities, and tools 安装 下载地址：h"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-02-08T00:00:00+00:00"><meta property="article:modified_time" content="2022-06-23T19:54:32+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Go 基础语法"><meta name=twitter:description content="Golang Go is an open source programming language supported by Google Easy to learn and get started with Built-in concurrency and a robust standard library Growing ecosystem of partners, communities, and tools 安装 下载地址：h"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/basicgrammar/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/linux/useful/install/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 基础语法","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/"},"genre":"posts","wordcount":23140,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/basicgrammar\/","datePublished":"2022-02-08T00:00:00+00:00","dateModified":"2022-06-23T19:54:32+08:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":""==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:""==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/categories/>分类 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/posts/>文章 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
 <input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
@@ -7,9 +7,9 @@
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
 <span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/categories/ title>分类</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/posts/ title>文章</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
-<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go 基础语法</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-08>2022-02-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 22381 字&nbsp;
-<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 45 分钟&nbsp;</div></div><div class=featured-image><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png data-srcset="https://booklovinmamas.com/wp-content/uploads/2017/09/go.png, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 1.5x, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 2x" data-sizes=auto alt=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png title=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#安装>安装</a></li><li><a href=#基本结构>基本结构</a><ul><li><a href=#运行>运行</a></li><li><a href=#基本结构-1>基本结构</a></li><li><a href=#一些命令>一些命令</a><ul><li><a href=#go-build>go build</a></li><li><a href=#go-clean>go clean</a></li><li><a href=#go-get>go get</a></li><li><a href=#go-install>go install</a></li><li><a href=#go-test>go test</a></li></ul></li></ul></li><li><a href=#项目>项目</a><ul><li><a href=#gopath>GOPATH</a><ul><li><a href=#编写应用包例>编写应用包例</a></li><li><a href=#编译安装应用包>编译安装应用包</a></li><li><a href=#编译程序>编译程序</a></li></ul></li><li><a href=#go-module>Go Module</a><ul><li><a href=#基本操作>基本操作</a></li><li><a href=#更新依赖>更新依赖</a></li></ul></li></ul></li><li><a href=#数据类型>数据类型</a><ul><li><a href=#变量-variable>变量 Variable</a></li><li><a href=#常量>常量</a></li><li><a href=#内置基本类型>内置基本类型</a></li><li><a href=#字符串>字符串</a><ul><li><a href=#utf-8>utf-8</a></li><li><a href=#特性>特性</a></li><li><a href=#处理中文>处理中文</a></li><li><a href=#修改字符串>修改字符串</a></li></ul></li><li><a href=#错误类型>错误类型</a></li><li><a href=#数据类型之间的转换>数据类型之间的转换</a></li><li><a href=#数组-array>数组 array</a></li><li><a href=#切片-slice>切片 slice</a><ul><li><a href=#性质>性质</a></li><li><a href=#声明>声明</a></li><li><a href=#使用>使用</a></li><li><a href=#内置函数>内置函数</a></li><li><a href=#小例子>小例子</a></li></ul></li><li><a href=#字典--键值对map>字典 / 键值对，map</a><ul><li><a href=#声明-1>声明</a></li><li><a href=#特性-1>特性</a></li><li><a href=#删除>删除</a></li></ul></li><li><a href=#make-new-操作>make, new 操作</a></li><li><a href=#零值>零值</a></li><li><a href=#指针-pointer>指针 pointer</a></li><li><a href=#位运算>位运算</a><ul><li><a href=#按位与>按位与</a></li><li><a href=#按位或>按位或</a></li><li><a href=#异或>异或</a></li><li><a href=#取反>取反</a></li><li><a href=#左移>左移</a></li><li><a href=#右移>右移</a></li></ul></li></ul></li><li><a href=#流程控制>流程控制</a><ul><li><a href=#条件语句-if-else>条件语句 if else</a></li><li><a href=#goto>goto</a></li><li><a href=#switch>switch</a><ul><li><a href=#switch-用于判断变量类型><code>switch</code> 用于判断变量类型</a></li><li><a href=#啊>啊</a></li></ul></li><li><a href=#for-循环>for 循环</a></li></ul></li><li><a href=#函数-functions>函数 functions</a><ul><li><a href=#参数与返回值>参数与返回值</a></li><li><a href=#变参->变参 <code>...</code></a></li><li><a href=#延迟语句-defer>延迟语句 defer</a></li><li><a href=#函数作为值类型>函数作为值、类型</a></li><li><a href=#闭包-closures>闭包 Closures</a></li><li><a href=#错误处理-error-handling>错误处理 error handling</a><ul><li><a href=#panic-和-recover>panic 和 recover</a></li></ul></li><li><a href=#main-函数和-init-函数><code>main</code> 函数和 <code>init</code> 函数</a></li><li><a href=#程序的初始化过程>程序的初始化过程</a></li><li><a href=#import>import</a><ul><li><a href=#点操作>点操作</a></li><li><a href=#别名操作>别名操作</a></li><li><a href=#_-操作><code>_</code> 操作</a></li></ul></li></ul></li><li><a href=#结构体方法和接口>结构体，方法和接口</a><ul><li><a href=#结构体-struct>结构体 struct</a><ul><li><a href=#匿名字段>匿名字段</a></li></ul></li><li><a href=#方法-methods>方法 methods</a><ul><li><a href=#值类型调用与指针类型调用>值类型调用与指针类型调用</a></li><li><a href=#普通函数与方法的区别>普通函数与方法的区别</a></li><li><a href=#method-继承>method 继承</a></li><li><a href=#method-重写>method 重写</a></li><li><a href=#interface-函数参数>interface 函数参数</a></li></ul></li><li><a href=#接口-interfaces>接口 interfaces</a></li><li><a href=#空接口>空接口</a></li><li><a href=#类型断言>类型断言</a></li></ul></li><li><a href=#并发编程-goroutine>并发编程 goroutine</a><ul><li><a href=#sync>sync</a></li><li><a href=#channel>channel</a></li></ul></li><li><a href=#单元测试-unit-test>单元测试 (unit test)</a></li><li><a href=#包-package-和模块-modules>包 (Package) 和模块 (Modules)</a><ul><li><a href=#package>Package</a></li><li><a href=#modules>Modules</a></li></ul></li><li><a href=#一些技巧和特性>一些技巧和特性</a><ul><li><a href=#零散的特性>零散的特性</a></li><li><a href=#分组声明>分组声明</a></li><li><a href=#iota-枚举>iota 枚举</a></li><li><a href=#变量函数命名原则>变量、函数命名原则</a></li><li><a href=#切片中删除元素>切片中删除元素</a><ul><li><a href=#从开头位置删除>从开头位置删除</a></li><li><a href=#从中间位置删除>从中间位置删除</a></li><li><a href=#从尾部删除>从尾部删除</a></li></ul></li><li><a href=#类型选择>类型选择</a></li><li><a href=#判断-map-中是否存在某键>判断 map 中是否存在某键</a></li><li><a href=#init-函数>init 函数</a></li><li><a href=#runtimecaller>runtime.Caller()</a></li><li><a href=#使用空白标识符进行接口检查>使用空白标识符进行接口检查</a></li><li><a href=#make-和-new-的区别><code>make</code> 和 <code>new</code> 的区别</a></li><li><a href=#解决-go-的相对路径问题>解决 Go 的相对路径问题</a><ul><li><a href=#获取当前可执行文件路径>获取当前可执行文件路径</a></li><li><a href=#增加-osgetwd-进行多层判断>增加 <code>os.Getwd()</code> 进行多层判断</a></li><li><a href=#配置全局系统变量>配置全局系统变量</a></li></ul></li><li><a href=#包装错误>包装错误</a></li><li><a href=#不要忘记为-iota-指定一种类型>不要忘记为 <code>iota</code> 指定一种类型</a></li><li><a href=#防止结构体字段用纯值方式初始化添加-_-struct--字段>防止结构体字段用纯值方式初始化，添加 <code>_ struct {}</code> 字段：</a></li><li><a href=#二维数组的创建方法>二维数组的创建方法</a></li><li><a href=#集合的实现>集合的实现</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=golang>Golang</h1><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png data-srcset="https://booklovinmamas.com/wp-content/uploads/2017/09/go.png, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 1.5x, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 2x" data-sizes=auto alt=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png title=img></p><ul><li>Go is an open source programming language supported by Google</li><li>Easy to learn and get started with</li><li>Built-in concurrency and a robust standard library</li><li>Growing ecosystem of partners, communities, and tools</li></ul><h2 id=安装>安装</h2><p>下载地址：https://go.dev/dl/</p><p>使用 Linux</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">Go 基础语法</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-08>2022-02-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 23140 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 47 分钟&nbsp;</div></div><div class=featured-image><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png data-srcset="https://booklovinmamas.com/wp-content/uploads/2017/09/go.png, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 1.5x, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 2x" data-sizes=auto alt=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png title=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#安装>安装</a></li><li><a href=#基本结构>基本结构</a><ul><li><a href=#运行>运行</a></li><li><a href=#基本结构-1>基本结构</a></li><li><a href=#一些命令>一些命令</a><ul><li><a href=#go-build>go build</a></li><li><a href=#go-clean>go clean</a></li><li><a href=#go-get>go get</a></li><li><a href=#go-install>go install</a></li><li><a href=#go-test>go test</a></li></ul></li></ul></li><li><a href=#项目>项目</a><ul><li><a href=#gopath>GOPATH</a><ul><li><a href=#编写应用包例>编写应用包例</a></li><li><a href=#编译安装应用包>编译安装应用包</a></li><li><a href=#编译程序>编译程序</a></li></ul></li><li><a href=#go-module>Go Module</a><ul><li><a href=#基本操作>基本操作</a></li><li><a href=#更新依赖>更新依赖</a></li></ul></li></ul></li><li><a href=#数据类型>数据类型</a><ul><li><a href=#变量-variable>变量 Variable</a></li><li><a href=#常量>常量</a></li><li><a href=#内置基本类型>内置基本类型</a></li><li><a href=#字符串>字符串</a><ul><li><a href=#utf-8>utf-8</a></li><li><a href=#特性>特性</a></li><li><a href=#处理中文>处理中文</a></li><li><a href=#修改字符串>修改字符串</a></li></ul></li><li><a href=#错误类型>错误类型</a></li><li><a href=#数据类型之间的转换>数据类型之间的转换</a></li><li><a href=#数组-array>数组 array</a></li><li><a href=#切片-slice>切片 slice</a><ul><li><a href=#性质>性质</a></li><li><a href=#声明>声明</a></li><li><a href=#使用>使用</a></li><li><a href=#内置函数>内置函数</a></li><li><a href=#小例子>小例子</a></li></ul></li><li><a href=#字典--键值对map>字典 / 键值对，map</a><ul><li><a href=#声明-1>声明</a></li><li><a href=#特性-1>特性</a></li><li><a href=#删除>删除</a></li></ul></li><li><a href=#make-new-操作>make, new 操作</a></li><li><a href=#零值>零值</a></li><li><a href=#指针-pointer>指针 pointer</a></li><li><a href=#位运算>位运算</a><ul><li><a href=#按位与>按位与</a></li><li><a href=#按位或>按位或</a></li><li><a href=#异或>异或</a></li><li><a href=#取反>取反</a></li><li><a href=#左移>左移</a></li><li><a href=#右移>右移</a></li></ul></li></ul></li><li><a href=#流程控制>流程控制</a><ul><li><a href=#条件语句-if-else>条件语句 if else</a></li><li><a href=#goto>goto</a></li><li><a href=#switch>switch</a><ul><li><a href=#switch-用于判断变量类型><code>switch</code> 用于判断变量类型</a></li><li><a href=#啊>啊</a></li></ul></li><li><a href=#for-循环>for 循环</a></li></ul></li><li><a href=#函数-functions>函数 functions</a><ul><li><a href=#参数与返回值>参数与返回值</a></li><li><a href=#变参->变参 <code>...</code></a></li><li><a href=#延迟语句-defer>延迟语句 defer</a></li><li><a href=#函数作为值类型>函数作为值、类型</a></li><li><a href=#闭包-closures>闭包 Closures</a></li><li><a href=#错误处理-error-handling>错误处理 error handling</a><ul><li><a href=#panic-和-recover>panic 和 recover</a></li></ul></li><li><a href=#main-函数和-init-函数><code>main</code> 函数和 <code>init</code> 函数</a></li><li><a href=#程序的初始化过程>程序的初始化过程</a></li><li><a href=#import>import</a><ul><li><a href=#点操作>点操作</a></li><li><a href=#别名操作>别名操作</a></li><li><a href=#_-操作><code>_</code> 操作</a></li></ul></li></ul></li><li><a href=#结构体方法和接口>结构体，方法和接口</a><ul><li><a href=#结构体-struct>结构体 struct</a><ul><li><a href=#匿名字段>匿名字段</a></li></ul></li><li><a href=#方法-methods>方法 methods</a><ul><li><a href=#值类型调用与指针类型调用>值类型调用与指针类型调用</a></li><li><a href=#普通函数与方法的区别>普通函数与方法的区别</a></li><li><a href=#method-继承>method 继承</a></li><li><a href=#method-重写>method 重写</a></li><li><a href=#interface-函数参数>interface 函数参数</a></li></ul></li><li><a href=#接口-interfaces>接口 interfaces</a></li><li><a href=#空接口>空接口</a></li><li><a href=#类型断言>类型断言</a></li></ul></li><li><a href=#并发编程-goroutine>并发编程 goroutine</a><ul><li><a href=#sync>sync</a></li><li><a href=#channel>channel</a></li></ul></li><li><a href=#单元测试-unit-test>单元测试 (unit test)</a></li><li><a href=#包-package-和模块-modules>包 (Package) 和模块 (Modules)</a><ul><li><a href=#package>Package</a></li><li><a href=#modules>Modules</a></li></ul></li><li><a href=#一些技巧和特性>一些技巧和特性</a><ul><li><a href=#零散的特性>零散的特性</a></li><li><a href=#分组声明>分组声明</a></li><li><a href=#iota-枚举>iota 枚举</a></li><li><a href=#变量函数命名原则>变量、函数命名原则</a></li><li><a href=#切片中删除元素>切片中删除元素</a><ul><li><a href=#从开头位置删除>从开头位置删除</a></li><li><a href=#从中间位置删除>从中间位置删除</a></li><li><a href=#从尾部删除>从尾部删除</a></li></ul></li><li><a href=#类型选择>类型选择</a></li><li><a href=#判断-map-中是否存在某键>判断 map 中是否存在某键</a></li><li><a href=#init-函数>init 函数</a></li><li><a href=#runtimecaller>runtime.Caller()</a></li><li><a href=#使用空白标识符进行接口检查>使用空白标识符进行接口检查</a></li><li><a href=#make-和-new-的区别><code>make</code> 和 <code>new</code> 的区别</a></li><li><a href=#解决-go-的相对路径问题>解决 Go 的相对路径问题</a><ul><li><a href=#获取当前可执行文件路径>获取当前可执行文件路径</a></li><li><a href=#增加-osgetwd-进行多层判断>增加 <code>os.Getwd()</code> 进行多层判断</a></li><li><a href=#配置全局系统变量>配置全局系统变量</a></li></ul></li><li><a href=#包装错误>包装错误</a></li><li><a href=#不要忘记为-iota-指定一种类型>不要忘记为 <code>iota</code> 指定一种类型</a></li><li><a href=#防止结构体字段用纯值方式初始化添加-_-struct--字段>防止结构体字段用纯值方式初始化，添加 <code>_ struct {}</code> 字段：</a></li><li><a href=#二维数组的创建方法>二维数组的创建方法</a></li><li><a href=#集合的实现>集合的实现</a></li><li><a href=#字符串拼接的-7-种姿势>字符串拼接的 7 种姿势</a><ul><li><a href=#string-concat>String Concat</a></li><li><a href=#string-sprintf>String Sprintf</a></li><li><a href=#string-join>String Join</a></li><li><a href=#buffer-write>Buffer Write</a></li><li><a href=#bytes-append>Bytes Append</a></li><li><a href=#string-copy>String Copy</a></li><li><a href=#string-builder>String Builder</a></li><li><a href=#性能测试>性能测试</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=golang>Golang</h1><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png data-srcset="https://booklovinmamas.com/wp-content/uploads/2017/09/go.png, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 1.5x, https://booklovinmamas.com/wp-content/uploads/2017/09/go.png 2x" data-sizes=auto alt=https://booklovinmamas.com/wp-content/uploads/2017/09/go.png title=img></p><ul><li>Go is an open source programming language supported by Google</li><li>Easy to learn and get started with</li><li>Built-in concurrency and a robust standard library</li><li>Growing ecosystem of partners, communities, and tools</li></ul><h2 id=安装>安装</h2><p>下载地址：https://go.dev/dl/</p><p>使用 Linux</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -2883,6 +2883,307 @@
 </span></span><span class=line><span class=cl><span class=k>if</span> <span class=nx>attended</span><span class=p>[</span><span class=nx>person</span><span class=p>]</span> <span class=p>{</span> <span class=c1>// person不在集合中，返回 false
 </span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>person</span><span class=p>,</span> <span class=s>&#34;was at the meeting&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-06-21</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/markdown/ class=prev rel=prev title="Hi~ 我是一个帮助文档"><i class="fas fa-angle-left fa-fw"></i>Hi~ 我是一个帮助文档</a>
-<a href=/Notes/posts/golang/go-test/ class=next rel=next title="Go test 教程">Go test 教程<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</span></span></code></pre></td></tr></table></div></div><h3 id=字符串拼接的-7-种姿势>字符串拼接的 7 种姿势</h3><h4 id=string-concat>String Concat</h4><p>简单</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>str</span> <span class=o>+=</span> <span class=s>&#34;test-string&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=string-sprintf>String Sprintf</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>str</span> <span class=p>=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Sprintf</span><span class=p>(</span><span class=s>&#34;%s%s&#34;</span><span class=p>,</span> <span class=nx>str</span><span class=p>,</span> <span class=s>&#34;test-string&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=string-join>String Join</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>str</span> <span class=p>=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>Join</span><span class=p>([]</span><span class=kt>string</span><span class=p>{</span><span class=nx>str</span><span class=p>,</span> <span class=s>&#34;test-string&#34;</span><span class=p>},</span> <span class=s>&#34;&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=buffer-write>Buffer Write</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>buf</span> <span class=o>:=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>bytes</span><span class=p>.</span><span class=nx>Buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>buf</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;test-string&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>str</span> <span class=o>:=</span> <span class=nx>buf</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=bytes-append>Bytes Append</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>b</span> <span class=p>[]</span><span class=kt>byte</span>
+</span></span><span class=line><span class=cl><span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;test-string&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>b</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>s</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>str</span> <span class=o>:=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>b</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=string-copy>String Copy</h4><p>奇奇怪怪，但是快</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>ts</span> <span class=o>:=</span> <span class=s>&#34;test-string&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>n</span> <span class=o>:=</span> <span class=mi>5</span>
+</span></span><span class=line><span class=cl><span class=nx>tsl</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>ts</span><span class=p>)</span> <span class=o>*</span> <span class=nx>n</span>
+</span></span><span class=line><span class=cl><span class=nx>bs</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>tsl</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>bl</span> <span class=o>:=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>bl</span> <span class=p>&lt;</span> <span class=nx>tsl</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>bl</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>bs</span><span class=p>[</span><span class=nx>bl</span><span class=p>:],</span> <span class=nx>ts</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>str</span> <span class=o>:=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>bs</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=string-builder>String Builder</h4><p>好用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>builder</span> <span class=nx>strings</span><span class=p>.</span><span class=nx>Builder</span>
+</span></span><span class=line><span class=cl><span class=nx>builder</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=s>&#34;test-string&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>str</span> <span class=o>:=</span> <span class=nx>builder</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=性能测试>性能测试</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;bytes&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;strings&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;testing&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>const</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>sss</span> <span class=p>=</span> <span class=s>&#34;hello world!&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cnt</span> <span class=p>=</span> <span class=mi>10000</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>expected</span> <span class=p>=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>Repeat</span><span class=p>(</span><span class=nx>sss</span><span class=p>,</span> <span class=nx>cnt</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkStringConcat</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>result</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>n</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>n</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kd>var</span> <span class=nx>str</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>cnt</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>str</span> <span class=o>+=</span> <span class=nx>sss</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=nx>result</span> <span class=p>=</span> <span class=nx>str</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span><span class=p>.</span><span class=nf>StopTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>result</span> <span class=o>!=</span> <span class=nx>expected</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>b</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;unexpected result; got=%s, want=%s&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>result</span><span class=p>),</span> <span class=nx>expected</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkStringSprintf</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>result</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>n</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>n</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kd>var</span> <span class=nx>str</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>cnt</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>str</span> <span class=p>=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Sprintf</span><span class=p>(</span><span class=s>&#34;%s%s&#34;</span><span class=p>,</span> <span class=nx>str</span><span class=p>,</span> <span class=nx>sss</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=nx>result</span> <span class=p>=</span> <span class=nx>str</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span><span class=p>.</span><span class=nf>StopTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>result</span> <span class=o>!=</span> <span class=nx>expected</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>b</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;unexpected result; got=%s, want=%s&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>result</span><span class=p>),</span> <span class=nx>expected</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkStringJoin</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>result</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>n</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>n</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kd>var</span> <span class=nx>str</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>cnt</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>str</span> <span class=p>=</span> <span class=nx>strings</span><span class=p>.</span><span class=nf>Join</span><span class=p>([]</span><span class=kt>string</span><span class=p>{</span><span class=nx>str</span><span class=p>,</span> <span class=nx>sss</span><span class=p>},</span> <span class=s>&#34;&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=nx>result</span> <span class=p>=</span> <span class=nx>str</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span><span class=p>.</span><span class=nf>StopTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>result</span> <span class=o>!=</span> <span class=nx>expected</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>b</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;unexpected result; got=%s, want=%s&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>result</span><span class=p>),</span> <span class=nx>expected</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkBufferWrite</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>result</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>n</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>n</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>buf</span> <span class=o>:=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>bytes</span><span class=p>.</span><span class=nx>Buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>cnt</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>buf</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>sss</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=nx>result</span> <span class=p>=</span> <span class=nx>buf</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span><span class=p>.</span><span class=nf>StopTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>result</span> <span class=o>!=</span> <span class=nx>expected</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>b</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;unexpected result; got=%s, want=%s&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>result</span><span class=p>),</span> <span class=nx>expected</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkBytesAppend</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>result</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>n</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>n</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kd>var</span> <span class=nx>bbb</span> <span class=p>[]</span><span class=kt>byte</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>cnt</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>bbb</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>bbb</span><span class=p>,</span> <span class=nx>sss</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=nx>result</span> <span class=p>=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>bbb</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span><span class=p>.</span><span class=nf>StopTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>result</span> <span class=o>!=</span> <span class=nx>expected</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>b</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;unexpected result; got=%s, want=%s&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>result</span><span class=p>),</span> <span class=nx>expected</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkStringCopy</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>result</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>n</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>n</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>tsl</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>sss</span><span class=p>)</span> <span class=o>*</span> <span class=nx>cnt</span>
+</span></span><span class=line><span class=cl>        <span class=nx>bs</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>tsl</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nx>bl</span> <span class=o>:=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nx>bl</span> <span class=p>&lt;</span> <span class=nx>tsl</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>bl</span> <span class=o>+=</span> <span class=nb>copy</span><span class=p>(</span><span class=nx>bs</span><span class=p>[</span><span class=nx>bl</span><span class=p>:],</span> <span class=nx>sss</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=nx>result</span> <span class=p>=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>bs</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span><span class=p>.</span><span class=nf>StopTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>result</span> <span class=o>!=</span> <span class=nx>expected</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>b</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;unexpected result; got=%s, want=%s&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>result</span><span class=p>),</span> <span class=nx>expected</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkStringBuilder</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>result</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>n</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>n</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=kd>var</span> <span class=nx>builder</span> <span class=nx>strings</span><span class=p>.</span><span class=nx>Builder</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>cnt</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>builder</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>sss</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=nx>result</span> <span class=p>=</span> <span class=nx>builder</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>b</span><span class=p>.</span><span class=nf>StopTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>result</span> <span class=o>!=</span> <span class=nx>expected</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>b</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;unexpected result; got=%s, want=%s&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>result</span><span class=p>),</span> <span class=nx>expected</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>测试结果:</p><p>BenchmarkStringConcat-4 19 61431933 ns/op 632845167 B/op 10005 allocs/op BenchmarkStringSprintf-4 10 109283838 ns/op 1075688336 B/op 29688 allocs/op BenchmarkStringJoin-4 15 75854431 ns/op 632844905 B/op 10003 allocs/op BenchmarkBufferWrite-4 10743 113597 ns/op 441616 B/op 13 allocs/op BenchmarkBytesAppend-4 15578 73796 ns/op 645104 B/op 24 allocs/op BenchmarkStringCopy-4 21416 55761 ns/op 245760 B/op 2 allocs/op BenchmarkStringBuilder-4 15961 74010 ns/op 522224 B/op 23 allocs/op</p><p>从测试结果来看，语法中的字符串拼接操作性能是极其低下的，对于操作频繁的大字符串，我们需考虑用更高效的方式替代。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-06-23</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/linux/useful/install/ class=prev rel=prev title="Linux 上的环境安装"><i class="fas fa-angle-left fa-fw"></i>Linux 上的环境安装</a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:45},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>

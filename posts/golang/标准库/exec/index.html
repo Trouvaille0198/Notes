@@ -1,0 +1,354 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>os/exec - 伤心肠粉的酱油碟子</title><meta name=Description content><meta property="og:title" content="os/exec"><meta property="og:description" content="os/exec 在 Golang 中用于执行命令的库是 os/exec 快速上手 exec.Command 函数返回一个 Cmd 对象，根据不同的需求，可以将"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/exec/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-06-22T00:00:00+00:00"><meta property="article:modified_time" content="2022-06-22T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="os/exec"><meta name=twitter:description content="os/exec 在 Golang 中用于执行命令的库是 os/exec 快速上手 exec.Command 函数返回一个 Cmd 对象，根据不同的需求，可以将"><meta name=application-name content="伤心肠粉的酱油碟子"><meta name=apple-mobile-web-app-title content="伤心肠粉的酱油碟子"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/exec/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/template/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E5%B7%A5%E5%85%B7/k8s/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"os/exec","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/exec\/"},"genre":"posts","keywords":"Go 库","wordcount":1536,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/exec\/","datePublished":"2022-06-22T00:00:00+00:00","dateModified":"2022-06-22T00:00:00+00:00","publisher":{"@type":"Organization","name":"MelonCholi"},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":""==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:""==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/Notes/categories/>分类 </a><a class=menu-item href=/Notes/tags/>标签 </a><a class=menu-item href=/Notes/posts/>文章 </a><span class="menu-item delimiter"></span><span class="menu-item search" id=search-desktop>
+<input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题><i class="fas fa-adjust fa-fw"></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子>伤心肠粉</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/Notes/categories/ title>分类</a><a class=menu-item href=/Notes/tags/ title>标签</a><a class=menu-item href=/Notes/posts/ title>文章</a><a href=javascript:void(0); class="menu-item theme-switch" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animated flipInX">os/exec</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/Notes/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw"></i>MelonCholi</a></span>&nbsp;<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-06-22>2022-06-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1536 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#快速上手>快速上手</a><ul><li><a href=#第一种只执行命令不获取结果>第一种：只执行命令，不获取结果</a></li><li><a href=#第二种执行命令并获取结果>第二种：执行命令，并获取结果</a></li><li><a href=#第三种执行命令并区分-stdout-和-stderr>第三种：执行命令，并区分 stdout 和 stderr</a></li><li><a href=#第四种多条命令组合请使用管道>第四种：多条命令组合，请使用管道</a></li><li><a href=#第五种设置命令级别的环境变量>第五种：设置命令级别的环境变量</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=osexec>os/exec</h1><p>在 Golang 中用于执行命令的库是 <code>os/exec</code></p><h2 id=快速上手>快速上手</h2><p>exec.Command 函数返回一个 <code>Cmd</code> 对象，根据不同的需求，可以将命令的执行分为三种情况</p><ol><li>只执行命令，不获取结果</li><li>执行命令，并获取结果（不区分 stdout 和 stderr）</li><li>执行命令，并获取结果（区分 stdout 和 stderr）</li></ol><h3 id=第一种只执行命令不获取结果>第一种：只执行命令，不获取结果</h3><p>直接调用 Cmd 对象的 Run 函数，返回的只有成功和失败，获取不到任何输出的结果。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;log&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;os/exec&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmd</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=s>&#34;ls&#34;</span><span class=p>,</span> <span class=s>&#34;-l&#34;</span><span class=p>,</span> <span class=s>&#34;/var/log/&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>err</span> <span class=o>:=</span> <span class=nx>cmd</span><span class=p>.</span><span class=nf>Run</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Fatalf</span><span class=p>(</span><span class=s>&#34;cmd.Run() failed with %s\n&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>一些用于执行的函数</p><ul><li>Run 阻塞进程，直到命令执行结束</li><li>Start 非阻塞执行</li><li>Wait 阻塞进程，等待命令执行结束, 与 Star 配合使用</li></ul><h3 id=第二种执行命令并获取结果>第二种：执行命令，并获取结果</h3><p>有时候我们执行一个命令就是想要获取输出结果，此时你可以调用 Cmd 的 CombinedOutput 函数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;log&#34;</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;os/exec&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmd</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=s>&#34;ls&#34;</span><span class=p>,</span> <span class=s>&#34;-l&#34;</span><span class=p>,</span> <span class=s>&#34;/var/log/&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>out</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>cmd</span><span class=p>.</span><span class=nf>CombinedOutput</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;combined out:\n%s\n&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>out</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Fatalf</span><span class=p>(</span><span class=s>&#34;cmd.Run() failed with %s\n&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;combined out:\n%s\n&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>out</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>CombinedOutput 函数，只返回 out，并不区分 stdout 和 stderr。如果你想区分他们，可以直接看第三种方法。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>$ go run demo.go 
+</span></span><span class=line><span class=cl>combined out:
+</span></span><span class=line><span class=cl>total 11540876
+</span></span><span class=line><span class=cl>-rw-r--r--  2 root       root         4096 Oct 29  2018 yum.log
+</span></span><span class=line><span class=cl>drwx------  2 root       root           94 Nov  6 05:56 audit
+</span></span><span class=line><span class=cl>-rw-r--r--  1 root       root    185249234 Nov 28  2019 message
+</span></span><span class=line><span class=cl>-rw-r--r--  2 root       root        16374 Aug 28 10:13 boot.log
+</span></span></code></pre></td></tr></table></div></div><p>不过在那之前，我却发现一个小问题：有时候，shell 命令能执行，并不代码 exec 也能执行。</p><p>比如我只想查看 <code>/var/log/</code> 目录下的 log 后缀名的文件呢？有点 Linux 基础的同学，都会用这个命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>$ ls -l /var/log/*.log
+</span></span><span class=line><span class=cl>total 11540
+</span></span><span class=line><span class=cl>-rw-r--r--  2 root       root         4096 Oct 29  2018 /var/log/yum.log
+</span></span><span class=line><span class=cl>-rw-r--r--  2 root       root        16374 Aug 28 10:13 /var/log/boot.log
+</span></span></code></pre></td></tr></table></div></div><p>按照这个写法将它放入到 <code>exec.Command</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;log&#34;</span>
+</span></span><span class=line><span class=cl><span class=s>&#34;os/exec&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmd</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=s>&#34;ls&#34;</span><span class=p>,</span> <span class=s>&#34;-l&#34;</span><span class=p>,</span> <span class=s>&#34;/var/log/*.log&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>out</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>cmd</span><span class=p>.</span><span class=nf>CombinedOutput</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;combined out:\n%s\n&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>out</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Fatalf</span><span class=p>(</span><span class=s>&#34;cmd.Run() failed with %s\n&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;combined out:\n%s\n&#34;</span><span class=p>,</span> <span class=nb>string</span><span class=p>(</span><span class=nx>out</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>什么情况？居然不行，报错了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>$ go run demo.go 
+</span></span><span class=line><span class=cl>combined out:
+</span></span><span class=line><span class=cl>ls: cannot access /var/log/*.log: No such file or directory
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>2020/11/11 19:46:00 cmd.Run() failed with exit status 2
+</span></span><span class=line><span class=cl>exit status 1
+</span></span></code></pre></td></tr></table></div></div><p>为什么会报错呢？shell 明明没有问题啊</p><p>其实很简单，原来 <code>ls -l /var/log/*.log</code> 并不等价于下面这段代码。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>exec.Command(&#34;ls&#34;, &#34;-l&#34;, &#34;/var/log/*.log&#34;)
+</span></span></code></pre></td></tr></table></div></div><p>上面这段代码对应的 Shell 命令应该是下面这样，如果你这样子写，ls 就会把参数里的内容当成具体的文件名，而忽略通配符 <code>*</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>$ ls -l &#34;/var/log/*.log&#34;
+</span></span><span class=line><span class=cl>ls: cannot access /var/log/*.log: No such file or directory
+</span></span></code></pre></td></tr></table></div></div><h3 id=第三种执行命令并区分-stdout-和-stderr>第三种：执行命令，并区分 stdout 和 stderr</h3><p>上面的写法，无法实现区分标准输出和标准错误，只要换成下面种写法，就可以实现。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;bytes&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;log&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;os/exec&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmd</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=s>&#34;ls&#34;</span><span class=p>,</span> <span class=s>&#34;-l&#34;</span><span class=p>,</span> <span class=s>&#34;/var/log/*.log&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>stdout</span><span class=p>,</span> <span class=nx>stderr</span> <span class=nx>bytes</span><span class=p>.</span><span class=nx>Buffer</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmd</span><span class=p>.</span><span class=nx>Stdout</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>stdout</span>  <span class=c1>// 标准输出
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>cmd</span><span class=p>.</span><span class=nx>Stderr</span> <span class=p>=</span> <span class=o>&amp;</span><span class=nx>stderr</span>  <span class=c1>// 标准错误
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>err</span> <span class=o>:=</span> <span class=nx>cmd</span><span class=p>.</span><span class=nf>Run</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>outStr</span><span class=p>,</span> <span class=nx>errStr</span> <span class=o>:=</span> <span class=nb>string</span><span class=p>(</span><span class=nx>stdout</span><span class=p>.</span><span class=nf>Bytes</span><span class=p>()),</span> <span class=nb>string</span><span class=p>(</span><span class=nx>stderr</span><span class=p>.</span><span class=nf>Bytes</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;out:\n%s\nerr:\n%s\n&#34;</span><span class=p>,</span> <span class=nx>outStr</span><span class=p>,</span> <span class=nx>errStr</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Fatalf</span><span class=p>(</span><span class=s>&#34;cmd.Run() failed with %s\n&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出如下，可以看到前面的报错内容被归入到标准错误里</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>$ go run demo.go 
+</span></span><span class=line><span class=cl>out:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>err:
+</span></span><span class=line><span class=cl>ls: cannot access /var/log/*.log: No such file or directory
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>2020/11/11 19:59:31 cmd.Run() failed with exit status 2
+</span></span><span class=line><span class=cl>exit status 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=第四种多条命令组合请使用管道>第四种：多条命令组合，请使用管道</h3><p>将上一条命令的执行输出结果，做为下一条命令的参数。在 Shell 中可以使用管道符 <code>|</code> 来实现。</p><p>比如下面这条命令，统计了 message 日志中 ERROR 日志的数量。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>$ grep ERROR /var/log/messages | wc -l
+</span></span><span class=line><span class=cl>19
+</span></span></code></pre></td></tr></table></div></div><p>类似的，在 Golang 中也有类似的实现。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;os&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;os/exec&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c1</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=s>&#34;grep&#34;</span><span class=p>,</span> <span class=s>&#34;ERROR&#34;</span><span class=p>,</span> <span class=s>&#34;/var/log/messages&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c2</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=s>&#34;wc&#34;</span><span class=p>,</span> <span class=s>&#34;-l&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c2</span><span class=p>.</span><span class=nx>Stdin</span><span class=p>,</span> <span class=nx>_</span> <span class=p>=</span> <span class=nx>c1</span><span class=p>.</span><span class=nf>StdoutPipe</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c2</span><span class=p>.</span><span class=nx>Stdout</span> <span class=p>=</span> <span class=nx>os</span><span class=p>.</span><span class=nx>Stdout</span>
+</span></span><span class=line><span class=cl>    <span class=nx>_</span> <span class=p>=</span> <span class=nx>c2</span><span class=p>.</span><span class=nf>Start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>_</span> <span class=p>=</span> <span class=nx>c1</span><span class=p>.</span><span class=nf>Run</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>_</span> <span class=p>=</span> <span class=nx>c2</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>$ go run demo.go 
+</span></span><span class=line><span class=cl>19
+</span></span></code></pre></td></tr></table></div></div><h3 id=第五种设置命令级别的环境变量>第五种：设置命令级别的环境变量</h3><p>使用 os 库的 Setenv 函数来设置的环境变量，是作用于整个进程的生命周期</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;log&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;os&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;os/exec&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>os</span><span class=p>.</span><span class=nf>Setenv</span><span class=p>(</span><span class=s>&#34;NAME&#34;</span><span class=p>,</span> <span class=s>&#34;wangbm&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmd</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=s>&#34;echo&#34;</span><span class=p>,</span> <span class=nx>os</span><span class=p>.</span><span class=nf>ExpandEnv</span><span class=p>(</span><span class=s>&#34;$NAME&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>out</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>cmd</span><span class=p>.</span><span class=nf>CombinedOutput</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Fatalf</span><span class=p>(</span><span class=s>&#34;cmd.Run() failed with %s\n&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=nx>out</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>只要在这个进程里，<code>NAME</code> 这个变量的值都会是 <code>wangbm</code>，无论你执行多少次命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ go run demo.go 
+</span></span><span class=line><span class=cl>wangbm
+</span></span></code></pre></td></tr></table></div></div><p>如果想把环境变量的作用范围再缩小到命令级别，也是有办法的。</p><p>为了方便验证，我新建个 sh 脚本，内容如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ cat /home/wangbm/demo.sh
+</span></span><span class=line><span class=cl>echo $NAME
+</span></span><span class=line><span class=cl>$ bash /home/wangbm/demo.sh   # 由于全局环境变量中没有 NAME，所以无输出
+</span></span></code></pre></td></tr></table></div></div><p>另外，demo.go 里的代码如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;os&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;os/exec&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>ChangeYourCmdEnvironment</span><span class=p>(</span><span class=nx>cmd</span> <span class=o>*</span> <span class=nx>exec</span><span class=p>.</span><span class=nx>Cmd</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>env</span> <span class=o>:=</span> <span class=nx>os</span><span class=p>.</span><span class=nf>Environ</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmdEnv</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>e</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>env</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>cmdEnv</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>cmdEnv</span><span class=p>,</span> <span class=nx>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmdEnv</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>cmdEnv</span><span class=p>,</span> <span class=s>&#34;NAME=wangbm&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmd</span><span class=p>.</span><span class=nx>Env</span> <span class=p>=</span> <span class=nx>cmdEnv</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cmd1</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=s>&#34;bash&#34;</span><span class=p>,</span> <span class=s>&#34;/home/wangbm/demo.sh&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nf>ChangeYourCmdEnvironment</span><span class=p>(</span><span class=nx>cmd1</span><span class=p>)</span> <span class=c1>// 添加环境变量到 cmd1 命令: NAME=wangbm
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>out1</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>cmd1</span><span class=p>.</span><span class=nf>CombinedOutput</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;output: %s&#34;</span><span class=p>,</span> <span class=nx>out1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>cmd2</span> <span class=o>:=</span> <span class=nx>exec</span><span class=p>.</span><span class=nf>Command</span><span class=p>(</span><span class=s>&#34;bash&#34;</span><span class=p>,</span> <span class=s>&#34;/home/wangbm/demo.sh&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>out2</span><span class=p>,</span> <span class=nx>_</span> <span class=o>:=</span> <span class=nx>cmd2</span><span class=p>.</span><span class=nf>CombinedOutput</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;output: %s&#34;</span><span class=p>,</span> <span class=nx>out2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>执行后，可以看到第二次执行的命令，是没有输出 NAME 的变量值。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ go run demo.go 
+</span></span><span class=line><span class=cl>output: wangbm
+</span></span><span class=line><span class=cl>output: 
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2022-06-22</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/template/ class=prev rel=prev title=text/template><i class="fas fa-angle-left fa-fw"></i>text/template</a>
+<a href=/Notes/posts/%E5%B7%A5%E5%85%B7/k8s/ class=next rel=next title=k8s>k8s<i class="fas fa-angle-right fa-fw"></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>酒困路长惟欲睡，日高人渴漫思茶</div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2022</span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><script type=text/javascript src=/Notes/lib/smooth-scroll/smooth-scroll.min.js></script><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js></script><script type=text/javascript src=/Notes/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:45},comment:{},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js></script></body></html>
