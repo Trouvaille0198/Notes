@@ -922,8 +922,6 @@ jobs:
       - run: npm install -g bats
 ```
 
-
-
 #### in step
 
 > jobs.<job_id>.steps[*].if
