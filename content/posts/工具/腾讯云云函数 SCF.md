@@ -1,5 +1,7 @@
 # 腾讯云云函数
 
+> 工作原理：https://cloud.tencent.com/document/product/583/9694
+
 ## 介绍
 
 云函数 (Serverless Cloud Function，**SCF**）是腾讯云推出的一款 serverless 服务
