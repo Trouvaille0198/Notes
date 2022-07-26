@@ -77,4 +77,3 @@ h6.md-focus:before {
 	line-height: inherit;
 }
 ```
-

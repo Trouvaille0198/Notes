@@ -108,6 +108,17 @@ MongoDB 是由 C++ 语言编写的，是一个基于分布式文件存储的开�
     use DB_NAME
     ```
 
+### 安装
+
+#### ubuntu
+
+```shell
+ wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+sudo apt-get update -y
+sudo apt-get install -y mongodb-org-tools
+```
+
 ## 数据库
 
 ### 创建数据库
@@ -1055,5 +1066,19 @@ end_dummy_id = ObjectId.from_datetime(end_day_zero)
 results_count = col.find({"_id": {"$gte": start_dummy_id,"$lte":end_dummy_id}}).count()
 
 print(results_count)
+```
+
+## 未归档
+
+### mongodump 和 mongorestore
+
+```shell
+mongodump --uri="mongodb+srv://<username>:<password>@<host:ip>/<dbname>" -o <output dir name> --authenticationDatabase admin
+```
+
+`+srv` 适用于需要 srv 认证的域名，没有的话就省去
+
+```shell
+mongorestore --uri="mongodb://<username>:<password>@<host:ip>/<dbname>" <output dir name/dbname> --authenticationDatabase admin
 ```
 
