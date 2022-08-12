@@ -15,6 +15,8 @@ categories: [刷题]
 
 ## DFS
 
+目标：找到子树同时包含 p 和 q 的、深度最大的节点
+
 递归地判断子树是否包含了 p 或 q
 
 ```go
@@ -31,7 +33,7 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	var res *TreeNode
 	var bp func(root *TreeNode) (pv, qv bool, d int)
 	bp = func(root *TreeNode) (pv, qv bool, d int) {
-		// 返回以root为头节点的树是否含有p和q 和它的深度
+		// 返回以root为头节点的树是否含有p和q和它的深度
 		if root == nil {
 			return false, false, 0
 		}
@@ -73,6 +75,7 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	left := lowestCommonAncestor(root.Left, p, q)
 	right := lowestCommonAncestor(root.Right, p, q)
 	if left != nil && right != nil {
+        // root 左右子树即为p和
 		return root
 	}
 	if left == nil {

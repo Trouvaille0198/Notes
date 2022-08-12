@@ -196,3 +196,17 @@ FanoutExchange 不需要绑定 routingKey，所以性能相对 TopicExchange 会
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAyMC83LzI1LzE3Mzg0OWEwMTRkNTc2ZTU)
 
 创建队列需要设置绑定的头部信息，有两种模式：**全部匹配和部分匹配**。如上图所示，交换机会根据生产者发送过来的头部信息携带的键值去匹配队列绑定的键值，路由到对应的队列。
+
+### 默认 exchange
+
+当交换器名称为空时，表示使用默认交换器（空的意思是空字符串）
+
+默认交换器是一个特殊的交换器，他无需进行绑定操作，可以以直接匹配的形式直接把消息发送到任何队列中。
+
+下图两种模式均采用了默认交换器：
+
+![点到多点](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20180723143901493)
+
+两个消费者从一个队列取数据时，会产生竞争条件。此时消息只能给其中的一个消费者。
+
+如果两个消费者均没有在收到消息后做应答操作，则消息会平均发送给两个消费者。如果收到消息后做了应答操作，则会采取能者多劳的模式。

@@ -1,6 +1,16 @@
+---
+title: "剑指 Offer 34. 二叉树中和为某一值的路径"
+date: 2022-02-21
+draft: false
+author: "MelonCholi"
+tags: [算法,回溯]
+categories: [刷题]
+hiddenFromHomePage: true
+---
+
 # 剑指 Offer 34. 二叉树中和为某一值的路径
 
-`mid` `DFS`
+`mid`
 
 给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有**从根节点到叶子节点**路径总和等于给定目标和的路径。
 

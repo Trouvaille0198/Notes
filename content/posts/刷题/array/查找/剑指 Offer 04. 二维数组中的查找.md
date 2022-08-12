@@ -70,7 +70,7 @@ func findNumberIn2DArray(matrix [][]int, target int) bool {
     - 当 matrix[i][j] > target 时，执行 i-- ，即消去第 i 行元素；
     - 当 matrix[i][j] < target 时，执行 j++ ，即消去第 j 列元素；
     - 当 matrix[i][j] = target 时，返回 truetrue ，代表找到目标值。
-2. 若行索引或列索引越界，则代表矩阵中无目标值，返回 falsefalse 。
+2. 若行索引或列索引越界，则代表矩阵中无目标值，返回 false
 
 ```go
 // 标志数

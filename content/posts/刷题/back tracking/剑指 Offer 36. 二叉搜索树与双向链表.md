@@ -47,6 +47,7 @@ func treeToDoublyList(root *TreeNode) *TreeNode {
 		pre.Right = root
 
 		pre = root
+        
 		inOrder(root.Right)
 	}
 	inOrder(root)
