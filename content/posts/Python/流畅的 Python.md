@@ -2826,3 +2826,196 @@ f = d1(d2(f))
 ```
 
 ### 参数化装饰器
+
+怎么让装饰器接受其他参数呢？答案是：创建一个装饰器工厂函数，把参数传给它，返回一个装饰器，然后再把它应用到要装饰的函数上。
+
+> **示例 7-22**　示例 7-2 中 registration.py 模块的删减版，这里再次给出是为了便于讲解
+
+```py
+registry = []
+
+def register(func):
+    print('running register(%s)' % func)
+    registry.append(func)
+    return func
+
+@register
+def f1():
+    print('running f1()')
+
+print('running main()')
+print('registry ->', registry)
+f1()
+```
+
+#### 一个参数化的注册装饰器
+
+为了便于启用或禁用 `register` 执行的函数注册功能，我们为它提供一个可选的 `active` 参数，设为 `False` 时，不注册被装饰的函数。实现方式参见示例 7-23。
+
+**从概念上看，这个新的 `register` 函数不是装饰器，而是装饰器工厂函数。调用它会返回真正的装饰器，这才是应用到目标函数上的装饰器。**
+
+> **示例 7-23**　为了接受参数，新的 `register` 装饰器必须作为函数调用
+
+```py
+registry = set()  
+def register(active=True):  
+    def decorate(func):  # decorate 这个内部函数是真正的装饰器；注意，它的参数是一个函数
+        print('running register(active=%s)->decorate(%s)'
+              % (active, func))
+        if active:   
+            registry.add(func)
+        else:
+            registry.discard(func)  
+
+        return func  
+    return decorate  # register 是装饰器工厂函数，因此返回 decorate
+
+@register(active=False)  # @register 工厂函数必须作为函数调用，并且传入所需的参数
+def f1():
+    print('running f1()')
+
+@register()  # 即使不传入参数，register 也必须作为函数调用（@register()），即要返回真正的装饰器 decorate
+def f2():
+    print('running f2()')
+
+def f3():
+    print('running f3()')
+```
+
+这里的关键是，`register()` 要返回 `decorate`，然后把它应用到被装饰的函数上
+
+如果不使用 `@` 句法，那就要像常规函数那样使用 `register`；若想把 `f` 添加到 `registry` 中，则装饰 `f` 函数的句法是 `register()(f)`；不想添加（或把它删除）的话，句法是 `register(active=False)(f)`
+
+参数化装饰器的原理相当复杂，我们刚刚讨论的那个比大多数都简单。参数化装饰器通常会把被装饰的函数替换掉，而且结构上需要多一层嵌套。接下来会探讨这种函数金字塔
+
+#### 参数化 `clock` 装饰器
+
+本节再次探讨 `clock` 装饰器，为它添加一个功能：让用户传入一个格式字符串，控制被装饰函数的输出
+
+> **示例 7-25**　clockdeco_param.py 模块：参数化 `clock` 装饰器
+
+```py
+import time
+
+DEFAULT_FMT = '[{elapsed:0.8f}s] {name}({args}) -> {result}'
+
+def clock(fmt=DEFAULT_FMT):   # 工厂函数
+    def decorate(func):       # 真正的装饰器
+        def clocked(*_args):  
+            t0 = time.time()
+            _result = func(*_args)  # 被装饰的函数返回的真正结果
+            elapsed = time.time() - t0
+            name = func.__name__
+            args = ', '.join(repr(arg) for arg in _args)  
+            result = repr(_result)  
+            print(fmt.format(**locals()))  
+            return _result  
+        return clocked  
+    return decorate  
+
+if __name__ == '__main__':
+
+    @clock()
+    def snooze(seconds):
+        time.sleep(seconds)
+
+    for i in range(3):
+        snooze(.123)
+```
+
+```py
+import time
+from clockdeco_param import clock
+
+@clock('{name}({args}) dt={elapsed:0.3f}s')
+def snooze(seconds):
+    time.sleep(seconds)
+
+for i in range(3):
+    snooze(.123)
+```
+
+```shell
+$ python3 clockdeco_param_demo2.py
+snooze(0.123) dt=0.124s
+snooze(0.123) dt=0.124s
+snooze(0.123) dt=0.124s
+```
+
+## 对象引用、可变性和垃圾回收
+
+### 变量不是盒子
+
+Python 变量类似于 Java 中的**引用**式变量，因此最好把它们理解为**附加在对象上的标注**。
+
+下面的例子说明了在 Python 中为什么不能使用盒子比喻，而便利贴则指出了变量的正确工作方式。
+
+> **示例 8-1**　变量 `a` 和 `b` 引用同一个列表，而不是那个列表的副本
+
+```py
+>>> a = [1, 2, 3]
+>>> b = a
+>>> a.append(4)
+>>> b
+[1, 2, 3, 4]
+```
+
+如果把变量想象为盒子，那么无法解释 Python 中的赋值；应该把变量视作便利贴，这样示例 8-1 中的行为就好解释了
+
+![{%}](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/00025.jpeg)
+
+对引用式变量来说，说把变量分配给对象更合理，反过来说就有问题。毕竟，对象在赋值之前就创建了
+
+因为变量只不过是标注，所以无法阻止为对象贴上多个标注。贴的多个标注，就是**别名**
+
+### 标识、相等性和别名
+
+> `charles` 和 `lewis` 指代同一个对象
+
+```py
+>>> charles = {'name': 'Charles L. Dodgson', 'born': 1832}
+>>> lewis = charles  
+>>> lewis is charles
+True
+>>> id(charles), id(lewis)  
+(4300473992, 4300473992)
+>>> lewis['balance'] = 950  
+>>> charles
+{'name': 'Charles L. Dodgson', 'balance': 950, 'born': 1832}
+```
+
+> **示例 8-4**　`alex` 与 `charles` 比较的结果是相等，但 `alex` 不是 `charles`
+
+```py
+>>> alex = {'name': 'Charles L. Dodgson', 'born': 1832, 'balance': 950}  
+>>> alex == charles  
+True
+>>> alex is not charles  
+True
+```
+
+示例 8-3 体现了**别名**。在那段代码中，`lewis` 和 `charles` 是别名，即两个变量绑定同一个对象。而 `alex` 不是 `charles` 的别名，因为二者绑定的是不同的对象。`alex` 和 `charles` 绑定的对象具有相同的**值**（`==` 比较的就是值），但是它们的标识不同。
+
+每个变量都有标识、类型和值。对象一旦创建，它的标识绝不会变；你可以**把标识理解为对象在内存中的地址**。is 运算符比较两个对象的标识；id() 函数返回对象标识的整数表示。
+
+对象 ID 的真正意义在不同的实现中有所不同。在 CPython 中，`id()` 返回对象的内存地址，但是在其他 Python 解释器中可能是别的值。关键是，ID 一定是唯一的数值标注，而且在对象的生命周期中绝不会变。
+
+其实，编程中很少使用 `id()` 函数。**标识最常使用 `is` 运算符检查，而不是直接比较 ID**
+
+#### 在 `==` 和 `is` 之间选择
+
+`==` 运算符比较两个对象的值（对象中保存的数据），而 `is` 比较对象的标识。
+
+通常，我们关注的是值，而不是标识，因此 Python 代码中 `==` 出现的频率比 `is` 高。
+
+然而，在变量和单例值之间比较时，应该使用 `is`。目前，最常使用 `is` 检查变量绑定的值是不是 `None`。下面是推荐的写法：
+
+```py
+x is None
+```
+
+否定的正确写法是：
+
+```py
+x is not None
+```
