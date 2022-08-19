@@ -83,7 +83,7 @@ Write 将 len(p) 个字节**从 p 中写入到基本数据流中**。
 
 它返回从 p 中被写入的字节数 n（0 <= n <= len(p)）以及任何遇到的引起写入提前停止的错误。若 Write 返回的 `n < len(p)`，它就必须返回一个非 nil 的错误
 
-同样的，所有实现了Write方法的类型都实现了 io.Writer 接口。
+同样的，所有实现了 Write 方法的类型都实现了 io.Writer 接口。
 
 ### 例
 
@@ -115,7 +115,7 @@ func Println(a ...interface{}) (n int, err error) {
 - crypto/tls.Conn 同时实现了 io.Reader 和 io.Writer
 - encoding/csv.Reader/Writer 分别实现了 io.Reader 和 io.Writer
 - mime/multipart.Part 实现了 io.Reader
-- net/conn 分别实现了 io.Reader 和 io.Writer(Conn接口定义了Read/Write)
+- net/conn 分别实现了 io.Reader 和 io.Writer(Conn 接口定义了 Read/Write)
 
 以上类型中，常用的类型有：os.File、strings.Reader、bufio.Reader/Writer、bytes.Buffer、bytes.Reader
 
@@ -183,7 +183,7 @@ WriteAt 从 p 中将 len(p) 个字节写入到偏移量 off 处的基本数据�
 
 它返回从 p 中被写入的字节数 n（0 <= n <= len(p)）以及任何遇到的引起写入提前停止的错误。
 
-若 WriteAt 返回的 n < len(p)，它就必须返回一个 非nil 的错误。
+若 WriteAt 返回的 n < len(p)，它就必须返回一个 非 nil 的错误。
 
 ### 例
 
@@ -313,7 +313,7 @@ const (
 )
 ```
 
-而原先 os 包中的常量已经被标注为Deprecated
+而原先 os 包中的常量已经被标注为 Deprecated
 
 ```go
 // Deprecated: Use io.SeekStart, io.SeekCurrent, and io.SeekEnd.
@@ -475,7 +475,7 @@ func main() {
 func CopyN(dst Writer, src Reader, n int64) (written int64, err error)
 ```
 
-CopyN 将 n 个字节 (或到一个error) 从 src 复制到 dst。 它返回复制的字节数以及在复制时遇到的最早的错误。当且仅当 err == nil 时，written == n 。
+CopyN 将 n 个字节 (或到一个 error) 从 src 复制到 dst。 它返回复制的字节数以及在复制时遇到的最早的错误。当且仅当 err == nil 时，written == n 。
 
 若 dst 实现了 ReaderFrom 接口，复制操作也就会使用它来实现。
 

@@ -357,7 +357,7 @@ type slice struct {
 1. 假如 Slice 容量够用，则将新元素追加进去，`Slice.len++`，返回原 Slice
 2. 原 Slice 容量不够，则
     1. 将 Slice 先扩容，扩容后得到新 Slice
-    2. 将新元素追加进新 Slice，`Slice.len++`，返回新的Slice。
+    2. 将新元素追加进新 Slice，`Slice.len++`，返回新的 Slice。
 
 #### Slice Copy
 
@@ -468,7 +468,7 @@ type bmap struct {
 
 当有两个或以上数量的键被哈希到了同一个 bucket 时，我们称这些键发生了冲突。Go 使用链地址法（拉链法）来解决键冲突。 由于每个 bucket 可以存放 8 个键值对，所以同一个 bucket 存放超过 8 个键值对时就会再创建一个键值对，用类似链表的方式将 bucket 连接起来。
 
-下图展示产生冲突后的map：
+下图展示产生冲突后的 map：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png)
 
@@ -517,7 +517,7 @@ bucket 数据结构指示下一个 bucket 的指针称为 **overflow bucket（�
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png)
 
-hmap 数据结构中 oldbuckets 成员指身原 bucket，而 buckets 指向了新申请的 bucket。新的键值对被插入新的bucket 中。 后续对 map 的访问操作会触发迁移，将 oldbuckets 中的键值对逐步的搬迁过来。当 oldbuckets 中的键值对全部搬迁完毕后，删除 oldbuckets。
+hmap 数据结构中 oldbuckets 成员指身原 bucket，而 buckets 指向了新申请的 bucket。新的键值对被插入新的 bucket 中。 后续对 map 的访问操作会触发迁移，将 oldbuckets 中的键值对逐步的搬迁过来。当 oldbuckets 中的键值对全部搬迁完毕后，删除 oldbuckets。
 
 搬迁完成后的示意图如下：
 
@@ -650,7 +650,7 @@ key2:value2
 
 本文示例中 tag 没有任何实际意义，这是为了阐述 tag 的定义与操作方法，也为了避免与你之前见过的诸如 `json:xxx` 混淆。
 
-使用反射可以动态的给结构体成员赋值，正是因为有 tag，在赋值前可以使用 tag 来决定赋值的动作。 比如，官方的 `encoding/json` 包，可以将一个JSON数据 `Unmarshal` 进一个结构体，此过程中就使用了 Tag。该包定义一些规则，只要参考该规则设置 tag 就可以将不同的 JSON 数据转换成结构体。
+使用反射可以动态的给结构体成员赋值，正是因为有 tag，在赋值前可以使用 tag 来决定赋值的动作。 比如，官方的 `encoding/json` 包，可以将一个 JSON 数据 `Unmarshal` 进一个结构体，此过程中就使用了 Tag。该包定义一些规则，只要参考该规则设置 tag 就可以将不同的 JSON 数据转换成结构体。
 
 总之：正是基于 struct 的 tag 特性，才有了诸如 json、orm 等等的应用。理解这个关系是至关重要的。或许，你可以定义另一种 tag 规则，来处理你特有的数据。
 
@@ -704,7 +704,7 @@ const 块中每一行在 GO 中使用 spec 数据结构描述，spec 声明如�
     }
 ```
 
-这里我们只关注 `ValueSpec.Names`， 这个切片中保存了一行中定义的常量，如果一行定义 N 个常量，那么`ValueSpec.Names` 切片长度即为N。
+这里我们只关注 `ValueSpec.Names`， 这个切片中保存了一行中定义的常量，如果一行定义 N 个常量，那么`ValueSpec.Names` 切片长度即为 N。
 
 const 块实际上是 spec 类型的切片，用于表示 const 中的多行。
 
@@ -883,7 +883,7 @@ func rawstring(size int) (s string, b []byte) { // 生成一个新的string，�
 
 ##### []byte 转换成 string 一定会拷贝内存吗？
 
-byte 切片转换成 string 的场景很多，为了性能上的考虑，有时候只是临时需要字符串的场景下，byte 切片转换成string 时并不会拷贝内存，而是直接返回一个 string，这个 string 的指针 (`string.str`) 指向切片的内存。
+byte 切片转换成 string 的场景很多，为了性能上的考虑，有时候只是临时需要字符串的场景下，byte 切片转换成 string 时并不会拷贝内存，而是直接返回一个 string，这个 string 的指针 (`string.str`) 指向切片的内存。
 
 比如，编译器会识别如下临时场景：
 
@@ -904,7 +904,7 @@ string 擅长的场景：
 
 []byte 擅长的场景：
 
-- 修改字符串的场景，尤其是修改粒度为1个字节；
+- 修改字符串的场景，尤其是修改粒度为 1 个字节；
 - 函数返回值，需要用 nil 表示含义的场景；
 - 需要切片操作的场景；
 
@@ -1027,9 +1027,9 @@ func a() {
 }
 ```
 
-defer 语句中的 `fmt.Println()` 参数 i 值在 defer 出现时就已经确定下来，实际上是拷贝了一份。后面对变量i的修改不会影响 `fmt.Println()` 函数的执行，仍然打印 "0"。
+defer 语句中的 `fmt.Println()` 参数 i 值在 defer 出现时就已经确定下来，实际上是拷贝了一份。后面对变量 i 的修改不会影响 `fmt.Println()` 函数的执行，仍然打印 "0"。
 
-注意：对于指针类型参数，规则仍然适用，只不过延迟函数的参数是一个地址值，这种情况下，defer后面的语句对变量的修改可能会影响延迟函数。
+注意：对于指针类型参数，规则仍然适用，只不过延迟函数的参数是一个地址值，这种情况下，defer 后面的语句对变量的修改可能会影响延迟函数。
 
 ##### 规则二
 
@@ -1074,14 +1074,14 @@ func deferFuncReturn() (result int) {
 }
 ```
 
-该函数的return语句可以拆分成下面两行：
+该函数的 return 语句可以拆分成下面两行：
 
 ```go
 result = i
 return
 ```
 
-而延迟函数的执行正是在return之前，即加入defer后的执行过程如下：
+而延迟函数的执行正是在 return 之前，即加入 defer 后的执行过程如下：
 
 ```go
 result = i
@@ -1141,11 +1141,11 @@ i++
 return
 ```
 
-由于 i 是整型，会将值拷贝给 anony，所以 defer 语句中修改i值，对函数返回值不造成影响。
+由于 i 是整型，会将值拷贝给 anony，所以 defer 语句中修改 i 值，对函数返回值不造成影响。
 
 ##### 主函数拥有具名返回值
 
-主函声明语句中带名字的返回值，会被初始化成一个局部变量，函数内部可以像使用局部变量一样使用该返回值。如果defer 语句操作该返回值，可能会改变返回结果。
+主函声明语句中带名字的返回值，会被初始化成一个局部变量，函数内部可以像使用局部变量一样使用该返回值。如果 defer 语句操作该返回值，可能会改变返回结果。
 
 一个影响函返回值的例子：
 
@@ -1186,7 +1186,7 @@ type _defer struct {
 }
 ```
 
-我们知道 defer 后面一定要接一个函数的，所以defer的数据结构跟一般函数类似，也有栈地址、程序计数器、函数地址等等。
+我们知道 defer 后面一定要接一个函数的，所以 defer 的数据结构跟一般函数类似，也有栈地址、程序计数器、函数地址等等。
 
 与函数不同的一点是它含有一个指针，可用于指向另一个 defer
 
@@ -1197,7 +1197,7 @@ type _defer struct {
 
 函数返回前执行 defer 则是从链表首部依次取出执行，不再赘述。
 
-一个 goroutine 可能连续调用多个函数，defer 添加过程跟上述流程一致，进入函数时添加 defer，离开函数时取出 defer，所以即便调用多个函数，也总是能保证 defh后进先出方式执行的。
+一个 goroutine 可能连续调用多个函数，defer 添加过程跟上述流程一致，进入函数时添加 defer，离开函数时取出 defer，所以即便调用多个函数，也总是能保证 defh 后进先出方式执行的。
 
 #### defer 的创建和执行
 
@@ -1285,9 +1285,9 @@ func UpdateTable() {
 2. 当前协程没有发生 panic；
 3. recover 没有被 defer 方法**直接调用**；
 
-前两条都比较容易理解，上述例子正是匹配第3个条件。
+前两条都比较容易理解，上述例子正是匹配第 3 个条件。
 
-本例中，`recover()` 调用栈为 `“defer （匿名）函数” --> IsPanic() --> recover()`。也就是说，recover 并没有被defer 方法直接调用。符合第 3 个条件，所以 `recover()` 永远返回 nil
+本例中，`recover()` 调用栈为 `“defer （匿名）函数” --> IsPanic() --> recover()`。也就是说，recover 并没有被 defer 方法直接调用。符合第 3 个条件，所以 `recover()` 永远返回 nil
 
 ### select
 
@@ -1561,7 +1561,7 @@ type Mutex struct {
 **协程之间抢锁实际上是抢给 Locked 赋值的权利**
 
 - 能给 Locked 域置 1，就说明抢锁成功。
-- 抢不到的话就阻塞等待Mutex.sema 信号量
+- 抢不到的话就阻塞等待 Mutex.sema 信号量
 - 一旦持有锁的协程解锁，等待的协程会依次被唤醒。
 
 Woken 和 Starving 主要用于控制协程间的抢锁过程，后面再进行了解。
@@ -1593,7 +1593,7 @@ Mutext 对外提供两个方法，实际上也只有这两个方法：
 
 ![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png)
 
-从上图可看到，当协程 B 对一个已被占用的锁再次加锁时，Waiter 计数器增加了 1，此时协程 B 将被阻塞，直到Locked 值变为 0 后才会被唤醒。
+从上图可看到，当协程 B 对一个已被占用的锁再次加锁时，Waiter 计数器增加了 1，此时协程 B 将被阻塞，直到 Locked 值变为 0 后才会被唤醒。
 
 ##### 简单解锁
 
@@ -1950,7 +1950,7 @@ M1 的来源有可能是 M 的缓存池，也可能是新建的。当 G0 系统�
 
 一般来讲，程序运行时就将 GOMAXPROCS 大小设置为 CPU 核数，可让 Go 程序充分利用 CPU。 在某些 IO 密集型的应用里，这个值可能并不意味着性能最好。 
 
-理论上当某个 Goroutine 进入系统调用时，会有一个新的 M 被启用或创建，继续占满 CPU。 但由于 Go 调度器检测到 M 被阻塞是有一定延迟的，也即旧的 M 被阻塞和新的M得到运行之间是有一定间隔的，所以在 IO 密集型应用中不妨把 GOMAXPROCS 设置的大一些，或许会有好的效果。
+理论上当某个 Goroutine 进入系统调用时，会有一个新的 M 被启用或创建，继续占满 CPU。 但由于 Go 调度器检测到 M 被阻塞是有一定延迟的，也即旧的 M 被阻塞和新的 M 得到运行之间是有一定间隔的，所以在 IO 密集型应用中不妨把 GOMAXPROCS 设置的大一些，或许会有好的效果。
 
 ## 内存管理
 
@@ -1962,11 +1962,11 @@ M1 的来源有可能是 M 的缓存池，也可能是新建的。当 G0 系统�
 
 ### 内存分配原理
 
-编写过 C 语言程序的肯定知道通过 `malloc()` 方法动态申请内存，其中内存分配器使用的是 glibc 提供的ptmalloc2。 
+编写过 C 语言程序的肯定知道通过 `malloc()` 方法动态申请内存，其中内存分配器使用的是 glibc 提供的 ptmalloc2。 
 
 除了 glibc，业界比较出名的内存分配器有 Google 的 tcmalloc 和 Facebook 的 jemalloc。二者在避免内存碎片和性能上均比 glic 有比较大的优势，在多线程环境中效果更明显。
 
-Golang 中也实现了内存分配器，原理与 tcmalloc 类似，简单的说就是维护一块大的全局内存，每个线程 (Golang中为 P) 维护一块小的私有内存，私有内存不足再从全局申请。
+Golang 中也实现了内存分配器，原理与 tcmalloc 类似，简单的说就是维护一块大的全局内存，每个线程 (Golang 中为 P) 维护一块小的私有内存，私有内存不足再从全局申请。
 
 另外，内存分配与 GC（垃圾回收）关系密切，所以了解 GC 前有必要了解内存分配的原理。
 
@@ -1976,7 +1976,7 @@ Golang 中也实现了内存分配器，原理与 tcmalloc 类似，简单的说
 
 然而同一进程下的所有线程共享相同的内存空间，它们申请内存时需要加锁，如果不加锁就存在同一块内存被 2 个线程同时访问的问题。
 
-TCMalloc 的做法是什么呢？为每个线程预分配一块缓存，线程申请小内存时，可以从缓存分配内存，这样有2个好处：
+TCMalloc 的做法是什么呢？为每个线程预分配一块缓存，线程申请小内存时，可以从缓存分配内存，这样有 2 个好处：
 
 1. 为线程预分配缓存需要进行 1 次系统调用，后续线程申请小内存时直接从缓存分配，都是在用户态执行的，没有了系统调用，缩短了内存总体的分配和释放时间，这是快速分配内存的第二个层次。
 2. 多个线程同时申请小内存时，**从各自的缓存分配**，访问的是不同的地址空间，从而无需加锁，把内存并发访问的粒度进一步降低了，这是快速分配内存的第三个层次。
@@ -2055,15 +2055,15 @@ Span 与 TCMalloc 中的 Span 相同，Span 是内存管理的基本单位，**�
 
 mcache 与 TCMalloc 中的 ThreadCache 类似，mcache 保存的是各种大小的 Span，并按 Span class 分类，小对象直接从 mcache 分配内存，它起到了缓存的作用，并且可以无锁访问。
 
-但是 mcache 与 ThreadCache 也有不同点，TCMalloc 中是每个线程 1 个 ThreadCache，Go 中是每个 P 拥有 1 个 mcache（其实是一样的）。因为在 Go 程序中，当前最多有 GOMAXPROCS 个线程在运行，所以最多需要 GOMAXPROCS 个mcache 就可以保证各线程对 mcache 的无锁访问，线程的运行又是与 P 绑定的，把 mcache 交给 P 刚刚好。
+但是 mcache 与 ThreadCache 也有不同点，TCMalloc 中是每个线程 1 个 ThreadCache，Go 中是每个 P 拥有 1 个 mcache（其实是一样的）。因为在 Go 程序中，当前最多有 GOMAXPROCS 个线程在运行，所以最多需要 GOMAXPROCS 个 mcache 就可以保证各线程对 mcache 的无锁访问，线程的运行又是与 P 绑定的，把 mcache 交给 P 刚刚好。
 
 - **mcentral**
 
 mcentral 与 TCMalloc 中的 CentralCache 类似，是所有线程共享的缓存，需要加锁访问。
 
-它按 Span 级别对 Span 分类，然后串联成链表，当 mcache 的某个级别 Span 的内存被分配光时，它会向mcentral 申请 1 个当前级别的 Span。
+它按 Span 级别对 Span 分类，然后串联成链表，当 mcache 的某个级别 Span 的内存被分配光时，它会向 mcentral 申请 1 个当前级别的 Span。
 
-但是 mcentral 与 CentralCache 也有不同点，CentralCache 是每个级别的 Span 有 1个 链表，mcache是每个级别的 Span 有 2 个链表，这和 mcache 申请内存有关，稍后再解释。
+但是 mcentral 与 CentralCache 也有不同点，CentralCache 是每个级别的 Span 有 1 个 链表，mcache 是每个级别的 Span 有 2 个链表，这和 mcache 申请内存有关，稍后再解释。
 
 - **mheap**
 
@@ -2071,7 +2071,7 @@ mheap 与 TCMalloc 中的 PageHeap 类似，它是**堆内存的抽象**，把�
 
 当 mcentral 的 Span 不够用时会向 mheap 申请内存，而 mheap 的 Span 不够用时会向 OS 申请内存。mheap 向 OS 的内存申请是按页来的，然后把申请来的内存页生成 Span 组织起来，同样也是需要加锁访问的。
 
-但是 mheap 与 PageHeap也有不同点：mheap 把 Span 组织成了**树结构**，而不是链表，并且还是 2 棵树，然后把 Span 分配到 heapArena 进行管理，它包含地址映射和 span 是否包含指针等位图，这样做的主要原因是为了更高效的利用内存：分配、回收和再利用。
+但是 mheap 与 PageHeap 也有不同点：mheap 把 Span 组织成了**树结构**，而不是链表，并且还是 2 棵树，然后把 Span 分配到 heapArena 进行管理，它包含地址映射和 span 是否包含指针等位图，这样做的主要原因是为了更高效的利用内存：分配、回收和再利用。
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-ce68750f087fc37aa8f37b0c30ba38f7_b.jpg)
 
@@ -2167,11 +2167,11 @@ Span 可以按对象大小切成很多份，这些都可以从映射表上计算
 
 随着内存的分配，span 中的对象内存块，有些被占用，有些未被占用，比如上图，整体代表 1 个 span，蓝色块代表已被占用内存，绿色块代表未被占用内存。当分配内存时，只要快速找到第一个可用的绿色块，并计算出内存地址即可，如果需要还可以对内存块数据清零。
 
-当 span 内的所有内存块都被占用时，没有剩余空间继续分配对象，mcache 会向 mcentral申请 1 个 span，mcache 拿到 span 后继续分配对象。
+当 span 内的所有内存块都被占用时，没有剩余空间继续分配对象，mcache 会向 mcentral 申请 1 个 span，mcache 拿到 span 后继续分配对象。
 
 - **mcache 向 mcentral 申请 span**
 
-mcentral 和 mcache一样，都是 0~133 这 134 个 span class 级别，但每个级别都保存了 2 个 span list，即 2 个 span 链表：
+mcentral 和 mcache 一样，都是 0~133 这 134 个 span class 级别，但每个级别都保存了 2 个 span list，即 2 个 span 链表：
 
 1. **nonempty**：这个链表里的 span，所有 span 都至少有 1 个空闲的对象空间。这些 span 是 mcache 释放 span 时加入到该链表的。
 2. **empty**：这个链表里的 span，所有的 span 都不确定里面是否有空闲的对象空间。当一个 span 交给 mcache 的时候，就会加入到 empty 链表。
@@ -2180,7 +2180,7 @@ mcentral 和 mcache一样，都是 0~133 这 134 个 span class 级别，但每�
 
 ![img](https://pic3.zhimg.com/v2-a0046c0be529175b1e6101698215f1f2_b.jpg)
 
-mcache 向 mcentral 申请 span 时，mcentral 会先从 nonempty 搜索满足条件的 span，如果没有找到再从emtpy 搜索满足条件的 span，然后把找到的 span 交给 mcache。
+mcache 向 mcentral 申请 span 时，mcentral 会先从 nonempty 搜索满足条件的 span，如果没有找到再从 emtpy 搜索满足条件的 span，然后把找到的 span 交给 mcache。
 
 - **mheap 的 span 管理**
 
@@ -2484,7 +2484,7 @@ Golang 内存分配是个相当复杂的过程，其中还掺杂了 GC 的处理
 Go 的内存分配原理主要强调两个重要的思想：
 
 1. **使用缓存提高效率**。在存储的整个体系中到处可见缓存的思想，Go 内存分配和管理也使用了缓存，利用缓存一是**减少了系统调用的次数**，二是**降低了锁的粒度、减少加锁的次数**，从这 2 点提高了内存管理效率。
-2. **以空间换时间**，提高内存管理效率。空间换时间是一种常用的性能优化思想，这种思想其实非常普遍，比如Hash、Map、二叉排序树等数据结构的本质就是空间换时间，在数据库中也很常见，比如数据库索引、索引视图和数据缓存等，再如 Redis 等缓存数据库也是空间换时间的思想。
+2. **以空间换时间**，提高内存管理效率。空间换时间是一种常用的性能优化思想，这种思想其实非常普遍，比如 Hash、Map、二叉排序树等数据结构的本质就是空间换时间，在数据库中也很常见，比如数据库索引、索引视图和数据缓存等，再如 Redis 等缓存数据库也是空间换时间的思想。
 
 ### 垃圾回收原理
 
@@ -2496,13 +2496,13 @@ Golang 的垃圾回收（GC）也是内存管理的一部分，了解垃圾回�
 
 业界常见的垃圾回收算法有以下几种：
 
-- 引用计数：对每个对象维护一个引用计数，当引用该对象的对象被销毁时，引用计数减1，当引用计数器为0是回收该对象。
+- 引用计数：对每个对象维护一个引用计数，当引用该对象的对象被销毁时，引用计数减 1，当引用计数器为 0 是回收该对象。
     - 优点：对象可以很快的被回收，不会出现内存耗尽或达到某个阀值时才回收。
     - 缺点：不能很好的处理循环引用，而且实时维护引用计数，有也一定的代价。
     - 代表语言：Python、PHP、Swift
 - 标记-清除：从根变量开始遍历所有引用的对象，引用的对象标记为"被引用"，没有被标记的进行回收。
     - 优点：解决了引用计数的缺点。
-    - 缺点：需要STW，即要暂时停掉程序运行。
+    - 缺点：需要 STW，即要暂时停掉程序运行。
     - 代表语言：Golang(其采用三色标记法)
 - 分代收集：按照对象生命周期长短划分不同的代空间，生命周期长的放入老年代，而短的放入新生代，不同代有不能的回收算法和回收频率。
     - 优点：回收性能好
@@ -2545,7 +2545,7 @@ allocBits 和 gcmarkBits 数据结构是完全一样的，标记结束就是内�
 - 黑色：对象已被标记，gcmarkBits 对应的位为 1（该对象不会在本次 GC 中被清理）
 - 白色：对象未被标记，gcmarkBits 对应的位为 0（该对象将会在本次 GC 中被清理）
 
-例如，当前内存中有 A~F 一共 6 个对象，根对象 a，b 本身为栈上分配的局部变量，根对象a、b分别引用了对象A、B, 而 B 对象又引用了对象 D，则 GC 开始前各对象的状态如下图所示:
+例如，当前内存中有 A~F 一共 6 个对象，根对象 a，b 本身为栈上分配的局部变量，根对象 a、b 分别引用了对象 A、B, 而 B 对象又引用了对象 D，则 GC 开始前各对象的状态如下图所示:
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-03-root_scan.png)
 
@@ -2691,7 +2691,7 @@ D:\SourceCode\GoExpert\src>go build -gcflags=-m
 .\main.go:18: main new(Student) does not escape
 ```
 
-可见在 `StudentRegister()` 函数中，也即代码第9行显示 "escapes to heap"，代表该行内存分配发生了逃逸现象。
+可见在 `StudentRegister()` 函数中，也即代码第 9 行显示 "escapes to heap"，代表该行内存分配发生了逃逸现象。
 
 ##### 栈空间不足逃逸
 
@@ -2713,7 +2713,7 @@ func main() {
 }
 ```
 
-上面代码 `Slice()` 函数中分配了一个1000个长度的切片，是否逃逸取决于栈空间是否足够大。 直接查看编译提示，如下：
+上面代码 `Slice()` 函数中分配了一个 1000 个长度的切片，是否逃逸取决于栈空间是否足够大。 直接查看编译提示，如下：
 
 ```go
 D:\SourceCode\GoExpert\src>go build -gcflags=-m
@@ -2851,7 +2851,7 @@ D:\SourceCode\GoExpert\src>go build -gcflags=-m
 
 三种方案各有优劣，比如 Channel 优点是实现简单，清晰易懂，WaitGroup 优点是子协程个数动态可调整，Context 优点是对子协程派生出来的孙子协程的控制。 缺点是相对而言的，要结合实例应用场景进行选择。
 
-channel一般用于协程之间的通信，channel也可以用于并发控制。比如主协程启动N个子协程，主协程等待所有子协程退出后再继续后续流程，这种场景下channel也可轻易实现。
+channel 一般用于协程之间的通信，channel 也可以用于并发控制。比如主协程启动 N 个子协程，主协程等待所有子协程退出后再继续后续流程，这种场景下 channel 也可轻易实现。
 
 ### channel
 
@@ -3084,7 +3084,7 @@ context 实际上只定义了接口，凡是实现该接口的类都可称为是
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/context-02-relation.png)
 
-上图中由于 goroutine派生出子 goroutine，而子 goroutine 又继续派生新的 goroutine，这种情况下使用 WaitGroup 就不太容易，因为子 goroutine 个数不容易确定。而使用 context 就可以很容易实现。
+上图中由于 goroutine 派生出子 goroutine，而子 goroutine 又继续派生新的 goroutine，这种情况下使用 WaitGroup 就不太容易，因为子 goroutine 个数不容易确定。而使用 context 就可以很容易实现。
 
 #### 接口定义
 
@@ -3392,7 +3392,7 @@ type timerCtx struct {
 }
 ```
 
-timerCtx 在 cancelCtx 基础上增加了 deadline 用于标示自动 cancel 的最终时间，而 timer 就是一个触发自动cancel 的定时器。
+timerCtx 在 cancelCtx 基础上增加了 deadline 用于标示自动 cancel 的最终时间，而 timer 就是一个触发自动 cancel 的定时器。
 
 由此，衍生出 `WithDeadline()` 和 `WithTimeout()`。实现上这两种类型实现原理一样，只不过使用语境不一样：
 
@@ -3941,7 +3941,7 @@ func Redeclare() {
 }
 ```
 
-注意上面声明的三个 err 变量。 2 号 err 与 1 号 err 不属于同一个作用域，`:=` 声明了新的变量，所以 2 号 err 与 1 号 err 属于两个变量。 2 号 err 与 3 号 err 属于同一个作用域，`:=` 重新声明了 err 但没创建新的变量，所以 2 号err 与 3 号 err 是同一个变量。
+注意上面声明的三个 err 变量。 2 号 err 与 1 号 err 不属于同一个作用域，`:=` 声明了新的变量，所以 2 号 err 与 1 号 err 属于两个变量。 2 号 err 与 3 号 err 属于同一个作用域，`:=` 重新声明了 err 但没创建新的变量，所以 2 号 err 与 3 号 err 是同一个变量。
 
 如果误把 2 号 err 与 1 号 err 混淆，就很容易产生意想不到的错误。
 

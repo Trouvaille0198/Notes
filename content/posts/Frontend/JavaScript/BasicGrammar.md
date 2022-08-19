@@ -75,7 +75,7 @@ alert(s); // s仍然为'Test'
 
 ##### 多行字符串
 
-由于多行字符串用 `\n` 写起来比较费事，所以最新的ES6标准新增了一种多行字符串的表示方法，用反引号 ` 表示：
+由于多行字符串用 `\n` 写起来比较费事，所以最新的 ES6 标准新增了一种多行字符串的表示方法，用反引号 ` 表示：
 
 ```javascript
 `这是一个
@@ -191,7 +191,7 @@ Math.abs(1 / 3 - (1 - 2 / 3)) < 0.0000001; // true
 
 `null` 表示一个“空”的值，它和 `0` 以及空字符串 `''` 不同，`0` 是一个数值，`''` 表示长度为 0 的字符串，而 `null` 表示“空”。
 
-在其他语言中，也有类似 JavaScript 的 `null` 的表示，例如 Java 也用 `null`，Swift 用 `nil`，Python 用 `None` 表示。但是，在JavaScript 中，还有一个和 `null` 类似的 `undefined`，它表示“未定义”。
+在其他语言中，也有类似 JavaScript 的 `null` 的表示，例如 Java 也用 `null`，Swift 用 `nil`，Python 用 `None` 表示。但是，在 JavaScript 中，还有一个和 `null` 类似的 `undefined`，它表示“未定义”。
 
 JavaScript 的设计者希望用 `null` 表示一个空的值，而 `undefined` 表示值未定义。事实证明，这并没有什么卵用，区分两者的意义不大。大多数情况下，我们都应该用 `null`。`undefined` 仅仅在判断函数参数是否传递的情况下有用。
 
@@ -270,7 +270,7 @@ arr.indexOf('30'); 	// 元素'30'的索引为2
 
 ##### 获取切片 .slice()
 
-`slice()` 就是对应String的 `substring()` 版本，它截取 `Array ` 的部分元素，然后返回一个新的 `Array`：
+`slice()` 就是对应 String 的 `substring()` 版本，它截取 `Array ` 的部分元素，然后返回一个新的 `Array`：
 
 ```javascript
 var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -487,7 +487,7 @@ xiaoming.hasOwnProperty('toString'); // false
 
 变量的概念基本上和初中代数的方程变量是一致的，只是在计算机程序中，变量不仅可以是数字，还可以是任意数据类型。
 
-变量在 JavaScript 中就是用一个变量名表示，变量名是大小写英文、数字、`$` 和 `_`的组合，且不能用数字开头。变量名也不能是JavaScript 的关键字，如 `if`、`while` 等。申明一个变量用 `var` 语句，比如：
+变量在 JavaScript 中就是用一个变量名表示，变量名是大小写英文、数字、`$` 和 `_`的组合，且不能用数字开头。变量名也不能是 JavaScript 的关键字，如 `if`、`while` 等。申明一个变量用 `var` 语句，比如：
 
 ```javascript
 var a; 				// 申明了变量a，此时a的值为undefined
@@ -522,13 +522,13 @@ a = 'ABC'; // a变为字符串
    - 利用算术运算 - * /：`str * 1` or `str / 1` or `str - 0`
 
 3. 转换为布尔型
-   - `Boolean(var)` 返回布尔型，代表空、否定的值会被转换为false，如 '', 0, NaN, null, undefined
+   - `Boolean(var)` 返回布尔型，代表空、否定的值会被转换为 false，如 '', 0, NaN, null, undefined
 
 ### Map 和 Set
 
-JavaScript的默认对象表示方式 `{}` 可以视为其他语言中的 `Map` 或 `Dictionary` 的数据结构，即一组键值对。
+JavaScript 的默认对象表示方式 `{}` 可以视为其他语言中的 `Map` 或 `Dictionary` 的数据结构，即一组键值对。
 
-但是J avaScript 的对象有个小问题，就是键必须是字符串。但实际上 Number 或者其他数据类型作为键也是非常合理的。
+但是 J avaScript 的对象有个小问题，就是键必须是字符串。但实际上 Number 或者其他数据类型作为键也是非常合理的。
 
 #### Map
 
@@ -541,7 +541,7 @@ var names = ['Michael', 'Bob', 'Tracy'];
 var scores = [95, 75, 85];
 ```
 
-给定一个名字，要查找对应的成绩，就先要在names中找到对应的位置，再从 scores 取出对应的成绩，Array 越长，耗时越长。
+给定一个名字，要查找对应的成绩，就先要在 names 中找到对应的位置，再从 scores 取出对应的成绩，Array 越长，耗时越长。
 
 如果用 Map 实现，只需要一个“名字”-“成绩”的对照表，直接根据名字查找成绩，无论这个表有多大，查找速度都不会变慢。用 JavaScript 写一个 Map 如下：
 
@@ -609,13 +609,13 @@ s; // Set {1, 2}
 
 ### iterable
 
-遍历 `Array` 可以采用下标循环，遍历 `Map` 和 `Set` 就无法使用下标。为了统一集合类型，ES6标准引入了新的 `iterable` 类型，`Array`、`Map` 和 `Set`都属于 `iterable` 类型。
+遍历 `Array` 可以采用下标循环，遍历 `Map` 和 `Set` 就无法使用下标。为了统一集合类型，ES6 标准引入了新的 `iterable` 类型，`Array`、`Map` 和 `Set`都属于 `iterable` 类型。
 
 #### for … of
 
 具有 `iterable` 类型的集合可以通过新的 `for ... of` 循环来遍历。
 
-`for ... of` 循环是ES6引入的新的语法，
+`for ... of` 循环是 ES6 引入的新的语法，
 
 ```javascript
 var a = ['A', 'B', 'C'];
@@ -707,7 +707,7 @@ var 变量名 = function () {
 
 ### arguements
 
-JavaScript还有一个免费赠送的关键字 `arguments`，它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。`arguments` 类似`Array `但它不是一个 `Array`
+JavaScript 还有一个免费赠送的关键字 `arguments`，它只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。`arguments` 类似`Array `但它不是一个 `Array`
 
 ```javascript
 function foo(x) {
@@ -855,7 +855,7 @@ function foo() {
 
 ### 全局作用域
 
-不在任何函数内定义的变量就具有全局作用域。实际上，JavaScript默认有一个全局对象`window`，全局作用域的变量实际上被绑定到 `window` 的一个属性：
+不在任何函数内定义的变量就具有全局作用域。实际上，JavaScript 默认有一个全局对象`window`，全局作用域的变量实际上被绑定到 `window` 的一个属性：
 
 例如，直接访问全局变量 `course` 和访问 `window.course` 是完全一样的。
 
@@ -898,7 +898,7 @@ MYAPP.foo = function () {
 
 把自己的代码全部放入唯一的名字空间`MYAPP`中，会大大减少全局变量冲突的可能。
 
-许多著名的JavaScript库都是这么干的：jQuery，YUI，underscore等等
+许多著名的 JavaScript 库都是这么干的：jQuery，YUI，underscore 等等
 
 ### 局部作用域 
 
@@ -913,7 +913,7 @@ function foo() {
 }
 ```
 
-为了解决块级作用域，ES6引入了新的关键字 `let`，用 `let` 替代 `var` 可以**申明一个块级作用域的变量**：
+为了解决块级作用域，ES6 引入了新的关键字 `let`，用 `let` 替代 `var` 可以**申明一个块级作用域的变量**：
 
 ```javascript
 function foo() {
@@ -936,7 +936,7 @@ function foo() {
 var PI = 3.14;
 ```
 
-ES6标准引入了新的关键字 `const` 来定义常量，`const` 与 `let` 都具有块级作用域：
+ES6 标准引入了新的关键字 `const` 来定义常量，`const` 与 `let` 都具有块级作用域：
 
 ```javascript
 'use strict';
@@ -1040,7 +1040,7 @@ var x, y;
 // 语法错误: Uncaught SyntaxError: Unexpected token =
 ```
 
-这是因为JavaScript引擎把 `{` 开头的语句当作了块处理，于是 `= `不再合法。解决方法是用小括号括起来：
+这是因为 JavaScript 引擎把 `{` 开头的语句当作了块处理，于是 `= `不再合法。解决方法是用小括号括起来：
 
 ```javascript
 ({x, y} = { name: '小明', x: 100, y: 200});
@@ -1081,7 +1081,7 @@ buildDate({ year: 2017, month: 1, day: 1, hour: 20, minute: 15 });
 // Sun Jan 01 2017 20:15:00 GMT+0800 (CST)
 ```
 
-使用解构赋值可以减少代码量，但是，需要在支持ES6解构赋值特性的现代浏览器中才能正常运行。目前支持解构赋值的浏览器包括Chrome，Firefox，Edge等
+使用解构赋值可以减少代码量，但是，需要在支持 ES6 解构赋值特性的现代浏览器中才能正常运行。目前支持解构赋值的浏览器包括 Chrome，Firefox，Edge 等
 
 ### 方法
 
@@ -1164,7 +1164,7 @@ Math.max.call(null, 3, 5, 4); // 5
 
 利用 `apply()`，我们还可以动态改变函数的行为。
 
-JavaScript的所有对象都是动态的，即使内置的函数，我们也可以重新指向新的函数。
+JavaScript 的所有对象都是动态的，即使内置的函数，我们也可以重新指向新的函数。
 
 例
 
@@ -1485,7 +1485,7 @@ const demo = (parma: IDemo) => {
 #### ? 用法
 
 - 除了表示可选参数外
-- 当使用 A 对象属性 A.B 时，如果无法确定 A 是否为空，则需要用 A?.B，表示当A有值的时候才去访问 B 属性，没有值的时候就不去访问，如果不使用?则会报错
+- 当使用 A 对象属性 A.B 时，如果无法确定 A 是否为空，则需要用 A?.B，表示当 A 有值的时候才去访问 B 属性，没有值的时候就不去访问，如果不使用?则会报错
 
 ```tsx
 // 由于函数参数可选，因此parma无法确定是否拥有，所以无法正常使用parma.x，使用parma?.x向编译器假设此时parma不为空且为IDemo类型，同时parma?.x无法保证非空，因此使用parma?.x!来保证了整体通过编译

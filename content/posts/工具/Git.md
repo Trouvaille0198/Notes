@@ -34,7 +34,7 @@ $ pwd
 
 `pwd`命令用于显示当前目录
 
-- 把这个目录变成Git可以管理的仓库
+- 把这个目录变成 Git 可以管理的仓库
 
 ```shell
 $ git init
@@ -103,7 +103,7 @@ $ git log --pretty=oneline //简单显示
 $ git reset --hard HEAD^
 ```
 
-上一个版本就是`HEAD^`，上上一个版本就是`HEAD^^`，当然往上100个版本写100个^比较容易数不过来，所以写成`HEAD~100`
+上一个版本就是`HEAD^`，上上一个版本就是`HEAD^^`，当然往上 100 个版本写 100 个^比较容易数不过来，所以写成`HEAD~100`
 
 2. 退回某一版本
 
@@ -153,7 +153,7 @@ $ git rm <filename>
 $ ssh-keygen -t rsa -C "youremail@example.com"
 ```
 
-可以在用户主目录里找到`.ssh`目录，里面有`id_rsa`和`id_rsa.pub`两个文件，这两个就是SSH Key的秘钥对，`id_rsa`是私钥，不能泄露出去，`id_rsa.pub`是公钥，可以放心地告诉任何人
+可以在用户主目录里找到`.ssh`目录，里面有`id_rsa`和`id_rsa.pub`两个文件，这两个就是 SSH Key 的秘钥对，`id_rsa`是私钥，不能泄露出去，`id_rsa.pub`是公钥，可以放心地告诉任何人
 
 ### 关联远程仓库
 
@@ -187,13 +187,13 @@ $ git clone git@github.com:GitHub-name/Repo-name.git
 
 ## 分支操作
 
-分支共有5种类型
+分支共有 5 种类型
 
 1. master/main，最终发布版本，整个项目中有且只有一个
 2. develop，项目的开发分支，原则上项目中有且只有一个
 3. feature，功能分支，用于开发一个新的功能
-4. release，预发布版本，介于develop和master之间的一个版本，主要用于测试
-5. hotfix，修复补丁，用于修复master上的bug，直接作用于master
+4. release，预发布版本，介于 develop 和 master 之间的一个版本，主要用于测试
+5. hotfix，修复补丁，用于修复 master 上的 bug，直接作用于 master
 
 ### 创建并切换到新的分支
 
@@ -275,7 +275,7 @@ $ git stash list
 $ git stash pop
 ```
 
-若要恢复指定的stash
+若要恢复指定的 stash
 
 ```shell
 $ git stash apply stash@{0}
@@ -293,9 +293,9 @@ $ git cherry-pick <id>
 $ git rebase
 ```
 
-rebase操作可以把本地未push的分叉提交历史整理成直线；
+rebase 操作可以把本地未 push 的分叉提交历史整理成直线；
 
-rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比
+rebase 的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比
 
 ## 多人协作
 
@@ -331,7 +331,7 @@ $ git checkout -b <branch-name> origin/<branch-name>
 $ git pull
 ```
 
-若提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令
+若提示 no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令
 
 ```shell
 $ git branch --set-upstream-to <branch-name> origin/<branch-name>
@@ -379,7 +379,7 @@ git merge upstream/master
 $ git tag <tag-name>
 ```
 
-若要根据commit id打标签
+若要根据 commit id 打标签
 
 ```shell
 $ git tag <tag-name> <id>

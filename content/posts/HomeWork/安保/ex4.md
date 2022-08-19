@@ -16,7 +16,7 @@ https://zhuanlan.zhihu.com/p/48249182
 
 随机选择一个整数 e，满足 1< e < φ(n)，且 e 与 φ(n) 互质
 
-计算 e对于 φ(n) 的模反元素 d
+计算 e 对于 φ(n) 的模反元素 d
 
 即 ed ≡ 1 (mod φ(n))
 

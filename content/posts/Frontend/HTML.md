@@ -33,9 +33,9 @@ categories: [前端]
 
 ### 基本结构标签
 
-1. `<html><html>` ：HTML标签，根标签，页面中最大的标签
+1. `<html><html>` ：HTML 标签，根标签，页面中最大的标签
 
-2. `<head></head>`：文档的头部，在其中必须设置title标签
+2. `<head></head>`：文档的头部，在其中必须设置 title 标签
 
 3. `<title></title>`：文档的标题
 
@@ -45,7 +45,7 @@ categories: [前端]
 
 1. 文档类型声明标签 `<!DOCTYPE>`
 
-   告诉浏览器使用那种HTML版本来显示网页，写在最前面
+   告诉浏览器使用那种 HTML 版本来显示网页，写在最前面
 
 ```html
 <!DOCTYPE html>
@@ -537,7 +537,7 @@ type 属性值
 
 - action：访问服务器的地址
 
-- method：请求方式有GET和POST
+- method：请求方式有 GET 和 POST
 
 > http://localhost:8080/?username=user&password=123&password2=123&sex=1&hobby=java&hobby=python&nation=1&desc=desc&1111=abc
 
@@ -547,7 +547,7 @@ type 属性值
 
 > 表单请求方法有 get 和 post
 
-GET方式
+GET 方式
 
 1. 传递参数的地方	地址?参数   地址?键=值&键=值(name=value)
 2. 不安全

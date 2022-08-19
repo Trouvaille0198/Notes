@@ -36,7 +36,7 @@ k8s 是基于容器的**集群编排引擎**，具备扩展集群、滚动升级
 
 Kubernetes 可以管理大规模的集群，使集群中的每一个节点彼此连接，能够像控制一台单一的计算机一样控制整个集群。
 
-集群有两种角色，一种是 **master** ，一种是 **Node**（也叫worker）。 
+集群有两种角色，一种是 **master** ，一种是 **Node**（也叫 worker）。 
 
 - **master** 是集群的"大脑"，负责管理整个集群：应用的调度、更新、扩缩容等。
 - **Node** 就是具体"干活"的
@@ -196,11 +196,11 @@ kube-proxy 维护节点上的一些网络规则， 这些网络规则会允许�
 
 每个 Kubernetes 对象都包含两个嵌套对象字段，用于管理 Object 的配置：Object Spec 和 Object Status。
 
-- Spec 描述了对象所需的状态 - 希望Object具有的特性，
-- Status描述了对象的实际状态，并由Kubernetes系统提供和更新。
+- Spec 描述了对象所需的状态 - 希望 Object 具有的特性，
+- Status 描述了对象的实际状态，并由 Kubernetes 系统提供和更新。
 
-例如，通过Kubernetes Deployment 来表示在集群上运行的应用的对象。
+例如，通过 Kubernetes Deployment 来表示在集群上运行的应用的对象。
 
-- 创建Deployment时，可以设置Deployment Spec，来指定要运行应用的三个副本。
-- Kubernetes系统将读取Deployment Spec，并启动你想要的三个应用实例 - 来更新状态以符合之前设置的Spec。
-- 如果这些实例中有任何一个失败（状态更改），Kuberentes系统将响应Spec和当前状态之间差异来调整，这种情况下，将会开始替代实例。
+- 创建 Deployment 时，可以设置 Deployment Spec，来指定要运行应用的三个副本。
+- Kubernetes 系统将读取 Deployment Spec，并启动你想要的三个应用实例 - 来更新状态以符合之前设置的 Spec。
+- 如果这些实例中有任何一个失败（状态更改），Kuberentes 系统将响应 Spec 和当前状态之间差异来调整，这种情况下，将会开始替代实例。

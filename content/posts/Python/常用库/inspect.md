@@ -41,7 +41,7 @@ class Person:
         self.age = age
 ```
 
-返回Person类的所有成员：
+返回 Person 类的所有成员：
 
 ```python
 if __name__ == "__main__":
@@ -169,7 +169,7 @@ None
 
 此外还有一系列的 is 开头的方法，包括：isfunction, isgeneratorfunction, isgenerator, iscoroutinefunction, iscoroutine, isawaitable, isasyncgenfunction, isasyncgen, istraceback 等。
 
-除了 is 开头的一系列方法外，还有一系列 get 开头的方法，这里不再赘述，可自行查询官方文档。我们将关注点转向inspect 的其他对象，包括：
+除了 is 开头的一系列方法外，还有一系列 get 开头的方法，这里不再赘述，可自行查询官方文档。我们将关注点转向 inspect 的其他对象，包括：
 
 1. Signatrure object
 2. Parameter

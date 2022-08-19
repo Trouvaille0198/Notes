@@ -100,9 +100,9 @@ else:
 
 #### 迭代
 
-如果给定一个 list 或tuple，我们可以通过for循环来遍历这个list或tuple，这种遍历我们称为迭代（Iteration）。在Python中，迭代是通过for ... in来完成的。Python的for循环不仅可以用在list或tuple上，还可以作用在其他可迭代对象上
+如果给定一个 list 或 tuple，我们可以通过 for 循环来遍历这个 list 或 tuple，这种遍历我们称为迭代（Iteration）。在 Python 中，迭代是通过 for ... in 来完成的。Python 的 for 循环不仅可以用在 list 或 tuple 上，还可以作用在其他可迭代对象上
 
-1. 默认情况下，dict迭代的是key。如果要迭代value，可以用for value in d.values()，如果要同时迭代key和value，可以用`for k, v in d.items()`
+1. 默认情况下，dict 迭代的是 key。如果要迭代 value，可以用 for value in d.values()，如果要同时迭代 key 和 value，可以用`for k, v in d.items()`
 
 ```python
 >>> d = {'a': 1, 'b': 2, 'c': 3}
@@ -114,7 +114,7 @@ c
 b
 ```
 
-2. 由于字符串也是可迭代对象，因此，也可以作用于for循环
+2. 由于字符串也是可迭代对象，因此，也可以作用于 for 循环
 
 ```python
 >>> for ch in 'ABC':
@@ -125,7 +125,7 @@ B
 C
 ```
 
-如何判断一个对象是可迭代对象呢？方法是通过collections模块的Iterable类型判断
+如何判断一个对象是可迭代对象呢？方法是通过 collections 模块的 Iterable 类型判断
 
 ```python
 >>> from collections import Iterable
@@ -551,7 +551,7 @@ l = [x*x for x in range(10)]
 g = (x*x for x in range(10))
 ```
 
-1. 直接打印g的结果
+1. 直接打印 g 的结果
 
 ```python
 <generator object <genexpr> at 0x000002A4CBF9EBA0>
@@ -610,7 +610,7 @@ g = generator(4)
      (0, 1, 2)
      ```
 
-   - 字符串'xxx'也可以看成是一种list，每个元素就是一个字符。因此，字符串也可以用切片操作，只是操作结果仍是字符串
+   - 字符串'xxx'也可以看成是一种 list，每个元素就是一个字符。因此，字符串也可以用切片操作，只是操作结果仍是字符串
 
      ```python
      >>> 'ABCDEFG'[:3]
@@ -647,7 +647,7 @@ g = generator(4)
      ['.emacs.d', '.ssh', '.Trash', 'Adlm', 'Applications', 'Desktop', 'Documents', 'Downloads', 'Library', 'Movies', 'Music', 'Pictures', 'Public', 'VirtualBox VMs', 'Workspace', 'XCode']
      ```
 
-   - 把一个list中所有的字符串变成小写
+   - 把一个 list 中所有的字符串变成小写
 
      ```python
      >>> L = ['Hello', 'World', 'IBM', 'Apple']
@@ -820,7 +820,7 @@ for x,y in users.items():
 
 ### get()
 
-- 说明：返回指定键的值，如果值不在字典中返回默认值None
+- 说明：返回指定键的值，如果值不在字典中返回默认值 None
 
 - 语法
 

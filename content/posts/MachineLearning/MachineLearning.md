@@ -66,7 +66,7 @@ categories: [Machine Learning]
 
 1. **留出法**
 
-   将数据集D划分为互斥集合，训练集S与测试集T，用T来评估和测试误差。
+   将数据集 D 划分为互斥集合，训练集 S 与测试集 T，用 T 来评估和测试误差。
 
    要求
 
@@ -75,7 +75,7 @@ categories: [Machine Learning]
 
 2. **k折交叉验证法**
 
-   将数据集D分成k份，每次以k-1个子集作为训练集S来训练，用余下的那一个子集用来测试，重复k次取平均值。
+   将数据集 D 分成 k 份，每次以 k-1 个子集作为训练集 S 来训练，用余下的那一个子集用来测试，重复 k 次取平均值。
 
    缺点：太慢太麻烦
 
@@ -83,9 +83,9 @@ categories: [Machine Learning]
 
 3. **自助法**
 
-   在数据集D中随机挑选样本放入训练集S中，再放回，重复m次（自助采样）。
+   在数据集 D 中随机挑选样本放入训练集 S 中，再放回，重复 m 次（自助采样）。
 
-   此时，D中部分样本会在S中多次出现，部分样本不会出现，不被采到的概率为$(1-\cfrac{1}{m})^m$，取极限约为36.8%，将不出现的样本作为测试集T，这样的测试结果称为包外估计（out-of-bagestimate）。
+   此时，D 中部分样本会在 S 中多次出现，部分样本不会出现，不被采到的概率为$(1-\cfrac{1}{m})^m$，取极限约为 36.8%，将不出现的样本作为测试集 T，这样的测试结果称为包外估计（out-of-bagestimate）。
 
    缺点：改变了初始数据集的分布，引入估计偏差。
 
@@ -139,8 +139,8 @@ $$
 
 #### 最优阈值的确定
 
-- **选取平衡点**（Break-Even Point），简称BEP
-- **$F1$ 度量**（P与R的调和平均数）
+- **选取平衡点**（Break-Even Point），简称 BEP
+- **$F1$ 度量**（P 与 R 的调和平均数）
 
 $$
 \cfrac{1}{F1}=\cfrac{1}{2}(\cfrac{1}{R}+\cfrac{1}{P}) \\
@@ -165,7 +165,7 @@ $$
 
   - macro-P 宏查准率：$macro-P=\cfrac{1}{n}\sum\limits_{i=1}^n P_i$
   - macro-R 宏查全率：$macro-R=\cfrac{1}{n}\sum\limits_{i=1}^n R_i$
-  - macro-F1 宏F1：$macro-F1=\cfrac{2\times macroP\times macroR}{macroP+macroR}$
+  - macro-F1 宏 F1：$macro-F1=\cfrac{2\times macroP\times macroR}{macroP+macroR}$
 
 - 先平均再计算
   - macro-P 宏查准率：$micro-P=\cfrac{\overline{TP}}{\overline{TP}+\overline{FP}}$

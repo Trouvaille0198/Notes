@@ -498,7 +498,7 @@ SQL>>> query.all()
       <User(name='fred', fullname='Fred Flinstone', password='blah')>]
 ```
 
-- `first()` 返回至多一个结果，而且以单项形式，而不是只有一个元素的tuple形式返回这个结果.
+- `first()` 返回至多一个结果，而且以单项形式，而不是只有一个元素的 tuple 形式返回这个结果.
 
 ```bash
 >>> query.first()
@@ -523,7 +523,7 @@ Traceback (most recent call last):
 NoResultFound: No row was found for one()
 ```
 
-- `one_or_none()`：从名称可以看出，当结果数量为 0 时返回 `None`， 多于1个时报错
+- `one_or_none()`：从名称可以看出，当结果数量为 0 时返回 `None`， 多于 1 个时报错
 - `scalar()`和`one()` 类似，但是返回单项而不是 tuple
 
 ### 嵌入使用 SQL

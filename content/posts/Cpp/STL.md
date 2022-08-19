@@ -195,7 +195,7 @@ int main(int argc, char* argv[])
 - 多个元素赋值：`lst.assign(int nSize, const T& x); // 类似于初始化时用数组进行赋值`
 - 交换两个同类型容器的元素：`swap(list&, list&); 或 lst.swap(list&);`
 - 合并两个列表的元素（默认升序排列）：`lst.merge();`
-- 在任意位置拼接入另一个list：`lst.splice(iterator it, list&);`
+- 在任意位置拼接入另一个 list：`lst.splice(iterator it, list&);`
 - 删除容器中相邻的重复元素：`lst.unique();`
 
 ```c++
@@ -350,4 +350,4 @@ sort(lst.begin(), lst.end(), Comp);
 可以看到，list 与 vector、deque 的用法基本一致，除了以下几处不同：
 
 - list 为双向迭代器，故不支持`it+=i`；
-- list 不支持下标访问和at方法访问。
+- list 不支持下标访问和 at 方法访问。

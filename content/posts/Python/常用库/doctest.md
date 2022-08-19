@@ -110,7 +110,7 @@ Traceback (most recent call last):
 
 ## 将测试用例保存到外部文件
 
-函数如果功能简单直接在 docstring 里写用例其实还不错，但是如果函数功能比较复杂，测试用例比较多，那么写到docstring 里就太长了。
+函数如果功能简单直接在 docstring 里写用例其实还不错，但是如果函数功能比较复杂，测试用例比较多，那么写到 docstring 里就太长了。
 
 Doctest 支持把测试代码抽离到另外一个 txt 里，然后通过解析 txt 的方式运行用例。
 
@@ -154,7 +154,7 @@ Now use it  # 这个是个注释
 
 执行文本用例的途径有两个
 
-直接命令行调用doctest模块运行文本用例
+直接命令行调用 doctest 模块运行文本用例
 
 ```bash
 python -m doctest -v example.txt

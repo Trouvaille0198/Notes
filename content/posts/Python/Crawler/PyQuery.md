@@ -58,7 +58,7 @@ doc = pq(filename='demo.html')
 
 pyquery 的选择结果可能是多个节点，也可能是单个节点，类型都是 ` PyQuery ` 类型，并没有返回像 Beautiful Soup 那样的列表。
 
-所有查找结点的方法都可以加入CSS选择器
+所有查找结点的方法都可以加入 CSS 选择器
 
 ## 子节点
 
@@ -226,7 +226,7 @@ print(li.html())
 
 ## addClass()、removeClass()
 
-添加，移除class标签
+添加，移除 class 标签
 
 ```python
 items.removeClass('active')

@@ -98,7 +98,7 @@ docker 中有这样几个概念：
 >
 > 
 
-因此我们只需要在 dockerfile 中指定需要哪些程序、依赖什么样的配置，之后把 dockerfile 交给“编译器” docker 进行“编译”，也就是 `docker build` 命令，生成的可执行程序就是 image，之后就可以运行这个 image 了，这就是 `docker run` 命令，image运行起来后就是 docker container。
+因此我们只需要在 dockerfile 中指定需要哪些程序、依赖什么样的配置，之后把 dockerfile 交给“编译器” docker 进行“编译”，也就是 `docker build` 命令，生成的可执行程序就是 image，之后就可以运行这个 image 了，这就是 `docker run` 命令，image 运行起来后就是 docker container。
 
 ### docker 是如何工作的
 
@@ -559,7 +559,7 @@ $ docker run -t -i ubuntu:18.04 /bin/bash
 root@af8bae53bdd3:/#
 ```
 
-其中，`-t` 选项让Docker分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上， `-i` 则让容器的标准输入保持打开。
+其中，`-t` 选项让 Docker 分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上， `-i` 则让容器的标准输入保持打开。
 
 当利用 `docker run` 来创建容器时，Docker 在后台运行的标准操作包括：
 

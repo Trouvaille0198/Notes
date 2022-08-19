@@ -60,7 +60,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
     参数可以是
 
-    - *mobject*：另一个Mobject
+    - *mobject*：另一个 Mobject
     - *aligned_edge*：DIRECTION 的线性组合
     - *coor_mask*：numpy 向量，默认为 `np.array([1, 1, 1])`
 
@@ -307,10 +307,10 @@ Whereas in a MathTex mobject everything is math-mode by default.
 #### 结构
 
 1. `Code[0]` 是代码的背景 ( `Code.background_mobject` )
-    1. 如果 `background == "rectangle"` 则是一个Rectangle
-    2. 如果 `background == "window"` 则是一个带有矩形和三个点的VGroup
-2. `Code[1]` 是行号 ( `Code.line_numbers` 一个Paragraph)，可以使用 `Code.line_numbers[0]` 或者 `Code[1][0]` 来访问行号中的第一个数字
-3. `Code[2]` 是代码 (`Code.code`)，一个带有颜色的Paragraph
+    1. 如果 `background == "rectangle"` 则是一个 Rectangle
+    2. 如果 `background == "window"` 则是一个带有矩形和三个点的 VGroup
+2. `Code[1]` 是行号 ( `Code.line_numbers` 一个 Paragraph)，可以使用 `Code.line_numbers[0]` 或者 `Code[1][0]` 来访问行号中的第一个数字
+3. `Code[2]` 是代码 (`Code.code`)，一个带有颜色的 Paragraph
 
 #### parameters
 
@@ -480,7 +480,7 @@ class concurrent(Scene):
 
 ***ApplyMethod(method, \*args, \*\*kwargs)***
 
-因为 `ApplyMethod` 是Transform的子类，所以每次只能对同一个物体执行一次操作（最后一次）
+因为 `ApplyMethod` 是 Transform 的子类，所以每次只能对同一个物体执行一次操作（最后一次）
 
 ```python
 from manim import *
@@ -1024,7 +1024,7 @@ class test(Scene):
 
 - ***UpdateFromAlphaFunc(mobject, update_function, \*\*kwargs)***
 
-    传入的函数含有参数alpha，表示动画完成度(0~1之间)
+    传入的函数含有参数 alpha，表示动画完成度(0~1 之间)
 
 ```python
 from manim import *
@@ -1053,7 +1053,7 @@ class test(Scene):
 
     传入一系列动画，一起执行（不能通过下标访问动画）
 
-    - *lag_ratio*：默认为0（即上一个动画运行到0%的时候运行下一个动画）
+    - *lag_ratio*：默认为 0（即上一个动画运行到 0%的时候运行下一个动画）
 
 ```python
 from manim import *

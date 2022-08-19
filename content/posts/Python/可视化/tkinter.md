@@ -481,7 +481,7 @@ master.mainloop()
 ***invoke()*** 
 
 -- 调用 Button 中 command 选项指定的函数或方法，并返回函数的返回值。
--- 如果 Button 的state (状态)是 "disabled"（不可用）或没有指定 command 选项，则该方法无效。
+-- 如果 Button 的 state (状态)是 "disabled"（不可用）或没有指定 command 选项，则该方法无效。
 
 ## 多选按钮 Checkbutton
 
@@ -585,7 +585,7 @@ def cb(self, event):
 **invoke()**
 
 -- 调用 Checkbutton 中 command 选项指定的函数或方法，并返回函数的返回值。
--- 如果 Checkbutton 的state(状态)"disabled"是 （不可用）或没有指定 command 选项，则该方法无效。
+-- 如果 Checkbutton 的 state(状态)"disabled"是 （不可用）或没有指定 command 选项，则该方法无效。
 
 ## 单选按钮 Radiobutton
 

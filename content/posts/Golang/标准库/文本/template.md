@@ -53,7 +53,7 @@ func main() {
 
 ### 分类
 
-下面是一个action（动作）的列表。"Arguments" 和 "pipelines" 代表数据的执行结果，细节定义在后面。
+下面是一个 action（动作）的列表。"Arguments" 和 "pipelines" 代表数据的执行结果，细节定义在后面。
 
 - `{{/* a comment */}}`
   - 注释，执行时会忽略。可以多行。注释不能嵌套，并且必须紧贴分界符始止，就像这里表示的一样。
@@ -61,16 +61,16 @@ func main() {
 - `{{pipeline}}`
   - pipeline 的值的默认文本表示会被拷贝到输出里。
 - `{{if pipeline}} T1 {{end}}`
-  - 如果 pipeline 的值为empty，不产生输出，否则输出 T1 执行结果。不改变 dot 的值。
+  - 如果 pipeline 的值为 empty，不产生输出，否则输出 T1 执行结果。不改变 dot 的值。
   - Empty 值包括 false、0、任意 nil 指针或者 nil 接口，任意长度为 0 的数组、切片、字典。
 - `{{if pipeline}} T1 {{else}} T0 {{end}}`
   - 如果 pipeline 的值为 empty，输出 T0 执行结果，否则输出 T1 执行结果。不改变 dot 的值。
 - `{{if pipeline}} T1 {{else if pipeline}} T0 {{end}}`
-  - 用于简化if-else链条，else action 可以直接包含另一个if；等价于：
+  - 用于简化 if-else 链条，else action 可以直接包含另一个 if；等价于：
     - `{{if pipeline}} T1 {{else}}{{if pipeline}} T0 {{end}}{{end}}`
 - `{{range pipeline}} T1 {{end}}`
   - pipeline 的值必须是 array、slice、map 或者 chan。
-  - 如果 pipeline 的值其长度为 0，不会有任何输出；否则 dot 依次设为 array、slice、map 或者chan 的每一个成员元素并执行 T1；
+  - 如果 pipeline 的值其长度为 0，不会有任何输出；否则 dot 依次设为 array、slice、map 或者 chan 的每一个成员元素并执行 T1；
   - 如果 pipeline 的值为 map，且键可排序的基本类型，元素也会按键的顺序排序。
 - `{{range pipeline}} T1 {{else}} T0 {{end}}`
   - pipeline 的值必须是数组、切片、字典或者通道。
@@ -78,9 +78,9 @@ func main() {
 - `{{template "name"}}`
   - 执行名为 name 的模板，提供给模板的参数为 nil，如模板不存在输出为 ""
 - `{{template "name" pipeline}}`
-  - 执行名为 name 的模板，提供给模板的参数为pipeline的值。
+  - 执行名为 name 的模板，提供给模板的参数为 pipeline 的值。
 - `{{with pipeline}} T1 {{end}}`
-  - 如果 pipeline 为 empty 不产生输出，否则将 dot 设为 pipeline 的值并执行T1。不修改外面的 dot
+  - 如果 pipeline 为 empty 不产生输出，否则将 dot 设为 pipeline 的值并执行 T1。不修改外面的 dot
 - `{{with pipeline}} T1 {{else}} T0 {{end}}`
   - 如果 pipeline 为 empty，不改变 dot 并执行 T0，否则 dot 设为 pipeline 的值并执行 T1。
 

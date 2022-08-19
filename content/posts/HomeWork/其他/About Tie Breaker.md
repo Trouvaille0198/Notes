@@ -64,14 +64,14 @@ draft: true
 代码结构
 
 - assets：静态文件，如人名库、国家名库
-- core：数据库与ORM框架的相关配置
+- core：数据库与 ORM 框架的相关配置
 - crud：使用对象关系映射模型构建的原子性数据库操作集合
 - game_configs：游戏的参数配置和算法权重配置文件
-    - 如头像生成概率、能力值的地域修正、联赛和俱乐部的初始数据、各个职责能力值的计算公式、token生成密钥等
+    - 如头像生成概率、能力值的地域修正、联赛和俱乐部的初始数据、各个职责能力值的计算公式、token 生成密钥等
     - ![image-20220404135825016](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220404135825016.png)
 
 - logs：日志文件
-- models：ORM模型定义
+- models：ORM 模型定义
     - 负责与对象关系映射模型与数据库的交互转换
     - ![image-20220404140159339](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220404140159339.png)
 
@@ -164,14 +164,14 @@ draft: true
 代码结构
 
 - assets：静态文件，如人名库、国家名库
-- core：数据库与ORM框架的相关配置
+- core：数据库与 ORM 框架的相关配置
 - crud：使用对象关系映射模型构建的原子性数据库操作集合
 - game_configs：游戏的参数配置和算法权重配置文件
-    - 如头像生成概率、能力值的地域修正、联赛和俱乐部的初始数据、各个职责能力值的计算公式、token生成密钥等
+    - 如头像生成概率、能力值的地域修正、联赛和俱乐部的初始数据、各个职责能力值的计算公式、token 生成密钥等
     - ![image-20220404135825016](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220404135825016.png)
 
 - logs：日志文件
-- models：ORM模型定义
+- models：ORM 模型定义
     - 负责与对象关系映射模型与数据库的交互转换
     - ![image-20220404140159339](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220404140159339.png)
 

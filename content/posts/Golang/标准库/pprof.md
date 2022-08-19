@@ -535,7 +535,7 @@ Showing nodes accounting for 1.77s, 100% of 1.77s total
          0     0%   100%      0.01s  0.56%  runtime.findrunnable
 ```
 
-pprof 支持多种输出格式（图片、文本、Web等），直接在命令行中运行 `go tool pprof` 即可看到所有支持的选项：
+pprof 支持多种输出格式（图片、文本、Web 等），直接在命令行中运行 `go tool pprof` 即可看到所有支持的选项：
 
 ```
 $ go tool pprof

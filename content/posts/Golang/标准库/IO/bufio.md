@@ -21,7 +21,7 @@ io 操作本身的效率并不低，低的是频繁的访问本地磁盘的文�
 
 ![image-20220310153950373](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220310153950373.png)
 
-bufio 封装了io.Reader 或 io.Writer 接口对象，并创建另一个也实现了该接口的对象。
+bufio 封装了 io.Reader 或 io.Writer 接口对象，并创建另一个也实现了该接口的对象。
 
 ## Reader
 

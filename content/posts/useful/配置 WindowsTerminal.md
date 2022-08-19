@@ -83,19 +83,19 @@ https://windowsterminalthemes.dev/
 
 #### 安装
 
-- 第一条命令（绕过power shell执行策略，使其可以执行脚本文件<后面会用到>）
+- 第一条命令（绕过 power shell 执行策略，使其可以执行脚本文件<后面会用到>）
 
 ```text
 Set-ExecutionPolicy Bypass
 ```
 
-- 第二条命令（oh-my-posh提供主题）
+- 第二条命令（oh-my-posh 提供主题）
 
 ```powershell
 Install-Module oh-my-posh -Scope CurrentUser
 ```
 
-- 第三条命令（posh-git将git信息添加到提示中）
+- 第三条命令（posh-git 将 git 信息添加到提示中）
 
 ```text
 Install-Module posh-git -Scope CurrentUser
@@ -103,7 +103,7 @@ Install-Module posh-git -Scope CurrentUser
 
 #### PowerShell 配置
 
-- 第一条（启动编辑power shell配置文件的引擎）
+- 第一条（启动编辑 power shell 配置文件的引擎）
 
 ```text
 if (!(Test-Path -Path $PROFILE )) { New-Item -Type File -Path $PROFILE -Force }
@@ -126,11 +126,11 @@ Set-PoshPrompt -Theme  blueish
 # Set-PoshPrompt -Theme  powerlevel10k_rainbow
 ```
 
-- 第一条命令表示导入posh-git
-- 第二条命令表示导入oh-my-posh
-- 第三条命令表示设置主题为JanDeDobbeleer
+- 第一条命令表示导入 posh-git
+- 第二条命令表示导入 oh-my-posh
+- 第三条命令表示设置主题为 JanDeDobbeleer
 
-**配置完后**，每次打开Windows Terminal中的Power shell都会执行脚本文件中的三条命令。
+**配置完后**，每次打开 Windows Terminal 中的 Power shell 都会执行脚本文件中的三条命令。
 
 #### 查看操作
 

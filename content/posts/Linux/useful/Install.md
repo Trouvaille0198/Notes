@@ -11,7 +11,7 @@ categories: [Linux]
 
 ## Node.js
 
-1. 执行以下命令，下载 Node.js Linux 64位二进制安装包。
+1. 执行以下命令，下载 Node.js Linux 64 位二进制安装包。
 
     ```
     wget https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
@@ -80,9 +80,9 @@ sudo chmod -R 777 gocode/ # gocode 会在后面生成
 
 ### 配置环境变量
 
-配置go的工作空间(配置GOPATH)，以及go的环境变量
+配置 go 的工作空间(配置 GOPATH)，以及 go 的环境变量
 
-go的代码必须在GOPATH中，也就是一个工作目录，目录包含三个子目录
+go 的代码必须在 GOPATH 中，也就是一个工作目录，目录包含三个子目录
 
 ```scss
 $GOPATH

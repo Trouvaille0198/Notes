@@ -42,7 +42,7 @@ func Println(a ...interface{}) (n int, err error)
 
 #### Fprint
 
-Fprint系列函数会将内容输出到一个io.Writer接口类型的变量w中，我们通常用这个函数往文件中写入内容。
+Fprint 系列函数会将内容输出到一个 io.Writer 接口类型的变量 w 中，我们通常用这个函数往文件中写入内容。
 
 ```go
 func Fprint(w io.Writer, a ...interface{}) (n int, err error)
@@ -67,7 +67,7 @@ fmt.Fprintf(fileObj, "往文件中写如信息：%s", name)
 
 ####  Sprint
 
-Sprint系列函数会把传入的数据生成并返回一个字符串。
+Sprint 系列函数会把传入的数据生成并返回一个字符串。
 
 ```go
 func Sprint(a ...interface{}) string
@@ -270,7 +270,7 @@ c000054058
 精度通过（可选的）宽度后跟点号后跟的十进制数指定。
 
 - 如果未指定精度，会使用默认精度；
-- 如果点号后没有跟数字，表示精度为0。举例如下
+- 如果点号后没有跟数字，表示精度为 0。举例如下
 
 | 占位符 | 说明               |
 | ------ | ------------------ |
@@ -367,7 +367,7 @@ func main() {
 }
 ```
 
-将上面的代码编译后在终端执行，在终端依次输入枯藤、18和false使用空格分隔。
+将上面的代码编译后在终端执行，在终端依次输入枯藤、18 和 false 使用空格分隔。
 
 ```
 $ ./scan_demo 

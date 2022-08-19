@@ -44,9 +44,9 @@ import matplotlib.pyplot as plt
 
 ### 层次
 
-- Figure：面板(图)，matplotlib中的所有图像都是位于figure对象中，一个图像只能有一个figure对象。
+- Figure：面板(图)，matplotlib 中的所有图像都是位于 figure 对象中，一个图像只能有一个 figure 对象。
 
-- Subplot：子图，figure对象下创建一个或多个subplot对象(即axes)用于绘制图像。
+- Subplot：子图，figure 对象下创建一个或多个 subplot 对象(即 axes)用于绘制图像。
 
 ### 创建图片
 
@@ -54,7 +54,7 @@ import matplotlib.pyplot as plt
 fig = plt.figure()
 ```
 
-`plt.figure()`返回figure实例
+`plt.figure()`返回 figure 实例
 
 一个空白的绘图窗口就会出现
 
@@ -66,8 +66,8 @@ fig = plt.figure()
 - *dpi*：分辨率，整数
 - *facecolor*：背景颜色
 - *edgecolor*：边框颜色
-- *frameon*：若为False，则没有边框
-- *clear*：若为True，如果图的编号已存在则先清除
+- *frameon*：若为 False，则没有边框
+- *clear*：若为 True，如果图的编号已存在则先清除
 
 ### 创建子图
 
@@ -81,15 +81,15 @@ ax3 = fig.add_subplot(2, 2, 3)
 #注意，此时fig上只有3张子图，其他子图没有被初始化
 ```
 
-`fig.add_subplot(nrows, ncols, index)`以图片作为对象，返回Axes实例
+`fig.add_subplot(nrows, ncols, index)`以图片作为对象，返回 Axes 实例
 
-你可以直接在其他空白的子图上调用Axes对象的实例方法进行绘图
+你可以直接在其他空白的子图上调用 Axes 对象的实例方法进行绘图
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201221134419683.png" alt="image-20201221134419683" style="zoom:67%;" />
 
 #### `plt.subplots()`
 
-使用子图网格创建图片是非常常见的任务，所以matplotlib包含了一个便捷方法plt.subplots，它创建一个新的图片，然后返回包含了已生成子图对象的NumPy数组：
+使用子图网格创建图片是非常常见的任务，所以 matplotlib 包含了一个便捷方法 plt.subplots，它创建一个新的图片，然后返回包含了已生成子图对象的 NumPy 数组：
 
 ```python
 fig, axes = plt.subplots(2, 3)
@@ -109,13 +109,13 @@ plt.subplots(nrows=1, ncols=1, sharex=False, sharey=False, squeeze=True, subplot
 
 - *nrows，ncols*：子图的行列数
 - *sharex, sharey* 
-  - 设置为 True或者 ‘all’ 时，所有子图共享 x 轴或者 y 轴，
+  - 设置为 True 或者 ‘all’ 时，所有子图共享 x 轴或者 y 轴，
   - 设置为 False or ‘none’ 时，所有子图的 x，y 轴均为独立，
   - 设置为 ‘row’ 时，每一行的子图会共享 x 或者 y 轴，
   - 设置为 ‘col’ 时，每一列的子图会共享 x 或者 y 轴。
 - *squeeze*：设置返回的子图对象的数组格式。
   - 当为 False 时，不论返回的子图是只有一个还是只有一行，都会用二维数组格式返回他的对象。
-  - 当为 True时，如果子图只有一个，则返回的子图对象是标量形式，如果子图有（N×1）或（1×N）个，则返回的子图对象是一维数组，如果是（N×M）则返回二维数组。
+  - 当为 True 时，如果子图只有一个，则返回的子图对象是标量形式，如果子图有（N×1）或（1×N）个，则返回的子图对象是一维数组，如果是（N×M）则返回二维数组。
 - *subplot_kw*：字典格式，传递给 `add_subplot()`，用于创建子图
 - gridspec_kw：字典格式，传递给`GridSpec`的构造函数，用于创建子图所摆放的网格。
 - *\*\*fig_kw* ：所有其他关键字参数都传递给 `figure()`调用。
@@ -136,11 +136,11 @@ ax[1,0].plot([1,2], [3,4])	# 第三个图
 ax[1,1].plot([1,2], [3,4])	# 第四个图
 ```
 
-数组axes可以像二维数组那样方便地进行索引，例如，axes[0，1]
+数组 axes 可以像二维数组那样方便地进行索引，例如，axes[0，1]
 
 ### 调整子图周围的间距
 
-默认情况下，matplotlib会在子图的外部和子图之间留出一定的间距。这个间距都是相对于图的高度和宽度来指定的，所以如果你通过编程或手动使用GUI窗口来调整图的大小，那么图就会自动调整。
+默认情况下，matplotlib 会在子图的外部和子图之间留出一定的间距。这个间距都是相对于图的高度和宽度来指定的，所以如果你通过编程或手动使用 GUI 窗口来调整图的大小，那么图就会自动调整。
 
 可以使用图对象上的`plt.subplots_adjust`方法更改间距
 
@@ -159,8 +159,8 @@ plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, h
 ##### 参数
 
 - *left, right, bottom, top*：子图所在区域的边界
-  - 当值大于1.0的时候子图会超出figure的边界从而显示不全；值不大于1.0的时候，子图会自动分布在一个矩形区域
-  - 要保证left < right, bottom < top，否则会报错
+  - 当值大于 1.0 的时候子图会超出 figure 的边界从而显示不全；值不大于 1.0 的时候，子图会自动分布在一个矩形区域
+  - 要保证 left < right, bottom < top，否则会报错
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/20190328213224823.png" alt="left, right, top, bottom" style="zoom: 50%;" />
 
@@ -186,7 +186,7 @@ fig.title('The Title',fontsize=14,color='purple')
 
 ##### 常用参数
 
-- *fontsize*：设置字体大小，默认12，
+- *fontsize*：设置字体大小，默认 12，
   - `['xx-small',  'x-small',  'small',  ‘medium’,  ‘large’, ’x-large’,  ‘xx-large’]`
 - *fontweight*：设置字体粗细
   - `[‘light’,  ‘normal’,  ‘medium’,  ‘semibold’,  ‘bold’,  ‘heavy’,  ‘black’]`
@@ -199,12 +199,12 @@ fig.title('The Title',fontsize=14,color='purple')
   - `['left', 'right', 'center']`
 - *rotation*：旋转角度
   - `[‘vertical’, ‘horizontal’]` 也可以为数字
-- *alpha*：透明度，参数值0至1之间
+- *alpha*：透明度，参数值 0 至 1 之间
 - *backgroundcolor*：标题背景颜色
 - *bbox*：给标题增加外框
   - `‘boxstyle’ `：方框外形
-  - `‘facecolor’ `：(简写fc)背景颜色
-  - `‘edgecolor’ `：(简写ec)边框线条颜色
+  - `‘facecolor’ `：(简写 fc)背景颜色
+  - `‘edgecolor’ `：(简写 ec)边框线条颜色
   - `‘edgewidth’` ：边框线条大小
 
 #### 设置子图标题
@@ -213,13 +213,13 @@ fig.title('The Title',fontsize=14,color='purple')
 ax1.set_title('graph1')
 ```
 
-用Axe对象接受此函数
+用 Axe 对象接受此函数
 
-参数见2.1.1
+参数见 2.1.1
 
 ### 轴操作
 
-set方法允许批量设置绘图属性，如
+set 方法允许批量设置绘图属性，如
 
 ```python
 props = {
@@ -258,7 +258,7 @@ ax1.set_yticklabels(['a','b','c','d','e'])
 ax1.set_xlabel('stage')
 ```
 
-参数见2.1.1
+参数见 2.1.1
 
 若要**直接在figure上操作**
 
@@ -276,11 +276,11 @@ plt.ylabel('y-income',fontsize=14)
 plt.xlim(xmin, xmax)
 ```
 
-*xmin*：x轴上的最小值
+*xmin*：x 轴上的最小值
 
-*xmax*：x轴上的最大值
+*xmax*：x 轴上的最大值
 
-y轴亦如是
+y 轴亦如是
 
 ```python
 ax.get_lim()
@@ -306,10 +306,10 @@ ax1.legend(loc=4)
   - `edgecolor='blue'`：设置图例边框颜色
   - `facecolor='blue'`：设置图例背景颜色,若无边框,参数无效
 - *title*：设置图例标题
-- *markerfirst*：如果为True（默认），则图例标记位于图例标签的左侧
-- *ncol*：设置图例分为n列展示
+- *markerfirst*：如果为 True（默认），则图例标记位于图例标签的左侧
+- *ncol*：设置图例分为 n 列展示
 
-若要直接在figure上操作
+若要直接在 figure 上操作
 
 ```python
 plt.legend()
@@ -335,7 +335,7 @@ plt.text(0.4,0.8,"This is a text",rotation=45)
 
 - *x,y*：设置坐标值值
 - *string*：设置说明文字
-- 其余详见2.1.1
+- 其余详见 2.1.1
 
 #### .annotate()
 
@@ -386,9 +386,9 @@ plt.axvline(x, c, ls, lw)  	#绘制平行于y轴的垂直参考线
 
 **参数**
 
-- *‘equal’*：x,y轴刻度等长
+- *‘equal’*：x,y 轴刻度等长
 - *‘off’*：关闭坐标轴
-- *[a, b, c, d]*：设置x轴的范围为[a, b]，y轴的范围为[c, d]
+- *[a, b, c, d]*：设置 x 轴的范围为[a, b]，y 轴的范围为[c, d]
 
 ## 绘图
 
@@ -409,7 +409,7 @@ plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
 
 #### 参数
 
-- *x,y*：数据，x可选
+- *x,y*：数据，x 可选
 
 - *fmt*：定义基本属性
   
@@ -467,7 +467,7 @@ plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
     | `'|'` | vline marker          |
     | `'_'` | hline marker          |
   
-  - *alpha*：透明值，接受0~1之间的浮点数
+  - *alpha*：透明值，接受 0~1 之间的浮点数
 
 #### 例
 
@@ -503,7 +503,7 @@ plt.show()
 
 ### 气泡图
 
-加入了第三个值 `s` 可以理解成普通散点，画的是二维，泡泡图体现了Z的大小
+加入了第三个值 `s` 可以理解成普通散点，画的是二维，泡泡图体现了 Z 的大小
 
 - *s*：散点标记的大小
 
@@ -533,7 +533,7 @@ plt.show()
 .barh(x, y) #横向柱状图
 ```
 
-- *x*：标示在x轴上的定性数据的类别
+- *x*：标示在 x 轴上的定性数据的类别
 
 - *y*：每种定性数据的类别的数量
 
@@ -589,16 +589,16 @@ plt.show()
 .hist(x)
 ```
 
-*x*：在x轴上绘制箱体的定量数据输入值
+*x*：在 x 轴上绘制箱体的定量数据输入值
 
 #### 重要参数
 
-- *x* : arrays(一个或多个)，在x轴上绘制箱体的定量数据输入值
+- *x* : arrays(一个或多个)，在 x 轴上绘制箱体的定量数据输入值
 
 - *range* : 设置显示范围（tuple or None, optional）
-- *bins*：x轴的分段数，默认为10
+- *bins*：x 轴的分段数，默认为 10
 
-- *histtype* : 选择展示的类型,默认为bar
+- *histtype* : 选择展示的类型,默认为 bar
   - `{‘bar’, ‘barstacked’, ‘step’, ‘stepfilled’}`
 
 - *align* : 对齐方式
@@ -607,7 +607,7 @@ plt.show()
 - *orientation* : 直方图方向
   - `{‘horizontal’, ‘vertical’} `
 
-- *log* : boolean，log刻度
+- *log* : boolean，log 刻度
 
 - *color*：颜色设置
 
@@ -655,7 +655,7 @@ plt.show()
 
 - *x*: 定性数据的不同类别的百分比
 
-- *explode*:指定饼图某些部分的突出显示，即呈现爆炸式，传入元组，每个数据分别为0-1的浮点，表示分离的程度
+- *explode*:指定饼图某些部分的突出显示，即呈现爆炸式，传入元组，每个数据分别为 0-1 的浮点，表示分离的程度
 
   - ```python
     sizes = [15, 30, 45, 10]
@@ -673,7 +673,7 @@ plt.show()
 
 - *labeldistance*：设置各扇形标签（图例）与圆心的距离；
 
-- *startangle*：设置饼图的初始摆放角度, 180为水平；
+- *startangle*：设置饼图的初始摆放角度, 180 为水平；
 
 - *radius*：设置饼图的半径大小；
 
@@ -738,7 +738,7 @@ plt.show()
 .stem(x, y)
 ```
 
-- *x*：制定棉棒的x轴基线上的位置
+- *x*：制定棉棒的 x 轴基线上的位置
 
 - *y*：绘制棉棒的长度
 

@@ -13,15 +13,15 @@ categories: [Python]
 
 ### Series
 
-Series 是一种类似于以为NumPy数组的对象，它由一组数据（各种NumPy数据类型）和与之相关的一组数据标签（即索引）组成的。可以用index和values分别规定索引和值。如果不规定索引，会自动创建 0 到 N-1 索引。
+Series 是一种类似于以为 NumPy 数组的对象，它由一组数据（各种 NumPy 数据类型）和与之相关的一组数据标签（即索引）组成的。可以用 index 和 values 分别规定索引和值。如果不规定索引，会自动创建 0 到 N-1 索引。
 
-Series是1维的数据，拥有的索引，一般以竖行形式输出
+Series 是 1 维的数据，拥有的索引，一般以竖行形式输出
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207200644867.png" alt="image-20201207200644867" style="zoom:50%;" />
 
 #### 创建
 
-Series可以方便的通过list，array还有dict来构建
+Series 可以方便的通过 list，array 还有 dict 来构建
 
 ```python
 pd.Series()
@@ -63,7 +63,7 @@ c    2
 dtype: int64 
 ```
 
-在构建Series的时候，指定index来代替默认的0~n数字式索引
+在构建 Series 的时候，指定 index 来代替默认的 0~n 数字式索引
 
 ```python
 ser4 = pd.Series([100, 200, 150], index=['apple', 'banana', 'peach'])
@@ -85,7 +85,7 @@ dtype: int64
 ser4['banana']
 ```
 
-index方式访问
+index 方式访问
 
 ```python
 ser4[1]
@@ -93,7 +93,7 @@ ser4[1]
 
 ### DataFrame
 
-DataFrame是一种表格型结构，含有一组有序的列，每一列可以是不同的数据类型。既有行索引，又有列索引<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/J$F`0{7$G@6E@1QX3O3$X{Q.png" alt="img" style="zoom:67%;" />
+DataFrame 是一种表格型结构，含有一组有序的列，每一列可以是不同的数据类型。既有行索引，又有列索引<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/J$F`0{7$G@6E@1QX3O3$X{Q.png" alt="img" style="zoom:67%;" />
 
 #### 从具有索引标签的字典数据创建
 
@@ -168,7 +168,7 @@ df
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205642638.png" alt="image-20201207205642638" style="zoom:80%;" />
 
-这玩意可以看做是多个Series的组合。DataFrame的不同列可以是不同的数据类型,如果以Series数组来创建DataFrame，每个Series将成为一行，而不是一列
+这玩意可以看做是多个 Series 的组合。DataFrame 的不同列可以是不同的数据类型,如果以 Series 数组来创建 DataFrame，每个 Series 将成为一行，而不是一列
 
 ## 审视
 
@@ -178,15 +178,15 @@ df
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207222452955.png" alt="image-20201207222452955" style="zoom:80%;" />
 
-col，index为列号和行号
+col，index 为列号和行号
 
-colName，indexName为具体值
+colName，indexName 为具体值
 
 #### `df[colName]`
 
 根据列名，并以 Series 的形式返回列
 
-若列名为默认的数字时，colName 可以被视为 col（其中就col可以表示为列表形式和切片形式）
+若列名为默认的数字时，colName 可以被视为 col（其中就 col 可以表示为列表形式和切片形式）
 
 ```python
 df['a'] 			#取a列
@@ -211,7 +211,7 @@ df['5':'7']  # 行名称为5的行至行名称为7的行
 
 更精准的访问（几列几行）
 
-若列名为默认的数字时，colName可以被视为col（其中就col可以表示为列表形式和切片形式）
+若列名为默认的数字时，colName 可以被视为 col（其中就 col 可以表示为列表形式和切片形式）
 
 ```python
 df['c']['B']
@@ -225,7 +225,7 @@ df['c']['B']
 
 #### ` df.iloc[index, col]`
 
-其中index，col可以表示为列表形式和切片形式，当只传入一个参数时，该参数默认为index
+其中 index，col 可以表示为列表形式和切片形式，当只传入一个参数时，该参数默认为 index
 
 ```python
 df.iloc[0:1] 			# 取第0行数据，较为规范
@@ -255,7 +255,7 @@ df.loc[df['c']=='snake'] 			#选取c列中内容为snake的行数据
 
 #### `df.ix[in,co]`
 
-ix是loc和iloc的混合，既能按索引标签提取，也能按位置进行数 据提取
+ix 是 loc 和 iloc 的混合，既能按索引标签提取，也能按位置进行数 据提取
 
 #### 筛选
 
@@ -336,7 +336,7 @@ df.shape
 
 #### 查看整体信息
 
-使用info函数查看数据表的整体信息，包括数据维度、列名称、数据格式和所占空间等信息
+使用 info 函数查看数据表的整体信息，包括数据维度、列名称、数据格式和所占空间等信息
 
 ```python
 df.info()
@@ -366,7 +366,7 @@ memory usage: 352.0+ bytes
 
 #### **查看数据格式**
 
-使用dtypes函数来返回数据格式
+使用 dtypes 函数来返回数据格式
 
 ```python
 df.dtypes       #查看数据表各列格式
@@ -522,7 +522,7 @@ df.sort_values(by=['B', 'C'], ascending=[False, True])	#先按B降序，再按C�
 df.sort_index(axis=0，ascending=1)		#按索引列升序排序，需要默认的索引值
 ```
 
-输出（此处index设置为了’A’）
+输出（此处 index 设置为了’A’）
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212247769.png" alt="image-20201209212247769" style="zoom: 67%;" />
 
@@ -645,10 +645,10 @@ df.count()		#返回每一列中的非空值的个数
 
 #### 缺失值处理
 
-- `dropna(axis=, how=)`：丢弃NaN数据
+- `dropna(axis=, how=)`：丢弃 NaN 数据
   - axis：0(按行丢弃)，1(按列丢弃)
-  - how：'any'(只要含有NaN数据就丢弃)，'all'(所有数据都为NaN时丢弃)
-- `fillna(value=)`：将NaN值都设置为value的值
+  - how：'any'(只要含有 NaN 数据就丢弃)，'all'(所有数据都为 NaN 时丢弃)
+- `fillna(value=)`：将 NaN 值都设置为 value 的值
 
 ```python
 df.dropna(how='any')					#删除数据表中含有空值的行
@@ -770,9 +770,9 @@ df_inner.set_index('A')
 
 参数
 
-- on：列名，join用来对齐的那一列的名字，用到这个参数的时候一定要保证左表和右表用来对齐的那一列都有相同的列名
+- on：列名，join 用来对齐的那一列的名字，用到这个参数的时候一定要保证左表和右表用来对齐的那一列都有相同的列名
 - how：数据融合的方法
-- sort：根据dataframe合并的keys按字典顺序排序，默认是，如果置false可以提高表现
+- sort：根据 dataframe 合并的 keys 按字典顺序排序，默认是，如果置 false 可以提高表现
 
 ```python
 df_inner=pd.merge(df1,df2,how='inner') 	#以小表为准
@@ -789,11 +789,11 @@ df_right=pd.merge(df1,df2,how='right')	#以右表为准,这里等同于outer_df
 
 第一个参数：需要合并的矩阵
 
-axis：合并维度，0：按行合并，1：按列合并，默认为0
+axis：合并维度，0：按行合并，1：按列合并，默认为 0
 
-join：处理非公有 列/行 的方式，inner：去除非公有的 列/行，outer：对非公有的 列/行 进行NaN值填充然后合并
+join：处理非公有 列/行 的方式，inner：去除非公有的 列/行，outer：对非公有的 列/行 进行 NaN 值填充然后合并
 
-ignore_index：是否重排行索引，若重排，行索引为顺序。默认为0
+ignore_index：是否重排行索引，若重排，行索引为顺序。默认为 0
 
 ```python
 pd.concat([df1, df2], join='outer', ignore_index=True) 	#按行合并，重排行索引
@@ -934,7 +934,7 @@ data[data["A"].isin([1, 2])] # 返回DataFrame副本
 *apply( func, axis=0 )*：定义一个对列，最大值-最小值的函数
 
 - func：自定义函数
-- axis=0：默认是列，axis=1为行进行运算
+- axis=0：默认是列，axis=1 为行进行运算
 
 ## 导入与到导出
 
@@ -1000,7 +1000,7 @@ df.groupby('animal')['age'].mean()
 df['animal'].value_counts()
 ```
 
-5. 将priority列中的yes, no替换为布尔值True, False
+5. 将 priority 列中的 yes, no 替换为布尔值 True, False
 
 ```python
 df['priority'] = df['priority'].map({'yes': True, 'no': False})

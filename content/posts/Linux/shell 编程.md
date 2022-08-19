@@ -17,14 +17,14 @@ Shell 编程跟 JavaScript、php 编程一样，只要有一个能编写代码�
 
 Linux 的 Shell 种类众多，常见的有：
 
-- Bourne Shell（/usr/bin/sh或/bin/sh）
+- Bourne Shell（/usr/bin/sh 或/bin/sh）
 - Bourne Again Shell（/bin/bash）
 - C Shell（/usr/bin/csh）
 - K Shell（/usr/bin/ksh）
 - Shell for Root（/sbin/sh）
 - ……
 
-Bash 是大多数Linux 系统默认的 Shell。
+Bash 是大多数 Linux 系统默认的 Shell。
 
 > 在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 **#!/bin/sh**，它同样也可以改为 **#!/bin/bash**。
 
@@ -854,7 +854,7 @@ esac
 
 ### break 和 continue
 
-break命令允许跳出所有循环
+break 命令允许跳出所有循环
 
 ```shell
 #!/bin/bash
@@ -930,7 +930,7 @@ echo "输入的两个数字之和为 $? !"
 
 ### 函数参数
 
-在Shell中，调用函数时可以向其传递参数。在函数体内部，通过 `$n` 的形式来获取参数的值，例如，`$1` 表示第一个参数，`$2` 表示第二个参数...
+在 Shell 中，调用函数时可以向其传递参数。在函数体内部，通过 `$n` 的形式来获取参数的值，例如，`$1` 表示第一个参数，`$2` 表示第二个参数...
 
 ```shell
 #!/bin/bash

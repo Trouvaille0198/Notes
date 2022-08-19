@@ -56,7 +56,7 @@ RabbitMQ 是一款使用 Erlang 语言开发的，实现 **AMQP (高级消息队
 - 多种协议（Multi-protocol）。RabbitMQ 支持多种消息队列协议，比如 STOMP、MQTT 等等。
 - 支持多种语言客户端（Many Clients）。RabbitMQ 几乎支持所有常用编程语言，包括 Java、.NET、Ruby 等等。
 - 可视化管理界面（Management UI）。RabbitMQ 提供了一个易用的用户界面，使得用户可以监控和管理消息 Broker。
-- 跟踪机制（Tracing）：如果消息异常，RabbitMQ提供了消息的跟踪机制，使用者可以找出发生了什么。
+- 跟踪机制（Tracing）：如果消息异常，RabbitMQ 提供了消息的跟踪机制，使用者可以找出发生了什么。
 - 插件机制（Plugin System）。RabbitMQ 提供了许多插件，可以通过插件进行扩展，也可以编写自己的插件。
 
 ## 安装
@@ -87,13 +87,13 @@ erlang [官网](http://www.erlang.org/downloads)下载
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAyMC83LzIxLzE3MzcxYjYzZTNkZDdmNzM)
 
-使用cmd命令，输入 erl -version 验证：
+使用 cmd 命令，输入 erl -version 验证：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAyMC83LzIxLzE3MzcxYmFjNDk0MzgxZDY)
 
 #### 安装 RabbitMQ 服务端
 
-在RabbitMQ 的 [gitHub 项目](https://github.com/rabbitmq/rabbitmq-server/releases/tag/v3.7.3)中，下载 window 版本的服务端安装包。
+在 RabbitMQ 的 [gitHub 项目](https://github.com/rabbitmq/rabbitmq-server/releases/tag/v3.7.3)中，下载 window 版本的服务端安装包。
 
 接着到双击安装，一直点下一步安装即可，安装完成后，找到安装目录：
 
@@ -103,7 +103,7 @@ erlang [官网](http://www.erlang.org/downloads)下载
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAyMC83LzIxLzE3MzcxYzc5ODk4OTk2NTc)
 
-然后双击 rabbitmq-server.bat 启动脚本，然后打开服务管理可以看到RabbitMQ正在运行：
+然后双击 rabbitmq-server.bat 启动脚本，然后打开服务管理可以看到 RabbitMQ 正在运行：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAyMC83LzIxLzE3MzcxY2E1ZjQ3ZmNlOGI)
 

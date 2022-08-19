@@ -13,7 +13,7 @@ categories: [前端]
 
 ### 概念
 
-文档对象模型（Document Object Model，简称DOM），是W3C组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口
+文档对象模型（Document Object Model，简称 DOM），是 W3C 组织推荐的处理可拓展标记语言（HTML 或 XML）的标准编程接口
 
 - 文档：一个页面就是一个文档，用 document 表示
 
@@ -121,7 +121,7 @@ var atts = para.attributes;
 
 - ***.className***
 
-    获取或设置指定元素的class属性的值，返回以空格分隔的字符串
+    获取或设置指定元素的 class 属性的值，返回以空格分隔的字符串
 
 - ***.tagName***
 

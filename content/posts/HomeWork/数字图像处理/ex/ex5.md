@@ -43,7 +43,7 @@
 
 - *method*：轮廓的近似办法
     - cv2.CHAIN_APPROX_NONE：存储所有的轮廓点，相邻的两个点的像素位置差不超过 1，即 `max(abs(x1-x2), abs(y2-y1)) == 1`
-    - cv2.CHAIN_APPROX_SIMPLE：压缩水平方向，垂直方向，对角线方向的元素，只保留该方向的终点坐标，例如一个矩形轮廓只需4个点来保存轮廓信息
+    - cv2.CHAIN_APPROX_SIMPLE：压缩水平方向，垂直方向，对角线方向的元素，只保留该方向的终点坐标，例如一个矩形轮廓只需 4 个点来保存轮廓信息
     - cv2.CHAIN_APPROX_TC89_L1，CV_CHAIN_APPROX_TC89_KCOS 使用 teh-Chinl chain 近似算法
 
 **返回值**
@@ -52,7 +52,7 @@
 
 ### 区域特征提取
 
-**SIFT** (Scale-Invariant Feature Transform) 是最成功的图像局部描述子之一。SIFT 特征包括兴趣点检测器和描述子，其中 SIFT 描述子具有非常强的稳健性，这在很大程度上也是 SIFT 特征能够成功和流行的主要原因。SIFT特征对于尺度、旋转、亮度都具有不变性。
+**SIFT** (Scale-Invariant Feature Transform) 是最成功的图像局部描述子之一。SIFT 特征包括兴趣点检测器和描述子，其中 SIFT 描述子具有非常强的稳健性，这在很大程度上也是 SIFT 特征能够成功和流行的主要原因。SIFT 特征对于尺度、旋转、亮度都具有不变性。
 
 可以用 sift 算法找出图像的角点分布
 

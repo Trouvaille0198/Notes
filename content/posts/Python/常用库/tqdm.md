@@ -6,7 +6,7 @@ Tqdm 是一个快速，可扩展的 Python 进度条，可以在 Python 长循�
 
 ## 使用方法一: tqdm
 
-`tqdm(list)` 方法可以传入任意一种list,比如数组
+`tqdm(list)` 方法可以传入任意一种 list,比如数组
 
 ```python
 from tqdm import tqdm

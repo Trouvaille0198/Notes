@@ -2529,7 +2529,7 @@ using (Font font3 = new Font("Arial", 10.0f),
 }
 ```
 
-代码段结束时，自动调用font3和font4的Dispose方法，释放实例。
+代码段结束时，自动调用 font3 和 font4 的 Dispose 方法，释放实例。
 
 ## 预处理指令
 

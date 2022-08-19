@@ -35,7 +35,7 @@ type Context interface {
 其中：
 
 - Deadline 方法需要返回当前 Context 被取消的时间，也就是完成工作的截止时间（deadline）；
-- Done 方法需要返回一个 Channel，这个 Channel 会在当前工作完成或者上下文被取消之后关闭，多次调用 Done 方法会返回同一个Channel；
+- Done 方法需要返回一个 Channel，这个 Channel 会在当前工作完成或者上下文被取消之后关闭，多次调用 Done 方法会返回同一个 Channel；
 - Err 方法会返回当前 Context 结束的原因，它只会在 Done 返回的 Channel 被关闭时才会返回非空的值：
     - 如果当前 Context 被取消就会返回 Canceled 错误；
     - 如果当前 Context 超时就会返回 DeadlineExceeded 错误；
@@ -43,7 +43,7 @@ type Context interface {
 
 ### `Background()` 和 `TODO()`
 
-Go语言内置两个函数：`Background()` 和 `TODO()`，这两个函数分别返回一个实现了 Context 接口的 background 和 todo。
+Go 语言内置两个函数：`Background()` 和 `TODO()`，这两个函数分别返回一个实现了 Context 接口的 background 和 todo。
 
 `Background()` 主要用于 main 函数、初始化以及测试代码中，作为 Context 这个树结构的最顶层的 Context，也就是根 Context。
 

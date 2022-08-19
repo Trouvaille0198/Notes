@@ -197,7 +197,7 @@ This always executes after statement 1
 #pragma parallel for private(i)
 ```
 
-将循环变量i视为线程本地存储，每个线程都有该变量的副本
+将循环变量 i 视为线程本地存储，每个线程都有该变量的副本
 
 #### 使用与主线程不同步的线程局部变量
 

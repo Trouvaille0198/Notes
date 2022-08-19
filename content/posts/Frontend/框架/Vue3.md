@@ -1410,7 +1410,7 @@ console.log(count.value) // 0
 
 - 引入 watch， `import { watch } from 'vue'`
 
-- 直接使用watch，watch 接受 3 个参数
+- 直接使用 watch，watch 接受 3 个参数
 
     1. 要监听更新的响应式引用或者 getter 函数
 

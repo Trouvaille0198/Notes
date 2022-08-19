@@ -544,11 +544,11 @@ func main() {
 
 ### 解码 packet 的各层
 
-我们可以获取原始数据包，并尝试将其强制转换为已知格式。它与不同的层兼容，因此我们可以轻松访问ethernet、IP 和 TCP 层。
+我们可以获取原始数据包，并尝试将其强制转换为已知格式。它与不同的层兼容，因此我们可以轻松访问 ethernet、IP 和 TCP 层。
 
 `layers` 包是 gopacket 的 Go 库中的新功能，在底层 libpcap 库中不存在。它是 gopacket 库的非常有用的一部分。它允许我们轻松地识别数据包是否包含特定类型的层。这个代码示例将演示如何使用 layers 包来查看包是否是 ethernet、IP 和 TCP，以及如何轻松访问这些头中的元素。
 
-找到 `payload` (有效载荷) 取决于涉及的所有层。每个协议都是不同的，必须相应地进行处理。这就是 layers 包的强大之处。gopacket 的作者花了很多时间为许多已知层（ethernet、IP、UDP和TCP）创建 layer 类型。其中`payload` (有效负载) 是应用程序层的一部分。
+找到 `payload` (有效载荷) 取决于涉及的所有层。每个协议都是不同的，必须相应地进行处理。这就是 layers 包的强大之处。gopacket 的作者花了很多时间为许多已知层（ethernet、IP、UDP 和 TCP）创建 layer 类型。其中`payload` (有效负载) 是应用程序层的一部分。
 
 ```go
 package main

@@ -200,7 +200,7 @@ show collections
 db.collection.insertOne()
 ```
 
-- 返回一个文档，其中包含新插入的文档的_id字段值
+- 返回一个文档，其中包含新插入的文档的_id 字段值
 - 如果文档未指定 **_id** 字段，则 MongoDB 将具有 **ObjectId** 值的 **_id** 字段添加到新文档中
 
 参数

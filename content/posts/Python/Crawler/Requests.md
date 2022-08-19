@@ -11,7 +11,7 @@
 - *requests.patch(url, data=None, **kwargs)*
 - *requests.delete(url, **kwargs)*
 
-除了`requests.request()`外，其余7个方法与http协议中的请求方法一一对应。这7个方法其实都是在调用`requests.request()`方法
+除了`requests.request()`外，其余 7 个方法与 http 协议中的请求方法一一对应。这 7 个方法其实都是在调用`requests.request()`方法
 
 | method          | 简述                                                                                       |
 | --------------- | ------------------------------------------------------------------------------------------ |
@@ -47,7 +47,7 @@ r = requests.options('http://httpbin.org/get')
 
  ## param
 
-接受一个字典，用于传递URL参数
+接受一个字典，用于传递 URL 参数
 
 ```python
 payload = {'key1': 'value1', 'key2': 'value2'}
@@ -63,7 +63,7 @@ http://httpbin.org/get?key1=value1&key2=value2
 
 ## headers
 
-接受一个字典，用于传递header参数（请求头）
+接受一个字典，用于传递 header 参数（请求头）
 
 ```python
 url = 'https://tophub.today/n/mproPpoq6O'
@@ -75,9 +75,9 @@ s = requests.get(url,headers=headers)
 
 ## data
 
-用于POST请求中，传递请求体中的data参数
+用于 POST 请求中，传递请求体中的 data 参数
 
-该网站可以判断如果请求是POST方式，就把相关请求信息返回
+该网站可以判断如果请求是 POST 方式，就把相关请求信息返回
 
 ```python
 data = {'name': 'germey', 'age': '22'}
@@ -113,7 +113,7 @@ print(r.text)
 
 ## json
 
-用于POST请求中，传递请求体中json格式的的data参数
+用于 POST 请求中，传递请求体中 json 格式的的 data 参数
 
 ## files
 
@@ -128,7 +128,7 @@ print(r.text)
 
 ## cookies
 
-用于传递cookies参数，不过将cookies写在headers中比较方便
+用于传递 cookies 参数，不过将 cookies 写在 headers 中比较方便
 
 ```python
 import requests
@@ -147,14 +147,14 @@ BDORZ=27315
 
 步骤
 
-1. 调用cookies属性，得到Cookies，可以发现它是RequestCookieJar类型
-2. 用items()方法将其转化为元组组成的列表，遍历输出每一个Cookie的名称和值，实现Cookie的遍历解析
+1. 调用 cookies 属性，得到 Cookies，可以发现它是 RequestCookieJar 类型
+2. 用 items()方法将其转化为元组组成的列表，遍历输出每一个 Cookie 的名称和值，实现 Cookie 的遍历解析
 
 ## verify
 
-用于https请求时的ssl证书验证，默认是开启的，如果不需要则设置为False即可
+用于 https 请求时的 ssl 证书验证，默认是开启的，如果不需要则设置为 False 即可
 
-例：请求一个HTTPS站点，但是证书验证错误的页面时，把verify参数设置为False
+例：请求一个 HTTPS 站点，但是证书验证错误的页面时，把 verify 参数设置为 False
 
 ```python
 import requests
@@ -195,11 +195,11 @@ response = requests.get('https://www.12306.cn',
 print(response.status_code)
 ```
 
-我们需要有crt和key文件，并且指定它们的路径。注意，本地私有证书的key必须是解密状态，加密状态的key是不支持的
+我们需要有 crt 和 key 文件，并且指定它们的路径。注意，本地私有证书的 key 必须是解密状态，加密状态的 key 是不支持的
 
 ## proxies
 
-设置请求的代理，支持http代理以及socks代理（需要安装第三方库"pip install requests[socks]"）
+设置请求的代理，支持 http 代理以及 socks 代理（需要安装第三方库"pip install requests[socks]"）
 
 ```python
 import requests
@@ -210,7 +210,7 @@ proxies = {
 requests.get("https://www.taobao.com", proxies=proxies)
 ```
 
-- 若代理需要使用HTTP Basic Auth，可以使用类似[http://user](http://user/):password@host:port这样的语法来设置代理
+- 若代理需要使用 HTTP Basic Auth，可以使用类似[http://user](http://user/):password@host:port 这样的语法来设置代理
 
 ```python
 proxies = {
@@ -218,7 +218,7 @@ proxies = {
 }
 ```
 
-- 使用SOCKS协议代理
+- 使用 SOCKS 协议代理
 
 ```python
 proxies = {
@@ -237,9 +237,9 @@ r = requests.get("https://www.taobao.com", timeout=1)
 print(r.status_code)
 ```
 
-- 请求分为两个阶段，即连接（connect）和读取（read）。上面设置的timeout将用作连接和读取这二者的timeout总和
+- 请求分为两个阶段，即连接（connect）和读取（read）。上面设置的 timeout 将用作连接和读取这二者的 timeout 总和
 
-- 如果想永久等待，可以直接将timeout设置为None，或者不设置直接留空，因为默认是None
+- 如果想永久等待，可以直接将 timeout 设置为 None，或者不设置直接留空，因为默认是 None
 
 ## auth
 
@@ -253,17 +253,17 @@ r = requests.get('http://localhost:5000',
 print(r.status_code)
 ```
 
-如果用户名和密码正确的话，请求时就会自动认证成功，会返回200状态码，如果认证失败，则返回401状态码
+如果用户名和密码正确的话，请求时就会自动认证成功，会返回 200 状态码，如果认证失败，则返回 401 状态码
 
 - 直接传一个元组
 
-  它会默认使用HTTPBasicAuth这个类来认证
+  它会默认使用 HTTPBasicAuth 这个类来认证
 
 ```python
 r = requests.get('http://localhost:5000', auth=('username', 'password'))
 ```
 
-- 使用OAuth1认证
+- 使用 OAuth1 认证
 
 ```python
 import requests
@@ -278,13 +278,13 @@ requests.get(url, auth=auth)
 
 ## allow_redirects
 
-是否允许重定向，默认True，即允许重定向
+是否允许重定向，默认 True，即允许重定向
 
 # response对象
 
-response类故名思议，它包含了服务器对http请求的响应。每次调用requests去请求之后，均会返回一个response对象，通过调用该对象，可以查看具体的响应信息
+response 类故名思议，它包含了服务器对 http 请求的响应。每次调用 requests 去请求之后，均会返回一个 response 对象，通过调用该对象，可以查看具体的响应信息
 
-以下是response对象的部分属性
+以下是 response 对象的部分属性
 
 ## .url
 
@@ -297,11 +297,11 @@ print(type(r.url), r.url)
 
 ## .request
 
-PreparedRequest对象，可以用于查看发送请求时的信息，比如r.request.headers查看请求头
+PreparedRequest 对象，可以用于查看发送请求时的信息，比如 r.request.headers 查看请求头
 
 ## .text
 
-响应的内容，unicode类型
+响应的内容，unicode 类型
 
 ```python
 print(type(r.text), r.text)
@@ -310,13 +310,13 @@ print(type(r.text), r.text)
 
 ## .content
 
-响应的内容，byte类型（二进制）
+响应的内容，byte 类型（二进制）
 
 一般在抓取图像时有用
 
 ## .status_code
 
-响应的http状态码
+响应的 http 状态码
 
 ```python
 print(type(r.status_code), r.status_code)
@@ -342,7 +342,7 @@ print(type(r.history), r.history)
 
 ## .cookies
 
-服务器发回的cookies，RequestsCookieJar类型
+服务器发回的 cookies，RequestsCookieJar 类型
 
 ```python
 print(type(r.cookies), r.cookies)
@@ -351,9 +351,9 @@ print(type(r.cookies), r.cookies)
 
 ## .json()
 
-用于将响应解析成JSON格式，即将返回结果是JSON格式的字符串转化为字典
+用于将响应解析成 JSON 格式，即将返回结果是 JSON 格式的字符串转化为字典
 
-如果返回结果不是JSON格式，便会出现解析错误，抛出`json.decoder.JSONDecodeError`异常
+如果返回结果不是 JSON 格式，便会出现解析错误，抛出`json.decoder.JSONDecodeError`异常
 
 ## .headers()
 
@@ -368,7 +368,7 @@ print(type(r.headers), r.headers)
 
 ## 会话维持
 
-requests 中的 session 对象能够让我们跨http请求保持某些参数，即让同一个 session 对象发送的请求头携带某个指定的参数。当然，最常见的应用是它可以让 cookie 保持在后续的一串请求中
+requests 中的 session 对象能够让我们跨 http 请求保持某些参数，即让同一个 session 对象发送的请求头携带某个指定的参数。当然，最常见的应用是它可以让 cookie 保持在后续的一串请求中
 
 即，利用 Session 对象，可以方便地维护一个会话
 
@@ -391,13 +391,13 @@ print(r.text)
 }
 ```
 
-第二次请求已经携带上了第一次请求所设置的cookie，即通过session达到了保持cookie的目的
+第二次请求已经携带上了第一次请求所设置的 cookie，即通过 session 达到了保持 cookie 的目的
 
-session让请求之间具有了连贯性
+session 让请求之间具有了连贯性
 
 ## s.cookies.update()
 
-用于设置请求中的cookies，方便实现跨参数请求，即能够在前后请求之间保持cookie
+用于设置请求中的 cookies，方便实现跨参数请求，即能够在前后请求之间保持 cookie
 
 传入参数：字典
 

@@ -497,7 +497,7 @@ func Add(a int, b int) int {
 }
 ```
 
-这个函数理所当然只能计算int的和，而浮点的计算是不支持的。这时候我们可以像下面这样定义一个泛型函数：
+这个函数理所当然只能计算 int 的和，而浮点的计算是不支持的。这时候我们可以像下面这样定义一个泛型函数：
 
 ```go
 func Add[T int | float32 | float64](a T, b T) T {
@@ -603,7 +603,7 @@ aa.Add(1.0, 2.0)
 type Slice[T int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64] []T
 ```
 
-理所当然，这种写法是我们无法忍受也难以维护的，而Go支持将类型约束单独拿出来定义到接口中，从而让代码更容易维护：
+理所当然，这种写法是我们无法忍受也难以维护的，而 Go 支持将类型约束单独拿出来定义到接口中，从而让代码更容易维护：
 
 ```go
 type IntUintFloat interface {
@@ -888,7 +888,7 @@ gofmt -w -r 'interface{} -> any' ./...
 type MyMap[KEY any, VALUE any] map[KEY]VALUE 
 ```
 
-所以Go直接内置了一个叫 `comparable` 的接口，它代表了所有可用 `!=` 以及 `==` 对比的类型：
+所以 Go 直接内置了一个叫 `comparable` 的接口，它代表了所有可用 `!=` 以及 `==` 对比的类型：
 
 ```go
 type MyMap[KEY comparable, VALUE any] map[KEY]VALUE // 正确
@@ -1053,7 +1053,7 @@ type DataProcessor2[T any] interface {
 }
 ```
 
-因为引入了类型形参，所以这两个接口是泛型类型。**而泛型类型要使用的话必须传入类型实参实例化才有意义**。所以我们来尝试实例化一下这两个接口。因为 `T` 的类型约束是 any，所以可以随便挑一个类型来当实参(比如string)：
+因为引入了类型形参，所以这两个接口是泛型类型。**而泛型类型要使用的话必须传入类型实参实例化才有意义**。所以我们来尝试实例化一下这两个接口。因为 `T` 的类型约束是 any，所以可以随便挑一个类型来当实参(比如 string)：
 
 ```go
 DataProcessor[string]

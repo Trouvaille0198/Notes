@@ -518,7 +518,7 @@ func printMem(t *testing.T) {
 }
 ```
 
-- `generateWithCap` 用于随机生成 n 个 int 整数，64位机器上，一个 int 占 8 Byte，128 * 1024 个整数恰好占据 1 MB 的空间。
+- `generateWithCap` 用于随机生成 n 个 int 整数，64 位机器上，一个 int 占 8 Byte，128 * 1024 个整数恰好占据 1 MB 的空间。
 - `printMem` 用于打印程序运行时占用的内存大小。
 
 接下来分别为 `lastNumsBySlice` 和 `lastNumsByCopy` 实现测试用例：

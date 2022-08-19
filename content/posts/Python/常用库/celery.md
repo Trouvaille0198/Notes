@@ -125,7 +125,7 @@ Celery 内置了一些后端结果：[SQLAlchemy/Django](https://www.sqlalchemy.
 app = Celery('tasks', backend='rpc://', broker='pyamqp://')
 ```
 
-可以使用Redis作为Celery结果后端，使用RabbitMQ作为中间人（Broker）可以使用以下配置（这种组合比较流行）：
+可以使用 Redis 作为 Celery 结果后端，使用 RabbitMQ 作为中间人（Broker）可以使用以下配置（这种组合比较流行）：
 
 ```python
 app = Celery('tasks', backend='redis://localhost', broker='pyamqp://')

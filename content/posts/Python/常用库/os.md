@@ -219,7 +219,7 @@ os.stat('.')
 
 ### os.chdir(path)
 
-（change dir）转到指定 path，相当于cd
+（change dir）转到指定 path，相当于 cd
 
 ### os.mkdir(path)
 

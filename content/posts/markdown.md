@@ -54,7 +54,7 @@ categories: [其他]
 
       - 四级列表
 
-要退出列表模式，使用shift + tab
+要退出列表模式，使用 shift + tab
 
 -----
 
@@ -74,9 +74,9 @@ print('Hello world'+name)
 
 --------------
 
-将链接文本放在[]中，将链接放在()中即可[创造链接](www.trouvaille0198.top "A mysterious website")，添加title以增加悬停提示
+将链接文本放在[]中，将链接放在()中即可[创造链接](www.trouvaille0198.top "A mysterious website")，添加 title 以增加悬停提示
 
-要将 URL 或电子邮件地址转换为链接，请将其括在<>中，<https://github.com/Trouvaille0198/Notes>，不过用Typora编辑的话也可以不括...
+要将 URL 或电子邮件地址转换为链接，请将其括在<>中，<https://github.com/Trouvaille0198/Notes>，不过用 Typora 编辑的话也可以不括...
 
 链接也可以格式化哦
 
@@ -95,5 +95,5 @@ print('Hello world'+name)
 
 这是上标 X^2^	\^ + word + \^
 
-这是==高亮==	\=\= + word + \=\= （Typora专有）
+这是==高亮==	\=\= + word + \=\= （Typora 专有）
 

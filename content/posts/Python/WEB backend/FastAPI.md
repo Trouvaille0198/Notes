@@ -1022,7 +1022,7 @@ async def read_items(user_agent: Optional[str] = Header(None)):
 
 默认情况下, `Header` 将把参数名称的字符从下划线 (`_`) 转换为连字符 (`-`) 来提取并记录 headers
 
-同时，HTTP headers 是大小写不敏感的，因此，因此可以使用标准Python样式(也称为 "snake_case")声明它们
+同时，HTTP headers 是大小写不敏感的，因此，因此可以使用标准 Python 样式(也称为 "snake_case")声明它们
 
 若需要禁用下划线到连字符的自动转换
 
@@ -1042,7 +1042,7 @@ async def read_items(x_token: Optional[List[str]] = Header(None)):
     return {"X-Token values": x_token}
 ```
 
-如果你与*路径操作*通信时发送两个HTTP headers，就像：
+如果你与*路径操作*通信时发送两个 HTTP headers，就像：
 
 ```python
 X-Token: foo

@@ -59,7 +59,7 @@ cd my-app
 vue add vuetify
 ```
 
-或者使用Vue UI 安装
+或者使用 Vue UI 安装
 
 ```bash
 vue ui
@@ -80,7 +80,7 @@ yarn electron:serve
 
 ### 布局
 
-Vuetify有两个主要布局组件， `v-app` 和 `v-main`
+Vuetify 有两个主要布局组件， `v-app` 和 `v-main`
 
 ```html
 <template>
@@ -225,7 +225,7 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 
 ### v-cards
 
-卡中有4个基本组件。 `v-card-title`, `v-card-subtitle`, `v-card-text` 和 `v-card-actions`
+卡中有 4 个基本组件。 `v-card-title`, `v-card-subtitle`, `v-card-text` 和 `v-card-actions`
 
 #### API
 
@@ -859,13 +859,13 @@ App-bar 组件与 `<a href=“/components/navigation drawers”>` ` v-navigation
 - `b` - 应用 `margin-bottom` 和 `padding-bottom` 的间距
 - `l` - 应用 `margin-left` 和 `padding-left` 的间距
 - `r` - 应用 `margin-right` 和 `padding-right` 的间距
-- `s` - 应用 `margin-left`/`padding-left` (LTR模式) 和 `margin-right`/`padding-right`(RTL模式) 的间距
-- `e` - 应用 `margin-right`/`padding-right` (LTR模式) 和 `margin-left`/`padding-left`(RTL模式) 的间距
+- `s` - 应用 `margin-left`/`padding-left` (LTR 模式) 和 `margin-right`/`padding-right`(RTL 模式) 的间距
+- `e` - 应用 `margin-right`/`padding-right` (LTR 模式) 和 `margin-left`/`padding-left`(RTL 模式) 的间距
 - `x` - 应用 `*-left` 和 `*-right` 的间距
 - `y` - 应用 `*-top` 和 `*-bottom` 的间距
 - `a` - 在所有方向应用该间距
 
-**size** 以4px增量控制间距属性:
+**size** 以 4px 增量控制间距属性:
 
 - `0` - 通过设置为 `0` 来消除所有 `margin` 或 `padding`.
 - `1` - 设置 `margin` 或 `padding` 为 4px

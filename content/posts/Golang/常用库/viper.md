@@ -118,11 +118,11 @@ viper.SafeWriteConfigAs("/path/to/my/.other_config")
 
 ### 监控并重新读取配置文件
 
-Viper支持在运行时实时读取配置文件的功能。
+Viper 支持在运行时实时读取配置文件的功能。
 
-需要重新启动服务器以使配置生效的日子已经一去不复返了，viper驱动的应用程序可以在运行时读取配置文件的更新，而不会错过任何消息。
+需要重新启动服务器以使配置生效的日子已经一去不复返了，viper 驱动的应用程序可以在运行时读取配置文件的更新，而不会错过任何消息。
 
-只需告诉viper实例watchConfig。可选地，你可以为Viper提供一个回调函数，以便在每次发生更改时运行。
+只需告诉 viper 实例 watchConfig。可选地，你可以为 Viper 提供一个回调函数，以便在每次发生更改时运行。
 
 **确保在调用`WatchConfig()`之前添加了所有的配置路径。**
 
@@ -136,7 +136,7 @@ viper.OnConfigChange(func(e fsnotify.Event) {
 
 ### 从io.Reader读取配置
 
-Viper预先定义了许多配置源，如文件、环境变量、标志和远程K/V存储，但你不受其约束。你还可以实现自己所需的配置源并将其提供给viper。
+Viper 预先定义了许多配置源，如文件、环境变量、标志和远程 K/V 存储，但你不受其约束。你还可以实现自己所需的配置源并将其提供给 viper。
 
 ```go
 viper.SetConfigType("yaml") // 或者 viper.SetConfigType("YAML")
@@ -187,7 +187,7 @@ viper.GetBool("verbose") // true
 
 ### 使用环境变量
 
-Viper完全支持环境变量。这使`Twelve-Factor App`开箱即用。有五种方法可以帮助与ENV协作:
+Viper 完全支持环境变量。这使`Twelve-Factor App`开箱即用。有五种方法可以帮助与 ENV 协作:
 
 - `AutomaticEnv()`
 - `BindEnv(string...) : error`
@@ -197,13 +197,13 @@ Viper完全支持环境变量。这使`Twelve-Factor App`开箱即用。有五�
 
 *使用ENV变量时，务必要意识到Viper将ENV变量视为区分大小写。*
 
-Viper提供了一种机制来确保ENV变量是惟一的。通过使用`SetEnvPrefix`，你可以告诉Viper在读取环境变量时使用前缀。`BindEnv`和`AutomaticEnv`都将使用这个前缀。
+Viper 提供了一种机制来确保 ENV 变量是惟一的。通过使用`SetEnvPrefix`，你可以告诉 Viper 在读取环境变量时使用前缀。`BindEnv`和`AutomaticEnv`都将使用这个前缀。
 
-`BindEnv`使用一个或两个参数。第一个参数是键名称，第二个是环境变量的名称。环境变量的名称区分大小写。如果没有提供ENV变量名，那么Viper将自动假设ENV变量与以下格式匹配：前缀+ “_” +键名全部大写。当你显式提供ENV变量名（第二个参数）时，它 **不会** 自动添加前缀。例如，如果第二个参数是“id”，Viper将查找环境变量“ID”。
+`BindEnv`使用一个或两个参数。第一个参数是键名称，第二个是环境变量的名称。环境变量的名称区分大小写。如果没有提供 ENV 变量名，那么 Viper 将自动假设 ENV 变量与以下格式匹配：前缀+ “_” +键名全部大写。当你显式提供 ENV 变量名（第二个参数）时，它 **不会** 自动添加前缀。例如，如果第二个参数是“id”，Viper 将查找环境变量“ID”。
 
-在使用ENV变量时，需要注意的一件重要事情是，每次访问该值时都将读取它。Viper在调用`BindEnv`时不固定该值。
+在使用 ENV 变量时，需要注意的一件重要事情是，每次访问该值时都将读取它。Viper 在调用`BindEnv`时不固定该值。
 
-`AutomaticEnv`是一个强大的助手，尤其是与`SetEnvPrefix`结合使用时。调用时，Viper会在发出`viper.Get`请求时随时检查环境变量。它将应用以下规则。它将检查环境变量的名称是否与键匹配（如果设置了`EnvPrefix`）。
+`AutomaticEnv`是一个强大的助手，尤其是与`SetEnvPrefix`结合使用时。调用时，Viper 会在发出`viper.Get`请求时随时检查环境变量。它将应用以下规则。它将检查环境变量的名称是否与键匹配（如果设置了`EnvPrefix`）。
 
 `SetEnvKeyReplacer`允许你使用`strings.Replacer`对象在一定程度上重写 Env 键。如果你希望在`Get()`调用中使用`-`或者其他什么符号，但是环境变量里使用`_`分隔符，那么这个功能是非常有用的。可以在`viper_test.go`中找到它的使用示例。
 
@@ -224,7 +224,7 @@ id := Get("id") // 13
 
 ### 使用Flags
 
-Viper 具有绑定到标志的能力。具体来说，Viper支持[Cobra](https://github.com/spf13/cobra)库中使用的`Pflag`。
+Viper 具有绑定到标志的能力。具体来说，Viper 支持[Cobra](https://github.com/spf13/cobra)库中使用的`Pflag`。
 
 与`BindEnv`类似，该值不是在调用绑定方法时设置的，而是在访问该方法时设置的。这意味着你可以根据需要尽早进行绑定，即使在`init()`函数中也是如此。
 
@@ -237,7 +237,7 @@ serverCmd.Flags().Int("port", 1138, "Port to run Application server on")
 viper.BindPFlag("port", serverCmd.Flags().Lookup("port"))
 ```
 
-你还可以绑定一组现有的pflags （pflag.FlagSet）：
+你还可以绑定一组现有的 pflags （pflag.FlagSet）：
 
 举个例子：
 
@@ -250,7 +250,7 @@ viper.BindPFlags(pflag.CommandLine)
 i := viper.GetInt("flagname") // 从viper而不是从pflag检索值
 ```
 
-在 Viper 中使用 pflag 并不阻碍其他包中使用标准库中的 flag 包。pflag 包可以通过导入这些 flags 来处理flag包定义的flags。这是通过调用pflag包提供的便利函数`AddGoFlagSet()`来实现的。
+在 Viper 中使用 pflag 并不阻碍其他包中使用标准库中的 flag 包。pflag 包可以通过导入这些 flags 来处理 flag 包定义的 flags。这是通过调用 pflag 包提供的便利函数`AddGoFlagSet()`来实现的。
 
 例如：
 
@@ -279,9 +279,9 @@ func main() {
 
 #### flag接口
 
-如果你不使用`Pflag`，Viper 提供了两个Go接口来绑定其他 flag 系统。
+如果你不使用`Pflag`，Viper 提供了两个 Go 接口来绑定其他 flag 系统。
 
-`FlagValue`表示单个flag。这是一个关于如何实现这个接口的非常简单的例子：
+`FlagValue`表示单个 flag。这是一个关于如何实现这个接口的非常简单的例子：
 
 ```go
 type myFlag struct {}
@@ -291,7 +291,7 @@ func (f myFlag) ValueString() string { return "my-flag-value" }
 func (f myFlag) ValueType() string { return "string" }
 ```
 
-一旦你的 flag 实现了这个接口，你可以很方便地告诉Viper绑定它：
+一旦你的 flag 实现了这个接口，你可以很方便地告诉 Viper 绑定它：
 
 ```go
 viper.BindFlagValue("my-flag-name", myFlag{})
@@ -311,7 +311,7 @@ func (f myFlagSet) VisitAll(fn func(FlagValue)) {
 }
 ```
 
-一旦你的flag set实现了这个接口，你就可以很方便地告诉Viper绑定它：
+一旦你的 flag set 实现了这个接口，你就可以很方便地告诉 Viper 绑定它：
 
 ```go
 fSet := myFlagSet{
@@ -322,19 +322,19 @@ viper.BindFlagValues("my-flags", fSet)
 
 ### 远程Key/Value存储支持
 
-在Viper中启用远程支持，需要在代码中匿名导入`viper/remote`这个包。
+在 Viper 中启用远程支持，需要在代码中匿名导入`viper/remote`这个包。
 
 ```
 import _ "github.com/spf13/viper/remote"
 ```
 
-Viper将读取从Key/Value存储（例如etcd或Consul）中的路径检索到的配置字符串（如`JSON`、`TOML`、`YAML`、`HCL`、`envfile`和`Java properties`格式）。这些值的优先级高于默认值，但是会被从磁盘、flag或环境变量检索到的配置值覆盖。（译注：也就是说Viper加载配置值的优先级为：磁盘上的配置文件>命令行标志位>环境变量>远程Key/Value存储>默认值。）
+Viper 将读取从 Key/Value 存储（例如 etcd 或 Consul）中的路径检索到的配置字符串（如`JSON`、`TOML`、`YAML`、`HCL`、`envfile`和`Java properties`格式）。这些值的优先级高于默认值，但是会被从磁盘、flag 或环境变量检索到的配置值覆盖。（译注：也就是说 Viper 加载配置值的优先级为：磁盘上的配置文件>命令行标志位>环境变量>远程 Key/Value 存储>默认值。）
 
-Viper使用[crypt](https://github.com/bketelsen/crypt)从K/V存储中检索配置，这意味着如果你有正确的gpg密匙，你可以将配置值加密存储并自动解密。加密是可选的。
+Viper 使用[crypt](https://github.com/bketelsen/crypt)从 K/V 存储中检索配置，这意味着如果你有正确的 gpg 密匙，你可以将配置值加密存储并自动解密。加密是可选的。
 
 你可以将远程配置与本地配置结合使用，也可以独立使用。
 
-`crypt`有一个命令行助手，你可以使用它将配置放入K/V存储中。`crypt`默认使用在[http://127.0.0.1:4001](http://127.0.0.1:4001/)的etcd。
+`crypt`有一个命令行助手，你可以使用它将配置放入 K/V 存储中。`crypt`默认使用在[http://127.0.0.1:4001](http://127.0.0.1:4001/)的 etcd。
 
 ```bash
 $ go get github.com/bketelsen/crypt/bin/crypt
@@ -347,7 +347,7 @@ $ crypt set -plaintext /config/hugo.json /Users/hugo/settings/config.json
 $ crypt get -plaintext /config/hugo.json
 ```
 
-有关如何设置加密值或如何使用Consul的示例，请参见`crypt`文档。
+有关如何设置加密值或如何使用 Consul 的示例，请参见`crypt`文档。
 
 ### 远程Key/Value存储示例-未加密
 
@@ -361,7 +361,7 @@ err := viper.ReadRemoteConfig()
 
 #### Consul
 
-你需要 Consul Key/Value存储中设置一个Key保存包含所需配置的JSON值。例如，创建一个key`MY_CONSUL_KEY`将下面的值存入Consul key/value 存储：
+你需要 Consul Key/Value 存储中设置一个 Key 保存包含所需配置的 JSON 值。例如，创建一个 key`MY_CONSUL_KEY`将下面的值存入 Consul key/value 存储：
 
 ```json
 {

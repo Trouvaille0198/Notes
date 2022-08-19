@@ -15,7 +15,7 @@ MPI 具有可移植性、高效性、灵活性和易用性的特点，不仅适�
 
 MPI 标准的常用实现有 OpenMPI 和 MPICH。
 
-MPICH 是 MPI 的一种高效便携式实现标准，通过安装MPICH构建MPI编程环境，从而进行并行程序的开发。MPICH 是 MPI（Message-Passing Interface）的一个应用实现，支持最新的 MPI-2 接口标准（现在好像已经有MPI-3了），是用于并行运算的工具。
+MPICH 是 MPI 的一种高效便携式实现标准，通过安装 MPICH 构建 MPI 编程环境，从而进行并行程序的开发。MPICH 是 MPI（Message-Passing Interface）的一个应用实现，支持最新的 MPI-2 接口标准（现在好像已经有 MPI-3 了），是用于并行运算的工具。
 
 ## 安装
 

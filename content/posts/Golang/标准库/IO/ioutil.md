@@ -15,7 +15,7 @@ categories: [Golang]
 
 有时候我们需要传递一个 io.ReadCloser 的实例，而我们现在有一个 io.Reader 的实例，比如：strings.Reader ，这个时候 NopCloser 就派上用场了。它包装一个 io.Reader，返回一个 io.ReadCloser ，而相应的 Close 方法啥也不做，只是返回 nil。
 
-比如，在标准库 net/http 包中的 NewRequest，接收一个 io.Reader 的 body，而实际上，Request 的 Body 的类型是 io.ReadCloser，因此，代码内部进行了判断，如果传递的 io.Reader 也实现了 io.ReadCloser 接口，则转换，否则通过ioutil.NopCloser 包装转换一下。相关代码如下：
+比如，在标准库 net/http 包中的 NewRequest，接收一个 io.Reader 的 body，而实际上，Request 的 Body 的类型是 io.ReadCloser，因此，代码内部进行了判断，如果传递的 io.Reader 也实现了 io.ReadCloser 接口，则转换，否则通过 ioutil.NopCloser 包装转换一下。相关代码如下：
 
 ```go
 rc, ok := body.(io.ReadCloser)
@@ -26,7 +26,7 @@ if !ok && body != nil {
 
 ## ReadAll 函数
 
-很多时候，我们需要一次性读取 io.Reader 中的数据。考虑到读取所有数据的需求比较多，Go 提供了 ReadAll 这个函数，用来从io.Reader 中一次读取所有数据。
+很多时候，我们需要一次性读取 io.Reader 中的数据。考虑到读取所有数据的需求比较多，Go 提供了 ReadAll 这个函数，用来从 io.Reader 中一次读取所有数据。
 
 ```go
 func ReadAll(r io.Reader) ([]byte, error)
@@ -81,7 +81,7 @@ ReadFile 的实现和 ReadAll 类似，不过，ReadFile 会先判断文件的�
 func ReadFile(filename string) ([]byte, error)
 ```
 
-ReadFile 从 filename 指定的文件中读取数据并返回文件的内容。成功的调用返回的err 为 nil 而非 EOF。因为本函数定义为读取整个文件，它不会将读取返回的 EOF 视为应报告的错误。(同 ReadAll )
+ReadFile 从 filename 指定的文件中读取数据并返回文件的内容。成功的调用返回的 err 为 nil 而非 EOF。因为本函数定义为读取整个文件，它不会将读取返回的 EOF 视为应报告的错误。(同 ReadAll )
 
 > ReadFile 源码中先获取了文件的大小，当大小 < 1e9 时，才会用到文件的大小。按源码中注释的说法是 FileInfo 不会很精确地得到文件大小。
 

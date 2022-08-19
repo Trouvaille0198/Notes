@@ -15,11 +15,11 @@ categories: [Python]
 
 1. *ndarray.ndim*
 
-   数组的轴（维度）的个数。在Python世界中，维度的数量被称为rank（秩）
+   数组的轴（维度）的个数。在 Python 世界中，维度的数量被称为 rank（秩）
 
 2. *ndarray.shape* 
 
-   数组的维度。这是一个整数的元组，表示每个维度中数组的大小。对于有 n 行和 m 列的矩阵，shape 将是 (n,m)。因此，shape 元组的长度就是rank或维度的个数 ndim。
+   数组的维度。这是一个整数的元组，表示每个维度中数组的大小。对于有 n 行和 m 列的矩阵，shape 将是 (n,m)。因此，shape 元组的长度就是 rank 或维度的个数 ndim。
 
 3. *ndarray.size*
 
@@ -27,11 +27,11 @@ categories: [Python]
 
 4. *ndarray.dtype* 
 
-   一个描述数组中元素类型的对象。可以使用标准的Python类型创建或指定dtype。另外NumPy提供它自己的类型。例numpy.int32、numpy.int16和numpy.float64。
+   一个描述数组中元素类型的对象。可以使用标准的 Python 类型创建或指定 dtype。另外 NumPy 提供它自己的类型。例 numpy.int32、numpy.int16 和 numpy.float64。
 
 5. *ndarray.itemsize* 
 
-   数组中每个元素的字节大小。例如，元素为 float64 类型的数组的 itemsize 为8（=64/8），而 complex32 类型的数组的 itemsize 为4（=32/8）。它等于 ndarray.dtype.itemsize 。
+   数组中每个元素的字节大小。例如，元素为 float64 类型的数组的 itemsize 为 8（=64/8），而 complex32 类型的数组的 itemsize 为 4（=32/8）。它等于 ndarray.dtype.itemsize 。
 
 6. *ndarray.data*
 
@@ -50,7 +50,7 @@ d = np.linspace(0, 2*np.pi, 5)
 
 #### 用列表和元组创建数组
 
- 使用array函数
+ 使用 array 函数
 
 ```python
 a = np.array([2,3,4])
@@ -116,7 +116,7 @@ b = np.arange(0, 2, 0.3)  # it accepts float arguments
 
 ##### 使用 linspace 函数
 
-当arange与浮点参数一起使用时，由于有限的浮点精度，通常不可能预测所获得的元素的数量。出于这个原因，通常最好使用linspace函数来接收我们想要的元素数量的函数，而不是步长（step）
+当 arange 与浮点参数一起使用时，由于有限的浮点精度，通常不可能预测所获得的元素的数量。出于这个原因，通常最好使用 linspace 函数来接收我们想要的元素数量的函数，而不是步长（step）
 
 ```python
 a = np.linspace(0, 2, 9)     # numbers from 0 to 2
@@ -129,7 +129,7 @@ a = np.linspace(0, 2, 9)     # numbers from 0 to 2
 
 用 `.reshape()` 方法
 
-创建一个共20个整数、4行5列的二维数组
+创建一个共 20 个整数、4 行 5 列的二维数组
 
 ```python
 a = np.arange(20).reshape(4, 5)
@@ -147,11 +147,11 @@ a = np.arange(20).reshape(4, 5)
 
 `numpy.random.rand(d0, d1, …, dn)`
 
-1. rand函数根据给定维度生成[0,1)之间的数据，包含0，不包含1
+1. rand 函数根据给定维度生成[0,1)之间的数据，包含 0，不包含 1
 
-2. dn表示每个维度
+2. dn 表示每个维度
 
-3. 返回值为指定维度的array
+3. 返回值为指定维度的 array
 
 ```python
 np.random.rand(4, 2)
@@ -167,11 +167,11 @@ np.random.rand(4, 2)
 
 `numpy.random.randn(d0, d1, …, dn)`
 
-1. randn函数返回一个或一组样本，具有**标准正态分布**。
+1. randn 函数返回一个或一组样本，具有**标准正态分布**。
 
-2. dn表格每个维度
+2. dn 表格每个维度
 
-3. 返回值为指定维度的array
+3. 返回值为指定维度的 array
 
 4. 没有参数时，返回单个数据
 
@@ -187,7 +187,7 @@ np.random.randn(2, 4)
 
 #### 基本运算符
 
-1. 乘积运算符`*`在NumPy数组中按元素进行运算。矩阵乘积可以使用`@`运算符或`dot`函数或方法执行
+1. 乘积运算符`*`在 NumPy 数组中按元素进行运算。矩阵乘积可以使用`@`运算符或`dot`函数或方法执行
 
 ```python
 A = np.array([[1, 1], [0, 1]])
@@ -223,7 +223,7 @@ print(a.max())  # >>>9
 print(a.cumsum())  # >>>[ 0  1  3  6 10 15 21 28 36 45]
 ```
 
-通过指定axis（列）参数，可以沿数组的指定轴应用操作
+通过指定 axis（列）参数，可以沿数组的指定轴应用操作
 
 ```python
 b = np.arange(12).reshape(3, 4)
@@ -237,7 +237,7 @@ b.sum(axis=0)              # sum of each column
 
 [数学函数合集](https://www.numpy.org.cn/reference/routines/math.html)
 
-NumPy提供熟悉的数学函数，例如sin，cos和exp。在NumPy中，这些被称为“通函数”。在NumPy中，这些函数在数组上按元素进行运算，产生一个数组作为输出
+NumPy 提供熟悉的数学函数，例如 sin，cos 和 exp。在 NumPy 中，这些被称为“通函数”。在 NumPy 中，这些函数在数组上按元素进行运算，产生一个数组作为输出
 
 ```python
 A = np.arange(3)
@@ -330,7 +330,7 @@ print(a[:, 1])
 	[12 17 22 27 32]
 ```
 
-三个点（ ... ）表示产生完整索引元组所需的冒号。例如，如果 x 是rank为5的数组（即，它具有5个轴），则
+三个点（ ... ）表示产生完整索引元组所需的冒号。例如，如果 x 是 rank 为 5 的数组（即，它具有 5 个轴），则
 
 x[1 , 2 , ...] 相当于 x[1,2, : , : , :]，
 
@@ -348,7 +348,7 @@ x[4, … ,5, :] 等效于 x[4, : , : , 5, : ]
 
 - *a*：输入数组
 
-- *decimals*：要舍入的小数位数。 默认值为0。 如果为负，整数将四舍五入到小数点左侧的位置
+- *decimals*：要舍入的小数位数。 默认值为 0。 如果为负，整数将四舍五入到小数点左侧的位置
 
 ```python
 n = np.array([-0.746, 4.6, 9.4, 7.447, 10.455, 11.555])
@@ -447,7 +447,7 @@ a = np.array([[2,  8,  0,  6],
               [8,  9,  3,  6]])
 ```
 
-可以使用各种命令更改数组的形状。请注意，以下三个命令（除resize）都返回一个修改后的数组，但不会更改原始数组
+可以使用各种命令更改数组的形状。请注意，以下三个命令（除 resize）都返回一个修改后的数组，但不会更改原始数组
 
 ```python
 a.ravel()  			# 展平数组
@@ -537,7 +537,7 @@ np.hsplit(a,(3,4))   # 以第三列和第四列为界，分割数组
 
 ## 例
 
-1. 打印numpy的版本和配置说明
+1. 打印 numpy 的版本和配置说明
 
 ```python
 print(np.__version__)
@@ -563,7 +563,7 @@ arr[arr % 2 == 1]
 	array([1, 3, 5, 7, 9])
 ```
 
-4. 找到数组[1,2,0,0,4,0]中非0元素的位置索引
+4. 找到数组[1,2,0,0,4,0]中非 0 元素的位置索引
 
 ```python
 nz = np.nonzero([1, 2, 0, 0, 4, 0])

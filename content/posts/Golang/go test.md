@@ -9,7 +9,7 @@ categories: [Golang]
 
 # go test
 
-Go语言提供了go test 命令行工具，使用该工具可以很方便的进行测试。
+Go 语言提供了 go test 命令行工具，使用该工具可以很方便的进行测试。
 
 不仅 Go 语言源码中大量使用 go test，在各种开源框架中的应用也极为普遍。
 

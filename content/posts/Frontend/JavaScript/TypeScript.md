@@ -1703,7 +1703,7 @@ const student = reactive({ name: '阿勇', age: 16, class: 'cs' }) as Student
 
 ### 自定义 hooks
 
-作者：JS开发宝典
+作者：JS 开发宝典
 链接：https://zhuanlan.zhihu.com/p/360947847
 来源：知乎
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
@@ -1810,7 +1810,7 @@ export default function useCount(initialVal: number, range?: Range): Result {
 
 **分析源码**
 
-这里首先是对 `hooks` 函数的入参类型和返回类型进行了定义，入参的 `Range` 和返回的 `Result` 分别用一个接口来指定，这样做了以后，最大的好处就是在使用 `useCount` 函数的时候，ide就会自动提示哪些参数是必填项，各个参数的类型是什么，防止业务逻辑出错。
+这里首先是对 `hooks` 函数的入参类型和返回类型进行了定义，入参的 `Range` 和返回的 `Result` 分别用一个接口来指定，这样做了以后，最大的好处就是在使用 `useCount` 函数的时候，ide 就会自动提示哪些参数是必填项，各个参数的类型是什么，防止业务逻辑出错。
 
 ![img](https://pic2.zhimg.com/v2-b3bffccd67b28b5f41413189b0fc47c1_b.jpg)
 

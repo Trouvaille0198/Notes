@@ -29,7 +29,7 @@ div {
     }
 ```
 
-- 选择器（Selector）：浏览器根据选择器决定哪些html元素受css样式的影响
+- 选择器（Selector）：浏览器根据选择器决定哪些 html 元素受 css 样式的影响
 
 - 属性（Property）：是你要改变的样式名
 - 值（Value ）：将值分配给属性
@@ -38,7 +38,7 @@ div {
 
 1. 每个属性用；分开。
 
-2. CSS注释以 **/\*** 开始, 以 **\*/** 结束
+2. CSS 注释以 **/\*** 开始, 以 **\*/** 结束
 
 ### 引入方式
 
@@ -50,7 +50,7 @@ div {
 
 Inline style，也叫行内式
 
-在元素标签内部的style属性中设定CSS格式
+在元素标签内部的 style 属性中设定 CSS 格式
 
 ```css
 <div style="color: red; font-size: 12px;">起飞</div>
@@ -314,7 +314,7 @@ p {
 注意
 
 -  每个值用逗号分开
-- 如果字体名称包含空格，它必须加上引号；在HTML中使用"style"属性时，必须使用单引号
+- 如果字体名称包含空格，它必须加上引号；在 HTML 中使用"style"属性时，必须使用单引号
 
 ### 大小 font-size
 
@@ -366,24 +366,24 @@ font-size: 80%;
 
 各种单位的含义：
 
-- `in`：英寸Inches (1 英寸 = 2.54 厘米)
-- `cm`：厘米Centimeters
-- `mm`：毫米Millimeters
-- `pt`：点Points，或者叫英镑 (1点 = 1/72英寸)
-- `pc`：皮卡Picas (1 皮卡 = 12 点)
+- `in`：英寸 Inches (1 英寸 = 2.54 厘米)
+- `cm`：厘米 Centimeters
+- `mm`：毫米 Millimeters
+- `pt`：点 Points，或者叫英镑 (1 点 = 1/72 英寸)
+- `pc`：皮卡 Picas (1 皮卡 = 12 点)
 
 ##### 相对单位
 
 - `px`：像素
-- `em`：印刷单位相当于12个点
+- `em`：印刷单位相当于 12 个点
 
 #### 用 em 来设置字体大小
 
-为了避免Internet Explorer 中无法调整文本的问题，许多开发者使用 em 单位代替像素。
+为了避免 Internet Explorer 中无法调整文本的问题，许多开发者使用 em 单位代替像素。
 
-em的尺寸单位由W3C建议。
+em 的尺寸单位由 W3C 建议。
 
-1em和当前字体大小相等。在浏览器中默认的文字大小是16px，因此有**px/16=em**
+1em 和当前字体大小相等。在浏览器中默认的文字大小是 16px，因此有**px/16=em**
 
 ```css
 h1 {
@@ -418,7 +418,7 @@ p {
 
 ### 样式 font-style
 
-font-style属性指定文本的字体样式
+font-style 属性指定文本的字体样式
 
 ```css
 p {
@@ -485,7 +485,7 @@ font 简写属性在一个声明中设置所有字体属性。
 
 可设置的属性是（按顺序）： "font-style  font-variant  font-weight  font-size/line-height  font-family"
 
-font-size和font-family的值是必需的。如果缺少了其他值，默认值将被插入，如果有默认值的话
+font-size 和 font-family 的值是必需的。如果缺少了其他值，默认值将被插入，如果有默认值的话
 
 ```css
 p.ex1 {
@@ -503,7 +503,7 @@ Text
 
 ### 颜色 color
 
-color属性指定文本的颜色
+color 属性指定文本的颜色
 
 ```css
 body {
@@ -527,7 +527,7 @@ p {
 
 ### 对齐方式 text-align
 
-text-align属性指定元素文本的水平对齐方式。
+text-align 属性指定元素文本的水平对齐方式。
 
 ```css
 h1 {
@@ -658,7 +658,7 @@ h2 {
 
 ### 字间距 word-spacing
 
-word-spacing属性增加或减少字与字之间的空白。
+word-spacing 属性增加或减少字与字之间的空白。
 
 ```css
 p {
@@ -742,7 +742,7 @@ Backgrounds
 
 ### 颜色 background-color
 
-background-color属性设置一个元素的背景颜色。
+background-color 属性设置一个元素的背景颜色。
 
 元素的背景是元素的总大小，包括填充和边界（但不包括边距）
 
@@ -773,7 +773,7 @@ background-image 属性设置一个元素的背景图像。
 
 元素的背景是元素的总大小，包括填充和边界（但不包括边距）。
 
-默认情况下，background-image放置在元素的左上角，并重复垂直和水平方向。
+默认情况下，background-image 放置在元素的左上角，并重复垂直和水平方向。
 
 提示：请设置一种可用的背景颜色，这样的话，假如背景图像不可用，可以使用背景色带代替。
 
@@ -799,7 +799,7 @@ body {
 
 设置如何平铺对象的 background-image 属性。
 
-默认情况下，重复background-image的垂直和水平方向。
+默认情况下，重复 background-image 的垂直和水平方向。
 
 ```css
 body {
@@ -819,7 +819,7 @@ body {
 
 ### 图像固定或滚动 background-attachment
 
- background-attachment设置背景图像是否固定或者随着页面的其余部分滚动。
+ background-attachment 设置背景图像是否固定或者随着页面的其余部分滚动。
 
 ```css
 body
@@ -840,7 +840,7 @@ body
 
 ### 图像起始位置 background-position
 
-background-position属性设置背景图像的起始位置。
+background-position 属性设置背景图像的起始位置。
 
 ```css
 body {
@@ -884,7 +884,7 @@ body {
 
 ## 链接
 
-链接的样式，可以用任何CSS属性（如颜色，字体，背景等）
+链接的样式，可以用任何 CSS 属性（如颜色，字体，背景等）
 
 特别的链接，可以有不同的样式，这取决于他们是什么状态
 
@@ -1110,7 +1110,7 @@ table,th, td
 
 ### 表格宽度和高度 Width 和 height
 
-Width和height属性定义表格的宽度和高度。
+Width 和 height 属性定义表格的宽度和高度。
 
 下面的例子是设置 100％的宽度，50 像素的 th 元素的高度的表格
 
@@ -1161,7 +1161,7 @@ td
 
 ### 表格颜色 color
 
-下面的例子指定边框的颜色，和th元素的文本和背景颜色
+下面的例子指定边框的颜色，和 th 元素的文本和背景颜色
 
 ```css
 table, td, th

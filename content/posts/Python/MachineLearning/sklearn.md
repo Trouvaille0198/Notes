@@ -27,7 +27,7 @@ from sklearn import datasets
 
 ***datasets.load_\*()***
 
-获取小规模数据集，数据包含在datasets里
+获取小规模数据集，数据包含在 datasets 里
 
 ```python
 data1 = datasets.load_iris()
@@ -285,7 +285,7 @@ print("特征名字：\n", transfer.get_feature_names())
  ['city=上海', 'city=北京', 'city=深圳', 'temperature']
 ```
 
-若返回稀疏矩阵，改sparse=True
+若返回稀疏矩阵，改 sparse=True
 
 ```python
 返回的结果:
@@ -381,9 +381,9 @@ print("返回特征名字：\n", transfer.get_feature_names())
 
 分析
 
-- 准备句子，利用jieba.cut进行分词
-- 实例化CountVectorizer
-- 将分词结果变成字符串当作fit_transform的输入值
+- 准备句子，利用 jieba.cut 进行分词
+- 实例化 CountVectorizer
+- 将分词结果变成字符串当作 fit_transform 的输入值
 
 ```python
 from sklearn.feature_extraction.text import CountVectorizer
@@ -455,9 +455,9 @@ $$
 
 - TfidfVectorizer.fit_transform(X)
   -  X：文本或者包含文本字符串的可迭代对象
-  - 返回sparse矩阵
+  - 返回 sparse 矩阵
 - TfidfVectorizer.inverse_transform(X)
-  -  X：array数组或者sparse矩阵 
+  -  X：array 数组或者 sparse 矩阵 
   - 返回转换之前数据格
 - TfidfVectorizer.get_feature_names() 
   - 返回值单词列表
@@ -555,8 +555,8 @@ $$
 ***MinMaxScaler (feature_range=(0,1)… )***
 
 - *MinMaxScalar.fit_transform(X)*
-  - X：numpy array格式的数据 [n_samples,n_features]
-  - 返回值：转换后的形状相同的array
+  - X：numpy array 格式的数据 [n_samples,n_features]
+  - 返回值：转换后的形状相同的 array
 
 ##### 例
 
@@ -762,12 +762,12 @@ from scipy.stats import pearsonr
 $$
 r=\cfrac{n\sum xy=\sum x\sum y}{\sqrt{n\sum x^2 -(\sum x)^2}\sqrt{n\sum y^2-(\sum y)^2}}
 $$
-相关系数的值介于–1与+1之间，即–1≤ r ≤+1。其性质如下：
+相关系数的值介于–1 与+1 之间，即–1≤ r ≤+1。其性质如下：
 
-- 当r > 0时，表示两变量正相关，r < 0时，两变量为负相关
-- 当|r|=1时，表示两变量为完全相关，当 r=0 时，表示两变量间无相关关系
-- 当0<|r|<1时，表示两变量存在一定程度的相关。且|r|越接近1，两变量间线性关系越密切；|r|越接近于0，表示两变量的线性相关越弱
-- 一般可按三级划分：|r|<0.4为低度相关；0.4≤|r|<0.7为显著性相关；0.7≤|r|<1为高度线性相关
+- 当 r > 0 时，表示两变量正相关，r < 0 时，两变量为负相关
+- 当|r|=1 时，表示两变量为完全相关，当 r=0 时，表示两变量间无相关关系
+- 当 0<|r|<1 时，表示两变量存在一定程度的相关。且|r|越接近 1，两变量间线性关系越密切；|r|越接近于 0，表示两变量的线性相关越弱
+- 一般可按三级划分：|r|<0.4 为低度相关；0.4≤|r|<0.7 为显著性相关；0.7≤|r|<1 为高度线性相关
 
 ###### API
 
@@ -777,7 +777,7 @@ $$
 - Y：numpy array 格式的数据
 - 返回值
   - r：相关系数 [-1，1] 之间
-  - p-value：p值（p值越小，表示相关系数越显著，一般p值在500个样本以上时有较高的可靠性）
+  - p-value：p 值（p 值越小，表示相关系数越显著，一般 p 值在 500 个样本以上时有较高的可靠性）
 
 
 
@@ -885,7 +885,7 @@ print("(主成分分析)PCA降维:\n", data_new)
 
 1. 实例化 (实例化的是一个转换器类(Transformer))
 
-2. 调用fit_transform(对于文档建立分类词频矩阵，不能同时调用)
+2. 调用 fit_transform(对于文档建立分类词频矩阵，不能同时调用)
 
 转换器调用形式
 
@@ -899,7 +899,7 @@ print("(主成分分析)PCA降维:\n", data_new)
 
 （estimator）
 
-估计器实现了算法的API，估计器是算法的父类
+估计器实现了算法的 API，估计器是算法的父类
 
 - 用于分类的估计器：
   - sklearn.neighbors k-近邻算法
@@ -914,7 +914,7 @@ print("(主成分分析)PCA降维:\n", data_new)
 
 调用步骤
 
-1. 实例化估计器类estimator
+1. 实例化估计器类 estimator
 
 2. 进行训练，一旦调用完毕，意味着模型生成
 
@@ -954,7 +954,7 @@ from sklearn.model_selection import GridSearchCV
 
 （Grid Search）
 
-通常情况下，有很多参数是需要手动指定的（如k-近邻算法中的K值），这种叫超参数。但是手动过程繁杂，所以需要对模型预设几种超参数组合。每组超参数都采用交叉验证来进行评估。最后选出最优参数组合建立模型。
+通常情况下，有很多参数是需要手动指定的（如 k-近邻算法中的 K 值），这种叫超参数。但是手动过程繁杂，所以需要对模型预设几种超参数组合。每组超参数都采用交叉验证来进行评估。最后选出最优参数组合建立模型。
 
 #### API
 
@@ -1064,7 +1064,7 @@ def load_model(name):
 from sklearn.neighbors import KNeighborsClassifier
 ```
 
-（K Nearest Neighbor）即K - 近邻算法
+（K Nearest Neighbor）即 K - 近邻算法
 
 如果一个样本在特征空间中的 **k 个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别**，则该样本也属于这个类别。
 
@@ -1083,7 +1083,7 @@ from sklearn.neighbors import KNeighborsClassifier
 - algorithm：*{‘auto’，‘ball_tree’，‘kd_tree’，‘brute’}*，可选用于计算最近邻居的算法，不同实现方式影响效率
   - *‘ball_tree’* 将会使用 BallTree
   - *‘kd_tree’* 将使用 KDTree
-  - *‘auto’* 将尝试根据传递给fit方法的值来决定最合适的算法
+  - *‘auto’* 将尝试根据传递给 fit 方法的值来决定最合适的算法
 
 #### 例
 
@@ -1207,7 +1207,7 @@ $$
 
 ##### 拉普拉斯平滑系数
 
-目的：防止计算出的分类概率为0
+目的：防止计算出的分类概率为 0
 $$
 P(F_1|C)=\cfrac{N_i+\alpha}{N+\alpha m}
 $$
@@ -1311,7 +1311,7 @@ $$
 - C4.5
   - 信息增益比 最大的准则
 - CART
-  - 分类树: 基尼系数 最小的准则 在sklearn中可以选择划分的默认原则
+  - 分类树: 基尼系数 最小的准则 在 sklearn 中可以选择划分的默认原则
   - 优势：划分更加细致（从后面例子的树显示来理解）
 
 #### API
@@ -1733,7 +1733,7 @@ from sklearn.linear_model import LinearRegression, SGDRegressor
 其实是随机梯度下降
 
 - ***SGDRegressor(loss="squared_loss", fit_intercept=True, learning_rate ='invscaling', eta0=0.01)***
-  - SGDRegressor类实现了随机梯度下降学习，它支持不同的 **loss 函数和正则化惩罚项**来拟合线性回归模型。
+  - SGDRegressor 类实现了随机梯度下降学习，它支持不同的 **loss 函数和正则化惩罚项**来拟合线性回归模型。
   - *loss*：损失类型
     - **loss=”squared_loss”: 普通最小二乘法**
   - *fit_intercept*：是否计算偏置
@@ -1884,8 +1884,8 @@ from sklearn.linear_model import Ridge, RidgeCV
   - 作用：可以使得其中一些 W 的都很小，都接近于 0，削弱某个特征的影响
   - 优点：越小的参数说明模型越简单，越简单的模型则越不容易产生过拟合现象
   - Ridge 回归
-- L1正则化
-  - 作用：可以使得其中一些W的值直接为0，删除这个特征的影响
+- L1 正则化
+  - 作用：可以使得其中一些 W 的值直接为 0，删除这个特征的影响
   - LASSO 回归
 
 > 线性回归的损失函数用最小二乘法，等价于当预测值与真实值的误差满足正态分布时的极大似然估计；岭回归的损失函数，是最小二乘法+L2范数，等价于当预测值与真实值的误差满足正态分布，且权重值也满足正态分布（先验分布）时的最大后验估计；LASSO的损失函数，是最小二乘法+L1范数，等价于等价于当预测值与真实值的误差满足正态分布，且且权重值满足拉普拉斯分布（先验分布）时的最大后验估计
@@ -1918,7 +1918,7 @@ from sklearn.linear_model import Ridge, RidgeCV
 
     
 
-Ridge 方法相当于 `SGDRegressor(penalty='l2', loss="squared_loss")`, 只不过 SGDRegressor 实现了一个普通的随机梯度下降学习，推荐使用Ridge(实现了SAG)
+Ridge 方法相当于 `SGDRegressor(penalty='l2', loss="squared_loss")`, 只不过 SGDRegressor 实现了一个普通的随机梯度下降学习，推荐使用 Ridge(实现了 SAG)
 
 ##### 交叉验证岭回归
 
@@ -2026,15 +2026,15 @@ $$
 
 <img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20210118223723565.png" alt="image-20210118223723565" style="zoom: 60%;" />
 
-**分析过程**（以一个蓝1点为例）
+**分析过程**（以一个蓝 1 点为例）
 
-1. 计算出蓝1离本身族群所有点的距离的平均值$a_i$
+1. 计算出蓝 1 离本身族群所有点的距离的平均值$a_i$
 
-2. 蓝1到其它两个族群的距离计算出平均值红平均，绿平均，取最小的那个距离作为$b_i$
+2. 蓝 1 到其它两个族群的距离计算出平均值红平均，绿平均，取最小的那个距离作为$b_i$
 
-3. 根据公式：极端值考虑：如果$b_i >>a_i$，那么公式结果趋近于1；如果$a_i>>>b_i$，那么公式结果趋近于-1
+3. 根据公式：极端值考虑：如果$b_i >>a_i$，那么公式结果趋近于 1；如果$a_i>>>b_i$，那么公式结果趋近于-1
 
-**结论**：如果$b_i>>a_i$，趋近于1，效果好， $b_i<<a_i$，趋近于-1，效果不好。轮廓系数的值是介于 [-1,1] ，越趋近于1代表内聚度和分离度都相对较优
+**结论**：如果$b_i>>a_i$，趋近于 1，效果好， $b_i<<a_i$，趋近于-1，效果不好。轮廓系数的值是介于 [-1,1] ，越趋近于 1 代表内聚度和分离度都相对较优
 
 #### API
 
@@ -2048,7 +2048,7 @@ $$
 
 1. 降维之后的数据
 
-2. k-means聚类
+2. k-means 聚类
 
 3. 聚类结果显示
 4. 用户聚类结果评估

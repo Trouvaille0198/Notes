@@ -320,7 +320,7 @@ var app = new Vue({
 
 - 本质是通过操纵 dom 元素来切换显示状态
 - 表达式的值为 true,元素存在于 dom 树中,为 false，从 dom 树中移除
-- 辨析：频繁的切换使用 v-show，偶尔切换使用v-if，前者的切换消耗小
+- 辨析：频繁的切换使用 v-show，偶尔切换使用 v-if，前者的切换消耗小
 
 ```javascript
 var app = new Vue({
@@ -465,7 +465,7 @@ var vm = new Vue({
 })
 ```
 
-其实computed里的代码完整的写法应该是：
+其实 computed 里的代码完整的写法应该是：
 
 ```js
 computed: {

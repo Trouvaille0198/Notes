@@ -53,7 +53,7 @@ db, err := sql.Open("mysql",
 		"user:password@tcp(127.0.0.1:3306)/hello")
 ```
 
-`sql.DB` 刚开始建立时是懒加载的，不会自动创建新的连接，只有使用 `Ping()` 或者运行查询时才会自动生成一个新的连接然后去连接数据库，只有这个时候才能确定数据库是否真的OK，所以建议**一定要在 `sql.Open` 后运行 `Ping()` 确定数据连接正常运行**。
+`sql.DB` 刚开始建立时是懒加载的，不会自动创建新的连接，只有使用 `Ping()` 或者运行查询时才会自动生成一个新的连接然后去连接数据库，只有这个时候才能确定数据库是否真的 OK，所以建议**一定要在 `sql.Open` 后运行 `Ping()` 确定数据连接正常运行**。
 
 `sql.DB` 是连接后初始化的一个连接池，通常全局就初始化这一个连接池，并且长期运行，所有后续数据库操作都使用该连接池进行。
 
@@ -399,7 +399,7 @@ Query 执行一次查询，返回多行结果（即 Rows），一般用于执行
 func (db *DB) QueryRow(query string, args ...interface{}) *Row
 ```
 
-QueryRow执行一次查询，并期望返回最多一行结果（即Row）。QueryRow总是返回非nil的值，直到返回值的Scan方法被调用时，才会返回被延迟的错误。（如：未找到结果）
+QueryRow 执行一次查询，并期望返回最多一行结果（即 Row）。QueryRow 总是返回非 nil 的值，直到返回值的 Scan 方法被调用时，才会返回被延迟的错误。（如：未找到结果）
 
 #### func (*DB) Prepare
 
@@ -415,7 +415,7 @@ Prepare 创建一个准备好的状态用于之后的查询和命令，即**准�
 func (db *DB) Begin() (*Tx, error)
 ```
 
-Begin开始一个事务。隔离水平由数据库驱动决定。
+Begin 开始一个事务。隔离水平由数据库驱动决定。
 
 ####  例
 
@@ -579,11 +579,11 @@ SetMaxOpenConns 设置与数据库建立连接的最大数目。
 func (db *DB) SetMaxIdleConns(n int)
 ```
 
-SetMaxIdleConns设置连接池中的最大闲置连接数。
+SetMaxIdleConns 设置连接池中的最大闲置连接数。
 
-如果n大于最大开启连接数，则新的最大闲置连接数会减小到匹配最大开启连接数的限制。
+如果 n 大于最大开启连接数，则新的最大闲置连接数会减小到匹配最大开启连接数的限制。
 
-如果n <= 0，不会保留闲置连接。
+如果 n <= 0，不会保留闲置连接。
 
 ### type Result
 
@@ -1091,7 +1091,7 @@ driver 包定义了应被数据库驱动实现的接口，这些接口会被 sql
 
 ### driver.Driver
 
-Driver是一个数据库驱动的接口，其定义了一个Open(name string)方法，该方法返回一个数据库的Conn接口：
+Driver 是一个数据库驱动的接口，其定义了一个 Open(name string)方法，该方法返回一个数据库的 Conn 接口：
 
 ```go
 type Driver interface {
@@ -1105,7 +1105,7 @@ type Driver interface {
 
 sql 包会维护闲置连接池以便有效的重用连接。
 
-返回的连接同一时间只会被一个 go 程使用。所以返回的 Conn 只能用来进行一次 goroutine 操作，即不能把这个Conn 应用于 Go 的多个 goroutine 中，否则会出现错误，如：
+返回的连接同一时间只会被一个 go 程使用。所以返回的 Conn 只能用来进行一次 goroutine 操作，即不能把这个 Conn 应用于 Go 的多个 goroutine 中，否则会出现错误，如：
 
 ```go
 go goroutineA(Conn) //执行查询操作
