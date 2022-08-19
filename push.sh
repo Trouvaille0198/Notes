@@ -1,6 +1,6 @@
 #!/bin/sh
 
-date="`date +%Y-%m-%d %H:%m`"
+date=$(date "+%Y-%m-%d %H:%m")
 # npm install textlint --global
 # npm install textlint-rule-ja-space-between-half-and-full-width --global
 cd ./content/posts/ || exit
