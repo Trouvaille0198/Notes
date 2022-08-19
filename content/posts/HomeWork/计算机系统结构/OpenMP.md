@@ -1,3 +1,12 @@
+---
+title: "OpenMP"
+date: 2021-03-16
+author: MelonCholi
+draft: false
+tags: [Linux]
+categories: [Linux]
+---
+
 # OpenMP
 
 ## 介绍
