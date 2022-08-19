@@ -1,4 +1,15 @@
-# 步骤
+---
+title: "pyinstaller"
+date: 2021-04-17
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
+# pyinstaller
+
+## 步骤
 
 1. 在 cmd 中使用命令找到 py 程序所在目录
 2. 使用命令
@@ -9,7 +20,7 @@ pyinstaller -F <name>.py
 
 ​		dist 文件夹中的 exe 即为我们所需要的可执行文件
 
-# 常用参数
+## 常用参数
 
 语法
 

@@ -1,4 +1,15 @@
-#  一、执行文件
+---
+title: "manim"
+date: 2021-04-17
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
+# manim
+
+##  执行文件
 
 `manim yourfile.py [className] [-params]`
 
@@ -22,23 +33,21 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 | `--high_quality`                      | `-qh`                 | Render at high quality                                    |
 | `--fourk_quality`                     | `-qk`                 | Render at 4K quality                                      |
 
-
-
 若要在 `Jupyter` 中使用
 
 ```python
 %%manim Test1 [CLI options]
 ```
 
-# Mobject
+## Mobject
 
 `Mobject` 是屏幕中出现的所有物体的超类
 
-## 通用方法
+### 通用方法
 
 所有方法以 `Mobject.` 开头
 
-### 移动
+#### 移动
 
 - ***to_edge(edge, buff=)***
 
@@ -90,7 +99,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
     放到画面中心
 
-### 旋转
+#### 旋转
 
 - ***rotate(angle)***
 
@@ -104,7 +113,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
     - *direction*：DIRECTION
 
-### 变形
+#### 变形
 
 - ***become(mobject)***
 
@@ -135,7 +144,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
     - *darkness*：暗度
 
-### 获取信息
+#### 获取信息
 
 - ***get_center()***
 
@@ -149,9 +158,7 @@ One can also specify the render quality by using the flags `-ql`, `-qm`, `-qh`, 
 
     获取宽度
 
-
-
-### 组合
+#### 组合
 
 - ***arrange(direction, buff=0.25, center=True, \*\*kwargs)***
 
@@ -170,7 +177,7 @@ class Example(Scene):
 
 ![image-20210216112707187](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210216112707187.png)
 
-### VMobject 独有方法
+#### VMobject 独有方法
 
 `VMobject` 是 `Mobject` 的子类，使用贝塞尔曲线来表示物体
 
@@ -193,9 +200,9 @@ class Example(Scene):
 
     允许设置全部样式
 
-## SVG
+### SVG
 
-### Text
+#### Text
 
 Mobjects used for displaying (non-LaTeX) text.
 
@@ -210,7 +217,7 @@ class HelloWorld(Scene):
         self.add(text)
 ```
 
-#### Parameters
+##### Parameters
 
 - color
     - 改变全部文字的颜色
@@ -248,14 +255,14 @@ class HelloWorld(Scene):
     - 或者切片模式，如`{'[1:4]': BOLD}`
 - 其余 `Mobject` 属性
 
-#### Methods
+##### Methods
 
 - ***set_color_by_t2c(self, t2c)***:
     - `text.set_color_by_t2c({'world':BLUE})`
 - ***set_color_by_t2g(self, t2g)***:
     - `text.set_color_by_t2g({'world':(BLUE, GREEN)})`
 
-### 切片
+#### 切片
 
 ```python
 from manim import *
@@ -277,7 +284,7 @@ class test(Scene):
 
 ![image-20210215185733556](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210215185733556.png)
 
-### Tex
+#### Tex
 
 A string compiled with LaTeX in normal mode.
 
@@ -294,17 +301,17 @@ class HelloLaTeX(Scene):
 
 we are using a raw string (`r'---'`) instead of a regular string (`'---'`). 
 
-### MathTex
+#### MathTex
 
 Whereas in a MathTex mobject everything is math-mode by default.
 
-### Code
+#### Code
 
 `Code` 使用 pygments 给代码生成带语法高亮的 html 文件，然后再转换为物体。
 
 ***Code(file_name=None, \*\*kwargs)***
 
-#### 结构
+##### 结构
 
 1. `Code[0]` 是代码的背景 ( `Code.background_mobject` )
     1. 如果 `background == "rectangle"` 则是一个 Rectangle
@@ -312,7 +319,7 @@ Whereas in a MathTex mobject everything is math-mode by default.
 2. `Code[1]` 是行号 ( `Code.line_numbers` 一个 Paragraph)，可以使用 `Code.line_numbers[0]` 或者 `Code[1][0]` 来访问行号中的第一个数字
 3. `Code[2]` 是代码 (`Code.code`)，一个带有颜色的 Paragraph
 
-#### parameters
+##### parameters
 
 - *file_name*
     - Name of the code file to display.
@@ -348,40 +355,40 @@ class test(Scene):
 
 ![image-20210215191333989](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210215191333989.png)
 
-### Brace
+#### Brace
 
 大括号
 
 ***Brace(mobject, direction, \*\*kwargs)***
 
-### ImageMobject
+#### ImageMobject
 
 注意：`ImageMobject` 不是 `VMobject` 的子类，所以有很多动画无法使用
 
 ***ImageMobject(filename, \*\*kwargs)***
 
-#### parameters
+##### parameters
 
 - *height*：插入图片的高度，默认为 2
 
-#### Methods
+##### Methods
 
 - ***set_opacity(alpha)***
     设置图片不透明度
 
-## Geometry
+### Geometry
 
-### 通用参数
+#### 通用参数
 
 - *color*：颜色
 - *fill_opacity*：图形内不透明度，默认为 0 （透明）
 
-### 圆
+#### 圆
 
 - ***Circle(\*\*kwargs)***
     - 正圆
 
-### 点
+#### 点
 
 - ***Dot(point, radius, stroke_width, fill_opacity, color, \*\*kwargs)***
     - *point*：np.array 或 DIRECTION，默认为 `array([0.0, 0.0, 0.0])`
@@ -390,12 +397,12 @@ class test(Scene):
     - *fill_opacity*：不透明度，默认为 1.0
     - *color*：颜色，默认为 `'#FFFFFF'`
 
-### 三角形
+#### 三角形
 
 - ***Triangle(\*\*kwargs)***
     - 正三角形
 
-### 矩形
+#### 矩形
 
 - ***Rectangle(\*\*kwargs)***
     - 矩形
@@ -407,7 +414,7 @@ class test(Scene):
     - parameters
         - `side_length` ：正方形边长
 
-### 线
+#### 线
 
 - ***Line(start, end, \*\*kwargs)***
 
@@ -421,37 +428,37 @@ class test(Scene):
 
             缩放到 `length` 长度
 
-### 箭头
+#### 箭头
 
 - ***Arrow(\*args, \*\*kwargs)***
     - *start*：起点，默认 LEFT
     - *end*：终点，默认 RIGHT
 
-# Animation
+## Animation
 
-## 通用
+### 通用
 
 所有方法以 `self.` 开头
 
-### wait()
+#### wait()
 
 ***wait(seconds)***
 
 等待动画停留时间，如果没有参数则默认等待到将动画播放完为止
 
-### add()
+#### add()
 
 ***add(someObject1, someObject2, ...)***
 
 无动画添加文字
 
-### remove()
+#### remove()
 
 ***remove(someObject1, someObject2, ...)***
 
 移除
 
-### play()
+#### play()
 
 ***play(SomePlayMethod(someObject), run_time=seconds)***
 
@@ -476,7 +483,7 @@ class concurrent(Scene):
         self.wait()
 ```
 
-### ApplyMethod()
+#### ApplyMethod()
 
 ***ApplyMethod(method, \*args, \*\*kwargs)***
 
@@ -497,11 +504,11 @@ class test16(Scene):
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/test16.gif" alt="test16" style="zoom: 67%;" />
 
-## PlayMethod
+### PlayMethod
 
-### Mobject.animate.method()
+#### Mobject.animate.method()
 
-### Creation
+#### Creation
 
 `manim.animation.creation`
 
@@ -556,7 +563,7 @@ class test(Scene):
 
     Simulate hand-writing a `Text` or hand-drawing a `VMobject`.
 
-### Fading
+#### Fading
 
 `manim.animation.fading`
 
@@ -589,19 +596,19 @@ class test(Scene):
 - ***FadeOutAndShift(mobject, direction)***
 	从指定方向淡出
 
-### Movement
+#### Movement
 
 - ***MoveAlongPath(mobject, path)***
 
     Make one mobject move along the path of another mobject
 
-### Rotate
+#### Rotate
 
 Animations related to rotation.
 
 - ***Rotate(mobject, angle)***
 
-### Transform
+#### Transform
 
 Animations transforming one mobject into another.
 
@@ -690,7 +697,7 @@ class test19(Scene):
 
 ![test19](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/test19.gif)
 
-### Grow
+#### Grow
 
 - ***GrowArrow(arrow, \*\*kwargs)***
 
@@ -744,7 +751,7 @@ class test(Scene):
 
 ![test4](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/test4.gif)
 
-### Indication
+#### Indication
 
 - ***FocusOn(focus_point, \*\*kwargs)***
     - *focus_point*：Mobject or point
@@ -915,7 +922,7 @@ class test(Scene):
 
 ![test11](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/test11.gif)
 
-### Movement
+#### Movement
 
 - ***MoveAlongPath(mobject, path, \*\*kwargs)***
 
@@ -937,7 +944,7 @@ class test11(Scene):
 
 ![test12](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/test12.gif)
 
-### Numbers
+#### Numbers
 
 - ***ChangingDecimal(decimal_mob, number_update_func, \*\*kwargs)***
 
@@ -964,7 +971,7 @@ class test(Scene):
 
 - ***ChangeDecimalToValue(decimal_mob, target_number, \*\*kwargs)***
 
-### Rotation
+#### Rotation
 
 `Rotate` 目前是 `Transform` 的子类，即带有 `path_arc` 的 `Transform` ，所以会有扭曲
 
@@ -989,7 +996,7 @@ class test(Scene):
 
 ![test14](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/test14.gif)
 
-### Update
+#### Update
 
 - ***UpdateFromFunc()***
 
@@ -1047,7 +1054,7 @@ class test(Scene):
 
 ![test21](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/test21.gif)
 
-### Composition
+#### Composition
 
 - ***AnimationGroup(\*animations, \*\*kwargs)***
 
@@ -1073,13 +1080,13 @@ class test22(Scene):
 
 ![test22](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/test22.gif)
 
-# Camera
+## Camera
 
 `Camera` 类及其子类用于获取当前屏幕上的画面， 然后作为每帧图像传递给 SceneFileWriter 来生成视频
 
-# Constants
+## Constants
 
-## Module Attributes
+### Module Attributes
 
 | `ORIGIN`  | The center of the coordinate system.                        |
 | --------- | ----------------------------------------------------------- |
@@ -1097,7 +1104,7 @@ class test22(Scene):
 | `TAU`     | The ratio of the circumference of a circle to its radius.   |
 | `DEGREES` | The exchange rate between radians and degrees.              |
 
-# 六 其他
+## 六 其他
 
 1. 公式怎么对齐
     1. 直接在`TexMobject`中使用`&`对齐

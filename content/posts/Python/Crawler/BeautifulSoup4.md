@@ -1,6 +1,17 @@
-# 基本操作
+---
+title: "BeautifulSoup4"
+date: 2021-04-17
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
 
-## 导入
+# BeautifulSoup4
+
+## 基本操作
+
+### 导入
 
 ```python
 from bs4 import BeautifulSoup
@@ -27,7 +38,7 @@ soup = BeautifulSoup(html_doc,"html.parser")
 | lxml XML 解析器  | `BeautifulSoup(markup, ["lxml-xml"])``BeautifulSoup(markup, "xml")` | 速度快唯一支持XML的解析器                             | 需要安装C语言库                                 |
 | html5lib         | `BeautifulSoup(markup, "html5lib")`                                 | 最好的容错性以浏览器的方式解析文档生成HTML5格式的文档 | 速度慢不依赖外部扩展                            |
 
-## 标准缩进格式
+### 标准缩进格式
 
 ```python
 print(soup.prettify())
@@ -71,9 +82,9 @@ and they lived at the bottom of a well.
 </html>
 ```
 
-# 对象
+## 对象
 
-## Tag
+### Tag
 
 每个标签节点就是一个 Tag 对象
 
@@ -93,7 +104,7 @@ soup.p.b  	#p下的b标签
 
 以下是 Tag 对象的部分属性
 
-### .name
+#### .name
 
 标签名属性
 
@@ -109,7 +120,7 @@ head
 a
 ```
 
-### .string
+#### .string
 
 文本内容属性
 
@@ -125,7 +136,7 @@ The Dormouse's story
 Elsie
 ```
 
-### [‘attributes’]
+#### [‘attributes’]
 
 标签指定属性属性
 
@@ -143,7 +154,7 @@ link1
 
 如果转换的文档是 XML 格式,那么 tag 中不包含多值属性
 
-### .attrs
+#### .attrs
 
 ```python
 soup.a.attrs
@@ -155,20 +166,20 @@ soup.a.attrs
 {'href': 'http://example.com/elsie', 'class': ['sister'], 'id': 'link1'}
 ```
 
-## NavigableString
+### NavigableString
 
 字符串常被包含在 tag 内.Beautiful Soup 用 `NavigableString` 类来包装 tag 中的字符串
 
 直接使用 *.stirng* 即可获取
 
-### 将其转换为 unicode 字符串
+#### 将其转换为 unicode 字符串
 
 ```python
 uni_str = unicode(soup.head.string) #在python3中不适用
 uni_str = str(soup.head.string)
 ```
 
-### replace_with()
+#### replace_with()
 
 tag 中包含的字符串不能编辑,但是可以被替换成其它的字符串
 
@@ -176,11 +187,11 @@ tag 中包含的字符串不能编辑,但是可以被替换成其它的字符串
 soup.head.string.replace_with('Harry potter')
 ```
 
-## BeautifulSoup
+### BeautifulSoup
 
 `BeautifulSoup` 对象表示的是一个文档的全部内容
 
-### .name
+#### .name
 
 `BeautifulSoup` 对象包含了一个值为 “[document]” 的特殊属性，用`.name`调用
 
@@ -194,7 +205,7 @@ soup.name
 '[document]'
 ```
 
-## Comment
+### Comment
 
 `Comment` 对象是一个特殊类型的 `NavigableString` 对象，是文档的注释部分
 
@@ -211,7 +222,7 @@ type(comment)
 bs4.element.Comment
 ```
 
-# 遍历文档树
+## 遍历文档树
 
 遍历文档树，就是是从根节点 html 标签开始遍历，直到找到目标元素为止，
 
@@ -221,11 +232,11 @@ bs4.element.Comment
   - 如果要找的内容在文档的末尾，那要遍历整个文档才能找到它，速度上就慢了
   - 只能获取到与之匹配的第一个子节点
 
-## 子节点
+### 子节点
 
-### .contents
+#### .contents
 
-#### Tag
+##### Tag
 
 Tag`的 `.contents` 属性可以将 tag 的子节点以列表的方式输出
 
@@ -252,7 +263,7 @@ soup.body.contents[1]
 <p class="title"><b>The Dormouse's story</b></p>
 ```
 
-#### NavigableString
+##### NavigableString
 
 字符串`NavigableString`没有 `.contents` 属性,因为字符串没有子节点
 
@@ -266,7 +277,7 @@ soup.head.string.cotents
 AttributeError: 'NavigableString' object has no attribute 'cotents'
 ```
 
-#### BeautifulSoup
+##### BeautifulSoup
 
 `BeautifulSoup` 对象本身一定会包含子节点,也就是说`<html>`标签也是 `BeautifulSoup` 对象的子节点
 
@@ -290,7 +301,7 @@ soup.contents
  </body></html>]
 ```
 
-### .children
+#### .children
 
 通过 tag 的 `.children` 生成器,可以对 tag 的子节点进行循环
 
@@ -317,7 +328,7 @@ and they lived at the bottom of a well.</p>
 <p class="story">...</p>
 ```
 
-### .descendants
+#### .descendants
 
 `.contents` 和 `.children` 属性仅包含 tag 的直接子节点，而`.descendants` 生成器可以对所有 tag 的子孙节点进行递归循环 
 
@@ -359,9 +370,9 @@ and they lived at the bottom of a well.
 ...
 ```
 
-## 父节点
+### 父节点
 
-### .parent
+#### .parent
 
 通过 `.parent` 属性来获取某个元素的父节点
 
@@ -381,7 +392,7 @@ bs4.BeautifulSoup
 None
 ```
 
-### .parents
+#### .parents
 
 通过元素的 `.parents` 生成器可以递归得到元素的所有父辈节点
 
@@ -399,9 +410,9 @@ html
 [document]
 ```
 
-## 兄弟节点
+### 兄弟节点
 
-### .next_sibling 和 .previous_sibling
+#### .next_sibling 和 .previous_sibling
 
 ```python
 soup.a.next_sibling   				#真实结果是第一个<a>标签和第二个<a>标签之间的顿号和换行符
@@ -415,7 +426,7 @@ soup.a.next_sibling.next_sibling
 <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>
 ```
 
-### .next_siblings 和 .previous_siblings
+#### .next_siblings 和 .previous_siblings
 
 通过 `.next_siblings` 和 `.previous_siblings` 生成器可以对当前节点的兄弟节点迭代输出
 
@@ -434,17 +445,17 @@ for sibling in soup.a.next_siblings:
 ';\nand they lived at the bottom of a well.'
 ```
 
-# 搜索文档树
+## 搜索文档树
 
 搜索文档树是通过指定标签名来搜索元素，另外还可以通过指定标签的属性值来精确定位某个节点元素
 
 最常用的两个方法就是 find 和 find_all。这两个方法在 BeatifulSoup 和 Tag 对象上都可以被调用
 
-## 过滤器
+### 过滤器
 
 过滤器贯穿整个搜索的 API。过滤器可以被用在 tag 的 name 中,节点的属性中,字符串中或他们的混合中
 
-### 字符串
+#### 字符串
 
 在搜索方法中传入一个字符串参数,Beautiful Soup 会查找与字符串完整匹配的内容
 
@@ -460,7 +471,7 @@ soup.find_all('a')
  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
 ```
 
-### 正则表达式
+#### 正则表达式
 
 Beautiful Soup 会通过正则表达式的 `match()` 来匹配内容
 
@@ -479,7 +490,7 @@ html
 title
 ```
 
-### 列表
+#### 列表
 
 Beautiful Soup 会将与列表中任一元素匹配的内容返回
 
@@ -498,7 +509,7 @@ soup.find_all(["a", "b"])
  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
 ```
 
-### True
+#### True
 
 `True` 可以匹配任何值
 
@@ -525,7 +536,7 @@ a
 p
 ```
 
-### 方法
+#### 方法
 
 如果没有合适过滤器,那么还可以定义一个方法,方法只接受一个元素参数 [[4\]](https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/#id91) ,如果这个方法返回 `True` 表示当前元素匹配并且被找到,如果不是则反回 `False`
 
@@ -566,7 +577,7 @@ soup.find_all(href=not_lacie)
  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
 ```
 
-## find_all()
+### find_all()
 
 ```python
 find_all( name , attrs , recursive , string , **kwargs )
@@ -578,7 +589,7 @@ find_all( name , attrs , recursive , string , **kwargs )
 
 返回列表
 
-### name
+#### name
 
 `name` 参数可以查找所有名字为 `name` 的 tag，字符串对象会被自动忽略掉
 
@@ -594,7 +605,7 @@ soup.find_all("a")
  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
 ```
 
-### keyword
+#### keyword
 
 1. 如果一个指定名字的参数不是搜索内置的参数名,搜索时会把该参数当作指定名字 tag 的属性来搜索
 
@@ -634,7 +645,7 @@ soup.find_all(class_=has_six_characters)                 #与第一种方法输�
  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
 ```
 
-### string
+#### string
 
 通过 `string` 参数可以搜搜文档中的字符串内容
 
@@ -650,7 +661,7 @@ soup.find_all("a", string="Elsie") #与其他参数混合使用时，返回对�
 [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>]
 ```
 
-### limit
+#### limit
 
 `find_all()` 方法返回全部的搜索结构,如果文档树很大那么搜索会很慢.如果我们不需要全部结果,可以使用 `limit` 参数限制返回结果的数量
 
@@ -665,7 +676,7 @@ soup.find_all("a", limit=2)
  <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>]
 ```
 
-### recursive
+#### recursive
 
 调用 tag 的 `find_all()` 方法时,Beautiful Soup 会检索当前 tag 的所有子孙节点,如果只想搜索 tag 的直接子节点,可以使用参数 `recursive=False`
 
@@ -677,7 +688,7 @@ soup.html.find_all("title", recursive=False)
 # []
 ```
 
-### attrs
+#### attrs
 
 传入字典
 
@@ -685,7 +696,7 @@ soup.html.find_all("title", recursive=False)
 css_class = soup.find_all(attrs={'class':'primaryconsumers'})
 ```
 
-### 简写方式
+#### 简写方式
 
 `find_all()` 几乎是 Beautiful Soup 中最常用的搜索方法,所以我们定义了它的简写方法. `BeautifulSoup` 对象和 `tag` 对象可以被当作一个方法来使用,这个方法的执行结果与调用这个对象的 `find_all()` 方法相同
 
@@ -699,7 +710,7 @@ soup.title.find_all(string=True)
 soup.title(string=True)
 ```
 
-## find()
+### find()
 
 find( name , attrs , recursive , string,  **kwargs )
 
@@ -729,7 +740,7 @@ soup.find("head").find("title")
 # <title>The Dormouse's story</title>
 ```
 
-## 其他方法
+### 其他方法
 
 1. find_parents()和 find_parent()
 
@@ -765,13 +776,13 @@ soup.find("head").find("title")
 
    前者返回节点后所有符合条件的节点，后者返回第一个符合条件的节点
 
-# CSS选择器
+## CSS选择器
 
 在 `Tag` 或 `BeautifulSoup` 对象的 `.select()` 方法中传入字符串参数, 即可使用 CSS 选择器的语法找到 tag
 
-# 其他
+## 其他
 
-## 复制Beautiful Soup对象
+### 复制Beautiful Soup对象
 
 `copy.copy()` 方法可以复制任意 `Tag` 或 `NavigableString` 对象
 
@@ -790,7 +801,7 @@ print soup.p is p_copy
 # False
 ```
 
-## get_text()
+#### get_text()
 
 获取标签里面内容，除了可以使用 .string 之外，还可以使用 get_text 方法，不同的地方在于前者返回的一个 NavigableString 对象，后者返回的是 unicode 类型的字符串。
 

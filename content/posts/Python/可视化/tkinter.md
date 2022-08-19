@@ -1,4 +1,15 @@
-# 窗口
+---
+title: "tkinter"
+date: 2021-04-17
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
+# tkinter
+
+## 窗口
 
 ```python
 import tkinter as tk    # 引入tkinter库，并取个别名（即外号)tk
@@ -7,7 +18,7 @@ root = tk.Tk()          # 创建窗口
 root.mainloop()         # 窗口循环显示
 ```
 
-## 属性设置
+### 属性设置
 
 ```python
 root['bg'] = 'red'      # 背景色，或root['background'] = 'red'
@@ -20,34 +31,34 @@ root['highlightcolor'] = 'yellow'   # 设置加亮区域在 有焦点 时的颜�
 root['highlightbackground'] = 'black' # 设置加亮区域在 无焦点 时的颜色
 ```
 
-## 常用方法
+### 常用方法
 
-### 标题设置
+#### 标题设置
 
 ```python
 root.title('你好')
 ```
 
-### 移除窗口栏
+#### 移除窗口栏
 
 ```python
 root.overrideredirect(True)
 ```
 
-### 窗口大小和位置
+#### 窗口大小和位置
 
 ```python
 # 大小为1000x700，位置为距离屏幕，左右距即x轴100，上下距即y轴50
 root.geometry('1000x700+100+50')
 ```
 
-### 窗口刷新
+#### 窗口刷新
 
 ```python
 root.update()
 ```
 
-### 获取窗口位置
+#### 获取窗口位置
 
 ```python
 # 获取位置前必须刷新窗口
@@ -56,7 +67,7 @@ print( root.winfo_x() )
 print( root.winfo_y() )
 ```
 
-### 窗口最大最小尺寸
+#### 窗口最大最小尺寸
 
 ```python
 # 使窗口能拉取的大小在一个范围内
@@ -64,23 +75,23 @@ root.maxsize(200, 300)
 root.minsize(20, 100)
 ```
 
-### 窗口高宽是否可变
+#### 窗口高宽是否可变
 
 ```python
 # True表示可以拉伸，False反之，该例子表示可拉伸宽度但固定了高度
 root.resizable( width=True, height=False )
 ```
 
-### 修改图标
+#### 修改图标
 
 ```python
 # 参数是*.ico格式的图标路径
 root.iconbitmap('path\python.ico')
 ```
 
-## 事件绑定
+### 事件绑定
 
-### 格式
+#### 格式
 
 ```python
 root.bind(event,handler)
@@ -116,7 +127,7 @@ root.bind( '<Button-1>', callback )
 root.mainloop()
 ```
 
-### 事件
+#### 事件
 
 Tkinter 使用所谓的 事件队列 (event sequences) 暴露接口以绑定 handler 到相关事件. 事件以字符串的形式给出
 
@@ -137,7 +148,7 @@ Tkinter 使用所谓的 事件队列 (event sequences) 暴露接口以绑定 han
 | \<KeyPress-H>               | 用户点击 H 按键               |
 | \<Control-Shift-KeyPress-H> | 用户同时点击 Ctrl + Shift + H |
 
-### type
+#### type
 
 | **type**      | **含义**                                                                                                                                                                                        |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -160,7 +171,7 @@ Tkinter 使用所谓的 事件队列 (event sequences) 暴露接口以绑定 han
 | Unmap         | 1. 当组件被取消映射的时候触发该事件 2. 意思是在应用程序中不再显示该组件的时候，例如调用 grid_remove() 方法                                                                                      |
 | Visibility    | 当应用程序至少有一部分在屏幕中是可见的时候触发该事件                                                                                                                                            |
 
-### modifier
+#### modifier
 
 在事件序列中，modifier 部分的内容可以是以下这些：
 
@@ -174,7 +185,7 @@ Tkinter 使用所谓的 事件队列 (event sequences) 暴露接口以绑定 han
 | Shift        | 当按下 Shift 按键的时候                                                                       |
 | Triple       | 跟 Double 类似，当后续三个事件被连续触发的时候                                                |
 
-### Event 属性
+#### Event 属性
 
 当 Tkinter 去回调你定义的函数的时候，都会带着 Event 对象（作为参数）去调用，Event 对象以下这些属性你可以使用：
 
@@ -190,7 +201,7 @@ Tkinter 使用所谓的 事件队列 (event sequences) 暴露接口以绑定 han
 | width, height  | 组件的新尺寸（Configure 事件专属）                 |
 | type           | 该事件类型                                         |
 
-### **Key names**
+#### **Key names**
 
 当事件为 \<Key>，\<KeyPress>，\<KeyRelease> 的时候，detail 可以通过设定具体的按键名（keysym）来筛选。例如 <Key-H> 表示按下键盘上的大写字母 H 时候触发事件，\<Key-Tab> 表示按下键盘上的 Tab 按键的时候触发事件。
 
@@ -268,7 +279,7 @@ Tkinter 使用所谓的 事件队列 (event sequences) 暴露接口以绑定 han
 | Tab                  | 23                    | Tab（制表）按键              |
 | Up                   | 98                    | ↑ 按键                       |
 
-### 例
+#### 例
 
 ```python
 # 捕获点击鼠标的位置
@@ -319,7 +330,7 @@ frame.pack()
 root.mainloop()
 ```
 
-# 控件
+## 控件
 
 目前有 15 种 Tkinter 的控件。下表简单简单介绍各个控件：
 
@@ -345,7 +356,7 @@ root.mainloop()
 | Spinbox      | 输入控件：与Entry类似，但可以指定输入范围值              |
 | PanedWindow  | 窗口布局管理的插件：可以包含一个或者多个子控件           |
 
-## 标签 Label
+### 标签 Label
 
 Label（标签）组件用于在屏幕上显示文本或图像。Label 组件仅能显示单一字体的文本，但文本可以跨越多行。另外，还可以为其中的个别字符加上下划线（例如用于表示键盘快捷键）。
 
@@ -364,7 +375,7 @@ master.mainloop()
 
 如果你没有指定 Label 的大小，那么 Label 的尺寸是正好可以容纳其内容而已
 
-### 参数
+#### 参数
 
 ***Label(master=None, \*\*options)***
 
@@ -405,7 +416,7 @@ master.mainloop()
 | **width**           | 1. 设置 Label 的宽度 2. 如果 Label 显示的是文本，那么单位是文本单元 3. 如果 Label 显示的是图像，那么单位是像素（或屏幕单元） 4. 如果设置为 0 或者干脆不设置，那么会自动根据 Label 的内容计算出宽度                                                                                         |
 | wraplength          | 1. 决定 Label 的文本应该被分成多少行 2. 该选项指定每行的长度，单位是屏幕单元 3. 默认值是 0                                                                                                                                                                                                 |
 
-## 按钮 Button
+### 按钮 Button
 
 Button（按钮）组件用于实现各种各样的按钮。Button 组件可以包含文本或图像，你可以将一个 Python 的函数或方法与之相关联，当按钮被按下时，对应的函数或方法将被自动执行
 
@@ -427,7 +438,7 @@ master.mainloop()
 
 ![image-20210203205325365](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203205325365.png)
 
-### 参数
+#### 参数
 
 ***Button(master=None, \*\*options)***
 
@@ -472,7 +483,7 @@ master.mainloop()
 | width               | 1. 设置 Button 的宽度 2. 如果 Button 显示的是文本，那么单位是文本单元 3. 如果 Button 显示的是图像，那么单位是像素（或屏幕单元） 4. 如果设置为 0 或者干脆不设置，那么会自动根据 Button 的内容计算出宽度                                                                                                                                                                                                        |
 | wraplength          | 1. 决定 Button 的文本应该被分成多少行 2. 该选项指定每行的长度，单位是屏幕单元 3. 默认值是 0                                                                                                                                                                                                                                                                                                                   |
 
-### 方法
+#### 方法
 
 ***flash()***
 
@@ -483,7 +494,7 @@ master.mainloop()
 -- 调用 Button 中 command 选项指定的函数或方法，并返回函数的返回值。
 -- 如果 Button 的 state (状态)是 "disabled"（不可用）或没有指定 command 选项，则该方法无效。
 
-## 多选按钮 Checkbutton
+### 多选按钮 Checkbutton
 
 Checkbutton（多选按钮）组件用于实现确定是否选择的按钮，当你希望表达“多选多”选项的时候，可以将一系列 Checkbutton 组合起来使用。
 
@@ -516,7 +527,7 @@ def cb(self, event):
     print "variable is", self.var.get()
 ```
 
-### 参数
+#### 参数
 
 **Checkbutton(master=None, \**options)** (class) 
 
@@ -564,7 +575,7 @@ def cb(self, event):
 | width               | 1. 设置 Checkbutton 的宽度 2. 如果 Checkbutton 显示的是文本，那么单位是文本单元 3. 如果 Checkbutton 显示的是图像，那么单位是像素（或屏幕单元） 4. 如果设置为 0 或者干脆不设置，那么会自动根据 Checkbutton 的内容计算出宽度                                                                       |
 | wraplength          | 1. 决定 Checkbutton 的文本应该被分成多少行 2. 该选项指定每行的长度，单位是屏幕单元 3. 默认值是 0                                                                                                                                                                                                 |
 
-### 方法
+#### 方法
 
 **deselect()**
 
@@ -587,7 +598,7 @@ def cb(self, event):
 -- 调用 Checkbutton 中 command 选项指定的函数或方法，并返回函数的返回值。
 -- 如果 Checkbutton 的 state(状态)"disabled"是 （不可用）或没有指定 command 选项，则该方法无效。
 
-## 单选按钮 Radiobutton
+### 单选按钮 Radiobutton
 
 Radiobutton（单选按钮）组件用于实现多选一的问题，它几乎总是成组地被使用，其中所有成员共用相同的变量
 
@@ -632,7 +643,7 @@ master.mainloop()
 
 ![image-20210203211405507](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203211405507.png)
 
-### 参数
+#### 参数
 
 ***Radiobutton(master=None, \*\*options)***
 
@@ -679,7 +690,7 @@ master.mainloop()
 | width               | 1. 设置 Radiobutton 的宽度 2. 如果 Radiobutton 显示的是文本，那么单位是文本单元 3. 如果 Radiobutton 显示的是图像，那么单位是像素（或屏幕单元） 4. 如果设置为 0 或者干脆不设置，那么会自动根据 Radiobutton 的内容计算出宽度                                                                       |
 | wraplength          | 1. 决定 Radiobutton 的文本应该被分成多少行 2. 该选项指定每行的长度，单位是屏幕单元 3. 默认值是 0                                                                                                                                                                                                 |
 
-### 方法
+#### 方法
 
 **deselect()**
 -- 取消该按钮的选中状态。
@@ -695,7 +706,7 @@ master.mainloop()
 -- 调用 Radiobutton 中 command 选项指定的函数或方法，并返回函数的返回值。
 -- 如果 Radiobutton 的 state(状态)"disabled"是 （不可用）或没有指定 command 选项，则该方法无效。
 
-## 框架 Frame
+### 框架 Frame
 
 Frame（框架）组件是在屏幕上的一个矩形区域。Frame 主要是作为其他组件的框架基础，或为其他组件提供间距填充
 
@@ -718,7 +729,7 @@ master.mainloop()
 
 ![image-20210203211832334](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203211832334.png)
 
-### 参数
+#### 参数
 
 ***Frame(master=None, \*\*options)***
 
@@ -747,7 +758,7 @@ master.mainloop()
 | visual              | 1. 为新窗口指定视觉信息 2. 该选项没有默认值                                                                                                                                                                                                                                                                                                                                                                                      |
 | **width**           | 1. 设置 Frame 的宽度 2. 默认值是 0                                                                                                                                                                                                                                                                                                                                                                                               |
 
-## 标签框架 LabelFrame
+### 标签框架 LabelFrame
 
 LabelFrame 组件是 Frame 组件的变体。默认情况下，LabelFrame 会在其子组件的周围绘制一个边框以及一个标题
 
@@ -771,7 +782,7 @@ master.mainloop()
 
 ![image-20210203212646783](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203212646783.png)
 
-### 参数
+#### 参数
 
 ***LabelFrame(master=None, \*\*options)***
 
@@ -806,7 +817,7 @@ master.mainloop()
 | visual              | 1. 为新窗口指定视觉信息 2. 该选项没有默认值                                                                                                                                                                                                                                                                                                                                                                                      |
 | width               | 1. 设置 LabelFrame 的宽度 2. 默认值是 0                                                                                                                                                                                                                                                                                                                                                                                          |
 
-## 输入框 Entry
+### 输入框 Entry
 
 Entry（输入框）组件通常用于获取用户的输入文本。
 
@@ -836,7 +847,7 @@ Entry 组件允许通过以下几种方式指定字符的位置
 > - "insert"：对应插入光标的当前位置
 > - 使用鼠标坐标（"@x"）：x 是鼠标位置与 Entry 左侧边缘的水平距离，这样就可以通过鼠标相对地定位字符的位置
 
-### 参数
+#### 参数
 
 **Entry(master=None, \**options)**
 
@@ -880,7 +891,7 @@ Entry 组件允许通过以下几种方式指定字符的位置
 | **width**           | 1. 设置输入框的宽度，以字符为单位 2. 默认值是 20 3. 对于变宽字体来说，组件的实际宽度等于字体的平均宽度乘以 width 选项的值                                                                                                                                                       |
 | xscrollcommand      | 1. 与 scrollbar（滚动条）组件相关联 2. 如果你觉得用户输入的内容会超过该组件的输入框宽度，那么可以考虑设置该选项 3. 使用方法可以参考：Scrollbar 组件                                                                                                                             |
 
-### 方法
+#### 方法
 
 **delete(first, last=None)** 
 
@@ -902,7 +913,7 @@ Entry 组件允许通过以下几种方式指定字符的位置
 -- 使用 insert(INSERT, text) 将 text 参数指定的字符串插入到光标的位置
 -- 使用 insert(END, text) 将 text 参数指定的字符串插入到输入框的末尾
 
-## 文本 Text
+### 文本 Text
 
 Text（文本）组件用于显示和处理多行文本。在 Tkinter 的所有组件中，Text 组件显得异常强大和灵活，适用于多种任务。虽然该组件的主要目的是显示多行文本，但它常常也被用于作为简单的文本编辑器和网页浏览器使用
 
@@ -923,7 +934,7 @@ root.mainloop()
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203214123731.png" alt="image-20210203214123731" style="zoom:67%;" />
 
-### 参数
+#### 参数
 
 **Text(master=None, \**options)**
 
@@ -972,7 +983,7 @@ root.mainloop()
 | xscrollcommand      | 1. 与 scrollbar（滚动条）组件相关联（水平方向） 2. 使用方法可以参考：[Scrollbar 组件](https://blog.csdn.net/qq_41556318/article/details/85108366)                                                                                                                                                                                                                                                                               |
 | yscrollcommand      | 1. 与 scrollbar（滚动条）组件相关联（垂直方向） 2. 使用方法可以参考：[Scrollbar 组件](https://blog.csdn.net/qq_41556318/article/details/85108366)                                                                                                                                                                                                                                                                               |
 
-### 方法
+#### 方法
 
 **bbox(index)**
 -- 返回给定索引指定的字符的边界框
@@ -1215,7 +1226,7 @@ root.mainloop()
 **yview_scroll(number, what)**
 -- 跟 yview("scroll", number, what) 一样
 
-## 顶层窗口 Toplevel
+### 顶层窗口 Toplevel
 
 Toplevel（顶级窗口）组件类似于 Frame 组件，但 Toplevel 组件是一个独立的顶级窗口，这种窗口通常拥有标题栏、边框等部件
 
@@ -1240,7 +1251,7 @@ root.mainloop()
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203214849716.png" alt="image-20210203214849716" style="zoom:67%;" />
 
-### 参数
+#### 参数
 
 **Toplevel(master=None, \**options)**
 
@@ -1269,7 +1280,7 @@ root.mainloop()
 | takefocus           | 1. 指定该组件是否接受输入焦点（用户可以通过 tab 键将焦点转移上来） 2. 默认值是 False                                                                                                                                                                                                                                                                                                                                                      |
 | width               | 设置宽度                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
-## 菜单 Menu
+### 菜单 Menu
 
 Menu（菜单）组件用于实现顶级菜单、下拉菜单和弹出菜单
 
@@ -1307,7 +1318,7 @@ root.mainloop()
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203215735047.png" alt="image-20210203215735047" style="zoom:67%;" />
 
-### 参数
+#### 参数
 
 **Menu(master=None, \**options)** 
 
@@ -1336,7 +1347,7 @@ root.mainloop()
 | tearoffcommand     | 如果你希望当用户“撕下”你的菜单时通知你的程序，那么你可以将该选项与一个方法相关联，那么当用户“撕下”你的菜单时，Tkinter 会带着两个参数去调用你的方法（一个参数是当前窗口的 ID，另一个参数是承载被“撕下”的菜单的窗口 ID） |
 | title              | 默认情况下，被“撕下”的菜单标题是其主菜单的名字，不过你也可以通过修改此项的值来修改标题                                                                                                                                 |
 
-### 方法
+#### 方法
 
 **add(type, \*\*options)**
 -- type 参数指定添加的菜单类型，可以是："command"，"cascade"，"checkbutton"，"radiobutton" 或 "separator"
@@ -1450,7 +1461,7 @@ root.mainloop()
 -- 返回 index 参数指定的菜单项的垂直偏移位置
 -- 该方法的目的是为了让你精确放置相对于当前鼠标的位置弹出菜单
 
-# 布局管理器
+## 布局管理器
 
 pack、grid 和 place 均用于管理同在一个父组件下的所有组件的布局，其中：
 
@@ -1460,7 +1471,7 @@ pack、grid 和 place 均用于管理同在一个父组件下的所有组件的�
 
 我们常常会遇到的一个情况是将一个组件放到一个容器组件中，并填充整个父组件
 
-## pack
+### pack
 
 默认下，pack 是将添加的组件依次纵向排列
 
@@ -1482,7 +1493,7 @@ root.mainloop()
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203221444206.png" alt="image-20210203221444206"  />
 
-### 参数
+#### 参数
 
 **pack(\**options)**
 
@@ -1500,7 +1511,7 @@ root.mainloop()
 | pady       | 指定垂直方向上的外边距                                                                                                                                                |
 | **side**   | 1. 指定组件的放置位置 2. 默认值是 "top" 3. 还可以设置的值有："left"，"bottom"，"right"                                                                                |
 
-## grid
+### grid
 
 使用 grid 排列组件，只需告诉它你想要将组件放置的位置（行/列，row 选项指定行，cloumn 选项指定列）。此外，你并不用提前指出网格（grid 分布给组件的位置称为网格）的尺寸，因为管理器会自动计算
 
@@ -1525,7 +1536,7 @@ root.mainloop()
 
 有时候你可能需要用几个网格来放置一个组件，你只需要指定 rowspan 和 columnspan 就可以实现跨行和跨列的功能
 
-### 参数
+#### 参数
 
 **grid(\**options)**
 -- 下方表格详细列举了各个选项的具体含义和用法：
@@ -1543,7 +1554,7 @@ root.mainloop()
 | **rowspan**    | 指定用多少行（跨行）显示该组件                                                                                                                                                                                                                                          |
 | **sticky**     | 1. 控制组件在 grid 分配的空间中的位置 2. 可以使用 "n", "e", "s", "w" 以及它们的组合来定位（ewsn代表东西南北，上北下南左西右东） 3. 使用加号（+）表示拉长填充，例如 "n" + "s" 表示将组件垂直拉长填充网格，"n" + "s" + "w" + "e" 表示填充整个网格 4. 不指定该值则居中显示 |
 
-## place
+### place
 
 通常情况下不建议使用 place 布局管理器，因为对比起 pack 和 grid，place 要做更多的工作。不过纯在即合理，place 在一些特殊的情况下可以发挥妙用
 
@@ -1564,7 +1575,7 @@ root.mainloop()
 
 relx 和 rely 选项指定的是相对于父组件的位置，范围是 00 ~ 1.0，因此 0.5 表示位于正中间。那么 relwidth 和 relheight 选项则是指定相对于父组件的尺寸
 
-### 参数
+#### 参数
 
 **place(\**options)**
 -- 下方表格详细列举了各个选项的具体含义和用法：
@@ -1583,7 +1594,7 @@ relx 和 rely 选项指定的是相对于父组件的位置，范围是 00 ~ 1.0
 | x             | 1. 指定该组件的水平偏移位置（像素） 2. 如同时指定了 relx 选项，优先实现 relx 选项                                                                               |
 | y             | 1. 指定该组件的垂直偏移位置（像素） 2. 如同时指定了 rely 选项，优先实现 rely 选项                                                                               |
 
-# 标准对话框
+## 标准对话框
 
 Tkinter 为了提供了三种标准对话框模块，它们分别是：
 
@@ -1591,7 +1602,7 @@ Tkinter 为了提供了三种标准对话框模块，它们分别是：
 - filedialog
 - colorchooser
 
-## messagebox（消息对话框）
+### messagebox（消息对话框）
 
 ```python
 import tkinter as tk
@@ -1604,7 +1615,7 @@ tk.mainloop()
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203223132391.png" alt="image-20210203223132391" style="zoom:77%;" />
 
-### 标准对话框样式
+#### 标准对话框样式
 
 | **使用函数**                            | **对话框样式**                                                                        |
 | --------------------------------------- | ------------------------------------------------------------------------------------- |
@@ -1616,7 +1627,7 @@ tk.mainloop()
 | showinfo(title, message, options)       | ![img](https://img-blog.csdnimg.cn/20190102104752798.png)                             |
 | showwarning(title, message, options)    | ![img](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/20190102104846588.png) |
 
-### 参数
+#### 参数
 
 所有的这些函数都有相同的参数：
 
@@ -1630,7 +1641,7 @@ tk.mainloop()
 | icon     | 1. 指定对话框显示的图标 2. 可以指定的值有：ERROR，INFO，QUESTION 或 WARNING 3. 注意：不能指定自己的图标                                                                           |
 | parent   | 1. 如果不指定该选项，那么对话框默认显示在根窗口上 2. 如果想要将对话框显示在子窗口 w 上，那么可以设置 parent=w                                                                     |
 
-### 返回值
+#### 返回值
 
 askokcancel()，askretrycancel() 和 askyesno() 返回布尔类型的值：
 
@@ -1641,7 +1652,7 @@ askquestion() 返回“yes”或“no”字符串表示用户点击了“是”�
 
 showerror()，showinfo() 和 showwarning() 返回“ok”表示用户按下了“是”按钮
 
-## filedialog（文件对话框）
+### filedialog（文件对话框）
 
 当你的应用程序需要使用打开文件或保存文件的功能时，文件对话框显得尤为重要
 
@@ -1663,7 +1674,7 @@ root.mainloop()
 
 filedialog 模块提供了两个函数：askopenfilename(\*\*option) 和 asksaveasfilename(\*\*option)，分别用于打开文件和保存文件
 
-### 参数
+#### 参数
 
 两个函数可供设置的选项是一样的，下边列举了可用的选项及含义：
 
@@ -1675,13 +1686,13 @@ filedialog 模块提供了两个函数：askopenfilename(\*\*option) 和 asksave
 | parent               | 1. 如果不指定该选项，那么对话框默认显示在根窗口上 2. 如果想要将对话框显示在子窗口 w 上，那么可以设置 parent=w                                                                       |
 | **title**            | 指定文件对话框的标题栏文本                                                                                                                                                          |
 
-### 返回值
+#### 返回值
 
 1. 如果用户选择了一个文件，那么返回值是该文件的完整路径
 
 2. 如果用户点击了取消按钮，那么返回值是空字符串
 
-## colorchooser（颜色选择对话框）
+### colorchooser（颜色选择对话框）
 
 颜色选择对话框提供一个友善的界面让用户选择需要的颜色
 
@@ -1702,7 +1713,7 @@ root.mainloop()
 
 <img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210203223907695.png" alt="image-20210203223907695" style="zoom:67%;" />
 
-#### 参数
+##### 参数
 
 askcolor(color, **option) 函数的 color 参数用于指定初始化的颜色，默认是浅灰色；
 
@@ -1713,7 +1724,7 @@ option 参数可以指定的选项及含义如下：
 | title    | 指定颜色对话框的标题栏文本                                                                                    |
 | parent   | 1. 如果不指定该选项，那么对话框默认显示在根窗口上 2. 如果想要将对话框显示在子窗口 w 上，那么可以设置 parent=w |
 
-#### 返回值
+##### 返回值
 
 1. 如果用户选择一个颜色并按下“确定”按钮后，返回值是一个 2 元祖，第 1 个元素是选择的 RGB 颜色值，第 2 个元素是对应的 16 进制颜色值
 

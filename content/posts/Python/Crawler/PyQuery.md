@@ -1,10 +1,21 @@
-# 初始化
+---
+title: "PyQuery"
+date: 2021-04-17
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
+# PyQuery
+
+## 初始化
 
 ```python
 from pyquery import PyQuery as pq
 ```
 
-## 字符初始化
+### 字符初始化
 
 ```python
 html = '''
@@ -24,7 +35,7 @@ html = '''
 doc = pq(html)
 ```
 
-## URL初始化
+### URL初始化
 
 ```python
 doc = pq(url="http://www.baidu.com",encoding='utf-8')
@@ -32,7 +43,7 @@ doc = pq(url="http://www.baidu.com",encoding='utf-8')
 doc = pq(requests.get('http://cuiqingcai.com').text)
 ```
 
-## 文件初始化
+### 文件初始化
 
 ```python
 doc = pq(filename='demo.html')
@@ -40,7 +51,7 @@ doc = pq(filename='demo.html')
 
 最常用的初始化方式还是以字符串形式传递
 
-# CSS选择器
+## CSS选择器
 
 | 名称              | 例子            | 说明                             |
 | ----------------- | --------------- | -------------------------------- |
@@ -54,15 +65,15 @@ doc = pq(filename='demo.html')
 | [attribute]       | [target]        | 选择带有target属性的所有元素     |
 | [attribute=value] | [target=_blank] | 选择target=_blank的所有元素      |
 
-# 查找节点
+## 查找节点
 
 pyquery 的选择结果可能是多个节点，也可能是单个节点，类型都是 ` PyQuery ` 类型，并没有返回像 Beautiful Soup 那样的列表。
 
 所有查找结点的方法都可以加入 CSS 选择器
 
-## 子节点
+### 子节点
 
-### 子孙节点 
+#### 子孙节点 
 
 ```python
 items.find()
@@ -72,15 +83,15 @@ items.find()
 
 `find() `方法会将符合条件的所有节点选择出来，结果的类型是 `PyQuery` 类型。
 
-### 直接子节点
+#### 直接子节点
 
 ```python
 items.children()
 ```
 
-## 父节点
+### 父节点
 
-### 直接父节点
+#### 直接父节点
 
 用 parent 方法来获取某个节点的父节点
 
@@ -88,13 +99,13 @@ items.children()
 items.parent()
 ```
 
-### 祖先节点
+#### 祖先节点
 
 ```python
 items.parents()
 ```
 
-## 兄弟节点
+### 兄弟节点
 
 选择 class 为 list 的节点内部 class 为 item-0 和 active 的节点
 
@@ -102,7 +113,7 @@ items.parents()
 items.siblings()
 ```
 
-# 遍历节点
+## 遍历节点
 
 对于单个节点来说，可以直接打印输出，也可以直接转成字符串
 
@@ -148,13 +159,13 @@ for li in lis:
 
 调用 items() 方法后，会得到一个生成器，遍历一下，就可以逐个得到 li 节点对象了，它的类型也是 PyQuery 类型
 
-# 获取信息
+## 获取信息
 
-## 获取属性
+### 获取属性
 
-### 单个节点
+#### 单个节点
 
-#### attr()
+##### attr()
 
 ```python
 a = doc('.item-0.active a')
@@ -168,13 +179,13 @@ print(a.attr('href'))
 link3.html
 ```
 
-#### attr属性
+##### attr属性
 
 ```python
 print(a.attr.href)
 ```
 
-### 多个节点
+#### 多个节点
 
 当返回结果包含多个节点时，调用 attr 方法，只会得到第一个节点的属性。需要遍历获得	
 
@@ -183,11 +194,11 @@ for item in a.items():
     print(item.attr('href'))
 ```
 
-## 获取文本
+### 获取文本
 
-### 单个节点
+#### 单个节点
 
-#### text()
+##### text()
 
 ```python
 a = doc('.item-0.active a')
@@ -201,7 +212,7 @@ print(a.text())
 third item
 ```
 
-#### html()
+##### html()
 
 获取这个节点内部的 HTML 文本，
 
@@ -215,16 +226,16 @@ print(li.html())
 <span class="bold">third item</span>
 ```
 
-### 多个节点
+#### 多个节点
 
 若结果是多个节点：
 
 1. html 方法返回的是第一个 节点的内部 HTML 文本（需要遍历每个节点）
 2. text 则返回了所有的 li 节点内部的纯文本，中间用一个空格分割开，即返回结果是一个字符串（不需要遍历）
 
-# DOM操作
+## DOM操作
 
-## addClass()、removeClass()
+### addClass()、removeClass()
 
 添加，移除 class 标签
 
@@ -233,7 +244,7 @@ items.removeClass('active')
 items.addClass('active')
 ```
 
-## attr、text、html
+### attr、text、html
 
 ```python
 items.attr('name', 'link') #属性名，属性值
@@ -241,7 +252,7 @@ items.text('changed item')
 items.html('<span>changed item</span>')
 ```
 
-## remove
+### remove
 
 例如，想提取 Hello, World 这个字符串，而不要 p 节点内部的字符串
 

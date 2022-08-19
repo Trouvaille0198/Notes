@@ -1,8 +1,19 @@
-#  基本操作
+---
+title: "Selenium"
+date: 2021-04-17
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
+# Selenium
+
+##  基本操作
 
 Selenium 是一个自动化测试工具，利用它可以驱动浏览器执行特定的动作，如点击、下拉等操作，同时还可以获取浏览器当前呈现的页面的源代码，做到可见即可爬。对于一些 JavaScript 动态渲染的页面来说，此种抓取方式非常有效。
 
-## 导入
+### 导入
 
 ```python
 from selenium import webdriver # 浏览器对象
@@ -12,7 +23,7 @@ from selenium.webdriver.support import expected_conditions as EC # 显示等待�
 from selenium.webdriver.support.wait import WebDriverWait # 显示等待
 ```
 
-## 声明浏览器对象
+### 声明浏览器对象
 
 ```python
 browser = webdriver.Chrome()
@@ -22,7 +33,7 @@ browser = webdriver.PhantomJS()
 browser = webdriver.Safari()
 ```
 
-## 其他操作
+### 其他操作
 
 ```python
 browser.get('https://www.taobao.com') 	# 访问 url
@@ -33,31 +44,31 @@ browser.close() 						# 关闭当前标签页
 browser.quit()                          # 关闭浏览器
 ```
 
-## Cookies 操作
+### Cookies 操作
 
-### 获取 Cookies
+#### 获取 Cookies
 
 ***.get_cookies()***
 
 - 返回现有 Cookies
 
-### 删除 Cookies
+#### 删除 Cookies
 
 ***.delete_all_cookies()***
 
 - 删除现有 Cookies
 
-### 添加 Cookies
+#### 添加 Cookies
 
 ***.add_cookie(dic_cookies)***
 
 - *dic_cookies*：字典形式的 Cookies
 
-# 页面操作
+## 页面操作
 
 页面操作以浏览器为对象
 
-## 前进后退
+### 前进后退
 
 ***.forward() .back()***
 
@@ -77,25 +88,25 @@ browser.close()
 
 连续访问 3 个页面，然后调用 `back()` 方法回到第二个页面，接下来再调用 `forward()` 方法又可以前进到第三个页面。
 
-## 标签页操作
+### 标签页操作
 
-### 打开新标签页
+#### 打开新标签页
 
 ***.execute_script('window.open()')***
 
-### 查看标签页 
+#### 查看标签页 
 
 ***.window_handles***
 
 - 返回标签页列表
 
-### 切换标签页
+#### 切换标签页
 
 ***.switch_to_window(window_value)***
 
 - *window_value*：标签页名
 
-## 切换 Frame
+### 切换 Frame
 
 ***.switch_to_frame(window_value)***
 
@@ -107,11 +118,11 @@ browser.switch_to.frame('iframeResult')
 browser.switch_to.parent_frame()
 ```
 
-## 延时等待
+### 延时等待
 
 在 Selenium 中，`get()` 方法会在网页框架加载结束后结束执行，此时如果获取 `page_source`，可能并不是浏览器完全加载完成的页面，如果某些页面有额外的 Ajax 请求，我们在网页源代码中也不一定能成功获取到。所以，这里需要延时等待一定时间，确保节点已经加载出来
 
-### 隐式等待
+#### 隐式等待
 
 ***.implicitly_wait(seconds)***
 
@@ -119,11 +130,11 @@ browser.switch_to.parent_frame()
 
 隐式等待的效果其实并没有那么好，因为我们只规定了一个固定时间，而页面的加载时间会受到网络条件的影响
 
-### 显式等待
+#### 显式等待
 
 先指定要查找的节点，然后指定一个**最长等待时间**。如果在规定时间内加载出来了这个节点，就返回查找的节点；如果到了规定时间依然没有加载出该节点，则抛出超时异常
 
-####  生成器
+#####  生成器
 
 ***WebDriverWait(driver,timeout,poll_frequency=0.5,ignored_exceptions=None)***
 
@@ -136,7 +147,7 @@ browser.switch_to.parent_frame()
 wait = WebDriverWait(browser, 10) # 传入浏览器生成器和最长等待时间
 ```
 
-####  直到函数
+#####  直到函数
 
 ***until(method)* 和 *until_not(method)***
 
@@ -150,7 +161,7 @@ input = wait.until(EC.presence_of_element_located((By.ID, 'q')))
 button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.btn-search')))
 ```
 
-####  等待条件
+#####  等待条件
 
 （expected_conditions）
 
@@ -173,21 +184,21 @@ button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.btn-search'))
 | element_located_selection_state_to_be  | 跟上面的方法作用一样，只是上面的方法传入定位到的 element，而这个方法传入 locator                                                   |
 | alert_is_present                       | 判断页面上是否存在 alert                                                                                                           |
 
-#### 异常
+##### 异常
 
 如果网络有问题，在设定时间内内没有成功加载，那就抛出 `TimeoutException` 异常
 
-# 节点操作
+## 节点操作
 
 节点操作均以节点为对象
 
-## 查找结点
+### 查找结点
 
-### 单个节点
+#### 单个节点
 
 返回元素节点，为 `WebElement `类型
 
-#### 分类方法
+##### 分类方法
 
 ***.find_element_by_XXX()***
 
@@ -214,7 +225,7 @@ browser.find_elements_by_tag_name("iframe")                            #按标�
 browser.find_elements_by_name("cheese")                                #按名称查找
 ```
 
-#### 通用方法
+##### 通用方法
 
 ***.find_element(By.XXX, value)***
 
@@ -229,15 +240,15 @@ By.CLASS_NAME = "class name"
 By.CSS_SELECTOR = "css selector"
 ```
 
-### 多个节点
+#### 多个节点
 
 如果要查找所有满足条件的节点，需要用 `find_elements()` 这样的方法。
 
 返回节点列表，每个节点都是 `WebElement `类型。
 
-## 获取节点信息
+### 获取节点信息
 
-### 基本信息
+#### 基本信息
 
 - ***.get_attribute(value)***
   - 获取属性 Gets the given attribute or property of the element.
@@ -255,7 +266,7 @@ By.CSS_SELECTOR = "css selector"
 - ***.tag_name***
   - 获取标签名称，This element’s `tagName` property.
 
-### 判断操作
+#### 判断操作
 
 - ***is_displayed()***
   - 是否可见，Whether the element is visible to a user. 
@@ -266,11 +277,11 @@ By.CSS_SELECTOR = "css selector"
 - ***is_selected()*** 
   - 是否被选中，Returns whether the element is selected.Can be used to check if a checkbox or radio button is selected.
 
-# 交互操作
+## 交互操作
 
 Selenium 可以驱动浏览器来执行一些操作，也就是说可以让浏览器模拟执行一些动作
 
-## 节点操作
+### 节点操作
 
 以节点为对象的操作
 
@@ -292,7 +303,7 @@ Selenium 可以驱动浏览器来执行一些操作，也就是说可以让浏�
   - path：路径
   - usage： `element.screenshot(‘/Screenshots/foo.png’)`
 
-## 动作链
+### 动作链
 
 还有另外一些操作，它们没有特定的执行对象，比如鼠标拖曳、键盘按键等，这些动作用动作链来执行
 
@@ -302,7 +313,7 @@ actions = ActionChains(browser) # 声明动作链对象
 actions.perform() # 执行操作
 ```
 
-### 拖曳
+#### 拖曳
 
 - ***.drag_and_drop(source, target)***
   - 元素拖曳到另一个元素
@@ -317,7 +328,7 @@ actions.perform() # 执行操作
   - xoffset：X offset to move to.
   - yoffset：Y offset to move to.
 
-### 点击
+#### 点击
 
 - ***.click(on_element=None)***
   - 点击元素，Clicks an element
@@ -334,7 +345,7 @@ actions.perform() # 执行操作
 - ***.double_click()***
   - 双击元素，Double-clicks an element.
 
-### 键盘操作
+#### 键盘操作
 
 - ***.key_down(value)***
 
@@ -349,7 +360,7 @@ actions.perform() # 执行操作
   - 松开，Releases a modifier key.
   - *value*：`Keys` 对象，The modifier key to send. 
 
-### 移动
+#### 移动
 
 - ***.move_to_element(to_element)***
 
@@ -368,7 +379,7 @@ actions.perform() # 执行操作
 
   - *yoffset*：Y offset to move to.
 
-### 发送按键
+#### 发送按键
 
 - ***.send_keys(keys_to_send)***
   - 发送，Sends keys to current focused element.
@@ -378,7 +389,7 @@ actions.perform() # 执行操作
   - *element*：The element to send keys.
   - *keys_to_send*：`Keys` 对象
 
-## 执行 JavaScript
+### 执行 JavaScript
 
 ***browser.execute_script(JS_action)***
 
@@ -393,7 +404,7 @@ browser.execute_script('window.scrollTo(0, document.body.scrollHeight)')
 browser.execute_script('alert("To Bottom")')
 ```
 
-## Keys 对象
+### Keys 对象
 
 我们经常需要模拟键盘的输入，当输入普通的值时，在 send_keys()方法中传入要输入的字符串就好了。
 
@@ -474,7 +485,7 @@ TAB = u'\ue004'
 UP = u'\ue013'
 ```
 
-# 常见操作
+## 常见操作
 
 1. 设置浏览器类的 options 选项
 

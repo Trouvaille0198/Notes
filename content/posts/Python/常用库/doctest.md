@@ -1,3 +1,12 @@
+---
+title: "doctest"
+date: 2021-08-10
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
 # doctest
 
 Doctest 的测试原理是把我们在 Python 控制台的输入输出记录保存到函数的 docstring 里，然后一一把这些输入到解析器然后对比输出是否一致用来确定测试结果是否通过。

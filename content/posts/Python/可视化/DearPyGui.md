@@ -1,10 +1,21 @@
-# 认识
+---
+title: "DearPyGui"
+date: 2021-04-17
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
 
-## 窗口 Windows
+# DearPyGui
+
+## 认识
+
+### 窗口 Windows
 
 窗口用于保存控件
 
-### 创建方法
+#### 创建方法
 
 1. 由 `add_window()` 方法启动窗口并在结束调 `end()` 方法
 2. 使用 `dearpygui.simple` 包和相应的窗口管理器（推荐）
@@ -28,7 +39,7 @@ start_dearpygui()
 
 代码最终必须以 `start_dearpygui()` 方法结束
 
-### 主窗口
+#### 主窗口
 
 如何设置主窗口？
 
@@ -40,15 +51,13 @@ start_dearpygui()
 start_dearpygui(primary_window="Tutorial")
 ```
 
-### 全局设置
+#### 全局设置
 
 ```python
 add_additional_font('三极中柔宋.ttf', 18, glyph_ranges='chinese_simplified_common')
 ```
 
-
-
-## 控件 Widgets
+### 控件 Widgets
 
 控件必须有一个唯一的 `name`，默认情况下，`name` 会被当成 `label` 使用（视具体控件而定）
 
@@ -63,7 +72,7 @@ add_button("Apply##1")
 add_button("Apply2", label="Apply") 
 ```
 
-### 值 value
+#### 值 value
 
 每个输入窗口控件都有一个 `value`
 
@@ -84,7 +93,7 @@ with window("Tutorial"):
 start_dearpygui()
 ```
 
-#### 控制相同值
+##### 控制相同值
 
 添加新的窗口控件时，会将 `value` 添加到 **Value存储系统** 中，默认情况下，此 `value` 的标识符是控件的 `name`。我们可以使用 `source` 参数覆盖标识符，这样做有一个好处，就是让多个控件控制同一个 `value`
 
@@ -108,7 +117,7 @@ with window("Tutorial"):
 start_dearpygui()
 ```
 
-#### 存储其他数据结构
+##### 存储其他数据结构
 
 Dear PyGui 还支持传入任意 Python 数据对象类型（甚至可以自定义数据类型）用于数据存储。使用 `add_data`，我们可以传入任意数据类型，并通过 `get_data("name")` 进行访问。
 
@@ -142,14 +151,14 @@ with window("Tutorial"):
 start_dearpygui()
 ```
 
-### 回调 Callback
+#### 回调 Callback
 
-#### 添加回调
+##### 添加回调
 
 1. 生成控件时使用 `callback` 参数设置
 2. 创建后使用 `set_item_callback` 分配给窗口控件
 
-#### 参数
+##### 参数
 
 每个回调方法都必须包含一个 `sender` 和 `data` 参数
 
@@ -157,7 +166,7 @@ start_dearpygui()
 
 `data` 显示控件指定的 `callback_data` 参数
 
-#### 获取控件值
+##### 获取控件值
 
 可以在回调函数中获取控件值
 
@@ -180,7 +189,7 @@ with window("Tutorial"):
 start_dearpygui()
 ```
 
-#### 窗口的特殊回调
+##### 窗口的特殊回调
 
 - ***on_close***：在窗口关闭时触发
 - ***set_resize_callback()***：在窗口被调整大小时触发
@@ -207,7 +216,7 @@ set_resize_callback(resize_info, handler="Tutorial")
 start_dearpygui()
 ```
 
-#### 运行时添加和删除控件
+##### 运行时添加和删除控件
 
 Dear PyGui 支持在运行时动态添加和删除任何控件或窗口
 
@@ -244,7 +253,7 @@ with window("Secondary Window"):
 start_dearpygui()
 ```
 
-#### 删除窗口
+##### 删除窗口
 
 删除窗口时，默认情况下，会删除窗口及其子控件，如果只想删除子控件，可以将 `children_only` 参数设置为 *True* 值
 
@@ -276,9 +285,9 @@ with window("Tutorial"):
 start_dearpygui()
 ```
 
-# 控件
+## 控件
 
-## 表格 Table
+### 表格 Table
 
 Dear PyGui has a simple table API that is well suited for static and dynamic tables.
 
@@ -307,7 +316,7 @@ start_dearpygui()
 
 ![image-20210501221056398](http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210501221056398.png)
 
-#### 修改
+##### 修改
 
 - ***coord_list = get_table_selections("Table name")***
 
@@ -348,37 +357,37 @@ with window("Tutorial"):
 start_dearpygui()
 ```
 
-## 分隔件
+### 分隔件
 
-### 同排 add_same_line
+#### 同排 add_same_line
 
 - *spacing*
 
     分隔距
 
-### 行距 add_spacing
+#### 行距 add_spacing
 
-### 分隔线 add_separator
+#### 分隔线 add_separator
 
-## 输入框 
+### 输入框 
 
-### 文本框 add_input_text
+#### 文本框 add_input_text
 
 ```python
 add_input_text("Label", default_value="Test Window")
 ```
 
-### 整型数框 add_input_int
+#### 整型数框 add_input_int
 
-### 浮点数框 add_input_float
+#### 浮点数框 add_input_float
 
-## 选择框
+### 选择框
 
-### 按钮 add_button
+#### 按钮 add_button
 
-### 复选框 add_checkbox
+#### 复选框 add_checkbox
 
-## 窗体
+### 窗体
 
 - *autosize*
 

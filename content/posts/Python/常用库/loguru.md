@@ -1,3 +1,12 @@
+---
+title: "loguru"
+date: 2021-04-17
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
+
 # loguru
 
 比 logging 更加轻便简单的日志记录器
