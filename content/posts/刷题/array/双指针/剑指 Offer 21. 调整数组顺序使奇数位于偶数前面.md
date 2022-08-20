@@ -3,7 +3,7 @@ title: "剑指 Offer 21. 调整数组顺序使奇数位于偶数前面"
 date: 2022-02-20
 draft: false
 author: "MelonCholi"
-tags: [算法,双指针]
+tags: [算法, 双指针, 快慢指针]
 categories: [刷题]
 hiddenFromHomePage: true
 ---
@@ -26,7 +26,7 @@ hiddenFromHomePage: true
 
 ```go
 func exchange(nums []int) []int {
-	// i始终在第一个偶数上 j往前探索找奇数
+	// slow 始终在第一个偶数上，fast 往前探索找奇数
 	slow, fast := 0, 0
 	for fast < len(nums) {
 		if nums[fast]%2 == 1 {
@@ -47,11 +47,11 @@ func exchange(nums []int) []int {
 
 	for low <= high {
 		for low < len(nums) && nums[low]%2 == 1 {
-			// low往前走 直到遇到偶数
+			// low 往前走 直到遇到偶数
 			low++
 		}
 		for high >= 0 && nums[high]%2 == 0 {
-			// high往后退 直到遇到奇数
+			// high 往后退 直到遇到奇数
 			high--
 		}
 		if low < high {
