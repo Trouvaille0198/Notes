@@ -1007,7 +1007,7 @@ python 并没有对私有成员提供严格的访问保护机制。
 
 ### 全部读取
 
-使用.read() 
+使用 .read() 
 
 ```python
 with open(filename) as file_object:

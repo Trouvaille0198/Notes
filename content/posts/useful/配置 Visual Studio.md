@@ -1,3 +1,12 @@
+---
+title: "配置 visual studio"
+date: 2022-03-25
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [有用的东东]
+---
+
 # 配置 Visual Studio
 
 ## 美化

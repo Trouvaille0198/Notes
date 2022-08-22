@@ -1,3 +1,12 @@
+---
+title: "Go Dockerfile 通用配置"
+date: 2022-06-25
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [有用的东东]
+---
+
 # Go Dockerfile 通用配置
 
 ```dockerfile

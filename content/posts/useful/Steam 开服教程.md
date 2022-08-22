@@ -1,3 +1,12 @@
+---
+title: "Steam 开服教程"
+date: 2022-03-25
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [有用的东东]
+---
+
 # Steam 开服教程
 
 Linux 系统：ubuntu 20.04 LTS

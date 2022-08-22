@@ -1,3 +1,12 @@
+---
+title: "Minecraft 开服教程"
+date: 2022-06-26
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [有用的东东]
+---
+
 # Minecraft 开服教程
 
 ## 开服步骤

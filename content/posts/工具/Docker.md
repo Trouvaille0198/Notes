@@ -44,7 +44,7 @@ featuredImage: https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/Moby-sha
 
 容器一词的英文是 container，其实 container 还有集装箱的意思，而容器和集装箱在概念上是很相似的。
 
-现代软件开发的一大目的就是**隔离**，应用程序在运行时相互独立互不干扰，这种隔离实现起来是很不容易的，其中一种解决方案就是上面提到的虚拟机技术，通过将应用程序部署在不同的虚拟机中从而实现隔离。
+现代软件开发的一大目的就是**隔离**，应用程序在运行时相互独立互不干扰，这种隔离实现起来是很不容易的，其中一种解决方案就是上面提到的虚拟机技术，通过将应用程序部署在不同的虚拟机中从而实现隔离：
 
 <img src="https://pic1.zhimg.com/v2-0f6ede7f0b920b5d0d5571c937a04838_b.jpg" alt="img" style="zoom:67%;" />
 
@@ -69,7 +69,7 @@ featuredImage: https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/Moby-sha
 
 docker 是一个用 Go 语言实现的开源项目，可以让我们方便的创建和使用容器，docker 将程序以及程序所有的依赖都打包到 docker container，这样你的程序可以在任何环境都会有一致的表现，这里程序运行的依赖也就是容器。
 
-就好比集装箱，容器所处的操作系统环境就好比货船或港口，**程序的表现只和集装箱有关系(容器)，和集装箱放在哪个货船或者哪个港口(操作系统)没有关系**。
+就好比集装箱，容器所处的操作系统环境就好比货船或港口，**程序的表现只和集装箱有关系(容器)，和集装箱放在哪个货船或者哪个港口 (操作系统) 没有关系**。
 
 因此我们可以看到 docker 可以**屏蔽环境差异**，也就是说，只要你的程序打包到了 docker 中，那么无论运行在什么环境下程序的行为都是一致的，程序员再也无法施展表演才华了，不会再有 “在我的环境上可以运行”，真正实现 “build once, run everywhere”。
 
@@ -96,13 +96,12 @@ docker 中有这样几个概念：
 >
 > - A **container** is a sandboxed process on your machine that is isolated from all other processes on the host machine.
 >
-> 
 
 因此我们只需要在 dockerfile 中指定需要哪些程序、依赖什么样的配置，之后把 dockerfile 交给“编译器” docker 进行“编译”，也就是 `docker build` 命令，生成的可执行程序就是 image，之后就可以运行这个 image 了，这就是 `docker run` 命令，image 运行起来后就是 docker container。
 
 ### docker 是如何工作的
 
-实际上 docker 使用了常见的 CS 架构，也就是 client-server 模式，docker client 负责处理用户输入的各种命令，比如 docker build、docker run，真正工作的其实是 server，也就是 docker demon
+实际上 docker 使用了常见的 CS 架构，也就是 client-server 模式，docker client 负责处理用户输入的各种命令，比如 docker build、docker run，真正工作的其实是 server，也就是 docker daemon
 
 > 值得注意的是，docker client 和 docker demon 可以运行在同一台机器上。
 
@@ -110,7 +109,7 @@ docker 中有这样几个概念：
 
 #### `docker build`
 
-当我们写完 dockerfile 交给 docker “编译” 时使用这个命令，那么 client 在接收到请求后转发给 docker daemon，接着 docker daemon 根据 dockerfile 创建出“可执行程序” image。
+当我们写完 dockerfile 交给 docker “编译” 时使用这个命令，那么 client 在接收到请求后转发给 docker daemon，接着 docker daemon 根据 dockerfile 创建出 “可执行程序” image。
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-f16577a98471b4c4b5b1af1036882caa_b.jpg)
 
@@ -118,7 +117,7 @@ docker 中有这样几个概念：
 
 #### `docker run`
 
-有了“可执行程序” image 后就可以运行程序了，接下来使用命令 `docker run`，docker daemon 接收到该命令后找到具体的 image，然后加载到内存开始执行，image 执行起来就是所谓的 container。
+有了 “可执行程序” image 后就可以运行程序了，接下来使用命令 `docker run`，docker daemon 接收到该命令后找到具体的 image，然后加载到内存开始执行，image 执行起来就是所谓的 container。
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-672b29e2d53d2ab044269b026c6bc473_b.jpg)
 
@@ -145,9 +144,9 @@ docker 中有这样几个概念：
 docker 基于 Linux 内核提供这样几项功能实现的：
 
 - **NameSpace**
-    我们知道 Linux 中的 PID、IPC、网络等资源是全局的，而 NameSpace 机制是一种资源隔离方案，在该机制下这些资源就不再是全局的了，而是属于某个特定的 NameSpace，各个 NameSpace 下的资源互不干扰，这就使得每个 NameSpace 看上去就像一个独立的操作系统一样，但是只有 NameSpace 是不够。
+    我们知道 Linux 中的 PID、IPC、网络等资源是全局的，而 NameSpace 机制是一种**资源隔离方案**，在该机制下这些资源就不再是全局的了，而是属于某个特定的 NameSpace，各个 NameSpace 下的资源互不干扰，这就使得每个 NameSpace 看上去就像一个独立的操作系统一样，但是只有 NameSpace 是不够。
 - **Control groups**
-    虽然有了 NameSpace 技术可以实现资源隔离，但进程还是可以不受控的访问**系统资源**，比如 CPU、内存、磁盘、网络等，为了控制容器中进程对资源的访问，Docker 采用 control groups 技术（也就是 cgroup），有了 cgroup 就可以控制容器中进程对系统资源的消耗了，比如你可以限制某个容器使用内存的上限、可以在哪些 CPU 上运行等等。
+    虽然有了 NameSpace 技术可以实现资源隔离，但进程还是可以不受控的**访问系统资源**，比如 CPU、内存、磁盘、网络等，为了控制容器中进程对资源的访问，Docker 采用 control groups 技术（也就是 cgroup），有了 cgroup 就可以控制容器中进程对系统资源的消耗了，比如你可以限制某个容器使用内存的上限、可以在哪些 CPU 上运行等等。
 
 有了这两项技术，容器看起来就真的像是独立的操作系统了。
 
@@ -355,7 +354,7 @@ ubuntu               bionic              329ed837d508        3 days ago         
 
 而 `docker image ls` 显示的是镜像下载到本地后，展开的大小，准确说，是展开后的各层所占空间的总和，**因为镜像到本地后，查看空间的时候，更关心的是本地磁盘空间占用的大小。**
 
-另外一个需要注意的问题是，`docker image ls` 列表中的镜像体积总和并非是所有镜像实际硬盘消耗。由于 Docker 镜像是多层存储结构，并且可以继承、复用，因此不同镜像可能会因为使用相同的基础镜像，从而拥有共同的层。由于 Docker 使用 Union FS，相同的层只需要保存一份即可，因此**实际镜像硬盘占用空间很可能要比这个列表镜像大小的总和要小的多。**
+另外一个需要注意的问题是，`docker image ls` 列表中的镜像体积总和并非是所有镜像实际硬盘消耗。由于 Docker 镜像是**多层存储结构**，并且可以继承、复用，因此不同镜像可能会因为使用相同的基础镜像，从而拥有共同的层。由于 Docker 使用 Union FS，相同的层只需要保存一份即可，因此**实际镜像硬盘占用空间很可能要比这个列表镜像大小的总和要小的多。**
 
 你可以通过 `docker system df` 命令来便捷的查看镜像、容器、数据卷所占用的空间。
 

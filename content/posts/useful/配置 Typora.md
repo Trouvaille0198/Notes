@@ -1,3 +1,12 @@
+---
+title: "配置 typora"
+date: 2022-02-25
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [有用的东东]
+---
+
 # 配置 Typora
 
 ## 自动添加标题序号

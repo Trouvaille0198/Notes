@@ -1,3 +1,12 @@
+---
+title: "配置 windows terminal"
+date: 2022-03-25
+draft: false
+author: "MelonCholi"
+tags: []
+categories: [有用的东东]
+---
+
 # 配置 Windows Terminal
 
 ##  设置
