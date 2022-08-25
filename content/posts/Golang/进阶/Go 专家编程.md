@@ -90,7 +90,7 @@ type hchan struct {
 
 ##### 环形队列
 
-chan 内部实现了一个环形队列作为其缓冲区，队列的长度是创建 chan 时指定的。
+chan 内部实现了一个**环形队列**作为其缓冲区，队列的长度是创建 chan 时指定的。
 
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220126151305080.png" alt="image-20220126151305080" style="zoom:67%;" />
 
@@ -279,8 +279,6 @@ No element in chan1 and chan2.
 
 从输出可见，从 channel 中读出数据的顺序是随机的，事实上 select 语句的多个 case 执行顺序是随机的。
 
-通过这个示例想说的是：select 的 case 语句读 channel 不会阻塞，尽管 channel 中没有数据。这是由于 case 语句编译后调用读 channel 时会明确传入不阻塞的参数，此时读不到数据时不会将当前 goroutine 加入到等待队列，而是直接返回。
-
 ##### range
 
 通过 range 可以持续从 channel 中读出数据，好像在遍历一个数组一样，当 channel 中没有数据时会阻塞当前 goroutine，与读 channel 时阻塞处理机制一样。
@@ -347,7 +345,7 @@ type slice struct {
 
 上图可见，扩容后新的 Slice 长度仍然是 5，但容量由 5 提升到了 10，原 Slice 的数据也都拷贝到了新 Slice 指向的数组中。
 
-扩容容量的选择遵循以下规则：
+:star: 扩容容量的选择遵循以下规则：
 
 - 如果原 Slice 容量小于 1024，则新 Slice 容量将扩大为原来的 2 倍；
 - 如果原 Slice 容量大于等于 1024，则新 Slice 容量将扩大为原来的 1.25 倍；
@@ -365,7 +363,7 @@ type slice struct {
 
 例如长度为 10 的切片拷贝到长度为 5 的切片时，将会拷贝 5 个元素。
 
-也就是说，copy 过程中不会发生扩容。
+也就是说，**copy 过程中不会发生扩容**。
 
 #### 特殊切片
 
@@ -390,9 +388,9 @@ sliceB := sliceA[0:5]
 
 #### Tips
 
-- 创建切片时可跟据实际需要预分配容量，尽量避免追加过程中扩容操作，有利于提升性能；
+- 创建切片时可跟据实际需要**预分配容量**，尽量避免追加过程中扩容操作，有利于提升性能；
 - 切片拷贝时需要判断实际拷贝的元素个数
-- 谨慎使用多个切片操作同一个数组，以防读写冲突
+- :star: **谨慎使用多个切片操作同一个数组，以防读写冲突**（slice 和 map 都不是并发安全的）
 
 #### 总结
 
@@ -430,6 +428,13 @@ type hmap struct {
 
 bucket 很多时候被翻译为桶，所谓的**哈希桶**实际上就是 bucket。
 
+哈希函数对传进来的 key 进行哈希运算，得到一个唯一的值：
+
+- 低位用于寻找当前 key 属于 `hmap` 中的哪个 bucket
+- 高位用于寻找 bucket 中的哪个 key。
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bb0f10a0a2994a50be44a8691512ff1c.png)
+
 #### bucket 数据结构
 
 bucket 数据结构由 `runtime/map.go/bmap` 定义：
@@ -445,7 +450,7 @@ type bmap struct {
 每个 bucket 可以存储 8 个键值对。
 
 - `tophash` 是个长度为 8 的数组，哈希值相同的键（准确的说是哈希值低位相同的键）存入当前 bucket 时会将哈希值的高位存储在该数组中，以方便后续匹配。
-- `data` 区存放的是 key-value 数据，存放顺序是 key/key/key/...value/value/value，如此存放是为了节省字节对齐带来的空间浪费。
+- `data` 区存放的是 key-value 数据，存放顺序是 key/key/key/...value/value/value，如此存放是为了节省**字节对齐**带来的空间浪费。
 - `overflow` 指针指向的是下一个 bucket，据此将所有冲突的键连接起来。
 
 注意：上述中 data 和 overflow 并不是在结构体中显示定义的，而是直接通过指针运算（计算内存地址）进行访问的。我们能根据编译期间的 [`cmd/compile/internal/gc.bmap`](https://draveness.me/golang/tree/cmd/compile/internal/gc.bmap) 函数重建它的结构：
@@ -462,21 +467,25 @@ type bmap struct {
 
 下图展示 bucket 存放 8 个 key-value 对：
 
-![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-02-struct_sketch.png)
 
 #### 哈希冲突
 
-当有两个或以上数量的键被哈希到了同一个 bucket 时，我们称这些键发生了冲突。Go 使用链地址法（拉链法）来解决键冲突。 由于每个 bucket 可以存放 8 个键值对，所以同一个 bucket 存放超过 8 个键值对时就会再创建一个键值对，用类似链表的方式将 bucket 连接起来。
+当有两个或以上数量的键被哈希到了同一个 bucket 时，我们称这些键发生了冲突。Go 使用链地址法（拉链法）来解决键冲突。 由于每个 bucket 可以存放 8 个键值对，所以同一个 bucket 存放超过 8 个键值对时就会再创建一个 bucket，用类似链表的方式将 bucket 连接起来。
 
 下图展示产生冲突后的 map：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-03-struct_sketch.png)
 
-bucket 数据结构指示下一个 bucket 的指针称为 **overflow bucket（溢出桶）**，意为当前 bucket 盛不下而溢出的部分。事实上哈希冲突并不是好事情，它降低了存取效率，好的哈希算法可以保证哈希值的随机性，但冲突过多也是要控制的，后面会再详细介绍。
+bucket 数据结构指示下一个 bucket 的指针称为 **overflow bucket（溢出桶）**，意为当前 bucket 盛不下而溢出的部分。溢出桶的内存布局与常规桶相同，是为了减少扩容次数而引入的。
+
+当一个桶存满了，还有可用的溢出桶时，就会在后面链一个溢出桶，继续往这里面存（没有可用的溢出桶时就扩容吧）
+
+事实上哈希冲突并不是好事情，它降低了存取效率，好的哈希算法可以保证哈希值的随机性，但冲突过多也是要控制的，后面会再详细介绍。
 
 #### 负载因子
 
-负载因子用于衡量一个哈希表冲突情况，公式为：
+负载因子（loadFactor）用于衡量一个哈希表冲突情况，公式为：
 
 ```go
 负载因子 = 键数量/bucket数量
@@ -501,11 +510,13 @@ bucket 数据结构指示下一个 bucket 的指针称为 **overflow bucket（�
 为了保证访问效率，当新元素将要添加进 map 时，都会检查是否需要扩容，扩容实际上是以空间换时间的手段。 触发扩容的条件有二个：
 
 1. 负载因子 > 6.5 时，也即平均每个 bucket 存储的键值对达到 6.5 个。
+   - 使用**增量扩容**
 2. overflow 数量 > 2^15^ 时，也即 overflow 数量超过 32768 时。
+   - 使用**等量扩容**
 
 ##### 增量扩容
 
-当负载因子过大时，就新建一个 bucket，新的 bucket 长度是原来的 2 倍，然后旧 bucket 数据搬迁到新的 bucket。 考虑到如果 map 存储了数以亿计的 key-value，一次性搬迁将会造成比较大的延时，Go 采用逐步搬迁策略，即每次访问 map 时都会触发一次搬迁，每次搬迁 2 个键值对。
+当负载因子过大时，就新建一个 bucket，**新的 bucket 长度是原来的 2 倍**，然后旧 bucket 数据搬迁到新的 bucket。 考虑到如果 map 存储了数以亿计的 key-value，一次性搬迁将会造成比较大的延时，Go 采用逐步搬迁策略，即每次访问 map 时都会触发一次搬迁，每次搬迁 2 个键值对。
 
 下图展示了包含一个 bucket 满载的 map (为了描述方便，图中 bucket 省略了 value 区域):
 
@@ -517,7 +528,7 @@ bucket 数据结构指示下一个 bucket 的指针称为 **overflow bucket（�
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-05-struct_sketch.png)
 
-hmap 数据结构中 oldbuckets 成员指身原 bucket，而 buckets 指向了新申请的 bucket。新的键值对被插入新的 bucket 中。 后续对 map 的访问操作会触发迁移，将 oldbuckets 中的键值对逐步的搬迁过来。当 oldbuckets 中的键值对全部搬迁完毕后，删除 oldbuckets。
+hmap 数据结构中 oldbuckets 成员指身原 bucket，而 buckets 指向了新申请的 bucket。新的键值对被插入新的 bucket 中。 后续**对 map 的访问操作会触发迁移**，将 oldbuckets 中的键值对逐步的搬迁过来。当 oldbuckets 中的键值对全部搬迁完毕后，删除 oldbuckets。
 
 搬迁完成后的示意图如下：
 
@@ -529,7 +540,7 @@ hmap 数据结构中 oldbuckets 成员指身原 bucket，而 buckets 指向了�
 
 所谓等量扩容，实际上并不是扩大容量，buckets 数量不变，重新做一遍类似增量扩容的搬迁动作，把松散的键值对重新排列一次，以使 bucket 的使用率更高，进而保证更快的存取。 
 
-在极端场景下，比如不断的增删，而键值对正好集中在一小部分的 bucket，这样会造成 overflow 的 bucket 数量增多，但负载因子又不高，从而无法执行增量搬迁的情况，如下图所示：
+在极端场景下，比如**不断的增删**，而键值对正好集中在一小部分的 bucket，这样会**造成 overflow 的 bucket 数量增多**，但负载因子又不高，从而无法执行增量搬迁的情况，如下图所示：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png)
 
@@ -542,7 +553,7 @@ hmap 数据结构中 oldbuckets 成员指身原 bucket，而 buckets 指向了�
 1. 跟据 key 值算出哈希值
 2. 取哈希值低位与 hmpa.B 取模确定 bucket 位置
 3. 取哈希值高位在 tophash 数组中查询
-4. 如果 tophash[i] 中存储值也哈希值相等，则去找到该 bucket 中的 key 值进行比较
+4. 如果 tophash[i] 中存储值与哈希值相等，则去找到该 bucket 中的 key 值进行比较
 5. 当前 bucket 没有找到，则继续从下个 overflow 的 bucket 中查找。
 6. 如果当前处于搬迁过程，则优先从 oldbuckets 查找
 
@@ -802,7 +813,7 @@ func GetStringBySlice(s []byte) string {
 
 转换示意图：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-01-slice2string.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/string-01-slice2string.png)
 
 ##### string 转 []byte
 
@@ -821,7 +832,7 @@ string 转换成 byte 切片，也**需要一次内存拷贝**，其过程如下
 
 转换示意图：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/string-02-string2slice.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/string-02-string2slice.png)
 
 ##### 字符串拼接
 
@@ -833,7 +844,10 @@ str := "Str1" + "Str2" + "Str3"
 
 **即便有非常多的字符串需要拼接，性能上也有比较好的保证**，因为新字符串的内存空间是一次分配完成的，所以性能消耗主要在拷贝数据上。
 
-一个拼接语句的字符串编译时都会被存放到一个切片中，拼接过程需要遍历两次切片，第一次遍历获取总的字符串长度，据此申请内存，第二次遍历会把字符串逐个拷贝过去。
+一个拼接语句的字符串编译时都会被存放到一个切片中，拼接过程需要遍历两次切片：
+
+- 第一次遍历获取总的字符串**长度**，据此**申请内存**
+- 第二次遍历会把字符串逐个**拷贝**过去。
 
 字符串拼接伪代码如下：
 
@@ -881,7 +895,7 @@ func rawstring(size int) (s string, b []byte) { // 生成一个新的string，�
 
 因为 string 通常指向字符串字面量，而字符串字面量存储位置是只读段，而不是堆或栈上，所以才有了 string 不可修改的约定。
 
-##### []byte 转换成 string 一定会拷贝内存吗？
+##### :star: []byte 转换成 string 一定会拷贝内存吗？
 
 byte 切片转换成 string 的场景很多，为了性能上的考虑，有时候只是临时需要字符串的场景下，byte 切片转换成 string 时并不会拷贝内存，而是直接返回一个 string，这个 string 的指针 (`string.str`) 指向切片的内存。
 
@@ -895,20 +909,20 @@ byte 切片转换成 string 的场景很多，为了性能上的考虑，有时�
 
 ##### string 和 []byte 如何取舍
 
-string 和 []byte 都可以表示字符串，但因数据结构不同，其衍生出来的方法也不同，要跟据实际应用场景来选择。
+`string` 和 `[]byte` 都可以表示字符串，但因数据结构不同，其衍生出来的方法也不同，要跟据实际应用场景来选择。
 
-string 擅长的场景：
+`string` 擅长的场景：
 
 - 需要字符串比较的场景；
 - 不需要 nil 字符串的场景；
 
-[]byte 擅长的场景：
+`[]byte` 擅长的场景：
 
 - 修改字符串的场景，尤其是修改粒度为 1 个字节；
 - 函数返回值，需要用 nil 表示含义的场景；
 - 需要切片操作的场景；
 
-虽然看起来 string 适用的场景不如 []byte 多，但因为 string 直观，在实际应用中还是大量存在，在偏底层的实现中 []byte 使用更多。
+虽然看起来 `string` 适用的场景不如 `[]byte` 多，但因为 `string` 直观，在实际应用中还是大量存在，在偏底层的实现中 `[]byte` 使用更多。
 
 ## 常用控制结构实现原理
 
@@ -974,7 +988,7 @@ func main() {
 
 输出 10、2、3 三个值。
 
-> 延迟函数 `printArray()` 的参数在defer语句出现时就已经确定了，即数组的地址，由于延迟函数执行时机是在 return 语句之前，所以对数组的最终修改值会被打印出来。
+> 延迟函数 `printArray()` 的参数在 defer 语句出现时就已经确定了，即数组的**地址**，由于延迟函数执行时机是在 return 语句之前，所以对数组的最终修改值会被打印出来。
 
 ##### 例三
 
@@ -999,12 +1013,12 @@ func deferFuncReturn() (result int) {
 > - 设置返回值
 > - ret
 >
-> defer 语句实际执行在返回前，即拥有 defer 的函数返回过程是：
+> :star: defer 语句实际执行在返回前，即拥有 defer 的函数返回过程是：
 >
-> - 设置返回值
+> - **设置返回值**
 >
-> - 执行 defer
-> - ret。
+> - **执行 defer**
+> - **ret**
 >
 > 所以 return 语句先把 result 设置为 i 的值，即 1，defer 语句中又把 result 递增 1，所以最终返回 2。
 
@@ -1051,7 +1065,7 @@ defer 语句中的 `fmt.Println()` 参数 i 值在 defer 出现时就已经确�
 
 #### 函数返回过程
 
-有一个事实必须要了解，关键字 `return` 不是一个原子操作，实际上 `return` 只代理汇编指令 `ret`，即将跳转程序执行。
+有一个事实必须要了解，**关键字 `return` 不是一个原子操作**，实际上 `return` 只代理汇编指令 `ret`，即将跳转程序执行。
 
 比如语句 `return i`，实际上分两步进行，即
 
@@ -1095,6 +1109,8 @@ return
 
 ##### 主函数拥有匿名返回值，返回字面值
 
+不影响
+
 一个主函数拥有一个匿名的返回值，返回时使用字面值，比如返回 "1"、"2"、"Hello" 这样的值，这种情况下 defer 语句是无法操作返回值的。
 
 一个返回字面值的函数，如下所示：
@@ -1114,6 +1130,8 @@ func foo() int {
 上面的 return 语句，直接把 1 写入栈中作为返回值，延迟函数无法操作该返回值，所以就无法影响返回值。
 
 ##### 主函数拥有匿名返回值，返回变量
+
+不影响
 
 一个主函数拥有一个匿名的返回值，返回使用本地或全局变量，这种情况下 defer 语句可以引用到返回值，但不会改变返回值。
 
@@ -1144,6 +1162,8 @@ return
 由于 i 是整型，会将值拷贝给 anony，所以 defer 语句中修改 i 值，对函数返回值不造成影响。
 
 ##### 主函数拥有具名返回值
+
+影响
 
 主函声明语句中带名字的返回值，会被初始化成一个局部变量，函数内部可以像使用局部变量一样使用该返回值。如果 defer 语句操作该返回值，可能会改变返回结果。
 
@@ -1409,7 +1429,7 @@ func RangeMap(myMap map[int]string) {
 
 函数中 for-range 语句中只获取 key 值，然后跟据 key 值获取 value 值
 
-虽然看似减少了一次赋值，但通过 key 值查找 value 值的性能消耗可能高于赋值消耗。能否优化取决于 map 所存储数据结构特征、结合实际情况进行。
+虽然看似减少了一次赋值，**但通过 key 值查找 value 值的性能消耗可能高于赋值消耗**。能否优化取决于 map 所存储数据结构特征、结合实际情况进行。
 
 ##### 动态遍历
 
@@ -1424,7 +1444,7 @@ func main() {
 }
 ```
 
-能够正常结束。循环内改变切片的长度，不影响循环次数，循环次效在循环开始前就已经确定了。
+能够正常结束。循环内改变切片的长度，不影响循环次数，:star: **循环次数在循环开始前就已经确定了**。
 
 #### 实现原理
 
@@ -1481,7 +1501,7 @@ func main() {
 //   }
 ```
 
-遍历 map 时没有指定循环次数，循环体与遍历 slice 类似。由于 map 底层实现与 slice 不同，map 底层使用 hash 表实现，插入数据位置是随机的，所以**遍历过程中新插入的数据不能保证遍历到**。
+**遍历 map 时没有指定循环次数**，循环体与遍历 slice 类似。由于 map 底层实现与 slice 不同，map 底层使用 hash 表实现，插入数据位置是随机的，所以**遍历过程中新插入的数据不能保证遍历到**。
 
 ##### range for channel
 
@@ -1545,7 +1565,7 @@ type Mutex struct {
 
 下图展示 Mutex 的内存布局：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-01-structure.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mutex-01-structure.png)
 
 - Locked: 表示该 Mutex 是否已被锁定
     - 0：没有锁定
@@ -1581,7 +1601,7 @@ Mutext 对外提供两个方法，实际上也只有这两个方法：
 
 假定当前只有一个协程在加锁，没有其他协程干扰，那么过程如下图所示：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-02-lock_without_block.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mutex-02-lock_without_block.png)
 
 加锁过程会去判断 Locked 标志位是否为 0，如果是 0 则把 Locked 位置 1，代表加锁成功。
 
@@ -1591,7 +1611,7 @@ Mutext 对外提供两个方法，实际上也只有这两个方法：
 
 假定加锁时，锁已被其他协程占用了，此时加锁过程如下图所示：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-03-lock_with_block.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mutex-03-lock_with_block.png)
 
 从上图可看到，当协程 B 对一个已被占用的锁再次加锁时，Waiter 计数器增加了 1，此时协程 B 将被阻塞，直到 Locked 值变为 0 后才会被唤醒。
 
@@ -1599,7 +1619,7 @@ Mutext 对外提供两个方法，实际上也只有这两个方法：
 
 假定解锁时，没有其他协程阻塞，此时解锁过程如下图所示：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-04-unlock_without_waiter.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mutex-04-unlock_without_waiter.png)
 
 由于没有其他协程阻塞等待加锁，所以此时解锁时只需要把 Locked 位置为 0 即可，不需要释放信号量。
 
@@ -1607,28 +1627,28 @@ Mutext 对外提供两个方法，实际上也只有这两个方法：
 
 假定解锁时，有 1 个或多个协程阻塞，此时解锁过程如下图所示：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/mutex-05-unlock_with_waiter.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/mutex-05-unlock_with_waiter.png)
 
 协程 A 解锁过程分为两个步骤
 
 - Locked 位置 0
-- 查看到 Waiter>0，所以释放一个信号量，唤醒一个阻塞的协程，被唤醒的协程 B 把 Locked 位置 1，于是协程 B 获得锁。
+- 查看到 Waiter > 0，所以释放一个信号量，唤醒一个阻塞的协程，被唤醒的协程 B 把 Locked 位置 1，于是协程 B 获得锁。
 
-### 自旋过程
+#### 自旋过程
 
 加锁时，如果当前 Locked 位为 1，说明该锁当前由其他协程持有，尝试加锁的协程并**不是马上转入阻塞**，而是会**持续地探测** Locked 位是否变为 0，这个过程即为自旋过程。
 
 自旋时间很短，但如果在自旋过程中发现锁已被释放，那么协程可以立即获取锁。此时即便有协程被唤醒也无法获取锁，只能再次阻塞。
 
-自旋的好处是，当加锁失败时不必立即转入阻塞，有一定机会获取到锁，这样可以避免协程的切换。
+自旋的好处是，**当加锁失败时不必立即转入阻塞，有一定机会获取到锁，这样可以避免协程的切换**。
 
-#### 什么是自旋
+##### 什么是自旋
 
 自旋对应于 CPU 的 "PAUSE" 指令，CPU 对该指令什么都不做，相当于 CPU 空转，对程序而言相当于 sleep 了一小段时间，时间非常短，当前实现是 30 个时钟周期。
 
 自旋过程中会持续探测 Locked 是否变为 0，连续两次探测间隔就是执行这些 PAUSE 指令，它不同于 sleep，不需要将协程转为睡眠状态。
 
-#### 自旋条件
+##### 自旋条件
 
 加锁时程序会自动判断是否可以自旋，无限制的自旋将会给 CPU 带来巨大压力，所以判断是否可以自旋就很重要了。
 
@@ -1641,31 +1661,31 @@ Mutext 对外提供两个方法，实际上也只有这两个方法：
 
 可见，自旋的条件是很苛刻的，总而言之就是不忙的时候才会启用自旋。
 
-#### 自旋的优势
+##### 自旋的优势
 
 自旋的优势是**更充分地利用 CPU，尽量避免协程切换**。
 
 因为当前申请加锁的协程拥有 CPU，如果经过短时间的自旋可以获得锁，当前协程可以继续运行，不必进入阻塞状态。
 
-#### 自旋的问题
+##### 自旋的问题
 
 如果自旋过程中获得锁，那么之前被阻塞的协程将无法获得锁，如果加锁的协程特别多，每次都通过自旋获得锁，那么之前被阻塞的进程将很难获得锁，从而进入饥饿状态。
 
 为了避免协程长时间无法获取锁，自 1.8 版本以来增加了一个状态，即 Mutex 的 Starving 状态。这个状态下不会自旋，一旦有协程释放锁，那么一定会唤醒一个协程并成功加锁。
 
-### Mutex 模式
+#### Mutex 模式
 
 前面分析加锁和解锁过程中只关注了 Waiter 和 Locked 位的变化，现在我们看一下 Starving 位的作用。
 
 每个 Mutex 都有两个模式，称为 Normal 和 Starving。下面分别说明这两个模式。
 
-#### normal 模式
+##### normal 模式
 
 默认情况下，Mutex 的模式为 normal。
 
 该模式下，协程如果加锁不成功不会立即转入阻塞排队，而是判断是否满足自旋的条件，如果满足则会启动自旋过程，尝试抢锁。
 
-#### starvation 模式
+##### starvation 模式
 
 自旋过程中能抢到锁，一定意味着同一时刻有协程释放了锁，我们知道释放锁时如果发现有阻塞等待的协程，还会释放一个信号量来唤醒一个等待协程，被唤醒的协程得到 CPU 后开始运行，此时发现锁已被抢占了，自己只好再次阻塞，不过阻塞前会判断自上次阻塞到本次阻塞经过了多长时间，如果超过 1ms 的话，会将 Mutex 标记为"饥饿"模式，然后再阻塞。
 
@@ -1675,7 +1695,7 @@ Mutext 对外提供两个方法，实际上也只有这两个方法：
 
 Woken 状态用于加锁和解锁过程的通信，举个例子，同一时刻，两个协程一个在加锁，一个在解锁，在加锁的协程可能在自旋过程中，此时把 Woken 标记为 1，用于通知解锁协程不必释放信号量了，好比在说：你只管解锁好了，不必释放信号量，我马上就拿到锁了。
 
-### 为什么重复解锁要 panic
+#### 为什么重复解锁要 panic
 
 可能你会想，为什么 Go 不能实现得更健壮些，多次执行 `Unlock()` 也不要 panic？
 
@@ -1683,13 +1703,13 @@ Woken 状态用于加锁和解锁过程的通信，举个例子，同一时刻�
 
 如果多次 `Unlock()`，那么可能每次都释放一个信号量，这样会唤醒多个协程，多个协程唤醒后会继续在 `Lock()` 的逻辑里抢锁，势必会增加 `Lock()` 实现的复杂度，也会引起不必要的协程切换。
 
-### 编程 Tips
+#### 编程 Tips
 
-#### 使用 defer 避免死锁
+##### 使用 defer 避免死锁
 
 加锁后立即使用 defer 对其解锁，可以有效的避免死锁。
 
-#### 加锁和解锁应该成对出现
+##### 加锁和解锁应该成对出现
 
 加锁和解锁最好出现在同一个层次的代码块中，比如同一个函数。
 
@@ -1847,7 +1867,7 @@ Goroutine 调度是一个很复杂的机制，尽管 Go 源码中提供了大量
 
 为了方便下面的叙述，我们把任务队列中的每一个任务称作 G，而 G 往往代表一个函数。 线程池中的 worker 线程不断的从任务队列中取出任务并执行。而 worker 线程的调度则交给操作系统进行调度。
 
-如果 worker 线程执行的 G 任务中发生系统调用，则操作系统会将该线程置为阻塞状态，也意味着该线程在怠工，也意味着消费任务队列的 worker 线程变少了，也就是说线程池消费任务队列的能力变弱了。
+如果 worker 线程执行的 G 任务中发生**系统调用**，则操作系统会将该线程置为阻塞状态，也意味着该线程在怠工，也意味着消费任务队列的 worker 线程变少了，也就是说线程池消费任务队列的能力变弱了。
 
 如果任务队列中的大部分任务都会进行系统调用，则会让这种状态恶化，大部分 worker 线程进入阻塞状态，从而任务队列中的任务产生堆积。
 
@@ -1888,7 +1908,7 @@ Goroutine 主要概念如下：
 
 
 - P (Processor)
-    - 代表了 `M` 所需的上下文环境，也是处理用户级代码逻辑的处理器
+    - 代表了 `M` 所需的**上下文环境**，也是处理用户级代码逻辑的处理器
     - 它包含运行 Go 代码的必要资源，也有调度 goroutine 的能力。
     - 它是让我们从 N:1 调度器转到 M:N 调度器的重要部分
 
@@ -1925,7 +1945,7 @@ P 的个数在程序启动时决定，默认情况下等同于 CPU 的核数，�
 
 上面说到 P 的个数默认等于 CPU 核数，每个 M 必须持有一个 P 才可以执行 G，一般情况下 M 的个数会略大于 P 的个数，这多出来的 M 将会在 G 产生系统调用时发挥作用。
 
-类似线程池，Go 也提供一个 M 的池子，需要时从池子中获取，用完放回池子，不够用时就再创建一个。
+类似线程池，Go 也**提供一个 M 的池子**，需要时从池子中获取，用完放回池子，不够用时就再创建一个。
 
 当 M 运行的某个 G 产生系统调用时，如下图所示：
 
@@ -1954,7 +1974,7 @@ M1 的来源有可能是 M 的缓存池，也可能是新建的。当 G0 系统�
 
 ## 内存管理
 
-本章主要介绍 GO 语言的自动垃圾回收机制。
+本章主要介绍 GO 语言的**自动垃圾回收机制**。
 
 自动垃圾回收是 GO 语言最大的特色之一，也是很有争议的话题。因为自动垃圾回收解放了程序员，使其不用担心内存泄露的问题，争议在于垃圾回收的性能，在某些应用场景下垃圾回收会暂时停止程序运行。
 
@@ -2055,7 +2075,7 @@ Span 与 TCMalloc 中的 Span 相同，Span 是内存管理的基本单位，**�
 
 mcache 与 TCMalloc 中的 ThreadCache 类似，mcache 保存的是各种大小的 Span，并按 Span class 分类，小对象直接从 mcache 分配内存，它起到了缓存的作用，并且可以无锁访问。
 
-但是 mcache 与 ThreadCache 也有不同点，TCMalloc 中是每个线程 1 个 ThreadCache，Go 中是每个 P 拥有 1 个 mcache（其实是一样的）。因为在 Go 程序中，当前最多有 GOMAXPROCS 个线程在运行，所以最多需要 GOMAXPROCS 个 mcache 就可以保证各线程对 mcache 的无锁访问，线程的运行又是与 P 绑定的，把 mcache 交给 P 刚刚好。
+但是 mcache 与 ThreadCache 也有不同点，TCMalloc 中是每个线程 1 个 ThreadCache，**Go 中是每个 P 拥有 1 个 mcache**（其实是一样的）。因为在 Go 程序中，当前最多有 GOMAXPROCS 个线程在运行，所以最多需要 GOMAXPROCS 个 mcache 就可以保证各线程对 mcache 的无锁访问，线程的运行又是与 P 绑定的，把 mcache 交给 P 刚刚好。
 
 - **mcentral**
 
@@ -2063,7 +2083,7 @@ mcentral 与 TCMalloc 中的 CentralCache 类似，是所有线程共享的缓�
 
 它按 Span 级别对 Span 分类，然后串联成链表，当 mcache 的某个级别 Span 的内存被分配光时，它会向 mcentral 申请 1 个当前级别的 Span。
 
-但是 mcentral 与 CentralCache 也有不同点，CentralCache 是每个级别的 Span 有 1 个 链表，mcache 是每个级别的 Span 有 2 个链表，这和 mcache 申请内存有关，稍后再解释。
+但是 mcentral 与 CentralCache 也有不同点，CentralCache 是每个级别的 Span 有 1 个 链表，**mcache 是每个级别的 Span 有 2 个链表**，这和 mcache 申请内存有关，稍后再解释。
 
 - **mheap**
 
@@ -2122,7 +2142,7 @@ numSpanClasses = _NumSizeClasses * 2
 
 numSpanClasses 为 span class 的数量为 134 个，所以 span class 的下标是从 0 到 133，所以上图中 mcache 标注了的 span class 是：span class 0 到 span class 133。每 1 个 span class 都指向 1 个 span，也就是 **mcache 最多有 134 个 span**。
 
-- **为对象寻找span**
+- **为对象寻找 span**
 
 寻找 span 的流程如下：
 
@@ -2492,19 +2512,19 @@ Go 的内存分配原理主要强调两个重要的思想：
 
 Golang 的垃圾回收（GC）也是内存管理的一部分，了解垃圾回收最好先了解前面介绍的内存分配原理。
 
-#### 垃圾回收算法
+#### 常见的垃圾回收算法
 
 业界常见的垃圾回收算法有以下几种：
 
-- 引用计数：对每个对象维护一个引用计数，当引用该对象的对象被销毁时，引用计数减 1，当引用计数器为 0 是回收该对象。
+- **引用计数**：对每个对象维护一个引用计数，当引用该对象的对象被销毁时，引用计数减 1，当引用计数器为 0 是回收该对象。
     - 优点：对象可以很快的被回收，不会出现内存耗尽或达到某个阀值时才回收。
     - 缺点：不能很好的处理循环引用，而且实时维护引用计数，有也一定的代价。
     - 代表语言：Python、PHP、Swift
-- 标记-清除：从根变量开始遍历所有引用的对象，引用的对象标记为"被引用"，没有被标记的进行回收。
+- **标记 - 清除**（mark and sweep）：从根变量开始遍历所有引用的对象，引用的对象标记为"被引用"，没有被标记的进行回收。
     - 优点：解决了引用计数的缺点。
     - 缺点：需要 STW，即要暂时停掉程序运行。
-    - 代表语言：Golang(其采用三色标记法)
-- 分代收集：按照对象生命周期长短划分不同的代空间，生命周期长的放入老年代，而短的放入新生代，不同代有不能的回收算法和回收频率。
+    - 代表语言：Golang (其采用三色标记法)
+- **分代收集**：按照对象生命周期长短划分不同的代空间，生命周期长的放入老年代，而短的放入新生代，不同代有不能的回收算法和回收频率。
     - 优点：回收性能好
     - 缺点：算法复杂
     - 代表语言： JAVA
@@ -2557,11 +2577,11 @@ allocBits 和 gcmarkBits 数据结构是完全一样的，标记结束就是内�
 
 由于根对象引用了对象 A、B，那么 A、B 变为灰色对象，接下来就开始分析灰色对象，分析 A 时，A 没有引用其他对象很快就转入黑色，B 引用了 D，则 B 转入黑色的同时还需要将 D 转为灰色，进行接下来的分析。如下图所示：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-05-mark_phase2.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-05-mark_phase2.png)
 
 上图中灰色对象只有 D，由于 D 没有引用其他对象，所以 D 转入黑色。标记过程结束：
 
-![img](http://localhost:8000/0b129d36-10be-4d13-96e7-2d90ed32fbdf/gc-06-mark_phase3.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/gc-06-mark_phase3.png)
 
 最终，黑色的对象会被保留下来，白色对象会被回收掉。
 
@@ -2585,7 +2605,7 @@ STW 时间的长短直接影响了应用的执行，时间过长对于一些 web
 
 写屏障类似一种开关，在 GC 的特定时机开启，开启后指针传递时会把指针标记，即本轮不回收，下次 GC 时再确定。
 
-GC 过程中新分配的内存会被立即标记，用的并不是写屏障技术，也即 GC 过程中分配的内存不会在本轮 GC 中回收。
+开始 gc 时启动内存写屏障，所有修改对象的操作加入一个写屏障，通知 gc 将受影响的对象变为灰色；然后在第一次 gc 后，重新对 gc 过程中变灰的对象再扫描一次
 
 ##### 辅助 GC (Mutator Assist)
 
@@ -2663,7 +2683,7 @@ type Student struct {
 }
 
 func StudentRegister(name string, age int) *Student {
-    s := new(Student) //局部变量s逃逸到堆
+    s := new(Student) // 局部变量s逃逸到堆
 
     s.Name = name
     s.Age = age
@@ -2835,7 +2855,7 @@ D:\SourceCode\GoExpert\src>go build -gcflags=-m
 - **逃逸分析目的是决定内分配地址是栈还是堆**
 - 逃逸分析在编译阶段完成
 
-### 编程 Tips
+#### 编程 Tips
 
 思考一下这个问题：函数传递指针真的比传值效率高吗？ 我们知道传递指针可以减少底层值的拷贝，可以提高效率，但是如果拷贝的数据量小，由于指针传递会产生逃逸，可能会使用堆，也可能会增加 GC 的负担，所以传递指针不一定是高效的。
 
@@ -2873,14 +2893,14 @@ func Process(ch chan int) {
 }
 
 func main() {
-    channels := make([]chan int, 10) //创建一个10个元素的切片，元素类型为channel
+    channels := make([]chan int, 10) // 创建一个10个元素的切片，元素类型为channel
 
     for i:= 0; i < 10; i++ {
-        channels[i] = make(chan int) //切片中放入一个channel
-        go Process(channels[i])      //启动协程，传一个管道用于通信
+        channels[i] = make(chan int) // 切片中放入一个channel
+        go Process(channels[i])      // 启动协程，传一个管道用于通信
     }
 
-    for i, ch := range channels {  //遍历切片，等待子协程结束
+    for i, ch := range channels {  // 遍历切片，等待子协程结束
         <-ch
         fmt.Println("Routine ", i, " quit!")
     }
@@ -2917,24 +2937,24 @@ import (
 func main() {
     var wg sync.WaitGroup
 
-    wg.Add(2) //设置计数器，数值即为goroutine的个数
+    wg.Add(2) // 设置计数器，数值即为goroutine的个数
     go func() {
-        //Do some work
+        // Do some work
         time.Sleep(1*time.Second)
 
         fmt.Println("Goroutine 1 finished!")
-        wg.Done() //goroutine执行结束后将计数器减1
+        wg.Done() // goroutine执行结束后将计数器减1
     }()
 
     go func() {
-        //Do some work
+        // Do some work
         time.Sleep(2*time.Second)
 
         fmt.Println("Goroutine 2 finished!")
         wg.Done() //goroutine执行结束后将计数器减1
     }()
 
-    wg.Wait() //主goroutine阻塞等待计数器变为0
+    wg.Wait() // 主goroutine阻塞等待计数器变为0
     fmt.Printf("All Goroutine finished!")
 }
 ```
@@ -3072,7 +3092,7 @@ func (wg *WaitGroup) Done() {
 
 ### Context
 
-Context 也叫作“上下文”，是一个比较抽象的概念，一般理解为**程序单元的一个运行状态、现场、快照**。其中上下是指存在上下层的传递，上会把内容传递给下，程序单元则指的是 Goroutine。
+Context 也叫作 “上下文”，是一个比较抽象的概念，一般理解为**程序单元的一个运行状态、现场、快照**。其中上下是指存在上下层的传递，上会把内容传递给下，程序单元则指的是 Goroutine。
 
 Golang context 是 Golang 应用开发常用的并发控制技术，它与 WaitGroup 最大的不同点是 **context 对于派生 goroutine 有更强的控制力**，它可以控制多级的 goroutine。
 
@@ -3273,7 +3293,7 @@ func (c *cancelCtx) cancel(removeFromParent bool, err error) {
 `WithCancel()` 方法作了三件事：
 
 - 初始化一个 cancelCtx 实例
-- 将 cancelCtx 实例添加到其父节点的 children 中(如果父节点也可以被 cancel 的话)
+- 将 cancelCtx 实例添加到其父节点的 children 中 (如果父节点也可以被 cancel 的话)
 - 返回 cancelCtx 实例和 `cancel()` 方法
 
 其实现源码如下所示：
