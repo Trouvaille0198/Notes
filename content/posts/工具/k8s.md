@@ -108,99 +108,20 @@ Service 对外也提供了多种入口：
 
 ![动图](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-232d0bd7f74bbf380e0d4f83f4a3bbc9_b.webp)
 
-## 组件
+## 简介
 
-![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/6eaf44b8963e40c2ac3b1b2ce80c9972~tplv-k3u1fbpfcp-zoom-in-crop-mark:3326:0:0:0.awebp)
+### Kubernetes (K8S) 是什么
 
-### Master
+它是一个为 **容器化** 应用提供**集群部署和管理**的开源工具，由 Google 开发。
 
-> 也叫控制平面组件（Control Plane Components）
+**Kubernetes** 这个名字源于希腊语，意为 “舵手” 或 “飞行员”。k8s 这个缩写是因为 k 和 s 之间有八个字符的关系。 
 
-Master 组件提供集群的管理控制中心。
+Google 在 2014 年开源了 Kubernetes 项目
 
-Master 组件可以在集群中任何节点上运行。但是为了简单起见，通常在一台 VM / 机器上启动所有 Master 组件，并且不会在此 VM / 机器上运行用户容器。
+**主要特性：**
 
-#### kube-apiserver
-
-> 上连其余组件，下接 ETCD，提供各类 api 处理、鉴权，和 Node 上的 kubelet 通信等，只有 apiserver 会连接 ETCD
-
-kube-apiserver 提供 Kubernetes API，是 Kubernetes 控制平台的前端（front-end）
-
-kubectl / kubernetes dashboard / kuboard 等 Kubernetes 管理工具就是通过 kubernetes API 实现对 Kubernetes 集群的管理
-
-#### ETCD
-
-> 整个集群的数据库
-
-`etcd` 是兼顾一致性与高可用性的键值数据库，可以作为保存 Kubernetes 所有集群数据的后台数据库。
-
-#### kube-controller-manager
-
-> 控制各类 controller
-
-kube-controller-manager 负责运行控制器进程
-
-逻辑上，每个控制器（controller）是一个单独的进程，但为了降低复杂性，所有的控制器被编译到一个二进制文件里，并作为一个进程运行。 
-
-这些控制器包括：
-
-- 节点控制器（Node Controller）：负责在节点出现故障时进行通知和响应
-- 任务控制器（Job Controller）：监测代表一次性任务的 Job 对象，然后创建 Pods 来运行这些任务直至完成
-- 端点控制器（Endpoints Controller）：填充端点（Endpoints）对象（即加入 Service 与 Pod）
-- 服务帐户和令牌控制器（Service Account & Token Controllers）：为新的命名空间创建默认帐户和 API 访问令牌
-
-#### kube-scheduler
-
-> 调度，打分，分配资源
-
-`kube-scheduler` 负责监视新创建的、未指定运行节点（node）的 Pods， 并选择节点来让 Pod 在上面运行。
-
-调度决策考虑的因素包括单个 Pod 及 Pods 集合的资源需求、软硬件及策略约束、 亲和性及反亲和性规范、数据位置、工作负载间的干扰及最后时限。
-
-### Node
-
-节点组件会在每个节点上运行，负责维护运行的 Pod 并提供 Kubernetes 运行环境。
-
-#### kubelet
-
-> agent，负责管理容器的生命周期
-
-kubelet 会在集群中每个节点（node）上运行。 它保证容器（containers）都运行在 Pod 中。
-
-#### kube-proxy
-
-> 打通网络
-
-kube-proxy 是集群中每个节点（node）所上运行的网络代理， 实现 Kubernetes 服务（Service） 概念的一部分。
-
-kube-proxy 维护节点上的一些网络规则， 这些网络规则会允许从集群内部或外部的网络会话与 Pod 进行网络通信。
-
-#### Container Runtime
-
-容器运行环境是负责运行容器的软件。可以是 Docker
-
-### k8s 组件调用流程
-
-![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/a64a2f42b9944778b65ba07d1f2bfe94~tplv-k3u1fbpfcp-zoom-in-crop-mark:3326:0:0:0.awebp)
-
-下面我们看下` kubectl create deployment redis-deployment --image=redis` 下发之后，k8s 集群做了什么。
-
-- 首先 controller-manager, scheduler, kubelet 都会和 apiserver 开始进行 **List-Watch 模型**，List 是拿到当前的状态，Watch 是拿到期望状态，然后 k8s 集群会致力于将当前状态达到达期望状态。
-- kubectl 下发命令到 apiserver，鉴权处理之后将创建信息存入 etcd，Deployment 的实现是使用 ReplicaSet 控制器，当 controller-manager 提前拿到当前的状态（pod=0），接着接收到期望状态，需要创建 ReplicaSet（pod=1），就会开始创建 Pod。
-- 然后 scheduler 会进行调度，确认 Pod 被创建在哪一台 Node 上。
-- 之后 Node 上的 kubelet 真正拉起一个 docker。
-
-## 对象
-
-对象是 Kubernetes 系统中的持久实体
-
-每个 Kubernetes 对象都包含两个嵌套对象字段，用于管理 Object 的配置：Object Spec 和 Object Status。
-
-- Spec 描述了对象所需的状态 - 希望 Object 具有的特性，
-- Status 描述了对象的实际状态，并由 Kubernetes 系统提供和更新。
-
-例如，通过 Kubernetes Deployment 来表示在集群上运行的应用的对象。
-
-- 创建 Deployment 时，可以设置 Deployment Spec，来指定要运行应用的三个副本。
-- Kubernetes 系统将读取 Deployment Spec，并启动你想要的三个应用实例 - 来更新状态以符合之前设置的 Spec。
-- 如果这些实例中有任何一个失败（状态更改），Kuberentes 系统将响应 Spec 和当前状态之间差异来调整，这种情况下，将会开始替代实例。
+- 高可用，不宕机，自动灾难恢复
+- 灰度更新，不影响业务正常运转
+- 一键回滚到历史版本
+- 方便的伸缩扩展（应用伸缩，机器加减）、提供负载均衡
+- 有一个完善的生态

@@ -59,7 +59,7 @@ sns.set(context='notebook', style='darkgrid', palette='deep', font='sans-serif',
 
 **sns.图名(x=np.array, y=np.array[, ...])**
 
-数据必须以长格式的 DataFrame 传入，同时变量通过`x`, `y`及其他参数指定。
+数据必须以长格式的 DataFrame 传入，同时变量通过 `x`, `y` 及其他参数指定。
 
 - *x, y*：*data* 中的变量名
 - *data*：长格式的 DataFrame，每列是一个变量，每行是一个观察值。
@@ -249,7 +249,7 @@ sns.catplot(x="species", kind="count", data=iris)
 ### displot() 单变量分布
 
 ```python
-sns.displot(x, kind=hist, data)
+sns.displot(x, kind='hist', data)
 ```
 
 该方法将会绘制直方图，拟合核密度估计图，或二者兼有
