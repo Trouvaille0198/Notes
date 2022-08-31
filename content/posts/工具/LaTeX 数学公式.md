@@ -3,7 +3,7 @@ title: "LaTeX 数学公式"
 date: 2021-10-23
 draft: false
 author: "MelonCholi"
-tags: [LaTeX,快速入门]
+tags: [LaTeX, 快速入门]
 categories: [工具]
 ---
 

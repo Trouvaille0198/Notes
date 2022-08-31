@@ -1,3 +1,12 @@
+---
+title: "wrk"
+date: 2022-08-30
+draft: false
+author: "MelonCholi"
+tags: [快速入门]
+categories: [工具]
+---
+
 # wrk
 
 参考：https://www.cnblogs.com/quanxiaoha/p/10661650.html
