@@ -15,7 +15,8 @@ categories: [数据库]
 
 Redis 是现在最受欢迎的 NoSQL 数据库之一，Redis 是一个使用 ANSI C 编写的开源、包含多种数据结构、支持网络、基于内存、可选持久性的键值对存储数据库，其具备如下特性：
 
-    - 基于**内存**运行，性能高效
+- 基于**内存**运行，性能高效
+
 - 支持分布式，理论上可以无限扩展
 - **key-value** 存储系统
 - 开源的使用 ANSI C 语言编写、遵守 BSD 协议、支持网络、可基于内存亦可持久化的日志型、Key-Value 数据库，并提供多种语言的 API
@@ -215,6 +216,47 @@ redis 127.0.0.1:6379> GET runoob
 "芜湖芜湖真的好满足"
 ```
 
+#### 操作命令
+
+- SET 
+- GET
+
+#### 使用场景
+
+一般我们用 String 类型用来存储商品数量、用户信息和分布式锁等应用场景
+
+**存储商品数量**
+
+```shell
+set goods:count:1 1233
+set goods:count:2 100
+```
+
+**用户信息**
+
+```redis
+set user:1 "{"id":1, "name":"张三", "age": 12}"
+set user:2 "{"id":2, "name":"李四", "age": 12}"
+```
+
+**分布式锁**
+
+```shell
+# 设置一个不存在的键名为id:1值为10， 过期时间为10秒。
+127.0.0.1:6379> set id:1 10 ex 10 nx
+OK
+127.0.0.1:6379> get id:1
+"10"
+# 当前的键还未过期，在次设置则不会设置成功。
+127.0.0.1:6379> set id:1 10 ex 10 nx
+(nil)
+# 当10秒之后去获取，当前的键则为空。
+127.0.0.1:6379> get id:1
+(nil)
+```
+
+> 用 Redis 实现分布式锁的原理，当一个键存在则设置失败。
+
 ### Hash
 
 - Redis hash 是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象。
@@ -245,6 +287,37 @@ redis 127.0.0.1:6379> HGET wuhu field2
 - HKEYS/HDEL
 - HVALS
 
+#### 使用场景
+
+利用 hash 结构，我们可以用来存储用户信息、对象信息等业务场景。
+
+**存用户信息**
+
+```shell
+127.0.0.1:6379> hset user:1 id 1 name zhangsan age 12 sex 1
+(integer) 4
+127.0.0.1:6379> hset user:2 id 2 name lisi age 14 sex 0
+(integer) 4
+127.0.0.1:6379> hmget user:1 id name age sex
+1) "1"
+2) "zhangsan"
+3) "12"
+4) "1"
+```
+
+**存储对象信息**
+
+```shell
+127.0.0.1:6379> hset object:user id public-1 name private-zhangsan
+(integer) 2
+127.0.0.1:6379> hmget object:uesr id name
+1) (nil)
+2) (nil)
+127.0.0.1:6379> hget object:user id
+"public-1"
+127.0.0.1:6379>
+```
+
 ### List
 
 - 该类型是一个**按照插入顺序排序**的**字符串集合**，基于**双链表**实现。
@@ -271,6 +344,47 @@ redis 127.0.0.1:6379> lrange wuhu 0 10
 - LINDEX / LRANGE
 - LLEN / LTRIM
 
+#### 使用场景
+
+list 一般用在的场景是队列、栈和秒杀等场景
+
+**队列**
+
+```shell
+127.0.0.1:6379> lpush list:1 0 1 2 3 4 5 6
+(integer) 7
+127.0.0.1:6379> rpop list:1 1
+1) "0"
+127.0.0.1:6379> rpop list:1 1
+1) "1"
+127.0.0.1:6379> rpop list:1 1
+1) "2"
+```
+
+**栈**
+
+```shell
+127.0.0.1:6379> lpush list:1 3 4 5 6
+(integer) 3
+127.0.0.1:6379> lpop list:1
+"6"
+127.0.0.1:6379> lpop list:1
+"5"
+127.0.0.1:6379> lpop list:1
+"4"
+127.0.0.1:6379> lpop list:1
+"3"
+```
+
+**秒杀**
+
+```shell
+127.0.0.1:6379> lpush order:user 11 12 14 15 16 17
+(integer) 6
+```
+
+> 在秒杀场景下，我们可以将秒杀成功的用户先写进队列，后续的业务在根据队列中数据进行处理。
+
 ### Set
 
 - Set 类型是一种**无顺序**的字符串集合，且元素是唯一的
@@ -279,38 +393,57 @@ redis 127.0.0.1:6379> lrange wuhu 0 10
 
 Set 类型主要应用于：在某些场景，如社交场景中，通过交集、并集和差集运算，通过 Set 类型可以非常方便地查找共同好友、共同关注和共同偏好等社交关系。
 
-#### sadd 命令
-
-添加一个 string 元素到 key 对应的 set 集合中，成功返回 1，如果元素已经在集合中返回 0。
-
-```
-sadd key member
-```
-
-例
-
-```shell
-redis 127.0.0.1:6379> sadd wuhu redis
-(integer) 1
-redis 127.0.0.1:6379> sadd wuhu mongodb
-(integer) 1
-redis 127.0.0.1:6379> sadd wuhu rabbitmq
-(integer) 1
-redis 127.0.0.1:6379> sadd wuhu rabbitmq
-(integer) 0
-redis 127.0.0.1:6379> smembers wuhu
-
-1) "redis"
-2) "rabbitmq"
-3) "mongodb"
-```
-
-> 以上实例中 rabbitmq 添加了两次，但根据集合内元素的唯一性，第二次插入的元素将被忽略。
-
 #### 操作命令
 
 - SADD / SPOP / SMOVE / SCARD
 - SINTER / SDIFF / SDIFFSTORE / SUNION
+
+#### 使用场景
+
+set 类型一般可以用在用户签到、网站访问统计、用户关注标签、好友推荐、猜奖、随机数生成等业务场景
+
+**某日用户签到情况**
+
+```shell
+# 键为具体某日，存储的值则是签到用户的id。
+127.0.0.1:6379> sadd sign:2020-01-16 1 2 3 4 5 6 7 8
+(integer) 8
+127.0.0.1:6379> smembers sign:2020-01-16
+1) "1"
+2) "2"
+3) "3"
+4) "4"
+5) "5"
+6) "6"
+7) "7"
+8) "8"
+```
+
+**用户关注标签（共同关注）**
+
+```shell
+127.0.0.1:6379> sadd user:1:friend 1 2 3 4 5 6
+(integer) 6
+127.0.0.1:6379> sadd user:2:friend 11 22 7 4 5 6
+(integer) 6
+127.0.0.1:6379> sinterstore user:relation user:1:friend user:2:friend
+(integer) 3
+127.0.0.1:6379> smembers user:relation
+1) "4"
+2) "5"
+3) "6"
+```
+
+> 用户 1 关注了 id 为 1，2，3，4，5，6 的栏目。用户 2 关注了 id 为 11，22，7，4，5，6 的栏目。这里取两个用户共同关注的栏目。
+
+**猜奖**
+
+```shell
+127.0.0.1:6379> spop user:2:friend 1
+1) "5"
+```
+
+> 用 set 实现猜奖，主要是使用了随机抛出集合类的元素的特点。
 
 ### Zset
 
@@ -320,14 +453,6 @@ redis 127.0.0.1:6379> smembers wuhu
 
 - 与 Set 类型一样，其底层也是通过哈希表实现的。
 - zset 的成员是唯一的,但**分数 (score) 却可以重复**
-
-#### zadd 命令
-
-添加元素到集合，元素在集合中存在则更新对应 score
-
-```shell
-zadd key score member
-```
 
 #### 实例
 
@@ -350,7 +475,30 @@ redis 127.0.0.1:6379> ZRANGEBYSCORE runoob 0 1000
 #### 操作命令
 
 - ZADD / ZPOP / ZMOVE / ZCARD / ZCOUNT
-- ZINTER / ZDIFF / ZDIFFSTORE / ZUNION
+- ZINTER / ZDIFF / ZDIFFSTORE / ZUNION’
+
+#### 使用场景
+
+**签到排行榜**
+
+```shell
+127.0.0.1:6379> zadd goods:order 1610812987 1
+(integer) 1
+127.0.0.1:6379> zadd goods:order 1610812980 2
+(integer) 1
+127.0.0.1:6379> zadd goods:order 1610812950 3
+(integer) 1
+127.0.0.1:6379> zadd goods:order 1610814950 4
+(integer) 1
+127.0.0.1:6379> zcard goods:order
+(integer) 4
+127.0.0.1:6379> zrangebyscore goods:order 1610812950 1610812987
+1) "3"
+2) "2"
+3) "1"
+```
+
+> 将用户的签到时间作为排行的分数，最后查询指定范围内签到用户的id
 
 ## 安装
 
@@ -386,6 +534,20 @@ redis 127.0.0.1:6379>
 <img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220901143345782.png" alt="image-20220901143345782" style="zoom:67%;" />
 
 
+
+### windows
+
+启动服务
+
+```shell
+redis-server --service-start
+```
+
+停止服务
+
+```shell
+redis-server --service-stop
+```
 
 ## 配置
 
@@ -764,6 +926,123 @@ redis 127.0.0.1:6379> ZRANGE wuhu 0 10 WITHSCORES
 | ZUNIONSTORE destination numkeys key [key ...]  | 计算给定的一个或多个有序集的并集，并存储在新的 key 中        |
 | ZSCAN key cursor [MATCH pattern] [COUNT count] | 迭代有序集合中的元素（包括元素成员和元素分值）               |
 
+### bitmap
+
+Bitmaps 底层存储的是一种二进制格式的数据。在一些特定场景下，用该类型能够**极大的减少存储空间**，因为存储的数据只能是 0 和 1。为了便于理解，可以将这种数据格式理解为一个数组的形式存储。
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/202206150046037.png)
+
+#### 基本命令 
+
+##### SETBIT
+
+用来设置或者清除某一位上的值，其返回值是原来位上存储的值。key 在初始状态下所有的位都为 0 ，语法格式如下：
+
+```shell
+SETBIT key offset value
+```
+
+其中 offset 表示偏移量，从 0 开始。示例如下：
+
+```shell
+127.0.0.1:6379> SET user:1 a
+OK
+# 设置偏移量为0
+127.0.0.1:6379> SETBIT user:1 0 1
+(integer) 0
+# 当对应位的字符是不可打印字符，redis会以16进制形式显示
+127.0.0.1:6379> GET user:1
+"\xe1"
+```
+
+##### GETBIT
+
+用来获取某一位上的值。示例如下：
+
+```shell
+127.0.0.1:6379> GETBIT user:1 0
+(integer) 1
+```
+
+当偏移量 offset 比字符串的长度大，或者当 key 不存在时，返回 0。
+
+```shell
+redis> EXISTS bits
+(integer) 0
+redis> GETBIT bits 100000
+(integer) 0
+```
+
+##### BITCOUNT
+
+统计指定位区间上，值为 1 的个数。语法格式如下：
+
+```shell
+BITCOUNT key [start end]
+```
+
+示例如下：
+
+```shell
+127.0.0.1:6379> BITCOUNT user:1
+(integer) 8
+```
+
+> 通过指定的 start 和 end 参数，可以让计数只在特定的字节上进行。
+
+#### 使用场景
+
+bitmap 可以用在一些访问统计、签到统计等场景
+
+**某个用户一个月的签到记录**
+
+```shell
+127.0.0.1:6379> setbit user:2020-01 0 1
+(integer) 0
+127.0.0.1:6379> setbit user:2020-01 1 1
+(integer) 0
+127.0.0.1:6379> setbit user:2020-01 2 1
+(integer) 0
+127.0.0.1:6379> bitcount user:2020-01 0 4
+(integer) 3
+```
+
+统计出该用户这个月只有 3 天签到
+
+**统计某一天网站的签到数量**
+
+```shell
+127.0.0.1:6379> setbit site:2020-01-17 1 1
+(integer) 0
+127.0.0.1:6379> setbit site:2020-01-17 3 1
+(integer) 0
+127.0.0.1:6379> setbit site:2020-01-17 4 1
+(integer) 0
+127.0.0.1:6379> setbit site:2020-01-17 6 1
+(integer) 0
+127.0.0.1:6379> bitcount site:2020-01-17 0 100
+(integer) 4
+127.0.0.1:6379> getbit site:2020-01-17 5
+(integer) 0
+```
+
+这里将用户的 id 作为偏移量，签到就是 1。可以统计出具体访问的总数，同时可以根据某个用户的 id 查询是否在当前签到。如果根据偏移量重复设置一个值，此时不会被重复添加，只是 Redis 会返回 1 表示当前已经存在。
+
+**计算某段时间内，都签到的用户数量**
+
+```shell
+127.0.0.1:6379> setbit site:2020-01-18 6 1
+(integer) 0
+127.0.0.1:6379> setbit site:2020-01-18 4 1
+(integer) 0
+127.0.0.1:6379> setbit site:2020-01-18 7 1
+(integer) 0
+127.0.0.1:6379> bitop and continue:site site:2020-01-18 site:2020-01-17
+(integer) 1
+```
+
+使用该场景，是因为该数据类型可以计算出多个 key 的交集 (and)。同时可以取并集 (or)，或 (or)，异或 (xor)
+
 ### HyperLogLog
 
 Redis 在 2.8.9 版本添加了 HyperLogLog 结构。
@@ -807,6 +1086,30 @@ redis 127.0.0.1:6379> PFCOUNT wuhu
 | **PFADD** key element [element ...]       | 添加指定元素到 HyperLogLog 中             |
 | **PFCOUNT** key [key ...]                 | 返回给定 HyperLogLog 的基数估算值。       |
 | PFMERGE destkey sourcekey [sourcekey ...] | 将多个 HyperLogLog 合并为一个 HyperLogLog |
+
+#### 使用场景
+
+HyperLogLog 一般用在一些不需要精确计算的统计类场景
+
+**用户签到统计**
+
+```shell
+127.0.0.1:6379> pfadd 2020:01:sgin  1 2 3 4 5 6 7 8
+(integer) 1
+# 尝试重复添加
+127.0.0.1:6379> pfadd 2020:02:sgin  1 2 3 4 5 6 7 8
+(integer) 0
+127.0.0.1:6379> pfadd 2020:02:sgin  9
+(integer) 1
+127.0.0.1:6379> pfadd 2020:02:sgin  10
+(integer) 1
+127.0.0.1:6379> pfadd 2020:02:sgin  11
+(integer) 1
+127.0.0.1:6379> pfcount 2020:02:sgin
+(integer) 11
+```
+
+
 
 ### 发布订阅
 
@@ -1322,23 +1625,26 @@ redis>
 
 Redis Stream 是 Redis 5.0 版本新增加的数据结构。
 
-Redis Stream 主要用于**消息队列**（MQ，Message Queue），Redis 本身是有一个 Redis 发布订阅 (pub/sub) 来实现消息队列的功能，但它有个缺点就是消息无法持久化，如果出现网络断开、Redis 宕机等，消息就会被丢弃。
-
-简单来说**发布订阅 (pub/sub) 可以分发消息，但无法记录历史消息**。
+Redis Stream 主要用于**消息队列**（MQ，Message Queue），Redis 本身是有一个 Redis 发布订阅 (pub/sub) 来实现消息队列的功能，但它有个缺点就是消息无法持久化（无法记录历史消息），如果出现网络断开、Redis 宕机等，消息就会被丢弃。
 
 而 Redis Stream 提供了消息的**持久化**和**主备复制**功能，可以让任何客户端访问任何时刻的数据，并且能记住每一个客户端的访问位置，还能保证消息不丢失。
 
 Redis Stream 的结构如下所示，它有一个消息链表，将所有加入的消息都串起来，每个消息都有一个唯一的 ID 和对应的内容：
 
-![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/en-us_image_0167982791.png)
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/202206051520866.png)
 
 每个 Stream 都有唯一的名称，它就是 Redis 的 key，在我们首次使用 xadd 指令追加消息时自动创建。
 
 上图解析：
 
-- **Consumer Group** ：消费组，使用 XGROUP CREATE 命令创建，一个消费组有多个消费者 (Consumer)。
-- **last_delivered_id** ：游标，每个消费组会有个游标 last_delivered_id，任意一个消费者读取了消息都会使游标 last_delivered_id 往前移动。
-- **pending_ids** ：消费者 (Consumer) 的状态变量，作用是维护消费者的未确认的 id。 pending_ids 记录了当前已经被客户端读取的消息，但是还没有 ack (Acknowledge character：确认字符）。
+- **Consumer Group** ：消费组，使用 XGROUP CREATE 命令创建，一个消费组有多个消费者 (Consumer)
+- **last_delivered_id** ：游标，每个消费组会有个游标 last_delivered_id，其中任意一个消费者读取了消息都会使游标 last_delivered_id 往前移动
+  - 组内消费者之间存在**竞争关系**。当某个消费者消费了一条消息时，同组消费者，都不会再次消费这条消息。
+
+- **pending_ids** ：消费者 (Consumer) 的状态变量，作用是维护消费者的未确认的 id
+  - pending_ids 记录了当前已经被客户端读取的消息，但是还没有 ack（Acknowledge character：确认字符）
+  - 每一个消费者消费之后，严格需要 ack 进行确认，该消息才会被标识为真正消费。否则 `Pending_ids[]` 将记录未进行 ack 的消息
+
 
 **消息队列相关命令：**
 
@@ -1619,6 +1925,10 @@ XREAD [COUNT count] [BLOCK milliseconds] STREAMS key [key ...] id [id ...]
 使用 XGROUP CREATE 创建消费者组
 
 ```shell
+xgroup create 队列名称 消费者组 消息ID开始位置-消息ID结束位置
+```
+
+```shell
 XGROUP [CREATE key groupname id-or-$] [SETID key groupname id-or-$] [DESTROY key groupname] [DELCONSUMER key groupname consumername]
 ```
 
@@ -1638,9 +1948,23 @@ XGROUP CREATE mystream consumer-group-name 0-0
 XGROUP CREATE mystream consumer-group-name $
 ```
 
+#### XINFO GROUPS
+
+查看消费者群组
+
+```shell
+xinfo groups key
+```
+
+key 为队列名称
+
 #### XREADGROUP GROUP
 
 使用 XREADGROUP GROUP 读取消费者组中的消息
+
+```shell
+xreadgroup group 消费者群组名 消费者名称 count 消费个数 streams 队列名称 消息消费ID
+```
 
 ```shell
 XREADGROUP GROUP group consumer [COUNT count] [BLOCK milliseconds] [NOACK] STREAMS key [key ...] ID [ID ...]
@@ -1652,6 +1976,8 @@ XREADGROUP GROUP group consumer [COUNT count] [BLOCK milliseconds] [NOACK] STREA
 - **milliseconds** ： 阻塞毫秒数
 - **key** ： 队列名
 - **ID** ： 消息 ID
+  - `>` 意味着消费者希望只接收从未发送给任何其他消费者的消息。这意思是说，请给我新的消息
+
 
 例
 
@@ -1857,6 +2183,1082 @@ Redis 有两种类型分区。 假设有 4 个 Redis 实例 R0，R1，R2，R3，
 - 用一个 hash 函数将 key 转换为一个数字，比如使用 crc32 hash 函数。对 key foobar 执行 crc32(foobar)会输出类似 93024922 的整数。
 - 对这个整数取模，将其转化为 0-3 之间的数字，就可以将这个整数映射到 4 个 Redis 实例中的一个了。93024922 % 4 = 2，就是说 key foobar 应该被存到 R2 实例中。注意：取模操作是取除的余数，通常在多种编程语言中用%操作符实现。
 
+## 持久化
+
+### 为什么要做持久化存储
+
+我们都知道 Redis 是一个基于内存的 nosql 数据库，内存存储很容易造成数据的丢失，因为当服务器关机等一些异常情况都会导致存储在内存中的数据丢失。
+
+1. 持久化存储就是**将 Redis 存储在内存中的数据存储在硬盘中，实现数据的永久保存**（主要原因）
+2. 数据的传输、拷贝（作用）
+3. 开发、测试（作用）
+
+在 Redis 中，持久化存储分为两种。一种是 aof 日志追加的方式，另外一种是 rdb 数据快照的方式
+
+### RDB 持久化存储
+
+RDB 持久化存储即是将 redis 存在内存中的数据以**快照的形式**保存在本地磁盘中。
+
+#### 配置
+
+```ini
+# 设置 dump 的文件名
+dbfilename dump.rdb
+
+# 工作目录
+# 例如上面的 dbfilename 只指定了文件名，
+# 但是它会写入到这个目录下。这个配置项一定是个目录，而不能是文件名。
+dir ./
+
+# bgsave 持久化出现问题，Redis 是否停止写入命令
+stop-writes-on-bgsave-error yes
+
+# 是否开启文件压缩
+rdbcompression yes
+
+# 保存或者加载 rdb 文件时是否对进行校验
+rdbchecksum yes
+
+# 持久化频率
+# save <seconds> <changes> 表示在 seconds 秒内，至少有 changes 次变化，就会自动触发 gbsave 命令
+save 900 1
+save 300 10
+save 60 10000
+```
+
+#### 分类
+
+RDB 持久化存储分为自动备份和手动备份
+
+**1. 手动备份**
+
+通过 save 命令和 bgsave 命令。
+
+save 是同步阻塞，而 bgsave 是非阻塞（阻塞实际发生在 fork 的子进程中）
+
+在我们实际过程中大多是使用 bgsave 命令实现备份。
+
+```php
+// 阻塞直到命令处理完毕响应OK
+redis> save
+OKCopy to clipboardErrorCopied
+// fork 一个独立线程实现持久化
+redis> bgsave
+Background saving startedCopy to clipboardErrorCopied
+```
+
+save 与 bgsave 不同场景的使用
+
+1. 当 Redis 从服务器项主服务器发送复制请求时，主服务器则会使用 bgsave 命令生成 rbd 文件，然后传输给从服务器。
+2. 当执行 debug reload 命令时也会使用 save 命令生成 rdb 文件。
+3. 当使用 shutdown 命令关掉服务时，如果没有启用 aof 方式实现持久化则会采用 bgsave 的方式做持久化。同时 shutdown 后面可以加备份参数 [nosave|save]。
+
+**2. 自动备份**
+
+修改配置项 `save m n`，即表示在 m 秒内执行了 n 次命令则进行备份。
+
+实则是通过 bgsave 处理
+
+#### bgsave 实现原理
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/16d1a887a8ba96ea~tplv-t2oaga2asx-zoom-in-crop-mark:3024:0:0:0.awebp)
+
+![](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/19104827_6197107b8370442287.png)
+
+1. 执行 bgsave 命令，Redis 父进程判断当前是否存在正在执行的子进程，如果存在则直接返回。
+
+2. 父进程 fork 一个子进程（fork 的过程中会造成阻塞的情况），这个过程可以使用 `info stats` 命令查看 `latest_fork_usec` 选项，查看最近一次 fork 操作消耗的时间，单位是微秒
+
+3. 父进程 fork 完之后，则会返回 Background saving started 信息提示，此时 fork 阻塞解除。
+
+4. fork 出的子进程开始根据父进程内存数据生成临时的快照文件，然后进行原子操作替换原文件。使用 lastsave 命令可以查看最后一次生成 rdb 的时间，对应 info 的 `rdb_last_save_time` 选项。
+5. 当备份完毕之后向父进程发送完成信息，此时父进程会更新最新的持久化统计信息。具体可以见 `info persistence` 下的 rbd 选项。
+
+#### RDB 持久化的优势与劣势
+
+##### 优势
+
+1. 全量备份，便于数据的传输。
+2. 压缩的二进制文件，重启服务加载快
+
+##### 劣势
+
+1. 加密的二进制格式存储文件，由于 Redis 各个版本之间的兼容性问题
+2. **实时性差**，并不是完全的实时同步，容易造成数据的不完整性。
+3. 加密处理，可读性差，无法直接读取 / 修改文件内容
+
+#### 常见的问题
+
+1. 当遇到磁盘写满情况，可以使用如下命令来切换存储磁盘
+
+   ```php
+   // dirName 则是新的存储目录名(该方式同样适用于aof格式)
+   config set dir <dirName>
+   ```
+
+2. 文件压缩处理，虽然对 CPU 具有消耗，但是减少体积的暂用，同时做文件传输（主从复制）也减少消耗
+
+   ```php
+   // 修改压缩开启或关闭
+   config set rdbcompression yes|no
+   ```
+
+3. rbd 备份文件损坏检测，可以使用 redis-check-rdb 工具检测 rdb 文件；该工具默认在 `/usr/local/bin/` 目录下面.
+
+   ```php
+   [root@syncd redis-data] # /usr/local/bin/redis-check-rdb ./6379-rdb.rdb
+   [offset 0] Checking RDB file ./6379-rdb.rdb
+   [offset 26] AUX FIELD redis-ver = '5.0.3'
+   [offset 40] AUX FIELD redis-bits = '64'
+   [offset 52] AUX FIELD ctime = '1552061947'
+   [offset 67] AUX FIELD used-mem = '852984'
+   [offset 83] AUX FIELD aof-preamble = '0'
+   [offset 85] Selecting DB ID 0
+   [offset 105] Checksum OK
+   [offset 105] \o/ RDB looks OK! \o/
+   [info] 1 keys read
+   [info] 0 expires
+   [info] 0 already expired
+   ```
+
+### AOF 持久化存储
+
+1. 由于 RDB 持久化方式不能做到实时存储，而 AOF 可以更具不同的策略实现实时持久化。
+2. AOF 持久化存储便是**以日志的形式将 aof_buf 缓冲区中的命令写入到磁盘中**。简而言之，就是记录 redis 的操作日志，将 redis 执行过的命令记录下来。
+3. 当我们需要数据恢复时或者重启 Redis 服务时，Redis 再去重新执行一次日志文件中的命令，以达到数据重载的目的。
+
+#### 配置
+
+```php
+# appendonly参数开启AOF持久化
+appendonly no
+
+# AOF持久化的文件名，默认是appendonly.aof，存储的目录便是 dir 配置项
+appendfilename "appendonly.aof"
+
+# AOF文件的保存位置和RDB文件的位置相同，都是通过dir参数设置的
+dir ./
+
+# 同步策略 (三者只需要开启以一个即可)
+# appendfsync always  // 命令写入立即写入磁盘
+appendfsync everysec  // 每秒实现文件的同步，写入磁盘
+# appendfsync no	  // 随机进行文件的同步，同步操作则交给操作系统来负责，通常时间是最长 30s
+
+# aof重写期间是否同步
+no-appendfsync-on-rewrite no
+
+# 重写触发配置
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+
+# 加载aof出错如何处理
+aof-load-truncated yes
+
+# 文件重写策略
+aof-rewrite-incremental-fsync yes
+```
+
+> 当命令写入到 AOF 缓冲区后，Redis 会根据持久化存储策略，单独开一个 AOF 线程来实现写入到磁盘操作。
+
+#### 实现原理
+
+aof 日志追加方式实现持久化存储，需要经历如下四个过程：命令写入 -> 文件同步 -> 文件重写 -> 文件重载。
+
+![](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/1618152161472-3.png)
+
+1. 命令追加（**append**），此时会将 redis 命令写入 aof_buf 缓冲区.。
+2. 文件写入（**write**），缓冲区中数据根据备份策略实现写入日志文件。
+3. 文件重写（**rewrite**），当 aof 的文件越来越庞大，会根据我们的配置策略来实现 aof 的重写，实现文件的压缩，减少体积。
+4. 当 redis 重新启动时，在去重写加载 aof 文件，达到数据恢复的目的。
+
+#### 文件写入策略
+
+文件写入是将 aof_buf 缓冲区的命令写入到文件中。文件写入的策略有如下三种方式：
+
+| 配置项   | 配置说明                                                     |
+| -------- | ------------------------------------------------------------ |
+| always   | 命令写入到 aof_buf 缓冲区中之后立即调用系统的 `fsync` 操作同步到 aof 文件中，fsync 完成后线程返回. |
+| everysec | 命令写入到 aof_buf 缓冲区后每隔一秒调用系统的 `write` 操作，`write` 完成后线程返回. |
+| no       | 命令写入 aof_bug 缓冲区后调用系统 `write` 操作，不对 aof 文件做 `fsync` 同步，同步硬盘操作由系统操作完成，时间一般最长为 30s. |
+
+##### 系统调用 write 和 fsync 说明
+
+1. write 操作会触发延迟写（delayed write）机制。
+   - Linux 在内核提供页缓冲区用来提高硬盘 IO 性能。write 操作在写入系统缓冲区后直接返回。同步硬盘操作依赖于系统调度机制，例如：缓冲区页空间写满或达到特定时间周期。同步文件之前，如果此时系统故障宕机，缓冲区内数据将丢失
+2. fsync 针对单个文件操作（比如 AOF 文件），做**强制硬盘同步**
+   - fsync 将阻塞直到写入硬盘完成后返回，保证了数据持久化
+
+##### 文件写入策略分析
+
+- 配置为 always 时， 每次写入都要同步 AOF 文件， 在一般的 SATA 硬盘上， Redis 只能支持大约几百 TPS 写入， 显然跟 Redis 高性能特性背道而驰，不建议配置。
+
+- 配置为 no。由于操作系统每次同步 AOF 文件的周期不可控， 而且会加大每次同步硬盘的数据量， 虽然提升了性能， 但数据安全性无法保证。
+
+- 配置为 everysec。是建议的同步策略， 也是默认配置， 做到兼顾性能和数据安全性。 理论上只有在系统突然宕机的情况下丢失 1 秒的数据。
+
+#### 文件重写
+
+在了解 AOF 重写之前，我们先来看看 AOF 文件中存储的内容是啥，先执行两个写操作：
+
+```
+127.0.0.1:6379> set s1 hello
+OK
+127.0.0.1:6379> set s2 world
+OK
+```
+
+然后我们打开`appendonly.aof`文件，可以看到如下内容：
+
+```shell
+*3
+$3
+set
+$2
+s1
+$5
+hello
+*3
+$3
+set
+$2
+s2
+$5
+world
+```
+
+> 该命令格式为Redis的序列化协议（RESP）。`*3`代表这个命令有三个参数，`$3`表示该参数长度为3
+
+随着时间的推移，Redis 执行的写命令会越来越多，AOF 文件也会越来越大，过大的 AOF 文件可能会对 Redis 服务器造成影响，如果使用 AOF 文件来进行数据还原所需时间也会越长。
+
+时间长了，AOF 文件中通常会有一些冗余命令，比如：过期数据的命令、无效的命令（重复设置、删除）、多个命令可合并为一个命令（批处理命令）。所以 AOF 文件是有精简压缩的空间的。
+
+**AOF 重写的目的就是减小 AOF 文件的体积**
+
+aof 文件重写是把 redis 进程内的数据转换为写命令同步到新的 aof 文件的过程。
+
+##### 文件重载主要优化的地方
+
+1. **减少无效数据**。将一些在进程内无效的数据不在写入新的文件。如过期的键
+2. **去掉一些无效的命令**。如 `del key1`
+3. **简化操作**。如 `lpush list a`，`lpush list b`，直接可以简化为 `lpush list a b`
+
+##### 文件重载触发机制
+
+1. **手动触发机制**。 
+
+   - 直接使用 bgrewriteaof 命令即可。该命令在 fork 子进程的时候会发生阻塞。
+
+2. **自动触发机制**
+
+   - ```shell
+     # 表示当 AOF 文件的体积大于 64MB，且 AOF 文件的体积比上一次重写后的体积大了一倍（100%）时，会执行 bgrewriteaof 命令
+     auto-aof-rewrite-percentage 100
+     auto-aof-rewrite-min-size 64mb
+     ```
+
+   - 其中 aof_current_size 和 aof_base_size 可以在 `info Persistence` 统计信息中查看。
+
+##### 重写步骤
+
+![1618152177852-4](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/1618152177852-4.png) 
+
+1. 执行重写命令，判断是否存在子进程。 
+
+   - 如果已经有子进程在进行 aof 重写，则会提示如下信息。
+
+       ```php
+       ERR Background append only file rewriting already in progress
+       ```
+
+   - 如果已经存在子进程在进行 bgsave 操作，重写命令会延迟到 bgsave 命令完成之后进行，会返回如下信息。
+
+       ```php
+       Background append only file rewriting scheduled
+       ```
+
+2. 父进程会 fork 一个子进程，在 fork 子进程的过程中会造成阻塞。
+
+3. fork 子进程结束后，父进程阻塞解除，进行其他新的命令操作；新的命令依旧根据文件写入策略同步数据，保证 aof 机制正确进行
+
+4. 子进程在进行写的过程中，由于 fork 操作运用的是**写时复制**技术，子进程只能共享 fork 操作时内存保留的数据，新的数据是无法操作的。父进程在这过程中仍然在响应其他的命令，于是 Redis 会使用 **aof-rewrite-buffer** 来保存这部分新的数据。
+
+5. 子进程进行根据重写规则将数据写入到新的 aof 文件中
+
+   - 每次写入有大小限制，通过 `aof-rewrite-incremental-fsync` 配置项来控制，默认是 32M，这样可以见减少单次刷盘（I/O 写）造成硬盘阻塞。
+
+6. 子进程在完成重写之后，会向父进程发送信息，父进程更新统计信息
+
+   - 可参看 `info persistence` 下的 aof_*相关统计。
+
+7. 父进程会把新写入存在 aof-rewrite-buffer 的数据写入到 aof 文件中
+
+   - 此时 Redis 是一个阻塞过程，直到 aof 文件替换完毕，这样保证了数据的一致性
+
+8. 父进程将新的 aof 文件替换掉旧的 aof 文件
+
+
+##### 步骤中的重点
+
+![2021-7-11193557.png](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2021-7-11193557.png)
+
+- 重写会有大量的写入操作，所以服务器进程会`fork`一个子进程来创建一个新的 AOF 文件；
+- 在重写期间，服务器进程继续处理命令请求，如果有写入的命令，追加到`aof_buf`的同时，还会追加到`aof_rewrite_buf`，也就是 AOF 重写缓冲区；
+- 当子进程完成重写之后，会给父进程一个信号，然后父进程会把 AOF 重写缓冲区的内容写进新的 AOF 临时文件中，再对新的 AOF 文件改名完成替换，这样可以保证新的 AOF 文件与当前数据库数据的一致性。
+
+##### 实现原理
+
+我们来看下 AOF 重写的具体过程，考虑这样一个情况， 如果服务器对键 `list` 执行了以下四条命令：
+
+```
+RPUSH list 1 2 3 4      // [1, 2, 3, 4]
+RPOP list               // [1, 2, 3]
+LPOP list               // [2, 3]
+LPUSH list 1            // [1, 2, 3]
+```
+
+那么当前列表键 `list` 在数据库中的值就为 `[1, 2, 3]` 。
+
+如果我们要保存这个列表的当前状态， 并且尽量减少所使用的命令数， 那么最简单的方式不是去 AOF 文件上分析前面执行的四条命令， 而是直接读取 `list` 键在数据库的当前值， 然后用一条 `RPUSH 1 2 3` 命令来代替前面的四条命令。
+
+再考虑这样一个例子， 如果服务器对集合键 `animal` 执行了以下命令：
+
+```
+SADD animal cat                 // {cat}
+SADD animal dog panda tiger     // {cat, dog, panda, tiger}
+SREM animal cat                 // {dog, panda, tiger}
+SADD animal cat lion            // {cat, lion, dog, panda, tiger}
+```
+
+那么使用一条 `SADD animal cat lion dog panda tiger` 命令， 就可以还原 `animal` 集合的状态， 这比之前的四条命令调用要大大减少。
+
+除了列表和集合之外， 字符串、有序集、哈希表等键也可以用类似的方法来保存状态， 并且保存这些状态所使用的命令数量， 比起之前建立这些键的状态所使用命令的数量要大大减少。
+
+根据键的类型， 使用适当的写入命令来重现键的当前值， 这就是 AOF 重写的实现原理。 整个重写过程可以用伪代码表示如下：
+
+```py
+def AOF_REWRITE(tmp_tile_name):
+  f = create(tmp_tile_name)
+  # 遍历所有数据库
+  for db in redisServer.db:
+    # 如果数据库为空，那么跳过这个数据库
+    if db.is_empty(): continue
+    # 写入 SELECT 命令，用于切换数据库
+    f.write_command("SELECT " + db.number)
+    # 遍历所有键
+    for key in db:
+      # 如果键带有过期时间，并且已经过期，那么跳过这个键
+      if key.have_expire_time() and key.is_expired(): continue
+      if key.type == String:
+        # 用 SET key value 命令来保存字符串键
+        value = get_value_from_string(key)
+        f.write_command("SET " + key + value)
+      elif key.type == List:
+        # 用 RPUSH key item1 item2 ... itemN 命令来保存列表键
+        item1, item2, ..., itemN = get_item_from_list(key)
+        f.write_command("RPUSH " + key + item1 + item2 + ... + itemN)
+      elif key.type == Set:
+        # 用 SADD key member1 member2 ... memberN 命令来保存集合键
+        member1, member2, ..., memberN = get_member_from_set(key)
+        f.write_command("SADD " + key + member1 + member2 + ... + memberN)
+      elif key.type == Hash:
+        # 用 HMSET key field1 value1 field2 value2 ... fieldN valueN 命令来保存哈希键
+        field1, value1, field2, value2, ..., fieldN, valueN = get_field_and_value_from_hash(key)
+        f.write_command("HMSET " + key + field1 + value1 + field2 + value2 + ... + fieldN + valueN)
+      elif key.type == SortedSet:
+        # 用 ZADD key score1 member1 score2 member2 ... scoreN memberN
+        # 命令来保存有序集键
+        score1, member1, score2, member2, ..., scoreN, memberN = get_score_and_member_from_sorted_set(key)
+        f.write_command("ZADD " + key + score1 + member1 + score2 + member2 + ... + scoreN + memberN)
+      else:
+        raise_type_error()
+      # 如果键带有过期时间，那么用 EXPIREAT key time 命令来保存键的过期时间
+      if key.have_expire_time():
+        f.write_command("EXPIREAT " + key + key.expire_time_in_unix_timestamp())
+    # 关闭文件
+    f.close()
+```
+
+#### 数据恢复
+
+Redis4.0 开始支持 RDB 和 AOF 的混合持久化（可以通过配置项 `aof-use-rdb-preamble` 开启）
+
+- 如果是 redis 进程挂掉，那么重启 redis 进程即可，直接基于 AOF 日志文件恢复数据；
+- 如果是 redis 进程所在机器挂掉，那么重启机器后，尝试重启 redis 进程，尝试直接基于 AOF 日志文件进行数据恢复，如果 AOF 文件破损，那么用`redis-check-aof fix`命令修复；
+- 如果没有 AOF 文件，会去加载 RDB 文件；
+- 如果 redis 当前最新的 AOF 和 RDB 文件出现了丢失/损坏，那么可以尝试基于该机器上当前的某个最新的 RDB 数据副本进行数据恢复。
+
+#### AOF的优缺点
+
+- 优点
+  - 多种文件写入（fsync）策略
+  - 数据**实时**保存，数据**完整性**强。即使丢失某些数据，制定好策略最多也是一秒内的数据丢失.
+  - **可读性强**，由于使用的是文本协议格式来存储的数据，可有直接查看操作的命令，同时也可以手动改写命令.
+- 缺点
+  - **文件体积过大**，加载速度比 rbd 慢
+    - 由于 aof 记录的是 redis 操作的日志，一些无效的，可简化的操作也会被记录下来，造成 aof 文件过大
+    - 但该方式可以通过文件重写策略进行优化
+
+## 主从复制
+
+Redis 复制功能主要的作用，是集群、分片功能实现的基础；同时也是 Redis 实现高可用的一种策略，例如解决单机并发问题、数据安全性等等问题。
+
+### 示例
+
+在本文环境演示中，有一台主机，启动了两个 Redis 示例。
+
+| 角色   | IP            | 端口号 | 密码  |
+| ------ | ------------- | ------ | ----- |
+| 从服务 | 192.168.2.102 | 6380   | p6380 |
+| 主服务 | 192.168.2.102 | 6379   | p6379 |
+
+#### 实现方式
+
+Redis 复制实现方式分为下面三种方式
+
+##### 服务启动时配置
+
+该方式通过在启动 Redis 服务时，通过**命令行参数**，进行启动主从复制功能。
+
+该方式的弊端是不能实现配置持久化，当服务停掉之后，启动服务时，需要添加相同的命令参数。
+
+master 服务器事先在 redis.confg 增加 requirepass 项
+
+```shell
+requirepass p6379
+```
+
+启动从服务器
+
+```shell
+redis-server --port 6380 --replicaof 192.168.2.102 6379
+```
+
+##### 命令行配置
+
+该方式通过使用 redis-cli 进入操作行界面，进行配置。
+
+该方式的弊端是不能实现配置持久化，当服务停掉之后，启动服务需要执行同样的命令。
+
+master 服务器执行
+
+```shell
+127.0.0.1:6379> config set requirepass p6379
+OK
+```
+
+从服务器执行
+
+```shell
+127.0.0.1:6380> replicaof 192.168.2.102 6379
+OK
+127.0.0.1:6380> config set masterauth p6379
+OK
+```
+
+##### 配置文件配置
+
+该方式是通过 redis.conf 配置文件进行设置，能够实现配置的持久化，是一种推荐使用的方式。
+
+配置主服务器，redis.config
+
+```shell
+requirepass p6379
+```
+
+配置从服务器，redis.config
+
+```shell
+masterauth p6379
+replicaof 192.168.2.102 6379
+```
+
+##### 配置说明
+
+- masterauth：设置 redis.config 连接密码，如果设置了该值。其他客户端在连接该服务器时，需要添加密码才可以访问
+
+- requirepass：设置主服务器的连接密码，和 1 中 masterauth 一致
+- replicaof：从服务器连接到服务器的 IP 地址 + 端口号
+
+### 实现原理
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2021519112001174.jpg" alt="img" style="zoom:150%;" />
+
+```uml
+// uml图
+@startuml
+从服务器->主服务器: 1.保存配置
+从服务器->主服务器: 2.建立socket连接
+从服务器->主服务器: 3.发送ping命令
+从服务器->主服务器: 4.权限验证
+从服务器->主服务器: 5.同步数据
+从服务器->主服务器: 6.持续复制数据
+@enduml
+```
+
+主从复制主要实现的一个流程如上图：
+
+1. 第一步，从服务器保存主服务器的配置信息，保存之后待从服务器内部的定时器执行时，就会触发复制的流程。
+
+2. 第二步，从服务器首先会与主服务器建立一个 **socket 套接字连接**，用作主从通信使用。后面主服务器发送数据给从服务器也是通过该套字节进行。
+
+3. 第三步，socket 套接字连接成功之后，接着发送鉴权 **ping 命令**，正常的情况下，主服务器会发送对应的响应。ping 命令的作用是为了，保证 socket 套字节是否可以用，同时也是为了验证主服务器是否接受操作命令。
+
+4. 第四步，接着就是**鉴权**验证，判断从节点配置的主节点连接密码是否正确。
+
+5. 第五步，鉴权成功之后，就可以开始复制数据了。主服务器此时会进行**全量复制**，将主服务的数据全部发给从服务器，从服务器保存主服务器发送的数据。
+
+6. 接下来就是持续复制操作。主服务器会进行**异步复制**，一边将写的数据写入自身，同时会将新的写命令发送给从服务器。
+
+### 策略
+
+Redis 主从复制主要分为三种策略方式，不同的策略方式都是针对不同的场景下进行使用。
+
+#### 全量复制
+
+全量复制用在**主从复制刚建立**时或者**从切主服务器**时，从服务器没有主服务器的数据，主服务器会将自身的数据通过 rdb 文件方式发送给从服务器，从服务器会清空自身数据，接着将主服务器发送的数据加载到自身中。
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/vn4mine017.png" alt="img" style="zoom:150%;" />
+
+```uml
+// uml图
+@startuml
+从服务器->主服务器: 1.psync ? -1
+主服务器->从服务器: 2.fullsync runid offset
+从服务器: 3.保存 runid offset
+主服务器: 4.执行bgsave生成rdb
+主服务器->从服务器: 5.发送rdb
+从服务器: 6.清空自身老数据
+从服务器: 7.加载主服务器数据
+@enduml
+```
+
+主节点在将 rdb 发送给从节点，到从节点接收完成之间，如果出现新的命令，主节点会写在复制客户端缓冲区中。
+
+当从节点加载 rdb 文件完成之后，主节点就会把这段时间写的数据下发给从节点。
+
+如果在发送 rdb 的过程中，比较耗时，导致复制客户端缓冲区溢出，此时就会导致全量复制失败。
+
+```redis
+clientoutput-buffer-limit slave 256MB 64MB 60
+```
+
+> 60 秒内超过 64M 或者 256M，就表示溢出，主从复制则失败
+
+如果在进行全量复制的过程中，从节点在响应客户端命令，这样就会存在客户端读取到的数据不是最新的。这样就可以通过配置，只有全量复制完成之后才响应客户端的请求命令。
+
+```redis
+slave-serve-stale-data no
+```
+
+下面的日志文件为从节点启动服务时，发起的复制请求到响应的整个流程记录。
+
+```shell
+35:C 02 Nov 2021 18:57:41.052 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+35:C 02 Nov 2021 18:57:41.055 # Redis version=6.2.6, bits=64, commit=00000000, modified=0, pid=35, just started
+35:C 02 Nov 2021 18:57:41.058 # Configuration loaded
+35:S 02 Nov 2021 18:57:41.062 * monotonic clock: POSIX clock_gettime
+35:S 02 Nov 2021 18:57:41.065 * Running mode=standalone, port=6383.
+35:S 02 Nov 2021 18:57:41.069 # Server initialized
+35:S 02 Nov 2021 18:57:41.075 * Ready to accept connections
+35:S 02 Nov 2021 18:57:41.077 * Connecting to MASTER 127.0.0.1:6380 # 开始进行主从复制操作。
+35:S 02 Nov 2021 18:57:41.080 * MASTER <-> REPLICA sync started
+35:S 02 Nov 2021 18:57:41.083 * Non blocking connect for SYNC fired the event.
+35:S 02 Nov 2021 18:57:41.087 * Master replied to PING, replication can continue... # 发送ping请求，确保能够进行复制操作。
+35:S 02 Nov 2021 18:57:41.092 * Partial resynchronization not possible (no cached master) # 发送部分复制请求，不符合部分复制条件。
+35:S 02 Nov 2021 18:57:41.121 * Full resync from master: 51792991a027de84a6670959443e77f862a00bb9:0 # 接着发送全量请求，并携带master的runid。
+35:S 02 Nov 2021 18:57:41.170 * MASTER <-> REPLICA sync: receiving 175 bytes from master to disk
+35:S 02 Nov 2021 18:57:41.175 * MASTER <-> REPLICA sync: Flushing old data
+35:S 02 Nov 2021 18:57:41.178 * MASTER <-> REPLICA sync: Loading DB in memory
+35:S 02 Nov 2021 18:57:41.221 * Loading RDB produced by version 6.2.6
+35:S 02 Nov 2021 18:57:41.223 * RDB age 0 seconds
+35:S 02 Nov 2021 18:57:41.226 * RDB memory usage when created 1.85 Mb
+35:S 02 Nov 2021 18:57:41.228 # Done loading RDB, keys loaded: 0, keys expired: 0.
+35:S 02 Nov 2021 18:57:41.230 * MASTER <-> REPLICA sync: Finished with success # 最终完整主从复制操作。
+```
+
+### 部分复制
+
+部分复制用在一些异常情况下，例如主从延迟、从服务宕机之后重新启动接收主服务器发送的部分数据。
+
+部分复制的实现主要依赖于复制缓存区、主服务的 runid、主从服务器各自的复制偏移量 (offset)
+
+- 复制缓存区
+  - 主服务在接收写命令时，会将命令写入缓存区，以便从服务器在异常情况下，减少数据的丢失。
+  - 当从服务器正常连接之后，主服务器会将缓存区内的数据发送给从服务器。这里的缓存区是一个长队列。
+  - 复制缓冲区的大小是有限制的，当超过这个大小，之前的老数据将会被移除来保存新的数据。
+
+- 主服务器 runid
+
+  - 主服务器会在每次服务启动之后，会生成一个唯一的 ID，作为自身标识。
+
+  - 从服务器会将该标识保存起来，发送部分复制命令时，会使用该 runid。
+
+  - ```shell
+    psync runid offset
+    ```
+
+- 主从复制各自偏移量
+  - 主从服务在建立复制之后，都会有自身的偏移量。
+  - 从节点会每秒钟发送自身复制的偏移量给主节点，主节点在发送写命令之后，从节点也会增加自身的复制偏移量。
+  - 主节点在每次进行了写命令之后，也会增加自身的偏移量。
+  - 这里的偏移量是通过命令的字节长度累加计算。
+
+### 异步复制
+
+异步复制是针对主从建立复制关系之后，主节点在响应客户端写的请求会立即把对应的结果返给客户端，接着在去把新的数据下发给从节点。
+
+这样就有可能主从延迟导致、主服务突然宕机了还没来得及同步数据，出现数据不一致的情况。
+
+## 哨兵机制
+
+### 主从复制弊端
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/1618556721550-Snipaste_2021-04-16_15-04-45.png" alt="1618556721550-Snipaste_2021-04-16_15-04-45" style="zoom:50%;" />
+
+上面的图形结构，大致的可以理解为 Redis 的主从复制拓扑图。
+
+1. 其中 1 个主节点负责应用系统的写数据，另外的 4 个从节点负责应用系统的读数据。
+2. 同时 4 个从节点向其中的 1 个一个主节点发起复制请求操作。
+
+在 Redis 服务运行正常的情况下，该拓扑结结构不会出现什么问题。试想一下这样的一个场景。如果主节点服务发生了异常，不能正常处理服务（如写入数据、主从复制操作）。**这时候，Redis 服务能正常响应应用系统的读操作，但是没法进行写操作。** 出现该情况就会严重影响到系统的业务数据。那该如何解决呢？
+
+可以大致想到下面的几种情况来解决。
+
+1. 当主节点发生异常情况时，手动的从部分从节点中选择一个节点作为主节点。然后改变其他从节点的主从复制关系。
+2. 我们也可以写一套自动处理该情况的服务，避免依赖于人为的操作。
+
+上面的方案在一定程度上是能帮助我们解决问题。但是过多的人为干预。例如第 1 点，我们需要考虑人工处理的实时性和正确性。第 2 点，自动化处理是能够很好的解决第 1 点中的问题，但是自动处理存在如何选择新主节点的问题，因此这也是个难题
+
+Redis 的哨兵机制就是针对这些问题出现的
+
+### 什么是哨兵
+
+可以把 Redis 的哨兵理解为一种 **Redis 分布式架构**。 该架构中主要存在两种角色，一种是哨兵，另外一种是数据节点（主从复制节点）
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/1618558716540-Snipaste_2021-04-16_15-38-08.png" alt="1618558716540-Snipaste_2021-04-16_15-38-08" style="zoom:50%;" />
+
+哨兵主要负责的任务是：
+
+1. 每一个哨兵都会监控数据节点以及其他的哨兵节点。
+2. 当其中的一个哨兵监控到节点不可达时，会给对应的节点做**下线标识**。如果下线的节点为主节点。这时候会通知其他的哨兵节点。
+3. 哨兵节点**通过 “协商” 推举**出从节点中的某一个节点为主节点。
+4. 接着将其他的从节点断开与旧主节点的复制关系，将推举出来的新主节点作为从节点的主节点。
+5. 将切换的结果通知给应用系统。
+
+![1618558995604-Snipaste_2021-04-16_15-43-04](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/1618558995604-Snipaste_2021-04-16_15-43-04.png)
+
+### 配置哨兵
+
+在演示环境中，配置了三台数据节点（1 主 2 从），三台哨兵节点。演示中用到的 Redis 为 6.0.8 版本。
+
+| 角色              | IP        | 端口号 |
+| ----------------- | --------- | ------ |
+| (数据节点) master | 127.0.0.1 | 8002   |
+| (数据节点) slave  | 127.0.0.1 | 8003   |
+| (数据节点) slave  | 127.0.0.1 | 8004   |
+| 哨兵节点          | 127.0.0.1 | 8005   |
+| 哨兵节点          | 127.0.0.1 | 8006   |
+| 哨兵节点          | 127.0.0.1 | 8007   |
+
+(数据节点) master 配置
+
+```ini
+# 服务配置
+daemonize yes
+
+# 端口号
+port 8002
+
+# 数据目录
+dir "/Users/kert/config/redis/8002"
+
+# 日志文件名称
+logfile "8002.log"
+
+# 设置密码
+bind 0.0.0.0
+# requirepass 8002
+
+# 多线程
+# 1.开启线程数。
+io-threads 2
+# 2.开启读线程。
+io-threads-do-reads yes
+
+# 持久化存储(RDB)
+# 1.每多少秒至少有多少个key发生变化，则执行save命令。
+save 10 1
+save 20 1
+save 30 1
+# 2.当bgsave命令发生错误时，停止写入操作。
+stop-writes-on-bgsave-error yes
+# 3.是否开启rbd文件压缩
+rdbcompression yes
+```
+
+(数据节点) slave 配置
+
+```ini
+# 服务配置
+daemonize yes
+
+port 8004
+
+dir "/Users/kert/config/redis/8004"
+
+logfile "8004.log"
+
+# 多线程
+# 1.开启线程数。
+io-threads 2
+# 2.开启读线程。
+io-threads-do-reads yes
+
+# 持久化存储(RDB)
+# 1.每多少秒至少有多少个key发生变化，则执行save命令。
+save 10 1
+save 20 1
+save 30 1
+# 2.当bgsave命令发生错误时，停止写入操作。
+stop-writes-on-bgsave-error yes
+# 3.是否开启rbd文件压缩
+rdbcompression yes
+
+# 配置主节点信息
+replicaof 127.0.0.1 8002
+```
+
+哨兵节点配置。
+
+```ini
+# 端口号
+port 8006
+# 运行模式
+daemonize yes
+# 数据目录
+dir "/Users/kert/config/redis/sentinel/8006"
+# 日志文件
+logfile "8006.log"
+# 监听数据节点
+sentinel monitor mymaster 127.0.0.1 8002 2(判定主节点下线状态的票数)
+# 设置主节点连接权限信息
+sentinel auth-pass mymaster 8002
+# 判断数据节点和sentinel节点多少毫秒数内没有响应ping，则处理为下线状态
+sentinel down-after-milliseconds mymaster 30000
+# 主节点下线后，从节点向新的主节点发起复制的个数限制(指的一次同时允许几个从节点)。
+sentinel parallel-syncs mymaster 1
+# 故障转移超时时间
+sentinel failover-timeout mymaster 180000Copy to clipboardErrorCopied
+```
+
+> 所有的哨兵节点直接将 port、dir 和 logfile 修改为对应的具体哨兵信息即可。
+
+接着启动对应的服务 Redis 服务
+
+```shell
+# 启动master节点
+kert@kertdeMacBook-Pro-2 [ ~/config/redis/8002 ] redis-server ./redis.conf
+
+# 启动slave节点
+kert@kertdeMacBook-Pro-2 [ ~/config/redis/8003 ] redis-server ./redis.conf
+kert@kertdeMacBook-Pro-2 [ ~/config/redis/8004 ] redis-server ./redis.conf
+
+# 启动哨兵节点
+kert@kertdeMacBook-Pro-2 [ ~/config/redis/sentinel ] redis-sentinel 8007.conf
+kert@kertdeMacBook-Pro-2 [ ~/config/redis/sentinel ] redis-sentinel 8006.conf
+kert@kertdeMacBook-Pro-2 [ ~/config/redis/sentinel ] redis-sentinel 8005.conf
+```
+
+> 哨兵启动，需要用到 Redis 安装完之后自带的 redis-sentinel 命令。
+
+查看 Redis 服务运行状态
+
+```shell
+ kert@kertdeMacBook-Pro-2 [ ~/config/redis/sentinel ] ps -ef | grep redis
+  501 99742     1   0  3:53PM ??         0:00.47 redis-server 0.0.0.0:8002
+  501 99776     1   0  3:53PM ??         0:00.36 redis-server 0.0.0.0:8003
+  501 99799     1   0  3:53PM ??         0:00.10 redis-server *:8004
+  501 99849     1   0  3:53PM ??         0:00.06 redis-sentinel *:8007 [sentinel]
+  501 99858     1   0  3:53PM ??         0:00.04 redis-sentinel *:8006 [sentinel]
+  501 99867     1   0  3:53PM ??         0:00.03 redis-sentinel *:8005 [sentinel]
+```
+
+> 看到上面的结果，则表示我们的 Redis 服务已经正常启动。
+
+### 演示故障切换
+
+我们先打开三个终端，分配时 master 节点和两个 slave 节点。检测是否能够正常进行主从复制。
+
+![1618560150817-Snipaste_2021-04-16_16-01-40](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/1618560150817-Snipaste_2021-04-16_16-01-40.png)
+
+我们在主节点任意写入一些数据，然后在从节点进行查询数据。为了方便，后面将 master 称作 1 号终端，两个 slave 分配叫做 2 号和 3 号终端。
+
+我们在 1 号终端写入数据。
+
+```shell
+127.0.0.1:8002> set name tony
+OK
+127.0.0.1:8002> set age 1
+OK
+127.0.0.1:8002> set score 1
+OK
+```
+
+接着在 2 号和 3 号终端下面执行如下的查询操作。
+
+```shell
+127.0.0.1:8003> get name
+"tony"
+127.0.0.1:8003> get age
+"1"
+127.0.0.1:8003> get score
+"1"
+```
+
+> 事实证明我们的主从复制是成功的，接下来我们就停掉 master 节点的服务。
+
+我们实现查看一下哨兵节点的一个状态信息。
+
+查看哨兵端口为 8005 的节点。
+
+```shell
+kert@kertdeMacBook-Pro-2 [ ~ ] redis-cli -p 8005 info
+# Sentinel
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+sentinel_simulate_failure_flags:0
+master0:name=mymaster,status=ok,address=127.0.0.1:8002,slaves=2,sentinels=3
+```
+
+查看哨兵端口为 8006 的节点。
+
+```shell
+kert@kertdeMacBook-Pro-2 [ ~ ] redis-cli -p 8006 info
+# Sentinel
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+sentinel_simulate_failure_flags:0
+master0:name=mymaster,status=ok,address=127.0.0.1:8002,slaves=2,sentinels=3
+```
+
+查看哨兵端口为 8007 的节点。
+
+```shell
+kert@kertdeMacBook-Pro-2 [ ~ ] redis-cli -p 8007 info
+# Sentinel
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+sentinel_simulate_failure_flags:0
+master0:name=mymaster,status=ok,address=127.0.0.1:8002,slaves=2,sentinels=3
+```
+
+> 通过上面的几个状态信息，我们可以看到哨兵检测的主节点信息，主节点下面有几个从节点，同时哨兵节点有几个。
+
+我们杀掉 master 的进程。可以看到 1 号端口自动断开了连接。
+
+![1618560942345-Snipaste_2021-04-16_16-15-12](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/1618560942345-Snipaste_2021-04-16_16-15-12.png)
+
+接着我们通过哨兵机制查看一下数据节点状态信息。
+
+```shell
+kert@kertdeMacBook-Pro-2 [ ~ ] redis-cli -p 8005 info
+# Sentinel
+sentinel_masters:1
+sentinel_tilt:0
+sentinel_running_scripts:0
+sentinel_scripts_queue_length:0
+sentinel_simulate_failure_flags:0
+master0:name=mymaster,status=ok,address=127.0.0.1:8004,slaves=2,sentinels=3
+```
+
+> 通过上面的查询结果，我们可以看到 address 的值变成了 8004 端口了，其他的信息没有发生改变，说明哨兵已经完成切换工作。
+
+接下来我们在新的主节点执行操作命令，查看在从节点是否能够完成主从复制。
+
+在 3 号端口（新的 master）执行一个 del 命令
+
+```shell
+127.0.0.1:8004> del age
+(integer) 1
+127.0.0.1:8004> keys *
+1) "name"
+2) "socre"
+```
+
+在 2 号端口执行读命令
+
+```shell
+127.0.0.1:8003> keys *
+1) "socre"
+2) "name"
+```
+
+> 此时可以发现我们的主从复制也是正常的。 
+
+启动旧的 master，并执行读命令
+
+```shell
+kert@kertdeMacBook-Pro-2 [ ~/config/redis/8002 ] redis-server ./redis.conf
+kert@kertdeMacBook-Pro-2 [ ~/config/redis/8002 ] redis-cli -p 8002
+127.0.0.1:8002> keys *
+1) "name"
+2) "socre"
+```
+
+> 此时你也会发现，原来的 master 节点变成了 slave 节点，并且能够正常复制新 master 节点的数据。
+
+### 配置文件对比
+
+在我们启动了哨兵模式之后，我们的哨兵配置文件和数据节点配置文件的内容都会自动的生成一个特定的内容。
+
+#### 数据节点 (master)
+
+变化前
+
+```shell
+# 服务配置
+daemonize yes
+
+# 端口号
+port 8002
+
+# 数据目录
+dir "/Users/kert/config/redis/8002"
+
+# 日志文件名称
+logfile "8002.log"
+
+# 设置密码
+bind 0.0.0.0
+# requirepass 8002
+
+# 多线程
+# 1.开启线程数。
+io-threads 2
+# 2.开启读线程。
+io-threads-do-reads yes
+# 持久化存储(RDB)
+# 1.每多少秒至少有多少个key发生变化，则执行save命令。
+save 10 1
+save 20 1
+save 30 1
+# 2.当bgsave命令发生错误时，停止写入操作。
+stop-writes-on-bgsave-error yes
+# 3.是否开启rbd文件压缩
+rdbcompression yesCopy to clipboardErrorCopied
+```
+
+变化后
+
+```shell
+# 服务配置
+daemonize yes
+
+# 端口号
+port 8002
+
+# 数据目录
+dir "/Users/kert/config/redis/8002"
+
+# 日志文件名称
+logfile "8002.log"
+
+# 设置密码
+bind 0.0.0.0
+# requirepass 8002
+
+# 多线程
+# 1.开启线程数。
+io-threads 2
+# 2.开启读线程。
+io-threads-do-reads yes
+
+# 持久化存储(RDB)
+# 1.每多少秒至少有多少个key发生变化，则执行save命令。
+save 10 1
+save 20 1
+save 30 1
+# 2.当bgsave命令发生错误时，停止写入操作。
+stop-writes-on-bgsave-error yes
+# 3.是否开启rbd文件压缩
+rdbcompression yes
+# Generated by CONFIG REWRITE
+pidfile "/var/run/redis.pid"
+user default on nopass ~* +@all
+
+replicaof 127.0.0.1 8004
+```
+
+#### 哨兵节点
+
+变化前
+
+```shell
+# 端口号
+port 8006
+# 运行模式
+daemonize yes
+# 数据目录
+dir "/Users/kert/config/redis/sentinel/8006"
+# 日志文件
+logfile "8006.log"
+# 监听数据节点
+sentinel monitor mymaster 127.0.0.1 8002 2(判定主节点下线状态的票数)
+# 设置主节点连接权限信息
+sentinel auth-pass mymaster 8002
+# 判断数据节点和sentinel节点多少毫秒数内没有响应ping，则处理为下线状态
+sentinel down-after-milliseconds mymaster 30000
+# 主节点下线后，从节点向新的主节点发起复制的个数限制(指的一次同时允许几个从节点)。
+sentinel parallel-syncs mymaster 1
+# 故障转移超时时间
+sentinel failover-timeout mymaster 180000Copy to clipboardErrorCopied
+```
+
+变化后
+
+```shell
+# 端口号
+port 8005
+# 运行模式
+daemonize yes
+# 数据目录
+dir "/Users/kert/config/redis/sentinel/8005"
+# 日志文件
+logfile "8005.log"
+# 监听数据节点
+sentinel myid 5724fd60af87e728e6f8f03ded693960c983e156
+# 判断数据节点和sentinel节点多少毫秒数内没有响应ping，则处理为下线状态
+sentinel deny-scripts-reconfig yes
+# 主节点下线后，从节点向新的主节点发起复制的个数限制(指的一次同时允许几个从节点)。
+sentinel monitor mymaster 127.0.0.1 8004 2
+# 故障转移超时时间
+sentinel config-epoch mymaster 3
+# Generated by CONFIG REWRITE
+protected-mode no
+user default on nopass ~* +@all
+sentinel leader-epoch mymaster 3
+sentinel known-replica mymaster 127.0.0.1 8002
+sentinel known-replica mymaster 127.0.0.1 8003
+sentinel known-sentinel mymaster 127.0.0.1 8006 8fbd2cce642c881f752775afee9b3591e0d90dc6
+sentinel known-sentinel mymaster 127.0.0.1 8007 69530c74791e5f32db1c2a006c826a6463bc6496
+sentinel current-epoch 3
+pidfile "/var/run/redis.pid"
+```
+
+### 哨兵选主机制
+
+- 从从节点中选择 slave-priority 配置最小值的那一天作为从节点，如果设置为 0，表示该从节点不参与从节点换主节点。
+
+- 如果不存在 slave-priority 配置，则选择集群中同步数据最多，偏移量最大的节点作为主节点。
+
+- 如果还是不存在，则选择 runid 最小的从节点为主节点。
+
 ## Redis 与 MySQL 的配合
 
 在 web 服务端开发的过程中，redis+mysql 是最常用的存储解决方案，mysql 存储着所有的业务数据，根据业务规模会采用相应的分库分表、读写分离、主备容灾、数据库集群等手段。但是由于 mysql 是基于磁盘的 IO，基于服务响应性能考虑，将业务热数据利用 redis 缓存，使得高频业务数据可以直接从内存读取，提高系统整体响应速度。
@@ -1932,7 +3334,7 @@ public void write(String key,Object data){
 
 结合双删策略 + 缓存超时设置，这样最差的情况就是在超时时间内数据存在不一致，而且又增加了写请求的耗时。
 
-#### 异步更新缓存 (基于订阅binlog的同步机制)
+#### 异步更新缓存 (基于订阅 binlog 的同步机制)
 
 ##### 技术整体思路：
 
@@ -1983,7 +3385,9 @@ redis [1] > GET foo
 
 ## 八股
 
-### Redis 使用场景
+### 数据类型
+
+#### Redis 使用场景
 
 1. 数据缓存 (用户信息、商品数量、文章阅读数量)
 
@@ -2001,7 +3405,7 @@ redis [1] > GET foo
 
 8. GEO 计算
 
-### Redis 功能特点
+#### Redis 功能特点
 
 1. 持久化
 2. 丰富的数据类型 (string、list、hash、set、zset、发布订阅等)
@@ -2014,7 +3418,7 @@ redis [1] > GET foo
 9. HyperLogLog
 10. 事务
 
-### Redis 各种数据类型的底层数据结构
+#### Redis 各种数据类型的底层数据结构
 
 1. string 底层数据结构为简单字符串。
 2. list 底层数据结构为 ziplist 和 linkedlist
@@ -2022,14 +3426,14 @@ redis [1] > GET foo
 4. set 底层数据结构为 intset 和 hashtable
 5. sorted set 底层数据结构为 ziplist 和 skiplist
 
-### 如何使用Redis实现队列功能
+#### 如何使用 Redis 实现队列功能
 
 1. 可以使用 list 实现普通队列，lpush 添加到嘟列，lpop 从队列中读取数据。
 2. 可以使用 zset 定期轮询数据，实现延迟队列。
 3. 可以使用发布订阅实现多个消费者队列。
 4. 可以使用 stream 实现队列。(推荐使用该方式实现)。
 
-### 你是怎么用 Redis 做异步队列的
+#### 你是怎么用 Redis 做异步队列的
 
 1. 一般使用 list 结构作为队列，rpush 生产消息，lpop 消费消息。当 lpop 没有消息的时候，要适当 sleep 一会再重试。
 2. 如果对方追问可不可以不用 sleep 呢？
@@ -2041,14 +3445,14 @@ redis [1] > GET foo
 5. 如果对方追问 redis 如何实现延时队列
    - **使用sortedset，拿时间戳作为score**，消息内容作为 key 调用 zadd 来生产消息，消费者用 zrangebyscore 指令获取 N 秒之前的数据轮询进行处理。
 
-### 使用 Redis Stream 做队列，比list，zset和发布订阅有什么区别
+#### 使用 Redis Stream 做队列，比 list，zset 和发布订阅有什么区别
 
 1. list 可以使用 lpush 向队列中添加数据，lpop 可以向队列中读取数据。list 作为消息队列无法实现一个消息多个消费者。如果出现消息处理失败，需要手动回滚消息。
 2. zset 在添加数据时，需要添加一个分值，可以根据该分值对数据进行排序，实现延迟消息队列的功能。消息是否消费需要额外的处理。
 3. 发布订阅可以实现多个消费者功能，但是发布订阅无法实现数据持久化，容易导致数据丢失。并且开启一个订阅者无法获取到之前的数据。
 4. stream 借鉴了常用的 MQ 服务，添加一个消息就会产生一个消息 ID，每一个消息 ID 下可以对应多个消费组，每一个消费组下可以对应多个消费者。可以实现多个消费者功能，同时支持 ack 机制，减少数据的丢失情况。也是支持数据值持久化和主从复制功能。
 
-### 设计一个网站每日、每月和每天的 PV、UV 该怎么设计
+#### 设计一个网站每日、每月和每天的 PV、UV 该怎么设计
 
 实现这样的功能，如果只是统计一个汇总数据，推荐使用 **HyperLogLog** 数据类型。
 
@@ -2056,7 +3460,7 @@ Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是�
 
 在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64^ 个不同元素的基 数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。
 
-### 如何使用 Redis 实现附近距离检索功能
+#### 如何使用 Redis 实现附近距离检索功能
 
 实现距离检索，可以使用 Redis 中的 **GEO 数据类型**。
 
@@ -2066,11 +3470,11 @@ GEO 主要用于存储地理位置信息，并对存储的信息进行操作，�
 
 由于 GEO 是在内存中进行计算，具备计算速度快的特点。
 
-### 如何使用 Redis 实现一个分布式锁功能
+#### 如何使用 Redis 实现一个分布式锁功能
 
 使用 Redis 实现分布式锁，可以使用 `set key value` + `expire ttl` 实现，但是这两个命令分开执行不是一个原子操作，因此推荐使用 `set key vale nx ttl`，该命令属于原子操作。
 
-### 使用 Redis 解决秒杀超卖，该选择什么数据类型，为什么选择该数据类型
+#### 使用 Redis 解决秒杀超卖，该选择什么数据类型，为什么选择该数据类型
 
 1. 在秒杀场景下，超卖是一个非常严重的问题。常规的逻辑是先查询库存在减少库存。但在秒杀场景中，无法保证减少库存的过程中有其他的请求读取了未减少的库存数据。
 2. 由于 Redis 是单线程的执行，同一时刻只有一个线程进行操作。因此可以使用 Redis 来实现秒杀减少库存。
@@ -2084,19 +3488,19 @@ GEO 主要用于存储地理位置信息，并对存储的信息进行操作，�
 4. 服务端异步队列将请求出队，出队成功的请求可以生成秒杀订单，减少数据库库存，返回秒杀订单详情。
 5. 用户在客户端申请秒杀请求后，进行**轮询**，查看是否秒杀成功，秒杀成功则进入秒杀订单详情，否则秒杀失败。
 
-### 如何使用 Redis 实现系统用户签到功能
+#### 如何使用 Redis 实现系统用户签到功能
 
 1. 使用 Redis 实现用户签到可以使用 **bitmap** 实现。bitmap 底层数据存储的是 1 否者 0，占用内存小。
 2. Redis 提供的数据类型 BitMap（位图），每个 bit 位对应 0 和 1 两个状态。虽然内部还是采用 String 类型存储，但 Redis 提供了一些指令用于直接操作 BitMap，可以把它看作一个 bit 数组，数组的下标就是偏移量。
 3. 它的优点是内存开销小，效率高且操作简单，很适合用于签到这类场景。
 4. 缺点在于位计算和位表示数值的局限。如果要用位来做业务数据记录，就不要在意 value 的值。
 
-### 如何使用 Redis 实现一个积分排行功能
+#### 如何使用 Redis 实现一个积分排行功能
 
 1. 使用 Redis 实现积分排行，可以使用 **zset** 数据类型。
 2. zset 在添加数据时，需要添加一个分值，将积分作为分值，值作为用户 ID，根据该分值对数据进行排序。
 
-### Redis 如何解决事务之间的冲突
+#### Redis 如何解决事务之间的冲突
 
 1. 使用 watch 监听 key 变化，当 key 发生变化，事务中的所有操作都会被取消。
 2. 使用乐观锁，通过版本号实现。
@@ -2104,12 +3508,245 @@ GEO 主要用于存储地理位置信息，并对存储的信息进行操作，�
 
 悲观锁
 
-- 悲观锁(Pessimistic Lock)，顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每 次在拿数据的时候都会上锁，这样别人拿到这个数据就会 block 直到它拿到锁。传统的关系型数据库里面 就用到了很多这种锁机制，比如行锁、表锁、读锁、写锁等，都是在做操作之前先上锁。
+- 悲观锁 (Pessimistic Lock)，顾名思义，就是很悲观，每次去拿数据的时候都认为别人会修改，所以每 次在拿数据的时候都会上锁，这样别人拿到这个数据就会 block 直到它拿到锁。传统的关系型数据库里面 就用到了很多这种锁机制，比如行锁、表锁、读锁、写锁等，都是在做操作之前先上锁。
 
 乐观锁
 
-- 乐观锁(Optimistic Lock)，顾名思义，就是很乐观，每次去那数据的时候都认为别人不会修改，所以不会上锁；但是在**修改**的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机 制。乐观锁适用于多读的应用类型，这样可以提高吞吐量。redis 就是使用这种 check-and-set 机制实现 事务的。
+- 乐观锁 (Optimistic Lock)，顾名思义，就是很乐观，每次去那数据的时候都认为别人不会修改，所以不会上锁；但是在**修改**的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机 制。乐观锁适用于多读的应用类型，这样可以提高吞吐量。redis 就是使用这种 check-and-set 机制实现 事务的。
 
 watch 监听
 
-- 在执行 multi 之前，先执行` watch key1 [key2 ...]`，可以监视一个或者多个 key，若在事务的 exec 命令之前，这些 key 对应的值被其他命令所改动了，那么事务中所有命令都将被打断，即事务所有操作将被取消执行。
+- 在执行 multi 之前，先执行 ` watch key1 [key2 ...]`，可以监视一个或者多个 key，若在事务的 exec 命令之前，这些 key 对应的值被其他命令所改动了，那么事务中所有命令都将被打断，即事务所有操作将被取消执行。
+
+#### Redis 事务的三大特性
+
+1. 事务中的所有命令都会序列化、按顺序地执行，事务在执行过程中，不会被其他客户端发送来的命令请求所打断。
+2. 队列中的命令没有提交 (exec) 之前，都不会实际被执行，因为事务提交前任何指令都不会被实际执行。
+3. 事务中如果有一条命令执行失败，后续的命令仍然会被执行，没有回滚。
+   - 如果在组队阶段，有 1 个失败了，后面都不会成功；
+   - 如果在组队阶段成功了，在执行阶段有命令失败，就这条失败，其他的命令则正常执行，不保证都成功或都失败。
+
+### 持久化
+
+#### Redis 持久化都有哪些方式
+
+1. 快照全量备份的方式 (RDB)，使用 bgsave 或者 save 命令
+   - bgsave 是通过 fork 一个子进程，异步持久化；
+   - save 使用同步阻塞的模式进行持久化。
+2. 增量日志快照的方式 (AOF)，将 Redis 写**命令**写入到缓冲区，然后在将缓冲区的命令写入到磁盘中。
+
+#### 使用 AOF 方式做持久化，会遇到什么问题？如何解决？
+
+1. AOF 记录的是 Redis 的**写操作命令**，当命令数量多时，就会导致文件过大。同时有些缓存数据本身应该是**过期**了，但对应的写命令还是被保留在文件中。这就出现 **AOF 文件过大**的问题。
+2. 针对这种情况，Redis 采用了**重写机制**，定期 fork 一个子进程对 AOF 文件进行重写，用来减少文件体积并剔除一些过期的命令。
+3. AOF 重写可以通过自动方式和手动的方式触发，手动可以使用 `bgrewriteaof` 和自动通过配置文件体积大小时触发。
+
+#### 什么是写时复制技术
+
+1. Redis 使用 AOF 做持久化时，会做重写操作，此时用到了写时复制技术。
+2. 在触发重写时，主进程会 fork 一个子进程，该子进程来负责做重写。在 fork 之后，子进程和主进程会共享物理内存地址，当有新的操作发生时，会单独复制一块内存空间用作重写操作。
+
+#### AOF 持久化会保证数据的不丢失吗
+
+1. 采用 AOF 持久化，首先写的命令是放在缓冲区中，通过同步策略持久化到磁盘中。可以通过 `appendfsync` 配置进行操作。具体可配置的值有：
+   - always：命令写入到 aof_buf 缓冲区中之后立即调用系统的 fsync 操作同步到 aof 文件中，fsync 完成后线程返回。
+   - everysec：命令写入到 aof_buf 缓冲区后每隔一秒调用系统的 write 操作，write 完成后线程返回。
+   - no：命令写入 aof_bug 缓冲区后调用系统 write 操作，不对 aof 文件做 fsync 同步，同步硬盘操作由系统操作完成，时间一般最长为 30s。
+
+2. fork 出来的子进程在做文件重写后，父进程此时会将就的重写文件替换掉。在这个过程中，父进程是一个阻塞的过程，不接受客户端的写命令。这个过程中容易导致数据的丢失。
+
+#### RDB 和 AOF 做持久化的区别
+
+##### RDB 优缺点
+
+- 优点
+  - 文件实现的数据快照，**全量备份**，便于数据的传输。
+    - 比如我们需要把 A 服务器上的备份文件传输到 B 服务器上面，直接将 rdb 文件拷贝即可。
+  - 文件采用**压缩的二进制文件**，当重启服务时加载数据文件，比 aof 方式更快（aof 是重新去执行一次命令）
+
+- 缺点
+  - rbd 采用加密的二进制格式存储文件，由于 **Redis 各个版本之间的兼容性问题**也导致 rdb 由版本兼容问题导致无法再其他的 Redis 版本中使用。
+  - **实时性差**，并不是完全的实时同步，容易造成数据的**不完整性**。
+    - 因为 rdb 并不是实时备份，当某个时间段 Redis 服务出现异常，内存数据丢失，这段时间的数据是无法恢复的，因此易导致数据的丢失。
+  - **可读性差**
+    - 由于文件内容采用二进制加密处理，我们无法直接读取，不能修改文件内容
+    - 但一般情况下是不会去查看或修改持久化的内容
+
+##### AOF 优缺点
+
+- 优点
+  - 多种文件写入（fsync）策略，数据实时保存，数据**完整性强**；即使丢失某些数据，制定好策略最多也是一秒内的数据丢失
+  - **可读性强**，由于使用的是文本协议格式来存储的数据，可有直接查看操作的命令，同时也可以手动改写命令。
+
+- 缺点
+  - 文件**体积过大**，加载速度比 rbd **慢**
+  - 由于 aof 记录的是 redis 操作的日志，一些无效的，可简化的操作也会被记录下来，造成 aof 文件过大；但该方式可以通过文件重写策略进行优化.
+
+### 主从复制
+
+#### Redis 的同步机制
+
+主从同步。
+
+- 第一次同步时，主节点做一次 bgsave，并同时将后续修改操作记录到内存 buffer
+
+- 待完成后将 rdb 文件**全量同步**到复制节点，复制节点接受完成后将 rdb 镜像加载到内存。
+
+- 加载完成后，再通知主节点将期间修改的操作记录同步到复制节点进行重放就完成了同步过程。
+
+#### 如何防止 Redis 脑裂导致数据库丢失情况
+
+##### 什么是脑裂
+
+所谓的脑裂，就是指在主从集群中，**同时有两个主节点**，它们都能接收写请求。
+
+而脑裂最直接的影响，就是客户端不知道应该往哪个主节点写入数据，结果就是不同的客户端会往不同的主节点上写入数据。而且，严重的话，脑裂会进一步导致数据丢失。
+
+##### 脑裂发生原因
+
+1. 确认是不是**数据同步**出现了问题。
+   - 在主从集群中发生数据丢失，最常见的原因就是主库的数据还没有同步到从库，结果主库发生了故障，等从库升级为主库后，未同步的数据就丢失了。
+   - 如果是这种情况的数据丢失，我们可以通过比对**主从库上的复制进度差值**来进行判断，也就是计算`master_repl_offset` 和 `slave_repl_offset` 的差值。
+     - 如果从库上的 `slave_repl_offset` 小于原主库的 `master_repl_offset`，那么，我们就可以认定数据丢失是由数据同步未完成导致的。
+
+2. 排查客户端的操作日志，发现脑裂现象
+   - 在排查客户端的操作日志时，我们发现，在主从切换后的一段时间内，有一个客户端仍然在和原主库通信，并没有和升级的新主库进行交互。
+   - 这就相当于主从集群中同时有了两个主库。根据这个迹象，我们就想到了在分布式主从集群发生故障时会出现的一个问题：脑裂。
+   - 但是，不同客户端同时给两个主库发送数据写操作，按道理来说，只会导致新数据会分布在不同的主库上，并不会造成数据丢失。那么，为什么我们的数据仍然丢失了呢？
+
+3. 发现是原主库假故障导致的脑裂。
+   - 我们是采用哨兵机制进行主从切换的，当主从切换发生时，一定是有超过预设数量（quorum 配置项）的哨兵实例和主库的心跳都超时了，才会把主库判断为客观下线，然后，哨兵开始执行切换操作。哨兵切换完成后，客户端会和新主库进行通信，发送请求操作。
+   - 但是，在切换过程中，既然客户端仍然和原主库通信，这就表明，原主库并没有真的发生故障（例如主库进程挂掉）
+
+##### 为什么脑裂会导致数据丢失
+
+主从切换后，从库一旦升级为新主库，哨兵就会让原主库执行 `slave of` 命令，和新主库重新进行全量同步。
+
+而在全量同步执行的最后阶段，原主库需要清空本地的数据，加载新主库发送的 RDB 文件，这样一来，原主库在主从切换期间保存的新写数据就丢失了。
+
+##### 解决方案
+
+Redis 已经提供了两个配置项来限制主库的请求处理，分别是 `min-slaves-to-write` 和 `min-slaves-max-lag`。
+
+- `min-slaves-to-write`：这个配置项设置了主库能进行数据同步的最少从库数量；
+
+- `min-slaves-max-lag`：这个配置项设置了主从库间进行数据复制时，从库给主库发送 ACK 消息的最大延迟（以秒为单位）。
+
+我们可以把 `min-slaves-to-write` 和 `min-slaves-max-lag` 这两个配置项搭配起来使用，分别给它们设置一定的阈值，假设为 N 和 T。这两个配置项组合后的要求是，主库连接的从库中至少有 N 个从库，和主库进行数据复制时的 ACK 消息延迟不能超过 T 秒，否则，主库就不会再接收客户端的请求了。
+
+即使原主库是假故障，它在假故障期间也无法响应哨兵心跳，也不能和从库进行同步，自然也就无法和从库进行 ACK 确认了。这样一来，`min-slaves-to-write` 和 `min-slaves-max-lag` 的组合要求就无法得到满足，原主库就会被限制接收客户端请求，客户端也就不能在原主库中写入新数据了。
+
+### 内存管理
+
+#### Redis 存储大 key 有什么优化的解决方案
+
+1. 应用层对存储的数据进行压缩，在存储到 Redis 中，从 Redis 中获取数据后再解压数据。
+2. 可以拆分存储内容，将大 key 中的存储信息进行拆分。例如一个存储一个很大的对象，可以将对象的方法和属性给拆分开进行存储，这样检索的时候也会很快。也可以采用数据切片处理。
+3. 制定合理的内存淘汰策略，例如 lru、lfu 等内存淘汰策略方案。
+4. 上面几种方案如不能解决，也可以使用集群、扩容等操作。进行横向扩展。
+
+> 针对大 key，一般会出现两种情况。一种是数据检索慢，另外一种是内存占用大。因此优化的策略可以从这两个方面入手。
+
+#### Redis 的数据过期策略有哪些
+
+过期策略是指数据在过期之后，还会占用这内容，这时候 Redis 是如何处理的？分别有下面三种方式:
+
+##### 定时策略
+
+Redis 在对设置了过期时间的 key，在创建时都会增加一个**定时器**。定时器定时去处理该 key。
+
+- 优点：保证内存被尽快释放，减少无效的缓存暂用内存。
+
+- 缺点：若过期 key 很多，删除这些 key 会占用很多的 CPU 时间，在 CPU 时间紧张的情况下，CPU 不能把所有的时间用来做要紧的事儿，还需要去花时间删除这些 key。定时器的创建耗时，若为每一个设置过期时间的 key 创建一个定时器（将会有大量的定时器产生），性能影响严重。
+
+一般来说不会选择该策略模式。
+
+##### 惰性策略
+
+在客户端向 Redis 读数据时，Redis 会检测该 key 是否过期，过期了就返回空值。
+
+- 优点：删除操作只发生在从数据库取出 key 的时候发生，而且只删除当前 key，所以对 CPU 时间的占用是比较少的，而且此时的删除是已经到了非做不可的地步（如果此时还不删除的话，我们就会获取到了已经过期的 key 了）。
+
+- 缺点：若大量的 key 在超出超时时间后，很久一段时间内，都没有被获取过，此时的无效缓存是永久暂用在内存中的，那么可能发生内存泄露（无用的垃圾占用了大量的内存）。
+
+##### 定期策略
+
+Redis 会定期去检测设置了过期时间的 key，当该 key 已经失效了，则会从内存中剔除。
+
+存中删除，如果未失效，则不作任何处理。
+
+- 优点：通过限制删除操作的时长和频率，来缓解定时策略、惰性策略的缺点
+
+- 缺点
+  - 在内存友好方面，不如"定时删除"，因为是随机遍历一些 key，因此存在部分 key 过期，但遍历 key 时，没有被遍历到，过期的 key 仍在内存中。
+  - 在 CPU 时间友好方面，不如"惰性删除"，定期删除也会暂用 CPU 性能消耗。
+
+- 难点：合理设置删除操作的执行时长（每次删除执行多长时间）和执行频率（每隔多长时间做一次删除）（这个要根据服务器运行情况来定了）
+
+#### Redis 的数据淘汰策略
+
+淘汰策略主要是针对数据一直存在内存中，导致内存无法接纳新的数据。重点是了解 lru 算法、lfu 算法。
+
+1. `volatile-lru` 当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的 key。
+2. `allkeys-lru` 当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（这个是最常用的）。
+3. `volatile-lfu` 当内存不足以容纳新写入数据时，在过期密集的键中，使用 LFU 算法进行删除 key。
+4. `allkeys-lfu` 当内存不足以容纳新写入数据时，使用 LFU 算法移除所有的 key。
+5. `volatile-random` 当内存不足以容纳新写入数据时，在设置了过期的键中，随机删除一个 key。
+6. `allkeys-random` 当内存不足以容纳新写入数据时，随机删除一个或者多个 key。
+7. `volatile-ttl` 当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的 key 优先移除。
+8. `noeviction` 当内存不足以容纳新写入数据时，新写入操作会报错。(默认的方式)
+
+#### 什么是缓存穿透、雪崩、击穿，如该如何解决这几个问题
+
+##### 缓存穿透
+
+**缓存穿透**是指，请求数据库或者缓存都**不存在**的数据，导致每一个请求都访问数据库。
+
+1. 可以针对**请求参数**过滤，减少无效的请求。
+
+2. 将**缓存内容设置为 null**，并制定一个合理的过期时间。
+3. 第 2 点中的方案会浪费无效的内存，可以使用**布隆过滤器**解决。[示例方案](https://mp.weixin.qq.com/s/6rK72BoiNGbto8WIeLQuoA)
+
+##### 缓存击穿
+
+**缓存击穿**是指，请求某一个**热点数据**在不存在，导致大量请求访问数据库。
+
+1. 设置数据**缓存时间永不过期**，可以根据物理过期时间和逻辑过期时间来控制。
+2. 可以将热点数据通过**多种方式缓存**，Redis 不存在还可以通过其他的缓存方式读取。
+
+##### 缓存雪崩
+
+**缓存雪崩**是指，某一个时刻请求的缓存大面积失效，导致大量请求访问数据库。有可能是缓存过期时间设置比较集中导致。
+
+1. 将**缓存的时间均匀分布**，避免缓存时间过于集中。
+2. 针对热点数据可以不用设置过期时间，可以根据物理过期时间和逻辑过期时间来控制。
+3. **多级缓存**，一级缓存和二级缓存都设置不同的缓存时间。
+
+#### 什么是缓存预热，如何做缓存预热，什么是服务降级，如何做服务降级?
+
+**缓存预热**是指系统上线后，**提前**将相关的缓存数据**加载**到缓存系统。避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题，用户直接查询事先被预热的缓存数据。
+
+如果不进行预热，那么 Redis 初始状态数据为空，系统上线初期，对于高并发的流量，都会访问到数据库中， 对数据库造成流量的压力。
+
+1. 数据量不大的时候，工程启动的时候进行加载缓存动作。
+2. 数据量大的时候，设置一个定时任务脚本，进行缓存的刷新。
+3. 数据量太大的时候，优先保证热点数据进行提前加载到缓存。
+
+**缓存降级**是指缓存失效或缓存服务器挂掉的情况下，不去访问数据库，直接返回默认数据或访问服务的内存数据。
+
+降级一般是有损的操作，所以尽量减少降级对于业务的影响程度。在项目实战中通常会将部分热点数据缓存到服务的内存中，这样一旦缓存出现异常，可以直接使用服务的内存数据，从而避免数据库遭受巨大压力。
+
+### 原理
+
+#### Redis 为什么读写数据快
+
+1. 数据的读写都是基于**内存**操作。
+2. **IO 多路复用**
+
+3. **单线程**模式。
+   - Redis 的瓶颈不在线程，不在获取 CPU 的资源，所以如果使用多线程就会带来多余的资源占用。比如上下文切换、资源竞争、锁的操作。
+   - **上下文的切换**：上下文其实不难理解，它就是 **CPU 寄存器**和**程序计数器**。主要的作用就是存放没有被分配到资源的线程。
+     - 多线程操作的时候，总有线程获取到资源，也总有线程需要等待获取资源，这个时候，等待获取资源的线程就需要被挂起，也就是我们的寄存。这个时候我们的上下文就产生了，当我们的上下文再次被唤起，得到资源的时候，就是我们上下文的切换。
+   - **竞争资源**：竞争资源相对来说比较好理解，CPU 对上下文的切换其实就是一种资源分批，但是在切换之前，到底切换到哪一个上下文，就是资源竞争的开始。在 redis 中由于是单线程的，所以所有的操作都不会涉及到资源的竞争。
+   - **锁的消耗**：对于多线程的情况来讲，不能回避的就是锁的问题。如果说多线程操作出现并发，有可能导致数据不一致，或者操作达不到预期的效果。这个时候我们就需要锁来解决这些问题。当我们的线程很多的时候，就需要不断的加锁，释放锁，该操作就会消耗掉我们很多的时间。
+
