@@ -1,0 +1,405 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Python unittest 库 - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta name=keywords content="Python"><meta itemprop=name content="Python unittest 库"><meta itemprop=description content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta itemprop=datePublished content="2022-09-15T00:00:00+00:00"><meta itemprop=dateModified content="2022-09-20T14:07:45+00:00"><meta itemprop=wordCount content="2800"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,"><meta property="og:title" content="Python unittest 库"><meta property="og:description" content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-09-15T00:00:00+00:00"><meta property="article:modified_time" content="2022-09-20T14:07:45+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python unittest 库"><meta name=twitter:description content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/warnings/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/ipdb/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python unittest 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/unittest\/"},"genre":"posts","keywords":"Python","wordcount":2800,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/unittest\/","datePublished":"2022-09-15T00:00:00+00:00","dateModified":"2022-09-20T14:07:45+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python unittest 库</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2022-09-15 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-09-15>2022-09-15</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 2800 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#mock>Mock</a><ul><li><ul><li><a href=#基本使用>基本使用</a><ul><li><a href=#return_vaule>return_vaule</a></li></ul></li><li><a href=#side_effect>side_effect</a></li><li><a href=#patch-装饰器>patch 装饰器</a></li><li><a href=#一个示例>一个示例</a></li></ul></li></ul></li><li><a href=#assert>assert</a></li></ul></nav></div></div><div class=content id=content><h1 id=unittest>unittest</h1><h2 id=mock>Mock</h2><blockquote><p>更详细的介绍：https://www.cnblogs.com/guyuyun/p/14880885.html</p></blockquote><p>mock 允许用模拟对象替换系统中真实对象，并对它们已使用的方式进行断言。</p><p>在进行单元测试的时候，会遇到以下问题：</p><ul><li>接口的依赖</li><li>外部接口调用</li></ul><p>测试环境非常复杂。</p><p>且单元测试应该只针对当前单元进行测试, 所有的内部或外部的依赖应该是稳定的, 已经在别处进行测试过的。使用 mock 就可以对外部依赖组件实现进行模拟并且替换掉, 从而使得单元测试将焦点只放在当前的单元功能。</p><p>例如对于以下代码，想要针对函数 func_a 写一个简单的单元测试：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>unittest</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func_c</span><span class=p>(</span><span class=n>arg1</span><span class=p>,</span> <span class=n>arg2</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a_dict</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 其他代码</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a_dict</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func_b</span><span class=p>(</span><span class=n>arg3</span><span class=p>,</span> <span class=n>arg4</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>b_list</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>a_arg1</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>a_arg2</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 其他代码</span>
+</span></span><span class=line><span class=cl>    <span class=n>a_dict</span> <span class=o>=</span> <span class=n>func_c</span><span class=p>(</span><span class=n>a_arg1</span><span class=p>,</span> <span class=n>a_arg2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 其他代码</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>b_list</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func_a</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>b_list</span> <span class=o>=</span> <span class=n>func_b</span><span class=p>(</span><span class=s1>&#39;111&#39;</span><span class=p>,</span> <span class=s1>&#39;222&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=s1>&#39;aaa&#39;</span> <span class=ow>in</span> <span class=n>b_list</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>FuncTest</span><span class=p>(</span><span class=n>unittest</span><span class=o>.</span><span class=n>TestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_func_a</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>assert</span> <span class=n>func_a</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>但是这样的话，函数 func_b 和 func_c 的逻辑都需要一起测试，在单元测试中这明显是不合理的，对于想要测试的函数 func_a，里面所使用到的其他函数或接口，我们只需要关心它的返回值即可，保证当前测试的函数按它自己的逻辑运行，所以可以写成下面这样：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>unittest</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>mock_func_b</span><span class=p>(</span><span class=n>arg3</span><span class=p>,</span> <span class=n>arg4</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>[</span><span class=s1>&#39;bbb&#39;</span><span class=p>,</span> <span class=s1>&#39;ccc&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func_a</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 使用一个模拟的mock_func_b代替真正的函数func_b</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 这个mock_func_b不需要关心具体实现逻辑，只关心返回值</span>
+</span></span><span class=line><span class=cl>    <span class=n>b_list</span> <span class=o>=</span> <span class=n>mock_func_b</span><span class=p>(</span><span class=s1>&#39;111&#39;</span><span class=p>,</span> <span class=s1>&#39;222&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=s1>&#39;aaa&#39;</span> <span class=ow>in</span> <span class=n>b_list</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>FuncTest</span><span class=p>(</span><span class=n>unittest</span><span class=o>.</span><span class=n>TestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_func_a</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>assert</span> <span class=n>func_a</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意，模拟的 mock_func_b 并不需要保证 func_a 中所有的可能分支和逻辑都执行一次，单元测试更多的是验证函数或接口（比如这里的 func_a）是否与设计相符、发现代码实现与需求中存在的错误、修改代码时是否引入了新的错误等。但是这里的写法也有很大的问题，一个功能模块中使用的函数或接口通常来讲其实并不少、也没有这里这么简单，如果涉及的接口都要重新写一个 mock 对象（如 mock_func_b），那单元测试的工作将会变得非常繁重和复杂，所以 unittest 中的 mock 模块派上了用场，这个模块也正如它的名称一样，可以模拟各种对象。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>import unittest
+</span></span><span class=line><span class=cl>from unittest import mock
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>def func_a():
+</span></span><span class=line><span class=cl>    # 创建一个mock对象，return_value表示在该对象被执行时返回指定的值
+</span></span><span class=line><span class=cl>    mock_func_b = mock.Mock(return_value=[&#39;bbb&#39;, &#39;ccc&#39;])
+</span></span><span class=line><span class=cl>    b_list = mock_func_b(&#39;111&#39;, &#39;222&#39;)
+</span></span><span class=line><span class=cl>    if &#39;aaa&#39; in b_list:
+</span></span><span class=line><span class=cl>        return False
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    return True
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>class FuncTest(unittest.TestCase):
+</span></span><span class=line><span class=cl>    def test_func_a(self):
+</span></span><span class=line><span class=cl>        assert func_a()
+</span></span></code></pre></td></tr></table></div></div><h4 id=基本使用>基本使用</h4><h5 id=return_vaule>return_vaule</h5><p>mock 对象的 return_vaule 的作用：它将忽略 mock 对象的行为，指定其返回值。</p><p>modular.py</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>Count</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span></code></pre></td></tr></table></div></div><p>mock_demo01.py</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>unittest</span> <span class=kn>import</span> <span class=n>mock</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>unittest</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>modular</span> <span class=kn>import</span> <span class=n>Count</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># test Count class</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>TestCount</span><span class=p>(</span><span class=n>unittest</span><span class=o>.</span><span class=n>TestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_add</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span> <span class=o>=</span> <span class=n>Count</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span><span class=o>.</span><span class=n>add</span> <span class=o>=</span> <span class=n>mock</span><span class=o>.</span><span class=n>Mock</span><span class=p>(</span><span class=n>return_value</span><span class=o>=</span><span class=mi>13</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>result</span> <span class=o>=</span> <span class=n>count</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=mi>8</span><span class=p>,</span><span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>result</span><span class=p>,</span><span class=mi>13</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>unittest</span><span class=o>.</span><span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>假设 Count 计算类没有实现，原本 add() 方法要实现两数相加。但这个功能还没有完成。这时就可以借助 mock 对其进行测试。　　</p><p>count = Count()</p><p>首先，调用被测试类 Count() 。</p><p>count.add = mock.Mock(return_value=7)</p><p>通过 Mock 类模拟被调用的方法 add()方法，return_value 定义 add()方法的返回值。</p><p>result = count.add(2,5)</p><p>接下来，相当于在正常的调用 add()方法，传两个参数 2 和 5，然后会得到相加的结果 7。然后，7 的结果是我们在上一步就预先设定好的。</p><p>self.assertEqual(result,7)</p><p>最后，通过 assertEqual()方法断言，返回的结果是否是预期的结果 7。</p><h4 id=side_effect>side_effect</h4><p>mock 对象的 side_effect 的作用：通过 side_effect 指定 mock 对象的副作用，这个副作用就是当你调用这个 mock 对象时会调用的函数,也可以选择抛出一个异常，来对程序的错误状态进行测试。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>unittest.mock</span> <span class=kn>import</span> <span class=n>Mock</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>say_hello</span><span class=p>(</span><span class=n>word</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Hello </span><span class=si>{</span><span class=n>word</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>mock</span><span class=o>=</span><span class=n>Mock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=c1># 指定为函数</span>
+</span></span><span class=line><span class=cl><span class=n>mock</span><span class=o>.</span><span class=n>side_effect</span>  <span class=o>=</span> <span class=n>say_hello</span>
+</span></span><span class=line><span class=cl><span class=n>mock</span><span class=p>(</span><span class=s1>&#39;china&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 指定为异常</span>
+</span></span><span class=line><span class=cl><span class=n>mock</span><span class=o>.</span><span class=n>side_effect</span>  <span class=o>=</span> <span class=ne>KeyError</span><span class=p>(</span><span class=s1>&#39;This is b&#39;</span><span class=p>)</span> <span class=c1>#Exception(&#34;Raise Exception&#34;)</span>
+</span></span><span class=line><span class=cl><span class=n>mock</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>另外也可以通过为 side_effect 指定一个列表，这样在每次调用时会依次返回，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>unittest.mock</span> <span class=kn>import</span> <span class=n>Mock</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>mock</span><span class=o>=</span><span class=n>Mock</span><span class=p>(</span><span class=n>side_effect</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>mock</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>mock</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>mock</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=patch-装饰器>patch 装饰器</h4><p>它是一个装饰器，需要把你想模拟的函数写在里面，然后在后面的单元测试案例中为它赋一个具体实例，再用 return_value 来指定模拟的这个函数希望返回的结果就可以了，后面就是正常单元测试代码。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=nd>@mock</span><span class=o>.</span><span class=n>pathc</span><span class=o>.</span><span class=n>object</span><span class=p>(</span><span class=n>类名</span><span class=err>，“</span><span class=n>类中函数名</span><span class=err>”</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>unittest</span> <span class=kn>import</span> <span class=n>mock</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>unittest</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Count</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># test Count class</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>TestCount</span><span class=p>(</span><span class=n>unittest</span><span class=o>.</span><span class=n>TestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@mock</span><span class=o>.</span><span class=n>patch</span><span class=o>.</span><span class=n>object</span><span class=p>(</span><span class=n>Count</span><span class=p>,</span> <span class=s2>&#34;add&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_add</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>mock_add</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>mock_add</span><span class=o>.</span> <span class=n>return_value</span> <span class=o>=</span> <span class=mi>13</span>
+</span></span><span class=line><span class=cl>        <span class=n>result</span> <span class=o>=</span> <span class=n>mock_add</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>result</span><span class=p>,</span><span class=mi>13</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>unittest</span><span class=o>.</span><span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>@mock.pathc(模块名，“函数名”)</p><p>linux_tool.py</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>re</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>send_shell_cmd</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s2>&#34;Response from send_shell_cmd function&#34;</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>check_cmd_response</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>response</span> <span class=o>=</span> <span class=n>send_shell_cmd</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;response: </span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>response</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>re</span><span class=o>.</span><span class=n>search</span><span class=p>(</span><span class=sa>r</span><span class=s2>&#34;mock_send_shell_cmd&#34;</span><span class=p>,</span> <span class=n>response</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>测试代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>unittest</span> <span class=kn>import</span> <span class=n>TestCase</span><span class=p>,</span> <span class=n>mock</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>linux_tool</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>TestLinuxTool</span><span class=p>(</span><span class=n>TestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>setUp</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>tearDown</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=nd>@mock</span><span class=o>.</span><span class=n>patch</span><span class=p>(</span><span class=s2>&#34;linux_tool.send_shell_cmd&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_check_cmd_response</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>mock_send_shell_cmd</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>mock_send_shell_cmd</span><span class=o>.</span><span class=n>return_value</span> <span class=o>=</span> <span class=s2>&#34;Response from emulated mock_send_shell_cmd function&#34;</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>        <span class=n>status</span> <span class=o>=</span> <span class=n>linux_tool</span><span class=o>.</span><span class=n>check_cmd_response</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;check result: </span><span class=si>%s</span><span class=s2>&#34;</span> <span class=o>%</span> <span class=n>status</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertTrue</span><span class=p>(</span><span class=n>status</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果 patch 多个外部函数，那么调用遵循自下而上的规则，比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=nd>@mock</span><span class=o>.</span><span class=n>patch</span><span class=p>(</span><span class=s2>&#34;function_C&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nd>@mock</span><span class=o>.</span><span class=n>patch</span><span class=p>(</span><span class=s2>&#34;function_B&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nd>@mock</span><span class=o>.</span><span class=n>patch</span><span class=p>(</span><span class=s2>&#34;function_A&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>test_check_cmd_response</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>mock_function_A</span><span class=p>,</span> <span class=n>mock_function_B</span><span class=p>,</span> <span class=n>mock_function_C</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>mock_function_A</span><span class=o>.</span><span class=n>return_value</span> <span class=o>=</span> <span class=s2>&#34;Function A return&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>mock_function_B</span><span class=o>.</span><span class=n>return_value</span> <span class=o>=</span> <span class=s2>&#34;Function B return&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>mock_function_C</span><span class=o>.</span><span class=n>return_value</span> <span class=o>=</span> <span class=s2>&#34;Function C return&#34;</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=bp>self</span><span class=o>.</span><span class=n>assertTrue</span><span class=p>(</span><span class=n>re</span><span class=o>.</span><span class=n>search</span><span class=p>(</span><span class=s2>&#34;A&#34;</span><span class=p>,</span> <span class=n>mock_function_A</span><span class=p>()))</span>
+</span></span><span class=line><span class=cl>    <span class=bp>self</span><span class=o>.</span><span class=n>assertTrue</span><span class=p>(</span><span class=n>re</span><span class=o>.</span><span class=n>search</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>,</span> <span class=n>mock_function_B</span><span class=p>()))</span>
+</span></span><span class=line><span class=cl>    <span class=bp>self</span><span class=o>.</span><span class=n>assertTrue</span><span class=p>(</span><span class=n>re</span><span class=o>.</span><span class=n>search</span><span class=p>(</span><span class=s2>&#34;C&#34;</span><span class=p>,</span> <span class=n>mock_function_C</span><span class=p>()))</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=一个示例>一个示例</h4><p>Count 类中 add_and_multiply 依赖 multiply，由于 multiply 并没有实现，这时候可以使用 mock 替换 multiply：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>unittest</span> <span class=kn>import</span> <span class=n>mock</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>unittest</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Count</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add_and_multiply</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>addition</span> <span class=o>=</span> <span class=n>x</span> <span class=o>+</span> <span class=n>y</span>
+</span></span><span class=line><span class=cl>        <span class=n>multiple</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>multiply</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=p>(</span><span class=n>addition</span><span class=p>,</span> <span class=n>multiple</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>multiply</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># test Count class</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>TestCount</span><span class=p>(</span><span class=n>unittest</span><span class=o>.</span><span class=n>TestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@mock</span><span class=o>.</span><span class=n>patch</span><span class=o>.</span><span class=n>object</span><span class=p>(</span><span class=n>Count</span><span class=p>,</span> <span class=s2>&#34;multiply&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_add</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>mock_multiply</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>mock_multiply</span><span class=o>.</span> <span class=n>return_value</span> <span class=o>=</span> <span class=mi>40</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span> <span class=o>=</span> <span class=n>Count</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>addition</span><span class=p>,</span><span class=n>multiple</span> <span class=o>=</span> <span class=n>count</span><span class=o>.</span><span class=n>add_and_multiply</span><span class=p>(</span><span class=mi>5</span><span class=p>,</span><span class=mi>8</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>addition</span><span class=p>,</span><span class=mi>13</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>multiple</span><span class=p>,</span> <span class=mi>40</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>unittest</span><span class=o>.</span><span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=assert>assert</h2><p>assertEqual(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a=b，则测试用例通过</p><p>assertNotEqual(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a != b，则测试用例通过</p><p>assertTrue(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 是 True，则测试用例通过</p><p>assertFalse(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 是 False，则测试用例通过</p><p>assertIs(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 是 b，则测试用例通过</p><p>assertNotIs(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 不是 b，则测试用例通过</p><p>assertIsNone(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 是 None，则测试用例通过</p><p>assertIsNotNone(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 不是 None，则测试用例通过</p><p>assertIn(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 在 b 中，则测试用例通过</p><p>assertNotIn(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 不在 b 中，则测试用例通过</p><p>assertIsInstance(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 是 b 的一个实例，则测试用例通过</p><p>assertNotIsInstance(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 不是 b 的实例，则测试用例通过</p><p>assertAlmostEqual(a, b)：round(a-b, 7) == 0</p><p>assertNotAlmostEqual(a, b)：round(a-b, 7) != 0</p><p>assertGreater(a, b)：a > b</p><p>assertGreaterEqual(a, b)：a >= b</p><p>assertLess(a, b)：a &lt; b</p><p>assertLessEqual(a, b)：a &lt;= b</p><p>assertRegexpMatches(s, re)：regex.search(s)</p><p>assertNotRegexpMatches(s, re)：not regex.search(s)</p><p>assertItemsEqual(a, b)：sorted(a) == sorted(b) and works with unhashable objs</p><p>assertDictContainsSubset(a, b)：all the key/value pairs in a exist in b</p><p>assertMultiLineEqual(a, b)：strings</p><p>assertSequenceEqual(a, b)：sequences</p><p>assertListEqual(a, b)：lists</p><p>assertTupleEqual(a, b)：tuples</p><p>assertSetEqual(a, b)：sets or frozensets</p><p>assertDictEqual(a, b)：dicts</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2022-09-20 14:07:45">更新于 2022-09-20</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/ data-title="Python unittest 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/ data-title="Python unittest 库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/warnings/ class=prev rel=prev title="Python warnings 库"><i class="fa-solid fa-angle-left fa-fw"></i>Python warnings 库</a>
+<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/ipdb/ class=next rel=next title="Python ipdb 库">Python ipdb 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
