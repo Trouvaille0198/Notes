@@ -58,7 +58,7 @@ func replaceSpace2(s string) string {
 	tmp := make([]byte, spaceCount*2)
 	b = append(b, tmp...)
 	i := length - 1 // 指向原来最后一位
-	j := len(b) - 1 // 指向现在zui'hou'yi
+	j := len(b) - 1 // 指向现在最后一位
 	// 从后向前填充
 	for i >= 0 {
 		if b[i] != ' ' {

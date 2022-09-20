@@ -521,3 +521,225 @@ git config core.ignorecase false
 git commit --amend
 ```
 
+## git rebase
+
+- `git merge`：当需要保留详细的合并信息的时候建议使用，特别是需要将分支合并进入`master`分支时
+- `git rebase`：当发现自己修改某个功能时，频繁进行了`git commit`提交时，发现其实过多的提交信息没有必要时使用，分支多，内容多时也可以考虑使用
+
+**与 `git merge` 一致，`git rebase` 的目的也是将一个分支的更改并入到另外一个分支中去。**主要特点如下：
+
+- 改变当前分支从 `master` 上拉出分支的位置
+- **没有多余的合并历史的记录**，且合并后的 `commit` 顺序不一定按照 `commit` 的提交时间排列，同一个`commit`的 SHA 值会发生变化
+
+### 例子
+
+**假设现在有基于远程分支“origin/master”，更新至本地最新“master”，创建一个叫“feature/mywork”的分支**进行说明
+
+```bash
+$ git checkout -b feature/mywork
+```
+
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef541cf035374f0b83973a199c2c6ea1~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="1.jpg" style="zoom: 33%;" />
+
+现在 在分支`feature/mywork`做一些修改，然后生成**两个commit**
+
+```bash
+$ vim README.md
+$ git commit -am "xxxA"
+
+$ vim CHANGELOG.md
+$ git commit -am "xxxB"
+...
+```
+
+与此同时，有些人在`master`分支上做了一些变更，如合并了 release 分支代码准备发布等。这时意味着`master`和`feature/mywork`这两个分支各自"前进"了，它们之间"分叉"了。 
+
+<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1088600f61e44e1b2d0e2bd7f49ca7c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="2.jpg" style="zoom: 33%;" />
+
+你可以用`pull`命令把`master`分支上的修改拉下来并且和你的修改合并；结果看起来就像一个新的"合并的提交"(merge commit)
+
+<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35d9c22941ea42c9abbf91b73802d7c4~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="3.jpg" style="zoom:33%;" />
+
+这时`feature/mywork`分支历史看起来已经有分叉了，这还只是两个分支的，试想下有一个大型项目，有 20 个分支，同时迭代一些功能模块或者修改相同的代码块，分支树将会变成什么样？那能避免这种情况吗？答案当然是可以的，**如果你想让`feature/mywork`分支历史看起来像没有经过任何合并一样，可以用`git rebase`**
+
+```bash
+$ git checkout feature/mywork
+$ git rebase master
+```
+
+先来看下效果：
+
+<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/98679c766a0c464b81ca1c0bc0cfa7b9~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="4.jpg" style="zoom:33%;" />
+
+解释：**`git rebase` 会把 `feature/mywork` 分支里的每个提交 (commit) 取消掉，并且把它们临时保存为补丁 (patch)，然后把 `feature/mywork` 分支更新到最新的 `master` 分支，最后把保存的这些补丁应用到 `feature/mywork` 分支上**
+
+当`feature/mywork`分支更新之后，它会指向这些新创建的提交 (commit)，而那些老的提交会被丢弃。 如果运行垃圾收集命令 (pruning garbage collection)，这些被丢弃的提交就会删除。
+
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c352046c07f45ee95729ca6a5edefaa~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="5.jpg" style="zoom:33%;" />
+
+现在我们可以看一下用 merge 和用 rebase 所产生的历史的区别：
+
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0d935bcca7af4fbf8d194cb31d8e565f~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="6.jpg" style="zoom:33%;" />
+
+<img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/206a02f937aa43b1ad53454a39585275~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="7.jpg" style="zoom:33%;" />
+
+### 解决冲突 CONFLICT
+
+在 rebase 的过程中，也许会出现冲突(conflict)。在这种情况，Git 会停止 rebase 并会让你去解决冲突；在解决完冲突后，用`git add`命令去更新这些内容的索引(index)，然后，你无需执行 `git commit`，只要执行：
+
+```bash
+$ git rebase --continue
+```
+
+这样 git 会继续应用 (apply) 余下的补丁。
+
+在任何时候，你可以终止 rebase 的行动，并且`feature/mywork`分支会回到 rebase 开始前的状态。
+
+```bash
+$ git rebase --abort
+```
+
+在命令行使用`git rebase`存在多个 commit、多个冲突时需要我们**多次解决同一个地方的冲突**，然后执行`git rebase --continue`，反复，直到冲突解决为止，稍显麻烦，可以使用 IDE 辅助进行，如 JetBrains 家族的 IDE 系列对 VCS 都有很好的支持，最新版的更是直接将 VCS 变为 Git
+
+
+
+## git checkout
+
+### 基础
+
+checkout 最常用的用法莫过于对于工作分支的切换了：
+
+```shell
+git checkout branchName
+```
+
+该命令会将当前工作分支切换到 branchName。另外，可以通过下面的命令在新分支创建的同时切换分支：
+
+```shell
+git checkout -b newBranch
+```
+
+该命令相当于下面这两条命令的执行结果：
+
+```shell
+1. git branch newBranch 
+2. git checkout newBranch
+```
+
+该命令的完全体为：
+
+```xml
+  git checkout -b|-B <new_branch> [<start point>]
+```
+
+该命令的一个应用场景为：当我们刚从 git 上 clone 一个项目后，我们可以查看该项目的分支情况
+
+![img](https:////upload-images.jianshu.io/upload_images/2147642-72217d4e0d491915.png?imageMogr2/auto-orient/strip|imageView2/2/w/454/format/webp)
+
+可以看到，克隆完后，只会默认创建一个 master 本地分支，其他都是远程分支，此时如果我们想切换到 newBranch 的远程分支该怎么操作呢？
+
+方法一：使用 `git checkout -b`
+
+```shell
+git checkout -b newBranch  origin/newBranch
+```
+
+方法二：使用 `git branch <branchname> [<start-point>]`
+
+```shell
+git branch newBranch origin/newBranch
+git checkout newBranch
+```
+
+方法一其实是方法二的简化版
+
+### 深入
+
+要想更深入的了解 checkout，我们需要了解 checkout 的作用机制。该命令的主要关联目标其实是.git 文件夹下的 HEAD 文件，我们可以查看工程下面的.git 文件夹：
+
+![img](https:////upload-images.jianshu.io/upload_images/2147642-70674478b9866791.jpeg?imageMogr2/auto-orient/strip|imageView2/2/w/631/format/webp)
+
+该文件夹下 HEAD 文件记录了当前 HEAD 的信息，继续查看 HEAD 文件：
+
+![img](https:////upload-images.jianshu.io/upload_images/2147642-9e5096caf64ba235.jpeg?imageMogr2/auto-orient/strip|imageView2/2/w/620/format/webp)
+
+可以看到当前 HEAD 文件指向了 refs/heads 路径下的 master 文件，该文件记录了 master 分支最近的一次 commit id,说明当前 HEAD 指向了 master 分支。如果我们将当前分支切换到 newBranch 分支，我们再看 HEAD 文件：
+
+![img](https:////upload-images.jianshu.io/upload_images/2147642-11092d89be549ea9.jpeg?imageMogr2/auto-orient/strip|imageView2/2/w/468/format/webp)
+
+可以看到 HEAD 文件内容指向了 newBranch 分支
+
+### 拓展
+
+#### 检出某文件
+
+```shell
+git checkout [<commit id>] [--] <paths>
+```
+
+该命令主要用于检出某一个指定文件。
+
+如果不填写 commit id，则**默认会从暂存区检出该文件**，如果暂存区为空，则该文件会回滚到最近一次的提交状态。
+
+例如：当暂存区为空，如果我们想要放弃对某一个文件的修改，可以用这个命令进行撤销：
+
+```shell
+git checkout  [--] <paths>
+```
+
+如果填写 commit id（既可以是 commit hash 也可以是分支名称还可以说 tag，其本质上都是 commit hash），则会从指定 commit hash 中检出该文件。用于恢复某一个文件到某一个提交状态。
+
+#### 创建并切换分支
+
+```shell
+ git checkout -b <new_branch> [<start_point>]
+```
+
+该命令是文章开头部分所说的 checkout 常见用法的扩展，我们可以指定某一个分支或者某一次提交来创建新的分支，并且切换到该分支下，该命令相当于下面两条命令的执行结果：
+
+```shell
+1. git branch  <new_branch> [<start_point>]
+2. git checkout <new_branch>
+```
+
+#### 强制创建并覆盖原同名分支
+
+```shell
+git checkout -B <new_branch>
+```
+
+该命令主要加了一个可选参数 B，如果已经存在了同名的分支，使用 git checkout -b <new_branch>会提示错误，加入-B 可选参数后会强制创建新分支，并且会覆盖原来存在的同名分支。
+
+#### 分出一个没有 commit 历史的干净分支
+
+```shell
+git checkout --orphan <new_branch>
+```
+
+假如你的某个分支上，积累了无数次的提交，你也懒得去打理，打印出的 log 也让你无力吐槽，那么这个命令将是你的神器，它会基于当前所在分支新建一个赤裸裸的分支，没有任何的提交历史，但是当前分支的内容一一俱全。新建的分支，严格意义上说，还不是一个分支，因为 HEAD 指向的引用中没有 commit 值，只有在进行一次提交后，它才算得上真正的分支。
+
+#### 切换分支时带走修改的内容
+
+```shell
+git checkout --merge <branch>
+```
+
+这个命令适用于在切换分支的时候，将当前分支修改的内容一起打包带走，同步到切换的分支下。
+有两个需要注意的问题。
+
+1. 如果当前分支和切换分支间的内容不同的话，容易造成冲突。
+2. 第二，切换到新分支后，当前分支修改过的内容就丢失了。
+
+所以这个命令，慎用
+
+#### 比较两个分支的差异
+
+```shell
+git checkout -p <branch>
+```
+
+这个命令可以用来打补丁。这个命令主要用来比较两个分支间的差异内容，并提供交互式的界面来选择进一步的操作。这个命令不仅可以比较两个分支间的差异，还可以比较单个文件的差异哦！
+
+## 其他
+
+- 不建议使用 `git push --force`，推荐 `--force-with-lease` 参数
