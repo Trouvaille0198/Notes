@@ -1,5 +1,5 @@
 ---
-title: "tkinter"
+title: "Python tkinter 库"
 date: 2021-04-17
 author: MelonCholi
 draft: false

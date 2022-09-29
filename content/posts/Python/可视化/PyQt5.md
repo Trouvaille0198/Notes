@@ -1,5 +1,5 @@
 ---
-title: "PyQt5"
+title: "Python PyQt5 库"
 date: 2021-04-17
 author: MelonCholi
 draft: false

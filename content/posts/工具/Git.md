@@ -560,7 +560,7 @@ $ git commit -am "xxxB"
 
 <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/35d9c22941ea42c9abbf91b73802d7c4~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="3.jpg" style="zoom:33%;" />
 
-这时`feature/mywork`分支历史看起来已经有分叉了，这还只是两个分支的，试想下有一个大型项目，有 20 个分支，同时迭代一些功能模块或者修改相同的代码块，分支树将会变成什么样？那能避免这种情况吗？答案当然是可以的，**如果你想让`feature/mywork`分支历史看起来像没有经过任何合并一样，可以用`git rebase`**
+这时 `feature/mywork` 分支历史看起来已经有分叉了，这还只是两个分支的，试想下有一个大型项目，有 20 个分支，同时迭代一些功能模块或者修改相同的代码块，分支树将会变成什么样？那能避免这种情况吗？答案当然是可以的，**如果你想让 `feature/mywork` 分支历史看起来像没有经过任何合并一样，可以用 `git rebase`**
 
 ```bash
 $ git checkout feature/mywork
@@ -600,8 +600,6 @@ $ git rebase --abort
 ```
 
 在命令行使用`git rebase`存在多个 commit、多个冲突时需要我们**多次解决同一个地方的冲突**，然后执行`git rebase --continue`，反复，直到冲突解决为止，稍显麻烦，可以使用 IDE 辅助进行，如 JetBrains 家族的 IDE 系列对 VCS 都有很好的支持，最新版的更是直接将 VCS 变为 Git
-
-
 
 ## git checkout
 

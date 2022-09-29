@@ -1,5 +1,5 @@
 ---
-title: "剑指 Offer 15. 二进制中1的个数"
+title: "剑指 Offer 15. 二进制中 1 的个数"
 date: 2022-03-03
 draft: false
 author: "MelonCholi"
@@ -7,7 +7,7 @@ tags: [算法,位运算]
 categories: [刷题]
 ---
 
-# 剑指 Offer 15. 二进制中1的个数
+# 剑指 Offer 15. 二进制中 1 的个数
 
 `easy`
 

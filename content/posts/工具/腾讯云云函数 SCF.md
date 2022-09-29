@@ -140,7 +140,7 @@ categories: [工具]
 
 #### 替代传统的 web 后端服务
 
-- [gocyber-service](https://console.cloud.tencent.com/scf/list-detail?rid=4&ns=default&id=gocservice-sit-goc&menu=log)
+- 后端直接部署
 
 #### 需要周期性获取 / 处理的数据
 

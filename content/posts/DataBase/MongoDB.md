@@ -127,7 +127,7 @@ sudo apt-get install -y mongodb-org-tools
 use DATABASE_NAME
 ```
 
-> 在 MongoDB 中，集合只有在内容插入后才会创建! 也就是说，创建集合(数据表)后要再插入一个文档(记录)，集合才会真正创建。
+> 在 MongoDB 中，集合只有在内容插入后才会创建! 也就是说，创建集合 (数据表) 后要再插入一个文档 (记录)，集合才会真正创建。
 
 ### 删除数据库
 
@@ -511,8 +511,6 @@ db.inventory.find( { "size.h": { $lt: 15 } } )
 ```shell
 db.inventory.find( { "size.h": { $lt: 15 }, "size.uom": "in", status: "D" } )
 ```
-
-
 
 #### 查询嵌入式文档数组
 
