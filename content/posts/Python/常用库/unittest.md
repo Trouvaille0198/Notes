@@ -86,7 +86,7 @@ class FuncTest(unittest.TestCase):
 
 注意，模拟的 mock_func_b 并不需要保证 func_a 中所有的可能分支和逻辑都执行一次，单元测试更多的是验证函数或接口（比如这里的 func_a）是否与设计相符、发现代码实现与需求中存在的错误、修改代码时是否引入了新的错误等。但是这里的写法也有很大的问题，一个功能模块中使用的函数或接口通常来讲其实并不少、也没有这里这么简单，如果涉及的接口都要重新写一个 mock 对象（如 mock_func_b），那单元测试的工作将会变得非常繁重和复杂，所以 unittest 中的 mock 模块派上了用场，这个模块也正如它的名称一样，可以模拟各种对象。
 
-```3python
+```python
 import unittest
 from unittest import mock
 
@@ -107,6 +107,8 @@ class FuncTest(unittest.TestCase):
 ```
 
 #### 基本使用
+
+
 
 ##### return_vaule 
 
@@ -142,23 +144,23 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-假设 Count 计算类没有实现，原本 add() 方法要实现两数相加。但这个功能还没有完成。这时就可以借助 mock 对其进行测试。　　
+假设 Count 计算类没有实现，原本 `add()` 方法要实现两数相加。但这个功能还没有完成。这时就可以借助 mock 对其进行测试。　　
 
-count = Count()
+`count = Count()`
 
-首先，调用被测试类 Count() 。
+首先，调用被测试类 `Count()` 。
 
-count.add = mock.Mock(return_value=7)
+`count.add = mock.Mock(return_value=7)`
 
-通过 Mock 类模拟被调用的方法 add()方法，return_value 定义 add()方法的返回值。
+通过 Mock 类模拟被调用的方法 add()方法，return_value 定义 `add()` 方法的返回值。
 
-result = count.add(2,5)
+`result = count.add(2,5)`
 
-接下来，相当于在正常的调用 add()方法，传两个参数 2 和 5，然后会得到相加的结果 7。然后，7 的结果是我们在上一步就预先设定好的。
+接下来，相当于再正常的调用 `add()` 方法，传两个参数 2 和 5，然后会得到相加的结果 7。然后，7 的结果是我们在上一步就预先设定好的。
 
-self.assertEqual(result,7)
+`self.assertEqual(result,7)`
 
-最后，通过 assertEqual()方法断言，返回的结果是否是预期的结果 7。
+最后，通过 `assertEqual()` 方法断言，返回的结果是否是预期的结果 7。
 
 #### side_effect
 
@@ -217,7 +219,7 @@ class TestCount(unittest.TestCase):
 
     @mock.patch.object(Count, "add")
     def test_add(self, mock_add):
-        mock_add. return_value = 13
+        mock_add.return_value = 13
         result = mock_add()
         self.assertEqual(result,13)
 
@@ -225,7 +227,7 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-@mock.pathc(模块名，“函数名”)
+`@mock.pathc(模块名，“函数名”)`
 
 linux_tool.py
 

@@ -593,13 +593,36 @@ $ git rebase --continue
 
 这样 git 会继续应用 (apply) 余下的补丁。
 
-在任何时候，你可以终止 rebase 的行动，并且`feature/mywork`分支会回到 rebase 开始前的状态。
+在任何时候，你可以终止 rebase 的行动，并且 `feature/mywork` 分支会回到 rebase 开始前的状态。
 
 ```bash
 $ git rebase --abort
 ```
 
 在命令行使用`git rebase`存在多个 commit、多个冲突时需要我们**多次解决同一个地方的冲突**，然后执行`git rebase --continue`，反复，直到冲突解决为止，稍显麻烦，可以使用 IDE 辅助进行，如 JetBrains 家族的 IDE 系列对 VCS 都有很好的支持，最新版的更是直接将 VCS 变为 Git
+
+### 合并历史 commit
+
+```bash
+# 从HEAD版本开始往过去数3个版本
+$ git rebase -i HEAD~3
+
+# 合并指定版本号（不包含此版本）
+$ git rebase -i [commitid]
+```
+
+- `-i（--interactive）`：弹出交互式的界面进行编辑合并
+- `[commitid]`：要合并多个版本之前的版本号，注意：`[commitid]` 本身不参与合并
+
+指令解释（交互编辑时使用）：
+
+- p, pick = use commit
+- r, reword = use commit, but edit the commit message
+- e, edit = use commit, but stop for amending
+- s, squash = use commit, but meld into previous commit
+- f, fixup = like "squash", but discard this commit's log message
+- x, exec = run command (the rest of the line) using shell
+- d, drop = remove commit
 
 ## git checkout
 

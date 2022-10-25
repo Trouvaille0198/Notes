@@ -450,7 +450,7 @@ set 类型一般可以用在用户签到、网站访问统计、用户关注标�
 - ZSet 是一种有序集合类型，**每个元素都会关联一个 double 类型的分数权值**，通过这个权值来为集合中的成员进行从小到大的**排序**。
 
 - 与 Set 类型一样，其底层也是通过哈希表实现的。
-- zset 的成员是唯一的,但**分数 (score) 却可以重复**
+- zset 的成员是唯一的，但**分数 (score) 却可以重复**
 
 #### 实例
 
@@ -473,7 +473,7 @@ redis 127.0.0.1:6379> ZRANGEBYSCORE runoob 0 1000
 #### 操作命令
 
 - ZADD / ZPOP / ZMOVE / ZCARD / ZCOUNT
-- ZINTER / ZDIFF / ZDIFFSTORE / ZUNION’
+- ZINTER / ZDIFF / ZDIFFSTORE / ZUNION
 
 #### 使用场景
 
@@ -1106,8 +1106,6 @@ HyperLogLog 一般用在一些不需要精确计算的统计类场景
 127.0.0.1:6379> pfcount 2020:02:sgin
 (integer) 11
 ```
-
-
 
 ### 发布订阅
 
@@ -3748,7 +3746,7 @@ redis [1] > GET foo
 4. 如果对方追问 pub/sub 有什么缺点？
    - 在消费者下线的情况下，**生产的消息会丢失**，可以使用 Redis6 增加的 **stream 数据类型**，也可以使用专业的**消息队列如 rabbitmq 等**。
 5. 如果对方追问 redis 如何实现延时队列
-   - **使用sortedset，拿时间戳作为score**，消息内容作为 key 调用 zadd 来生产消息，消费者用 zrangebyscore 指令获取 N 秒之前的数据轮询进行处理。
+   - **使用 sortedset，拿时间戳作为 score**，消息内容作为 key 调用 zadd 来生产消息，消费者用 zrangebyscore 指令获取 N 秒之前的数据轮询进行处理。
 
 #### 使用 Redis Stream 做队列，比 list，zset 和发布订阅有什么区别
 
