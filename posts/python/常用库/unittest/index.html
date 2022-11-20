@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Python unittest 库 - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta name=keywords content="Python"><meta itemprop=name content="Python unittest 库"><meta itemprop=description content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta itemprop=datePublished content="2022-09-15T00:00:00+00:00"><meta itemprop=dateModified content="2022-10-25T09:00:37+00:00"><meta itemprop=wordCount content="2779"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,"><meta property="og:title" content="Python unittest 库"><meta property="og:description" content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-09-15T00:00:00+00:00"><meta property="article:modified_time" content="2022-10-25T09:00:37+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python unittest 库"><meta name=twitter:description content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/warnings/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/ipdb/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python unittest 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/unittest\/"},"genre":"posts","keywords":"Python","wordcount":2779,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/unittest\/","datePublished":"2022-09-15T00:00:00+00:00","dateModified":"2022-10-25T09:00:37+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Python unittest 库 - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta name=keywords content="Python"><meta itemprop=name content="Python unittest 库"><meta itemprop=description content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta itemprop=datePublished content="2022-09-15T00:00:00+00:00"><meta itemprop=dateModified content="2022-11-20T03:48:49+00:00"><meta itemprop=wordCount content="4579"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,"><meta property="og:title" content="Python unittest 库"><meta property="og:description" content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-09-15T00:00:00+00:00"><meta property="article:modified_time" content="2022-11-20T03:48:49+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python unittest 库"><meta name=twitter:description content="unittest Mock 更详细的介绍：https://www.cnblogs.com/guyuyun"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/warnings/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/ipdb/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python unittest 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/unittest\/"},"genre":"posts","keywords":"Python","wordcount":4579,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/unittest\/","datePublished":"2022-09-15T00:00:00+00:00","dateModified":"2022-11-20T03:48:49+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
 <span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
@@ -7,9 +7,9 @@
 <span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python unittest 库</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
 MelonCholi</span></span>
 <span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2022-09-15 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-09-15>2022-09-15</time>
-</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 2779 字&nbsp;
-<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#mock>Mock</a><ul><li><ul><li><a href=#基本使用>基本使用</a><ul><li><a href=#return_vaule>return_vaule</a></li></ul></li><li><a href=#side_effect>side_effect</a></li><li><a href=#patch-装饰器>patch 装饰器</a></li><li><a href=#一个示例>一个示例</a></li></ul></li></ul></li><li><a href=#assert>assert</a></li></ul></nav></div></div><div class=content id=content><h1 id=unittest>unittest</h1><h2 id=mock>Mock</h2><blockquote><p>更详细的介绍：https://www.cnblogs.com/guyuyun/p/14880885.html</p></blockquote><p>mock 允许用模拟对象替换系统中真实对象，并对它们已使用的方式进行断言。</p><p>在进行单元测试的时候，会遇到以下问题：</p><ul><li>接口的依赖</li><li>外部接口调用</li></ul><p>测试环境非常复杂。</p><p>且单元测试应该只针对当前单元进行测试, 所有的内部或外部的依赖应该是稳定的, 已经在别处进行测试过的。使用 mock 就可以对外部依赖组件实现进行模拟并且替换掉, 从而使得单元测试将焦点只放在当前的单元功能。</p><p>例如对于以下代码，想要针对函数 func_a 写一个简单的单元测试：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 4579 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#mock>Mock</a><ul><li><a href=#基本使用>基本使用</a><ul><li><ul><li><a href=#return_vaule>return_vaule</a></li></ul></li></ul></li><li><a href=#side_effect>side_effect</a></li><li><a href=#patch-装饰器>patch 装饰器</a><ul><li><a href=#mockpatchobject>@mock.patch.object</a></li><li><a href=#mockpatch>@mock.patch</a><ul><li><a href=#详细参数>详细参数</a></li><li><a href=#例>例</a></li></ul></li><li><a href=#自上而下原则>自上而下原则</a></li></ul></li><li><a href=#一个示例>一个示例</a></li></ul></li><li><a href=#assert>assert</a><ul><li><a href=#预览>预览</a></li><li><a href=#assertraises>assertRaises()</a></li></ul></li><li><a href=#跳过>跳过</a></li></ul></nav></div></div><div class=content id=content><h1 id=unittest>unittest</h1><h2 id=mock>Mock</h2><blockquote><p>更详细的介绍：https://www.cnblogs.com/guyuyun/p/14880885.html</p></blockquote><p>mock 允许用模拟对象替换系统中真实对象，并对它们已使用的方式进行断言。</p><p>在进行单元测试的时候，会遇到以下问题：</p><ul><li>接口的依赖</li><li>外部接口调用</li></ul><p>测试环境非常复杂。</p><p>且单元测试应该只针对当前单元进行测试, 所有的内部或外部的依赖应该是稳定的, 已经在别处进行测试过的。使用 mock 就可以对外部依赖组件实现进行模拟并且替换掉, 从而使得单元测试将焦点只放在当前的单元功能。</p><p>例如对于以下代码，想要针对函数 func_a 写一个简单的单元测试：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -109,7 +109,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>FuncTest</span><span class=p>(</span><span class=n>unittest</span><span class=o>.</span><span class=n>TestCase</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_func_a</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>        <span class=k>assert</span> <span class=n>func_a</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><p>注意，模拟的 mock_func_b 并不需要保证 func_a 中所有的可能分支和逻辑都执行一次，单元测试更多的是验证函数或接口（比如这里的 func_a）是否与设计相符、发现代码实现与需求中存在的错误、修改代码时是否引入了新的错误等。但是这里的写法也有很大的问题，一个功能模块中使用的函数或接口通常来讲其实并不少、也没有这里这么简单，如果涉及的接口都要重新写一个 mock 对象（如 mock_func_b），那单元测试的工作将会变得非常繁重和复杂，所以 unittest 中的 mock 模块派上了用场，这个模块也正如它的名称一样，可以模拟各种对象。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>注意，模拟的 mock_func_b 并不需要保证 func_a 中所有的可能分支和逻辑都执行一次，单元测试更多的是验证函数或接口（比如这里的 func_a）是否与设计相符、发现代码实现与需求中存在的错误、修改代码时是否引入了新的错误等。</p><p>但是这里的写法也有很大的问题，一个功能模块中使用的函数或接口通常来讲其实并不少、也没有这里这么简单，如果涉及的接口都要重新写一个 mock 对象（如 mock_func_b），那单元测试的工作将会变得非常繁重和复杂，所以 unittest 中的 mock 模块派上了用场，这个模块也正如它的名称一样，可以模拟各种对象。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -143,7 +143,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>FuncTest</span><span class=p>(</span><span class=n>unittest</span><span class=o>.</span><span class=n>TestCase</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_func_a</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>        <span class=k>assert</span> <span class=n>func_a</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=基本使用>基本使用</h4><h5 id=return_vaule>return_vaule</h5><p>mock 对象的 return_vaule 的作用：它将忽略 mock 对象的行为，指定其返回值。</p><p>modular.py</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=基本使用>基本使用</h3><h5 id=return_vaule>return_vaule</h5><p>mock 对象的 return_vaule 的作用：它将忽略 mock 对象的行为，指定其返回值。</p><p>modular.py</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -183,7 +183,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>    <span class=n>unittest</span><span class=o>.</span><span class=n>main</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><p>假设 Count 计算类没有实现，原本 <code>add()</code> 方法要实现两数相加。但这个功能还没有完成。这时就可以借助 mock 对其进行测试。　　</p><p><code>count = Count()</code></p><p>首先，调用被测试类 <code>Count()</code> 。</p><p><code>count.add = mock.Mock(return_value=7)</code></p><p>通过 Mock 类模拟被调用的方法 add()方法，return_value 定义 <code>add()</code> 方法的返回值。</p><p><code>result = count.add(2,5)</code></p><p>接下来，相当于再正常的调用 <code>add()</code> 方法，传两个参数 2 和 5，然后会得到相加的结果 7。然后，7 的结果是我们在上一步就预先设定好的。</p><p><code>self.assertEqual(result,7)</code></p><p>最后，通过 <code>assertEqual()</code> 方法断言，返回的结果是否是预期的结果 7。</p><h4 id=side_effect>side_effect</h4><p>mock 对象的 side_effect 的作用：通过 side_effect 指定 mock 对象的副作用，这个副作用就是当你调用这个 mock 对象时会调用的函数,也可以选择抛出一个异常，来对程序的错误状态进行测试。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>假设 Count 计算类没有实现，原本 <code>add()</code> 方法要实现两数相加。但这个功能还没有完成。这时就可以借助 mock 对其进行测试。　　</p><p><code>count = Count()</code></p><p>首先，调用被测试类 <code>Count()</code> 。</p><p><code>count.add = mock.Mock(return_value=7)</code></p><p>通过 Mock 类模拟被调用的方法 add()方法，return_value 定义 <code>add()</code> 方法的返回值。</p><p><code>result = count.add(2,5)</code></p><p>接下来，相当于再正常的调用 <code>add()</code> 方法，传两个参数 2 和 5，然后会得到相加的结果 7。然后，7 的结果是我们在上一步就预先设定好的。</p><p><code>self.assertEqual(result,7)</code></p><p>最后，通过 <code>assertEqual()</code> 方法断言，返回的结果是否是预期的结果 7。</p><h3 id=side_effect>side_effect</h3><p>mock 对象的 side_effect 的作用：通过 side_effect 指定 mock 对象的副作用，这个副作用就是当你调用这个 mock 对象时会调用的函数,也可以选择抛出一个异常，来对程序的错误状态进行测试。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -227,8 +227,8 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>mock</span><span class=p>())</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>mock</span><span class=p>())</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>mock</span><span class=p>())</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=patch-装饰器>patch 装饰器</h4><p>它是一个装饰器，需要把你想模拟的函数写在里面，然后在后面的单元测试案例中为它赋一个具体实例，再用 return_value 来指定模拟的这个函数希望返回的结果就可以了，后面就是正常单元测试代码。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=nd>@mock</span><span class=o>.</span><span class=n>pathc</span><span class=o>.</span><span class=n>object</span><span class=p>(</span><span class=n>类名</span><span class=err>，“</span><span class=n>类中函数名</span><span class=err>”</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=patch-装饰器>patch 装饰器</h3><p>它是一个装饰器，需要把你想模拟的函数写在里面，然后在后面的单元测试案例中为它赋一个具体实例，再用 return_value 来指定模拟的这个函数希望返回的结果就可以了，后面就是正常单元测试代码。</p><h4 id=mockpatchobject>@mock.patch.object</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=nd>@mock</span><span class=o>.</span><span class=n>patch</span><span class=o>.</span><span class=n>object</span><span class=p>(</span><span class=n>类名</span><span class=err>，“</span><span class=n>类中函数名</span><span class=err>”</span><span class=p>)</span>
 </span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -269,7 +269,11 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>    <span class=n>unittest</span><span class=o>.</span><span class=n>main</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><p><code>@mock.pathc(模块名，“函数名”)</code></p><p>linux_tool.py</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h4 id=mockpatch>@mock.patch</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=nd>@mock</span><span class=o>.</span><span class=n>patch</span><span class=p>(</span><span class=err>“</span><span class=n>函数名及其路径</span><span class=err>”</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=详细参数>详细参数</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>unittest</span><span class=o>.</span><span class=n>mock</span><span class=o>.</span><span class=n>patch</span><span class=p>(</span><span class=n>target</span><span class=err>，</span><span class=n>new</span> <span class=o>=</span> <span class=n>DEFAULT</span><span class=err>，</span><span class=n>spec</span> <span class=o>=</span> <span class=kc>None</span><span class=err>，</span><span class=n>create</span> <span class=o>=</span> <span class=kc>False</span><span class=err>，</span><span class=n>spec_set</span> <span class=o>=</span> <span class=kc>None</span><span class=err>，</span><span class=n>autospec</span> <span class=o>=</span> <span class=kc>None</span><span class=err>，</span><span class=n>new_callable</span> <span class=o>=</span> <span class=kc>None</span><span class=err>，</span><span class=o>**</span> <span class=n>kwargs</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>target：必须是一个 str，格式为 <code>'package.module.ClassName'</code>，<ul><li>注意这里的格式一定要写对，如果你的函数或类写在 pakege 名称为 a 下，b.py 脚本里，有个 c 的函数（或类），那这个参数就写 “a.b.c”</li></ul></li><li>new：如果没写，默认指定的是 MagicMock</li><li>spec=True 或 spec_set=True，这会导致 patch 传递给被模拟为 spec / spec_set 的对象</li><li>new_callable：指定将被调用以创建新对象的不同类或可调用对象。默认情况下 MagicMock 使用。</li></ul><h5 id=例>例</h5><p>linux_tool.py</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -304,6 +308,8 @@ MelonCholi</span></span>
 </span><span class=lnt>15
 </span><span class=lnt>16
 </span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>unittest</span> <span class=kn>import</span> <span class=n>TestCase</span><span class=p>,</span> <span class=n>mock</span>
 </span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>linux_tool</span>
 </span></span><span class=line><span class=cl> 
@@ -315,13 +321,15 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl>        <span class=k>pass</span>
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl>    <span class=nd>@mock</span><span class=o>.</span><span class=n>patch</span><span class=p>(</span><span class=s2>&#34;linux_tool.send_shell_cmd&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  	<span class=c1># or</span>
+</span></span><span class=line><span class=cl>    <span class=c1># @mock.patch(linux_tool, &#34;send_shell_cmd&#34;)</span>
 </span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_check_cmd_response</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>mock_send_shell_cmd</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>        <span class=n>mock_send_shell_cmd</span><span class=o>.</span><span class=n>return_value</span> <span class=o>=</span> <span class=s2>&#34;Response from emulated mock_send_shell_cmd function&#34;</span>
 </span></span><span class=line><span class=cl> 
 </span></span><span class=line><span class=cl>        <span class=n>status</span> <span class=o>=</span> <span class=n>linux_tool</span><span class=o>.</span><span class=n>check_cmd_response</span><span class=p>()</span>
 </span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;check result: </span><span class=si>%s</span><span class=s2>&#34;</span> <span class=o>%</span> <span class=n>status</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertTrue</span><span class=p>(</span><span class=n>status</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><p>如果 patch 多个外部函数，那么调用遵循自下而上的规则，比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h4 id=自上而下原则>自上而下原则</h4><p>如果 patch 多个外部函数，那么调用遵循<strong>自下而上</strong>的规则，比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -343,7 +351,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl>    <span class=bp>self</span><span class=o>.</span><span class=n>assertTrue</span><span class=p>(</span><span class=n>re</span><span class=o>.</span><span class=n>search</span><span class=p>(</span><span class=s2>&#34;A&#34;</span><span class=p>,</span> <span class=n>mock_function_A</span><span class=p>()))</span>
 </span></span><span class=line><span class=cl>    <span class=bp>self</span><span class=o>.</span><span class=n>assertTrue</span><span class=p>(</span><span class=n>re</span><span class=o>.</span><span class=n>search</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>,</span> <span class=n>mock_function_B</span><span class=p>()))</span>
 </span></span><span class=line><span class=cl>    <span class=bp>self</span><span class=o>.</span><span class=n>assertTrue</span><span class=p>(</span><span class=n>re</span><span class=o>.</span><span class=n>search</span><span class=p>(</span><span class=s2>&#34;C&#34;</span><span class=p>,</span> <span class=n>mock_function_C</span><span class=p>()))</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=一个示例>一个示例</h4><p>Count 类中 add_and_multiply 依赖 multiply，由于 multiply 并没有实现，这时候可以使用 mock 替换 multiply：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=一个示例>一个示例</h3><p>Count 类中 add_and_multiply 依赖 multiply，由于 multiply 并没有实现，这时候可以使用 mock 替换 multiply：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -397,7 +405,309 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>    <span class=n>unittest</span><span class=o>.</span><span class=n>main</span><span class=p>()</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=assert>assert</h2><p>assertEqual(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a=b，则测试用例通过</p><p>assertNotEqual(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a != b，则测试用例通过</p><p>assertTrue(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 是 True，则测试用例通过</p><p>assertFalse(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 是 False，则测试用例通过</p><p>assertIs(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 是 b，则测试用例通过</p><p>assertNotIs(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 不是 b，则测试用例通过</p><p>assertIsNone(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 是 None，则测试用例通过</p><p>assertIsNotNone(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 不是 None，则测试用例通过</p><p>assertIn(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 在 b 中，则测试用例通过</p><p>assertNotIn(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 不在 b 中，则测试用例通过</p><p>assertIsInstance(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 是 b 的一个实例，则测试用例通过</p><p>assertNotIsInstance(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 不是 b 的实例，则测试用例通过</p><p>assertAlmostEqual(a, b)：round(a-b, 7) == 0</p><p>assertNotAlmostEqual(a, b)：round(a-b, 7) != 0</p><p>assertGreater(a, b)：a > b</p><p>assertGreaterEqual(a, b)：a >= b</p><p>assertLess(a, b)：a &lt; b</p><p>assertLessEqual(a, b)：a &lt;= b</p><p>assertRegexpMatches(s, re)：regex.search(s)</p><p>assertNotRegexpMatches(s, re)：not regex.search(s)</p><p>assertItemsEqual(a, b)：sorted(a) == sorted(b) and works with unhashable objs</p><p>assertDictContainsSubset(a, b)：all the key/value pairs in a exist in b</p><p>assertMultiLineEqual(a, b)：strings</p><p>assertSequenceEqual(a, b)：sequences</p><p>assertListEqual(a, b)：lists</p><p>assertTupleEqual(a, b)：tuples</p><p>assertSetEqual(a, b)：sets or frozensets</p><p>assertDictEqual(a, b)：dicts</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2022-10-25 09:00:37">更新于 2022-10-25</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/ data-title="Python unittest 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+</span></span></code></pre></td></tr></table></div></div><h2 id=assert>assert</h2><h3 id=预览>预览</h3><p>assertEqual(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a=b，则测试用例通过</p><p>assertNotEqual(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a != b，则测试用例通过</p><p>assertTrue(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 是 True，则测试用例通过</p><p>assertFalse(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 是 False，则测试用例通过</p><p>assertIs(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 是 b，则测试用例通过</p><p>assertNotIs(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 不是 b，则测试用例通过</p><p>assertIsNone(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 是 None，则测试用例通过</p><p>assertIsNotNone(x，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 x 不是 None，则测试用例通过</p><p>assertIn(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 在 b 中，则测试用例通过</p><p>assertNotIn(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 不在 b 中，则测试用例通过</p><p>assertIsInstance(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 是 b 的一个实例，则测试用例通过</p><p>assertNotIsInstance(a,b，[msg=&lsquo;测试失败时打印的信息&rsquo;])：若 a 不是 b 的实例，则测试用例通过</p><p>assertAlmostEqual(a, b)：round(a-b, 7) == 0</p><p>assertNotAlmostEqual(a, b)：round(a-b, 7) != 0</p><p>assertGreater(a, b)：a > b</p><p>assertGreaterEqual(a, b)：a >= b</p><p>assertLess(a, b)：a &lt; b</p><p>assertLessEqual(a, b)：a &lt;= b</p><p>assertRegexpMatches(s, re)：regex.search(s)</p><p>assertNotRegexpMatches(s, re)：not regex.search(s)</p><p>assertItemsEqual(a, b)：sorted(a) == sorted(b) and works with unhashable objs</p><p>assertDictContainsSubset(a, b)：all the key/value pairs in a exist in b</p><p>assertMultiLineEqual(a, b)：strings</p><p>assertSequenceEqual(a, b)：sequences</p><p>assertListEqual(a, b)：lists</p><p>assertTupleEqual(a, b)：tuples</p><p>assertSetEqual(a, b)：sets or frozensets</p><p>assertDictEqual(a, b)：dicts</p><h3 id=assertraises>assertRaises()</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>assertRaises</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=n>exception</span><span class=p>,</span>  <span class=c1># 待验证异常类型</span>
+</span></span><span class=line><span class=cl>  <span class=n>callable</span><span class=p>,</span>  <span class=c1># 待验证方法</span>
+</span></span><span class=line><span class=cl>	<span class=o>*</span><span class=n>args</span><span class=p>,</span>  <span class=c1># 待验证方法参数</span>
+</span></span><span class=line><span class=cl>	<span class=o>**</span><span class=n>kwds</span> <span class=c1># 待验证方法参数(dict类型)</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>功能说明</p><ul><li>验证异常测试</li><li>验证异常（第一个参数）是当调用待测试函数时，在传入相应的测试数据后，如果测试通过，则表明待测试函数抛出了预期的异常，否则测试失败。</li></ul><p>下面我们通过一个示例来进行演示，如果验证做除法时抛出除数不能为0的异常ZeroDivisionError。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># _*_ coding:utf-8 _*_</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>__author__</span> <span class=o>=</span> <span class=s1>&#39;苦叶子&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>unittest</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sys</span>
+</span></span><span class=line><span class=cl><span class=n>reload</span><span class=p>(</span><span class=n>sys</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sys</span><span class=o>.</span><span class=n>setdefaultencoding</span><span class=p>(</span><span class=s2>&#34;utf-8&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 除法函数</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>div</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a</span><span class=o>/</span><span class=n>b</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=c1># 测试用例</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>demoRaiseTest</span><span class=p>(</span><span class=n>unittest</span><span class=o>.</span><span class=n>TestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_raise</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertRaises</span><span class=p>(</span><span class=ne>ZeroDivisionError</span><span class=p>,</span> <span class=n>div</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl><span class=c1># 主函数</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>unittest</span><span class=o>.</span><span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>test_raise 方法使用了 assertRaises 方法来断言验证 div 方法除数为零时抛出的异常。</p><p>运行 python raise_demo.py 结果如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>.
+</span></span><span class=line><span class=cl>-------------------------------------
+</span></span><span class=line><span class=cl>Ran <span class=m>1</span> <span class=nb>test</span> in 0.000s
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>OK
+</span></span></code></pre></td></tr></table></div></div><p>你还可以尝试调整下数据，如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=k>def</span> <span class=nf>test_raise</span><span class=p>(</span><span class=nb>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nb>self</span><span class=o>.</span><span class=n>assertRaises</span><span class=p>(</span><span class=no>ZeroDivisionError</span><span class=p>,</span> <span class=n>div</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>执行结果如下:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>F</span>
+</span></span><span class=line><span class=cl><span class=o>=====================================</span>
+</span></span><span class=line><span class=cl>FAIL: test_raise <span class=o>(</span>__main__.demoRaiseTest<span class=o>)</span>
+</span></span><span class=line><span class=cl>----------------------------------------------------------------------
+</span></span><span class=line><span class=cl>Traceback <span class=o>(</span>most recent call last<span class=o>)</span>:
+</span></span><span class=line><span class=cl>  File <span class=s2>&#34;raise_demo.py&#34;</span>, line 18, in test_raise
+</span></span><span class=line><span class=cl>    self.assertRaises<span class=o>(</span>ZeroDivisionError, div, 1,1<span class=o>)</span>
+</span></span><span class=line><span class=cl>AssertionError: ZeroDivisionError not raised
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>----------------------------------
+</span></span><span class=line><span class=cl>Ran <span class=m>1</span> <span class=nb>test</span> in 0.000s
+</span></span></code></pre></td></tr></table></div></div><h2 id=跳过>跳过</h2><p>在执行测试用例时，有时候有些用例是不需要执行的，直接删除代码是不妥的；unittest 提供了一些跳过指定用例的方法</p><ul><li><code>@unittest.skip(reason)</code>：强制跳转。reason 是跳转原因</li><li><code>@unittest.skipIf(condition, reason)</code>：condition 为 True 的时候跳转</li><li><code>@unittest.skipUnless(condition, reason)</code>：condition 为 False 的时候跳转</li><li><code>@unittest.expectedFailure</code>：如果 test 失败了，这个 test 不计入失败的 case 数目</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># coding = utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>unittest</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>warnings</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>selenium</span> <span class=kn>import</span> <span class=n>webdriver</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>time</span> <span class=kn>import</span> <span class=n>sleep</span>
+</span></span><span class=line><span class=cl><span class=c1># 驱动文件路径</span>
+</span></span><span class=line><span class=cl><span class=n>driverfile_path</span> <span class=o>=</span> <span class=sa>r</span><span class=s1>&#39;D:\coship\Test_Framework\drivers\IEDriverServer.exe&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>CmsLoginTest</span><span class=p>(</span><span class=n>unittest</span><span class=o>.</span><span class=n>TestCase</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>setUp</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 这行代码的作用是忽略一些告警打印</span>
+</span></span><span class=line><span class=cl>        <span class=n>warnings</span><span class=o>.</span><span class=n>simplefilter</span><span class=p>(</span><span class=s2>&#34;ignore&#34;</span><span class=p>,</span> <span class=ne>ResourceWarning</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span> <span class=o>=</span> <span class=n>webdriver</span><span class=o>.</span><span class=n>Ie</span><span class=p>(</span><span class=n>executable_path</span><span class=o>=</span><span class=n>driverfile_path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s2>&#34;http://172.21.13.83:28080/&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>tearDown</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>quit</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@unittest</span><span class=o>.</span><span class=n>skip</span><span class=p>(</span><span class=s2>&#34;用户名密码都为空用例不执行&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_login1</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;&#39;&#39;用户名、密码为空&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;#imageField&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>click</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>error_message1</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[for=&#39;loginName&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>text</span>
+</span></span><span class=line><span class=cl>        <span class=n>error_message2</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[for=&#39;textfield&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>text</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>error_message1</span><span class=p>,</span> <span class=s1>&#39;用户名不能为空&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>error_message2</span><span class=p>,</span> <span class=s1>&#39;密码不能为空&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@unittest</span><span class=o>.</span><span class=n>skipIf</span><span class=p>(</span><span class=mi>3</span> <span class=o>&gt;</span> <span class=mi>2</span><span class=p>,</span> <span class=s2>&#34;3大于2，此用例不执行&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_login3</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;&#39;&#39;用户名、密码正确&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[name=&#39;admin.loginName&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>send_keys</span><span class=p>(</span><span class=s2>&#34;autotest&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[name=&#39;admin.password&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>send_keys</span><span class=p>(</span><span class=s2>&#34;111111&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;#imageField&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>click</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>switch_to</span><span class=o>.</span><span class=n>frame</span><span class=p>(</span><span class=s2>&#34;topFrame&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>username</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;#nav_top&gt;ul&gt;li&gt;a&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>text</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>username</span><span class=p>,</span><span class=s2>&#34;autotest&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@unittest</span><span class=o>.</span><span class=n>skipUnless</span><span class=p>(</span><span class=mi>3</span> <span class=o>&lt;</span> <span class=mi>2</span><span class=p>,</span><span class=s2>&#34;2没有大于3，此用例不执行&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_login2</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;&#39;&#39;用户名正确，密码错误&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[name=&#39;admin.loginName&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>send_keys</span><span class=p>(</span><span class=s2>&#34;autotest&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[name=&#39;admin.password&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>send_keys</span><span class=p>(</span><span class=s2>&#34;123456&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;#imageField&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>click</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>error_message</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;.errorMessage&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>text</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>error_message</span><span class=p>,</span> <span class=s1>&#39;密码错误,请重新输入!&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@unittest</span><span class=o>.</span><span class=n>expectedFailure</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_login4</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;&#39;&#39;用户名不存在&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[name=&#39;admin.loginName&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>send_keys</span><span class=p>(</span><span class=s2>&#34;test007&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[name=&#39;admin.password&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>send_keys</span><span class=p>(</span><span class=s2>&#34;123456&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;#imageField&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>click</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>error_message</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;.errorMessage&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>text</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>error_message</span><span class=p>,</span> <span class=s1>&#39;用户名不存在!&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_login5</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;&#39;&#39;用户名为空&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[name=&#39;admin.password&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>send_keys</span><span class=p>(</span><span class=s2>&#34;123456&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;#imageField&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>click</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>error_message</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[for=&#39;loginName&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>text</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>error_message</span><span class=p>,</span> <span class=s1>&#39;用户不存在!&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>test_login6</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;&#39;&#39;密码为空&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[name=&#39;admin.loginName&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>send_keys</span><span class=p>(</span><span class=s2>&#34;autotest&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;#imageField&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>click</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>error_message</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>driver</span><span class=o>.</span><span class=n>find_element_by_css_selector</span><span class=p>(</span><span class=s2>&#34;[for=&#39;textfield&#39;]&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>text</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>assertEqual</span><span class=p>(</span><span class=n>error_message</span><span class=p>,</span> <span class=s1>&#39;密码不能为空&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>unittest</span><span class=o>.</span><span class=n>main</span><span class=p>(</span><span class=n>verbosity</span><span class=o>=</span><span class=mi>2</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>执行结果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=s2>&#34;C:\Program Files\Python36\python.exe&#34;</span> D:/Git/Test_Framework/utils/cmslogin.py
+</span></span><span class=line><span class=cl>test_login1 <span class=o>(</span>__main__.CmsLoginTest<span class=o>)</span>
+</span></span><span class=line><span class=cl>用户名、密码为空 ... skipped <span class=s1>&#39;用户名密码都为空用例不执行&#39;</span>
+</span></span><span class=line><span class=cl>test_login2 <span class=o>(</span>__main__.CmsLoginTest<span class=o>)</span>
+</span></span><span class=line><span class=cl>用户名正确，密码错误 ... skipped <span class=s1>&#39;2没有大于3，此用例不执行&#39;</span>
+</span></span><span class=line><span class=cl>test_login3 <span class=o>(</span>__main__.CmsLoginTest<span class=o>)</span>
+</span></span><span class=line><span class=cl>用户名、密码正确 ... skipped <span class=s1>&#39;3大于2，此用例不执行&#39;</span>
+</span></span><span class=line><span class=cl>test_login4 <span class=o>(</span>__main__.CmsLoginTest<span class=o>)</span>
+</span></span><span class=line><span class=cl>用户名不存在 ... expected failure
+</span></span><span class=line><span class=cl>test_login5 <span class=o>(</span>__main__.CmsLoginTest<span class=o>)</span>
+</span></span><span class=line><span class=cl>用户名为空 ... FAIL
+</span></span><span class=line><span class=cl>test_login6 <span class=o>(</span>__main__.CmsLoginTest<span class=o>)</span>
+</span></span><span class=line><span class=cl>密码为空 ... <span class=nv>ok</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>======================================================================</span>
+</span></span><span class=line><span class=cl>FAIL: test_login5 <span class=o>(</span>__main__.CmsLoginTest<span class=o>)</span>
+</span></span><span class=line><span class=cl>用户名为空
+</span></span><span class=line><span class=cl>----------------------------------------------------------------------
+</span></span><span class=line><span class=cl>Traceback <span class=o>(</span>most recent call last<span class=o>)</span>:
+</span></span><span class=line><span class=cl>  File <span class=s2>&#34;D:/Git/Test_Framework/utils/cmslogin.py&#34;</span>, line 71, in test_login5
+</span></span><span class=line><span class=cl>    self.assertEqual<span class=o>(</span>error_message, <span class=s1>&#39;用户不存在!&#39;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>AssertionError: <span class=s1>&#39;用户名不能为空&#39;</span> !<span class=o>=</span> <span class=s1>&#39;用户不存在!&#39;</span>
+</span></span><span class=line><span class=cl>- 用户名不能为空
+</span></span><span class=line><span class=cl>+ 用户不存在!
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>----------------------------------------------------------------------
+</span></span><span class=line><span class=cl>Ran <span class=m>6</span> tests in 32.663s
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>FAILED <span class=o>(</span><span class=nv>failures</span><span class=o>=</span>1, <span class=nv>skipped</span><span class=o>=</span>3, expected <span class=nv>failures</span><span class=o>=</span>1<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Process finished with <span class=nb>exit</span> code <span class=m>1</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2022-11-20 03:48:49">更新于 2022-11-20</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/ data-title="Python unittest 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
 <a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
 <a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/unittest/ data-title="Python unittest 库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/warnings/ class=prev rel=prev title="Python warnings 库"><i class="fa-solid fa-angle-left fa-fw"></i>Python warnings 库</a>
 <a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/ipdb/ class=next rel=next title="Python ipdb 库">Python ipdb 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
