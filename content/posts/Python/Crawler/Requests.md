@@ -20,24 +20,24 @@ categories: [Python]
 - *requests.patch(url, data=None, **kwargs)*
 - *requests.delete(url, **kwargs)*
 
-除了`requests.request()`外，其余 7 个方法与 http 协议中的请求方法一一对应。这 7 个方法其实都是在调用`requests.request()`方法
+除了 `requests.request()` 外，其余 7 个方法与 http 协议中的请求方法一一对应。这 7 个方法其实都是在调用 `requests.request()` 方法
 
-| method          | 简述                                                                                       |
-| --------------- | ------------------------------------------------------------------------------------------ |
-| url             | 请求的url                                                                                  |
-| params          | 请求携带的params                                                                           |
-| data            | 请求body中的data                                                                           |
-| json            | 请求body中的json格式的data                                                                 |
-| headers         | 请求携带的headers                                                                          |
-| cookies         | 请求携带的cookies                                                                          |
-| files           | 上传文件时使用                                                                             |
-| auth            | 身份认证时使用                                                                             |
-| timeout         | 设置请求的超时时间，可以设置连接超时和读取超时                                             |
-| allow_redirects | 是否允许重定向，默认True，即允许重定向                                                     |
-| proxies         | 设置请求的代理，支持http代理以及socks代理（需要安装第三方库"pip install requests[socks]"） |
-| verify          | 用于https请求时的ssl证书验证，默认是开启的，如果不需要则设置为False即可                    |
-| stream          | 是否立即下载响应内容，默认是False，即立即下载响应内容                                      |
-| cert            | 用于指定本地文件用作客户端证书                                                             |
+| method          | 简述                                                         |
+| --------------- | ------------------------------------------------------------ |
+| url             | 请求的 url                                                   |
+| params          | 请求携带的 params                                            |
+| data            | 请求 body 中的 data                                          |
+| json            | 请求 body 中的 json 格式的 data                              |
+| headers         | 请求携带的 headers                                           |
+| cookies         | 请求携带的 cookies                                           |
+| files           | 上传文件时使用                                               |
+| auth            | 身份认证时使用                                               |
+| timeout         | 设置请求的超时时间，可以设置连接超时和读取超时               |
+| allow_redirects | 是否允许重定向，默认 True，即允许重定向                      |
+| proxies         | 设置请求的代理，支持 http 代理以及 socks 代理（需要安装第三方库 "pip install requests[socks]"） |
+| verify          | 用于 https 请求时的 ssl 证书验证，默认是开启的，如果不需要则设置为 False 即可 |
+| stream          | 是否立即下载响应内容，默认是 False，即立即下载响应内容       |
+| cert            | 用于指定本地文件用作客户端证书                               |
 
 ## 基本调用
 
@@ -52,9 +52,9 @@ r = requests.head('http://httpbin.org/get')
 r = requests.options('http://httpbin.org/get')
 ```
 
-返回`Response`对象
+返回 `Response` 对象
 
- ## param
+ ## params
 
 接受一个字典，用于传递 URL 参数
 
@@ -208,7 +208,7 @@ print(response.status_code)
 
 ## proxies
 
-设置请求的代理，支持 http 代理以及 socks 代理（需要安装第三方库"pip install requests[socks]"）
+设置请求的代理，支持 http 代理以及 socks 代理（需要安装第三方库 "pip install requests[socks]"）
 
 ```python
 import requests

@@ -3102,3 +3102,62 @@ BenchmarkStringConcat-4               19          61431933 ns/op        63284516
 
 从测试结果来看，语法中的字符串拼接操作性能是极其低下的，对于操作频繁的大字符串，我们需考虑用更高效的方式替代。
 
+### 函数传参
+
+**Go 语言中所有的传参都是值传递（传值）**，都是一个副本，一个拷贝。且传参和赋值（=）的操作本质是一样的。
+
+拷贝的内容分为 非引用类型 和 引用类型 两种类型
+
+- 非引用类型：int、string、struct、array 这样就不能修改原内容数据。
+
+- 引用类型：指针、map、slice、chan ，这样就可以修改原内容数据。
+
+切片传参时要注意扩容的影响
+
+```go
+package main
+ 
+import "fmt"
+ 
+func Add2Slice(s []int, t int) {
+	s[0]++
+	s = append(s, t) // 扩容
+	s[0]++
+}
+func main() {
+	a := []int{0, 1, 2, 3}
+	Add2Slice(a, 4)
+	fmt.Println(a)
+}
+ 
+// output
+// {1, 1, 2, 3}
+```
+
+slice 会有个长度和容量。如果没有足够可用的容量，append 函数会创建一个新的底层数组，拷贝已存在的值和将要被附加的新值。
+
+append 函数重新创建底层数组时：
+
+- 元素个数小于 1000，容量会是现有元素的 2 倍
+- 元素个数超过1000，容量会是现有元素的 1.25 倍
+
+```go
+package main
+ 
+import "fmt"
+ 
+func Add2Slice(s *[]int, t int) { // 传指针
+	// *s[0]++  /* 报错 */
+	*s = append(*s, t)	
+	// s[0]++
+}
+func main() {
+	a := []int{0, 1, 2, 3}
+	Add2Slice(&a, 4)
+	fmt.Println(a)
+}
+ 
+// output
+// {0, 1, 2, 3, 4}
+```
+

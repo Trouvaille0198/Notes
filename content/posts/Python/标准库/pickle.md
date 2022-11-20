@@ -85,7 +85,7 @@ dump (obj, file,protocol=None, *, fix mports=True)
 
 - obj：要转换的 Python 对象。
 - file：转换到指定的二进制文件中，要求该文件必须是以"wb"的打开方式进行操作。
-- protocol：和 dumps() 函数中 protocol 参数的含义完全相同，因此这里不再重复描述。
+- protocol：和 `dumps()` 函数中 protocol 参数的含义完全相同，因此这里不再重复描述。
 - 其他参数：为了兼容以前 Python 2.x 版本而保留的参数，可以忽略。
 
 例 3：将 tup1 元组转换成二进制对象文件。
@@ -101,7 +101,7 @@ with open ("a.txt", 'wb') as f:
 
 ## pickle.load()
 
-此函数和 dump() 函数相对应，用于将二进制对象文件转换成 Python 对象。该函数的基本语法格式为：
+此函数和 `dump()` 函数相对应，用于将二进制对象文件转换成 Python 对象。该函数的基本语法格式为：
 
 ```py
 load(file, *, fix_imports=True, encoding='ASCII', errors='strict')

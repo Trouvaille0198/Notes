@@ -84,7 +84,9 @@ class FuncTest(unittest.TestCase):
         assert func_a()
 ```
 
-注意，模拟的 mock_func_b 并不需要保证 func_a 中所有的可能分支和逻辑都执行一次，单元测试更多的是验证函数或接口（比如这里的 func_a）是否与设计相符、发现代码实现与需求中存在的错误、修改代码时是否引入了新的错误等。但是这里的写法也有很大的问题，一个功能模块中使用的函数或接口通常来讲其实并不少、也没有这里这么简单，如果涉及的接口都要重新写一个 mock 对象（如 mock_func_b），那单元测试的工作将会变得非常繁重和复杂，所以 unittest 中的 mock 模块派上了用场，这个模块也正如它的名称一样，可以模拟各种对象。
+注意，模拟的 mock_func_b 并不需要保证 func_a 中所有的可能分支和逻辑都执行一次，单元测试更多的是验证函数或接口（比如这里的 func_a）是否与设计相符、发现代码实现与需求中存在的错误、修改代码时是否引入了新的错误等。
+
+但是这里的写法也有很大的问题，一个功能模块中使用的函数或接口通常来讲其实并不少、也没有这里这么简单，如果涉及的接口都要重新写一个 mock 对象（如 mock_func_b），那单元测试的工作将会变得非常繁重和复杂，所以 unittest 中的 mock 模块派上了用场，这个模块也正如它的名称一样，可以模拟各种对象。
 
 ```python
 import unittest
@@ -106,9 +108,7 @@ class FuncTest(unittest.TestCase):
         assert func_a()
 ```
 
-#### 基本使用
-
-
+### 基本使用
 
 ##### return_vaule 
 
@@ -162,7 +162,7 @@ if __name__ == '__main__':
 
 最后，通过 `assertEqual()` 方法断言，返回的结果是否是预期的结果 7。
 
-#### side_effect
+### side_effect
 
 mock 对象的 side_effect 的作用：通过 side_effect 指定 mock 对象的副作用，这个副作用就是当你调用这个 mock 对象时会调用的函数,也可以选择抛出一个异常，来对程序的错误状态进行测试。
 
@@ -196,12 +196,14 @@ print(mock())
 print(mock())
 ```
 
-#### patch 装饰器
+### patch 装饰器
 
 它是一个装饰器，需要把你想模拟的函数写在里面，然后在后面的单元测试案例中为它赋一个具体实例，再用 return_value 来指定模拟的这个函数希望返回的结果就可以了，后面就是正常单元测试代码。
 
+#### @mock.patch.object
+
 ```py
-@mock.pathc.object(类名，“类中函数名”)
+@mock.patch.object(类名，“类中函数名”)
 ```
 
 ```py
@@ -227,7 +229,25 @@ if __name__ == '__main__':
     unittest.main()
 ```
 
-`@mock.pathc(模块名，“函数名”)`
+#### @mock.patch
+
+```py
+@mock.patch(“函数名及其路径”)
+```
+
+##### 详细参数
+
+```py
+unittest.mock.patch(target，new = DEFAULT，spec = None，create = False，spec_set = None，autospec = None，new_callable = None，** kwargs)
+```
+
+- target：必须是一个 str，格式为 `'package.module.ClassName'`，
+    - 注意这里的格式一定要写对，如果你的函数或类写在 pakege 名称为 a 下，b.py 脚本里，有个 c 的函数（或类），那这个参数就写 “a.b.c”
+- new：如果没写，默认指定的是 MagicMock
+- spec=True 或 spec_set=True，这会导致 patch 传递给被模拟为 spec / spec_set 的对象
+- new_callable：指定将被调用以创建新对象的不同类或可调用对象。默认情况下 MagicMock 使用。
+
+##### 例
 
 linux_tool.py
 
@@ -257,6 +277,8 @@ class TestLinuxTool(TestCase):
         pass
  
     @mock.patch("linux_tool.send_shell_cmd")
+  	# or
+    # @mock.patch(linux_tool, "send_shell_cmd")
     def test_check_cmd_response(self, mock_send_shell_cmd):
         mock_send_shell_cmd.return_value = "Response from emulated mock_send_shell_cmd function"
  
@@ -265,7 +287,9 @@ class TestLinuxTool(TestCase):
         self.assertTrue(status)
 ```
 
-如果 patch 多个外部函数，那么调用遵循自下而上的规则，比如：
+#### 自上而下原则
+
+如果 patch 多个外部函数，那么调用遵循**自下而上**的规则，比如：
 
 ```py
 @mock.patch("function_C")
@@ -281,7 +305,7 @@ def test_check_cmd_response(self, mock_function_A, mock_function_B, mock_functio
     self.assertTrue(re.search("C", mock_function_C()))
 ```
 
-#### 一个示例
+### 一个示例
 
 Count 类中 add_and_multiply 依赖 multiply，由于 multiply 并没有实现，这时候可以使用 mock 替换 multiply：
 
@@ -316,6 +340,8 @@ if __name__ == '__main__':
 ```
 
 ## assert
+
+### 预览
 
 assertEqual(a,b，[msg='测试失败时打印的信息'])：若 a=b，则测试用例通过
 
@@ -372,3 +398,204 @@ assertTupleEqual(a, b)：tuples
 assertSetEqual(a, b)：sets or frozensets   
 
 assertDictEqual(a, b)：dicts   
+
+### assertRaises()
+
+```py
+assertRaises(
+	exception,  # 待验证异常类型
+  callable,  # 待验证方法
+	*args,  # 待验证方法参数
+	**kwds # 待验证方法参数(dict类型)
+)
+```
+
+功能说明
+
+- 验证异常测试
+- 验证异常（第一个参数）是当调用待测试函数时，在传入相应的测试数据后，如果测试通过，则表明待测试函数抛出了预期的异常，否则测试失败。
+
+下面我们通过一个示例来进行演示，如果验证做除法时抛出除数不能为0的异常ZeroDivisionError。
+
+```python
+# _*_ coding:utf-8 _*_
+
+__author__ = '苦叶子'
+
+import unittest
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
+# 除法函数
+def div(a, b):
+    return a/b
+    
+# 测试用例
+class demoRaiseTest(unittest.TestCase):
+    def test_raise(self):
+        self.assertRaises(ZeroDivisionError, div, 1, 0)
+        
+# 主函数
+if __name__ == '__main__':
+    unittest.main()
+```
+
+test_raise 方法使用了 assertRaises 方法来断言验证 div 方法除数为零时抛出的异常。
+
+运行 python raise_demo.py 结果如下
+
+```bash
+.
+-------------------------------------
+Ran 1 test in 0.000s
+
+OK
+```
+
+你还可以尝试调整下数据，如下：
+
+```ruby
+def test_raise(self):
+    
+    self.assertRaises(ZeroDivisionError, div, 1,1)
+```
+
+执行结果如下:
+
+```bash
+F
+=====================================
+FAIL: test_raise (__main__.demoRaiseTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "raise_demo.py", line 18, in test_raise
+    self.assertRaises(ZeroDivisionError, div, 1,1)
+AssertionError: ZeroDivisionError not raised
+
+----------------------------------
+Ran 1 test in 0.000s
+```
+
+## 跳过
+
+在执行测试用例时，有时候有些用例是不需要执行的，直接删除代码是不妥的；unittest 提供了一些跳过指定用例的方法
+
+- `@unittest.skip(reason)`：强制跳转。reason 是跳转原因
+- `@unittest.skipIf(condition, reason)`：condition 为 True 的时候跳转
+- `@unittest.skipUnless(condition, reason)`：condition 为 False 的时候跳转
+- `@unittest.expectedFailure`：如果 test 失败了，这个 test 不计入失败的 case 数目
+
+```py
+# coding = utf-8
+import unittest
+import warnings
+from selenium import webdriver
+from time import sleep
+# 驱动文件路径
+driverfile_path = r'D:\coship\Test_Framework\drivers\IEDriverServer.exe'
+
+class CmsLoginTest(unittest.TestCase):
+    def setUp(self):
+        # 这行代码的作用是忽略一些告警打印
+        warnings.simplefilter("ignore", ResourceWarning)
+        self.driver = webdriver.Ie(executable_path=driverfile_path)
+        self.driver.get("http://172.21.13.83:28080/")
+
+    def tearDown(self):
+        self.driver.quit()
+
+    @unittest.skip("用户名密码都为空用例不执行")
+    def test_login1(self):
+        '''用户名、密码为空'''
+        self.driver.find_element_by_css_selector("#imageField").click()
+        error_message1 = self.driver.find_element_by_css_selector("[for='loginName']").text
+        error_message2 = self.driver.find_element_by_css_selector("[for='textfield']").text
+        self.assertEqual(error_message1, '用户名不能为空')
+        self.assertEqual(error_message2, '密码不能为空')
+
+    @unittest.skipIf(3 > 2, "3大于2，此用例不执行")
+    def test_login3(self):
+        '''用户名、密码正确'''
+        self.driver.find_element_by_css_selector("[name='admin.loginName']").send_keys("autotest")
+        self.driver.find_element_by_css_selector("[name='admin.password']").send_keys("111111")
+        self.driver.find_element_by_css_selector("#imageField").click()
+        sleep(1)
+        self.driver.switch_to.frame("topFrame")
+        username = self.driver.find_element_by_css_selector("#nav_top>ul>li>a").text
+        self.assertEqual(username,"autotest")
+
+    @unittest.skipUnless(3 < 2,"2没有大于3，此用例不执行")
+    def test_login2(self):
+        '''用户名正确，密码错误'''
+        self.driver.find_element_by_css_selector("[name='admin.loginName']").send_keys("autotest")
+        self.driver.find_element_by_css_selector("[name='admin.password']").send_keys("123456")
+        self.driver.find_element_by_css_selector("#imageField").click()
+        error_message = self.driver.find_element_by_css_selector(".errorMessage").text
+        self.assertEqual(error_message, '密码错误,请重新输入!')
+
+    @unittest.expectedFailure
+    def test_login4(self):
+        '''用户名不存在'''
+        self.driver.find_element_by_css_selector("[name='admin.loginName']").send_keys("test007")
+        self.driver.find_element_by_css_selector("[name='admin.password']").send_keys("123456")
+        self.driver.find_element_by_css_selector("#imageField").click()
+        error_message = self.driver.find_element_by_css_selector(".errorMessage").text
+        self.assertEqual(error_message, '用户名不存在!')
+
+    def test_login5(self):
+        '''用户名为空'''
+        self.driver.find_element_by_css_selector("[name='admin.password']").send_keys("123456")
+        self.driver.find_element_by_css_selector("#imageField").click()
+        error_message = self.driver.find_element_by_css_selector("[for='loginName']").text
+        self.assertEqual(error_message, '用户不存在!')
+
+    def test_login6(self):
+        '''密码为空'''
+        self.driver.find_element_by_css_selector("[name='admin.loginName']").send_keys("autotest")
+        self.driver.find_element_by_css_selector("#imageField").click()
+        error_message = self.driver.find_element_by_css_selector("[for='textfield']").text
+        self.assertEqual(error_message, '密码不能为空')
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
+```
+
+执行结果
+
+```bash
+"C:\Program Files\Python36\python.exe" D:/Git/Test_Framework/utils/cmslogin.py
+test_login1 (__main__.CmsLoginTest)
+用户名、密码为空 ... skipped '用户名密码都为空用例不执行'
+test_login2 (__main__.CmsLoginTest)
+用户名正确，密码错误 ... skipped '2没有大于3，此用例不执行'
+test_login3 (__main__.CmsLoginTest)
+用户名、密码正确 ... skipped '3大于2，此用例不执行'
+test_login4 (__main__.CmsLoginTest)
+用户名不存在 ... expected failure
+test_login5 (__main__.CmsLoginTest)
+用户名为空 ... FAIL
+test_login6 (__main__.CmsLoginTest)
+密码为空 ... ok
+
+======================================================================
+FAIL: test_login5 (__main__.CmsLoginTest)
+用户名为空
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:/Git/Test_Framework/utils/cmslogin.py", line 71, in test_login5
+    self.assertEqual(error_message, '用户不存在!')
+AssertionError: '用户名不能为空' != '用户不存在!'
+- 用户名不能为空
++ 用户不存在!
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 32.663s
+
+FAILED (failures=1, skipped=3, expected failures=1)
+
+Process finished with exit code 1
+```
+

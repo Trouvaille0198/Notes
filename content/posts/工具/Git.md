@@ -437,7 +437,9 @@ $ git config --global color.ui true
 
 ### 配置别名
 
+```bash
 $ git config --global alias.<simple-name> <origin-name>
+```
 
 ### 忽略特殊文件
 
@@ -507,19 +509,40 @@ subject：概括提交内容
 
 详见：https://www.cnblogs.com/daysme/p/7722474.html
 
-### 其他
+## git 命令补全配置
 
-识别大小写
+配置该功能时，只要下载 `git-bash-completion.git` 文件，无需下载所有的 `git` 源码。
 
-```bash
-git config core.ignorecase false
-```
+所需文件是 `github` 上的开源文件
 
-修改上一次的 commit 记录
+下载
 
 ```bash
-git commit --amend
+root@ubuntu:~ git clone https://github.com/markgandolfo/git-bash-completion.git
+root@ubuntu:~ cp git-bash-completion/git-completion.bash ~/.git-completion.bash
+root@ubuntu:~ ll .git-completion.bash
+-rwxr-xr-x 1 root root 27704 Feb 18 06:16 .git-completion.bash*
 ```
+
+修改 `~/.bashrc`，在文件结尾增加：
+
+```bash
+if [ -f ~/.git-completion.bash ]; then
+        . ~/.git-completion.bash
+fi
+```
+
+执行 `.bashrc` 文件，在同一个窗口执行 `git` 命令，命令后续部分使用 `tab` 键补全。
+
+```bash
+root@ubuntu:~ source ~/.bashrc
+root@ubuntu:~ git sta
+stage    stash    status
+```
+
+> 上述是`git`命令补全功能。不要和`linux`命令补全功能混淆。`linux`命令补全安装方法：`apt-get install bash-completion`。
+>
+> 可以使用`git config`命令配置`git`命令别名，减少命令输入。
 
 ## git rebase
 
@@ -761,6 +784,372 @@ git checkout -p <branch>
 
 这个命令可以用来打补丁。这个命令主要用来比较两个分支间的差异内容，并提供交互式的界面来选择进一步的操作。这个命令不仅可以比较两个分支间的差异，还可以比较单个文件的差异哦！
 
+## git stash
+
+使用git的时候，我们往往使用分支（branch）解决任务切换问题。
+
+例如，我们往往会建一个自己的分支去修改和调试代码；如果别人或者自己发现原有的分支上有个不得不修改的bug，我们往往会把完成一半的代码`commit`提交到本地仓库，然后切换分支去修改bug，改好之后再切换回来。这样的话往往log上会有大量不必要的记录。
+
+其实如果我们不想提交完成一半或者不完善的代码，但是却不得不去修改一个紧急Bug，那么使用 `git stash` 就可以将你当前未提交到本地（和服务器）的代码推入到Git的栈中。
+
+这时候你的工作区间和上一次提交的内容是完全一样的，所以你可以放心的修Bug；等到修完Bug，提交到服务器上后，再使用`git stash apply`将以前一半的工作应用回来。
+
+> 经常有这样的事情发生，当你正在进行项目中某一部分的工作，里面的东西处于一个比较杂乱的状态，而你想转到其他分支上进行一些工作。
+>
+> 问题是，你不想提交进行了一半的工作，否则以后你无法回到这个工作点。
+>
+> 解决这个问题的办法就是 `git stash` 命令。
+>
+> 储藏 (stash) 可以获取你工作目录的中间状态——也就是你修改过的被追踪的文件和暂存的变更——并将它保存到一个未完结变更的堆栈中，随时可以重新应用。
+
+### stash 当前修改
+
+`git stash` 会把所有未提交的修改（包括暂存的和非暂存的）都保存起来，用于后续恢复当前工作目录。
+比如下面的中间状态，通过 `git stash` 命令推送一个新的储藏，当前的工作目录就干净了。
+
+```bash
+$ git status
+On branch master
+Changes to be committed:
+
+new file:   style.css
+
+Changes not staged for commit:
+
+modified:   index.html
+
+$ git stash
+Saved working directory and index state WIP on master: 5002d47 our new homepage
+HEAD is now at 5002d47 our new homepage
+
+$ git status
+On branch master
+nothing to commit, working tree clean
+```
+
+需要说明一点，stash 是本地的，不会通过 `git push` 命令上传到 git server 上。
+
+实际应用中推荐给每个 stash 加一个message，用于记录版本，**使用 `git stash save` 取代 `git stash` 命令。**示例如下：
+
+```bash
+$ git stash save "test-cmd-stash"
+Saved working directory and index state On autoswitch: test-cmd-stash
+HEAD 现在位于 296e8d4 remove unnecessary postion reset in onResume function
+$ git stash list
+stash@{0}: On autoswitch: test-cmd-stash
+```
+
+### 重新应用缓存的 stash
+
+可以通过 `git stash pop` 命令恢复之前缓存的工作目录，输出如下：
+
+```bash
+$ git status
+On branch master
+nothing to commit, working tree clean
+$ git stash pop
+On branch master
+Changes to be committed:
+
+    new file:   style.css
+
+Changes not staged for commit:
+
+    modified:   index.html
+
+Dropped refs/stash@{0} (32b3aa1d185dfe6d57b3c3cc3b32cbf3e380cc6a)
+```
+
+这个指令将缓存堆栈中的第一个 stash 删除，并将对应修改应用到当前的工作目录下。
+
+你也可以使用 `git stash apply` 命令，将缓存堆栈中的 stash 多次应用到工作目录中，但**并不删除 stash 拷贝**。
+
+命令输出如下：
+
+```bash
+$ git stash apply
+On branch master
+Changes to be committed:
+
+    new file:   style.css
+
+Changes not staged for commit:
+
+    modified:   index.html
+```
+
+### 查看现有 stash
+
+可以使用 `git stash list` 命令，一个典型的输出如下：
+
+```bash
+$ git stash list
+stash@{0}: WIP on master: 049d078 added the index file
+stash@{1}: WIP on master: c264051 Revert "added file_size"
+stash@{2}: WIP on master: 21d80a5 added number to log
+```
+
+在使用 `git stash apply` 命令时可以通过名字指定使用哪个 stash，默认使用最近的stash（ 即 `stash@{0`} ）
+
+### 删除 stash
+
+可以使用 `git stash drop` 命令，后面可以跟着 stash 名字。下面是一个示例：
+
+```perl
+$ git stash list
+stash@{0}: WIP on master: 049d078 added the index file
+stash@{1}: WIP on master: c264051 Revert "added file_size"
+stash@{2}: WIP on master: 21d80a5 added number to log
+$ git stash drop stash@{0}
+Dropped stash@{0} (364e91f3f268f0900bc3ee613f9f733e82aaed43)
+```
+
+或者使用 `git stash clear` 命令，删除所有缓存的 stash。
+
+### 查看指定 stash 的 diff
+
+可以使用 `git stash show` 命令，后面可以跟着 stash 名字。示例如下：
+
+```ruby
+$ git stash show
+ index.html | 1 +
+ style.css | 3 +++
+ 2 files changed, 4 insertions(+)
+```
+
+在该命令后面添加 `-p` 或 `--patch` 可以查看特定 stash 的全部 diff，如下：
+
+```diff
+$ git stash show -p
+diff --git a/style.css b/style.css
+new file mode 100644
+index 0000000..d92368b
+--- /dev/null
++++ b/style.css
+@@ -0,0 +1,3 @@
++* {
++  text-decoration: blink;
++}
+diff --git a/index.html b/index.html
+index 9daeafb..ebdcbd2 100644
+--- a/index.html
++++ b/index.html
+@@ -1 +1,2 @@
++<link rel="stylesheet" href="style.css"/>
+```
+
+### 从 stash 创建分支
+
+如果你储藏了一些工作，暂时不去理会，然后继续在你储藏工作的分支上工作，你在重新应用工作时可能会碰到一些问题：如果尝试应用的变更是针对一个你那之后修改过的文件，你会碰到一个归并冲突并且必须去化解它。
+
+如果你想用更方便的方法来重新检验你储藏的变更，你可以运行 `git stash branch`，这会创建一个新的分支，检出你储藏工作时的所处的提交，重新应用你的工作，如果成功，将会丢弃储藏。
+
+```shell
+$ git stash branch testchanges
+Switched to a new branch "testchanges"
+# On branch testchanges
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#      modified:   index.html
+#
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#
+#      modified:   lib/simplegit.rb
+#
+Dropped refs/stash@{0} (f0dfc4d5dc332d1cee34a634182e168c4efc3359)
+```
+
+这是一个很棒的捷径来恢复储藏的工作然后在新的分支上继续当时的工作。
+
+### 暂存未跟踪或忽略的文件
+
+默认情况下，`git stash` 会缓存下列文件：
+
+- 添加到暂存区的修改（staged changes）
+- Git 跟踪的但并未添加到暂存区的修改（unstaged changes）
+
+但不会缓存一下文件：
+
+- **在工作目录中新的文件**（untracked files）
+- 被忽略的文件（ignored files）
+
+`git stash` 命令提供了参数用于缓存上面两种类型的文件。
+
+- 使用 `-u` 或者 `--include-untracked` 可以 stash untracked 文件。
+- 使用 `-a` 或者 `--all` 命令可以 stash 当前目录下的所有修改。
+
+## git cherry-pick
+
+### 基本用法
+
+`git cherry-pick` 命令的作用，就是将指定的提交（commit）应用于其他分支。
+
+```bash
+$ git cherry-pick <commitHash>
+```
+
+上面命令就会将指定的提交 `commitHash`，应用于当前分支。这会在当前分支产生一个新的提交，当然它们的哈希值会不一样。
+
+举例来说，代码仓库有 `master` 和 `feature` 两个分支。
+
+```
+a - b - c - d   Master
+         \
+           e - f - g Feature
+```
+
+现在将提交 `f` 应用到 `master` 分支。
+
+```bash
+# 切换到 master 分支
+$ git checkout master
+
+# Cherry pick 操作
+$ git cherry-pick f
+```
+
+上面的操作完成以后，代码库就变成了下面的样子。
+
+```
+a - b - c - d - f   Master
+         \
+           e - f - g Feature
+```
+
+从上面可以看到，`master` 分支的末尾增加了一个提交 `f`。
+
+`git cherry-pick` 命令的参数，不一定是提交的哈希值，分支名也是可以的，表示转移该分支的最新提交。
+
+```bash
+git cherry-pick feature
+```
+
+上面代码表示将 `feature` 分支的最近一次提交，转移到当前分支。
+
+### 转移多个提交
+
+Cherry pick 支持一次转移多个提交。
+
+```bash
+$ git cherry-pick <HashA> <HashB>
+```
+
+上面的命令将 A 和 B 两个提交应用到当前分支。这会在当前分支生成两个对应的新提交。
+
+如果想要转移一系列的连续提交，可以使用下面的简便语法。
+
+```bash
+$ git cherry-pick A..B 
+```
+
+上面的命令可以转移从 A 到 B（**除了 A**）的所有提交。它们必须按照正确的顺序放置：提交 A 必须早于提交 B，否则命令将失败，但不会报错。
+
+注意，使用上面的命令，提交 A 将不会包含在 Cherry pick 中。如果要包含提交 A，可以使用下面的语法。
+
+```bash
+$ git cherry-pick A^..B 
+```
+
+### 配置项
+
+`git cherry-pick`命令的常用配置项如下。
+
+- `-e`，`--edit`
+    - 打开外部编辑器，编辑提交信息。
+
+- `-n`，`--no-commit`
+    - 只更新工作区和暂存区，不产生新的提交。
+
+- `-x`
+    - 在提交信息的末尾追加一行`(cherry picked from commit ...)`，方便以后查到这个提交是如何产生的。
+
+- `-s`，`--signoff`
+    - 在提交信息的末尾追加一行操作者的签名，表示是谁进行了这个操作。
+
+- `-m parent-number`，`--mainline parent-number`
+
+    - 如果原始提交是一个合并节点，来自于两个分支的合并，那么 Cherry pick 默认将失败，因为它不知道应该采用哪个分支的代码变动。
+
+    - `-m` 配置项告诉 Git，应该采用哪个分支的变动。它的参数 `parent-number` 是一个从 `1` 开始的整数，代表原始提交的父分支编号。
+
+    - ```bash
+        $ git cherry-pick -m 1 <commitHash>
+        ```
+
+    - 面命令表示，Cherry pick 采用提交 `commitHash` 来自编号 1 的父分支的变动。
+
+        一般来说，1号父分支是接受变动的分支（the branch being merged into），2号父分支是作为变动来源的分支（the branch being merged from）
+
+### 代码冲突
+
+如果操作过程中发生代码冲突，Cherry pick 会停下来，让用户决定如何继续操作。
+
+- `--continue`
+
+    - 用户解决代码冲突后，第一步将修改的文件重新加入暂存区（`git add .`），第二步使用下面的命令，让 Cherry pick 过程继续执行。
+
+    - ```bash
+        $ git cherry-pick --continue
+        ```
+
+- `--abort`
+    - 发生代码冲突后，放弃合并，回到操作前的样子。
+
+- `--quit`
+    - 发生代码冲突后，退出 Cherry pick，但是不回到操作前的样子。
+
+### 转移到另一个代码库
+
+Cherry pick 也支持转移另一个代码库的提交，方法是先将该库加为远程仓库。
+
+```bash
+$ git remote add target git://gitUrl
+```
+
+上面命令添加了一个远程仓库`target`。
+
+然后，将远程代码抓取到本地。
+
+```bash
+$ git fetch target
+```
+
+上面命令将远程代码仓库抓取到本地。
+
+接着，检查一下要从远程仓库转移的提交，获取它的哈希值。
+
+```bash
+$ git log target/master
+```
+
+最后，使用`git cherry-pick`命令转移提交。
+
+```bash
+$ git cherry-pick <commitHash>
+```
+
 ## 其他
 
 - 不建议使用 `git push --force`，推荐 `--force-with-lease` 参数
+
+- 识别大小写
+
+```bash
+git config core.ignorecase false
+```
+
+- 修改上一次的 commit 记录
+
+```bash
+git commit --amend
+```
+
+- 比较文件
+
+```bash
+git diff <branch_name1> <branch_name2> --stat
+git diff <branch_name1> --stat # 比较当前文件与 branch_name1
+```
+
