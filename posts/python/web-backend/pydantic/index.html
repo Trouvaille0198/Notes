@@ -1,0 +1,1367 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>marshmallow - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="pydantic models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obj"><meta name=keywords content="Python,后端"><meta itemprop=name content="marshmallow"><meta itemprop=description content="pydantic models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obj"><meta itemprop=datePublished content="2022-11-22T00:00:00+00:00"><meta itemprop=dateModified content="2022-11-23T14:00:55+00:00"><meta itemprop=wordCount content="4294"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,后端,"><meta property="og:title" content="marshmallow"><meta property="og:description" content="pydantic models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obj"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-11-22T00:00:00+00:00"><meta property="article:modified_time" content="2022-11-23T14:00:55+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="marshmallow"><meta name=twitter:description content="pydantic models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obj"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/database/mysql/mvcc/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/marshmallow/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"marshmallow","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/pydantic\/"},"genre":"posts","keywords":"Python, 后端","wordcount":4294,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/pydantic\/","datePublished":"2022-11-22T00:00:00+00:00","dateModified":"2022-11-23T14:00:55+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>marshmallow</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2022-11-22 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-11-22>2022-11-22</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 4294 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#models>models</a><ul><li><a href=#基础使用>基础使用</a></li><li><a href=#model-的属性>model 的属性</a></li><li><a href=#嵌套-model>嵌套 model</a></li><li><a href=#orm-mode>ORM Mode</a><ul><li><a href=#保留字>保留字</a></li><li><a href=#嵌套-orm-models>嵌套 ORM models</a></li><li><a href=#数据绑定>数据绑定</a></li></ul></li><li><a href=#错误处理>错误处理</a><ul><li><a href=#自定义错误>自定义错误</a></li></ul></li><li><a href=#helper-函数>helper 函数</a><ul><li><a href=#不经验证地创建-model>不经验证地创建 model</a></li></ul></li><li><a href=#generic-models>Generic Models</a></li><li><a href=#model-的动态创建>model 的动态创建</a></li><li><a href=#从-namedtuple-和-typeddict-中创建-model>从 <code>NamedTuple</code> 和 <code>TypedDict</code> 中创建 model</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=pydantic>pydantic</h1><h2 id=models>models</h2><p>通过创建一个继承 <code>BaseModel</code> 的子类（model）来定义一类对象（defining objects）</p><p>模型（model）可以是强类型语言中的类型（types），也可以是 API 接口中的参数</p><p>未经验证的 raw data 可以被传入 model，model 会根据自身的的字段定义对 untrusted data 进行验证</p><blockquote><p>pydantic 不仅仅是一个验证模块（validation library），更是一个解析模块（parsing library），验证只提供对传入数据的类型与约束，而 pydantic 可以保证传出数据的类型与约束都是符合规则的。</p><p><em>pydantic</em> is primarily a parsing library, <strong>not a validation library</strong>. Validation is a means to an end: building a model which conforms to the types and constraints provided.</p><p>In other words, <em>pydantic</em> guarantees the types and constraints of the output model, not the input data</p></blockquote><h3 id=基础使用>基础使用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=s1>&#39;Jane Doe&#39;</span> <span class=c1># has default value, not required then</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>name</code> 字段的类型被它的默认值所指出，所以就不用显式地定义了</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=nb>id</span><span class=o>=</span><span class=s1>&#39;123&#39;</span><span class=p>)</span> <span class=c1># str was cast to an int</span>
+</span></span><span class=line><span class=cl><span class=n>user_x</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=nb>id</span><span class=o>=</span><span class=s1>&#39;123.45&#39;</span><span class=p>)</span> <span class=c1># float was cast to an int</span>
+</span></span></code></pre></td></tr></table></div></div><p>聪明的实例化</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>assert</span> <span class=n>user</span><span class=o>.</span><span class=n>__fields_set__</span> <span class=o>==</span> <span class=p>{</span><span class=s1>&#39;id&#39;</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>__fields_set__</code> 指出了在实例化时传入的字段</p><p><code>&lt;model>.dict()</code> 和 <code>dict(&lt;model>)</code> 能将 model 转换为字典；不过 <code>&lt;model>.dict()</code> 可能会包含一些其他数据</p><h3 id=model-的属性>model 的属性</h3><ul><li><code>dict()</code><ul><li>返回字典</li></ul></li><li><code>json()</code><ul><li>返回 json 字符串</li></ul></li><li><code>copy()</code><ul><li>返回拷贝（默认浅拷贝 shallow copy）</li></ul></li><li><code>parse_obj()</code><ul><li>class method，将一个 dict 转换为 model 的方法</li></ul></li><li><code>parse_raw()</code><ul><li>class method，将字符串转换为 model 的方法</li></ul></li><li><code>parse_file()</code><ul><li>class method，将文件路径对应的文件转换为 model 的方法，类似 <code>parse_raw()</code></li></ul></li><li><code>from_orm()</code><ul><li>class method，将一个 ORM 模型对象转换为 model 的方法</li></ul></li><li><code>schema()</code><ul><li>返回一个 JSON Schema 格式的字典</li></ul></li><li><code>schema_json()</code><ul><li>返回一个 JSON Schema 格式的字符串</li></ul></li><li><code>construct()</code><ul><li>class method，生成一个跳过校验的实例</li></ul></li><li><code>__fields_set__</code><ul><li>初始化实例所传入字段的集合</li></ul></li><li><code>__fields__</code><ul><li>model 定义字段的集合</li></ul></li><li><code>__config__</code><ul><li>model 的 configuration class</li></ul></li></ul><h3 id=嵌套-model>嵌套 model</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Optional</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Foo</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>count</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>size</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=nb>float</span><span class=p>]</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Bar</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>apple</span> <span class=o>=</span> <span class=s1>&#39;x&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>banana</span> <span class=o>=</span> <span class=s1>&#39;y&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Spam</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>foo</span><span class=p>:</span> <span class=n>Foo</span>
+</span></span><span class=line><span class=cl>    <span class=n>bars</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=n>Bar</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>m</span> <span class=o>=</span> <span class=n>Spam</span><span class=p>(</span><span class=n>foo</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;count&#39;</span><span class=p>:</span> <span class=mi>4</span><span class=p>},</span> <span class=n>bars</span><span class=o>=</span><span class=p>[{</span><span class=s1>&#39;apple&#39;</span><span class=p>:</span> <span class=s1>&#39;x1&#39;</span><span class=p>},</span> <span class=p>{</span><span class=s1>&#39;apple&#39;</span><span class=p>:</span> <span class=s1>&#39;x2&#39;</span><span class=p>}])</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; foo=Foo(count=4, size=None) bars=[Bar(apple=&#39;x1&#39;, banana=&#39;y&#39;),</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; Bar(apple=&#39;x2&#39;, banana=&#39;y&#39;)]</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=o>.</span><span class=n>dict</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>    &#39;foo&#39;: {&#39;count&#39;: 4, &#39;size&#39;: None},
+</span></span></span><span class=line><span class=cl><span class=s2>    &#39;bars&#39;: [
+</span></span></span><span class=line><span class=cl><span class=s2>        {&#39;apple&#39;: &#39;x1&#39;, &#39;banana&#39;: &#39;y&#39;},
+</span></span></span><span class=line><span class=cl><span class=s2>        {&#39;apple&#39;: &#39;x2&#39;, &#39;banana&#39;: &#39;y&#39;},
+</span></span></span><span class=line><span class=cl><span class=s2>    ],
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=orm-mode>ORM Mode</h3><p>models 支持 ORM 模式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>sqlalchemy</span> <span class=kn>import</span> <span class=n>Column</span><span class=p>,</span> <span class=n>Integer</span><span class=p>,</span> <span class=n>String</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>sqlalchemy.dialects.postgresql</span> <span class=kn>import</span> <span class=n>ARRAY</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>sqlalchemy.ext.declarative</span> <span class=kn>import</span> <span class=n>declarative_base</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>constr</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>Base</span> <span class=o>=</span> <span class=n>declarative_base</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>CompanyOrm</span><span class=p>(</span><span class=n>Base</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>__tablename__</span> <span class=o>=</span> <span class=s1>&#39;companies&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span> <span class=o>=</span> <span class=n>Column</span><span class=p>(</span><span class=n>Integer</span><span class=p>,</span> <span class=n>primary_key</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>nullable</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>public_key</span> <span class=o>=</span> <span class=n>Column</span><span class=p>(</span><span class=n>String</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span> <span class=n>index</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>nullable</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>unique</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>Column</span><span class=p>(</span><span class=n>String</span><span class=p>(</span><span class=mi>63</span><span class=p>),</span> <span class=n>unique</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>domains</span> <span class=o>=</span> <span class=n>Column</span><span class=p>(</span><span class=n>ARRAY</span><span class=p>(</span><span class=n>String</span><span class=p>(</span><span class=mi>255</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>CompanyModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>public_key</span><span class=p>:</span> <span class=n>constr</span><span class=p>(</span><span class=n>max_length</span><span class=o>=</span><span class=mi>20</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=n>constr</span><span class=p>(</span><span class=n>max_length</span><span class=o>=</span><span class=mi>63</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>domains</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=n>constr</span><span class=p>(</span><span class=n>max_length</span><span class=o>=</span><span class=mi>255</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Config</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>orm_mode</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>co_orm</span> <span class=o>=</span> <span class=n>CompanyOrm</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=o>=</span><span class=mi>123</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>public_key</span><span class=o>=</span><span class=s1>&#39;foobar&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=o>=</span><span class=s1>&#39;Testing&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>domains</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;example.com&#39;</span><span class=p>,</span> <span class=s1>&#39;foobar.com&#39;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>co_orm</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; &lt;models_orm_mode_3_9.CompanyOrm object at 0x7fb20cc17790&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>co_model</span> <span class=o>=</span> <span class=n>CompanyModel</span><span class=o>.</span><span class=n>from_orm</span><span class=p>(</span><span class=n>co_orm</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>co_model</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; id=123 public_key=&#39;foobar&#39; name=&#39;Testing&#39; domains=[&#39;example.com&#39;,</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; &#39;foobar.com&#39;]</span>
+</span></span></code></pre></td></tr></table></div></div><p>要点</p><ul><li><code>Config</code> 属性 <code>orn_mode</code> 必须为 <code>True</code></li><li>使用 <code>.from_orm()</code> 类方法来创建 model</li></ul><h4 id=保留字>保留字</h4><p>设置 <code>Field</code> 的 <code>alias</code> 参数来使用 SQLAlchemy 的保留字</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>sqlalchemy</span> <span class=k>as</span> <span class=nn>sa</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>sqlalchemy.ext.declarative</span> <span class=kn>import</span> <span class=n>declarative_base</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>MyModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>metadata</span><span class=p>:</span> <span class=nb>dict</span><span class=p>[</span><span class=nb>str</span><span class=p>,</span> <span class=nb>str</span><span class=p>]</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>alias</span><span class=o>=</span><span class=s1>&#39;metadata_&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Config</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>orm_mode</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>BaseModel</span> <span class=o>=</span> <span class=n>declarative_base</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>SQLModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>__tablename__</span> <span class=o>=</span> <span class=s1>&#39;my_table&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span> <span class=o>=</span> <span class=n>sa</span><span class=o>.</span><span class=n>Column</span><span class=p>(</span><span class=s1>&#39;id&#39;</span><span class=p>,</span> <span class=n>sa</span><span class=o>.</span><span class=n>Integer</span><span class=p>,</span> <span class=n>primary_key</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># &#39;metadata&#39; is reserved by SQLAlchemy, hence the &#39;_&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>metadata_</span> <span class=o>=</span> <span class=n>sa</span><span class=o>.</span><span class=n>Column</span><span class=p>(</span><span class=s1>&#39;metadata&#39;</span><span class=p>,</span> <span class=n>sa</span><span class=o>.</span><span class=n>JSON</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sql_model</span> <span class=o>=</span> <span class=n>SQLModel</span><span class=p>(</span><span class=n>metadata_</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;key&#39;</span><span class=p>:</span> <span class=s1>&#39;val&#39;</span><span class=p>},</span> <span class=nb>id</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>pydantic_model</span> <span class=o>=</span> <span class=n>MyModel</span><span class=o>.</span><span class=n>from_orm</span><span class=p>(</span><span class=n>sql_model</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>pydantic_model</span><span class=o>.</span><span class=n>dict</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;metadata&#39;: {&#39;key&#39;: &#39;val&#39;}}</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>pydantic_model</span><span class=o>.</span><span class=n>dict</span><span class=p>(</span><span class=n>by_alias</span><span class=o>=</span><span class=kc>True</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;metadata_&#39;: {&#39;key&#39;: &#39;val&#39;}}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=嵌套-orm-models>嵌套 ORM models</h4><p>ORM 实例也可以嵌套地传入 model</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>PetCls</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>name</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>species</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>species</span> <span class=o>=</span> <span class=n>species</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>PersonCls</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>name</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>age</span><span class=p>:</span> <span class=nb>float</span> <span class=o>=</span> <span class=kc>None</span><span class=p>,</span> <span class=n>pets</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=n>PetCls</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>age</span> <span class=o>=</span> <span class=n>age</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>pets</span> <span class=o>=</span> <span class=n>pets</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Pet</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>species</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Config</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>orm_mode</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Person</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span><span class=p>:</span> <span class=nb>float</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>pets</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=n>Pet</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Config</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>orm_mode</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>bones</span> <span class=o>=</span> <span class=n>PetCls</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;Bones&#39;</span><span class=p>,</span> <span class=n>species</span><span class=o>=</span><span class=s1>&#39;dog&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>orion</span> <span class=o>=</span> <span class=n>PetCls</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;Orion&#39;</span><span class=p>,</span> <span class=n>species</span><span class=o>=</span><span class=s1>&#39;cat&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>anna</span> <span class=o>=</span> <span class=n>PersonCls</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;Anna&#39;</span><span class=p>,</span> <span class=n>age</span><span class=o>=</span><span class=mi>20</span><span class=p>,</span> <span class=n>pets</span><span class=o>=</span><span class=p>[</span><span class=n>bones</span><span class=p>,</span> <span class=n>orion</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>anna_model</span> <span class=o>=</span> <span class=n>Person</span><span class=o>.</span><span class=n>from_orm</span><span class=p>(</span><span class=n>anna</span><span class=p>)</span> <span class=c1># Recursive ORM instance be parsed</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>anna_model</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; name=&#39;Anna&#39; age=20.0 pets=[Pet(name=&#39;Bones&#39;, species=&#39;dog&#39;),</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; Pet(name=&#39;Orion&#39;, species=&#39;cat&#39;)]</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=数据绑定>数据绑定</h4><blockquote><p>ORM to model 的原理</p><p>Arbitrary classes are processed by <em>pydantic</em> using the <code>GetterDict</code> class (see <a href=https://github.com/pydantic/pydantic/blob/main/pydantic/utils.py target=_blank rel="external nofollow noopener noreferrer">utils.py</a>), which attempts to provide a dictionary-like interface to any class. You can customise how this works by setting your own sub-class of <code>GetterDict</code> as the value of <code>Config.getter_dict</code> (see <a href=https://pydantic-docs.helpmanual.io/usage/model_config/ target=_blank rel="external nofollow noopener noreferrer">config</a>).</p></blockquote><p>You can also customise class validation using <a href=https://pydantic-docs.helpmanual.io/usage/validators/#root-validators target=_blank rel="external nofollow noopener noreferrer">root_validators</a> with <code>pre=True</code>. In this case your validator function will be passed a <code>GetterDict</code> instance which you may copy and modify.</p><p>The <code>GetterDict</code> instance will be called for each field with a sentinel as a fallback (if no other default value is set). Returning this sentinel means that the field is missing. Any other value will be interpreted as the value of the field.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Any</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic.utils</span> <span class=kn>import</span> <span class=n>GetterDict</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>xml.etree.ElementTree</span> <span class=kn>import</span> <span class=n>fromstring</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>xmlstring</span> <span class=o>=</span> <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>&lt;User Id=&#34;2138&#34;&gt;
+</span></span></span><span class=line><span class=cl><span class=s2>    &lt;FirstName /&gt;
+</span></span></span><span class=line><span class=cl><span class=s2>    &lt;LoggedIn Value=&#34;true&#34; /&gt;
+</span></span></span><span class=line><span class=cl><span class=s2>&lt;/User&gt;
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserGetter</span><span class=p>(</span><span class=n>GetterDict</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>get</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>key</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>default</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Any</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># element attributes</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>key</span> <span class=ow>in</span> <span class=p>{</span><span class=s1>&#39;Id&#39;</span><span class=p>,</span> <span class=s1>&#39;Status&#39;</span><span class=p>}:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>_obj</span><span class=o>.</span><span class=n>attrib</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>key</span><span class=p>,</span> <span class=n>default</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># element children</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>_obj</span><span class=o>.</span><span class=n>find</span><span class=p>(</span><span class=n>key</span><span class=p>)</span><span class=o>.</span><span class=n>attrib</span><span class=p>[</span><span class=s1>&#39;Value&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=k>except</span> <span class=p>(</span><span class=ne>AttributeError</span><span class=p>,</span> <span class=ne>KeyError</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=n>default</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>Id</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>Status</span><span class=p>:</span> <span class=nb>str</span> <span class=o>|</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>FirstName</span><span class=p>:</span> <span class=nb>str</span> <span class=o>|</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>LastName</span><span class=p>:</span> <span class=nb>str</span> <span class=o>|</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>LoggedIn</span><span class=p>:</span> <span class=nb>bool</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Config</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>orm_mode</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>        <span class=n>getter_dict</span> <span class=o>=</span> <span class=n>UserGetter</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>from_orm</span><span class=p>(</span><span class=n>fromstring</span><span class=p>(</span><span class=n>xmlstring</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=错误处理>错误处理</h3><p>校验过程中，一旦出错，pydantic 将会抛出 <code>ValidationError</code> 错误</p><blockquote><p>自定义的验证代码不应该抛出 <code>ValidationError</code> 错误，而是抛出 <code>ValueError</code>、<code>TypeError</code> 或 <code>AssertionError</code>，这样它们能被 <code>ValidationError</code> 捕获到</p></blockquote><p>校验中只会报一次错，<code>ValidationError</code> 将包含所有的错误</p><p>你可以使用以下方法处理错误 <code>exception</code>：</p><ul><li><code>e.errors()</code><ul><li>列表形式</li></ul></li><li><code>e.json()</code><ul><li>json 形式</li></ul></li><li><code>str(e)</code><ul><li>易读的字符串形式</li></ul></li></ul><p>每个 error 对象都包含：</p><ul><li><p><code>loc</code></p><ul><li>一个列表，指出<strong>错误位置</strong><ul><li>第一个元素指出出错的 field</li><li>如果 fields 是一个 sub-model，其下的元素也会被嵌套地展示</li></ul></li></ul></li><li><p><code>type</code></p><ul><li>一个计算机易读的字符串，指出<strong>错误类型</strong></li></ul></li><li><p><code>msg</code></p><ul><li>一个用户易读的<strong>错误说明</strong></li></ul></li><li><p><code>ctx</code></p><ul><li>补充错误信息的上下文</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>ValidationError</span><span class=p>,</span> <span class=n>conint</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Location</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>lat</span> <span class=o>=</span> <span class=mf>0.1</span>
+</span></span><span class=line><span class=cl>    <span class=n>lng</span> <span class=o>=</span> <span class=mf>10.1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>is_required</span><span class=p>:</span> <span class=nb>float</span>
+</span></span><span class=line><span class=cl>    <span class=n>gt_int</span><span class=p>:</span> <span class=n>conint</span><span class=p>(</span><span class=n>gt</span><span class=o>=</span><span class=mi>42</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>list_of_ints</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>a_float</span><span class=p>:</span> <span class=nb>float</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>recursive_model</span><span class=p>:</span> <span class=n>Location</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>data</span> <span class=o>=</span> <span class=nb>dict</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>list_of_ints</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;1&#39;</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=s1>&#39;bad&#39;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>    <span class=n>a_float</span><span class=o>=</span><span class=s1>&#39;not a float&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>recursive_model</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;lat&#39;</span><span class=p>:</span> <span class=mf>4.2</span><span class=p>,</span> <span class=s1>&#39;lng&#39;</span><span class=p>:</span> <span class=s1>&#39;New York&#39;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=n>gt_int</span><span class=o>=</span><span class=mi>21</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>Model</span><span class=p>(</span><span class=o>**</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    5 validation errors for Model
+</span></span></span><span class=line><span class=cl><span class=s2>    is_required
+</span></span></span><span class=line><span class=cl><span class=s2>      field required (type=value_error.missing)
+</span></span></span><span class=line><span class=cl><span class=s2>    gt_int
+</span></span></span><span class=line><span class=cl><span class=s2>      ensure this value is greater than 42 (type=value_error.number.not_gt;
+</span></span></span><span class=line><span class=cl><span class=s2>    limit_value=42)
+</span></span></span><span class=line><span class=cl><span class=s2>    list_of_ints -&gt; 2
+</span></span></span><span class=line><span class=cl><span class=s2>      value is not a valid integer (type=type_error.integer)
+</span></span></span><span class=line><span class=cl><span class=s2>    a_float
+</span></span></span><span class=line><span class=cl><span class=s2>      value is not a valid float (type=type_error.float)
+</span></span></span><span class=line><span class=cl><span class=s2>    recursive_model -&gt; lng
+</span></span></span><span class=line><span class=cl><span class=s2>      value is not a valid float (type=type_error.float)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>Model</span><span class=p>(</span><span class=o>**</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=o>.</span><span class=n>json</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    [
+</span></span></span><span class=line><span class=cl><span class=s2>      {
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;loc&#34;: [
+</span></span></span><span class=line><span class=cl><span class=s2>          &#34;is_required&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>        ],
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;msg&#34;: &#34;field required&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;type&#34;: &#34;value_error.missing&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>      },
+</span></span></span><span class=line><span class=cl><span class=s2>      {
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;loc&#34;: [
+</span></span></span><span class=line><span class=cl><span class=s2>          &#34;gt_int&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>        ],
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;msg&#34;: &#34;ensure this value is greater than 42&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;type&#34;: &#34;value_error.number.not_gt&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;ctx&#34;: {
+</span></span></span><span class=line><span class=cl><span class=s2>          &#34;limit_value&#34;: 42
+</span></span></span><span class=line><span class=cl><span class=s2>        }
+</span></span></span><span class=line><span class=cl><span class=s2>      },
+</span></span></span><span class=line><span class=cl><span class=s2>      {
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;loc&#34;: [
+</span></span></span><span class=line><span class=cl><span class=s2>          &#34;list_of_ints&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>          2
+</span></span></span><span class=line><span class=cl><span class=s2>        ],
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;msg&#34;: &#34;value is not a valid integer&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;type&#34;: &#34;type_error.integer&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>      },
+</span></span></span><span class=line><span class=cl><span class=s2>      {
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;loc&#34;: [
+</span></span></span><span class=line><span class=cl><span class=s2>          &#34;a_float&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>        ],
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;msg&#34;: &#34;value is not a valid float&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;type&#34;: &#34;type_error.float&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>      },
+</span></span></span><span class=line><span class=cl><span class=s2>      {
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;loc&#34;: [
+</span></span></span><span class=line><span class=cl><span class=s2>          &#34;recursive_model&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>          &#34;lng&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>        ],
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;msg&#34;: &#34;value is not a valid float&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;type&#34;: &#34;type_error.float&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>      }
+</span></span></span><span class=line><span class=cl><span class=s2>    ]
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=自定义错误>自定义错误</h4><p>使用 <code>ValueError</code>、<code>TypeError</code> 或 <code>AssertionError</code> 在 <code>@validator</code> 装饰的函数中抛出错误</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>ValidationError</span><span class=p>,</span> <span class=n>validator</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>foo</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@validator</span><span class=p>(</span><span class=s1>&#39;foo&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>value_must_equal_bar</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=n>v</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>v</span> <span class=o>!=</span> <span class=s1>&#39;bar&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s1>&#39;value must be &#34;bar&#34;&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>v</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>Model</span><span class=p>(</span><span class=n>foo</span><span class=o>=</span><span class=s1>&#39;ber&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=o>.</span><span class=n>errors</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    [
+</span></span></span><span class=line><span class=cl><span class=s2>        {
+</span></span></span><span class=line><span class=cl><span class=s2>            &#39;loc&#39;: (&#39;foo&#39;,),
+</span></span></span><span class=line><span class=cl><span class=s2>            &#39;msg&#39;: &#39;value must be &#34;bar&#34;&#39;,
+</span></span></span><span class=line><span class=cl><span class=s2>            &#39;type&#39;: &#39;value_error&#39;,
+</span></span></span><span class=line><span class=cl><span class=s2>        },
+</span></span></span><span class=line><span class=cl><span class=s2>    ]
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>当然，你也可以设计一个错误类，来自定义错误码，消息模版和上下文</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>PydanticValueError</span><span class=p>,</span> <span class=n>ValidationError</span><span class=p>,</span> <span class=n>validator</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>NotABarError</span><span class=p>(</span><span class=n>PydanticValueError</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>code</span> <span class=o>=</span> <span class=s1>&#39;not_a_bar&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>msg_template</span> <span class=o>=</span> <span class=s1>&#39;value is not &#34;bar&#34;, got &#34;</span><span class=si>{wrong_value}</span><span class=s1>&#34;&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>foo</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@validator</span><span class=p>(</span><span class=s1>&#39;foo&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>value_must_equal_bar</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=n>v</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>v</span> <span class=o>!=</span> <span class=s1>&#39;bar&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=n>NotABarError</span><span class=p>(</span><span class=n>wrong_value</span><span class=o>=</span><span class=n>v</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>v</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>Model</span><span class=p>(</span><span class=n>foo</span><span class=o>=</span><span class=s1>&#39;ber&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=o>.</span><span class=n>json</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    [
+</span></span></span><span class=line><span class=cl><span class=s2>      {
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;loc&#34;: [
+</span></span></span><span class=line><span class=cl><span class=s2>          &#34;foo&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>        ],
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;msg&#34;: &#34;value is not </span><span class=se>\&#34;</span><span class=s2>bar</span><span class=se>\&#34;</span><span class=s2>, got </span><span class=se>\&#34;</span><span class=s2>ber</span><span class=se>\&#34;</span><span class=s2>&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;type&#34;: &#34;value_error.not_a_bar&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;ctx&#34;: {
+</span></span></span><span class=line><span class=cl><span class=s2>          &#34;wrong_value&#34;: &#34;ber&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>        }
+</span></span></span><span class=line><span class=cl><span class=s2>      }
+</span></span></span><span class=line><span class=cl><span class=s2>    ]
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=helper-函数>helper 函数</h3><p>pydantic 为 model 提供三个 helper 类方法供其在 parsing data 时使用</p><ul><li><code>parse_obj()</code><ul><li>将一个对象转换为 model 的方法</li><li>跟 <code>__init__</code> 方法很像，只不过它接收一个 dict 而不是关键字参数（说实话，在 <code>__init__</code> 里用 <code>**kwargs</code> 传字典也能起到相同的作用）</li></ul></li><li><code>parse_raw()</code><ul><li>将字符串转换为 model 的方法</li><li>str / bytes 都能传，它首先会转换成 json，然后再把 json 传进 <code>parse_obj()</code></li><li>pickle data 也能传，方法详见示例</li></ul></li><li><code>parse_file()</code><ul><li>将文件路径对应的文件转换为 model 的方法，</li><li>它会先读文件，再把结果传进 <code>parse_raw()</code></li><li>套娃了属于是</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pickle</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>datetime</span> <span class=kn>import</span> <span class=n>datetime</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pathlib</span> <span class=kn>import</span> <span class=n>Path</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=s1>&#39;John Doe&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>signup_ts</span><span class=p>:</span> <span class=n>datetime</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>m</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>parse_obj</span><span class=p>({</span><span class=s1>&#39;id&#39;</span><span class=p>:</span> <span class=mi>123</span><span class=p>,</span> <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;James&#39;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; id=123 signup_ts=None name=&#39;James&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>User</span><span class=o>.</span><span class=n>parse_obj</span><span class=p>([</span><span class=s1>&#39;not&#39;</span><span class=p>,</span> <span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;dict&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    1 validation error for User
+</span></span></span><span class=line><span class=cl><span class=s2>    __root__
+</span></span></span><span class=line><span class=cl><span class=s2>      User expected dict not list (type=type_error)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># assumes json as no content type passed</span>
+</span></span><span class=line><span class=cl><span class=n>m</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>parse_raw</span><span class=p>(</span><span class=s1>&#39;{&#34;id&#34;: 123, &#34;name&#34;: &#34;James&#34;}&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; id=123 signup_ts=None name=&#39;James&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>pickle_data</span> <span class=o>=</span> <span class=n>pickle</span><span class=o>.</span><span class=n>dumps</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;id&#39;</span><span class=p>:</span> <span class=mi>123</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;James&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;signup_ts&#39;</span><span class=p>:</span> <span class=n>datetime</span><span class=p>(</span><span class=mi>2017</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>14</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=n>m</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>parse_raw</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>pickle_data</span><span class=p>,</span> <span class=n>content_type</span><span class=o>=</span><span class=s1>&#39;application/pickle&#39;</span><span class=p>,</span> <span class=n>allow_pickle</span><span class=o>=</span><span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; id=123 signup_ts=datetime.datetime(2017, 7, 14, 0, 0) name=&#39;James&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>path</span> <span class=o>=</span> <span class=n>Path</span><span class=p>(</span><span class=s1>&#39;data.json&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>path</span><span class=o>.</span><span class=n>write_text</span><span class=p>(</span><span class=s1>&#39;{&#34;id&#34;: 123, &#34;name&#34;: &#34;James&#34;}&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>m</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>parse_file</span><span class=p>(</span><span class=n>path</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; id=123 signup_ts=None name=&#39;James&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>来自 pickle 官方文档的警告：&ldquo;The pickle module is not secure against erroneous or maliciously constructed data. Never unpickle data received from an untrusted or unauthenticated source.&rdquo;</p></blockquote><h4 id=不经验证地创建-model>不经验证地创建 model</h4><p><code>construct()</code> 方法允许你不经验证就创建 model，当信息源绝对可靠时，这样做可以提高效率（不验证比验证快 30 倍）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=s1>&#39;John Doe&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>original_user</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=nb>id</span><span class=o>=</span><span class=mi>123</span><span class=p>,</span> <span class=n>age</span><span class=o>=</span><span class=mi>32</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user_data</span> <span class=o>=</span> <span class=n>original_user</span><span class=o>.</span><span class=n>dict</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>user_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;id&#39;: 123, &#39;age&#39;: 32, &#39;name&#39;: &#39;John Doe&#39;}</span>
+</span></span><span class=line><span class=cl><span class=n>fields_set</span> <span class=o>=</span> <span class=n>original_user</span><span class=o>.</span><span class=n>__fields_set__</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>fields_set</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;age&#39;, &#39;id&#39;}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ...</span>
+</span></span><span class=line><span class=cl><span class=c1># pass user_data and fields_set to RPC or save to the database etc.</span>
+</span></span><span class=line><span class=cl><span class=c1># ...</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># you can then create a new instance of User without</span>
+</span></span><span class=line><span class=cl><span class=c1># re-running validation which would be unnecessary at this point:</span>
+</span></span><span class=line><span class=cl><span class=n>new_user</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>construct</span><span class=p>(</span><span class=n>_fields_set</span><span class=o>=</span><span class=n>fields_set</span><span class=p>,</span> <span class=o>**</span><span class=n>user_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>repr</span><span class=p>(</span><span class=n>new_user</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; User(id=123, age=32, name=&#39;John Doe&#39;)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>new_user</span><span class=o>.</span><span class=n>__fields_set__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;age&#39;, &#39;id&#39;}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># construct can be dangerous, only use it with validated data!:</span>
+</span></span><span class=line><span class=cl><span class=n>bad_user</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>construct</span><span class=p>(</span><span class=nb>id</span><span class=o>=</span><span class=s1>&#39;dog&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>repr</span><span class=p>(</span><span class=n>bad_user</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; User(id=&#39;dog&#39;, name=&#39;John Doe&#39;)</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>_fields_set</code> 参数是可选的，它可以准确地区分出<strong>传入的</strong>和<strong>默认赋值的</strong>参数；如果它被忽略，<code>__fields_set__</code> 就是这个 model 的所有字段了</p><h3 id=generic-models>Generic Models</h3><p>为了方便 model 的复用，pydantic 支持创建 generic models</p><p>按照以下步骤去创建一个 generic model</p><ol><li><p>声明一个或多个 <code>typing.TypeVar</code> 实例，用于参数化你的 model</p></li><li><p>声明一个继承自 <code>pydantic.generics.GenericModel</code> 和 <code>typing.Generic</code> 的 pydantic model，并在其中传入你刚刚声明的 <code>typing.TypeVar</code> 实例作为 <code>typing.Generic</code> 的参数</p></li><li><p>在你想要的字段上，使用 <code>typing.TypeVar</code> 实例作为标注</p></li></ol><p>以下是一个可复用的 HTTP 响应负载处理类（HTTP response payload wrapper）的例子</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Generic</span><span class=p>,</span> <span class=n>TypeVar</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>validator</span><span class=p>,</span> <span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic.generics</span> <span class=kn>import</span> <span class=n>GenericModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>DataT</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;DataT&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Error</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>code</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>message</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>DataModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>numbers</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>people</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=nb>str</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Response</span><span class=p>(</span><span class=n>GenericModel</span><span class=p>,</span> <span class=n>Generic</span><span class=p>[</span><span class=n>DataT</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>    <span class=n>data</span><span class=p>:</span> <span class=n>DataT</span> <span class=o>|</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>error</span><span class=p>:</span> <span class=n>Error</span> <span class=o>|</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@validator</span><span class=p>(</span><span class=s1>&#39;error&#39;</span><span class=p>,</span> <span class=n>always</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>check_consistency</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=n>v</span><span class=p>,</span> <span class=n>values</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>v</span> <span class=ow>is</span> <span class=ow>not</span> <span class=kc>None</span> <span class=ow>and</span> <span class=n>values</span><span class=p>[</span><span class=s1>&#39;data&#39;</span><span class=p>]</span> <span class=ow>is</span> <span class=ow>not</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s1>&#39;must not provide both data and error&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>v</span> <span class=ow>is</span> <span class=kc>None</span> <span class=ow>and</span> <span class=n>values</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;data&#39;</span><span class=p>)</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s1>&#39;must provide data or error&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>v</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>data</span> <span class=o>=</span> <span class=n>DataModel</span><span class=p>(</span><span class=n>numbers</span><span class=o>=</span><span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>],</span> <span class=n>people</span><span class=o>=</span><span class=p>[])</span>
+</span></span><span class=line><span class=cl><span class=n>error</span> <span class=o>=</span> <span class=n>Error</span><span class=p>(</span><span class=n>code</span><span class=o>=</span><span class=mi>404</span><span class=p>,</span> <span class=n>message</span><span class=o>=</span><span class=s1>&#39;Not found&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Response</span><span class=p>[</span><span class=nb>int</span><span class=p>](</span><span class=n>data</span><span class=o>=</span><span class=mi>1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; data=1 error=None</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Response</span><span class=p>[</span><span class=nb>str</span><span class=p>](</span><span class=n>data</span><span class=o>=</span><span class=s1>&#39;value&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; data=&#39;value&#39; error=None</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Response</span><span class=p>[</span><span class=nb>str</span><span class=p>](</span><span class=n>data</span><span class=o>=</span><span class=s1>&#39;value&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>dict</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;data&#39;: &#39;value&#39;, &#39;error&#39;: None}</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Response</span><span class=p>[</span><span class=n>DataModel</span><span class=p>](</span><span class=n>data</span><span class=o>=</span><span class=n>data</span><span class=p>)</span><span class=o>.</span><span class=n>dict</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>    &#39;data&#39;: {&#39;numbers&#39;: [1, 2, 3], &#39;people&#39;: []},
+</span></span></span><span class=line><span class=cl><span class=s2>    &#39;error&#39;: None,
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Response</span><span class=p>[</span><span class=n>DataModel</span><span class=p>](</span><span class=n>error</span><span class=o>=</span><span class=n>error</span><span class=p>)</span><span class=o>.</span><span class=n>dict</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>    &#39;data&#39;: None,
+</span></span></span><span class=line><span class=cl><span class=s2>    &#39;error&#39;: {&#39;code&#39;: 404, &#39;message&#39;: &#39;Not found&#39;},
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>Response</span><span class=p>[</span><span class=nb>int</span><span class=p>](</span><span class=n>data</span><span class=o>=</span><span class=s1>&#39;value&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    2 validation errors for Response[int]
+</span></span></span><span class=line><span class=cl><span class=s2>    data
+</span></span></span><span class=line><span class=cl><span class=s2>      value is not a valid integer (type=type_error.integer)
+</span></span></span><span class=line><span class=cl><span class=s2>    error
+</span></span></span><span class=line><span class=cl><span class=s2>      must provide data or error (type=value_error)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果要继承一个 GenericModel 并且不替换 <code>TypeVar</code> 实例的话，这个字类也必须继承一个 <code>typing.Generic</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>TypeVar</span><span class=p>,</span> <span class=n>Generic</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic.generics</span> <span class=kn>import</span> <span class=n>GenericModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>TypeX</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;TypeX&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>BaseClass</span><span class=p>(</span><span class=n>GenericModel</span><span class=p>,</span> <span class=n>Generic</span><span class=p>[</span><span class=n>TypeX</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>    <span class=n>X</span><span class=p>:</span> <span class=n>TypeX</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>ChildClass</span><span class=p>(</span><span class=n>BaseClass</span><span class=p>[</span><span class=n>TypeX</span><span class=p>],</span> <span class=n>Generic</span><span class=p>[</span><span class=n>TypeX</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Inherit from Generic[TypeX]</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Replace TypeX by int</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ChildClass</span><span class=p>[</span><span class=nb>int</span><span class=p>](</span><span class=n>X</span><span class=o>=</span><span class=mi>1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; X=1</span>
+</span></span></code></pre></td></tr></table></div></div><p>当然，可以部分继承父类的 <code>TypeVar</code> 实例，也可以新增 <code>TypeVar</code> 实例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>TypeVar</span><span class=p>,</span> <span class=n>Generic</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic.generics</span> <span class=kn>import</span> <span class=n>GenericModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>TypeX</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;TypeX&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>TypeY</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;TypeY&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>TypeZ</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;TypeZ&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>BaseClass</span><span class=p>(</span><span class=n>GenericModel</span><span class=p>,</span> <span class=n>Generic</span><span class=p>[</span><span class=n>TypeX</span><span class=p>,</span> <span class=n>TypeY</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>    <span class=n>x</span><span class=p>:</span> <span class=n>TypeX</span>
+</span></span><span class=line><span class=cl>    <span class=n>y</span><span class=p>:</span> <span class=n>TypeY</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>ChildClass</span><span class=p>(</span><span class=n>BaseClass</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=n>TypeY</span><span class=p>],</span> <span class=n>Generic</span><span class=p>[</span><span class=n>TypeY</span><span class=p>,</span> <span class=n>TypeZ</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>    <span class=n>z</span><span class=p>:</span> <span class=n>TypeZ</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Replace TypeY by str</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ChildClass</span><span class=p>[</span><span class=nb>str</span><span class=p>,</span> <span class=nb>int</span><span class=p>](</span><span class=n>x</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=s1>&#39;y&#39;</span><span class=p>,</span> <span class=n>z</span><span class=o>=</span><span class=mi>3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; x=1 y=&#39;y&#39; z=3</span>
+</span></span></code></pre></td></tr></table></div></div><p>还可以用 <code>__concrete_name__</code> 方法复写具体子类（concrete subclasses）的名字</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Any</span><span class=p>,</span> <span class=n>Generic</span><span class=p>,</span> <span class=n>TypeVar</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic.generics</span> <span class=kn>import</span> <span class=n>GenericModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>DataT</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;DataT&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Response</span><span class=p>(</span><span class=n>GenericModel</span><span class=p>,</span> <span class=n>Generic</span><span class=p>[</span><span class=n>DataT</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>    <span class=n>data</span><span class=p>:</span> <span class=n>DataT</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@classmethod</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>__concrete_name__</span><span class=p>(</span><span class=bp>cls</span><span class=p>:</span> <span class=nb>type</span><span class=p>[</span><span class=n>Any</span><span class=p>],</span> <span class=n>params</span><span class=p>:</span> <span class=nb>tuple</span><span class=p>[</span><span class=nb>type</span><span class=p>[</span><span class=n>Any</span><span class=p>],</span> <span class=o>...</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>params</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=o>.</span><span class=vm>__name__</span><span class=o>.</span><span class=n>title</span><span class=p>()</span><span class=si>}</span><span class=s1>Response&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>repr</span><span class=p>(</span><span class=n>Response</span><span class=p>[</span><span class=nb>int</span><span class=p>](</span><span class=n>data</span><span class=o>=</span><span class=mi>1</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; IntResponse(data=1)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>repr</span><span class=p>(</span><span class=n>Response</span><span class=p>[</span><span class=nb>str</span><span class=p>](</span><span class=n>data</span><span class=o>=</span><span class=s1>&#39;a&#39;</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; StrResponse(data=&#39;a&#39;)</span>
+</span></span></code></pre></td></tr></table></div></div><p>在嵌套 model 中使用相同的 <code>TypeVar</code> 实例可以保证一致性</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Generic</span><span class=p>,</span> <span class=n>TypeVar</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic.generics</span> <span class=kn>import</span> <span class=n>GenericModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>T</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;T&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>InnerT</span><span class=p>(</span><span class=n>GenericModel</span><span class=p>,</span> <span class=n>Generic</span><span class=p>[</span><span class=n>T</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>    <span class=n>inner</span><span class=p>:</span> <span class=n>T</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>OuterT</span><span class=p>(</span><span class=n>GenericModel</span><span class=p>,</span> <span class=n>Generic</span><span class=p>[</span><span class=n>T</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>    <span class=n>outer</span><span class=p>:</span> <span class=n>T</span>
+</span></span><span class=line><span class=cl>    <span class=n>nested</span><span class=p>:</span> <span class=n>InnerT</span><span class=p>[</span><span class=n>T</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>nested</span> <span class=o>=</span> <span class=n>InnerT</span><span class=p>[</span><span class=nb>int</span><span class=p>](</span><span class=n>inner</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>OuterT</span><span class=p>[</span><span class=nb>int</span><span class=p>](</span><span class=n>outer</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>nested</span><span class=o>=</span><span class=n>nested</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; outer=1 nested=InnerT[int](inner=1)</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>nested</span> <span class=o>=</span> <span class=n>InnerT</span><span class=p>[</span><span class=nb>str</span><span class=p>](</span><span class=n>inner</span><span class=o>=</span><span class=s1>&#39;a&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>OuterT</span><span class=p>[</span><span class=nb>int</span><span class=p>](</span><span class=n>outer</span><span class=o>=</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=n>nested</span><span class=o>=</span><span class=n>nested</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    2 validation errors for OuterT[int]
+</span></span></span><span class=line><span class=cl><span class=s2>    outer
+</span></span></span><span class=line><span class=cl><span class=s2>      value is not a valid integer (type=type_error.integer)
+</span></span></span><span class=line><span class=cl><span class=s2>    nested -&gt; inner
+</span></span></span><span class=line><span class=cl><span class=s2>      value is not a valid integer (type=type_error.integer)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>与那些内置类型（如 <code>List</code> 和 <code>Dict</code>）类似，在没有被传参之前（如 <code>List[int]</code>），GenericModel 的行为会被以下规定所定义：</p><ul><li>如果在实例化（instantiate） generic model 之前没有参数化（specify parameters）之，传参会被视为 <code>Any</code> 类型</li><li>你可以在参数化（parametrize）model 时传入绑定参数（<em>bounded</em> parameters）来添加子类检查（subclass checks）</li></ul><p>类似于 <code>List</code> 和 <code>Dict</code>，任何使用 <code>TypeVar</code> 传入 model 的参数都能被更具体的类型替换</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Generic</span><span class=p>,</span> <span class=n>TypeVar</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic.generics</span> <span class=kn>import</span> <span class=n>GenericModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>AT</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;AT&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>BT</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;BT&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>GenericModel</span><span class=p>,</span> <span class=n>Generic</span><span class=p>[</span><span class=n>AT</span><span class=p>,</span> <span class=n>BT</span><span class=p>]):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>:</span> <span class=n>AT</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span><span class=p>:</span> <span class=n>BT</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Model</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=s1>&#39;a&#39;</span><span class=p>))</span> <span class=c1># 参数化之前，随便传，无所谓</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; a=&#39;a&#39; b=&#39;a&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>IntT</span> <span class=o>=</span> <span class=n>TypeVar</span><span class=p>(</span><span class=s1>&#39;IntT&#39;</span><span class=p>,</span> <span class=n>bound</span><span class=o>=</span><span class=nb>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>typevar_model</span> <span class=o>=</span> <span class=n>Model</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=n>IntT</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>typevar_model</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=mi>1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; a=1 b=1</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>typevar_model</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=s1>&#39;a&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>exc</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>exc</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    2 validation errors for Model[int, IntT]
+</span></span></span><span class=line><span class=cl><span class=s2>    a
+</span></span></span><span class=line><span class=cl><span class=s2>      value is not a valid integer (type=type_error.integer)
+</span></span></span><span class=line><span class=cl><span class=s2>    b
+</span></span></span><span class=line><span class=cl><span class=s2>      value is not a valid integer (type=type_error.integer)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>concrete_model</span> <span class=o>=</span> <span class=n>typevar_model</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span> <span class=c1># 替换 IntT</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>concrete_model</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=mi>1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; a=1 b=1</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=model-的动态创建>model 的动态创建</h3><p>有些时候，model 的定义直到程序运行时才会完整，pydantic 提供 <code>create_model</code> 方法，允许 model 在运行时被创建</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>create_model</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>DynamicFoobarModel</span> <span class=o>=</span> <span class=n>create_model</span><span class=p>(</span><span class=s1>&#39;DynamicFoobarModel&#39;</span><span class=p>,</span> <span class=n>foo</span><span class=o>=</span><span class=p>(</span><span class=nb>str</span><span class=p>,</span> <span class=o>...</span><span class=p>),</span> <span class=n>bar</span><span class=o>=</span><span class=mi>123</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>StaticFoobarModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>foo</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>bar</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>123</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>StaticFoobarModel</code> 和 <code>DynamicFoobarModel</code> 在这里是完全一样的</p><p>动态 model 字段的定义，以下两种均可：</p><ul><li><code>(&lt;type>, &lt;default value>)</code> 的元组格式</li><li>一个默认值</li></ul><p><code>__config__</code> 和 <code>__base__</code> 这两个特殊参数可以用来自定义 model，比如添加额外字段来扩展 base model 之类的</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>create_model</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>FooModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>foo</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>bar</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>123</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>BarModel</span> <span class=o>=</span> <span class=n>create_model</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;BarModel&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>apple</span><span class=o>=</span><span class=s1>&#39;russet&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>banana</span><span class=o>=</span><span class=s1>&#39;yellow&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>__base__</span><span class=o>=</span><span class=n>FooModel</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>BarModel</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; &lt;class &#39;pydantic.main.BarModel&#39;&gt;</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>BarModel</span><span class=o>.</span><span class=n>__fields__</span><span class=o>.</span><span class=n>keys</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; dict_keys([&#39;foo&#39;, &#39;bar&#39;, &#39;apple&#39;, &#39;banana&#39;])</span>
+</span></span></code></pre></td></tr></table></div></div><p>你甚至还能在 <code>__validators__</code> 参数中传入字典来实现 validator 的功能（震惊）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>create_model</span><span class=p>,</span> <span class=n>ValidationError</span><span class=p>,</span> <span class=n>validator</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>username_alphanumeric</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=n>v</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>assert</span> <span class=n>v</span><span class=o>.</span><span class=n>isalnum</span><span class=p>(),</span> <span class=s1>&#39;must be alphanumeric&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>v</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>validators</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;username_validator&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>validator</span><span class=p>(</span><span class=s1>&#39;username&#39;</span><span class=p>)(</span><span class=n>username_alphanumeric</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>UserModel</span> <span class=o>=</span> <span class=n>create_model</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;UserModel&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>username</span><span class=o>=</span><span class=p>(</span><span class=nb>str</span><span class=p>,</span> <span class=o>...</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>__validators__</span><span class=o>=</span><span class=n>validators</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>UserModel</span><span class=p>(</span><span class=n>username</span><span class=o>=</span><span class=s1>&#39;scolvin&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; username=&#39;scolvin&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>UserModel</span><span class=p>(</span><span class=n>username</span><span class=o>=</span><span class=s1>&#39;scolvi%n&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    1 validation error for UserModel
+</span></span></span><span class=line><span class=cl><span class=s2>    username
+</span></span></span><span class=line><span class=cl><span class=s2>      must be alphanumeric (type=assertion_error)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=从-namedtuple-和-typeddict-中创建-model>从 <code>NamedTuple</code> 和 <code>TypedDict</code> 中创建 model</h3></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2022-11-23 14:00:55">更新于 2022-11-23</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/ data-title=marshmallow data-hashtags=Python,后端><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/ data-title=marshmallow><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E5%90%8E%E7%AB%AF/>后端</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/database/mysql/mvcc/ class=prev rel=prev title="MySQL MVCC"><i class="fa-solid fa-angle-left fa-fw"></i>MySQL MVCC</a>
+<a href=/Notes/posts/python/web-backend/marshmallow/ class=next rel=next title=marshmallow>marshmallow<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

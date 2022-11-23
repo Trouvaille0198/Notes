@@ -1,0 +1,801 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>marshmallow - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="marshmallow 摘自 https://www.cnblogs.com/ChangAn223/p/11305376.html marshmallow 是一个用来将复杂的orm对象与python原生数据类型之间相互转换的库"><meta name=keywords content="Python,后端"><meta itemprop=name content="marshmallow"><meta itemprop=description content="marshmallow 摘自 https://www.cnblogs.com/ChangAn223/p/11305376.html marshmallow 是一个用来将复杂的orm对象与python原生数据类型之间相互转换的库"><meta itemprop=datePublished content="2022-11-18T00:00:00+00:00"><meta itemprop=dateModified content="2022-11-23T14:00:55+00:00"><meta itemprop=wordCount content="4445"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,后端,"><meta property="og:title" content="marshmallow"><meta property="og:description" content="marshmallow 摘自 https://www.cnblogs.com/ChangAn223/p/11305376.html marshmallow 是一个用来将复杂的orm对象与python原生数据类型之间相互转换的库"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/web-backend/marshmallow/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-11-18T00:00:00+00:00"><meta property="article:modified_time" content="2022-11-23T14:00:55+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="marshmallow"><meta name=twitter:description content="marshmallow 摘自 https://www.cnblogs.com/ChangAn223/p/11305376.html marshmallow 是一个用来将复杂的orm对象与python原生数据类型之间相互转换的库"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/marshmallow/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/linux/useful/crontab/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"marshmallow","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/marshmallow\/"},"genre":"posts","keywords":"Python, 后端","wordcount":4445,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/marshmallow\/","datePublished":"2022-11-18T00:00:00+00:00","dateModified":"2022-11-23T14:00:55+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>marshmallow</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2022-11-18 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-11-18>2022-11-18</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 4445 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#快速开始>快速开始</a><ul><li><a href=#schema>Schema</a></li><li><a href=#serializing-序列化>Serializing 序列化</a></li><li><a href=#过滤输出>过滤输出</a></li><li><a href=#deserializing-反序列化>Deserializing 反序列化</a></li><li><a href=#处理多个对象的集合>处理多个对象的集合</a></li><li><a href=#validation-验证>Validation 验证</a><ul><li><a href=#自定义验证信息>自定义验证信息</a></li><li><a href=#将验证函数写在-schema-中变成验证方法>将验证函数写在 Schema 中变成验证方法</a></li><li><a href=#required-fields-必填选项>Required Fields 必填选项</a></li><li><a href=#自定义-required-异常信息>自定义 required 异常信息</a></li><li><a href=#忽略部分字段>忽略部分字段</a></li><li><a href=#对未知字段的处理>对未知字段的处理</a></li></ul></li><li><a href=#schemavalidate-校验数据>Schema.validate 校验数据</a></li><li><a href=#指定序列化--反序列化键>指定序列化 / 反序列化键</a><ul><li><a href=#序列化时指定-object-属性对应-fields-字段>序列化时指定 object 属性对应 fields 字段</a></li><li><a href=#反序列化时指定-fields-字段对应-object-属性>反序列化时指定 fields 字段对应 object 属性</a></li><li><a href=#让-key-同时满足序列化与反序列化的方法>让 key 同时满足序列化与反序列化的方法</a></li></ul></li><li><a href=#创建隐式字段>创建隐式字段</a></li></ul></li><li><a href=#排序>排序</a><ul><li><a href=#只读与只写字段>“只读”与“只写”字段</a></li><li><a href=#序列化--反序列化时指定字段的默认值>序列化 / 反序列化时指定字段的默认值</a></li><li><a href=#自定义字段>自定义字段</a></li><li><a href=#更多>更多</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=marshmallow>marshmallow</h1><blockquote><p>摘自 <a href=https://www.cnblogs.com/ChangAn223/p/11305376.html target=_blank rel="external nofollow noopener noreferrer">https://www.cnblogs.com/ChangAn223/p/11305376.html</a></p></blockquote><p>marshmallow 是一个用来将复杂的orm对象与python原生数据类型之间相互转换的库，简而言之，就是实现object -> dict， objects -> list，string -> dict 和 string -> list。</p><ul><li><p>序列化：是将数据对象转化为可存储或可传输的数据类型</p></li><li><p>反序列化：将可存储或可传输的数据类型转化为数据对象</p></li></ul><p>marshmallow 的两个主要功能：<strong>数据转换</strong>和<strong>数据校验</strong></p><h2 id=快速开始>快速开始</h2><p>要进行序列化或反序列化，首先我们需要一个用来操作的object，这里我们先定义一个类：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>datetime</span> <span class=k>as</span> <span class=nn>dt</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>name</span><span class=p>,</span> <span class=n>email</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>email</span> <span class=o>=</span> <span class=n>email</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>created_time</span> <span class=o>=</span> <span class=n>dt</span><span class=o>.</span><span class=n>datetime</span><span class=o>.</span><span class=n>now</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=schema>Schema</h3><p>要对一个类或者一个json数据实现相互<strong>转换</strong> (即序列化和反序列化)，需要一个中间载体，这个载体就是Schema</p><p>另外Schema还可以用来做数据<strong>验证</strong>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 这是一个简单的Scheme</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span> <span class=n>fields</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=serializing-序列化>Serializing 序列化</h3><p>使用scheme的 <code>dump()</code> 方法来序列化对象，返回的是dict格式的数据</p><p>另外schema的 <code>dumps(</code>) 方法序列化对象，返回的是json编码格式的字符串。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=s2>&#34;lhh&#34;</span><span class=p>,</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>dump</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;email&#39;: &#39;2432783449@qq.com&#39;, &#39;created_time&#39;: &#39;2021-05-28 20:43:08.946112&#39;, &#39;name&#39;: &#39;lhh&#39;}  dict</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>res2</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>dumps</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#34;name&#34;: &#34;lhh&#34;, &#34;email&#34;: &#34;2432783449@qq.com&#34;, &#34;created_time&#34;: &#34;2021-05-28 20:45:17.</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=过滤输出>过滤输出</h3><p>当不需要输出所有的字段时，可以在实例化Scheme时，声明only参数，来指定输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>summary_schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>(</span><span class=n>only</span><span class=o>=</span><span class=p>{</span><span class=s2>&#34;name&#34;</span><span class=p>,</span><span class=s2>&#34;email&#34;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>summary_schema</span><span class=o>.</span><span class=n>dump</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=deserializing-反序列化>Deserializing 反序列化</h3><p>schema 的 <code>load()</code> 方法与 <code>dump()</code> 方法相反，用于dict类型的反序列化。它将输入的字典格式数据转换成应用层数据结构，同时也能起到验证输入的字典格式数据的作用。</p><p>同样，也有对json解码的 <code>loads()</code> 方法。用于string类型的反序列化。</p><p>默认情况下，<code>load()</code> 方法返回一个字典，当输入的数据的值不匹配字段类型时，抛出 ValidationError 异常。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>user_data</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;lhh&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;email&#34;</span><span class=p>:</span> <span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;created_time&#34;</span><span class=p>:</span> <span class=s2>&#34;2021-05-28 20:45:17.418739&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>user_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;created_time&#39;: &#39;2021-05-28 20:45:17.418739&#39;, &#39;email&#39;: &#39;2432783449@qq.com&#39;, &#39;name&#39;: &#39;lhh&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>对反序列化而言, 将传入的 dict 变成 object 更加有意义</strong>。在Marshmallow中, dict -> object的方法需要自己实现，然后在该方法前面加上一个装饰器 post_load 即可</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@post_load</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>make_user</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>User</span><span class=p>(</span><span class=o>**</span><span class=n>data</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>这样每次调用 <code>load()</code> 方法时, 会按照 make_user 的逻辑，返回一个User类对象。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>user_data</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;lhh&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;email&#34;</span><span class=p>:</span> <span class=s2>&#34;2432783449@qq.com&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>user_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># &lt;__main__.User object at 0x0000027BE9678128&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>res</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;name: </span><span class=si>{}</span><span class=s2>    email: </span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>user</span><span class=o>.</span><span class=n>name</span><span class=p>,</span> <span class=n>user</span><span class=o>.</span><span class=n>email</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1># name: lhh    email: 2432783449@qq.com</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=处理多个对象的集合>处理多个对象的集合</h3><p>多个对象的集合如果是可迭代的，那么也可以直接对这个集合进行序列化或者反序列化。在实例化Scheme类时设置参数 many=True</p><p>也可以不在实例化类的时候设置，而在调用 <code>dump()</code> 方法的时候传入这个参数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>user1</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;lhh1&#34;</span><span class=p>,</span> <span class=n>email</span><span class=o>=</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>user2</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s2>&#34;lhh2&#34;</span><span class=p>,</span> <span class=n>email</span><span class=o>=</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>users</span> <span class=o>=</span> <span class=p>[</span><span class=n>user1</span><span class=p>,</span> <span class=n>user2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 第一种方法</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>(</span><span class=n>many</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>dump</span><span class=p>(</span><span class=n>users</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 第二种方法</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>dump</span><span class=p>(</span><span class=n>users</span><span class=p>,</span><span class=n>many</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=validation-验证>Validation 验证</h3><p>当不合法的数据通过 <code>Schema.load()</code> 或者 <code>Schema.loads()</code> 时，会抛出一个 <code>ValidationError</code> 异常。</p><ul><li><code>ValidationError.messages</code> 属性有验证错误信息</li><li>验证通过的数据在 <code>ValidationError.valid_data</code> 属性中</li></ul><p>我们捕获这个异常，然后做异常处理。</p><p>首先需要导入 <code>ValidationError</code> 这个异常</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span><span class=n>fields</span><span class=p>,</span><span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span><span class=o>.</span><span class=n>load</span><span class=p>({</span><span class=s2>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;lhh&#34;</span><span class=p>,</span><span class=s2>&#34;email&#34;</span><span class=p>:</span><span class=s2>&#34;lhh&#34;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;错误信息：</span><span class=si>{</span><span class=n>e</span><span class=o>.</span><span class=n>messages</span><span class=si>}</span><span class=s2>  合法数据:</span><span class=si>{</span><span class=n>e</span><span class=o>.</span><span class=n>valid_data</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 当验证一个数据集合的时候，返回的错误信息会以 错误序号-错误信息 的键值对形式保存在errors中</span>
+</span></span><span class=line><span class=cl><span class=n>user_data</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s1>&#39;email&#39;</span><span class=p>:</span> <span class=s1>&#39;2432783449@qq.com&#39;</span><span class=p>,</span> <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;lhh&#39;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s1>&#39;email&#39;</span><span class=p>:</span> <span class=s1>&#39;invalid&#39;</span><span class=p>,</span> <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;Invalid&#39;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;wcy&#39;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=s1>&#39;email&#39;</span><span class=p>:</span> <span class=s1>&#39;2432783449@qq.com&#39;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>(</span><span class=n>many</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>user_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;错误信息：</span><span class=si>{}</span><span class=s2>   合法数据：</span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>e</span><span class=o>.</span><span class=n>messages</span><span class=p>,</span> <span class=n>e</span><span class=o>.</span><span class=n>valid_data</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以看到上面，有错误信息，但是对于没有传入的属性则没有检查，也就是默认没有属性必须传入的规定。</p><p>在 Schema 里规定不可缺省字段：设置参数 required=True</p><h4 id=自定义验证信息>自定义验证信息</h4><p>在编写Schema类的时候，可以向内建的fields中设置validate参数的值来定制验证的逻辑</p><p>validate的值可以是函数、匿名函数lambda，或者是定义了 <strong>call</strong> 的对象。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span><span class=n>fields</span><span class=p>,</span><span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>validate</span><span class=o>=</span><span class=k>lambda</span> <span class=n>s</span><span class=p>:</span><span class=nb>len</span><span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>6</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user_data</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;InvalidName&#34;</span><span class=p>,</span><span class=s2>&#34;email&#34;</span><span class=p>:</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>user_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=o>.</span><span class=n>messages</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>在验证函数中自定义异常信息：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>#encoding=utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span><span class=n>fields</span><span class=p>,</span><span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>validate_name</span><span class=p>(</span><span class=n>name</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>name</span><span class=p>)</span> <span class=o>&lt;=</span><span class=mi>2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=n>ValidationError</span><span class=p>(</span><span class=s2>&#34;name长度必须大于2位&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>name</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=mi>6</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=n>ValidationError</span><span class=p>(</span><span class=s2>&#34;name长度不能大于6位&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>validate</span><span class=o>=</span><span class=n>validate_name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user_data</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;InvalidName&#34;</span><span class=p>,</span><span class=s2>&#34;email&#34;</span><span class=p>:</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>user_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=o>.</span><span class=n>messages</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>注意：只会在反序列化的时候发生验证，序列化的时候不会验证</p></blockquote><h4 id=将验证函数写在-schema-中变成验证方法>将验证函数写在 Schema 中变成验证方法</h4><p>在 Schema 中，使用 validates 装饰器就可以注册验证方法。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>#encoding=utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span> <span class=n>fields</span><span class=p>,</span> <span class=n>ValidationError</span><span class=p>,</span> <span class=n>validates</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@validates</span><span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>validate_name</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>value</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>value</span><span class=p>)</span> <span class=o>&lt;=</span> <span class=mi>2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=n>ValidationError</span><span class=p>(</span><span class=s2>&#34;name长度必须大于2位&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>value</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=mi>6</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=n>ValidationError</span><span class=p>(</span><span class=s2>&#34;name长度不能大于6位&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user_data</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;InvalidName&#34;</span><span class=p>,</span><span class=s2>&#34;email&#34;</span><span class=p>:</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>user_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=o>.</span><span class=n>messages</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=required-fields-必填选项>Required Fields 必填选项</h4><p>上面已经简单使用过required参数了。这里再简单介绍一下。</p><h4 id=自定义-required-异常信息>自定义 required 异常信息</h4><p>首先我们可以自定义在 requird=True 时缺失字段时抛出的异常信息：设置参数 error_messages 的值</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>#encoding=utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span> <span class=n>fields</span><span class=p>,</span> <span class=n>ValidationError</span><span class=p>,</span> <span class=n>validates</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>error_messages</span><span class=o>=</span><span class=p>{</span><span class=s2>&#34;required&#34;</span><span class=p>:</span><span class=s2>&#34;name字段必须的&#34;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@validates</span><span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>validate_name</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>value</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>value</span><span class=p>)</span> <span class=o>&lt;=</span> <span class=mi>2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=n>ValidationError</span><span class=p>(</span><span class=s2>&#34;name长度必须大于2位&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>value</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=mi>6</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=n>ValidationError</span><span class=p>(</span><span class=s2>&#34;name长度不能大于6位&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user_data</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;email&#34;</span><span class=p>:</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>user_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=o>.</span><span class=n>messages</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=忽略部分字段>忽略部分字段</h4><p>使用 required 之后我们还是可以在传入数据的时候忽略这个必填字段。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>#encoding=utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span> <span class=n>fields</span><span class=p>,</span> <span class=n>ValidationError</span><span class=p>,</span> <span class=n>validates</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Integer</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 方法一：在load()方法设置 partial 参数的值（元组），表示忽略那些字段。</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>load</span><span class=p>({</span><span class=s2>&#34;age&#34;</span><span class=p>:</span> <span class=mi>42</span><span class=p>},</span> <span class=n>partial</span><span class=o>=</span><span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;age&#39;: 42}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 方法二：直接设置 partial=True</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>load</span><span class=p>({</span><span class=s2>&#34;age&#34;</span><span class=p>:</span> <span class=mi>42</span><span class=p>},</span> <span class=n>partial</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;age&#39;: 42}</span>
+</span></span></code></pre></td></tr></table></div></div><p>方法一只忽略传入 partial 的字段，方法二会忽略除前面传入的数据里已有的字段之外的所有字段</p><h4 id=对未知字段的处理>对未知字段的处理</h4><p>默认情况下，如果传入了未知的字段（Schema 里没有的字段），执行 <code>load()</code> 方法会抛出一个 ValidationError 异常。这种行为可以通过更改 unknown 选项来修改。</p><p>unknown 有三个值：</p><ul><li><code>EXCLUDE</code>: exclude unknown fields (直接扔掉未知字段)</li><li><code>INCLUDE</code>: accept and include the unknown fields（接受未知字段）</li><li><code>RAISE</code>: raise a ValidationError if there are any unknown fields（抛出异常）</li></ul><p>我们可以看到，<strong>默认的行为是 <code>RAISE</code></strong>。有两种方法去更改：</p><ol><li>在编写 Schema 类的时候在 class Meta 里修改</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>EXCLUDE</span><span class=p>,</span><span class=n>Schema</span><span class=p>,</span><span class=n>fields</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span><span class=n>error_messages</span><span class=o>=</span><span class=p>{</span><span class=s2>&#34;required&#34;</span><span class=p>:</span> <span class=s2>&#34;name字段必须填写&#34;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Meta</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>unknown</span>  <span class=o>=</span> <span class=n>EXCLUDE</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>在实例化 Schema 类的时候设置参数 unknown 的值</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Str</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>error_messages</span><span class=o>=</span><span class=p>{</span><span class=s2>&#34;required&#34;</span><span class=p>:</span> <span class=s2>&#34;name字段必须填写&#34;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>shema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>(</span><span class=n>unknown</span><span class=o>=</span><span class=n>EXCLUDE</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=schemavalidate-校验数据>Schema.validate 校验数据</h3><p>如果只是想用 Schema 去验证数据，而不进行反序列化生成对象，可以使用<code> Schema.validate()</code></p><p>通过 <code>schema.validate()</code> 会自动对数据进行校验</p><ul><li>如果有错误, 则会返回错误信息的 dict</li><li>没有错误则返回空的dict</li></ul><p>通过返回的数据, 我们就可以确认验证是否通过.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>#encoding=utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span><span class=n>fields</span><span class=p>,</span><span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Str</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>error_messages</span><span class=o>=</span><span class=p>{</span><span class=s2>&#34;required&#34;</span><span class=p>:</span> <span class=s2>&#34;name 字段必须填写&#34;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_time</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;lhh&#34;</span><span class=p>,</span><span class=s2>&#34;email&#34;</span><span class=p>:</span><span class=s2>&#34;2432783449&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>validate</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>  <span class=c1># {&#39;email&#39;: [&#39;Not a valid email address.&#39;]}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;lhh&#34;</span><span class=p>,</span><span class=s2>&#34;email&#34;</span><span class=p>:</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>validate</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>  <span class=c1># {}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=指定序列化--反序列化键>指定序列化 / 反序列化键</h3><p>Specifying Serialization / Deserialization Keys</p><h4 id=序列化时指定-object-属性对应-fields-字段>序列化时指定 object 属性对应 fields 字段</h4><p>Schema默认会序列化传入对象和自身定义的fields相同的属性, 然而你也会有需求使用不同的fields和属性名. 在这种情况下, 你需要明确定义这个fields将从什么属性名取值</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>fields</span><span class=p>,</span><span class=n>Schema</span><span class=p>,</span><span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>datetime</span> <span class=k>as</span> <span class=nn>dt</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>name</span><span class=p>,</span> <span class=n>email</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>email</span> <span class=o>=</span> <span class=n>email</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>created_time</span> <span class=o>=</span> <span class=n>dt</span><span class=o>.</span><span class=n>datetime</span><span class=o>.</span><span class=n>now</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>full_name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>(</span><span class=n>attribute</span><span class=o>=</span><span class=s2>&#34;name&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>email_address</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>(</span><span class=n>attribute</span><span class=o>=</span><span class=s2>&#34;email&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_at</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>(</span><span class=n>attribute</span><span class=o>=</span><span class=s2>&#34;created_time&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=s2>&#34;lhh&#34;</span><span class=p>,</span><span class=n>email</span><span class=o>=</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>dump</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;email_address&#39;: &#39;2432783449@qq.com&#39;, &#39;full_name&#39;: &#39;lhh&#39;, &#39;created_at&#39;: &#39;2021-05-29T09:24:38.186191&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如上所示：UserSchema 中的 full_name，email_address，created_at 分别从 User 对象的 name，email，created_time 属性取值。</p><h4 id=反序列化时指定-fields-字段对应-object-属性>反序列化时指定 fields 字段对应 object 属性</h4><p>这个与上面相反，Schema默认反序列化传入字典和输出字典中相同的字段名. 如果你觉得数据不匹配你的schema, 可以传入 load_from 参数指定需要增加load的字段名 (原字段名也能load, 且优先load原字段名)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>fields</span><span class=p>,</span><span class=n>Schema</span><span class=p>,</span><span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>datetime</span> <span class=k>as</span> <span class=nn>dt</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>full_name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>(</span><span class=n>load_from</span><span class=o>=</span><span class=s2>&#34;name&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>email_address</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>(</span><span class=n>load_from</span><span class=o>=</span><span class=s2>&#34;email&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_at</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>(</span><span class=n>load_from</span><span class=o>=</span><span class=s2>&#34;created_time&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;full_name&#34;</span><span class=p>:</span><span class=s2>&#34;lhh&#34;</span><span class=p>,</span><span class=s2>&#34;email_address&#34;</span><span class=p>:</span><span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;full_name&#39;: &#39;lhh&#39;, &#39;email_address&#39;: &#39;2432783449@qq.com&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=让-key-同时满足序列化与反序列化的方法>让 key 同时满足序列化与反序列化的方法</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>#encoding=utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>fields</span><span class=p>,</span><span class=n>ValidationError</span><span class=p>,</span><span class=n>Schema</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>full_name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>(</span><span class=n>data_key</span><span class=o>=</span><span class=s2>&#34;name&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>email_address</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Email</span><span class=p>(</span><span class=n>data_key</span><span class=o>=</span><span class=s2>&#34;email&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_at</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>(</span><span class=n>data_key</span><span class=o>=</span><span class=s2>&#34;created_time&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 序列化</span>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;full_name&#34;</span><span class=p>:</span> <span class=s2>&#34;lhh&#34;</span><span class=p>,</span> <span class=s2>&#34;email_address&#34;</span><span class=p>:</span> <span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>dump</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;name&#39;: &#39;lhh&#39;, &#39;email&#39;: &#39;2432783449@qq.com&#39;}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 反序列化</span>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=p>{</span><span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;lhh&#39;</span><span class=p>,</span> <span class=s1>&#39;email&#39;</span><span class=p>:</span> <span class=s1>&#39;2432783449@qq.com&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;full_name&#39;: &#39;lhh&#39;, &#39;email_address&#39;: &#39;2432783449@qq.com&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建隐式字段>创建隐式字段</h3><blockquote><p>Implicit Field Creation</p></blockquote><p>当Schema具有许多属性时，为每个属性指定字段类型可能会重复，特别是当许多属性已经是本地python的数据类型时。</p><p>class Meta 允许指定要序列化的属性，marshmallow 将根据属性的类型选择适当的字段类型。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 重构Schema</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>uppername</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Function</span><span class=p>(</span><span class=k>lambda</span> <span class=n>obj</span><span class=p>:</span> <span class=n>obj</span><span class=o>.</span><span class=n>name</span><span class=o>.</span><span class=n>upper</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Meta</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>fields</span> <span class=o>=</span> <span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>,</span> <span class=s2>&#34;email&#34;</span><span class=p>,</span> <span class=s2>&#34;created_at&#34;</span><span class=p>,</span> <span class=s2>&#34;uppername&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>以上代码中， name将自动被格式化为String类型，created_at将被格式化为DateTime类型。</p><p>如果您希望指定除了显式声明的字段之外还包括哪些字段名，则可以使用附加选项。如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>uppername</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Function</span><span class=p>(</span><span class=k>lambda</span> <span class=n>obj</span><span class=p>:</span> <span class=n>obj</span><span class=o>.</span><span class=n>name</span><span class=o>.</span><span class=n>upper</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Meta</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># No need to include &#39;uppername&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=n>additional</span> <span class=o>=</span> <span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>,</span> <span class=s2>&#34;email&#34;</span><span class=p>,</span> <span class=s2>&#34;created_at&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=排序>排序</h2><p>对于某些用例，维护序列化输出的字段顺序可能很有用。要启用排序，请将ordered选项设置为true。这将指示marshmallow将数据序列化到 <code>collections.OrderedDict</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>collections</span> <span class=kn>import</span> <span class=n>OrderedDict</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>datetime</span> <span class=k>as</span> <span class=nn>dt</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>fields</span><span class=p>,</span><span class=n>ValidationError</span><span class=p>,</span><span class=n>Schema</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>name</span><span class=p>,</span> <span class=n>email</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>email</span> <span class=o>=</span> <span class=n>email</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>created_time</span> <span class=o>=</span> <span class=n>dt</span><span class=o>.</span><span class=n>datetime</span><span class=o>.</span><span class=n>now</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>uppername</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Function</span><span class=p>(</span><span class=k>lambda</span> <span class=n>obj</span><span class=p>:</span> <span class=n>obj</span><span class=o>.</span><span class=n>name</span><span class=o>.</span><span class=n>upper</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Meta</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>fields</span> <span class=o>=</span> <span class=p>(</span><span class=s2>&#34;name&#34;</span><span class=p>,</span> <span class=s2>&#34;email&#34;</span><span class=p>,</span> <span class=s2>&#34;created_time&#34;</span><span class=p>,</span> <span class=s2>&#34;uppername&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>ordered</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=s2>&#34;lhh&#34;</span><span class=p>,</span> <span class=s2>&#34;2432783449@qq.com&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>dump</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>isinstance</span><span class=p>(</span><span class=n>res</span><span class=p>,</span><span class=n>OrderedDict</span><span class=p>))</span>  <span class=c1># 判断变量类型</span>
+</span></span><span class=line><span class=cl><span class=c1># True</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># OrderedDict([(&#39;name&#39;, &#39;lhh&#39;), (&#39;email&#39;, &#39;2432783449@qq.com&#39;), (&#39;created_time&#39;, &#39;2021-05-29T09:40:46.351382&#39;), (&#39;uppername&#39;, &#39;LHH&#39;)])</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=只读与只写字段>“只读”与“只写”字段</h3><p>在Web API的上下文中，序列化参数dump_only和反序列化参数load_only在概念上分别等同于只读和只写字段。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span><span class=n>fields</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Str</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>password</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Str</span><span class=p>(</span><span class=n>load_only</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>  <span class=c1># 等于只写</span>
+</span></span><span class=line><span class=cl>    <span class=n>created_at</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>(</span><span class=n>dump_only</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>  <span class=c1># 等于只读</span>
+</span></span></code></pre></td></tr></table></div></div><p>load时，dump_only字段被视为未知字段。如果unknown选项设置为include，则与这些字段对应的键的值将因此loaded而不进行验证。</p><h3 id=序列化--反序列化时指定字段的默认值>序列化 / 反序列化时指定字段的默认值</h3><p>序列化时输入值缺失用default指定默认值。反序列化时输入值缺失用missing指定默认值。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># encoding=utf-8</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>uuid</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>datetime</span> <span class=k>as</span> <span class=nn>dt</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>fields</span><span class=p>,</span><span class=n>ValidationError</span><span class=p>,</span><span class=n>Schema</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>UserSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>UUID</span><span class=p>(</span><span class=n>missing</span><span class=o>=</span><span class=n>uuid</span><span class=o>.</span><span class=n>uuid1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>birthday</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>DateTime</span><span class=p>(</span><span class=n>default</span><span class=o>=</span><span class=n>dt</span><span class=o>.</span><span class=n>datetime</span><span class=p>(</span><span class=mi>1996</span><span class=p>,</span><span class=mi>11</span><span class=p>,</span><span class=mi>17</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 序列化</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span><span class=o>.</span><span class=n>dump</span><span class=p>({})</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;birthday&#39;: &#39;1996-11-17T00:00:00&#39;}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 反序列化</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>UserSchema</span><span class=p>()</span><span class=o>.</span><span class=n>load</span><span class=p>({</span><span class=s1>&#39;birthday&#39;</span><span class=p>:</span> <span class=s1>&#39;1996-11-17T00:00:00&#39;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;id&#39;: UUID(&#39;751d95db-c020-11eb-83eb-001a7dda7115&#39;), &#39;birthday&#39;: datetime.datetime(1996, 11, 17, 0, 0)}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=自定义字段>自定义字段</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>marshmallow</span> <span class=kn>import</span> <span class=n>Schema</span><span class=p>,</span> <span class=n>fields</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>String128</span><span class=p>(</span><span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    长度为128的字符串类型
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>default_error_messages</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;该字段只能是字符串类型&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;invalid&#34;</span><span class=p>:</span> <span class=s2>&#34;该字符串长度必须大于6&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_deserialize</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>value</span><span class=p>,</span> <span class=n>attr</span><span class=p>,</span> <span class=n>data</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=ow>not</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>value</span><span class=p>,</span> <span class=nb>str</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>fail</span><span class=p>(</span><span class=s2>&#34;type&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>value</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>6</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>fail</span><span class=p>(</span><span class=s2>&#34;invalid&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>AppSchema</span><span class=p>(</span><span class=n>Schema</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span> <span class=o>=</span> <span class=n>String128</span><span class=p>(</span><span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>priority</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Integer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>obj_type</span> <span class=o>=</span> <span class=n>String128</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>link</span> <span class=o>=</span> <span class=n>String128</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>deploy</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>Dict</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>description</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>projects</span> <span class=o>=</span> <span class=n>fields</span><span class=o>.</span><span class=n>List</span><span class=p>(</span><span class=n>cls_or_instance</span><span class=o>=</span><span class=n>fields</span><span class=o>.</span><span class=n>Dict</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>app</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;app11&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;priority&#34;</span><span class=p>:</span> <span class=mi>2</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;obj_type&#34;</span><span class=p>:</span> <span class=s2>&#34;web&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;link&#34;</span><span class=p>:</span> <span class=s2>&#34;123.123.00.2&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;deploy&#34;</span><span class=p>:</span> <span class=p>{</span><span class=s2>&#34;deploy1&#34;</span><span class=p>:</span> <span class=s2>&#34;deploy1&#34;</span><span class=p>,</span> <span class=s2>&#34;deploy2&#34;</span><span class=p>:</span> <span class=s2>&#34;deploy2&#34;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;app111 test111&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;projects&#34;</span><span class=p>:</span> <span class=p>[{</span><span class=s2>&#34;id&#34;</span><span class=p>:</span> <span class=mi>2</span><span class=p>}]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>schema</span> <span class=o>=</span> <span class=n>AppSchema</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>res</span> <span class=o>=</span> <span class=n>schema</span><span class=o>.</span><span class=n>validate</span><span class=p>(</span><span class=n>app</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># {&#39;obj_type&#39;: [&#39;该字符串长度必须大于6&#39;], &#39;name&#39;: [&#39;该字符串长度必须大于6&#39;]}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=更多>更多</h3><ul><li>需要表示对象之间的关系？请参见<a href=https://marshmallow.readthedocs.io/en/3.0/nesting.html target=_blank rel="external nofollow noopener noreferrer"> Nesting Schemas 页面</a>。</li><li>想要创建自己的字段类型？请参阅<a href=https://marshmallow.readthedocs.io/en/3.0/custom_fields.html target=_blank rel="external nofollow noopener noreferrer">自定义字段页面</a>。</li><li>需要添加模式级验证，后处理或错误处理行为吗？请参阅<a href=https://marshmallow.readthedocs.io/en/3.0/extending.html target=_blank rel="external nofollow noopener noreferrer">Schema扩展页面</a>。</li><li>例如，使用marshmallow的应用程序，请查看<a href=https://marshmallow.readthedocs.io/en/3.0/examples.html target=_blank rel="external nofollow noopener noreferrer">Examples页面</a>。</li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2022-11-23 14:00:55">更新于 2022-11-23</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/marshmallow/ data-title=marshmallow data-hashtags=Python,后端><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/marshmallow/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/marshmallow/ data-title=marshmallow><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E5%90%8E%E7%AB%AF/>后端</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/web-backend/pydantic/ class=prev rel=prev title=marshmallow><i class="fa-solid fa-angle-left fa-fw"></i>marshmallow</a>
+<a href=/Notes/posts/linux/useful/crontab/ class=next rel=next title=crontab>crontab<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
