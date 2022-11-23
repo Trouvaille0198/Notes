@@ -36,8 +36,6 @@ categories: [Machine Learning]
 
   原理：奥卡姆剃刀
 
-
-
 # 模型评估与选择
 
 ## 术语

@@ -7,8 +7,6 @@ tags: [Linux,快速入门]
 categories: [Linux]
 ---
 
-
-
 # crontab
 
 ```shell
@@ -17,7 +15,7 @@ crontab -e
 
 ## 时间语法
 
-```text
+```bash
 # For details see man 4 crontabs
 
 # Example of job definition:

@@ -540,9 +540,9 @@ root@ubuntu:~ git sta
 stage    stash    status
 ```
 
-> 上述是`git`命令补全功能。不要和`linux`命令补全功能混淆。`linux`命令补全安装方法：`apt-get install bash-completion`。
+> 上述是 `git` 命令补全功能。不要和 `linux` 命令补全功能混淆。`linux` 命令补全安装方法：`apt-get install bash-completion`。
 >
-> 可以使用`git config`命令配置`git`命令别名，减少命令输入。
+> 可以使用 `git config` 命令配置 `git` 命令别名，减少命令输入。
 
 ## git rebase
 
@@ -963,6 +963,12 @@ Dropped refs/stash@{0} (f0dfc4d5dc332d1cee34a634182e168c4efc3359)
 
 这是一个很棒的捷径来恢复储藏的工作然后在新的分支上继续当时的工作。
 
+### 暂存指定文件
+
+```bash
+git stash push <file_path>
+```
+
 ### 暂存未跟踪或忽略的文件
 
 默认情况下，`git stash` 会缓存下列文件：
@@ -970,7 +976,7 @@ Dropped refs/stash@{0} (f0dfc4d5dc332d1cee34a634182e168c4efc3359)
 - 添加到暂存区的修改（staged changes）
 - Git 跟踪的但并未添加到暂存区的修改（unstaged changes）
 
-但不会缓存一下文件：
+但不会缓存以下文件：
 
 - **在工作目录中新的文件**（untracked files）
 - 被忽略的文件（ignored files）
