@@ -1221,3 +1221,51 @@ from pathlib import Path
 current_path = Path.cwd()
 ```
 
+5. 用装饰器实现单例模式
+
+```py
+from functools import wraps
+def singleton(cls):
+    instances = {}
+    @wraps(cls)
+    def getinstance(*args, **kw):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kw)
+        return instances[cls]
+    return getinstance
+ 
+@singleton
+class test_singleton(object):
+  def __init__(self):
+    self.num_sum=0
+  def add(self):
+    self.num_sum=100
+    
+if __name__ == '__main__':
+  cls1 = test_singleton()
+  cls2 = test_singleton()
+  print(cls1)
+  print(cls2)
+```
+
+输出
+
+```py
+<__main__.test_singleton object at 0x7fcb651870f0>
+<__main__.test_singleton object at 0x7fcb651870f0>
+```
+
+可以看出，虽然进行了两次实例化，但仍为同一个实例
+
+6. 删除一个列表中的重复元素
+
+```py
+L.sort()
+last = L[-1]
+for i in range(len(L)-2, -1, -1): # 从倒数第二个开始往前
+    if last == L[i]:
+    		del L[i]
+		else:
+    		last = L[i]
+```
+
