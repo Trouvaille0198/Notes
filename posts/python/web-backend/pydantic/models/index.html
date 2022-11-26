@@ -1,15 +1,15 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>marshmallow - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="pydantic models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obj"><meta name=keywords content="Python,后端"><meta itemprop=name content="marshmallow"><meta itemprop=description content="pydantic models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obj"><meta itemprop=datePublished content="2022-11-22T00:00:00+00:00"><meta itemprop=dateModified content="2022-11-23T14:00:55+00:00"><meta itemprop=wordCount content="4294"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,后端,"><meta property="og:title" content="marshmallow"><meta property="og:description" content="pydantic models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obj"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-11-22T00:00:00+00:00"><meta property="article:modified_time" content="2022-11-23T14:00:55+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="marshmallow"><meta name=twitter:description content="pydantic models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obj"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/database/mysql/mvcc/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/marshmallow/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"marshmallow","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/pydantic\/"},"genre":"posts","keywords":"Python, 后端","wordcount":4294,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/pydantic\/","datePublished":"2022-11-22T00:00:00+00:00","dateModified":"2022-11-23T14:00:55+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>pydantic models - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obje"><meta name=keywords content="Python,后端,pydantic"><meta itemprop=name content="pydantic models"><meta itemprop=description content="models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obje"><meta itemprop=datePublished content="2022-11-22T00:00:00+00:00"><meta itemprop=dateModified content="2022-11-26T05:25:16+00:00"><meta itemprop=wordCount content="7247"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,后端,pydantic,"><meta property="og:title" content="pydantic models"><meta property="og:description" content="models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obje"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/models/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-11-22T00:00:00+00:00"><meta property="article:modified_time" content="2022-11-26T05:25:16+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="pydantic models"><meta name=twitter:description content="models 通过创建一个继承 BaseModel 的子类（model）来定义一类对象（defining obje"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/models/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/basicgrammar/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/field-types/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"pydantic models","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/pydantic\/models\/"},"genre":"posts","keywords":"Python, 后端, pydantic","wordcount":7247,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/web-backend\/pydantic\/models\/","datePublished":"2022-11-22T00:00:00+00:00","dateModified":"2022-11-26T05:25:16+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
 <span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
-<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>marshmallow</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>pydantic models</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
 MelonCholi</span></span>
 <span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2022-11-22 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-11-22>2022-11-22</time>
-</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 4294 字&nbsp;
-<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#models>models</a><ul><li><a href=#基础使用>基础使用</a></li><li><a href=#model-的属性>model 的属性</a></li><li><a href=#嵌套-model>嵌套 model</a></li><li><a href=#orm-mode>ORM Mode</a><ul><li><a href=#保留字>保留字</a></li><li><a href=#嵌套-orm-models>嵌套 ORM models</a></li><li><a href=#数据绑定>数据绑定</a></li></ul></li><li><a href=#错误处理>错误处理</a><ul><li><a href=#自定义错误>自定义错误</a></li></ul></li><li><a href=#helper-函数>helper 函数</a><ul><li><a href=#不经验证地创建-model>不经验证地创建 model</a></li></ul></li><li><a href=#generic-models>Generic Models</a></li><li><a href=#model-的动态创建>model 的动态创建</a></li><li><a href=#从-namedtuple-和-typeddict-中创建-model>从 <code>NamedTuple</code> 和 <code>TypedDict</code> 中创建 model</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=pydantic>pydantic</h1><h2 id=models>models</h2><p>通过创建一个继承 <code>BaseModel</code> 的子类（model）来定义一类对象（defining objects）</p><p>模型（model）可以是强类型语言中的类型（types），也可以是 API 接口中的参数</p><p>未经验证的 raw data 可以被传入 model，model 会根据自身的的字段定义对 untrusted data 进行验证</p><blockquote><p>pydantic 不仅仅是一个验证模块（validation library），更是一个解析模块（parsing library），验证只提供对传入数据的类型与约束，而 pydantic 可以保证传出数据的类型与约束都是符合规则的。</p><p><em>pydantic</em> is primarily a parsing library, <strong>not a validation library</strong>. Validation is a means to an end: building a model which conforms to the types and constraints provided.</p><p>In other words, <em>pydantic</em> guarantees the types and constraints of the output model, not the input data</p></blockquote><h3 id=基础使用>基础使用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 7247 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 15 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#基础使用>基础使用</a></li><li><a href=#model-的属性>model 的属性</a></li><li><a href=#嵌套-model>嵌套 model</a></li><li><a href=#orm-mode>ORM Mode</a><ul><li><a href=#保留字>保留字</a></li><li><a href=#嵌套-orm-models>嵌套 ORM models</a></li><li><a href=#数据绑定>数据绑定</a></li></ul></li><li><a href=#错误处理>错误处理</a><ul><li><a href=#自定义错误>自定义错误</a></li></ul></li><li><a href=#helper-函数>helper 函数</a><ul><li><a href=#不经验证地创建-model>不经验证地创建 model</a></li></ul></li><li><a href=#generic-models>Generic Models</a></li><li><a href=#model-的动态创建>model 的动态创建</a></li><li><a href=#从-namedtuple-和-typeddict-中创建-model>从 <code>NamedTuple</code> 和 <code>TypedDict</code> 中创建 model</a></li><li><a href=#custom-root-types>Custom Root Types</a></li><li><a href=#虚假-的不可变性质>“虚假” 的不可变性质</a></li><li><a href=#abstract-base-classes>Abstract Base Classes</a></li><li><a href=#字段顺序>字段顺序</a></li><li><a href=#必要字段>必要字段</a></li><li><a href=#拥有动态默认值的字段>拥有动态默认值的字段</a></li><li><a href=#自动排除的属性>自动排除的属性</a></li><li><a href=#model-的私有属性>model 的私有属性</a></li><li><a href=#将数据解析为指定类型>将数据解析为指定类型</a></li><li><a href=#数据转换>数据转换</a></li><li><a href=#-model-签名>❤️ model 签名</a></li><li><a href=#结构化模式匹配>结构化模式匹配</a></li></ul></nav></div></div><div class=content id=content><h1 id=models>models</h1><p>通过创建一个继承 <code>BaseModel</code> 的子类（model）来定义一类对象（defining objects）</p><p>模型（model）可以是强类型语言中的类型（types），也可以是 API 接口中的参数</p><p>未经验证的 raw data 可以被传入 model，model 会根据自身的的字段定义对 untrusted data 进行验证</p><blockquote><p>pydantic 不仅仅是一个验证模块（validation library），更是一个解析模块（parsing library），验证只提供对传入数据的类型与约束，而 pydantic 可以保证传出数据的类型与约束都是符合规则的。</p><p><em>pydantic</em> is primarily a parsing library, <strong>not a validation library</strong>. Validation is a means to an end: building a model which conforms to the types and constraints provided.</p><p>In other words, <em>pydantic</em> guarantees the types and constraints of the output model, not the input data</p></blockquote><h2 id=基础使用>基础使用</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -25,7 +25,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=n>user_x</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=nb>id</span><span class=o>=</span><span class=s1>&#39;123.45&#39;</span><span class=p>)</span> <span class=c1># float was cast to an int</span>
 </span></span></code></pre></td></tr></table></div></div><p>聪明的实例化</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>assert</span> <span class=n>user</span><span class=o>.</span><span class=n>__fields_set__</span> <span class=o>==</span> <span class=p>{</span><span class=s1>&#39;id&#39;</span><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p><code>__fields_set__</code> 指出了在实例化时传入的字段</p><p><code>&lt;model>.dict()</code> 和 <code>dict(&lt;model>)</code> 能将 model 转换为字典；不过 <code>&lt;model>.dict()</code> 可能会包含一些其他数据</p><h3 id=model-的属性>model 的属性</h3><ul><li><code>dict()</code><ul><li>返回字典</li></ul></li><li><code>json()</code><ul><li>返回 json 字符串</li></ul></li><li><code>copy()</code><ul><li>返回拷贝（默认浅拷贝 shallow copy）</li></ul></li><li><code>parse_obj()</code><ul><li>class method，将一个 dict 转换为 model 的方法</li></ul></li><li><code>parse_raw()</code><ul><li>class method，将字符串转换为 model 的方法</li></ul></li><li><code>parse_file()</code><ul><li>class method，将文件路径对应的文件转换为 model 的方法，类似 <code>parse_raw()</code></li></ul></li><li><code>from_orm()</code><ul><li>class method，将一个 ORM 模型对象转换为 model 的方法</li></ul></li><li><code>schema()</code><ul><li>返回一个 JSON Schema 格式的字典</li></ul></li><li><code>schema_json()</code><ul><li>返回一个 JSON Schema 格式的字符串</li></ul></li><li><code>construct()</code><ul><li>class method，生成一个跳过校验的实例</li></ul></li><li><code>__fields_set__</code><ul><li>初始化实例所传入字段的集合</li></ul></li><li><code>__fields__</code><ul><li>model 定义字段的集合</li></ul></li><li><code>__config__</code><ul><li>model 的 configuration class</li></ul></li></ul><h3 id=嵌套-model>嵌套 model</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p><code>__fields_set__</code> 指出了在实例化时传入的字段</p><p><code>&lt;model>.dict()</code> 和 <code>dict(&lt;model>)</code> 能将 model 转换为字典；不过 <code>&lt;model>.dict()</code> 可能会包含一些其他数据</p><h2 id=model-的属性>model 的属性</h2><ul><li><code>dict()</code><ul><li>返回字典</li></ul></li><li><code>json()</code><ul><li>返回 json 字符串</li></ul></li><li><code>copy()</code><ul><li>返回拷贝（默认浅拷贝 shallow copy）</li></ul></li><li><code>parse_obj()</code><ul><li>class method，将一个 dict 转换为 model 的方法</li></ul></li><li><code>parse_raw()</code><ul><li>class method，将字符串转换为 model 的方法</li></ul></li><li><code>parse_file()</code><ul><li>class method，将文件路径对应的文件转换为 model 的方法，类似 <code>parse_raw()</code></li></ul></li><li><code>from_orm()</code><ul><li>class method，将一个 ORM 模型对象转换为 model 的方法</li></ul></li><li><code>schema()</code><ul><li>返回一个 JSON Schema 格式的字典</li></ul></li><li><code>schema_json()</code><ul><li>返回一个 JSON Schema 格式的字符串</li></ul></li><li><code>construct()</code><ul><li>class method，生成一个跳过校验的实例</li></ul></li><li><code>__fields_set__</code><ul><li>初始化实例所传入字段的集合</li></ul></li><li><code>__fields__</code><ul><li>model 定义字段的集合</li></ul></li><li><code>__config__</code><ul><li>model 的 configuration class</li></ul></li></ul><h2 id=嵌套-model>嵌套 model</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -91,7 +91,7 @@ MelonCholi</span></span>
 </span></span></span><span class=line><span class=cl><span class=s2>    ],
 </span></span></span><span class=line><span class=cl><span class=s2>}
 </span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=orm-mode>ORM Mode</h3><p>models 支持 ORM 模式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h2 id=orm-mode>ORM Mode</h2><p>models 支持 ORM 模式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -167,7 +167,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>co_model</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=c1>#&gt; id=123 public_key=&#39;foobar&#39; name=&#39;Testing&#39; domains=[&#39;example.com&#39;,</span>
 </span></span><span class=line><span class=cl><span class=c1>#&gt; &#39;foobar.com&#39;]</span>
-</span></span></code></pre></td></tr></table></div></div><p>要点</p><ul><li><code>Config</code> 属性 <code>orn_mode</code> 必须为 <code>True</code></li><li>使用 <code>.from_orm()</code> 类方法来创建 model</li></ul><h4 id=保留字>保留字</h4><p>设置 <code>Field</code> 的 <code>alias</code> 参数来使用 SQLAlchemy 的保留字</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p>要点</p><ul><li><code>Config</code> 属性 <code>orn_mode</code> 必须为 <code>True</code></li><li>使用 <code>.from_orm()</code> 类方法来创建 model</li></ul><h3 id=保留字>保留字</h3><p>设置 <code>Field</code> 的 <code>alias</code> 参数来使用 SQLAlchemy 的保留字</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -227,7 +227,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;metadata&#39;: {&#39;key&#39;: &#39;val&#39;}}</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>pydantic_model</span><span class=o>.</span><span class=n>dict</span><span class=p>(</span><span class=n>by_alias</span><span class=o>=</span><span class=kc>True</span><span class=p>))</span>
 </span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;metadata_&#39;: {&#39;key&#39;: &#39;val&#39;}}</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=嵌套-orm-models>嵌套 ORM models</h4><p>ORM 实例也可以嵌套地传入 model</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=嵌套-orm-models>嵌套 ORM models</h3><p>ORM 实例也可以嵌套地传入 model</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -307,7 +307,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>anna_model</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=c1>#&gt; name=&#39;Anna&#39; age=20.0 pets=[Pet(name=&#39;Bones&#39;, species=&#39;dog&#39;),</span>
 </span></span><span class=line><span class=cl><span class=c1>#&gt; Pet(name=&#39;Orion&#39;, species=&#39;cat&#39;)]</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=数据绑定>数据绑定</h4><blockquote><p>ORM to model 的原理</p><p>Arbitrary classes are processed by <em>pydantic</em> using the <code>GetterDict</code> class (see <a href=https://github.com/pydantic/pydantic/blob/main/pydantic/utils.py target=_blank rel="external nofollow noopener noreferrer">utils.py</a>), which attempts to provide a dictionary-like interface to any class. You can customise how this works by setting your own sub-class of <code>GetterDict</code> as the value of <code>Config.getter_dict</code> (see <a href=https://pydantic-docs.helpmanual.io/usage/model_config/ target=_blank rel="external nofollow noopener noreferrer">config</a>).</p></blockquote><p>You can also customise class validation using <a href=https://pydantic-docs.helpmanual.io/usage/validators/#root-validators target=_blank rel="external nofollow noopener noreferrer">root_validators</a> with <code>pre=True</code>. In this case your validator function will be passed a <code>GetterDict</code> instance which you may copy and modify.</p><p>The <code>GetterDict</code> instance will be called for each field with a sentinel as a fallback (if no other default value is set). Returning this sentinel means that the field is missing. Any other value will be interpreted as the value of the field.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=数据绑定>数据绑定</h3><blockquote><p>ORM to model 的原理</p><p>Arbitrary classes are processed by <em>pydantic</em> using the <code>GetterDict</code> class (see <a href=https://github.com/pydantic/pydantic/blob/main/pydantic/utils.py target=_blank rel="external nofollow noopener noreferrer">utils.py</a>), which attempts to provide a dictionary-like interface to any class. You can customise how this works by setting your own sub-class of <code>GetterDict</code> as the value of <code>Config.getter_dict</code> (see <a href=https://pydantic-docs.helpmanual.io/usage/model_config/ target=_blank rel="external nofollow noopener noreferrer">config</a>).</p></blockquote><p>You can also customise class validation using <a href=https://pydantic-docs.helpmanual.io/usage/validators/#root-validators target=_blank rel="external nofollow noopener noreferrer">root_validators</a> with <code>pre=True</code>. In this case your validator function will be passed a <code>GetterDict</code> instance which you may copy and modify.</p><p>The <code>GetterDict</code> instance will be called for each field with a sentinel as a fallback (if no other default value is set). Returning this sentinel means that the field is missing. Any other value will be interpreted as the value of the field.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -393,7 +393,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>from_orm</span><span class=p>(</span><span class=n>fromstring</span><span class=p>(</span><span class=n>xmlstring</span><span class=p>))</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=错误处理>错误处理</h3><p>校验过程中，一旦出错，pydantic 将会抛出 <code>ValidationError</code> 错误</p><blockquote><p>自定义的验证代码不应该抛出 <code>ValidationError</code> 错误，而是抛出 <code>ValueError</code>、<code>TypeError</code> 或 <code>AssertionError</code>，这样它们能被 <code>ValidationError</code> 捕获到</p></blockquote><p>校验中只会报一次错，<code>ValidationError</code> 将包含所有的错误</p><p>你可以使用以下方法处理错误 <code>exception</code>：</p><ul><li><code>e.errors()</code><ul><li>列表形式</li></ul></li><li><code>e.json()</code><ul><li>json 形式</li></ul></li><li><code>str(e)</code><ul><li>易读的字符串形式</li></ul></li></ul><p>每个 error 对象都包含：</p><ul><li><p><code>loc</code></p><ul><li>一个列表，指出<strong>错误位置</strong><ul><li>第一个元素指出出错的 field</li><li>如果 fields 是一个 sub-model，其下的元素也会被嵌套地展示</li></ul></li></ul></li><li><p><code>type</code></p><ul><li>一个计算机易读的字符串，指出<strong>错误类型</strong></li></ul></li><li><p><code>msg</code></p><ul><li>一个用户易读的<strong>错误说明</strong></li></ul></li><li><p><code>ctx</code></p><ul><li>补充错误信息的上下文</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h2 id=错误处理>错误处理</h2><p>校验过程中，一旦出错，pydantic 将会抛出 <code>ValidationError</code> 错误</p><blockquote><p>自定义的验证代码不应该抛出 <code>ValidationError</code> 错误，而是抛出 <code>ValueError</code>、<code>TypeError</code> 或 <code>AssertionError</code>，这样它们能被 <code>ValidationError</code> 捕获到</p></blockquote><p>校验中只会报一次错，<code>ValidationError</code> 将包含所有的错误</p><p>你可以使用以下方法处理错误 <code>exception</code>：</p><ul><li><code>e.errors()</code><ul><li>列表形式</li></ul></li><li><code>e.json()</code><ul><li>json 形式</li></ul></li><li><code>str(e)</code><ul><li>易读的字符串形式</li></ul></li></ul><p>每个 error 对象都包含：</p><ul><li><p><code>loc</code></p><ul><li>一个列表，指出<strong>错误位置</strong><ul><li>第一个元素指出出错的 field</li><li>如果 fields 是一个 sub-model，其下的元素也会被嵌套地展示</li></ul></li></ul></li><li><p><code>type</code></p><ul><li>一个计算机易读的字符串，指出<strong>错误类型</strong></li></ul></li><li><p><code>msg</code></p><ul><li>一个用户易读的<strong>错误说明</strong></li></ul></li><li><p><code>ctx</code></p><ul><li>补充错误信息的上下文</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -573,7 +573,7 @@ MelonCholi</span></span>
 </span></span></span><span class=line><span class=cl><span class=s2>      }
 </span></span></span><span class=line><span class=cl><span class=s2>    ]
 </span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><h4 id=自定义错误>自定义错误</h4><p>使用 <code>ValueError</code>、<code>TypeError</code> 或 <code>AssertionError</code> 在 <code>@validator</code> 装饰的函数中抛出错误</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=自定义错误>自定义错误</h3><p>使用 <code>ValueError</code>、<code>TypeError</code> 或 <code>AssertionError</code> 在 <code>@validator</code> 装饰的函数中抛出错误</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -699,7 +699,7 @@ MelonCholi</span></span>
 </span></span></span><span class=line><span class=cl><span class=s2>      }
 </span></span></span><span class=line><span class=cl><span class=s2>    ]
 </span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=helper-函数>helper 函数</h3><p>pydantic 为 model 提供三个 helper 类方法供其在 parsing data 时使用</p><ul><li><code>parse_obj()</code><ul><li>将一个对象转换为 model 的方法</li><li>跟 <code>__init__</code> 方法很像，只不过它接收一个 dict 而不是关键字参数（说实话，在 <code>__init__</code> 里用 <code>**kwargs</code> 传字典也能起到相同的作用）</li></ul></li><li><code>parse_raw()</code><ul><li>将字符串转换为 model 的方法</li><li>str / bytes 都能传，它首先会转换成 json，然后再把 json 传进 <code>parse_obj()</code></li><li>pickle data 也能传，方法详见示例</li></ul></li><li><code>parse_file()</code><ul><li>将文件路径对应的文件转换为 model 的方法，</li><li>它会先读文件，再把结果传进 <code>parse_raw()</code></li><li>套娃了属于是</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h2 id=helper-函数>helper 函数</h2><p>pydantic 为 model 提供三个 helper 类方法供其在 parsing data 时使用</p><ul><li><code>parse_obj()</code><ul><li>将一个对象转换为 model 的方法</li><li>跟 <code>__init__</code> 方法很像，只不过它接收一个 dict 而不是关键字参数（说实话，在 <code>__init__</code> 里用 <code>**kwargs</code> 传字典也能起到相同的作用）</li></ul></li><li><code>parse_raw()</code><ul><li>将字符串转换为 model 的方法</li><li>str / bytes 都能传，它首先会转换成 json，然后再把 json 传进 <code>parse_obj()</code></li><li>pickle data 也能传，方法详见示例</li></ul></li><li><code>parse_file()</code><ul><li>将文件路径对应的文件转换为 model 的方法，</li><li>它会先读文件，再把结果传进 <code>parse_raw()</code></li><li>套娃了属于是</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -795,7 +795,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=n>m</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>parse_file</span><span class=p>(</span><span class=n>path</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=c1>#&gt; id=123 signup_ts=None name=&#39;James&#39;</span>
-</span></span></code></pre></td></tr></table></div></div><blockquote><p>来自 pickle 官方文档的警告：&ldquo;The pickle module is not secure against erroneous or maliciously constructed data. Never unpickle data received from an untrusted or unauthenticated source.&rdquo;</p></blockquote><h4 id=不经验证地创建-model>不经验证地创建 model</h4><p><code>construct()</code> 方法允许你不经验证就创建 model，当信息源绝对可靠时，这样做可以提高效率（不验证比验证快 30 倍）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>来自 pickle 官方文档的警告：&ldquo;The pickle module is not secure against erroneous or maliciously constructed data. Never unpickle data received from an untrusted or unauthenticated source.&rdquo;</p></blockquote><h3 id=不经验证地创建-model>不经验证地创建 model</h3><p><code>construct()</code> 方法允许你不经验证就创建 model，当信息源绝对可靠时，这样做可以提高效率（不验证比验证快 30 倍）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -863,7 +863,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=n>bad_user</span> <span class=o>=</span> <span class=n>User</span><span class=o>.</span><span class=n>construct</span><span class=p>(</span><span class=nb>id</span><span class=o>=</span><span class=s1>&#39;dog&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>repr</span><span class=p>(</span><span class=n>bad_user</span><span class=p>))</span>
 </span></span><span class=line><span class=cl><span class=c1>#&gt; User(id=&#39;dog&#39;, name=&#39;John Doe&#39;)</span>
-</span></span></code></pre></td></tr></table></div></div><p><code>_fields_set</code> 参数是可选的，它可以准确地区分出<strong>传入的</strong>和<strong>默认赋值的</strong>参数；如果它被忽略，<code>__fields_set__</code> 就是这个 model 的所有字段了</p><h3 id=generic-models>Generic Models</h3><p>为了方便 model 的复用，pydantic 支持创建 generic models</p><p>按照以下步骤去创建一个 generic model</p><ol><li><p>声明一个或多个 <code>typing.TypeVar</code> 实例，用于参数化你的 model</p></li><li><p>声明一个继承自 <code>pydantic.generics.GenericModel</code> 和 <code>typing.Generic</code> 的 pydantic model，并在其中传入你刚刚声明的 <code>typing.TypeVar</code> 实例作为 <code>typing.Generic</code> 的参数</p></li><li><p>在你想要的字段上，使用 <code>typing.TypeVar</code> 实例作为标注</p></li></ol><p>以下是一个可复用的 HTTP 响应负载处理类（HTTP response payload wrapper）的例子</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><p><code>_fields_set</code> 参数是可选的，它可以准确地区分出<strong>传入的</strong>和<strong>默认赋值的</strong>参数；如果它被忽略，<code>__fields_set__</code> 就是这个 model 的所有字段了</p><h2 id=generic-models>Generic Models</h2><p>为了方便 model 的复用，pydantic 支持创建 generic models</p><p>按照以下步骤去创建一个 generic model</p><ol><li><p>声明一个或多个 <code>typing.TypeVar</code> 实例，用于参数化你的 model</p></li><li><p>声明一个继承自 <code>pydantic.generics.GenericModel</code> 和 <code>typing.Generic</code> 的 pydantic model，并在其中传入你刚刚声明的 <code>typing.TypeVar</code> 实例作为 <code>typing.Generic</code> 的参数</p></li><li><p>在你想要的字段上，使用 <code>typing.TypeVar</code> 实例作为标注</p></li></ol><p>以下是一个可复用的 HTTP 响应负载处理类（HTTP response payload wrapper）的例子</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -1243,7 +1243,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=n>concrete_model</span> <span class=o>=</span> <span class=n>typevar_model</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span> <span class=c1># 替换 IntT</span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>concrete_model</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=mi>1</span><span class=p>))</span>
 </span></span><span class=line><span class=cl><span class=c1>#&gt; a=1 b=1</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=model-的动态创建>model 的动态创建</h3><p>有些时候，model 的定义直到程序运行时才会完整，pydantic 提供 <code>create_model</code> 方法，允许 model 在运行时被创建</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h2 id=model-的动态创建>model 的动态创建</h2><p>有些时候，model 的定义直到程序运行时才会完整，pydantic 提供 <code>create_model</code> 方法，允许 model 在运行时被创建</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -1359,9 +1359,717 @@ MelonCholi</span></span>
 </span></span></span><span class=line><span class=cl><span class=s2>    username
 </span></span></span><span class=line><span class=cl><span class=s2>      must be alphanumeric (type=assertion_error)
 </span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
-</span></span></code></pre></td></tr></table></div></div><h3 id=从-namedtuple-和-typeddict-中创建-model>从 <code>NamedTuple</code> 和 <code>TypedDict</code> 中创建 model</h3></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2022-11-23 14:00:55">更新于 2022-11-23</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/ data-title=marshmallow data-hashtags=Python,后端><i class="fa-brands fa-twitter fa-fw"></i></a>
-<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
-<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/ data-title=marshmallow><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E5%90%8E%E7%AB%AF/>后端</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/database/mysql/mvcc/ class=prev rel=prev title="MySQL MVCC"><i class="fa-solid fa-angle-left fa-fw"></i>MySQL MVCC</a>
-<a href=/Notes/posts/python/web-backend/marshmallow/ class=next rel=next title=marshmallow>marshmallow<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+</span></span></code></pre></td></tr></table></div></div><h2 id=从-namedtuple-和-typeddict-中创建-model>从 <code>NamedTuple</code> 和 <code>TypedDict</code> 中创建 model</h2><p>有时候，你的项目中已经用到了继承自 <code>NamedTuple</code> 或 <code>TypedDict</code> 的类，但是迁移至 pydantic <code>BaseModel</code> 的成本又太大</p><p>为了解决这一点，pydantic 提供了 <code>create_model_from_namedtuple</code> 和 <code>create_model_from_typeddict</code> 这两个方法，他们的使用方法与 <code>create_model</code> 相同</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing_extensions</span> <span class=kn>import</span> <span class=n>TypedDict</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>ValidationError</span><span class=p>,</span> <span class=n>create_model_from_typeddict</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>TypedDict</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Config</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>extra</span> <span class=o>=</span> <span class=s1>&#39;forbid&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>UserM</span> <span class=o>=</span> <span class=n>create_model_from_typeddict</span><span class=p>(</span><span class=n>User</span><span class=p>,</span> <span class=n>__config__</span><span class=o>=</span><span class=n>Config</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>repr</span><span class=p>(</span><span class=n>UserM</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=mi>123</span><span class=p>,</span> <span class=nb>id</span><span class=o>=</span><span class=s1>&#39;3&#39;</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; User(name=&#39;123&#39;, id=3)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>UserM</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=mi>123</span><span class=p>,</span> <span class=nb>id</span><span class=o>=</span><span class=s1>&#39;3&#39;</span><span class=p>,</span> <span class=n>other</span><span class=o>=</span><span class=s1>&#39;no&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    1 validation error for User
+</span></span></span><span class=line><span class=cl><span class=s2>    other
+</span></span></span><span class=line><span class=cl><span class=s2>      extra fields not permitted (type=value_error.extra)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=custom-root-types>Custom Root Types</h2><p>通过声明一个 <code>__root__</code> 字段，Pydantic models 可以被一个自定义的根类型（custom root type）所定义</p><p>根类型可以是任何 pydantic 支持的类型，被 <code>__root__</code> 字段的类型标注所指定</p><p>除了直接在实例化 model 的时候传入 <code>__root__</code> 关键字参数，还能在 <code>parse_obj</code> 方法中传入唯一一个值来给 <code>__root__</code> 赋值</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>json</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic.schema</span> <span class=kn>import</span> <span class=n>schema</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Pets</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>__root__</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=nb>str</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Pets</span><span class=p>(</span><span class=n>__root__</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; __root__=[&#39;dog&#39;, &#39;cat&#39;]</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Pets</span><span class=p>(</span><span class=n>__root__</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>])</span><span class=o>.</span><span class=n>json</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; [&#34;dog&#34;, &#34;cat&#34;]</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Pets</span><span class=o>.</span><span class=n>parse_obj</span><span class=p>([</span><span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; __root__=[&#39;dog&#39;, &#39;cat&#39;]</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Pets</span><span class=o>.</span><span class=n>schema</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>    &#39;title&#39;: &#39;Pets&#39;,
+</span></span></span><span class=line><span class=cl><span class=s2>    &#39;type&#39;: &#39;array&#39;,
+</span></span></span><span class=line><span class=cl><span class=s2>    &#39;items&#39;: {&#39;type&#39;: &#39;string&#39;},
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>pets_schema</span> <span class=o>=</span> <span class=n>schema</span><span class=p>([</span><span class=n>Pets</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>json</span><span class=o>.</span><span class=n>dumps</span><span class=p>(</span><span class=n>pets_schema</span><span class=p>,</span> <span class=n>indent</span><span class=o>=</span><span class=mi>2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>{
+</span></span></span><span class=line><span class=cl><span class=s2>  &#34;definitions&#34;: {
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;Pets&#34;: {
+</span></span></span><span class=line><span class=cl><span class=s2>      &#34;title&#34;: &#34;Pets&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>      &#34;type&#34;: &#34;array&#34;,
+</span></span></span><span class=line><span class=cl><span class=s2>      &#34;items&#34;: {
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;type&#34;: &#34;string&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>      }
+</span></span></span><span class=line><span class=cl><span class=s2>    }
+</span></span></span><span class=line><span class=cl><span class=s2>  }
+</span></span></span><span class=line><span class=cl><span class=s2>}
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果 model 定义了根类型，并且在 <code>parse_obj</code> 中传入了一个字典参数，那具体的逻辑如下：</p><ul><li>如果自定义根类型也恰好是一个映射类型（<code>Dict</code> 或 <code>Mapping</code>），那参数作为自定义根类型被校验</li><li>至于其他的自定义根类型<ul><li>如果字典参数重正好有一个<code>__root__</code> 键，那么其对应的值将作为自定义根类型被校验</li><li>否则，字典参数本身将作为自定义根类型被校验（并报错）</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Pets</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>__root__</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=nb>str</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Pets</span><span class=o>.</span><span class=n>parse_obj</span><span class=p>([</span><span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; __root__=[&#39;dog&#39;, &#39;cat&#39;]</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Pets</span><span class=o>.</span><span class=n>parse_obj</span><span class=p>({</span><span class=s1>&#39;__root__&#39;</span><span class=p>:</span> <span class=p>[</span><span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>]}))</span>  <span class=c1># not recommended</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; __root__=[&#39;dog&#39;, &#39;cat&#39;]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>PetsByName</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>__root__</span><span class=p>:</span> <span class=nb>dict</span><span class=p>[</span><span class=nb>str</span><span class=p>,</span> <span class=nb>str</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>PetsByName</span><span class=o>.</span><span class=n>parse_obj</span><span class=p>({</span><span class=s1>&#39;Otis&#39;</span><span class=p>:</span> <span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;Milo&#39;</span><span class=p>:</span> <span class=s1>&#39;cat&#39;</span><span class=p>}))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; __root__={&#39;Otis&#39;: &#39;dog&#39;, &#39;Milo&#39;: &#39;cat&#39;}</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>PetsByName</span><span class=o>.</span><span class=n>parse_obj</span><span class=p>({</span><span class=s1>&#39;__root__&#39;</span><span class=p>:</span> <span class=p>{</span><span class=s1>&#39;Otis&#39;</span><span class=p>:</span> <span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;Milo&#39;</span><span class=p>:</span> <span class=s1>&#39;cat&#39;</span><span class=p>}})</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    1 validation error for PetsByName
+</span></span></span><span class=line><span class=cl><span class=s2>    __root__ -&gt; __root__
+</span></span></span><span class=line><span class=cl><span class=s2>      str type expected (type=type_error.str)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>Calling the <code>parse_obj</code> method on a dict with the single key <code>"__root__"</code> for non-mapping custom root types is currently supported for backwards compatibility, but is not recommended and may be dropped in a future version.</p></blockquote><p>如果你想要直接取到 <code>__root__</code> 字段中的值，或是想要迭代之，你可以实现对应的 <code>__iter__</code> 和 <code>__getitem__</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Pets</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>__root__</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=nb>str</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__iter__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nb>iter</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>__root__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__getitem__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>__root__</span><span class=p>[</span><span class=n>item</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>pets</span> <span class=o>=</span> <span class=n>Pets</span><span class=o>.</span><span class=n>parse_obj</span><span class=p>([</span><span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>pets</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; dog</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>([</span><span class=n>pet</span> <span class=k>for</span> <span class=n>pet</span> <span class=ow>in</span> <span class=n>pets</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; [&#39;dog&#39;, &#39;cat&#39;]</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=虚假-的不可变性质>“虚假” 的不可变性质</h2><p>设置 <code>allow_mutation = False</code> 可以让 model 不可变，所有对其值的修改都会抛出错误</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>FooBarModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span><span class=p>:</span> <span class=nb>dict</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Config</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>allow_mutation</span> <span class=o>=</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>foobar</span> <span class=o>=</span> <span class=n>FooBarModel</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=s1>&#39;hello&#39;</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;apple&#39;</span><span class=p>:</span> <span class=s1>&#39;pear&#39;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>foobar</span><span class=o>.</span><span class=n>a</span> <span class=o>=</span> <span class=s1>&#39;different&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=ne>TypeError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#&gt; &#34;FooBarModel&#34; is immutable and does not support item assignment</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>foobar</span><span class=o>.</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; hello</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>foobar</span><span class=o>.</span><span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;apple&#39;: &#39;pear&#39;}</span>
+</span></span><span class=line><span class=cl><span class=n>foobar</span><span class=o>.</span><span class=n>b</span><span class=p>[</span><span class=s1>&#39;apple&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;grape&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>foobar</span><span class=o>.</span><span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;apple&#39;: &#39;grape&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>都是假的，Python 里从来没有严格的不可变性</p><p>Immutability in Python is never strict. If developers are determined/stupid they can always modify a so-called &ldquo;immutable&rdquo; object.</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>FooBarModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span><span class=p>:</span> <span class=nb>dict</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Config</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>allow_mutation</span> <span class=o>=</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>foobar</span> <span class=o>=</span> <span class=n>FooBarModel</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=s1>&#39;hello&#39;</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;apple&#39;</span><span class=p>:</span> <span class=s1>&#39;pear&#39;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>foobar</span><span class=o>.</span><span class=n>a</span> <span class=o>=</span> <span class=s1>&#39;different&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=ne>TypeError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#&gt; &#34;FooBarModel&#34; is immutable and does not support item assignment</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>foobar</span><span class=o>.</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; hello</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>foobar</span><span class=o>.</span><span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;apple&#39;: &#39;pear&#39;}</span>
+</span></span><span class=line><span class=cl><span class=n>foobar</span><span class=o>.</span><span class=n>b</span><span class=p>[</span><span class=s1>&#39;apple&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;grape&#39;</span> <span class=c1># 避免不了修改</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>foobar</span><span class=o>.</span><span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;apple&#39;: &#39;grape&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><p>试图修改 <code>a</code> 会抛出错误，但是字典字段 <code>b</code> 被避免不了被修改的命运</p><h2 id=abstract-base-classes>Abstract Base Classes</h2><p>model 能跟抽象基类（Abstract Base Classes，ABC）一起使用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>abc</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>FooBarModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>,</span> <span class=n>abc</span><span class=o>.</span><span class=n>ABC</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@abc.abstractmethod</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>my_abstract_method</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>pass</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=字段顺序>字段顺序</h2><p>字段顺序是非常重要的：</p><ul><li>校验是按照字段顺序进行的</li><li>字段顺序在 model schema 中保留</li><li>字段顺序在校验错误中保留</li><li>字段顺序在 <code>.dict()</code> 和 <code>.json()</code> 中保留</li></ul><p>从 v1.0 版开始，所有带注释的字段（无论是只带注释的还是带默认值的）都会排在没有注释的字段之前</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=n>c</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=n>d</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>e</span><span class=p>:</span> <span class=nb>float</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Model</span><span class=o>.</span><span class=n>__fields__</span><span class=o>.</span><span class=n>keys</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; dict_keys([&#39;a&#39;, &#39;c&#39;, &#39;e&#39;, &#39;b&#39;, &#39;d&#39;])</span>
+</span></span><span class=line><span class=cl><span class=n>m</span> <span class=o>=</span> <span class=n>Model</span><span class=p>(</span><span class=n>e</span><span class=o>=</span><span class=mi>2</span><span class=p>,</span> <span class=n>a</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=o>.</span><span class=n>dict</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;a&#39;: 1, &#39;c&#39;: 1, &#39;e&#39;: 2.0, &#39;b&#39;: 2, &#39;d&#39;: 0}</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>Model</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=s1>&#39;x&#39;</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=s1>&#39;x&#39;</span><span class=p>,</span> <span class=n>c</span><span class=o>=</span><span class=s1>&#39;x&#39;</span><span class=p>,</span> <span class=n>d</span><span class=o>=</span><span class=s1>&#39;x&#39;</span><span class=p>,</span> <span class=n>e</span><span class=o>=</span><span class=s1>&#39;x&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>error_locations</span> <span class=o>=</span> <span class=p>[</span><span class=n>e</span><span class=p>[</span><span class=s1>&#39;loc&#39;</span><span class=p>]</span> <span class=k>for</span> <span class=n>e</span> <span class=ow>in</span> <span class=n>e</span><span class=o>.</span><span class=n>errors</span><span class=p>()]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>error_locations</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; [(&#39;a&#39;,), (&#39;c&#39;,), (&#39;e&#39;,), (&#39;b&#39;,), (&#39;d&#39;,)]</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>从上面的例子可以看出，把带注释和不带注释的字段混在一起，有时会造成意想不到的结果，这其实是 Python 的缺陷</p><p>即使默认值也能跟类型标注一样来保证顺序，我们还是建议给所有字段都带上类型标注</p></blockquote><h2 id=必要字段>必要字段</h2><p>给个类型标注就能让一个字段变成必要字段（required fields），或者加个 <code>...</code> 省略</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=n>c</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=c1># a, b and c are all required</span>
+</span></span></code></pre></td></tr></table></div></div><p>但是用省略符号是不被推荐的，跟 mypy 也不是很契合</p><blockquote><p>从 v1.2 版本开始，类型注解中只有 nullable（<code>Optional[...]</code>, <code>Union[None, ...]</code> 和 <code>Any</code>）字段和以省略号（&mldr;）作为默认值的 nullable 字段，不再是同一个意思了。</p><p>在某些情况下，这可能会导致 v1.2 版本同早期 v1.* 版本不完全向后兼容。</p></blockquote><p>如果你想要一个可以为 <code>None</code> 的必要字段，使用 <code>Optional</code>（当然在 3.10 变成了 <code>|</code>）加 <code>...</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span><span class=p>,</span> <span class=n>ValidationError</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>:</span> <span class=nb>int</span> <span class=o>|</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span><span class=p>:</span> <span class=nb>int</span> <span class=o>|</span> <span class=kc>None</span> <span class=o>=</span> <span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=n>c</span><span class=p>:</span> <span class=nb>int</span> <span class=o>|</span> <span class=kc>None</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Model</span><span class=p>(</span><span class=n>b</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>c</span><span class=o>=</span><span class=mi>2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; a=None b=1 c=2</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>Model</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=n>ValidationError</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    1 validation error for Model
+</span></span></span><span class=line><span class=cl><span class=s2>    c
+</span></span></span><span class=line><span class=cl><span class=s2>      field required (type=value_error.missing)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>上面的例子中，<code>a</code>, <code>b</code> 和 <code>c</code> 都能为 <code>None</code>，但是 <code>a</code> 是可选的，但是 <code>b</code> 和 <code>c</code> 都是必要的</p><h2 id=拥有动态默认值的字段>拥有动态默认值的字段</h2><p>使用 <code>default_factory</code> 来创建一个拥有动态默认值的字段</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>datetime</span> <span class=kn>import</span> <span class=n>datetime</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>uuid</span> <span class=kn>import</span> <span class=n>UUID</span><span class=p>,</span> <span class=n>uuid4</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>uid</span><span class=p>:</span> <span class=n>UUID</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>default_factory</span><span class=o>=</span><span class=n>uuid4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>updated</span><span class=p>:</span> <span class=n>datetime</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>default_factory</span><span class=o>=</span><span class=n>datetime</span><span class=o>.</span><span class=n>utcnow</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>m1</span> <span class=o>=</span> <span class=n>Model</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>m2</span> <span class=o>=</span> <span class=n>Model</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>m1</span><span class=o>.</span><span class=n>uid</span><span class=si>}</span><span class=s1> != </span><span class=si>{</span><span class=n>m2</span><span class=o>.</span><span class=n>uid</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; 6d747bf7-8c49-4bb2-a8bf-85f56bf0ead5 != 998c81a8-450f-4fa5-835d-00a33892989e</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>m1</span><span class=o>.</span><span class=n>updated</span><span class=si>}</span><span class=s1> != </span><span class=si>{</span><span class=n>m2</span><span class=o>.</span><span class=n>updated</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; 2022-09-05 18:00:23.978959 != 2022-09-05 18:00:23.978973</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=自动排除的属性>自动排除的属性</h2><p>以下划线开头的类变量和类型标注为 <code>typing.ClassVar</code> 的属性将被自动从 model 中排除</p><h2 id=model-的私有属性>model 的私有属性</h2><p>如果你想要修改或操作 model 实例的内部属性，使用 <code>PrivateAttr</code> 来声明之</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>datetime</span> <span class=kn>import</span> <span class=n>datetime</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>random</span> <span class=kn>import</span> <span class=n>randint</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>PrivateAttr</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>TimeAwareModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>_processed_at</span><span class=p>:</span> <span class=n>datetime</span> <span class=o>=</span> <span class=n>PrivateAttr</span><span class=p>(</span><span class=n>default_factory</span><span class=o>=</span><span class=n>datetime</span><span class=o>.</span><span class=n>now</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>_secret_value</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>PrivateAttr</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=o>**</span><span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>super</span><span class=p>()</span><span class=o>.</span><span class=fm>__init__</span><span class=p>(</span><span class=o>**</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># this could also be done with default_factory</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_secret_value</span> <span class=o>=</span> <span class=n>randint</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>m</span> <span class=o>=</span> <span class=n>TimeAwareModel</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=o>.</span><span class=n>_processed_at</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; 2022-09-05 18:00:24.562238</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>m</span><span class=o>.</span><span class=n>_secret_value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; 5</span>
+</span></span></code></pre></td></tr></table></div></div><p>私有属性必须以下划线开头，<code>_attr</code> 和 <code>__attr__</code> 这两种结构都行</p><p>如果 <code>Config.underscore_attrs_are_private</code> 为 <code>True</code>，任何 non-ClassVar 的下划线属性都会被视为私有</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>ClassVar</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>_class_var</span><span class=p>:</span> <span class=n>ClassVar</span><span class=p>[</span><span class=nb>str</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;class var value&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>_private_attr</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=s1>&#39;private attr value&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>class</span> <span class=nc>Config</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>underscore_attrs_are_private</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Model</span><span class=o>.</span><span class=n>_class_var</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; class var value</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Model</span><span class=o>.</span><span class=n>_private_attr</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; &lt;member &#39;_private_attr&#39; of &#39;Model&#39; objects&gt;</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Model</span><span class=p>()</span><span class=o>.</span><span class=n>_private_attr</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; private attr value</span>
+</span></span></code></pre></td></tr></table></div></div><p>在类创建时，pydantic 构造了充满私有属性的 <code>__slots__</code></p><h2 id=将数据解析为指定类型>将数据解析为指定类型</h2><p>pydantic 提供了一个独立的函数 <code>parse_obj_as</code>，它能以点对点的方式完成解析成 model 的操作。</p><p>这个函数的行为类似于 <code>BaseModel.parse_obj</code>，但是可以与任意的 pydantic 兼容类型一起工作。</p><p>当你需要将结果解析为一个非 BaseModel 子类的类型中时，这一点尤其有用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>parse_obj_as</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Item</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># `item_data` could come from an API call, eg., via something like:</span>
+</span></span><span class=line><span class=cl><span class=c1># item_data = requests.get(&#39;https://my-api.com/items&#39;).json()</span>
+</span></span><span class=line><span class=cl><span class=n>item_data</span> <span class=o>=</span> <span class=p>[{</span><span class=s1>&#39;id&#39;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span> <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;My Item&#39;</span><span class=p>}]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>items</span> <span class=o>=</span> <span class=n>parse_obj_as</span><span class=p>(</span><span class=nb>list</span><span class=p>[</span><span class=n>Item</span><span class=p>],</span> <span class=n>item_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>items</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; [Item(id=1, name=&#39;My Item&#39;)]</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个函数能够将数据解析为 pydantic 能做到的的任何类型。</p><p>pydantic 还包括两个类似的独立函数 <code>parse_file_as</code> 和 <code>parse_raw_as</code>，它们分别与 <code>BaseModel.parse_file</code> 和 <code>BaseModel.parse_raw</code> 类似</p><h2 id=数据转换>数据转换</h2><p>pydantic 可能会改变 input data 以使其通过类型检查，但有时候，这种行为可能会导致信息的丢失</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Model</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span><span class=p>:</span> <span class=nb>float</span>
+</span></span><span class=line><span class=cl>    <span class=n>c</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>Model</span><span class=p>(</span><span class=n>a</span><span class=o>=</span><span class=mf>3.1415</span><span class=p>,</span> <span class=n>b</span><span class=o>=</span><span class=s1>&#39; 2.72 &#39;</span><span class=p>,</span> <span class=n>c</span><span class=o>=</span><span class=mi>123</span><span class=p>)</span><span class=o>.</span><span class=n>dict</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;a&#39;: 3, &#39;b&#39;: 2.72, &#39;c&#39;: &#39;123&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这种行为是 pydantic 经过深思熟虑之后的结果，而且一般来说，蛮有用的</p><p>不过，严格的类型检查也是部分支持的</p><h2 id=-model-签名>❤️ model 签名</h2><p>所有的 model 都会根据其字段生成签名（signature）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>inspect</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>FooModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>description</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=s1>&#39;Foo&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>apple</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=o>...</span><span class=p>,</span> <span class=n>alias</span><span class=o>=</span><span class=s1>&#39;pear&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>inspect</span><span class=o>.</span><span class=n>signature</span><span class=p>(</span><span class=n>FooModel</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; (*, id: int, name: str = None, description: str = &#39;Foo&#39;, pear: int) -&gt; None</span>
+</span></span></code></pre></td></tr></table></div></div><p>一个精确的签名对于像 <code>FastAPI</code> 和 <code>hypothesis</code> 这样经常进行对象<strong>自省</strong>的库是很有用的</p><p>生成的签名也将遵循自定义的 <code>__init__</code> 函数</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>inspect</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>MyModel</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>info</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=s1>&#39;Foo&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=nb>id</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>1</span><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>bar</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=o>**</span><span class=n>data</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;My custom init!&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>super</span><span class=p>()</span><span class=o>.</span><span class=fm>__init__</span><span class=p>(</span><span class=nb>id</span><span class=o>=</span><span class=nb>id</span><span class=p>,</span> <span class=n>bar</span><span class=o>=</span><span class=n>bar</span><span class=p>,</span> <span class=o>**</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>inspect</span><span class=o>.</span><span class=n>signature</span><span class=p>(</span><span class=n>MyModel</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; (id: int = 1, *, bar: str, info: str = &#39;Foo&#39;) -&gt; None</span>
+</span></span></code></pre></td></tr></table></div></div><p>为了被签名收纳，字段的名字（name）或者别名（alias）必须是一个合法的 python 标识符，pydantic 会优先选择别名，当别名不合法时则会选择名字</p><p>如果一个字段的别名和名称都是无效的标识符，那将添加一个 <code>**data</code> 参数。此外，如果 <code>Config.extra</code> 为 <code>Extra.allow</code>，那么 <code>**data</code> 参数将总是出现在签名中。</p><h2 id=结构化模式匹配>结构化模式匹配</h2><p>model 支持结构化模式匹配（structural pattern matching），这是 Python 3.10 的新特性</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Pet</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>species</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>Pet</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;Bones&#39;</span><span class=p>,</span> <span class=n>species</span><span class=o>=</span><span class=s1>&#39;dog&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>match</span> <span class=n>a</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=c1># match `species` to &#39;dog&#39;, declare and initialize `dog_name`</span>
+</span></span><span class=line><span class=cl>    <span class=n>case</span> <span class=n>Pet</span><span class=p>(</span><span class=n>species</span><span class=o>=</span><span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=n>dog_name</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>dog_name</span><span class=si>}</span><span class=s1> is a dog&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#&gt; Bones is a dog</span>
+</span></span><span class=line><span class=cl>    <span class=c1># default case</span>
+</span></span><span class=line><span class=cl>    <span class=n>case</span> <span class=n>_</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;No dog matched&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>match-case 语句看起来像是创建了一个全新的 model，然而并没有</p><p>他只是一个用来获取属性、比较它、声明它、初始化它的语法糖</p></blockquote></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2022-11-26 05:25:16">更新于 2022-11-26</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/models/ data-title="pydantic models" data-hashtags=Python,后端,pydantic><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/models/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/web-backend/pydantic/models/ data-title="pydantic models"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E5%90%8E%E7%AB%AF/>后端</a>,&nbsp;<a href=/Notes/tags/pydantic/>pydantic</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/basicgrammar/ class=prev rel=prev title="Python 基础语法"><i class="fa-solid fa-angle-left fa-fw"></i>Python 基础语法</a>
+<a href=/Notes/posts/python/web-backend/pydantic/field-types/ class=next rel=next title="pydantic field types">pydantic field types<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
 <span itemprop=copyrightYear>2022</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
