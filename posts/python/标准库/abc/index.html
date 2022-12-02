@@ -1,0 +1,171 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Python abc 库 - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="abc 抽象基类 Abstract Base Class 官方文档：https://docs.python.org/zh-"><meta name=keywords content="Python"><meta itemprop=name content="Python abc 库"><meta itemprop=description content="abc 抽象基类 Abstract Base Class 官方文档：https://docs.python.org/zh-"><meta itemprop=datePublished content="2022-11-30T00:00:00+00:00"><meta itemprop=dateModified content="2022-12-02T12:34:12+00:00"><meta itemprop=wordCount content="1201"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,"><meta property="og:title" content="Python abc 库"><meta property="og:description" content="abc 抽象基类 Abstract Base Class 官方文档：https://docs.python.org/zh-"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/abc/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-11-30T00:00:00+00:00"><meta property="article:modified_time" content="2022-12-02T12:34:12+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python abc 库"><meta name=twitter:description content="abc 抽象基类 Abstract Base Class 官方文档：https://docs.python.org/zh-"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/abc/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/rich/console/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/rich/styles/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python abc 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/abc\/"},"genre":"posts","keywords":"Python","wordcount":1201,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/abc\/","datePublished":"2022-11-30T00:00:00+00:00","dateModified":"2022-12-02T12:34:12+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python abc 库</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2022-11-30 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-11-30>2022-11-30</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 1201 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#快速开始>快速开始</a></li><li><a href=#官方文档摘录>官方文档摘录</a><ul><li><a href=#class-abcabc><em>class</em> abc.ABC</a><ul><li><a href=#class-abcabcmeta><em>class</em> abc.ABCMeta</a><ul><li><a href=#register-subclass><code>register</code> (<em>subclass</em>)</a></li></ul></li><li><a href=#__subclasshook__-subclass><code>__subclasshook__</code> (<em>subclass</em>)</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=abc>abc</h1><blockquote><p>抽象基类 Abstract Base Class</p></blockquote><p>官方文档：https://docs.python.org/zh-cn/3/library/abc.html</p><p>该模块提供了一个元类 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABCMeta target=_blank rel="external nofollow noopener noreferrer"><code>ABCMeta</code></a>，可以用来定义抽象类，另外还提供一个工具类 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABC target=_blank rel="external nofollow noopener noreferrer"><code>ABC</code></a>，可以用它以继承的方式定义抽象基类。</p><h2 id=快速开始>快速开始</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># BEGIN TOMBOLA_ABC</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>abc</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tombola</span><span class=p>(</span><span class=n>abc</span><span class=o>.</span><span class=n>ABC</span><span class=p>):</span>  <span class=c1># &lt;1&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@abc.abstractmethod</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>load</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>iterable</span><span class=p>):</span>  <span class=c1># &lt;2&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Add items from an iterable.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@abc.abstractmethod</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>pick</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>  <span class=c1># &lt;3&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Remove item at random, returning it.
+</span></span></span><span class=line><span class=cl><span class=s2>        This method should raise `LookupError` when the instance is empty.
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>loaded</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>  <span class=c1># &lt;4&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return `True` if there&#39;s at least 1 item, `False` otherwise.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nb>bool</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>inspect</span><span class=p>())</span>  <span class=c1># &lt;5&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>inspect</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return a sorted tuple with the items currently inside.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>items</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>  <span class=c1># &lt;6&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>items</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>pick</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>            <span class=k>except</span> <span class=ne>LookupError</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>break</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>load</span><span class=p>(</span><span class=n>items</span><span class=p>)</span>  <span class=c1># &lt;7&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nb>tuple</span><span class=p>(</span><span class=nb>sorted</span><span class=p>(</span><span class=n>items</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># END TOMBOLA_ABC</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=官方文档摘录>官方文档摘录</h2><h3 id=class-abcabc><em>class</em> abc.ABC</h3><p>一个使用 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABCMeta target=_blank rel="external nofollow noopener noreferrer"><code>ABCMeta</code></a> 作为元类的工具类。<strong>抽象基类可以通过从 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABC target=_blank rel="external nofollow noopener noreferrer"><code>ABC</code></a> 派生来简单地创建</strong>，这就避免了在某些情况下会令人混淆的元类用法，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABC</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>MyABC</span><span class=p>(</span><span class=n>ABC</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABC target=_blank rel="external nofollow noopener noreferrer"><code>ABC</code></a> 的类型仍然是 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABCMeta target=_blank rel="external nofollow noopener noreferrer"><code>ABCMeta</code></a>，因此继承 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABC target=_blank rel="external nofollow noopener noreferrer"><code>ABC</code></a> 仍然需要关注元类使用中的注意事项，比如可能会导致元类冲突的多重继承。当然你也可以直接使用 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABCMeta target=_blank rel="external nofollow noopener noreferrer"><code>ABCMeta</code></a> 作为元类来定义抽象基类，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABCMeta</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>MyABC</span><span class=p>(</span><span class=n>metaclass</span><span class=o>=</span><span class=n>ABCMeta</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=class-abcabcmeta><em>class</em> abc.ABCMeta</h4><p>用于定义抽象基类（ABC）的元类。使用该元类以创建抽象基类。</p><p>抽象基类可以像 mix-in 类一样直接被子类继承。你也可以将不相关的具体类（包括内建类）和抽象基类注册为“抽象子类” —— 这些类以及它们的子类会被内建函数 <a href=https://docs.python.org/zh-cn/3/library/functions.html#issubclass target=_blank rel="external nofollow noopener noreferrer"><code>issubclass()</code></a> 识别为对应的抽象基类的子类，但是该抽象基类不会出现在其 MRO（Method Resolution Order，方法解析顺序）中，抽象基类中实现的方法也不可调用（即使通过 <a href=https://docs.python.org/zh-cn/3/library/functions.html#super target=_blank rel="external nofollow noopener noreferrer"><code>super()</code></a> 调用也不行）</p><p>使用 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABCMeta target=_blank rel="external nofollow noopener noreferrer"><code>ABCMeta</code></a> 作为元类创建的类含有如下方法：</p><h5 id=register-subclass><code>register</code> (<em>subclass</em>)</h5><p>将“子类”注册为该抽象基类的“抽象子类”</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>abc</span> <span class=kn>import</span> <span class=n>ABC</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>MyABC</span><span class=p>(</span><span class=n>ABC</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>MyABC</span><span class=o>.</span><span class=n>register</span><span class=p>(</span><span class=nb>tuple</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>assert</span> <span class=nb>issubclass</span><span class=p>(</span><span class=nb>tuple</span><span class=p>,</span> <span class=n>MyABC</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>assert</span> <span class=nb>isinstance</span><span class=p>((),</span> <span class=n>MyABC</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>你也可以在虚基类中重载这个方法。</p><h4 id=__subclasshook__-subclass><code>__subclasshook__</code> (<em>subclass</em>)</h4><blockquote><p>必须定义为类方法</p></blockquote><p>检查 <em>subclass</em> 是否是该抽象基类的子类。也就是说对于那些你希望定义为该抽象基类的子类的类，你不用对每个类都调用 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABCMeta.register target=_blank rel="external nofollow noopener noreferrer"><code>register()</code></a> 方法了，而是可以直接自定义 <code>issubclass</code> 的行为。（这个类方法是在抽象基类的 <code>__subclasscheck__()</code> 方法中调用的。）</p><p>该方法必须返回 <code>True</code>, <code>False</code> 或是 <code>NotImplemented</code>。</p><ul><li>如果返回 <code>True</code>，<em>subclass</em> 就会被认为是这个抽象基类的子类</li><li>如果返回 <code>False</code>，无论正常情况是否应该认为是其子类，统一视为不是。</li><li>如果返回 <code>NotImplemented</code>，子类检查会按照正常机制继续执行。</li></ul><p>定义 ABC 的示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>Foo</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__getitem__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>index</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__len__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=o>...</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>get_iterator</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nb>iter</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>MyIterable</span><span class=p>(</span><span class=n>ABC</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@abstractmethod</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__iter__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=kc>False</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>yield</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>get_iterator</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=fm>__iter__</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@classmethod</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>__subclasshook__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=n>C</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>cls</span> <span class=ow>is</span> <span class=n>MyIterable</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=nb>any</span><span class=p>(</span><span class=s2>&#34;__iter__&#34;</span> <span class=ow>in</span> <span class=n>B</span><span class=o>.</span><span class=vm>__dict__</span> <span class=k>for</span> <span class=n>B</span> <span class=ow>in</span> <span class=n>C</span><span class=o>.</span><span class=vm>__mro__</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>NotImplemented</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>MyIterable</span><span class=o>.</span><span class=n>register</span><span class=p>(</span><span class=n>Foo</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>ABC <code>MyIterable</code> 定义了标准的迭代方法 <a href=https://docs.python.org/zh-cn/3/library/stdtypes.html#iterator.__iter__ target=_blank rel="external nofollow noopener noreferrer"><code>__iter__()</code></a> 作为一个抽象方法。这里给出的实现仍可在子类中被调用。</p><p><code>get_iterator()</code> 方法也是 <code>MyIterable</code> 抽象基类的一部分，但它并非必须被非抽象派生类所重载。</p><p>这里定义的 <a href=https://docs.python.org/zh-cn/3/library/abc.html#abc.ABCMeta.__subclasshook__ target=_blank rel="external nofollow noopener noreferrer"><code>__subclasshook__()</code></a> 类方法指明了任何在其 <a href=https://docs.python.org/zh-cn/3/library/stdtypes.html#object.__dict__ target=_blank rel="external nofollow noopener noreferrer"><code>__dict__</code></a> (或在其通过 <a href=https://docs.python.org/zh-cn/3/library/stdtypes.html#class.__mro__ target=_blank rel="external nofollow noopener noreferrer"><code>__mro__</code></a> 列表访问的基类) 中具有 <a href=https://docs.python.org/zh-cn/3/library/stdtypes.html#iterator.__iter__ target=_blank rel="external nofollow noopener noreferrer"><code>__iter__()</code></a> 方法的类也都会被视为 <code>MyIterable</code>。</p><p>最后，末尾行使得 <code>Foo</code> 成为 <code>MyIterable</code> 的一个虚子类，即使它没有定义 <a href=https://docs.python.org/zh-cn/3/library/stdtypes.html#iterator.__iter__ target=_blank rel="external nofollow noopener noreferrer"><code>__iter__()</code></a> 方法（它使用了以 <code>__len__()</code> 和 <code>__getitem__()</code> 术语定义的旧式可迭代对象协议）。 请注意这将不会使 <code>get_iterator</code> 成为 <code>Foo</code> 的一个可用方法，它是被另外提供的。:</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2022-12-02 12:34:12">更新于 2022-12-02</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/abc/ data-title="Python abc 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/abc/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/abc/ data-title="Python abc 库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/rich/console/ class=prev rel=prev title="Python rich 库 - Console"><i class="fa-solid fa-angle-left fa-fw"></i>Python rich 库 - Console</a>
+<a href=/Notes/posts/python/%E5%8F%AF%E8%A7%86%E5%8C%96/rich/styles/ class=next rel=next title="Python rich 库 - Style">Python rich 库 - Style<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
