@@ -1432,18 +1432,18 @@ import random
 
 class BingoCage:
 
-def __init__(self, items):
-    self._items = list(items) 
-    random.shuffle(self._items)  
+	def __init__(self, items):
+    	self._items = list(items) 
+    	random.shuffle(self._items)  
 
-def pick(self):  
-    try:
-        return self._items.pop()
-    except IndexError:
-        raise LookupError('pick from empty BingoCage')  
+	def pick(self):  
+    	try:
+        	return self._items.pop()
+    	except IndexError:
+        	raise LookupError('pick from empty BingoCage')  
 
-def __call__(self):  # bingo.pick() 的快捷方式是 bingo()
-    return self.pick()
+	def __call__(self):  # bingo.pick() 的快捷方式是 bingo()
+    	return self.pick()
 ```
 
 ```py
@@ -1457,6 +1457,10 @@ True
 ```
 
 实现 `__call__` 方法的类是创建函数类对象的简便方式，此时必须在内部维护一个状态，让它在调用之间可用，例如 `BingoCage` 中的剩余元素。装饰器就是这样。装饰器必须是函数，而且有时要在多次调用之间“记住”某些事 （例如备忘（memoization），即缓存消耗大的计算结果，供后面使用）。
+
+#### 另一种对 `__call__` 的解释
+
+该方法的功能类似于在类中重载 `()` 运算符，使得类实例对象可以像调用普通函数那样，以 `对象名()` 的形式使用。
 
 ### 函数内省
 

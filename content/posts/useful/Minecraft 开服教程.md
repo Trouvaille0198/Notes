@@ -212,8 +212,6 @@ java -server -Xincgc -Xmx最大内存M -Xms最小内存M -Xss512K -XX:+Aggressiv
 
 沙子、沙砾、砂土：1*1
 
-
-
 ### 载具
 
 仪表盘

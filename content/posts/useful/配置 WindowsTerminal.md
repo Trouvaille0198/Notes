@@ -88,6 +88,8 @@ https://windowsterminalthemes.dev/
 
 ### oh-my-posh
 
+> 我的建议是，还是不要用这玩意儿了。wsl 里用 oh-my-zsh 就够了，powershell 朴素一点没啥关系
+
 官网：https://ohmyposh.dev/docs/
 
 #### 安装
@@ -172,3 +174,62 @@ MesloLGM NF
  }
 ```
 
+## 插件
+
+### autojump
+
+没错，windows 上也可以用哦
+
+主要用在 powershell 里，WSL 里另配置一套就好
+
+```bash
+git clone git://github.com/wting/autojump.git
+cd autojump
+install.py
+```
+
+然后在环境变量里添加这个 path：`~\AppData\Local\autojump\bin`
+
+### zsh-autosuggestions
+
+命令自动补全插件，基于 zsh
+
+```bash
+cd ~/.oh-my-zsh/custom/plugins/ # 好吧，windows上我就不知道这个路径具体在哪儿了
+git clone https://github.com/zsh-users/zsh-autosuggestions
+```
+
+在 `.zshrc` 上添加这个插件
+
+```bash
+plugins=(git
+zsh-autosuggestions
+autojump
+zsh-syntax-highlighting
+)
+```
+
+### zsh-syntax-highlighting
+
+高亮插件，基于 zsh
+
+```bash
+cd ~/.oh-my-zsh/custom/plugins/ 
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+```
+
+在 `.zshrc` 上添加这个插件（记住要放在最后一个）
+
+
+
+顺便说一嘴，mac 或 Linux 的话，装这三个插件直接
+
+```bash
+brew install autojump # mac 直接 brew，Linux 的话就跟 windows 一样
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+然后加到 `~/.zshrc` 中即可

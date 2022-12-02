@@ -11,7 +11,7 @@ categories: [Python]
 
 pydantic 尽可能的使用标准库类型（standard library types）来标注字段来提供一个平滑的学习曲线；不过它也实现了许多常用的类型（commonly used types）
 
-你可以你创造自己的类型（your own pydantic-compatible types）
+你当然可以创造属于自己的类型（your own pydantic-compatible types）
 
 ## 标准库类型
 
@@ -48,7 +48,7 @@ pydantic 尽可能的使用标准库类型（standard library types）来标注�
 
 - `list`
 
-    allows `list`, `tuple`, `set`, `frozenset`, `deque`, or generators and casts to a list; see `typing.List` below for sub-type constraints
+    允许 `list`, `tuple`, `set`, `frozenset`, `deque`, 或者生成器（generators）并且将其转换为 list
 
 - `tuple`
 
@@ -108,11 +108,7 @@ pydantic 尽可能的使用标准库类型（standard library types）来标注�
 
 - `typing.List`
 
-    see [Typing Iterables](https://pydantic-docs.helpmanual.io/usage/types/#typing-iterables) below for more detail on parsing and validation
-
 - `typing.Tuple`
-
-    see [Typing Iterables](https://pydantic-docs.helpmanual.io/usage/types/#typing-iterables) below for more detail on parsing and validation
 
 - `subclass of typing.NamedTuple`
 

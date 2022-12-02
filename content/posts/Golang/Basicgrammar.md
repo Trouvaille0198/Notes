@@ -21,7 +21,7 @@ featuredImage: https://booklovinmamas.com/wp-content/uploads/2017/09/go.png
 
 下载地址：https://go.dev/dl/
 
-使用 Linux
+### Linux
 
 ```shell
 $ wget https://studygolang.com/dl/golang/go1.13.6.linux-amd64.tar.gz
@@ -43,6 +43,24 @@ $ go env -w GOPROXY=https://goproxy.cn,direct
 ```
 export GOPROXY=https://goproxy.cn
 ```
+
+### Windows
+
+官网下安装包就好啦~
+
+默认安装路径：`C:\Program Files\Go`
+
+需要新建两个环境变量配置
+
+- **GOROOT** ，这是 Go 环境所在目录的配置：`C:\Program Files\Go`
+    - ![image-20221128204220497](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20221128204220497.png)
+- **GOPATH** ，这个是 Go 项目的**工作目录**
+    - 最好建两个，第一个是默认第三方包的下载位置，第二个放自己的代码
+    - `C:\Users\<user_name>\go`
+
+然后在 path 环境变量中新建 `%GOROOT%\bin`
+
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20221128204605362.png" alt="image-20221128204605362" style="zoom: 50%;" />
 
 ## 基本结构
 
@@ -192,7 +210,7 @@ Launchpad (Bazaar)
 
 #### go install
 
-这个命令在内部实际上分成了两步操作：第一步是生成结果文件(可执行文件或者 .a 包)，第二步会把编译好的结果移到 `$GOPATH/pkg` 或者 `$GOPATH/bin`。
+这个命令在内部实际上分成了两步操作：第一步是生成结果文件（可执行文件或者 .a 包），第二步会把编译好的结果移到 `$GOPATH/pkg` 或者 `$GOPATH/bin`。
 
 参数支持 `go build` 的编译参数。只要记住一个参数 `-v` 就好了，这个随时随地的可以查看底层的执行信息。
 
@@ -218,6 +236,14 @@ ok   compress/gzip 0.033s
 - `-run regexp` 只运行 regexp 匹配的函数，例如 `-run=Array` 那么就执行包含有 Array 开头的函数
 - `-v` 显示测试的详细命令
 
+#### go get 和 go install 职责的改变
+
+在 1.16 之后，`go install` 被设计为“用于构建和安装二进制文件”， `go get` 则被设计为 “用于编辑 go.mod 变更依赖”，并且使用时，应该与 `-d` 参数共用，在将来版本中 `-d` 可能会默认启用；
+
+基本上 `go install <package>@<version>` 是用于命令的全局安装，例如：`go install sigs.k8s.io/kind@v0.9.0`;
+
+而 `go get` 安装二进制的功能，后续版本将会删除，它主要被设计为修改 `go.mod` 追加依赖之类的，但还存在类似 `go mod tidy` 之类的命令，所以使用频率可能不会很高；
+
 ## 项目
 
 ### GOPATH
@@ -226,7 +252,7 @@ go 命令依赖一个重要的环境变量：$GOPATH
 
 > Windows 系统中环境变量的形式为 `%GOPATH%`
 >
-> GOPATH 允许多个目录，当有多个目录时，请注意分隔符，Windows 是分号，Linux 是冒号，当有多个 GOPATH 时，默认会将 go get 的内容放在第一个目录下
+> GOPATH 允许多个目录，当有多个目录时，请注意分隔符，Windows 是分号，Linux 是冒号，**当有多个 GOPATH 时，默认会将 go get 的内容放在第一个目录下**
 
 $GOPATH 目录有三个子目录：
 
@@ -2731,7 +2757,7 @@ var _ json.Marshaler = (*RawMessage)(nil)
 
 #### 获取当前可执行文件路径
 
-将配置文件的相对路径与`GetAppPath()`的结果相拼接，可解决 `go build main.go` 的可执行文件跨目录执行的问题（如：`go build ./src/gin-blog/main.go`）
+将配置文件的相对路径与 `GetAppPath()` 的结果相拼接，可解决 `go build main.go` 的可执行文件跨目录执行的问题（如：`go build ./src/gin-blog/main.go`）
 
 ```go
 import (

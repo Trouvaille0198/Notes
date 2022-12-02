@@ -546,7 +546,7 @@ stage    stash    status
 
 ## git rebase
 
-- `git merge`：当需要保留详细的合并信息的时候建议使用，特别是需要将分支合并进入`master`分支时
+- `git merge`：当需要保留详细的合并信息的时候建议使用，特别是需要将分支合并进入 `master` 分支时
 - `git rebase`：当发现自己修改某个功能时，频繁进行了`git commit`提交时，发现其实过多的提交信息没有必要时使用，分支多，内容多时也可以考虑使用
 
 **与 `git merge` 一致，`git rebase` 的目的也是将一个分支的更改并入到另外一个分支中去。**主要特点如下：
@@ -596,7 +596,7 @@ $ git rebase master
 
 解释：**`git rebase` 会把 `feature/mywork` 分支里的每个提交 (commit) 取消掉，并且把它们临时保存为补丁 (patch)，然后把 `feature/mywork` 分支更新到最新的 `master` 分支，最后把保存的这些补丁应用到 `feature/mywork` 分支上**
 
-当`feature/mywork`分支更新之后，它会指向这些新创建的提交 (commit)，而那些老的提交会被丢弃。 如果运行垃圾收集命令 (pruning garbage collection)，这些被丢弃的提交就会删除。
+当 `feature/mywork` 分支更新之后，它会指向这些新创建的提交 (commit)，而那些老的提交会被丢弃。 如果运行垃圾收集命令 (pruning garbage collection)，这些被丢弃的提交就会删除。
 
 <img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5c352046c07f45ee95729ca6a5edefaa~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="5.jpg" style="zoom:33%;" />
 
@@ -608,7 +608,7 @@ $ git rebase master
 
 ### 解决冲突 CONFLICT
 
-在 rebase 的过程中，也许会出现冲突(conflict)。在这种情况，Git 会停止 rebase 并会让你去解决冲突；在解决完冲突后，用`git add`命令去更新这些内容的索引(index)，然后，你无需执行 `git commit`，只要执行：
+在 rebase 的过程中，也许会出现冲突 (conflict)。在这种情况，Git 会停止 rebase 并会让你去解决冲突；在解决完冲突后，用 `git add` 命令去更新这些内容的索引 (index)，然后，你无需执行 `git commit`，只要执行：
 
 ```bash
 $ git rebase --continue
@@ -622,7 +622,7 @@ $ git rebase --continue
 $ git rebase --abort
 ```
 
-在命令行使用`git rebase`存在多个 commit、多个冲突时需要我们**多次解决同一个地方的冲突**，然后执行`git rebase --continue`，反复，直到冲突解决为止，稍显麻烦，可以使用 IDE 辅助进行，如 JetBrains 家族的 IDE 系列对 VCS 都有很好的支持，最新版的更是直接将 VCS 变为 Git
+在命令行使用 `git rebase` 存在多个 commit、多个冲突时需要我们**多次解决同一个地方的冲突**，然后执行 `git rebase --continue`，反复，直到冲突解决为止，稍显麻烦，可以使用 IDE 辅助进行，如 JetBrains 家族的 IDE 系列对 VCS 都有很好的支持，最新版的更是直接将 VCS 变为 Git
 
 ### 合并历史 commit
 
@@ -862,7 +862,7 @@ Dropped refs/stash@{0} (32b3aa1d185dfe6d57b3c3cc3b32cbf3e380cc6a)
 
 这个指令将缓存堆栈中的第一个 stash 删除，并将对应修改应用到当前的工作目录下。
 
-你也可以使用 `git stash apply` 命令，将缓存堆栈中的 stash 多次应用到工作目录中，但**并不删除 stash 拷贝**。
+你也可以使用 **`git stash apply`** 命令，将缓存堆栈中的 stash 多次应用到工作目录中，但**并不删除 stash 拷贝**。
 
 命令输出如下：
 

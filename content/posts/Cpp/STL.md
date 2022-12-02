@@ -188,8 +188,6 @@ int main(int argc, char* argv[])
 }
 ```
 
-
-
 #### 其他函数
 
 - 多个元素赋值：`lst.assign(int nSize, const T& x); // 类似于初始化时用数组进行赋值`
@@ -268,10 +266,6 @@ int main(int argc, char* argv[])
 }
 ```
 
-
-
-[回到顶部](https://www.cnblogs.com/linuxAndMcu/p/10260627.html#_labelTop)
-
 ### 迭代器与算法
 
 **1. 迭代器**
@@ -308,8 +302,6 @@ int main(int argc, char* argv[])
 }
 ```
 
-
-
 **2. 算法**
 
 - 遍历元素
@@ -319,8 +311,6 @@ list<int>::iterator it;
 for (it = lst.begin(); it != lst.end(); it++)
     cout << *it << endl;
 ```
-
-
 
 - 元素翻转
 
