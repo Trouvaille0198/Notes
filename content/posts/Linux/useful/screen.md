@@ -41,4 +41,3 @@ screen \[-AmRvx -ls -wipe] \[-d <作业名称>] \[-h <行数>] \[-r <作业名�
 `screen -r yourname`                  回到 yourname 这个 session
 `screen -d yourname`                  远程 detach 某个 session
 `screen -d -r yourname`            结束当前 session 并回到 yourname 这个 session
-

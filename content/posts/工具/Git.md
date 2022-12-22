@@ -9,10 +9,6 @@ categories: [工具]
 
 # Git
 
-```shell
-git config --global user.email "suntianye@gocyber.world"
-```
-
 ## 安装
 
 ### 设置名字、邮箱
@@ -153,7 +149,7 @@ $ git rm <filename>
 $ ssh-keygen -t rsa -C "youremail@example.com"
 ```
 
-可以在用户主目录里找到`.ssh`目录，里面有`id_rsa`和`id_rsa.pub`两个文件，这两个就是 SSH Key 的秘钥对，`id_rsa`是私钥，不能泄露出去，`id_rsa.pub`是公钥，可以放心地告诉任何人
+可以在用户主目录里找到 `.ssh` 目录，里面有 `id_rsa` 和 `id_rsa.pub` 两个文件，这两个就是 SSH Key 的秘钥对，`id_rsa` 是私钥，不能泄露出去，`id_rsa.pub` 是公钥，可以放心地告诉任何人
 
 ### 关联远程仓库
 
