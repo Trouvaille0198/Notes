@@ -35,7 +35,7 @@ text.append(" World!")
 console.print(text)
 ```
 
-如果你想使用已经用ANSI代码格式化的文本，调用 `from_ansi()` 将其转换为一个 `Text` 对象
+如果你想使用已经用 ANSI 代码格式化的文本，调用 `from_ansi()` 将其转换为一个 `Text` 对象
 
 ```py
 text = Text.from_ansi("\033[1mHello, World!\033[0m")

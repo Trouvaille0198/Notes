@@ -156,7 +156,7 @@ console.print("Something terrible happened!", style="danger")
 
 ### Customizing Defaults
 
-`Theme` 类会继承 Rich 内置的默认 style，如果你自定义的 theme 包含了已经存在的 style名字，这将会直接覆盖掉默认值，这个特性允许你自定的更改默认值
+`Theme` 类会继承 Rich 内置的默认 style，如果你自定义的 theme 包含了已经存在的 style 名字，这将会直接覆盖掉默认值，这个特性允许你自定的更改默认值
 
 For instance, here’s how you can change how Rich highlights numbers:
 

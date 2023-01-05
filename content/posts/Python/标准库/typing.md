@@ -255,7 +255,7 @@ class typing.Sequence(Reversible[T_co], Collection[T_co])
 class typing.Mapping(Sized, Collection[KT], Generic[VT_co])
 ```
 
-要注释函数参数中的Key-Value类型时，推荐使用的抽象集合类型。
+要注释函数参数中的 Key-Value 类型时，推荐使用的抽象集合类型。
 
 ### 泛型
 

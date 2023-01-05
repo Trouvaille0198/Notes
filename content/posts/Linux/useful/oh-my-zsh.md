@@ -259,7 +259,7 @@ bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
 ```
 
-这样子，就可以在输入一个命令，比如 git 之后，按 Ctrl-P 与 Ctrl-N 在以 git为前缀的历史记录中浏览，非常方便。
+这样子，就可以在输入一个命令，比如 git 之后，按 Ctrl-P 与 Ctrl-N 在以 git 为前缀的历史记录中浏览，非常方便。
 
 但是这个做法有一个问题，就是这个功能只考虑输入的第一个单词。也就是说，如果之前输入了 git status, git commit, git push 等等命令，那么我输入 "git s" 再 Ctrl-P，并不会锁定到 "git status", 而是会在所有以 git 开头的历史命令中循环。
 

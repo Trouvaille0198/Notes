@@ -11,7 +11,7 @@ categories: [Python]
 
 > 摘自 https://www.cnblogs.com/ChangAn223/p/11305376.html
 
-marshmallow 是一个用来将复杂的orm对象与python原生数据类型之间相互转换的库，简而言之，就是实现object -> dict， objects -> list，string -> dict 和 string -> list。
+marshmallow 是一个用来将复杂的 orm 对象与 python 原生数据类型之间相互转换的库，简而言之，就是实现 object -> dict， objects -> list，string -> dict 和 string -> list。
 
 - 序列化：是将数据对象转化为可存储或可传输的数据类型 
 
@@ -21,7 +21,7 @@ marshmallow 的两个主要功能：**数据转换**和**数据校验**
 
 ## 快速开始
 
-要进行序列化或反序列化，首先我们需要一个用来操作的object，这里我们先定义一个类：
+要进行序列化或反序列化，首先我们需要一个用来操作的 object，这里我们先定义一个类：
 
 ```python
 import datetime as dt
@@ -36,9 +36,9 @@ class User:
 
 ### Schema
 
-要对一个类或者一个json数据实现相互**转换** (即序列化和反序列化)，需要一个中间载体，这个载体就是Schema
+要对一个类或者一个 json 数据实现相互**转换** (即序列化和反序列化)，需要一个中间载体，这个载体就是 Schema
 
-另外Schema还可以用来做数据**验证**。
+另外 Schema 还可以用来做数据**验证**。
 
 ```py
 # 这是一个简单的Scheme
@@ -53,9 +53,9 @@ class UserSchema(Schema):
 
 ### Serializing 序列化
 
-使用scheme的 `dump()` 方法来序列化对象，返回的是dict格式的数据
+使用 scheme 的 `dump()` 方法来序列化对象，返回的是 dict 格式的数据
 
-另外schema的 `dumps(`) 方法序列化对象，返回的是json编码格式的字符串。
+另外 schema 的 `dumps(`) 方法序列化对象，返回的是 json 编码格式的字符串。
 
 ```py
 user = User("lhh","2432783449@qq.com")
@@ -71,7 +71,7 @@ print(res2)
 
 ### 过滤输出
 
-当不需要输出所有的字段时，可以在实例化Scheme时，声明only参数，来指定输出：
+当不需要输出所有的字段时，可以在实例化 Scheme 时，声明 only 参数，来指定输出：
 
 ```python
 summary_schema = UserSchema(only={"name","email"})
@@ -81,9 +81,9 @@ print(res)
 
 ### Deserializing 反序列化
 
-schema 的 `load()` 方法与 `dump()` 方法相反，用于dict类型的反序列化。它将输入的字典格式数据转换成应用层数据结构，同时也能起到验证输入的字典格式数据的作用。
+schema 的 `load()` 方法与 `dump()` 方法相反，用于 dict 类型的反序列化。它将输入的字典格式数据转换成应用层数据结构，同时也能起到验证输入的字典格式数据的作用。
 
-同样，也有对json解码的 `loads()` 方法。用于string类型的反序列化。 
+同样，也有对 json 解码的 `loads()` 方法。用于 string 类型的反序列化。 
 
 默认情况下，`load()` 方法返回一个字典，当输入的数据的值不匹配字段类型时，抛出 ValidationError 异常。
 
@@ -99,7 +99,7 @@ print(res)
 # {'created_time': '2021-05-28 20:45:17.418739', 'email': '2432783449@qq.com', 'name': 'lhh'}
 ```
 
-**对反序列化而言, 将传入的 dict 变成 object 更加有意义**。在Marshmallow中, dict -> object的方法需要自己实现，然后在该方法前面加上一个装饰器 post_load 即可
+**对反序列化而言, 将传入的 dict 变成 object 更加有意义**。在 Marshmallow 中, dict -> object 的方法需要自己实现，然后在该方法前面加上一个装饰器 post_load 即可
 
 ```python
 class UserSchema(Schema):
@@ -112,7 +112,7 @@ class UserSchema(Schema):
         return User(**data)
 ```
 
-这样每次调用 `load()` 方法时, 会按照 make_user 的逻辑，返回一个User类对象。
+这样每次调用 `load()` 方法时, 会按照 make_user 的逻辑，返回一个 User 类对象。
 
 ```python
 user_data = {
@@ -131,7 +131,7 @@ print("name: {}    email: {}".format(user.name, user.email))
 
 ### 处理多个对象的集合
 
-多个对象的集合如果是可迭代的，那么也可以直接对这个集合进行序列化或者反序列化。在实例化Scheme类时设置参数 many=True
+多个对象的集合如果是可迭代的，那么也可以直接对这个集合进行序列化或者反序列化。在实例化 Scheme 类时设置参数 many=True
 
 也可以不在实例化类的时候设置，而在调用 `dump()` 方法的时候传入这个参数。
 
@@ -200,9 +200,9 @@ except ValidationError as e:
 
 ####  自定义验证信息
 
-在编写Schema类的时候，可以向内建的fields中设置validate参数的值来定制验证的逻辑
+在编写 Schema 类的时候，可以向内建的 fields 中设置 validate 参数的值来定制验证的逻辑
 
-validate的值可以是函数、匿名函数lambda，或者是定义了 **call** 的对象。
+validate 的值可以是函数、匿名函数 lambda，或者是定义了 **call** 的对象。
 
 ```python
 from marshmallow import Schema,fields,ValidationError
@@ -279,7 +279,7 @@ except ValidationError as e:
 
 #### Required Fields 必填选项
 
-上面已经简单使用过required参数了。这里再简单介绍一下。
+上面已经简单使用过 required 参数了。这里再简单介绍一下。
 
 #### 自定义 required 异常信息
 
@@ -383,7 +383,7 @@ shema = UserSchema(unknown=EXCLUDE)
 通过 `schema.validate()` 会自动对数据进行校验
 
 - 如果有错误, 则会返回错误信息的 dict
-- 没有错误则返回空的dict
+- 没有错误则返回空的 dict
 
 通过返回的数据, 我们就可以确认验证是否通过.
 
@@ -413,7 +413,7 @@ Specifying Serialization / Deserialization Keys
 
 #### 序列化时指定 object 属性对应 fields 字段
 
-Schema默认会序列化传入对象和自身定义的fields相同的属性, 然而你也会有需求使用不同的fields和属性名. 在这种情况下, 你需要明确定义这个fields将从什么属性名取值
+Schema 默认会序列化传入对象和自身定义的 fields 相同的属性, 然而你也会有需求使用不同的 fields 和属性名. 在这种情况下, 你需要明确定义这个 fields 将从什么属性名取值
 
 ```python
 from marshmallow import fields,Schema,ValidationError
@@ -443,7 +443,7 @@ print(res)
 
 ####  反序列化时指定 fields 字段对应 object 属性
 
-这个与上面相反，Schema默认反序列化传入字典和输出字典中相同的字段名. 如果你觉得数据不匹配你的schema, 可以传入 load_from 参数指定需要增加load的字段名 (原字段名也能load, 且优先load原字段名)
+这个与上面相反，Schema 默认反序列化传入字典和输出字典中相同的字段名. 如果你觉得数据不匹配你的 schema, 可以传入 load_from 参数指定需要增加 load 的字段名 (原字段名也能 load, 且优先 load 原字段名)
 
 ```python
 from marshmallow import fields,Schema,ValidationError
@@ -492,7 +492,7 @@ print(res)
 
 > Implicit Field Creation
 
-当Schema具有许多属性时，为每个属性指定字段类型可能会重复，特别是当许多属性已经是本地python的数据类型时。
+当 Schema 具有许多属性时，为每个属性指定字段类型可能会重复，特别是当许多属性已经是本地 python 的数据类型时。
 
 class Meta 允许指定要序列化的属性，marshmallow 将根据属性的类型选择适当的字段类型。
 
@@ -505,7 +505,7 @@ class UserSchema(Schema):
         fields = ("name", "email", "created_at", "uppername")
 ```
 
-以上代码中， name将自动被格式化为String类型，created_at将被格式化为DateTime类型。
+以上代码中， name 将自动被格式化为 String 类型，created_at 将被格式化为 DateTime 类型。
 
 如果您希望指定除了显式声明的字段之外还包括哪些字段名，则可以使用附加选项。如下：
 
@@ -520,7 +520,7 @@ class UserSchema(Schema):
 
 ## 排序
 
-对于某些用例，维护序列化输出的字段顺序可能很有用。要启用排序，请将ordered选项设置为true。这将指示marshmallow将数据序列化到 `collections.OrderedDict`
+对于某些用例，维护序列化输出的字段顺序可能很有用。要启用排序，请将 ordered 选项设置为 true。这将指示 marshmallow 将数据序列化到 `collections.OrderedDict`
 
 ```python
 from collections import OrderedDict
@@ -552,7 +552,7 @@ print(res)
 
 ### “只读”与“只写”字段
 
-在Web API的上下文中，序列化参数dump_only和反序列化参数load_only在概念上分别等同于只读和只写字段。
+在 Web API 的上下文中，序列化参数 dump_only 和反序列化参数 load_only 在概念上分别等同于只读和只写字段。
 
 ```python
 from marshmallow import Schema,fields
@@ -564,11 +564,11 @@ class UserSchema(Schema):
     created_at = fields.DateTime(dump_only=True)  # 等于只读
 ```
 
-load时，dump_only字段被视为未知字段。如果unknown选项设置为include，则与这些字段对应的键的值将因此loaded而不进行验证。
+load 时，dump_only 字段被视为未知字段。如果 unknown 选项设置为 include，则与这些字段对应的键的值将因此 loaded 而不进行验证。
 
 ### 序列化 / 反序列化时指定字段的默认值
 
-序列化时输入值缺失用default指定默认值。反序列化时输入值缺失用missing指定默认值。
+序列化时输入值缺失用 default 指定默认值。反序列化时输入值缺失用 missing 指定默认值。
 
 ```python
 # encoding=utf-8
@@ -646,4 +646,4 @@ print(res)
 - 需要表示对象之间的关系？请参见[ Nesting Schemas 页面](https://marshmallow.readthedocs.io/en/3.0/nesting.html)。
 - 想要创建自己的字段类型？请参阅[自定义字段页面](https://marshmallow.readthedocs.io/en/3.0/custom_fields.html)。
 - 需要添加模式级验证，后处理或错误处理行为吗？请参阅[Schema扩展页面](https://marshmallow.readthedocs.io/en/3.0/extending.html)。
-- 例如，使用marshmallow的应用程序，请查看[Examples页面](https://marshmallow.readthedocs.io/en/3.0/examples.html)。
+- 例如，使用 marshmallow 的应用程序，请查看[Examples页面](https://marshmallow.readthedocs.io/en/3.0/examples.html)。

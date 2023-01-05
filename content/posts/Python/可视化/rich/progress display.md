@@ -218,7 +218,7 @@ with Progress(console=my_console) as progress:
 
 ### Customizing
 
-如果Progress类没有提供你所需要的 progress display，你可以重写 `get_renderables` 方法。
+如果 Progress 类没有提供你所需要的 progress display，你可以重写 `get_renderables` 方法。
 
 For example, the following class will render a [`Panel`](https://rich.readthedocs.io/en/stable/reference/panel.html#rich.panel.Panel) around the progress display:
 

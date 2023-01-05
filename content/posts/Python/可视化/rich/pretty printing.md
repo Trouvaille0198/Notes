@@ -184,7 +184,7 @@ You can add a `__rich_repr__` method to **any class** to enable the Rich formatt
 
 If you use `None` as the `name`, then it will be treated as a positional argument as well, in order to support having `tuple` positional arguments.
 
-你也可以让 Rich 生成 angular bracket 风格的 repr，这往往用于没有简单方法重新创建对象的构造函数的情况（where there is no easy way to recreate the object’s constructor）。要做到这一点，请在你的 `__rich_repr__` 方法之后立即将函数属性 "angular "设置为True。比如说。
+你也可以让 Rich 生成 angular bracket 风格的 repr，这往往用于没有简单方法重新创建对象的构造函数的情况（where there is no easy way to recreate the object’s constructor）。要做到这一点，请在你的 `__rich_repr__` 方法之后立即将函数属性 "angular "设置为 True。比如说。
 
 ```py
 __rich_repr__.angular = True
@@ -226,9 +226,9 @@ class Bird:
 
 ### Automatic Rich Repr
 
-如果参数的名称与你的属性相同，Rich可以自动生成一个 repr。
+如果参数的名称与你的属性相同，Rich 可以自动生成一个 repr。
 
-要自动建立一个rich repr，请使用 `auto()` 类装饰器。
+要自动建立一个 rich repr，请使用 `auto()` 类装饰器。
 
 ```py
 import rich.repr

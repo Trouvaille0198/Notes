@@ -9,7 +9,7 @@ categories: [Python]
 
 # Highlighting
 
-Rich 可以将 style 应用于你 `print()` 或 `log()` 的文本中。在默认设置下，Rich会突出显示数字、字符串、集合 (collection)、bool、None，以及一些比较特殊的模式，如文件路径、URL 和 UUID。另外还有一些非默认的高亮显示，如 ISO8601 高亮显示日期和时间。
+Rich 可以将 style 应用于你 `print()` 或 `log()` 的文本中。在默认设置下，Rich 会突出显示数字、字符串、集合 (collection)、bool、None，以及一些比较特殊的模式，如文件路径、URL 和 UUID。另外还有一些非默认的高亮显示，如 ISO8601 高亮显示日期和时间。
 
 你可以通过在 `print()` 或 `log()` 上设置 `highlight=False` 来禁用高亮，或者在 Console 构造函数上设置`highlight=False` 来禁用高亮。
 

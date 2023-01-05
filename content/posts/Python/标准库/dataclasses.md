@@ -20,9 +20,9 @@ dataclass 的定义位于 [PEP-557](https://www.python.org/dev/peps/pep-0557/)�
 3. dataclass 拥有 `__eq__` 和 `__hash__` 魔法方法
 4. dataclass 有着模式单一固定的构造方式，或是需要重载运算符，而普通 class 通常无需这些工作
 
-基于上述原因，通常自己实现一个dataclass是繁琐而无聊的，而dataclass单一固定的行为正适合程序为我们自动生成，于是`dataclasses`模块诞生了。
+基于上述原因，通常自己实现一个 dataclass 是繁琐而无聊的，而 dataclass 单一固定的行为正适合程序为我们自动生成，于是`dataclasses`模块诞生了。
 
-配合类型注解语法，我们可以轻松生成一个实现了`__init__`，`__repr__`，`__cmp__`等方法的dataclass：
+配合类型注解语法，我们可以轻松生成一个实现了`__init__`，`__repr__`，`__cmp__`等方法的 dataclass：
 
 ```python
 from dataclasses import dataclass
@@ -222,7 +222,7 @@ def field(*, default=MISSING, default_factory=MISSING, init=True, repr=True,
                  metadata)
 ```
 
-写个demo看看这个怎么使用
+写个 demo 看看这个怎么使用
 
 ```python
 from dataclasses import field, dataclass
@@ -293,7 +293,7 @@ dataclasses.dataclass(*, init=True, repr=True, eq=True, order=False, unsafe_hash
     - 设为 True 时，对 field 赋值将会引发错误，对象将是不可变的，如果已经定义了 `__setattr__` 和 `__delattr__` 将会引发 `TypeError`
 - unsafehash
     - 如果是 False，将根据 eq 和 frozen 参数来生成 `__hash__`。
-        1. eq 和 frozen 都为True，`__hash__` 将会生成 
+        1. eq 和 frozen 都为 True，`__hash__` 将会生成 
         2. eq 为 True 而 frozen 为 False，`__hash__` 被设为 `None`
         3. eq 为 False，frozen 为 True，`__hash__` 将使用超类（object）的同名属性（通常就是基于对象 id 的 hash） 当设置为 True 时将会根据类属性自动生成 `__hash__`
             - 然而这是不安全的，因为这些属性是默认可变的，这会导致 hash 的不一致，所以除非能保证对象属性不可随意改变，否则应该谨慎地设置该参数为 True
@@ -353,7 +353,7 @@ class C:
 
 `__post_init__` 在 `__init__` 后被调用，我们可以在这里初始化那些需要前置条件的 field。
 
-repr 参数表示该 field 是否被包含进 repr 的输出，compare 和 hash 参数表示 field 是否参与比较和计算 hash 值。metadata 不被 dataclass自身使用，通常让第三方组件从中获取某些元信息时才使用，所以我们不需要使用这一参数。
+repr 参数表示该 field 是否被包含进 repr 的输出，compare 和 hash 参数表示 field 是否参与比较和计算 hash 值。metadata 不被 dataclass 自身使用，通常让第三方组件从中获取某些元信息时才使用，所以我们不需要使用这一参数。
 
 如果指定一个 field 的类型注解为 `dataclasses.InitVar`，那么这个 field 将只会在初始化过程中（`__init__` 和 `__post_init__`）可以被使用，当初始化完成后访问该 field 会返回一个 `dataclasses.Field` 对象而不是 field 原本的值，也就是**该 field 不再是一个可访问的数据对象**。
 

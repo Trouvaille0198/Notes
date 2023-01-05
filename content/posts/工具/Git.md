@@ -782,13 +782,13 @@ git checkout -p <branch>
 
 ## git stash
 
-使用git的时候，我们往往使用分支（branch）解决任务切换问题。
+使用 git 的时候，我们往往使用分支（branch）解决任务切换问题。
 
-例如，我们往往会建一个自己的分支去修改和调试代码；如果别人或者自己发现原有的分支上有个不得不修改的bug，我们往往会把完成一半的代码`commit`提交到本地仓库，然后切换分支去修改bug，改好之后再切换回来。这样的话往往log上会有大量不必要的记录。
+例如，我们往往会建一个自己的分支去修改和调试代码；如果别人或者自己发现原有的分支上有个不得不修改的 bug，我们往往会把完成一半的代码`commit`提交到本地仓库，然后切换分支去修改 bug，改好之后再切换回来。这样的话往往 log 上会有大量不必要的记录。
 
-其实如果我们不想提交完成一半或者不完善的代码，但是却不得不去修改一个紧急Bug，那么使用 `git stash` 就可以将你当前未提交到本地（和服务器）的代码推入到Git的栈中。
+其实如果我们不想提交完成一半或者不完善的代码，但是却不得不去修改一个紧急 Bug，那么使用 `git stash` 就可以将你当前未提交到本地（和服务器）的代码推入到 Git 的栈中。
 
-这时候你的工作区间和上一次提交的内容是完全一样的，所以你可以放心的修Bug；等到修完Bug，提交到服务器上后，再使用`git stash apply`将以前一半的工作应用回来。
+这时候你的工作区间和上一次提交的内容是完全一样的，所以你可以放心的修 Bug；等到修完 Bug，提交到服务器上后，再使用`git stash apply`将以前一半的工作应用回来。
 
 > 经常有这样的事情发生，当你正在进行项目中某一部分的工作，里面的东西处于一个比较杂乱的状态，而你想转到其他分支上进行一些工作。
 >
@@ -825,7 +825,7 @@ nothing to commit, working tree clean
 
 需要说明一点，stash 是本地的，不会通过 `git push` 命令上传到 git server 上。
 
-实际应用中推荐给每个 stash 加一个message，用于记录版本，**使用 `git stash save` 取代 `git stash` 命令。**示例如下：
+实际应用中推荐给每个 stash 加一个 message，用于记录版本，**使用 `git stash save` 取代 `git stash` 命令。**示例如下：
 
 ```bash
 $ git stash save "test-cmd-stash"
@@ -885,7 +885,7 @@ stash@{1}: WIP on master: c264051 Revert "added file_size"
 stash@{2}: WIP on master: 21d80a5 added number to log
 ```
 
-在使用 `git stash apply` 命令时可以通过名字指定使用哪个 stash，默认使用最近的stash（ 即 `stash@{0`} ）
+在使用 `git stash apply` 命令时可以通过名字指定使用哪个 stash，默认使用最近的 stash（ 即 `stash@{0`} ）
 
 ### 删除 stash
 
@@ -1082,7 +1082,7 @@ $ git cherry-pick A^..B
 
     - 面命令表示，Cherry pick 采用提交 `commitHash` 来自编号 1 的父分支的变动。
 
-        一般来说，1号父分支是接受变动的分支（the branch being merged into），2号父分支是作为变动来源的分支（the branch being merged from）
+        一般来说，1 号父分支是接受变动的分支（the branch being merged into），2 号父分支是作为变动来源的分支（the branch being merged from）
 
 ### 代码冲突
 

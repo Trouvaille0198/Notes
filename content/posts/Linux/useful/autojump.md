@@ -22,7 +22,7 @@ cd autojump
 ./install.py or ./uninstall.py
 ```
 
-由于Linux 下 Shell 启动会自动读取 ~/.bashrc 文件，所以将下面一行添加到该文件中（注意修改一下路径）
+由于 Linux 下 Shell 启动会自动读取 ~/.bashrc 文件，所以将下面一行添加到该文件中（注意修改一下路径）
 
 ```ruby
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
