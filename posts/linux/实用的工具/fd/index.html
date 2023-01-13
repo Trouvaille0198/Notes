@@ -1,0 +1,134 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>fd - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="fd fd 是基于 Rust 开发的一个速度超快的命令行搜索工具，fd 旨在成为 Linux / Unix 下 find 命令的替代"><meta name=keywords content="Linux,快速入门"><meta itemprop=name content="fd"><meta itemprop=description content="fd fd 是基于 Rust 开发的一个速度超快的命令行搜索工具，fd 旨在成为 Linux / Unix 下 find 命令的替代"><meta itemprop=datePublished content="2023-01-13T00:00:00+00:00"><meta itemprop=dateModified content="2023-01-13T09:00:31+00:00"><meta itemprop=wordCount content="956"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Linux,快速入门,"><meta property="og:title" content="fd"><meta property="og:description" content="fd fd 是基于 Rust 开发的一个速度超快的命令行搜索工具，fd 旨在成为 Linux / Unix 下 find 命令的替代"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/linux/%E5%AE%9E%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7/fd/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-01-13T00:00:00+00:00"><meta property="article:modified_time" content="2023-01-13T09:00:31+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="fd"><meta name=twitter:description content="fd fd 是基于 Rust 开发的一个速度超快的命令行搜索工具，fd 旨在成为 Linux / Unix 下 find 命令的替代"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/linux/%E5%AE%9E%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7/fd/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/useful/%E4%B9%90%E7%90%86/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%8E%A8%E5%AF%BC%E4%B9%90%E7%90%86/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"fd","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/linux\/%E5%AE%9E%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7\/fd\/"},"genre":"posts","keywords":"Linux, 快速入门","wordcount":956,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/linux\/%E5%AE%9E%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7\/fd\/","datePublished":"2023-01-13T00:00:00+00:00","dateModified":"2023-01-13T09:00:31+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>fd</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/linux/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Linux</a></span></div><div class=post-meta-line><span title="2023-01-13 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-01-13>2023-01-13</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 956 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#安装>安装</a></li><li><a href=#用法>用法</a><ul><li><a href=#简单搜索>简单搜索</a></li><li><a href=#按指定类型进行搜索>按指定类型进行搜索</a></li><li><a href=#搜索指定目录>搜索指定目录</a></li><li><a href=#通过正则表达式搜索>通过正则表达式搜索</a></li><li><a href=#搜索指定扩展名的文件>搜索指定扩展名的文件</a></li><li><a href=#排除特定的目录或文件>排除特定的目录或文件</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=fd>fd</h1><p>fd 是基于 Rust 开发的一个速度超快的命令行搜索工具，fd 旨在成为 Linux / Unix 下 find 命令的替代品。</p><p>fd 虽然不能提供现在 find 命令所有的强大功能，但它也提供了足够强大的功能来满足你日常需要。比如：简洁的语法、彩色的终端输出、超快的查询速度、智能大小写、支持正则表达式以及可并行执行命令等特性。</p><p>项目地址：https://github.com/sharkdp/fd</p><h2 id=安装>安装</h2><p>从 <a href=https://github.com/sharkdp/fd/releases target=_blank rel="external nofollow noopener noreferrer">releases 页面</a>下载最新<code>.deb</code>包装并通过以下方式安装:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sudo dpkg -i fd_7.0.0_amd64.deb  # adapt version number and architecture
+</span></span></code></pre></td></tr></table></div></div><h2 id=用法>用法</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>❯ fd -h
+</span></span><span class=line><span class=cl>A program to find entries in your filesystem
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Usage: fd <span class=o>[</span>OPTIONS<span class=o>]</span> <span class=o>[</span>pattern<span class=o>]</span> <span class=o>[</span>path<span class=o>]</span>...
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Arguments:
+</span></span><span class=line><span class=cl>  <span class=o>[</span>pattern<span class=o>]</span>  the search pattern <span class=o>(</span>a regular expression, unless <span class=s1>&#39;--glob&#39;</span> is used<span class=p>;</span> optional<span class=o>)</span>
+</span></span><span class=line><span class=cl>  <span class=o>[</span>path<span class=o>]</span>...  the root directories <span class=k>for</span> the filesystem search <span class=o>(</span>optional<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -H, --hidden                     Search hidden files and directories
+</span></span><span class=line><span class=cl>  -I, --no-ignore                  Do not respect .<span class=o>(</span>git<span class=p>|</span>fd<span class=o>)</span>ignore files
+</span></span><span class=line><span class=cl>  -s, --case-sensitive             Case-sensitive search <span class=o>(</span>default: smart <span class=k>case</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  -i, --ignore-case                Case-insensitive search <span class=o>(</span>default: smart <span class=k>case</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  -g, --glob                       Glob-based search <span class=o>(</span>default: regular expression<span class=o>)</span>
+</span></span><span class=line><span class=cl>  -a, --absolute-path              Show absolute instead of relative paths
+</span></span><span class=line><span class=cl>  -l, --list-details               Use a long listing format with file metadata
+</span></span><span class=line><span class=cl>  -L, --follow                     Follow symbolic links
+</span></span><span class=line><span class=cl>  -p, --full-path                  Search full abs. path <span class=o>(</span>default: filename only<span class=o>)</span>
+</span></span><span class=line><span class=cl>  -d, --max-depth &lt;depth&gt;          Set maximum search depth <span class=o>(</span>default: none<span class=o>)</span>
+</span></span><span class=line><span class=cl>  -E, --exclude &lt;pattern&gt;          Exclude entries that match the given glob pattern
+</span></span><span class=line><span class=cl>  -t, --type &lt;filetype&gt;            Filter by type: file <span class=o>(</span>f<span class=o>)</span>, directory <span class=o>(</span>d<span class=o>)</span>, symlink <span class=o>(</span>l<span class=o>)</span>,
+</span></span><span class=line><span class=cl>                                   executable <span class=o>(</span>x<span class=o>)</span>, empty <span class=o>(</span>e<span class=o>)</span>, socket <span class=o>(</span>s<span class=o>)</span>, pipe <span class=o>(</span>p<span class=o>)</span>
+</span></span><span class=line><span class=cl>  -e, --extension &lt;ext&gt;            Filter by file extension
+</span></span><span class=line><span class=cl>  -S, --size &lt;size&gt;                Limit results based on the size of files
+</span></span><span class=line><span class=cl>      --changed-within &lt;date<span class=p>|</span>dur&gt;  Filter by file modification <span class=nb>time</span> <span class=o>(</span>newer than<span class=o>)</span>
+</span></span><span class=line><span class=cl>      --changed-before &lt;date<span class=p>|</span>dur&gt;  Filter by file modification <span class=nb>time</span> <span class=o>(</span>older than<span class=o>)</span>
+</span></span><span class=line><span class=cl>  -o, --owner &lt;user:group&gt;         Filter by owning user and/or group
+</span></span><span class=line><span class=cl>  -x, --exec &lt;cmd&gt;...              Execute a <span class=nb>command</span> <span class=k>for</span> each search result
+</span></span><span class=line><span class=cl>  -X, --exec-batch &lt;cmd&gt;...        Execute a <span class=nb>command</span> with all search results at once
+</span></span><span class=line><span class=cl>  -c, --color &lt;when&gt;               When to use colors <span class=o>[</span>default: auto<span class=o>]</span> <span class=o>[</span>possible values: auto,
+</span></span><span class=line><span class=cl>                                   always, never<span class=o>]</span>
+</span></span><span class=line><span class=cl>  -h, --help                       Print <span class=nb>help</span> information <span class=o>(</span>use <span class=sb>`</span>--help<span class=sb>`</span> <span class=k>for</span> more detail<span class=o>)</span>
+</span></span><span class=line><span class=cl>  -V, --version                    Print version information
+</span></span></code></pre></td></tr></table></div></div><h3 id=简单搜索>简单搜索</h3><p>fd 只需带上一个需要查找的参数就可以执行最简单的搜索，该参数就是你要搜索的任何东西。例如：你想要找一个包含 “go” 关键字的文件名或目录。</p><blockquote><p>注：fd 默认是不区分大小写和支持模糊查询的。</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>❯ fd go
+</span></span><span class=line><span class=cl>download/Python-3.11.1/Include/cpython/longobject.h
+</span></span><span class=line><span class=cl>download/Python-3.11.1/Include/longobject.h
+</span></span><span class=line><span class=cl>download/Python-3.11.1/Lib/idlelib/debugobj.py
+</span></span><span class=line><span class=cl>download/Python-3.11.1/Lib/idlelib/debugobj_r.py
+</span></span><span class=line><span class=cl>download/Python-3.11.1/PC/icons/logo.svg
+</span></span><span class=line><span class=cl>download/Python-3.11.1/PC/icons/logox128.png
+</span></span><span class=line><span class=cl>download/Python-3.11.1/Tools/scripts/google.py
+</span></span><span class=line><span class=cl>download/node-v18.12.1-linux-x64/lib/node_modules/npm/docs/content/commands/npm-logout.md
+</span></span><span class=line><span class=cl>download/node-v18.12.1-linux-x64/lib/node_modules/npm/docs/output/commands/npm-logout.html
+</span></span><span class=line><span class=cl>powerlevel10k/gitstatus/src/algorithm.h
+</span></span><span class=line><span class=cl>repos/PythonLearning/AlgorithmLearning/
+</span></span><span class=line><span class=cl>repos/PythonLearning/DjangoLearning/
+</span></span></code></pre></td></tr></table></div></div><h3 id=按指定类型进行搜索>按指定类型进行搜索</h3><p>默认情况下，fd 会搜索所有符合条件的结果。如果你想指定搜索的类型可以使用 <code>-t</code> 参数，fd 目前支持四种类型：<code>f</code>、<code>d</code>、<code>l</code>、<code>x</code>，分别表示：文件、目录、符号链接、可执行文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>❯ fd -td go
+</span></span><span class=line><span class=cl>download/node-v18.12.1-linux-x64/lib/node_modules/npm/node_modules/dezalgo/
+</span></span><span class=line><span class=cl>download/node-v18.12.1-linux-x64/lib/node_modules/npm/node_modules/negotiator/
+</span></span><span class=line><span class=cl>repos/PythonLearning/AlgorithmLearning/
+</span></span><span class=line><span class=cl>repos/PythonLearning/DjangoLearning/
+</span></span></code></pre></td></tr></table></div></div><h3 id=搜索指定目录>搜索指定目录</h3><p>fd 默认会在当前目录和其下所有子目录中搜索，如果你想搜索指定的目录就需要在第二个参数中指定。例如：要在指定的 <code>/etc</code> 目录中搜索包含 passwd 关键字的文件或目录。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>fd passwd /etc
+</span></span></code></pre></td></tr></table></div></div><h3 id=通过正则表达式搜索>通过正则表达式搜索</h3><ul><li>搜索当前目录下以 head 开头并以 swig 结尾的文件。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>fd <span class=s1>&#39;^head.*swig$&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>搜索当前目录下文件名包含字母且文件名后缀为 PNG 的文件。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>fd <span class=s1>&#39;[a-z]\.png$&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=搜索指定扩展名的文件>搜索指定扩展名的文件</h3><p>在当前目录下搜索文件扩展名为 md 的文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>fd -e md
+</span></span></code></pre></td></tr></table></div></div><p>在当前目录下搜索文件名包含 reademe 且扩展名为 md 的文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>fd -e md readme
+</span></span></code></pre></td></tr></table></div></div><h3 id=排除特定的目录或文件>排除特定的目录或文件</h3><p>搜索当前目录下除 lib 目录外的所有包含关键字 readme 的文件或目录。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>fd -E lib readme
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2023-01-13 09:00:31">更新于 2023-01-13</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/linux/%E5%AE%9E%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7/fd/ data-title=fd data-hashtags=Linux,快速入门><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/linux/%E5%AE%9E%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7/fd/ data-hashtag=Linux><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/linux/%E5%AE%9E%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7/fd/ data-title=fd><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/linux/>Linux</a>,&nbsp;<a href=/Notes/tags/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>快速入门</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/useful/%E4%B9%90%E7%90%86/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%8E%A8%E5%AF%BC%E4%B9%90%E7%90%86/ class=prev rel=prev title=从零开始推导乐理><i class="fa-solid fa-angle-left fa-fw"></i>从零开始推导乐理</a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
