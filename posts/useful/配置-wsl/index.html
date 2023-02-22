@@ -1,0 +1,161 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>配置 WSL - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="配置 WSL 使用 ssh 远程 wsl 安装 ssh 服务 1 apt install openssh-server 修改 sshd 服务启动配置文件 1 2 3 4 5 6 7 8 9 vi /etc/ssh/sshd_config"><meta name=keywords content="Theme,Hugo"><meta itemprop=name content="配置 WSL"><meta itemprop=description content="配置 WSL 使用 ssh 远程 wsl 安装 ssh 服务 1 apt install openssh-server 修改 sshd 服务启动配置文件 1 2 3 4 5 6 7 8 9 vi /etc/ssh/sshd_config"><meta itemprop=datePublished content="2022-02-14T00:00:00+00:00"><meta itemprop=dateModified content="2023-02-22T13:49:16+00:00"><meta itemprop=wordCount content="1006"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content><meta property="og:title" content="配置 WSL"><meta property="og:description" content="配置 WSL 使用 ssh 远程 wsl 安装 ssh 服务 1 apt install openssh-server 修改 sshd 服务启动配置文件 1 2 3 4 5 6 7 8 9 vi /etc/ssh/sshd_config"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/useful/%E9%85%8D%E7%BD%AE-wsl/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-02-14T00:00:00+00:00"><meta property="article:modified_time" content="2023-02-22T13:49:16+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="配置 WSL"><meta name=twitter:description content="配置 WSL 使用 ssh 远程 wsl 安装 ssh 服务 1 apt install openssh-server 修改 sshd 服务启动配置文件 1 2 3 4 5 6 7 8 9 vi /etc/ssh/sshd_config"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/useful/%E9%85%8D%E7%BD%AE-wsl/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strings/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/gorm/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"配置 WSL","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/useful\/%E9%85%8D%E7%BD%AE-wsl\/"},"genre":"posts","wordcount":1006,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/useful\/%E9%85%8D%E7%BD%AE-wsl\/","datePublished":"2022-02-14T00:00:00+00:00","dateModified":"2023-02-22T13:49:16+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>配置 WSL</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/%E6%9C%89%E7%94%A8%E7%9A%84%E4%B8%9C%E4%B8%9C/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;有用的东东</a></span></div><div class=post-meta-line><span title="2022-02-14 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-14>2022-02-14</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 1006 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#使用-ssh-远程-wsl>使用 ssh 远程 wsl</a><ul><li><a href=#安装-ssh-服务>安装 ssh 服务</a><ul><li><a href=#启动>启动</a></li></ul></li><li><a href=#远程-ssh-连接>远程 ssh 连接</a><ul><li><a href=#配置端口转发规则>配置端口转发规则</a></li><li><a href=#配置防火墙出入站规则>配置防火墙出入站规则</a></li></ul></li><li><a href=#wsl-固定ip-配置>wsl “固定IP” 配置</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=配置-wsl>配置 WSL</h1><h2 id=使用-ssh-远程-wsl>使用 ssh 远程 wsl</h2><h3 id=安装-ssh-服务>安装 ssh 服务</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>apt install openssh-server
+</span></span></code></pre></td></tr></table></div></div><p>修改 sshd 服务启动配置文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>vi /etc/ssh/sshd_config
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># add</span>
+</span></span><span class=line><span class=cl><span class=c1># 允许root用户登录</span>
+</span></span><span class=line><span class=cl>PermitRootLogin yes
+</span></span><span class=line><span class=cl><span class=c1># 服务端口，为了不和windows及其它wsl子系统冲突，手动指定一个</span>
+</span></span><span class=line><span class=cl>Port <span class=m>12308</span>
+</span></span><span class=line><span class=cl><span class=c1># 监听地址，如果需要远程机器连接</span>
+</span></span><span class=line><span class=cl>ListenAddress 0.0.0.0
+</span></span></code></pre></td></tr></table></div></div><h4 id=启动>启动</h4><p>ubuntu</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>service ssh restart
+</span></span></code></pre></td></tr></table></div></div><p>wsl</p><p>wsl 是无法用 <code>systemctl</code> 启动 ssh 的，因此，需要自己写脚本 <code>vi /etc/init.d/sshd</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/sh
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=c1># Start/stop/restart the secure shell server:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sshd_start<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1># Create host keys if needed.</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=o>[</span> ! -r /etc/ssh/ssh_host_key <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    /usr/bin/ssh-keygen -t rsa1 -f /etc/ssh/ssh_host_key -N <span class=s1>&#39;&#39;</span> 
+</span></span><span class=line><span class=cl>  <span class=k>fi</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=o>[</span> ! -f /etc/ssh/ssh_host_dsa_key <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    /usr/bin/ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=k>fi</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=o>[</span> ! -f /etc/ssh/ssh_host_rsa_key <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=k>fi</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=o>[</span> ! -f /etc/ssh/ssh_host_rsa_key <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    /usr/bin/ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key-N <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=k>fi</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=o>[</span> ! -f /etc/ssh/ssh_host_rsa_key <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    /usr/bin/ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key-N <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=k>fi</span>
+</span></span><span class=line><span class=cl>  /usr/sbin/sshd -f /etc/ssh/sshd_config
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sshd_stop<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  killall sshd
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sshd_restart<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=o>[</span> -r /var/run/sshd.pid <span class=o>]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;WARNING: killing listener process only.  To kill every sshd process, you must&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;         use &#39;rc.sshd stop&#39;.  &#39;rc.sshd restart&#39; kills only the parent sshd to&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;         allow an admin logged in through sshd to use &#39;rc.sshd restart&#39; without&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;         being cut off.  If sshd has been upgraded, new connections will now&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;         use the new version, which should be a safe enough approach.&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>kill</span> <span class=sb>`</span>cat /var/run/sshd.pid<span class=sb>`</span>
+</span></span><span class=line><span class=cl>  <span class=k>else</span>
+</span></span><span class=line><span class=cl>    killall sshd
+</span></span><span class=line><span class=cl>  <span class=k>fi</span>
+</span></span><span class=line><span class=cl>  sleep <span class=m>1</span>
+</span></span><span class=line><span class=cl>  sshd_start
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>case</span> <span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span> in
+</span></span><span class=line><span class=cl><span class=s1>&#39;start&#39;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  sshd_start
+</span></span><span class=line><span class=cl>  <span class=p>;;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;stop&#39;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  sshd_stop
+</span></span><span class=line><span class=cl>  <span class=p>;;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;restart&#39;</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>  sshd_restart
+</span></span><span class=line><span class=cl>  <span class=p>;;</span>
+</span></span><span class=line><span class=cl>*<span class=o>)</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;usage </span><span class=nv>$0</span><span class=s2> start|stop|restart&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>esac</span>
+</span></span></code></pre></td></tr></table></div></div><p>启动</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>/etc/init.d/sshd start
+</span></span></code></pre></td></tr></table></div></div><p>查看</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ps -ef<span class=p>|</span>grep ssh
+</span></span></code></pre></td></tr></table></div></div><p>windows 下面 <code>win+r</code> 打开 <code>cmd</code>，输 入<code>netstat -ano|findstr "12308"</code> 查看端口，发现已经启动</p><p>到这个阶段，已经可以用本地 win 主机来 ssh 连接 wsl 了</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ssh &lt;name&gt;@&lt;wsl ip&gt; -p <span class=m>12308</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=远程-ssh-连接>远程 ssh 连接</h3><p>如果防火墙开启，那我们需要配置防火墙规则同时需要配置端口转发规则</p><h4 id=配置端口转发规则>配置端口转发规则</h4><p>意思就是，访问到物理机的 2222 端口的请求，转发到 wsl 的 12308 端口，IP 为 wsl 的 ip</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>netsh</span> <span class=n>interface</span> <span class=n>portproxy</span> <span class=n>add</span> <span class=n>v4tov4</span> <span class=n>listenaddress</span><span class=p>=</span><span class=mf>0.0</span><span class=p>.</span><span class=py>0</span><span class=p>.</span><span class=py>0</span> <span class=n>listenport</span><span class=p>=</span><span class=mf>2222</span> <span class=n>connectaddress</span><span class=p>=[</span><span class=no>IP</span><span class=p>]</span> <span class=n>connectport</span><span class=p>=[</span><span class=no>PORT</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=配置防火墙出入站规则>配置防火墙出入站规则</h4><p>这是安全规则，如果防火墙关闭的话则不用配置，</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>netsh</span> <span class=n>advfirewall</span> <span class=n>firewall</span> <span class=n>add</span> <span class=n>rule</span> <span class=n>name</span><span class=p>=</span><span class=n>WSL2</span> <span class=n>dir</span><span class=p>=</span><span class=k>in</span> <span class=n>action</span><span class=p>=</span><span class=n>allow</span> <span class=n>protocol</span><span class=p>=</span><span class=n>TCP</span> <span class=n>localport</span><span class=p>=</span><span class=mf>2222</span>
+</span></span></code></pre></td></tr></table></div></div><p>配置完以上两步后，我们则可以通过外网来访问我们的 wsl</p><p>（例如，本机 ip 是 1.2.3.4，wsl 地址是 172.16.12.1）</p><p>那么，远程访问时，通过</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>ssh jack@1.2.3.4 -p <span class=m>2222</span>
+</span></span></code></pre></td></tr></table></div></div><p>即使所有的命令行都关闭，只要 wsl 不是 shutdown 状态，ssh 服务正常开启，那么就可以通过 ssh 进行连接</p><p>其实，通过这一步可以自由的配置本地端口与 wsl 端口的映射，也就是可以通过物理机来进行网站或应用程序的访问，比如，我们再 wsl 部署一个网站，我们可以直接将该网站的端口 xxxx 映射到物理机的 8080（举例），那么我们通过本机 ip:8080 即可访问该网站，大大提高我们的易操作性。</p><h3 id=wsl-固定ip-配置>wsl “固定IP” 配置</h3><p>wsl 每次重启，ip 地址都会变化，也就是说通过以上步骤添加的映射规则再 wsl 重启后就失效了！</p><p>其实这种说法并不准确，因为严格意义上，固定 wsl ip 实现相当复杂，我们一般都是通过变相的操作来达到相同的目的。</p><p>这个方法就是，wsl 启动时，读取 ip 并将 ip 以及域名写入到 Windows 的 hosts 文件中，这样以来，我们映射规则中的 IP 就可以用域名来代替。</p><blockquote><p>详见 <a href=https://zhuanlan.zhihu.com/p/372601715 target=_blank rel="external nofollow noopener noreferrer">https://zhuanlan.zhihu.com/p/372601715</a></p></blockquote></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2023-02-22 13:49:16">更新于 2023-02-22</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/useful/%E9%85%8D%E7%BD%AE-wsl/ data-title="配置 WSL"><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/useful/%E9%85%8D%E7%BD%AE-wsl/><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/useful/%E9%85%8D%E7%BD%AE-wsl/ data-title="配置 WSL"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/%E6%96%87%E6%9C%AC/strings/ class=prev rel=prev title="Go strings 标准库"><i class="fa-solid fa-angle-left fa-fw"></i>Go strings 标准库</a>
+<a href=/Notes/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/gorm/ class=next rel=next title="Go GORM 库">Go GORM 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
