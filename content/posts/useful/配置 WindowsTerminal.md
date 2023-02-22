@@ -86,6 +86,12 @@ https://windowsterminalthemes.dev/
 
 下载：https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip
 
+#### Menlo for Powerline
+
+> 推荐
+
+下载：https://github.com/lxbrtsch/Menlo-for-Powerline
+
 ### oh-my-posh
 
 > 我的建议是，还是不要用这玩意儿了。wsl 里用 oh-my-zsh 就够了，powershell 朴素一点没啥关系

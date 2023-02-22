@@ -143,7 +143,7 @@ a = np.arange(20).reshape(4, 5)
 
 #### 随机创建
 
-##### 使用numpy.random.rand()
+##### 使用 numpy.random.rand()
 
 `numpy.random.rand(d0, d1, …, dn)`
 
@@ -163,7 +163,7 @@ np.random.rand(4, 2)
        		[0.854591  , 0.46243232]])
 ```
 
-##### 使用numpy.random.randn()
+##### 使用 numpy.random.randn()
 
 `numpy.random.randn(d0, d1, …, dn)`
 

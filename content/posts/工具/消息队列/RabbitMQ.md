@@ -1,6 +1,6 @@
 ---
 title: "RabbitMQ"
-date: 2022-8-2
+date: 2022-08-02
 draft: false
 author: "MelonCholi"
 tags: [快速入门]
@@ -61,7 +61,7 @@ RabbitMQ 是一款使用 Erlang 语言开发的，实现 **AMQP (高级消息队
 
 ## 安装
 
-#### Linux
+### Linux
 
 如果您使用的是 Ubuntu 或 Debian ，可以通过以下命令进行安装 RabbitMQ：
 
@@ -77,9 +77,9 @@ $ docker run -d -p 5462:5462 rabbitmq
 
 命令执行完毕之后，中间人（Broker）会在后台继续运行，准备输出一条 *Starting rabbitmq-server: SUCCESS* 的消息。
 
-#### windows
+### windows
 
-##### 安装 erLang 语言，配置环境变量
+#### 安装 erLang 语言，配置环境变量
 
 erlang [官网](http://www.erlang.org/downloads)下载
 
@@ -91,7 +91,7 @@ erlang [官网](http://www.erlang.org/downloads)下载
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAyMC83LzIxLzE3MzcxYmFjNDk0MzgxZDY)
 
-#### 安装 RabbitMQ 服务端
+### 安装 RabbitMQ 服务端
 
 在 RabbitMQ 的 [gitHub 项目](https://github.com/rabbitmq/rabbitmq-server/releases/tag/v3.7.3)中，下载 window 版本的服务端安装包。
 
@@ -122,7 +122,7 @@ erlang [官网](http://www.erlang.org/downloads)下载
 - Broker：消息队列服务进程。此进程包括两个部分：Exchange 和 Queue。
   - Exchange：消息队列交换机。**按一定的规则将消息路由转发到某个队列**。
   - Queue：消息队列，存储消息的队列。
-  - Banding：绑定，用于 Queue 和 Exchange 之间的关联。一个绑定就是基于路由键将交换机和消息队列连接起来的路由规则，所以可以将交换器理解成一个由绑定构成的路由表。
+  - Banding：绑定，用于 Queue 和 Exchange 之间的关联。一个绑定就是基于路由键将交换机和消息队列连接起来的**路由规则**，所以可以将交换器理解成一个由绑定构成的路由表。
 - Producer：消息生产者。生产方客户端将消息同交换机路由发送到队列中。
 - Consumer：消息消费者。消费队列中存储的消息。
 - Connect：连接，生产者与 RMQ Server 之间建立的 TCP 连接。

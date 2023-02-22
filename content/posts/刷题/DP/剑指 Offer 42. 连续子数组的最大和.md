@@ -16,9 +16,9 @@
 
 ## DP
 
-用 f(i) 代表以第 i 个数结尾的「连续子数组的最大和」
+用 dp(i) 代表以第 i 个数结尾的「连续子数组的最大和」
 
-f(i)=max{f(i−1)+nums[i],nums[i]}
+dp(i) = max{ dp(i−1) + nums[i], nums[i] }
 
 ```go
 func maxSubArray(nums []int) int {

@@ -14,8 +14,15 @@ categories: [工具]
 ### 设置名字、邮箱
 
 ```shell
-$ git config --global user.name "Your Name"
-$ git config --global user.email "email@example.com"
+git config --global user.name "Your Name"
+git config --global user.email "email@example.com"
+```
+
+查看名字、邮箱
+
+```shell
+git config user.name
+git config user.email
 ```
 
 ### 创建版本库（**repository**）
@@ -75,7 +82,7 @@ $ git diff <filename>
 查看工作区和版本库里文件的区别
 
 ```shell
-$ git diff HEAD -- <filename> 
+$ git diff HEAD -- <filename>
 ```
 
 3. 查看文件内容
@@ -129,7 +136,7 @@ $ git reset HEAD <filename>
 
 6. 从工作区中删除文件
 
-```shell7. 
+```shell7.
 $ rm <filename>
 ```
 
@@ -401,13 +408,13 @@ $ git show <tag-name>
 
 ### 删除标签
 
-```shell 
+```shell
 $ git tag -d <tag-name>
 ```
 
 若要删除远程库标签，先从本地删除，然后
 
-```shell 
+```shell
 $ git push origin :refs/tags/<tag-name>
 ```
 
@@ -571,7 +578,7 @@ $ git commit -am "xxxB"
 ...
 ```
 
-与此同时，有些人在`master`分支上做了一些变更，如合并了 release 分支代码准备发布等。这时意味着`master`和`feature/mywork`这两个分支各自"前进"了，它们之间"分叉"了。 
+与此同时，有些人在`master`分支上做了一些变更，如合并了 release 分支代码准备发布等。这时意味着`master`和`feature/mywork`这两个分支各自"前进"了，它们之间"分叉"了。
 
 <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e1088600f61e44e1b2d0e2bd7f49ca7c~tplv-k3u1fbpfcp-zoom-in-crop-mark:3024:0:0:0.awebp" alt="2.jpg" style="zoom: 33%;" />
 
@@ -662,7 +669,7 @@ git checkout -b newBranch
 该命令相当于下面这两条命令的执行结果：
 
 ```shell
-1. git branch newBranch 
+1. git branch newBranch
 2. git checkout newBranch
 ```
 
@@ -1043,7 +1050,7 @@ $ git cherry-pick <HashA> <HashB>
 如果想要转移一系列的连续提交，可以使用下面的简便语法。
 
 ```bash
-$ git cherry-pick A..B 
+$ git cherry-pick A..B
 ```
 
 上面的命令可以转移从 A 到 B（**除了 A**）的所有提交。它们必须按照正确的顺序放置：提交 A 必须早于提交 B，否则命令将失败，但不会报错。
@@ -1051,7 +1058,7 @@ $ git cherry-pick A..B
 注意，使用上面的命令，提交 A 将不会包含在 Cherry pick 中。如果要包含提交 A，可以使用下面的语法。
 
 ```bash
-$ git cherry-pick A^..B 
+$ git cherry-pick A^..B
 ```
 
 ### 配置项
@@ -1154,4 +1161,3 @@ git commit --amend
 git diff <branch_name1> <branch_name2> --stat
 git diff <branch_name1> --stat # 比较当前文件与 branch_name1
 ```
-

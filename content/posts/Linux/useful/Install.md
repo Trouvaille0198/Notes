@@ -30,7 +30,24 @@ deb-src http://mirrors.aliyun.com/ubuntu/ TODO-proposed main restricted universe
 
 deb http://mirrors.aliyun.com/ubuntu/ TODO-backports main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ TODO-backports main restricted universe multiverse
+```
 
+## 小工具安装
+
+7z
+
+```shell
+sudo apt install p7zip-full p7zip-rar
+```
+
+btop
+
+https://github.com/aristocratos/btop
+
+ifconfig
+
+```shell
+sudo apt install net-tools
 ```
 
 ## Node.js
@@ -79,23 +96,23 @@ deb-src http://mirrors.aliyun.com/ubuntu/ TODO-backports main restricted univers
 
 下载 go 源码包
 
-```bash
-//下载地址 go官网 https://golang.org/dl/
+```shell
+# 下载地址 go官网 https://golang.org/dl/
 cd /opt/
 sudo wget https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz
 ```
 
 解压缩 go 源码包，确认当前 linux 系统版本是 32 位还是 64 位，再选择 go 源码包
 
-```csharp
-//查看linux多少位
-[root@pyyuc /opt 21:59:02]#uname -m
+```shell
+# 查看linux多少位
+[root@pyyuc /opt 21:59:02]# uname -m
 x86_64
 
-//决定下载64位
+# 决定下载64位
 sudo tar -zxvf go1.18.3.linux-amd64.tar.gz
 
-//解压缩后go源码路径确保为
+# 解压缩后go源码路径确保为
 /opt/go/
 ```
 
@@ -142,7 +159,7 @@ export GOBIN=$GOPATH/bin        # go install 后生成的可执行命令存放�
 export PATH=$GOROOT/bin:$GOBIN:$PATH    # Linux 环境变量
 ```
 
-读取/etc/profile，立即生效
+读取 /etc/profile，立即生效
 
 ```bash
 source /etc/profile     #读取环境变量

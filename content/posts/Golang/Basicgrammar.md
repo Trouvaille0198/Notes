@@ -114,7 +114,7 @@ go build -o hello.exe ./main.go  # 指定可执行文件名
 
 - 如果是普通应用包，执行后不会产生任何文件。如果你需要在 `$GOPATH/pkg`下生成相应的文件，那就得执行 `go install`。
 - 如果是 `main` 包，执行后会在当前目录下生成一个可执行文件。如果你需要在 `$GOPATH/bin` 下生成相应的文件，需要执行 `go install`，或者使用 `go build -o 路径/a.exe`。
-- 如果某个项目文件夹下有多个文件，而你只想编译某个文件，就可在`go build`之后加上文件名，例如`go build a.go`；`go build` 命令默认会编译当前目录下的所有 go 文件。
+- 如果某个项目文件夹下有多个文件，而你只想编译某个文件，就可在 `go build` 之后加上文件名，例如 `go build a.go`；`go build` 命令默认会编译当前目录下的所有 go 文件。
 - 你也可以指定编译输出的文件名。
     - 例如 `go build -o hello.exe ./main.go`
 
@@ -758,10 +758,10 @@ fmt.Println(arr)  // [101 102 103 104 105]
 var fslice []int
 
 // 声明并初始化
-slice := []byte {'a', 'b', 'c', 'd'}
+slice := []byte{'a', 'b', 'c', 'd'}
 
 // 从一个数组或一个已经存在的slice中再次声明
-var ar = [10]byte {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+var ar = [10]byte{'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
 a := ar[2:5]
 ```
 
@@ -930,7 +930,7 @@ bool    false
 string  ""
 ```
 
-布尔类型的零值（初始值）为 false，数值类型的零值为 0，字符串类型的零值为空字符串`""`，而**指针、切片、映射、通道、函数和接口的零值则是 nil**。
+布尔类型的零值（初始值）为 false，数值类型的零值为 0，字符串类型的零值为空字符串 `""`，而**指针、切片、映射、通道、函数和接口的零值则是 nil**。
 
 ### 指针 pointer
 
@@ -2595,7 +2595,7 @@ func main() {
 - 大写字母开头的变量是可导出的，也就是其它包可以读取的，是公有变量；小写字母开头的就是不可导出的，是私有变量。
 - 大写字母开头的函数也是一样，相当于 `class` 中的带 `public` 关键词的公有函数；小写字母开头的就是有`private` 关键词的私有函数。
 
-### 切片中删除元素
+### 切片中删除元素（已知索引）
 
 Go 语言并没有对删除切片元素提供专用的语法或者接口，需要使用切片本身的特性来删除元素，根据要删除元素的位置有三种情况，分别是从开头位置删除、从中间位置删除和从尾部删除，其中删除切片尾部的元素速度最快。
 
@@ -3128,7 +3128,7 @@ BenchmarkStringConcat-4               19          61431933 ns/op        63284516
 
 从测试结果来看，语法中的字符串拼接操作性能是极其低下的，对于操作频繁的大字符串，我们需考虑用更高效的方式替代。
 
-### 函数传参
+### :star: 函数传参
 
 **Go 语言中所有的传参都是值传递（传值）**，都是一个副本，一个拷贝。且传参和赋值（=）的操作本质是一样的。
 
@@ -3138,7 +3138,7 @@ BenchmarkStringConcat-4               19          61431933 ns/op        63284516
 
 - 引用类型：指针、map、slice、chan ，这样就可以修改原内容数据。
 
-切片传参时要注意扩容的影响
+:star: 切片传参时要注意**扩容**的影响
 
 ```go
 package main
@@ -3187,3 +3187,120 @@ func main() {
 // {0, 1, 2, 3, 4}
 ```
 
+### 处理 map 和 slice 的并发写
+
+#### 加锁
+
+n 个 goroutine 都有可能执行写入操作，保证同一时间只能有一个在执行写操作。 加锁操作简单，适用于性能要求低和逻辑不复杂的场景。
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+func main() {
+	slc := []int{}
+
+	n := 10000
+	var wg sync.WaitGroup
+	var lock sync.Mutex
+	wg.Add(n)
+	for i := 0; i < n; i++ {
+		go func(a int) {
+			lock.Lock()
+			slc = append(slc, a)
+			lock.Unlock()
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
+
+	fmt.Println("done len:", len(slc))
+}
+```
+
+#### Active Object方式
+
+本质上 n 个 goroutine 的写操作全部被写到了 channel 里，channel 里的数据再通过循环一个一个写入 slice/map 中
+
+所以同一时间，只有 1 个 goroutine 在执行写操作。避免多个 goroutine 竞争锁。 适合业务场景复杂，性能要求高的场景。
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+// active object对象
+type Service struct {
+	channel chan int `desc:"即将加入到数据slice的数据"`
+	data    []int    `desc:"数据slice"`
+}
+
+// 新建一个size大小缓存的active object对象
+func NewService(size int, done func()) *Service {
+	s := &Service{
+		channel: make(chan int, size),
+		data:    make([]int, 0),
+	}
+
+	go func() {
+		s.schedule()
+		done()
+	}()
+	return s
+}
+
+// 把管道中的数据append到slice中
+func (s *Service) schedule() {
+	for v := range s.channel {
+		s.data = append(s.data, v)
+	}
+}
+
+// 增加一个值
+func (s *Service) Add(v int) {
+	s.channel <- v
+}
+
+// 管道使用完关闭
+func (s *Service) Close() {
+	close(s.channel)
+}
+
+// 返回slice
+func (s *Service) Slice() []int {
+	return s.data
+}
+
+func main() {
+
+	// 1. 新建一个active object, 并增加结束信号
+	c := make(chan struct{})
+	s := NewService(100, func() { c <- struct{}{} })
+
+	// 2. 起n个goroutine不断执行增加操作
+	n := 10000
+	var wg sync.WaitGroup
+	wg.Add(n)
+	for i := 0; i < n; i++ {
+		go func(a int) {
+			s.Add(a)
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
+	s.Close()
+
+	<-c
+
+	// 3. 校验所有结果是否都被添加上
+	fmt.Println("done len:", len(s.Slice()))
+}
+```
+
+​	

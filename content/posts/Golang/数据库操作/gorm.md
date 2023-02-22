@@ -1,5 +1,5 @@
 ---
-title: "Go GORM"
+title: "Go GORM 库"
 date: 2022-02-14
 draft: false
 author: "MelonCholi"

@@ -18,3 +18,12 @@ go install github.com/isacikgoz/tldr@latest
 ```
 
 更新缓存，`tldr --update` 或 `tldr -u`
+
+用 npm 安装
+
+https://github.com/tldr-pages/tldr
+
+```shell
+npm install -g tldr
+```
+
