@@ -78,9 +78,11 @@ https://windowsterminalthemes.dev/
 修改配置
 
 ```json
-"fontFace": "DejaVuSansMono Nerd Font" 
+"fontFace": "DejaVuSansMono Nerd Font"
 // Cousine Nerd Font
 ```
+
+推荐：CaskaydiaCove Nerd Font Mono（或者叫 CaskaydiaCove NFM）
 
 #### Meslo LGM NF
 
@@ -220,7 +222,7 @@ zsh-syntax-highlighting
 高亮插件，基于 zsh
 
 ```bash
-cd ~/.oh-my-zsh/custom/plugins/ 
+cd ~/.oh-my-zsh/custom/plugins/
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 ```
 
