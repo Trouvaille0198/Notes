@@ -1,0 +1,1473 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Svelte 入门 - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="Svelte 简介 官方文档：https://www.sveltejs.cn/tutorial"><meta name=keywords content="前端,快速入门"><meta itemprop=name content="Svelte 入门"><meta itemprop=description content="Svelte 简介 官方文档：https://www.sveltejs.cn/tutorial"><meta itemprop=datePublished content="2023-04-09T00:00:00+00:00"><meta itemprop=dateModified content="2023-05-13T09:25:24+00:00"><meta itemprop=wordCount content="8573"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="前端,快速入门,"><meta property="og:title" content="Svelte 入门"><meta property="og:description" content="Svelte 简介 官方文档：https://www.sveltejs.cn/tutorial"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/frontend/svelte/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-04-09T00:00:00+00:00"><meta property="article:modified_time" content="2023-05-13T09:25:24+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Svelte 入门"><meta name=twitter:description content="Svelte 简介 官方文档：https://www.sveltejs.cn/tutorial"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/frontend/svelte/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/games/%E4%B8%96%E7%95%8C%E5%BC%B9%E5%B0%84%E7%89%A9%E8%AF%AD/abs/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/markdown/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Svelte 入门","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/svelte\/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95\/"},"genre":"posts","keywords":"前端, 快速入门","wordcount":8573,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/frontend\/svelte\/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95\/","datePublished":"2023-04-09T00:00:00+00:00","dateModified":"2023-05-13T09:25:24+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
+<a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Svelte 入门</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/%E5%89%8D%E7%AB%AF/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;前端</a></span></div><div class=post-meta-line><span title="2023-04-09 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-04-09>2023-04-09</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 8573 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 18 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a><ul><li><a href=#构建>构建</a></li><li><a href=#组件>组件</a></li><li><a href=#动态属性>动态属性</a></li><li><a href=#css-样式>CSS 样式</a></li><li><a href=#嵌套组件>嵌套组件</a></li><li><a href=#html-标签>HTML 标签</a></li><li><a href=#创建一个应用程序>创建一个应用程序</a></li></ul></li><li><a href=#反应性能力>反应性能力</a><ul><li><a href=#声明>声明</a></li><li><a href=#语句>语句</a></li><li><a href=#更新数组和对象>更新数组和对象</a></li></ul></li><li><a href=#属性>属性</a><ul><li><a href=#声明属性>声明属性</a></li><li><a href=#默认值>默认值</a></li><li><a href=#属性传递>属性传递</a></li></ul></li><li><a href=#逻辑>逻辑</a><ul><li><a href=#if>if</a></li><li><a href=#else>else</a></li><li><a href=#else-if>else if</a></li><li><a href=#each>each</a></li><li><a href=#为-each-块添加-key-值>为 each 块添加 key 值</a></li><li><a href=#await>Await</a></li></ul></li><li><a href=#事件>事件</a><ul><li><a href=#dom-events>DOM events</a></li><li><a href=#inline-handlers>Inline handlers</a></li><li><a href=#事件修饰符>事件修饰符</a></li><li><a href=#组件事件>组件事件</a></li><li><a href=#事件转发>事件转发</a></li><li><a href=#dom-事件转发>DOM 事件转发</a></li></ul></li><li><a href=#绑定>绑定</a><ul><li><a href=#text-inputs>Text inputs</a></li><li><a href=#numeric-inputs>Numeric inputs</a></li><li><a href=#复选框>复选框</a></li><li><a href=#输入框组绑定>输入框组绑定</a></li><li><a href=#文本域绑定>文本域绑定</a></li><li><a href=#选择框绑定>选择框绑定</a></li></ul></li><li><a href=#生命周期>生命周期</a><ul><li><a href=#onmounted>onMounted</a></li><li><a href=#ondestroy>onDestroy</a></li><li><a href=#beforeupdate-和-afterupdate>beforeUpdate 和 afterUpdate</a></li><li><a href=#tick>tick</a></li></ul></li><li><a href=#stores>Stores</a><ul><li><a href=#可写状态-writable-stores>可写状态 Writable stores</a></li><li><a href=#自动订阅auto-subscriptions>自动订阅（Auto-subscriptions）</a></li><li><a href=#只读状态readable-stores>只读状态（Readable stores）</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=svelte>Svelte</h1><h2 id=简介>简介</h2><blockquote><p>官方文档：https://www.sveltejs.cn/tutorial</p></blockquote><p>Svelte 是一个构建 web 应用程序的工具。</p><p>Svelte 与诸如 React 和 Vue 等 JavaScript 框架类似，都怀揣着一颗让构建交互式用户界面变得更容易的心。</p><p>但是有一个关键的区别：Svelte 在<strong>构建/编译阶段</strong>将你的应用程序转换为理想的 JavaScript 应用，而不是在运行阶段解释应用程序的代码。这意味着你不需要为框架所消耗的性能付出成本，并且在应用程序首次加载时没有额外损失。</p><p>你可以使用 Svelte 构建整个应用程序，也可以逐步将其融合到现有的代码中。你还可以将组件作为独立的包（package）交付到任何地方，并且不会有传统框架所带来的额外开销</p><h3 id=构建>构建</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>npx degit sveltejs/template &lt;my_project_name&gt;
+</span></span><span class=line><span class=cl><span class=nb>cd</span> &lt;my_project_name&gt;
+</span></span><span class=line><span class=cl>npm install
+</span></span></code></pre></td></tr></table></div></div><h3 id=组件>组件</h3><p>在 Svelte 中，应用程序由一个或多个 <em>组件（components）</em> 构成。组件是一个可重用的、自包含的代码块，它将 HTML、CSS 和 JavaScript 代码封装在一起并写入 <code>.svelte</code> 后缀名的文件中。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>name</span> <span class=o>=</span> <span class=s1>&#39;world&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span>Hello <span class=p>{</span><span class=nx>name</span><span class=p>.</span><span class=nx>toUpperCase</span><span class=p>()}</span>!<span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=动态属性>动态属性</h3><p>就像可以使用花括号控制文本一样，也可以使用花括号控制元素属性。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>src</span> <span class=o>=</span> <span class=s1>&#39;tutorial/image.gif&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>name</span> <span class=o>=</span> <span class=s1>&#39;Rick Astley&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>img</span> <span class=p>{</span><span class=nx>src</span><span class=p>}</span> <span class=na>alt</span><span class=o>=</span><span class=s>&#34;</span><span class=p>{</span><span class=nx>name</span><span class=p>}</span><span class=s> dances.&#34;</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image.gif data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image.gif, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image.gif 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image.gif 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image.gif title="Rick Astley dances."></p><p><strong>名称和值相同的属性</strong>并不少见，比如 <code>src={src}</code>。Svelte 为这些情况提供了一个方便的速记法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>img</span> <span class=p>{</span><span class=nx>src</span><span class=p>}</span> <span class=na>alt</span><span class=o>=</span><span class=s>&#34;A man dances.&#34;</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=css-样式>CSS 样式</h3><p>就像在 HTML 中一样，你可以向组件添加一个 <code>&lt;style></code> 标签。</p><p>重要的是，这些 CSS 样式规则 <em>的作用域被限定在当前组件中</em>。您不会意外地更改应用程序中其他地方的 <code>&lt;p></code> 元素的样式。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl>// Nested.svelte
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>p</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>color</span><span class=p>:</span> <span class=kc>purple</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>font-family</span><span class=p>:</span> <span class=s1>&#39;Comic Sans MS&#39;</span><span class=p>,</span> <span class=kc>cursive</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>font-size</span><span class=p>:</span> <span class=mi>2</span><span class=kt>em</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>This is a paragraph.<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410000637208.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410000637208.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410000637208.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410000637208.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410000637208.png title=image-20230410000637208></p><h3 id=嵌套组件>嵌套组件</h3><p>将整个应用程序放在一个组件中是不切实际的。相反，我们可以从其他文件导入组件并包含它们，就好像我们包含 HTML 元素一样。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=nx>Nested</span> <span class=nx>from</span> <span class=s1>&#39;./Nested.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>p</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>color</span><span class=p>:</span> <span class=kc>purple</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>font-family</span><span class=p>:</span> <span class=s1>&#39;Comic Sans MS&#39;</span><span class=p>,</span> <span class=kc>cursive</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>font-size</span><span class=p>:</span> <span class=mi>2</span><span class=kt>em</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>This is a paragraph.<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Nested</span><span class=p>/&gt;</span>	
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410001438372.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410001438372.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410001438372.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410001438372.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410001438372.png title=image-20230410001438372></p><p>注意，尽管 <code>Nested.svelte</code> 有一个 <code>&lt;p></code> 元素，但 <code>App.svelte</code> 中的样式是不会溢出的（也就是不会影响 <code>Nested.svelte</code> 中的 <code>&lt;p></code> 元素）。</p><p>还需要注意的是，组件名称 <code>Nested</code> 的<strong>首字母大写</strong>。采用此约定是为了使我们能够区分用户自定义的组件和一般的 HTML 标签。</p><h3 id=html-标签>HTML 标签</h3><p>通常，字符串以纯文本形式插入，这意味着像 <code>&lt;</code> 和 <code>></code> 这样的字符没有特殊的含义。</p><p>但<strong>有时需要将 HTML 直接绘制到组件中</strong>。</p><p>在 Svelte 中，你可以使用特殊标记 <code>{@html ...}</code> 实现：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>string</span> <span class=o>=</span> <span class=sb>`this string contains some &lt;strong&gt;HTML!!!&lt;/strong&gt;`</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=k>@html</span> <span class=kt>string</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>在将表达式的输出插入到 DOM 之前，Svelte 不会对 <code>{@html ...}</code> 内的表达式的输出做任何清理的。</p><p>换言之，如果使用此功能，则必须手动转义来自不信任源的 HTML 代码，否则会使用户面临 XSS 攻击的风险。</p></blockquote><h3 id=创建一个应用程序>创建一个应用程序</h3><p>首先，你需要将 Svelte 与构建工具集成起来。官方提供了针对 <a href=https://rollupjs.org/ target=_blank rel="external nofollow noopener noreferrer">Rollup</a> 和 <a href=https://webpack.js.org/ target=_blank rel="external nofollow noopener noreferrer">webpack</a> 的插件：</p><ul><li><a href=https://github.com/sveltejs/rollup-plugin-svelte target=_blank rel="external nofollow noopener noreferrer">rollup-plugin-svelte</a></li><li><a href=https://github.com/sveltejs/svelte-loader target=_blank rel="external nofollow noopener noreferrer">svelte-loader</a></li></ul><p>另外还有很多是<a href=https://github.com/sveltejs/integrations#bundler-plugins target=_blank rel="external nofollow noopener noreferrer">社区维护的插件</a>。</p><p>然后，一旦您的项目设置好了，使用 Svelte 组件就很容易了。编译器将每个组件转换为常规的 JavaScript 类 - 接下来只需导入它并用 <code>new</code> 实例化即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>import</span> <span class=nx>App</span> <span class=nx>from</span> <span class=s1>&#39;./App.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>app</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>App</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>	<span class=nx>target</span><span class=o>:</span> <span class=nb>document</span><span class=p>.</span><span class=nx>body</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>	<span class=nx>props</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// we&#39;ll learn about props later
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>answer</span><span class=o>:</span> <span class=mi>42</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后，如果需要，你可以使用 <a href=https://www.sveltejs.cn/docs#Client-side_component_API target=_blank rel="external nofollow noopener noreferrer">组件 API</a> 与 <code>app</code> 进行交互。</p><h2 id=反应性能力>反应性能力</h2><p>Svelete 的内核是一个强大的 <em>（反应性）reactivity</em> 系统，能够让 DOM 与你的应用程序状态保持同步，例如，事件响应。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>count</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>handleClick</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>count</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>button</span> <span class=na>on:click</span><span class=o>=</span><span class=p>{</span><span class=nx>handleClick</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>	Clicked <span class=p>{</span><span class=nx>count</span><span class=p>}</span> <span class=p>{</span><span class=nx>count</span> <span class=o>===</span> <span class=mi>1</span> <span class=o>?</span> <span class=s1>&#39;time&#39;</span> <span class=o>:</span> <span class=s1>&#39;times&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=声明>声明</h3><p>当组件的状态改变时，Svelte 会自动更新 DOM。通常，组件状态的某些部分需要通过 <em>其它</em> 部分的计算而得出（例如 <code>fullname</code> 就是 <code>firstname</code> 和 <code>lastname</code> 的合体），并在 <em>其它</em> 部分更改时重新计算。</p><p>对于这些，我们提供了 <em>反应式声明（reactive declarations）</em>。它们看起来像这样：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kd>let</span> <span class=nx>count</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nx>$</span><span class=o>:</span> <span class=nx>doubled</span> <span class=o>=</span> <span class=nx>count</span> <span class=o>*</span> <span class=mi>2</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>看来其有点陌生，不过别担心。上述是 <a href=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label target=_blank rel="external nofollow noopener noreferrer">有效</a> （非常规）的 JavaScript 语句，Svelte 会将其解释为 “只要参考值变化了就重新运行此代码”。一旦看习惯了，你就再也戒不掉了。</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>count</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=nx>$</span><span class=o>:</span> <span class=nx>doubled</span> <span class=o>=</span> <span class=nx>count</span> <span class=o>*</span> <span class=mi>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>handleClick</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>count</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>button</span> <span class=na>on:click</span><span class=o>=</span><span class=p>{</span><span class=nx>handleClick</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>	Clicked <span class=p>{</span><span class=nx>count</span><span class=p>}</span> <span class=p>{</span><span class=nx>count</span> <span class=o>===</span> <span class=mi>1</span> <span class=o>?</span> <span class=s1>&#39;time&#39;</span> <span class=o>:</span> <span class=s1>&#39;times&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=nx>count</span><span class=p>}</span> doubled is <span class=p>{</span><span class=nx>doubled</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410002438130.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410002438130.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410002438130.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410002438130.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230410002438130.png title=image-20230410002438130></p><p>当然，你可以在 HTML 标签内书写 <code>{count * 2}</code>，而不必非得使用反应式声明的语法。但是，当你需要多次引用它们时，或者你需要的值依赖于 <em>其它</em> 响应式声明所计算的来的值时，响应式声明就变得特别有用。</p><h3 id=语句>语句</h3><p>我们不仅提供了声明反应式的 <em>值</em>，我们还可以运行反应式的 <em>语句</em>。例如，当 <code>count</code> 的值改变时就输出到日志中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=nx>$</span><span class=o>:</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=sb>`the count is </span><span class=si>${</span><span class=nx>count</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>你可以轻松地将一组语句组合成一个代码块：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=nx>$</span><span class=o>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=sb>`the count is </span><span class=si>${</span><span class=nx>count</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nx>alert</span><span class=p>(</span><span class=sb>`I SAID THE COUNT IS </span><span class=si>${</span><span class=nx>count</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>你甚至可以将 <code>$:</code> 放在= <code>if</code> 代码块前面：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=nx>$</span><span class=o>:</span> <span class=k>if</span> <span class=p>(</span><span class=nx>count</span> <span class=o>&gt;=</span> <span class=mi>10</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>alert</span><span class=p>(</span><span class=sb>`count is dangerously high!`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nx>count</span> <span class=o>=</span> <span class=mi>9</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=更新数组和对象>更新数组和对象</h3><p>由于 <strong>Svelte 的反应性是由赋值语句触发的</strong>，因此使用数组的诸如 <code>push</code> 和 <code>splice</code> 之类的方法就不会触发自动更新。例如，点击按钮就不会执行任何操作。</p><p>解决该问题的一种方法是添加一个多余的赋值语句：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kd>function</span> <span class=nx>addNumber</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>numbers</span><span class=p>.</span><span class=nx>push</span><span class=p>(</span><span class=nx>numbers</span><span class=p>.</span><span class=nx>length</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=nx>numbers</span> <span class=o>=</span> <span class=nx>numbers</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>但还有一个更惯用的解决方案：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kd>function</span> <span class=nx>addNumber</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>numbers</span> <span class=o>=</span> <span class=p>[...</span><span class=nx>numbers</span><span class=p>,</span> <span class=nx>numbers</span><span class=p>.</span><span class=nx>length</span> <span class=o>+</span> <span class=mi>1</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>你可以使用类似的模式来替换 <code>pop</code>、<code>shift</code>、<code>unshift</code> 和 <code>splice</code> 方法。</p><p>✔️ 赋值给数组和对象的 <em>属性（properties）</em> （例如，<code>obj.foo += 1</code> 或 <code>array[i] = x</code>）与对值本身进行赋值的方式相同。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kd>function</span> <span class=nx>addNumber</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>numbers</span><span class=p>[</span><span class=nx>numbers</span><span class=p>.</span><span class=nx>length</span><span class=p>]</span> <span class=o>=</span> <span class=nx>numbers</span><span class=p>.</span><span class=nx>length</span> <span class=o>+</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>一个简单的经验法则是：**被更新的变量的名称必须出现在赋值语句的左侧。**例如下面这个：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>foo</span> <span class=o>=</span> <span class=nx>obj</span><span class=p>.</span><span class=nx>foo</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nx>foo</span><span class=p>.</span><span class=nx>bar</span> <span class=o>=</span> <span class=s1>&#39;baz&#39;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>就不会更新对 <code>obj.foo.bar</code> 的引用，除非使用 <code>obj = obj</code> 方式。</p><h2 id=属性>属性</h2><h3 id=声明属性>声明属性</h3><p>到目前为止，我们仅处理属性的内部状态，也就是说，这些值只能在给定组件中访问。</p><p>在任何实际应用中，你都会需要将数据从一个组件传递给其子组件。</p><p>为此，我们需要声明属性（Declaring properties， generally shortened to &lsquo;props&rsquo;）。在 Svelte 中，我们使用 <code>export</code> 关键字来做到这一点。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>export</span> <span class=kd>let</span> <span class=nx>answer</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>Just like <code>$:</code>, this may feel a little weird at first. That&rsquo;s not how <code>export</code> normally works in JavaScript modules! Just roll with it for now — it&rsquo;ll soon become second nature.</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl>// Nested.svelte
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>export</span> <span class=kd>let</span> <span class=nx>answer</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>The answer is <span class=p>{</span><span class=nx>answer</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl>// App.svelte
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=nx>Nested</span> <span class=nx>from</span> <span class=s1>&#39;./Nested.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Nested</span> <span class=na>answer</span><span class=o>=</span><span class=p>{</span><span class=mi>42</span><span class=p>}</span><span class=s>/</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=默认值>默认值</h3><p>We can easily specify default values for props in <code>Nested.svelte</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>export</span> <span class=kd>let</span> <span class=nx>answer</span> <span class=o>=</span> <span class=s1>&#39;a mystery&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>If we now add a second component <em>without</em> an <code>answer</code> prop, it will fall back to the default:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Nested</span> <span class=na>answer</span><span class=o>=</span><span class=p>{</span><span class=mi>42</span><span class=p>}</span><span class=s>/</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Nested</span><span class=p>/&gt;</span> // will be a &#39;a mystery&#39;
+</span></span></code></pre></td></tr></table></div></div><h3 id=属性传递>属性传递</h3><p>如果你的组件含有有一个对象属性，可以利用 <code>...</code> 语法将它们<em>spread</em>（传播）到一个组件上，而不用逐一指定：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Info</span> <span class=p>{...</span><span class=nx>pkg</span><span class=p>}/&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>相反，如果你需要引用传递到组件中的所有道具，包括未使用 <code>export</code> 声明的道具，可以利用 <code>$$props</code> 直接获取。但通常不建议这么做，因为 Svelte 难以优化，但在极少数情况下很有用。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl>// Info.svelte
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>export</span> <span class=kd>let</span> <span class=nx>name</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>export</span> <span class=kd>let</span> <span class=nx>version</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>export</span> <span class=kd>let</span> <span class=nx>speed</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>export</span> <span class=kd>let</span> <span class=nx>website</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	The <span class=p>&lt;</span><span class=nt>code</span><span class=p>&gt;{</span><span class=nx>name</span><span class=p>}&lt;/</span><span class=nt>code</span><span class=p>&gt;</span> package is <span class=p>{</span><span class=nx>speed</span><span class=p>}</span> fast.
+</span></span><span class=line><span class=cl>	Download version <span class=p>{</span><span class=nx>version</span><span class=p>}</span> from <span class=p>&lt;</span><span class=nt>a</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;https://www.npmjs.com/package/</span><span class=p>{</span><span class=nx>name</span><span class=p>}</span><span class=s>&#34;</span><span class=p>&gt;</span>npm<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	and <span class=p>&lt;</span><span class=nt>a</span> <span class=na>href</span><span class=o>=</span><span class=p>{</span><span class=nx>website</span><span class=p>}</span><span class=err>&gt;</span><span class=s>learn</span> <span class=na>more</span> <span class=na>here</span><span class=err>&lt;/</span><span class=na>a</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl>// App.svelte
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=nx>Info</span> <span class=nx>from</span> <span class=s1>&#39;./Info.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kr>const</span> <span class=nx>pkg</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;svelte&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nx>version</span><span class=o>:</span> <span class=mi>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nx>speed</span><span class=o>:</span> <span class=s1>&#39;blazing&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nx>website</span><span class=o>:</span> <span class=s1>&#39;https://svelte.dev&#39;</span>
+</span></span><span class=line><span class=cl>	<span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Info</span> <span class=na>name</span><span class=o>=</span><span class=p>{</span><span class=nx>pkg</span><span class=p>.</span><span class=nx>name</span><span class=p>}</span> <span class=s>version=</span><span class=p>{</span><span class=nx>pkg</span><span class=p>.</span><span class=nx>version</span><span class=p>}</span> <span class=na>speed</span><span class=o>=</span><span class=p>{</span><span class=nx>pkg</span><span class=p>.</span><span class=nx>speed</span><span class=p>}</span> <span class=s>website=</span><span class=p>{</span><span class=nx>pkg</span><span class=p>.</span><span class=nx>website</span><span class=p>}</span><span class=s>/</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>// 等价于
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Info</span> <span class=p>{...</span><span class=nx>pkg</span><span class=p>}/&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=逻辑>逻辑</h2><h3 id=if>if</h3><p>HTML doesn&rsquo;t have a way of expressing <em>logic</em>, like conditionals and loops. Svelte does.</p><p>To conditionally render some markup, we wrap it in an <code>if</code> block:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>user</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>loggedIn</span><span class=o>:</span> <span class=kc>false</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>toggle</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>user</span><span class=p>.</span><span class=nx>loggedIn</span> <span class=o>=</span> <span class=o>!</span><span class=nx>user</span><span class=p>.</span><span class=nx>loggedIn</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>#if</span> <span class=nx>user</span><span class=p>.</span><span class=nx>loggedIn</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>button</span> <span class=na>on:click</span><span class=o>=</span><span class=p>{</span><span class=nx>toggle</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>		Log out
+</span></span><span class=line><span class=cl>	<span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/if</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>#if</span> <span class=o>!</span><span class=nx>user</span><span class=p>.</span><span class=nx>loggedIn</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>button</span> <span class=na>on:click</span><span class=o>=</span><span class=p>{</span><span class=nx>toggle</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>		Log in
+</span></span><span class=line><span class=cl>	<span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/if</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=else>else</h3><p>Since the two conditions — <code>if user.loggedIn</code> and <code>if !user.loggedIn</code> — are mutually exclusive（互斥的）, we can simplify this component slightly by using an <code>else</code> block:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>{</span><span class=k>#if</span> <span class=nx>user</span><span class=p>.</span><span class=nx>loggedIn</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>button</span> <span class=na>on:click</span><span class=o>=</span><span class=p>{</span><span class=nx>toggle</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>		Log out
+</span></span><span class=line><span class=cl>	<span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=o>:</span><span class=k>else</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>button</span> <span class=na>on:click</span><span class=o>=</span><span class=p>{</span><span class=nx>toggle</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>		Log in
+</span></span><span class=line><span class=cl>	<span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/if</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><ul><li><p>A <code>#</code> character always indicates a <em>block opening</em> tag.</p></li><li><p>A <code>/</code> character always indicates a <em>block closing</em> tag.</p></li><li><p>A <code>:</code> character, as in <code>{:else}</code>, indicates a <em>block continuation</em> tag.</p></li></ul><p>Don&rsquo;t worry — you&rsquo;ve already learned almost all the syntax Svelte adds to HTML.</p></blockquote><h3 id=else-if>else if</h3><p>将多个条件链接在一起请使用<code>else if</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>{</span><span class=k>#if</span> <span class=nx>x</span> <span class=o>&gt;</span> <span class=mi>10</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=nx>x</span><span class=p>}</span> is greater than 10<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>:else</span> <span class=k>if</span> <span class=mi>5</span> <span class=o>&gt;</span> <span class=nx>x</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=nx>x</span><span class=p>}</span> is less than 5<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=o>:</span><span class=k>else</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=nx>x</span><span class=p>}</span> is between 5 and 10<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/if</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=each>each</h3><p>如果你遇到需要遍历的数据列表，请使用 <code>each</code> 块：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span><span class=k>#each</span> <span class=nx>cats</span> <span class=kr>as</span> <span class=nx>cat</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;&lt;</span><span class=nt>a</span> <span class=na>target</span><span class=o>=</span><span class=s>&#34;_blank&#34;</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;https://www.youtube.com/watch?v=</span><span class=p>{</span><span class=nx>cat</span><span class=p>.</span><span class=nx>id</span><span class=p>}</span><span class=s>&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=p>{</span><span class=nx>cat</span><span class=p>.</span><span class=nx>name</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span><span class=k>/each</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>表达式 <code>cats</code> 是一个数组</p><p>遇到数组或类似于数组的对象 (即具有 <code>length</code> 属性)，你都可以通过 <code>each [...iterable]</code> 遍历迭代该对象。</p><p>你也可以将 <em>index</em> 作为第二个参数 (key)，类似于：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>{</span><span class=k>#each</span> <span class=nx>cats</span> <span class=kr>as</span> <span class=nx>cat</span><span class=p>,</span> <span class=nx>i</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;&lt;</span><span class=nt>a</span> <span class=na>target</span><span class=o>=</span><span class=s>&#34;_blank&#34;</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;https://www.youtube.com/watch?v=</span><span class=p>{</span><span class=nx>cat</span><span class=p>.</span><span class=nx>id</span><span class=p>}</span><span class=s>&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span><span class=nx>i</span> <span class=o>+</span> <span class=mi>1</span><span class=p>}</span>: <span class=p>{</span><span class=nx>cat</span><span class=p>.</span><span class=nx>name</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/each</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果你希望代码更加健壮，你可以使用 <code>each cats as { id, name }</code> 来解构，用 <code>id</code> 和 <code>name</code> 来代替 <code>cat.id</code> 和 <code>cat.name</code>。</p><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>cats</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span> <span class=nx>id</span><span class=o>:</span> <span class=s1>&#39;J---aiyznGQ&#39;</span><span class=p>,</span> <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;Keyboard Cat&#39;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span> <span class=nx>id</span><span class=o>:</span> <span class=s1>&#39;z_AbfPXTKms&#39;</span><span class=p>,</span> <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;Maru&#39;</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span> <span class=nx>id</span><span class=o>:</span> <span class=s1>&#39;OUtn3pvWmpg&#39;</span><span class=p>,</span> <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;Henri The Existential Cat&#39;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span>The Famous Cats of YouTube<span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span><span class=k>#each</span> <span class=nx>cats</span> <span class=kr>as</span> <span class=p>{</span> <span class=nx>id</span><span class=p>,</span> <span class=nx>name</span> <span class=p>},</span> <span class=nx>i</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;</span><span class=nt>li</span><span class=p>&gt;&lt;</span><span class=nt>a</span> <span class=na>target</span><span class=o>=</span><span class=s>&#34;_blank&#34;</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;https://www.youtube.com/watch?v=</span><span class=p>{</span><span class=nx>id</span><span class=p>}</span><span class=s>&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=p>{</span><span class=nx>i</span> <span class=o>+</span> <span class=mi>1</span><span class=p>}</span>: <span class=p>{</span><span class=nx>name</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;&lt;/</span><span class=nt>li</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span><span class=k>/each</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>ul</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=为-each-块添加-key-值>为 each 块添加 key 值</h3><blockquote><p>具体示例见 <a href=https://www.sveltejs.cn/tutorial/keyed-each-blocks target=_blank rel="external nofollow noopener noreferrer">https://www.sveltejs.cn/tutorial/keyed-each-blocks</a></p></blockquote><p>一般来说，当你修改 <code>each</code> 块中的值时，它将会在尾端进行添加或删除条目，并更新所有变化， 这可能不是你想要的效果。</p><p>为此，我们为 <code>each</code> 块指定一个唯一标识符，作为 key 值：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>{</span><span class=k>#each</span> <span class=nx>things</span> <span class=kr>as</span> <span class=nx>thing</span> <span class=p>(</span><span class=nx>thing</span><span class=p>.</span><span class=nx>id</span><span class=p>)}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>Thing</span> <span class=na>current</span><span class=o>=</span><span class=p>{</span><span class=nx>thing</span><span class=p>.</span><span class=nx>color</span><span class=p>}</span><span class=s>/</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/each</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>(thing.id)</code> 告诉 Svelte 什么地方需要改变。</p><blockquote><p>你可以将任何对象用作 key 来使用，就像 Svelte 用 <code>Map</code> 在内部作为 key 一样，换句话说，你可以用 <code>(thing)</code> 来代替 <code>(thing.id)</code> 作为 key 值。但是，使用字符串或者数字作为 key 值通常更安全，因为这能确保它的<strong>唯一性</strong>，例如，使用来自 API 服务器的新数据进行更新时。</p></blockquote><h3 id=await>Await</h3><p>很多 Web 应用程序都可能在某个时候有需要处理异步数据的需求。使用 Svelte 在标签中使用 <em>await</em> 处理 <a href=https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises target=_blank rel="external nofollow noopener noreferrer">promises</a> 数据亦是十分容易：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>{</span><span class=k>#await</span> <span class=nx>promise</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>...waiting<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>:then</span> <span class=kt>number</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>The number is <span class=p>{</span><span class=kt>number</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>:catch</span> <span class=nx>error</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span> <span class=na>style</span><span class=o>=</span><span class=s>&#34;color: red&#34;</span><span class=p>&gt;{</span><span class=nx>error</span><span class=p>.</span><span class=nx>message</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/await</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p><code>promise</code> 总是获取最新的信息，这使得你无需关心 rece 状态</p></blockquote><p>如果你的知道你的 promise 返回错误，则可以忽略 <code>catch</code> 块。如果在请求完成之前不想程序执行任何操作，也可以忽略第一个块。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>{</span><span class=k>#await</span> <span class=nx>promise</span> <span class=k>then</span> <span class=nx>value</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>the value is <span class=p>{</span><span class=nx>value</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/await</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=事件>事件</h2><h3 id=dom-events>DOM events</h3><p>As we&rsquo;ve briefly seen already, you can listen to any event on an element with the <code>on:</code> directive:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>div</span> <span class=na>on:mousemove</span><span class=o>=</span><span class=p>{</span><span class=nx>handleMousemove</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>	The mouse position is <span class=p>{</span><span class=nx>m</span><span class=p>.</span><span class=nx>x</span><span class=p>}</span> x <span class=p>{</span><span class=nx>m</span><span class=p>.</span><span class=nx>y</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>m</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>x</span><span class=o>:</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>y</span><span class=o>:</span> <span class=mi>0</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>handleMousemove</span><span class=p>(</span><span class=nx>event</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>m</span><span class=p>.</span><span class=nx>x</span> <span class=o>=</span> <span class=nx>event</span><span class=p>.</span><span class=nx>clientX</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=nx>m</span><span class=p>.</span><span class=nx>y</span> <span class=o>=</span> <span class=nx>event</span><span class=p>.</span><span class=nx>clientY</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>div</span> <span class=p>{</span> <span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span> <span class=k>height</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>div</span> <span class=na>on:mousemove</span><span class=o>=</span><span class=p>{</span><span class=nx>handleMousemove</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>	The mouse position is <span class=p>{</span><span class=nx>m</span><span class=p>.</span><span class=nx>x</span><span class=p>}</span> x <span class=p>{</span><span class=nx>m</span><span class=p>.</span><span class=nx>y</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>在此列举一些常用的 DOM Events</p><ul><li><code>on:load</code>：<strong><code>load</code></strong> 事件在整个页面及所有依赖资源如样式表和图片都已完成加载时触发。</li><li>pointEvent：指针事件，详见 <a href=https://developer.mozilla.org/zh-CN/docs/Web/API/Pointer_events target=_blank rel="external nofollow noopener noreferrer">https://developer.mozilla.org/zh-CN/docs/Web/API/Pointer_events</a><ul><li><code>on:onpointerdown</code></li><li><code>on:onpointerenter</code></li><li><code>on:onpointerleave</code></li><li><code>on:onpointerup</code></li></ul></li></ul><h3 id=inline-handlers>Inline handlers</h3><p>You can also declare event handlers inline:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>m</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>x</span><span class=o>:</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>y</span><span class=o>:</span> <span class=mi>0</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>div</span> <span class=p>{</span> <span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span> <span class=k>height</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>div</span> <span class=na>on:mousemove</span><span class=o>=</span><span class=s>&#34;</span><span class=p>{</span><span class=nx>e</span> <span class=o>=&gt;</span> <span class=nx>m</span> <span class=o>=</span> <span class=p>{</span> <span class=nx>x</span>: <span class=kt>e.clientX</span><span class=p>,</span> <span class=nx>y</span>: <span class=kt>e.clientY</span> <span class=p>}}</span><span class=s>&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	The mouse position is <span class=p>{</span><span class=nx>m</span><span class=p>.</span><span class=nx>x</span><span class=p>}</span> x <span class=p>{</span><span class=nx>m</span><span class=p>.</span><span class=nx>y</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>The quote marks are optional, but they&rsquo;re helpful for syntax highlighting in some environments.</p><blockquote><p>In some frameworks you may see recommendations to avoid inline event handlers for performance reasons, particularly inside loops. That advice doesn&rsquo;t apply to Svelte — the compiler will always do the right thing, whichever form you choose.</p></blockquote><h3 id=事件修饰符>事件修饰符</h3><p>DOM 事件处理程序具有额外的 <em>修饰符（modifiers）</em> 。 例如，带 <code>once</code> 修饰符的事件处理程序只运用一次：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>handleClick</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>alert</span><span class=p>(</span><span class=s1>&#39;no more alerts&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>button</span> <span class=na>on:click</span><span class=o>|</span><span class=na>once</span><span class=o>=</span><span class=p>{</span><span class=nx>handleClick</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>	Click me
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>所有修饰符列表：</p><ul><li><code>preventDefault</code>：调用 <code>event.preventDefault()</code> ，在运行处理程序之前调用。比如，对客户端表单处理有用。</li><li><code>stopPropagation</code>：调用 <code>event.stopPropagation()</code>, 防止事件影响到下一个元素。</li><li><code>passive</code>：优化了对 touch/wheel 事件的滚动表现 (Svelte 会在合适的地方自动添加滚动条)。</li><li><code>capture</code>：在 <em>capture</em> 阶段而不是 <em>bubbling</em> 阶段触发事件处理程序 (<a href=https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture target=_blank rel="external nofollow noopener noreferrer">MDN docs</a>)</li><li><code>once</code>：运行一次事件处理程序后将其删除。</li><li><code>self</code>：仅当 event.target 是其本身时才执行。</li></ul><p>你可以将修饰符组合在一起使用，例如：<code>on:click|once|capture={...}</code>。</p><h3 id=组件事件>组件事件</h3><p>组件也可以调度事件，为此，组件内必须创建一个相同事件并在外部进行分配。 更改 <code>Inner.svelte</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl>// Inner.svelte
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=p>{</span> <span class=nx>createEventDispatcher</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kr>const</span> <span class=nx>dispatch</span> <span class=o>=</span> <span class=nx>createEventDispatcher</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>sayHello</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>dispatch</span><span class=p>(</span><span class=s1>&#39;message&#39;</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>text</span><span class=o>:</span> <span class=s1>&#39;Hello!&#39;</span>
+</span></span><span class=line><span class=cl>		<span class=p>});</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>button</span> <span class=na>on:click</span><span class=o>=</span><span class=p>{</span><span class=nx>sayHello</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>	Click to say hello
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl>// App.svelte
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=nx>Inner</span> <span class=nx>from</span> <span class=s1>&#39;./Inner.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>handleMessage</span><span class=p>(</span><span class=nx>event</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>alert</span><span class=p>(</span><span class=nx>event</span><span class=p>.</span><span class=nx>detail</span><span class=p>.</span><span class=nx>text</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Inner</span> <span class=na>on:message</span><span class=o>=</span><span class=p>{</span><span class=nx>handleMessage</span><span class=p>}</span><span class=s>/</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p><code>createEventDispatcher</code> 必须在首次实例化组件时调用它，—组件本身不支持如 <code>setTimeout</code> 之类的事件回调。 定义一个 <code>dispatch</code> 进行连接，进而把组件实例化。</p></blockquote><h3 id=事件转发>事件转发</h3><p>与 DOM 事件不同， 组件事件不会 <em>冒泡（bubble）</em> ，如果你想要在某个深层嵌套的组件上监听事件，则中间组件必须 <em>转发（forward）</em> 该事件。</p><p>这种情况，我们有类似的 <code>App.svelte</code> 和 <code>Inner.svelte</code> 在上一章节，但是现在多出一个 <code>Outer.svelte</code> 来包含 <code>&lt;Inner/></code>。</p><p>解决这个问题的方法之一是添加 <code>createEventDispatcher</code> 到 <code>Outer.svelte</code>中，监听其 <code>message</code> 事件，并为它创建一个转发程序：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl>// Outer.svelte
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=nx>Inner</span> <span class=nx>from</span> <span class=s1>&#39;./Inner.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=p>{</span> <span class=nx>createEventDispatcher</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kr>const</span> <span class=nx>dispatch</span> <span class=o>=</span> <span class=nx>createEventDispatcher</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>forward</span><span class=p>(</span><span class=nx>event</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>dispatch</span><span class=p>(</span><span class=s1>&#39;message&#39;</span><span class=p>,</span> <span class=nx>event</span><span class=p>.</span><span class=nx>detail</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Inner</span> <span class=na>on:message</span><span class=o>=</span><span class=p>{</span><span class=nx>forward</span><span class=p>}</span><span class=s>/</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>但这样书写似乎有些臃肿，因此 Svelte 设立了一个简写属性 <code>on:message</code>。 <code>message</code> 没有赋予特定的值得情况下意味着转发所有<code>massage</code>事件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=nx>Inner</span> <span class=nx>from</span> <span class=s1>&#39;./Inner.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>Inner</span> <span class=na>on:message</span><span class=p>/&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=dom-事件转发>DOM 事件转发</h3><p>事件转发也可以应用到 DOM 事件。</p><p>我们希望 <code>&lt;FancyButton></code> 组件内部接收外部的 <code>handleClick()</code>，为此，我们只需要为 <code>FancyButton.svelte</code> 内的 <code>&lt;button></code> 标签添加 <code>click</code> 事件即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>button</span> <span class=na>on:click</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	Click me
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>button</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=绑定>绑定</h2><h3 id=text-inputs>Text inputs</h3><p>（自上而下的数据流）As a general rule, data flow in Svelte is <em>top down</em> — a parent component can set props on a child component, and a component can set attributes on an element, but not the other way around.</p><p>Sometimes it&rsquo;s useful to break that rule. Take the case of the <code>&lt;input></code> element in this component — we <em>could</em> add an <code>on:input</code> event handler that sets the value of <code>name</code> to <code>event.target.value</code>, but it&rsquo;s a bit&mldr; boilerplatey（样板化）. It gets even worse with other form elements, as we&rsquo;ll see.</p><p>Instead, we can use the <code>bind:value</code> directive:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>input</span> <span class=na>bind:value</span><span class=o>=</span><span class=p>{</span><span class=nx>name</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>This means that not only will changes to the value of <code>name</code> update the input value, but changes to the input value will update <code>name</code>.</p><h3 id=numeric-inputs>Numeric inputs</h3><p>In the DOM, everything is a string. That&rsquo;s unhelpful when you&rsquo;re dealing with numeric inputs — <code>type="number"</code> and <code>type="range"</code> — as it means you have to remember to coerce（强制） <code>input.value</code> before using it.</p><p>With <code>bind:value</code>, Svelte takes care of it for you:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>number</span> <span class=na>bind:value</span><span class=o>=</span><span class=p>{</span><span class=nx>a</span><span class=p>}</span> <span class=s>min=0</span> <span class=na>max</span><span class=o>=</span><span class=s>10</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>range</span> <span class=na>bind:value</span><span class=o>=</span><span class=p>{</span><span class=nx>a</span><span class=p>}</span> <span class=s>min=0</span> <span class=na>max</span><span class=o>=</span><span class=s>10</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>a</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>b</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>number</span> <span class=na>value</span><span class=o>=</span><span class=p>{</span><span class=nx>a</span><span class=p>}</span> <span class=s>min=0</span> <span class=na>max</span><span class=o>=</span><span class=s>10</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>range</span> <span class=na>value</span><span class=o>=</span><span class=p>{</span><span class=nx>a</span><span class=p>}</span> <span class=s>min=0</span> <span class=na>max</span><span class=o>=</span><span class=s>10</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>number</span> <span class=na>value</span><span class=o>=</span><span class=p>{</span><span class=nx>b</span><span class=p>}</span> <span class=s>min=0</span> <span class=na>max</span><span class=o>=</span><span class=s>10</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>range</span> <span class=na>value</span><span class=o>=</span><span class=p>{</span><span class=nx>b</span><span class=p>}</span> <span class=s>min=0</span> <span class=na>max</span><span class=o>=</span><span class=s>10</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;{</span><span class=nx>a</span><span class=p>}</span> + <span class=p>{</span><span class=nx>b</span><span class=p>}</span> = <span class=p>{</span><span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=复选框>复选框</h3><p>我们不仅可以使用 <code>input.value</code>，也可以将复选状态绑定 <code>input.checked</code> 将复选框的状态绑定：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>checkbox</span> <span class=na>bind:checked</span><span class=o>=</span><span class=p>{</span><span class=nx>yes</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=输入框组绑定>输入框组绑定</h3><p>如果你需要绑定更多值，则可以使用 <code>bind:group</code> 将 <code>value</code> 属性放在一起使用。 在 <code>bind:group</code> 中，同一组的单选框值是互斥的，同一组的复选框会形成一个数组。</p><p>添加 <code>bind:group</code> 到每一个选择框：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>radio</span> <span class=na>bind:group</span><span class=o>=</span><span class=p>{</span><span class=nx>scoops</span><span class=p>}</span> <span class=s>value=</span><span class=p>{</span><span class=mi>1</span><span class=p>}&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>在这种情况下，我们可以给复选框标签添加一个 <code>each</code> 块来简化代码。 首先添加一个<code>menu</code>变量到 <code>&lt;script></code>标签中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kd>let</span> <span class=nx>menu</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;Cookies and cream&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;Mint choc chip&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;Raspberry ripple&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>];</span>
+</span></span></code></pre></td></tr></table></div></div><p>接下来继续替换：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>h2</span><span class=p>&gt;</span>Flavours<span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>#each</span> <span class=nx>menu</span> <span class=kr>as</span> <span class=nx>flavour</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>checkbox</span> <span class=na>bind:group</span><span class=o>=</span><span class=p>{</span><span class=nx>flavours</span><span class=p>}</span> <span class=s>value=</span><span class=p>{</span><span class=nx>flavour</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span><span class=nx>flavour</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/each</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>现在，我们可以轻易的拓展我们的“ice cream menu”。</p><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>scoops</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>flavours</span> <span class=o>=</span> <span class=p>[</span><span class=s1>&#39;Mint choc chip&#39;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>menu</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>		<span class=s1>&#39;Cookies and cream&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=s1>&#39;Mint choc chip&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=s1>&#39;Raspberry ripple&#39;</span>
+</span></span><span class=line><span class=cl>	<span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>join</span><span class=p>(</span><span class=nx>flavours</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=p>(</span><span class=nx>flavours</span><span class=p>.</span><span class=nx>length</span> <span class=o>===</span> <span class=mi>1</span><span class=p>)</span> <span class=k>return</span> <span class=nx>flavours</span><span class=p>[</span><span class=mi>0</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=sb>`</span><span class=si>${</span><span class=nx>flavours</span><span class=p>.</span><span class=nx>slice</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=p>).</span><span class=nx>join</span><span class=p>(</span><span class=s1>&#39;, &#39;</span><span class=p>)</span><span class=si>}</span><span class=sb> and </span><span class=si>${</span><span class=nx>flavours</span><span class=p>[</span><span class=nx>flavours</span><span class=p>.</span><span class=nx>length</span> <span class=o>-</span> <span class=mi>1</span><span class=p>]</span><span class=si>}</span><span class=sb>`</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>h2</span><span class=p>&gt;</span>Size<span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>radio</span> <span class=na>bind:group</span><span class=o>=</span><span class=p>{</span><span class=nx>scoops</span><span class=p>}</span> <span class=s>value=</span><span class=p>{</span><span class=mi>1</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>	One scoop
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>radio</span> <span class=na>bind:group</span><span class=o>=</span><span class=p>{</span><span class=nx>scoops</span><span class=p>}</span> <span class=s>value=</span><span class=p>{</span><span class=mi>2</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>	Two scoops
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>radio</span> <span class=na>bind:group</span><span class=o>=</span><span class=p>{</span><span class=nx>scoops</span><span class=p>}</span> <span class=s>value=</span><span class=p>{</span><span class=mi>3</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>	Three scoops
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>h2</span><span class=p>&gt;</span>Flavours<span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>#each</span> <span class=nx>menu</span> <span class=kr>as</span> <span class=nx>flavour</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;</span><span class=nt>input</span> <span class=na>type</span><span class=o>=</span><span class=s>checkbox</span> <span class=na>bind:group</span><span class=o>=</span><span class=p>{</span><span class=nx>flavours</span><span class=p>}</span> <span class=s>value=</span><span class=p>{</span><span class=nx>flavour</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span><span class=nx>flavour</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;/</span><span class=nt>label</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/each</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>#if</span> <span class=nx>flavours</span><span class=p>.</span><span class=nx>length</span> <span class=o>===</span> <span class=mi>0</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>Please select at least one flavour<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>:else</span> <span class=k>if</span> <span class=nx>flavours</span><span class=p>.</span><span class=nx>length</span> <span class=o>&gt;</span> <span class=nx>scoops</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>Can&#39;t order more flavours than scoops!<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=o>:</span><span class=k>else</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		You ordered <span class=p>{</span><span class=nx>scoops</span><span class=p>}</span> <span class=p>{</span><span class=nx>scoops</span> <span class=o>===</span> <span class=mi>1</span> <span class=o>?</span> <span class=s1>&#39;scoop&#39;</span> <span class=o>:</span> <span class=s1>&#39;scoops&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>		of <span class=p>{</span><span class=nx>join</span><span class=p>(</span><span class=nx>flavours</span><span class=p>)}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>/if</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=文本域绑定>文本域绑定</h3><p>同样，<code>&lt;textarea></code> 标签在 Svelte 也可使用 <code>bind:value</code> 进行绑定：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>textarea</span> <span class=na>bind:value</span><span class=o>=</span><span class=p>{</span><span class=nx>value</span><span class=p>}</span><span class=err>&gt;</span><span class=s>&lt;/textarea</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>在这种情况下，如果值与变量名相同，我们也可以使用简写形式：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>textarea</span> <span class=na>bind:value</span><span class=p>&gt;&lt;/</span><span class=nt>textarea</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>这种写法适用于所有绑定，而不仅仅是 <code>&lt;textarea></code>。</p><p>例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=nx>marked</span> <span class=nx>from</span> <span class=s1>&#39;marked&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>value</span> <span class=o>=</span> <span class=sb>`Some words are *italic*, some are **bold**`</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>textarea</span> <span class=p>{</span> <span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span> <span class=k>height</span><span class=p>:</span> <span class=mi>200</span><span class=kt>px</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>textarea</span> <span class=na>bind:value</span><span class=p>&gt;&lt;/</span><span class=nt>textarea</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=k>@html</span> <span class=nx>marked</span><span class=p>(</span><span class=nx>value</span><span class=p>)}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=选择框绑定>选择框绑定</h3><p>我们还可以利用 <code>bind:value</code> 对 <code>&lt;select></code> 标签进行绑定</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>questions</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span> <span class=nx>id</span><span class=o>:</span> <span class=mi>1</span><span class=p>,</span> <span class=nx>text</span><span class=o>:</span> <span class=sb>`Where did you go to school?`</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span> <span class=nx>id</span><span class=o>:</span> <span class=mi>2</span><span class=p>,</span> <span class=nx>text</span><span class=o>:</span> <span class=sb>`What is your mother&#39;s name?`</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span> <span class=nx>id</span><span class=o>:</span> <span class=mi>3</span><span class=p>,</span> <span class=nx>text</span><span class=o>:</span> <span class=sb>`What is another personal fact that an attacker could easily find with Google?`</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>selected</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>answer</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>input</span> <span class=p>{</span> <span class=k>display</span><span class=p>:</span> <span class=kc>block</span><span class=p>;</span> <span class=k>width</span><span class=p>:</span> <span class=mi>500</span><span class=kt>px</span><span class=p>;</span> <span class=k>max-width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>select</span> <span class=na>bind:value</span><span class=o>=</span><span class=p>{</span><span class=nx>selected</span><span class=p>}</span> <span class=s>on:change=&#34;</span><span class=p>{()</span> <span class=o>=&gt;</span> <span class=nx>answer</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span><span class=p>}</span><span class=s>&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=k>#each</span> <span class=nx>questions</span> <span class=kr>as</span> <span class=nx>question</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;</span><span class=nt>option</span> <span class=na>value</span><span class=o>=</span><span class=p>{</span><span class=nx>question</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span><span class=nx>question</span><span class=p>.</span><span class=nx>text</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>&lt;/</span><span class=nt>option</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span><span class=k>/each</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>select</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>selected question <span class=p>{</span><span class=nx>selected</span> <span class=o>?</span> <span class=nx>selected</span><span class=p>.</span><span class=nx>id</span> <span class=o>:</span> <span class=s1>&#39;[waiting...]&#39;</span><span class=p>}&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>即使 <code>&lt;option></code> 中的值是对象而非字符串， Svelte 对它进行绑定也不会有任何困难。</p><blockquote><p>由于我们没有 <code>selected</code> 设置为初始值，因此绑定会自动将其 (列表中的第一个) 设置为默认值。 但也要注意，在绑定的目标未初始化前，<code>selected</code> 仍然是未定义的，因此我们应该谨慎的使用诸如<code>selected.id</code>中的内容。</p></blockquote><h2 id=生命周期>生命周期</h2><h3 id=onmounted>onMounted</h3><p>Every component has a <em>lifecycle</em> that starts when it is created, and ends when it is destroyed. There are a handful of functions that allow you to run code at key moments during that lifecycle.</p><p>The one you&rsquo;ll use most frequently is <code>onMount</code>, which <strong>runs after the component is first rendered to the DOM</strong>. We briefly encountered it <a href=https://www.sveltejs.cn/tutorial/bind-this target=_blank rel="external nofollow noopener noreferrer">earlier</a> when we needed to interact with a <code>&lt;canvas></code> element after it had been rendered.</p><p>We&rsquo;ll add an <code>onMount</code> handler that loads some data over the network:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=p>{</span> <span class=nx>onMount</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>photos</span> <span class=o>=</span> <span class=p>[];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>onMount</span><span class=p>(</span><span class=kr>async</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=kr>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=sb>`https://jsonplaceholder.typicode.com/photos?_limit=20`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=nx>photos</span> <span class=o>=</span> <span class=kr>await</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>	<span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>It&rsquo;s recommended to put the <code>fetch</code> in <code>onMount</code> rather than at the top level of the <code>&lt;script></code> because of server-side rendering (SSR).</p><p>With the exception of <code>onDestroy</code>, lifecycle functions don&rsquo;t run during SSR, which means we can avoid fetching data that should be loaded lazily once the component has been mounted in the DOM.</p></blockquote><p>Lifecycle functions must be called while the component is initialising so that the callback is bound to the component instance — not (say) in a <code>setTimeout</code>.</p><p>If the <code>onMount</code> callback returns a function, that function will be called when the component is destroyed.</p><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=p>{</span> <span class=nx>onMount</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>photos</span> <span class=o>=</span> <span class=p>[];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>onMount</span><span class=p>(</span><span class=kr>async</span> <span class=p>()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kr>const</span> <span class=nx>res</span> <span class=o>=</span> <span class=kr>await</span> <span class=nx>fetch</span><span class=p>(</span><span class=sb>`https://jsonplaceholder.typicode.com/photos?_limit=20`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=nx>photos</span> <span class=o>=</span> <span class=kr>await</span> <span class=nx>res</span><span class=p>.</span><span class=nx>json</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>	<span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>.</span><span class=nc>photos</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>display</span><span class=p>:</span> <span class=k>grid</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>grid-template-columns</span><span class=p>:</span> <span class=nf>repeat</span><span class=p>(</span><span class=mi>5</span><span class=p>,</span> <span class=mi>1</span><span class=n>fr</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=k>grid-gap</span><span class=p>:</span> <span class=mi>8</span><span class=kt>px</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nt>figure</span><span class=o>,</span> <span class=nt>img</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>margin</span><span class=p>:</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span>Photo album<span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;photos&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span><span class=k>#each</span> <span class=nx>photos</span> <span class=kr>as</span> <span class=nx>photo</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;</span><span class=nt>figure</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;</span><span class=nt>img</span> <span class=na>src</span><span class=o>=</span><span class=p>{</span><span class=nx>photo</span><span class=p>.</span><span class=nx>thumbnailUrl</span><span class=p>}</span> <span class=s>alt=</span><span class=p>{</span><span class=nx>photo</span><span class=p>.</span><span class=nx>title</span><span class=p>}&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;</span><span class=nt>figcaption</span><span class=p>&gt;{</span><span class=nx>photo</span><span class=p>.</span><span class=nx>title</span><span class=p>}&lt;/</span><span class=nt>figcaption</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;/</span><span class=nt>figure</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span><span class=o>:</span><span class=k>else</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=c>&lt;!-- this block renders when photos.length === 0 --&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>&lt;</span><span class=nt>p</span><span class=p>&gt;</span>loading...<span class=p>&lt;/</span><span class=nt>p</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>{</span><span class=k>/each</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=ondestroy>onDestroy</h3><p>To run code when your component is destroyed, use <code>onDestroy</code>.</p><p>For example, we can add a <code>setInterval</code> function when our component initialises, and clean it up when it&rsquo;s no longer relevant. Doing so prevents memory leaks.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=p>{</span> <span class=nx>onDestroy</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>seconds</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>const</span> <span class=nx>interval</span> <span class=o>=</span> <span class=nx>setInterval</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=nx>seconds</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1000</span><span class=p>);</span> <span class=c1>// 每1000毫秒
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=nx>onDestroy</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=nx>clearInterval</span><span class=p>(</span><span class=nx>interval</span><span class=p>));</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>While it&rsquo;s important to call lifecycle functions during the component&rsquo;s initialisation, it doesn&rsquo;t matter <em>where</em> you call them from. So if we wanted, we could abstract the interval logic into a helper function in <code>utils.js</code>&mldr;</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>onDestroy</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>onInterval</span><span class=p>(</span><span class=nx>callback</span><span class=p>,</span> <span class=nx>milliseconds</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kr>const</span> <span class=nx>interval</span> <span class=o>=</span> <span class=nx>setInterval</span><span class=p>(</span><span class=nx>callback</span><span class=p>,</span> <span class=nx>milliseconds</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>onDestroy</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>clearInterval</span><span class=p>(</span><span class=nx>interval</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>&mldr;and import it into our component:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=p>{</span> <span class=nx>onInterval</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;./utils.js&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>seconds</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=nx>onInterval</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=nx>seconds</span> <span class=o>+=</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=beforeupdate-和-afterupdate>beforeUpdate 和 afterUpdate</h3><p>顾名思义，<code>beforeUpdate</code> 函数实现在 DOM 渲染完成前执行。<code>afterUpdate</code> 函数则相反，它会运行在你的异步数据加载完成后。</p><p>总之，它们对于一些需要以状态驱动的地方很有用, 例如渲染标签的滚动位置。</p><p>这个 <a href=https://en.wikipedia.org/wiki/ELIZA target=_blank rel="external nofollow noopener noreferrer">Eliza</a> 聊天机器人窗口体验不太好，一旦消息超过窗口高度，你必须手动滚动窗口才能查看最新消息，让我们来改进它：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kd>let</span> <span class=nx>div</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kd>let</span> <span class=nx>autoscroll</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>beforeUpdate</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>autoscroll</span> <span class=o>=</span> <span class=nx>div</span> <span class=o>&amp;&amp;</span> <span class=p>(</span><span class=nx>div</span><span class=p>.</span><span class=nx>offsetHeight</span> <span class=o>+</span> <span class=nx>div</span><span class=p>.</span><span class=nx>scrollTop</span><span class=p>)</span> <span class=o>&gt;</span> <span class=p>(</span><span class=nx>div</span><span class=p>.</span><span class=nx>scrollHeight</span> <span class=o>-</span> <span class=mi>20</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>afterUpdate</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>(</span><span class=nx>autoscroll</span><span class=p>)</span> <span class=nx>div</span><span class=p>.</span><span class=nx>scrollTo</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nx>div</span><span class=p>.</span><span class=nx>scrollHeight</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>请注意，<code>beforeUpdate</code> 函数需要在组件挂载前运行，所以我们需要先将 <code>div</code> 与组件标签绑定，并判断 <code>div</code> 是否已被正常渲染</p><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=nx>Eliza</span> <span class=nx>from</span> <span class=s1>&#39;elizabot&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=p>{</span> <span class=nx>beforeUpdate</span><span class=p>,</span> <span class=nx>afterUpdate</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>div</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>autoscroll</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>beforeUpdate</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// determine whether we should auto-scroll
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// once the DOM is updated...
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>autoscroll</span> <span class=o>=</span> <span class=nx>div</span> <span class=o>&amp;&amp;</span> <span class=p>(</span><span class=nx>div</span><span class=p>.</span><span class=nx>offsetHeight</span> <span class=o>+</span> <span class=nx>div</span><span class=p>.</span><span class=nx>scrollTop</span><span class=p>)</span> <span class=o>&gt;</span> <span class=p>(</span><span class=nx>div</span><span class=p>.</span><span class=nx>scrollHeight</span> <span class=o>-</span> <span class=mi>20</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>afterUpdate</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// ...the DOM is now in sync with the data
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>if</span> <span class=p>(</span><span class=nx>autoscroll</span><span class=p>)</span> <span class=nx>div</span><span class=p>.</span><span class=nx>scrollTo</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nx>div</span><span class=p>.</span><span class=nx>scrollHeight</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>	<span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kr>const</span> <span class=nx>eliza</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Eliza</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>comments</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span> <span class=nx>author</span><span class=o>:</span> <span class=s1>&#39;eliza&#39;</span><span class=p>,</span> <span class=nx>text</span><span class=o>:</span> <span class=nx>eliza</span><span class=p>.</span><span class=nx>getInitial</span><span class=p>()</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>function</span> <span class=nx>handleKeydown</span><span class=p>(</span><span class=nx>event</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=p>(</span><span class=nx>event</span><span class=p>.</span><span class=nx>which</span> <span class=o>===</span> <span class=mi>13</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=kr>const</span> <span class=nx>text</span> <span class=o>=</span> <span class=nx>event</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>text</span><span class=p>)</span> <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=nx>comments</span> <span class=o>=</span> <span class=nx>comments</span><span class=p>.</span><span class=nx>concat</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>				<span class=nx>author</span><span class=o>:</span> <span class=s1>&#39;user&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nx>text</span>
+</span></span><span class=line><span class=cl>			<span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=nx>event</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>value</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=kr>const</span> <span class=nx>reply</span> <span class=o>=</span> <span class=nx>eliza</span><span class=p>.</span><span class=nx>transform</span><span class=p>(</span><span class=nx>text</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=nx>setTimeout</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>comments</span> <span class=o>=</span> <span class=nx>comments</span><span class=p>.</span><span class=nx>concat</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>					<span class=nx>author</span><span class=o>:</span> <span class=s1>&#39;eliza&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nx>text</span><span class=o>:</span> <span class=s1>&#39;...&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nx>placeholder</span><span class=o>:</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>				<span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				<span class=nx>setTimeout</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nx>comments</span> <span class=o>=</span> <span class=nx>comments</span><span class=p>.</span><span class=nx>filter</span><span class=p>(</span><span class=nx>comment</span> <span class=p>=&gt;</span> <span class=o>!</span><span class=nx>comment</span><span class=p>.</span><span class=nx>placeholder</span><span class=p>).</span><span class=nx>concat</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>						<span class=nx>author</span><span class=o>:</span> <span class=s1>&#39;eliza&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>						<span class=nx>text</span><span class=o>:</span> <span class=nx>reply</span>
+</span></span><span class=line><span class=cl>					<span class=p>});</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span> <span class=mi>500</span> <span class=o>+</span> <span class=nb>Math</span><span class=p>.</span><span class=nx>random</span><span class=p>()</span> <span class=o>*</span> <span class=mi>500</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>			<span class=p>},</span> <span class=mi>200</span> <span class=o>+</span> <span class=nb>Math</span><span class=p>.</span><span class=nx>random</span><span class=p>()</span> <span class=o>*</span> <span class=mi>200</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>.</span><span class=nc>chat</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>flex-direction</span><span class=p>:</span> <span class=kc>column</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>height</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>max-width</span><span class=p>:</span> <span class=mi>320</span><span class=kt>px</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=p>.</span><span class=nc>scrollable</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>flex</span><span class=p>:</span> <span class=mi>1</span> <span class=mi>1</span> <span class=kc>auto</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>border-top</span><span class=p>:</span> <span class=mi>1</span><span class=kt>px</span> <span class=kc>solid</span> <span class=mh>#eee</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>margin</span><span class=p>:</span> <span class=mi>0</span> <span class=mi>0</span> <span class=mf>0.5</span><span class=kt>em</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>overflow-y</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nt>article</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>margin</span><span class=p>:</span> <span class=mf>0.5</span><span class=kt>em</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=p>.</span><span class=nc>user</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>text-align</span><span class=p>:</span> <span class=kc>right</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nt>span</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>padding</span><span class=p>:</span> <span class=mf>0.5</span><span class=kt>em</span> <span class=mi>1</span><span class=kt>em</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>display</span><span class=p>:</span> <span class=kc>inline-block</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=p>.</span><span class=nc>eliza</span> <span class=nt>span</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>background-color</span><span class=p>:</span> <span class=mh>#eee</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>border-radius</span><span class=p>:</span> <span class=mi>1</span><span class=kt>em</span> <span class=mi>1</span><span class=kt>em</span> <span class=mi>1</span><span class=kt>em</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=p>.</span><span class=nc>user</span> <span class=nt>span</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>background-color</span><span class=p>:</span> <span class=mh>#0074D9</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>color</span><span class=p>:</span> <span class=kc>white</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>border-radius</span><span class=p>:</span> <span class=mi>1</span><span class=kt>em</span> <span class=mi>1</span><span class=kt>em</span> <span class=mi>0</span> <span class=mi>1</span><span class=kt>em</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>word-break</span><span class=p>:</span> <span class=n>break-all</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;chat&#34;</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span>Eliza<span class=p>&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;scrollable&#34;</span> <span class=na>bind:this</span><span class=o>=</span><span class=p>{</span><span class=nx>div</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span><span class=k>#each</span> <span class=nx>comments</span> <span class=kr>as</span> <span class=nx>comment</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;</span><span class=nt>article</span> <span class=na>class</span><span class=o>=</span><span class=p>{</span><span class=nx>comment</span><span class=p>.</span><span class=nx>author</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl>				<span class=p>&lt;</span><span class=nt>span</span><span class=p>&gt;{</span><span class=nx>comment</span><span class=p>.</span><span class=nx>text</span><span class=p>}&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>			<span class=p>&lt;/</span><span class=nt>article</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>		<span class=p>{</span><span class=k>/each</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=p>&lt;</span><span class=nt>input</span> <span class=na>on:keydown</span><span class=o>=</span><span class=p>{</span><span class=nx>handleKeydown</span><span class=p>}</span><span class=err>&gt;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=tick>tick</h3><p><code>tick</code> 函数不同于其他生命周期函数，因为你可以随时调用它，而不用等待组件首次初始化。它返回一个带有 resolve 方法的 <a href=https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Using_promises target=_blank rel="external nofollow noopener noreferrer">Promise</a>，每当组件 <code>pending 状态</code> 变化便会立即体现到 DOM 中 (除非没有 <code>pending 状态</code> 变化)</p><p>在 Svelte 中每当组件状态失效时，DOM 不会立即更新。 反而 Svelte 会等待下一个 <em>microtask</em> 以查看是否还有其他变化的状态或组件需要应用更新。这样做避免了浏览器做无用功，使之更高效。</p><p>这点在本示例中有所体现。选择文本，然后按 “Tab” 键。 因为 <code>&lt;textarea></code> 标签的值已发生变化，浏览器会将选中区域取消选中并将光标置于文本末尾，这显然不是我们想要的，我们可以借助 <code>tick</code> 函数来解决此问题：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>tick</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后在 <code>this.selectionStart</code> 和 <code>this.selectionEnd</code> 设置结束前立即运行<code>handleKeydown</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>await</span> <span class=nx>tick</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=k>this</span><span class=p>.</span><span class=nx>selectionStart</span> <span class=o>=</span> <span class=nx>selectionStart</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>this</span><span class=p>.</span><span class=nx>selectionEnd</span> <span class=o>=</span> <span class=nx>selectionEnd</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=kr>import</span> <span class=p>{</span> <span class=nx>tick</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>text</span> <span class=o>=</span> <span class=sb>`Select some text and hit the tab key to toggle uppercase`</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=kr>async</span> <span class=kd>function</span> <span class=nx>handleKeydown</span><span class=p>(</span><span class=nx>event</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=p>(</span><span class=nx>event</span><span class=p>.</span><span class=nx>which</span> <span class=o>!==</span> <span class=mi>9</span><span class=p>)</span> <span class=k>return</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=nx>event</span><span class=p>.</span><span class=nx>preventDefault</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=kr>const</span> <span class=p>{</span> <span class=nx>selectionStart</span><span class=p>,</span> <span class=nx>selectionEnd</span><span class=p>,</span> <span class=nx>value</span> <span class=p>}</span> <span class=o>=</span> <span class=k>this</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=kr>const</span> <span class=nx>selection</span> <span class=o>=</span> <span class=nx>value</span><span class=p>.</span><span class=nx>slice</span><span class=p>(</span><span class=nx>selectionStart</span><span class=p>,</span> <span class=nx>selectionEnd</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=kr>const</span> <span class=nx>replacement</span> <span class=o>=</span> <span class=sr>/[a-z]/</span><span class=p>.</span><span class=nx>test</span><span class=p>(</span><span class=nx>selection</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=o>?</span> <span class=nx>selection</span><span class=p>.</span><span class=nx>toUpperCase</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>			<span class=o>:</span> <span class=nx>selection</span><span class=p>.</span><span class=nx>toLowerCase</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=nx>text</span> <span class=o>=</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>			<span class=nx>value</span><span class=p>.</span><span class=nx>slice</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nx>selectionStart</span><span class=p>)</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>			<span class=nx>replacement</span> <span class=o>+</span>
+</span></span><span class=line><span class=cl>			<span class=nx>value</span><span class=p>.</span><span class=nx>slice</span><span class=p>(</span><span class=nx>selectionEnd</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=kr>await</span> <span class=nx>tick</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>		<span class=k>this</span><span class=p>.</span><span class=nx>selectionStart</span> <span class=o>=</span> <span class=nx>selectionStart</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>this</span><span class=p>.</span><span class=nx>selectionEnd</span> <span class=o>=</span> <span class=nx>selectionEnd</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>	<span class=nt>textarea</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=k>height</span><span class=p>:</span> <span class=mi>200</span><span class=kt>px</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>textarea</span> <span class=na>value</span><span class=o>=</span><span class=p>{</span><span class=nx>text</span><span class=p>}</span> <span class=s>on:keydown=</span><span class=p>{</span><span class=nx>handleKeydown</span><span class=p>}&gt;&lt;/</span><span class=nt>textarea</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=stores>Stores</h2><p>stores 用于跨组件之间的状态共享。</p><p>当期望脱离组件的层级（父-子）关系且能够在任意位置都能访问某个状态（变量）时，状态管理仍然是非常有用的一个特性。</p><p>Store 写法只需要写在一个 js 文件中，然后通过 svelte/store 中提供的 writable 方法来向公共仓库中注册一个值作为一个仓库元素，之后在组件内可以通过 subscribe 来监听仓库元素的变化（理解上来说本质上是一个发布订阅的模式），通过 set 和 update 来发布仓库内某一个值的变化。</p><ul><li>Set：直接将仓库内的某个数指定为某个值</li><li>Update：接收一个仓库当前值的参数的回调函数，将执行结果作为要更新仓库参数的值</li></ul><h3 id=可写状态-writable-stores>可写状态 Writable stores</h3><p>并非所有的状态都属于在组件层次的结构内。某些时候，有些状态需要被多个毫不相干的组件或普通的 JavaScript 模块访问。</p><p>在 Svelte 中，我们通过 <em>store</em> 来实现。</p><p>Svelte 将状态划分为两种，一种<code>可读可写</code>，一种<code>只读</code>，都用<code>可读可写</code>（可以读取，也可以修改）虽然省事，不过允许或者说强制状态是只读的，可以防止状态被意外修改。</p><p>要创建一个可读且可写的状态十分简单，例如我们要创建一个数字型的可写状态 <code>count</code>，Svelte 提供 <code>writable</code> 函数来创建：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=c1>// stores.js
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>writable</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte/store&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kr>const</span> <span class=nx>count</span> <span class=o>=</span> <span class=nx>writable</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们可以将创建状态的代码，放到单独的文件 <code>store.js</code> 中，以便其他需要用到 count 状态的组件可以引入使用。</p><p>所谓 store（也即状态），只不过是<strong>具有 <code>subscribe</code> 方法的对象</strong>，它允许当 store 的值改变时自动通知对此感兴趣的相关组件或程序。在 <code>App.svelte</code> 中，<code>count</code> 便是一个 store，我们在 <code>count.subscribe</code> 的回调中设置 <code>count_value</code> 的值。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>let</span> <span class=nx>count_value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>unsubscribe</span> <span class=o>=</span> <span class=nx>count</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>(</span><span class=nx>value</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=nx>count_value</span> <span class=o>=</span> <span class=nx>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>});</span>
+</span></span></code></pre></td></tr></table></div></div><p>除了 <code>subscribe</code> 方法外，它还具有 <code>set</code> 和 <code>update</code> 方法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kd>function</span> <span class=nx>increment</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>count</span><span class=p>.</span><span class=nx>update</span><span class=p>(</span><span class=nx>n</span> <span class=p>=&gt;</span> <span class=nx>n</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>function</span> <span class=nx>reset</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>count</span><span class=p>.</span><span class=nx>set</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>✔️ 当我们需要知道 <code>count</code> 当前值的时候，应该使用 <code>update</code>，它会将当前值传递到回调函数供你使用；如果无需知道，则使用 <code>set</code>。</p></blockquote><p>例子：<code>$count += 1</code> 就相当于 <code>count.update(n => n + 1)</code> 或者 <code>count.set($count + 1)</code></p><h3 id=自动订阅auto-subscriptions>自动订阅（Auto-subscriptions）</h3><p>上一个例子中，程序虽然可以这么写，不过存在一个不易察觉的错误：<code>unsubscribe</code> 函数没有机会被调用。如果该组件会被多次实例化和销毁，这将导致 <em>内存泄露</em>。</p><p>解决之道，应该使用 <code>onDestroy</code> 这个<a href=https://zhuanlan.zhihu.com/p/369399405 target=_blank rel="external nofollow noopener noreferrer">生命周期</a> Hook。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=p>{</span> <span class=nx>onDestroy</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=p>{</span> <span class=nx>count</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;./stores.js&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=nx>Incrementer</span> <span class=nx>from</span> <span class=s1>&#39;./Incrementer.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=nx>Decrementer</span> <span class=nx>from</span> <span class=s1>&#39;./Decrementer.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=nx>Reset</span> <span class=nx>from</span> <span class=s1>&#39;./Reset.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kd>let</span> <span class=nx>count_value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>unsubscribe</span> <span class=o>=</span> <span class=nx>count</span><span class=p>.</span><span class=nx>subscribe</span><span class=p>(</span><span class=nx>value</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>count_value</span> <span class=o>=</span> <span class=nx>value</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nx>onDestroy</span><span class=p>(</span><span class=nx>unsubscribe</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span>count 当前的值是：<span class=p>{</span><span class=nx>count_value</span><span class=p>}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>不过事情又开始变得有点呆板重复了。</p><p>特别是当你的组件 subscribe 了很多的 store 的时候。Svelte 给出一个绝佳的替代方案，你可以在 store 名称前面加上 <code>$</code> 前缀来引用这个 store 的值：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=p>{</span> <span class=nx>count</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;./stores.js&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=nx>Incrementer</span> <span class=nx>from</span> <span class=s1>&#39;./Incrementer.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=nx>Decrementer</span> <span class=nx>from</span> <span class=s1>&#39;./Decrementer.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=nx>Reset</span> <span class=nx>from</span> <span class=s1>&#39;./Reset.svelte&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span>count 当前的值是：<span class=p>{</span><span class=nx>$count</span><span class=p>}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>自动订阅仅适用于在组件的顶层范围声明（或者导入的JS文件中）的 store 变量。</p></blockquote><p>在标记中使用 <code>$count</code> 不会有任何限制，你也可以在 <code>&lt;script></code> 的任何位置使用它，例如在事件处理程序或者响应式声明中。</p><blockquote><p>Svelte 假定所有以 <code>$</code> 开头的任何标识符都表示引用某个 store 值，而 <code>$</code> 实际上是一个保留字符，Svelte 会禁止你使用 <code>$</code> 作为你声明的变量的前缀。</p></blockquote><h3 id=只读状态readable-stores>只读状态（Readable stores）</h3><p>并非所有 store 允许所有人可写的。例如，你可能有一个 store 表示鼠标位置或者用户地理位置，允许 ‘外部’ 来修改这个值是没有意义的。对于这种情况，我们可以用只读 store。</p><p>本节我们要制作一个数字钟，显示当前的时间，先看看主程序的代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-svelte data-lang=svelte><span class=line><span class=cl>// App.svelte
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>  <span class=kr>import</span> <span class=p>{</span> <span class=nx>time</span> <span class=p>}</span> <span class=nx>from</span> <span class=s1>&#39;./stores.js&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>formatter</span> <span class=o>=</span> <span class=k>new</span> <span class=nx>Intl</span><span class=p>.</span><span class=nx>DateTimeFormat</span><span class=p>(</span><span class=s1>&#39;zh-CN&#39;</span><span class=p>,</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>hour12</span><span class=o>:</span> <span class=kc>false</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>hour</span><span class=o>:</span> <span class=s1>&#39;2-digit&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>minute</span><span class=o>:</span> <span class=s1>&#39;2-digit&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=nx>second</span><span class=o>:</span> <span class=s1>&#39;2-digit&#39;</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>h1</span><span class=p>&gt;</span>The time is <span class=p>{</span><span class=nx>formatter</span><span class=p>.</span><span class=nx>format</span><span class=p>(</span><span class=nx>$time</span><span class=p>)}&lt;/</span><span class=nt>h1</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2023-05-13 09:25:24">更新于 2023-05-13</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/frontend/svelte/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/ data-title="Svelte 入门" data-hashtags=前端,快速入门><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/frontend/svelte/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/ data-hashtag=前端><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/frontend/svelte/%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/ data-title="Svelte 入门"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E5%89%8D%E7%AB%AF/>前端</a>,&nbsp;<a href=/Notes/tags/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>快速入门</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/games/%E4%B8%96%E7%95%8C%E5%BC%B9%E5%B0%84%E7%89%A9%E8%AF%AD/abs/ class=prev rel=prev title="世界弹射物语 abs"><i class="fa-solid fa-angle-left fa-fw"></i>世界弹射物语 abs</a>
+<a href=/Notes/posts/markdown/ class=next rel=next title="Hi~ 我是一个帮助文档">Hi~ 我是一个帮助文档<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.stemmer.support.min.js defer></script><script type=text/javascript src=/Notes/lib/lunr/lunr.zh.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{highlightTag:"em",lunrIndexURL:"/Notes/index.json",lunrLanguageCode:"zh",lunrSegmentitURL:"/Notes/lib/lunr/lunr.segmentit.js",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"lunr"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
