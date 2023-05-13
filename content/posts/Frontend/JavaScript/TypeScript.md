@@ -9,6 +9,8 @@ categories: [前端]
 
 # TypeScript
 
+> 开发规范参考：https://juejin.cn/post/7047843645273145358
+
 ## 简介
 
 ### 认识

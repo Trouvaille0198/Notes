@@ -985,7 +985,7 @@ Vue 为最常用的键提供了别名：
 
 ### 结构示例
 
-#### optionAPI
+#### OptionAPI
 
 ```vue
 <template>

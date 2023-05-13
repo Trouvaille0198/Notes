@@ -40,19 +40,21 @@ Go 语言提供的默认日志包是 [golang.org/pkg/log/](https://golang.org/pk
 package main
 
 import (
-    "log"
-    "os"
+	"log"
+	"os"
 )
 
-func initGoLogger()  {
-  locatonPath := "/Users/codehope/remote-es-server-code/zap-demo/test.log"
-    locationLoggerFile, _ := os.OpenFile(locatonPath,os.O_CREATE|os.O_APPEND|os.O_RDWR,0744)
-    log.SetOutput(locationLoggerFile)
+func initGoLogger() {
+	locatonPath := "/Users/codehope/remote-es-server-code/zap-demo/test.log"
+	locationLoggerFile, _ := os.OpenFile(locatonPath, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0744)
+	log.SetOutput(locationLoggerFile)
 }
-func main()  {
-    initGoLogger()
-    log.Printf("info %s","message")
+
+func main() {
+	initGoLogger()
+	log.Printf("info %s", "message")
 }
+
 ```
 
 当我们执行上面的代码，我们能看到一个 `test.log` 文件被创建，下面的内容会被添加到这个日志文件中
@@ -116,7 +118,7 @@ Zap 提供了两种类型的日志记录器 — `Sugared Logger` 和 `Logger`
 
 ### 创建 Logger
 
-通过调用` zap.NewProduction()` /` zap.NewDevelopment()` 或者 `zap.Example()` 创建一个 Logger。
+通过调用 `zap.NewProduction()` / `zap.NewDevelopment()` 或者 `zap.Example()` 创建一个 Logger。
 
 上面的每一个函数都将创建一个 logger。唯一的区别在于它将记录的信息不同。例如 production logger 默认记录调用函数信息、日期和时间等。
 
@@ -324,7 +326,7 @@ func setJSONEncoder() zapcore.Encoder {
 }
 ```
 
-当使用这些修改过的 logger 配置调用上述部分的 main () 函数时，以下输出将打印在文件 ——test.log 中。
+当使用这些修改过的 logger 配置调用上述部分的 main() 函数时，以下输出将打印在文件 ——test.log 中。
 
 ```text
 1.635838141476396e+09    info    Info0

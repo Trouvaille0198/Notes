@@ -15,7 +15,7 @@ categories: [Linux]
 
 ### 参数
 
-```
+```shell
 -h, --help              // 查看帮助文档
 -v, --version           // 查看 apt-get 的版本
 -y                      // 在需要确认的场景中回应 yes

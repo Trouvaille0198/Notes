@@ -1185,3 +1185,14 @@ git commit --amend
 git diff <branch_name1> <branch_name2> --stat
 git diff <branch_name1> --stat # 比较当前文件与 branch_name1
 ```
+
+- 当本地有领先远端的 commit，同时远端也有领先本地的 commit（这种情况经常会发生），并使用 git pull 拉去远端代码时，会产生一条 merge commit，例：merge branch 'feature/login' of ssh://gitlab.aaa.net/project/main-web into feature/login，污染了 commit 记录
+
+    - 原因：**本地分支与远程分支存在分叉**，而 git pull = git fetch + git merge，在 merge 时有冲突就会产生一条 merge commit
+
+    - 避免方法
+
+        1. 使用 `git pull --rebase` 代替 git pull，这种方案的原理是不产生额外的合并节点，而是将远端更新拉取到本地，而后将本地的提交附加到远端更新之后。
+            - 一劳永逸：`git config --global pull.rebase true`
+
+        2. 在本地 commit 之前 stash，pull 之后再 pop 出来

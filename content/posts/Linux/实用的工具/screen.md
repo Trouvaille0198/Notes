@@ -9,6 +9,11 @@ categories: [Linux]
 
 # screen
 
+```shell
+```
+
+
+
 ## 概述
 
 Screen 是一款由 GNU 计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。GNU Screen 可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。
@@ -41,3 +46,5 @@ screen \[-AmRvx -ls -wipe] \[-d <作业名称>] \[-h <行数>] \[-r <作业名�
 `screen -r yourname`                  回到 yourname 这个 session
 `screen -d yourname`                  远程 detach 某个 session
 `screen -d -r yourname`            结束当前 session 并回到 yourname 这个 session
+
+离开快捷键：Ctrl + a + d

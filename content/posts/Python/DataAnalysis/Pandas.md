@@ -646,14 +646,14 @@ df.count()		#返回每一列中的非空值的个数
 #### 缺失值处理
 
 - `dropna(axis=, how=)`：丢弃 NaN 数据
-  - axis：0(按行丢弃)，1(按列丢弃)
-  - how：'any'(只要含有 NaN 数据就丢弃)，'all'(所有数据都为 NaN 时丢弃)
+  - axis：0 (按行丢弃)，1 (按列丢弃)
+  - how：'any' (只要含有 NaN 数据就丢弃)，'all' (所有数据都为 NaN 时丢弃)
 - `fillna(value=)`：将 NaN 值都设置为 value 的值
 
 ```python
-df.dropna(how='any')					#删除数据表中含有空值的行
-df.fillna(value=0)						#使用数字0填充数据表中空值
-df['B'].fillna(df['B'].mean())			#使用price均值对NA进行填充
+df.dropna(how='any')					# 删除数据表中含有空值的行
+df.fillna(value=0)						# 使用数字0填充数据表中空值
+df['B'].fillna(df['B'].mean())			# 使用price均值对NA进行填充
 ```
 
 输出

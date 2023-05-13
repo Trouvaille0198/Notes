@@ -1761,7 +1761,7 @@ func main() {
 }
 ```
 
-匿名字段能够实现字段的继承
+**匿名字段能够实现字段的继承**
 
 student 还能访问 Human 这个字段作为字段名。
 
@@ -1773,7 +1773,6 @@ mark.Human.age -= 1
 不仅仅是 struct，所有的内置类型和自定义类型都可以作为匿名字段
 
 ```go
-
 package main
 
 import "fmt"
@@ -1841,6 +1840,10 @@ func main() {
 	fmt.Println("Bob's personal phone is:", Bob.Human.phone)
 }
 ```
+
+##### interface 作为匿名字段
+
+详见：https://segmentfault.com/a/1190000018865258
 
 ### 方法 methods
 
@@ -2504,6 +2507,60 @@ $ go run .
 Ahoy, world!
 13
 ```
+
+## 新版本的特性
+
+### Go1.16
+
+#### embed
+
+embed 是在 Go 1.16 中新加包。它通过 `//go:embed` 指令，可以在编译阶段将静态资源文件打包进编译好的程序中，并提供访问这些文件的能力。
+
+##### 为什么需要 embed 包
+
+- 部署过程更简单。传统部署要么需要将静态资源与已编译程序打包在一起上传，或者使用 docker 和 dockerfile 自动化前者
+- 确保程序的完整性。在运行过程中损坏或丢失静态资源通常会影响程序的正常运行。
+- 您可以独立控制程序所需的静态资源。
+
+##### embed 的基本语法
+
+基本语法非常简单，首先导入 embed 包，然后使用指令 `//go:embed` 文件名 将对应的文件或目录结构导入到对应的变量上。 例如： 在当前目录下新建文件 version.txt，并输入内容 0.0.1
+
+```go
+package main
+
+import (
+    _ "embed"
+    "fmt"
+)
+
+//go:embed version.txt
+var version string
+
+func main() {
+    fmt.Printf("version: %q\n", version)
+}
+```
+
+### Go1.18
+
+#### any
+
+any 作为一个新的关键字出现，**any 有一个真身，本质就上是 interface{} 的别名**：
+
+```go
+type any = interface{}
+```
+
+使用例子：
+
+```go
+func Print[T any](s []T) {}
+```
+
+#### 泛型
+
+详见 “Go 泛型”
 
 ## 一些技巧和特性
 

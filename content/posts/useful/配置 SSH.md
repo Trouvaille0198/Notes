@@ -39,3 +39,13 @@ ssh-copy-id username@ip
 ssh username@ip [-p port] -i id_rsa
 ```
 
+### 更好的免密登录方式
+
+把客户机的公钥（命名为 id_rsa.pub.win）复制到服务机上，在 .ssh 执行
+
+```shell
+mv id_rsa.pub.win authorized_keys
+```
+
+
+

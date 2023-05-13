@@ -182,6 +182,10 @@ MesloLGM NF
  }
 ```
 
+### ssh 实现免密登录
+
+
+
 ## 插件
 
 ### autojump
@@ -227,8 +231,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 ```
 
 在 `.zshrc` 上添加这个插件（记住要放在最后一个）
-
-
 
 顺便说一嘴，mac 或 Linux 的话，装这三个插件直接
 

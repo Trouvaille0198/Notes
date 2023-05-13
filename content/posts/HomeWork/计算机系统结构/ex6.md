@@ -39,6 +39,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 Docker 使用 Dockerfile 的配置文件来配置初始化镜像所需要的内容，涉及到程序运行的系统要求、编程语言的依赖、源代码文件的移动、编译和运行、端口绑定等一系列操作。具体配置如下：
 
 ```dockerfile
+# Dockerfile
 FROM golang:alpine
 
 # 为我们的镜像设置必要的环境变量
