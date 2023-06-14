@@ -29,6 +29,16 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+      
+      # - name: Run DocSearch Scraper
+      #   env:
+      #     APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
+      #     API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+      #   run: |
+      #     docker run \
+      #     -e APPLICATION_ID -e API_KEY \
+      #     -e CONFIG="$(cat .github/scrapeConfig/docusaurus-v2.json)" \
+      #     algolia/docsearch-scraper
           
   algolia:
     runs-on: ubuntu-latest
@@ -42,6 +52,6 @@ jobs:
         uses: guzhongren/algolia-docsearch-upload-action@v2.0.0
         env:
           FILE_PATH: "./index.json"
-          APPLICATION_ID: ${{ secrets.ALGOLIA_APPLICATION_ID }}
-          ADMIN_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+          ADMIN_API_KEY: ${{ secrets.ADMIN_API_KEY }}
           INDEX_NAME: ${{ secrets.INDEX_NAME }}
