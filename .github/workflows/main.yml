@@ -29,6 +29,17 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
+
+  docsify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: docsify-action
+        uses: tool3/docsify-action@v1.0.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dir: ./content/posts
+          
+
       
       
           
