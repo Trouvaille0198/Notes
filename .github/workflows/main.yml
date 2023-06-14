@@ -40,15 +40,10 @@ jobs:
         with:
           ref: gh-pages
 
-      # - name: Algolia Docsearch Uploader
-      #   uses: guzhongren/algolia-docsearch-upload-action@v2.0.0
-      #   env:
-      #     FILE_PATH: "./index.json"
-      #     APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
-      #     ADMIN_API_KEY: ${{ secrets.ADMIN_API_KEY }}
-      #     INDEX_NAME: ${{ secrets.INDEX_NAME }}
-      - uses: darrenjennings/algolia-docsearch-action@master
-        with:
-          algolia_application_id: ${{ secrets.APPLICATION_ID }}
-          algolia_api_key: ${{ secrets.ADMIN_API_KEY }}
-          file: './index.json'
+      - name: Algolia Docsearch Uploader
+        uses: guzhongren/algolia-docsearch-upload-action@v2.0.0
+        env:
+          FILE_PATH: "./index.json"
+          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+          ADMIN_API_KEY: ${{ secrets.API_KEY }}
+          INDEX_NAME: "Notes"
