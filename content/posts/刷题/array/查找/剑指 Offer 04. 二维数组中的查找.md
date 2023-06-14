@@ -62,14 +62,14 @@ func findNumberIn2DArray(matrix [][]int, target int) bool {
 
 如下图所示，我们将矩阵逆时针旋转 45° ，并将其转化为图形式，发现其类似于 二叉搜索树 ，即对于每个元素，其左分支元素更小、右分支元素更大。因此，通过从 “根节点” 开始搜索，遇到比 target 大的元素就向左，反之向右，即可找到目标值 target 。
 
-<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220227151607027.png" alt="image-20220227151607027" style="zoom: 33%;" />
+<img src="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220227151607027.png" alt="image-20220227151607027" style="zoom: 33%;" />
 
 算法流程：
 
 1. 从矩阵 matrix 左下角元素（索引设为 (i, j) ）开始遍历，并与目标值对比：
-    - 当 matrix[i][j] > target 时，执行 i-- ，即消去第 i 行元素；
-    - 当 matrix[i][j] < target 时，执行 j++ ，即消去第 j 列元素；
-    - 当 matrix[i][j] = target 时，返回 truetrue ，代表找到目标值。
+    - 当 `matrix[i][j] > target` 时，执行 i-- ，即消去第 i 行元素；
+    - 当 `matrix[i][j] < target` 时，执行 j++ ，即消去第 j 列元素；
+    - 当 `matrix[i][j] = target` 时，返回 truetrue ，代表找到目标值。
 2. 若行索引或列索引越界，则代表矩阵中无目标值，返回 false
 
 ```go

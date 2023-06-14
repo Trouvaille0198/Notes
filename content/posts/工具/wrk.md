@@ -28,11 +28,13 @@ sudo cp wrk /usr/local/bin
 
 ## 快速使用
 
+例
+
 ```shell
 wrk -t12 -c400 -d30s http://www.baidu.com
 ```
 
-
+使用方法
 
 ```shell
 使用方法: wrk <选项> <被测HTTP服务的URL>                            
@@ -51,7 +53,7 @@ wrk -t12 -c400 -d30s http://www.baidu.com
   <T>代表时间参数，支持时间单位 (2s, 2m, 2h)
 ```
 
-
+output
 
 ```shell
 Running 30s test @ http://www.baidu.com （压测时间30s）
@@ -73,7 +75,7 @@ Requests/sec:    163.76 (QPS 163.76,即平均每秒处理请求数为163.76)
 Transfer/sec:      2.46MB (平均每秒流量2.46MB)
 ```
 
-
+lua 配置文件
 
 ```lua
 wrk.method = "PUT"

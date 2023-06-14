@@ -269,17 +269,36 @@ go env -w GOPROXY=https://goproxy.cn
 
 ## Python
 
-### apt
+### Miniconda
+
+从官网下载安装脚本 https://docs.conda.io/en/latest/miniconda.html
+
+```shell
+wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+
+然后添加到系统环境变量中
+
+```shell
+export PATH="~/miniconda3/bin:$PATH"
+```
+
+
+
+### 官网
+
+#### apt
 
 建议使用 apt，自己编译坑比较多。。
 
-### 编译安装
+#### 编译安装
 
 这里采用直接从 Python 官网下载的方法
 
 详见：https://zhuanlan.zhihu.com/p/506491209
 
-#### 安装相关依赖
+##### 安装相关依赖
 
 先安装 gcc
 
@@ -300,7 +319,7 @@ sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-
 
 > 注意，Python 的部分功能依赖于对应的库（如 OpenSSL、SQLite3、LZMA 等），如果在编译时未能找到这些库，仍然可能完成编译。此时的 Python 解释器看似可以工作，但在需要使用特定功能时就会出问题。例如 OpenSSL 出现问题会导致无法正常使用 pip
 
-#### 选择安装包
+##### 选择安装包
 
 下载地址：https://www.python.org/downloads/
 
@@ -313,7 +332,7 @@ wget https://www.python.org/ftp/python/3.11.1/Python-3.11.1.tgz
 tar -zxvf Python-3.11.1.tgz
 ```
 
-#### 配置
+##### 配置
 
 进入 Python 文件夹，运行
 
@@ -332,7 +351,7 @@ sudo ./configure --enable-optimizations --with-lto --enable-shared
 
 经过一系列检查无误之后，会自动生成 Makefile，即可进行下一步的编译了。
 
-#### 编译
+##### 编译
 
 完成配置，生成 Makefile 后，就可以开始编译了。**编译耗时较长**，可以使用 `-j` 选项指定参与编译的 CPU 核心数，例如此机器为 6 核 CPU：
 
@@ -355,7 +374,7 @@ To find the necessary bits, look in setup.py in detect_modules() for the module'
 
 如果出现类似如上的警告，说明编译时有部分软件包不可用，导致编译出的 Python 有部分可选模块不可用。检查中提到的依赖是否都已安装，或求助于网络搜索引擎，安装对应软件包后再次编译即可。
 
-#### 安装
+##### 安装
 
 ```sh
 # 安装二进制文件
@@ -368,7 +387,7 @@ sudo make altinstall
 
 故应使用 `altinstall` 而不是 `install` 。二者的一个重要区别在于，后者会创建符号链接，将 `python3` 等命令链接到正在安装的新版本 Python 3 上，这可能会破坏系统。更多信息请参阅当前目录下的 `README.rst` 文件。
 
-#### 链接动态库
+##### 链接动态库
 
 由于[编译配置](https://zhuanlan.zhihu.com/write#配置)中有 `--enable-shared` 的选项，故此时直接使用命令 `python3.11` 会提示无法找到 `libpython3.11.so.1.0` 的错误。只需找到该 `so` 文件，复制（或创建符号链接）到 `/usr/lib/` 目录下即可：
 
@@ -380,7 +399,7 @@ libpython3.11.so.1: /usr/local/lib/libpython3.11.so.1.0
 $ sudo ln -s /usr/local/lib/libpython3.11.so.1.0 /usr/lib/
 ```
 
-#### 使用 Python 3.11
+##### 使用 Python 3.11
 
 完成安装后，Python 3.11 会与系统原有的 Python 3.10 共存。由于 Ubuntu 系统、安装的其他软件等很可能会依赖于系统原有的 3.10，所以不要移除原有 Python 环境，也不要对 `python3` 等命令进行修改。
 
@@ -388,7 +407,7 @@ $ sudo ln -s /usr/local/lib/libpython3.11.so.1.0 /usr/lib/
 
 类似的，使用 `python 3.11` 的 `pip` 的命令为 `pip3.11`
 
-#### 建立软链接
+##### 建立软链接
 
 一个是连接 python 运行位置，另一个则连接着 pip 的运行位置
 

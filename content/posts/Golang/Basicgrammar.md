@@ -3360,4 +3360,24 @@ func main() {
 }
 ```
 
-​	
+### 拷贝 slice
+
+两种方法
+
+copy
+
+```go
+originalSlice := []int{1, 2, 3, 4, 5}
+
+newSlice := make([]int, len(originalSlice))
+copy(newSlice, originalSlice)
+```
+
+append
+
+```go
+originalSlice := []int{1, 2, 3, 4, 5}
+
+newSlice := append([]int{}, originalSlice...)
+```
+

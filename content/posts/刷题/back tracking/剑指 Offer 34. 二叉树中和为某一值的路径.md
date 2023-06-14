@@ -40,7 +40,8 @@ func pathSum(root *TreeNode, target int) [][]int {
 			return
 		}
 
-		road = append(road, root.Val)
+		road = append(road, root.Val) // 在这里其实已经生成一个新slice了
+       
 		if sum(road) == target && root.Left == nil && root.Right == nil {
 			// 到叶子节点 且路径和等于目标值
 			tmp := make([]int, len(road)) // 拷贝切片
@@ -62,7 +63,7 @@ func pathSum(root *TreeNode, target int) [][]int {
 func pathSum(root *TreeNode, target int) [][]int {
 	res := make([][]int, 0)
 	road := make([]int, 0)
-	var backtracking func(root *TreeNode, leftVal int)
+	var backtracking func(root *TreeNode, leftVal int) // leftVal 剩余的值
 	backtracking = func(root *TreeNode, leftVal int) {
 		if root == nil {
 			return
@@ -87,5 +88,5 @@ func pathSum(root *TreeNode, target int) [][]int {
 }
 ```
 
-
+> 可以加个减枝条件：和已经大于 target 则停止检索
 

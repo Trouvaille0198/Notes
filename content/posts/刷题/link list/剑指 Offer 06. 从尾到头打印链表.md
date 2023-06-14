@@ -32,11 +32,11 @@ func reversePrint(head *ListNode) []int {
 
 ```go
 // 递归
-func reversePrint2(head *ListNode) []int {
+func reversePrint(head *ListNode) []int {
 	if head == nil {
 		return []int{}
 	}
-	return append(reversePrint2(head.Next), head.Val)
+	return append(reversePrint(head.Next), head.Val)
 }
 ```
 

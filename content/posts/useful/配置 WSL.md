@@ -164,3 +164,55 @@ wsl 每次重启，ip 地址都会变化，也就是说通过以上步骤添加�
 这个方法就是，wsl 启动时，读取 ip 并将 ip 以及域名写入到 Windows 的 hosts 文件中，这样以来，我们映射规则中的 IP 就可以用域名来代替。
 
 > 详见 https://zhuanlan.zhihu.com/p/372601715
+
+## 转移 WSL 到其他盘
+
+> 摘自：https://zhuanlan.zhihu.com/p/621873601
+
+### 准备工作
+
+打开 CMD，输入 `wsl -l -v` 查看 wsl 虚拟机的名称与状态。
+
+![image-20230525223359817](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230525223359817.png)
+
+了解到本机的 WSL 全称为 Ubuntu，以下的操作都将围绕这个来进行。
+
+输入 `wsl --shutdown` 使其停止运行，再次使用 `wsl -l -v` 确保其处于 stopped 状态。
+
+### 导出 / 恢复备份
+
+在 D 盘创建一个目录用来存放新的 WSL，比如 `D:\Ubuntu_WSL` 。
+
+导出备份（比如命名为 Ubuntu.tar)
+
+```sh
+wsl --export Ubuntu D:\Ubuntu_WSL\Ubuntu.tar
+```
+
+确定在此目录下可以看见备份 Ubuntu.tar 文件之后，注销原有的 wsl
+
+```sh
+wsl --unregister Ubuntu
+```
+
+将备份文件恢复到 `D:\Ubuntu_WSL` 中去
+
+```sh
+wsl --import Ubuntu D:\Ubuntu_WSL D:\Ubuntu_WSL\Ubuntu.tar
+```
+
+这时候启动 WSL，发现好像已经恢复正常了，但是用户变成了 root，之前使用过的文件也看不见了。
+
+### 恢复默认用户
+
+在 CMD 中，输入 `Linux发行版名称 config --default-user 原本用户名`
+
+例如：
+
+```bash
+Ubuntu config --default-user melon
+```
+
+请注意，这里的发行版名称的版本号是纯数字，比如 Ubuntu-22.04 就是 Ubuntu2204。
+
+这时候再次打开 WSL，你会发现一切都恢复正常了。
