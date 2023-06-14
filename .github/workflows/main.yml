@@ -32,27 +32,28 @@ jobs:
       
       
           
-  algolia:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2.4.2
-        with:
-          ref: gh-pages
+  # algolia:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2.4.2
+  #       with:
+  #         ref: gh-pages
 
-      # - name: Algolia Docsearch Uploader
-      #   uses: guzhongren/algolia-docsearch-upload-action@v2.0.0
-      #   env:
-      #     FILE_PATH: "./index.json"
-      #     APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
-      #     ADMIN_API_KEY: ${{ secrets.ADMIN_API_KEY }}
-      #     INDEX_NAME: "Notes"
-      # token too long
+  #     - name: Algolia Docsearch Uploader
+  #       uses: guzhongren/algolia-docsearch-upload-action@v2.0.0
+  #       env:
+  #         FILE_PATH: "./index.json"
+  #         APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+  #         ADMIN_API_KEY: ${{ secrets.ADMIN_API_KEY }}
+  #         INDEX_NAME: "Notes"
+  #     token too long
 
-      - name: Algolia Docsearch Uploader
-        uses: guzhongren/algolia-docsearch-upload-action@v2.0.0
-        env:
-          FILE_PATH: "index.json"
-          APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
-          ADMIN_API_KEY: ${{ secrets.ADMIN_API_KEY }}
-          INDEX_NAME: "Notes"
+  #     - name: Algolia Docsearch Uploader
+  #       uses: guzhongren/algolia-docsearch-upload-action@v2.0.0
+  #       env:
+  #         FILE_PATH: "index.json"
+  #         APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+  #         ADMIN_API_KEY: ${{ secrets.ADMIN_API_KEY }}
+  #         INDEX_NAME: "Notes"
+ 
