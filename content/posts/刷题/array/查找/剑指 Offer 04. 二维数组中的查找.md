@@ -10,7 +10,7 @@ hiddenFromHomePage: true
 
 # 剑指 Offer 04. 二维数组中的查找
 
-`mid` `search`
+`mid`
 
 在一个 n * m 的二维数组中，每一行都按照**从左到右递增**的顺序排序，每一列都按照**从上到下递增**的顺序排序。
 
@@ -66,7 +66,7 @@ func findNumberIn2DArray(matrix [][]int, target int) bool {
 
 算法流程：
 
-1. 从矩阵 matrix 左下角元素（索引设为 (i, j) ）开始遍历，并与目标值对比：
+1. 从矩阵 matrix **左下角**元素（索引设为 (i, j) ）开始遍历，并与目标值对比：
     - 当 `matrix[i][j] > target` 时，执行 i-- ，即消去第 i 行元素；
     - 当 `matrix[i][j] < target` 时，执行 j++ ，即消去第 j 列元素；
     - 当 `matrix[i][j] = target` 时，返回 truetrue ，代表找到目标值。
@@ -77,7 +77,7 @@ func findNumberIn2DArray(matrix [][]int, target int) bool {
 func findNumberIn2DArray2(matrix [][]int, target int) bool {
 	row, col := len(matrix)-1, 0 // 从左下角开始
 
-	for row >= 0 && col < len(matrix[0]) {
+	for row >= 0 && col < len(matrix[0]) { 
 		if matrix[row][col] > target {
 			row--
 		} else if matrix[row][col] < target {

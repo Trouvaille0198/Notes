@@ -27,7 +27,7 @@ https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/
 
 ## 双栈
 
-根据栈先进后出的特性，我们每次往第一个栈里插入元素后，第一个栈的底部元素是最后插入的元素，第一个栈的顶部元素是下一个待删除的元素。
+根据栈先进后出的特性，我们每次往第一个栈里插入元素后，第一个栈的顶部元素是最后插入的元素，第一个栈的底部元素是下一个待删除的元素。
 
 为了维护队列先进先出的特性，我们引入第二个栈，用第二个栈维护待删除的元素，在执行删除操作的时候我们首先看下第二个栈是否为空。
 
@@ -48,7 +48,7 @@ func (this *CQueue) AppendTail(value int) {
 }
 
 func (this *CQueue) DeleteHead() int {
-    // 只有stack2为空时，stack1中的元素c倒入stack2中
+    // 只有stack2为空时，stack1中的元素才会倒入stack2中
 	if len(this.stack2) == 0 {
 		if len(this.stack1) == 0 {
 			return -1

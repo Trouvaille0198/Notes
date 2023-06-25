@@ -68,6 +68,8 @@ Token -> 语法树 AST -> 中间码 -> 机器码
 
 ### chan
 
+> 环形队列、两个等待队列
+
 `src/runtime/chan.go:hchan` 定义了 channel 的数据结构：
 
 ```go
@@ -281,7 +283,7 @@ No element in chan1 and chan2.
 
 ##### range
 
-通过 range 可以持续从 channel 中读出数据，好像在遍历一个数组一样，当 channel 中没有数据时会阻塞当前 goroutine，与读 channel 时阻塞处理机制一样。
+通过 range 可以持续从 channel 中读出数据，好像在遍历一个数组一样，当 channel 中没有数据时会**阻塞**当前 goroutine，与读 channel 时阻塞处理机制一样。
 
 ```go
 func chanRange(chanName chan int) {
@@ -345,10 +347,10 @@ type slice struct {
 
 上图可见，扩容后新的 Slice 长度仍然是 5，但容量由 5 提升到了 10，原 Slice 的数据也都拷贝到了新 Slice 指向的数组中。
 
-:star: 扩容容量的选择遵循以下规则：
+:star: **扩容容量的选择遵循以下规则**：
 
-- 如果原 Slice 容量小于 1024，则新 Slice 容量将扩大为原来的 2 倍；
-- 如果原 Slice 容量大于等于 1024，则新 Slice 容量将扩大为原来的 1.25 倍；
+- 如果原 Slice 容量小于 1024，则新 Slice 容量将扩大为原来的 **2** 倍；
+- 如果原 Slice 容量大于等于 1024，则新 Slice 容量将扩大为原来的 **1.25** 倍；
 
 使用 `append()` 向 Slice 添加一个元素的实现步骤如下：
 
@@ -403,6 +405,10 @@ sliceB := sliceA[0:5]
 
 ### map
 
+> buckets：8个键值对、overflow、哈希值低位找桶高位找key
+>
+> 扩容：增量扩容（负载因子太高、翻倍），等量扩容（overflow太多）
+
 ![hmap-and-buckets](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/hmap-and-buckets.png)
 
 Golang 的 map 使用哈希表作为底层实现，一个哈希表里可以有多个哈希表节点，也即 bucket，而每个 bucket 就保存了 map 中的一个或一组键值对。
@@ -430,8 +436,8 @@ bucket 很多时候被翻译为桶，所谓的**哈希桶**实际上就是 bucke
 
 哈希函数对传进来的 key 进行哈希运算，得到一个唯一的值：
 
-- 低位用于寻找当前 key 属于 `hmap` 中的哪个 bucket
-- 高位用于寻找 bucket 中的哪个 key。
+- **低位**用于寻找当前 key 属于 `hmap` 中的哪个 bucket
+- **高位**用于寻找 bucket 中的哪个 key。
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/bb0f10a0a2994a50be44a8691512ff1c.png)
 
@@ -447,7 +453,7 @@ type bmap struct {
 }
 ```
 
-每个 bucket 可以存储 8 个键值对。
+每个 bucket 可以存储 **8** 个键值对。
 
 - `tophash` 是个长度为 8 的数组，哈希值相同的键（准确的说是哈希值低位相同的键）存入当前 bucket 时会将哈希值的高位存储在该数组中，以方便后续匹配。
 - `data` 区存放的是 key-value 数据，存放顺序是 key/key/key/...value/value/value，如此存放是为了节省**字节对齐**带来的空间浪费。
@@ -471,7 +477,7 @@ type bmap struct {
 
 #### 哈希冲突
 
-当有两个或以上数量的键被哈希到了同一个 bucket 时，我们称这些键发生了冲突。Go 使用链地址法（拉链法）来解决键冲突。 由于每个 bucket 可以存放 8 个键值对，所以同一个 bucket 存放超过 8 个键值对时就会再创建一个 bucket，用类似链表的方式将 bucket 连接起来。
+当有两个或以上数量的键被哈希到了同一个 bucket 时，我们称这些键发生了冲突。Go 使用链地址法（**拉链法**）来解决键冲突。 由于每个 bucket 可以存放 8 个键值对，所以同一个 bucket 存放超过 8 个键值对时就会再创建一个 bucket，用类似链表的方式将 bucket 连接起来。
 
 下图展示产生冲突后的 map：
 
@@ -514,9 +520,9 @@ bucket 数据结构指示下一个 bucket 的指针称为 **overflow bucket（�
 2. overflow 数量 > 2^15^ 时，也即 overflow 数量超过 32768 时。
    - 使用**等量扩容**
 
-##### 增量扩容
+##### 增量扩容 / 翻倍扩容
 
-当负载因子过大时，就新建一个 bucket，**新的 bucket 长度是原来的 2 倍**，然后旧 bucket 数据搬迁到新的 bucket。 考虑到如果 map 存储了数以亿计的 key-value，一次性搬迁将会造成比较大的延时，Go 采用逐步搬迁策略，即每次访问 map 时都会触发一次搬迁，每次搬迁 2 个键值对。
+当负载因子过大时，就新建 2n 个 bucket（n 为原来 buckets 的个数），然后旧 buckets 数据搬迁到新的 buckets。 考虑到如果 map 存储了数以亿计的 key-value，一次性搬迁将会造成比较大的延时，Go 采用逐步搬迁策略，即每次访问 map 时都会触发一次搬迁，每次搬迁 2 个键值对。
 
 下图展示了包含一个 bucket 满载的 map (为了描述方便，图中 bucket 省略了 value 区域):
 
@@ -538,13 +544,13 @@ hmap 数据结构中 oldbuckets 成员指身原 bucket，而 buckets 指向了�
 
 ##### 等量扩容
 
-所谓等量扩容，实际上并不是扩大容量，buckets 数量不变，重新做一遍类似增量扩容的搬迁动作，把松散的键值对重新排列一次，以使 bucket 的使用率更高，进而保证更快的存取。 
+所谓等量扩容，实际上并不是扩大容量；创建和旧桶数目一样多的新桶，然后把原来的键值对迁移到新桶中。把松散的键值对重新排列一次，以使 bucket 的使用率更高，进而保证更快的存取。 
 
 在极端场景下，比如**不断的增删**，而键值对正好集中在一小部分的 bucket，这样会**造成 overflow 的 bucket 数量增多**，但负载因子又不高，从而无法执行增量搬迁的情况，如下图所示：
 
 ![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/map-07-struct_sketch.png)
 
-上图可见，overflow 的 buckt 中大部分是空的，访问效率会很差。此时进行一次等量扩容，即 buckets 数量不变，经过重新组织后 overflow 的 bucket 数量会减少，即节省了空间又会提高访问效率。
+上图可见，overflow 的 bucket 中大部分是空的，访问效率会很差。此时进行一次等量扩容，即 buckets 数量不变，经过重新组织后 overflow 的 bucket 数量会减少，即节省了空间又会提高访问效率。
 
 #### 查找过程
 
@@ -1933,6 +1939,8 @@ P 的个数在程序启动时决定，默认情况下等同于 CPU 的核数，�
 
 ### Goroutine 调度策略
 
+> 队列轮转、系统调用、工作量窃取
+
 #### 队列轮转
 
 上图中可见每个 P 维护着一个包含 G 的队列，不考虑 G 进入系统调用或 IO 操作的情况下，P 周期性的将 G 调度到 M 中执行，执行一小段时间，将上下文保存下来，然后将 G 放到队列尾部，然后从队列中重新取出一个 G 进行调度。
@@ -2654,8 +2662,8 @@ GC 性能与对象数量负相关，对象越多 GC 性能越差，对程序影�
 
 所谓逃逸分析（Escape analysis）是指由编译器决定内存分配的位置，不需要程序员指定。 函数中申请一个新的对象
 
-- 如果分配在栈中，则函数执行结束可自动将内存回收；
-- 如果分配在堆中，则函数执行结束可交给 GC（垃圾回收）处理;
+- 如果分配在**栈**中，则函数执行结束时，内存会**自动回收**；
+- 如果分配在**堆**中，则函数执行结束可交给 **GC**（垃圾回收）处理;
 
 有了逃逸分析，返回函数局部变量将变得可能，除此之外，逃逸分析还跟闭包息息相关，了解哪些场景下对象会逃逸至关重要。
 
@@ -2865,9 +2873,9 @@ D:\SourceCode\GoExpert\src>go build -gcflags=-m
 
 我们考虑这么一种场景，协程 A 执行过程中需要创建子协程 A1、A2、A3...An，协程 A 创建完子协程后就等待子协程退出。 针对这种场景，GO 提供了三种解决方案：
 
-- Channel：使用 channel 控制子协程
-- WaitGroup：使用信号量机制控制子协程
-- Context：使用上下文控制子协程
+- **Channel**：使用 channel 控制子协程
+- **WaitGroup**：使用信号量机制控制子协程
+- **Context**：使用上下文控制子协程
 
 三种方案各有优劣，比如 Channel 优点是实现简单，清晰易懂，WaitGroup 优点是子协程个数动态可调整，Context 优点是对子协程派生出来的孙子协程的控制。 缺点是相对而言的，要结合实例应用场景进行选择。
 

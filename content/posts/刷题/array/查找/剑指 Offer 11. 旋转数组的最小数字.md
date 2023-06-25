@@ -10,7 +10,7 @@ hiddenFromHomePage: true
 
 # 剑指 Offer 11. 旋转数组的最小数字
 
-`easy`
+`easy` `二分`
 
 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。
 
@@ -30,11 +30,15 @@ hiddenFromHomePage: true
 输出：0
 ```
 
+## 分析 
+
+首先，遍历一定是可以的。。但是时间复杂度是 O(N)
+
 ## 二分
 
 - middle > high：代表最小值一定在 middle 右侧，所以 low 移到 middle + 1 的位置。
 - middle < high：代表最小值一定在 middle 左侧**或者就是 middle**，所以 high 移到 middle 的位置。
-- middle 既不大于 low 指针的值，也不小于 high 指针的值，代表着 middle 可能等于 low 指针的值，或者 high 指针的值，我们这时候只能**让 high 指针递减**，来一个一个找最小值了。
+- middle == high：这时候不好判断，只能**让 high 指针递减**，来一个一个找最小值了。
 
 ```go
 // 二分
@@ -42,11 +46,11 @@ func minArray2(numbers []int) int {
 	low := 0
 	high := len(numbers) - 1
 	for low < high {
-		pivot := low + (high-low)/2
-		if numbers[pivot] < numbers[high] {
-			high = pivot // z
-		} else if numbers[pivot] > numbers[high] {
-			low = pivot + 1
+		mid := low + (high-low)/2
+		if numbers[mid] < numbers[high] {
+			high = mid
+		} else if numbers[mid] > numbers[high] {
+			low = mid + 1
 		} else {
 			high--
 		}

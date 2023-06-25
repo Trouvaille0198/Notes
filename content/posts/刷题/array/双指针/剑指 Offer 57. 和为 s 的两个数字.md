@@ -32,6 +32,8 @@ hiddenFromHomePage: true
 
 ## 对撞指针
 
+头尾指针：和小了，左指针右移；和大了，右指针左移
+
 ```go
 func twoSum(nums []int, target int) []int {
 	if len(nums) <= 1 {

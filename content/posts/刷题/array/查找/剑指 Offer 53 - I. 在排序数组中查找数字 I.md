@@ -3,14 +3,14 @@ title: "剑指 Offer 53 - I. 在排序数组中查找数字 I"
 date: 2022-02-22
 draft: false
 author: "MelonCholi"
-tags: [算法,数组,二分]
+tags: [算法,数组,查找,二分]
 categories: [刷题]
 hiddenFromHomePage: true
 ---
 
 # 剑指 Offer 53 - I. 在排序数组中查找数字 I
 
-`easy`
+`easy` `二分`
 
 统计一个数字在排序数组中出现的次数。
 

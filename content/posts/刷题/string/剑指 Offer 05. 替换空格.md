@@ -44,7 +44,7 @@ func replaceSpace(s string) string {
 
 ```go
 // 原地修改 时间复杂度O(N),空间复杂度O(1)
-func replaceSpace2(s string) string {
+func replaceSpace(s string) string {
 	b := []byte(s)
 	length := len(b)
 	spaceCount := 0

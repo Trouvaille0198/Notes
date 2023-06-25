@@ -2566,7 +2566,30 @@ func Print[T any](s []T) {}
 
 ### 零散的特性
 
-- Go 的相对路径是相对于**执行命令时的目录**
+- Go 的**相对路径**是相对于**执行命令时的目录**
+
+### 拷贝 slice
+
+两种方法
+
+copy
+
+```go
+originalSlice := []int{1, 2, 3, 4, 5}
+
+newSlice := make([]int, len(originalSlice))
+copy(newSlice, originalSlice)
+```
+
+append
+
+```go
+originalSlice := []int{1, 2, 3, 4, 5}
+
+newSlice := append([]int{}, originalSlice...)
+```
+
+
 
 ### 分组声明
 
@@ -2686,6 +2709,7 @@ a = a[:copy(a, a[N:])] // 删除开头N个元素
 ```go
 a = []int{1, 2, 3, ...}a = append(a[:i], a[i+1:]...) // 删除中间1个元素
 a = append(a[:i], a[i+N:]...) // 删除中间N个元素
+
 a = a[:i+copy(a[i:], a[i+1:])] // 删除中间1个元素
 a = a[:i+copy(a[i:], a[i+N:])] // 删除中间N个元素
 ```
@@ -2740,7 +2764,7 @@ case *int:
 
 ```go
 if seconds, ok := timeZone[tz]; ok {
-        return t
+	return t
 }
 ```
 
@@ -2793,7 +2817,7 @@ func Caller(skip int) (pc uintptr, file string, line int, ok bool)
 var _ json.Marshaler = (*RawMessage)(nil)
 ```
 
-在此声明中，我们调用了一个 *RawMessage 转换并将其赋予了 Marshaler，以此来要求 *RawMessage 实现 Marshaler，这时其属性就会在编译时被检测。 
+在此声明中，我们调用了一个 *RawMessage 转换并将其赋予了 Marshaler，以此来**要求 *RawMessage 实现 Marshaler**，这时其属性就会在编译时被检测。 
 
 若 json.Marshaler 接口被更改，此包将无法通过编译， 而我们则会注意到它需要更新。
 
@@ -3214,7 +3238,8 @@ func main() {
 }
  
 // output
-// {1, 1, 2, 3}
+// {1, 1, 2, 3} 
+// 而不是 {2, 1, 2, 3}
 ```
 
 slice 会有个长度和容量。如果没有足够可用的容量，append 函数会创建一个新的底层数组，拷贝已存在的值和将要被附加的新值。
@@ -3358,26 +3383,5 @@ func main() {
 	// 3. 校验所有结果是否都被添加上
 	fmt.Println("done len:", len(s.Slice()))
 }
-```
-
-### 拷贝 slice
-
-两种方法
-
-copy
-
-```go
-originalSlice := []int{1, 2, 3, 4, 5}
-
-newSlice := make([]int, len(originalSlice))
-copy(newSlice, originalSlice)
-```
-
-append
-
-```go
-originalSlice := []int{1, 2, 3, 4, 5}
-
-newSlice := append([]int{}, originalSlice...)
 ```
 

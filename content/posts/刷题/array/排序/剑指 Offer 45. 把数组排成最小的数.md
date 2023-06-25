@@ -30,6 +30,8 @@ hiddenFromHomePage: true
 
 ## 自定义排序
 
+a 和 b 哪个数大，取决于 “ab” 和 “ba” 哪个数大。听懂掌声。
+
 ```go
 // 获取两个数字拼接后的结果
 func plusNum(a, b int) (res int) {
@@ -51,7 +53,7 @@ func minNumber(nums []int) string {
 	var res string
 	// 选择排序
 	sort.Slice(nums, func(i, j int) bool {
-		return plusNum(nums[i], nums[j]) < plusNum(nums[j], nums[i])
+		return compare(nums[i], nums[j])
 	})
 	for _, item := range nums {
 		res += strconv.Itoa(item)

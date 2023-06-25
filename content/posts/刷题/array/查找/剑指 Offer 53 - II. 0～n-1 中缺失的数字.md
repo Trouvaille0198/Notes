@@ -36,7 +36,7 @@ hiddenFromHomePage: true
 // 遍历 出现前后差为2则返回
 func missingNumber(nums []int) int {
 	for i := 0; i < len(nums); i++ {
-		if i+1 < len(nums) && nums[i+1]-nums[i] > 1 {
+		if i+1 <= len(nums)-1 && nums[i+1]-nums[i] > 1 {
 			return i + 1
 		}
 	}
@@ -54,7 +54,7 @@ func missingNumber(nums []int) int {
 
 ```go
 // 等差数列求和
-func missingNumber2(nums []int) int {
+func missingNumber(nums []int) int {
 	n := len(nums)
 	totalSum := n * (n + 1) / 2
 	sum := 0
@@ -71,7 +71,7 @@ func missingNumber2(nums []int) int {
 
 ```go
 // 二分
-func missingNumber3(nums []int) int {
+func missingNumber(nums []int) int {
 	low, high := 0, len(nums)-1
 	for low <= high {
 		mid := (low + high) >> 1

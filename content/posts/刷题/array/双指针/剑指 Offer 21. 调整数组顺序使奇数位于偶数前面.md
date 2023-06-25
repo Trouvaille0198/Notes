@@ -22,6 +22,8 @@ hiddenFromHomePage: true
 注：[3,1,2,4] 也是正确的答案之一。
 ```
 
+相当标准的双指针题目
+
 ## 快慢指针
 
 ```go
@@ -30,6 +32,7 @@ func exchange(nums []int) []int {
 	slow, fast := 0, 0
 	for fast < len(nums) {
 		if nums[fast]%2 == 1 {
+            // 是奇数
 			nums[slow], nums[fast] = nums[fast], nums[slow]
 			slow++
 		}
