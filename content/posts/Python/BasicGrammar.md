@@ -11,9 +11,7 @@ categories: [Python]
 
 ## 认识
 
-强类型语言：解释器会根据赋值或运算来自动推断变量类型
-
-动态类型语言：变量类型可以随时变化，是为 “状态机”
+Python 是一种动态类型语言（运行时做数据类型检查）、也是一种强类型语言（强制类型定义）
 
 ### 对象模型
 
@@ -25,7 +23,7 @@ categories: [Python]
 
 ### 内存管理
 
-python 采用基于值的管理方式
+python 采用**基于值的内存管理**
 
 - 在 Python 中，即使是简单的赋值语句 `a = 1`，也只是将变量标识符 `a` 引用向对象 `1`
 
@@ -59,7 +57,16 @@ python 采用基于值的管理方式
 
 - 深拷贝会**递归**地拷贝原对象中的每一个子对象，因此拷贝后的对象和原对象互不相关。
 
-列表的切片是浅拷贝，是对原列表的引用。当列表含列表元素时，会产生问题
+**列表的切片是浅拷贝**，是对原列表的引用。当列表含列表元素时，会产生问题
+
+要实现对列表的深拷贝：
+
+```python
+import copy
+
+original_list = [1, 2, [3, 4]]
+copied_list = copy.deepcopy(original_list)
+```
 
 ## 选择结构
 
@@ -100,9 +107,9 @@ else:
 
 #### 迭代
 
-如果给定一个 list 或 tuple，我们可以通过 for 循环来遍历这个 list 或 tuple，这种遍历我们称为迭代（Iteration）。在 Python 中，迭代是通过 for ... in 来完成的。Python 的 for 循环不仅可以用在 list 或 tuple 上，还可以作用在其他可迭代对象上
+如果给定一个 list 或 tuple，我们可以通过 for 循环来遍历这个 list 或 tuple，这种遍历我们称为迭代（Iteration）。在 Python 中，迭代是通过 for ... in 来完成的。Python 的 for 循环不仅可以用在 list 或 tuple 上，还可以作用在其他**可迭代对象**（Iterable）上
 
-1. 默认情况下，dict 迭代的是 key。如果要迭代 value，可以用 for value in d.values()，如果要同时迭代 key 和 value，可以用`for k, v in d.items()`
+1. 默认情况下，dict 迭代的是 key。如果要迭代 value，可以用 `for value in d.values()`，如果要同时迭代 key 和 value，可以用`for k, v in d.items()`
 
 ```python
 >>> d = {'a': 1, 'b': 2, 'c': 3}
@@ -148,12 +155,13 @@ while <condition>:
 
 ### 循环的 else 语句
 
-循环自然结束，就执行 else 中的语句，如果遇到 break，则不执行 else 中的语句
+循环自然结束，就执行 else 中的语句，**如果遇到 break，则不执行 else 中的语句**
 
 ```python
 for < variable> in < sequence >:
     <statements>
 else:
+    # 循环正常退出则执行
     <statements>
     
 # or
@@ -161,6 +169,7 @@ else:
 while <conditions>:
     <statements>
 else:
+    # 循环正常退出则执行
     <statements>
 ```
 
@@ -194,7 +203,7 @@ calc([1, 2, 3])
 calc((1, 3, 5, 7))
 ```
 
-2. 用*号
+2. 用 `*` 号
 
 ```python
 def calc(*numbers)
@@ -202,7 +211,7 @@ def calc(*numbers)
 calc(1, 2)
 ```
 
-*numbers 表示把 number 这个 list 的所有元素作为可变参数传进去。这种写法相当有用，而且很常见
+`*numbers` 表示把 `number` 这个 list 的所有元素作为可变参数传进去。这种写法相当有用，而且很常见
 
 #### 关键字参数
 
@@ -216,13 +225,13 @@ func('Jack', 24, city=extra['city'], job=extra['job'])
 func('Jack', 24, **extra)
 ```
 
-\*\*extra 表示把 extra 这个 dict 的所有 key-value 用关键字参数传入到函数的 \*\*kw 参数
+`**extra` 表示把 extra 这个 dict 的所有 key-value 用关键字参数传入到函数的 `**kw` 参数
 
 #### 补充
 
-*args 是可变参数，args 接收的是一个 tuple
+`*args` 是**可变参数**，args 接收的是一个 tuple
 
-**kwargs 是关键字参数，kwargs 接收的是一个 dict
+`**kwargs` 是**关键字参数**，kwargs 接收的是一个 dict
 
 ### 装饰器
 
@@ -249,7 +258,7 @@ print(add(1,2))
 print(sub(1,2))
 ```
 
-
+使用方法：
 
 ```python
 @timer
@@ -289,15 +298,13 @@ list(map(lambda x:x**2,a))
 
 # 列表
 
-列表赋值，实质上指向同一块内存
+列表赋值，不同的变量名实质上指向同一块内存
 
-要创建指向不同内存的列表，使用切片
+:heavy_check_mark: 要创建指向不同内存的列表，使用切片
 
 ## 基本语句
 
 ### 声明列表
-
-例
 
 ```python
 favorate_singers = ['Mika','Jay Chou','Bruno Mars','Ed Sheeran']
@@ -308,13 +315,13 @@ favorate_singers = ['Mika','Jay Chou','Bruno Mars','Ed Sheeran']
 1. 在列表末尾添加元素
 
 ```python
-list.append(value)
+list_a.append(value)
 ```
 
 2. 在列表中插入元素
 
   ```python
-list.insert(index，value)
+list_a.insert(index，value)
   ```
 
 3. 在列表末尾合并另一个列表
@@ -328,42 +335,43 @@ list_a.extend(list_b)
 1. 知晓索引并将其删除
 
 ```python
- del list[index]
+del list_a[index]
 ```
 
 2. 删除元素并将其弹出
 
 ```python
-list.pop([index])	   # 括号内为空，则弹出最后一个元素；返回弹出的元素值
+list_a.pop([index])	   # 括号内为空，则弹出最后一个元素；返回弹出的元素值
 ```
 
 3. 根据值删除元素
 
 ```python
-list.remove(value)      # 只删除第一个指定的值，要删除多个相同值需使用循环
+list_a.remove(value)      # 只删除第一个指定的值，要删除多个相同值需使用循环
 ```
 
 ### 组织列表
 
-#### 按照首字母顺序排序列表(永久性）
+#### 按照首字母顺序排序列表（永久性）
 
 ```python
-list.sort()	# 反向排序：列表名.sort(reverse=True)
+list.sort()	
+# 反向排序：列表名.sort(reverse=True)
 ```
 
-#### 按照首字母顺序排序列表(临时性)
+#### 按照首字母顺序排序列表（临时性）
 
 ```python
-sorted(list)
+sorted(list) # 返回一个有序的列表
 ```
 
-#### 倒着排序列表(永久性)
+#### 倒着排序列表（永久性）
 
 ```python
 list.reverse()	# 恢复的办法，再来一次 reverse()
 ```
 
-#### 倒着排序列表(临时性)
+#### 倒着排序列表（临时性）
 
 ```python
 reversed(list) # 返回迭代器
@@ -384,7 +392,7 @@ L=[1,2,3,4,5]
 for i in range(len(L)):
      L[i]+=10         
 print(L) 
-               #等效于
+               # 等效于
 L=[]
 for i in range(1,6):
 	L.append(i+10)
@@ -395,20 +403,18 @@ print(L)
 
 ```python
 L=[1,2,3,4,5]
-L=[x+10 for x in L]     #result:[11,12,13,14,15]
+L=[x+10 for x in L]     # result: [11,12,13,14,15]
 ```
 
 #### 创建切片
 
 参数 [start_index: stop_index: step] ：
 
-   	 start_index是切片的起始位置索引，不提供时默认从头
-   	
-   	 stop_index是切片的结束位置（**不包括**）索引，不提供时默认至尾,可为负
-   	
-   	 step为步长，可以不提供，默认值是1
+- `start_index` 是切片的起始位置索引，不提供时默认从头
+- `stop_index` 是切片的结束位置（**不包括**）索引，不提供时默认至尾；可为负
+- `step` 为步长，可以不提供，默认值是 1
 
-### 复制列表/创建列表副本
+### 复制列表 / 创建列表副本
 
  用切片复制
 
@@ -420,6 +426,7 @@ List2 = List1[:]
 
 ```python
 List = [a,b,c,d,e]
+
 if a in List
 if a not in List
 ```
@@ -459,7 +466,7 @@ True
 
 2. 使用乘法运算相当于创建了一个新列表，改变了地址
 
-3. 使用乘法复制了列表中的列表元素时，实质上是创建了其引用，非常危险
+3. 使用乘法复制了列表中的列表元素时，**实质上是创建了其引用，非常危险**
 
     ```python
     >>> a = [[0] * 2] * 3
@@ -471,7 +478,7 @@ True
     [[2, 0], [2, 0], [2, 0]]
     ```
 
-4. 列表直接赋值是深拷贝，修改其一，另一也会变；而切片是浅拷贝，可以放心使用
+4. 列表直接赋值是创建一个引用，修改其一，另一也会变；而切片是浅拷贝，可以放心使用
 
 ### 列表表达式
 
@@ -482,13 +489,11 @@ True
 
 ## 元组
 
-概念：不可变的列表，用圆括号来标识（tuple）
+元组是不可变的列表，用圆括号来标识（tuple）
 
-元组可以作为字典的键，而列表不能
+元组可以作为字典的键（**不可变对象**），而列表不能
 
 ### 定义元组
-
- 例
 
 ```python
 tup1 = ('physics', 'chemistry', 1997, 2000)
@@ -508,7 +513,7 @@ tup1 = (50, )
 3. 可以对元组进行连接组合       
 
  ```python
-tup1 =  
+tup1 = (50, )
 tup2 = ('abc', 'xyz') 
 tup3 = tup1 + tup2
  ```
@@ -540,11 +545,11 @@ tup3 = tup1 + tup2
 
 生成器是一个特殊的程序，可以被用作控制循环的迭代行为，python 中生成器是迭代器的一种，使用 yield 返回值函数，每次调用 yield 会暂停，而可以使用 `next() ` 函数和 `send()` 函数恢复生成器
 
-生成器类似于返回值为数组的一个函数，这个函数可以接受参数，可以被调用，但是，不同于一般的函数会一次性返回包括了所有数值的数组，生成器一次只能产生一个值，这样消耗的内存数量将大大减小，而且允许调用函数可以很快的处理前几个返回值，因此生成器看起来像是一个函数，但是表现得却像是迭代器
+生成器类似于返回值为数组的一个函数，这个函数可以接受参数，可以被调用，但是，不同于一般的函数会一次性返回包括了所有数值的数组，生成器一次只能产生一个值，这样消耗的内存数量将大大减小，而且允许调用函数可以很快的处理前几个返回值，因此生成器**看起来像是一个函数，但是表现得却像是迭代器**
 
 ### 创建
 
-#### 把一个列表生成式的 [] 中括号改为 () 小括号
+#### 把一个列表生成式的 `[]` 中括号改为 `()` 小括号
 
 ```python
 l = [x*x for x in range(10)]
@@ -573,6 +578,7 @@ print(next(g))
 
 ```python
 for i in g:
+    # 即调用 __iter__()
     print(i)
 ```
 
@@ -595,7 +601,7 @@ g = generator(4)
 
 1. 索引数从 0 开始
 2. 将索引指定为 -1，可以返回最后一个列表元素
-3. 负数索引返回离列表末尾相应距离的元素，如 print(list[-3:]) 即打印 list 的最后三个元素
+3. 负数索引返回离列表末尾相应距离的元素，如 `print(list[-3:])` 即打印 list 的最后三个元素
 
 ![image-20201206215555032](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20201206215555032.png)
 
@@ -610,7 +616,7 @@ g = generator(4)
      (0, 1, 2)
      ```
 
-   - 字符串'xxx'也可以看成是一种 list，每个元素就是一个字符。因此，字符串也可以用切片操作，只是操作结果仍是字符串
+   - 字符串 `'xxx'` 也可以看成是一种元组，每个元素就是一个字符。因此，字符串也可以用切片操作，只是操作结果仍是字符串
 
      ```python
      >>> 'ABCDEFG'[:3]
@@ -621,7 +627,7 @@ g = generator(4)
 
 6. 运用列表生成式
 
-   - 要生成[1x1, 2x2, 3x3, ..., 10x10]
+   - 要生成 `[1x1, 2x2, 3x3, ..., 10x10]`
 
      ```python
      [x * x for x in range(1, 11)]
@@ -868,7 +874,6 @@ len(dict)
     {0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9'}
     ```
 
-    
 
 # 类
 
@@ -914,18 +919,18 @@ rest1.open_rest()
 
 ```python
 class IceCreamStand(Restaurant):
-      def __init__(self,name,type):
-          super().__init__(name,type)                                        #super()用来继承父类的属性                                                                                            #父类也称超类(superclass)
-          self.flavours=['strawberry','chocolate','milk','matcha']           #为子类定义的属性
+	def __init__(self,name,type):
+		super().__init__(name,type)  # super()用来继承父类的属性                                                                    # 父类也称超类(superclass)
+		self.flavours=['strawberry','chocolate','milk','matcha']  # 为子类定义的属性
 ```
 
 ### 给子类定义方法
 
 ```python
 def describe_flavour(self):
-print("There're several kinds of flavours which are",end=' ')
-for flavour in self.flavours:
-    print(flavour,end=' ')
+	print("There're several kinds of flavours which are",end=' ')
+	for flavour in self.flavours:
+    	print(flavour,end=' ')
 ```
 
 ### 使用子类和实例 
@@ -970,7 +975,7 @@ from car import *
 
 这是个 Python 的语法，`__name__` 属性显示当前模块名
 
-当模块被直接运行时 `__name__` 属性为 **main** ，作为模块被导入时为模块名
+当模块被直接运行时 `__name__` 属性为 `‘__main__’` ，作为模块被导入时为模块名
 
 这句话的意思就是，当模块被直接运行时，以下代码块将被运行，当模块是被导入时，代码块不被运行。
 
@@ -980,12 +985,37 @@ from car import *
 
 python 并没有对私有成员提供严格的访问保护机制。
 
-- 私有属性："__" 开头
+- 私有属性："__"  双下划线开头
     - 主函数中访问：`对象名._类名__value`
 - 保护成员："_" 开头
     - 不能被作为包导入
 
+```py
+class A:
+    def __init__(self, value1 = 0, value2 = 0):
+        self._value1 = value1
+        self.__value2 = value2
+    def setValue(self, value1, value2):
+        self._value1 = value1
+        self.__value2 = value2
+    def show(self):
+        print(self._value1)
+        print(self.__value2)
+
+>>> a = A()
+>>> a._value1
+0
+>>> a._A__value2         # 在外部访问对象的私有数据成员
+0
+>>> a.__value2           # 报错
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'A' object has no attribute '__value2'. Did you mean: '_A__value2'?
+```
+
 ## 特殊方法
+
+以双下划线开头结尾
 
 - `__new__`：构造函数
 - `__init__`：初始化函数
@@ -1000,6 +1030,7 @@ python 并没有对私有成员提供严格的访问保护机制。
 - `__getitem__`：下标访问或迭代器访问
 - `__setitem__`：下标修改或迭代器修改
 - `__dict__`：使用一个字典对对象中成员的值进行修改，一般不需要重载
+- `__iter__`：迭代器实现
 
 # 文件
 
@@ -1007,12 +1038,12 @@ python 并没有对私有成员提供严格的访问保护机制。
 
 ### 全部读取
 
-使用 .read() 
+使用 `.read()` 
 
 ```python
 with open(filename) as file_object:
-      contents = file_object.read()        #使用.read()读取文件的全部内容
-      print(contents.rstrip())             #使用.rstrip()来剥除.read()造成的末尾空字符串
+    contents = file_object.read()  # 使用.read()读取文件的全部内容
+    print(contents.rstrip())       # 使用.rstrip()来剥除.read()造成的末尾空字符串
 ```
 
 ### 逐行读取
@@ -1027,7 +1058,7 @@ with open(filename) as file_object:
 
 ### 创建一个包含文件各行内容的列表
 
-使用 .readlines()  
+使用 `.readlines() ` 
 
 ```python
 with open(filename) as file_object:
@@ -1045,7 +1076,7 @@ with open(filename) as file_object:
 
 pi_string=''
 for line in lines:
-    pi_string+=line.strip()                 #使用.strip()将每行空格全部除去
+    pi_string+=line.strip()             # 使用.strip()将每行空格全部除去
 
 print(pi_string)
 print(pi_string[:10] + '...')
@@ -1060,7 +1091,7 @@ print(len(pi_string))
 filename = 'text_files\programming.txt'
 
 with open(filename, 'w') as file_object:
-    file_object.write('Heya!\n')                   #write()不会自动添加换行符，需手动添加
+    file_object.write('Heya!\n')              # write()不会自动添加换行符，需手动添加
 ```
 
 ### 附加到文件
@@ -1068,13 +1099,13 @@ with open(filename, 'w') as file_object:
 ```python
 filename = 'text_files\programming.txt'
 
-with open(filename, 'a') as file_object:            #'a'表示以附加模式打开文件
+with open(filename, 'a') as file_object:      # 'a'表示以附加模式打开文件
     file_object.write('Greeting!\n') 
 ```
 
 ## 其他打开方式
 
-- r：以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。
+- r：以只读方式打开文件。文件的指针将会放在文件的开头。这是**默认**模式。
 - rb：以二进制只读方式打开一个文件。文件指针将会放在文件的开头。
 - r+：以读写方式打开一个文件。文件指针将会放在文件的开头。
 - rb+：以二进制读写方式打开一个文件。文件指针将会放在文件的开头。
@@ -1091,7 +1122,7 @@ with open(filename, 'a') as file_object:            #'a'表示以附加模式打
 
 ### json 格式
 
-对象：它在 JavaScript 中是使用花括号 `{}` 包裹起来的内容，数据结构为 `{key1：value1, key2：value2, ...}` 的键值对结构。在面向对象的语言中，key 为对象的属性，value 为对应的值。键名可以使用整数和字符串来表示。值的类型可以是任意类型。
+对象：它在 JavaScript 中是使用花括号 `{}` 包裹起来的内容，数据结构为 `{key1: value1, key2: value2, ...}` 的键值对结构。在面向对象的语言中，key 为对象的属性，value 为对应的值。键名可以使用整数和字符串来表示。值的类型可以是任意类型。
 
 数组：数组在 JavaScript 中是方括号 `[]` 包裹起来的内容，数据结构为 `["java", "javascript", "vb", ...]` 的索引结构。在 JavaScript 中，数组是一种比较特殊的数据类型，它也可以像对象那样使用键值对，但还是索引用得多。同样，值的类型可以是任意类型。
 
@@ -1121,22 +1152,24 @@ json 库提供的主要功能也是字典与 json 的相互转换
 
 ### 存储数据
 
+使用 `json.dump() `
+
 ```python
 filename = 'name.json'
 with open(filename, 'w') as f_obj:
-        json.dump(name, f_obj)                            #name为要储存的数据
+	json.dump(name, f_obj)          # name为要储存的数据
 ```
 
 ### 读取数据
 
-使用`json.load() `
+使用 `json.load() `
 
 返回字典对象
 
 ```python
 filename = 'name.json'
 with open(filename) as f_obj:
-        name = json.load(f_obj)                         #将json中的数据读到name中
+    name = json.load(f_obj)         # 将json中的数据读到name中
 ```
 
 使用 load 方法将字符串转为 JSON 对象。如果最外层是中括号，那最终的类型是列表类型
@@ -1192,6 +1225,26 @@ with open('data.json', 'w', encoding='utf-8') as file:
 ```
 
 # 异常处理
+
+在 Python 中，`try` 语句用于捕获和处理异常。它的基本语法如下：
+
+```py
+try:
+    # 可能引发异常的代码块
+    # ...
+except ExceptionType1:
+    # 处理 ExceptionType1 类型的异常
+    # ...
+except ExceptionType2:
+    # 处理 ExceptionType2 类型的异常
+    # ...
+else:
+    # 当没有异常发生时执行的代码
+    # ...
+finally:
+    # 无论是否有异常发生，都会执行的清理代码
+    # ...
+```
 
 # 技巧
 
