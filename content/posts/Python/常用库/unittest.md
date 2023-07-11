@@ -110,9 +110,9 @@ class FuncTest(unittest.TestCase):
 
 ### 基本使用
 
-##### return_vaule 
+##### return_value 
 
-mock 对象的 return_vaule 的作用：它将忽略 mock 对象的行为，指定其返回值。
+mock 对象的 return_value 的作用：它将忽略 mock 对象的行为，指定其返回值。
 
 modular.py
 

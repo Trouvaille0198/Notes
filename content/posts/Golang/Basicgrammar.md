@@ -8,7 +8,7 @@ categories: [Golang]
 featuredImage: https://booklovinmamas.com/wp-content/uploads/2017/09/go.png
 ---
 
-# Golang
+# Golang 基础语法
 
 ![img](https://booklovinmamas.com/wp-content/uploads/2017/09/go.png)
 

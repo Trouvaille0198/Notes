@@ -5,9 +5,12 @@ author: MelonCholi
 draft: false
 tags: [Python]
 categories: [Python]
+featuredImage: https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/PYTHONLANG3.jpg
 ---
 
-# 基础语法
+# Python 基础语法
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/PYTHONLANG3.jpg)
 
 ## 认识
 
@@ -15,11 +18,11 @@ Python 是一种动态类型语言（运行时做数据类型检查）、也是�
 
 ### 对象模型
 
-- 对象：python 中处理的每样 “东西” 都是对象
-    - 内置对象：可直接使用
-        - 如数字、字符串、列表、del 等；
-    - 非内置对象：需要导入模块才能使用
-        - 如 sin(x)，random() 等。
+python 中处理的每样 “东西” 都是**对象**
+- 内置对象：可直接使用
+    - 如数字、字符串、列表、del 等；
+- 非内置对象：需要导入模块才能使用
+    - 如 sin(x)，random() 等。
 
 ### 内存管理
 
