@@ -1,0 +1,48 @@
+---
+title: "108. 将有序数组转换为二叉搜索树"
+date: 2023-07-12
+draft: false
+author: "MelonCholi"
+tags: [算法, 树, 对称性递归]
+categories: [刷题]
+hiddenFromHomePage: true
+---
+
+# 108. 将有序数组转换为二叉搜索树
+
+给你一个整数数组 nums ，其中元素已经按 升序 排列，请你将其转换为一棵 高度平衡 二叉搜索树。
+
+高度平衡 二叉树是一棵满足「每个节点的左右两个子树的高度差的绝对值不超过 1 」的二叉树。
+
+示例 1：
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/btree1.jpg)
+
+
+输入：nums = [-10,-3,0,5,9]
+输出：[0,-3,9,-10,null,5]
+解释：[0,-10,5,null,-3,null,9] 也将被视为正确答案：
+
+![img](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/btree2.jpg)
+
+## 递归
+
+总是选择中间位置左边的数字作为根节点
+
+```go
+func sortedArrayToBST(nums []int) *TreeNode {
+    var helper func(l,r int)*TreeNode
+    helper = func(l,r int)*TreeNode {
+        if l>r {
+            return nil
+        }
+        mid := (l+r)>>1
+        root := &TreeNode{Val: nums[mid]}
+        root.Left = helper(l,mid-1)
+        root.Right = helper(mid+1,r)
+        return root
+    }
+    return helper(0,len(nums)-1)
+}
+```
+
