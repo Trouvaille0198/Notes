@@ -1,3 +1,12 @@
+---
+title: "剑指 Offer 52. 两个链表的第一个公共节点"
+date: 2022-02-26
+draft: false
+author: "MelonCholi"
+tags: [算法, 链表]
+categories: [算法]
+---
+
 # 剑指 Offer 52. 两个链表的第一个公共节点
 
 输入两个链表，找出它们的第一个公共节点。

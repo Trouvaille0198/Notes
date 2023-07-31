@@ -349,8 +349,12 @@ type slice struct {
 
 :star: **扩容容量的选择遵循以下规则**：
 
+- 当新 Slice 需要的容量大于原 Slice 容量的两倍，则直接按照新切片需要的容量扩容；
+
 - 如果原 Slice 容量小于 1024，则新 Slice 容量将扩大为原来的 **2** 倍；
 - 如果原 Slice 容量大于等于 1024，则新 Slice 容量将扩大为原来的 **1.25** 倍；
+
+![image-20230713201116517](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20230713201116517.png)
 
 使用 `append()` 向 Slice 添加一个元素的实现步骤如下：
 

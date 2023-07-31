@@ -1,3 +1,12 @@
+---
+title: "剑指 Offer 24. 反转链表"
+date: 2022-02-26
+draft: false
+author: "MelonCholi"
+tags: [算法, 链表]
+categories: [算法]
+---
+
 # 剑指 Offer 24. 反转链表
 
 `easy`

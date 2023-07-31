@@ -1,3 +1,12 @@
+---
+title: "剑指 Offer 35. 复杂链表的复制"
+date: 2022-02-26
+draft: false
+author: "MelonCholi"
+tags: [算法, 链表]
+categories: [算法]
+---
+
 # 剑指 Offer 35. 复杂链表的复制
 
 `mid`
@@ -42,11 +51,12 @@ func copyRandomList(head *Node) *Node {
 	}
 	nodeMap := make(map[*Node]*Node)
 	newHead := &Node{} // 空头结点
-
+	// 构建链表
 	for p, k := head, newHead; p != nil; p, k = p.Next, k.Next {
 		k.Next = &Node{Val: p.Val}
 		nodeMap[p] = k.Next
 	}
+    // 连接random指针
 	for p, k := head, newHead; p != nil; p, k = p.Next, k.Next {
 		if p.Random != nil {
 			k.Next.Random = nodeMap[p.Random]
@@ -56,7 +66,7 @@ func copyRandomList(head *Node) *Node {
 }
 ```
 
-## 原地转换
+## 原地复制、拆分
 
 1. 复制一个新的节点在原有节点之后，如 1 -> 2 -> 3 -> null 复制完就是 1 -> 1 -> 2 -> 2 -> 3 - > 3 -> null
 2. 从头开始遍历链表，通过 cur.next.random = cur.random.next 可以将复制节点的随机指针串起来，当然需要判断 cur.random 是否存在

@@ -17,9 +17,17 @@ fd 虽然不能提供现在 find 命令所有的强大功能，但它也提供�
 
 ## 安装
 
+使用 apt
+
+```sh
+sudo apt install fd-find
+```
+
+> Note that the binary is called `fdfind` as the binary name `fd` is already used by another package. It is recommended that after installation, you add a link to `fd` by executing command `ln -s $(which fdfind) ~/.local/bin/fd`, in order to use `fd` in the same way as in this documentation. Make sure that `$HOME/.local/bin` is in your `$PATH`.
+
 从 [releases 页面](https://github.com/sharkdp/fd/releases)下载最新`.deb`包装并通过以下方式安装:
 
-```
+```sh
 sudo dpkg -i fd_7.0.0_amd64.deb  # adapt version number and architecture
 ```
 

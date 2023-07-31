@@ -71,7 +71,7 @@ original_list = [1, 2, [3, 4]]
 copied_list = copy.deepcopy(original_list)
 ```
 
-## 选择结构
+### 选择结构
 
 格式
 
@@ -88,13 +88,13 @@ else:
 
 注意冒号和缩进
 
-## 循环结构
+### 循环结构
 
 循环后可以跟 `else` 语句，当循环正常结束时执行，不正常结束就不执行
 
-### for 循环
+#### for 循环
 
-#### 格式
+##### 格式
 
 ```python
 for < variable> in < sequence >:
@@ -103,12 +103,12 @@ else:
     <statements>
 ```
 
-#### 特殊语句
+##### 特殊语句
 
 - **break** 语句可以跳出 for 和 while 的循环体。如果你从 for 或 while 循环中终止，任何对应的循环 else 块将不执行
 - **continue** 语句被用来告诉 Python 跳过当前循环块中的剩余语句，然后继续进行下一轮循环
 
-#### 迭代
+##### 迭代
 
 如果给定一个 list 或 tuple，我们可以通过 for 循环来遍历这个 list 或 tuple，这种遍历我们称为迭代（Iteration）。在 Python 中，迭代是通过 for ... in 来完成的。Python 的 for 循环不仅可以用在 list 或 tuple 上，还可以作用在其他**可迭代对象**（Iterable）上
 
@@ -149,14 +149,14 @@ False
 
 迭代时，产生的是临时变量，修改此临时变量不会影响本身迭代对象里对应元素的值
 
-### while 循环
+#### while 循环
 
 ```python
 while <condition>:
     <statements>
 ```
 
-### 循环的 else 语句
+#### 循环的 else 语句
 
 循环自然结束，就执行 else 中的语句，**如果遇到 break，则不执行 else 中的语句**
 
@@ -175,6 +175,14 @@ else:
     # 循环正常退出则执行
     <statements>
 ```
+
+### 其他
+
+- 除法：/  
+    - 结果可能为浮点数
+- 取整：//
+    - 向下取整（向小区整）
+- 取余：%
 
 ## 函数
 
@@ -299,21 +307,21 @@ list(map(lambda x:pow(x), a))
 list(map(lambda x:x**2,a))
 ```
 
-# 列表
+## 列表
 
 列表赋值，不同的变量名实质上指向同一块内存
 
 :heavy_check_mark: 要创建指向不同内存的列表，使用切片
 
-## 基本语句
+### 基本语句
 
-### 声明列表
+#### 声明列表
 
 ```python
 favorate_singers = ['Mika','Jay Chou','Bruno Mars','Ed Sheeran']
 ```
 
-### 添加列表元素
+#### 添加列表元素
 
 1. 在列表末尾添加元素
 
@@ -333,7 +341,7 @@ list_a.insert(index，value)
 list_a.extend(list_b)
 ```
 
-### 删除列表元素
+#### 删除列表元素
 
 1. 知晓索引并将其删除
 
@@ -353,42 +361,42 @@ list_a.pop([index])	   # 括号内为空，则弹出最后一个元素；返回�
 list_a.remove(value)      # 只删除第一个指定的值，要删除多个相同值需使用循环
 ```
 
-### 组织列表
+#### 组织列表
 
-#### 按照首字母顺序排序列表（永久性）
+按照首字母顺序排序列表（永久性）
 
 ```python
 list.sort()	
 # 反向排序：列表名.sort(reverse=True)
 ```
 
-#### 按照首字母顺序排序列表（临时性）
+按照首字母顺序排序列表（临时性）
 
 ```python
 sorted(list) # 返回一个有序的列表
 ```
 
-#### 倒着排序列表（永久性）
+倒着排序列表（永久性）
 
 ```python
 list.reverse()	# 恢复的办法，再来一次 reverse()
 ```
 
-#### 倒着排序列表（临时性）
+倒着排序列表（临时性）
 
 ```python
 reversed(list) # 返回迭代器
 ```
 
-#### 确定列表的长度
+确定列表的长度
 
 ```python
 len(list)
 ```
 
-### 操作列表
+#### 操作列表
 
-#### 遍历列表
+##### 遍历列表
 
 ```python
 L=[1,2,3,4,5]
@@ -402,14 +410,14 @@ for i in range(1,6):
 print(L)
 ```
 
-#### 列表解析
+##### 列表解析
 
 ```python
 L=[1,2,3,4,5]
 L=[x+10 for x in L]     # result: [11,12,13,14,15]
 ```
 
-#### 创建切片
+##### 创建切片
 
 参数 [start_index: stop_index: step] ：
 
@@ -417,7 +425,7 @@ L=[x+10 for x in L]     # result: [11,12,13,14,15]
 - `stop_index` 是切片的结束位置（**不包括**）索引，不提供时默认至尾；可为负
 - `step` 为步长，可以不提供，默认值是 1
 
-### 复制列表 / 创建列表副本
+#### 复制列表 / 创建列表副本
 
  用切片复制
 
@@ -425,7 +433,7 @@ L=[x+10 for x in L]     # result: [11,12,13,14,15]
 List2 = List1[:]
 ```
 
-### 检查元素是否在列表中
+#### 检查元素是否在列表中
 
 ```python
 List = [a,b,c,d,e]
@@ -434,16 +442,16 @@ if a in List
 if a not in List
 ```
 
-### 其他函数
+#### 其他函数
 
 - ***list.index(value)***
     - 返回值为 value 的首个元素的下标
 - ***list.count(value)***
     - 返回值为 value 的元素在列表中出现的个数
 
-## 性质
+### 性质
 
-### 序列对象的内存机制
+#### 序列对象的内存机制
 
 序列对象在内存中的起始地址是不变的，修改序列中的值不会影响到整个序列的起始地址。（有点像链表）
 
@@ -483,20 +491,20 @@ True
 
 4. 列表直接赋值是创建一个引用，修改其一，另一也会变；而切片是浅拷贝，可以放心使用
 
-### 列表表达式
+#### 列表表达式
 
 ```python
 >>> [v**2 if v%2==0 else v+1 for v in [2,3,4,-1] if v>0]
 [4, 4, 16]
 ```
 
-## 元组
+### 元组
 
 元组是不可变的列表，用圆括号来标识（tuple）
 
 元组可以作为字典的键（**不可变对象**），而列表不能
 
-### 定义元组
+#### 定义元组
 
 ```python
 tup1 = ('physics', 'chemistry', 1997, 2000)
@@ -504,7 +512,7 @@ tup2 = (1, 2, 3, 4, 5 )
 tup3 = "a", "b", "c", "d"
 ```
 
-### 注意
+#### 注意
 
 1. 元组本身不可改变，但是可以给元组变量赋值
 2. 元组中只包含一个元素时，需要在元素后面添加逗号
@@ -521,7 +529,7 @@ tup2 = ('abc', 'xyz')
 tup3 = tup1 + tup2
  ```
 
-### 序列解包
+#### 序列解包
 
 可以使用元组进行序列解包
 
@@ -540,9 +548,9 @@ tup3 = tup1 + tup2
 {'x': 1, 'y': 2}
 ```
 
-## 生成器
+### 生成器
 
-### 定义
+#### 定义
 
 在 Python 中，一边循环一边计算的机制，称为生成器（generator）
 
@@ -550,9 +558,9 @@ tup3 = tup1 + tup2
 
 生成器类似于返回值为数组的一个函数，这个函数可以接受参数，可以被调用，但是，不同于一般的函数会一次性返回包括了所有数值的数组，生成器一次只能产生一个值，这样消耗的内存数量将大大减小，而且允许调用函数可以很快的处理前几个返回值，因此生成器**看起来像是一个函数，但是表现得却像是迭代器**
 
-### 创建
+#### 创建
 
-#### 把一个列表生成式的 `[]` 中括号改为 `()` 小括号
+##### 把一个列表生成式的 `[]` 中括号改为 `()` 小括号
 
 ```python
 l = [x*x for x in range(10)]
@@ -585,7 +593,7 @@ for i in g:
     print(i)
 ```
 
-#### 构建函数
+##### 构建函数
 
 如果一个函数定义中包含 yield 关键字，那么这个函数就不再是一个普通函数，而是一个 generator
 
@@ -600,7 +608,7 @@ def generator(max):
 g = generator(4)
 ```
 
-## 技巧
+### 技巧
 
 1. 索引数从 0 开始
 2. 将索引指定为 -1，可以返回最后一个列表元素
@@ -664,9 +672,9 @@ g = generator(4)
      ['hello', 'world', 'ibm', 'apple']
      ```
 
-# 字典
+## 字典
 
-## 基本语句
+### 基本语句
 
 - 声明字典
 
@@ -736,15 +744,15 @@ for key in sorted(alien_0.keys()):
 for value in set(alien_0.values()): 
 ```
 
-## 集合
+### 集合
 
-### 定义
+#### 定义
 
 集合（set）是一个无序的不重复元素序列
 
 set 和 dict 类似，也是一组 key 的集合，但不存储 value。由于 key 不能重复，所以，在 set 中，没有重复的 key
 
-### 基本操作
+#### 基本操作
 
 - 初始化
 
@@ -772,11 +780,11 @@ s1 & s2
 s1 | s2
 ```
 
-### 嵌套
+#### 嵌套
 
 定义：列表中嵌套字典，字典中嵌套列表，字典中嵌套字典
 
-#### 在列表中存储字典
+##### 在列表中存储字典
 
 ```python
 aliens=[]
@@ -785,7 +793,7 @@ for new_alien in range(30):
     aliens.append(new_alien)
 ```
 
-#### 在字典中存储列表
+##### 在字典中存储列表
 
 ```python
 favorate_languages={
@@ -805,7 +813,7 @@ for x,y in favorate_languages.items( ):
             print(Y)
 ```
 
-#### 在字典中存储字典
+##### 在字典中存储字典
 
 ```python
 users={
@@ -825,9 +833,9 @@ for x,y in users.items():
     print("\t"+y['gender']+' , '+y['location'])
 ```
 
-## 相关函数
+### 相关函数
 
-### get()
+#### get()
 
 - 说明：返回指定键的值，如果值不在字典中返回默认值 None
 
@@ -841,7 +849,7 @@ dict.get(key, default=None)
   - key -- 字典中要查找的键
   - default -- 如果指定键的值不存在时，返回该默认值
 
-### len()
+#### len()
 
 - 说明：计算字典元素个数，即键的总数。
 
@@ -851,7 +859,7 @@ dict.get(key, default=None)
 len(dict)
 ```
 
-## 其他技巧
+### 其他技巧
 
 1. 通常习惯声明一个空字典以便添加键-值对
 
@@ -878,11 +886,11 @@ len(dict)
     ```
 
 
-# 类
+## 类
 
-## 基本语句
+### 基本语句
 
-### 创建类
+#### 创建类
 
 ```python
 class Restaurant():
@@ -892,7 +900,7 @@ class Restaurant():
         self.customer_number = 0
 ```
 
-### 创建方法
+#### 创建方法
 
 ```python
 def describe_rest(self):
@@ -903,22 +911,22 @@ def open_rest(self):
     print("This restaurant is opening")
 ```
 
-### 使用类和实例
+#### 使用类和实例
 
 ```python
 rest1 = Restaurant('KFC', 'snack bar')
 ```
 
-### 调用方法
+#### 调用方法
 
 ```python
 rest1.describe_rest()
 rest1.open_rest()
 ```
 
-## 继承
+### 继承
 
-### 子类
+#### 子类
 
 ```python
 class IceCreamStand(Restaurant):
@@ -927,7 +935,7 @@ class IceCreamStand(Restaurant):
 		self.flavours=['strawberry','chocolate','milk','matcha']  # 为子类定义的属性
 ```
 
-### 给子类定义方法
+#### 给子类定义方法
 
 ```python
 def describe_flavour(self):
@@ -936,7 +944,7 @@ def describe_flavour(self):
     	print(flavour,end=' ')
 ```
 
-### 使用子类和实例 
+#### 使用子类和实例 
 
 ```python
 rest2=IceCreamStand('Dairy Queen','Ice Cream Stand')
@@ -944,7 +952,7 @@ rest2.describe_rest()
 rest2.describe_flavour()
 ```
 
-## 导入
+### 导入
 
 假若有 Car 类, ElectricCar 类于 car.py 模块中
 
@@ -974,7 +982,7 @@ from car import *
 
 必要时，也允许从一个模块中导入另一个模块来构建子类
 
-### 关于 `if __name__ == '__main__'`
+#### 关于 `if __name__ == '__main__'`
 
 这是个 Python 的语法，`__name__` 属性显示当前模块名
 
@@ -984,7 +992,7 @@ from car import *
 
 可以用作测试，也可以用作模板
 
-## 私有成员与公有成员
+### 私有成员与公有成员
 
 python 并没有对私有成员提供严格的访问保护机制。
 
@@ -1016,7 +1024,7 @@ Traceback (most recent call last):
 AttributeError: 'A' object has no attribute '__value2'. Did you mean: '_A__value2'?
 ```
 
-## 特殊方法
+### 特殊方法
 
 以双下划线开头结尾
 
@@ -1035,11 +1043,11 @@ AttributeError: 'A' object has no attribute '__value2'. Did you mean: '_A__value
 - `__dict__`：使用一个字典对对象中成员的值进行修改，一般不需要重载
 - `__iter__`：迭代器实现
 
-# 文件
+## 文件
 
-## 读取文件
+### 读取文件
 
-### 全部读取
+#### 全部读取
 
 使用 `.read()` 
 
@@ -1049,7 +1057,7 @@ with open(filename) as file_object:
     print(contents.rstrip())       # 使用.rstrip()来剥除.read()造成的末尾空字符串
 ```
 
-### 逐行读取
+#### 逐行读取
 
 遍历
 
@@ -1059,7 +1067,7 @@ with open(filename) as file_object:
         print(line.rstrip())               #使用.rstrip()来剥除文件每行末尾的换行符
 ```
 
-### 创建一个包含文件各行内容的列表
+#### 创建一个包含文件各行内容的列表
 
 使用 `.readlines() ` 
 
@@ -1071,7 +1079,7 @@ for line in lines:
     print(line.strip())
 ```
 
-### 使用文件内容并将文件的空格全部移除
+#### 使用文件内容并将文件的空格全部移除
 
 ```python
 with open(filename) as file_object:
@@ -1086,9 +1094,9 @@ print(pi_string[:10] + '...')
 print(len(pi_string))
 ```
 
-## 写入文件
+### 写入文件
 
-### 写入空文件
+#### 写入空文件
 
 ```python
 filename = 'text_files\programming.txt'
@@ -1097,7 +1105,7 @@ with open(filename, 'w') as file_object:
     file_object.write('Heya!\n')              # write()不会自动添加换行符，需手动添加
 ```
 
-### 附加到文件
+#### 附加到文件
 
 ```python
 filename = 'text_files\programming.txt'
@@ -1106,7 +1114,7 @@ with open(filename, 'a') as file_object:      # 'a'表示以附加模式打开�
     file_object.write('Greeting!\n') 
 ```
 
-## 其他打开方式
+### 其他打开方式
 
 - r：以只读方式打开文件。文件的指针将会放在文件的开头。这是**默认**模式。
 - rb：以二进制只读方式打开一个文件。文件指针将会放在文件的开头。
@@ -1121,9 +1129,9 @@ with open(filename, 'a') as file_object:      # 'a'表示以附加模式打开�
 - a+：以读写方式打开一个文件。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，则创建新文件来读写。
 - ab+：以二进制追加方式打开一个文件。如果该文件已存在，则文件指针将会放在文件结尾。如果该文件不存在，则创建新文件用于读写。
 
-## 用 json 处理数据
+### 用 json 处理数据
 
-### json 格式
+#### json 格式
 
 对象：它在 JavaScript 中是使用花括号 `{}` 包裹起来的内容，数据结构为 `{key1: value1, key2: value2, ...}` 的键值对结构。在面向对象的语言中，key 为对象的属性，value 为对应的值。键名可以使用整数和字符串来表示。值的类型可以是任意类型。
 
@@ -1145,7 +1153,7 @@ with open(filename, 'a') as file_object:      # 'a'表示以附加模式打开�
 
 值得注意的是，JSON 的数据需要用双引号来包围，不能使用单引号
 
-### 导入模块
+#### 导入模块
 
 ```python
 import json
@@ -1153,7 +1161,7 @@ import json
 
 json 库提供的主要功能也是字典与 json 的相互转换
 
-### 存储数据
+#### 存储数据
 
 使用 `json.dump() `
 
@@ -1163,7 +1171,7 @@ with open(filename, 'w') as f_obj:
 	json.dump(name, f_obj)          # name为要储存的数据
 ```
 
-### 读取数据
+#### 读取数据
 
 使用 `json.load() `
 
@@ -1177,7 +1185,7 @@ with open(filename) as f_obj:
 
 使用 load 方法将字符串转为 JSON 对象。如果最外层是中括号，那最终的类型是列表类型
 
-#### 数据转换表
+##### 数据转换表
 
 | JSON          | Python |
 | ------------- | ------ |
@@ -1190,12 +1198,12 @@ with open(filename) as f_obj:
 | false         | False  |
 | null          | None   |
 
-#### 其他特点
+##### 其他特点
 
 - 当 JSON 数据中有重复键名, 则后面的键值会覆盖前面的、
 - json.loads 方法默认会将 JSON 字符串中的 NaN, Infinity, -Infinity 转化为 Python 中的 float('nan'), float('inf') 和 float('-inf')
 
-### 输出数据
+#### 输出数据
 
 调用 dumps 方法将 JSON 对象转化为字符串
 
@@ -1227,7 +1235,7 @@ with open('data.json', 'w', encoding='utf-8') as file:
     file.write(json.dumps(data, indent=2, ensure_ascii=False))
 ```
 
-# 异常处理
+## 异常处理
 
 在 Python 中，`try` 语句用于捕获和处理异常。它的基本语法如下：
 
@@ -1249,7 +1257,7 @@ finally:
     # ...
 ```
 
-# 技巧
+## 技巧
 
 1. 生成依赖文件 `requirement.txt`：使用 `pipreqs`
 
