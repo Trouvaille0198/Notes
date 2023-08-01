@@ -119,6 +119,12 @@ sudo apt-get update -y
 sudo apt-get install -y mongodb-org-tools
 ```
 
+使用 mongo shell
+
+```shell
+mongosh
+```
+
 ## 数据库
 
 ### 创建数据库
@@ -282,7 +288,7 @@ db.inventory.deleteOne( { status: "D" } )
 ### 查询
 
 ```shell
-bd.collectionName.find(query, projection)
+db.collectionName.find(query, projection)
 ```
 
 - **query** ：可选，使用查询操作符指定查询条件

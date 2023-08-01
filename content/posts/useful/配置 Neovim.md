@@ -46,7 +46,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 
 Neovim 推荐将数据存储在 **标准数据目录**下（`:h base-directories` 查看详细文档），**标准数据目录**默认是 `~/.local/share/nvim/` ，你可以通过调用 `:echo stdpath("data")` 命令查看你系统下的实际路径。
 
-`Packer` 会将插件默认安装在 `标准数据目录/site/pack/packer/start` 中，完整目录也就是`~/.local/share/nvim/site/pack/packer/start` 目录下。
+`Packer` 会将插件默认安装在标准数据目录 `/site/pack/packer/start` 中，完整目录也就是 `~/.local/share/nvim/site/pack/packer/start` 目录下。
 
 在 vi 中运行 `:PackerSync`
 

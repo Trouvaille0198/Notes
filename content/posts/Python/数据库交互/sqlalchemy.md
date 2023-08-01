@@ -3,7 +3,7 @@ title: "SQLAlchemy"
 date: 2021-10-23
 author: MelonCholi
 draft: false
-tags: [Python,后端,数据库,ORM]
+tags: [Python, 后端, 数据库交互, ORM]
 categories: [Python]
 ---
 

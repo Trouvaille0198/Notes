@@ -14,7 +14,7 @@ categories: [前端]
 ### 安装
 
 ```bash
-npm install yarn
+npm install -g yarn
 ```
 
 ### 初始化一个新项目
