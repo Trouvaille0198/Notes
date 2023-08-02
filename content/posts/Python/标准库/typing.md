@@ -53,6 +53,36 @@ Python 运行时并不强制标注函数和变量类型。类型标注可被用�
 - 可对 `Any` 类型的值执行任何操作或方法调用，并赋值给任意变量
 - 使用 `Any`，说明值是动态类型
 
+### Type
+
+用于注解一个类型，而非类的实例
+
+```python
+from typing import Type
+
+class Animal:
+    def speak(self):
+        pass
+
+class Dog(Animal):
+    def speak(self):
+        print("Woof!")
+
+class Cat(Animal):
+    def speak(self):
+        print("Meow!")
+
+def make_sound(animal_type: Type[Animal]):
+    animal_instance = animal_type()
+    animal_instance.speak()
+
+make_sound(Dog)  # 输出: Woof!
+make_sound(Cat)  # 输出: Meow!
+
+```
+
+
+
 ### 其他
 
 Callable、Iterable、Iterator、Set 等
@@ -154,7 +184,7 @@ new_vector = scale(2.0, [1.0, -4.2, 5.4])
 
 请注意，`None` 作为类型提示是一种特殊情况，并且由 `type(None)` 取代，这是因为 `None` 是一个存在于解释器中的单例对象。
 
-### 2. NewType
+### NewType
 
 使用 `NewType` 辅助函数创建不同的类型，静态类型检查器会将新类型视为它是原始类型的子类。
 
