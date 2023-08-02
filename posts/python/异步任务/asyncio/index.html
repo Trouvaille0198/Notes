@@ -1,14 +1,993 @@
-<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>- 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="motor "><meta name=keywords content="Theme,Hugo"><meta itemprop=name content><meta itemprop=description content="motor "><meta itemprop=dateModified content="2023-08-01T10:41:50+00:00"><meta itemprop=wordCount content="1"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content><meta property="og:title" content><meta property="og:description" content="motor "><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:modified_time" content="2023-08-01T10:41:50+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content><meta name=twitter:description content="motor "><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/datetime/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/getpot/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1\/asyncio\/"},"genre":"posts","wordcount":1,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1\/asyncio\/","dateModified":"2023-08-01T10:41:50+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"作者"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Python asyncio 异步编程 - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="asyncio 协程是在单线程里实现任务的切换的 利用同步的方式去实现异步 不再需要锁，提高了并发"><meta name=keywords content="Python"><meta itemprop=name content="Python asyncio 异步编程"><meta itemprop=description content="asyncio 协程是在单线程里实现任务的切换的 利用同步的方式去实现异步 不再需要锁，提高了并发"><meta itemprop=dateModified content="2023-08-02T10:22:00+00:00"><meta itemprop=wordCount content="7209"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,"><meta property="og:title" content="Python asyncio 异步编程"><meta property="og:description" content="asyncio 协程是在单线程里实现任务的切换的 利用同步的方式去实现异步 不再需要锁，提高了并发"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:modified_time" content="2023-08-02T10:22:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python asyncio 异步编程"><meta name=twitter:description content="asyncio 协程是在单线程里实现任务的切换的 利用同步的方式去实现异步 不再需要锁，提高了并发"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/celery/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/logging/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python asyncio 异步编程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1\/asyncio\/"},"genre":"posts","keywords":"Python","wordcount":7209,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1\/asyncio\/","dateModified":"2023-08-02T10:22:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
 <span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
-<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span></span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><img class="lazyload avatar" src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/57000045 data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/57000045, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/57000045 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/57000045 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/57000045 title=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/57000045>&nbsp;</span></span></div><div class=post-meta-line><span title="0001-01-01 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>
-</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 1 字&nbsp;
-<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div></div><div class=content id=content><h1 id=motor>motor</h1></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2023-08-01 10:41:50">更新于 2023-08-01</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/ data-title><i class="fa-brands fa-twitter fa-fw"></i></a>
-<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/><i class="fa-brands fa-facebook-square fa-fw"></i></a>
-<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/ data-title><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/datetime/ class=prev rel=prev title><i class="fa-solid fa-angle-left fa-fw"></i></a>
-<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/getpot/ class=next rel=next title><i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python asyncio 异步编程</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="0001-01-01 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 7209 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 15 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#协程基础yield>协程基础——yield</a><ul><li><a href=#yield-和-next>yield 和 next</a></li><li><a href=#send>send</a></li><li><a href=#抛出错误>抛出错误</a></li><li><a href=#yield-from>yield from</a><ul><li><a href=#简单应用拼接可迭代对象>简单应用：拼接可迭代对象</a></li><li><a href=#复杂应用生成器的嵌套>复杂应用：生成器的嵌套</a></li></ul></li></ul></li><li><a href=#异步-ioasyncio>异步 IO（asyncio）</a><ul><li><a href=#协程是如何工作的>协程是如何工作的</a></li><li><a href=#await-与-yield-对比>await 与 yield 对比</a></li><li><a href=#绑定回调函数>绑定回调函数</a></li><li><a href=#协程中的并发>协程中的并发</a></li><li><a href=#协程中的嵌套>协程中的嵌套</a></li><li><a href=#协程中的状态>协程中的状态</a></li><li><a href=#gather-与-wait>gather 与 wait</a></li></ul></li><li><a href=#5-接收参数方式>5. 接收参数方式</a><ul><li><a href=#asynciowait>asyncio.wait</a></li><li><a href=#asynciogather>asyncio.gather</a></li></ul></li><li><a href=#6-返回结果不同>6. 返回结果不同</a><ul><li><a href=#asynciowait-1>asyncio.wait</a></li><li><a href=#asynciogather-1>asyncio.gather</a></li></ul></li><li><a href=#7-wait-有控制功能>7. wait 有控制功能</a></li></ul></nav></div></div><div class=content id=content><h1 id=asyncio>asyncio</h1><ol><li>协程是在单线程里实现任务的切换的</li><li>利用同步的方式去实现异步</li><li>不再需要锁，提高了并发性能</li></ol><h2 id=协程基础yield>协程基础——yield</h2><h3 id=yield-和-next>yield 和 next</h3><p>先把 yield 看做 return，它首先是个return，</p><ul><li>普通的 return，就是在程序中返回某个值，返回之后程序就<strong>不再往下运行了</strong>。</li></ul><p>看做 return 之后再把它看做一个是生成器（generator）的一部分</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>def</span> <span class=nf>foo</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;starting...&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>res</span> <span class=o>=</span> <span class=k>yield</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;res:&#34;</span><span class=p>,</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>g</span> <span class=o>=</span> <span class=n>foo</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>g</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;*&#34;</span><span class=o>*</span><span class=mi>20</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>g</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>starting...
+</span></span><span class=line><span class=cl><span class=m>4</span>
+</span></span><span class=line><span class=cl>********************
+</span></span><span class=line><span class=cl>res: None
+</span></span><span class=line><span class=cl><span class=m>4</span>
+</span></span></code></pre></td></tr></table></div></div><ol><li><p>程序开始执行以后，因为foo函数中有yield关键字，所以foo函数并不会真的执行，而是先得到一个生成器g(相当于一个对象)</p></li><li><p>直到调用next方法，foo函数正式开始执行，先执行foo函数中的print方法，然后进入while循环</p></li><li><p>程序遇到yield关键字，然后把yield想想成return,return了一个4之后，程序停止，并没有执行赋值给res操作，此时next(g)语句执行完成，所以输出的前两行（第一个是while上面的print的结果,第二个是return出的结果）是执行print(next(g))的结果，</p></li><li><p>程序执行print("*"<em>20)，输出20个</em></p></li><li><p>又开始执行下面的print(next(g)),这个时候和上面那个差不多，不过不同的是，这个时候是从刚才那个next程序停止的地方开始执行的，也就是要执行res的赋值操作，这时候要注意，这个时候赋值操作的右边是没有值的（因为刚才那个是return出去了，并没有给赋值操作的左边传参数），所以这个时候res赋值是None,所以接着下面的输出就是res:None,</p></li><li><p>程序会继续在while里执行，又一次碰到yield,这个时候同样return 出4，然后程序停止，print函数输出的4就是这次return出的4.</p></li></ol><p>可以看出：</p><ul><li>带yield的函数是一个生成器，而不是一个函数了</li><li>这个生成器有一个函数就是next函数，next就相当于“下一步”生成哪个数，这一次的next开始的地方是接着上一次的next停止的地方执行的，所以调用next的时候，生成器并不会从 foo 函数的开始执行，只是接着上一步停止的地方开始，然后遇到 yield 后，return 出要生成的数，此步就结束。</li></ul><h3 id=send>send</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>foo</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;starting...&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>res</span> <span class=o>=</span> <span class=k>yield</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;res:&#34;</span><span class=p>,</span><span class=n>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>g</span> <span class=o>=</span> <span class=n>foo</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>next</span><span class=p>(</span><span class=n>g</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;*&#34;</span><span class=o>*</span><span class=mi>20</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>g</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>7</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个例子就把上面那个例子的最后一行换掉了，输出结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>starting...
+</span></span><span class=line><span class=cl><span class=m>4</span>
+</span></span><span class=line><span class=cl>********************
+</span></span><span class=line><span class=cl>res: <span class=m>7</span>
+</span></span><span class=line><span class=cl><span class=m>4</span>
+</span></span></code></pre></td></tr></table></div></div><p>send 函数发送一个参数给 res。</p><p>上面的例子 return 的时候，并没有把4赋值给res，下次执行的时候只好继续执行赋值操作，只好赋值为None了，而如果用send的话，开始执行的时候，先接着上一次（return 4 之后）执行，先把7赋值给了res，然后执行 next，遇见下一回的 yield，return 出结果后结束。</p><ol start=5><li><p>程序执行 g.send(7)，程序会从yield关键字那一行继续向下运行，send会把7这个值赋值给res变量</p></li><li><p>由于 <strong>send 方法中包含 next() 方法</strong>，所以程序会继续向下运行执行 print 方法，然后再次进入 while 循环</p></li><li><p>程序执行再次遇到yield关键字，yield会返回后面的值后，程序再次暂停，直到再次调用next方法或send方法。</p></li></ol><h3 id=抛出错误>抛出错误</h3><p>当生成器运行到底后，将抛出 <code>StopIteration</code> 错误，若生成器有返回值，则返回值存储在异常对象的 value 属性中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>def</span> <span class=nf>coroutine_example</span><span class=p>(</span><span class=n>name</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;start coroutine...name:&#39;</span><span class=p>,</span> <span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>x</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>name</span> <span class=c1># 调用next()时，产出yield右边的值后暂停；调用send()时，产出值赋给x，并往下运行</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>x</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=s1>&#39;zhihuID: Zarten&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;send值:&#39;</span><span class=p>,</span> <span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>coro</span> <span class=o>=</span> <span class=n>coroutine_example</span><span class=p>(</span><span class=s1>&#39;Zarten&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>next</span><span class=p>(</span><span class=n>coro</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;send的返回值:&#39;</span><span class=p>,</span> <span class=n>coro</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>6</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>coro</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=kc>None</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=ne>StopIteration</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;返回值：&#39;</span><span class=p>,</span> <span class=n>e</span><span class=o>.</span><span class=n>value</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=yield-from>yield from</h3><p><code>yield from</code> 后面需要加的是可迭代对象，它可以是普通的可迭代对象，也可以是迭代器，甚至是生成器。</p><h4 id=简单应用拼接可迭代对象>简单应用：拼接可迭代对象</h4><p>我们可以用一个使用<code>yield</code>和一个使用<code>yield from</code>的例子来对比看下。</p><p>使用<code>yield</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 字符串</span>
+</span></span><span class=line><span class=cl><span class=n>astr</span><span class=o>=</span><span class=s1>&#39;ABC&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># 列表</span>
+</span></span><span class=line><span class=cl><span class=n>alist</span><span class=o>=</span><span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=c1># 字典</span>
+</span></span><span class=line><span class=cl><span class=n>adict</span><span class=o>=</span><span class=p>{</span><span class=s2>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;wangbm&#34;</span><span class=p>,</span><span class=s2>&#34;age&#34;</span><span class=p>:</span><span class=mi>18</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1># 生成器</span>
+</span></span><span class=line><span class=cl><span class=n>agen</span><span class=o>=</span><span class=p>(</span><span class=n>i</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>4</span><span class=p>,</span><span class=mi>8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>gen</span><span class=p>(</span><span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kw</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>item</span> <span class=ow>in</span> <span class=n>args</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>item</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>yield</span> <span class=n>i</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>new_list</span><span class=o>=</span><span class=n>gen</span><span class=p>(</span><span class=n>astr</span><span class=p>,</span> <span class=n>alist</span><span class=p>,</span> <span class=n>adict</span><span class=p>,</span> <span class=n>agen</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>list</span><span class=p>(</span><span class=n>new_list</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1># [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, 1, 2, 3, &#39;name&#39;, &#39;age&#39;, 4, 5, 6, 7]</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用<code>yield from</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 字符串</span>
+</span></span><span class=line><span class=cl><span class=n>astr</span><span class=o>=</span><span class=s1>&#39;ABC&#39;</span>
+</span></span><span class=line><span class=cl><span class=c1># 列表</span>
+</span></span><span class=line><span class=cl><span class=n>alist</span><span class=o>=</span><span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=c1># 字典</span>
+</span></span><span class=line><span class=cl><span class=n>adict</span><span class=o>=</span><span class=p>{</span><span class=s2>&#34;name&#34;</span><span class=p>:</span><span class=s2>&#34;wangbm&#34;</span><span class=p>,</span><span class=s2>&#34;age&#34;</span><span class=p>:</span><span class=mi>18</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1># 生成器</span>
+</span></span><span class=line><span class=cl><span class=n>agen</span><span class=o>=</span><span class=p>(</span><span class=n>i</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>4</span><span class=p>,</span><span class=mi>8</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>gen</span><span class=p>(</span><span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kw</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>item</span> <span class=ow>in</span> <span class=n>args</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>yield from</span> <span class=n>item</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>new_list</span><span class=o>=</span><span class=n>gen</span><span class=p>(</span><span class=n>astr</span><span class=p>,</span> <span class=n>alist</span><span class=p>,</span> <span class=n>adict</span><span class=p>,</span> <span class=n>agen</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>list</span><span class=p>(</span><span class=n>new_list</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=c1># [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, 1, 2, 3, &#39;name&#39;, &#39;age&#39;, 4, 5, 6, 7]</span>
+</span></span></code></pre></td></tr></table></div></div><p>由上面两种方式对比，可以看出，<strong>yield from 后面加上可迭代对象，他可以把可迭代对象里的每个元素一个一个地 yield 出来</strong>，对比 yield 来说代码更加简洁，结构更加清晰。</p><h4 id=复杂应用生成器的嵌套>复杂应用：生成器的嵌套</h4><p>如果你认为只是 <code>yield from</code> 仅仅只有上述的功能的话，那你就太小瞧了它，它的更强大的功能还在后面。</p><p>当 <code>yield from</code> 后面加上一个生成器后，就实现了<strong>生成器的嵌套</strong>。</p><blockquote><p>当然实现生成器的嵌套，并不是一定必须要使用<code>yield from</code>，而是使用<code>yield from</code>可以让我们避免让我们自己处理各种料想不到的异常，而让我们专注于业务代码的实现。</p></blockquote><p>如果自己用<code>yield</code>去实现，那只会加大代码的编写难度，降低开发效率，降低代码的可读性。既然Python已经想得这么周到，我们当然要好好利用起来。</p><p>讲解它之前，首先要知道这个几个概念</p><ol><li><code>调用方</code>：调用委托生成器的客户端（调用方）代码</li><li><code>委托生成器</code>：包含 yield from 表达式的生成器函数</li><li><code>子生成器</code>：yield from后面加的生成器函数</li></ol><p>一下这个例子，是实现实时计算平均值的。 比如，第一次传入 10，那返回平均数自然是 10. 第二次传入 20，那返回平均数是 (10+20)/2=15；第三次传入 30，那返回平均数 (10+20+30)/3=20</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 子生成器</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>average_gen</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>total</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>count</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>average</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>new_num</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>average</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>total</span> <span class=o>+=</span> <span class=n>new_num</span>
+</span></span><span class=line><span class=cl>        <span class=n>average</span> <span class=o>=</span> <span class=n>total</span><span class=o>/</span><span class=n>count</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 委托生成器</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>proxy_gen</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>yield from</span> <span class=n>average_gen</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 调用方</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>calc_average</span> <span class=o>=</span> <span class=n>proxy_gen</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>next</span><span class=p>(</span><span class=n>calc_average</span><span class=p>)</span>            <span class=c1># 预激下生成器</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>  <span class=c1># 打印：10.0</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>20</span><span class=p>))</span>  <span class=c1># 打印：15.0</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>30</span><span class=p>))</span>  <span class=c1># 打印：20.0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>认真阅读以上代码，应该很容易能理解，调用方、委托生成器、子生成器之间的关系。</p><p><strong>委托生成器的作用是</strong>：在调用方与子生成器之间建立一个<code>双向通道</code>。</p><p>所谓的双向通道是什么意思呢？ 调用方可以通过 <code>send()</code> 直接发送消息给子生成器，而子生成器 yield 的值，也是直接返回给调用方。</p><p>你可能会经常看到有些代码，还可以在<code>yield from</code>前面看到可以赋值。这是什么用法？</p><p>你可能会以为，子生成器 yield 回来的值，被委托生成器给拦截了。你可以亲自写个 demo 运行试验一下，并不是你想的那样。 因为我们之前说了，委托生成器，只起一个桥梁作用，它建立的是一个 <code>双向通道</code>，它并没有权利也没有办法，对子生成器 yield 回来的内容做拦截。</p><p>为了解释这个用法，我还是用上述的例子，并对其进行了一些改造。添加了一些注释，希望你能看得明白。</p><p>按照惯例，我们还是举个例子。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 子生成器</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>average_gen</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>total</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>count</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>average</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>new_num</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>average</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>new_num</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>total</span> <span class=o>+=</span> <span class=n>new_num</span>
+</span></span><span class=line><span class=cl>        <span class=n>average</span> <span class=o>=</span> <span class=n>total</span><span class=o>/</span><span class=n>count</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 每一次return，都意味着当前协程结束。</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>total</span><span class=p>,</span><span class=n>count</span><span class=p>,</span><span class=n>average</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 委托生成器</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>proxy_gen</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 只有子生成器要结束（return）了，yield from左边的变量才会被赋值，后面的代码才会执行。</span>
+</span></span><span class=line><span class=cl>        <span class=n>total</span><span class=p>,</span> <span class=n>count</span><span class=p>,</span> <span class=n>average</span> <span class=o>=</span> <span class=k>yield from</span> <span class=n>average_gen</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;计算完毕！！</span><span class=se>\n</span><span class=s2>总共传入 </span><span class=si>{}</span><span class=s2> 个数值， 总和：</span><span class=si>{}</span><span class=s2>，平均数：</span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>count</span><span class=p>,</span> <span class=n>total</span><span class=p>,</span> <span class=n>average</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 调用方</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>calc_average</span> <span class=o>=</span> <span class=n>proxy_gen</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>next</span><span class=p>(</span><span class=n>calc_average</span><span class=p>)</span>            <span class=c1># 预激协程</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>  <span class=c1># 打印：10.0</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>20</span><span class=p>))</span>  <span class=c1># 打印：15.0</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>30</span><span class=p>))</span>  <span class=c1># 打印：20.0</span>
+</span></span><span class=line><span class=cl>    <span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=kc>None</span><span class=p>)</span>      <span class=c1># 结束协程</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 如果此处再调用calc_average.send(10)，由于上一协程已经结束，将重开一协程</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行后，输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>10.0
+</span></span><span class=line><span class=cl>15.0
+</span></span><span class=line><span class=cl>20.0
+</span></span><span class=line><span class=cl>计算完毕！！
+</span></span><span class=line><span class=cl>总共传入 3 个数值， 总和：60，平均数：20.0
+</span></span></code></pre></td></tr></table></div></div><p>也就是说，当子生成器结束后抛出的 <code>StopIteration</code> 错误会被委托生成器接住，并且 <code>yield from</code> 左边的值会附上子生成器的返回值</p><p>如果我们去掉委托生成器，而直接调用子生成器。那我们就需要把代码改成像下面这样，我们需要自己捕获异常并处理。而不像使<code>yield from</code>那样省心。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 子生成器</span>
+</span></span><span class=line><span class=cl><span class=c1># 子生成器</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>average_gen</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>total</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>count</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>average</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>new_num</span> <span class=o>=</span> <span class=k>yield</span> <span class=n>average</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>new_num</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>total</span> <span class=o>+=</span> <span class=n>new_num</span>
+</span></span><span class=line><span class=cl>        <span class=n>average</span> <span class=o>=</span> <span class=n>total</span><span class=o>/</span><span class=n>count</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>total</span><span class=p>,</span><span class=n>count</span><span class=p>,</span><span class=n>average</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 调用方</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>calc_average</span> <span class=o>=</span> <span class=n>average_gen</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>next</span><span class=p>(</span><span class=n>calc_average</span><span class=p>)</span>            <span class=c1># 预激协程</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>10</span><span class=p>))</span>  <span class=c1># 打印：10.0</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>20</span><span class=p>))</span>  <span class=c1># 打印：15.0</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=mi>30</span><span class=p>))</span>  <span class=c1># 打印：20.0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># ----------------注意-----------------</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>calc_average</span><span class=o>.</span><span class=n>send</span><span class=p>(</span><span class=kc>None</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>except</span> <span class=ne>StopIteration</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>total</span><span class=p>,</span> <span class=n>count</span><span class=p>,</span> <span class=n>average</span> <span class=o>=</span> <span class=n>e</span><span class=o>.</span><span class=n>value</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;计算完毕！！</span><span class=se>\n</span><span class=s2>总共传入 </span><span class=si>{}</span><span class=s2> 个数值， 总和：</span><span class=si>{}</span><span class=s2>，平均数：</span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>count</span><span class=p>,</span> <span class=n>total</span><span class=p>,</span> <span class=n>average</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=c1># ----------------注意-----------------</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>所以委派生成器主要就是来捕获子生成器的错误用的。</p><p>不过委派生成器如果自身退出，那么它的 <code>StopIteration</code> 还是会在调用方这边抛出</p><h2 id=异步-ioasyncio>异步 IO（asyncio）</h2><p><code>asyncio</code> 是Python 3.4版本引入的标准库，直接内置了对异步IO的支持。</p><p>在了解<code>asyncio</code>的使用方法前，首先有必要先介绍一下，这几个贯穿始终的概念。</p><ul><li><code>event_loop</code> 事件循环：程序开启一个无限的循环，程序员会把一些函数（协程）注册到事件循环上。当满足事件发生的时候，调用相应的协程函数。</li><li><code>coroutine</code> 协程：协程对象，指一个使用 async 关键字定义的函数，它的调用不会立即执行函数，而是会返回一个协程对象。协程对象需要注册到事件循环，由事件循环调用。</li><li><code>future</code> 对象： 代表将来执行或没有执行的任务的结果。它和 task 上没有本质的区别</li><li><code>task</code> 任务：一个协程对象就是一个原生可以挂起的函数，任务则是对协程进一步封装，其中包含任务的各种状态。Task 对象是 Future 的子类，它将 coroutine 和 Future 联系在一起，将 coroutine 封装成一个 Future 对象。</li><li><code>async/await</code> 关键字：python3.5 用于定义协程的关键字，async 定义一个协程，await 用于挂起阻塞的异步调用接口。其作用在一定程度上类似于yield。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>@asyncio.coroutine -&gt; async
+</span></span><span class=line><span class=cl>yield from -&gt; await
+</span></span></code></pre></td></tr></table></div></div><h3 id=协程是如何工作的>协程是如何工作的</h3><p>协程完整的工作流程是这样的</p><ul><li>定义/创建协程对象</li><li>将协程转为 task 任务</li><li>定义事件循环对象容器</li><li>将 task 任务扔进事件循环对象中触发</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>hello</span><span class=p>(</span><span class=n>name</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Hello,&#39;</span><span class=p>,</span> <span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 定义协程对象</span>
+</span></span><span class=line><span class=cl><span class=n>coroutine</span> <span class=o>=</span> <span class=n>hello</span><span class=p>(</span><span class=s2>&#34;World&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 定义事件循环对象容器</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=c1># task = asyncio.ensure_future(coroutine)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 将协程转为task任务</span>
+</span></span><span class=line><span class=cl><span class=n>task</span> <span class=o>=</span> <span class=n>loop</span><span class=o>.</span><span class=n>create_task</span><span class=p>(</span><span class=n>coroutine</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 将task任务扔进事件循环对象中并触发</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>task</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出结果显而易见</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>Hello, World
+</span></span></code></pre></td></tr></table></div></div><p>也将一个生成器，直接变成协程使用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>collections.abc</span> <span class=kn>import</span> <span class=n>Generator</span><span class=p>,</span> <span class=n>Coroutine</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;&#39;&#39;
+</span></span></span><span class=line><span class=cl><span class=s1>只要在一个生成器函数头部用上 @asyncio.coroutine 装饰器
+</span></span></span><span class=line><span class=cl><span class=s1>就能将这个函数对象，【标记】为协程对象。注意这里是【标记】，划重点。
+</span></span></span><span class=line><span class=cl><span class=s1>实际上，它的本质还是一个生成器。
+</span></span></span><span class=line><span class=cl><span class=s1>标记后，它实际上已经可以当成协程使用。后面会介绍。
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@asyncio.coroutine</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>hello</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 异步调用asyncio.sleep(1):</span>
+</span></span><span class=line><span class=cl>    <span class=k>yield from</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>coroutine</span> <span class=o>=</span> <span class=n>hello</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=nb>isinstance</span><span class=p>(</span><span class=n>coroutine</span><span class=p>,</span> <span class=n>Generator</span><span class=p>))</span>  <span class=c1># True</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=nb>isinstance</span><span class=p>(</span><span class=n>coroutine</span><span class=p>,</span> <span class=n>Coroutine</span><span class=p>))</span>  <span class=c1># False</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=await-与-yield-对比>await 与 yield 对比</h3><p>前面我们说，<code>await</code> 用于挂起阻塞的异步调用接口。其作用在一定程度上类似于 yield。</p><p>注意这里是，一定程度上，意思是效果上一样（都能实现暂停的效果），但是功能上却不兼容。就是你不能在生成器中使用 <code>await</code>，也不能在 async 定义的协程中使用 <code>yield from</code>。</p><p>除此之外呢，还有一点很重要的。</p><ul><li><code>yield from</code> 后面可接可迭代对象，也可接 future对象 / 协程对象；</li><li><code>await</code> 后面必须要接 future对象<code>/</code>协程对象</li></ul><h3 id=绑定回调函数>绑定回调函数</h3><p>异步IO的实现原理，就是在IO高的地方挂起，等IO结束后，再继续执行。在绝大部分时候，我们后续的代码的执行是需要依赖IO的返回值的，这就要用到回调了。</p><p>回调的实现，有两种，一种是绝大部分程序员喜欢的，利用的同步编程实现的回调。 这就要求我们要能够有办法取得协程的await的返回值。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>_sleep</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s1>&#39;暂停了</span><span class=si>{}</span><span class=s1>秒！&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>coroutine</span> <span class=o>=</span> <span class=n>_sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>task</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>task</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># task.result() 可以取得返回结果</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s1>&#39;返回结果：</span><span class=si>{}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>task</span><span class=o>.</span><span class=n>result</span><span class=p>()))</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>返回结果：暂停了2秒！
+</span></span></code></pre></td></tr></table></div></div><p>还有一种是通过 asyncio 自带的添加回调函数功能来实现。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>_sleep</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s1>&#39;暂停了</span><span class=si>{}</span><span class=s1>秒！&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>callback</span><span class=p>(</span><span class=n>future</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;这里是回调函数，获取返回结果是：&#39;</span><span class=p>,</span> <span class=n>future</span><span class=o>.</span><span class=n>result</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>coroutine</span> <span class=o>=</span> <span class=n>_sleep</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>task</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 添加回调函数</span>
+</span></span><span class=line><span class=cl><span class=n>task</span><span class=o>.</span><span class=n>add_done_callback</span><span class=p>(</span><span class=n>callback</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>task</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>这里是回调函数，获取返回结果是： 暂停了2秒！
+</span></span></code></pre></td></tr></table></div></div><h3 id=协程中的并发>协程中的并发</h3><p>协程的并发，和线程一样。举个例子来说，就好像一个人同时吃三个馒头，咬了第一个馒头一口，就得等这口咽下去，才能去啃第其他两个馒头。就这样交替换着吃。</p><p><code>asyncio</code> 实现并发，就需要多个协程来完成任务，每当有任务阻塞的时候就 await，然后其他协程继续工作。</p><p>第一步，当然是创建多个协程的列表。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 协程函数</span>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>do_some_work</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Waiting: &#39;</span><span class=p>,</span> <span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s1>&#39;Done after </span><span class=si>{}</span><span class=s1>s&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 协程对象</span>
+</span></span><span class=line><span class=cl><span class=n>coroutine1</span> <span class=o>=</span> <span class=n>do_some_work</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>coroutine2</span> <span class=o>=</span> <span class=n>do_some_work</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>coroutine3</span> <span class=o>=</span> <span class=n>do_some_work</span><span class=p>(</span><span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 将协程转成task，并组成list</span>
+</span></span><span class=line><span class=cl><span class=n>tasks</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>第二步，如何将这些协程注册到事件循环中呢。</p><p>有两种方法，至于这两种方法什么区别，稍后会介绍。</p><ul><li>使用<code>asyncio.wait()</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>tasks</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>使用<code>asyncio.gather()</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 千万注意，这里的 「*」 不能省略</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span><span class=o>*</span><span class=n>tasks</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>最后，return 的结果，可以用 <code>task.result()</code> 查看。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>for</span> <span class=n>task</span> <span class=ow>in</span> <span class=n>tasks</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Task ret: &#39;</span><span class=p>,</span> <span class=n>task</span><span class=o>.</span><span class=n>result</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><p>完整代码如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 协程函数</span>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>do_some_work</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Waiting: &#39;</span><span class=p>,</span> <span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s1>&#39;Done after </span><span class=si>{}</span><span class=s1>s&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 协程对象</span>
+</span></span><span class=line><span class=cl><span class=n>coroutine1</span> <span class=o>=</span> <span class=n>do_some_work</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>coroutine2</span> <span class=o>=</span> <span class=n>do_some_work</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>coroutine3</span> <span class=o>=</span> <span class=n>do_some_work</span><span class=p>(</span><span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 将协程转成task，并组成list</span>
+</span></span><span class=line><span class=cl><span class=n>tasks</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>tasks</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>task</span> <span class=ow>in</span> <span class=n>tasks</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Task ret: &#39;</span><span class=p>,</span> <span class=n>task</span><span class=o>.</span><span class=n>result</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出结果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>Waiting:  <span class=m>1</span>
+</span></span><span class=line><span class=cl>Waiting:  <span class=m>2</span>
+</span></span><span class=line><span class=cl>Waiting:  <span class=m>4</span>
+</span></span><span class=line><span class=cl>Task ret:  Done after 1s
+</span></span><span class=line><span class=cl>Task ret:  Done after 2s
+</span></span><span class=line><span class=cl>Task ret:  Done after 4s
+</span></span></code></pre></td></tr></table></div></div><h3 id=协程中的嵌套>协程中的嵌套</h3><p>使用 async 可以定义协程，协程用于耗时的 io 操作，我们也可以封装更多的 io 操作过程，这样就实现了嵌套的协程，即一个协程中 await 了另外一个协程，如此连接起来。</p><p>来看个例子。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 用于内部的协程函数</span>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>do_some_work</span><span class=p>(</span><span class=n>x</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Waiting: &#39;</span><span class=p>,</span> <span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s1>&#39;Done after </span><span class=si>{}</span><span class=s1>s&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 外部的协程函数</span>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 创建三个协程对象</span>
+</span></span><span class=line><span class=cl>    <span class=n>coroutine1</span> <span class=o>=</span> <span class=n>do_some_work</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>coroutine2</span> <span class=o>=</span> <span class=n>do_some_work</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>coroutine3</span> <span class=o>=</span> <span class=n>do_some_work</span><span class=p>(</span><span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 将协程转为task，并组成list</span>
+</span></span><span class=line><span class=cl>    <span class=n>tasks</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine1</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>coroutine3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 【重点】：await 一个task列表（协程）</span>
+</span></span><span class=line><span class=cl>    <span class=c1># dones：表示已经完成的任务</span>
+</span></span><span class=line><span class=cl>    <span class=c1># pendings：表示未完成的任务</span>
+</span></span><span class=line><span class=cl>    <span class=n>dones</span><span class=p>,</span> <span class=n>pendings</span> <span class=o>=</span> <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>tasks</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>task</span> <span class=ow>in</span> <span class=n>dones</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Task ret: &#39;</span><span class=p>,</span> <span class=n>task</span><span class=o>.</span><span class=n>result</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>main</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果这边，使用的是 <code>asyncio.gather()</code>，是这么用的</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 注意这边返回结果，与await不一样</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>results</span> <span class=o>=</span> <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span><span class=o>*</span><span class=n>tasks</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>result</span> <span class=ow>in</span> <span class=n>results</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Task ret: &#39;</span><span class=p>,</span> <span class=n>result</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出还是一样的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>Waiting:  1
+</span></span><span class=line><span class=cl>Waiting:  2
+</span></span><span class=line><span class=cl>Waiting:  4
+</span></span><span class=line><span class=cl>Task ret:  Done after 1s
+</span></span><span class=line><span class=cl>Task ret:  Done after 2s
+</span></span><span class=line><span class=cl>Task ret:  Done after 4s
+</span></span></code></pre></td></tr></table></div></div><p>仔细查看，可以发现这个例子完全是由 上面「<code>协程中的并发</code>」例子改编而来。结果完全一样。只是把创建协程对象，转换task任务，封装成在一个协程函数里而已。外部的协程，嵌套了一个内部的协程。</p><p>其实你如果去看下<code>asyncio.await()</code>的源码的话，你会发现下面这种写法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>tasks</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>看似没有嵌套，实际上内部也是嵌套的。</p><h3 id=协程中的状态>协程中的状态</h3><p>还记得我们在讲生成器的时候，有提及过生成器的状态。同样，在协程这里，我们也了解一下协程（准确的说，应该是 Future 对象，或者 Task 任务）有哪些状态。</p><ol><li><code>Pending</code>：创建 future，还未执行</li><li><code>Running</code>：事件循环正在调用执行任务</li><li><code>Done</code>：任务执行完毕</li><li><code>Cancelled</code>：Task 被取消后的状态</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>threading</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>hello</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Running in the loop...&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>flag</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>flag</span> <span class=o>&lt;</span> <span class=mi>1000</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s2>&#34;F:</span><span class=se>\\</span><span class=s2>test.txt&#34;</span><span class=p>,</span> <span class=s2>&#34;a&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>f</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=s2>&#34;------&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>flag</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Stop the loop&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>coroutine</span> <span class=o>=</span> <span class=n>hello</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>task</span> <span class=o>=</span> <span class=n>loop</span><span class=o>.</span><span class=n>create_task</span><span class=p>(</span><span class=n>coroutine</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># Pending：未执行状态</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>task</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>,</span> <span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=n>task</span><span class=p>,))</span>
+</span></span><span class=line><span class=cl>        <span class=c1># t1.daemon = True</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># Running：运行中状态</span>
+</span></span><span class=line><span class=cl>        <span class=n>time</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=n>task</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>t1</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>except</span> <span class=ne>KeyboardInterrupt</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># 取消任务</span>
+</span></span><span class=line><span class=cl>        <span class=n>task</span><span class=o>.</span><span class=n>cancel</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Cacelled：取消任务</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=n>task</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>finally</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=n>task</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>顺利执行的话，将会打印 <code>Pending</code> -> <code>Pending：Runing</code> -> <code>Finished</code> 的状态变化</p><p>假如，执行后 立马按下 Ctrl+C，则会触发task取消，就会打印 <code>Pending</code> -> <code>Cancelling</code> -> <code>Cancelling</code> 的状态变化。</p><h3 id=gather-与-wait>gather 与 wait</h3><p>还记得上面我说，把多个协程注册进一个事件循环中有两种方法吗？</p><ul><li>使用<code>asyncio.wait()</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>tasks</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>使用<code>asyncio.gather()</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=c1># 千万注意，这里的 「*」 不能省略</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span><span class=o>*</span><span class=n>tasks</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>asyncio.gather</code> 和 <code>asyncio.wait</code> 在asyncio中用得的比较广泛，这里有必要好好研究下这两货。</p><p>还是照例用例子来说明，先定义一个协程函数</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>factorial</span><span class=p>(</span><span class=n>name</span><span class=p>,</span> <span class=n>number</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>f</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=n>number</span><span class=o>+</span><span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Task </span><span class=si>%s</span><span class=s2>: Compute factorial(</span><span class=si>%s</span><span class=s2>)...&#34;</span> <span class=o>%</span> <span class=p>(</span><span class=n>name</span><span class=p>,</span> <span class=n>i</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>f</span> <span class=o>*=</span> <span class=n>i</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Task </span><span class=si>%s</span><span class=s2>: factorial(</span><span class=si>%s</span><span class=s2>) = </span><span class=si>%s</span><span class=s2>&#34;</span> <span class=o>%</span> <span class=p>(</span><span class=n>name</span><span class=p>,</span> <span class=n>number</span><span class=p>,</span> <span class=n>f</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=5-接收参数方式>5. 接收参数方式</h2><h3 id=asynciowait>asyncio.wait</h3><p>接收的tasks，必须是一个list对象，这个list对象里，存放多个的task。</p><p>它可以这样，用<code>asyncio.ensure_future</code>转为task对象</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>tasks</span><span class=o>=</span><span class=p>[</span>
+</span></span><span class=line><span class=cl>       <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;A&#34;</span><span class=p>,</span> <span class=mi>2</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>       <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>,</span> <span class=mi>3</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>       <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;C&#34;</span><span class=p>,</span> <span class=mi>4</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>tasks</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>也可以这样，不转为task对象。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>tasks</span><span class=o>=</span><span class=p>[</span>
+</span></span><span class=line><span class=cl>       <span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;A&#34;</span><span class=p>,</span> <span class=mi>2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>       <span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>,</span> <span class=mi>3</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>       <span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;C&#34;</span><span class=p>,</span> <span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>tasks</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=asynciogather>asyncio.gather</h3><p>接收的就比较广泛了，他可以接收list对象，但是 <code>*</code> 不能省略</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>tasks</span><span class=o>=</span><span class=p>[</span>
+</span></span><span class=line><span class=cl>       <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;A&#34;</span><span class=p>,</span> <span class=mi>2</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>       <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>,</span> <span class=mi>3</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>       <span class=n>asyncio</span><span class=o>.</span><span class=n>ensure_future</span><span class=p>(</span><span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;C&#34;</span><span class=p>,</span> <span class=mi>4</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span><span class=o>*</span><span class=n>tasks</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>还可以这样，和上面的 <code>*</code> 作用一致，这是因为<code>asyncio.gather()</code>的第一个参数是 <code>*coros_or_futures</code>，它叫 <code>非命名键值可变长参数列表</code>，可以集合所有没有命名的变量。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;A&#34;</span><span class=p>,</span> <span class=mi>2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>,</span> <span class=mi>3</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;C&#34;</span><span class=p>,</span> <span class=mi>4</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>甚至还可以这样</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>group1</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span><span class=o>*</span><span class=p>[</span><span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;A&#34;</span> <span class=p>,</span><span class=n>i</span><span class=p>)</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>)])</span>
+</span></span><span class=line><span class=cl><span class=n>group2</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span><span class=o>*</span><span class=p>[</span><span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>5</span><span class=p>)])</span>
+</span></span><span class=line><span class=cl><span class=n>group3</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span><span class=o>*</span><span class=p>[</span><span class=n>factorial</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>,</span> <span class=n>i</span><span class=p>)</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>7</span><span class=p>)])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span><span class=n>group1</span><span class=p>,</span> <span class=n>group2</span><span class=p>,</span> <span class=n>group3</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=6-返回结果不同>6. 返回结果不同</h2><h3 id=asynciowait-1>asyncio.wait</h3><p><code>asyncio.wait</code> 返回 <code>dones</code> 和 <code>pendings</code></p><ul><li><code>dones</code>：表示已经完成的任务</li><li><code>pendings</code>：表示未完成的任务</li></ul><p>如果我们需要获取，运行结果，需要手工去收集获取。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>dones</span><span class=p>,</span> <span class=n>pendings</span> <span class=o>=</span> <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>tasks</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>task</span> <span class=ow>in</span> <span class=n>dones</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Task ret: &#39;</span><span class=p>,</span> <span class=n>task</span><span class=o>.</span><span class=n>result</span><span class=p>())</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=asynciogather-1>asyncio.gather</h3><p><code>asyncio.gather</code> 它会把值直接返回给我们，不需要手工去收集。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>results</span> <span class=o>=</span> <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>gather</span><span class=p>(</span><span class=o>*</span><span class=n>tasks</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>result</span> <span class=ow>in</span> <span class=n>results</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Task ret: &#39;</span><span class=p>,</span> <span class=n>result</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=7-wait-有控制功能>7. wait 有控制功能</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>asyncio</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>random</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>async</span> <span class=k>def</span> <span class=nf>coro</span><span class=p>(</span><span class=n>tag</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>await</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>sleep</span><span class=p>(</span><span class=n>random</span><span class=o>.</span><span class=n>uniform</span><span class=p>(</span><span class=mf>0.5</span><span class=p>,</span> <span class=mi>5</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span> <span class=o>=</span> <span class=n>asyncio</span><span class=o>.</span><span class=n>get_event_loop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>tasks</span> <span class=o>=</span> <span class=p>[</span><span class=n>coro</span><span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>11</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 【控制运行任务数】：运行第一个任务就返回</span>
+</span></span><span class=line><span class=cl><span class=c1># FIRST_COMPLETED ：第一个任务完全返回</span>
+</span></span><span class=line><span class=cl><span class=c1># FIRST_EXCEPTION：产生第一个异常返回</span>
+</span></span><span class=line><span class=cl><span class=c1># ALL_COMPLETED：所有任务完成返回 （默认选项）</span>
+</span></span><span class=line><span class=cl><span class=n>dones</span><span class=p>,</span> <span class=n>pendings</span> <span class=o>=</span> <span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>tasks</span><span class=p>,</span> <span class=n>return_when</span><span class=o>=</span><span class=n>asyncio</span><span class=o>.</span><span class=n>FIRST_COMPLETED</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;第一次完成的任务数:&#34;</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>dones</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 【控制时间】：运行一秒后，就返回</span>
+</span></span><span class=line><span class=cl><span class=n>dones2</span><span class=p>,</span> <span class=n>pendings2</span> <span class=o>=</span> <span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>pendings</span><span class=p>,</span> <span class=n>timeout</span><span class=o>=</span><span class=mi>1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;第二次完成的任务数:&#34;</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>dones2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 【默认】：所有任务完成后返回</span>
+</span></span><span class=line><span class=cl><span class=n>dones3</span><span class=p>,</span> <span class=n>pendings3</span> <span class=o>=</span> <span class=n>loop</span><span class=o>.</span><span class=n>run_until_complete</span><span class=p>(</span><span class=n>asyncio</span><span class=o>.</span><span class=n>wait</span><span class=p>(</span><span class=n>pendings2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;第三次完成的任务数:&#34;</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>dones3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>loop</span><span class=o>.</span><span class=n>close</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出结果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>第一次完成的任务数: 1
+</span></span><span class=line><span class=cl>第二次完成的任务数: 4
+</span></span><span class=line><span class=cl>第三次完成的任务数: 5
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2023-08-02 10:22:00">更新于 2023-08-02</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/ data-title="Python asyncio 异步编程" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/asyncio/ data-title="Python asyncio 异步编程"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/celery/ class=prev rel=prev title="Python celery 库"><i class="fa-solid fa-angle-left fa-fw"></i>Python celery 库</a>
+<a href=/Notes/posts/python/%E5%B8%B8%E7%94%A8%E5%BA%93/logging/ class=next rel=next title=logging>logging<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
 <span itemprop=copyrightYear>2022 - 2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
