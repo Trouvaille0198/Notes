@@ -50,8 +50,9 @@ assert user.__fields_set__ == {'id'}
 
 ## model 的属性
 
-- `dict()`
+- `model_dump()`
     - 返回字典
+    - 原来的 `dict()` 已弃用
 - `json()`
     -  返回 json 字符串
 - `copy()`

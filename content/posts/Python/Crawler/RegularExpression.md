@@ -134,7 +134,7 @@ categories: [Python]
 import re
 content = 'Hello 123 4567 World_This is a Regex Demo'
 print(len(content))
-result = re.match(、, content)
+result = re.match("^Hello\s\d\d\d\s\d{4}\s\w{10}", content)
 print(result)
 print(result.group())
 print(result.span())
@@ -151,11 +151,11 @@ Hello 123 4567 World_This
 
 步骤
 
-1. 在`match()`方法中，第一个参数传入了正则表达式，第二个参数传入了要匹配的字符串
+1. 在 `match()` 方法中，第一个参数传入了正则表达式，第二个参数传入了要匹配的字符串
 
-2. `group()`方法可以输出匹配到的内容，结果是`Hello 123 4567 World_This`
+2. `group()` 方法可以输出匹配到的内容，结果是`Hello 123 4567 World_This`
 
-   `span()`方法可以输出匹配的范围，结果是`(0, 25)`
+   `span()` 方法可以输出匹配的范围，结果是 `(0, 25)`
 
 也可这样写
 
@@ -186,7 +186,7 @@ Hello 1234567 World
 (0, 19)
 ```
 
-若想把字符串中的 1234567 提取出来，此时可以将数字部分的正则表达式用()括起来，然后调用了 group(1)获取匹配结果
+若想把字符串中的 1234567 提取出来，此时可以将数字部分的正则表达式用()括起来，然后调用了 group(1) 获取匹配结果
 
 也可这样写
 
@@ -208,7 +208,7 @@ result = re.match('^He.*?(\d+).*Demo$', content)
 
 ```python
 
->>>import re
+>>> import re
 >>> pattern = re.compile(r'\d+')   
 m = pattern.match('one12twothree34four', 3, 10) # 从'1'的位置开始匹配，正好匹配
 >>> print m                                         # 返回一个 Match 对象
@@ -268,7 +268,7 @@ print(content)
 aKyroiRixLg
 ```
 
-只需要给第一个参数传入\d+来匹配所有的数字，第二个参数为替换成的字符串（如果去掉该参数的话，可以赋值为空），第三个参数是原字符串
+只需要给第一个参数传入 `\d+` 来匹配所有的数字，第二个参数为替换成的字符串（如果去掉该参数的话，可以赋值为空），第三个参数是原字符串
 
 #### compile()
 
