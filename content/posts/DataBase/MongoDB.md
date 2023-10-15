@@ -113,10 +113,13 @@ MongoDB 是由 C++ 语言编写的，是一个基于分布式文件存储的开�
 #### ubuntu
 
 ```shell
- wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
 sudo apt-get update -y
 sudo apt-get install -y mongodb-org-tools
+
+sudo apt-get install -y mongodb-mongosh
+
 ```
 
 使用 mongo shell

@@ -57,9 +57,9 @@ assert user.__fields_set__ == {'id'}
     -  返回 json 字符串
 - `copy()`
     - 返回拷贝（默认浅拷贝 shallow copy）
-- `parse_obj()`
+- `model_validate()`，曾用 `parse_obj()`
     - class method，将一个 dict 转换为 model 的方法
-- `parse_raw()`
+- `model_validate_json`，曾用 `parse_raw()`
     - class method，将字符串转换为 model 的方法
 - `parse_file()`
     - class method，将文件路径对应的文件转换为 model 的方法，类似 `parse_raw()`

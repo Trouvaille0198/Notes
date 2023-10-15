@@ -9,6 +9,67 @@ categories: [工具]
 
 # Git
 
+## CheatSheet
+
+- 不建议使用 `git push --force`，推荐 `--force-with-lease` 参数
+
+- 识别大小写
+
+```bash
+git config core.ignorecase false
+```
+
+- 修改上一次的 commit 记录
+
+```bash
+git commit --amend
+```
+
+- 比较文件
+
+```bash
+git diff <branch_name1> <branch_name2> --stat
+git diff <branch_name1> --stat # 比较当前文件与 branch_name1
+```
+
+- 当本地有领先远端的 commit，同时远端也有领先本地的 commit（这种情况经常会发生），并使用 git pull 拉去远端代码时，会产生一条 merge commit，例：merge branch 'feature/login' of ssh://gitlab.aaa.net/project/main-web into feature/login，污染了 commit 记录
+
+    - 原因：**本地分支与远程分支存在分叉**，而 git pull = git fetch + git merge，在 merge 时有冲突就会产生一条 merge commit
+
+    - 避免方法
+
+        1. 使用 `git pull --rebase` 代替 git pull，这种方案的原理是不产生额外的合并节点，而是将远端更新拉取到本地，而后将本地的提交附加到远端更新之后。
+            - 一劳永逸：`git config --global pull.rebase true`
+
+        2. 在本地 commit 之前 stash，pull 之后再 pop 出来
+
+
+- fork 仓库拉取主仓库的更改：
+
+```Shell
+git pull upstream master
+```
+
+- 将 commit 撤回至暂存区
+
+```Shell
+# <commit-id> 之后的提交（不包括其本身）会撤回至暂存区
+git reset --soft <commit-id>
+```
+
+- 强制覆盖远程仓库的 commit 记录
+
+```Shell
+git push --force
+```
+
+- 忽略已跟踪的文件
+
+```sh
+git update-index --assume-unchanged <file-path>
+git update-index --no-assume-unchanged <file-path> # 取消忽略
+```
+
 ## 安装
 
 ### 设置名字、邮箱
@@ -23,6 +84,13 @@ git config --global user.email "email@example.com"
 ```shell
 git config user.name
 git config user.email
+```
+
+也可以在当前 repo 下设置用户名和邮箱，这样只会在此 repo 下生效
+
+```sh
+git config --local user.name "Your Name"
+git config --local user.email "email@example.com"
 ```
 
 ### 创建版本库（**repository**）
@@ -1163,36 +1231,70 @@ git bundle create repo.bundle HEAD master
 git clone repo.bundle repo
 ```
 
-## 其他
+## git worktree
 
-- 不建议使用 `git push --force`，推荐 `--force-with-lease` 参数
+git worktree 是在 2015 年 7 月发布的 2.5 版引入的。Worktree 是链接到统一仓库的多个工作区（目录，树）。一个 git 仓库可以支持多个工作树，分别对应不同的分支。我们在 git 中通过 "git init" 或 "git clone" 就能创建一个（主）工作区（树）（main working tree）
 
-- 识别大小写
+同理，我们使用 git worktree 创建一个（和工作区）不同目录的工作区（树），我们称之为为"链接工作区（树）（linked working tree）"。git 仓库有一个主工作树（裸库）和零个或多个链接工作树。与重建的孤立的目录不同，链接工作树和主仓库直接就行分支一样是有机关联的，任何一个链接工作树的变更提交都在仓库内部。链接工作树用完后，可以直接通过 git worktree remove 删除。
 
-```bash
-git config core.ignorecase false
+![](https://pic1.zhimg.com/80/v2-1688c37a2c59e782b3d7e6b4f75ad7f4_1440w.webp)
+
+### 常用命令
+
+`git worktree add <path> [<branch>]`
+
+增加一个新的 worktree ，并指定了其关联的目录是 `path` ，关联的分支是 `<branch>` 。后者是一个可选项，默认值是 `HEAD` 分支。如果 `<branch>` 已经被关联到了一个 worktree ，则这次 add 会被拒绝执行，可以通过增加 `-f | --force` 选项来强制执行。
+
+> 同时，可以使用 `-b <new-branch>` 基于 `<branch>` 新建分支并使这个新分支关联到这个新的 worktree 。如果 `<new-branch>` 已经存在，则这次 add 会被拒绝，可以使用 `-B` 代替这里的 `-b` 来强制执行，则原来的 `<new-branch>` 的提交进度会被重置为和 `<branch>` 一样的位置。
+
+`git worktree list` 
+
+列出当前仓库已经存在的所有 `worktree` 的详细情况，包括每个 `worktree` 的关联目录，当前的提交点的哈希码和当前 checkout 到的关联分支。
+
+例：
+
+```cpp
+$ git worktree list
+/path/to/bare-source            (bare)
+/path/to/linked-worktree        abcd1234 [master]
+/path/to/other-linked-worktree  1234abc  (detached HEAD)
 ```
 
-- 修改上一次的 commit 记录
+可以添加 `--porcelain` 选项，可以列出更完整的哈希值和分支信息
 
-```bash
-git commit --amend
+```cpp
+$ git worktree list --porcelain
+worktree /path/to/bare-source
+bare
+
+worktree /path/to/linked-worktree
+HEAD abcd1234abcd1234abcd1234abcd1234abcd1234
+branch refs/heads/master
+
+worktree /path/to/other-linked-worktree
+HEAD 1234abc1234abc1234abc1234abc1234abc1234a
+detached
 ```
 
-- 比较文件
+## git update-index
 
-```bash
-git diff <branch_name1> <branch_name2> --stat
-git diff <branch_name1> --stat # 比较当前文件与 branch_name1
+开发的时候，我们可能需要的开发环境部分配置跟测试及生产环境不一样，如数据库配置，需要手动修改，又不想把修改过的配置文件提交；又如 .vscode/settings.json，自己的配置不想与远程仓库的配置相冲突。这时就可以使用 git update-index
+
+```sh
+git update-index --assume-unchanged [file-path]
 ```
 
-- 当本地有领先远端的 commit，同时远端也有领先本地的 commit（这种情况经常会发生），并使用 git pull 拉去远端代码时，会产生一条 merge commit，例：merge branch 'feature/login' of ssh://gitlab.aaa.net/project/main-web into feature/login，污染了 commit 记录
+命令中的 file-path 就是需要忽略提交的文件的路径，只对文件有效。
 
-    - 原因：**本地分支与远程分支存在分叉**，而 git pull = git fetch + git merge，在 merge 时有冲突就会产生一条 merge commit
+如果需要恢复提交，使用：
 
-    - 避免方法
+```sh
+git update-index --no-assume-unchanged [file-path]
+```
 
-        1. 使用 `git pull --rebase` 代替 git pull，这种方案的原理是不产生额外的合并节点，而是将远端更新拉取到本地，而后将本地的提交附加到远端更新之后。
-            - 一劳永逸：`git config --global pull.rebase true`
+### 详细
 
-        2. 在本地 commit 之前 stash，pull 之后再 pop 出来
+`git update-index` 会将工作树中的文件内容注册到索引。
+
+修改索引或目录缓存。提到的每个文件都更新到索引中，并清除任何 `unmerged` 或 `needs updating` 状态。
+

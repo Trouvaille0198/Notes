@@ -24,7 +24,7 @@ categories: [Linux]
 模板
 
 ```sh
-deb https://mirrors.aliyun.com/ubuntu/ TODO main restricted universe multiverse
+Fdeb https://mirrors.aliyun.com/ubuntu/ TODO main restricted universe multiverse
 deb-src https://mirrors.aliyun.com/ubuntu/ TODO main restricted universe multiverse
 
 deb https://mirrors.aliyun.com/ubuntu/ TODO-security main restricted universe multiverse
@@ -269,6 +269,70 @@ go env -w GOPROXY=https://goproxy.cn
 
 ## Python
 
+### 使用 pyenv 来实现多版本安装（推荐）
+
+> https://github.com/pyenv/pyenv#installation
+
+安装 pyenv 
+
+```shell
+curl https://pyenv.run | bash
+# 或者去文档选用其他方法
+```
+
+添加环境变量
+
+```shell
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+```
+
+安装任意版本
+
+```shell
+pyenv install <version-name>
+pyenv uninstall <version-name>
+```
+
+获取所有可安装版本信息
+
+```shell
+pyenv install -l
+```
+
+获取本地已安装版本
+
+```shell
+pyenv versions
+```
+
+选用指定版本
+
+To select a Pyenv-installed Python as the version to use, run one of the following commands:
+
+- [`pyenv shell `](https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-shell) -- select just for current shell session
+- [`pyenv local `](https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-local) -- automatically select whenever you are in the current directory (or its subdirectories)
+- [`pyenv global `](https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-shell) -- select globally for your user account
+
+#### 与 pyenv-virtualenvwrapper 配合使用
+
+> https://github.com/pyenv/pyenv-virtualenvwrapper
+
+这样就能在 `pyenv` 中使用 `virtualenv` 啦，依赖分离
+
+```shell
+git clone https://github.com/pyenv/pyenv-virtualenvwrapper.git $(pyenv root)/plugins/pyenv-virtualenvwrapper
+```
+
+每次打开 shell，运行
+
+```shell
+pyenv virtualenvwrapper
+```
+
+之后就能在 pyenv 当前版本的 Python 中使用诸如 `mkvirtualenv` 或 `workon` 的指令啦
+
 ### Miniconda
 
 从官网下载安装脚本 https://docs.conda.io/en/latest/miniconda.html
@@ -283,8 +347,6 @@ bash Miniconda3-latest-Linux-x86_64.sh
 ```shell
 export PATH="~/miniconda3/bin:$PATH"
 ```
-
-
 
 ### 官网
 

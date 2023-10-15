@@ -9,142 +9,21 @@ categories: [Python]
 
 # contextlib
 
-### **上下文管理器**
+上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。
 
-上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。既然提及上下文，就不可避免的涉及 Python 中关于上下文的魔法。上下文管理器(context manager)是 Python2.5 开始支持的一种语法，用于规定某个对象的使用范围。一旦进入或者离开该使用范围，会有特殊操作被调用。它的语法形式是 with…as…，主要应用场景资源的创建和释放。例如，文件就支持上下文管理器，可以确保完成文件读写后关闭文件句柄。
+上下文管理器 (context manager) 是 Python2.5 开始支持的一种语法，用于规定某个对象的使用范围。一旦进入或者离开该使用范围，会有特殊操作被调用。它的语法形式是 with…as…，主要应用场景资源的创建和释放。例如，文件就支持上下文管理器，可以确保完成文件读写后关闭文件句柄。
 
-```text
+```py
 with open('password.txt', 'wt') as f:
     f.write('contents go here')
 # 文件会自动关闭
 ```
 
-### **__enter__和__exit__**
-
-with 方法的实现涉及到两个魔法函数__enter__和__exit__。
-执行流进入 with 中的代码块时会执行__enter__方法，它会返回在这个上下文中使用的一个对象。执行流离开 with 块时，则调用这个上下文管理器的__exit__方法来清理所使用的资源。
-
-```text
-class Context:
-    def __init__(self):
-        print("int __init__")
-
-    def __enter__(self):
-        print("int __enter__")
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print("in __exit__")
-
-if __name__ == '__main__':
-    with Context():
-        print('start with')
-```
-
-输出
-
-```text
-int __init__
-int __enter__
-start with
-in __exit__
-```
-
-相对于使用 try:finally 块，使用 with 语句代码看起来更紧凑，with 代码块执行的时候总会调用__exit__方法,即使出现了异常。
-如果给 with 语句的 as 子句指定一个别名，那么__enter__方法可以返回与这个名关联的任何对象。
-
-```text
-import requests
-
-
-class Request:
-    def __init__(self):
-        self.session = requests.session()
-
-    def get(self, url, headers=None):
-        if headers is None:
-            headers = {}
-
-        response = self.session.get(url)
-        return response
-
-
-class Context:
-    def __init__(self):
-        print("int __init__")
-
-    def __enter__(self):
-        print("int __enter__")
-        return Request()
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print("in __exit__")
-
-
-if __name__ == '__main__':
-    with Context() as t:
-        req = t.get("https://wwww.baidu.com")
-        print(req.text)
-```
-
-这里的 t 就是__enter__方法返回的 Request 对象的实例,然后我们可以调用该实例的一些方法。
-如果上下文中出现异常，可以通过修改__exit__方法，如果返回值为 true，则可以把异常打印出来，如果为 false 则会抛出异常。
-
-```text
-class Context:
-    def __init__(self,flag):
-        self.flag = flag
-
-    def __enter__(self):
-        print("int __enter__")
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print("in __exit__")
-        print(f"{exc_type=}") #Python3.8 的语法等价于 f"exc_type={exc_type}"
-        print(f"{exc_val=}")
-        print(f"{exc_val=}")
-        return self.flag
-
-
-if __name__ == '__main__':
-    with Context(True) as t:
-        raise RuntimeError()
-
-    print("------华丽的分割线---------")
-
-    with Context(False) as t:
-        raise RuntimeError()
-```
-
-输出
-
-```text
-int __enter__
-in __exit__
-exc_type=<class 'RuntimeError'>
-exc_val=RuntimeError()
-exc_val=RuntimeError()
-
-------华丽的分割线---------
-
-int __enter__
-in __exit__
-exc_type=<class 'RuntimeError'>
-exc_val=RuntimeError()
-exc_val=RuntimeError()
-Traceback (most recent call last):
-  File "demo.py", line 26, in <module>
-    raise RuntimeError()
-RuntimeError
-```
-
-可以看到__exit__方法接收一些参数，其中包含 with 块中产生的异常的详细信息。
-
-### **上下文管理器作为装饰器**
+## **上下文管理器作为装饰器**
 
 通过继承 contextlib 里面的 ContextDecorator 类,实现对常规上下文管理器类的支持，其不仅可以作为上下文管理器，也可以作为函数修饰符。
 
-```text
+```py
 import contextlib
 
 
@@ -174,33 +53,7 @@ with Context('上下文管理器方式'):
     print('emmmm')
 ```
 
-看一下 ContextDecorator 的源码就了解了
-
-```text
-class ContextDecorator(object):
-    "A base class or mixin that enables context managers to work as decorators."
-
-    def _recreate_cm(self):
-        """Return a recreated instance of self.
-
-        Allows an otherwise one-shot context manager like
-        _GeneratorContextManager to support use as
-        a decorator via implicit recreation.
-
-        This is a private interface just for _GeneratorContextManager.
-        See issue #11647 for details.
-        """
-        return self
-
-    def __call__(self, func): #将类变为可调用对象
-        @wraps(func)
-        def inner(*args, **kwds):
-            with self._recreate_cm():
-                return func(*args, **kwds)
-        return inner
-```
-
-### **生成器函数转为上下文管理器**
+## **生成器函数转为上下文管理器**
 
 有时候我们的代码只有很少的上下文要管理，此时再使用上面的形式写出 with 相关的魔法函数
 就显得比较啰嗦了，在这种情况下，我们可以使用 contextmanager 修饰符将一个生成器转换为上下文管理器。
@@ -361,7 +214,7 @@ def contextmanager(func):
     return helper
 ```
 
-### **关闭打开的句柄**
+## **关闭打开的句柄**
 
 并不是所有的类都支持上下文管理器的 API，有一些遗留的类会使用一个 close 方法。
 为了确保关闭句柄，需要使用 closing 为他创建一个上文管理器。
@@ -437,7 +290,7 @@ class closing(object):
 
 这个 contextlib.closing()会帮它加上__enter__()和__exit__()，使其满足 with 的条件。然后 exit 里执行的就是对应类的 close 方法。
 
-### **巧妙的回避错误**
+## **巧妙的回避错误**
 
 contextlib.suppress(*exceptions)
 另一个工具就是在 Python 3.4 中加入的 suppress 类。这个上下文管理工具背后的理念就是它可以禁止任意数目的异常。假如我们想忽略 FileNotFoundError 异常。如果你书写了如下的上下文管理器，那么它不会正常运行。
@@ -464,7 +317,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '1.txt'
 
 在这段代码中，我们引入 suppress，然后将我们要忽略的异常传递给它，在这个例子中，就是 FileNotFoundError。如果你想运行这段代码，你将会注意到，文件不存在时，什么事情都没有发生，也没有错误被抛出。请注意，这个上下文管理器是可重用的。
 
-### **例子数据库的自动提交和回滚**
+## **例子数据库的自动提交和回滚**
 
 在编程中如果频繁的修改数据库, 一味的使用类似 try:… except..: rollback() raise e 其实是不太好的.
 

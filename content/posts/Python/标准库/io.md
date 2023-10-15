@@ -9,7 +9,11 @@ categories: [Python]
 
 # io
 
+> 官方文档：https://docs.python.org/3/library/io.html
+
 ## StringIO 和 BytesIO
+
+> StringIO 和 BytesIO 是在内存中操作 str 和 bytes 的方法，使得和读写文件具有一致的接口
 
 很多时候，数据读写不一定是文件，也可以在内存中读写。
 
@@ -74,6 +78,24 @@ b'\xe4\xb8\xad\xe6\x96\x87'
 b'\xe4\xb8\xad\xe6\x96\x87'
 ```
 
-### 小结
+### 通用方法
 
-StringIO 和 BytesIO 是在内存中操作 str 和 bytes 的方法，使得和读写文件具有一致的接口
+#### tell()
+
+Return the current stream position.
+
+通常用于获取字节数
+
+#### truncate(size=None, /)
+
+Resize the stream to the given *size* in bytes (or the current position if *size* is not specified). The current stream position isn’t changed. This resizing can extend or reduce the current file size. In case of extension, the contents of the new file area depend on the platform (on most systems, additional bytes are zero-filled). The new file size is returned.
+
+#### seek(offset, whence=SEEK_SET, /)
+
+Change the stream position to the given byte *offset*. *offset* is interpreted relative to the position indicated by *whence*. The default value for *whence* is `SEEK_SET`. Values for *whence* are:
+
+- `SEEK_SET` or `0` – start of the stream (the default); *offset* should be zero or positive
+- `SEEK_CUR` or `1` – current stream position; *offset* may be negative
+- `SEEK_END` or `2` – end of the stream; *offset* is usually negative
+
+Return the new absolute position.
