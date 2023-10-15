@@ -1,4 +1,4 @@
-<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Python contextlib 库 - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="contextlib 上下文管理器 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。"><meta name=keywords content="Python"><meta itemprop=name content="Python contextlib 库"><meta itemprop=description content="contextlib 上下文管理器 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。"><meta itemprop=dateModified content="2023-08-15T14:05:31+00:00"><meta itemprop=wordCount content="3392"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,"><meta property="og:title" content="Python contextlib 库"><meta property="og:description" content="contextlib 上下文管理器 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:modified_time" content="2023-08-15T14:05:31+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python contextlib 库"><meta name=twitter:description content="contextlib 上下文管理器 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/dramatiq/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/celery/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python contextlib 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/contextlib\/"},"genre":"posts","keywords":"Python","wordcount":3392,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/contextlib\/","dateModified":"2023-08-15T14:05:31+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=x-ua-compatible content="IE=edge, chrome=1"><title>Python contextlib 库 - 伤心肠粉的酱油碟子</title><meta name=author content><meta name=author-link content><meta name=description content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta name=keywords content="Python"><meta itemprop=name content="Python contextlib 库"><meta itemprop=description content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta itemprop=dateModified content="2023-10-15T12:19:29+00:00"><meta itemprop=wordCount content="2531"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,"><meta property="og:title" content="Python contextlib 库"><meta property="og:description" content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:modified_time" content="2023-10-15T12:19:29+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python contextlib 库"><meta name=twitter:description content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/dramatiq/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/celery/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python contextlib 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/contextlib\/"},"genre":"posts","keywords":"Python","wordcount":2531,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/contextlib\/","dateModified":"2023-10-15T12:19:29+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i></a>
 <a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i></a>
 <span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
@@ -7,51 +7,15 @@
 <span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python contextlib 库</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
 MelonCholi</span></span>
 <span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="0001-01-01 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>
-</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 3392 字&nbsp;
-<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><ul><li><a href=#上下文管理器><strong>上下文管理器</strong></a></li><li><a href=#__enter__和__exit__><strong><strong>enter__和__exit</strong></strong></a></li><li><a href=#上下文管理器作为装饰器><strong>上下文管理器作为装饰器</strong></a></li><li><a href=#生成器函数转为上下文管理器><strong>生成器函数转为上下文管理器</strong></a></li><li><a href=#关闭打开的句柄><strong>关闭打开的句柄</strong></a></li><li><a href=#巧妙的回避错误><strong>巧妙的回避错误</strong></a></li><li><a href=#例子数据库的自动提交和回滚><strong>例子数据库的自动提交和回滚</strong></a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=contextlib>contextlib</h1><h3 id=上下文管理器><strong>上下文管理器</strong></h3><p>上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。既然提及上下文，就不可避免的涉及 Python 中关于上下文的魔法。上下文管理器(context manager)是 Python2.5 开始支持的一种语法，用于规定某个对象的使用范围。一旦进入或者离开该使用范围，会有特殊操作被调用。它的语法形式是 with…as…，主要应用场景资源的创建和释放。例如，文件就支持上下文管理器，可以确保完成文件读写后关闭文件句柄。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 2531 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#上下文管理器作为装饰器><strong>上下文管理器作为装饰器</strong></a></li><li><a href=#生成器函数转为上下文管理器><strong>生成器函数转为上下文管理器</strong></a></li><li><a href=#关闭打开的句柄><strong>关闭打开的句柄</strong></a></li><li><a href=#巧妙的回避错误><strong>巧妙的回避错误</strong></a></li><li><a href=#例子数据库的自动提交和回滚><strong>例子数据库的自动提交和回滚</strong></a></li></ul></nav></div></div><div class=content id=content><h1 id=contextlib>contextlib</h1><p>上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。</p><p>上下文管理器 (context manager) 是 Python2.5 开始支持的一种语法，用于规定某个对象的使用范围。一旦进入或者离开该使用范围，会有特殊操作被调用。它的语法形式是 with…as…，主要应用场景资源的创建和释放。例如，文件就支持上下文管理器，可以确保完成文件读写后关闭文件句柄。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>with open(&#39;password.txt&#39;, &#39;wt&#39;) as f:
-</span></span><span class=line><span class=cl>    f.write(&#39;contents go here&#39;)
-</span></span><span class=line><span class=cl># 文件会自动关闭
-</span></span></code></pre></td></tr></table></div></div><h3 id=__enter__和__exit__><strong><strong>enter__和__exit</strong></strong></h3><p>with 方法的实现涉及到两个魔法函数__enter__和__exit__。
-执行流进入 with 中的代码块时会执行__enter__方法，它会返回在这个上下文中使用的一个对象。执行流离开 with 块时，则调用这个上下文管理器的__exit__方法来清理所使用的资源。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>class Context:
-</span></span><span class=line><span class=cl>    def __init__(self):
-</span></span><span class=line><span class=cl>        print(&#34;int __init__&#34;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __enter__(self):
-</span></span><span class=line><span class=cl>        print(&#34;int __enter__&#34;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __exit__(self, exc_type, exc_val, exc_tb):
-</span></span><span class=line><span class=cl>        print(&#34;in __exit__&#34;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>if __name__ == &#39;__main__&#39;:
-</span></span><span class=line><span class=cl>    with Context():
-</span></span><span class=line><span class=cl>        print(&#39;start with&#39;)
-</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>int __init__
-</span></span><span class=line><span class=cl>int __enter__
-</span></span><span class=line><span class=cl>start with
-</span></span><span class=line><span class=cl>in __exit__
-</span></span></code></pre></td></tr></table></div></div><p>相对于使用 try:finally 块，使用 with 语句代码看起来更紧凑，with 代码块执行的时候总会调用__exit__方法,即使出现了异常。
-如果给 with 语句的 as 子句指定一个别名，那么__enter__方法可以返回与这个名关联的任何对象。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;password.txt&#39;</span><span class=p>,</span> <span class=s1>&#39;wt&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>f</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=s1>&#39;contents go here&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 文件会自动关闭</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=上下文管理器作为装饰器><strong>上下文管理器作为装饰器</strong></h2><p>通过继承 contextlib 里面的 ContextDecorator 类,实现对常规上下文管理器类的支持，其不仅可以作为上下文管理器，也可以作为函数修饰符。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -78,221 +42,34 @@ MelonCholi</span></span>
 </span><span class=lnt>25
 </span><span class=lnt>26
 </span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>import requests
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>contextlib</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>class Request:
-</span></span><span class=line><span class=cl>    def __init__(self):
-</span></span><span class=line><span class=cl>        self.session = requests.session()
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Context</span><span class=p>(</span><span class=n>contextlib</span><span class=o>.</span><span class=n>ContextDecorator</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def get(self, url, headers=None):
-</span></span><span class=line><span class=cl>        if headers is None:
-</span></span><span class=line><span class=cl>            headers = {}
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>how_used</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>how_used</span> <span class=o>=</span> <span class=n>how_used</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;__init__(</span><span class=si>{</span><span class=n>how_used</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        response = self.session.get(url)
-</span></span><span class=line><span class=cl>        return response
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__enter__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;__enter__(</span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>how_used</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>class Context:
-</span></span><span class=line><span class=cl>    def __init__(self):
-</span></span><span class=line><span class=cl>        print(&#34;int __init__&#34;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __enter__(self):
-</span></span><span class=line><span class=cl>        print(&#34;int __enter__&#34;)
-</span></span><span class=line><span class=cl>        return Request()
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __exit__(self, exc_type, exc_val, exc_tb):
-</span></span><span class=line><span class=cl>        print(&#34;in __exit__&#34;)
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__exit__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>exc_type</span><span class=p>,</span> <span class=n>exc_val</span><span class=p>,</span> <span class=n>exc_tb</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;__exit__(</span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>how_used</span><span class=si>}</span><span class=s1>)&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>if __name__ == &#39;__main__&#39;:
-</span></span><span class=line><span class=cl>    with Context() as t:
-</span></span><span class=line><span class=cl>        req = t.get(&#34;https://wwww.baidu.com&#34;)
-</span></span><span class=line><span class=cl>        print(req.text)
-</span></span></code></pre></td></tr></table></div></div><p>这里的 t 就是__enter__方法返回的 Request 对象的实例,然后我们可以调用该实例的一些方法。
-如果上下文中出现异常，可以通过修改__exit__方法，如果返回值为 true，则可以把异常打印出来，如果为 false 则会抛出异常。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>class Context:
-</span></span><span class=line><span class=cl>    def __init__(self,flag):
-</span></span><span class=line><span class=cl>        self.flag = flag
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __enter__(self):
-</span></span><span class=line><span class=cl>        print(&#34;int __enter__&#34;)
-</span></span><span class=line><span class=cl>        return self
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __exit__(self, exc_type, exc_val, exc_tb):
-</span></span><span class=line><span class=cl>        print(&#34;in __exit__&#34;)
-</span></span><span class=line><span class=cl>        print(f&#34;{exc_type=}&#34;) #Python3.8 的语法等价于 f&#34;exc_type={exc_type}&#34;
-</span></span><span class=line><span class=cl>        print(f&#34;{exc_val=}&#34;)
-</span></span><span class=line><span class=cl>        print(f&#34;{exc_val=}&#34;)
-</span></span><span class=line><span class=cl>        return self.flag
+</span></span><span class=line><span class=cl><span class=nd>@Context</span><span class=p>(</span><span class=s1>&#39;这是装饰器方式&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func</span><span class=p>(</span><span class=n>message</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>message</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;---------------&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>func</span><span class=p>(</span><span class=s1>&#39;作为装饰器运行&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>if __name__ == &#39;__main__&#39;:
-</span></span><span class=line><span class=cl>    with Context(True) as t:
-</span></span><span class=line><span class=cl>        raise RuntimeError()
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    print(&#34;------华丽的分割线---------&#34;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    with Context(False) as t:
-</span></span><span class=line><span class=cl>        raise RuntimeError()
-</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>int __enter__
-</span></span><span class=line><span class=cl>in __exit__
-</span></span><span class=line><span class=cl>exc_type=&lt;class &#39;RuntimeError&#39;&gt;
-</span></span><span class=line><span class=cl>exc_val=RuntimeError()
-</span></span><span class=line><span class=cl>exc_val=RuntimeError()
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>------华丽的分割线---------
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>int __enter__
-</span></span><span class=line><span class=cl>in __exit__
-</span></span><span class=line><span class=cl>exc_type=&lt;class &#39;RuntimeError&#39;&gt;
-</span></span><span class=line><span class=cl>exc_val=RuntimeError()
-</span></span><span class=line><span class=cl>exc_val=RuntimeError()
-</span></span><span class=line><span class=cl>Traceback (most recent call last):
-</span></span><span class=line><span class=cl>  File &#34;demo.py&#34;, line 26, in &lt;module&gt;
-</span></span><span class=line><span class=cl>    raise RuntimeError()
-</span></span><span class=line><span class=cl>RuntimeError
-</span></span></code></pre></td></tr></table></div></div><p>可以看到__exit__方法接收一些参数，其中包含 with 块中产生的异常的详细信息。</p><h3 id=上下文管理器作为装饰器><strong>上下文管理器作为装饰器</strong></h3><p>通过继承 contextlib 里面的 ContextDecorator 类,实现对常规上下文管理器类的支持，其不仅可以作为上下文管理器，也可以作为函数修饰符。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>import contextlib
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>class Context(contextlib.ContextDecorator):
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __init__(self, how_used):
-</span></span><span class=line><span class=cl>        self.how_used = how_used
-</span></span><span class=line><span class=cl>        print(f&#39;__init__({how_used})&#39;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __enter__(self):
-</span></span><span class=line><span class=cl>        print(f&#39;__enter__({self.how_used})&#39;)
-</span></span><span class=line><span class=cl>        return self
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __exit__(self, exc_type, exc_val, exc_tb):
-</span></span><span class=line><span class=cl>        print(f&#39;__exit__({self.how_used})&#39;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>@Context(&#39;这是装饰器方式&#39;)
-</span></span><span class=line><span class=cl>def func(message):
-</span></span><span class=line><span class=cl>    print(message)
-</span></span><span class=line><span class=cl>print(&#34;---------------&#34;)
-</span></span><span class=line><span class=cl>func(&#39;作为装饰器运行&#39;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>print(&#34;\n-------华丽的分割线--------\n&#34;)
-</span></span><span class=line><span class=cl>with Context(&#39;上下文管理器方式&#39;):
-</span></span><span class=line><span class=cl>    print(&#39;emmmm&#39;)
-</span></span></code></pre></td></tr></table></div></div><p>看一下 ContextDecorator 的源码就了解了</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>class ContextDecorator(object):
-</span></span><span class=line><span class=cl>    &#34;A base class or mixin that enables context managers to work as decorators.&#34;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def _recreate_cm(self):
-</span></span><span class=line><span class=cl>        &#34;&#34;&#34;Return a recreated instance of self.
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        Allows an otherwise one-shot context manager like
-</span></span><span class=line><span class=cl>        _GeneratorContextManager to support use as
-</span></span><span class=line><span class=cl>        a decorator via implicit recreation.
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        This is a private interface just for _GeneratorContextManager.
-</span></span><span class=line><span class=cl>        See issue #11647 for details.
-</span></span><span class=line><span class=cl>        &#34;&#34;&#34;
-</span></span><span class=line><span class=cl>        return self
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __call__(self, func): #将类变为可调用对象
-</span></span><span class=line><span class=cl>        @wraps(func)
-</span></span><span class=line><span class=cl>        def inner(*args, **kwds):
-</span></span><span class=line><span class=cl>            with self._recreate_cm():
-</span></span><span class=line><span class=cl>                return func(*args, **kwds)
-</span></span><span class=line><span class=cl>        return inner
-</span></span></code></pre></td></tr></table></div></div><h3 id=生成器函数转为上下文管理器><strong>生成器函数转为上下文管理器</strong></h3><p>有时候我们的代码只有很少的上下文要管理，此时再使用上面的形式写出 with 相关的魔法函数
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>-------华丽的分割线--------</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>Context</span><span class=p>(</span><span class=s1>&#39;上下文管理器方式&#39;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;emmmm&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=生成器函数转为上下文管理器><strong>生成器函数转为上下文管理器</strong></h2><p>有时候我们的代码只有很少的上下文要管理，此时再使用上面的形式写出 with 相关的魔法函数
 就显得比较啰嗦了，在这种情况下，我们可以使用 contextmanager 修饰符将一个生成器转换为上下文管理器。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -535,7 +312,7 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span></span><span class=line><span class=cl>    def helper(*args, **kwds):
 </span></span><span class=line><span class=cl>        return GeneratorContextManager(func(*args, **kwds))
 </span></span><span class=line><span class=cl>    return helper
-</span></span></code></pre></td></tr></table></div></div><h3 id=关闭打开的句柄><strong>关闭打开的句柄</strong></h3><p>并不是所有的类都支持上下文管理器的 API，有一些遗留的类会使用一个 close 方法。
+</span></span></code></pre></td></tr></table></div></div><h2 id=关闭打开的句柄><strong>关闭打开的句柄</strong></h2><p>并不是所有的类都支持上下文管理器的 API，有一些遗留的类会使用一个 close 方法。
 为了确保关闭句柄，需要使用 closing 为他创建一个上文管理器。
 该模块主要是解决不能支持上下文管理器的类。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
@@ -646,7 +423,7 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span></span><span class=line><span class=cl>        return self.thing
 </span></span><span class=line><span class=cl>    def __exit__(self, *exc_info):
 </span></span><span class=line><span class=cl>       self.thing.close()
-</span></span></code></pre></td></tr></table></div></div><p>这个 contextlib.closing()会帮它加上__enter__()和__exit__()，使其满足 with 的条件。然后 exit 里执行的就是对应类的 close 方法。</p><h3 id=巧妙的回避错误><strong>巧妙的回避错误</strong></h3><p>contextlib.suppress(*exceptions)
+</span></span></code></pre></td></tr></table></div></div><p>这个 contextlib.closing()会帮它加上__enter__()和__exit__()，使其满足 with 的条件。然后 exit 里执行的就是对应类的 close 方法。</p><h2 id=巧妙的回避错误><strong>巧妙的回避错误</strong></h2><p>contextlib.suppress(*exceptions)
 另一个工具就是在 Python 3.4 中加入的 suppress 类。这个上下文管理工具背后的理念就是它可以禁止任意数目的异常。假如我们想忽略 FileNotFoundError 异常。如果你书写了如下的上下文管理器，那么它不会正常运行。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
@@ -671,7 +448,7 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span></span><span class=line><span class=cl>...     with open(&#34;1.txt&#34;) as fobj:
 </span></span><span class=line><span class=cl>...         for line in fobj:
 </span></span><span class=line><span class=cl>...             print(line)
-</span></span></code></pre></td></tr></table></div></div><p>在这段代码中，我们引入 suppress，然后将我们要忽略的异常传递给它，在这个例子中，就是 FileNotFoundError。如果你想运行这段代码，你将会注意到，文件不存在时，什么事情都没有发生，也没有错误被抛出。请注意，这个上下文管理器是可重用的。</p><h3 id=例子数据库的自动提交和回滚><strong>例子数据库的自动提交和回滚</strong></h3><p>在编程中如果频繁的修改数据库, 一味的使用类似 try:… except..: rollback() raise e 其实是不太好的.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><p>在这段代码中，我们引入 suppress，然后将我们要忽略的异常传递给它，在这个例子中，就是 FileNotFoundError。如果你想运行这段代码，你将会注意到，文件不存在时，什么事情都没有发生，也没有错误被抛出。请注意，这个上下文管理器是可重用的。</p><h2 id=例子数据库的自动提交和回滚><strong>例子数据库的自动提交和回滚</strong></h2><p>在编程中如果频繁的修改数据库, 一味的使用类似 try:… except..: rollback() raise e 其实是不太好的.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -727,7 +504,7 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span></span><span class=line><span class=cl>    user = User()
 </span></span><span class=line><span class=cl>    user.set_attrs(form.data)
 </span></span><span class=line><span class=cl>    db.session.add(user)
-</span></span></code></pre></td></tr></table></div></div><p>上下文管理器很有趣，也很方便。我经常在自动测试中使用它们，例如，打开和关闭对话。现在，你应该可以使用 Python 内置的工具去创建你的上下文管理器。你还可以继续阅读 Python 关于 contextlib 的文档，那里有很多本文没有覆盖到的知识。</p><p>这篇文章其实主要为了后面的异步上文管理器使用的。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2023-08-15 14:05:31">更新于 2023-08-15</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/ data-title="Python contextlib 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+</span></span></code></pre></td></tr></table></div></div><p>上下文管理器很有趣，也很方便。我经常在自动测试中使用它们，例如，打开和关闭对话。现在，你应该可以使用 Python 内置的工具去创建你的上下文管理器。你还可以继续阅读 Python 关于 contextlib 的文档，那里有很多本文没有覆盖到的知识。</p><p>这篇文章其实主要为了后面的异步上文管理器使用的。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2023-10-15 12:19:29">更新于 2023-10-15</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/ data-title="Python contextlib 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
 <a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
 <a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/ data-title="Python contextlib 库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/dramatiq/ class=prev rel=prev title="Python dramatiq 库"><i class="fa-solid fa-angle-left fa-fw"></i>Python dramatiq 库</a>
 <a href=/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/celery/ class=next rel=next title="Python celery 库">Python celery 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
