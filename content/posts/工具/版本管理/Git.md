@@ -1298,3 +1298,28 @@ git update-index --no-assume-unchanged [file-path]
 
 修改索引或目录缓存。提到的每个文件都更新到索引中，并清除任何 `unmerged` 或 `needs updating` 状态。
 
+## git remote
+
+git remote 命令用于用于管理 Git 仓库中的远程仓库
+
+以下是 git remote 命令的常见用法：
+
+- `git remote`：列出当前仓库中已配置的远程仓库。
+- `git remote -v`：列出当前仓库中已配置的远程仓库，并显示它们的 URL。
+- `git remote add <remote_name> <remote_url>`：添加一个新的远程仓库。指定一个远程仓库的名称和 URL，将其添加到当前仓库中。
+- `git remote rename <old_name> <new_name>`：将已配置的远程仓库重命名。
+- `git remote remove <remote_name>`：从当前仓库中删除指定的远程仓库。
+- `git remote set-url <remote_name> <new_url>`：修改指定远程仓库的 URL。
+- `git remote show <remote_name>`：显示指定远程仓库的详细信息，包括 URL 和跟踪分支。
+
+以下列出了远程仓库、添加远程仓库、重命名远程仓库、删除远程仓库、修改远程仓库 URL 和查看远程仓库信息的用法：
+
+```sh
+git remote
+git remote -v
+git remote add origin https://github.com/user/repo.git
+git remote rename origin new-origin
+git remote remove new-origin
+git remote set-url origin https://github.com/user/new-repo.git
+git remote show origin
+```

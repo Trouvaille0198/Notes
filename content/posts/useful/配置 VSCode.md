@@ -1,5 +1,5 @@
 ---
-title: "VSCode 常用快捷键记录"
+title: "配置 VSCode"
 date: 2023-02-21
 draft: false
 author: "MelonCholi"

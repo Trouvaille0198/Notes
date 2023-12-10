@@ -89,7 +89,7 @@ Doing so immediately enqueues a message (via our local RabbitMQ server) that can
 
 ### Workers
 
-Dramatiq comes with a command line utility called, predictably, `dramatiq`. This utility is able to spin up multiple concurrent worker processes that pop messages off the queue and send them to actor functions for execution.
+Dramatiq 自带一个命令行工具，称为 `dramatiq`。该工具能够启动多个并发的 worker 进程，从队列中获取消息并将其发送到 actor  函数以进行执行。
 
 使用 `dramatiq` 命令行工具来生成解决 actors 的 workers
 
@@ -509,8 +509,6 @@ redis_broker = RedisBroker(
 )
 ```
 
-
-
 ### DIY
 
 ## dramatiq_dashboard
@@ -518,3 +516,62 @@ redis_broker = RedisBroker(
 > https://github.com/Bogdanp/dramatiq_dashboard
 
 第三方库，可视化仪表盘
+
+## 其他技巧
+
+### 控制单个 actor 函数的并发量
+
+> https://github.com/Bogdanp/dramatiq/issues/32
+
+dramtiq 提供了一个 *ConcurrentRateLimiter* 类来控制单个 actor 函数的并发量，具体原理就是设定一个互斥量 mutex 来保证同一时刻只有指定数量的 actor 在执行。
+
+```py
+import dramatiq
+import time
+
+from dramatiq.rate_limits import ConcurrentRateLimiter
+from dramatiq.rate_limits.backends import RedisBackend
+
+backend = RedisBackend(client=...)
+DISTRIBUTED_MUTEX = ConcurrentRateLimiter(backend, "distributed-mutex", limit=1)
+
+
+@dramatiq.actor
+def one_at_a_time():
+    with DISTRIBUTED_MUTEX.acquire():
+        time.sleep(1)
+        print("Done.")
+```
+
+可以将其封装成中间件
+
+```python
+def get_mutex(limit: int = 1) -> ConcurrentRateLimiter:
+    """获取mutex"""
+    backend = RateLimitRedisBackend(client=redis_client)
+    return ConcurrentRateLimiter(backend, "distributed-mutex", limit=limit)
+
+
+class RetryMutex(Middleware):
+    def after_process_message(self, broker, message, *, result=None, exception=None) -> None:  # type:ignore
+        if isinstance(exception, RateLimitExceeded):
+            # 若访问mutex失败，将此任务重新入列
+            broker.enqueue(message, delay=10_000) 
+
+            
+broker = dramatiq.get_broker()
+broker.add_middleware(RetryMutex())
+```
+
+使用示例：
+
+```py
+MUTEX = get_mutex(1)
+
+
+@dramatiq_app.actor(max_retries=0)
+def t_func(i: int) -> None:
+    with MUTEX.acquire():
+        # do sth...
+```
+

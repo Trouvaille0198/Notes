@@ -232,6 +232,20 @@ sudo apt install fd-find
 ln -s $(which fdfind) ~/.local/bin/fd
 ```
 
+## cheat
+
+一本常用命令说明书：https://github.com/cheat/cheat
+
+```sh
+cd /tmp \
+  && wget https://github.com/cheat/cheat/releases/download/4.4.0/cheat-linux-amd64.gz \
+  && gunzip cheat-linux-amd64.gz \
+  && chmod +x cheat-linux-amd64 \
+  && sudo mv cheat-linux-amd64 /usr/local/bin/cheat
+```
+
+👆 最新版本号随时从官方仓库看
+
 ### 其他
 
 ```sh
