@@ -3,8 +3,8 @@ title: "CAGED 系统"
 date: 2023-12-06
 draft: false
 author: "MelonCholi"
-tags: [音乐]
-categories: [有用的东东]
+tags: [吉他, 乐理]
+categories: [音乐]
 ---
 
 # CAGED 和弦

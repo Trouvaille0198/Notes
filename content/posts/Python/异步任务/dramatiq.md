@@ -9,6 +9,8 @@ categories: [Python]
 
 # dramatiq
 
+> 官方文档：https://dramatiq.io/
+
 一个简单的分布式任务队列库
 
 Dramatiq 主要遵循以下原则:
@@ -289,7 +291,7 @@ def long_running():
 
 ### Scheduling Messages
 
-You can schedule messages to run some time in the future by calling [`send_with_options`](https://dramatiq.io/reference.html#dramatiq.Actor.send_with_options) on actors and providing a `delay` (in milliseconds):
+You can schedule messages to run some time in the future by calling [`send_with_options`](https://dramatiq.io/reference.html#dramatiq.Actor.send_with_options) on actors and providing a `delay` (in **milliseconds**):
 
 延迟运行函数
 

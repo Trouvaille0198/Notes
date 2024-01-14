@@ -1,6 +1,17 @@
-# 认识
+---
+title: "Python dateime 库"
+date: 2021-04-17
+author: MelonCholi
+draft: false
+tags: [Python]
+categories: [Python]
+---
 
-## 类
+# datetime
+
+## 认识
+
+### 类
 
 | 类名          | 功能说明                                                    |
 | ------------- | ----------------------------------------------------------- |
@@ -11,14 +22,14 @@
 | timedelta     | 时间间隔，即两个时间点之间的长度                            |
 | tzinfo        | 时区信息对象                                                |
 
-## 常量
+### 常量
 
 | 常量    | 功能说明             | 用法             | 返回值 |
 | ------- | -------------------- | ---------------- | ------ |
 | MAXYEAR | 返回能表示的最大年份 | datetime.MAXYEAR | 9999   |
 | MINYEAR | 返回能表示的最小年份 | datetime.MINYEAR | 1      |
 
-# date
+## date
 
 ***date（year，month，day)***
 
@@ -46,10 +57,10 @@ print(a<b)
 # False
 ```
 
-## 方法
+### 方法
 
 - ***.isoformat()***
-    
+  
     - 返回 ISO 格式字符串
     
 - ***.isocalendar()***
@@ -88,13 +99,13 @@ print(a<b)
 - ***strptime(str,format)***
     - 将字符串对象转化为日期对象
 
-# time
+## time
 
 ***time([hour[, minute[, second[, microsecond[, tzinfo]]]]])***
 
 方法与 `date` 类似
 
-# datetime
+## datetime
 
 `datetime` 类其实是可以看做是 `date` 类和 `time` 类的合体，其大部分的方法和属性都继承于这二个类
 
@@ -106,7 +117,7 @@ print(a)
 # 2021-05-11 11:35:00.048964
 ```
 
-## 专属属性
+### 专属属性
 
 - ***.date()***
     - 返回日期部分
@@ -119,15 +130,4 @@ print(a)
     - 将一个 date 对象和一个 time 对象合并生成一个 datetime 对象
 - ***.now()***
     - 返回当前日期时间的 datetime 对象
-
-```
-loguru==0.5.3
-pydantic==1.8.1
-jieba==0.42.1
-aiohttp==3.7.4.post0
-nb-cli
-nonebot-plugin-test
-nonebot-adapter-cqhttp
-nonebot_plugin_apscheduler
-```
 

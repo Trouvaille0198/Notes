@@ -24,7 +24,7 @@ https://www.nerdfonts.com/font-downloads 随便挑
 
 ## 网络配置
 
-> 可选，未经验证
+> 可选，未经验证！
 
 备份原有软件源文件
 
@@ -124,7 +124,6 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 
 # ZSH_THEME="random"
-ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
     git
@@ -169,13 +168,13 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 ```
 
-
+此配置文件会根据文档的进展而逐渐完善
 
 ## 工具安装
 
 ### snap
 
-包管理器，会用到的
+包管理器，你总会用到的
 
 ```sh
 sudo apt install snapd -y
@@ -196,7 +195,9 @@ mkdir -p ~/.local/bin
 ln -s /usr/bin/batcat ~/.local/bin/bat
 ```
 
-在配置中添加
+> 一切的软连接都装在 ~/.local
+
+并在配置中添加
 
 ```sh
 alias cat='batcat'
@@ -232,16 +233,38 @@ sudo apt install fd-find
 ln -s $(which fdfind) ~/.local/bin/fd
 ```
 
+### bashtop
+
+> https://github.com/aristocratos/bashtop
+
+top 的替代品
+
+```sh
+sudo apt install bashtop
+```
+
+### ifconfig
+
+```sh
+sudo apt install net-tools
+```
+
 ## cheat
 
 一本常用命令说明书：https://github.com/cheat/cheat
 
 ```sh
-cd /tmp \
+# cd /tmp \
+#   && wget https://github.com/cheat/cheat/releases/download/4.4.0/cheat-linux-amd64.gz \
+#   && gunzip cheat-linux-amd64.gz \
+#   && chmod +x cheat-linux-amd64 \
+#   && sudo mv cheat-linux-amd64 /usr/local/bin/cheat
+  
+cd ~/.opt \
   && wget https://github.com/cheat/cheat/releases/download/4.4.0/cheat-linux-amd64.gz \
   && gunzip cheat-linux-amd64.gz \
   && chmod +x cheat-linux-amd64 \
-  && sudo mv cheat-linux-amd64 /usr/local/bin/cheat
+  && ln -s ~/.opt/cheat-linux-amd64 ~/.local/bin/cheat
 ```
 
 👆 最新版本号随时从官方仓库看
@@ -250,14 +273,188 @@ cd /tmp \
 
 ```sh
 sudo apt install unzip
-
 ```
 
 ## 编程环境配置
 
 ### Python
 
+#### 安装 pyenv
+
+> https://github.com/pyenv/pyenv#installation
+
+```sh
+curl https://pyenv.run | bash
+# 或者去文档选用其他方法
+```
+
+添加环境变量
+
+```sh
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+```
+
+安装 / 卸载任意版本
+
+```sh
+pyenv install <version-name>
+pyenv uninstall <version-name>
+```
+
+#### 安装 pyenv-virtualenvwrapper
+
+这样就能在 `pyenv` 中使用 `virtualenv` 啦，依赖分离
+
+```sh
+git clone https://github.com/pyenv/pyenv-virtualenvwrapper.git $(pyenv root)/plugins/pyenv-virtualenvwrapper
+```
+
+在 `~/.zshrc` 中补充指令缩写
+
+```sh
+alias pv='pyenv virtualenvwrapper'
+```
+
+
+
 ### Go
+
+#### 安装
+
+官网下载：https://golang.org/dl/
+
+下载 go 源码包
+
+版本随时从官网取，确认当前 linux 系统版本是 32 位还是 64 位，再选择 go 源码包
+
+```sh
+# 查看linux多少位
+[root@pyyuc /opt 21:59:02]# uname -m
+x86_64
+```
+
+> 之后所有的软件都安装在 `~/.opt/`（而非 `/opt/`，主要考虑到用户隔离）
+
+```sh
+mkdir ~/.opt
+cd ~/.opt
+sudo wget https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz
+sudo tar -zxvf go1.18.3.linux-amd64.tar.gz
+```
+
+给予权限
+
+```sh
+sudo chmod -R 777 go/
+sudo chmod -R 777 gocode/ # gocode 会在后面生成
+```
+
+#### 配置环境变量
+
+##### 配置 go 的工作空间（配置 GOPATH），以及 go 的环境变量
+
+创建 ~/.opt/gocode/{src,bin,pkg}，用于设置 GOPATH 为 ~/.opt/godocer
+
+```sh
+mkdir -p ~/.opt/gocode/{src,bin,pkg}
+
+~/.opt/gocode/
+├── bin
+├── pkg
+└── src
+```
+
+##### 设置 GOPATH 环境变量
+
+在 `~/zshrc` 中写入 GOPATH 信息以及 go sdk 路径
+
+```sh
+export GOROOT=~/.opt/go           # Golang 源代码目录，安装目录
+export GOPATH=~/.opt/gocode       # Golang 项目代码目录
+export GOBIN=$GOPATH/bin          # go install 后生成的可执行命令存放路径
+
+export PATH=$GOROOT/bin:$GOBIN:$PATH    # Linux 环境变量
+```
+
+##### go install 配置代理（可选）
+
+```sh
+go env -w GOPROXY=https://goproxy.cn
+```
+
+### Node.js
+
+官网下载：https://nodejs.org/en/download/
+
+> 都给我装在 `~/.opt/`！
+
+下载、解压 Node.js Linux 64 位二进制安装包
+
+```sh
+cd ~/.opt
+wget https://nodejs.org/dist/v18.12.1/node-v18.12.1-linux-x64.tar.xz
+tar xvf node-v18.12.1-linux-x64.tar.xz
+```
+
+👆 版本随时从官网取
+
+创建软链接
+
+```sh
+sudo ln -s ~/download/node-v18.12.1-linux-x64/bin/node ~/.opt/bin/node
+sudo ln -s ~/download/node-v18.12.1-linux-x64/bin/npm ~/.opt/bin/npm
+```
+
+### Docker
+
+由于 `apt` 源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。
+
+```sh
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+```
+
+为了确认所下载软件包的合法性，需要添加软件源的 `GPG` 密钥。
+
+```sh
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+
+# 官方源
+# $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+```
+
+然后，我们需要向 `sources.list` 中添加 Docker 软件源
+
+```sh
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+# 官方源
+echo \
+   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+> 以上命令会添加稳定版本的 Docker APT 镜像源，如果需要测试版本的 Docker 请将 stable 改为 test。
+
+更新 apt 软件包缓存，并安装 `docker-ce`：
+
+```sh
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+```
+
+
 
 ## Vim 配置
 
