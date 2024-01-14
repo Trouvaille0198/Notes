@@ -1,5 +1,5 @@
 <!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>Python contextlib 库 - 伤心肠粉的酱油碟子</title><meta name=author content>
-<meta name=author-link content><meta name=description content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta name=keywords content="Python"><meta itemprop=name content="Python contextlib 库"><meta itemprop=description content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta itemprop=dateModified content="2023-12-10T13:54:05+00:00"><meta itemprop=wordCount content="2531"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,"><meta property="og:title" content="Python contextlib 库"><meta property="og:description" content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:modified_time" content="2023-12-10T13:54:05+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python contextlib 库"><meta name=twitter:description content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/dramatiq/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/celery/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python contextlib 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/contextlib\/"},"genre":"posts","keywords":"Python","wordcount":2531,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/contextlib\/","dateModified":"2023-12-10T13:54:05+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<meta name=author-link content><meta name=description content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta name=keywords content="Python"><meta itemprop=name content="Python contextlib 库"><meta itemprop=description content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta itemprop=datePublished content="2023-08-02T00:00:00+00:00"><meta itemprop=dateModified content="2024-01-14T09:16:02+00:00"><meta itemprop=wordCount content="2087"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,"><meta property="og:title" content="Python contextlib 库"><meta property="og:description" content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta property="og:type" content="article"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-08-02T00:00:00+00:00"><meta property="article:modified_time" content="2024-01-14T09:16:02+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python contextlib 库"><meta name=twitter:description content="contextlib 上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。 上下文管理器"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/python/basicgrammar/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/games/%E5%8D%9A%E5%BE%B7%E4%B9%8B%E9%97%A83/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python contextlib 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/contextlib\/"},"genre":"posts","keywords":"Python","wordcount":2087,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/contextlib\/","datePublished":"2023-08-02T00:00:00+00:00","dateModified":"2024-01-14T09:16:02+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
 <a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
 </a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
 </a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
@@ -7,16 +7,16 @@
 </a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
 </a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python contextlib 库</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
 MelonCholi</span></span>
-<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="0001-01-01 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>
-</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 2531 字&nbsp;
-<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#上下文管理器作为装饰器><strong>上下文管理器作为装饰器</strong></a></li><li><a href=#生成器函数转为上下文管理器><strong>生成器函数转为上下文管理器</strong></a></li><li><a href=#关闭打开的句柄><strong>关闭打开的句柄</strong></a></li><li><a href=#巧妙的回避错误><strong>巧妙的回避错误</strong></a></li><li><a href=#例子数据库的自动提交和回滚><strong>例子数据库的自动提交和回滚</strong></a></li></ul></nav></div></div><div class=content id=content><h1 id=contextlib>contextlib</h1><p>上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。</p><p>上下文管理器 (context manager) 是 Python2.5 开始支持的一种语法，用于规定某个对象的使用范围。一旦进入或者离开该使用范围，会有特殊操作被调用。它的语法形式是 with…as…，主要应用场景资源的创建和释放。例如，文件就支持上下文管理器，可以确保完成文件读写后关闭文件句柄。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2023-08-02 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-08-02>2023-08-02</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 2087 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#contextdecorator---作为装饰器使用上下文管理器>ContextDecorator - 作为装饰器使用上下文管理器</a></li><li><a href=#contextmanager---生成器函数转为上下文管理器>contextmanager - 生成器函数转为上下文管理器</a><ul><li><a href=#原理>原理</a></li></ul></li><li><a href=#closing---关闭打开的句柄>closing - 关闭打开的句柄</a></li><li><a href=#suppress---巧妙的回避错误>suppress - 巧妙的回避错误</a></li><li><a href=#例子数据库的自动提交和回滚>例子数据库的自动提交和回滚</a></li></ul></nav></div></div><div class=content id=content><h1 id=contextlib>contextlib</h1><p>上下文，简而言之，就是程式所执行的环境状态，或者说程式运行的情景。</p><p>上下文管理器 (context manager) 是 Python2.5 开始支持的一种语法，用于规定某个对象的使用范围。一旦进入或者离开该使用范围，会有特殊操作被调用。它的语法形式是 with…as…，主要应用场景资源的创建和释放。例如，文件就支持上下文管理器，可以确保完成文件读写后关闭文件句柄。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;password.txt&#39;</span><span class=p>,</span> <span class=s1>&#39;wt&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
 </span></span><span class=line><span class=cl>    <span class=n>f</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=s1>&#39;contents go here&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=c1># 文件会自动关闭</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=上下文管理器作为装饰器><strong>上下文管理器作为装饰器</strong></h2><p>通过继承 contextlib 里面的 ContextDecorator 类,实现对常规上下文管理器类的支持，其不仅可以作为上下文管理器，也可以作为函数修饰符。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><h2 id=contextdecorator---作为装饰器使用上下文管理器>ContextDecorator - 作为装饰器使用上下文管理器</h2><p>通过继承 contextlib 里面的 ContextDecorator 类，实现对常规上下文管理器类的支持，其不仅可以作为上下文管理器，也可以作为函数修饰符。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -43,6 +43,8 @@ MelonCholi</span></span>
 </span><span class=lnt>25
 </span><span class=lnt>26
 </span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>contextlib</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
@@ -63,6 +65,8 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=nd>@Context</span><span class=p>(</span><span class=s1>&#39;这是装饰器方式&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>func</span><span class=p>(</span><span class=n>message</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>message</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;---------------&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=n>func</span><span class=p>(</span><span class=s1>&#39;作为装饰器运行&#39;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
@@ -70,84 +74,7 @@ MelonCholi</span></span>
 </span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>-------华丽的分割线--------</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>Context</span><span class=p>(</span><span class=s1>&#39;上下文管理器方式&#39;</span><span class=p>):</span>
 </span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;emmmm&#39;</span><span class=p>)</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=生成器函数转为上下文管理器><strong>生成器函数转为上下文管理器</strong></h2><p>有时候我们的代码只有很少的上下文要管理，此时再使用上面的形式写出 with 相关的魔法函数
-就显得比较啰嗦了，在这种情况下，我们可以使用 contextmanager 修饰符将一个生成器转换为上下文管理器。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>import contextlib
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>@contextlib.contextmanager
-</span></span><span class=line><span class=cl>def make_context():
-</span></span><span class=line><span class=cl>    print(&#34;enter make_context&#34;)
-</span></span><span class=line><span class=cl>    try:
-</span></span><span class=line><span class=cl>        yield {}
-</span></span><span class=line><span class=cl>    except RuntimeError as err:
-</span></span><span class=line><span class=cl>        print(f&#34;{err=}&#34;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>print(&#34;Normal&#34;)
-</span></span><span class=line><span class=cl>with make_context() as value:
-</span></span><span class=line><span class=cl>    print(&#34;in with&#34;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>print(&#34;RuntimeError&#34;)
-</span></span><span class=line><span class=cl>with make_context() as value:
-</span></span><span class=line><span class=cl>    raise RuntimeError(&#34;runtimeerror&#34;)
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>print(&#34;Else Error&#34;)
-</span></span><span class=line><span class=cl>with make_context() as value:
-</span></span><span class=line><span class=cl>    raise ZeroDivisionError(&#34;0 不能作为分母&#34;)
-</span></span></code></pre></td></tr></table></div></div><p>输出结果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>enter make_context
-</span></span><span class=line><span class=cl>in with
-</span></span><span class=line><span class=cl>existing
-</span></span><span class=line><span class=cl>RuntimeError:
-</span></span><span class=line><span class=cl>enter make_context
-</span></span><span class=line><span class=cl>err=RuntimeError(&#39;runtimeerror&#39;)
-</span></span><span class=line><span class=cl>existing
-</span></span><span class=line><span class=cl>Else Error:
-</span></span><span class=line><span class=cl>enter make_context
-</span></span><span class=line><span class=cl>existing
-</span></span><span class=line><span class=cl>Traceback (most recent call last):
-</span></span><span class=line><span class=cl>  File &#34;demo.py&#34;, line 24, in &lt;module&gt;
-</span></span><span class=line><span class=cl>    raise ZeroDivisionError(&#34;0 不能作为除数&#34;)
-</span></span><span class=line><span class=cl>ZeroDivisionError: 0 不能作为除数
-</span></span></code></pre></td></tr></table></div></div><p>需要主要的是这个函数必须是个装饰器
-被装饰器装饰的函数分为三部分:
-with 语句中的代码块执行前执行函数中 yield 之前代码
-yield 返回的内容复制给 as 之后的变量
-with 代码块执行完毕后执行函数中 yield 之后的代码</p><p>再简单理解就是
-yield 前半段用来表示__enter__()
-yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模块中引入 contextmanager，然后装饰我们所定义的 make_context 函数。这就允许我们使用 Python 的 with 语句来调用 make_context 函数。在函数中通过 yield 一个空字典，将其传递出去，最终主调函数可以使用它。</p><p>一旦 with 语句结束，控制就会返回给 make_context 函数，它继续执行 yield 语句后面的代码,这个最终会执行 finally 语句打印 existing。如果我们遇到了 RuntimeError 错误，它就会被捕获，最终 finally 语句依然会打印 existing。</p><p>因为 contextmanager 继承自 ContextDecorator，所以也可以被用作函数修饰符</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span></code></pre></td></tr></table></div></div><img src=C:\Users\chenx\AppData\Roaming\Typora\typora-user-images\image-20231213165118061.png alt=image-20231213165118061 style=zoom:50%><h2 id=contextmanager---生成器函数转为上下文管理器>contextmanager - 生成器函数转为上下文管理器</h2><p>有时候我们的代码只有很少的上下文要管理，此时再使用上面的形式写出 with 相关的魔法函数就显得比较啰嗦了，在这种情况下，我们可以使用 contextmanager 修饰符将一个生成器转换为上下文管理器。</p><p>官方注释</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -170,30 +97,30 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span><span class=lnt>21
 </span><span class=lnt>22
 </span><span class=lnt>23
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>import contextlib
-</span></span><span class=line><span class=cl>@contextlib.contextmanager
-</span></span><span class=line><span class=cl>def make_context():
-</span></span><span class=line><span class=cl>    print(&#34;enter make_context&#34;)
-</span></span><span class=line><span class=cl>    try:
-</span></span><span class=line><span class=cl>        yield {}
-</span></span><span class=line><span class=cl>    except RuntimeError as err:
-</span></span><span class=line><span class=cl>        print(f&#34;{err=}&#34;)
-</span></span><span class=line><span class=cl>    finally:
-</span></span><span class=line><span class=cl>         print(&#34;existing&#34;)
-</span></span><span class=line><span class=cl>@make_context()
-</span></span><span class=line><span class=cl>def normal():
-</span></span><span class=line><span class=cl>    print(&#34;in normal&#34;)
-</span></span><span class=line><span class=cl>@make_context()
-</span></span><span class=line><span class=cl>def raise_error(err):
-</span></span><span class=line><span class=cl>   raise err
-</span></span><span class=line><span class=cl>if __name__ == &#39;__main__&#39;:
-</span></span><span class=line><span class=cl>    print(&#34;Normal:&#34;)
-</span></span><span class=line><span class=cl>    normal()
-</span></span><span class=line><span class=cl>    print(&#34;RuntimeError:&#34;)
-</span></span><span class=line><span class=cl>    raise_error(RuntimeError(&#34;runtime error&#34;))
-</span></span><span class=line><span class=cl>    print(&#34;Else Error&#34;)
-</span></span><span class=line><span class=cl>    raise_error(ValueError(&#34;value error&#34;))
-</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>Typical</span> <span class=n>usage</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nd>@contextmanager</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>some_generator</span><span class=p>(</span><span class=o>&lt;</span><span class=n>arguments</span><span class=o>&gt;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>yield</span> <span class=o>&lt;</span><span class=n>value</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=k>finally</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=o>&lt;</span><span class=n>cleanup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>This</span> <span class=n>makes</span> <span class=n>this</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>with</span> <span class=n>some_generator</span><span class=p>(</span><span class=o>&lt;</span><span class=n>arguments</span><span class=o>&gt;</span><span class=p>)</span> <span class=k>as</span> <span class=o>&lt;</span><span class=n>variable</span><span class=o>&gt;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>body</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>equivalent</span> <span class=n>to</span> <span class=n>this</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=o>&lt;</span><span class=n>setup</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>variable</span><span class=o>&gt;</span> <span class=o>=</span> <span class=o>&lt;</span><span class=n>value</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>body</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>    <span class=k>finally</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>&lt;</span><span class=n>cleanup</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>被装饰器装饰的函数分为三部分:</p><ul><li>with 语句中的代码块执行前，执行函数中 yield 之前代码</li><li>yield 返回的内容复制给 as 之后的变量</li><li>with 代码块执行完毕后，执行函数中 yield 之后的代码</li></ul><p>再简单理解就是</p><ul><li><strong>yield 前半段用来表示 <code>__enter__()</code></strong></li><li><strong>yield 后半段用来表示 <code>__exit__()</code></strong></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -212,28 +139,122 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span><span class=lnt>17
 </span><span class=lnt>18
 </span><span class=lnt>19
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>Normal:
-</span></span><span class=line><span class=cl>enter make_context
-</span></span><span class=line><span class=cl>in normal
-</span></span><span class=line><span class=cl>existing
-</span></span><span class=line><span class=cl>RuntimeError:
-</span></span><span class=line><span class=cl>enter make_context
-</span></span><span class=line><span class=cl>err=RuntimeError(&#39;runtime error&#39;)
-</span></span><span class=line><span class=cl>existing
-</span></span><span class=line><span class=cl>Else Error
-</span></span><span class=line><span class=cl>enter make_context
-</span></span><span class=line><span class=cl>existing
-</span></span><span class=line><span class=cl>Traceback (most recent call last):
-</span></span><span class=line><span class=cl>  File &#34;demo.py&#34;, line 33, in &lt;module&gt;
-</span></span><span class=line><span class=cl>    raise_error(ValueError(&#34;value error&#34;))
-</span></span><span class=line><span class=cl>  File &#34;/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/contextlib.py&#34;, line 75, in inner
-</span></span><span class=line><span class=cl>    return func(*args, **kwds)
-</span></span><span class=line><span class=cl>  File &#34;demo.py&#34;, line 21, in raise_error
-</span></span><span class=line><span class=cl>    raise err
-</span></span><span class=line><span class=cl>ValueError: value error
-</span></span></code></pre></td></tr></table></div></div><p>这是 contextmanager 原理：
-1、因为 func()已经是个生成器了嘛，所以运行<strong>enter__()的时候，contextmanager 调用 self.gen.next()会跑到 func 的 yield 处，停住挂起，这个时候已经有了 t1=time.time() 2、然后运行 with 语句体里面的语句，也就是 a+b=300 3、跑完后运行__exit</strong>()的时候，contextmanager 调用 self.gen.next()会从 func 的 yield 的下一句开始一直到结束。这个时候有了 t2=time.time()，t2-t1 从而实现了统计 cost_time 的效果，完美。
-源码</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>contextlib</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@contextlib.contextmanager</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>make_context</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;enter make_context&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>yield</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>    <span class=k>except</span> <span class=ne>RuntimeError</span> <span class=k>as</span> <span class=n>err</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>err</span><span class=si>=}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Normal&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>make_context</span><span class=p>()</span> <span class=k>as</span> <span class=n>value</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;in with&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=c1># Normal</span>
+</span></span><span class=line><span class=cl><span class=c1># enter make_context</span>
+</span></span><span class=line><span class=cl><span class=c1># in with</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;RuntimeError&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>make_context</span><span class=p>()</span> <span class=k>as</span> <span class=n>value</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>raise</span> <span class=ne>RuntimeError</span><span class=p>(</span><span class=s2>&#34;runtimeerror&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=c1># RuntimeError</span>
+</span></span><span class=line><span class=cl><span class=c1># enter make_context</span>
+</span></span><span class=line><span class=cl><span class=c1># err=RuntimeError(&#39;runtimeerror&#39;)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Else Error&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>make_context</span><span class=p>()</span> <span class=k>as</span> <span class=n>value</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>raise</span> <span class=ne>ZeroDivisionError</span><span class=p>(</span><span class=s2>&#34;0 不能作为分母&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=c1># Else Error</span>
+</span></span><span class=line><span class=cl><span class=c1># enter make_context</span>
+</span></span></code></pre></td></tr></table></div></div><p>因为 contextmanager 继承自 ContextDecorator，所以也可以被用作函数修饰符</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>contextlib</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@contextlib.contextmanager</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>make_context</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;enter make_context&#34;</span><span class=p>)</span>  <span class=c1># enter</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>yield</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>    <span class=k>except</span> <span class=ne>RuntimeError</span> <span class=k>as</span> <span class=n>err</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>err</span><span class=si>=}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>finally</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;existing&#34;</span><span class=p>)</span>  <span class=c1># exit</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@make_context</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>normal</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;in normal&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@make_context</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>raise_error</span><span class=p>(</span><span class=n>err</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>raise</span> <span class=n>err</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Normal:&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>normal</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;RuntimeError:&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>raise_error</span><span class=p>(</span><span class=ne>RuntimeError</span><span class=p>(</span><span class=s2>&#34;runtime error&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Else Error&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>raise_error</span><span class=p>(</span><span class=ne>ValueError</span><span class=p>(</span><span class=s2>&#34;value error&#34;</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=C:%5cUsers%5cchenx%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20231213171751340.png data-srcset="C:%5cUsers%5cchenx%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20231213171751340.png, C:%5cUsers%5cchenx%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20231213171751340.png 1.5x, C:%5cUsers%5cchenx%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20231213171751340.png 2x" data-sizes=auto alt=C:\Users\chenx\AppData\Roaming\Typora\typora-user-images\image-20231213171751340.png title=image-20231213171751340></p><h3 id=原理>原理</h3><ol><li><p>因为 func() 已经是个生成器了嘛，所以运行 <code>__enter__()</code> 的时候，contextmanager 调用 <code>self.gen.next()</code> 会跑到 func 的 yield 处，停住挂起</p></li><li><p>然后运行 with 语句体里面的语句</p></li><li><p>跑完后运行 <code>__exit__()</code> 的时候，contextmanager 调用 <code>self.gen.next()</code> 会从 func 的 yield 的下一句开始一直到结束。</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -273,49 +294,47 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span><span class=lnt>38
 </span><span class=lnt>39
 </span><span class=lnt>40
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>class GeneratorContextManager(object):
-</span></span><span class=line><span class=cl>    &#34;&#34;&#34;Helper for @contextmanager decorator.&#34;&#34;&#34;
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>GeneratorContextManager</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Helper for @contextmanager decorator.&#34;&#34;&#34;</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __init__(self, gen):
-</span></span><span class=line><span class=cl>        self.gen = gen
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>gen</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>gen</span> <span class=o>=</span> <span class=n>gen</span> <span class=c1># func</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __enter__(self):
-</span></span><span class=line><span class=cl>        try:
-</span></span><span class=line><span class=cl>            return self.gen.next()
-</span></span><span class=line><span class=cl>        except StopIteration:
-</span></span><span class=line><span class=cl>            raise RuntimeError(&#34;generator didn&#39;t yield&#34;)
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__enter__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>gen</span><span class=o>.</span><span class=n>next</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span> <span class=ne>StopIteration</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>RuntimeError</span><span class=p>(</span><span class=s2>&#34;generator didn&#39;t yield&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def __exit__(self, type, value, traceback):
-</span></span><span class=line><span class=cl>        if type is None:
-</span></span><span class=line><span class=cl>            try:
-</span></span><span class=line><span class=cl>                self.gen.next()
-</span></span><span class=line><span class=cl>            except StopIteration:
-</span></span><span class=line><span class=cl>                return
-</span></span><span class=line><span class=cl>            else:
-</span></span><span class=line><span class=cl>                raise RuntimeError(&#34;generator didn&#39;t stop&#34;)
-</span></span><span class=line><span class=cl>        else:
-</span></span><span class=line><span class=cl>            if value is None:
-</span></span><span class=line><span class=cl>                # Need to force instantiation so we can reliably
-</span></span><span class=line><span class=cl>                # tell if we get the same exception back
-</span></span><span class=line><span class=cl>                value = type()
-</span></span><span class=line><span class=cl>            try:
-</span></span><span class=line><span class=cl>                self.gen.throw(type, value, traceback)
-</span></span><span class=line><span class=cl>                raise RuntimeError(&#34;generator didn&#39;t stop after throw()&#34;)
-</span></span><span class=line><span class=cl>            except StopIteration, exc:
-</span></span><span class=line><span class=cl>                return exc is not value
-</span></span><span class=line><span class=cl>            except:
-</span></span><span class=line><span class=cl>                if sys.exc_info()[1] is not value:
-</span></span><span class=line><span class=cl>                    raise
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__exit__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=nb>type</span><span class=p>,</span> <span class=n>value</span><span class=p>,</span> <span class=n>traceback</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>type</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>gen</span><span class=o>.</span><span class=n>next</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=k>except</span> <span class=ne>StopIteration</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>raise</span> <span class=ne>RuntimeError</span><span class=p>(</span><span class=s2>&#34;generator didn&#39;t stop&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>value</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=c1># Need to force instantiation so we can reliably</span>
+</span></span><span class=line><span class=cl>                <span class=c1># tell if we get the same exception back</span>
+</span></span><span class=line><span class=cl>                <span class=n>value</span> <span class=o>=</span> <span class=nb>type</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>gen</span><span class=o>.</span><span class=n>throw</span><span class=p>(</span><span class=nb>type</span><span class=p>,</span> <span class=n>value</span><span class=p>,</span> <span class=n>traceback</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=k>raise</span> <span class=ne>RuntimeError</span><span class=p>(</span><span class=s2>&#34;generator didn&#39;t stop after throw()&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>except</span> <span class=ne>StopIteration</span><span class=p>,</span> <span class=n>exc</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=n>exc</span> <span class=ow>is</span> <span class=ow>not</span> <span class=n>value</span>
+</span></span><span class=line><span class=cl>            <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>sys</span><span class=o>.</span><span class=n>exc_info</span><span class=p>()[</span><span class=mi>1</span><span class=p>]</span> <span class=ow>is</span> <span class=ow>not</span> <span class=n>value</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=k>raise</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>def contextmanager(func):
-</span></span><span class=line><span class=cl>    @wraps(func)
-</span></span><span class=line><span class=cl>    def helper(*args, **kwds):
-</span></span><span class=line><span class=cl>        return GeneratorContextManager(func(*args, **kwds))
-</span></span><span class=line><span class=cl>    return helper
-</span></span></code></pre></td></tr></table></div></div><h2 id=关闭打开的句柄><strong>关闭打开的句柄</strong></h2><p>并不是所有的类都支持上下文管理器的 API，有一些遗留的类会使用一个 close 方法。
-为了确保关闭句柄，需要使用 closing 为他创建一个上文管理器。
-该模块主要是解决不能支持上下文管理器的类。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>contextmanager</span><span class=p>(</span><span class=n>func</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@wraps</span><span class=p>(</span><span class=n>func</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>helper</span><span class=p>(</span><span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwds</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>GeneratorContextManager</span><span class=p>(</span><span class=n>func</span><span class=p>(</span><span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwds</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>helper</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=closing---关闭打开的句柄>closing - 关闭打开的句柄</h2><p>并不是所有的类都支持上下文管理器的 API，有一些遗留的类会使用一个 close 方法。</p><p>为了确保关闭句柄，需要使用 closing 为他创建一个上文管理器。</p><p>该模块主要是解决不能支持上下文管理器的类。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -340,55 +359,32 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span><span class=lnt>23
 </span><span class=lnt>24
 </span><span class=lnt>25
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>import contextlib
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>contextlib</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>class Http():
-</span></span><span class=line><span class=cl>    def __init__(self):
-</span></span><span class=line><span class=cl>        print(&#34;int init:&#34;)
-</span></span><span class=line><span class=cl>        self.session = &#34;open&#34;
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Http</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;int init:&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>session</span> <span class=o>=</span> <span class=s2>&#34;open&#34;</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    def close(self):
-</span></span><span class=line><span class=cl>        &#34;&#34;&#34;
-</span></span><span class=line><span class=cl>        关闭的方法必须叫 close
-</span></span><span class=line><span class=cl>        &#34;&#34;&#34;
-</span></span><span class=line><span class=cl>        print(&#34;in close:&#34;)
-</span></span><span class=line><span class=cl>        self.session = &#34;close&#34;
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>close</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>        关闭的方法必须叫 close
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;in close:&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>session</span> <span class=o>=</span> <span class=s2>&#34;close&#34;</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>if __name__ == &#39;__main__&#39;:
-</span></span><span class=line><span class=cl>    with contextlib.closing(Http()) as http:
-</span></span><span class=line><span class=cl>        print(f&#34;inside session value:{http.session}&#34;)
-</span></span><span class=line><span class=cl>    print(f&#34;outside session value:{http.session}&#34;)
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>with</span> <span class=n>contextlib</span><span class=o>.</span><span class=n>closing</span><span class=p>(</span><span class=n>Http</span><span class=p>())</span> <span class=k>as</span> <span class=n>http</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;inside session value:</span><span class=si>{</span><span class=n>http</span><span class=o>.</span><span class=n>session</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;outside session value:</span><span class=si>{</span><span class=n>http</span><span class=o>.</span><span class=n>session</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    with contextlib.closing(Http()) as http:
-</span></span><span class=line><span class=cl>        print(f&#34;inside session value:{http.session}&#34;)
-</span></span><span class=line><span class=cl>        raise EnvironmentError(&#34;EnvironmentError&#34;)
-</span></span><span class=line><span class=cl>    print(f&#34;outside session value:{http.session}&#34;)
-</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>int init:
-</span></span><span class=line><span class=cl>inside session value:open
-</span></span><span class=line><span class=cl>in close:
-</span></span><span class=line><span class=cl>outside session value:close
-</span></span><span class=line><span class=cl>int init:
-</span></span><span class=line><span class=cl>inside session value:open
-</span></span><span class=line><span class=cl>in close:
-</span></span><span class=line><span class=cl>Traceback (most recent call last):
-</span></span><span class=line><span class=cl>  File &#34;demo.py&#34;, line 23, in &lt;module&gt;
-</span></span><span class=line><span class=cl>    raise EnvironmentError(&#34;EnvironmentError&#34;)
-</span></span><span class=line><span class=cl>OSError: EnvironmentError
-</span></span></code></pre></td></tr></table></div></div><p>可以看到即使程序出现了错误，最后也会执行 close 方法的内容。
-看一眼下面的源码就知道 closing 干嘛了</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></span><span class=line><span class=cl>    <span class=k>with</span> <span class=n>contextlib</span><span class=o>.</span><span class=n>closing</span><span class=p>(</span><span class=n>Http</span><span class=p>())</span> <span class=k>as</span> <span class=n>http</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;inside session value:</span><span class=si>{</span><span class=n>http</span><span class=o>.</span><span class=n>session</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>EnvironmentError</span><span class=p>(</span><span class=s2>&#34;EnvironmentError&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;outside session value:</span><span class=si>{</span><span class=n>http</span><span class=o>.</span><span class=n>session</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=C:\Users\chenx\AppData\Roaming\Typora\typora-user-images\image-20231213173150856.png alt=image-20231213173150856 style=zoom:50%><p>可以看到即使程序出现了错误，最后也会执行 close 方法的内容。</p><p>看一眼下面的源码就知道 closing 干嘛了</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -406,50 +402,51 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span><span class=lnt>16
 </span><span class=lnt>17
 </span><span class=lnt>18
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>class closing(object):
-</span></span><span class=line><span class=cl>    &#34;&#34;&#34;Context to automatically close something at the end of a block.
-</span></span><span class=line><span class=cl>    Code like this:
-</span></span><span class=line><span class=cl>        with closing(&lt;module&gt;.open(&lt;arguments&gt;)) as f:
-</span></span><span class=line><span class=cl>            &lt;block&gt;
-</span></span><span class=line><span class=cl>    is equivalent to this:
-</span></span><span class=line><span class=cl>        f = &lt;module&gt;.open(&lt;arguments&gt;)
-</span></span><span class=line><span class=cl>        try:
-</span></span><span class=line><span class=cl>            &lt;block&gt;
-</span></span><span class=line><span class=cl>        finally:
-</span></span><span class=line><span class=cl>            f.close()
-</span></span><span class=line><span class=cl>    &#34;&#34;&#34;
-</span></span><span class=line><span class=cl>    def __init__(self, thing):
-</span></span><span class=line><span class=cl>        self.thing = thing
-</span></span><span class=line><span class=cl>    def __enter__(self):
-</span></span><span class=line><span class=cl>        return self.thing
-</span></span><span class=line><span class=cl>    def __exit__(self, *exc_info):
-</span></span><span class=line><span class=cl>       self.thing.close()
-</span></span></code></pre></td></tr></table></div></div><p>这个 contextlib.closing()会帮它加上__enter__()和__exit__()，使其满足 with 的条件。然后 exit 里执行的就是对应类的 close 方法。</p><h2 id=巧妙的回避错误><strong>巧妙的回避错误</strong></h2><p>contextlib.suppress(*exceptions)
-另一个工具就是在 Python 3.4 中加入的 suppress 类。这个上下文管理工具背后的理念就是它可以禁止任意数目的异常。假如我们想忽略 FileNotFoundError 异常。如果你书写了如下的上下文管理器，那么它不会正常运行。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>closing</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Context to automatically close something at the end of a block.
+</span></span></span><span class=line><span class=cl><span class=s2>    Code like this:
+</span></span></span><span class=line><span class=cl><span class=s2>        with closing(&lt;module&gt;.open(&lt;arguments&gt;)) as f:
+</span></span></span><span class=line><span class=cl><span class=s2>            &lt;block&gt;
+</span></span></span><span class=line><span class=cl><span class=s2>    is equivalent to this:
+</span></span></span><span class=line><span class=cl><span class=s2>        f = &lt;module&gt;.open(&lt;arguments&gt;)
+</span></span></span><span class=line><span class=cl><span class=s2>        try:
+</span></span></span><span class=line><span class=cl><span class=s2>            &lt;block&gt;
+</span></span></span><span class=line><span class=cl><span class=s2>        finally:
+</span></span></span><span class=line><span class=cl><span class=s2>            f.close()
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>thing</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>thing</span> <span class=o>=</span> <span class=n>thing</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__enter__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>thing</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__exit__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=o>*</span><span class=n>exc_info</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>       <span class=bp>self</span><span class=o>.</span><span class=n>thing</span><span class=o>.</span><span class=n>close</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个 <code>contextlib.closing()</code> 会帮它加上 <code>__enter__()</code> 和 <code>__exit__()</code>，使其满足 with 的条件。然后 exit 里执行的就是对应类的 close 方法。</p><h2 id=suppress---巧妙的回避错误>suppress - 巧妙的回避错误</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>contextlib</span><span class=o>.</span><span class=n>suppress</span><span class=p>(</span><span class=o>*</span><span class=n>exceptions</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>另一个工具就是在 Python 3.4 中加入的 suppress 类。这个上下文管理工具背后的理念就是它可以<strong>禁止任意数目的异常</strong>。</p><p>假如我们想忽略 FileNotFoundError 异常。如果你书写了如下的上下文管理器，那么它不会正常运行。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
 </span><span class=lnt>6
 </span><span class=lnt>7
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>&gt;&gt;&gt; with open(&#34;1.txt&#34;) as fobj:
-</span></span><span class=line><span class=cl>...     for line in fobj:
-</span></span><span class=line><span class=cl>...         print(line)
-</span></span><span class=line><span class=cl>...
-</span></span><span class=line><span class=cl>Traceback (most recent call last):
-</span></span><span class=line><span class=cl>  File &#34;&lt;stdin&gt;&#34;, line 1, in &lt;module&gt;
-</span></span><span class=line><span class=cl>FileNotFoundError: [Errno 2] No such file or directory: &#39;1.txt&#39;
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s2>&#34;1.txt&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>fobj</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=k>for</span> <span class=n>line</span> <span class=ow>in</span> <span class=n>fobj</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=nb>print</span><span class=p>(</span><span class=n>line</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Traceback</span> <span class=p>(</span><span class=n>most</span> <span class=n>recent</span> <span class=n>call</span> <span class=n>last</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>  <span class=n>File</span> <span class=s2>&#34;&lt;stdin&gt;&#34;</span><span class=p>,</span> <span class=n>line</span> <span class=mi>1</span><span class=p>,</span> <span class=ow>in</span> <span class=o>&lt;</span><span class=n>module</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=ne>FileNotFoundError</span><span class=p>:</span> <span class=p>[</span><span class=n>Errno</span> <span class=mi>2</span><span class=p>]</span> <span class=n>No</span> <span class=n>such</span> <span class=n>file</span> <span class=ow>or</span> <span class=n>directory</span><span class=p>:</span> <span class=s1>&#39;1.txt&#39;</span>
 </span></span></code></pre></td></tr></table></div></div><p>正如你所看到的，这个上下文管理器没有处理这个异常，如果你想忽略这个错误，你可以按照如下方式来做，</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
 </span><span class=lnt>5
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>&gt;&gt;&gt; from contextlib import suppress
-</span></span><span class=line><span class=cl>&gt;&gt;&gt; with suppress(FileNotFoundError):
-</span></span><span class=line><span class=cl>...     with open(&#34;1.txt&#34;) as fobj:
-</span></span><span class=line><span class=cl>...         for line in fobj:
-</span></span><span class=line><span class=cl>...             print(line)
-</span></span></code></pre></td></tr></table></div></div><p>在这段代码中，我们引入 suppress，然后将我们要忽略的异常传递给它，在这个例子中，就是 FileNotFoundError。如果你想运行这段代码，你将会注意到，文件不存在时，什么事情都没有发生，也没有错误被抛出。请注意，这个上下文管理器是可重用的。</p><h2 id=例子数据库的自动提交和回滚><strong>例子数据库的自动提交和回滚</strong></h2><p>在编程中如果频繁的修改数据库, 一味的使用类似 try:… except..: rollback() raise e 其实是不太好的.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>contextlib</span> <span class=kn>import</span> <span class=n>suppress</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>with</span> <span class=n>suppress</span><span class=p>(</span><span class=ne>FileNotFoundError</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=s2>&#34;1.txt&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>fobj</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=k>for</span> <span class=n>line</span> <span class=ow>in</span> <span class=n>fobj</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>             <span class=nb>print</span><span class=p>(</span><span class=n>line</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>在这段代码中，我们引入 suppress，然后将我们要忽略的异常传递给它，在这个例子中，就是 FileNotFoundError。如果你想运行这段代码，你将会注意到，文件不存在时，什么事情都没有发生，也没有错误被抛出。请注意，这个上下文管理器是可重用的。</p><h2 id=例子数据库的自动提交和回滚>例子数据库的自动提交和回滚</h2><p>在编程中如果频繁的修改数据库，一味的使用类似 <code>try:… except..: rollback() raise e</code> 其实是不太好的.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -458,15 +455,15 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>   try:
-</span></span><span class=line><span class=cl>        gift = Gift()
-</span></span><span class=line><span class=cl>        gift.isbn = isbn
-</span></span><span class=line><span class=cl>        ... 
-</span></span><span class=line><span class=cl>        db.session.add(gift)
-</span></span><span class=line><span class=cl>        db.session.commit()
-</span></span><span class=line><span class=cl>    except Exception as e:
-</span></span><span class=line><span class=cl>        db.session.rollback()
-</span></span><span class=line><span class=cl>        raise e
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>gift</span> <span class=o>=</span> <span class=n>Gift</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>gift</span><span class=o>.</span><span class=n>isbn</span> <span class=o>=</span> <span class=n>isbn</span>
+</span></span><span class=line><span class=cl>    <span class=o>...</span> 
+</span></span><span class=line><span class=cl>    <span class=n>db</span><span class=o>.</span><span class=n>session</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>gift</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>db</span><span class=o>.</span><span class=n>session</span><span class=o>.</span><span class=n>commit</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>db</span><span class=o>.</span><span class=n>session</span><span class=o>.</span><span class=n>rollback</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>raise</span> <span class=n>e</span>
 </span></span></code></pre></td></tr></table></div></div><p>为了达到使用 with 语句的目的, 我们可以重写 db 所属的类:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
@@ -477,16 +474,20 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span><span class=lnt> 8
 </span><span class=lnt> 9
 </span><span class=lnt>10
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>from flask_sqlalchemy import SQLAlchemy as _SQLALchemy
-</span></span><span class=line><span class=cl>class SQLAlchemy(_SQLALchemy):
-</span></span><span class=line><span class=cl>    @contextmanager
-</span></span><span class=line><span class=cl>    def auto_commit(self):
-</span></span><span class=line><span class=cl>        try:
-</span></span><span class=line><span class=cl>            yield
-</span></span><span class=line><span class=cl>            self.session.commit()
-</span></span><span class=line><span class=cl>        except Exception as e:
-</span></span><span class=line><span class=cl>            db.session.rollback()
-</span></span><span class=line><span class=cl>            raise e
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>from</span> <span class=nn>flask_sqlalchemy</span> <span class=kn>import</span> <span class=n>SQLAlchemy</span> <span class=k>as</span> <span class=n>_SQLALchemy</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>SQLAlchemy</span><span class=p>(</span><span class=n>_SQLALchemy</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@contextmanager</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>auto_commit</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>yield</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>session</span><span class=o>.</span><span class=n>commit</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>db</span><span class=o>.</span><span class=n>session</span><span class=o>.</span><span class=n>rollback</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=n>e</span>
 </span></span></code></pre></td></tr></table></div></div><p>这时候, 在执行数据的修改的时候便可以:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
@@ -496,18 +497,18 @@ yield 后半段用来表示__exit__()</p><p>在这里，我们从 contextlib 模
 </span><span class=lnt>7
 </span><span class=lnt>8
 </span><span class=lnt>9
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl> with db.auto_commit():
-</span></span><span class=line><span class=cl>        gift = Gift()
-</span></span><span class=line><span class=cl>        gift.isbn = isbndb.session.add(gift)
-</span></span><span class=line><span class=cl>        db.session.add(gift)
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>with</span> <span class=n>db</span><span class=o>.</span><span class=n>auto_commit</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>gift</span> <span class=o>=</span> <span class=n>Gift</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>gift</span><span class=o>.</span><span class=n>isbn</span> <span class=o>=</span> <span class=n>isbndb</span><span class=o>.</span><span class=n>session</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>gift</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>db</span><span class=o>.</span><span class=n>session</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>gift</span><span class=p>)</span>
 </span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>with db.auto_commit():
-</span></span><span class=line><span class=cl>    user = User()
-</span></span><span class=line><span class=cl>    user.set_attrs(form.data)
-</span></span><span class=line><span class=cl>    db.session.add(user)
-</span></span></code></pre></td></tr></table></div></div><p>上下文管理器很有趣，也很方便。我经常在自动测试中使用它们，例如，打开和关闭对话。现在，你应该可以使用 Python 内置的工具去创建你的上下文管理器。你还可以继续阅读 Python 关于 contextlib 的文档，那里有很多本文没有覆盖到的知识。</p><p>这篇文章其实主要为了后面的异步上文管理器使用的。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2023-12-10 13:54:05">更新于 2023-12-10</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/ data-title="Python contextlib 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>db</span><span class=o>.</span><span class=n>auto_commit</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>user</span><span class=o>.</span><span class=n>set_attrs</span><span class=p>(</span><span class=n>form</span><span class=o>.</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>db</span><span class=o>.</span><span class=n>session</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>上下文管理器很有趣，也很方便。我经常在自动测试中使用它们，例如，打开和关闭对话。现在，你应该可以使用 Python 内置的工具去创建你的上下文管理器。你还可以继续阅读 Python 关于 contextlib 的文档，那里有很多本文没有覆盖到的知识。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-01-14 09:16:02">更新于 2024-01-14</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/ data-title="Python contextlib 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
 <a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
-<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/ data-title="Python contextlib 库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/dramatiq/ class=prev rel=prev title="Python dramatiq 库"><i class="fa-solid fa-angle-left fa-fw"></i>Python dramatiq 库</a>
-<a href=/Notes/posts/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/celery/ class=next rel=next title="Python celery 库">Python celery 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
-<span itemprop=copyrightYear>2022 - 2023</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/python/%E6%A0%87%E5%87%86%E5%BA%93/contextlib/ data-title="Python contextlib 库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/python/basicgrammar/ class=prev rel=prev title="Python 基础语法"><i class="fa-solid fa-angle-left fa-fw"></i>Python 基础语法</a>
+<a href=/Notes/posts/games/%E5%8D%9A%E5%BE%B7%E4%B9%8B%E9%97%A83/ class=next rel=next title="博德之门 3">博德之门 3<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
 </a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
