@@ -1,5 +1,5 @@
 ---
-title: "Building Linux Development Environment from Scratch"
+title: "从零开始构建 Linux 开发环境"
 date: 2023-09-20
 author: MelonCholi
 draft: false
@@ -7,9 +7,43 @@ tags: [Linux]
 categories: [Linux]
 ---
 
-# Building Linux Development Environment from Scratch
+# 从零开始构建 Linux 开发环境
 
 我的 Linux 配置
+
+## 一些常用文件的默认位置
+
+zsh 配置文件：`~/.zshrc`
+
+vscode server：`~/.vscode-server`
+
+## 客户端配置 SSH 免密登录
+
+在客户端 `.ssh` 目录中，打开 bash 配置私钥
+
+```shell
+ssh-keygen
+```
+
+将客户端的公钥放到服务端上
+
+```sh
+cat ~/.ssh/id_rsa.pub | ssh username@ip 'cat >> ~/.ssh/authorized_keys'
+```
+
+:star: 用 `ssh-copy-id` 命令更方便
+
+```shell
+ssh-copy-id username@ip 
+```
+
+此时，客户端的公钥会被添加到远程服务器上的 `~/.ssh/authorized_keys` 文件中
+
+然后就可以使用私钥登录啦~
+
+```shell
+ssh username@ip [-p port] -i id_rsa
+```
 
 ## Windows Terminal 配置
 
@@ -75,6 +109,8 @@ sudo apt install build-essential
 ```sh
 # 查看系统当前使用的shell
 echo $SHELL
+# 如果没有zsh，那就下一个！
+sudo apt-get install zsh
 # 设置默认zsh
 chsh -s /bin/zsh
 ```
@@ -94,8 +130,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 > https://github.com/romkatv/powerlevel10k#installation
 
 ```sh
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.opt/powerlevel10k
+echo 'source ~/.opt/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 ```
 
 `source ~/.zshrc`，就会进入 P10k 的配置界面
@@ -122,6 +158,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export PATH=$PATH:~/.local/bin/
 
 # ZSH_THEME="random"
 
@@ -144,7 +181,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-
 alias :vrc="vi ~/.zshrc"
 alias :src="source ~/.zshrc"
 alias -s ttt='tar zxvf'
@@ -158,17 +194,68 @@ bindkey '^N' history-substring-search-down
 # 让 history 命令显示时间
 HIST_STAMPS="yyyy-mm-dd"
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+source ~/.opt/powerlevel10k/powerlevel10k.zsh-theme
 ```
 
 此配置文件会根据文档的进展而逐渐完善
+
+### 一些插件的下载
+
+zsh-autosuggestions
+
+```sh
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+zsh-syntax-highlighting
+
+```sh
+sudo apt install zsh-syntax-highlighting
+cd ~/.opt
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+```
+
+## git 配置
+
+ssh-keygen 一下叭
+
+```sh
+cd ~/.ssh
+ssh-keygen -t rsa
+```
+
+将 `id_rsa.pub` 公钥内容，添加到 github 之类的托管平台上
+
+设置名字，邮箱
+
+```sh
+git config --global user.name "Your Name"
+git config --global user.email "email@example.com"
+```
+
+### 使用 LazyVim 配置 Vim
+
+#### 安装 NeoVim
+
+```sh
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+```
+
+#### 使用个人配置
+
+```sh
+git clone git@github.com:Trouvaille0198/neovim-config.git ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+```
+
+运行 `vi`，等待插件下载完成
+
+#### 添加 snippets
 
 ## 工具安装
 
@@ -195,7 +282,7 @@ mkdir -p ~/.local/bin
 ln -s /usr/bin/batcat ~/.local/bin/bat
 ```
 
-> 一切的软连接都装在 ~/.local
+> **一切的软链接都装在 ~/.local**
 
 并在配置中添加
 
@@ -249,7 +336,7 @@ sudo apt install bashtop
 sudo apt install net-tools
 ```
 
-## cheat
+### cheat
 
 一本常用命令说明书：https://github.com/cheat/cheat
 
@@ -273,6 +360,26 @@ cd ~/.opt \
 
 ```sh
 sudo apt install unzip
+sudo apt install build-essential # gcc etc
+sudo apt install libedit-dev liblzma-dev libreadline-dev libffi-dev
+sudo apt install zlib1g zlib1g-dev libssl-dev libbz2-dev libsqlite3-dev
+```
+
+## Vim 配置
+
+### 安装 NeoVim
+
+```sh
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt-get update
+sudo apt-get install neovim
+```
+
+在 `~/.zshrc` 中添加别名，以替换默认的 vim 命令
+
+```sh
+alias vim='nvim'
+alias vi='nvim'
 ```
 
 ## 编程环境配置
@@ -299,8 +406,15 @@ echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 安装 / 卸载任意版本
 
 ```sh
+pyenv install --list # 查看版本
 pyenv install <version-name>
 pyenv uninstall <version-name>
+```
+
+如果下的太慢，就用镜像把源码下到缓存目录：
+
+```sh
+export v=3.12.1; wget https://npm.taobao.org/mirrors/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/; pyenv install $v 
 ```
 
 #### 安装 pyenv-virtualenvwrapper
@@ -317,8 +431,6 @@ git clone https://github.com/pyenv/pyenv-virtualenvwrapper.git $(pyenv root)/plu
 alias pv='pyenv virtualenvwrapper'
 ```
 
-
-
 ### Go
 
 #### 安装
@@ -331,24 +443,24 @@ alias pv='pyenv virtualenvwrapper'
 
 ```sh
 # 查看linux多少位
-[root@pyyuc /opt 21:59:02]# uname -m
-x86_64
+uname -m
+# x86_64
 ```
 
 > 之后所有的软件都安装在 `~/.opt/`（而非 `/opt/`，主要考虑到用户隔离）
 
 ```sh
-mkdir ~/.opt
 cd ~/.opt
-sudo wget https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz
-sudo tar -zxvf go1.18.3.linux-amd64.tar.gz
+sudo wget https://golang.google.cn/dl/go1.21.6.linux-amd64.tar.gz
+sudo tar -zxvf go1.21.6.linux-amd64.tar.gz
 ```
 
 给予权限
 
 ```sh
+mkdir gocode
 sudo chmod -R 777 go/
-sudo chmod -R 777 gocode/ # gocode 会在后面生成
+sudo chmod -R 777 gocode/
 ```
 
 #### 配置环境变量
@@ -403,8 +515,8 @@ tar xvf node-v18.12.1-linux-x64.tar.xz
 创建软链接
 
 ```sh
-sudo ln -s ~/download/node-v18.12.1-linux-x64/bin/node ~/.opt/bin/node
-sudo ln -s ~/download/node-v18.12.1-linux-x64/bin/npm ~/.opt/bin/npm
+sudo ln -s ~/.opt/node-v18.12.1-linux-x64/bin/node ~/.local/bin/node
+sudo ln -s ~/.opt/node-v18.12.1-linux-x64/bin/npm ~/.local/bin/npm
 ```
 
 ### Docker
@@ -427,7 +539,7 @@ curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --de
 
 
 # 官方源
-# $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 ```
 
 然后，我们需要向 `sources.list` 中添加 Docker 软件源
@@ -451,27 +563,137 @@ echo \
 ```sh
 sudo apt-get update
 
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-
-
-## Vim 配置
-
-### 安装 NeoVim
-
-### 安装 NeoVide
-
-> [Installation - Neovide](https://neovide.dev/installation.html)
+安装 docker-compose（最新版本去[仓库](https://github.com/docker/compose/releases/)看）
 
 ```sh
-snap install neovide
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.1/docker-compose-$(uname -s)-$(uname -m)" -o ~/.local/bin/docker-compose
+sudo chmod +x ~/.local/bin/docker-compose
 ```
 
-### 使用 LazyVim 配置 Vim
+修改设置（限制日志容量上限、启用 IPv6 等）
 
-#### 添加 snippets
+```sh
+cat > /etc/docker/daemon.json <<EOF
+{
+    "log-driver": "json-file",
+    "log-opts": {
+        "max-size": "20m",
+        "max-file": "3"
+    },
+    "ipv6": true,
+    "fixed-cidr-v6": "fd00:dead:beef:c0::/80",
+    "experimental":true,
+    "ip6tables":true
+}
+EOF
+```
 
-## git 配置
+## （可选）设置 swap 分区
+
+查看 Linux 当前分区情况：
+
+```text
+free -m
+```
+
+如果是增加 swap 分区，则先把当前所有分区都关闭了：
+
+```text
+swapoff -a
+```
+
+创建要作为 Swap 分区文件（其中 `/var/swapfile` 是文件位置，`bs*count` 是文件大小，例如以下命令就会创建一个 4G 的文件）：
+
+```text
+dd if=/dev/zero of=/var/swapfile bs=1M count=4096
+```
+
+建立 Swap 的文件系统（格式化为 Swap 分区文件）：
+
+```text
+mkswap /var/swapfile
+```
+
+启用 Swap 分区：
+
+```text
+swapon /var/swapfile
+```
+
+设置开启启动。在 /etc/fstab 文件中加入一行代码：
+
+```text
+/var/swapfile swap swap defaults 0 0
+```
 
 ## 最终的 `.zshrc`
+
+```sh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+export PATH=$PATH:~/.local/bin/
+export GOROOT=~/.opt/go           # Golang 源代码目录，安装目录
+export GOPATH=~/.opt/gocode       # Golang 项目代码目录
+export GOBIN=$GOPATH/bin          # go install 后生成的可执行命令存放路径
+
+export PATH=$GOROOT/bin:$GOBIN:$PATH    # Linux 环境变量
+# ZSH_THEME="random"
+
+plugins=(
+    git
+    extract
+    rand-quote
+    themes
+    z
+    per-directory-history
+    history-substring-search
+    command-not-found
+    safe-paste
+    colored-man-pages
+    sudo
+    zsh-autosuggestions
+    #  history
+    zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+
+alias :vrc="vi ~/.zshrc"
+alias :src="source ~/.zshrc"
+alias -s ttt='tar zxvf'
+alias cp="cp -i" # 防止 copy 的时候覆盖已存在的文件, 带上 i 选项，文件已存在的时候，会提示，需要确认才能 copy
+alias gcm='git checkout master'
+alias cat='batcat'
+alias ls='exa'
+alias vim='nvim'
+alias vi='nvim'
+alias pv='pyenv virtualenvwrapper'
+
+# 以自己输入的所有内容为前缀，进行历史查找
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+# 让 history 命令显示时间
+HIST_STAMPS="yyyy-mm-dd"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source ~/.opt/powerlevel10k/powerlevel10k.zsh-theme
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+```
+

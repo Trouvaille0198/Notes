@@ -5,12 +5,12 @@ draft: false
 author: "MelonCholi"
 tags: []
 categories: [Golang]
-featuredImage: https://booklovinmamas.com/wp-content/uploads/2017/09/go.png
+featuredImage: https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png
 ---
 
 # Golang 基础语法
 
-![img](https://booklovinmamas.com/wp-content/uploads/2017/09/go.png)
+<img src="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/2048px-Go_gopher_favicon.svg.png" alt="File:Go gopher favicon.svg - Wikimedia Commons" style="zoom:23%;" />
 
 - Go is an open source programming language supported by Google
 - Easy to learn and get started with

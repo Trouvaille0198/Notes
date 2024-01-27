@@ -182,10 +182,6 @@ MesloLGM NF
  }
 ```
 
-### ssh 实现免密登录
-
-
-
 ## 插件
 
 ### autojump
