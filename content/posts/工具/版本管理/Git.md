@@ -625,6 +625,12 @@ stage    stash    status
 - 改变当前分支从 `master` 上拉出分支的位置
 - **没有多余的合并历史的记录**，且合并后的 `commit` 顺序不一定按照 `commit` 的提交时间排列，同一个`commit`的 SHA 值会发生变化
 
+默认设置 rebase 开启：
+
+```sh
+git config pull.rebase true
+```
+
 ### 例子
 
 **假设现在有基于远程分支“origin/master”，更新至本地最新“master”，创建一个叫“feature/mywork”的分支**进行说明

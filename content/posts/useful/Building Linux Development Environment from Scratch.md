@@ -56,6 +56,14 @@ https://www.nerdfonts.com/font-downloads 随便挑
 - CaskaydiaCove Nerd Font Mono（或者叫 CaskaydiaCove NFM）
 - Hack Nerd Font，选 HackNerdFontMono-Regular.ttf
 
+```sh
+mkdir -p ~/dockers/data/wallabag/ && 
+docker run -d --name wallabag wallabag/wallabag &&
+docker cp wallabag:/var/www/wallabag/data ~/dockers/data/wallabag/ &&
+docker rm -f wallabag && \
+chmod -R 777 ~/dockers/data/wallabag/data/db
+```
+
 ## 网络配置
 
 > 可选，未经验证！
@@ -431,6 +439,8 @@ git clone https://github.com/pyenv/pyenv-virtualenvwrapper.git $(pyenv root)/plu
 alias pv='pyenv virtualenvwrapper'
 ```
 
+
+
 ### Go
 
 #### 安装
@@ -627,6 +637,46 @@ swapon /var/swapfile
 
 ```text
 /var/swapfile swap swap defaults 0 0
+```
+
+### Code-Server
+
+可以在浏览器中编辑代码
+
+安装
+
+```sh
+curl -fsSL https://code-server.dev/install.sh | sh
+```
+
+To have systemd start code-server now and restart on boot:
+
+```sh
+sudo systemctl enable --now code-server@$USER
+```
+
+Or, if you don't want/need a background service you can run:
+
+```sh
+code-server
+```
+
+修改配置
+
+```sh
+vi ~/.config/code-server/config.yaml 
+```
+
+开启
+
+```sh
+sudo systemctl restart code-server@$USER
+```
+
+查看进程状态
+
+```sh
+sudo systemctl status --now code-server@$USER
 ```
 
 ## 最终的 `.zshrc`
