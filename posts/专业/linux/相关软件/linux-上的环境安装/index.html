@@ -1,0 +1,378 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>Linux 上的环境安装 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="环境安装 端口无法访问的解决方案： 设置安全组 1 iptables -I INPUT -p tcp --dport <port> -j ACCEPT 更换 apt 源 详见：ht"><meta name=keywords content='Linux,快速入门'><meta itemprop=name content="Linux 上的环境安装"><meta itemprop=description content="环境安装 端口无法访问的解决方案： 设置安全组 1 iptables -I INPUT -p tcp --dport <port> -j ACCEPT 更换 apt 源 详见：ht"><meta itemprop=datePublished content="2021-10-23T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="3263"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Linux,快速入门"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/linux-%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="Linux 上的环境安装"><meta property="og:description" content="环境安装 端口无法访问的解决方案： 设置安全组 1 iptables -I INPUT -p tcp --dport <port> -j ACCEPT 更换 apt 源 详见：ht"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-10-23T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Linux"><meta property="article:tag" content="快速入门"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Linux 上的环境安装"><meta name=twitter:description content="环境安装 端口无法访问的解决方案： 设置安全组 1 iptables -I INPUT -p tcp --dport <port> -j ACCEPT 更换 apt 源 详见：ht"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/linux-%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E8%BD%AF%E4%BB%B6%E6%93%8D%E4%BD%9C/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux 上的环境安装","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/linux\/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6\/linux-%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85\/"},"genre":"posts","keywords":"Linux, 快速入门","wordcount":3263,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/linux\/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6\/linux-%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Linux 上的环境安装</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/linux/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Linux</a></span></div><div class=post-meta-line><span title="2021-10-23 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 3263 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#更换-apt-源>更换 apt 源</a></li><li><a href=#小工具安装>小工具安装</a><ul><li><a href=#7z>7z</a></li><li><a href=#bashtopbtop>bashtop/btop</a></li><li><a href=#ifconfig>ifconfig</a></li><li><a href=#bat>bat</a></li></ul></li><li><a href=#nodejs>Node.js</a></li><li><a href=#go>Go</a><ul><li><a href=#安装>安装</a></li><li><a href=#配置环境变量>配置环境变量</a></li><li><a href=#其他>其他</a></li></ul></li><li><a href=#python>Python</a><ul><li><a href=#使用-pyenv-来实现多版本安装推荐>使用 pyenv 来实现多版本安装（推荐）</a><ul><li><a href=#与-pyenv-virtualenvwrapper-配合使用>与 pyenv-virtualenvwrapper 配合使用</a></li></ul></li><li><a href=#miniconda>Miniconda</a></li><li><a href=#官网>官网</a><ul><li><a href=#apt>apt</a></li><li><a href=#编译安装>编译安装</a><ul><li><a href=#安装相关依赖>安装相关依赖</a></li><li><a href=#选择安装包>选择安装包</a></li><li><a href=#配置>配置</a></li><li><a href=#编译>编译</a></li><li><a href=#安装-1>安装</a></li><li><a href=#链接动态库>链接动态库</a></li><li><a href=#使用-python-311>使用 Python 3.11</a></li><li><a href=#建立软链接>建立软链接</a></li></ul></li></ul></li></ul></li><li><a href=#docker>Docker</a></li></ul></nav></div></div><div class=content id=content><h1 id=环境安装>环境安装</h1><p>端口无法访问的解决方案：</p><ol><li><p>设置安全组</p></li><li><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl> iptables -I INPUT -p tcp --dport &lt;port&gt; -j ACCEPT
+</span></span></code></pre></td></tr></table></div></div></li></ol><h2 id=更换-apt-源>更换 apt 源</h2><p>详见：https://blog.csdn.net/wangyijieonline/article/details/105360138</p><p>模板</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>Fdeb https://mirrors.aliyun.com/ubuntu/ TODO main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src https://mirrors.aliyun.com/ubuntu/ TODO main restricted universe multiverse
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>deb https://mirrors.aliyun.com/ubuntu/ TODO-security main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src https://mirrors.aliyun.com/ubuntu/ TODO-security main restricted universe multiverse
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>deb https://mirrors.aliyun.com/ubuntu/ TODO-updates main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src https://mirrors.aliyun.com/ubuntu/ TODO-updates main restricted universe multiverse
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>deb https://mirrors.aliyun.com/ubuntu/ TODO-proposed main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src https://mirrors.aliyun.com/ubuntu/ TODO-proposed main restricted universe multiverse
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>deb https://mirrors.aliyun.com/ubuntu/ TODO-backports main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src https://mirrors.aliyun.com/ubuntu/ TODO-backports main restricted universe multiverse
+</span></span></code></pre></td></tr></table></div></div><p>原来的文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to</span>
+</span></span><span class=line><span class=cl><span class=c1># newer versions of the distribution.</span>
+</span></span><span class=line><span class=cl>deb http://archive.ubuntu.com/ubuntu/ jammy main restricted
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://archive.ubuntu.com/ubuntu/ jammy main restricted</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>## Major bug fix updates produced after the final release of the</span>
+</span></span><span class=line><span class=cl><span class=c1>## distribution.</span>
+</span></span><span class=line><span class=cl>deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu</span>
+</span></span><span class=line><span class=cl><span class=c1>## team. Also, please note that software in universe WILL NOT receive any</span>
+</span></span><span class=line><span class=cl><span class=c1>## review or updates from the Ubuntu security team.</span>
+</span></span><span class=line><span class=cl>deb http://archive.ubuntu.com/ubuntu/ jammy universe
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://archive.ubuntu.com/ubuntu/ jammy universe</span>
+</span></span><span class=line><span class=cl>deb http://archive.ubuntu.com/ubuntu/ jammy-updates universe
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://archive.ubuntu.com/ubuntu/ jammy-updates universe</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>## N.B. software from this repository is ENTIRELY UNSUPPORTED by the Ubuntu</span>
+</span></span><span class=line><span class=cl><span class=c1>## team, and may not be under a free licence. Please satisfy yourself as to</span>
+</span></span><span class=line><span class=cl><span class=c1>## your rights to use the software. Also, please note that software in</span>
+</span></span><span class=line><span class=cl><span class=c1>## multiverse WILL NOT receive any review or updates from the Ubuntu</span>
+</span></span><span class=line><span class=cl><span class=c1>## security team.</span>
+</span></span><span class=line><span class=cl>deb http://archive.ubuntu.com/ubuntu/ jammy multiverse
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://archive.ubuntu.com/ubuntu/ jammy multiverse</span>
+</span></span><span class=line><span class=cl>deb http://archive.ubuntu.com/ubuntu/ jammy-updates multiverse
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://archive.ubuntu.com/ubuntu/ jammy-updates multiverse</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>## N.B. software from this repository may not have been tested as</span>
+</span></span><span class=line><span class=cl><span class=c1>## extensively as that contained in the main release, although it includes</span>
+</span></span><span class=line><span class=cl><span class=c1>## newer versions of some applications which may provide useful features.</span>
+</span></span><span class=line><span class=cl><span class=c1>## Also, please note that software in backports WILL NOT receive any review</span>
+</span></span><span class=line><span class=cl><span class=c1>## or updates from the Ubuntu security team.</span>
+</span></span><span class=line><span class=cl>deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://security.ubuntu.com/ubuntu/ jammy-security main restricted</span>
+</span></span><span class=line><span class=cl>deb http://security.ubuntu.com/ubuntu/ jammy-security universe
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://security.ubuntu.com/ubuntu/ jammy-security universe</span>
+</span></span><span class=line><span class=cl>deb http://security.ubuntu.com/ubuntu/ jammy-security multiverse
+</span></span><span class=line><span class=cl><span class=c1># deb-src http://security.ubuntu.com/ubuntu/ jammy-security multiverse</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=小工具安装>小工具安装</h2><h3 id=7z>7z</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo apt install p7zip-full p7zip-rar
+</span></span></code></pre></td></tr></table></div></div><h3 id=bashtopbtop>bashtop/btop</h3><p><a href=https://github.com/aristocratos/btop target=_blank rel="external nofollow noopener noreferrer">https://github.com/aristocratos/btop</a></p><p><a href=https://github.com/aristocratos/bashtop target=_blank rel="external nofollow noopener noreferrer">https://github.com/aristocratos/bashtop</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo apt install bashtop
+</span></span></code></pre></td></tr></table></div></div><p>总体来说 bashtop 更好看一些</p><h3 id=ifconfig>ifconfig</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo apt install net-tools
+</span></span></code></pre></td></tr></table></div></div><h3 id=bat>bat</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo apt install bat
+</span></span></code></pre></td></tr></table></div></div><p>如果你通过这种方法安装<code>bat</code>，请留意你所安装的可执行文件是否为<code>batcat</code>（由<a href=https://github.com/sharkdp/bat/issues/982 target=_blank rel="external nofollow noopener noreferrer">其他包的可执行文件名冲突</a>造成）。你可以创建一个<code>bat -> batcat</code>的符号链接(symlink)或别名来避免因为可执行文件不同带来的问题并与其他发行版保持一致性。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>mkdir -p ~/.local/bin
+</span></span><span class=line><span class=cl>ln -s /usr/bin/batcat ~/.local/bin/bat
+</span></span></code></pre></td></tr></table></div></div><h2 id=nodejs>Node.js</h2><p>官网下载：https://nodejs.org/en/download/</p><p>比如你在 <code>~/download</code></p><ol><li><p>执行以下命令，下载 Node.js Linux 64 位二进制安装包。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>wget https://nodejs.org/dist/v18.12.1/node-v18.12.1-linux-x64.tar.xz
+</span></span></code></pre></td></tr></table></div></div></li><li><p>执行以下命令，解压安装包。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>tar xvf node-v18.12.1-linux-x64.tar.xz
+</span></span></code></pre></td></tr></table></div></div></li><li><p>依次执行以下命令，创建软链接。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo ln -s ~/download/node-v18.12.1-linux-x64/bin/node /usr/local/bin/node
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo ln -s ~/download/node-v18.12.1-linux-x64/bin/npm /usr/local/bin/npm
+</span></span></code></pre></td></tr></table></div></div><p>成功创建软链接后，即可在云服务器任意目录下使用 node 及 npm 命令。</p></li><li><p>依次执行以下命令，查看 Node.js 及 npm 版本信息。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>node -v
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>npm -v
+</span></span></code></pre></td></tr></table></div></div></li><li><p>要使 npm 全局安装的软件命令行可用，需要添加环境变量</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span>~/download/node-v18.12.1-linux-x64/bin:<span class=nv>$PATH</span> <span class=c1># 很丑就是了……</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><h2 id=go>Go</h2><h3 id=安装>安装</h3><p>下载 go 源码包</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 下载地址 go官网 https://golang.org/dl/</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /opt/
+</span></span><span class=line><span class=cl>sudo wget https://golang.google.cn/dl/go1.18.3.linux-amd64.tar.gz
+</span></span></code></pre></td></tr></table></div></div><p>解压缩 go 源码包，确认当前 linux 系统版本是 32 位还是 64 位，再选择 go 源码包</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 查看linux多少位</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>root@pyyuc /opt 21:59:02<span class=o>]</span><span class=c1># uname -m</span>
+</span></span><span class=line><span class=cl>x86_64
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 决定下载64位</span>
+</span></span><span class=line><span class=cl>sudo tar -zxvf go1.18.3.linux-amd64.tar.gz
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 解压缩后go源码路径确保为</span>
+</span></span><span class=line><span class=cl>/opt/go/
+</span></span></code></pre></td></tr></table></div></div><p>给予 go 目录权限</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sudo chmod -R <span class=m>777</span> go/
+</span></span><span class=line><span class=cl>sudo chmod -R <span class=m>777</span> gocode/ <span class=c1># gocode 会在后面生成</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=配置环境变量>配置环境变量</h3><p>配置 go 的工作空间（配置 GOPATH），以及 go 的环境变量</p><p>go 的代码必须在 GOPATH 中，也就是一个工作目录，目录包含三个子目录</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-scss data-lang=scss><span class=line><span class=cl><span class=err>$</span><span class=nt>GOPATH</span>
+</span></span><span class=line><span class=cl>    <span class=nt>src</span>        <span class=nt>存放go源代码的目录</span><span class=o>,</span><span class=nt>存放golang项目的目录</span><span class=err>，</span><span class=nt>所有项目都放到gopath的src目录下</span>
+</span></span><span class=line><span class=cl>    <span class=nt>bin</span>        <span class=nt>在go</span> <span class=nt>install后生成的可执行文件的目录</span>
+</span></span><span class=line><span class=cl>    <span class=nt>pkg</span>        <span class=nt>编译后生成的</span><span class=err>，</span><span class=nt>源码文件</span><span class=err>，</span><span class=nt>如</span><span class=nc>.a</span>
+</span></span></code></pre></td></tr></table></div></div><p>创建 /opt/gocode/{src,bin,pkg}，用于设置 GOPATH 为 /opt/godocer</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir -p /opt/gocode/<span class=o>{</span>src,bin,pkg<span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>/opt/gocode/
+</span></span><span class=line><span class=cl>├── bin
+</span></span><span class=line><span class=cl>├── pkg
+</span></span><span class=line><span class=cl>└── src
+</span></span></code></pre></td></tr></table></div></div><p>6.设置 GOPATH 环境变量</p><p>修改 /etc/profile 系统环境变量文件，写入 GOPATH 信息以及 go sdk 路径</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOROOT</span><span class=o>=</span>/opt/go           <span class=c1># Golang 源代码目录，安装目录</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOPATH</span><span class=o>=</span>/opt/gocode       <span class=c1># Golang 项目代码目录</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOBIN</span><span class=o>=</span><span class=nv>$GOPATH</span>/bin        <span class=c1># go install 后生成的可执行命令存放路径</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$GOROOT</span>/bin:<span class=nv>$GOBIN</span>:<span class=nv>$PATH</span>    <span class=c1># Linux 环境变量</span>
+</span></span></code></pre></td></tr></table></div></div><p>读取 /etc/profile，立即生效</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>source</span> /etc/profile     <span class=c1>#读取环境变量</span>
+</span></span></code></pre></td></tr></table></div></div><p>查看 go 环境是否生效</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>//查看go环境变量路径
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>which</span> <span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=c1>//查看go语言环境信息
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>go</span> <span class=nx>env</span>
+</span></span><span class=line><span class=cl><span class=c1>//查看go版本，查看是否安装成功
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>[</span><span class=nx>root</span><span class=err>@</span><span class=nx>pyyuc</span> <span class=p>~</span> <span class=mi>22</span><span class=p>:</span><span class=mi>59</span><span class=p>:</span><span class=mo>05</span><span class=p>]</span><span class=err>#</span> <span class=k>go</span> <span class=nx>version</span>
+</span></span><span class=line><span class=cl><span class=k>go</span> <span class=nx>version</span> <span class=nx>go1</span><span class=mf>.11.4</span> <span class=nx>linux</span><span class=o>/</span><span class=nx>amd64</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=其他>其他</h3><p>go install 配置代理</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>go env -w <span class=nv>GOPROXY</span><span class=o>=</span>https://goproxy.cn
+</span></span></code></pre></td></tr></table></div></div><h2 id=python>Python</h2><h3 id=使用-pyenv-来实现多版本安装推荐>使用 pyenv 来实现多版本安装（推荐）</h3><blockquote><p><a href=https://github.com/pyenv/pyenv#installation target=_blank rel="external nofollow noopener noreferrer">https://github.com/pyenv/pyenv#installation</a></p></blockquote><p>安装 pyenv</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>curl https://pyenv.run <span class=p>|</span> bash
+</span></span><span class=line><span class=cl><span class=c1># 或者去文档选用其他方法</span>
+</span></span></code></pre></td></tr></table></div></div><p>添加环境变量</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;command -v pyenv &gt;/dev/null || export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;eval &#34;$(pyenv init -)&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</span></span></code></pre></td></tr></table></div></div><p>安装任意版本</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>pyenv install &lt;version-name&gt;
+</span></span><span class=line><span class=cl>pyenv uninstall &lt;version-name&gt;
+</span></span></code></pre></td></tr></table></div></div><p>获取所有可安装版本信息</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>pyenv install -l
+</span></span></code></pre></td></tr></table></div></div><p>获取本地已安装版本</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>pyenv versions
+</span></span></code></pre></td></tr></table></div></div><p>选用指定版本</p><p>To select a Pyenv-installed Python as the version to use, run one of the following commands:</p><ul><li><a href=https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-shell target=_blank rel="external nofollow noopener noreferrer"><code>pyenv shell </code></a>&ndash; select just for current shell session</li><li><a href=https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-local target=_blank rel="external nofollow noopener noreferrer"><code>pyenv local </code></a>&ndash; automatically select whenever you are in the current directory (or its subdirectories)</li><li><a href=https://github.com/pyenv/pyenv/blob/master/COMMANDS.md#pyenv-shell target=_blank rel="external nofollow noopener noreferrer"><code>pyenv global </code></a>&ndash; select globally for your user account</li></ul><h4 id=与-pyenv-virtualenvwrapper-配合使用>与 pyenv-virtualenvwrapper 配合使用</h4><blockquote><p><a href=https://github.com/pyenv/pyenv-virtualenvwrapper target=_blank rel="external nofollow noopener noreferrer">https://github.com/pyenv/pyenv-virtualenvwrapper</a></p></blockquote><p>这样就能在 <code>pyenv</code> 中使用 <code>virtualenv</code> 啦，依赖分离</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>git clone https://github.com/pyenv/pyenv-virtualenvwrapper.git <span class=k>$(</span>pyenv root<span class=k>)</span>/plugins/pyenv-virtualenvwrapper
+</span></span></code></pre></td></tr></table></div></div><p>每次打开 shell，运行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>pyenv virtualenvwrapper
+</span></span></code></pre></td></tr></table></div></div><p>之后就能在 pyenv 当前版本的 Python 中使用诸如 <code>mkvirtualenv</code> 或 <code>workon</code> 的指令啦</p><h3 id=miniconda>Miniconda</h3><p>从官网下载安装脚本 <a href=https://docs.conda.io/en/latest/miniconda.html target=_blank rel="external nofollow noopener noreferrer">https://docs.conda.io/en/latest/miniconda.html</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+</span></span><span class=line><span class=cl>bash Miniconda3-latest-Linux-x86_64.sh
+</span></span></code></pre></td></tr></table></div></div><p>然后添加到系统环境变量中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=s2>&#34;~/miniconda3/bin:</span><span class=nv>$PATH</span><span class=s2>&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=官网>官网</h3><h4 id=apt>apt</h4><p>建议使用 apt，自己编译坑比较多。。</p><h4 id=编译安装>编译安装</h4><p>这里采用直接从 Python 官网下载的方法</p><p>详见：https://zhuanlan.zhihu.com/p/506491209</p><h5 id=安装相关依赖>安装相关依赖</h5><p>先安装 gcc</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 安装 GCC 编译器</span>
+</span></span><span class=line><span class=cl>sudo apt install gcc
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 检查安装是否成功</span>
+</span></span><span class=line><span class=cl>gcc -v
+</span></span><span class=line><span class=cl><span class=c1># 若显示出 GCC 版本则成功</span>
+</span></span></code></pre></td></tr></table></div></div><p>再安装相关依赖</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libbz2-dev liblzma-dev sqlite3 libsqlite3-dev tk-dev uuid-dev libgdbm-compat-dev
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>注意，Python 的部分功能依赖于对应的库（如 OpenSSL、SQLite3、LZMA 等），如果在编译时未能找到这些库，仍然可能完成编译。此时的 Python 解释器看似可以工作，但在需要使用特定功能时就会出问题。例如 OpenSSL 出现问题会导致无法正常使用 pip</p></blockquote><h5 id=选择安装包>选择安装包</h5><p>下载地址：https://www.python.org/downloads/</p><p>以 <code>https://www.python.org/ftp/python/3.11.1/Python-3.11.1.tgz</code> 为例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 下载</span>
+</span></span><span class=line><span class=cl>wget https://www.python.org/ftp/python/3.11.1/Python-3.11.1.tgz
+</span></span><span class=line><span class=cl><span class=c1># 解压</span>
+</span></span><span class=line><span class=cl>tar -zxvf Python-3.11.1.tgz
+</span></span></code></pre></td></tr></table></div></div><h5 id=配置>配置</h5><p>进入 Python 文件夹，运行</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 检查依赖与配置编译</span>
+</span></span><span class=line><span class=cl>sudo ./configure --enable-optimizations --with-lto --enable-shared
+</span></span></code></pre></td></tr></table></div></div><p>此处使用了三个可选配置项，含义如下：</p><ul><li>&ndash;enable-optimizations：用 <a href="https://link.zhihu.com/?target=https%3A//docs.python.org/zh-cn/3/using/configure.html%23envvar-PROFILE_TASK" target=_blank rel="external nofollow noopener noreferrer">PROFILE_TASK</a> 启用以配置文件主导的优化（PGO）</li><li>&ndash;with-lto：在编译过程中启用链接时间优化（LTO）</li><li>&ndash;enable-shared：启用共享 Python 库 libpython 的编译</li></ul><p>更多可用配置项的信息，请参阅 <a href="https://link.zhihu.com/?target=https%3A//docs.python.org/zh-cn/3/using/configure.html" target=_blank rel="external nofollow noopener noreferrer">Python 官方文档</a>。</p><p>经过一系列检查无误之后，会自动生成 Makefile，即可进行下一步的编译了。</p><h5 id=编译>编译</h5><p>完成配置，生成 Makefile 后，就可以开始编译了。<strong>编译耗时较长</strong>，可以使用 <code>-j</code> 选项指定参与编译的 CPU 核心数，例如此机器为 6 核 CPU：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 编译，-j 后面的数字为参与编译的 CPU 核心数，根据个人机器配置调整</span>
+</span></span><span class=line><span class=cl>sudo make -j <span class=m>6</span>
+</span></span></code></pre></td></tr></table></div></div><p>编译结束后，注意仔细查看一下输出，检查可能存在的错误：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 一种可能出现的问题：</span>
+</span></span><span class=line><span class=cl>$ sudo make
+</span></span><span class=line><span class=cl><span class=c1># ......省略部分输出......</span>
+</span></span><span class=line><span class=cl>Python build finished successfully!
+</span></span><span class=line><span class=cl>The necessary bits to build these optional modules were not found:
+</span></span><span class=line><span class=cl>_dbm                  _tkinter              _uuid              
+</span></span><span class=line><span class=cl>To find the necessary bits, look in setup.py in detect_modules<span class=o>()</span> <span class=k>for</span> the module<span class=err>&#39;</span>s name.
+</span></span></code></pre></td></tr></table></div></div><p>如果出现类似如上的警告，说明编译时有部分软件包不可用，导致编译出的 Python 有部分可选模块不可用。检查中提到的依赖是否都已安装，或求助于网络搜索引擎，安装对应软件包后再次编译即可。</p><h5 id=安装-1>安装</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 安装二进制文件</span>
+</span></span><span class=line><span class=cl>sudo make altinstall
+</span></span></code></pre></td></tr></table></div></div><p>在 Makefile 中有如下提示：</p><blockquote><p>If you have a previous version of Python installed that you don&rsquo;t want to overwrite, you can use &ldquo;make altinstall&rdquo; instead of &ldquo;make install&rdquo;.</p></blockquote><p>故应使用 <code>altinstall</code> 而不是 <code>install</code> 。二者的一个重要区别在于，后者会创建符号链接，将 <code>python3</code> 等命令链接到正在安装的新版本 Python 3 上，这可能会破坏系统。更多信息请参阅当前目录下的 <code>README.rst</code> 文件。</p><h5 id=链接动态库>链接动态库</h5><p>由于<a href=https://zhuanlan.zhihu.com/write#%e9%85%8d%e7%bd%ae target=_blank rel="external nofollow noopener noreferrer">编译配置</a>中有 <code>--enable-shared</code> 的选项，故此时直接使用命令 <code>python3.11</code> 会提示无法找到 <code>libpython3.11.so.1.0</code> 的错误。只需找到该 <code>so</code> 文件，复制（或创建符号链接）到 <code>/usr/lib/</code> 目录下即可：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 找到 libpython 的位置</span>
+</span></span><span class=line><span class=cl>$ whereis libpython3.11.so.1.0
+</span></span><span class=line><span class=cl>libpython3.11.so.1: /usr/local/lib/libpython3.11.so.1.0
+</span></span><span class=line><span class=cl><span class=c1># 在 /usr/lib/ 下创建 libpython 的符号链接</span>
+</span></span><span class=line><span class=cl>$ sudo ln -s /usr/local/lib/libpython3.11.so.1.0 /usr/lib/
+</span></span></code></pre></td></tr></table></div></div><h5 id=使用-python-311>使用 Python 3.11</h5><p>完成安装后，Python 3.11 会与系统原有的 Python 3.10 共存。由于 Ubuntu 系统、安装的其他软件等很可能会依赖于系统原有的 3.10，所以不要移除原有 Python 环境，也不要对 <code>python3</code> 等命令进行修改。</p><p>直接在命令行使用 <code>python3.11</code> 命令即可调用新安装的解释器：</p><p>类似的，使用 <code>python 3.11</code> 的 <code>pip</code> 的命令为 <code>pip3.11</code></p><h5 id=建立软链接>建立软链接</h5><p>一个是连接 python 运行位置，另一个则连接着 pip 的运行位置</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>ln -s /usr/local/bin/python3.11 /usr/bin/python
+</span></span><span class=line><span class=cl>ln -s /usr/local/bin/pip3.11 /usr/bin/pip
+</span></span></code></pre></td></tr></table></div></div><p>一般机器都是这两个位置 <code>/usr/bin/python</code> <code>/usr/bin/pip</code></p><p>查看对应的 python 和 pip 的软连接状态：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>where python
+</span></span><span class=line><span class=cl>where pip
+</span></span></code></pre></td></tr></table></div></div><p>以后切换版本时，只要修改这两个软连接即可，可以到对应的运行位置下使用 <code>la python*</code> 来查看软连接信息</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/992deeb1835a492795a497890679d062.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/992deeb1835a492795a497890679d062.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/992deeb1835a492795a497890679d062.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/992deeb1835a492795a497890679d062.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/992deeb1835a492795a497890679d062.png title=在这里插入图片描述></p><h2 id=docker>Docker</h2><p>由于 <code>apt</code> 源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ sudo apt-get update
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$ sudo apt-get install <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    apt-transport-https <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    ca-certificates <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    curl <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    gnupg <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    lsb-release
+</span></span></code></pre></td></tr></table></div></div><p>为了确认所下载软件包的合法性，需要添加软件源的 <code>GPG</code> 密钥。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg <span class=p>|</span> sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 官方源</span>
+</span></span><span class=line><span class=cl><span class=c1># $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后，我们需要向 <code>sources.list</code> 中添加 Docker 软件源</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ <span class=nb>echo</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=s2>&#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+</span></span></span><span class=line><span class=cl><span class=s2>  </span><span class=k>$(</span>lsb_release -cs<span class=k>)</span><span class=s2> stable&#34;</span> <span class=p>|</span> sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 官方源</span>
+</span></span><span class=line><span class=cl>$ <span class=nb>echo</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   <span class=s2>&#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+</span></span></span><span class=line><span class=cl><span class=s2>   </span><span class=k>$(</span>lsb_release -cs<span class=k>)</span><span class=s2> stable&#34;</span> <span class=p>|</span> sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>以上命令会添加稳定版本的 Docker APT 镜像源，如果需要测试版本的 Docker 请将 stable 改为 test。</p></blockquote><p>更新 apt 软件包缓存，并安装 <code>docker-ce</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ sudo apt-get update
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/linux-%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/ data-title="Linux 上的环境安装" data-hashtags=Linux,快速入门><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/linux-%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/ data-hashtag=Linux><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/linux-%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/ data-title="Linux 上的环境安装"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/linux/>Linux</a>,&nbsp;<a href=/Notes/tags/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>快速入门</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/ class=prev rel=prev title="Linux 用户管理"><i class="fa-solid fa-angle-left fa-fw"></i>Linux 用户管理</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E8%BD%AF%E4%BB%B6%E6%93%8D%E4%BD%9C/ class=next rel=next title="Linux 软件操作">Linux 软件操作<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

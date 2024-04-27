@@ -1,0 +1,408 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>Python DearPyGui 库 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="DearPyGui 认识 窗口 Windows 窗口用于保存控件 创建方法 由 add_window() 方法启动窗口并在结束调 end() 方法 使用 dearpygui.simple 包和相"><meta name=keywords content='Python'><meta itemprop=name content="Python DearPyGui 库"><meta itemprop=description content="DearPyGui 认识 窗口 Windows 窗口用于保存控件 创建方法 由 add_window() 方法启动窗口并在结束调 end() 方法 使用 dearpygui.simple 包和相"><meta itemprop=datePublished content="2021-04-17T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="1648"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%8F%AF%E8%A7%86%E5%8C%96/dearpygui/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="Python DearPyGui 库"><meta property="og:description" content="DearPyGui 认识 窗口 Windows 窗口用于保存控件 创建方法 由 add_window() 方法启动窗口并在结束调 end() 方法 使用 dearpygui.simple 包和相"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-17T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Python"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python DearPyGui 库"><meta name=twitter:description content="DearPyGui 认识 窗口 Windows 窗口用于保存控件 创建方法 由 add_window() 方法启动窗口并在结束调 end() 方法 使用 dearpygui.simple 包和相"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%8F%AF%E8%A7%86%E5%8C%96/dearpygui/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%8F%AF%E8%A7%86%E5%8C%96/manim/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/datetime/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python DearPyGui 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E5%8F%AF%E8%A7%86%E5%8C%96\/dearpygui\/"},"genre":"posts","keywords":"Python","wordcount":1648,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E5%8F%AF%E8%A7%86%E5%8C%96\/dearpygui\/","datePublished":"2021-04-17T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python DearPyGui 库</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2021-04-17 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-04-17>2021-04-17</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 1648 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#认识>认识</a><ul><li><a href=#窗口-windows>窗口 Windows</a><ul><li><a href=#创建方法>创建方法</a></li><li><a href=#主窗口>主窗口</a></li><li><a href=#全局设置>全局设置</a></li></ul></li><li><a href=#控件-widgets>控件 Widgets</a><ul><li><a href=#值-value>值 value</a><ul><li><a href=#控制相同值>控制相同值</a></li><li><a href=#存储其他数据结构>存储其他数据结构</a></li></ul></li><li><a href=#回调-callback>回调 Callback</a><ul><li><a href=#添加回调>添加回调</a></li><li><a href=#参数>参数</a></li><li><a href=#获取控件值>获取控件值</a></li><li><a href=#窗口的特殊回调>窗口的特殊回调</a></li><li><a href=#运行时添加和删除控件>运行时添加和删除控件</a></li><li><a href=#删除窗口>删除窗口</a></li></ul></li></ul></li></ul></li><li><a href=#控件>控件</a><ul><li><a href=#表格-table>表格 Table</a><ul><li><ul><li><a href=#修改>修改</a></li></ul></li></ul></li><li><a href=#分隔件>分隔件</a><ul><li><a href=#同排-add_same_line>同排 add_same_line</a></li><li><a href=#行距-add_spacing>行距 add_spacing</a></li><li><a href=#分隔线-add_separator>分隔线 add_separator</a></li></ul></li><li><a href=#输入框>输入框</a><ul><li><a href=#文本框-add_input_text>文本框 add_input_text</a></li><li><a href=#整型数框-add_input_int>整型数框 add_input_int</a></li><li><a href=#浮点数框-add_input_float>浮点数框 add_input_float</a></li></ul></li><li><a href=#选择框>选择框</a><ul><li><a href=#按钮-add_button>按钮 add_button</a></li><li><a href=#复选框-add_checkbox>复选框 add_checkbox</a></li></ul></li><li><a href=#窗体>窗体</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=dearpygui>DearPyGui</h1><h2 id=认识>认识</h2><h3 id=窗口-windows>窗口 Windows</h3><p>窗口用于保存控件</p><h4 id=创建方法>创建方法</h4><ol><li>由 <code>add_window()</code> 方法启动窗口并在结束调 <code>end()</code> 方法</li><li>使用 <code>dearpygui.simple</code> 包和相应的窗口管理器（推荐）</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># method 1</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>add_window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>add_text</span><span class=p>(</span><span class=s2>&#34;This is some text on window 1&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>end</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># method 2</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial##2&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_text</span><span class=p>(</span><span class=s2>&#34;This is some text on window 2&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>代码最终必须以 <code>start_dearpygui()</code> 方法结束</p><h4 id=主窗口>主窗口</h4><p>如何设置主窗口？</p><ol><li><p>使用 <code>start_dearpygui</code> 方法的 <code>primary_window</code> 参数</p></li><li><p>使用 <code>set_primary_window</code> 方法</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>(</span><span class=n>primary_window</span><span class=o>=</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=全局设置>全局设置</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>add_additional_font</span><span class=p>(</span><span class=s1>&#39;三极中柔宋.ttf&#39;</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=n>glyph_ranges</span><span class=o>=</span><span class=s1>&#39;chinese_simplified_common&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=控件-widgets>控件 Widgets</h3><p>控件必须有一个唯一的 <code>name</code>，默认情况下，<code>name</code> 会被当成 <code>label</code> 使用（视具体控件而定）</p><p>如何改变 <code>label</code></p><ul><li>使用 <code>##</code> 进行字符拼接，左边的字符串为要显示的名称，右边则为隐藏名称</li><li>通过设置 <code>label</code> 参数的值，显式设置要显示的名称</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Display &#39;Apply&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;Apply##1&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;Apply2&#34;</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;Apply&#34;</span><span class=p>)</span> 
+</span></span></code></pre></td></tr></table></div></div><h4 id=值-value>值 value</h4><p>每个输入窗口控件都有一个 <code>value</code></p><ul><li>可以在创建时使用 <code>default_value</code> 参数设置</li><li>可以在运行时通过 <code>set_value</code> 方法进行设置。</li><li>可以使用 <code>get_value</code> 方法访问控件的 <code>value</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_checkbox</span><span class=p>(</span><span class=s2>&#34;Radio Button&#34;</span><span class=p>,</span> <span class=n>default_value</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;First value of the Radio Button is: &#34;</span><span class=p>,</span> <span class=n>get_value</span><span class=p>(</span><span class=s2>&#34;Radio Button&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>set_value</span><span class=p>(</span><span class=s2>&#34;Radio Button&#34;</span><span class=p>,</span> <span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Value after setting the Radio Button is: &#34;</span><span class=p>,</span> <span class=n>get_value</span><span class=p>(</span><span class=s2>&#34;Radio Button&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=控制相同值>控制相同值</h5><p>添加新的窗口控件时，会将 <code>value</code> 添加到 <strong>Value存储系统</strong> 中，默认情况下，此 <code>value</code> 的标识符是控件的 <code>name</code>。我们可以使用 <code>source</code> 参数覆盖标识符，这样做有一个好处，就是让多个控件控制同一个 <code>value</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>plus_one</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>count</span> <span class=o>=</span> <span class=n>get_value</span><span class=p>(</span><span class=s1>&#39;count_value&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>set_value</span><span class=p>(</span><span class=s1>&#39;count_value&#39;</span><span class=p>,</span> <span class=nb>str</span><span class=p>(</span><span class=nb>int</span><span class=p>(</span><span class=n>count</span><span class=p>)</span><span class=o>+</span><span class=mi>1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>show_logger</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_input_text</span><span class=p>(</span><span class=s2>&#34;input text##1&#34;</span><span class=p>,</span> <span class=n>source</span><span class=o>=</span><span class=s1>&#39;count_value&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s1>&#39;plus 1&#39;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>plus_one</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=存储其他数据结构>存储其他数据结构</h5><p>Dear PyGui 还支持传入任意 Python 数据对象类型（甚至可以自定义数据类型）用于数据存储。使用 <code>add_data</code>，我们可以传入任意数据类型，并通过 <code>get_data("name")</code> 进行访问。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>store_data</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>custom_data</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;Radio Button&#34;</span><span class=p>:</span> <span class=n>get_value</span><span class=p>(</span><span class=s2>&#34;Radio Button&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;Checkbox&#34;</span><span class=p>:</span> <span class=n>get_value</span><span class=p>(</span><span class=s2>&#34;Checkbox&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;Text Input&#34;</span><span class=p>:</span> <span class=n>get_value</span><span class=p>(</span><span class=s2>&#34;Text Input&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_data</span><span class=p>(</span><span class=s2>&#34;stored_data&#34;</span><span class=p>,</span> <span class=n>custom_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>print_data</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>log_debug</span><span class=p>(</span><span class=n>get_data</span><span class=p>(</span><span class=s2>&#34;stored_data&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>show_logger</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_radio_button</span><span class=p>(</span><span class=s2>&#34;Radio Button&#34;</span><span class=p>,</span> <span class=n>items</span><span class=o>=</span><span class=p>[</span><span class=s2>&#34;opt 1&#34;</span><span class=p>,</span> <span class=s2>&#34;opt 2&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_checkbox</span><span class=p>(</span><span class=s2>&#34;Checkbox&#34;</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;tag&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_input_text</span><span class=p>(</span><span class=s2>&#34;Text Input&#34;</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;text&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;store data&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>store_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;print data&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>print_data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=回调-callback>回调 Callback</h4><h5 id=添加回调>添加回调</h5><ol><li>生成控件时使用 <code>callback</code> 参数设置</li><li>创建后使用 <code>set_item_callback</code> 分配给窗口控件</li></ol><h5 id=参数>参数</h5><p>每个回调方法都必须包含一个 <code>sender</code> 和 <code>data</code> 参数</p><p><code>sender</code> 记录哪个控件通过发送 <code>name</code> 来触发回调</p><p><code>data</code> 显示控件指定的 <code>callback_data</code> 参数</p><h5 id=获取控件值>获取控件值</h5><p>可以在回调函数中获取控件值</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>update_var</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>my_var</span> <span class=o>=</span> <span class=n>get_value</span><span class=p>(</span><span class=n>sender</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>log_debug</span><span class=p>(</span><span class=n>my_var</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>show_logger</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_checkbox</span><span class=p>(</span><span class=s2>&#34;check box&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>update_var</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_input_text</span><span class=p>(</span><span class=s2>&#34;input text&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>update_var</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_input_int</span><span class=p>(</span><span class=s2>&#34;input int&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>update_var</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=窗口的特殊回调>窗口的特殊回调</h5><ul><li><em><strong>on_close</strong></em>：在窗口关闭时触发</li><li><em><strong>set_resize_callback()</strong></em>：在窗口被调整大小时触发</li><li><em><strong>set_render_callback()</strong></em></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>close_info</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>log_debug</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>sender</span><span class=si>}</span><span class=s2> has been closed&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>resize_info</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>log_debug</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=n>sender</span><span class=si>}</span><span class=s1> has been resized&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>show_logger</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>,</span> <span class=n>on_close</span><span class=o>=</span><span class=n>close_info</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_text</span><span class=p>(</span><span class=s1>&#39;Hello World!&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>set_resize_callback</span><span class=p>(</span><span class=n>resize_info</span><span class=p>,</span> <span class=n>handler</span><span class=o>=</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=运行时添加和删除控件>运行时添加和删除控件</h5><p>Dear PyGui 支持在运行时动态添加和删除任何控件或窗口</p><p>通过使用回调运行所需控件的 <code>add_***</code> 方法并指定该控件所属的 <code>parent</code> 来完成</p><p>默认情况下，如果未指定 <code>parent</code>，则将控件添加到主窗口。</p><p>而通过在添加控件时使用 <code>before</code> 参数，可以设置将新控件放在哪个控件之前，默认情况下，会将新控件放在最后。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>add_buttons</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;New Button 2&#34;</span><span class=p>,</span> <span class=n>parent</span><span class=o>=</span><span class=s2>&#34;Secondary Window&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;New Button&#34;</span><span class=p>,</span> <span class=n>before</span><span class=o>=</span><span class=s2>&#34;New Button 2&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>delete_buttons</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>delete_item</span><span class=p>(</span><span class=s2>&#34;New Button&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>delete_item</span><span class=p>(</span><span class=s2>&#34;New Button 2&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>show_debug</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;Add Buttons&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>add_buttons</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;Delete Buttons&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>delete_buttons</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Secondary Window&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=删除窗口>删除窗口</h5><p>删除窗口时，默认情况下，会删除窗口及其子控件，如果只想删除子控件，可以将 <code>children_only</code> 参数设置为 <em>True</em> 值</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>add_widgets</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Secondary Window&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;New Button 2&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;New Button&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;New Button 3&#34;</span><span class=p>,</span> <span class=n>parent</span><span class=o>=</span><span class=s2>&#34;Secondary Window&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>delete_widgets</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>delete_item</span><span class=p>(</span><span class=s2>&#34;Secondary Window&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>delete_children</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>delete_item</span><span class=p>(</span><span class=s2>&#34;Secondary Window&#34;</span><span class=p>,</span> <span class=n>children_only</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;add&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>add_widgets</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;delete window and widgets&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>delete_widgets</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;delete widgets&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>delete_children</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=控件>控件</h2><h3 id=表格-table>表格 Table</h3><p>Dear PyGui has a simple table API that is well suited for static and dynamic tables.</p><p>The table widget is started by calling add_table().</p><p>To edit the table widget we can use the methods add_row() add_column() which will append the row/column to the last slot in the table.</p><p>Alternatively, we can insert rows/columns using insert_row insert_column. Columns and Rows are inserted according to their index argument. If the specified index already exists the exiting columns/rows will be bumped and the new row/column will be inserted at the specified index.</p><p>Also an added or inserted row/column will by default fill unspecified cells with empty cells.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_table</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;Header 0&#34;</span><span class=p>,</span> <span class=s2>&#34;Header 1&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_row</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;row 0&#34;</span><span class=p>,</span> <span class=s2>&#34;text&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_row</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;row 2&#34;</span><span class=p>,</span> <span class=s2>&#34;text&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_column</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=s2>&#34;Header 3&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;data&#34;</span><span class=p>,</span> <span class=s2>&#34;data&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>insert_row</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;row 1&#34;</span><span class=p>,</span> <span class=s2>&#34;inserted row&#34;</span><span class=p>,</span> <span class=s2>&#34;inserted row&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>insert_column</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=s2>&#34;Header 2&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;inserted with column&#34;</span><span class=p>,</span> <span class=s2>&#34;inserted column&#34;</span><span class=p>,</span> <span class=s2>&#34;inserted column&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210501221056398.png data-srcset="http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210501221056398.png, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210501221056398.png 1.5x, http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210501221056398.png 2x" data-sizes=auto alt=http://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20210501221056398.png title=image-20210501221056398></p><h5 id=修改>修改</h5><ul><li><p><em><strong>coord_list = get_table_selections(&ldquo;Table name&rdquo;)</strong></em></p><p>获取选中的表格项</p></li><li><p><em><strong>set_table_item(&ldquo;Table name&rdquo;, coordinates[0], coordinates[1], &ldquo;New Value&rdquo;)</strong></em></p></li><li><p><strong>set_headers(&ldquo;Table name&rdquo;, header_list)</strong>*</p><p>修改表头，传入表头名列表</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.core</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dearpygui.simple</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>modify_tables</span><span class=p>(</span><span class=n>sender</span><span class=p>,</span> <span class=n>data</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>log_debug</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Table Called: </span><span class=si>{</span><span class=n>sender</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>coord_list</span> <span class=o>=</span> <span class=n>get_table_selections</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>log_debug</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Selected Cells (coordinates): </span><span class=si>{</span><span class=n>coord_list</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>coordinates</span> <span class=ow>in</span> <span class=n>coord_list</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>set_table_item</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=n>coordinates</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>coordinates</span><span class=p>[</span><span class=mi>1</span><span class=p>],</span> <span class=s2>&#34;New Value&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>set_headers</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;New Header 0&#34;</span><span class=p>,</span> <span class=s2>&#34;New Header 1&#34;</span><span class=p>,</span> <span class=s2>&#34;New Header 2&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>show_logger</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>with</span> <span class=n>window</span><span class=p>(</span><span class=s2>&#34;Tutorial&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_spacing</span><span class=p>(</span><span class=n>count</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_button</span><span class=p>(</span><span class=s2>&#34;Modify Selected Table Values&#34;</span><span class=p>,</span> <span class=n>callback</span><span class=o>=</span><span class=n>modify_tables</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_spacing</span><span class=p>(</span><span class=n>count</span><span class=o>=</span><span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_table</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;Header 0&#34;</span><span class=p>,</span> <span class=s2>&#34;Header 1&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_row</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;awesome row&#34;</span><span class=p>,</span> <span class=s2>&#34;text&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_row</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;super unique&#34;</span><span class=p>,</span> <span class=s2>&#34;unique text&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_column</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=s2>&#34;Header 2&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;text from column&#34;</span><span class=p>,</span> <span class=s2>&#34;text from column&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>add_row</span><span class=p>(</span><span class=s2>&#34;Table Example&#34;</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;boring row&#34;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>start_dearpygui</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=分隔件>分隔件</h3><h4 id=同排-add_same_line>同排 add_same_line</h4><ul><li><p><em>spacing</em></p><p>分隔距</p></li></ul><h4 id=行距-add_spacing>行距 add_spacing</h4><h4 id=分隔线-add_separator>分隔线 add_separator</h4><h3 id=输入框>输入框</h3><h4 id=文本框-add_input_text>文本框 add_input_text</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>add_input_text</span><span class=p>(</span><span class=s2>&#34;Label&#34;</span><span class=p>,</span> <span class=n>default_value</span><span class=o>=</span><span class=s2>&#34;Test Window&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=整型数框-add_input_int>整型数框 add_input_int</h4><h4 id=浮点数框-add_input_float>浮点数框 add_input_float</h4><h3 id=选择框>选择框</h3><h4 id=按钮-add_button>按钮 add_button</h4><h4 id=复选框-add_checkbox>复选框 add_checkbox</h4><h3 id=窗体>窗体</h3><ul><li><p><em>autosize</em></p><p>是否自动规划窗口大小</p></li><li><p><em>width</em></p><p>宽</p></li><li><p><em>height</em></p><p>高</p></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%8F%AF%E8%A7%86%E5%8C%96/dearpygui/ data-title="Python DearPyGui 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%8F%AF%E8%A7%86%E5%8C%96/dearpygui/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%8F%AF%E8%A7%86%E5%8C%96/dearpygui/ data-title="Python DearPyGui 库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%8F%AF%E8%A7%86%E5%8C%96/manim/ class=prev rel=prev title="Python manim 库"><i class="fa-solid fa-angle-left fa-fw"></i>Python manim 库</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/datetime/ class=next rel=next title="Python dateime 库">Python dateime 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

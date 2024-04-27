@@ -1,0 +1,393 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>Python typer库 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="TODO: typer https://typer.tiangolo.com/ click 是 Argparse 的升级版，而 typer 则是 click 的升级版，其中最大的优势就是可以通过参数的类型识"><meta name=keywords content='Python'><meta itemprop=name content="Python typer库"><meta itemprop=description content="TODO: typer https://typer.tiangolo.com/ click 是 Argparse 的升级版，而 typer 则是 click 的升级版，其中最大的优势就是可以通过参数的类型识"><meta itemprop=datePublished content="2023-11-01T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="1753"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/typer/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="Python typer库"><meta property="og:description" content="TODO: typer https://typer.tiangolo.com/ click 是 Argparse 的升级版，而 typer 则是 click 的升级版，其中最大的优势就是可以通过参数的类型识"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-11-01T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Python"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python typer库"><meta name=twitter:description content="TODO: typer https://typer.tiangolo.com/ click 是 Argparse 的升级版，而 typer 则是 click 的升级版，其中最大的优势就是可以通过参数的类型识"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/typer/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/pytest/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E5%8D%9A%E7%89%A9/geoguessr-%E4%B8%8E%E5%9B%BE%E5%AF%BB/%E6%8C%87%E7%A4%BA%E7%89%8C/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python typer库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/typer\/"},"genre":"posts","keywords":"Python","wordcount":1753,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/typer\/","datePublished":"2023-11-01T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python typer库</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2023-11-01 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-11-01>2023-11-01</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 1753 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#初识>初识</a></li><li><a href=#当有多个子命令时>当有多个子命令时</a></li><li><a href=#callback-参数调用函数>callback 参数调用函数</a></li><li><a href=#当需要--help的短命令-h的时候>当需要<code>--help</code>的短命令<code>-h</code>的时候</a></li><li><a href=#get_app_dir-取配置文件夹路径>get_app_dir 取配置文件夹路径</a></li><li><a href=#参数类型>参数类型</a><ul><li><a href=#int>int</a></li><li><a href=#bool>bool</a></li><li><a href=#enum>enum</a></li><li><a href=#path>path</a></li><li><a href=#file>file</a></li></ul></li><li><a href=#测试>测试</a><ul><li><a href=#测试输出>测试输出</a></li><li><a href=#测试输入>测试输入</a></li></ul></li><li><a href=#关于打包>关于打包</a></li></ul></nav></div></div><div class=content id=content><h1 id=todo-typer>TODO: typer</h1><blockquote><p><a href=https://typer.tiangolo.com/ target=_blank rel="external nofollow noopener noreferrer">https://typer.tiangolo.com/</a></p></blockquote><p><code>click</code> 是 <code>Argparse</code> 的升级版，而 <code>typer</code> 则是 <code>click</code> 的升级版，其中最大的优势就是可以通过参数的类型识别来快速建立 CLI</p><h2 id=初识>初识</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=kn>import</span> <span class=nn>typer</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>firstname</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span>  <span class=c1># 简单的参数，默认等同于 firstname: str = typer.Argument(...)</span>
+</span></span><span class=line><span class=cl>    <span class=n>lastname</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Argument</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=o>...</span><span class=p>,</span> <span class=n>help</span><span class=o>=</span><span class=s2>&#34;Lastname&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>  <span class=c1># ... 表示必选， 虽然 Argument 本身就是必选</span>
+</span></span><span class=line><span class=cl>    <span class=n>email</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=o>...</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;-e&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;--email&#34;</span><span class=p>,</span>  <span class=c1># Option 为可选参数， ... 表示这个可选参数为必选项, 后面可跟缩写和非缩写的参数名</span>
+</span></span><span class=line><span class=cl>        <span class=n>prompt</span><span class=o>=</span><span class=s2>&#34;Please enter your email&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>),</span>  <span class=c1># prompt 为提示信息, 如果没有明确指定，则会弹出提示要求输入</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 类型为int，所以可以指定最小值和最大值, clamp 表示超出了就按照最大值或最小值来处理</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span><span class=kc>None</span><span class=p>,</span> <span class=s2>&#34;-a&#34;</span><span class=p>,</span> <span class=s2>&#34;--age&#34;</span><span class=p>,</span> <span class=nb>min</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=nb>max</span><span class=o>=</span><span class=mi>100</span><span class=p>,</span> <span class=n>clamp</span><span class=o>=</span><span class=kc>True</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    Say hello to someone.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 上方为CLI的描述, 会自动放入帮助信息</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Hello </span><span class=si>{</span><span class=n>firstname</span><span class=si>}</span><span class=s2> </span><span class=si>{</span><span class=n>lastname</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Your email is </span><span class=si>{</span><span class=n>email</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>age</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Your age is </span><span class=si>{</span><span class=n>age</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>typer</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>)</span>  <span class=c1># 运行主函数</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，当只需要一个主命令的时候，那么使用 <code>typer.run(main)</code> 会非常方便。</p><p>参数有两种 <code>typer.Argument</code> 和 <code>typer.Option</code></p><p>输出结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>&gt; python .<span class=se>\1</span>.py --help
+</span></span><span class=line><span class=cl>Usage: 1.py <span class=o>[</span>OPTIONS<span class=o>]</span> FIRSTNAME LASTNAME
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  Say hello to someone.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Arguments:
+</span></span><span class=line><span class=cl>  FIRSTNAME  <span class=o>[</span>required<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  -e, --email TEXT         <span class=o>[</span>required<span class=o>]</span>
+</span></span><span class=line><span class=cl>  --install-completion     Install completion <span class=k>for</span> the current shell.
+</span></span><span class=line><span class=cl>  --show-completion        Show completion <span class=k>for</span> the current shell, to copy it
+</span></span><span class=line><span class=cl>                           or customize the installation.
+</span></span><span class=line><span class=cl>  --help                   Show this message and exit.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&gt; python .<span class=se>\1</span>.py Fried Pei 
+</span></span><span class=line><span class=cl>Please enter your email: 365433079@qq.com
+</span></span><span class=line><span class=cl>Hello Fried Pei
+</span></span><span class=line><span class=cl>Your email is 365433079@qq.com
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&gt; python .<span class=se>\1</span>.py Fried Pei --age <span class=m>28</span> --email 365433079@qq.com  
+</span></span><span class=line><span class=cl>Hello Fried Pei
+</span></span><span class=line><span class=cl>Your email is 365433079@qq.com
+</span></span><span class=line><span class=cl>Your age is <span class=m>28</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=当有多个子命令时>当有多个子命令时</h2><p>比如使用 <code>git</code> 的时候，既可以直接使用也可以 <code>git push --all</code> 这样的命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>import</span> <span class=n>typer</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>app</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Typer</span><span class=p>()</span>  <span class=c1># 初始化app</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># callback 为主命令</span>
+</span></span><span class=line><span class=cl><span class=c1># invoke_without_command 当没有子命令时也可以执行</span>
+</span></span><span class=line><span class=cl><span class=vi>@app</span><span class=o>.</span><span class=n>callback</span><span class=p>(</span><span class=n>invoke_without_command</span><span class=o>=</span><span class=no>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=ss>ctx</span><span class=p>:</span> <span class=n>typer</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span>  <span class=c1># 上下文，放在第一个</span>
+</span></span><span class=line><span class=cl>    <span class=ss>verbose</span><span class=p>:</span> <span class=n>int</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=mi>0</span><span class=p>,</span> <span class=s2>&#34;--verbose&#34;</span><span class=p>,</span> <span class=s2>&#34;-v&#34;</span><span class=p>,</span> <span class=n>help</span><span class=o>=</span><span class=s1>&#39;Verbosity level(1-3)&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span><span class=o>=</span><span class=no>True</span><span class=p>,</span> <span class=n>show_default</span><span class=o>=</span><span class=no>False</span><span class=p>),</span>  <span class=c1># 进行计数， 并且不显示默认值</span>
+</span></span><span class=line><span class=cl><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ss>verbose</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;verbose level: {}&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>verbose</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>ctx</span><span class=o>.</span><span class=n>invoked_subcommand</span> <span class=n>is</span> <span class=ss>None</span><span class=p>:</span>  <span class=c1># 当没有子命令时执行</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Run main process&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># command 为子命令</span>
+</span></span><span class=line><span class=cl><span class=vi>@app</span><span class=o>.</span><span class=n>command</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>push</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=ss>ctx</span><span class=p>:</span> <span class=n>typer</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=ss>all</span><span class=p>:</span> <span class=n>bool</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span><span class=no>False</span><span class=p>,</span> <span class=s2>&#34;--all&#34;</span><span class=p>,</span> <span class=s2>&#34;-a&#34;</span><span class=p>,</span> <span class=n>help</span><span class=o>=</span><span class=s2>&#34;Push all&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ss>all</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;push all&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=n>typer</span><span class=o>.</span><span class=n>Exit</span><span class=p>()</span>  <span class=c1># 主动退出  还有一种 typer.Abort() 会有提示 Abort!</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;push&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=n>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>app</span><span class=p>()</span>  <span class=c1># 启动app, 去找 callback 装饰的函数</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以看使用 <code>app()</code> 最本质的做法是 <code>typer.Typer()</code>, 并且对主命令使用 <code>@callback</code> 对子命令使用<code>command</code>
+另外 <code>typer.Context</code> 储存着上下文变量， <code>typer.Context.invoke_without_command</code> 为查看是否有子命令</p><p>输出为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>&gt; python .<span class=se>\2</span>.py --help    
+</span></span><span class=line><span class=cl>Usage: 2.py <span class=o>[</span>OPTIONS<span class=o>]</span> COMMAND <span class=o>[</span>ARGS<span class=o>]</span>...
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  -v, --verbose         Verbosity level<span class=o>(</span>1-3<span class=o>)</span>
+</span></span><span class=line><span class=cl>  --install-completion  Install completion <span class=k>for</span> the current shell.
+</span></span><span class=line><span class=cl>  --show-completion     Show completion <span class=k>for</span> the current shell, to copy it or
+</span></span><span class=line><span class=cl>                        customize the installation.
+</span></span><span class=line><span class=cl>  --help                Show this message and exit.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  push
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&gt; python .<span class=se>\2</span>.py -vv
+</span></span><span class=line><span class=cl>verbose level: <span class=m>2</span>
+</span></span><span class=line><span class=cl>Run main process
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&gt; python .<span class=se>\2</span>.py push --all
+</span></span><span class=line><span class=cl>push all
+</span></span></code></pre></td></tr></table></div></div><h2 id=callback-参数调用函数>callback 参数调用函数</h2><p>比如需要看 banner，或者 version 的时候，写在主函数里面难免有些臃肿，那么单独取一个回调会好很多</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>import</span> <span class=n>typer</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>app</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Typer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>state</span> <span class=o>=</span> <span class=p>{</span><span class=s2>&#34;verbose&#34;</span><span class=p>:</span> <span class=no>False</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>dis_version</span><span class=p>(</span><span class=nb>display</span><span class=p>:</span> <span class=n>bool</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>display</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Version 0.0.1&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=n>typer</span><span class=o>.</span><span class=n>Exit</span><span class=p>()</span> <span class=c1># 显示完后退出</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=vi>@app</span><span class=o>.</span><span class=n>callback</span><span class=p>(</span><span class=n>invoke_without_command</span><span class=o>=</span><span class=no>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>(</span><span class=ss>ctx</span><span class=p>:</span> <span class=n>typer</span><span class=o>.</span><span class=n>Context</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>         <span class=ss>verbose</span><span class=p>:</span> <span class=n>bool</span> <span class=o>=</span> <span class=no>False</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>         <span class=ss>version</span><span class=p>:</span> <span class=n>bool</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>             <span class=no>False</span><span class=p>,</span> <span class=s2>&#34;--version&#34;</span><span class=p>,</span> <span class=s2>&#34;-v&#34;</span><span class=p>,</span> <span class=n>help</span><span class=o>=</span><span class=s2>&#34;Show version&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>             <span class=n>callback</span><span class=o>=</span><span class=n>dis_version</span><span class=p>,</span> <span class=n>is_eager</span><span class=o>=</span><span class=no>True</span><span class=p>),</span>  <span class=c1># 调用 dis_version 函数， 并且优先级最高(is_eager)</span>
+</span></span><span class=line><span class=cl>         <span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    Manage users in the awesome CLI app.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ss>verbose</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>typer</span><span class=o>.</span><span class=n>echo</span><span class=p>(</span><span class=s2>&#34;Will write verbose output&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>state</span><span class=o>[</span><span class=s2>&#34;verbose&#34;</span><span class=o>]</span> <span class=o>=</span> <span class=no>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>typer</span><span class=o>.</span><span class=n>confirm</span><span class=p>(</span><span class=s2>&#34;Are you sure?&#34;</span><span class=p>,</span> <span class=n>default</span><span class=o>=</span><span class=no>True</span><span class=p>,</span> <span class=nb>abort</span><span class=o>=</span><span class=no>True</span><span class=p>)</span>  <span class=c1># 给出选项，abort选项表示 No 则直接中断</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>ctx</span><span class=o>.</span><span class=n>invoked_subcommand</span> <span class=n>is</span> <span class=ss>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;main process&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=n>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>app</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=当需要--help的短命令-h的时候>当需要<code>--help</code>的短命令<code>-h</code>的时候</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>typer</span>
+</span></span><span class=line><span class=cl><span class=n>app</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Typer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>CONTEXT_SETTINGS</span> <span class=o>=</span> <span class=nb>dict</span><span class=p>(</span><span class=n>help_option_names</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;-h&#39;</span><span class=p>,</span> <span class=s1>&#39;--help&#39;</span><span class=p>])</span><span class=nd>@app.command</span><span class=p>(</span><span class=n>context_settings</span><span class=o>=</span><span class=n>CONTEXT_SETTINGS</span><span class=p>)</span><span class=k>def</span> <span class=nf>main</span><span class=p>(</span><span class=n>nom</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>    <span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=get_app_dir-取配置文件夹路径>get_app_dir 取配置文件夹路径</h2><p>定义如下</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>get_app_dir</span><span class=p>(</span><span class=n>app_name</span><span class=p>,</span> <span class=n>roaming</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>force_posix</span><span class=o>=</span><span class=kc>False</span><span class=p>):</span>    <span class=sa>r</span><span class=s2>&#34;&#34;&#34;Returns the config folder for the application.  The default behavior    is to return whatever is most appropriate for the operating system.
+</span></span></span><span class=line><span class=cl><span class=s2>    To give you an idea, for an app called ``&#34;Foo Bar&#34;``, something like    the following folders could be returned:
+</span></span></span><span class=line><span class=cl><span class=s2>    Mac OS X:      ``~/Library/Application Support/Foo Bar``    Mac OS X (POSIX):      ``~/.foo-bar``    Unix:      ``~/.config/foo-bar``    Unix (POSIX):      ``~/.foo-bar``    Win XP (roaming):      ``C:\Documents and Settings\&lt;user&gt;\Local Settings\Application Data\Foo Bar``    Win XP (not roaming):      ``C:\Documents and Settings\&lt;user&gt;\Application Data\Foo Bar``    Win 7 (roaming):      ``C:\Users\&lt;user&gt;\AppData\Roaming\Foo Bar``    Win 7 (not roaming):      ``C:\Users\&lt;user&gt;\AppData\Local\Foo Bar``
+</span></span></span><span class=line><span class=cl><span class=s2>    .. versionadded:: 2.0
+</span></span></span><span class=line><span class=cl><span class=s2>    :param app_name: the application name.  This should be properly capitalized                     and can contain whitespace.    :param roaming: controls if the folder should be roaming or not on Windows.                    Has no affect otherwise.    :param force_posix: if this is set to `True` then on any POSIX system the                        folder will be stored in the home folder with a leading                        dot instead of the XDG config home or darwin&#39;s                        application support folder.    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>typer</span>
+</span></span><span class=line><span class=cl><span class=n>APP_NAME</span> <span class=o>=</span> <span class=s1>&#39;cmder&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>    <span class=n>app_dir</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>get_app_dir</span><span class=p>(</span><span class=n>APP_NAME</span><span class=p>,</span> <span class=n>force_posix</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>    <span class=n>config_path</span><span class=p>:</span> <span class=n>Path</span> <span class=o>=</span> <span class=n>Path</span><span class=p>(</span><span class=n>app_dir</span><span class=p>)</span> <span class=o>/</span> <span class=s2>&#34;config.json&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=参数类型>参数类型</h2><h3 id=int>int</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>(</span>    <span class=nb>id</span><span class=p>:</span> <span class=n>int</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Argument</span><span class=p>(</span><span class=o>...</span><span class=p>,</span> <span class=n>min</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>max</span><span class=o>=</span><span class=mi>1000</span><span class=p>),</span>    <span class=ss>rank</span><span class=p>:</span> <span class=n>int</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>max</span><span class=o>=</span><span class=mi>10</span><span class=p>,</span> <span class=n>clamp</span><span class=o>=</span><span class=no>True</span><span class=p>),</span>    <span class=ss>score</span><span class=p>:</span> <span class=n>float</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>min</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>max</span><span class=o>=</span><span class=mi>100</span><span class=p>,</span> <span class=n>clamp</span><span class=o>=</span><span class=no>True</span><span class=p>),):</span>
+</span></span><span class=line><span class=cl><span class=err>复制代码</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>(</span><span class=ss>verbose</span><span class=p>:</span> <span class=n>int</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=s2>&#34;--verbose&#34;</span><span class=p>,</span> <span class=s2>&#34;-v&#34;</span><span class=p>,</span> <span class=n>count</span><span class=o>=</span><span class=no>True</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl><span class=err>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>min 最小值</li><li>max 最大值</li><li>clamp 超出值后按最小/大处理</li><li>count 计数</li></ul><h3 id=bool>bool</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>(</span><span class=ss>accept</span><span class=p>:</span> <span class=no>Optional</span><span class=o>[</span><span class=n>bool</span><span class=o>]</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span><span class=no>None</span><span class=p>,</span> <span class=s2>&#34;--accept/--reject&#34;</span><span class=p>,</span> <span class=s2>&#34;-a/-A&#34;</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl><span class=err>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><p>默认情况下给出的参考值是<code>--accept/--no-accept</code> 修改成<code>--accept/--reject</code> 和 短命令 <code>-a/-A</code></p><h3 id=enum>enum</h3><p>只区枚举中的值</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>from</span> <span class=n>enum</span> <span class=n>import</span> <span class=no>Enum</span>
+</span></span><span class=line><span class=cl><span class=n>import</span> <span class=n>typer</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>NeuralNetwork</span><span class=p>(</span><span class=n>str</span><span class=p>,</span> <span class=no>Enum</span><span class=p>):</span>    <span class=n>simple</span> <span class=o>=</span> <span class=s2>&#34;simple&#34;</span>    <span class=n>conv</span> <span class=o>=</span> <span class=s2>&#34;conv&#34;</span>    <span class=n>lstm</span> <span class=o>=</span> <span class=s2>&#34;lstm&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>(</span><span class=ss>network</span><span class=p>:</span> <span class=no>NeuralNetwork</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span><span class=no>NeuralNetwork</span><span class=o>.</span><span class=n>simple</span><span class=p>,</span> <span class=n>case_sensitive</span><span class=o>=</span><span class=no>False</span><span class=p>)):</span>    <span class=n>typer</span><span class=o>.</span><span class=n>echo</span><span class=p>(</span><span class=n>f</span><span class=s2>&#34;Training neural network of type: {network.value}&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=n>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>    <span class=n>typer</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=err>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>case_sensitive 大小写敏感</li></ul><h3 id=path>path</h3><p>可以直接对路径进行验证</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ruby data-lang=ruby><span class=line><span class=cl><span class=n>import</span> <span class=n>typerfrom</span> <span class=n>pathlib</span> <span class=n>import</span> <span class=no>Path</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>(</span>    <span class=ss>config</span><span class=p>:</span> <span class=no>Path</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span>        <span class=o>...</span><span class=p>,</span>        <span class=n>exists</span><span class=o>=</span><span class=no>True</span><span class=p>,</span>        <span class=n>file_okay</span><span class=o>=</span><span class=no>True</span><span class=p>,</span>        <span class=n>dir_okay</span><span class=o>=</span><span class=no>False</span><span class=p>,</span>        <span class=n>writable</span><span class=o>=</span><span class=no>False</span><span class=p>,</span>        <span class=n>readable</span><span class=o>=</span><span class=no>True</span><span class=p>,</span>        <span class=n>resolve_path</span><span class=o>=</span><span class=no>True</span><span class=p>,</span>    <span class=p>)):</span>    <span class=n>text</span> <span class=o>=</span> <span class=n>config</span><span class=o>.</span><span class=n>read_text</span><span class=p>(</span><span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span>    <span class=n>typer</span><span class=o>.</span><span class=n>echo</span><span class=p>(</span><span class=n>f</span><span class=s2>&#34;Config file contents: {text}&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=n>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>    <span class=n>typer</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>main</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=err>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>exists 是否存在</li><li>file_okay 可以是文件</li><li>dir_okay 可以是文件夹</li><li>writable 是否可写</li><li>readable 是否可读</li><li>resolve_path 当为 True，则会转化成绝对路径</li></ul><h3 id=file>file</h3><p>可以直接返回一个<code>fi</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>(</span><span class=n>config</span><span class=p>:</span> <span class=n>typer</span><span class=o>.</span><span class=n>FileText</span> <span class=o>=</span> <span class=n>typer</span><span class=o>.</span><span class=n>Option</span><span class=p>(</span><span class=o>...</span><span class=p>,</span> <span class=n>mode</span><span class=o>=</span><span class=s2>&#34;a&#34;</span><span class=p>)):</span>    <span class=n>config</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=s1>&#39;This is a single line</span><span class=se>\n</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>mode 定义操作类型</li></ul><h2 id=测试>测试</h2><p>可以使用<code>pytest</code>来对<code>typer</code>进行测试</p><h3 id=测试输出>测试输出</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typer.testing</span> <span class=kn>import</span> <span class=n>CliRunner</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>.main</span> <span class=kn>import</span> <span class=n>app</span>
+</span></span><span class=line><span class=cl><span class=n>runner</span> <span class=o>=</span> <span class=n>CliRunner</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>test_app</span><span class=p>():</span>    <span class=n>result</span> <span class=o>=</span> <span class=n>runner</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span><span class=n>app</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;Camila&#34;</span><span class=p>,</span> <span class=s2>&#34;--city&#34;</span><span class=p>,</span> <span class=s2>&#34;Berlin&#34;</span><span class=p>])</span>    <span class=k>assert</span> <span class=n>result</span><span class=o>.</span><span class=n>exit_code</span> <span class=o>==</span> <span class=mi>0</span>    <span class=k>assert</span> <span class=s2>&#34;Hello Camila&#34;</span> <span class=ow>in</span> <span class=n>result</span><span class=o>.</span><span class=n>stdout</span>    <span class=k>assert</span> <span class=s2>&#34;Let&#39;s have a coffee in Berlin&#34;</span> <span class=ow>in</span> <span class=n>result</span><span class=o>.</span><span class=n>stdout</span>
+</span></span><span class=line><span class=cl><span class=n>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=测试输入>测试输入</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typer.testing</span> <span class=kn>import</span> <span class=n>CliRunner</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>.main</span> <span class=kn>import</span> <span class=n>app</span>
+</span></span><span class=line><span class=cl><span class=n>runner</span> <span class=o>=</span> <span class=n>CliRunner</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>test_app</span><span class=p>():</span>    <span class=n>result</span> <span class=o>=</span> <span class=n>runner</span><span class=o>.</span><span class=n>invoke</span><span class=p>(</span><span class=n>app</span><span class=p>,</span> <span class=p>[</span><span class=s2>&#34;Camila&#34;</span><span class=p>],</span> <span class=nb>input</span><span class=o>=</span><span class=s2>&#34;camila@example.com</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>)</span>    <span class=k>assert</span> <span class=n>result</span><span class=o>.</span><span class=n>exit_code</span> <span class=o>==</span> <span class=mi>0</span>    <span class=k>assert</span> <span class=s2>&#34;Hello Camila, your email is: camila@example.com&#34;</span> <span class=ow>in</span> <span class=n>result</span><span class=o>.</span><span class=n>stdout</span>
+</span></span><span class=line><span class=cl><span class=n>复制代码</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=关于打包>关于打包</h2><ul><li><a href=https://typer.tiangolo.com/tutorial/package/ target=_blank rel="external nofollow noopener noreferrer">这里</a>是 typer 里面提供的打包方法</li><li><a href=https://elinpf.github.io/2022/02/24/poetry-%e5%8c%85%e7%ae%a1%e7%90%86%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95/ target=_blank rel="external nofollow noopener noreferrer">poetry 包管理使用方法</a></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/typer/ data-title="Python typer库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/typer/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/typer/ data-title="Python typer库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/pytest/ class=prev rel=prev title=pytest><i class="fa-solid fa-angle-left fa-fw"></i>pytest</a>
+<a href=/Notes/posts/%E5%8D%9A%E7%89%A9/geoguessr-%E4%B8%8E%E5%9B%BE%E5%AF%BB/%E6%8C%87%E7%A4%BA%E7%89%8C/ class=next rel=next title="图寻 - 指示牌">图寻 - 指示牌<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

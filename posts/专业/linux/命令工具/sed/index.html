@@ -1,0 +1,450 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>sed - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="sed sed 主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。 我们知"><meta name=keywords content='Go 库'><meta itemprop=name content="sed"><meta itemprop=description content="sed sed 主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。 我们知"><meta itemprop=datePublished content="2023-02-17T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="4668"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Go 库"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/sed/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="sed"><meta property="og:description" content="sed sed 主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。 我们知"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-02-17T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Go 库"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="sed"><meta name=twitter:description content="sed sed 主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。 我们知"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/sed/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/useful/%E4%B8%80%E4%BA%9B%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E7%9A%84%E6%8A%80%E5%B7%A7/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/database/leveldb/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"sed","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/linux\/%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7\/sed\/"},"genre":"posts","keywords":"Go 库","wordcount":4668,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/linux\/%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7\/sed\/","datePublished":"2023-02-17T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>sed</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Golang</a></span></div><div class=post-meta-line><span title="2023-02-17 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-02-17>2023-02-17</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 4668 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#sed-脚本命令>sed 脚本命令</a><ul><li><a href=#s-替换文字>s 替换文字</a></li><li><a href=#d-删除>d 删除</a></li><li><a href=#ai-添加>a/i 添加</a></li><li><a href=#c-替换行>c 替换行</a></li><li><a href=#y-转换>y 转换</a></li><li><a href=#p-打印>p 打印</a></li><li><a href=#w-写入>w 写入</a></li><li><a href=#r-写入>r 写入</a></li><li><a href=#q-退出>q 退出</a></li></ul></li><li><a href=#address-寻址方式>address 寻址方式</a><ul><li><a href=#以数字形式指定行区间>以数字形式指定行区间</a></li><li><a href=#用文本模式指定行区间>用文本模式指定行区间</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=sed>sed</h1><p>sed 主要用来自动编辑一个或多个文件、简化对文件的反复操作、编写转换程序等。</p><p>我们知道，Vim 采用的是交互式文本编辑模式，你可以用键盘命令来交互性地插入、删除或替换数据中的文本。但 sed 命令不同，它采用的是<strong>流编辑模式</strong>，最明显的特点是，在 sed 处理数据之前，需要预先提供一组规则，sed 会按照此规则来编辑数据。</p><p>sed 会根据脚本命令来处理文本文件中的数据，这些命令要么从命令行中输入，要么存储在一个文本文件中，此命令执行数据的顺序如下：</p><ol><li>每次仅读取一行内容；</li><li>根据提供的规则命令匹配并修改数据。注意，sed 默认不会直接修改源文件数据，而是会将数据复制到缓冲区中，修改也仅限于缓冲区中的数据；</li><li>将执行结果输出。</li></ol><p>当一行数据匹配完成后，它会继续读取下一行数据，并重复这个过程，直到将文件中所有数据处理完毕。</p><p>sed 命令的基本格式如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=o>[</span>选项<span class=o>]</span> <span class=o>[</span>脚本命令<span class=o>]</span> 文件名
+</span></span></code></pre></td></tr></table></div></div><p>该命令常用的选项及含义：</p><table><thead><tr><th>选项</th><th>含义</th></tr></thead><tbody><tr><td>-e 脚本命令</td><td>该选项会将其后跟的脚本命令添加到已有的命令中。</td></tr><tr><td>-f 脚本命令文件</td><td>该选项会将其后文件中的脚本命令添加到已有的命令中。</td></tr><tr><td>-n</td><td>默认情况下，sed 会在所有的脚本指定执行完毕后，会自动输出处理后的内容，而该选项会屏蔽启动输出，需使用 print 命令来完成输出。</td></tr><tr><td>-i</td><td>此选项会直接修改源文件，要慎用。</td></tr></tbody></table><p>成功使用 sed 命令的关键在于掌握各式各样的脚本命令及格式，它能帮你定制编辑文件的规则。</p><h2 id=sed-脚本命令>sed 脚本命令</h2><h3 id=s-替换文字>s 替换文字</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>s/pattern/replacement/flags
+</span></span></code></pre></td></tr></table></div></div><p>其中，address 表示指定要操作的具体行，pattern 指的是需要替换的内容，replacement 指的是要替换的新内容。</p><p>此命令中常用的 flags 标记：</p><table><thead><tr><th>flags 标记</th><th>功能</th></tr></thead><tbody><tr><td>n</td><td>1~512 之间的数字，表示指定要替换的字符串出现第几次时才进行替换，例如，一行中有 3 个 A，但用户只想替换第二个 A，这是就用到这个标记；</td></tr><tr><td>g</td><td>对数据中<strong>所有</strong>匹配到的内容进行替换，如果没有 g，则只会在第一次匹配成功时做替换操作。例如，一行数据中有 3 个 A，则只会替换第一个 A；</td></tr><tr><td>p</td><td>会打印与替换命令中指定的模式匹配的行。此标记通常与 -n 选项一起使用。</td></tr><tr><td>w file</td><td>将缓冲区中的内容写到指定的 file 文件中；</td></tr><tr><td>&</td><td>用正则表达式匹配的内容进行替换；</td></tr><tr><td>\n</td><td>匹配第 n 个子串，该子串之前在 pattern 中用 () 指定。</td></tr><tr><td>\</td><td>转义（转义替换部分包含：&、\ 等）。</td></tr></tbody></table><p>原文</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>This is a test of the test script.
+</span></span><span class=line><span class=cl>This is the second test of the test script.
+</span></span></code></pre></td></tr></table></div></div><p>比如，可以指定 sed 用新文本替换第几处模式匹配的地方：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;s/test/trial/2&#39;</span> data4.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This is a <span class=nb>test</span> of the trial script.
+</span></span><span class=line><span class=cl>This is the second <span class=nb>test</span> of the trial script.
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，使用数字 2 作为标记的结果就是，sed 编辑器只替换每行中第 2 次出现的匹配模式。</p><p>如果要用新文件替换所有匹配的字符串，可以使用 g 标记：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;s/test/trial/g&#39;</span> data4.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This is a trial of the trial script.
+</span></span><span class=line><span class=cl>This is the second trial of the trial script.
+</span></span></code></pre></td></tr></table></div></div><p>-n 选项会禁止 sed 输出，但 p 标记会输出修改过的行，将二者匹配使用的效果就是只输出被替换命令修改过的行，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>cat data5.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This is a <span class=nb>test</span> line.
+</span></span><span class=line><span class=cl>This is a different line.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sed -n <span class=s1>&#39;s/test/trial/p&#39;</span> data5.txt
+</span></span><span class=line><span class=cl>This is a trial line.
+</span></span></code></pre></td></tr></table></div></div><p>w 标记会将匹配后的结果保存到指定文件中，比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;s/test/trial/w test.txt&#39;</span> data5.txt
+</span></span><span class=line><span class=cl>This is a trial line.
+</span></span><span class=line><span class=cl>This is a different line.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>cat test.txt
+</span></span><span class=line><span class=cl>This is a trial line.
+</span></span></code></pre></td></tr></table></div></div><p>在使用 s 脚本命令时，替换类似文件路径的字符串会比较麻烦，需要将路径中的正斜线进行转义，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;s/\/bin\/bash/\/bin\/csh/&#39;</span> /etc/passwd
+</span></span></code></pre></td></tr></table></div></div><h3 id=d-删除>d 删除</h3><p>此命令的基本格式为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>d
+</span></span></code></pre></td></tr></table></div></div><p>如果需要删除文本中的特定行，可以用 d 脚本命令，它会删除指定行中的所有内容。但使用该命令时要特别小心，如果你忘记指定具体行号的话，文件中的所有内容都会被删除，举个例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cat data1.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sed <span class=s1>&#39;d&#39;</span> data1.txt
+</span></span><span class=line><span class=cl><span class=c1># 什么也不输出，证明成了空文件</span>
+</span></span></code></pre></td></tr></table></div></div><p>当和指定地址一起使用时，删除命令显然能发挥出大的功用。可以从数据流中删除特定的文本行。</p><p>address 的具体写法后续会做详细介绍，这里只举几个简单的例子：</p><ul><li><p>通过行号指定，比如删除 data6.txt 文件内容中的第 3 行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>cat data6.txt
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sed <span class=s1>&#39;3d&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span></code></pre></td></tr></table></div></div></li><li><p>或者通过特定行区间指定，比如删除 data6.txt 文件内容中的第 2、3 行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>root@localhost ~<span class=o>]</span><span class=c1># sed &#39;2,3d&#39; data6.txt</span>
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span></code></pre></td></tr></table></div></div></li><li><p>也可以使用两个文本模式来删除某个区间内的行，但这么做时要小心，你指定的第一个模式会“打开”行删除功能，第二个模式会“关闭”行删除功能，因此，sed 会删除两个指定行之间的所有行（包括指定的行），例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;/1/,/3/d&#39;</span> data6.txt
+</span></span><span class=line><span class=cl><span class=c1># 删除第 1~3 行的文本数据</span>
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span></code></pre></td></tr></table></div></div></li><li><p>或者通过特殊的文件结尾字符，比如删除 data6.txt 文件内容中第 3 行开始的所有的内容：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;3,$d&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span></code></pre></td></tr></table></div></div></li></ul><p>在默认情况下 sed 并不会修改原始文件，这里被删除的行只是从 sed 的输出中消失了，原始文件没做任何改变。</p><h3 id=ai-添加>a/i 添加</h3><p>a 命令表示在指定行的后面附加一行，i 命令表示在指定行的前面插入一行，这里之所以要同时介绍这 2 个脚本命令，因为它们的基本格式完全相同，如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>a<span class=se>\&lt;</span>new content&gt;
+</span></span><span class=line><span class=cl><span class=c1># and</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>i<span class=se>\&lt;</span>new content&gt;
+</span></span></code></pre></td></tr></table></div></div><p>下面分别就这 2 个命令，给读者举几个例子。比如说，将一个新行插入到数据流第三行前，执行命令如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;3i\This is an inserted line.&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is an inserted line.
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span></code></pre></td></tr></table></div></div><p>再比如说，将一个新行附加到数据流中第三行后，执行命令如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;3a\This is an appended line.&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span><span class=line><span class=cl>This is an appended line.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span></code></pre></td></tr></table></div></div><p>如果你想将一个多行数据添加到数据流中，只需对要插入或附加的文本中的每一行末尾（除最后一行）添加反斜线即可，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;1i\
+</span></span></span><span class=line><span class=cl><span class=s1>This is one line of new text.\
+</span></span></span><span class=line><span class=cl><span class=s1>This is another line of new text.&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This is one line of new text.
+</span></span><span class=line><span class=cl>This is another line of new text.
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，指定的两行都会被添加到数据流中。</p><h3 id=c-替换行>c 替换行</h3><p>c 命令表示将<strong>指定行</strong>中的所有内容，替换成该选项后面的字符串。该命令的基本格式为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>c<span class=se>\&lt;</span>用于替换的新文本&gt;
+</span></span></code></pre></td></tr></table></div></div><p>举个例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;3c\
+</span></span></span><span class=line><span class=cl><span class=s1>This is a changed line of text.&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is a changed line of text.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span></code></pre></td></tr></table></div></div><p>在这个例子中，sed 编辑器会修改第三行中的文本，其实，下面的写法也可以实现此目的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;/number 3/c\
+</span></span></span><span class=line><span class=cl><span class=s1>This is a changed line of text.&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is a changed line of text.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span></code></pre></td></tr></table></div></div><h3 id=y-转换>y 转换</h3><p>y 转换命令是唯一可以处理单个字符的 sed 脚本命令，其基本格式如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>y/inchars/outchars/
+</span></span></code></pre></td></tr></table></div></div><p>转换命令会对 inchars 和 outchars 值进行一对一的映射，即 inchars 中的第一个字符会被转换为 outchars 中的第一个字符，第二个字符会被转换成 outchars 中的第二个字符 &mldr; 这个映射过程会一直持续到处理完指定字符。如果 inchars 和 outchars 的长度不同，则 sed 会产生一条错误消息。</p><p>举个简单例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;y/123/789/&#39;</span> data8.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This is line number 7.
+</span></span><span class=line><span class=cl>This is line number 8.
+</span></span><span class=line><span class=cl>This is line number 9.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span><span class=line><span class=cl>This is line number <span class=m>7</span> again.
+</span></span><span class=line><span class=cl>This is yet another line.
+</span></span><span class=line><span class=cl>This is the last line in the file.
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，inchars 模式中指定字符的每个实例都会被替换成 outchars 模式中相同位置的那个字符。</p><p>转换命令是一个<strong>全局命令</strong>，也就是说，它会文本行中找到的所有指定字符自动进行转换，而不会考虑它们出现的位置，再打个比方：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;This 1 is a test of 1 try.&#34;</span> <span class=p>|</span> sed <span class=s1>&#39;y/123/456/&#39;</span>
+</span></span><span class=line><span class=cl>This <span class=m>4</span> is a <span class=nb>test</span> of <span class=m>4</span> try.
+</span></span></code></pre></td></tr></table></div></div><p>sed 转换了在文本行中匹配到的字符 1 的两个实例，我们无法限定只转换在特定地方出现的字符。</p><h3 id=p-打印>p 打印</h3><p>p 命令表示搜索符号条件的行，并输出该行的内容，此命令的基本格式为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>p
+</span></span></code></pre></td></tr></table></div></div><p>p 命令常见的用法是打印包含匹配文本模式的行，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>cat data6.txt
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sed -n <span class=s1>&#39;/number 3/p&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，用 -n 选项和 p 命令配合使用，我们可以禁止输出其他行，只打印包含匹配文本模式的行。</p><p>如果需要在修改之前查看行，也可以使用打印命令，比如与替换或修改命令一起使用。可以创建一个脚本在修改行之前显示该行，如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed -n <span class=s1>&#39;/3/{
+</span></span></span><span class=line><span class=cl><span class=s1>p
+</span></span></span><span class=line><span class=cl><span class=s1>s/line/test/p
+</span></span></span><span class=line><span class=cl><span class=s1>}&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span><span class=line><span class=cl>This is <span class=nb>test</span> number 3.
+</span></span></code></pre></td></tr></table></div></div><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=C:%5cUsers%5csunty%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230217141006816.png data-srcset="C:%5cUsers%5csunty%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230217141006816.png, C:%5cUsers%5csunty%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230217141006816.png 1.5x, C:%5cUsers%5csunty%5cAppData%5cRoaming%5cTypora%5ctypora-user-images%5cimage-20230217141006816.png 2x" data-sizes=auto alt=C:\Users\sunty\AppData\Roaming\Typora\typora-user-images\image-20230217141006816.png title=image-20230217141006816></p><p>sed 命令会查找包含数字 3 的行，然后执行两条命令。首先，脚本用 p 命令来打印出原始行；然后它用 s 命令替换文本，并用 p 标记打印出替换结果。输出同时显示了原来的行文本和新的行文本。</p><h3 id=w-写入>w 写入</h3><p>w 命令用来将文本中指定行的内容写入文件中，此命令的基本格式如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>w filename
+</span></span></code></pre></td></tr></table></div></div><p>这里的 filename 表示文件名，可以使用相对路径或绝对路径，但不管是哪种，运行 sed 命令的用户都必须有文件的写权限。</p><p>下面的例子是将数据流中的前两行打印到一个文本文件中：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;1,2w test.txt&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>cat test.txt
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span></code></pre></td></tr></table></div></div><p>当然，如果不想让行直接输出，可以用 -n 选项，再举个例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>cat data11.txt
+</span></span><span class=line><span class=cl>Blum, R    Browncoat
+</span></span><span class=line><span class=cl>McGuiness, A Alliance
+</span></span><span class=line><span class=cl>Bresnahan, C Browncoat
+</span></span><span class=line><span class=cl>Harken, C   Alliance
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sed -n <span class=s1>&#39;/Browncoat/w Browncoats.txt&#39;</span> data11.txt
+</span></span><span class=line><span class=cl>cat Browncoats.txt
+</span></span><span class=line><span class=cl>Blum, R    Browncoat
+</span></span><span class=line><span class=cl>Bresnahan, C Browncoat
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，通过使用 w 脚本命令，sed 可以实现<strong>将包含文本模式的数据行写入目标文件</strong></p><h3 id=r-写入>r 写入</h3><p>r 命令用于将一个独立文件的数据插入到当前数据流的指定位置，该命令的基本格式为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>r filename
+</span></span></code></pre></td></tr></table></div></div><p>sed 命令会将 filename 文件中的内容插入到 address 指定行的后面，比如说：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>cat data12.txt
+</span></span><span class=line><span class=cl>This is an added line.
+</span></span><span class=line><span class=cl>This is the second added line.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sed <span class=s1>&#39;3r data12.txt&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span><span class=line><span class=cl>This is an added line.
+</span></span><span class=line><span class=cl>This is the second added line.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span></code></pre></td></tr></table></div></div><p>如果你想将指定文件中的数据插入到数据流的末尾，可以使用 $ 地址符，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;$r data12.txt&#39;</span> data6.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span><span class=line><span class=cl>This is line number 3.
+</span></span><span class=line><span class=cl>This is line number 4.
+</span></span><span class=line><span class=cl>This is an added line.
+</span></span><span class=line><span class=cl>This is the second added line.
+</span></span></code></pre></td></tr></table></div></div><h3 id=q-退出>q 退出</h3><p>q 命令的作用是使 sed 命令在第一次匹配任务结束后，退出 sed 程序，不再进行对后续数据的处理。</p><p>比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;2q&#39;</span> test.txt
+</span></span><span class=line><span class=cl>This is line number 1.
+</span></span><span class=line><span class=cl>This is line number 2.
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，sed 命令在打印输出第 2 行之后，就停止了，是 q 命令造成的，再比如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;/number 1/{ s/number 1/number 0/;q; }&#39;</span> test.txt
+</span></span><span class=line><span class=cl>This is line number 0.
+</span></span></code></pre></td></tr></table></div></div><p>使用 q 命令之后，sed 命令会在匹配到 number 1 时，将其替换成 number 0，然后直接退出。</p><h2 id=address-寻址方式>address 寻址方式</h2><p>前面在介绍各个脚本命令时，我们一直忽略了对 address 部分的介绍。对各个脚本命令来说，<strong>address 用来表明该脚本命令作用到文本中的具体行</strong></p><p>默认情况下，sed 命令会作用于文本数据的所有行。如果只想将命令作用于特定行或某些行，则必须写明 address 部分，表示的方法有以下 2 种：</p><ol><li>以数字形式指定行区间；</li><li>用文本模式指定具体行区间。</li></ol><p>以上两种形式都可以使用如下这 2 种格式，分别是：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=o>[</span>address<span class=o>]</span>脚本命令
+</span></span></code></pre></td></tr></table></div></div><p>或者</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>address <span class=o>{</span>
+</span></span><span class=line><span class=cl>  多个脚本命令
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>以上两种形式在前面例子中都有具体实例，因此这里不再做过多赘述。</p><h3 id=以数字形式指定行区间>以数字形式指定行区间</h3><p>当使用数字方式的行寻址时，可以用行在文本流中的行位置来引用。<strong>sed 会将文本流中的第一行编号为 1</strong>，然后继续按顺序为接下来的行分配行号。</p><p>在脚本命令中，指定的地址可以是单个行号，或是用起始行号、逗号以及结尾行号指定的一定区间范围内的行。这里举一个 sed 命令作用到指定行号的例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;2s/dog/cat/&#39;</span> data1.txt
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy cat
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，sed 只修改地址指定的第二行的文本。下面的例子中使用了行地址区间：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl> sed <span class=s1>&#39;2,3s/dog/cat/&#39;</span> data1.txt
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy cat
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy cat
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span></code></pre></td></tr></table></div></div><p>在此基础上，如果想将命令作用到文本中从某行开始的所有行，可以用特殊地址——美元符（$）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>sed <span class=s1>&#39;2,$s/dog/cat/&#39;</span> data1.txt
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy dog
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy cat
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy cat
+</span></span><span class=line><span class=cl>The quick brown fox jumps over the lazy cat
+</span></span></code></pre></td></tr></table></div></div><h3 id=用文本模式指定行区间>用文本模式指定行区间</h3><p>sed 允许指定文本模式来过滤出命令要作用的行，格式如下：</p><p>/pattern/command</p><p>注意，必须用<strong>正斜线</strong>将要指定的 pattern 封起来，sed 会将该命令作用到包含指定文本模式的行上。</p><p>举个例子，如果你想只修改用户 demo 的默认 shell，可以使用 sed 命令，执行命令如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>grep demo /etc/passwd
+</span></span><span class=line><span class=cl>demo:x:502:502::/home/Samantha:/bin/bash
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sed <span class=s1>&#39;/demo/s/bash/csh/&#39;</span> /etc/passwd
+</span></span><span class=line><span class=cl>root:x:0:0:root:/root:/bin/bash
+</span></span><span class=line><span class=cl>...
+</span></span><span class=line><span class=cl>demo:x:502:502::/home/demo:/bin/csh
+</span></span><span class=line><span class=cl>...
+</span></span></code></pre></td></tr></table></div></div><p>虽然使用固定文本模式能帮你过滤出特定的值，就跟上面这个用户名的例子一样，但其作用难免有限，因此，sed 允许在文本模式使用正则表达式指明作用的具体行。正则表达式允许创建高级文本模式匹配表达式来匹配各种数据。这些表达式结合了一系列通配符、特殊字符以及固定文本字符来生成能够匹配几乎任何形式文本的简练模式。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>cat test.txt
+</span></span><span class=line><span class=cl>&lt;html&gt;
+</span></span><span class=line><span class=cl>&lt;title&gt;First Wed&lt;/title&gt;
+</span></span><span class=line><span class=cl>&lt;body&gt;
+</span></span><span class=line><span class=cl>h1Helloh1
+</span></span><span class=line><span class=cl>h2Helloh2
+</span></span><span class=line><span class=cl>h3Helloh3
+</span></span><span class=line><span class=cl>&lt;/body&gt;
+</span></span><span class=line><span class=cl>&lt;/html&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 使用正则表示式给所有第一个的h1、h2、h3添加&lt;&gt;，给第二个h1、h2、h3添加&lt;/&gt;</span>
+</span></span><span class=line><span class=cl>cat sed.sh
+</span></span><span class=line><span class=cl>/h<span class=o>[</span>0-9<span class=o>]</span>/<span class=o>{</span>
+</span></span><span class=line><span class=cl>    s//<span class=se>\&lt;</span><span class=p>&amp;</span><span class=se>\&gt;</span>/1
+</span></span><span class=line><span class=cl>    s//<span class=se>\&lt;\/</span><span class=p>&amp;</span><span class=se>\&gt;</span>/2
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sed -f sed.sh test.txt
+</span></span><span class=line><span class=cl>&lt;h1&gt;Hello&lt;/h1&gt;
+</span></span><span class=line><span class=cl>&lt;h2&gt;Hello&lt;/h2&gt;
+</span></span><span class=line><span class=cl>&lt;h3&gt;Hello&lt;/h3&gt;
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/sed/ data-title=sed data-hashtags="Go 库"><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/sed/ data-hashtag="Go 库"><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E5%91%BD%E4%BB%A4%E5%B7%A5%E5%85%B7/sed/ data-title=sed><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/useful/%E4%B8%80%E4%BA%9B%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E7%9A%84%E6%8A%80%E5%B7%A7/ class=prev rel=prev title=一些离线安装的技巧><i class="fa-solid fa-angle-left fa-fw"></i>一些离线安装的技巧</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/database/leveldb/ class=next rel=next title=LevelDB>LevelDB<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

@@ -1,0 +1,184 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>剑指 Offer 40. 最小的 k 个数 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="剑指 Offer 40. 最小的 k 个数 easy 快排 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入 4、5"><meta name=keywords content='算法,排序'><meta itemprop=name content="剑指 Offer 40. 最小的 k 个数"><meta itemprop=description content="剑指 Offer 40. 最小的 k 个数 easy 快排 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入 4、5"><meta itemprop=datePublished content="2022-02-26T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="633"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="算法,排序"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/array/%E6%8E%92%E5%BA%8F/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="剑指 Offer 40. 最小的 k 个数"><meta property="og:description" content="剑指 Offer 40. 最小的 k 个数 easy 快排 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入 4、5"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-02-26T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="算法"><meta property="article:tag" content="排序"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="剑指 Offer 40. 最小的 k 个数"><meta name=twitter:description content="剑指 Offer 40. 最小的 k 个数 easy 快排 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入 4、5"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/array/%E6%8E%92%E5%BA%8F/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/array/%E6%8E%92%E5%BA%8F/%E5%89%91%E6%8C%87-offer-41.-%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/link-list/%E5%89%91%E6%8C%87-offer-35.-%E5%A4%8D%E6%9D%82%E9%93%BE%E8%A1%A8%E7%9A%84%E5%A4%8D%E5%88%B6/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"剑指 Offer 40. 最小的 k 个数","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/%E5%88%B7%E9%A2%98\/array\/%E6%8E%92%E5%BA%8F\/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0\/"},"genre":"posts","keywords":"算法, 排序","wordcount":633,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/%E5%88%B7%E9%A2%98\/array\/%E6%8E%92%E5%BA%8F\/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0\/","datePublished":"2022-02-26T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>剑指 Offer 40. 最小的 k 个数</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/%E5%88%B7%E9%A2%98/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;刷题</a></span></div><div class=post-meta-line><span title="2022-02-26 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-26>2022-02-26</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 633 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#排序>排序</a></li><li><a href=#快排思想>快排思想</a></li><li><a href=#堆>堆</a></li></ul></nav></div></div><div class=content id=content><h1 id=剑指-offer-40-最小的-k-个数>剑指 Offer 40. 最小的 k 个数</h1><p><code>easy</code> <code>快排</code></p><p>输入整数数组 <code>arr</code> ，找出其中最小的 <code>k</code> 个数。例如，输入 4、5、1、6、2、7、3、8 这 8 个数字，则最小的 4 个数字是 1、2、3、4。</p><p><strong>示例 1：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>输入：arr = [3,2,1], k = 2
+</span></span><span class=line><span class=cl>输出：[1,2] 或者 [2,1]
+</span></span></code></pre></td></tr></table></div></div><p><strong>示例 2：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>输入：arr = [0,1,2,1], k = 1
+</span></span><span class=line><span class=cl>输出：[0]
+</span></span></code></pre></td></tr></table></div></div><h2 id=排序>排序</h2><p>排序后取前 k 个数，很笨！</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>getLeastNumbers</span><span class=p>(</span><span class=nx>arr</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>k</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>sort</span><span class=p>.</span><span class=nf>Ints</span><span class=p>(</span><span class=nx>arr</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>arr</span><span class=p>[:</span><span class=nx>k</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=快排思想>快排思想</h2><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165449390.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165449390.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165449390.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165449390.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165449390.png title=image-20220226165449390></p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165623178.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165623178.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165623178.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165623178.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165623178.png title=image-20220226165623178></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 快排思想
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>getLeastNumbers</span><span class=p>(</span><span class=nx>arr</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>k</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>quickSort</span> <span class=kd>func</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>l</span><span class=p>,</span> <span class=nx>r</span><span class=p>,</span> <span class=nx>x</span> <span class=kt>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>quickSort</span> <span class=p>=</span> <span class=kd>func</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>l</span><span class=p>,</span> <span class=nx>r</span><span class=p>,</span> <span class=nx>x</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>l</span> <span class=p>&gt;</span> <span class=nx>r</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=o>:=</span> <span class=nx>l</span><span class=p>,</span> <span class=nx>r</span>
+</span></span><span class=line><span class=cl>		<span class=nx>pivotPos</span> <span class=o>:=</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>j</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>&gt;</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>nums</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span> <span class=p>=</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>j</span><span class=p>],</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>				<span class=nx>pivotPos</span> <span class=p>=</span> <span class=p>!</span><span class=nx>pivotPos</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=nx>pivotPos</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>j</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>i</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>num</span> <span class=o>:=</span> <span class=nx>i</span> <span class=o>-</span> <span class=nx>l</span> <span class=o>+</span> <span class=mi>1</span> <span class=c1>// 本次划分 可以保证划分正确的个数为num
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>if</span> <span class=nx>x</span> <span class=o>==</span> <span class=nx>num</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// 正好
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>return</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=nx>x</span> <span class=p>&lt;</span> <span class=nx>num</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nf>quickSort</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=nx>l</span><span class=p>,</span> <span class=nx>i</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=nx>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nf>quickSort</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nx>r</span><span class=p>,</span> <span class=nx>x</span><span class=o>-</span><span class=nx>num</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>k</span> <span class=o>==</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nf>quickSort</span><span class=p>(</span><span class=nx>arr</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>arr</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=nx>k</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>arr</span><span class=p>[:</span><span class=nx>k</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=堆>堆</h2><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165517304.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165517304.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165517304.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165517304.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165517304.png title=image-20220226165517304></p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165612477.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165612477.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165612477.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165612477.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220226165612477.png title=image-20220226165612477></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>getLeastNumbers3</span><span class=p>(</span><span class=nx>arr</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>k</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 大顶堆
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>var</span> <span class=nx>heapify</span> <span class=kd>func</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>root</span><span class=p>,</span> <span class=nx>end</span> <span class=kt>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>heapify</span> <span class=p>=</span> <span class=kd>func</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>root</span><span class=p>,</span> <span class=nx>end</span> <span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// 大顶堆堆化，堆顶值小一直下沉
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// 左孩子节点索引
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=nx>child</span> <span class=o>:=</span> <span class=nx>root</span><span class=o>*</span><span class=mi>2</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// 越界跳出
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>if</span> <span class=nx>child</span> <span class=p>&gt;</span> <span class=nx>end</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>return</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// 比较左右孩子，取大值，否则child不用++
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>if</span> <span class=nx>child</span> <span class=p>&lt;</span> <span class=nx>end</span> <span class=o>&amp;&amp;</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>child</span><span class=p>]</span> <span class=o>&lt;=</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>child</span><span class=o>+</span><span class=mi>1</span><span class=p>]</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>child</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// 如果父节点已经大于左右孩子大值，已堆化
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>if</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>root</span><span class=p>]</span> <span class=p>&gt;</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>child</span><span class=p>]</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>return</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// 孩子节点大值上冒
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=nx>nums</span><span class=p>[</span><span class=nx>root</span><span class=p>],</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>child</span><span class=p>]</span> <span class=p>=</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>child</span><span class=p>],</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>root</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// 更新父节点到子节点，继续往下比较，不断下沉
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=nx>root</span> <span class=p>=</span> <span class=nx>child</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>end</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>arr</span><span class=p>)</span> <span class=o>-</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 从最后一个非叶子节点开始堆化
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=nx>end</span> <span class=o>/</span> <span class=mi>2</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&gt;=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span><span class=o>--</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>heapify</span><span class=p>(</span><span class=nx>arr</span><span class=p>,</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>end</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 依次弹出元素，然后再堆化，相当于依次把最大值放入尾部
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=nx>end</span><span class=p>;</span> <span class=nx>i</span> <span class=o>&gt;=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span><span class=o>--</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>arr</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=nx>arr</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>arr</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span> <span class=nx>arr</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=nx>end</span><span class=o>--</span>
+</span></span><span class=line><span class=cl>		<span class=nf>heapify</span><span class=p>(</span><span class=nx>arr</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>end</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>arr</span><span class=p>[:</span><span class=nx>k</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/array/%E6%8E%92%E5%BA%8F/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0/ data-title="剑指 Offer 40. 最小的 k 个数" data-hashtags=算法,排序><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/array/%E6%8E%92%E5%BA%8F/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0/ data-hashtag=算法><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/array/%E6%8E%92%E5%BA%8F/%E5%89%91%E6%8C%87-offer-40.-%E6%9C%80%E5%B0%8F%E7%9A%84-k-%E4%B8%AA%E6%95%B0/ data-title="剑指 Offer 40. 最小的 k 个数"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E7%AE%97%E6%B3%95/>算法</a>,&nbsp;<a href=/Notes/tags/%E6%8E%92%E5%BA%8F/>排序</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/array/%E6%8E%92%E5%BA%8F/%E5%89%91%E6%8C%87-offer-41.-%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/ class=prev rel=prev title="剑指 Offer 41. 数据流中的中位数"><i class="fa-solid fa-angle-left fa-fw"></i>剑指 Offer 41. 数据流中的中位数</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/link-list/%E5%89%91%E6%8C%87-offer-35.-%E5%A4%8D%E6%9D%82%E9%93%BE%E8%A1%A8%E7%9A%84%E5%A4%8D%E5%88%B6/ class=next rel=next title="剑指 Offer 35. 复杂链表的复制">剑指 Offer 35. 复杂链表的复制<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

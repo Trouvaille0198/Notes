@@ -1,0 +1,532 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>Python dataclasses 库 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="dataclasses 简介 dataclass 的定义位于 PEP-557，根据定义，一个 dataclass 是指 “一个带有默认值的可变的 n"><meta name=keywords content='Python'><meta itemprop=name content="Python dataclasses 库"><meta itemprop=description content="dataclasses 简介 dataclass 的定义位于 PEP-557，根据定义，一个 dataclass 是指 “一个带有默认值的可变的 n"><meta itemprop=datePublished content="2022-11-09T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="4285"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/dataclasses/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="Python dataclasses 库"><meta property="og:description" content="dataclasses 简介 dataclass 的定义位于 PEP-557，根据定义，一个 dataclass 是指 “一个带有默认值的可变的 n"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-11-09T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Python"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python dataclasses 库"><meta name=twitter:description content="dataclasses 简介 dataclass 的定义位于 PEP-557，根据定义，一个 dataclass 是指 “一个带有默认值的可变的 n"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/dataclasses/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%B7%A5%E5%85%B7/protobuf/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/games/%E6%96%87%E6%98%8E%E5%85%AD/%E5%BE%B7%E5%9B%BD/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python dataclasses 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/dataclasses\/"},"genre":"posts","keywords":"Python","wordcount":4285,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/dataclasses\/","datePublished":"2022-11-09T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python dataclasses 库</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2022-11-09 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-11-09>2022-11-09</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 4285 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#简介>简介</a></li><li><a href=#使用>使用</a><ul><li><a href=#控制魔法方法的重写>控制魔法方法的重写</a></li><li><a href=#post_init>post_init</a></li><li><a href=#field>field</a></li></ul></li><li><a href=#深入-dataclasses-装饰器>深入 dataclasses 装饰器</a><ul><li><a href=#数据类的基石--dataclassesfield>数据类的基石 —— dataclasses.field</a></li><li><a href=#一些常用函数>一些常用函数</a></li><li><a href=#dataclass-继承>dataclass 继承</a></li></ul></li><li><a href=#总结>总结</a></li></ul></nav></div></div><div class=content id=content><h1 id=dataclasses>dataclasses</h1><h2 id=简介>简介</h2><p>dataclass 的定义位于 <a href=https://www.python.org/dev/peps/pep-0557/ target=_blank rel="external nofollow noopener noreferrer">PEP-557</a>，根据定义，一个 dataclass 是指 “一个带有默认值的可变的 namedtuple”，广义的定义就是有一个类，它的属性均可公开访问，可以带有默认值并能被修改，而且类中含有与这些属性相关的类方法，那么这个类就可以称为 dataclass，再通俗点讲，<strong>dataclass 就是一个含有数据及操作数据方法的容器</strong>。</p><p>乍一看可能会觉得这个概念不就是普通的 class 么，然而还是有几处不同：</p><ol><li>相比普通 class，dataclass 通常不包含私有属性，数据可以直接访问</li><li>dataclass 的 repr 方法通常有固定格式，会打印出类型名以及属性名和它的值</li><li>dataclass 拥有 <code>__eq__</code> 和 <code>__hash__</code> 魔法方法</li><li>dataclass 有着模式单一固定的构造方式，或是需要重载运算符，而普通 class 通常无需这些工作</li></ol><p>基于上述原因，通常自己实现一个 dataclass 是繁琐而无聊的，而 dataclass 单一固定的行为正适合程序为我们自动生成，于是 <code>dataclasses</code> 模块诞生了。</p><p>配合类型注解语法，我们可以轻松生成一个实现了 <code>__init__</code>，<code>__repr__</code>，<code>__cmp__</code> 等方法的 dataclass：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>dataclass</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>InventoryItem</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;&#39;&#39;Class for keeping track of an item in inventory.&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>unit_price</span><span class=p>:</span> <span class=nb>float</span>
+</span></span><span class=line><span class=cl>    <span class=n>quantity_on_hand</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>total_cost</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>float</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>unit_price</span> <span class=o>*</span> <span class=bp>self</span><span class=o>.</span><span class=n>quantity_on_hand</span>
+</span></span></code></pre></td></tr></table></div></div><p>同时使用 dataclass 也有一些好处，它比 namedtuple 更灵活。同时因为它是一个常规的类，所以你可以享受继承带来的便利。</p><h2 id=使用>使用</h2><p>在 python 中创建一个类，我们需要写 <code>__init__</code> 方法进行初始化对象操作，需要对对象进一步说明的话，最好写一个 <code>__repr__</code> 方法，这样我们直接输出对象的话，方便理解这个对象是啥。写两三个这样的类还好，多了的话，就觉得烦躁了，因为每写个类，你都得需要写 <code>__init__</code>，<code>__repr__</code> 这些方法，都是重复性的操作。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>People</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>name</span><span class=p>,</span> <span class=n>age</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>age</span> <span class=o>=</span> <span class=n>age</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__repr__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=sa>f</span><span class=s2>&#34;Student-</span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 实例一个name为zhuyu的People对象</span>
+</span></span><span class=line><span class=cl><span class=n>zhuyu</span> <span class=o>=</span> <span class=n>People</span><span class=p>(</span><span class=s2>&#34;zhuyu&#34;</span><span class=p>,</span> <span class=mi>23</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>zhuyu</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>  <span class=c1># 输出 zhuyu</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>zhuyu</span><span class=p>)</span>  <span class=c1># Student-zhuyu</span>
+</span></span></code></pre></td></tr></table></div></div><p>下面使用 dataclasses 去创建一个类，相对于上面这个类的写法是不是显得简单很多，一些魔法方法不用我们自己去写 dataclasss 会帮我们完成。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>dataclass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>  <span class=c1># 重点这里</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Goods</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;商品类&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>price</span><span class=p>:</span> <span class=nb>float</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>milk</span> <span class=o>=</span> <span class=n>Goods</span><span class=p>(</span><span class=s2>&#34;milk&#34;</span><span class=p>,</span> <span class=mf>9.99</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>milk</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>  <span class=c1># milk</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>milk</span><span class=p>)</span>       <span class=c1># Goods(name=&#39;milk&#39;, price=9.99)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=控制魔法方法的重写>控制魔法方法的重写</h3><p>dataclass 会帮我们重写一个魔法方法，可能是你想要的，也可能是你不想要的，我们可以通过一些参数进行控制 (哪些魔法不想重写)，继续看 dataclass 函数，它是可以传参数的，它的注释也写得很清楚了</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>dataclass</span><span class=p>(</span><span class=n>_cls</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=o>*</span><span class=p>,</span> <span class=n>init</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=nb>repr</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>eq</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>order</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=n>unsafe_hash</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>frozen</span><span class=o>=</span><span class=kc>False</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Returns the same class as was passed in, with dunder methods
+</span></span></span><span class=line><span class=cl><span class=s2>    added based on the fields defined in the class.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    Examines PEP 526 __annotations__ to determine fields.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    If init is true, an __init__() method is added to the class. If
+</span></span></span><span class=line><span class=cl><span class=s2>    repr is true, a __repr__() method is added. If order is true, rich
+</span></span></span><span class=line><span class=cl><span class=s2>    comparison dunder methods are added. If unsafe_hash is true, a
+</span></span></span><span class=line><span class=cl><span class=s2>    __hash__() method function is added. If frozen is true, fields may
+</span></span></span><span class=line><span class=cl><span class=s2>    not be assigned to after instance creation.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>wrap</span><span class=p>(</span><span class=bp>cls</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>_process_class</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=n>init</span><span class=p>,</span> <span class=nb>repr</span><span class=p>,</span> <span class=n>eq</span><span class=p>,</span> <span class=n>order</span><span class=p>,</span> <span class=n>unsafe_hash</span><span class=p>,</span> <span class=n>frozen</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># See if we&#39;re being called as @dataclass or @dataclass().</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>_cls</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># We&#39;re called with parens.</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>wrap</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># We&#39;re called as @dataclass without parens.</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>wrap</span><span class=p>(</span><span class=n>_cls</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>init</strong> 参数默认为 <code>True</code>，会默认帮你添加 init 方法，那么你实例化该对象的话，就需要传参数 (如果需要参数传递话)，为 <code>False</code> 的话，实例对象就不用传递了</p><p>当然之前我们在写类的时候，<code>init</code> 方法中不单单只是对属性进行赋值，例如下面这个 demo</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>uuid</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>get_id</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nb>str</span><span class=p>(</span><span class=n>uuid</span><span class=o>.</span><span class=n>uuid4</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>A</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>name</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>id</span> <span class=o>=</span> <span class=n>get_id</span><span class=p>()</span>   <span class=c1># id不需要当作参数传来</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_init_config</span><span class=p>()</span>  <span class=c1># 执行其他一些初始化操作</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_init_config</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;配置相关的操作&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=nb>print</span><span class=p>(</span><span class=s2>&#34;执行初始化操作&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>A</span><span class=p>(</span><span class=s2>&#34;zhuyu&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>id</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=post_init>post_init</h3><p>下面我们通过 dataclass 来实现上面这个例子，通过重写 <code>__post_init__</code> 这个方法，在这个方法中做一个逻辑操作，它执行完 <code>__init__</code> 方法之后就会调用 <code>__post_init__</code> 这个方法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>dataclass</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>uuid</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>get_id</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nb>str</span><span class=p>(</span><span class=n>uuid</span><span class=o>.</span><span class=n>uuid4</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>A</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>get_id</span><span class=p>()</span>  <span class=c1># id 通过调用一个函数生成，就不用传入了</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_init_config</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;配置相关的操作&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;执行初始化操作&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>__post_init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_init_config</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>A</span><span class=p>(</span><span class=s2>&#34;zhu&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>id</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>关于类的继承，使用 dataclass 一样也是可以继承的</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>dataclass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>A</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>__post_init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;父类&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>B</span><span class=p>(</span><span class=n>A</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>__post_init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;基类&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nb>super</span><span class=p>()</span><span class=o>.</span><span class=n>__post_init__</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>B</span><span class=p>(</span><span class=s1>&#39;name&#39;</span><span class=p>,</span> <span class=mi>22</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=field>field</h3><p>继续看 field，这个函数的位置为 <code>from dataclasses import field</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>field</span><span class=p>(</span><span class=o>*</span><span class=p>,</span> <span class=n>default</span><span class=o>=</span><span class=n>MISSING</span><span class=p>,</span> <span class=n>default_factory</span><span class=o>=</span><span class=n>MISSING</span><span class=p>,</span> <span class=n>init</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=nb>repr</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nb>hash</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>compare</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>metadata</span><span class=o>=</span><span class=kc>None</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return an object to identify dataclass fields.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    default is the default value of the field.  default_factory is a
+</span></span></span><span class=line><span class=cl><span class=s2>    0-argument function called to initialize a field&#39;s value.  If init
+</span></span></span><span class=line><span class=cl><span class=s2>    is True, the field will be a parameter to the class&#39;s __init__()
+</span></span></span><span class=line><span class=cl><span class=s2>    function.  If repr is True, the field will be included in the
+</span></span></span><span class=line><span class=cl><span class=s2>    object&#39;s repr().  If hash is True, the field will be included in
+</span></span></span><span class=line><span class=cl><span class=s2>    the object&#39;s hash().  If compare is True, the field will be used
+</span></span></span><span class=line><span class=cl><span class=s2>    in comparison functions.  metadata, if specified, must be a
+</span></span></span><span class=line><span class=cl><span class=s2>    mapping which is stored but not otherwise examined by dataclass.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    It is an error to specify both default and default_factory.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>default</span> <span class=ow>is</span> <span class=ow>not</span> <span class=n>MISSING</span> <span class=ow>and</span> <span class=n>default_factory</span> <span class=ow>is</span> <span class=ow>not</span> <span class=n>MISSING</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=s1>&#39;cannot specify both default and default_factory&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>Field</span><span class=p>(</span><span class=n>default</span><span class=p>,</span> <span class=n>default_factory</span><span class=p>,</span> <span class=n>init</span><span class=p>,</span> <span class=nb>repr</span><span class=p>,</span> <span class=nb>hash</span><span class=p>,</span> <span class=n>compare</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                 <span class=n>metadata</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>写个 demo 看看这个怎么使用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>field</span><span class=p>,</span> <span class=n>dataclass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>A</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>field</span><span class=p>(</span><span class=n>default</span><span class=o>=</span><span class=s1>&#39;zhuyu&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>B</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>field</span><span class=p>(</span><span class=n>init</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>A</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>B</span><span class=p>(</span><span class=s1>&#39;zhuyu&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>  <span class=c1># zhuyu</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>b</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>  <span class=c1># zhuyu</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># init 默认为 true,说明你在初始化对象的时候，需要传递该参数(参考class B)，但是 field 中从参数 default 或者 default_factory 不为空的时候，就算 init 为 true，也是可以不用传递参数(参考 class A)</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>field</span><span class=p>,</span> <span class=n>dataclass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>A</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>field</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>field</span><span class=p>(</span><span class=nb>repr</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>B</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>field</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>age</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>field</span><span class=p>(</span><span class=nb>repr</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>a</span> <span class=o>=</span> <span class=n>A</span><span class=p>(</span><span class=s1>&#39;zhuyu&#39;</span><span class=p>,</span> <span class=mi>22</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>b</span> <span class=o>=</span> <span class=n>B</span><span class=p>(</span><span class=s1>&#39;zhuyu&#39;</span><span class=p>,</span> <span class=mi>23</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>a</span><span class=p>)</span>  <span class=c1># A(name=&#39;zhuyu&#39;)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>  <span class=c1># B(name=&#39;zhuyu&#39;, age=23)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># repr 默认为 True，会将该字段添加到 __repr__ 中去，为 False 的话，则不会添加进去</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=深入-dataclasses-装饰器>深入 dataclasses 装饰器</h2><p>dataclass 的魔力源泉都在 <code>dataclass</code> 这个装饰器中，如果想要完全掌控 dataclass 的话那么它是你必须了解的内容。</p><p>装饰器的原型如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>dataclasses</span><span class=o>.</span><span class=n>dataclass</span><span class=p>(</span><span class=o>*</span><span class=p>,</span> <span class=n>init</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=nb>repr</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>eq</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>order</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>unsafe_hash</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>frozen</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>dataclass</code> 装饰器将根据类属性生成数据类和数据类需要的方法。</p><p>我们的关注点集中在它的 <code>kwargs</code> 上：</p><ul><li>init<ul><li>指定是否自动生成 <code>__init__</code>，如果已经有定义同名方法则忽略这个值，也就是指定为 True 也不会自动生成</li></ul></li><li>repr<ul><li>同 init，指定是否自动生成 <code>__repr__</code>；自动生成的打印格式为 <code>class_name(arrt1:value1, attr2:value2, ...)</code></li></ul></li><li>eq<ul><li>同 init，指定是否生成 <code>__eq__</code>；自动生成的方法将按属性在类内定义时的顺序逐个比较，全部的值相同才会返回 True</li></ul></li><li>order<ul><li>自动生成 <code>__lt__</code>，<code>__le__</code>，<code>__gt__</code>，<code>__ge__</code>，比较方式与 eq 相同；如果 order 指定为 True 而 eq 指定为 False，将引发 <code>ValueError</code>；如果已经定义同名函数，将引发 <code>TypeError</code></li></ul></li><li>frozen<ul><li>设为 True 时，对 field 赋值将会引发错误，对象将是不可变的，如果已经定义了 <code>__setattr__</code> 和 <code>__delattr__</code> 将会引发 <code>TypeError</code></li></ul></li><li>unsafehash<ul><li>如果是 False，将根据 eq 和 frozen 参数来生成 <code>__hash__</code>。<ol><li>eq 和 frozen 都为 True，<code>__hash__</code> 将会生成</li><li>eq 为 True 而 frozen 为 False，<code>__hash__</code> 被设为 <code>None</code></li><li>eq 为 False，frozen 为 True，<code>__hash__</code> 将使用超类（object）的同名属性（通常就是基于对象 id 的 hash） 当设置为 True 时将会根据类属性自动生成 <code>__hash__</code><ul><li>然而这是不安全的，因为这些属性是默认可变的，这会导致 hash 的不一致，所以除非能保证对象属性不可随意改变，否则应该谨慎地设置该参数为 True</li></ul></li></ol></li></ul></li></ul><p>有默认值的属性必须定义在没有默认值的属性之后，和对 kw 参数的要求一样。</p><p>上面我们偶尔提到了 field 的概念，我们所说的数据类属性，数据属性实际上都是被 field 的对象，它代表着一个数据的实体和它的元信息，下面我们了解一下 <code>dataclasses.field</code>。</p><h3 id=数据类的基石--dataclassesfield>数据类的基石 —— dataclasses.field</h3><p>先看下 field 的原型：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>python</span> <span class=n>dataclasses</span><span class=o>.</span><span class=n>field</span><span class=p>(</span><span class=o>*</span><span class=p>,</span> <span class=n>default</span><span class=o>=</span><span class=n>MISSING</span><span class=p>,</span> <span class=n>default_factory</span><span class=o>=</span><span class=n>MISSING</span><span class=p>,</span> <span class=nb>repr</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=nb>hash</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>init</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>compare</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>metadata</span><span class=o>=</span><span class=kc>None</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>通常我们无需直接使用，装饰器会根据我们给出的类型注解自动生成 field，但有时候我们也需要定制这一过程，这时 <code>dataclasses.field</code> 就显得格外有用了。</p><p>default 和 default_factory 参数将会影响默认值的产生，它们的默认值都是 None，意思是调用时如果为指定则产生一个为 None 的值。</p><p>其中 default 是 field 的默认值，而 default_factory 控制如何产生值，它接收一个无参数或者全是默认参数的 <code>callable</code> 对象，然后用调用这个对象获得 field 的初始值，之后再将 default（如果值不是 MISSING）复制给 <code>callable</code> 返回的这个对象。</p><p>举个例子，对于 list，当复制它时只是复制了一份引用，所以像 dataclass 里那样直接复制给实例的做法是危险而错误的，为了保证使用 list 时的安全性，应该这样做：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>C</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>mylist</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span> <span class=o>=</span> <span class=n>field</span><span class=p>(</span><span class=n>default_factory</span><span class=o>=</span><span class=nb>list</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>当初始化 <code>C</code> 的实例时就会调用 <code>list()</code> 而不是直接复制一份 list 的引用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>c1</span> <span class=o>=</span> <span class=n>C</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>c1</span><span class=o>.</span><span class=n>mylist</span> <span class=o>+=</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>c1</span><span class=o>.</span><span class=n>mylist</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>c2</span> <span class=o>=</span> <span class=n>C</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>c2</span><span class=o>.</span><span class=n>mylist</span>
+</span></span><span class=line><span class=cl><span class=p>[]</span>
+</span></span></code></pre></td></tr></table></div></div><p>数据污染得到了避免。</p><p>init 参数如果设置为 False，表示不为这个 field 生成初始化操作，dataclass 提供了 hook—— <code>__post_init__</code> 供我们利用这一特性：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>C</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>c</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>field</span><span class=p>(</span><span class=n>init</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>__post_init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>c</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>a</span> <span class=o>+</span> <span class=bp>self</span><span class=o>.</span><span class=n>b</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>__post_init__</code> 在 <code>__init__</code> 后被调用，我们可以在这里初始化那些需要前置条件的 field。</p><p>repr 参数表示该 field 是否被包含进 repr 的输出，compare 和 hash 参数表示 field 是否参与比较和计算 hash 值。metadata 不被 dataclass 自身使用，通常让第三方组件从中获取某些元信息时才使用，所以我们不需要使用这一参数。</p><p>如果指定一个 field 的类型注解为 <code>dataclasses.InitVar</code>，那么这个 field 将只会在初始化过程中（<code>__init__</code> 和 <code>__post_init__</code>）可以被使用，当初始化完成后访问该 field 会返回一个 <code>dataclasses.Field</code> 对象而不是 field 原本的值，也就是<strong>该 field 不再是一个可访问的数据对象</strong>。</p><p>举个例子，比如一个由数据库对象，它只需要在初始化的过程中被访问：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>C</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>i</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl>    <span class=n>j</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>    <span class=n>database</span><span class=p>:</span> <span class=n>InitVar</span><span class=p>[</span><span class=n>DatabaseType</span><span class=p>]</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>__post_init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>database</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>j</span> <span class=ow>is</span> <span class=kc>None</span> <span class=ow>and</span> <span class=n>database</span> <span class=ow>is</span> <span class=ow>not</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>j</span> <span class=o>=</span> <span class=n>database</span><span class=o>.</span><span class=n>lookup</span><span class=p>(</span><span class=s1>&#39;j&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=n>c</span> <span class=o>=</span> <span class=n>C</span><span class=p>(</span><span class=mi>10</span><span class=p>,</span> <span class=n>database</span><span class=o>=</span><span class=n>my_database</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个例子中会返回 <code>c.i</code> 和 <code>c.j</code> 的数据，但是不会返回 <code>c.database</code> 的。</p><h3 id=一些常用函数>一些常用函数</h3><p><code>dataclasses</code> 模块中提供了一些常用函数供我们处理数据类。</p><p>使用 <code>dataclasses.asdict</code> 和 <code>dataclasses.astuple</code> 我们可以把数据类实例中的数据转换成字典或者元组：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>asdict</span><span class=p>,</span> <span class=n>astuple</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>asdict</span><span class=p>(</span><span class=n>Lang</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=p>{</span><span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;python&#39;</span><span class=p>,</span> <span class=s1>&#39;strong_type&#39;</span><span class=p>:</span> <span class=kc>True</span><span class=p>,</span> <span class=s1>&#39;static_type&#39;</span><span class=p>:</span> <span class=kc>False</span><span class=p>,</span> <span class=s1>&#39;age&#39;</span><span class=p>:</span> <span class=mi>28</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>astuple</span><span class=p>(</span><span class=n>Lang</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=s1>&#39;python&#39;</span><span class=p>,</span> <span class=kc>True</span><span class=p>,</span> <span class=kc>False</span><span class=p>,</span> <span class=mi>28</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用 <code>dataclasses.is_dataclass</code> 可以判断一个类或实例对象是否是数据类：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>is_dataclass</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>is_dataclass</span><span class=p>(</span><span class=n>Lang</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>is_dataclass</span><span class=p>(</span><span class=n>Lang</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=dataclass-继承>dataclass 继承</h3><p>python3.7 引入 dataclass 的一大原因就在于<strong>相比 namedtuple，dataclass 可以享受继承带来的便利</strong></p><p><code>dataclass</code> 装饰器会检查当前 class 的所有基类，如果发现一个 dataclass，就会把它的字段按顺序添加进当前的 class，随后再处理当前 class 的 field。所有生成的方法也将按照这一过程处理，因此如果子类中的 field 与基类同名，那么<strong>子类将会无条件覆盖基类</strong>。子类将会根据所有的 field 重新生成一个构造函数，并在其中初始化基类。</p><p>看个例子：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nd>@dataclass</span> 
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Lang</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;&#34;&#34;a dataclass that describes a programming language&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=s1>&#39;python&#39;</span> 
+</span></span><span class=line><span class=cl>  <span class=n>strong_type</span><span class=p>:</span> <span class=nb>bool</span> <span class=o>=</span> <span class=kc>True</span> 
+</span></span><span class=line><span class=cl>  <span class=n>static_type</span><span class=p>:</span> <span class=nb>bool</span> <span class=o>=</span> <span class=kc>False</span> 
+</span></span><span class=line><span class=cl>  <span class=n>age</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>28</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Python</span><span class=p>(</span><span class=n>Lang</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>tab_size</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>    <span class=n>is_script</span><span class=p>:</span> <span class=nb>bool</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Python</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>Python</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;python&#39;</span><span class=p>,</span> <span class=n>strong_type</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>static_type</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>age</span><span class=o>=</span><span class=mi>28</span><span class=p>,</span> <span class=n>tab_size</span><span class=o>=</span><span class=mi>4</span><span class=p>,</span> <span class=n>is_script</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Base</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>x</span><span class=p>:</span> <span class=nb>float</span> <span class=o>=</span> <span class=mf>25.0</span>
+</span></span><span class=line><span class=cl>    <span class=n>y</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>C</span><span class=p>(</span><span class=n>Base</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>z</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>    <span class=n>x</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>15</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>C</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>C</span><span class=p>(</span><span class=n>x</span><span class=o>=</span><span class=mi>15</span><span class=p>,</span> <span class=n>y</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>z</span><span class=o>=</span><span class=mi>10</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>Lang</code> 的 field 被 <code>Python</code> 继承了，而 <code>C</code> 中的 <code>x</code> 则覆盖了 <code>Base</code> 中的定义。</p><p>没错，数据类的继承就是这么简单。</p><h2 id=总结>总结</h2><p>合理使用 dataclass 将会大大减轻开发中的负担，将我们从大量的重复劳动中解放出来，这既是 dataclass 的魅力，不过魅力的背后也总是有陷阱相伴</p><ul><li>dataclass 通常情况下是 unhashable 的，因为默认生成的 <code>__hash__</code> 是 <code>None</code>，所以不能用来做字典的 key，如果有这种需求，那么应该指定你的数据类为 frozen dataclass</li><li>小心当你定义了和 <code>dataclass</code> 生成的同名方法时会引发的问题</li><li>当使用可变类型（如 list）时，应该考虑使用 <code>field</code> 的 <code>default_factory</code></li><li>数据类的属性都是公开的，如果你有属性只需要初始化时使用而不需要在其他时候被访问，请使用 <code>dataclasses.InitVar</code></li></ul><p>只要避开这些陷阱，dataclass 一定能成为提高生产力的利器</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/dataclasses/ data-title="Python dataclasses 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/dataclasses/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/dataclasses/ data-title="Python dataclasses 库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%B7%A5%E5%85%B7/protobuf/ class=prev rel=prev title=protobuf><i class="fa-solid fa-angle-left fa-fw"></i>protobuf</a>
+<a href=/Notes/posts/games/%E6%96%87%E6%98%8E%E5%85%AD/%E5%BE%B7%E5%9B%BD/ class=next rel=next title="文明六 - 德国">文明六 - 德国<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

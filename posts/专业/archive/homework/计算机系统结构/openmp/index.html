@@ -1,0 +1,410 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>OpenMP - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="OpenMP 介绍 OpenMP 是一种应用程序接口 (API)，可用于显式地指示多线程、共享内存并行性。 它"><meta name=keywords content='Linux'><meta itemprop=name content="OpenMP"><meta itemprop=description content="OpenMP 介绍 OpenMP 是一种应用程序接口 (API)，可用于显式地指示多线程、共享内存并行性。 它"><meta itemprop=datePublished content="2021-03-16T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="2914"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Linux"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/archive/homework/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/openmp/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="OpenMP"><meta property="og:description" content="OpenMP 介绍 OpenMP 是一种应用程序接口 (API)，可用于显式地指示多线程、共享内存并行性。 它"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-03-16T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Linux"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="OpenMP"><meta name=twitter:description content="OpenMP 介绍 OpenMP 是一种应用程序接口 (API)，可用于显式地指示多线程、共享内存并行性。 它"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/archive/homework/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/openmp/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/games/ptcg/%E7%AE%80%E4%B8%AD%E5%8D%95%E5%8D%A1%E5%88%86%E6%9E%90/%E6%B3%BD/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/nfs/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"OpenMP","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/archive\/homework\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84\/openmp\/"},"genre":"posts","keywords":"Linux","wordcount":2914,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/archive\/homework\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84\/openmp\/","datePublished":"2021-03-16T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>OpenMP</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/linux/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Linux</a></span></div><div class=post-meta-line><span title="2021-03-16 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-03-16>2021-03-16</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 2914 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#介绍>介绍</a><ul><li><a href=#共享内存模型>共享内存模型</a></li><li><a href=#基于线程的并行性>基于线程的并行性</a></li><li><a href=#fork---join-模型>Fork - Join 模型</a></li><li><a href=#数据范围>数据范围</a></li><li><a href=#io>I/O</a></li><li><a href=#内存模型经常刷新>内存模型：经常刷新？</a></li></ul></li><li><a href=#使用>使用</a><ul><li><a href=#循环并行>循环并行</a><ul><li><a href=#循环并行化的条件>循环并行化的条件</a></li><li><a href=#控制线程数>控制线程数</a></li><li><a href=#对任务执行的细粒度控制>对任务执行的细粒度控制</a></li><li><a href=#私有变量>私有变量</a></li><li><a href=#使用与主线程不同步的线程局部变量>使用与主线程不同步的线程局部变量</a></li></ul></li><li><a href=#一些-api-函数>一些 API 函数</a></li><li><a href=#例>例</a><ul><li><a href=#合并排序>合并排序</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=openmp>OpenMP</h1><h2 id=介绍>介绍</h2><p>OpenMP 是一种应用程序接口 (API)，可用于显式地指示多线程、共享内存并行性。</p><p>它由三个主要的 API 组件组成：</p><ul><li>编译器指令</li><li>运行时库函数</li><li>环境变量</li></ul><p>它是 Open Multi-Processing 的缩写，是一个应用程序接口（API），可用于显式指导多线程、共享内存的并行性。</p><p>在项目程序已经完成好的情况下不需要大幅度的修改源代码，只需要加上专用的 pragma 来指明自己的意图，由此编译器可以自动将程序进行并行化，并在必要之处加入同步互斥以及通信。</p><p>当选择忽略这些 pragma，或者编译器不支持 OpenMp 时，程序又可退化为通常的程序 (一般为串行)，代码仍然可以正常运作，只是不能利用多线程来加速程序执行。</p><p>OpenMP 提供的这种对于并行描述的高层抽象降低了并行编程的难度和复杂度，这样程序员可以把更多的精力投入到并行算法本身，而非其具体实现细节。对基于数据分集的多线程程序设计，OpenMP 是一个很好的选择。</p><h3 id=共享内存模型>共享内存模型</h3><p>OpenMP 是为多处理器或多核共享内存机器设计的。底层架构可以是共享内存 UMA 或 NUMA。即 (Uniform Memory Access 和 Non-Uniform Memory Access)</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220529214026758.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220529214026758.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220529214026758.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220529214026758.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220529214026758.png title=image-20220529214026758></p><p>因为 OpenMP 是为共享内存并行编程而设计的，所以它在很大程度上局限于单节点并行性。通常，节点上处理元素 (核心) 的数量决定了可以实现多少并行性。</p><h3 id=基于线程的并行性>基于线程的并行性</h3><p>OpenMP 程序仅通过使用线程来实现并行性。</p><p>执行线程是操作系统可以调度的最小处理单元。一种可以自动运行的子程序，这个概念可能有助于解释什么是线程。</p><p>线程存在于单个进程的资源中。没有这个进程，它们就不复存在。</p><p>通常，线程的数量与机器处理器/核心的数量相匹配。但是，线程的实际使用取决于应用程序。</p><h3 id=fork---join-模型>Fork - Join 模型</h3><p>OpenMP 使用并行执行的 fork-join 模型：</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/22782486-dbd6ee9610fb13a5.gif data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/22782486-dbd6ee9610fb13a5.gif, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/22782486-dbd6ee9610fb13a5.gif 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/22782486-dbd6ee9610fb13a5.gif 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/22782486-dbd6ee9610fb13a5.gif title=img></p><p>所有 OpenMP 程序都开始于一个主线程。主线程按顺序执行，直到遇到第一个并行区域结构。</p><p>FORK：主线程然后创建一组并行线程。</p><p>之后程序中由并行区域结构封装的语句在各个团队线程中并行执行。</p><p>JOIN：当团队线程完成并行区域结构中的语句时，它们将进行同步并终止，只留下主线程。</p><p>并行区域的数量和组成它们的线程是任意的。</p><h3 id=数据范围>数据范围</h3><p>因为 OpenMP 是共享内存编程模型，所以在默认情况下，<strong>并行区域中的大多数数据都是共享的</strong>。</p><p>一个并行区域中的所有线程都可以同时访问共享数据。</p><p>OpenMP 为程序员提供了一种方法，可以在不需要默认共享范围的情况下显式地指定数据的“作用域”。</p><p>数据范围属性子句将更详细地讨论这个主题。</p><h3 id=io>I/O</h3><p>OpenMP 没有指定任何关于并行 I/O 的内容。如果多个线程试图从同一个文件进行写/读操作，这一点尤其重要。</p><p>如果每个线程都对不同的文件执行 I/O，那么问题就不那么重要了。</p><p>完全由程序员来确保在多线程程序的上下文中正确地执行 I/O。</p><h3 id=内存模型经常刷新>内存模型：经常刷新？</h3><p>OpenMP 提供了线程内存的“宽松一致性”和“临时”视图(用他们的话说)。换句话说，线程可以“缓存”它们的数据，</p><p>并且不需要始终与实际内存保持精确的一致性。</p><p>当所有线程以相同的方式查看共享变量非常重要时，程序员负责确保所有线程根据需要刷新该变量。</p><h2 id=使用>使用</h2><p>在所有的预处理指令中，<code>#pragma</code> 指令可能是最复杂的了，它的作用是设定编译器的状态或者是指示编译器完成一些特定的动作</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>#pragma omp parallel 
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>omp 表示这个指令是 OpenMP 的指令，事实上所有 OpenMP 的指令都带有 omp 关键字</p></blockquote><p>产生了 n 个线程执行之后的语句（n 为 CPU 核数）</p><h3 id=循环并行>循环并行</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>#pragma omp parallel for
+</span></span></code></pre></td></tr></table></div></div><p>把 for 循环中的任务等分成 n 份，分别由 n 个进程各执行一份</p><p>不能保证执行的先后顺序，如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span> 
+</span></span><span class=line><span class=cl><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=cp>#pragma omp parallel for
+</span></span></span><span class=line><span class=cl><span class=cp></span>    <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>=</span><span class=mi>0</span><span class=p>;</span> <span class=n>i</span><span class=o>&lt;</span><span class=mi>10</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=n>i</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> 
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// output might be: 3068417952
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=循环并行化的条件>循环并行化的条件</h4><p>尽管 OpenMP 可以方便地对 for 循环进行并行化，但并不是所有的 for 循环都可以进行并行化。以下几种情况不能进行并行化：</p><ol><li><p>for 循环中的循环变量必须是有符号整形。例如，<code>for(unsigned int i = 0; i &lt; 10; ++i){}</code> 会编译不通过；</p></li><li><p>for 循环中比较操作符必须是 &lt;, &lt;=, >, >=。例如 <code>for (int i = 0; i ！= 10; ++i){}</code> 会编译不通过；</p></li><li><p>for 循环中的第三个表达式，必须是整数的加减，并且加减的值必须是一个循环不变量。例如 <code>for(int i = 0; i != 10; i = i + 1){}</code> 会编译不通过；感觉只能 ++i; i++; &ndash;i; 或 i&ndash;；</p></li><li><p>如果 for 循环中的比较操作为 &lt; 或 &lt;=，那么循环变量只能增加；反之亦然。例如 <code>for(int i = 0; i != 10; --i)</code> 会编译不通过；</p></li><li><p>循环必须是单入口、单出口，也就是说循环内部不允许能够达到循环以外的跳转语句，exit 除外。异常的处理也必须在循环体内处理。例如：若循环体内的 break 或 goto 会跳转到循环体外，那么会编译不通过。</p></li></ol><h4 id=控制线程数>控制线程数</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>#pragma omp parallel num_threads(5)
+</span></span></code></pre></td></tr></table></div></div><p>或者</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>omp_set_num_threads(5); 
+</span></span><span class=line><span class=cl>#pragma omp parallel 
+</span></span></code></pre></td></tr></table></div></div><h4 id=对任务执行的细粒度控制>对任务执行的细粒度控制</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>(</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=cp>#pragma omp parallel
+</span></span></span><span class=line><span class=cl><span class=cp></span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;All threads run this</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=cp>#pragma omp sections
+</span></span></span><span class=line><span class=cl><span class=cp></span>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=cp>#pragma omp section
+</span></span></span><span class=line><span class=cl><span class=cp></span>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;This executes in parallel</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=cp>#pragma omp section
+</span></span></span><span class=line><span class=cl><span class=cp></span>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;Sequential statement 1</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;This always executes after statement 1</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=cp>#pragma omp section
+</span></span></span><span class=line><span class=cl><span class=cp></span>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;This also executes in parallel</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>所有线程并行运行在 pragma omp sections 之前但在 pragma omp parallel 之后的代码。 pragma omp section 则被分配出去，只运行一次。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=n>tintin</span><span class=err>$</span> <span class=p>.</span><span class=o>/</span><span class=n>a</span><span class=p>.</span><span class=n>out</span> 
+</span></span><span class=line><span class=cl><span class=n>All</span> <span class=n>threads</span> <span class=n>run</span> <span class=k>this</span>
+</span></span><span class=line><span class=cl><span class=n>All</span> <span class=n>threads</span> <span class=n>run</span> <span class=k>this</span>
+</span></span><span class=line><span class=cl><span class=n>All</span> <span class=n>threads</span> <span class=n>run</span> <span class=k>this</span>
+</span></span><span class=line><span class=cl><span class=n>All</span> <span class=n>threads</span> <span class=n>run</span> <span class=k>this</span>
+</span></span><span class=line><span class=cl><span class=n>All</span> <span class=n>threads</span> <span class=n>run</span> <span class=k>this</span>
+</span></span><span class=line><span class=cl><span class=n>All</span> <span class=n>threads</span> <span class=n>run</span> <span class=k>this</span>
+</span></span><span class=line><span class=cl><span class=n>All</span> <span class=n>threads</span> <span class=n>run</span> <span class=k>this</span>
+</span></span><span class=line><span class=cl><span class=n>All</span> <span class=n>threads</span> <span class=n>run</span> <span class=k>this</span>
+</span></span><span class=line><span class=cl><span class=n>This</span> <span class=n>executes</span> <span class=n>in</span> <span class=n>parallel</span>
+</span></span><span class=line><span class=cl><span class=n>Sequential</span> <span class=n>statement</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>This</span> <span class=n>also</span> <span class=n>executes</span> <span class=n>in</span> <span class=n>parallel</span>
+</span></span><span class=line><span class=cl><span class=n>This</span> <span class=n>always</span> <span class=n>executes</span> <span class=n>after</span> <span class=n>statement</span> <span class=mi>1</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=私有变量>私有变量</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>#pragma parallel for private(i)
+</span></span></code></pre></td></tr></table></div></div><p>将循环变量 i 视为线程本地存储，每个线程都有该变量的副本</p><h4 id=使用与主线程不同步的线程局部变量>使用与主线程不同步的线程局部变量</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;omp.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span> 
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>idx</span> <span class=o>=</span> <span class=mi>100</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=cp>#pragma omp parallel private(idx)
+</span></span></span><span class=line><span class=cl><span class=cp></span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>printf</span><span class=p>(</span><span class=s>&#34;In thread %d idx = %d</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>omp_get_thread_num</span><span class=p>(),</span> <span class=n>idx</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出可能是</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>In thread 1 idx = 1
+</span></span><span class=line><span class=cl>In thread 5 idx = 1
+</span></span><span class=line><span class=cl>In thread 6 idx = 1
+</span></span><span class=line><span class=cl>In thread 0 idx = 0
+</span></span><span class=line><span class=cl>In thread 4 idx = 1
+</span></span><span class=line><span class=cl>In thread 7 idx = 1
+</span></span><span class=line><span class=cl>In thread 2 idx = 1
+</span></span><span class=line><span class=cl>In thread 3 idx = 1
+</span></span></code></pre></td></tr></table></div></div><h3 id=一些-api-函数>一些 API 函数</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=c1>// 设置并行线程数
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>omp_set_num_threads</span><span class=p>(</span><span class=kt>int</span> <span class=n>_Num_threads</span><span class=p>);</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=c1>// 获取当前并行线程数
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>omp_get_num_threads</span><span class=p>(</span><span class=kt>void</span><span class=p>);</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=c1>// 获取当前系统最大可并行运行的线程数
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>omp_get_max_threads</span><span class=p>(</span><span class=kt>void</span><span class=p>);</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=c1>// 获取当前运行线程的ID，注意和操作系统中的线程ID不同
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>omp_get_thread_num</span><span class=p>(</span><span class=kt>void</span><span class=p>);</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=c1>// 获取当前系统中处理器数目
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>omp_get_num_procs</span><span class=p>(</span><span class=kt>void</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=例>例</h3><h4 id=合并排序>合并排序</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;iostream&gt;</span><span class=cp>  
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;vector&gt;</span><span class=cp>  
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;omp.h&gt;</span><span class=cp>  
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=k>using</span> <span class=k>namespace</span> <span class=n>std</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=c1>// g++ -fopenmp  merge_sort.cpp -o merge_sort.o  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=n>merge</span><span class=p>(</span><span class=k>const</span> <span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=o>&amp;</span><span class=n>l</span><span class=p>,</span> <span class=k>const</span> <span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=o>&amp;</span><span class=n>r</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=c1>// 两个数组升序合并  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>    <span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=n>res</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=n>j</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=p>(</span><span class=n>i</span> <span class=o>&lt;</span> <span class=n>l</span><span class=p>.</span><span class=n>size</span><span class=p>()</span> <span class=o>&amp;&amp;</span> <span class=n>j</span> <span class=o>&lt;</span> <span class=n>r</span><span class=p>.</span><span class=n>size</span><span class=p>())</span>  
+</span></span><span class=line><span class=cl>    <span class=p>{</span>  
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=n>l</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>&lt;</span> <span class=n>r</span><span class=p>[</span><span class=n>j</span><span class=p>])</span>  
+</span></span><span class=line><span class=cl>            <span class=n>res</span><span class=p>.</span><span class=n>push_back</span><span class=p>(</span><span class=n>l</span><span class=p>[</span><span class=n>i</span><span class=o>++</span><span class=p>]);</span>  
+</span></span><span class=line><span class=cl>        <span class=k>else</span>  
+</span></span><span class=line><span class=cl>            <span class=n>res</span><span class=p>.</span><span class=n>push_back</span><span class=p>(</span><span class=n>r</span><span class=p>[</span><span class=n>j</span><span class=o>++</span><span class=p>]);</span>  
+</span></span><span class=line><span class=cl>    <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=c1>// 添加某一数组的剩余部分  
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>while</span> <span class=p>(</span><span class=n>i</span> <span class=o>&lt;</span> <span class=n>l</span><span class=p>.</span><span class=n>size</span><span class=p>())</span>  
+</span></span><span class=line><span class=cl>        <span class=n>res</span><span class=p>.</span><span class=n>push_back</span><span class=p>(</span><span class=n>l</span><span class=p>[</span><span class=n>i</span><span class=o>++</span><span class=p>]);</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=p>(</span><span class=n>j</span> <span class=o>&lt;</span> <span class=n>r</span><span class=p>.</span><span class=n>size</span><span class=p>())</span>  
+</span></span><span class=line><span class=cl>        <span class=n>res</span><span class=p>.</span><span class=n>push_back</span><span class=p>(</span><span class=n>r</span><span class=p>[</span><span class=n>j</span><span class=o>++</span><span class=p>]);</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>res</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=n>mergeSortParallel</span><span class=p>(</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=o>&amp;</span><span class=n>num</span><span class=p>,</span> <span class=kt>int</span> <span class=n>threadNum</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=c1>// 归并排序 并行执行  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>num</span><span class=p>.</span><span class=n>size</span><span class=p>()</span> <span class=o>==</span> <span class=mi>1</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>num</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>std</span><span class=o>::</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;::</span><span class=n>iterator</span> <span class=n>middle</span> <span class=o>=</span> <span class=n>num</span><span class=p>.</span><span class=n>begin</span><span class=p>()</span> <span class=o>+</span> <span class=p>(</span><span class=n>num</span><span class=p>.</span><span class=n>size</span><span class=p>()</span> <span class=o>/</span> <span class=mi>2</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>    <span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=n>l</span><span class=p>(</span><span class=n>num</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>middle</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>    <span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=n>r</span><span class=p>(</span><span class=n>middle</span><span class=p>,</span> <span class=n>num</span><span class=p>.</span><span class=n>end</span><span class=p>());</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>threadNum</span> <span class=o>&gt;</span> <span class=mi>1</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=p>{</span>  
+</span></span><span class=line><span class=cl><span class=cp>#pragma omp parallel sections </span><span class=c1>// 设置并行区域  
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=p>{</span>  
+</span></span><span class=line><span class=cl><span class=cp>#pragma omp section </span><span class=c1>// 需要分配线程并行处理的区域  
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=p>{</span>  
+</span></span><span class=line><span class=cl>                <span class=n>l</span> <span class=o>=</span> <span class=n>mergeSortParallel</span><span class=p>(</span><span class=n>l</span><span class=p>,</span> <span class=n>threadNum</span> <span class=o>/</span> <span class=mi>2</span><span class=p>);</span> <span class=c1>// 分配一半线程执行此递归程序  
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=cp>#pragma omp section  
+</span></span></span><span class=line><span class=cl><span class=cp></span>            <span class=p>{</span>  
+</span></span><span class=line><span class=cl>                <span class=n>r</span> <span class=o>=</span> <span class=n>mergeSortParallel</span><span class=p>(</span><span class=n>r</span><span class=p>,</span> <span class=n>threadNum</span> <span class=o>-</span> <span class=n>threadNum</span> <span class=o>/</span> <span class=mi>2</span><span class=p>);</span> <span class=c1>// 分配剩余线程  
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=p>}</span>  
+</span></span><span class=line><span class=cl>        <span class=p>}</span>  
+</span></span><span class=line><span class=cl>    <span class=p>}</span>  
+</span></span><span class=line><span class=cl>    <span class=k>else</span> <span class=c1>// 没有空闲的线程 由当前线程接管之后的递归程序  
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>{</span>  
+</span></span><span class=line><span class=cl>        <span class=n>l</span> <span class=o>=</span> <span class=n>mergeSortParallel</span><span class=p>(</span><span class=n>l</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>        <span class=n>r</span> <span class=o>=</span> <span class=n>mergeSortParallel</span><span class=p>(</span><span class=n>r</span><span class=p>,</span> <span class=mi>1</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>    <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nf>merge</span><span class=p>(</span><span class=n>l</span><span class=p>,</span> <span class=n>r</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=n>mergeSortSerial</span><span class=p>(</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=o>&amp;</span><span class=n>num</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=c1>// 归并排序 线性执行  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=n>num</span><span class=p>.</span><span class=n>size</span><span class=p>()</span> <span class=o>==</span> <span class=mi>1</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>num</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>std</span><span class=o>::</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;::</span><span class=n>iterator</span> <span class=n>middle</span> <span class=o>=</span> <span class=n>num</span><span class=p>.</span><span class=n>begin</span><span class=p>()</span> <span class=o>+</span> <span class=p>(</span><span class=n>num</span><span class=p>.</span><span class=n>size</span><span class=p>()</span> <span class=o>/</span> <span class=mi>2</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>    <span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=n>l</span><span class=p>(</span><span class=n>num</span><span class=p>.</span><span class=n>begin</span><span class=p>(),</span> <span class=n>middle</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>    <span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=n>r</span><span class=p>(</span><span class=n>middle</span><span class=p>,</span> <span class=n>num</span><span class=p>.</span><span class=n>end</span><span class=p>());</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>l</span> <span class=o>=</span> <span class=n>mergeSortSerial</span><span class=p>(</span><span class=n>l</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>    <span class=n>r</span> <span class=o>=</span> <span class=n>mergeSortSerial</span><span class=p>(</span><span class=n>r</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nf>merge</span><span class=p>(</span><span class=n>l</span><span class=p>,</span> <span class=n>r</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=p>{</span>  
+</span></span><span class=line><span class=cl>    <span class=kt>double</span> <span class=n>start</span><span class=p>,</span> <span class=n>end</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>    <span class=kt>double</span> <span class=n>parallelDuration</span><span class=p>,</span> <span class=n>serialDuration</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;总共有&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>omp_get_max_threads</span><span class=p>()</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;个线程&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>    <span class=n>vector</span><span class=o>&lt;</span><span class=kt>long</span><span class=o>&gt;</span> <span class=n>a</span><span class=p>(</span><span class=mi>50000000</span><span class=p>),</span> <span class=n>b</span><span class=p>(</span><span class=mi>50000000</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span><span class=kt>long</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>50000000</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>    <span class=p>{</span>  
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>randInt</span> <span class=o>=</span> <span class=n>rand</span><span class=p>()</span> <span class=o>%</span> <span class=mi>10</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>        <span class=n>a</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=n>randInt</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>        <span class=n>b</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=n>randInt</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>    <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>start</span> <span class=o>=</span> <span class=n>omp_get_wtime</span><span class=p>();</span>  
+</span></span><span class=line><span class=cl>    <span class=n>b</span> <span class=o>=</span> <span class=n>mergeSortSerial</span><span class=p>(</span><span class=n>b</span><span class=p>);</span>  
+</span></span><span class=line><span class=cl>    <span class=n>end</span> <span class=o>=</span> <span class=n>omp_get_wtime</span><span class=p>();</span>  
+</span></span><span class=line><span class=cl>    <span class=n>serialDuration</span> <span class=o>=</span> <span class=n>end</span> <span class=o>-</span> <span class=n>start</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;串行计算共耗时&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>serialDuration</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;s.&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>start</span> <span class=o>=</span> <span class=n>omp_get_wtime</span><span class=p>();</span>  
+</span></span><span class=line><span class=cl>    <span class=n>a</span> <span class=o>=</span> <span class=n>mergeSortParallel</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>omp_get_max_threads</span><span class=p>());</span>  
+</span></span><span class=line><span class=cl>    <span class=n>end</span> <span class=o>=</span> <span class=n>omp_get_wtime</span><span class=p>();</span>  
+</span></span><span class=line><span class=cl>    <span class=n>parallelDuration</span> <span class=o>=</span> <span class=n>end</span> <span class=o>-</span> <span class=n>start</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;并行计算共耗时&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>parallelDuration</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;s.&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>    <span class=n>cout</span> <span class=o>&lt;&lt;</span> <span class=s>&#34;运行加速比为&#34;</span> <span class=o>&lt;&lt;</span> <span class=n>serialDuration</span> <span class=o>/</span> <span class=n>parallelDuration</span> <span class=o>&lt;&lt;</span> <span class=n>endl</span><span class=p>;</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span></code></pre></td></tr></table></div></div><p>使用八个线程运行此 merge sort 我的运行时执行时间为 2.1 秒，而使用一个线程则为 3.7 秒。 这里唯一需要记住的是，您需要注意线程数。 我从八个线程入手：里程可能会因您的系统配置而异。 但是，如果没有显式的线程数，最终将创建数百个（甚至数千个）线程，并且系统性能下降的可能性非常高。 同样，前面讨论的杂注 sections 已与 merge sort 代码很好地结合使用。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/archive/homework/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/openmp/ data-title=OpenMP data-hashtags=Linux><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/archive/homework/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/openmp/ data-hashtag=Linux><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/archive/homework/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84/openmp/ data-title=OpenMP><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/linux/>Linux</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/games/ptcg/%E7%AE%80%E4%B8%AD%E5%8D%95%E5%8D%A1%E5%88%86%E6%9E%90/%E6%B3%BD/ class=prev rel=prev title><i class="fa-solid fa-angle-left fa-fw"></i></a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/nfs/ class=next rel=next title=NFS>NFS<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

@@ -1,0 +1,708 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>Go context 库源码分析 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="context 源码分析 什么是 Context Context 也叫作上下文，是一个比较抽象的概念，一般理解为程序单元的一个"><meta name=keywords content='Go 库'><meta itemprop=name content="Go context 库源码分析"><meta itemprop=description content="context 源码分析 什么是 Context Context 也叫作上下文，是一个比较抽象的概念，一般理解为程序单元的一个"><meta itemprop=datePublished content="2022-02-07T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="6492"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Go 库"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E6%A0%87%E5%87%86%E5%BA%93/context/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="Go context 库源码分析"><meta property="og:description" content="context 源码分析 什么是 Context Context 也叫作上下文，是一个比较抽象的概念，一般理解为程序单元的一个"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-02-07T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Go 库"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Go context 库源码分析"><meta name=twitter:description content="context 源码分析 什么是 Context Context 也叫作上下文，是一个比较抽象的概念，一般理解为程序单元的一个"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E6%A0%87%E5%87%86%E5%BA%93/context/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E5%B8%B8%E7%94%A8%E5%BA%93/gopacket/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/basicgrammar/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go context 库源码分析","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/context\/"},"genre":"posts","keywords":"Go 库","wordcount":6492,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/golang\/%E6%A0%87%E5%87%86%E5%BA%93\/context\/","datePublished":"2022-02-07T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Go context 库源码分析</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Golang</a></span></div><div class=post-meta-line><span title="2022-02-07 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-07>2022-02-07</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 6492 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 13 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#什么是-context>什么是 Context</a></li><li><a href=#快速入门>快速入门</a><ul><li><a href=#withcancel>WithCancel</a></li><li><a href=#withdeadline>WithDeadline</a></li><li><a href=#withtimeout>WithTimeout</a></li><li><a href=#withvalue>WithValue</a></li></ul></li><li><a href=#接口>接口</a><ul><li><a href=#context>Context</a></li><li><a href=#canceler>canceler</a></li></ul></li><li><a href=#结构体>结构体</a><ul><li><a href=#emptyctx>emptyCtx</a></li><li><a href=#cancelctx>cancelCtx</a><ul><li><a href=#done>Done()</a></li><li><a href=#cancel>cancel()</a></li></ul></li><li><a href=#timerctx>timerCtx</a></li></ul></li><li><a href=#总结>总结</a></li></ul></nav></div></div><div class=content id=content><h1 id=context-源码分析>context 源码分析</h1><h2 id=什么是-context>什么是 Context</h2><p>Context 也叫作上下文，是一个比较抽象的概念，一般理解为程序单元的一个运行状态、现场、快照。其中上下是指存在上下层的传递，上会把内容传递给下，程序单元则指的是 Goroutine。</p><p>每个 Goroutine 在执行之前，都要先知道程序当前的执行状态，通常将这些执行状态封装在一个 Context 变量中，传递给要执行的 Goroutine 中。</p><p><strong>例如</strong>：在网络编程下，当接收到一个网络请求 Request，在处理 Request 时，我们可能需要开启不同的 Goroutine 来获取数据与逻辑处理，即一个请求 Request，会在多个 Goroutine 中处理。</p><p>而这些 Goroutine 可能需要共享 Request 的一些信息，同时当 Request 被取消或者超时的时候，所有从这个 Request 创建的所有 Goroutine 也应该被结束。</p><p>context 包就是为了解决上面所说的这些问题而开发的：在 一组 goroutine 之间传递共享的值、取消信号、deadline……</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWM0LnpoaW1nLmNvbS84MC92Mi04ZTcwNDE5Y2IwN2U5OWJkYTY1NmYyM2YzZWI3NWRjYl83MjB3LmpwZw data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWM0LnpoaW1nLmNvbS84MC92Mi04ZTcwNDE5Y2IwN2U5OWJkYTY1NmYyM2YzZWI3NWRjYl83MjB3LmpwZw, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWM0LnpoaW1nLmNvbS84MC92Mi04ZTcwNDE5Y2IwN2U5OWJkYTY1NmYyM2YzZWI3NWRjYl83MjB3LmpwZw 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWM0LnpoaW1nLmNvbS84MC92Mi04ZTcwNDE5Y2IwN2U5OWJkYTY1NmYyM2YzZWI3NWRjYl83MjB3LmpwZw 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWM0LnpoaW1nLmNvbS84MC92Mi04ZTcwNDE5Y2IwN2U5OWJkYTY1NmYyM2YzZWI3NWRjYl83MjB3LmpwZw title=在这里插入图片描述></p><p>源码很短，总共不到 500 行，其中还有很多大段的注释，代码可能也就 200 行左右的样子。这是一张整体结构图：</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWNiLnpoaW1nLmNvbS84MC92Mi01NGYzODk2NGM2NzE1Yjg1ZDZjODc4NTg3NDUxNGFkMV83MjB3LmpwZw alt=在这里插入图片描述 style=zoom:67%><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMzLnpoaW1nLmNvbS84MC92Mi02YTI3NTI2ZjUzNjUwNWNlYTA4YTU4MTNjY2NlMDViMl83MjB3LmpwZw data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMzLnpoaW1nLmNvbS84MC92Mi02YTI3NTI2ZjUzNjUwNWNlYTA4YTU4MTNjY2NlMDViMl83MjB3LmpwZw, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMzLnpoaW1nLmNvbS84MC92Mi02YTI3NTI2ZjUzNjUwNWNlYTA4YTU4MTNjY2NlMDViMl83MjB3LmpwZw 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMzLnpoaW1nLmNvbS84MC92Mi02YTI3NTI2ZjUzNjUwNWNlYTA4YTU4MTNjY2NlMDViMl83MjB3LmpwZw 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMzLnpoaW1nLmNvbS84MC92Mi02YTI3NTI2ZjUzNjUwNWNlYTA4YTU4MTNjY2NlMDViMl83MjB3LmpwZw title=在这里插入图片描述></p><h2 id=快速入门>快速入门</h2><p>Context 包中定义了四个 With 系列函数。</p><h3 id=withcancel>WithCancel</h3><p>WithCancel 的函数签名如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>WithCancel</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>)</span> <span class=p>(</span><span class=nx>ctx</span> <span class=nx>Context</span><span class=p>,</span> <span class=nx>cancel</span> <span class=nx>CancelFunc</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>WithCancel 返回带有新 Done 通道的父节点的副本，当调用返回的 cancel 函数或当关闭父上下文的 Done 通道时，将关闭返回上下文的 Done 通道，无论先发生什么情况。</p><p>取消此上下文将释放与其关联的资源，因此代码应该在此上下文中运行的操作完成后立即调用 cancel，示例代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;context&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>gen</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>(</span><span class=nx>ctx</span> <span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>)</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>dst</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nx>n</span> <span class=o>:=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>ctx</span><span class=p>.</span><span class=nf>Done</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>                    <span class=k>return</span> <span class=c1>// return结束该goroutine，防止泄露
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=k>case</span> <span class=nx>dst</span> <span class=o>&lt;-</span> <span class=nx>n</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=nx>n</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>                <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}()</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nx>dst</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>ctx</span><span class=p>,</span> <span class=nx>cancel</span> <span class=o>:=</span> <span class=nx>context</span><span class=p>.</span><span class=nf>WithCancel</span><span class=p>(</span><span class=nx>context</span><span class=p>.</span><span class=nf>Background</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=k>defer</span> <span class=nf>cancel</span><span class=p>()</span> <span class=c1>// 当我们取完需要的整数后调用cancel
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=k>range</span> <span class=nf>gen</span><span class=p>(</span><span class=nx>ctx</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nx>n</span> <span class=o>==</span> <span class=mi>5</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>上面的代码中，gen 函数在单独的 Goroutine 中生成整数并将它们发送到返回的通道，gen 的调用者在使用生成的整数之后需要取消上下文，以免 gen 启动的内部 Goroutine 发生泄漏。</p><p>运行结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>go run main.go
+</span></span><span class=line><span class=cl>1
+</span></span><span class=line><span class=cl>2
+</span></span><span class=line><span class=cl>3
+</span></span><span class=line><span class=cl>4
+</span></span><span class=line><span class=cl>5
+</span></span></code></pre></td></tr></table></div></div><h3 id=withdeadline>WithDeadline</h3><p>WithDeadline 的函数签名如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>WithDeadline</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>,</span> <span class=nx>deadline</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span><span class=p>)</span> <span class=p>(</span><span class=nx>Context</span><span class=p>,</span> <span class=nx>CancelFunc</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>WithDeadline 函数会返回父上下文的副本，并将 deadline 调整为不迟于 d。</p><p>如果父上下文的 deadline 已经早于 d，则 <code>WithDeadline(parent, d)</code> 在语义上等同于父上下文。</p><p>当截止日过期时，当调用返回的 cancel 函数时，或者当父上下文的 Done 通道关闭时，返回上下文的 Done 通道将被关闭，以最先发生的情况为准。</p><p>取消此上下文将释放与其关联的资源，因此代码应该在此上下文中运行的操作完成后立即调用 cancel，示例代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;context&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;time&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>d</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>Add</span><span class=p>(</span><span class=mi>50</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Millisecond</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ctx</span><span class=p>,</span> <span class=nx>cancel</span> <span class=o>:=</span> <span class=nx>context</span><span class=p>.</span><span class=nf>WithDeadline</span><span class=p>(</span><span class=nx>context</span><span class=p>.</span><span class=nf>Background</span><span class=p>(),</span> <span class=nx>d</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 尽管ctx会过期，但在任何情况下调用它的cancel函数都是很好的实践。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 如果不这样做，可能会使上下文及其父类存活的时间超过必要的时间。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>defer</span> <span class=nf>cancel</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>time</span><span class=p>.</span><span class=nf>After</span><span class=p>(</span><span class=mi>1</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;overslept&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>ctx</span><span class=p>.</span><span class=nf>Done</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>ctx</span><span class=p>.</span><span class=nf>Err</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>go run main.go
+</span></span><span class=line><span class=cl>context deadline exceeded
+</span></span></code></pre></td></tr></table></div></div><p>上面的代码中，定义了一个 50 毫秒之后过期的 deadline，然后我们调用 <code>context.WithDeadline(context.Background(), d)</code> 得到一个上下文（ctx）和一个取消函数（cancel），然后使用一个 select 让主程序陷入等待，等待 1 秒后打印 overslept 退出或者等待 ctx 过期后退出。因为 ctx 50 秒后就过期，所以 <code>ctx.Done()</code> 会先接收到值，然后打印 <code>ctx.Err()</code> 取消原因。</p><h3 id=withtimeout>WithTimeout</h3><p>WithTimeout 的函数签名如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>WithTimeout</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>,</span> <span class=nx>timeout</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Duration</span><span class=p>)</span> <span class=p>(</span><span class=nx>Context</span><span class=p>,</span> <span class=nx>CancelFunc</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>WithTimeout 函数返回 <code>WithDeadline(parent, time.Now().Add(timeout))</code>。</p><p>取消此上下文将释放与其相关的资源，因此代码应该在此上下文中运行的操作完成后立即调用 cancel，示例代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;context&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;time&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 传递带有超时的上下文
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 告诉阻塞函数在超时结束后应该放弃其工作。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>ctx</span><span class=p>,</span> <span class=nx>cancel</span> <span class=o>:=</span> <span class=nx>context</span><span class=p>.</span><span class=nf>WithTimeout</span><span class=p>(</span><span class=nx>context</span><span class=p>.</span><span class=nf>Background</span><span class=p>(),</span> <span class=mi>50</span><span class=o>*</span><span class=nx>time</span><span class=p>.</span><span class=nx>Millisecond</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>defer</span> <span class=nf>cancel</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>time</span><span class=p>.</span><span class=nf>After</span><span class=p>(</span><span class=mi>1</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;overslept&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>ctx</span><span class=p>.</span><span class=nf>Done</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>ctx</span><span class=p>.</span><span class=nf>Err</span><span class=p>())</span> <span class=c1>// 终端输出&#34;context deadline exceeded&#34;
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>go run main.go
+</span></span><span class=line><span class=cl>context deadline exceeded
+</span></span></code></pre></td></tr></table></div></div><h3 id=withvalue>WithValue</h3><p>WithValue 函数能够将请求作用域的数据与 Context 对象建立关系。函数声明如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>WithValue</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>,</span> <span class=nx>key</span><span class=p>,</span> <span class=nx>val</span> <span class=kd>interface</span><span class=p>{})</span> <span class=nx>Context</span>
+</span></span></code></pre></td></tr></table></div></div><p>WithValue 函数接收 context 并返回派生的 context，其中值 val 与 key 关联，并通过 context 树与 context 一起传递。这意味着一旦获得带有值的 context，从中派生的任何 context 都会获得此值。</p><p>不建议使用 context 值传递关键参数，函数应接收签名中的那些值，使其显式化。</p><p>所提供的键必须是可比较的，并且不应该是 string 类型或任何其他内置类型，以避免使用上下文在包之间发生冲突。WithValue 的用户应该为键定义自己的类型，为了避免在分配给接口 <code>{ } </code>时进行分配，上下文键通常具有具体类型 <code>struct{}</code>。或者，导出的上下文关键变量的静态类型应该是指针或接口。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;context&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>type</span> <span class=nx>favContextKey</span> <span class=kt>string</span> <span class=c1>// 定义一个key类型
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// f:一个从上下文中根据key取value的函数
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>f</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>(</span><span class=nx>ctx</span> <span class=nx>context</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span> <span class=nx>k</span> <span class=nx>favContextKey</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nx>v</span> <span class=o>:=</span> <span class=nx>ctx</span><span class=p>.</span><span class=nf>Value</span><span class=p>(</span><span class=nx>k</span><span class=p>);</span> <span class=nx>v</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;found value:&#34;</span><span class=p>,</span> <span class=nx>v</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;key not found:&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>k</span> <span class=o>:=</span> <span class=nf>favContextKey</span><span class=p>(</span><span class=s>&#34;language&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 创建一个携带key为k，value为&#34;Go&#34;的上下文
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>ctx</span> <span class=o>:=</span> <span class=nx>context</span><span class=p>.</span><span class=nf>WithValue</span><span class=p>(</span><span class=nx>context</span><span class=p>.</span><span class=nf>Background</span><span class=p>(),</span> <span class=nx>k</span><span class=p>,</span> <span class=s>&#34;Go&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nf>f</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span> <span class=nx>k</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>f</span><span class=p>(</span><span class=nx>ctx</span><span class=p>,</span> <span class=nf>favContextKey</span><span class=p>(</span><span class=s>&#34;color&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>go run main.go
+</span></span><span class=line><span class=cl>found value: Go
+</span></span><span class=line><span class=cl>key not found: color
+</span></span></code></pre></td></tr></table></div></div><p>使用 Context 的注意事项：</p><ul><li>不要把 Context 放在结构体中，要以参数的方式显示传递；</li><li>以 Context 作为参数的函数方法，应该把 Context 作为第一个参数；</li><li>给一个函数方法传递 Context 的时候，不要传递 nil，如果不知道传递什么，就使用 context.TODO；</li><li>Context 的 Value 相关方法应该传递请求域的必要数据，不应该用于传递可选参数；</li><li>Context 是线程安全的，可以放心的在多个 Goroutine 中传递。</li></ul><h2 id=接口>接口</h2><h3 id=context>Context</h3><p>Context 包的核心就是 Context 接口，其定义如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Context</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Deadline</span><span class=p>()</span> <span class=p>(</span><span class=nx>deadline</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span><span class=p>,</span> <span class=nx>ok</span> <span class=kt>bool</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Done</span><span class=p>()</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Err</span><span class=p>()</span> <span class=kt>error</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Value</span><span class=p>(</span><span class=nx>key</span> <span class=kd>interface</span><span class=p>{})</span> <span class=kd>interface</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>定义的 4 个方法都是幂等的。也就是说连续多次调用同一个方法，得到的结果都是相同的。</p><ul><li>Deadline 返回 context 完成工作<strong>截止时间</strong><ul><li>通过此时间，函数就可以决定是否进行接下来的操作，如果时间太短，就可以不往下做了，否则浪费系统资源。当然，也可以用这个 deadline 来设置一个 I/O 操作的超时时间。</li></ul></li><li>Done 方法需要返回一个<strong>只读</strong>的 Channel，可以表示 <code>context</code> 被取消的信号<ul><li>注意，这是一个只读的 channel。 我们又知道，读一个关闭的 channel 会读出相应类型的零值。并且源码里没有地方会向这个 <code>channel</code> 里面塞入值。换句话说，这是一个 <code>receive-only</code> 的 channel。因此在子协程里读这个 channel，除非被关闭，否则读不出来任何东西。也正是利用了这一点，子协程从 <code>channel</code> 里读出了值（零值）后，就可以做一些收尾工作，尽快退出。</li></ul></li><li>Err 方法会返回当前 Context 结束的原因，它只会在 Done 返回的 Channel 被关闭时才会返回非空的值，否则返回 <code>nil</code><ul><li>如果当前 Context 被<strong>取消</strong>就会返回 Canceled 错误；</li><li>如果当前 Context <strong>超时</strong>就会返回 DeadlineExceeded 错误；</li></ul></li><li>Value 方法会从 Context 中返回<strong>预设的键对应的值</strong><ul><li>对于同一个上下文来说，多次调用 Value 并传入相同的 Key 会返回相同的结果，该方法仅用于传递跨 API 和进程间跟请求域的数据。</li></ul></li></ul><h3 id=canceler>canceler</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>canceler</span> <span class=kd>interface</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>cancel</span><span class=p>(</span><span class=nx>removeFromParent</span> <span class=kt>bool</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>Done</span><span class=p>()</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>实现了上面定义的两个方法的 Context，就表明该 Context 是<strong>可取消的</strong>。</p><p>源码中有两个类型实现了 canceler 接口：<code>*cancelCtx</code> 和 <code>*timerCtx</code>。注意是加了 * 号的，是这两个结构体的指针实现了 canceler 接口。</p><p>Context 接口设计成这个样子的原因：</p><ul><li><p>“取消”操作应该是建议性，而非强制性</p><ul><li>caller 不应该去关心、干涉 callee 的情况，决定如何以及何时 return 是 callee 的责任。caller 只需发送“取消”信息，callee 根据收到的信息来做进一步的决策，因此接口并没有定义 cancel 方法。</li></ul></li><li><p>“取消”操作应该可传递</p><ul><li>“取消”某个函数时，和它相关联的其他函数也应该“取消”。因此，Done() 方法返回一个只读的 channel，所有相关函数监听此 channel。一旦 channel 关闭，通过 channel 的“广播机制”，所有监听者都能收到。</li></ul></li></ul><h2 id=结构体>结构体</h2><h3 id=emptyctx>emptyCtx</h3><p>源码中定义了 <code>Context</code> 接口后，并且给出了一个实现：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>emptyCtx</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=o>*</span><span class=nx>emptyCtx</span><span class=p>)</span> <span class=nf>Deadline</span><span class=p>()</span> <span class=p>(</span><span class=nx>deadline</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span><span class=p>,</span> <span class=nx>ok</span> <span class=kt>bool</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=o>*</span><span class=nx>emptyCtx</span><span class=p>)</span> <span class=nf>Done</span><span class=p>()</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{}</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>nil</span> <span class=c1>// 读之将阻塞
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=o>*</span><span class=nx>emptyCtx</span><span class=p>)</span> <span class=nf>Err</span><span class=p>()</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=o>*</span><span class=nx>emptyCtx</span><span class=p>)</span> <span class=nf>Value</span><span class=p>(</span><span class=nx>key</span> <span class=kd>interface</span><span class=p>{})</span> <span class=kd>interface</span><span class=p>{}</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>看这段源码，非常 happy。因为每个函数都实现的异常简单，要么是直接返回，要么是返回 nil。</p><p>所以，这实际上是一个空的 context，永远不会被 cancel，没有存储值，也没有 deadline。</p><p>它被包装成：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=nx>background</span> <span class=p>=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>emptyCtx</span><span class=p>)</span> <span class=c1>// 本质是一个指针
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>todo</span>       <span class=p>=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>emptyCtx</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>通过下面两个导出的函数（首字母大写）对外公开：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Background</span><span class=p>()</span> <span class=nx>Context</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>background</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TODO</span><span class=p>()</span> <span class=nx>Context</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>todo</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>background 通常用在 main 函数中，作为所有 context 的<strong>根节点</strong>。</p><p>todo 通常用在并不知道传递什么 context 的情形。</p><p>例如，调用一个需要传递 context 参数的函数，你手头并没有其他 context 可以传递，这时就可以传递 todo。这常常发生在重构进行中，给一些函数添加了一个 Context 参数，但不知道要传什么，就用 todo “占个位子”，最终要换成其他 context。</p><h3 id=cancelctx>cancelCtx</h3><p>再来看一个重要的 context：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>cancelCtx</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Context</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 保护之后的字段
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>mu</span>       <span class=nx>sync</span><span class=p>.</span><span class=nx>Mutex</span>
+</span></span><span class=line><span class=cl>    <span class=nx>done</span>     <span class=kd>chan</span> <span class=kd>struct</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>children</span> <span class=kd>map</span><span class=p>[</span><span class=nx>canceler</span><span class=p>]</span><span class=kd>struct</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>err</span>      <span class=kt>error</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这是一个可以取消的 Context，实现了 canceler 接口。它直接将接口 Context 作为它的一个匿名字段，这样，它就可以被看成一个 Context。</p><h4 id=done>Done()</h4><p>先来看 <code>Done()</code> 方法的实现：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=o>*</span><span class=nx>cancelCtx</span><span class=p>)</span> <span class=nf>Done</span><span class=p>()</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{}</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>c</span><span class=p>.</span><span class=nx>done</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>c</span><span class=p>.</span><span class=nx>done</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>d</span> <span class=o>:=</span> <span class=nx>c</span><span class=p>.</span><span class=nx>done</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>d</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>c.done</code> 是“懒汉式”创建，只有调用了 <code>Done()</code> 方法的时候才会被创建。再次说明，函数返回的是一个只读的 channel，而且没有地方向这个 channel 里面写数据。所以，直接调用读这个 <code>channel</code>，协程会被 block 住。<strong>一般通过搭配 select 来使用</strong>。一旦关闭，就会立即读出零值。</p><p><code>Err()</code> 和 <code>String()</code> 方法比较简单，不多说。推荐看源码，非常简单。</p><h4 id=cancel>cancel()</h4><p>接下来，我们重点关注 <code>cancel()</code> 方法的实现：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=o>*</span><span class=nx>cancelCtx</span><span class=p>)</span> <span class=nf>cancel</span><span class=p>(</span><span class=nx>removeFromParent</span> <span class=kt>bool</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 必须要传 err
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=nx>err</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nb>panic</span><span class=p>(</span><span class=s>&#34;context: internal error: missing cancel error&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=nx>c</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>c</span><span class=p>.</span><span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>c</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=c1>// 已经被其他协程取消
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 给 err 字段赋值
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>c</span><span class=p>.</span><span class=nx>err</span> <span class=p>=</span> <span class=nx>err</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 关闭 channel，通知其他协程
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=nx>c</span><span class=p>.</span><span class=nx>done</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>c</span><span class=p>.</span><span class=nx>done</span> <span class=p>=</span> <span class=nx>closedchan</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nb>close</span><span class=p>(</span><span class=nx>c</span><span class=p>.</span><span class=nx>done</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 遍历它的所有子节点
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>for</span> <span class=nx>child</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>c</span><span class=p>.</span><span class=nx>children</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 递归地取消所有子节点
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>child</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>false</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 将子节点置空
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>c</span><span class=p>.</span><span class=nx>children</span> <span class=p>=</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>removeFromParent</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 从父节点中移除自己 
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nf>removeChild</span><span class=p>(</span><span class=nx>c</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>总体来看，<code>cancel()</code> 方法的功能就是：</p><ol><li>关闭 c.done 这个 channel；</li><li>递归地取消它的所有子节点；</li><li>从父节点从删除自己。</li></ol><p>达到的效果是通过关闭 channel，将取消信号传递给了它的所有子节点。goroutine 接收到取消信号的方式就是 select 语句中的读 <code>c.done</code> 被选中。</p><p>我们再来看创建一个可取消的 Context 的方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>WithCancel</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>)</span> <span class=p>(</span><span class=nx>ctx</span> <span class=nx>Context</span><span class=p>,</span> <span class=nx>cancel</span> <span class=nx>CancelFunc</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span> <span class=o>:=</span> <span class=nf>newCancelCtx</span><span class=p>(</span><span class=nx>parent</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>propagateCancel</span><span class=p>(</span><span class=nx>parent</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>c</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=o>&amp;</span><span class=nx>c</span><span class=p>,</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span> <span class=nx>c</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>true</span><span class=p>,</span> <span class=nx>Canceled</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>newCancelCtx</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>)</span> <span class=nx>cancelCtx</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>cancelCtx</span><span class=p>{</span><span class=nx>Context</span><span class=p>:</span> <span class=nx>parent</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这是一个暴露给用户的方法，传入一个父 Context（这通常是一个 background，作为根节点），返回新建的 context，新 context 的 done channel 是新建的（前文讲过）。</p><p>当 WithCancel 函数返回的 CancelFunc 被调用或者是父节点的 done channel 被关闭（父节点的 CancelFunc 被调用），此 context（子节点） 的 done channel 也会被关闭。</p><p>注意传给 WithCancel 方法的参数，前者是 true，也就是说取消的时候，需要将自己从父节点里删除。第二个参数则是一个固定的取消错误类型：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>Canceled</span> <span class=p>=</span> <span class=nx>errors</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=s>&#34;context canceled&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>还注意到一点，cancel 方法中递归地调用子节点 cancel 方法的时候，传入的第一个参数 <code>removeFromParent</code> 是 false。</p><p>两个问题需要回答：</p><ol><li>什么时候会传 true？</li><li>为什么有时传 true，有时传 false？</li></ol><p>当 <code>removeFromParent</code> 为 true 时，会将当前节点的 context 从父节点 context 中删除：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>removeChild</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>,</span> <span class=nx>child</span> <span class=nx>canceler</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>p</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nf>parentCancelCtx</span><span class=p>(</span><span class=nx>parent</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>!</span><span class=nx>ok</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>p</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>p</span><span class=p>.</span><span class=nx>children</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nb>delete</span><span class=p>(</span><span class=nx>p</span><span class=p>.</span><span class=nx>children</span><span class=p>,</span> <span class=nx>child</span><span class=p>)</span> <span class=c1>// 最关键的一行
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>p</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>什么时候会传 true 呢？答案是调用 <code>WithCancel()</code> 方法的时候，也就是新创建一个可取消的 context 节点时，返回的 cancelFunc 函数会传入 true。这样做的结果是：当调用返回的 cancelFunc 时，会将这个 context 从它的父节点里“除名”，因为父节点可能有很多子节点，你自己取消了，所以我要和你断绝关系，对其他人没影响。</p><p>在取消函数内部，我知道，我所有的子节点都会因为我的一 <code>c.children = nil</code> 而化为灰烬。我自然就没有必要再多做这一步，最后我所有的子节点都会和我断绝关系，没必要一个个做。另外，如果遍历子节点的时候，调用 child.cancel 函数传了 true，还会造成同时遍历和删除一个 map 的境地，会有问题的。</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMxLnpoaW1nLmNvbS84MC92Mi1mN2VhMGIwYmFlYzY4YjcxOGE1MTQ0MTk2MzZlODc1Yl83MjB3LmpwZw data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMxLnpoaW1nLmNvbS84MC92Mi1mN2VhMGIwYmFlYzY4YjcxOGE1MTQ0MTk2MzZlODc1Yl83MjB3LmpwZw, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMxLnpoaW1nLmNvbS84MC92Mi1mN2VhMGIwYmFlYzY4YjcxOGE1MTQ0MTk2MzZlODc1Yl83MjB3LmpwZw 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMxLnpoaW1nLmNvbS84MC92Mi1mN2VhMGIwYmFlYzY4YjcxOGE1MTQ0MTk2MzZlODc1Yl83MjB3LmpwZw 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/aHR0cHM6Ly9waWMxLnpoaW1nLmNvbS84MC92Mi1mN2VhMGIwYmFlYzY4YjcxOGE1MTQ0MTk2MzZlODc1Yl83MjB3LmpwZw title=在这里插入图片描述></p><p>如上图，代表一棵 context 树。当调用左图中标红 context 的 cancel 方法后，该 context 从它的父 context 中去除掉了：实线箭头变成了虚线。且虚线圈框出来的 context 都被取消了，圈内的 context 间的父子关系都荡然无存了。</p><p>重点看 <code>propagateCancel()</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>propagateCancel</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>,</span> <span class=nx>child</span> <span class=nx>canceler</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 父节点是个空节点
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=nx>parent</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=c1>// parent is never canceled
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 找到可以取消的父 context
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=nx>p</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nf>parentCancelCtx</span><span class=p>(</span><span class=nx>parent</span><span class=p>);</span> <span class=nx>ok</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>p</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nx>p</span><span class=p>.</span><span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// 父节点已经被取消了，本节点（子节点）也要取消
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nx>child</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>false</span><span class=p>,</span> <span class=nx>p</span><span class=p>.</span><span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// 父节点未取消
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>if</span> <span class=nx>p</span><span class=p>.</span><span class=nx>children</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nx>p</span><span class=p>.</span><span class=nx>children</span> <span class=p>=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=nx>canceler</span><span class=p>]</span><span class=kd>struct</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// &#34;挂到&#34;父节点上
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nx>p</span><span class=p>.</span><span class=nx>children</span><span class=p>[</span><span class=nx>child</span><span class=p>]</span> <span class=p>=</span> <span class=kd>struct</span><span class=p>{}{}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=nx>p</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 如果没有找到可取消的父 context。新启动一个协程监控父节点或子节点取消信号
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>parent</span><span class=p>.</span><span class=nf>Done</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>                <span class=nx>child</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>false</span><span class=p>,</span> <span class=nx>parent</span><span class=p>.</span><span class=nf>Err</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>            <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>child</span><span class=p>.</span><span class=nf>Done</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=p>}()</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个方法的作用就是<strong>向上寻找可以“挂靠”的“可取消”的 context，并且将 child “挂靠”上去</strong>。这样，调用上层 cancel 方法的时候，就可以层层传递，将那些挂靠的子 context 同时“取消”。</p><p>这里着重解释下为什么会有 else 描述的情况发生。else 是指当前节点 context 没有向上找到可以取消的父节点，那么就要再启动一个协程监控父节点或者子节点的取消动作。</p><p>这里就有疑问了，既然没找到可以取消的父节点，那 <code>case &lt;-parent.Done()</code> 这个 case 就永远不会发生，所以可以忽略这个 case；而 <code>case &lt;-child.Done()</code> 这个 case 又啥事不干。那这个 else 不就多余了吗？</p><p>其实不然。我们来看 <code>parentCancelCtx</code> 的代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>parentCancelCtx</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>)</span> <span class=p>(</span><span class=o>*</span><span class=nx>cancelCtx</span><span class=p>,</span> <span class=kt>bool</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>switch</span> <span class=nx>c</span> <span class=o>:=</span> <span class=nx>parent</span><span class=p>.(</span><span class=kd>type</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=o>*</span><span class=nx>cancelCtx</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=nx>c</span><span class=p>,</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=o>*</span><span class=nx>timerCtx</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=o>&amp;</span><span class=nx>c</span><span class=p>.</span><span class=nx>cancelCtx</span><span class=p>,</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>        <span class=k>case</span> <span class=o>*</span><span class=nx>valueCtx</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nx>parent</span> <span class=p>=</span> <span class=nx>c</span><span class=p>.</span><span class=nx>Context</span>
+</span></span><span class=line><span class=cl>        <span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>nil</span><span class=p>,</span> <span class=kc>false</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里只会识别三种 Context 类型：<code>*cancelCtx</code>，<code>*timerCtx</code>，<code>*valueCtx</code>。若是把 <code>Context</code> 内嵌到一个类型里，就识别不出来了。</p><p>else 这段代码说明，如果把 ctx 强行塞进一个结构体，并用它作为父节点，调用 WithCancel 函数构建子节点 context 的时候，Go 会新启动一个协程来监控取消信号，明显有点浪费嘛。</p><p>再来说一下，select 语句里的两个 case 其实都不能删。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>parent</span><span class=p>.</span><span class=nf>Done</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=nx>child</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>false</span><span class=p>,</span> <span class=nx>parent</span><span class=p>.</span><span class=nf>Err</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>    <span class=k>case</span> <span class=o>&lt;-</span><span class=nx>child</span><span class=p>.</span><span class=nf>Done</span><span class=p>():</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>第一个 case 说明当父节点取消，则取消子节点。如果去掉这个 case，那么父节点取消的信号就不能传递到子节点。</p><p>第二个 case 是说如果子节点自己取消了，那就退出这个 select，父节点的取消信号就不用管了。如果去掉这个 case，那么很可能父节点一直不取消，这个 goroutine 就泄漏了。当然，如果父节点取消了，就会重复让子节点取消，不过，这也没什么影响嘛。</p><h3 id=timerctx>timerCtx</h3><p>timerCtx 基于 cancelCtx，只是多了一个 time.Timer 和一个 deadline。</p><p><strong>Timer 会在 deadline 到来时，自动取消 context。</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>timerCtx</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cancelCtx</span>
+</span></span><span class=line><span class=cl>    <span class=nx>timer</span> <span class=o>*</span><span class=nx>time</span><span class=p>.</span><span class=nx>Timer</span> <span class=c1>// Under cancelCtx.mu.
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=nx>deadline</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>timerCtx 首先是一个 cancelCtx，所以它能取消。看下 cancel() 方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=o>*</span><span class=nx>timerCtx</span><span class=p>)</span> <span class=nf>cancel</span><span class=p>(</span><span class=nx>removeFromParent</span> <span class=kt>bool</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 直接调用 cancelCtx 的取消方法
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>c</span><span class=p>.</span><span class=nx>cancelCtx</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>false</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>removeFromParent</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 从父节点中删除子节点
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nf>removeChild</span><span class=p>(</span><span class=nx>c</span><span class=p>.</span><span class=nx>cancelCtx</span><span class=p>.</span><span class=nx>Context</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>c</span><span class=p>.</span><span class=nx>timer</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 关掉定时器，这样，在 deadline 到来时，不会再次取消
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>c</span><span class=p>.</span><span class=nx>timer</span><span class=p>.</span><span class=nf>Stop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=nx>c</span><span class=p>.</span><span class=nx>timer</span> <span class=p>=</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>创建 timerCtx 的方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>WithTimeout</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>,</span> <span class=nx>timeout</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Duration</span><span class=p>)</span> <span class=p>(</span><span class=nx>Context</span><span class=p>,</span> <span class=nx>CancelFunc</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nf>WithDeadline</span><span class=p>(</span><span class=nx>parent</span><span class=p>,</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>Add</span><span class=p>(</span><span class=nx>timeout</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>WithTimeout</code> 函数直接调用了 <code>WithDeadline</code>，传入的 <code>deadline</code> 是当前时间加上 <code>timeout</code> 的时间，也就是从现在开始再经过 <code>timeout</code> 时间就算超时。也就是说，<code>WithDeadline</code> 需要用的是绝对时间。重点来看它：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>WithDeadline</span><span class=p>(</span><span class=nx>parent</span> <span class=nx>Context</span><span class=p>,</span> <span class=nx>deadline</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span><span class=p>)</span> <span class=p>(</span><span class=nx>Context</span><span class=p>,</span> <span class=nx>CancelFunc</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>cur</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>parent</span><span class=p>.</span><span class=nf>Deadline</span><span class=p>();</span> <span class=nx>ok</span> <span class=o>&amp;&amp;</span> <span class=nx>cur</span><span class=p>.</span><span class=nf>Before</span><span class=p>(</span><span class=nx>deadline</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 如果父节点 context 的 deadline 早于指定时间。直接构建一个可取消的 context。
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=c1>// 原因是一旦父节点超时，自动调用 cancel 函数，子节点也会随之取消。
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=c1>// 所以不用单独处理子节点的计时器时间到了之后，自动调用 cancel 函数
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>return</span> <span class=nf>WithCancel</span><span class=p>(</span><span class=nx>parent</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 构建 timerCtx
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>c</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>timerCtx</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>cancelCtx</span><span class=p>:</span> <span class=nf>newCancelCtx</span><span class=p>(</span><span class=nx>parent</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=nx>deadline</span><span class=p>:</span>  <span class=nx>deadline</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 挂靠到父节点上
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nf>propagateCancel</span><span class=p>(</span><span class=nx>parent</span><span class=p>,</span> <span class=nx>c</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 计算当前距离 deadline 的时间
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>d</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Until</span><span class=p>(</span><span class=nx>deadline</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>d</span> <span class=o>&lt;=</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 直接取消
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>c</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>true</span><span class=p>,</span> <span class=nx>DeadlineExceeded</span><span class=p>)</span> <span class=c1>// deadline has already passed
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>return</span> <span class=nx>c</span><span class=p>,</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span> <span class=nx>c</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>true</span><span class=p>,</span> <span class=nx>Canceled</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>defer</span> <span class=nx>c</span><span class=p>.</span><span class=nx>mu</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>c</span><span class=p>.</span><span class=nx>err</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// d 时间后，timer 会自动调用 cancel 函数。自动取消
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=nx>c</span><span class=p>.</span><span class=nx>timer</span> <span class=p>=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>AfterFunc</span><span class=p>(</span><span class=nx>d</span><span class=p>,</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>c</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>true</span><span class=p>,</span> <span class=nx>DeadlineExceeded</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=p>})</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>c</span><span class=p>,</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span> <span class=nx>c</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>true</span><span class=p>,</span> <span class=nx>Canceled</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>也就是说仍然要把子节点挂靠到父节点，一旦父节点取消了，会把取消信号向下传递到子节点，子节点随之取消。</p><p>有一个特殊情况是，如果要创建的这个子节点的 deadline 比父节点要晚，也就是说如果父节点是时间到自动取消，那么一定会取消这个子节点，导致子节点的 deadline 根本不起作用，因为子节点在 deadline 到来之前就已经被父节点取消了。</p><p>这个函数的最核心的一句是：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>c</span><span class=p>.</span><span class=nx>timer</span> <span class=p>=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>AfterFunc</span><span class=p>(</span><span class=nx>d</span><span class=p>,</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>c</span><span class=p>.</span><span class=nf>cancel</span><span class=p>(</span><span class=kc>true</span><span class=p>,</span> <span class=nx>DeadlineExceeded</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><p>c.timer 会在 d 时间间隔后，自动调用 cancel 函数，并且传入的错误就是 <code>DeadlineExceeded</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>DeadlineExceeded</span> <span class=kt>error</span> <span class=p>=</span> <span class=nx>deadlineExceededError</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>deadlineExceededError</span> <span class=kd>struct</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>deadlineExceededError</span><span class=p>)</span> <span class=nf>Error</span><span class=p>()</span> <span class=kt>string</span>   <span class=p>{</span> <span class=k>return</span> <span class=s>&#34;context deadline exceeded&#34;</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>也就是超时错误。</p><h2 id=总结>总结</h2><p>Go 语言中的 Context 的主要作用还是<strong>在多个 Goroutine 或者模块之间同步取消信号或者截止日期</strong>，用于减少对资源的消耗和长时间占用，避免资源浪费，虽然传值也是它的功能之一，但是这个功能我们还是很少用到。</p><p>在真正使用传值的功能时我们也应该非常谨慎，不能将请求的所有参数都使用 Context 进行传递，这是一种非常差的设计，比较常见的使用场景是传递请求对应用户的认证令牌以及用于进行分布式追踪的请求 ID。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E6%A0%87%E5%87%86%E5%BA%93/context/ data-title="Go context 库源码分析" data-hashtags="Go 库"><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E6%A0%87%E5%87%86%E5%BA%93/context/ data-hashtag="Go 库"><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E6%A0%87%E5%87%86%E5%BA%93/context/ data-title="Go context 库源码分析"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/go-%E5%BA%93/>Go 库</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E5%B8%B8%E7%94%A8%E5%BA%93/gopacket/ class=prev rel=prev title="Go gopacket 库"><i class="fa-solid fa-angle-left fa-fw"></i>Go gopacket 库</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/golang/basicgrammar/ class=next rel=next title="Go 基础语法">Go 基础语法<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

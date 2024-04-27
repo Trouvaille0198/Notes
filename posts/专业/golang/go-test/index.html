@@ -1,0 +1,431 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>Go test 教程 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="go test Go 语言提供了 go test 命令行工具，使用该工具可以很方便的进行测试。 不仅 Go 语言源码中"><meta name=keywords content='Theme,Hugo'><meta itemprop=name content="Go test 教程"><meta itemprop=description content="go test Go 语言提供了 go test 命令行工具，使用该工具可以很方便的进行测试。 不仅 Go 语言源码中"><meta itemprop=datePublished content="2022-02-25T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="4199"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Golang"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/go-test/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="Go test 教程"><meta property="og:description" content="go test Go 语言提供了 go test 命令行工具，使用该工具可以很方便的进行测试。 不仅 Go 语言源码中"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-02-25T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Go test 教程"><meta name=twitter:description content="go test Go 语言提供了 go test 命令行工具，使用该工具可以很方便的进行测试。 不仅 Go 语言源码中"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/go-test/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/useful/%E5%85%AB%E8%82%A1%E6%96%87/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/dp/152.-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go test 教程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/golang\/go-test\/"},"genre":"posts","wordcount":4199,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/golang\/go-test\/","datePublished":"2022-02-25T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Go test 教程</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Golang</a></span></div><div class=post-meta-line><span title="2022-02-25 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-02-25>2022-02-25</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 4199 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#单元测试>单元测试</a><ul><li><a href=#规范>规范</a></li><li><a href=#测试文件>测试文件</a></li><li><a href=#go-test-1>go test</a><ul><li><a href=#示例>示例</a></li><li><a href=#显示每个用例的结果>显示每个用例的结果</a></li><li><a href=#查看覆盖率>查看覆盖率</a></li><li><a href=#运行指定函数>运行指定函数</a></li><li><a href=#标记单元测试结果>标记单元测试结果</a></li><li><a href=#单元测试日志>单元测试日志</a></li></ul></li></ul></li><li><a href=#性能测试-benchmark>性能测试 Benchmark</a><ul><li><a href=#快速浏览>快速浏览</a></li><li><a href=#规范-1>规范</a><ul><li><a href=#基准测试原理>基准测试原理</a></li><li><a href=#自定义测试时间--benchtime>自定义测试时间 <code>-benchtime</code></a></li><li><a href=#测试-cpu-核数--cpu>测试 CPU 核数 <code>-cpu</code></a></li><li><a href=#测试内存--benchmem>测试内存 <code>-benchmem</code></a></li><li><a href=#控制计时器>控制计时器</a></li><li><a href=#测试不同的数据>测试不同的数据</a></li></ul></li></ul></li><li><a href=#示例测试>示例测试</a><ul><li><a href=#示例-1>示例</a></li></ul></li><li><a href=#子测试>子测试</a></li></ul></nav></div></div><div class=content id=content><h1 id=go-test>go test</h1><p>Go 语言提供了 go test 命令行工具，使用该工具可以很方便的进行测试。</p><p>不仅 Go 语言源码中大量使用 go test，在各种开源框架中的应用也极为普遍。</p><p>目前 go test 支持的测试类型有：</p><ul><li>单元测试</li><li>性能测试</li><li>示例测试</li></ul><h2 id=单元测试>单元测试</h2><p>单元测试是指对软件中的最小可测试单元进行检查和验证，比如对一个函数的测试。</p><ul><li>测试文件名必须以"_test.go"结尾；</li><li>测试函数名必须以“TestXxx”开始；</li><li>命令行下使用"go test"即可启动测试；</li></ul><h3 id=规范>规范</h3><p>Go 语言推荐测试文件和源代码文件放在一块，测试文件以 <code>_test.go</code> 结尾。比如，当前 package 有 <code>calc.go</code> 一个文件，我们想测试 <code>calc.go</code> 中的 <code>Add</code> 和 <code>Mul</code> 函数，那么应该新建 <code>calc_test.go</code> 作为测试文件。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>example/
+</span></span><span class=line><span class=cl>   |--calc.go
+</span></span><span class=line><span class=cl>   |--calc_test.go
+</span></span></code></pre></td></tr></table></div></div><p>假如 <code>calc.go</code> 的代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Add</span><span class=p>(</span><span class=nx>a</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>b</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>a</span> <span class=o>+</span> <span class=nx>b</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>Mul</span><span class=p>(</span><span class=nx>a</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>b</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>a</span> <span class=o>*</span> <span class=nx>b</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>那么 <code>calc_test.go</code> 中的测试用例可以这么写：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;testing&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestAdd</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>ans</span> <span class=o>:=</span> <span class=nf>Add</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>);</span> <span class=nx>ans</span> <span class=o>!=</span> <span class=mi>3</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;1 + 2 expected be 3, but %d got&#34;</span><span class=p>,</span> <span class=nx>ans</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>ans</span> <span class=o>:=</span> <span class=nf>Add</span><span class=p>(</span><span class=o>-</span><span class=mi>10</span><span class=p>,</span> <span class=o>-</span><span class=mi>20</span><span class=p>);</span> <span class=nx>ans</span> <span class=o>!=</span> <span class=o>-</span><span class=mi>30</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>t</span><span class=p>.</span><span class=nf>Errorf</span><span class=p>(</span><span class=s>&#34;-10 + -20 expected be -30, but %d got&#34;</span><span class=p>,</span> <span class=nx>ans</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=测试文件>测试文件</h3><p>单元测试源码文件可以由多个测试用例组成，每个测试用例函数需要以 <code>Test</code> 为前缀，例如：</p><p><code>func TestXXX( t *testing.T )</code></p><ul><li>测试用例文件不会参与正常源码编译，不会被包含到可执行文件中。</li><li>测试用例文件使用 <code>go test</code> 指令来执行，没有也不需要 <code>main()</code> 作为函数入口。所有在以 <code>_test</code> 结尾的源码内以 <code>Test</code> 开头的函数会自动被执行。</li><li>测试用例可以不传入 <code>*testing.T</code> 参数。</li><li>基准测试 (benchmark) 的参数是 <code>*testing.B</code>，TestMain 的参数是 <code>*testing.M</code> 类型。</li></ul><h3 id=go-test-1>go test</h3><p>默认的情况下，<code>go test</code> 命令不需要任何的参数，它会自动把你源码包下面所有 test 文件测试完毕，当然你也可以带上参数。</p><ul><li><code>-bench regexp</code> 执行相应的 benchmarks，例如 -bench=.；</li><li><code>-cover</code> 开启测试覆盖率；</li><li><code>-run regexp</code> 只运行 regexp 匹配的函数，例如 -run=Array 那么就执行包含有 Array 开头的函数；</li><li><code>-v</code> 显示测试的详细命令。</li></ul><h4 id=示例>示例</h4><p>运行 <code>go test</code>，该 package 下所有的测试用例都会被执行。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>0.009</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><p>或者指定 test 文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>go</span> <span class=nx>test</span> <span class=nx>helloworld_test</span><span class=p>.</span><span class=k>go</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=显示每个用例的结果>显示每个用例的结果</h4><p><code>go test -v</code>，<code>-v</code> 参数会显示每个用例的测试结果</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>v</span>
+</span></span><span class=line><span class=cl><span class=o>==</span><span class=p>=</span> <span class=nx>RUN</span>   <span class=nx>TestAdd</span>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=nx>PASS</span><span class=p>:</span> <span class=nf>TestAdd</span> <span class=p>(</span><span class=mf>0.00</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>==</span><span class=p>=</span> <span class=nx>RUN</span>   <span class=nx>TestMul</span>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=nx>PASS</span><span class=p>:</span> <span class=nf>TestMul</span> <span class=p>(</span><span class=mf>0.00</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>0.007</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看覆盖率>查看覆盖率</h4><h4 id=运行指定函数>运行指定函数</h4><p>如果只想运行其中的一个用例，例如 <code>TestAdd</code>，可以用 <code>-run</code> 参数指定，该参数支持通配符 <code>*</code>，和部分正则表达式，例如 <code>^</code>、<code>$</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>run</span> <span class=nx>TestAdd</span> <span class=o>-</span><span class=nx>v</span>
+</span></span><span class=line><span class=cl><span class=o>==</span><span class=p>=</span> <span class=nx>RUN</span>   <span class=nx>TestAdd</span>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=nx>PASS</span><span class=p>:</span> <span class=nf>TestAdd</span> <span class=p>(</span><span class=mf>0.00</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>0.007</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=标记单元测试结果>标记单元测试结果</h4><p>当需要终止当前测试用例时，可以使用 FailNow，参考下面的代码。</p><p>测试结果标记（具体位置是<code>./src/chapter11/gotest/fail_test.go</code>）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestFailNow</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>    
+</span></span><span class=line><span class=cl>	<span class=nx>t</span><span class=p>.</span><span class=nf>FailNow</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>还有一种<strong>只标记错误不终止测试</strong>的方法，代码如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestFail</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;before fail&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>t</span><span class=p>.</span><span class=nf>Fail</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;after fail&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>测试结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=o>==</span><span class=p>=</span> <span class=nx>RUN</span>   <span class=nx>TestFail</span>
+</span></span><span class=line><span class=cl><span class=nx>before</span> <span class=nx>fail</span>
+</span></span><span class=line><span class=cl><span class=nx>after</span> <span class=nx>fail</span>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=nx>FAIL</span><span class=p>:</span> <span class=nf>TestFail</span> <span class=p>(</span><span class=mf>0.00</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>FAIL</span>
+</span></span><span class=line><span class=cl><span class=nx>exit</span> <span class=nx>status</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=nx>FAIL</span>        <span class=nx>command</span><span class=o>-</span><span class=nx>line</span><span class=o>-</span><span class=nx>arguments</span>        <span class=mf>0.002</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><p>从日志中看出，第 5 行调用 <code>Fail()</code> 后测试结果标记为失败，但是第 7 行依然被程序执行了。</p><h4 id=单元测试日志>单元测试日志</h4><p>每个测试用例可能并发执行，使用 testing.T 提供的日志输出可以保证日志跟随这个测试上下文一起打印输出。testing.T 提供了几种日志输出方法，详见下表所示。</p><table><thead><tr><th>方 法</th><th>备 注</th></tr></thead><tbody><tr><td>Log</td><td>打印日志，同时结束测试</td></tr><tr><td>Logf</td><td>格式化打印日志，同时结束测试</td></tr><tr><td>Error</td><td>打印错误日志，同时结束测试</td></tr><tr><td>Errorf</td><td>格式化打印错误日志，同时结束测试</td></tr><tr><td>Fatal</td><td>打印致命日志，同时结束测试</td></tr><tr><td>Fatalf</td><td>格式化打印致命日志，同时结束测试</td></tr></tbody></table><p>开发者可以根据实际需要选择合适的日志。</p><h2 id=性能测试-benchmark>性能测试 Benchmark</h2><p>性能测试，也称<strong>基准测试</strong>，可以测试一段程序的性能，可以得到时间消耗、内存使用情况的报告。</p><p>Go 语言中提供了基准测试框架，使用方法类似于单元测试，使用者无须准备高精度的计时器和各种分析工具，基准测试本身即可以打印出非常标准的测试报告。</p><h3 id=快速浏览>快速浏览</h3><ol><li>进行性能测试时，尽可能保持测试环境的稳定</li><li>实现 benchmark 测试
+• 位于 <code>_test.go</code> 文件中
+• 函数名以 <code>Benchmark</code> 开头
+• 参数为 <code>b *testing.B</code>
+• <code>b.ResetTimer()</code> 可重置定时器
+• <code>b.StopTimer()</code> 暂停计时
+• <code>b.StartTimer()</code> 开始计时</li><li>执行 benchmark 测试
+• <code>go test -bench .</code> 执行当前测试
+• <code>b.N</code> 决定用例需要执行的次数
+• <code>-bench</code> 可传入正则，匹配用例
+• <code>-cpu</code> 可改变 CPU 核数
+• <code>-benchtime</code> 可指定执行时间或具体次数
+• <code>-count</code> 可设置 benchmark 轮数
+• <code>-benchmem</code> 可查看内存分配量和分配次数</li></ol><h3 id=规范-1>规范</h3><p>基准测试（具体位置是 <code>./src/chapter11/gotest/benchmark_test.go</code>）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>code11_3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;testing&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkAdd</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>n</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>n</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这段代码使用基准测试框架测试加法性能。</p><p>第 7 行中的 <code>b.N</code> 由基准测试框架提供。N 值是动态调整的，直到可靠的算出程序执行时间后才会停止，具体执行次数会在执行结束后打印出来。</p><p>测试代码需要保证函数可重入性及无状态，也就是说，测试代码不使用全局变量等带有记忆性质的数据结构。避免多次运行同一段代码时的环境不一致，不能假设 N 值范围。</p><p>使用如下命令行开启基准测试：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>v</span> <span class=o>-</span><span class=nx>bench</span><span class=p>=.</span> <span class=nx>benchmark_test</span><span class=p>.</span><span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=nx>goos</span><span class=p>:</span> <span class=nx>linux</span>
+</span></span><span class=line><span class=cl><span class=nx>goarch</span><span class=p>:</span> <span class=nx>amd64</span>
+</span></span><span class=line><span class=cl><span class=nx>Benchmark_Add</span><span class=o>-</span><span class=mi>4</span>           <span class=mi>20000000</span>         <span class=mf>0.33</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>          <span class=nx>command</span><span class=o>-</span><span class=nx>line</span><span class=o>-</span><span class=nx>arguments</span>        <span class=mf>0.700</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>第 1 行的 <code>-bench=.</code> 表示运行 benchmark_test.go 文件里的所有基准测试，和单元测试中的 <code>-run</code> 类似。</li><li>第 4 行中显示基准测试名称，20000000 表示测试的次数，也就是 testing.B 结构中提供给程序使用的 N。“0.33 ns/op”表示每一个操作耗费多少时间（纳秒）。</li></ul><blockquote><p>Windows 下使用 go test 命令行时，<code>-bench=.</code> 应写为 <code>-bench="."</code>。</p></blockquote><h4 id=基准测试原理>基准测试原理</h4><p>基准测试框架对一个测试用例的默认测试时间是 1 秒。开始测试时，当以 Benchmark 开头的基准测试用例函数返回时还不到 1 秒，那么 testing.B 中的 N 值将按 1、2、5、10、20、50……递增，同时以递增后的值重新调用基准测试用例函数。</p><h4 id=自定义测试时间--benchtime>自定义测试时间 <code>-benchtime</code></h4><p>通过 <code>-benchtime</code> 参数可以自定义测试时间，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>v</span> <span class=o>-</span><span class=nx>bench</span><span class=p>=.</span> <span class=o>-</span><span class=nx>benchtime</span><span class=p>=</span><span class=mi>5</span><span class=nx>s</span> <span class=nx>benchmark_test</span><span class=p>.</span><span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=nx>goos</span><span class=p>:</span> <span class=nx>linux</span>
+</span></span><span class=line><span class=cl><span class=nx>goarch</span><span class=p>:</span> <span class=nx>amd64</span>
+</span></span><span class=line><span class=cl><span class=nx>Benchmark_Add</span><span class=o>-</span><span class=mi>4</span>           <span class=mi>10000000000</span>                 <span class=mf>0.33</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>          <span class=nx>command</span><span class=o>-</span><span class=nx>line</span><span class=o>-</span><span class=nx>arguments</span>        <span class=mf>3.380</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>-benchtime</code> 的值除了是时间外，还可以是具体的次数。例如，执行 30 次可以用 <code>-benchtime=30x</code></p><h4 id=测试-cpu-核数--cpu>测试 CPU 核数 <code>-cpu</code></h4><p><code>-cpu</code> 支持传入一个列表作为参数，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>bench</span><span class=p>=</span><span class=err>&#39;</span><span class=nx>Fib</span><span class=err>$&#39;</span> <span class=o>-</span><span class=nx>cpu</span><span class=p>=</span><span class=mi>2</span><span class=p>,</span><span class=mi>4</span> <span class=p>.</span>
+</span></span><span class=line><span class=cl><span class=nx>goos</span><span class=p>:</span> <span class=nx>darwin</span>
+</span></span><span class=line><span class=cl><span class=nx>goarch</span><span class=p>:</span> <span class=nx>amd64</span>
+</span></span><span class=line><span class=cl><span class=nx>pkg</span><span class=p>:</span> <span class=nx>example</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkFib</span><span class=o>-</span><span class=mi>2</span>               <span class=mi>206</span>           <span class=mi>5774888</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkFib</span><span class=o>-</span><span class=mi>4</span>               <span class=mi>205</span>           <span class=mi>5799426</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>3.563</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=测试内存--benchmem>测试内存 <code>-benchmem</code></h4><p>基准测试可以对一段代码可能存在的内存分配进行统计，下面是一段使用字符串格式化的函数，内部会进行一些分配操作。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkAlloc</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Sprintf</span><span class=p>(</span><span class=s>&#34;%d&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在命令行中添加 <code>-benchmem</code> 参数以显示内存分配情况，参见下面的指令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>v</span> <span class=o>-</span><span class=nx>bench</span><span class=p>=</span><span class=nx>Alloc</span> <span class=o>-</span><span class=nx>benchmem</span> <span class=nx>benchmark_test</span><span class=p>.</span><span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=nx>goos</span><span class=p>:</span> <span class=nx>linux</span>
+</span></span><span class=line><span class=cl><span class=nx>goarch</span><span class=p>:</span> <span class=nx>amd64</span>
+</span></span><span class=line><span class=cl><span class=nx>Benchmark_Alloc</span><span class=o>-</span><span class=mi>4</span> <span class=mi>20000000</span> <span class=mi>109</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span> <span class=mi>16</span> <span class=nx>B</span><span class=o>/</span><span class=nx>op</span> <span class=mi>2</span> <span class=nx>allocs</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>          <span class=nx>command</span><span class=o>-</span><span class=nx>line</span><span class=o>-</span><span class=nx>arguments</span>        <span class=mf>2.311</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><p>代码说明如下：</p><ul><li>第 1 行的代码中 <code>-bench</code> 后添加了 Alloc，指定只测试 <code>BenchmarkAlloc()</code> 函数。</li><li>第 4 行代码的“16 B/op”表示每一次调用需要分配 16 个字节，“2 allocs/op”表示每一次调用有两次分配。</li></ul><h4 id=控制计时器>控制计时器</h4><p>有些测试需要一定的启动和初始化时间，如果从 <code>Benchmark()</code> 函数开始计时会很大程度上影响测试结果的精准性。</p><p>testing.B 提供了一系列的方法可以方便地控制计时器，从而让计时器只在需要的区间进行测试。我们通过下面的代码来了解计时器的控制。</p><p>基准测试中的计时器控制（具体位置是 <code>./src/chapter11/gotest/benchmark_test.go</code>）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkAddTimerControl</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 重置计时器
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>b</span><span class=p>.</span><span class=nf>ResetTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 停止计时器
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>b</span><span class=p>.</span><span class=nf>StopTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 开始计时器
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>b</span><span class=p>.</span><span class=nf>StartTimer</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>n</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>n</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>从 <code>Benchmark()</code> 函数开始，Timer 就开始计数。<code>StopTimer()</code> 可以停止这个计数过程，做一些耗时的操作，通过 <code>StartTimer()</code> 重新开始计时。<code>ResetTimer()</code> 可以重置计数器的数据。</p><p><strong>计数器内部不仅包含耗时数据，还包括内存分配的数据。</strong></p><h4 id=测试不同的数据>测试不同的数据</h4><p>不同的函数复杂度不同，O(1)，O(n)，O(n^2) 等，<strong>利用 benchmark 验证复杂度一个简单的方式</strong>，是构造不同的输入。对刚才的 benchmark 稍作改造，便能够达到目的。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// generate_test.go
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;math/rand&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;testing&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;time&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>generate</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>nums</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Int</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>nums</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>benchmarkGenerate</span><span class=p>(</span><span class=nx>i</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>n</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>n</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>generate</span><span class=p>(</span><span class=nx>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkGenerate1000</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span>    <span class=p>{</span> <span class=nf>benchmarkGenerate</span><span class=p>(</span><span class=mi>1000</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkGenerate10000</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span>   <span class=p>{</span> <span class=nf>benchmarkGenerate</span><span class=p>(</span><span class=mi>10000</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkGenerate100000</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span>  <span class=p>{</span> <span class=nf>benchmarkGenerate</span><span class=p>(</span><span class=mi>100000</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkGenerate1000000</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span> <span class=nf>benchmarkGenerate</span><span class=p>(</span><span class=mi>1000000</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里，我们实现一个辅助函数 <code>benchmarkGenerate</code> 允许传入参数 i，并构造了 4 个不同输入的 benchmark 用例。运行结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>bench</span> <span class=p>.</span>                                                       
+</span></span><span class=line><span class=cl><span class=nx>goos</span><span class=p>:</span> <span class=nx>darwin</span>
+</span></span><span class=line><span class=cl><span class=nx>goarch</span><span class=p>:</span> <span class=nx>amd64</span>
+</span></span><span class=line><span class=cl><span class=nx>pkg</span><span class=p>:</span> <span class=nx>example</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkGenerate1000</span><span class=o>-</span><span class=mi>8</span>            <span class=mi>34048</span>             <span class=mi>34643</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkGenerate10000</span><span class=o>-</span><span class=mi>8</span>            <span class=mi>4070</span>            <span class=mi>295642</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkGenerate100000</span><span class=o>-</span><span class=mi>8</span>            <span class=mi>403</span>           <span class=mi>3230415</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkGenerate1000000</span><span class=o>-</span><span class=mi>8</span>            <span class=mi>39</span>          <span class=mi>32083701</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>6.597</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><p>通过测试结果可以发现，输入变为原来的 10 倍，函数每次调用的时长也差不多是原来的 10 倍，这说明复杂度是线性的。</p><h2 id=示例测试>示例测试</h2><p>示例测试，广泛应用于 Go 源码和各种开源框架中，用于展示某个包或某个方法的用法。</p><ol><li>例子测试函数名需要以 &ldquo;Example&rdquo; 开头；</li><li>检测单行输出格式为 &ldquo;<code>// Output: &lt;期望字符串></code>"；</li><li>检测多行输出格式为 &ldquo;<code>// Output: \ &lt;期望字符串> \ &lt;期望字符串></code>"，每个期望字符串占一行；</li><li>检测无序输出格式为 &ldquo;<code>// Unordered output: \ &lt;期望字符串> \ &lt;期望字符串></code>"，每个期望字符串占一行；</li><li>测试字符串时会自动忽略字符串前后的空白字符；</li><li>如果测试函数中没有 &ldquo;Output&rdquo; 标识，则该测试函数不会被执行；</li><li>执行测试可以使用 <code>go test</code>，此时该目录下的其他测试文件也会一并执行；</li><li>执行测试可以使用 <code>go test &lt;xxx_test.go></code>，此时仅执行特定文件中的测试函数；</li></ol><h3 id=示例-1>示例</h3><p>源代码文件 <code>example.go</code> 中包含 <code>SayHello()</code>、<code>SayGoodbye()</code>和<code>PrintNames()</code> 三个方法，如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>gotest</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// SayHello 打印一行字符串
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>SayHello</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Hello World&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// SayGoodbye 打印两行字符串
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>SayGoodbye</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Hello,&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;goodbye&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// PrintNames 打印学生姓名
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>PrintNames</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>students</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>int</span><span class=p>]</span><span class=kt>string</span><span class=p>,</span> <span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>students</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=p>=</span> <span class=s>&#34;Jim&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>students</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=p>=</span> <span class=s>&#34;Bob&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>students</span><span class=p>[</span><span class=mi>3</span><span class=p>]</span> <span class=p>=</span> <span class=s>&#34;Tom&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>students</span><span class=p>[</span><span class=mi>4</span><span class=p>]</span> <span class=p>=</span> <span class=s>&#34;Sue&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>students</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这几个方法打印内容略有不同，分别代表一种典型的场景：</p><ul><li><code>SayHello()</code>：只有一行打印输出</li><li><code>SayGoodbye()</code>：有两行打印输出</li><li><code>PrintNames()</code>：有多行打印输出，且由于 Map 数据结构的原因，多行打印次序是随机的。</li></ul><hr><p>测试文件 <code>example_test.go</code> 中包含 3 个测试方法，于源代码文件中的 3 个方法一一对应，测试文件如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>gotest_test</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=s>&#34;gotest&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 检测单行输出
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>ExampleSayHello</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>gotest</span><span class=p>.</span><span class=nf>SayHello</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// OutPut: Hello World
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 检测多行输出
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>ExampleSayGoodbye</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>gotest</span><span class=p>.</span><span class=nf>SayGoodbye</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// OutPut:
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// Hello,
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// goodbye
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 检测乱序输出
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>ExamplePrintNames</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>gotest</span><span class=p>.</span><span class=nf>PrintNames</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Unordered output:
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// Jim
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// Bob
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// Tom
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// Sue
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>例子测试函数命名规则为"Examplexxx&rdquo;，其中"xxx"为自定义的标识，通常为待测函数名称。</p><p>这三个测试函数分别代表三种场景：</p><ul><li><code>ExampleSayHello()</code>： 待测试函数只有一行输出，使用&rdquo;// OutPut: &ldquo;检测。</li><li><code>ExampleSayGoodbye()</code>：待测试函数有多行输出，使用&rdquo;// OutPut: &ldquo;检测，其中期望值也是多行。</li><li><code>ExamplePrintNames()</code>：待测试函数有多行输出，但输出次序不确定，使用&rdquo;// Unordered output:&ldquo;检测。</li></ul><p>注：字符串比较时会忽略前后的空白字符。</p><hr><p>命令行下，使用 <code>go test</code> 或 <code>go test example_test.go</code> 命令即可启动测试，如下所示：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>E</span><span class=p>:</span><span class=err>\</span><span class=nx>OpenSource</span><span class=err>\</span><span class=nx>GitHub</span><span class=err>\</span><span class=nx>RainbowMango</span><span class=err>\</span><span class=nx>GoExpertProgrammingSourceCode</span><span class=err>\</span><span class=nx>GoExpert</span><span class=err>\</span><span class=nx>src</span><span class=err>\</span><span class=nx>gotest</span><span class=p>&gt;</span><span class=k>go</span> <span class=nx>test</span> <span class=nx>example_test</span><span class=p>.</span><span class=k>go</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>command</span><span class=o>-</span><span class=nx>line</span><span class=o>-</span><span class=nx>arguments</span>  <span class=mf>0.331</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=子测试>子测试</h2></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/go-test/ data-title="Go test 教程"><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/go-test/><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/go-test/ data-title="Go test 教程"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/useful/%E5%85%AB%E8%82%A1%E6%96%87/ class=prev rel=prev title=面试八股文><i class="fa-solid fa-angle-left fa-fw"></i>面试八股文</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%88%B7%E9%A2%98/dp/152.-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84/ class=next rel=next title="152. 乘积最大子数组">152. 乘积最大子数组<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

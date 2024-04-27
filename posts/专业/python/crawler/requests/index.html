@@ -1,0 +1,442 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>reuqest API - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="request API 模块 *requests.request(method, url, *kwargs) *requests.get(url, params=None, *kwargs) *requests.options(url, *kwargs) *requests.head(url, *kwargs) *requests.post(url, data=None, json=None, *kwargs) *requests.put(url, data=None, *kwargs) *requests.patch(url, data=None, *kwargs) *requests.delete(url, *kwargs) 除了 requests.request() 外，其余 7 个方法与 http 协"><meta name=keywords content='Python'><meta itemprop=name content="reuqest API"><meta itemprop=description content="request API 模块 *requests.request(method, url, *kwargs) *requests.get(url, params=None, *kwargs) *requests.options(url, *kwargs) *requests.head(url, *kwargs) *requests.post(url, data=None, json=None, *kwargs) *requests.put(url, data=None, *kwargs) *requests.patch(url, data=None, *kwargs) *requests.delete(url, *kwargs) 除了 requests.request() 外，其余 7 个方法与 http 协"><meta itemprop=datePublished content="2021-04-17T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="2721"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/crawler/requests/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="reuqest API"><meta property="og:description" content="request API 模块 *requests.request(method, url, *kwargs) *requests.get(url, params=None, *kwargs) *requests.options(url, *kwargs) *requests.head(url, *kwargs) *requests.post(url, data=None, json=None, *kwargs) *requests.put(url, data=None, *kwargs) *requests.patch(url, data=None, *kwargs) *requests.delete(url, *kwargs) 除了 requests.request() 外，其余 7 个方法与 http 协"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-17T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Python"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="reuqest API"><meta name=twitter:description content="request API 模块 *requests.request(method, url, *kwargs) *requests.get(url, params=None, *kwargs) *requests.options(url, *kwargs) *requests.head(url, *kwargs) *requests.post(url, data=None, json=None, *kwargs) *requests.put(url, data=None, *kwargs) *requests.patch(url, data=None, *kwargs) *requests.delete(url, *kwargs) 除了 requests.request() 外，其余 7 个方法与 http 协"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/crawler/requests/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/crawler/selenium/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%8F%AF%E8%A7%86%E5%8C%96/wordcloud/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"reuqest API","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/crawler\/requests\/"},"genre":"posts","keywords":"Python","wordcount":2721,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/crawler\/requests\/","datePublished":"2021-04-17T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>reuqest API</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2021-04-17 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-04-17>2021-04-17</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 2721 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#模块>模块</a></li><li><a href=#基本调用>基本调用</a></li><li><a href=#params>params</a></li><li><a href=#headers>headers</a></li><li><a href=#data>data</a></li><li><a href=#json>json</a></li><li><a href=#files>files</a></li><li><a href=#cookies>cookies</a></li><li><a href=#verify>verify</a></li><li><a href=#proxies>proxies</a></li><li><a href=#timeout>timeout</a></li><li><a href=#auth>auth</a></li><li><a href=#allow_redirects>allow_redirects</a></li></ul><ul><li><a href=#url>.url</a></li><li><a href=#request>.request</a></li><li><a href=#text>.text</a></li><li><a href=#content>.content</a></li><li><a href=#status_code>.status_code</a></li><li><a href=#links>.links</a></li><li><a href=#history>.history</a></li><li><a href=#reason>.reason</a></li><li><a href=#cookies-1>.cookies</a></li><li><a href=#json-1>.json()</a></li><li><a href=#headers-1>.headers()</a></li></ul><ul><li><a href=#会话维持>会话维持</a></li><li><a href=#scookiesupdate>s.cookies.update()</a></li></ul></nav></div></div><div class=content id=content><h1 id=request-api>request API</h1><h2 id=模块>模块</h2><ul><li>*requests.request(method, url, *<em>kwargs)</em></li><li>*requests.get(url, params=None, *<em>kwargs)</em></li><li>*requests.options(url, *<em>kwargs)</em></li><li>*requests.head(url, *<em>kwargs)</em></li><li>*requests.post(url, data=None, json=None, *<em>kwargs)</em></li><li>*requests.put(url, data=None, *<em>kwargs)</em></li><li>*requests.patch(url, data=None, *<em>kwargs)</em></li><li>*requests.delete(url, *<em>kwargs)</em></li></ul><p>除了 <code>requests.request()</code> 外，其余 7 个方法与 http 协议中的请求方法一一对应。这 7 个方法其实都是在调用 <code>requests.request()</code> 方法</p><table><thead><tr><th>method</th><th>简述</th></tr></thead><tbody><tr><td>url</td><td>请求的 url</td></tr><tr><td>params</td><td>请求携带的 params</td></tr><tr><td>data</td><td>请求 body 中的 data</td></tr><tr><td>json</td><td>请求 body 中的 json 格式的 data</td></tr><tr><td>headers</td><td>请求携带的 headers</td></tr><tr><td>cookies</td><td>请求携带的 cookies</td></tr><tr><td>files</td><td>上传文件时使用</td></tr><tr><td>auth</td><td>身份认证时使用</td></tr><tr><td>timeout</td><td>设置请求的超时时间，可以设置连接超时和读取超时</td></tr><tr><td>allow_redirects</td><td>是否允许重定向，默认 True，即允许重定向</td></tr><tr><td>proxies</td><td>设置请求的代理，支持 http 代理以及 socks 代理（需要安装第三方库 &ldquo;pip install requests[socks]"）</td></tr><tr><td>verify</td><td>用于 https 请求时的 ssl 证书验证，默认是开启的，如果不需要则设置为 False 即可</td></tr><tr><td>stream</td><td>是否立即下载响应内容，默认是 False，即立即下载响应内容</td></tr><tr><td>cert</td><td>用于指定本地文件用作客户端证书</td></tr></tbody></table><h2 id=基本调用>基本调用</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>request</span><span class=p>(</span><span class=s1>&#39;get&#39;</span><span class=p>,</span><span class=s1>&#39;https://api.github.com/events&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;https://api.github.com/events&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s1>&#39;http://httpbin.org/post&#39;</span><span class=p>,</span> <span class=n>data</span> <span class=o>=</span> <span class=p>{</span><span class=s1>&#39;key&#39;</span><span class=p>:</span><span class=s1>&#39;value&#39;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>put</span><span class=p>(</span><span class=s1>&#39;http://httpbin.org/put&#39;</span><span class=p>,</span> <span class=n>data</span> <span class=o>=</span> <span class=p>{</span><span class=s1>&#39;key&#39;</span><span class=p>:</span><span class=s1>&#39;value&#39;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>delete</span><span class=p>(</span><span class=s1>&#39;http://httpbin.org/delete&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>head</span><span class=p>(</span><span class=s1>&#39;http://httpbin.org/get&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>options</span><span class=p>(</span><span class=s1>&#39;http://httpbin.org/get&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>返回 <code>Response</code> 对象</p><h2 id=params>params</h2><p>接受一个字典，用于传递 URL 参数</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=p>{</span><span class=s1>&#39;key1&#39;</span><span class=p>:</span> <span class=s1>&#39;value1&#39;</span><span class=p>,</span> <span class=s1>&#39;key2&#39;</span><span class=p>:</span> <span class=s1>&#39;value2&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s2>&#34;http://httpbin.org/get&#34;</span><span class=p>,</span> <span class=n>params</span><span class=o>=</span><span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>url</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>http://httpbin.org/get?key1=value1&amp;key2=value2
+</span></span></code></pre></td></tr></table></div></div><h2 id=headers>headers</h2><p>接受一个字典，用于传递 header 参数（请求头）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>url</span> <span class=o>=</span> <span class=s1>&#39;https://tophub.today/n/mproPpoq6O&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>headers</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;User-Agent&#39;</span><span class=p>:</span> <span class=s1>&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=p>,</span><span class=n>headers</span><span class=o>=</span><span class=n>headers</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=data>data</h2><p>用于 POST 请求中，传递请求体中的 data 参数</p><p>该网站可以判断如果请求是 POST 方式，就把相关请求信息返回</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>data</span> <span class=o>=</span> <span class=p>{</span><span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;germey&#39;</span><span class=p>,</span> <span class=s1>&#39;age&#39;</span><span class=p>:</span> <span class=s1>&#39;22&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s2>&#34;http://httpbin.org/post&#34;</span><span class=p>,</span> <span class=n>data</span><span class=o>=</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>text</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{
+</span></span><span class=line><span class=cl>  &#34;args&#34;: {}, 
+</span></span><span class=line><span class=cl>  &#34;data&#34;: &#34;&#34;, 
+</span></span><span class=line><span class=cl>  &#34;files&#34;: {}, 
+</span></span><span class=line><span class=cl>  &#34;form&#34;: {
+</span></span><span class=line><span class=cl>    &#34;age&#34;: &#34;22&#34;, 
+</span></span><span class=line><span class=cl>    &#34;name&#34;: &#34;germey&#34;
+</span></span><span class=line><span class=cl>  }, 
+</span></span><span class=line><span class=cl>  &#34;headers&#34;: {
+</span></span><span class=line><span class=cl>    &#34;Accept&#34;: &#34;*/*&#34;, 
+</span></span><span class=line><span class=cl>    &#34;Accept-Encoding&#34;: &#34;gzip, deflate&#34;, 
+</span></span><span class=line><span class=cl>    &#34;Content-Length&#34;: &#34;18&#34;, 
+</span></span><span class=line><span class=cl>    &#34;Content-Type&#34;: &#34;application/x-www-form-urlencoded&#34;, 
+</span></span><span class=line><span class=cl>    &#34;Host&#34;: &#34;httpbin.org&#34;, 
+</span></span><span class=line><span class=cl>    &#34;User-Agent&#34;: &#34;python-requests/2.25.0&#34;, 
+</span></span><span class=line><span class=cl>    &#34;X-Amzn-Trace-Id&#34;: &#34;Root=1-5fe43f55-5d4750b76935f7515662c3b3&#34;
+</span></span><span class=line><span class=cl>  }, 
+</span></span><span class=line><span class=cl>  &#34;json&#34;: null, 
+</span></span><span class=line><span class=cl>  &#34;origin&#34;: &#34;59.79.2.148&#34;, 
+</span></span><span class=line><span class=cl>  &#34;url&#34;: &#34;http://httpbin.org/post&#34;
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h2 id=json>json</h2><p>用于 POST 请求中，传递请求体中 json 格式的的 data 参数</p><h2 id=files>files</h2><p>上传文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=n>files</span> <span class=o>=</span> <span class=p>{</span><span class=s1>&#39;file&#39;</span><span class=p>:</span> <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;favicon.ico&#39;</span><span class=p>,</span> <span class=s1>&#39;rb&#39;</span><span class=p>)}</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span><span class=s2>&#34;http://httpbin.org/post&#34;</span><span class=p>,</span> <span class=n>files</span><span class=o>=</span><span class=n>files</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>text</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=cookies>cookies</h2><p>用于传递 cookies 参数，不过将 cookies 写在 headers 中比较方便</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s2>&#34;https://www.baidu.com&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>cookies</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>key</span><span class=p>,</span> <span class=n>value</span> <span class=ow>in</span> <span class=n>r</span><span class=o>.</span><span class=n>cookies</span><span class=o>.</span><span class=n>items</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>key</span> <span class=o>+</span> <span class=s1>&#39;=&#39;</span> <span class=o>+</span> <span class=n>value</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl><span class=p>&lt;</span><span class=nt>RequestsCookieJar</span><span class=err>[&lt;</span><span class=na>Cookie</span> <span class=na>BDORZ</span><span class=o>=</span><span class=s>27315</span> <span class=na>for</span> <span class=err>.</span><span class=na>baidu</span><span class=err>.</span><span class=na>com</span><span class=p>/&gt;</span>]&gt;
+</span></span><span class=line><span class=cl>BDORZ=27315
+</span></span></code></pre></td></tr></table></div></div><p>步骤</p><ol><li>调用 cookies 属性，得到 Cookies，可以发现它是 RequestCookieJar 类型</li><li>用 items()方法将其转化为元组组成的列表，遍历输出每一个 Cookie 的名称和值，实现 Cookie 的遍历解析</li></ol><h2 id=verify>verify</h2><p>用于 https 请求时的 ssl 证书验证，默认是开启的，如果不需要则设置为 False 即可</p><p>例：请求一个 HTTPS 站点，但是证书验证错误的页面时，把 verify 参数设置为 False</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=n>response</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;https://www.12306.cn&#39;</span><span class=p>,</span> <span class=n>verify</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>response</span><span class=o>.</span><span class=n>status_code</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl>D:\Application\Anaconda\lib\site-packages\urllib3\connectionpool.py:988: InsecureRequestWarning: Unverified HTTPS request is being made to host &#39;www.12306.cn&#39;. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+</span></span><span class=line><span class=cl>  InsecureRequestWarning,
+</span></span><span class=line><span class=cl>200
+</span></span></code></pre></td></tr></table></div></div><p>报了一个警告，它建议我们给它指定证书</p><ul><li>可以通过设置忽略警告的方式来屏蔽这个警告</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>requests.packages</span> <span class=kn>import</span> <span class=n>urllib3</span>
+</span></span><span class=line><span class=cl><span class=n>urllib3</span><span class=o>.</span><span class=n>disable_warnings</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>或者通过捕获警告到日志的方式忽略警告</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>logging</span>
+</span></span><span class=line><span class=cl><span class=n>logging</span><span class=o>.</span><span class=n>captureWarnings</span><span class=p>(</span><span class=kc>True</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>可以指定一个本地证书用作客户端证书</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=n>response</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;https://www.12306.cn&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                        <span class=n>cert</span><span class=o>=</span><span class=p>(</span><span class=s1>&#39;/path/server.crt&#39;</span><span class=p>,</span> <span class=s1>&#39;/path/key&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>response</span><span class=o>.</span><span class=n>status_code</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们需要有 crt 和 key 文件，并且指定它们的路径。注意，本地私有证书的 key 必须是解密状态，加密状态的 key 是不支持的</p><h2 id=proxies>proxies</h2><p>设置请求的代理，支持 http 代理以及 socks 代理（需要安装第三方库 &ldquo;pip install requests[socks]"）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=n>proxies</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=s2>&#34;http&#34;</span><span class=p>:</span> <span class=s2>&#34;http://10.10.1.10:3128&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>	<span class=s2>&#34;https&#34;</span><span class=p>:</span> <span class=s2>&#34;http://10.10.1.10:1080&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s2>&#34;https://www.taobao.com&#34;</span><span class=p>,</span> <span class=n>proxies</span><span class=o>=</span><span class=n>proxies</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>若代理需要使用 HTTP Basic Auth，可以使用类似<a href=http://user/ target=_blank rel="external nofollow noopener noreferrer">http://user</a>:password@host:port 这样的语法来设置代理</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>proxies</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;http&#34;</span><span class=p>:</span> <span class=s2>&#34;http://user:password@10.10.1.10:3128/&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>使用 SOCKS 协议代理</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>proxies</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;http&#39;</span><span class=p>:</span> <span class=s1>&#39;socks5://user:password@host:port&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>	<span class=s1>&#39;https&#39;</span><span class=p>:</span> <span class=s1>&#39;socks5://user:password@host:port&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=timeout>timeout</h2><p>设置请求的超时时间，（发出请求到服务器返回响应的时间），可以设置连接超时和读取超时</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s2>&#34;https://www.taobao.com&#34;</span><span class=p>,</span> <span class=n>timeout</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>status_code</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>请求分为两个阶段，即连接（connect）和读取（read）。上面设置的 timeout 将用作连接和读取这二者的 timeout 总和</p></li><li><p>如果想永久等待，可以直接将 timeout 设置为 None，或者不设置直接留空，因为默认是 None</p></li></ul><h2 id=auth>auth</h2><p>身份认证时使用</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>requests.auth</span> <span class=kn>import</span> <span class=n>HTTPBasicAuth</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;http://localhost:5000&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                 <span class=n>auth</span><span class=o>=</span><span class=n>HTTPBasicAuth</span><span class=p>(</span><span class=s1>&#39;username&#39;</span><span class=p>,</span> <span class=s1>&#39;password&#39;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>status_code</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果用户名和密码正确的话，请求时就会自动认证成功，会返回 200 状态码，如果认证失败，则返回 401 状态码</p><ul><li><p>直接传一个元组</p><p>它会默认使用 HTTPBasicAuth 这个类来认证</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;http://localhost:5000&#39;</span><span class=p>,</span> <span class=n>auth</span><span class=o>=</span><span class=p>(</span><span class=s1>&#39;username&#39;</span><span class=p>,</span> <span class=s1>&#39;password&#39;</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>使用 OAuth1 认证</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>requests_oauthlib</span> <span class=kn>import</span> <span class=n>OAuth1</span>
+</span></span><span class=line><span class=cl><span class=n>url</span> <span class=o>=</span> <span class=s1>&#39;https://api.twitter.com/1.1/account/verify_credentials.json&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>auth</span> <span class=o>=</span> <span class=n>OAuth1</span><span class=p>(</span><span class=s1>&#39;YOUR_APP_KEY&#39;</span><span class=p>,</span> <span class=s1>&#39;YOUR_APP_SECRET&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>              <span class=s1>&#39;USER_OAUTH_TOKEN&#39;</span><span class=p>,</span> <span class=s1>&#39;USER_OAUTH_TOKEN_SECRET&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>requests</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=p>,</span> <span class=n>auth</span><span class=o>=</span><span class=n>auth</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=allow_redirects>allow_redirects</h2><p>是否允许重定向，默认 True，即允许重定向</p><h1 id=response对象>response对象</h1><p>response 类故名思议，它包含了服务器对 http 请求的响应。每次调用 requests 去请求之后，均会返回一个 response 对象，通过调用该对象，可以查看具体的响应信息</p><p>以下是 response 对象的部分属性</p><h2 id=url>.url</h2><p>请求的最终地址</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>type</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>url</span><span class=p>),</span> <span class=n>r</span><span class=o>.</span><span class=n>url</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=o>&lt;</span><span class=k>class</span> <span class=err>&#39;</span><span class=nc>str</span><span class=s1>&#39;&gt; https://static1.scrape.center/</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=request>.request</h2><p>PreparedRequest 对象，可以用于查看发送请求时的信息，比如 r.request.headers 查看请求头</p><h2 id=text>.text</h2><p>响应的内容，unicode 类型</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>type</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>text</span><span class=p>),</span> <span class=n>r</span><span class=o>.</span><span class=n>text</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=o>&lt;</span><span class=k>class</span> <span class=err>&#39;</span><span class=nc>str</span><span class=s1>&#39;&gt; &#34;HTML的内容&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=content>.content</h2><p>响应的内容，byte 类型（二进制）</p><p>一般在抓取图像时有用</p><h2 id=status_code>.status_code</h2><p>响应的 http 状态码</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>type</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>status_code</span><span class=p>),</span> <span class=n>r</span><span class=o>.</span><span class=n>status_code</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=o>&lt;</span><span class=k>class</span> <span class=err>&#39;</span><span class=nc>int</span><span class=s1>&#39;&gt; 500</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=links>.links</h2><p>响应的解析头链接</p><h2 id=history>.history</h2><p>请求的历史记录，可以用于查看重定向信息，以列表形式展示，排序方式是从最旧到最新的请求</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>type</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>history</span><span class=p>),</span> <span class=n>r</span><span class=o>.</span><span class=n>history</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=o>&lt;</span><span class=k>class</span> <span class=err>&#39;</span><span class=nc>list</span><span class=s1>&#39;&gt; []</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=reason>.reason</h2><p>响应状态的描述，比如 &ldquo;Not Found&rdquo; or &ldquo;OK&rdquo;</p><h2 id=cookies-1>.cookies</h2><p>服务器发回的 cookies，RequestsCookieJar 类型</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>type</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>cookies</span><span class=p>),</span> <span class=n>r</span><span class=o>.</span><span class=n>cookies</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=o>&lt;</span><span class=k>class</span> <span class=err>&#39;</span><span class=nc>requests</span><span class=o>.</span><span class=n>cookies</span><span class=o>.</span><span class=n>RequestsCookieJar</span><span class=s1>&#39;&gt; &lt;RequestsCookieJar[]&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=json-1>.json()</h2><p>用于将响应解析成 JSON 格式，即将返回结果是 JSON 格式的字符串转化为字典</p><p>如果返回结果不是 JSON 格式，便会出现解析错误，抛出<code>json.decoder.JSONDecodeError</code>异常</p><h2 id=headers-1>.headers()</h2><p>响应头，可单独取出某个字段的值，比如(r.headers)[&lsquo;content-type&rsquo;]</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=nb>type</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>headers</span><span class=p>),</span> <span class=n>r</span><span class=o>.</span><span class=n>headers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=o>&lt;</span><span class=k>class</span> <span class=err>&#39;</span><span class=nc>requests</span><span class=o>.</span><span class=n>structures</span><span class=o>.</span><span class=n>CaseInsensitiveDict</span><span class=s1>&#39;&gt; {&#39;</span><span class=n>Server</span><span class=s1>&#39;: &#39;</span><span class=n>nginx</span><span class=o>/</span><span class=mf>1.17.8</span><span class=s1>&#39;, &#39;</span><span class=n>Date</span><span class=s1>&#39;: &#39;</span><span class=n>Tue</span><span class=p>,</span> <span class=mi>27</span> <span class=n>Oct</span> <span class=mi>2020</span> <span class=mi>15</span><span class=p>:</span><span class=mi>10</span><span class=p>:</span><span class=mi>32</span> <span class=n>GMT</span><span class=s1>&#39;, &#39;</span><span class=n>Content</span><span class=o>-</span><span class=n>Type</span><span class=s1>&#39;: &#39;</span><span class=n>text</span><span class=o>/</span><span class=n>html</span><span class=s1>&#39;, &#39;</span><span class=n>Content</span><span class=o>-</span><span class=n>Length</span><span class=s1>&#39;: &#39;</span><span class=mi>145</span><span class=s1>&#39;, &#39;</span><span class=n>Connection</span><span class=s1>&#39;: &#39;</span><span class=n>keep</span><span class=o>-</span><span class=n>alive</span><span class=s1>&#39;, &#39;</span><span class=n>X</span><span class=o>-</span><span class=n>Frame</span><span class=o>-</span><span class=n>Options</span><span class=s1>&#39;: &#39;</span><span class=n>DENY</span><span class=s1>&#39;, &#39;</span><span class=n>Vary</span><span class=s1>&#39;: &#39;</span><span class=n>Cookie</span><span class=s1>&#39;, &#39;</span><span class=n>X</span><span class=o>-</span><span class=n>Content</span><span class=o>-</span><span class=n>Type</span><span class=o>-</span><span class=n>Options</span><span class=s1>&#39;: &#39;</span><span class=n>nosniff</span><span class=s1>&#39;, &#39;</span><span class=n>Strict</span><span class=o>-</span><span class=n>Transport</span><span class=o>-</span><span class=n>Security</span><span class=s1>&#39;: &#39;</span><span class=nb>max</span><span class=o>-</span><span class=n>age</span><span class=o>=</span><span class=mi>15724800</span><span class=p>;</span> <span class=n>includeSubDomains</span><span class=s1>&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=session对象>session对象</h1><h2 id=会话维持>会话维持</h2><p>requests 中的 session 对象能够让我们跨 http 请求保持某些参数，即让同一个 session 对象发送的请求头携带某个指定的参数。当然，最常见的应用是它可以让 cookie 保持在后续的一串请求中</p><p>即，利用 Session 对象，可以方便地维护一个会话</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl><span class=c1># tips: http://httpbin.org能够用于测试http请求和响应</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>Session</span><span class=p>()</span> 											
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;http://httpbin.org/cookies/set/sessioncookie/123456789&#39;</span><span class=p>)</span> <span class=c1>#第一步：发送一个请求，用于设置请求中的cookies</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>s</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s2>&#34;http://httpbin.org/cookies&#34;</span><span class=p>)</span> 						<span class=c1>#第二步：再发送一个请求，用于查看当前请求中的cookies</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>text</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;cookies&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;sessioncookie&#34;</span><span class=p>:</span> <span class=s2>&#34;123456789&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>第二次请求已经携带上了第一次请求所设置的 cookie，即通过 session 达到了保持 cookie 的目的</p><p>session 让请求之间具有了连贯性</p><h2 id=scookiesupdate>s.cookies.update()</h2><p>用于设置请求中的 cookies，方便实现跨参数请求，即能够在前后请求之间保持 cookie</p><p>传入参数：字典</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>session</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>cookies</span><span class=o>.</span><span class=n>update</span><span class=p>({</span><span class=s1>&#39;cookies_are&#39;</span><span class=p>:</span> <span class=s1>&#39;cookie&#39;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=n>r</span> <span class=o>=</span> <span class=n>s</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=o>=</span><span class=s1>&#39;http://httpbin.org/cookies&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>r</span><span class=o>.</span><span class=n>text</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;cookies&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;cookies_are&#34;</span><span class=p>:</span> <span class=s2>&#34;cookie&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=状态码查询对象-requestscodes>状态码查询对象 requests.codes</h1><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>exit</span><span class=p>()</span> <span class=k>if</span> <span class=ow>not</span> <span class=n>r</span><span class=o>.</span><span class=n>status_code</span> <span class=o>==</span> <span class=n>requests</span><span class=o>.</span><span class=n>codes</span><span class=o>.</span><span class=n>ok</span> <span class=k>else</span> <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Request Successfully!&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>返回码和相应的查询条件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 信息性状态码</span>
+</span></span><span class=line><span class=cl><span class=mi>100</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;continue&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>101</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;switching_protocols&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>102</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;processing&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>103</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;checkpoint&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>122</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;uri_too_long&#39;</span><span class=p>,</span> <span class=s1>&#39;request_uri_too_long&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 成功状态码</span>
+</span></span><span class=line><span class=cl><span class=mi>200</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;ok&#39;</span><span class=p>,</span> <span class=s1>&#39;okay&#39;</span><span class=p>,</span> <span class=s1>&#39;all_ok&#39;</span><span class=p>,</span> <span class=s1>&#39;all_okay&#39;</span><span class=p>,</span> <span class=s1>&#39;all_good&#39;</span><span class=p>,</span> <span class=s1>&#39;</span><span class=se>\\</span><span class=s1>o/&#39;</span><span class=p>,</span> <span class=s1>&#39;✓&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>201</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;created&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>202</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;accepted&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>203</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;non_authoritative_info&#39;</span><span class=p>,</span> <span class=s1>&#39;non_authoritative_information&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>204</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;no_content&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>205</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;reset_content&#39;</span><span class=p>,</span> <span class=s1>&#39;reset&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>206</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;partial_content&#39;</span><span class=p>,</span> <span class=s1>&#39;partial&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>207</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;multi_status&#39;</span><span class=p>,</span> <span class=s1>&#39;multiple_status&#39;</span><span class=p>,</span> <span class=s1>&#39;multi_stati&#39;</span><span class=p>,</span> <span class=s1>&#39;multiple_stati&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>208</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;already_reported&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>226</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;im_used&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 重定向状态码</span>
+</span></span><span class=line><span class=cl><span class=mi>300</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;multiple_choices&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>301</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;moved_permanently&#39;</span><span class=p>,</span> <span class=s1>&#39;moved&#39;</span><span class=p>,</span> <span class=s1>&#39;</span><span class=se>\\</span><span class=s1>o-&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>302</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;found&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>303</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;see_other&#39;</span><span class=p>,</span> <span class=s1>&#39;other&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>304</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;not_modified&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>305</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;use_proxy&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>306</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;switch_proxy&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>307</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;temporary_redirect&#39;</span><span class=p>,</span> <span class=s1>&#39;temporary_moved&#39;</span><span class=p>,</span> <span class=s1>&#39;temporary&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>308</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;permanent_redirect&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=s1>&#39;resume_incomplete&#39;</span><span class=p>,</span> <span class=s1>&#39;resume&#39;</span><span class=p>,),</span> <span class=c1># These 2 to be removed in 3.0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 客户端错误状态码</span>
+</span></span><span class=line><span class=cl><span class=mi>400</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;bad_request&#39;</span><span class=p>,</span> <span class=s1>&#39;bad&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>401</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;unauthorized&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>402</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;payment_required&#39;</span><span class=p>,</span> <span class=s1>&#39;payment&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>403</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;forbidden&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>404</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;not_found&#39;</span><span class=p>,</span> <span class=s1>&#39;-o-&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>405</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;method_not_allowed&#39;</span><span class=p>,</span> <span class=s1>&#39;not_allowed&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>406</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;not_acceptable&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>407</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;proxy_authentication_required&#39;</span><span class=p>,</span> <span class=s1>&#39;proxy_auth&#39;</span><span class=p>,</span> <span class=s1>&#39;proxy_authentication&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>408</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;request_timeout&#39;</span><span class=p>,</span> <span class=s1>&#39;timeout&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>409</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;conflict&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>410</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;gone&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>411</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;length_required&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>412</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;precondition_failed&#39;</span><span class=p>,</span> <span class=s1>&#39;precondition&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>413</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;request_entity_too_large&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>414</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;request_uri_too_large&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>415</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;unsupported_media_type&#39;</span><span class=p>,</span> <span class=s1>&#39;unsupported_media&#39;</span><span class=p>,</span> <span class=s1>&#39;media_type&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>416</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;requested_range_not_satisfiable&#39;</span><span class=p>,</span> <span class=s1>&#39;requested_range&#39;</span><span class=p>,</span> <span class=s1>&#39;range_not_satisfiable&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>417</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;expectation_failed&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>418</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;im_a_teapot&#39;</span><span class=p>,</span> <span class=s1>&#39;teapot&#39;</span><span class=p>,</span> <span class=s1>&#39;i_am_a_teapot&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>421</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;misdirected_request&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>422</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;unprocessable_entity&#39;</span><span class=p>,</span> <span class=s1>&#39;unprocessable&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>423</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;locked&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>424</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;failed_dependency&#39;</span><span class=p>,</span> <span class=s1>&#39;dependency&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>425</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;unordered_collection&#39;</span><span class=p>,</span> <span class=s1>&#39;unordered&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>426</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;upgrade_required&#39;</span><span class=p>,</span> <span class=s1>&#39;upgrade&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>428</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;precondition_required&#39;</span><span class=p>,</span> <span class=s1>&#39;precondition&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>429</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;too_many_requests&#39;</span><span class=p>,</span> <span class=s1>&#39;too_many&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>431</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;header_fields_too_large&#39;</span><span class=p>,</span> <span class=s1>&#39;fields_too_large&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>444</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;no_response&#39;</span><span class=p>,</span> <span class=s1>&#39;none&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>449</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;retry_with&#39;</span><span class=p>,</span> <span class=s1>&#39;retry&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>450</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;blocked_by_windows_parental_controls&#39;</span><span class=p>,</span> <span class=s1>&#39;parental_controls&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>451</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;unavailable_for_legal_reasons&#39;</span><span class=p>,</span> <span class=s1>&#39;legal_reasons&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>499</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;client_closed_request&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 服务端错误状态码</span>
+</span></span><span class=line><span class=cl><span class=mi>500</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;internal_server_error&#39;</span><span class=p>,</span> <span class=s1>&#39;server_error&#39;</span><span class=p>,</span> <span class=s1>&#39;/o</span><span class=se>\\</span><span class=s1>&#39;</span><span class=p>,</span> <span class=s1>&#39;✗&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>501</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;not_implemented&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>502</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;bad_gateway&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>503</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;service_unavailable&#39;</span><span class=p>,</span> <span class=s1>&#39;unavailable&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>504</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;gateway_timeout&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>505</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;http_version_not_supported&#39;</span><span class=p>,</span> <span class=s1>&#39;http_version&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>506</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;variant_also_negotiates&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>507</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;insufficient_storage&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>509</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;bandwidth_limit_exceeded&#39;</span><span class=p>,</span> <span class=s1>&#39;bandwidth&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=mi>510</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;not_extended&#39;</span><span class=p>,),</span>
+</span></span><span class=line><span class=cl><span class=mi>511</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;network_authentication_required&#39;</span><span class=p>,</span> <span class=s1>&#39;network_auth&#39;</span><span class=p>,</span> <span class=s1>&#39;network_authentication&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=异常处理>异常处理</h1><p><em><strong>requests.exceptions.ConnectionError</strong></em></p><ol><li>http 的连接数超过最大限制，默认的情况下连接是 Keep-alive 的，所以这就导致了服务器保持了太多连接而不能再新建连接。</li><li>ip 被封</li><li>程序请求速度过快。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-dart data-lang=dart><span class=line><span class=cl><span class=k>try</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>	<span class=n>response</span> <span class=o>=</span> <span class=n>requests</span><span class=p>.</span><span class=kd>get</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>except</span> <span class=n>requests</span><span class=p>.</span><span class=n>exceptions</span><span class=p>.</span><span class=nl>ConnectionError:</span>
+</span></span><span class=line><span class=cl>	<span class=n>print</span><span class=p>(</span><span class=s1>&#39;error!&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>continue</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/crawler/requests/ data-title="reuqest API" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/crawler/requests/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/crawler/requests/ data-title="reuqest API"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/crawler/selenium/ class=prev rel=prev title=Selenium><i class="fa-solid fa-angle-left fa-fw"></i>Selenium</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%8F%AF%E8%A7%86%E5%8C%96/wordcloud/ class=next rel=next title="Python wordcloud 库">Python wordcloud 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

@@ -1,0 +1,212 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>pydantic fields - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="02. Fields Field 函数用于自定义字段，为其添加元数据 默认值 default 1 2 3 4 5 6 7 8 9 10 from pydantic import BaseModel, Field class"><meta name=keywords content='Python,pydantic,后端'><meta itemprop=name content="pydantic fields"><meta itemprop=description content="02. Fields Field 函数用于自定义字段，为其添加元数据 默认值 default 1 2 3 4 5 6 7 8 9 10 from pydantic import BaseModel, Field class"><meta itemprop=datePublished content="2024-04-22T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="606"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,Pydantic,后端"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/web-backend/pydantic/02.-fields/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="pydantic fields"><meta property="og:description" content="02. Fields Field 函数用于自定义字段，为其添加元数据 默认值 default 1 2 3 4 5 6 7 8 9 10 from pydantic import BaseModel, Field class"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-04-22T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Python"><meta property="article:tag" content="Pydantic"><meta property="article:tag" content="后端"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="pydantic fields"><meta name=twitter:description content="02. Fields Field 函数用于自定义字段，为其添加元数据 默认值 default 1 2 3 4 5 6 7 8 9 10 from pydantic import BaseModel, Field class"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/web-backend/pydantic/02.-fields/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/ruff/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/web-backend/pydantic/10.-validators/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"pydantic fields","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/web-backend\/pydantic\/02.-fields\/"},"genre":"posts","keywords":"Python, pydantic, 后端","wordcount":606,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/web-backend\/pydantic\/02.-fields\/","datePublished":"2024-04-22T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"CoengFan"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>pydantic fields</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+CoengFan</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2024-04-22 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2024-04-22>2024-04-22</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 606 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#默认值-default>默认值 <code>default</code></a></li><li><a href=#与-annotated-合用>与 <code>Annotated</code> 合用</a></li><li><a href=#字段别名-alias>字段别名 alias</a></li><li><a href=#数字条件约束>数字条件约束</a></li></ul></nav></div></div><div class=content id=content><h1 id=02-fields>02. Fields</h1><p><code>Field</code> 函数用于自定义字段，为其添加元数据</p><h2 id=默认值-default>默认值 <code>default</code></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>default</span><span class=o>=</span><span class=s1>&#39;John Doe&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; name=&#39;John Doe&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>还可以使用 <code>default_factory</code> 定义一个可变的默认值</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>uuid</span> <span class=kn>import</span> <span class=n>uuid4</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>default_factory</span><span class=o>=</span><span class=k>lambda</span><span class=p>:</span> <span class=n>uuid4</span><span class=p>()</span><span class=o>.</span><span class=n>hex</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>If you use <code>typing.Optional</code>, it doesn&rsquo;t mean that the field has a default value of <code>None</code>!</p></blockquote><h2 id=与-annotated-合用>与 <code>Annotated</code> 合用</h2><p><code>Field</code> 可以写进 <code>Annotated</code> 哦（不过有啥用嘛）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>uuid</span> <span class=kn>import</span> <span class=n>uuid4</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing_extensions</span> <span class=kn>import</span> <span class=n>Annotated</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=n>Annotated</span><span class=p>[</span><span class=nb>str</span><span class=p>,</span> <span class=n>Field</span><span class=p>(</span><span class=n>default_factory</span><span class=o>=</span><span class=k>lambda</span><span class=p>:</span> <span class=n>uuid4</span><span class=p>()</span><span class=o>.</span><span class=n>hex</span><span class=p>)]</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>default_factory 只能写在 <code>Annotated</code> 里面，而 default 无法写在里面，只能直接在外面通过赋值的形式写</p></blockquote><h2 id=字段别名-alias>字段别名 alias</h2><p>有三种方法定义一个 alias：</p><ul><li><code>Field(..., alias='foo')</code></li><li><code>Field(..., validation_alias='foo')</code></li><li><code>Field(..., serialization_alias='foo')</code></li></ul><p>alias 在<strong>验证</strong>和<strong>序列化</strong>时都被用到，除非用第二、三种方法分别开来</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=o>...</span><span class=p>,</span> <span class=n>alias</span><span class=o>=</span><span class=s1>&#39;username&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=n>username</span><span class=o>=</span><span class=s1>&#39;johndoe&#39;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; name=&#39;johndoe&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>user</span><span class=o>.</span><span class=n>model_dump</span><span class=p>(</span><span class=n>by_alias</span><span class=o>=</span><span class=kc>True</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;username&#39;: &#39;johndoe&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>by_alias=True</code> 一定要显式地写出来！默认是 <code>False</code></p><p>If you want to use an alias <em>only</em> for validation, you can use the <code>validation_alias</code> parameter:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=o>...</span><span class=p>,</span> <span class=n>validation_alias</span><span class=o>=</span><span class=s1>&#39;username&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=n>username</span><span class=o>=</span><span class=s1>&#39;johndoe&#39;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; name=&#39;johndoe&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>user</span><span class=o>.</span><span class=n>model_dump</span><span class=p>(</span><span class=n>by_alias</span><span class=o>=</span><span class=kc>True</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;name&#39;: &#39;johndoe&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><p>If you only want to define an alias for <em>serialization</em>, you can use the <code>serialization_alias</code> parameter:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>User</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>name</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=o>...</span><span class=p>,</span> <span class=n>serialization_alias</span><span class=o>=</span><span class=s1>&#39;username&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>user</span> <span class=o>=</span> <span class=n>User</span><span class=p>(</span><span class=n>name</span><span class=o>=</span><span class=s1>&#39;johndoe&#39;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>#&gt; name=&#39;johndoe&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>user</span><span class=o>.</span><span class=n>model_dump</span><span class=p>(</span><span class=n>by_alias</span><span class=o>=</span><span class=kc>True</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl><span class=c1>#&gt; {&#39;username&#39;: &#39;johndoe&#39;}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=数字条件约束>数字条件约束</h2><p>可以用以下参数来限制数字型字段的值：</p><ul><li><code>gt</code> - greater than</li><li><code>lt</code> - less than</li><li><code>ge</code> - greater than or equal to</li><li><code>le</code> - less than or equal to</li><li><code>multiple_of</code> - a multiple of the given number 给定数字的倍数</li><li><code>allow_inf_nan</code> - allow <code>'inf'</code>, <code>'-inf'</code>, <code>'nan'</code> values</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Foo</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>positive</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>gt</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>non_negative</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>ge</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>negative</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>lt</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>non_positive</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>le</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>even</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>multiple_of</span><span class=o>=</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>love_for_pydantic</span><span class=p>:</span> <span class=nb>float</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>allow_inf_nan</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>foo</span> <span class=o>=</span> <span class=n>Foo</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=n>positive</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>non_negative</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>negative</span><span class=o>=-</span><span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>non_positive</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>even</span><span class=o>=</span><span class=mi>2</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=n>love_for_pydantic</span><span class=o>=</span><span class=nb>float</span><span class=p>(</span><span class=s1>&#39;inf&#39;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>foo</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>positive=1 non_negative=0 negative=-1 non_positive=0 even=2 love_for_pydantic=inf
+</span></span></span><span class=line><span class=cl><span class=s2>&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>对那些混合类型来说，使用数字约束可能会出错。使用 <code>Annotated</code> 来避免这种情况</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Optional</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing_extensions</span> <span class=kn>import</span> <span class=n>Annotated</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pydantic</span> <span class=kn>import</span> <span class=n>BaseModel</span><span class=p>,</span> <span class=n>Field</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Foo</span><span class=p>(</span><span class=n>BaseModel</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>positive</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>Annotated</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=n>Field</span><span class=p>(</span><span class=n>gt</span><span class=o>=</span><span class=mi>0</span><span class=p>)]]</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Can error in some cases, not recommended:</span>
+</span></span><span class=line><span class=cl>    <span class=n>non_negative</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=nb>int</span><span class=p>]</span> <span class=o>=</span> <span class=n>Field</span><span class=p>(</span><span class=n>ge</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/web-backend/pydantic/02.-fields/ data-title="pydantic fields" data-hashtags=Python,pydantic,后端><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/web-backend/pydantic/02.-fields/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/web-backend/pydantic/02.-fields/ data-title="pydantic fields"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/pydantic/>Pydantic</a>,&nbsp;<a href=/Notes/tags/%E5%90%8E%E7%AB%AF/>后端</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/ruff/ class=prev rel=prev title=ruff><i class="fa-solid fa-angle-left fa-fw"></i>ruff</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/web-backend/pydantic/10.-validators/ class=next rel=next title="pydantic validators">pydantic validators<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

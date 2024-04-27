@@ -1,0 +1,152 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>pyinstrumen - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="pyinstrument Profile a Python script Call Pyinstrument directly from the command line. Instead of writing python script.py, type pyinstrument script.py. Your script will run as normal, and at the end (or when you press ^C), Pyinstrument will output a colored summary showing where most of the time was spent."><meta name=keywords content='Python'><meta itemprop=name content="pyinstrumen"><meta itemprop=description content="pyinstrument Profile a Python script Call Pyinstrument directly from the command line. Instead of writing python script.py, type pyinstrument script.py. Your script will run as normal, and at the end (or when you press ^C), Pyinstrument will output a colored summary showing where most of the time was spent."><meta itemprop=datePublished content="2021-04-17T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="729"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pyinstrument/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="pyinstrumen"><meta property="og:description" content="pyinstrument Profile a Python script Call Pyinstrument directly from the command line. Instead of writing python script.py, type pyinstrument script.py. Your script will run as normal, and at the end (or when you press ^C), Pyinstrument will output a colored summary showing where most of the time was spent."><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-04-17T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Python"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="pyinstrumen"><meta name=twitter:description content="pyinstrument Profile a Python script Call Pyinstrument directly from the command line. Instead of writing python script.py, type pyinstrument script.py. Your script will run as normal, and at the end (or when you press ^C), Pyinstrument will output a colored summary showing where most of the time was spent."><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pyinstrument/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/crawler/pyquery/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pyinstaller/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"pyinstrumen","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/pyinstrument\/"},"genre":"posts","keywords":"Python","wordcount":729,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E5%B8%B8%E7%94%A8%E5%BA%93\/pyinstrument\/","datePublished":"2021-04-17T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>pyinstrumen</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2021-04-17 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-04-17>2021-04-17</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 729 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#profile-a-python-script>Profile a Python script</a></li><li><a href=#profile-a-specific-chunk-of-code>Profile a specific chunk of code</a></li><li><a href=#profile-a-web-request-in-django>Profile a web request in Django</a></li><li><a href=#profile-a-web-request-in-flask>Profile a web request in Flask</a></li></ul></nav></div></div><div class=content id=content><h1 id=pyinstrument>pyinstrument</h1><h2 id=profile-a-python-script>Profile a Python script</h2><p>Call Pyinstrument directly from the command line. Instead of writing <code>python script.py</code>, type <code>pyinstrument script.py</code>. Your script will run as normal, and at the end (or when you press <code>^C</code>), Pyinstrument will output a colored summary showing where most of the time was spent.</p><p>Here are the options you can use:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>Usage: pyinstrument [options] scriptfile [arg] ...
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Options:
+</span></span><span class=line><span class=cl>  --version             show program&#39;s version number and exit
+</span></span><span class=line><span class=cl>  -h, --help            show this help message and exit
+</span></span><span class=line><span class=cl>  --load-prev=ID        instead of running a script, load a previous report
+</span></span><span class=line><span class=cl>  -m MODULE_NAME        run library module as a script, like &#39;python -m
+</span></span><span class=line><span class=cl>                        module&#39;
+</span></span><span class=line><span class=cl>  --from-path           (POSIX only) instead of the working directory, look
+</span></span><span class=line><span class=cl>                        for scriptfile in the PATH environment variable
+</span></span><span class=line><span class=cl>  -o OUTFILE, --outfile=OUTFILE
+</span></span><span class=line><span class=cl>                        save to &lt;outfile&gt;
+</span></span><span class=line><span class=cl>  -r RENDERER, --renderer=RENDERER
+</span></span><span class=line><span class=cl>                        how the report should be rendered. One of: &#39;text&#39;,
+</span></span><span class=line><span class=cl>                        &#39;html&#39;, &#39;json&#39;, or python import path to a renderer
+</span></span><span class=line><span class=cl>                        class
+</span></span><span class=line><span class=cl>  -t, --timeline        render as a timeline - preserve ordering and don&#39;t
+</span></span><span class=line><span class=cl>                        condense repeated calls
+</span></span><span class=line><span class=cl>  --hide=EXPR           glob-style pattern matching the file paths whose
+</span></span><span class=line><span class=cl>                        frames to hide. Defaults to &#39;*/lib/*&#39;.
+</span></span><span class=line><span class=cl>  --hide-regex=REGEX    regex matching the file paths whose frames to hide.
+</span></span><span class=line><span class=cl>                        Useful if --hide doesn&#39;t give enough control.
+</span></span><span class=line><span class=cl>  --show=EXPR           glob-style pattern matching the file paths whose
+</span></span><span class=line><span class=cl>                        frames to show, regardless of --hide or --hide-regex.
+</span></span><span class=line><span class=cl>                        For example, use --show &#39;*/&lt;library&gt;/*&#39; to show frames
+</span></span><span class=line><span class=cl>                        within a library that would otherwise be hidden.
+</span></span><span class=line><span class=cl>  --show-regex=REGEX    regex matching the file paths whose frames to always
+</span></span><span class=line><span class=cl>                        show. Useful if --show doesn&#39;t give enough control.
+</span></span><span class=line><span class=cl>  --show-all            show everything
+</span></span><span class=line><span class=cl>  --unicode             (text renderer only) force unicode text output
+</span></span><span class=line><span class=cl>  --no-unicode          (text renderer only) force ascii text output
+</span></span><span class=line><span class=cl>  --color               (text renderer only) force ansi color text output
+</span></span><span class=line><span class=cl>  --no-color            (text renderer only) force no color text output
+</span></span></code></pre></td></tr></table></div></div><p><strong>Protip:</strong> <code>-r html</code> will give you a interactive profile report as HTML - you can really explore this way!</p><h2 id=profile-a-specific-chunk-of-code>Profile a specific chunk of code</h2><p>Pyinstrument also has a Python API. Just surround your code with Pyinstrument, like this:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pyinstrument</span> <span class=kn>import</span> <span class=n>Profiler</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>profiler</span> <span class=o>=</span> <span class=n>Profiler</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>profiler</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># code you want to profile</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>profiler</span><span class=o>.</span><span class=n>stop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>profiler</span><span class=o>.</span><span class=n>print</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>If you get “No samples were recorded.” because your code executed in under 1ms, hooray! If you <strong>still</strong> want to instrument the code, set an interval value smaller than the default 0.001 (1 millisecond) like this:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>profiler</span> <span class=o>=</span> <span class=n>Profiler</span><span class=p>(</span><span class=n>interval</span><span class=o>=</span><span class=mf>0.0001</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span></code></pre></td></tr></table></div></div><p>Experiment with the interval value to see different depths, but keep in mind that smaller intervals could affect the performance overhead of profiling.</p><p><strong>Protip:</strong> To explore the profile in a web browser, use <a href=https://pyinstrument.readthedocs.io/en/latest/reference.html#pyinstrument.Profiler.open_in_browser target=_blank rel="external nofollow noopener noreferrer"><code>profiler.open_in_browser()</code></a>. To save this HTML for later, use <a href=https://pyinstrument.readthedocs.io/en/latest/reference.html#pyinstrument.Profiler.output_html target=_blank rel="external nofollow noopener noreferrer"><code>profiler.output_html()</code></a>.</p><h2 id=profile-a-web-request-in-django>Profile a web request in Django</h2><p>To profile Django web requests, add <code>pyinstrument.middleware.ProfilerMiddleware</code> to <code>MIDDLEWARE_CLASSES</code> in your <code>settings.py</code>.</p><p>Once installed, add <code>?profile</code> to the end of a request URL to activate the profiler. Your request will run as normal, but instead of getting the response, you’ll get pyinstrument’s analysis of the request in a web page.</p><p>If you’re writing an API, it’s not easy to change the URL when you want to profile something. In this case, add <code>PYINSTRUMENT_PROFILE_DIR = 'profiles'</code> to your <code>settings.py</code>. Pyinstrument will profile every request and save the HTML output to the folder <code>profiles</code> in your working directory.</p><p>If you want to show the profiling page depending on the request you can define <code>PYINSTRUMENT_SHOW_CALLBACK</code> as dotted path to a function used for determining whether the page should show or not. You can provide your own function callback(request) which returns True or False in your settings.py.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>custom_show_pyinstrument</span><span class=p>(</span><span class=n>request</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>request</span><span class=o>.</span><span class=n>user</span><span class=o>.</span><span class=n>is_superuser</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>PYINSTRUMENT_SHOW_CALLBACK</span> <span class=o>=</span> <span class=s2>&#34;</span><span class=si>%s</span><span class=s2>.custom_show_pyinstrument&#34;</span> <span class=o>%</span> <span class=vm>__name__</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=profile-a-web-request-in-flask>Profile a web request in Flask</h2><p>A simple setup to profile a Flask application is the following:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>flask</span> <span class=kn>import</span> <span class=n>Flask</span><span class=p>,</span> <span class=n>g</span><span class=p>,</span> <span class=n>make_response</span><span class=p>,</span> <span class=n>request</span>
+</span></span><span class=line><span class=cl><span class=n>app</span> <span class=o>=</span> <span class=n>Flask</span><span class=p>(</span><span class=vm>__name__</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@app.before_request</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>before_request</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=s2>&#34;profile&#34;</span> <span class=ow>in</span> <span class=n>request</span><span class=o>.</span><span class=n>args</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>g</span><span class=o>.</span><span class=n>profiler</span> <span class=o>=</span> <span class=n>Profiler</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>g</span><span class=o>.</span><span class=n>profiler</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nd>@app.after_request</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>after_request</span><span class=p>(</span><span class=n>response</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=nb>hasattr</span><span class=p>(</span><span class=n>g</span><span class=p>,</span> <span class=s2>&#34;profiler&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>response</span>
+</span></span><span class=line><span class=cl>    <span class=n>g</span><span class=o>.</span><span class=n>profiler</span><span class=o>.</span><span class=n>stop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>output_html</span> <span class=o>=</span> <span class=n>g</span><span class=o>.</span><span class=n>profiler</span><span class=o>.</span><span class=n>output_html</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>make_response</span><span class=p>(</span><span class=n>output_html</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>This will check for the <code>?profile</code> query param on each request and if found, it starts profiling. After each request where the profiler was running it creates the html output and returns that instead of the actual response.</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pyinstrument/ data-title=pyinstrumen data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pyinstrument/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pyinstrument/ data-title=pyinstrumen><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/crawler/pyquery/ class=prev rel=prev title=PyQuery><i class="fa-solid fa-angle-left fa-fw"></i>PyQuery</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/pyinstaller/ class=next rel=next title=pyinstaller>pyinstaller<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

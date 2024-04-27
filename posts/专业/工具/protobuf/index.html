@@ -1,0 +1,347 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>protobuf - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="protobuf 官方文档：https://protobuf.dev/programming-g"><meta name=keywords content='快速入门'><meta itemprop=name content="protobuf"><meta itemprop=description content="protobuf 官方文档：https://protobuf.dev/programming-g"><meta itemprop=datePublished content="2022-09-28T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="3986"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="快速入门"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%B7%A5%E5%85%B7/protobuf/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="protobuf"><meta property="og:description" content="protobuf 官方文档：https://protobuf.dev/programming-g"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-09-28T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="快速入门"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="protobuf"><meta name=twitter:description content="protobuf 官方文档：https://protobuf.dev/programming-g"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%B7%A5%E5%85%B7/protobuf/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/tempfile/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/dataclasses/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"protobuf","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/%E5%B7%A5%E5%85%B7\/protobuf\/"},"genre":"posts","keywords":"快速入门","wordcount":3986,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/%E5%B7%A5%E5%85%B7\/protobuf\/","datePublished":"2022-09-28T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>protobuf</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/%E5%B7%A5%E5%85%B7/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;工具</a></span></div><div class=post-meta-line><span title="2022-09-28 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-09-28>2022-09-28</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 3986 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#安装>安装</a><ul><li><a href=#protoc>protoc</a></li><li><a href=#protoc-gen-go>protoc-gen-go</a></li></ul></li><li><a href=#定义消息类型>定义消息类型</a></li><li><a href=#字段类型>字段类型</a><ul><li><a href=#标量类型-scalar>标量类型 (Scalar)</a></li><li><a href=#枚举-enumerations>枚举 (Enumerations)</a></li><li><a href=#使用其他消息类型>使用其他消息类型</a></li><li><a href=#any-任意类型>Any 任意类型</a></li><li><a href=#oneof>oneof</a><ul><li><a href=#特性>特性</a></li></ul></li><li><a href=#map>map</a><ul><li><a href=#特性-1>特性</a></li></ul></li></ul></li><li><a href=#定义服务-services>定义服务 (Services)</a></li><li><a href=#protoc-其他参数>protoc 其他参数</a></li><li><a href=#推荐风格>推荐风格</a></li><li><a href=#proto2-与-proto3-的区别>proto2 与 proto3 的区别</a></li><li><a href=#一些技巧>一些技巧</a><ul><li><a href=#option-go_package>option go_package</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=protobuf>protobuf</h1><p>官方文档：https://protobuf.dev/programming-guides/proto3/</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=n>syntax</span> <span class=o>=</span> <span class=s>&#34;proto3&#34;</span><span class=p>;</span> <span class=c1>// proto3 必须加此注解
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=kd>message</span> <span class=nc>SearchRequest</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kt>string</span> <span class=n>query</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kt>int32</span> <span class=n>page_number</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kt>int32</span> <span class=n>result_per_page</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kd>enum</span> <span class=n>Corpus</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>UNIVERSAL</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>WEB</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>IMAGES</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>LOCAL</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>NEWS</span> <span class=o>=</span> <span class=mi>4</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>PRODUCTS</span> <span class=o>=</span> <span class=mi>5</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>VIDEO</span> <span class=o>=</span> <span class=mi>6</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=n>Corpus</span> <span class=n>corpus</span> <span class=o>=</span> <span class=mi>4</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>Protocol Buffers 是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化，或者说序列化。它很适合做数据存储或 RPC 数据交换格式。可用于通讯协议、数据存储等领域的语言无关、平台无关、可扩展的序列化结构数据格式。</p><p>特点</p><p>　　- 平台无关，语言无关，可扩展；
+　　- 提供了友好的动态库，使用简单；
+　　- 解析速度快，比对应的 XML 快约 20-100 倍；
+　　- 序列化数据非常简洁、紧凑，与 XML 相比，其序列化之后的数据量约为 1/3 到 1/10。</p><h2 id=安装>安装</h2><h3 id=protoc>protoc</h3><p>从 <a href=https://github.com/protocolbuffers/protobuf/releases target=_blank rel="external nofollow noopener noreferrer">Protobuf Releases</a> 下载最先版本的发布包安装。如果是 Ubuntu，可以按照如下步骤操作</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 下载安装包</span>
+</span></span><span class=line><span class=cl>$ wget https://github.com/protocolbuffers/protobuf/releases/download/v22.0-rc3/protoc-22.0-rc-3-linux-x86_64.zip
+</span></span><span class=line><span class=cl><span class=c1># 解压到 /usr/local 目录下</span>
+</span></span><span class=line><span class=cl>$ unzip protoc-22.0-rc-3-linux-x86_64.zip -d <span class=nv>$HOME</span>/.local
+</span></span></code></pre></td></tr></table></div></div><p>Update your environment’s path variable to include the path to the <code>protoc</code> executable. For example:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ <span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$PATH</span><span class=s2>:</span><span class=nv>$HOME</span><span class=s2>/.local/bin&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果能正常显示版本，则表示安装成功。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ protoc --version
+</span></span><span class=line><span class=cl>libprotoc 22.0-rc3
+</span></span></code></pre></td></tr></table></div></div><h3 id=protoc-gen-go>protoc-gen-go</h3><p>我们需要在 Golang 中使用 protobuf，还需要安装 protoc-gen-go，这个工具用来将 <code>.proto</code> 文件转换为 Golang 代码。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=n>go</span> <span class=n>install</span> <span class=n>google</span><span class=o>.</span><span class=n>golang</span><span class=o>.</span><span class=n>org</span><span class=o>/</span><span class=n>protobuf</span><span class=o>/</span><span class=n>cmd</span><span class=o>/</span><span class=n>protoc</span><span class=o>-</span><span class=n>gen</span><span class=o>-</span><span class=n>go</span><span class=nd>@latest</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=定义消息类型>定义消息类型</h2><p>接下来，我们创建一个非常简单的示例，<code>student.proto</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=n>syntax</span> <span class=o>=</span> <span class=s>&#34;proto3&#34;</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=kn>package</span> <span class=nn>main</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=c1>// this is a comment
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>message</span> <span class=nc>Student</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kt>string</span> <span class=n>name</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kt>bool</span> <span class=n>male</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=k>repeated</span> <span class=kt>int32</span> <span class=n>scores</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>在当前目录下执行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ protoc --go_out<span class=o>=</span>. *.proto
+</span></span><span class=line><span class=cl>$ ls
+</span></span><span class=line><span class=cl>student.pb.go  student.proto
+</span></span></code></pre></td></tr></table></div></div><p>即是，将该目录下的所有的 .proto 文件转换为 Go 代码，我们可以看到该目录下多出了一个 Go 文件 <em>student.pb.go</em>。这个文件内部定义了一个结构体 Student，以及相关的方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Student</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span> <span class=kt>string</span> <span class=s>`protobuf:&#34;bytes,1,opt,name=name,proto3&#34; json:&#34;name,omitempty&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Male</span> <span class=kt>bool</span> <span class=s>`protobuf:&#34;varint,2,opt,name=male,proto3&#34; json:&#34;male,omitempty&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Scores</span> <span class=p>[]</span><span class=kt>int32</span> <span class=s>`protobuf:&#34;varint,3,rep,packed,name=scores,proto3&#34; json:&#34;scores,omitempty&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>逐行解读 <code>student.proto</code></p><ul><li>protobuf 有 2 个版本，默认版本是 proto2，如果需要 proto3，则需要在非空非注释第一行使用 <code>syntax = "proto3"</code> 标明版本。</li><li><code>package</code>，即包名声明符是可选的，用来防止不同的消息类型有命名冲突。</li><li>消息类型 使用 <code>message</code> 关键字定义，Student 是类型名，name, male, scores 是该类型的 3 个字段，类型分别为 string, bool 和 []int32。字段可以是标量类型，也可以是合成类型。</li><li><strong>每个字段的修饰符默认是 singular</strong>，一般省略不写，<code>repeated</code> 表示字段可重复，即用来表示 Go 语言中的<strong>数组</strong>类型。</li><li><strong>每个字符 <code>=</code> 后面的数字称为标识符</strong>，每个字段都需要提供一个唯一的标识符。标识符用来在消息的二进制格式中识别各个字段，一旦使用就不能够再改变，标识符的取值范围为 [1, 2^29 - 1] 。</li><li>.proto 文件可以写注释，单行注释 <code>//</code>，多行注释 <code>/* ... */</code></li><li>一个 .proto 文件中可以写多个消息类型，即对应多个结构体 (struct)。</li></ul><p>接下来，就可以在项目代码中直接使用了，以下是一个非常简单的例子，即证明被序列化的和反序列化后的实例，包含相同的数据。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;log&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;github.com/golang/protobuf/proto&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>test</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>Student</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;geektutu&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nx>Male</span><span class=p>:</span>  <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nx>Scores</span><span class=p>:</span> <span class=p>[]</span><span class=kt>int32</span><span class=p>{</span><span class=mi>98</span><span class=p>,</span> <span class=mi>85</span><span class=p>,</span> <span class=mi>88</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>data</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>proto</span><span class=p>.</span><span class=nf>Marshal</span><span class=p>(</span><span class=nx>test</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=s>&#34;marshaling error: &#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>newTest</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>Student</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>err</span> <span class=p>=</span> <span class=nx>proto</span><span class=p>.</span><span class=nf>Unmarshal</span><span class=p>(</span><span class=nx>data</span><span class=p>,</span> <span class=nx>newTest</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=s>&#34;unmarshaling error: &#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// Now test and newTest contain the same data.
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nx>test</span><span class=p>.</span><span class=nf>GetName</span><span class=p>()</span> <span class=o>!=</span> <span class=nx>newTest</span><span class=p>.</span><span class=nf>GetName</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>log</span><span class=p>.</span><span class=nf>Fatalf</span><span class=p>(</span><span class=s>&#34;data mismatch %q != %q&#34;</span><span class=p>,</span> <span class=nx>test</span><span class=p>.</span><span class=nf>GetName</span><span class=p>(),</span> <span class=nx>newTest</span><span class=p>.</span><span class=nf>GetName</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>保留字段 (Reserved Field)</li></ul><p>更新消息类型时，可能会将某些字段/标识符删除。这些被删掉的字段 / 标识符可能被重新使用，如果加载老版本的数据时，可能会造成数据冲突，在升级时，可以将这些字段 / 标识符保留 (reserved)，这样就不会被重新使用了，protoc 会检查。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=kd>message</span> <span class=nc>Foo</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=n>reserved</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>15</span><span class=p>,</span> <span class=mi>9</span> <span class=k>to</span> <span class=mi>11</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=n>reserved</span> <span class=s>&#34;foo&#34;</span><span class=p>,</span> <span class=s>&#34;bar&#34;</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=字段类型>字段类型</h2><h3 id=标量类型-scalar>标量类型 (Scalar)</h3><table><thead><tr><th style=text-align:left>proto 类型</th><th style=text-align:left>go 类型</th><th style=text-align:left>备注</th><th style=text-align:left>proto 类型</th><th style=text-align:left>go 类型</th><th style=text-align:left>备注</th></tr></thead><tbody><tr><td style=text-align:left>double</td><td style=text-align:left>float64</td><td style=text-align:left></td><td style=text-align:left>float</td><td style=text-align:left>float32</td><td style=text-align:left></td></tr><tr><td style=text-align:left>int32</td><td style=text-align:left>int32</td><td style=text-align:left></td><td style=text-align:left>int64</td><td style=text-align:left>int64</td><td style=text-align:left></td></tr><tr><td style=text-align:left>uint32</td><td style=text-align:left>uint32</td><td style=text-align:left></td><td style=text-align:left>uint64</td><td style=text-align:left>uint64</td><td style=text-align:left></td></tr><tr><td style=text-align:left>sint32</td><td style=text-align:left>int32</td><td style=text-align:left>适合负数</td><td style=text-align:left>sint64</td><td style=text-align:left>int64</td><td style=text-align:left>适合负数</td></tr><tr><td style=text-align:left>fixed32</td><td style=text-align:left>uint32</td><td style=text-align:left>固长编码，适合大于 2^28 的值</td><td style=text-align:left>fixed64</td><td style=text-align:left>uint64</td><td style=text-align:left>固长编码，适合大于 2^56 的值</td></tr><tr><td style=text-align:left>sfixed32</td><td style=text-align:left>int32</td><td style=text-align:left>固长编码</td><td style=text-align:left>sfixed64</td><td style=text-align:left>int64</td><td style=text-align:left>固长编码</td></tr><tr><td style=text-align:left>bool</td><td style=text-align:left>bool</td><td style=text-align:left></td><td style=text-align:left>string</td><td style=text-align:left>string</td><td style=text-align:left>UTF8 编码，长度不超过 2^32</td></tr><tr><td style=text-align:left>bytes</td><td style=text-align:left>[]byte</td><td style=text-align:left>任意字节序列，长度不超过 2^32</td><td style=text-align:left></td><td style=text-align:left></td><td style=text-align:left></td></tr></tbody></table><p>标量类型如果没有被赋值，则不会被序列化，解析时，会赋予默认值。</p><ul><li>strings：空字符串</li><li>bytes：空序列</li><li>bools：false</li><li>数值类型：0</li></ul><h3 id=枚举-enumerations>枚举 (Enumerations)</h3><p>枚举类型适用于提供一组预定义的值，选择其中一个。例如我们将性别定义为枚举类型。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=kd>message</span> <span class=nc>Student</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kt>string</span> <span class=n>name</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kd>enum</span> <span class=n>Gender</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>FEMALE</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>MALE</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=n>Gender</span> <span class=n>gender</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=k>repeated</span> <span class=kt>int32</span> <span class=n>scores</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><ul><li>枚举类型的第一个选项的标识符必须是 0，这也是枚举类型的默认值。</li><li>别名（Alias），允许为不同的枚举值赋予相同的标识符，称之为别名，需要打开 <code>allow_alias</code> 选项。</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=kd>message</span> <span class=nc>EnumAllowAlias</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kd>enum</span> <span class=n>Status</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=k>option</span> <span class=n>allow_alias</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>UNKOWN</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>STARTED</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>RUNNING</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=使用其他消息类型>使用其他消息类型</h3><p><code>Result</code> 是另一个消息类型，在 SearchReponse 作为一个消息字段类型使用。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=kd>message</span> <span class=nc>SearchResponse</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=k>repeated</span> <span class=n>Result</span> <span class=n>results</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span> <span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=kd>message</span> <span class=nc>Result</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kt>string</span> <span class=n>url</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kt>string</span> <span class=n>title</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=k>repeated</span> <span class=kt>string</span> <span class=n>snippets</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>嵌套写也是支持的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=kd>message</span> <span class=nc>SearchResponse</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kd>message</span> <span class=nc>Result</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>url</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>title</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=k>repeated</span> <span class=kt>string</span> <span class=n>snippets</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=k>repeated</span> <span class=n>Result</span> <span class=n>results</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>SearchResponse 中 results 的属性名实际上为 SearchResponse_Result</p><p>如果定义在其他文件中，可以导入其他消息类型来使用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=k>import</span> <span class=s>&#34;myproject/other_protos.proto&#34;</span><span class=p>;</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=any-任意类型>Any 任意类型</h3><p>Any 可以表示不在 .proto 中定义任意的内置类型。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=k>import</span> <span class=s>&#34;google/protobuf/any.proto&#34;</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=kd>message</span> <span class=nc>ErrorStatus</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=kt>string</span> <span class=kd>message</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=k>repeated</span> <span class=n>google.protobuf.Any</span> <span class=n>details</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>Any 字段需要通过 <code>MarshalAny(m proto.Message) (anypb.Any, error)</code> 方法转换为 anypb.Any 类型，通过 <code>ptypes.UnmarshalAny(any *anypb.Any, m proto.Message)</code> 转换成 protoc3 支持的类型</p><h3 id=oneof>oneof</h3><p>If you have a message with many fields and where at most one field will be set at the same time, you can enforce this behavior and save memory by using the oneof feature.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=kd>message</span> <span class=nc>SampleMessage</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=k>oneof</span> <span class=n>test_oneof</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>name</span> <span class=o>=</span> <span class=mi>4</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>SubMessage</span> <span class=n>sub_message</span> <span class=o>=</span> <span class=mi>9</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>当我们某一个字段可能出现多种不同类型，那么就可以使用 oneof。对于网络传输中的一个响应，可能出现不同的结构。例如，response 可能是文章列表（包含标题，正文，作者，日期等字段）、也有可能是一首歌（歌曲的 byte，标题，作者信息等）。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=c1>// response.proto
+</span></span></span><span class=line><span class=cl><span class=c1></span> <span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=n>syntax</span><span class=o>=</span><span class=s>&#34;proto3&#34;</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span> <span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=kd>message</span> <span class=nc>Response</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=n>Header</span> <span class=n>header</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=k>oneof</span> <span class=n>payload</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>        <span class=n>ArticleResponse</span> <span class=n>articleResponse</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>        <span class=n>MusicResponse</span> <span class=n>musicResponse</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span> <span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=kd>message</span> <span class=nc>Header</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>namespace</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>name</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>version</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span> <span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=kd>message</span> <span class=nc>ArticleResponse</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>title</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>author</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>date</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span> <span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=kd>message</span> <span class=nc>MusicResponse</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>title</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>string</span> <span class=n>author</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>    <span class=kt>bytes</span> <span class=n>data</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=特性>特性</h4><ul><li>Setting a oneof field will automatically clear all other members of the oneof. So if you set several oneof fields, only the <em>last</em> field you set will still have a value.</li><li>A oneof cannot be <code>repeated</code>.</li></ul><h3 id=map>map</h3><p>If you want to create an associative map as part of your data definition, protocol buffers provides a handy shortcut syntax:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>map&lt;key_type, value_type&gt; map_field = N;
+</span></span></code></pre></td></tr></table></div></div><p>例如</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-protobuf data-lang=protobuf><span class=line><span class=cl><span class=kd>message</span> <span class=nc>MapRequest</span> <span class=p>{</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span>  <span class=n>map</span><span class=p>&lt;</span><span class=kt>string</span><span class=p>,</span> <span class=kt>int32</span><span class=p>&gt;</span> <span class=n>points</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=p>}</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=特性-1>特性</h4><ul><li>Map fields cannot be <code>repeated</code>.</li><li>When generating text format for a <code>.proto</code>, maps are sorted by key. Numeric keys are sorted numerically.</li></ul><h2 id=定义服务-services>定义服务 (Services)</h2><p>如果消息类型是用来远程通信的 (Remote Procedure Call, RPC)，可以在 .proto 文件中定义 RPC 服务接口。例如我们定义了一个名为 SearchService 的 RPC 服务，提供了 <code>Search</code> 接口，入参是 <code>SearchRequest</code> 类型，返回类型是 <code>SearchResponse</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>service</span> <span class=nx>SearchService</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>rpc</span> <span class=nf>Search</span> <span class=p>(</span><span class=nx>SearchRequest</span><span class=p>)</span> <span class=nf>returns</span> <span class=p>(</span><span class=nx>SearchResponse</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>官方仓库也提供了一个 <a href=https://github.com/protocolbuffers/protobuf/blob/master/docs/third_party.md target=_blank rel="external nofollow noopener noreferrer">插件列表</a>，帮助开发基于 Protocol Buffer 的 RPC 服务。</p><h2 id=protoc-其他参数>protoc 其他参数</h2><p>命令行使用方法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>protoc --proto_path<span class=o>=</span>IMPORT_PATH --&lt;lang&gt;_out<span class=o>=</span>DST_DIR path/to/file.proto
+</span></span></code></pre></td></tr></table></div></div><ul><li><code>--proto_path=IMPORT_PATH</code>：可以在 .proto 文件中 import 其他的 .proto 文件，proto_path 即用来指定其他 .proto 文件的查找目录。如果没有引入其他的 .proto 文件，该参数可以省略。</li><li><code>--&lt;lang>_out=DST_DIR</code>：指定生成代码的目标文件夹，例如 –go_out=. 即生成 GO 代码在当前文件夹，另外支持 cpp/java/python/ruby/objc/csharp/php 等语言</li></ul><h2 id=推荐风格>推荐风格</h2><ul><li>文件 (Files)<ul><li>文件名使用小写下划线的命名风格，例如 lower_snake_case.proto</li><li>每行不超过 80 字符</li><li>使用 2 个空格缩进</li></ul></li><li>包 (Packages)<ul><li>包名应该和目录结构对应，例如文件在 <code>my/package/</code> 目录下，包名应为 <code>my.package</code></li></ul></li><li>消息和字段 (Messages & Fields)<ul><li>消息名使用首字母大写驼峰风格 (CamelCase)，例如 <code>message StudentRequest { ... }</code></li><li>字段名使用小写下划线的风格，例如 <code>string status_code = 1</code></li><li>枚举类型，枚举名使用首字母大写驼峰风格，例如 <code>enum FooBar</code>，枚举值使用全大写下划线隔开的风格 (CAPITALS_WITH_UNDERSCORES )，例如 FOO_DEFAULT=1</li></ul></li><li>服务 (Services)<ul><li>RPC 服务名和方法名，均使用首字母大写驼峰风格，例如 <code>service FooService{ rpc GetSomething() }</code></li></ul></li></ul><h2 id=proto2-与-proto3-的区别>proto2 与 proto3 的区别</h2><ol><li><p>在第一行非空白非注释行，必须写：</p><p>syntax = &ldquo;proto3&rdquo;;</p></li><li><p>字段规则移除了 “required”，并把 “optional” 改名为 “singular”</p><p>在 proto2 中 required 也是不推荐使用的。proto3 直接从语法层面上移除了 required 规则。其实可以做的更彻底，把所有字段规则描述都撤销，原来的 repeated 改为在类型或字段名后加一对中括号。这样是不是更简洁？</p></li><li><p>“repeated”字段默认采用 <code>packed</code> 编码；</p><p>在 proto2 中，需要明确使用 <code>[packed=true]</code> 来为字段指定比较紧凑的 <code>packed</code> 编码方式。</p></li><li><p>语言增加 Go、Ruby、JavaNano 支持；</p></li><li><p>移除了 default 选项；</p><p>在 proto2 中，可以使用 default 选项为某一字段指定默认值。在 proto3 中，字段的默认值只能根据字段类型由系统决定。也就是说，默认值全部是约定好的，而不再提供指定默认值的语法。</p><p>在字段被设置为默认值的时候，该字段不会被序列化。这样可以节省空间，提高效率。</p><p>但这样就无法区分某字段是根本没赋值，还是赋值了默认值。这在 proto3 中问题不大，但在 proto2 中会有问题。</p><p>比如，在更新协议的时候使用 default 选项为某个字段指定了一个与原来不同的默认值，旧代码获取到的该字段的值会与新代码不一样。</p><p>另一个重约定而弱语法的例子是 Go 语言里的公共/私有对象。Go 语言约定，首字母大写的为公共对象，否则为私有对象。所以在 Go 语言中是没有 public、private 这样的语法的。</p></li><li><p>枚举类型的第一个字段必须为 0 ；</p><p>这也是一个约定。</p></li><li><p>移除了对分组的支持；</p><p>分组的功能完全可以用消息嵌套的方式来实现，并且更清晰。在 proto2 中已经把分组语法标注为『过期』了。这次也算清理垃圾了。</p></li><li><p>旧代码在解析新增字段时，会把不认识的字段丢弃，再序列化后新增的字段就没了；</p><p>在 proto2 中，旧代码虽然会忽视不认识的新增字段，但并不会将其丢弃，再序列化的时候那些字段会被原样保留。</p><p>我觉得还是 proto2 的处理方式更好一些。能尽量保持兼容性和扩展能力，或许实现起来也更简单。proto3 现在的处理方式，没有带来明显的好处，但丢掉了部分兼容性和灵活性。</p><p>[2017-06-15 更新]：经过漫长的 <a href=https://github.com/google/protobuf/issues/272 target=_blank rel="external nofollow noopener noreferrer">讨论</a>，官方终于同意在 proto3 中恢复 proto2 的处理方式了。 可以通过 <a href=https://docs.google.com/document/d/1KMRX-G91Aa-Y2FkEaHeeviLRRNblgIahbsk4wA14gRk/view target=_blank rel="external nofollow noopener noreferrer">这个文档</a> 了解前因后果及时间线。</p></li><li><p>移除了对扩展的支持，新增了 Any 类型；</p><p>Any 类型是用来替代 proto2 中的扩展的。目前还在开发中。</p><p>proto2 中的扩展特性很像 Swift 语言中的扩展。理解起来有点困难，使用起来更是会带来不少混乱。</p><p>相比之下，proto3 中新增的 Any 类型有点像 C/C++ 中的 void* ，好理解，使用起来逻辑也更清晰。</p></li><li><p>增加了 JSON 映射特性；</p><p>语言的活力来自于与时俱进。当前，JSON 的流行有其充分的理由。很多『现代化』的语言都内置了对 JSON 的支持，比如 Go、PHP 等。而 C++ 这种看似保罗万象的学院派语言，因循守旧、故步自封，以致于现出了式微的苗头。</p></li></ol><h2 id=一些技巧>一些技巧</h2><h3 id=option-go_package>option go_package</h3><p>option go_package 用于生成的 .pb.go 文件，在引用时和生成 go 包名时起作用</p><p>示例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>syntax</span> <span class=p>=</span> <span class=s>&#34;proto3&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kn>package</span> <span class=nx>enumx</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1>// option go_package = &#34;生成位置;包名&#34;;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>option</span> <span class=nx>go_package</span> <span class=p>=</span> <span class=s>&#34;github.com/wymli/bc_sns/dep/pb/go/enumx;enumx&#34;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%B7%A5%E5%85%B7/protobuf/ data-title=protobuf data-hashtags=快速入门><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%B7%A5%E5%85%B7/protobuf/ data-hashtag=快速入门><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/%E5%B7%A5%E5%85%B7/protobuf/ data-title=protobuf><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>快速入门</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/tempfile/ class=prev rel=prev title="Python tempfile 库"><i class="fa-solid fa-angle-left fa-fw"></i>Python tempfile 库</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/dataclasses/ class=next rel=next title="Python dataclasses 库">Python dataclasses 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

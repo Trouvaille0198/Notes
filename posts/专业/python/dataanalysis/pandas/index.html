@@ -1,0 +1,798 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>pandas - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="pandas 分类与创建 Series Series 是一种类似于以为 NumPy 数组的对象，它由一组数据（各种 NumPy 数据类型）和与"><meta name=keywords content='Python,数据分析'><meta itemprop=name content="pandas"><meta itemprop=description content="pandas 分类与创建 Series Series 是一种类似于以为 NumPy 数组的对象，它由一组数据（各种 NumPy 数据类型）和与"><meta itemprop=datePublished content="2021-10-23T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="4861"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python,数据分析"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/dataanalysis/pandas/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="pandas"><meta property="og:description" content="pandas 分类与创建 Series Series 是一种类似于以为 NumPy 数组的对象，它由一组数据（各种 NumPy 数据类型）和与"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-10-23T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Python"><meta property="article:tag" content="数据分析"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="pandas"><meta name=twitter:description content="pandas 分类与创建 Series Series 是一种类似于以为 NumPy 数组的对象，它由一组数据（各种 NumPy 数据类型）和与"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/dataanalysis/pandas/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/aiohttp/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/dataanalysis/numpy/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"pandas","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/dataanalysis\/pandas\/"},"genre":"posts","keywords":"Python, 数据分析","wordcount":4861,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/dataanalysis\/pandas\/","datePublished":"2021-10-23T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>pandas</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="2021-10-23 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-10-23>2021-10-23</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 4861 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#分类与创建>分类与创建</a><ul><li><a href=#series>Series</a><ul><li><a href=#创建>创建</a></li><li><a href=#访问>访问</a></li></ul></li><li><a href=#dataframe>DataFrame</a><ul><li><a href=#从具有索引标签的字典数据创建>从具有索引标签的字典数据创建</a></li><li><a href=#从-numpy-数组创建>从 numpy 数组创建</a></li><li><a href=#通过其他dataframe来创建>通过其他DataFrame来创建</a></li><li><a href=#从csv文件创建>从csv文件创建</a></li><li><a href=#用series创建>用Series创建</a></li></ul></li></ul></li><li><a href=#审视>审视</a><ul><li><a href=#访问-1>访问</a><ul><li><a href=#dfcolname><code>df[colName]</code></a></li><li><a href=#dfcolnameindexname><code>df[colName][indexName]</code></a></li><li><a href=#-dfilocindex-col><code>df.iloc[index, col]</code></a></li><li><a href=#dflocindexnamecolname><code>df.loc[indexName,colName]</code></a></li><li><a href=#dfixinco><code>df.ix[in,co]</code></a></li><li><a href=#筛选>筛选</a><ul><li><a href=#dfquery><em><strong>df.query()</strong></em></a></li></ul></li></ul></li><li><a href=#查看>查看</a><ul><li><a href=#查看行数列数>查看行数、列数</a></li><li><a href=#查看整体信息>查看整体信息</a></li><li><a href=#查看数据格式><strong>查看数据格式</strong></a></li><li><a href=#查看缺失值>查看缺失值</a></li><li><a href=#查看唯一值>查看唯一值</a></li><li><a href=#查看数据表数值><strong>查看数据表数值</strong></a></li><li><a href=#查看行列名称>查看行、列名称</a></li><li><a href=#查看前后n行数据>查看前后n行数据</a></li><li><a href=#显示全部数据>显示全部数据</a></li></ul></li><li><a href=#统计>统计</a><ul><li><a href=#对数据的统计汇总>对数据的统计汇总</a></li><li><a href=#排序>排序</a><ul><li><a href=#dfsort_values>df.sort_values</a></li><li><a href=#dfsort_index>df.sort_index</a></li></ul></li><li><a href=#统计函数>统计函数</a><ul><li><a href=#maxmin>max()、min()</a></li><li><a href=#stdvar>std()、var()</a></li><li><a href=#median>median()</a></li><li><a href=#idxmaxidxmin>idxmax()、idxmin()</a></li><li><a href=#其他>其他</a></li></ul></li></ul></li></ul></li><li><a href=#预处理>预处理</a><ul><li><a href=#数据清理>数据清理</a><ul><li><a href=#缺失值处理>缺失值处理</a></li><li><a href=#清理空格><strong>清理空格</strong></a></li><li><a href=#大小写转换><strong>大小写转换</strong></a></li><li><a href=#更改数据格式><strong>更改数据格式</strong></a></li><li><a href=#更改行列名称>更改行列名称</a></li><li><a href=#重复值处理>重复值处理</a></li><li><a href=#数值修改及替换><strong>数值修改及替换</strong></a></li><li><a href=#设置索引列>设置索引列</a></li></ul></li><li><a href=#数据表合并>数据表合并</a><ul><li><a href=#merge><code>.merge()</code></a></li><li><a href=#concat><code>.concat()</code></a></li></ul></li><li><a href=#数据分组>数据分组</a><ul><li><a href=#分类汇总>分类汇总</a></li></ul></li><li><a href=#数据增删>数据增删</a><ul><li><a href=#删除行列>删除行列</a></li><li><a href=#增加行>增加行</a></li><li><a href=#增加列>增加列</a></li></ul></li><li><a href=#数据运算>数据运算</a><ul><li><a href=#算术运算>算术运算</a></li><li><a href=#逻辑运算>逻辑运算</a><ul><li><a href=#符号>符号</a></li><li><a href=#函数>函数</a></li></ul></li><li><a href=#自定义运算>自定义运算</a></li></ul></li></ul></li><li><a href=#导入与导出>导入与导出</a><ul><li><a href=#导入数据>导入数据</a></li><li><a href=#导出数据>导出数据</a></li></ul></li><li><a href=#例>例</a></li><li><a href=#预览-dataframe>预览 DataFrame</a></li></ul></nav></div></div><div class=content id=content><h1 id=pandas>pandas</h1><h2 id=分类与创建>分类与创建</h2><h3 id=series>Series</h3><p>Series 是一种类似于以为 NumPy 数组的对象，它由一组数据（各种 NumPy 数据类型）和与之相关的一组数据标签（即索引）组成的。可以用 index 和 values 分别规定索引和值。如果不规定索引，会自动创建 0 到 N-1 索引。</p><p>Series 是 1 维的数据，拥有的索引，一般以竖行形式输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207200644867.png alt=image-20201207200644867 style=zoom:50%><h4 id=创建>创建</h4><p>Series 可以方便的通过 list，array 还有 dict 来构建</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>mylist</span> <span class=o>=</span> <span class=nb>list</span><span class=p>(</span><span class=s1>&#39;abc&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>myarr</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>mydict</span> <span class=o>=</span> <span class=nb>dict</span><span class=p>(</span><span class=nb>zip</span><span class=p>(</span><span class=n>mylist</span><span class=p>,</span> <span class=n>myarr</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>ser1</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>(</span><span class=n>mylist</span><span class=p>)</span>  <span class=c1>#使用列表创建</span>
+</span></span><span class=line><span class=cl><span class=n>ser2</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>(</span><span class=n>myarr</span><span class=p>)</span>   <span class=c1>#使用数组创建</span>
+</span></span><span class=line><span class=cl><span class=n>ser3</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>(</span><span class=n>mydict</span><span class=p>)</span>  <span class=c1>#使用字典创建</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ser1</span><span class=p>,</span><span class=s1>&#39;</span><span class=se>\n</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ser2</span><span class=p>,</span><span class=s1>&#39;</span><span class=se>\n</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ser3</span><span class=p>,</span><span class=s1>&#39;</span><span class=se>\n</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=mi>0</span>    <span class=n>a</span>
+</span></span><span class=line><span class=cl><span class=mi>1</span>    <span class=n>b</span>
+</span></span><span class=line><span class=cl><span class=mi>2</span>    <span class=n>c</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=nb>object</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mi>0</span>    <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=mi>1</span>    <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=mi>2</span>    <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=n>int32</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>a</span>    <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>b</span>    <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>c</span>    <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=n>int64</span> 
+</span></span></code></pre></td></tr></table></div></div><p>在构建 Series 的时候，指定 index 来代替默认的 0~n 数字式索引</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>ser4</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>([</span><span class=mi>100</span><span class=p>,</span> <span class=mi>200</span><span class=p>,</span> <span class=mi>150</span><span class=p>],</span> <span class=n>index</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;apple&#39;</span><span class=p>,</span> <span class=s1>&#39;banana&#39;</span><span class=p>,</span> <span class=s1>&#39;peach&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>ser4</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>apple</span>     <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=n>banana</span>    <span class=mi>200</span>
+</span></span><span class=line><span class=cl><span class=n>peach</span>     <span class=mi>150</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=n>int64</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=访问>访问</h4><p>下标方式访问</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>ser4</span><span class=p>[</span><span class=s1>&#39;banana&#39;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>index 方式访问</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>ser4</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=dataframe>DataFrame</h3><p>DataFrame 是一种表格型结构，含有一组有序的列，每一列可以是不同的数据类型。既有行索引，又有列索引<img src="https://trou.oss-cn-shanghai.aliyuncs.com/img/J$F`0{7$G@6E@1QX3O3$X{Q.png" alt=img style=zoom:67%></p><h4 id=从具有索引标签的字典数据创建>从具有索引标签的字典数据创建</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>data</span> <span class=o>=</span> <span class=p>{</span><span class=s1>&#39;animal&#39;</span><span class=p>:</span> <span class=p>[</span><span class=s1>&#39;cat&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>,</span> <span class=s1>&#39;snake&#39;</span><span class=p>,</span> <span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>,</span> <span class=s1>&#39;snake&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>,</span> <span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;dog&#39;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;age&#39;</span><span class=p>:</span> <span class=p>[</span><span class=mf>2.5</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mf>0.5</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>nan</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mf>4.5</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>nan</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>3</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;visits&#39;</span><span class=p>:</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>1</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;priority&#39;</span><span class=p>:</span> <span class=p>[</span><span class=s1>&#39;yes&#39;</span><span class=p>,</span> <span class=s1>&#39;yes&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;yes&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;yes&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>]}</span>
+</span></span><span class=line><span class=cl><span class=n>labels</span> <span class=o>=</span> <span class=p>[</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;b&#39;</span><span class=p>,</span> <span class=s1>&#39;c&#39;</span><span class=p>,</span> <span class=s1>&#39;d&#39;</span><span class=p>,</span> <span class=s1>&#39;e&#39;</span><span class=p>,</span> <span class=s1>&#39;f&#39;</span><span class=p>,</span> <span class=s1>&#39;g&#39;</span><span class=p>,</span> <span class=s1>&#39;h&#39;</span><span class=p>,</span> <span class=s1>&#39;i&#39;</span><span class=p>,</span> <span class=s1>&#39;j&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>(</span><span class=n>data</span><span class=p>,</span><span class=n>index</span> <span class=o>=</span> <span class=n>labels</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>df</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205444467.png alt=image-20201207205444467 style=zoom:80%><h4 id=从-numpy-数组创建>从 numpy 数组创建</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df2</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>],</span> <span class=p>[</span><span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>],</span> <span class=p>[</span><span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>,</span> <span class=mi>9</span><span class=p>]]),</span>
+</span></span><span class=line><span class=cl>                    <span class=n>columns</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;b&#39;</span><span class=p>,</span> <span class=s1>&#39;c&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>df2</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205555602.png data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205555602.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205555602.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205555602.png 2x" data-sizes=auto alt=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205555602.png title=image-20201207205555602></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>arange</span><span class=p>(</span><span class=mi>9</span><span class=p>)</span><span class=o>.</span><span class=n>reshape</span><span class=p>(</span><span class=mi>3</span><span class=p>,</span> <span class=mi>3</span><span class=p>),</span> <span class=n>index</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;Mon&#34;</span><span class=p>,</span> <span class=s2>&#34;Tue&#34;</span><span class=p>,</span> <span class=s2>&#34;Wed&#34;</span><span class=p>],</span> <span class=n>columns</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;store1&#39;</span><span class=p>,</span> <span class=s1>&#39;store2&#39;</span><span class=p>,</span> <span class=s1>&#39;store3&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>df</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205853449.png alt=image-20201207205853449 style=zoom:80%><h4 id=通过其他dataframe来创建>通过其他DataFrame来创建</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df3</span> <span class=o>=</span> <span class=n>df2</span><span class=p>[[</span><span class=s2>&#34;a&#34;</span><span class=p>,</span><span class=s2>&#34;b&#34;</span><span class=p>,</span><span class=s2>&#34;c&#34;</span><span class=p>]]</span><span class=o>.</span><span class=n>copy</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>df3</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png 2x" data-sizes=auto alt=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205620990.png title=image-20201207205620990></p><h4 id=从csv文件创建>从csv文件创建</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>read_csv</span><span class=p>(</span><span class=s1>&#39;path&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>read_csv</span><span class=p>(</span><span class=s1>&#39;test.csv&#39;</span><span class=p>,</span> <span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;gbk&#39;</span><span class=p>,</span> <span class=n>sep</span><span class=o>=</span><span class=s1>&#39;;&#39;</span><span class=p>)</span> 	<span class=c1>#分隔符为“；”，编码格式为gbk</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=用series创建>用Series创建</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>s_1</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=s1>&#39;animal&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>s_2</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=s1>&#39;age&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>s_3</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=s1>&#39;visits&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>s_4</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=s1>&#39;priority&#39;</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>([</span><span class=n>s_1</span><span class=p>,</span><span class=n>s_2</span><span class=p>,</span><span class=n>s_3</span><span class=p>,</span><span class=n>s_4</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=n>df</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207205642638.png alt=image-20201207205642638 style=zoom:80%><p>这玩意可以看做是多个 Series 的组合。DataFrame 的不同列可以是不同的数据类型,如果以 Series 数组来创建 DataFrame，每个 Series 将成为一行，而不是一列</p><h2 id=审视>审视</h2><h3 id=访问-1>访问</h3><p>以下图为例</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207222452955.png alt=image-20201207222452955 style=zoom:80%><p>col，index 为列号和行号</p><p>colName，indexName 为具体值</p><h4 id=dfcolname><code>df[colName]</code></h4><p>根据列名，并以 Series 的形式返回列</p><p>若列名为默认的数字时，colName 可以被视为 col（其中就 col 可以表示为列表形式和切片形式）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;a&#39;</span><span class=p>]</span> 			<span class=c1>#取a列</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>a</span>				<span class=c1>#也可</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[[</span><span class=s1>&#39;b&#39;</span><span class=p>,</span><span class=s1>&#39;e&#39;</span><span class=p>,</span><span class=s1>&#39;f&#39;</span><span class=p>]]</span>   <span class=c1>#取b,e,f列</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207223843331.png alt=image-20201207223843331 style=zoom:67%><p>特殊情况下，<code>df[colName]</code> 可以接收行名称或者行数，但必须是切片</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=mi>1</span><span class=p>]</span>      <span class=c1># 第1行</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=mi>3</span><span class=p>]</span>      <span class=c1># 前3行</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;5&#39;</span><span class=p>:</span><span class=s1>&#39;5&#39;</span><span class=p>]</span>  <span class=c1># 行名称为5的行</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;5&#39;</span><span class=p>:</span><span class=s1>&#39;7&#39;</span><span class=p>]</span>  <span class=c1># 行名称为5的行至行名称为7的行</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=dfcolnameindexname><code>df[colName][indexName]</code></h4><p>更精准的访问（几列几行）</p><p>若列名为默认的数字时，colName 可以被视为 col（其中就 col 可以表示为列表形式和切片形式）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;c&#39;</span><span class=p>][</span><span class=s1>&#39;B&#39;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=mf>0.5</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=-dfilocindex-col><code>df.iloc[index, col]</code></h4><p>其中 index，col 可以表示为列表形式和切片形式，当只传入一个参数时，该参数默认为 index</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=mi>1</span><span class=p>]</span> 			<span class=c1># 取第0行数据，较为规范</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>   			<span class=c1># 硬要这样俺也没办法</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[:,[</span><span class=mi>2</span><span class=p>]]</span>  		<span class=c1># 取第2列数据</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=mi>3</span><span class=p>,</span><span class=mi>2</span><span class=p>:</span><span class=mi>6</span><span class=p>]</span>  		<span class=c1># 取0到2行，2到5列数据</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>iloc</span><span class=p>[[</span><span class=mi>0</span><span class=p>,</span><span class=mi>3</span><span class=p>],[</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>7</span><span class=p>]]</span>  <span class=c1># 取0和3行，2、3、7列相交数据</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207224248457.png alt=image-20201207224248457 style=zoom:65%><h4 id=dflocindexnamecolname><code>df.loc[indexName,colName]</code></h4><p><code>df.iloc</code>只能选取数据表里实际有的行和列，而<code>df.loc</code>可以选取没有的行和列，赋值后就可以添加新行或者列</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>loc</span><span class=p>[:,</span><span class=s1>&#39;c&#39;</span><span class=p>]</span> 						<span class=c1>#选取c列</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>loc</span><span class=p>[[</span><span class=s1>&#39;A&#39;</span><span class=p>,</span><span class=s1>&#39;C&#39;</span><span class=p>],[</span><span class=s1>&#39;c&#39;</span><span class=p>,</span><span class=s1>&#39;e&#39;</span><span class=p>,</span><span class=s1>&#39;f&#39;</span><span class=p>]]</span> 	<span class=c1>#选取A,C列，c,e,f行相交数据</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>loc</span><span class=p>[</span><span class=n>df</span><span class=p>[</span><span class=s1>&#39;c&#39;</span><span class=p>]</span><span class=o>==</span><span class=s1>&#39;snake&#39;</span><span class=p>]</span> 			<span class=c1>#选取c列中内容为snake的行数据</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201207230245814.png alt=image-20201207230245814 style=zoom:70%><h4 id=dfixinco><code>df.ix[in,co]</code></h4><p>ix 是 loc 和 iloc 的混合，既能按索引标签提取，也能按位置进行数 据提取</p><h4 id=筛选>筛选</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>loc</span><span class=p>[</span><span class=n>df</span><span class=o>.</span><span class=n>index</span><span class=p>[[</span><span class=mi>1</span><span class=p>,</span><span class=mi>3</span><span class=p>]],</span> <span class=p>[</span><span class=s1>&#39;d&#39;</span><span class=p>,</span><span class=s1>&#39;f&#39;</span><span class=p>]]</span>	<span class=c1>#筛选出索引为1，3行的d，f列</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=n>df</span><span class=p>[</span><span class=s1>&#39;d&#39;</span><span class=p>]</span> <span class=o>&gt;</span> <span class=mi>3</span><span class=p>]</span>						<span class=c1>#筛选d（列名）值大于3的行</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=n>df</span><span class=p>[</span><span class=s1>&#39;d&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>isnull</span><span class=p>()]</span> 				<span class=c1>#筛选d（列名）值为空的行</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>isin</span><span class=p>([</span><span class=s1>&#39;cat&#39;</span><span class=p>])</span>				<span class=c1>#筛选A列中含有cat的行</span>
+</span></span><span class=line><span class=cl><span class=c1>#输出</span>
+</span></span><span class=line><span class=cl><span class=n>a</span>     <span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=n>b</span>     <span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=n>c</span>    <span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>d</span>    <span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>e</span>    <span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>f</span>     <span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=n>g</span>    <span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>h</span>     <span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=n>i</span>    <span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>j</span>    <span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>Name</span><span class=p>:</span> <span class=n>A</span><span class=p>,</span> <span class=n>dtype</span><span class=p>:</span> <span class=nb>bool</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=dfquery><em><strong>df.query()</strong></em></h5><p>以下表为例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>   <span class=n>A</span>   <span class=n>B</span>  <span class=n>C</span>
+</span></span><span class=line><span class=cl><span class=mi>0</span>  <span class=mi>1</span>  <span class=mi>10</span>  <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=mi>1</span>  <span class=mi>2</span>   <span class=mi>8</span>  <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=mi>2</span>  <span class=mi>3</span>   <span class=mi>6</span>  <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=mi>3</span>  <span class=mi>4</span>   <span class=mi>4</span>  <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=mi>4</span>  <span class=mi>5</span>   <span class=mi>2</span>  <span class=mi>2</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>({</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;A&#39;</span><span class=p>:</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>6</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;B&#39;</span><span class=p>:</span> <span class=nb>range</span><span class=p>(</span><span class=mi>10</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=o>-</span><span class=mi>2</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;C&#39;</span><span class=p>:</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=p>})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>query</span><span class=p>(</span><span class=s1>&#39;B == 2&#39;</span><span class=p>)</span> <span class=c1># 查询B列中数值为2的行记录</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=n>df</span><span class=o>.</span><span class=n>A</span> <span class=o>&lt;</span> <span class=n>df</span><span class=o>.</span><span class=n>B</span><span class=p>]</span> <span class=c1># 查询A列数值小于B列的行记录</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>query</span><span class=p>(</span><span class=s1>&#39;A &lt; B&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=n>df</span><span class=o>.</span><span class=n>B</span> <span class=o>==</span> <span class=n>df</span><span class=p>[</span><span class=s1>&#39;C C&#39;</span><span class=p>]]</span> <span class=c1># 查询B列数值和C C列相等的行记录</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>   <span class=n>A</span>  <span class=n>B</span>  <span class=n>C</span>
+</span></span><span class=line><span class=cl><span class=mi>4</span>  <span class=mi>5</span>  <span class=mi>2</span>  <span class=mi>2</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   <span class=n>A</span>   <span class=n>B</span>  <span class=n>C</span>
+</span></span><span class=line><span class=cl><span class=mi>0</span>  <span class=mi>1</span>  <span class=mi>10</span>  <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=mi>1</span>  <span class=mi>2</span>   <span class=mi>8</span>  <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=mi>2</span>  <span class=mi>3</span>   <span class=mi>6</span>  <span class=mi>2</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>   <span class=n>A</span>  <span class=n>B</span>  <span class=n>C</span>
+</span></span><span class=line><span class=cl><span class=mi>4</span>  <span class=mi>5</span>  <span class=mi>2</span>  <span class=mi>2</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=查看>查看</h3><h4 id=查看行数列数>查看行数、列数</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>shape</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=p>(</span><span class=mi>4</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看整体信息>查看整体信息</h4><p>使用 info 函数查看数据表的整体信息，包括数据维度、列名称、数据格式和所占空间等信息</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>info</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&lt;</span><span class=k>class</span> <span class=err>&#39;</span><span class=nc>pandas</span><span class=o>.</span><span class=n>core</span><span class=o>.</span><span class=n>frame</span><span class=o>.</span><span class=n>DataFrame</span><span class=s1>&#39;&gt;</span>
+</span></span><span class=line><span class=cl><span class=n>Index</span><span class=p>:</span> <span class=mi>4</span> <span class=n>entries</span><span class=p>,</span> <span class=n>A</span> <span class=n>to</span> <span class=n>D</span>
+</span></span><span class=line><span class=cl><span class=n>Data</span> <span class=n>columns</span> <span class=p>(</span><span class=n>total</span> <span class=mi>10</span> <span class=n>columns</span><span class=p>):</span>
+</span></span><span class=line><span class=cl> <span class=c1>#   Column  Non-Null Count  Dtype </span>
+</span></span><span class=line><span class=cl><span class=o>---</span>  <span class=o>------</span>  <span class=o>--------------</span>  <span class=o>-----</span> 
+</span></span><span class=line><span class=cl> <span class=mi>0</span>   <span class=n>a</span>       <span class=mi>4</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl> <span class=mi>1</span>   <span class=n>b</span>       <span class=mi>4</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl> <span class=mi>2</span>   <span class=n>c</span>       <span class=mi>4</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl> <span class=mi>3</span>   <span class=n>d</span>       <span class=mi>3</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl> <span class=mi>4</span>   <span class=n>e</span>       <span class=mi>4</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl> <span class=mi>5</span>   <span class=n>f</span>       <span class=mi>4</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl> <span class=mi>6</span>   <span class=n>g</span>       <span class=mi>4</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl> <span class=mi>7</span>   <span class=n>h</span>       <span class=mi>3</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl> <span class=mi>8</span>   <span class=n>i</span>       <span class=mi>4</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl> <span class=mi>9</span>   <span class=n>j</span>       <span class=mi>4</span> <span class=n>non</span><span class=o>-</span><span class=n>null</span>      <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>dtypes</span><span class=p>:</span> <span class=nb>object</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>memory</span> <span class=n>usage</span><span class=p>:</span> <span class=mf>352.0</span><span class=o>+</span> <span class=nb>bytes</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看数据格式><strong>查看数据格式</strong></h4><p>使用 dtypes 函数来返回数据格式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>dtypes</span>       <span class=c1>#查看数据表各列格式</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;B&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>dtype</span>	<span class=c1>#查看单列格式</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>b</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>c</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>d</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>e</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>f</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>g</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>h</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>i</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>j</span>    <span class=nb>object</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=nb>object</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>(</span><span class=s1>&#39;O&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看缺失值>查看缺失值</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>isnull</span><span class=p>()</span>			<span class=c1># 检查数据空值</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;h&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>isnull</span><span class=p>()</span>	<span class=c1># 检查特定列空值</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>isnull</span><span class=p>()</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span>  	<span class=c1># 查看各列的缺失值个数</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>isnull</span><span class=p>()</span><span class=o>.</span><span class=n>any</span><span class=p>()</span>   <span class=c1># 查看各列是否有缺失值</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>isnan</span><span class=p>()</span> 			<span class=c1>#判断nan值</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209152042577.png alt=image-20201209152042577 style=zoom:80%><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>A</span>    <span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>B</span>     <span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=n>C</span>    <span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>D</span>    <span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=n>Name</span><span class=p>:</span> <span class=n>h</span><span class=p>,</span> <span class=n>dtype</span><span class=p>:</span> <span class=nb>bool</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看唯一值>查看唯一值</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;a&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>unique</span><span class=p>()</span>	<span class=c1>#查看a列中的唯一值</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>array</span><span class=p>([</span><span class=s1>&#39;cat&#39;</span><span class=p>,</span> <span class=mf>2.5</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=s1>&#39;yes&#39;</span><span class=p>],</span> <span class=n>dtype</span><span class=o>=</span><span class=nb>object</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看数据表数值><strong>查看数据表数值</strong></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>values</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>array</span><span class=p>([[</span><span class=s1>&#39;cat&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>,</span> <span class=s1>&#39;snake&#39;</span><span class=p>,</span> <span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>,</span> <span class=s1>&#39;snake&#39;</span><span class=p>,</span> <span class=s1>&#39;cat&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;dog&#39;</span><span class=p>,</span> <span class=s1>&#39;dog&#39;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>       <span class=p>[</span><span class=mf>2.5</span><span class=p>,</span> <span class=mf>3.0</span><span class=p>,</span> <span class=mf>0.5</span><span class=p>,</span> <span class=n>nan</span><span class=p>,</span> <span class=mf>5.0</span><span class=p>,</span> <span class=mf>2.0</span><span class=p>,</span> <span class=mf>4.5</span><span class=p>,</span> <span class=n>nan</span><span class=p>,</span> <span class=mf>7.0</span><span class=p>,</span> <span class=mf>3.0</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>       <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>1</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>       <span class=p>[</span><span class=s1>&#39;yes&#39;</span><span class=p>,</span> <span class=s1>&#39;yes&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;yes&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;yes&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>]],</span>
+</span></span><span class=line><span class=cl>      <span class=n>dtype</span><span class=o>=</span><span class=nb>object</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看行列名称>查看行、列名称</h4><p>返回 Index 对象</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>columns</span>	<span class=c1>#查看列名称</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>index</span>	<span class=c1>#查看行名称</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>Index</span><span class=p>([</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;b&#39;</span><span class=p>,</span> <span class=s1>&#39;c&#39;</span><span class=p>,</span> <span class=s1>&#39;d&#39;</span><span class=p>,</span> <span class=s1>&#39;e&#39;</span><span class=p>,</span> <span class=s1>&#39;f&#39;</span><span class=p>,</span> <span class=s1>&#39;g&#39;</span><span class=p>,</span> <span class=s1>&#39;h&#39;</span><span class=p>,</span> <span class=s1>&#39;i&#39;</span><span class=p>,</span> <span class=s1>&#39;j&#39;</span><span class=p>],</span> <span class=n>dtype</span><span class=o>=</span><span class=s1>&#39;object&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Index</span><span class=p>([</span><span class=s1>&#39;A&#39;</span><span class=p>,</span> <span class=s1>&#39;B&#39;</span><span class=p>,</span> <span class=s1>&#39;C&#39;</span><span class=p>,</span> <span class=s1>&#39;D&#39;</span><span class=p>],</span> <span class=n>dtype</span><span class=o>=</span><span class=s1>&#39;object&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=查看前后n行数据>查看前后n行数据</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>head</span><span class=p>(</span><span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>tail</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=显示全部数据>显示全部数据</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 设置行不限制数量</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>set_option</span><span class=p>(</span><span class=s1>&#39;display.max_rows&#39;</span><span class=p>,</span><span class=kc>None</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># 设置列不限制数量</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>set_option</span><span class=p>(</span><span class=s1>&#39;display.max_columns&#39;</span><span class=p>,</span><span class=kc>None</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=统计>统计</h3><p>以下图为例</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209203305092.png alt=image-20201209203305092 style=zoom:80%><h4 id=对数据的统计汇总>对数据的统计汇总</h4><p>只会统计数值型数据</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>describe</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209203341244.png alt=image-20201209203341244 style=zoom:75%><h4 id=排序>排序</h4><h5 id=dfsort_values>df.sort_values</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>sort_values</span><span class=p>(</span><span class=n>by</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;C&#39;</span><span class=p>])</span>								<span class=c1>#按特定列的值升序排序</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>sort_values</span><span class=p>(</span><span class=n>by</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;B&#39;</span><span class=p>],</span><span class=n>ascending</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>				<span class=c1>#降序排序</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>sort_values</span><span class=p>(</span><span class=n>by</span><span class=o>=</span><span class=p>[</span><span class=s1>&#39;B&#39;</span><span class=p>,</span> <span class=s1>&#39;C&#39;</span><span class=p>],</span> <span class=n>ascending</span><span class=o>=</span><span class=p>[</span><span class=kc>False</span><span class=p>,</span> <span class=kc>True</span><span class=p>])</span>	<span class=c1>#先按B降序，再按C升序</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209205226758.png alt=image-20201209205226758 style=zoom:60%><h5 id=dfsort_index>df.sort_index</h5><p>按索引排序</p><ul><li><em>axis</em>：0（跨行），1（跨列）</li><li>ascending：0（降序），1（升序）</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>sort_index</span><span class=p>(</span><span class=n>axis</span><span class=o>=</span><span class=mi>0</span><span class=err>，</span><span class=n>ascending</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>		<span class=c1>#按索引列升序排序，需要默认的索引值</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出（此处 index 设置为了’A’）</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212247769.png alt=image-20201209212247769 style=zoom:67%><h4 id=统计函数>统计函数</h4><p>返回 Series</p><h5 id=maxmin>max()、min()</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 使用统计函数：0 代表列求结果， 1 代表行求统计结果</span>
+</span></span><span class=line><span class=cl><span class=n>data</span><span class=o>.</span><span class=n>max</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>open</span> 			<span class=mf>34.99</span>
+</span></span><span class=line><span class=cl><span class=n>high</span> 			<span class=mf>36.35</span>
+</span></span><span class=line><span class=cl><span class=n>close</span> 			<span class=mf>35.21</span>
+</span></span><span class=line><span class=cl><span class=n>low</span> 			<span class=mf>34.01</span>
+</span></span><span class=line><span class=cl><span class=n>volume</span> 			<span class=mf>501915.41</span>
+</span></span><span class=line><span class=cl><span class=n>price_change</span> 	<span class=mf>3.03</span>
+</span></span><span class=line><span class=cl><span class=n>p_change</span> 		<span class=mf>10.03</span>
+</span></span><span class=line><span class=cl><span class=n>turnover</span> 		<span class=mf>12.56</span>
+</span></span><span class=line><span class=cl><span class=n>my_price_change</span> <span class=mf>3.41</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=n>float64</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=stdvar>std()、var()</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 方差</span>
+</span></span><span class=line><span class=cl><span class=n>data</span><span class=o>.</span><span class=n>var</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>open</span> 				<span class=mf>1.545255e+01</span>
+</span></span><span class=line><span class=cl><span class=n>high</span> 				<span class=mf>1.662665e+01</span>
+</span></span><span class=line><span class=cl><span class=n>close</span> 				<span class=mf>1.554572e+01</span>
+</span></span><span class=line><span class=cl><span class=n>low</span> 				<span class=mf>1.437902e+01</span>
+</span></span><span class=line><span class=cl><span class=n>volume</span> 				<span class=mf>5.458124e+09</span>
+</span></span><span class=line><span class=cl><span class=n>price_change</span> 		<span class=mf>8.072595e-01</span>
+</span></span><span class=line><span class=cl><span class=n>p_change</span> 			<span class=mf>1.664394e+01</span>
+</span></span><span class=line><span class=cl><span class=n>turnover</span> 			<span class=mf>4.323800e+00</span>
+</span></span><span class=line><span class=cl><span class=n>my_price_change</span> 	<span class=mf>6.409037e-01</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=n>float64</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=c1># 标准差</span>
+</span></span><span class=line><span class=cl><span class=n>data</span><span class=o>.</span><span class=n>std</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>open</span> 				<span class=mf>3.930973</span>
+</span></span><span class=line><span class=cl><span class=n>high</span> 				<span class=mf>4.077578</span>
+</span></span><span class=line><span class=cl><span class=n>close</span> 				<span class=mf>3.942806</span>
+</span></span><span class=line><span class=cl><span class=n>low</span> 				<span class=mf>3.791968</span>
+</span></span><span class=line><span class=cl><span class=n>volume</span> 				<span class=mf>73879.119354</span>
+</span></span><span class=line><span class=cl><span class=n>price_change</span> 		<span class=mf>0.898476</span>
+</span></span><span class=line><span class=cl><span class=n>p_change</span> 			<span class=mf>4.079698</span>
+</span></span><span class=line><span class=cl><span class=n>turnover</span> 			<span class=mf>2.079375</span>
+</span></span><span class=line><span class=cl><span class=n>my_price_change</span> 	<span class=mf>0.800565</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=n>float64</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=median>median()</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>({</span><span class=s1>&#39;COL1&#39;</span> <span class=p>:</span> <span class=p>[</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=mi>5</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=mi>2</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>					<span class=s1>&#39;COL2&#39;</span> <span class=p>:</span> <span class=p>[</span><span class=mi>0</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=mi>2</span><span class=p>]})</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>median</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>COL1</span> 	<span class=mf>3.5</span>
+</span></span><span class=line><span class=cl><span class=n>COL2</span> 	<span class=mf>2.0</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=n>float64</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=idxmaxidxmin>idxmax()、idxmin()</h5><p>求索引位置</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 求出最大值的位置</span>
+</span></span><span class=line><span class=cl><span class=n>data</span><span class=o>.</span><span class=n>idxmax</span><span class=p>(</span><span class=n>axis</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>open</span> 			<span class=mi>2015</span><span class=o>-</span><span class=mi>06</span><span class=o>-</span><span class=mi>15</span>
+</span></span><span class=line><span class=cl><span class=n>high</span> 			<span class=mi>2015</span><span class=o>-</span><span class=mi>06</span><span class=o>-</span><span class=mi>10</span>
+</span></span><span class=line><span class=cl><span class=n>close</span> 			<span class=mi>2015</span><span class=o>-</span><span class=mi>06</span><span class=o>-</span><span class=mi>12</span>
+</span></span><span class=line><span class=cl><span class=n>low</span> 			<span class=mi>2015</span><span class=o>-</span><span class=mi>06</span><span class=o>-</span><span class=mi>12</span>
+</span></span><span class=line><span class=cl><span class=n>volume</span> 			<span class=mi>2017</span><span class=o>-</span><span class=mi>10</span><span class=o>-</span><span class=mi>26</span>
+</span></span><span class=line><span class=cl><span class=n>price_change</span> 	<span class=mi>2015</span><span class=o>-</span><span class=mi>06</span><span class=o>-</span><span class=mi>09</span>
+</span></span><span class=line><span class=cl><span class=n>p_change</span> 		<span class=mi>2015</span><span class=o>-</span><span class=mi>08</span><span class=o>-</span><span class=mi>28</span>
+</span></span><span class=line><span class=cl><span class=n>turnover</span> 		<span class=mi>2017</span><span class=o>-</span><span class=mi>10</span><span class=o>-</span><span class=mi>26</span>
+</span></span><span class=line><span class=cl><span class=n>my_price_change</span> <span class=mi>2015</span><span class=o>-</span><span class=mi>07</span><span class=o>-</span><span class=mi>10</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=nb>object</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=c1># 求出最小值的位置</span>
+</span></span><span class=line><span class=cl><span class=n>data</span><span class=o>.</span><span class=n>idxmin</span><span class=p>(</span><span class=n>axis</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>open</span> 			<span class=mi>2015</span><span class=o>-</span><span class=mi>03</span><span class=o>-</span><span class=mi>02</span>
+</span></span><span class=line><span class=cl><span class=n>high</span> 			<span class=mi>2015</span><span class=o>-</span><span class=mi>03</span><span class=o>-</span><span class=mi>02</span>
+</span></span><span class=line><span class=cl><span class=n>close</span> 			<span class=mi>2015</span><span class=o>-</span><span class=mi>09</span><span class=o>-</span><span class=mi>02</span>
+</span></span><span class=line><span class=cl><span class=n>low</span> 			<span class=mi>2015</span><span class=o>-</span><span class=mi>03</span><span class=o>-</span><span class=mi>02</span>
+</span></span><span class=line><span class=cl><span class=n>volume</span> 			<span class=mi>2016</span><span class=o>-</span><span class=mi>07</span><span class=o>-</span><span class=mi>06</span>
+</span></span><span class=line><span class=cl><span class=n>price_change</span> 	<span class=mi>2015</span><span class=o>-</span><span class=mi>06</span><span class=o>-</span><span class=mi>15</span>
+</span></span><span class=line><span class=cl><span class=n>p_change</span> 		<span class=mi>2015</span><span class=o>-</span><span class=mi>09</span><span class=o>-</span><span class=mi>01</span>
+</span></span><span class=line><span class=cl><span class=n>turnover</span> 		<span class=mi>2016</span><span class=o>-</span><span class=mi>07</span><span class=o>-</span><span class=mi>06</span>
+</span></span><span class=line><span class=cl><span class=n>my_price_change</span> <span class=mi>2015</span><span class=o>-</span><span class=mi>06</span><span class=o>-</span><span class=mi>15</span>
+</span></span><span class=line><span class=cl><span class=n>dtype</span><span class=p>:</span> <span class=nb>object</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=其他>其他</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>corr</span><span class=p>()</span>		<span class=c1>#返回列与列之间的相关系数</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>count</span><span class=p>()</span>		<span class=c1>#返回每一列中的非空值的个数</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=预处理>预处理</h2><h3 id=数据清理>数据清理</h3><p>所有函数，均返回 DataFrame 副本，不赋值不会生效</p><p>以下图为例</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209163600487.png alt=image-20201209163600487 style=zoom:67%><h4 id=缺失值处理>缺失值处理</h4><ul><li><code>dropna(axis=, how=)</code>：丢弃 NaN 数据<ul><li>axis：0 (按行丢弃)，1 (按列丢弃)</li><li>how：&lsquo;any&rsquo; (只要含有 NaN 数据就丢弃)，&lsquo;all&rsquo; (所有数据都为 NaN 时丢弃)</li></ul></li><li><code>fillna(value=)</code>：将 NaN 值都设置为 value 的值</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>dropna</span><span class=p>(</span><span class=n>how</span><span class=o>=</span><span class=s1>&#39;any&#39;</span><span class=p>)</span>					<span class=c1># 删除数据表中含有空值的行</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>fillna</span><span class=p>(</span><span class=n>value</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>						<span class=c1># 使用数字0填充数据表中空值</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;B&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>fillna</span><span class=p>(</span><span class=n>df</span><span class=p>[</span><span class=s1>&#39;B&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>mean</span><span class=p>())</span>			<span class=c1># 使用price均值对NA进行填充</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209164235597.png alt=image-20201209164235597 style=zoom:67%><h4 id=清理空格><strong>清理空格</strong></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;city&#39;</span><span class=p>]</span><span class=o>=</span><span class=n>df</span><span class=p>[</span><span class=s1>&#39;city&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>map</span><span class=p>(</span><span class=nb>str</span><span class=o>.</span><span class=n>strip</span><span class=p>)</span>	<span class=c1>#清除city字段中的字符空格</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=大小写转换><strong>大小写转换</strong></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>str</span><span class=o>.</span><span class=n>upper</span><span class=p>()</span>				<span class=c1>#city列大小写转换</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209164710193.png alt=image-20201209164710193 style=zoom:67%><h4 id=更改数据格式><strong>更改数据格式</strong></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;C&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>astype</span><span class=p>(</span><span class=s1>&#39;int&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span>    <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>b</span>    <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=n>c</span>    <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=n>d</span>    <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=n>e</span>    <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=n>f</span>    <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=n>g</span>    <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>h</span>    <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>i</span>    <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=n>j</span>    <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=n>Name</span><span class=p>:</span> <span class=n>C</span><span class=p>,</span> <span class=n>dtype</span><span class=p>:</span> <span class=n>int32</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=更改行列名称>更改行列名称</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>rename</span><span class=p>(</span><span class=n>columns</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;A&#39;</span><span class=p>:</span> <span class=s1>&#39;Name&#39;</span><span class=p>,</span><span class=s1>&#39;C&#39;</span><span class=p>:</span><span class=s1>&#39;Age&#39;</span><span class=p>})</span>			<span class=c1>#更改列名称</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>rename</span><span class=p>(</span><span class=n>index</span><span class=o>=</span><span class=p>{</span><span class=s1>&#39;e&#39;</span><span class=p>:</span> <span class=s1>&#39;eee&#39;</span><span class=p>})</span>						<span class=c1>#更改行名称</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>columns</span> <span class=o>=</span> <span class=p>[</span><span class=s1>&#39;animal&#39;</span><span class=p>,</span><span class=s1>&#39;age&#39;</span><span class=p>,</span><span class=s1>&#39;visits&#39;</span><span class=p>,</span><span class=s1>&#39;priority&#39;</span><span class=p>]</span> 	<span class=c1>#传入列表以改变列名称</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>index</span> <span class=o>=</span> <span class=p>[</span><span class=o>...</span><span class=p>]</span>								    <span class=c1>#传入列表以改变行名称</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209165738698.png alt=image-20201209165738698 style=zoom:67%><h4 id=重复值处理>重复值处理</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>duplicated</span><span class=p>()</span> 			<span class=c1># 返回一个布尔型的Series,显示各行是否有重复行</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>duplicated</span><span class=p>()</span><span class=o>.</span><span class=n>any</span><span class=p>()</span>		<span class=c1># 返回bool，查看是否有重复值</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>duplicated</span><span class=p>(</span><span class=s1>&#39;k1&#39;</span><span class=p>)</span> 		<span class=c1># 检查各行的k1列是否重复</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>duplicated</span><span class=p>([</span><span class=s1>&#39;k1&#39;</span><span class=p>,</span><span class=s1>&#39;k2&#39;</span><span class=p>])</span>	<span class=c1># 检查各行的k1，k2列是否重复</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>drop_duplicates</span><span class=p>()</span>             <span class=c1>#保留第一个值，返回副本</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>drop_duplicates</span><span class=p>(</span><span class=n>keep</span><span class=o>=</span><span class=s1>&#39;last&#39;</span><span class=p>)</span>  <span class=c1>#保留最后一个值，返回副本</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>drop_duplicates</span><span class=p>(</span><span class=n>keep</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>   <span class=c1>#删除所有重复值，返回副本</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>drop_duplicates</span><span class=p>(</span><span class=s1>&#39;k1&#39;</span><span class=p>)</span>         <span class=c1>#删除第一列重复值，返回副本</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>drop_duplicates</span><span class=p>([</span><span class=s1>&#39;k1&#39;</span><span class=p>,</span><span class=s1>&#39;k2&#39;</span><span class=p>])</span>  <span class=c1>#删除全部列重复值，返回副本</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>drop_duplicates</span><span class=p>(</span><span class=n>inplace</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span> <span class=c1>#就地修改</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=数值修改及替换><strong>数值修改及替换</strong></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;D&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s1>&#39;yes&#39;</span><span class=p>,</span> <span class=s1>&#39;true&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>a</span>    <span class=n>true</span>
+</span></span><span class=line><span class=cl><span class=n>b</span>    <span class=n>true</span>
+</span></span><span class=line><span class=cl><span class=n>c</span>      <span class=n>no</span>
+</span></span><span class=line><span class=cl><span class=n>d</span>    <span class=n>true</span>
+</span></span><span class=line><span class=cl><span class=n>e</span>      <span class=n>no</span>
+</span></span><span class=line><span class=cl><span class=n>f</span>      <span class=n>no</span>
+</span></span><span class=line><span class=cl><span class=n>g</span>      <span class=n>no</span>
+</span></span><span class=line><span class=cl><span class=n>h</span>    <span class=n>true</span>
+</span></span><span class=line><span class=cl><span class=n>i</span>      <span class=n>no</span>
+</span></span><span class=line><span class=cl><span class=n>j</span>      <span class=n>no</span>
+</span></span><span class=line><span class=cl><span class=n>Name</span><span class=p>:</span> <span class=n>D</span><span class=p>,</span> <span class=n>dtype</span><span class=p>:</span> <span class=nb>object</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=设置索引列>设置索引列</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df_inner</span><span class=o>.</span><span class=n>set_index</span><span class=p>(</span><span class=s1>&#39;A&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209212104774.png alt=image-20201209212104774 style=zoom:67%><h3 id=数据表合并>数据表合并</h3><p>以下两张图为例</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209210714655.png alt=image-20201209210714655 style=zoom:65%><h4 id=merge><code>.merge()</code></h4><p>参数</p><ul><li>on：列名，join 用来对齐的那一列的名字，用到这个参数的时候一定要保证左表和右表用来对齐的那一列都有相同的列名</li><li>how：数据融合的方法</li><li>sort：根据 dataframe 合并的 keys 按字典顺序排序，默认是，如果置 false 可以提高表现</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df_inner</span><span class=o>=</span><span class=n>pd</span><span class=o>.</span><span class=n>merge</span><span class=p>(</span><span class=n>df1</span><span class=p>,</span><span class=n>df2</span><span class=p>,</span><span class=n>how</span><span class=o>=</span><span class=s1>&#39;inner&#39;</span><span class=p>)</span> 	<span class=c1>#以小表为准</span>
+</span></span><span class=line><span class=cl><span class=n>df_outer</span><span class=o>=</span><span class=n>pd</span><span class=o>.</span><span class=n>merge</span><span class=p>(</span><span class=n>df1</span><span class=p>,</span><span class=n>df2</span><span class=p>,</span><span class=n>how</span><span class=o>=</span><span class=s1>&#39;outer&#39;</span><span class=p>)</span>	<span class=c1>#以大表为准</span>
+</span></span><span class=line><span class=cl><span class=n>df_left</span><span class=o>=</span><span class=n>pd</span><span class=o>.</span><span class=n>merge</span><span class=p>(</span><span class=n>df1</span><span class=p>,</span><span class=n>df2</span><span class=p>,</span><span class=n>how</span><span class=o>=</span><span class=s1>&#39;left&#39;</span><span class=p>)</span>	<span class=c1>#以左表为准，这里等同于inner_df</span>
+</span></span><span class=line><span class=cl><span class=n>df_right</span><span class=o>=</span><span class=n>pd</span><span class=o>.</span><span class=n>merge</span><span class=p>(</span><span class=n>df1</span><span class=p>,</span><span class=n>df2</span><span class=p>,</span><span class=n>how</span><span class=o>=</span><span class=s1>&#39;right&#39;</span><span class=p>)</span>	<span class=c1>#以右表为准,这里等同于outer_df</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209211615829.png alt=image-20201209211615829 style=zoom:67%><h4 id=concat><code>.concat()</code></h4><p>第一个参数：需要合并的矩阵</p><p>axis：合并维度，0：按行合并，1：按列合并，默认为 0</p><p>join：处理非公有 列/行 的方式，inner：去除非公有的 列/行，outer：对非公有的 列/行 进行 NaN 值填充然后合并</p><p>ignore_index：是否重排行索引，若重排，行索引为顺序。默认为 0</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>concat</span><span class=p>([</span><span class=n>df1</span><span class=p>,</span> <span class=n>df2</span><span class=p>],</span> <span class=n>join</span><span class=o>=</span><span class=s1>&#39;outer&#39;</span><span class=p>,</span> <span class=n>ignore_index</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span> 	<span class=c1>#按行合并，重排行索引</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>concat</span><span class=p>([</span><span class=n>df1</span><span class=p>,</span> <span class=n>df2</span><span class=p>],</span> <span class=n>axis</span><span class=o>=</span><span class=mi>1</span><span class=p>,</span> <span class=n>join</span><span class=o>=</span><span class=s1>&#39;inner&#39;</span><span class=p>)</span>				<span class=c1>#按列合并</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209213557164.png alt=image-20201209213557164 style=zoom:80%><h3 id=数据分组>数据分组</h3><h4 id=分类汇总>分类汇总</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df_inner</span><span class=o>.</span><span class=n>groupby</span><span class=p>(</span><span class=s1>&#39;city&#39;</span><span class=p>)</span><span class=o>.</span><span class=n>count</span><span class=p>()</span>								<span class=c1>#对所有列进行计数汇总</span>
+</span></span><span class=line><span class=cl><span class=n>df_inner</span><span class=o>.</span><span class=n>groupby</span><span class=p>(</span><span class=s1>&#39;city&#39;</span><span class=p>)[</span><span class=s1>&#39;id&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>count</span><span class=p>()</span>							<span class=c1>#对特定的ID列进行计数汇总</span>
+</span></span><span class=line><span class=cl><span class=n>df_inner</span><span class=o>.</span><span class=n>groupby</span><span class=p>([</span><span class=s1>&#39;city&#39;</span><span class=p>,</span><span class=s1>&#39;pay&#39;</span><span class=p>])[</span><span class=s1>&#39;id&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>count</span><span class=p>()</span>					<span class=c1>#对两个字段进行汇总计数</span>
+</span></span><span class=line><span class=cl><span class=n>df_inner</span><span class=o>.</span><span class=n>groupby</span><span class=p>(</span><span class=s1>&#39;city&#39;</span><span class=p>)[</span><span class=s1>&#39;price&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>agg</span><span class=p>([</span><span class=nb>len</span><span class=p>,</span><span class=n>np</span><span class=o>.</span><span class=n>sum</span><span class=p>,</span> <span class=n>np</span><span class=o>.</span><span class=n>mean</span><span class=p>])</span>	<span class=c1>#对city字段进行汇总并计算price的合计和均值</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出</p><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201209222416782.png alt=image-20201209222416782 style=zoom:67%><h3 id=数据增删>数据增删</h3><p>更多：https://www.cnblogs.com/guxh/p/9420610.html</p><h4 id=删除行列>删除行列</h4><img src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217130111523.png alt=image-20201217130111523 style=zoom:77%><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df1</span><span class=o>.</span><span class=n>drop</span><span class=p>([</span><span class=s1>&#39;0&#39;</span><span class=p>,</span><span class=s1>&#39;1&#39;</span><span class=p>])</span>				<span class=c1>#按行名删除（如果有的话）</span>
+</span></span><span class=line><span class=cl><span class=n>df1</span><span class=o>.</span><span class=n>drop</span><span class=p>(</span><span class=n>df1</span><span class=o>.</span><span class=n>index</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=mi>2</span><span class=p>])</span>		<span class=c1>#按行号删除</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>drop</span><span class=p>([</span><span class=s1>&#39;id&#39;</span><span class=p>,</span><span class=s1>&#39;date&#39;</span><span class=p>],</span><span class=n>axis</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span> 	<span class=c1>#按列名删除</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>drop</span><span class=p>(</span><span class=n>df</span><span class=o>.</span><span class=n>columns</span><span class=p>[</span><span class=mi>0</span><span class=p>:</span><span class=mi>2</span><span class=p>],</span><span class=n>axis</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>	<span class=c1>#按列号删除</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>del</span> <span class=n>df</span><span class=p>[</span><span class=s1>&#39;id&#39;</span><span class=p>]</span> 					<span class=c1>#删除列（就地删除）</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=增加行>增加行</h4><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png data-srcset="https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png 1.5x, https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png 2x" data-sizes=auto alt=https://trou.oss-cn-shanghai.aliyuncs.com/img/image-20201217132418146.png title=image-20201217132418146></p><p>想增加一行，行名称为‘a’，内容为[16, 17, 18, 19]</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>loc</span><span class=p>[</span><span class=s1>&#39;a&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=p>[</span><span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>]</span>    
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>at</span><span class=p>[</span><span class=s1>&#39;a&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=p>[</span><span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>set_value</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=n>df</span><span class=o>.</span><span class=n>columns</span><span class=p>,</span> <span class=p>[</span><span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>],</span> <span class=n>takeable</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>    <span class=c1># warning，set_value会被取消</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>loc</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=n>df</span><span class=p>)]</span> <span class=o>=</span> <span class=p>[</span><span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>]</span><span class=c1>#简单地逐行添加内容</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#.append()</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>([</span><span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>],</span> <span class=n>index</span><span class=o>=</span><span class=n>df</span><span class=o>.</span><span class=n>columns</span><span class=p>,</span> <span class=n>name</span><span class=o>=</span><span class=s1>&#39;5&#39;</span><span class=p>)</span> <span class=c1>#添加有name的Series</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>s</span><span class=p>)</span> <span class=c1>#赋值以生效</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=增加列>增加列</h4><p>般涉及到增加列项时，经常会对现有的数据进行遍历运算，获得新增列项的值</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>#遍历DataFrame获取序列的方法</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=p>[</span><span class=n>a</span> <span class=o>+</span> <span class=n>c</span> <span class=k>for</span> <span class=n>a</span><span class=p>,</span> <span class=n>c</span> <span class=ow>in</span> <span class=nb>zip</span><span class=p>(</span><span class=n>df</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>],</span> <span class=n>df</span><span class=p>[</span><span class=s1>&#39;C&#39;</span><span class=p>])]</span>          <span class=c1># 通过遍历获取序列</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=p>[</span><span class=n>row</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>]</span> <span class=o>+</span> <span class=n>row</span><span class=p>[</span><span class=s1>&#39;C&#39;</span><span class=p>]</span> <span class=k>for</span> <span class=n>i</span><span class=p>,</span> <span class=n>row</span> <span class=ow>in</span> <span class=n>df</span><span class=o>.</span><span class=n>iterrows</span><span class=p>()]</span>  <span class=c1># 通过iterrows()获取序列，s为list</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=n>df</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=k>lambda</span> <span class=n>row</span><span class=p>:</span> <span class=n>row</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>]</span> <span class=o>+</span> <span class=n>row</span><span class=p>[</span><span class=s1>&#39;C&#39;</span><span class=p>],</span> <span class=n>axis</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>  <span class=c1># 通过apply获取序列，s为Series</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=n>df</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>]</span> <span class=o>+</span> <span class=n>df</span><span class=p>[</span><span class=s1>&#39;C&#39;</span><span class=p>]</span>                                  <span class=c1># 通过Series矢量相加获取序列</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=n>df</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>values</span> <span class=o>+</span> <span class=n>df</span><span class=p>[</span><span class=s1>&#39;C&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>values</span>                    <span class=c1># 通过Numpy矢量相加获取序列</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#通过df[]或者df.loc添加序列</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>loc</span><span class=p>[:,</span> <span class=s1>&#39;E&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>s</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;E&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>s</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#.insert()可以指定插入位置，和插入列名称</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>insert</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=s1>&#39;E&#39;</span><span class=p>,</span> <span class=n>s</span><span class=p>)</span> <span class=c1>#在第0列插入s，命名为E</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#.concat()</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>Series</span><span class=p>([</span><span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>],</span> <span class=n>name</span><span class=o>=</span><span class=s1>&#39;E&#39;</span><span class=p>,</span> <span class=n>index</span><span class=o>=</span><span class=n>df</span><span class=o>.</span><span class=n>index</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>df</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>concat</span><span class=p>([</span><span class=n>df</span><span class=p>,</span> <span class=n>s</span><span class=p>],</span> <span class=n>axis</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#简单地逐列添加内容</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=n>df</span><span class=p>)]</span> <span class=o>=</span> <span class=p>[</span><span class=mi>16</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>18</span><span class=p>,</span> <span class=mi>19</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=数据运算>数据运算</h3><h4 id=算术运算>算术运算</h4><ul><li>add(other)</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>data</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>sub(other)</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>data</span><span class=p>[</span><span class=s1>&#39;A&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>sub</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=逻辑运算>逻辑运算</h4><p>更多被运用到数据筛选中</p><h5 id=符号>符号</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>data</span><span class=p>[</span><span class=s2>&#34;A&#34;</span><span class=p>]</span> <span class=o>&gt;</span> <span class=mi>2</span> 								<span class=c1># 返回Series</span>
+</span></span><span class=line><span class=cl><span class=n>data</span><span class=p>[</span><span class=n>data</span><span class=p>[</span><span class=s2>&#34;A&#34;</span><span class=p>]</span> <span class=o>&gt;</span> <span class=mi>2</span><span class=p>]</span><span class=o>.</span><span class=n>head</span><span class=p>()</span> 					<span class=c1># 返回DataFrame副本</span>
+</span></span><span class=line><span class=cl><span class=n>data</span><span class=p>[(</span><span class=n>data</span><span class=p>[</span><span class=s2>&#34;A&#34;</span><span class=p>]</span> <span class=o>&gt;</span> <span class=mi>1</span><span class=p>)</span> <span class=o>&amp;</span> <span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=s2>&#34;A&#34;</span><span class=p>]</span> <span class=o>&lt;</span> <span class=mi>3</span><span class=p>)]</span> 	<span class=c1># 多个逻辑判断</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=函数>函数</h5><ul><li><em>query(expr)</em><ul><li>expr：查询字符串</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>data</span><span class=o>.</span><span class=n>query</span><span class=p>(</span><span class=s2>&#34;A&lt;3 &amp; A&gt;1&#34;</span><span class=p>)</span> <span class=c1># 返回DataFrame副本</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><em>isin(values)</em></li></ul><p>可以指定值进行一个判断，从而进行筛选操作</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>data</span><span class=p>[</span><span class=n>data</span><span class=p>[</span><span class=s2>&#34;A&#34;</span><span class=p>]</span><span class=o>.</span><span class=n>isin</span><span class=p>([</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>])]</span> <span class=c1># 返回DataFrame副本</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=自定义运算>自定义运算</h4><p><em>apply( func, axis=0 )</em>：定义一个对列，最大值-最小值的函数</p><ul><li>func：自定义函数</li><li>axis=0：默认是列，axis=1 为行进行运算</li></ul><h2 id=导入与导出>导入与导出</h2><h3 id=导入数据>导入数据</h3><ul><li><em>path</em>：文件路径</li><li><em>sep</em>：分隔符，默认用",&ldquo;隔开</li><li><em>usecols</em>：指定读取的列名</li></ul><p>可以使用 <code>index_col=[0]</code> 参数指定默认索引</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>read_csv</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>					<span class=c1>#从CSV文件导入数据</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>read_table</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>					<span class=c1>#从限定分隔符的文本文件导入数据</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>read_excel</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>					<span class=c1>#从Excel文件导入数据</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>read_sql</span><span class=p>(</span><span class=n>query</span><span class=p>,</span> <span class=n>connection_object</span><span class=p>)</span>	<span class=c1>#从SQL表/库导入数据</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>read_json</span><span class=p>(</span><span class=n>json_string</span><span class=p>)</span>				<span class=c1>#从JSON格式的字符串导入数据</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>read_html</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>						<span class=c1>#解析URL、字符串或者HTML文件，抽取其中的tables表格</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>read_clipboard</span><span class=p>()</span>						<span class=c1>#从你的粘贴板获取内容，并传给read_table()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=导出数据>导出数据</h3><ul><li><em>path</em>：文件路径</li><li><em>sep</em>：分隔符，默认用&rdquo;,&ldquo;隔开</li><li><em>columns</em>：选择需要的列索引</li><li><em>header</em> ：boolean or list of string, default True，是否写入列索引</li><li><em>index</em>：是否写入行索引</li><li><em>mode</em>：&lsquo;w&rsquo;：重写, &lsquo;a&rsquo; 追加</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>to_csv</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>							<span class=c1>#导出数据到CSV文件</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>to_excel</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>						<span class=c1>#导出数据到Excel文件</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>to_sql</span><span class=p>(</span><span class=n>table_name</span><span class=p>,</span> <span class=n>connection_object</span><span class=p>)</span>	<span class=c1>#导出数据到SQL表</span>
+</span></span><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>to_json</span><span class=p>(</span><span class=n>filename</span><span class=p>)</span>						<span class=c1>#以Json格式导出数据到文本文件</span>
+</span></span></code></pre></td></tr></table></div></div><p>转换成 json 格式通常用 <code>df.to_json(filename, orient='records', force_ascii=False)</code></p><h2 id=例>例</h2><ol><li>取出索引为 [3, 4, 8] 行的 animal 和 age 列</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>loc</span><span class=p>[</span><span class=n>df</span><span class=o>.</span><span class=n>index</span><span class=p>[[</span><span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>8</span><span class=p>]],</span> <span class=p>[</span><span class=s1>&#39;animal&#39;</span><span class=p>,</span> <span class=s1>&#39;age&#39;</span><span class=p>]]</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=2><li>取出 age 值缺失的行</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=n>df</span><span class=p>[</span><span class=s1>&#39;age&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>isnull</span><span class=p>()]</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>计算每个不同种类 animal 的 age 的平均数</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>groupby</span><span class=p>(</span><span class=s1>&#39;animal&#39;</span><span class=p>)[</span><span class=s1>&#39;age&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>计算 df 中每个种类 animal 的数量</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;animal&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>value_counts</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=5><li>将 priority 列中的 yes, no 替换为布尔值 True, False</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>df</span><span class=p>[</span><span class=s1>&#39;priority&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>df</span><span class=p>[</span><span class=s1>&#39;priority&#39;</span><span class=p>]</span><span class=o>.</span><span class=n>map</span><span class=p>({</span><span class=s1>&#39;yes&#39;</span><span class=p>:</span> <span class=kc>True</span><span class=p>,</span> <span class=s1>&#39;no&#39;</span><span class=p>:</span> <span class=kc>False</span><span class=p>})</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=6><li>求哪一列的和最小</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python3 data-lang=python3><span class=line><span class=cl><span class=n>df</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span><span class=o>.</span><span class=n>idxmin</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=7><li>去除 Unnamed:0 列</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>read_csv</span><span class=p>(</span><span class=n>path</span><span class=p>,</span> <span class=n>index_col</span><span class=o>=</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># or</span>
+</span></span><span class=line><span class=cl><span class=n>pd</span><span class=o>.</span><span class=n>to_csv</span><span class=p>(</span><span class=n>path</span><span class=p>,</span> <span class=n>index</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=预览-dataframe>预览 DataFrame</h2><p>一个独立的支持库，pandas_profiling，可以快速预览数据集。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pandas_profiling</span> <span class=k>as</span> <span class=nn>pp</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>pp.ProfileReport(df)</code></p><p>这个函数支持任意 DataFrame，并生成交互式 HTML 数据报告：</p><ul><li>第一部分是纵览数据集，还会列出数据一些可能存在的问题；</li><li>第二部分汇总每列数据，点击 <strong>toggle details</strong> 查看更多信息；</li><li>第三部分显示列之间的关联热力图；</li><li>第四部分显示数据集的前几条数据。</li></ul><p><code>profile.to_file("your_report.html")</code></p><p>保存 html 文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>profile</span> <span class=o>=</span> <span class=n>pp</span><span class=o>.</span><span class=n>ProfileReport</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>profile</span><span class=o>.</span><span class=n>to_file</span><span class=p>(</span><span class=s2>&#34;output_file.html&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/dataanalysis/pandas/ data-title=pandas data-hashtags=Python,数据分析><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/dataanalysis/pandas/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/dataanalysis/pandas/ data-title=pandas><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a>,&nbsp;<a href=/Notes/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/>数据分析</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%B8%B8%E7%94%A8%E5%BA%93/aiohttp/ class=prev rel=prev title="Python aiohttp 库"><i class="fa-solid fa-angle-left fa-fw"></i>Python aiohttp 库</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/dataanalysis/numpy/ class=next rel=next title=numpy>numpy<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

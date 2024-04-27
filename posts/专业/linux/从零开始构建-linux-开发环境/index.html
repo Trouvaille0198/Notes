@@ -1,0 +1,638 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>从零开始构建 Linux 开发环境 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="从零开始构建 Linux 开发环境 我的 Linux 配置 一些常用文件的默认位置 zsh 配置文件：~/.zshr"><meta name=keywords content='Linux'><meta itemprop=name content="从零开始构建 Linux 开发环境"><meta itemprop=description content="从零开始构建 Linux 开发环境 我的 Linux 配置 一些常用文件的默认位置 zsh 配置文件：~/.zshr"><meta itemprop=datePublished content="2023-09-20T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="3186"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Linux"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA-linux-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="从零开始构建 Linux 开发环境"><meta property="og:description" content="从零开始构建 Linux 开发环境 我的 Linux 配置 一些常用文件的默认位置 zsh 配置文件：~/.zshr"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-09-20T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Linux"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="从零开始构建 Linux 开发环境"><meta name=twitter:description content="从零开始构建 Linux 开发环境 我的 Linux 配置 一些常用文件的默认位置 zsh 配置文件：~/.zshr"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA-linux-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E9%85%8D%E7%BD%AE-jupyter-lab/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"从零开始构建 Linux 开发环境","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/linux\/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA-linux-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83\/"},"genre":"posts","keywords":"Linux","wordcount":3186,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/linux\/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA-linux-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83\/","datePublished":"2023-09-20T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>从零开始构建 Linux 开发环境</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/linux/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Linux</a></span></div><div class=post-meta-line><span title="2023-09-20 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-09-20>2023-09-20</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 3186 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#一些常用文件的默认位置>一些常用文件的默认位置</a></li><li><a href=#客户端配置-ssh-免密登录>客户端配置 SSH 免密登录</a></li><li><a href=#windows-terminal-配置>Windows Terminal 配置</a><ul><li><a href=#字体选择>字体选择</a></li></ul></li><li><a href=#网络配置>网络配置</a><ul><li><a href=#镜像源>镜像源</a></li><li><a href=#代理>代理</a></li></ul></li><li><a href=#zsh-配置>zsh 配置</a><ul><li><a href=#oh-my-zsh-配置>oh-my-zsh 配置</a><ul><li><a href=#安装-oh-my-zsh>安装 oh-my-zsh</a></li><li><a href=#安装-powerlevel10k-主题>安装 Powerlevel10k 主题</a></li><li><a href=#更改配置文件-zshrc>更改配置文件 <code>.zshrc</code></a></li></ul></li><li><a href=#一些插件的下载>一些插件的下载</a></li></ul></li><li><a href=#git-配置>git 配置</a></li><li><a href=#vim-配置>Vim 配置</a><ul><li><a href=#安装-neovim>安装 NeoVim</a></li><li><a href=#使用个人配置基于-lazyvim>使用个人配置（基于 LazyVim）</a></li><li><a href=#添加-snippets>添加 snippets</a></li></ul></li><li><a href=#工具安装>工具安装</a><ul><li><a href=#snap>snap</a></li><li><a href=#deb-get>deb-get</a></li><li><a href=#bat>bat</a></li><li><a href=#exa>exa</a></li><li><a href=#fd>fd</a></li><li><a href=#bashtop>bashtop</a></li><li><a href=#ifconfig>ifconfig</a></li><li><a href=#cheat>cheat</a></li><li><a href=#dust>dust</a></li><li><a href=#duf>duf</a></li><li><a href=#gping>gping</a></li><li><a href=#procs>procs</a></li><li><a href=#httpie>httpie</a></li><li><a href=#curlie>curlie</a></li><li><a href=#其他>其他</a></li></ul></li><li><a href=#编程环境配置>编程环境配置</a><ul><li><a href=#python>Python</a><ul><li><a href=#安装-pyenvpython版本管理pyenvmd>安装 <a href=../Python/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/pyenv.md>pyenv</a></a></li><li><a href=#安装-pyenv-virtualenvwrapper>安装 pyenv-virtualenvwrapper</a></li></ul></li><li><a href=#go>Go</a><ul><li><a href=#安装>安装</a></li><li><a href=#配置环境变量>配置环境变量</a><ul><li><a href=#配置-go-的工作空间配置-gopath以及-go-的环境变量>配置 go 的工作空间（配置 GOPATH），以及 go 的环境变量</a></li><li><a href=#设置-gopath-环境变量>设置 GOPATH 环境变量</a></li><li><a href=#go-install-配置代理可选>go install 配置代理（可选）</a></li></ul></li></ul></li><li><a href=#nodejs>Node.js</a></li><li><a href=#docker>Docker</a></li></ul></li><li><a href=#可选设置-swap-分区>（可选）设置 swap 分区</a><ul><li><a href=#code-server>Code-Server</a></li></ul></li><li><a href=#最终的-zshrc>最终的 <code>.zshrc</code></a></li></ul></nav></div></div><div class=content id=content><h1 id=从零开始构建-linux-开发环境>从零开始构建 Linux 开发环境</h1><p>我的 Linux 配置</p><h2 id=一些常用文件的默认位置>一些常用文件的默认位置</h2><p>zsh 配置文件：<code>~/.zshrc</code></p><p>vscode server：<code>~/.vscode-server</code></p><h2 id=客户端配置-ssh-免密登录>客户端配置 SSH 免密登录</h2><p>在客户端 <code>.ssh</code> 目录中，打开 bash 配置私钥</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>ssh-keygen
+</span></span></code></pre></td></tr></table></div></div><p>将客户端的公钥放到服务端上</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>cat ~/.ssh/id_rsa.pub <span class=p>|</span> ssh username@ip <span class=s1>&#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>&#x2b50; 用 <code>ssh-copy-id</code> 命令更方便</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>ssh-copy-id username@ip 
+</span></span></code></pre></td></tr></table></div></div><p>此时，客户端的公钥会被添加到远程服务器上的 <code>~/.ssh/authorized_keys</code> 文件中</p><p>然后就可以使用私钥登录啦~</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>ssh username@ip <span class=o>[</span>-p port<span class=o>]</span> -i id_rsa
+</span></span></code></pre></td></tr></table></div></div><h2 id=windows-terminal-配置>Windows Terminal 配置</h2><h3 id=字体选择>字体选择</h3><p><a href=https://www.nerdfonts.com/font-downloads target=_blank rel="external nofollow noopener noreferrer">https://www.nerdfonts.com/font-downloads</a> 随便挑</p><p>推荐：</p><ul><li>CaskaydiaCove Nerd Font Mono（或者叫 CaskaydiaCove NFM）</li><li>Hack Nerd Font，选 HackNerdFontMono-Regular.ttf</li></ul><h2 id=网络配置>网络配置</h2><h3 id=镜像源>镜像源</h3><blockquote><p>可选，未经验证！</p></blockquote><p>备份原有软件源文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak_yyyymmdd
+</span></span></code></pre></td></tr></table></div></div><p>修改 sources.list 文件</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 修改为如下地址：</span>
+</span></span><span class=line><span class=cl>sudo vi /etc/apt/sources.list
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 163源</span>
+</span></span><span class=line><span class=cl>deb http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src http://mirrors.163.com/ubuntu/ bionic main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src http://mirrors.163.com/ubuntu/ bionic-security main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src http://mirrors.163.com/ubuntu/ bionic-updates main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src http://mirrors.163.com/ubuntu/ bionic-proposed main restricted universe multiverse
+</span></span><span class=line><span class=cl>deb-src http://mirrors.163.com/ubuntu/ bionic-backports main restricted universe multiverse
+</span></span></code></pre></td></tr></table></div></div><p>更新系统软件源</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 执行命令，更新系统软件源地址：</span>
+</span></span><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>sudo apt-get upgrade
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 安装lrzsz tree</span>
+</span></span><span class=line><span class=cl>sudo apt-get -y install lrzsz tree
+</span></span><span class=line><span class=cl><span class=c1># 安装 build-essential 软件包集合 （其中就包括 gcc、G ++ 和 make 等）</span>
+</span></span><span class=line><span class=cl>sudo apt install build-essential
+</span></span></code></pre></td></tr></table></div></div><h3 id=代理>代理</h3><p>在 Windows 中的 C:\Users&lt;your_username> 目录下创建一个 .wslconfig 文件，然后在文件中写入如下内容</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=k>[experimental]</span>
+</span></span><span class=line><span class=cl><span class=na>autoMemoryReclaim</span><span class=o>=</span><span class=s>gradual  </span>
+</span></span><span class=line><span class=cl><span class=na>networkingMode</span><span class=o>=</span><span class=s>mirrored</span>
+</span></span><span class=line><span class=cl><span class=na>dnsTunneling</span><span class=o>=</span><span class=s>true</span>
+</span></span><span class=line><span class=cl><span class=na>firewall</span><span class=o>=</span><span class=s>true</span>
+</span></span><span class=line><span class=cl><span class=na>autoProxy</span><span class=o>=</span><span class=s>true</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后用 <code>wsl --shutdown</code> 关闭 WSL，之后再重启</p><h2 id=zsh-配置>zsh 配置</h2><p>更改默认 shell 为 zsh</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 查看系统当前使用的shell</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=nv>$SHELL</span>
+</span></span><span class=line><span class=cl><span class=c1># 如果没有zsh，那就下一个！</span>
+</span></span><span class=line><span class=cl>sudo apt-get install zsh
+</span></span><span class=line><span class=cl><span class=c1># 设置默认zsh</span>
+</span></span><span class=line><span class=cl>chsh -s /bin/zsh
+</span></span></code></pre></td></tr></table></div></div><h3 id=oh-my-zsh-配置>oh-my-zsh 配置</h3><h4 id=安装-oh-my-zsh>安装 oh-my-zsh</h4><blockquote><p><a href=https://github.com/ohmyzsh/ohmyzsh/wiki target=_blank rel="external nofollow noopener noreferrer">https://github.com/ohmyzsh/ohmyzsh/wiki</a></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sh -c <span class=s2>&#34;</span><span class=k>$(</span>curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span class=k>)</span><span class=s2>&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=安装-powerlevel10k-主题>安装 Powerlevel10k 主题</h4><blockquote><p><a href=https://github.com/romkatv/powerlevel10k#installation target=_blank rel="external nofollow noopener noreferrer">https://github.com/romkatv/powerlevel10k#installation</a></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git clone --depth<span class=o>=</span><span class=m>1</span> https://github.com/romkatv/powerlevel10k.git ~/.opt/powerlevel10k
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;source ~/.opt/powerlevel10k/powerlevel10k.zsh-theme&#39;</span> &gt;&gt;~/.zshrc
+</span></span></code></pre></td></tr></table></div></div><p><code>source ~/.zshrc</code>，就会进入 P10k 的配置界面</p><p>若要重置 P10k 配置，运行 <code>p10k configure</code> 或者直接修改 <code>~/.p10k.zsh</code></p><blockquote><p>这是手动安装方案，所以不需要在 <code>~/.zshrc</code> 里配置 <code>ZSH_THEME="powerlevel9k/powerlevel9k"</code> 这句话</p></blockquote><h4 id=更改配置文件-zshrc>更改配置文件 <code>.zshrc</code></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>vi ~/.zshrc
+</span></span></code></pre></td></tr></table></div></div><p>内容如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.</span>
+</span></span><span class=line><span class=cl><span class=c1># Initialization code that may require console input (password prompts, [y/n]</span>
+</span></span><span class=line><span class=cl><span class=c1># confirmations, etc.) must go above this block; everything else may go below.</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[[</span> -r <span class=s2>&#34;</span><span class=si>${</span><span class=nv>XDG_CACHE_HOME</span><span class=k>:-</span><span class=nv>$HOME</span><span class=p>/.cache</span><span class=si>}</span><span class=s2>/p10k-instant-prompt-</span><span class=si>${</span><span class=p>(%)</span><span class=k>:-</span><span class=p>%n</span><span class=si>}</span><span class=s2>.zsh&#34;</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>  <span class=nb>source</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>XDG_CACHE_HOME</span><span class=k>:-</span><span class=nv>$HOME</span><span class=p>/.cache</span><span class=si>}</span><span class=s2>/p10k-instant-prompt-</span><span class=si>${</span><span class=p>(%)</span><span class=k>:-</span><span class=p>%n</span><span class=si>}</span><span class=s2>.zsh&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Path to your oh-my-zsh installation.</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>ZSH</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$HOME</span><span class=s2>/.oh-my-zsh&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$PATH</span>:~/.local/bin/:/snap/bin
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ZSH_THEME=&#34;random&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>plugins</span><span class=o>=(</span>
+</span></span><span class=line><span class=cl>    git
+</span></span><span class=line><span class=cl>    extract
+</span></span><span class=line><span class=cl>    rand-quote
+</span></span><span class=line><span class=cl>    themes
+</span></span><span class=line><span class=cl>    z
+</span></span><span class=line><span class=cl>    per-directory-history
+</span></span><span class=line><span class=cl>    history-substring-search
+</span></span><span class=line><span class=cl>    command-not-found
+</span></span><span class=line><span class=cl>    safe-paste
+</span></span><span class=line><span class=cl>    colored-man-pages
+</span></span><span class=line><span class=cl>    sudo
+</span></span><span class=line><span class=cl>    zsh-autosuggestions
+</span></span><span class=line><span class=cl>    <span class=c1>#  history</span>
+</span></span><span class=line><span class=cl>    zsh-syntax-highlighting
+</span></span><span class=line><span class=cl>    copypath
+</span></span><span class=line><span class=cl>    copyfile
+</span></span><span class=line><span class=cl>    you-should-use
+</span></span><span class=line><span class=cl><span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>source</span> <span class=nv>$ZSH</span>/oh-my-zsh.sh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> :vrc<span class=o>=</span><span class=s2>&#34;vi ~/.zshrc&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> :src<span class=o>=</span><span class=s2>&#34;source ~/.zshrc&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> -s <span class=nv>ttt</span><span class=o>=</span><span class=s1>&#39;tar zxvf&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>cp</span><span class=o>=</span><span class=s2>&#34;cp -i&#34;</span> <span class=c1># 防止 copy 的时候覆盖已存在的文件, 带上 i 选项，文件已存在的时候，会提示，需要确认才能 copy</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>gcm</span><span class=o>=</span><span class=s1>&#39;git checkout master&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 以自己输入的所有内容为前缀，进行历史查找</span>
+</span></span><span class=line><span class=cl>bindkey <span class=s1>&#39;^P&#39;</span> history-substring-search-up
+</span></span><span class=line><span class=cl>bindkey <span class=s1>&#39;^N&#39;</span> history-substring-search-down
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 让 history 命令显示时间</span>
+</span></span><span class=line><span class=cl><span class=nv>HIST_STAMPS</span><span class=o>=</span><span class=s2>&#34;yyyy-mm-dd&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.</span>
+</span></span><span class=line><span class=cl><span class=o>[[</span> ! -f ~/.p10k.zsh <span class=o>]]</span> <span class=o>||</span> <span class=nb>source</span> ~/.p10k.zsh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>source</span> ~/.opt/powerlevel10k/powerlevel10k.zsh-theme
+</span></span></code></pre></td></tr></table></div></div><p>此配置文件会根据文档的进展而逐渐完善</p><h3 id=一些插件的下载>一些插件的下载</h3><p>zsh-autosuggestions</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git clone https://github.com/zsh-users/zsh-autosuggestions <span class=si>${</span><span class=nv>ZSH_CUSTOM</span><span class=k>:-</span><span class=p>~/.oh-my-zsh/custom</span><span class=si>}</span>/plugins/zsh-autosuggestions
+</span></span></code></pre></td></tr></table></div></div><p>zsh-syntax-highlighting</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo apt install zsh-syntax-highlighting
+</span></span><span class=line><span class=cl><span class=nb>cd</span> ~/.opt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git <span class=nv>$ZSH_CUSTOM</span>/plugins/zsh-syntax-highlighting
+</span></span></code></pre></td></tr></table></div></div><p>zsh-history-substring-search</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl> git clone https://github.com/zsh-users/zsh-history-substring-search <span class=si>${</span><span class=nv>ZSH_CUSTOM</span><span class=k>:-</span><span class=p>~/.oh-my-zsh/custom</span><span class=si>}</span>/plugins/zsh-history-substring-search
+</span></span></code></pre></td></tr></table></div></div><p>zsh-you-should-use</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git clone https://github.com/MichaelAquilina/zsh-you-should-use.git <span class=nv>$ZSH_CUSTOM</span>/plugins/you-should-use
+</span></span></code></pre></td></tr></table></div></div><h2 id=git-配置>git 配置</h2><p>ssh-keygen 一下叭</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>cd</span> ~/.ssh
+</span></span><span class=line><span class=cl>ssh-keygen -t rsa
+</span></span></code></pre></td></tr></table></div></div><p>将 <code>id_rsa.pub</code> 公钥内容，添加到 github 之类的托管平台上</p><p>设置名字，邮箱</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git config --global user.name <span class=s2>&#34;Your Name&#34;</span>
+</span></span><span class=line><span class=cl>git config --global user.email <span class=s2>&#34;email@example.com&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=vim-配置>Vim 配置</h2><h3 id=安装-neovim>安装 NeoVim</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo snap install --beta nvim --classic
+</span></span></code></pre></td></tr></table></div></div><p>或者这样</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 不要直接用 apt install neovim，版本很老！</span>
+</span></span><span class=line><span class=cl>sudo add-apt-repository ppa:neovim-ppa/unstable
+</span></span><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>sudo apt-get install neovim
+</span></span></code></pre></td></tr></table></div></div><p>在 <code>~/.zshrc</code> 中添加别名，以替换默认的 vim 命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>vim</span><span class=o>=</span><span class=s1>&#39;nvim&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>vi</span><span class=o>=</span><span class=s1>&#39;nvim&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=使用个人配置基于-lazyvim>使用个人配置（基于 LazyVim）</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git clone git@github.com:Trouvaille0198/neovim-config.git ~/.config/nvim
+</span></span><span class=line><span class=cl>rm -rf ~/.config/nvim/.git
+</span></span></code></pre></td></tr></table></div></div><p>运行 <code>nvim</code>，等待插件下载完成</p><h3 id=添加-snippets>添加 snippets</h3><h2 id=工具安装>工具安装</h2><h3 id=snap>snap</h3><p>包管理器，你总会用到的</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo apt install snapd -y
+</span></span></code></pre></td></tr></table></div></div><h3 id=deb-get>deb-get</h3><p>包管理器，你总会用到的</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get <span class=p>|</span> sudo -E bash -s install deb-get
+</span></span></code></pre></td></tr></table></div></div><h3 id=bat>bat</h3><p>cat 的美化替代品</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo apt install bat
+</span></span></code></pre></td></tr></table></div></div><p>使用软链接</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>mkdir -p ~/.local/bin
+</span></span><span class=line><span class=cl>ln -s /usr/bin/batcat ~/.local/bin/bat
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>==<strong>一切的软链接都装在 ~/.local</strong>==</p></blockquote><p>并在配置中添加</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>cat</span><span class=o>=</span><span class=s1>&#39;batcat&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=exa>exa</h3><p>ls 的替代品</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo apt install exa
+</span></span></code></pre></td></tr></table></div></div><p>在配置中添加</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>ls</span><span class=o>=</span><span class=s1>&#39;exa&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>项目地址：https://github.com/sharkdp/fd</p><h3 id=fd>fd</h3><p>一个命令行搜索工具</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo apt install fd-find
+</span></span></code></pre></td></tr></table></div></div><p>使用软链接</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>ln -s <span class=k>$(</span>which fdfind<span class=k>)</span> ~/.local/bin/fd
+</span></span></code></pre></td></tr></table></div></div><h3 id=bashtop>bashtop</h3><blockquote><p><a href=https://github.com/aristocratos/bashtop target=_blank rel="external nofollow noopener noreferrer">https://github.com/aristocratos/bashtop</a></p></blockquote><p>top 的替代品</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo add-apt-repository ppa:bashtop-monitor/bashtop
+</span></span><span class=line><span class=cl>sudo apt update
+</span></span><span class=line><span class=cl>sudo apt install bashtop
+</span></span></code></pre></td></tr></table></div></div><h3 id=ifconfig>ifconfig</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo apt install net-tools
+</span></span></code></pre></td></tr></table></div></div><h3 id=cheat>cheat</h3><p>一本常用命令说明书：https://github.com/cheat/cheat</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># cd /tmp \</span>
+</span></span><span class=line><span class=cl><span class=c1>#   &amp;&amp; wget https://github.com/cheat/cheat/releases/download/4.4.0/cheat-linux-amd64.gz \</span>
+</span></span><span class=line><span class=cl><span class=c1>#   &amp;&amp; gunzip cheat-linux-amd64.gz \</span>
+</span></span><span class=line><span class=cl><span class=c1>#   &amp;&amp; chmod +x cheat-linux-amd64 \</span>
+</span></span><span class=line><span class=cl><span class=c1>#   &amp;&amp; sudo mv cheat-linux-amd64 /usr/local/bin/cheat</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=nb>cd</span> ~/.opt <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=o>&amp;&amp;</span> wget https://github.com/cheat/cheat/releases/download/4.4.0/cheat-linux-amd64.gz <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=o>&amp;&amp;</span> gunzip cheat-linux-amd64.gz <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=o>&amp;&amp;</span> chmod +x cheat-linux-amd64 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=o>&amp;&amp;</span> ln -s ~/.opt/cheat-linux-amd64 ~/.local/bin/cheat
+</span></span></code></pre></td></tr></table></div></div><p>👆 最新版本号随时从官方仓库看</p><h3 id=dust>dust</h3><blockquote><p><a href=https://github.com/bootandy/dust target=_blank rel="external nofollow noopener noreferrer">GitHub - bootandy/dust: A more intuitive version of du in rust</a></p></blockquote><p>du 替代</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>deb-get install du-dust
+</span></span></code></pre></td></tr></table></div></div><h3 id=duf>duf</h3><blockquote><p><a href=https://github.com/muesli/duf target=_blank rel="external nofollow noopener noreferrer">GitHub - muesli/duf: Disk Usage/Free Utility - a better &lsquo;df&rsquo; alternative</a></p></blockquote><p>df 替代</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>apt install duf
+</span></span></code></pre></td></tr></table></div></div><h3 id=gping>gping</h3><blockquote><p><a href=https://github.com/orf/gping target=_blank rel="external nofollow noopener noreferrer">GitHub - orf/gping: Ping, but with a graph</a></p></blockquote><p>gui ping</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>snap install gping
+</span></span></code></pre></td></tr></table></div></div><h3 id=procs>procs</h3><blockquote><p><a href="https://github.com/dalance/procs?tab=readme-ov-file#installation" target=_blank rel="external nofollow noopener noreferrer">GitHub - dalance/procs: A modern replacement for ps written in Rust</a></p></blockquote><p>ps 替代</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>snap install procs
+</span></span></code></pre></td></tr></table></div></div><h3 id=httpie>httpie</h3><blockquote><p><a href=https://httpie.io/docs/cli/snapcraft-linux target=_blank rel="external nofollow noopener noreferrer">Snapcraft (Linux) - HTTPie 3.2.2 (latest) docs</a></p></blockquote><p>curl 替代</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>snap install httpie
+</span></span></code></pre></td></tr></table></div></div><h3 id=curlie>curlie</h3><blockquote><p><a href=https://github.com/rs/curlie target=_blank rel="external nofollow noopener noreferrer">GitHub - rs/curlie: The power of curl, the ease of use of httpie.</a></p></blockquote><p>又一个 curl 的替代，保留了 curl 的语法</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>curl -sS https://webinstall.dev/curlie <span class=p>|</span> bash
+</span></span></code></pre></td></tr></table></div></div><h3 id=其他>其他</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo apt install unzip
+</span></span><span class=line><span class=cl>sudo apt install build-essential <span class=c1># gcc etc</span>
+</span></span><span class=line><span class=cl>sudo apt install libedit-dev liblzma-dev libreadline-dev libffi-dev
+</span></span><span class=line><span class=cl>sudo apt install zlib1g zlib1g-dev libssl-dev libbz2-dev libsqlite3-dev
+</span></span></code></pre></td></tr></table></div></div><h2 id=编程环境配置>编程环境配置</h2><h3 id=python>Python</h3><h4 id=安装-pyenvpython版本管理pyenvmd>安装 <a href=../Python/%e7%89%88%e6%9c%ac%e7%ae%a1%e7%90%86/pyenv.md>pyenv</a></h4><blockquote><p><a href=https://github.com/pyenv/pyenv#installation target=_blank rel="external nofollow noopener noreferrer">https://github.com/pyenv/pyenv#installation</a></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>curl https://pyenv.run <span class=p>|</span> bash
+</span></span><span class=line><span class=cl><span class=c1># 或者去文档选用其他方法</span>
+</span></span></code></pre></td></tr></table></div></div><p>添加环境变量</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;command -v pyenv &gt;/dev/null || export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;eval &#34;$(pyenv init -)&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo ln -s ~/.pyenv/bin/pyenv ~/.local/bin/pyenv
+</span></span></code></pre></td></tr></table></div></div><p>安装 / 卸载任意版本</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>pyenv install --list <span class=c1># 列出所有版本</span>
+</span></span><span class=line><span class=cl>pyenv install &lt;version-name&gt;
+</span></span><span class=line><span class=cl>pyenv uninstall &lt;version-name&gt;
+</span></span></code></pre></td></tr></table></div></div><p>如果下得太慢，就用镜像把源码下到缓存目录：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>export</span> <span class=nv>v</span><span class=o>=</span>3.12.1<span class=p>;</span> wget https://npm.taobao.org/mirrors/python/<span class=nv>$v</span>/Python-<span class=nv>$v</span>.tar.xz -P ~/.pyenv/cache/<span class=p>;</span> pyenv install <span class=nv>$v</span> 
+</span></span></code></pre></td></tr></table></div></div><h4 id=安装-pyenv-virtualenvwrapper>安装 pyenv-virtualenvwrapper</h4><blockquote><p><a href=https://github.com/pyenv/pyenv-virtualenvwrapper target=_blank rel="external nofollow noopener noreferrer">GitHub - pyenv/pyenv-virtualenvwrapper: an alternative approach to manage virtualenvs from pyenv.</a></p></blockquote><p>这样就能在 <code>pyenv</code> 中使用 [[virtualenv]] 啦，依赖分离</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git clone https://github.com/pyenv/pyenv-virtualenvwrapper.git <span class=k>$(</span>pyenv root<span class=k>)</span>/plugins/pyenv-virtualenvwrapper
+</span></span></code></pre></td></tr></table></div></div><p>在 <code>~/.zshrc</code> 中补充指令缩写</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>pv</span><span class=o>=</span><span class=s1>&#39;pyenv virtualenvwrapper&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>之后就能在 pyenv 当前版本的 Python 中使用诸如 <code>mkvirtualenv</code> 或 <code>workon</code> 的指令啦</p><h3 id=go>Go</h3><h4 id=安装>安装</h4><p>官网下载：https://golang.org/dl/</p><p>下载 go 源码包</p><p>版本随时从官网取，确认当前 linux 系统版本是 32 位还是 64 位，再选择 go 源码包</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 查看linux多少位</span>
+</span></span><span class=line><span class=cl>uname -m
+</span></span><span class=line><span class=cl><span class=c1># x86_64</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>之后所有的软件都安装在 <code>~/.opt/</code>（而非 <code>/opt/</code>，主要考虑到用户隔离）</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>cd</span> ~/.opt
+</span></span><span class=line><span class=cl>sudo wget https://golang.google.cn/dl/go1.21.6.linux-amd64.tar.gz
+</span></span><span class=line><span class=cl>sudo tar -zxvf go1.21.6.linux-amd64.tar.gz
+</span></span></code></pre></td></tr></table></div></div><p>给予权限</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>mkdir gocode
+</span></span><span class=line><span class=cl>sudo chmod -R <span class=m>777</span> go/
+</span></span><span class=line><span class=cl>sudo chmod -R <span class=m>777</span> gocode/
+</span></span></code></pre></td></tr></table></div></div><h4 id=配置环境变量>配置环境变量</h4><h5 id=配置-go-的工作空间配置-gopath以及-go-的环境变量>配置 go 的工作空间（配置 GOPATH），以及 go 的环境变量</h5><p>创建 ~/.opt/gocode/{src,bin,pkg}，用于设置 GOPATH 为 ~/.opt/godocer</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>mkdir -p ~/.opt/gocode/<span class=o>{</span>src,bin,pkg<span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>~/.opt/gocode/
+</span></span><span class=line><span class=cl>├── bin
+</span></span><span class=line><span class=cl>├── pkg
+</span></span><span class=line><span class=cl>└── src
+</span></span></code></pre></td></tr></table></div></div><h5 id=设置-gopath-环境变量>设置 GOPATH 环境变量</h5><p>在 <code>~/zshrc</code> 中写入 GOPATH 信息以及 go sdk 路径</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOROOT</span><span class=o>=</span>~/.opt/go           <span class=c1># Golang 源代码目录，安装目录</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOPATH</span><span class=o>=</span>~/.opt/gocode       <span class=c1># Golang 项目代码目录</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOBIN</span><span class=o>=</span><span class=nv>$GOPATH</span>/bin          <span class=c1># go install 后生成的可执行命令存放路径</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$GOROOT</span>/bin:<span class=nv>$GOBIN</span>:<span class=nv>$PATH</span>    <span class=c1># Linux 环境变量</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=go-install-配置代理可选>go install 配置代理（可选）</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>go env -w <span class=nv>GOPROXY</span><span class=o>=</span>https://goproxy.cn
+</span></span></code></pre></td></tr></table></div></div><h3 id=nodejs>Node.js</h3><p>官网下载：https://nodejs.org/en/download/</p><blockquote><p>都给我装在 <code>~/.opt/</code>！</p></blockquote><p>下载、解压 Node.js Linux 64 位二进制安装包</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>cd</span> ~/.opt
+</span></span><span class=line><span class=cl>wget https://nodejs.org/dist/v20.12.1/node-v20.12.1-linux-x64.tar.xz
+</span></span><span class=line><span class=cl>tar xvf node-v20.12.1-linux-x64.tar.xz
+</span></span></code></pre></td></tr></table></div></div><p>👆 版本随时从官网取</p><p>创建软链接</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo ln -s ~/.opt/node-v20.12.1-linux-x64/bin/node ~/.local/bin/node
+</span></span><span class=line><span class=cl>sudo ln -s ~/.opt/node-v20.12.1-linux-x64/bin/npm ~/.local/bin/npm
+</span></span></code></pre></td></tr></table></div></div><h3 id=docker>Docker</h3><p>由于 <code>apt</code> 源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo apt-get install <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    apt-transport-https <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    ca-certificates <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    curl <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    gnupg <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>    lsb-release
+</span></span></code></pre></td></tr></table></div></div><p>为了确认所下载软件包的合法性，需要添加软件源的 <code>GPG</code> 密钥。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg <span class=p>|</span> sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 官方源</span>
+</span></span><span class=line><span class=cl><span class=c1># curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后，我们需要向 <code>sources.list</code> 中添加 Docker 软件源</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nb>echo</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=s2>&#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+</span></span></span><span class=line><span class=cl><span class=s2>  </span><span class=k>$(</span>lsb_release -cs<span class=k>)</span><span class=s2> stable&#34;</span> <span class=p>|</span> sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 官方源</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   <span class=s2>&#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+</span></span></span><span class=line><span class=cl><span class=s2>   </span><span class=k>$(</span>lsb_release -cs<span class=k>)</span><span class=s2> stable&#34;</span> <span class=p>|</span> sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>以上命令会添加稳定版本的 Docker APT 镜像源，如果需要测试版本的 Docker 请将 stable 改为 test。</p></blockquote><p>更新 apt 软件包缓存，并安装 <code>docker-ce</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo apt-get update
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+</span></span></code></pre></td></tr></table></div></div><p>安装 docker-compose（最新版本去 <a href=https://github.com/docker/compose/releases/ target=_blank rel="external nofollow noopener noreferrer">仓库</a> 看）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo curl -L <span class=s2>&#34;https://github.com/docker/compose/releases/download/v2.24.1/docker-compose-</span><span class=k>$(</span>uname -s<span class=k>)</span><span class=s2>-</span><span class=k>$(</span>uname -m<span class=k>)</span><span class=s2>&#34;</span> -o ~/.local/bin/docker-compose
+</span></span><span class=line><span class=cl>sudo chmod +x ~/.local/bin/docker-compose
+</span></span></code></pre></td></tr></table></div></div><p>修改设置（限制日志容量上限、启用 IPv6 等）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>cat &gt; /etc/docker/daemon.json <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>{
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;log-driver&#34;: &#34;json-file&#34;,
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;log-opts&#34;: {
+</span></span></span><span class=line><span class=cl><span class=s>        &#34;max-size&#34;: &#34;20m&#34;,
+</span></span></span><span class=line><span class=cl><span class=s>        &#34;max-file&#34;: &#34;3&#34;
+</span></span></span><span class=line><span class=cl><span class=s>    },
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;ipv6&#34;: true,
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;fixed-cidr-v6&#34;: &#34;fd00:dead:beef:c0::/80&#34;,
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;experimental&#34;:true,
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;ip6tables&#34;:true
+</span></span></span><span class=line><span class=cl><span class=s>}
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=可选设置-swap-分区>（可选）设置 swap 分区</h2><p>查看 Linux 当前分区情况：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>free -m
+</span></span></code></pre></td></tr></table></div></div><p>如果是增加 swap 分区，则先把当前所有分区都关闭了：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>swapoff -a
+</span></span></code></pre></td></tr></table></div></div><p>创建要作为 Swap 分区文件（其中 <code>/var/swapfile</code> 是文件位置，<code>bs*count</code> 是文件大小，例如以下命令就会创建一个 4G 的文件）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>dd if=/dev/zero of=/var/swapfile bs=1M count=4096
+</span></span></code></pre></td></tr></table></div></div><p>建立 Swap 的文件系统（格式化为 Swap 分区文件）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>mkswap /var/swapfile
+</span></span></code></pre></td></tr></table></div></div><p>启用 Swap 分区：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>swapon /var/swapfile
+</span></span></code></pre></td></tr></table></div></div><p>设置开启启动。在 /etc/fstab 文件中加入一行代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>/var/swapfile swap swap defaults 0 0
+</span></span></code></pre></td></tr></table></div></div><h3 id=code-server>Code-Server</h3><p>可以在浏览器中编辑代码</p><p>安装</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>curl -fsSL https://code-server.dev/install.sh <span class=p>|</span> sh
+</span></span></code></pre></td></tr></table></div></div><p>To have systemd start code-server now and restart on boot:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> --now code-server@<span class=nv>$USER</span>
+</span></span></code></pre></td></tr></table></div></div><p>Or, if you don&rsquo;t want/need a background service you can run:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>code-server
+</span></span></code></pre></td></tr></table></div></div><p>修改配置</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>vi ~/.config/code-server/config.yaml 
+</span></span></code></pre></td></tr></table></div></div><p>开启</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo systemctl restart code-server@<span class=nv>$USER</span>
+</span></span></code></pre></td></tr></table></div></div><p>查看进程状态</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo systemctl status --now code-server@<span class=nv>$USER</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=最终的-zshrc>最终的 <code>.zshrc</code></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.</span>
+</span></span><span class=line><span class=cl><span class=c1># Initialization code that may require console input (password prompts, [y/n]</span>
+</span></span><span class=line><span class=cl><span class=c1># confirmations, etc.) must go above this block; everything else may go below.</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[[</span> -r <span class=s2>&#34;</span><span class=si>${</span><span class=nv>XDG_CACHE_HOME</span><span class=k>:-</span><span class=nv>$HOME</span><span class=p>/.cache</span><span class=si>}</span><span class=s2>/p10k-instant-prompt-</span><span class=si>${</span><span class=p>(%)</span><span class=k>:-</span><span class=p>%n</span><span class=si>}</span><span class=s2>.zsh&#34;</span> <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>  <span class=nb>source</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>XDG_CACHE_HOME</span><span class=k>:-</span><span class=nv>$HOME</span><span class=p>/.cache</span><span class=si>}</span><span class=s2>/p10k-instant-prompt-</span><span class=si>${</span><span class=p>(%)</span><span class=k>:-</span><span class=p>%n</span><span class=si>}</span><span class=s2>.zsh&#34;</span>
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Path to your oh-my-zsh installation.</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>ZSH</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$HOME</span><span class=s2>/.oh-my-zsh&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$PATH</span>:~/.local/bin/:/snap/bin
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOROOT</span><span class=o>=</span>~/.opt/go           <span class=c1># Golang 源代码目录，安装目录</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOPATH</span><span class=o>=</span>~/.opt/gocode       <span class=c1># Golang 项目代码目录</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOBIN</span><span class=o>=</span><span class=nv>$GOPATH</span>/bin          <span class=c1># go install 后生成的可执行命令存放路径</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$GOROOT</span>/bin:<span class=nv>$GOBIN</span>:<span class=nv>$PATH</span>    <span class=c1># Linux 环境变量</span>
+</span></span><span class=line><span class=cl><span class=c1># ZSH_THEME=&#34;random&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>plugins</span><span class=o>=(</span>
+</span></span><span class=line><span class=cl>    git
+</span></span><span class=line><span class=cl>    extract
+</span></span><span class=line><span class=cl>    rand-quote
+</span></span><span class=line><span class=cl>    themes
+</span></span><span class=line><span class=cl>    z
+</span></span><span class=line><span class=cl>    per-directory-history
+</span></span><span class=line><span class=cl>    history-substring-search
+</span></span><span class=line><span class=cl>    command-not-found
+</span></span><span class=line><span class=cl>    safe-paste
+</span></span><span class=line><span class=cl>    colored-man-pages
+</span></span><span class=line><span class=cl>    sudo
+</span></span><span class=line><span class=cl>    zsh-autosuggestions
+</span></span><span class=line><span class=cl>    <span class=c1>#  history</span>
+</span></span><span class=line><span class=cl>    zsh-syntax-highlighting
+</span></span><span class=line><span class=cl>    copypath
+</span></span><span class=line><span class=cl>    copyfile
+</span></span><span class=line><span class=cl>    you-should-use
+</span></span><span class=line><span class=cl><span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>source</span> <span class=nv>$ZSH</span>/oh-my-zsh.sh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> :vrc<span class=o>=</span><span class=s2>&#34;vi ~/.zshrc&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> :src<span class=o>=</span><span class=s2>&#34;source ~/.zshrc&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> -s <span class=nv>ttt</span><span class=o>=</span><span class=s1>&#39;tar zxvf&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>cp</span><span class=o>=</span><span class=s2>&#34;cp -i&#34;</span> <span class=c1># 防止 copy 的时候覆盖已存在的文件, 带上 i 选项，文件已存在的时候，会提示，需要确认才能 copy</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>gcm</span><span class=o>=</span><span class=s1>&#39;git checkout master&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>cat</span><span class=o>=</span><span class=s1>&#39;batcat&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>top</span><span class=o>=</span><span class=s1>&#39;bashtop&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>ls</span><span class=o>=</span><span class=s1>&#39;exa&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>du</span><span class=o>=</span><span class=s1>&#39;dust&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>df</span><span class=o>=</span><span class=s1>&#39;duf&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>find</span><span class=o>=</span><span class=s1>&#39;fd&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>ping</span><span class=o>=</span><span class=s1>&#39;gping&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>ps</span><span class=o>=</span><span class=s1>&#39;procs&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>curl</span><span class=o>=</span><span class=s1>&#39;curlie&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>vim</span><span class=o>=</span><span class=s1>&#39;nvim&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>vi</span><span class=o>=</span><span class=s1>&#39;nvim&#39;</span>
+</span></span><span class=line><span class=cl><span class=nb>alias</span> <span class=nv>pv</span><span class=o>=</span><span class=s1>&#39;pyenv virtualenvwrapper&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 以自己输入的所有内容为前缀，进行历史查找</span>
+</span></span><span class=line><span class=cl>bindkey <span class=s1>&#39;^P&#39;</span> history-substring-search-up
+</span></span><span class=line><span class=cl>bindkey <span class=s1>&#39;^N&#39;</span> history-substring-search-down
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 让 history 命令显示时间</span>
+</span></span><span class=line><span class=cl><span class=nv>HIST_STAMPS</span><span class=o>=</span><span class=s2>&#34;yyyy-mm-dd&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.</span>
+</span></span><span class=line><span class=cl><span class=o>[[</span> ! -f ~/.p10k.zsh <span class=o>]]</span> <span class=o>||</span> <span class=nb>source</span> ~/.p10k.zsh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>source</span> ~/.opt/powerlevel10k/powerlevel10k.zsh-theme
+</span></span><span class=line><span class=cl><span class=nb>source</span> /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>command</span> -v pyenv &gt;/dev/null <span class=o>||</span> <span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$PYENV_ROOT</span><span class=s2>/bin:</span><span class=nv>$PATH</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>eval</span> <span class=s2>&#34;</span><span class=k>$(</span>pyenv init -<span class=k>)</span><span class=s2>&#34;</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA-linux-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/ data-title="从零开始构建 Linux 开发环境" data-hashtags=Linux><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA-linux-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/ data-hashtag=Linux><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%9E%84%E5%BB%BA-linux-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/ data-title="从零开始构建 Linux 开发环境"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/linux/>Linux</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/linux/%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/ class=prev rel=prev title=CheetSheat><i class="fa-solid fa-angle-left fa-fw"></i>CheetSheat</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E9%85%8D%E7%BD%AE-jupyter-lab/ class=next rel=next title="配置 jupyter-lab">配置 jupyter-lab<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

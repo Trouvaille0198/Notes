@@ -1,0 +1,464 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>关于 MySQL 的一些笔记 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="MySQL 学习笔记 登录和退出 MySQL 服务器 1 2 3 4 5 6 7 8 # 登录MySQL mysql -u [username] -p[password] # 远程连接 mysql"><meta name=keywords content='数据库,快速入门,MySQL'><meta itemprop=name content="关于 MySQL 的一些笔记"><meta itemprop=description content="MySQL 学习笔记 登录和退出 MySQL 服务器 1 2 3 4 5 6 7 8 # 登录MySQL mysql -u [username] -p[password] # 远程连接 mysql"><meta itemprop=datePublished content="2021-12-23T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="6540"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="数据库,快速入门,MySQL"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/database/mysql/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="关于 MySQL 的一些笔记"><meta property="og:description" content="MySQL 学习笔记 登录和退出 MySQL 服务器 1 2 3 4 5 6 7 8 # 登录MySQL mysql -u [username] -p[password] # 远程连接 mysql"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-12-23T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="数据库"><meta property="article:tag" content="快速入门"><meta property="article:tag" content="MySQL"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="关于 MySQL 的一些笔记"><meta name=twitter:description content="MySQL 学习笔记 登录和退出 MySQL 服务器 1 2 3 4 5 6 7 8 # 登录MySQL mysql -u [username] -p[password] # 远程连接 mysql"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/database/mysql/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E6%A0%87%E5%87%86%E5%BA%93/math/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E5%91%BD%E5%90%8D%E5%92%8C%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"关于 MySQL 的一些笔记","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/database\/mysql\/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5\/"},"genre":"posts","keywords":"数据库, 快速入门, MySQL","wordcount":6540,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/database\/mysql\/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5\/","datePublished":"2021-12-23T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>关于 MySQL 的一些笔记</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;数据库</a></span></div><div class=post-meta-line><span title="2021-12-23 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2021-12-23>2021-12-23</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 6540 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 14 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#登录和退出-mysql-服务器>登录和退出 MySQL 服务器</a></li><li><a href=#基本语法>基本语法</a></li><li><a href=#建表约束>建表约束</a><ul><li><a href=#主键约束>主键约束</a></li><li><a href=#唯一约束>唯一约束</a></li><li><a href=#非空约束>非空约束</a></li><li><a href=#默认约束>默认约束</a></li><li><a href=#外键约束>外键约束</a></li></ul></li><li><a href=#数据库的三大设计范式>数据库的三大设计范式</a><ul><li><a href=#1nf原子性>1NF（原子性）</a></li><li><a href=#2nf完全依赖>2NF（完全依赖）</a></li><li><a href=#3nf无传递依赖>3NF（无传递依赖）</a></li></ul></li><li><a href=#常见的存储引擎>常见的存储引擎</a><ul><li><a href=#innodb-存储引擎>InnoDB 存储引擎</a></li><li><a href=#myisam-存储引擎>MyISAM 存储引擎</a></li><li><a href=#memory-存储引擎>MEMORY 存储引擎</a></li><li><a href=#archive-存储引擎>ARCHIVE 存储引擎</a></li><li><a href=#myisam-和-innodb-的区别>MyISAM 和 InnoDB 的区别</a></li></ul></li><li><a href=#锁机制>锁机制</a><ul><li><a href=#数据库锁与隔离级别的关系>数据库锁与隔离级别的关系</a></li><li><a href=#数据库锁的类型>数据库锁的类型</a></li><li><a href=#innodb-的行锁实现>InnoDB 的行锁实现</a></li></ul></li><li><a href=#日志-log>日志 log</a><ul><li><a href=#二进制日志-bin-log>二进制日志 bin log</a></li><li><a href=#重做日志-redo-log>重做日志 redo log</a></li><li><a href=#回滚日志-undo-log>回滚日志 undo log</a></li><li><a href=#bin-log-和-redo-log-有什么区别>bin log 和 redo log 有什么区别？</a></li></ul></li><li><a href=#mysql-架构>MySQL 架构</a></li><li><a href=#分表与分区>分表与分区</a><ul><li><a href=#两种方式>两种方式</a><ul><li><a href=#垂直划分>垂直划分</a></li><li><a href=#水平划分>水平划分</a></li></ul></li><li><a href=#分区表>分区表</a></li><li><a href=#分区表类型>分区表类型</a><ul><li><a href=#range-分区>range 分区</a></li><li><a href=#list-分区>list 分区</a></li><li><a href=#hash-分区>hash 分区</a></li></ul></li><li><a href=#分区的问题>分区的问题</a></li></ul></li><li><a href=#主从同步>主从同步</a><ul><li><a href=#定义>定义</a><ul><li><a href=#什么是主从同步>什么是主从同步</a></li><li><a href=#为什么要做主从同步>为什么要做主从同步</a></li><li><a href=#读写分离>读写分离</a></li></ul></li><li><a href=#主从复制的实现>主从复制的实现</a></li><li><a href=#乐观锁和悲观锁>乐观锁和悲观锁</a></li></ul></li><li><a href=#存储过程>存储过程</a></li><li><a href=#其他技巧>其他技巧</a><ul><li><a href=#g-和-g><code>\G</code> 和 <code>\g</code></a><ul><li><a href=#g><code>\g</code></a></li><li><a href=#g-1><code>\G</code></a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=mysql-学习笔记>MySQL 学习笔记</h1><h2 id=登录和退出-mysql-服务器>登录和退出 MySQL 服务器</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 登录MySQL</span>
+</span></span><span class=line><span class=cl>mysql -u <span class=o>[</span>username<span class=o>]</span> -p<span class=o>[</span>password<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 远程连接</span>
+</span></span><span class=line><span class=cl>mysql -h <span class=o>[</span>host<span class=o>]</span> -P <span class=o>[</span>port<span class=o>]</span> -u <span class=o>[</span>username<span class=o>]</span> -p<span class=o>[</span>password<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 退出MySQL数据库服务器</span>
+</span></span><span class=line><span class=cl>exit<span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=基本语法>基本语法</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=c1>-- 显示所有数据库
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>show</span><span class=w> </span><span class=k>databases</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 创建数据库
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>DATABASE</span><span class=w> </span><span class=n>test</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 切换数据库
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>use</span><span class=w> </span><span class=n>test</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 显示数据库中的所有表
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>show</span><span class=w> </span><span class=kp>tables</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 创建数据表
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>pet</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>owner</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>species</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>sex</span><span class=w> </span><span class=kt>CHAR</span><span class=p>(</span><span class=mi>1</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>birth</span><span class=w> </span><span class=kt>DATE</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>death</span><span class=w> </span><span class=kt>DATE</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 查看数据表结构
+</span></span></span><span class=line><span class=cl><span class=c1>-- describe pet;
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>desc</span><span class=w> </span><span class=n>pet</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 查询表
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>from</span><span class=w> </span><span class=n>pet</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 插入数据
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>INSERT</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=n>pet</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=p>(</span><span class=s1>&#39;puffball&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;Diane&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;hamster&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;f&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;1990-03-30&#39;</span><span class=p>,</span><span class=w> </span><span class=no>NULL</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 修改数据
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>UPDATE</span><span class=w> </span><span class=n>pet</span><span class=w> </span><span class=kt>SET</span><span class=w> </span><span class=n>name</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;squirrel&#39;</span><span class=w> </span><span class=k>WHERE</span><span class=w> </span><span class=n>owner</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;Diane&#39;</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 删除数据
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>DELETE</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>pet</span><span class=w> </span><span class=k>WHERE</span><span class=w> </span><span class=n>name</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=s1>&#39;squirrel&#39;</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 删除表
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>DROP</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>myorder</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=建表约束>建表约束</h2><h3 id=主键约束>主键约束</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=c1>-- 主键约束
+</span></span></span><span class=line><span class=cl><span class=c1>-- 使某个字段不重复且不得为空，确保表内所有数据的唯一性。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 联合主键
+</span></span></span><span class=line><span class=cl><span class=c1>-- 联合主键中的每个字段都不能为空，并且加起来不能和已设置的联合主键重复。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>password</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>(</span><span class=n>id</span><span class=p>,</span><span class=w> </span><span class=n>name</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 自增约束
+</span></span></span><span class=line><span class=cl><span class=c1>-- 自增约束的主键由系统自动递增分配。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=w> </span><span class=kp>AUTO_INCREMENT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 添加主键约束
+</span></span></span><span class=line><span class=cl><span class=c1>-- 如果忘记设置主键，还可以通过SQL语句设置（两种方式）：
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=k>ADD</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>(</span><span class=n>id</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=n>MODIFY</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 删除主键
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=k>drop</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=唯一约束>唯一约束</h3><p>unique</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=c1>-- 建表时创建唯一约束
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>UNIQUE</span><span class=p>(</span><span class=n>name</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 添加唯一约束
+</span></span></span><span class=line><span class=cl><span class=c1>-- 如果建表时没有设置唯一约束，还可以通过SQL语句设置（两种方式）：
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=k>ADD</span><span class=w> </span><span class=k>UNIQUE</span><span class=p>(</span><span class=n>name</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=n>MODIFY</span><span class=w> </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=w> </span><span class=k>UNIQUE</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 删除唯一约束
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=k>DROP</span><span class=w> </span><span class=k>INDEX</span><span class=w> </span><span class=n>name</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=非空约束>非空约束</h3><p>not null</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=c1>-- 建表时添加非空约束
+</span></span></span><span class=line><span class=cl><span class=c1>-- 约束某个字段不能为空
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=w> </span><span class=k>NOT</span><span class=w> </span><span class=no>NULL</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 移除非空约束
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=n>MODIFY</span><span class=w> </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>);</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=默认约束>默认约束</h3><p>default</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=c1>-- 建表时添加默认约束
+</span></span></span><span class=line><span class=cl><span class=c1>-- 约束某个字段的默认值
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>user2</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>age</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>DEFAULT</span><span class=w> </span><span class=mi>10</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 移除非空约束
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=n>MODIFY</span><span class=w> </span><span class=n>age</span><span class=w> </span><span class=kt>INT</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=外键约束>外键约束</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=c1>-- 班级
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>classes</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 学生表
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>students</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>-- 这里的 class_id 要和 classes 中的 id 字段相关联
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>    </span><span class=n>class_id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>-- 表示 class_id 的值必须来自于 classes 中的 id 字段值
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>    </span><span class=k>FOREIGN</span><span class=w> </span><span class=k>KEY</span><span class=p>(</span><span class=n>class_id</span><span class=p>)</span><span class=w> </span><span class=k>REFERENCES</span><span class=w> </span><span class=nf>classes</span><span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=c1>-- 1. 主表（父表）classes 中没有的数据值，在副表（子表）students 中，是不可以使用的；
+</span></span></span><span class=line><span class=cl><span class=c1>-- 2. 主表中的记录被副表引用时，主表不可以被删除。
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=数据库的三大设计范式>数据库的三大设计范式</h2><h3 id=1nf原子性>1NF（原子性）</h3><p><strong>所有字段值都是不可再分的原子值</strong></p><p>只要字段值还可以继续拆分，就不满足第一范式。</p><p>范式设计得越详细，对某些实际操作可能会更好，但并非都有好处，需要对项目的实际情况进行设定。</p><h3 id=2nf完全依赖>2NF（完全依赖）</h3><p>在满足第一范式的前提下，<strong>其他列都必须完全依赖于主键列</strong>。</p><blockquote><p>不完全依赖只可能发生在联合主键的情况下：</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=c1>-- 订单表
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>myorder</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>customer_id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>customer_name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=w> </span><span class=p>(</span><span class=n>product_id</span><span class=p>,</span><span class=w> </span><span class=n>customer_id</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>实际上，在这张订单表中，<code>product_name</code> 只依赖于 <code>product_id</code> ，<code>customer_name</code> 只依赖于 <code>customer_id</code> 。也就是说，<code>product_name</code> 和 <code>customer_id</code> 是没用关系的，<code>customer_name</code> 和 <code>product_id</code> 也是没有关系的。</p><p>这就不满足第二范式：其他列都必须完全依赖于主键列！</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>myorder</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order_id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>customer_id</span><span class=w> </span><span class=kt>INT</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>product</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>customer</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>拆分之后，<code>myorder</code> 表中的 <code>product_id</code> 和 <code>customer_id</code> 完全依赖于 <code>order_id</code> 主键，而 <code>product</code> 和 <code>customer</code> 表中的其他字段又完全依赖于主键。满足了第二范式的设计！</p><h3 id=3nf无传递依赖>3NF（无传递依赖）</h3><p>在满足第二范式的前提下，<strong>除了主键列之外，其他列之间不能有传递依赖关系</strong>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>myorder</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order_id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>customer_id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>customer_phone</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>15</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>表中的 <code>customer_phone</code> 有可能依赖于 <code>order_id</code> 、 <code>customer_id</code> 两列，也就不满足了第三范式的设计：其他列之间不能有传递依赖关系。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>myorder</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>order_id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>product_id</span><span class=w> </span><span class=kt>INT</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>customer_id</span><span class=w> </span><span class=kt>INT</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=nf>customer</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>id</span><span class=w> </span><span class=kt>INT</span><span class=w> </span><span class=k>PRIMARY</span><span class=w> </span><span class=k>KEY</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>name</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>20</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>phone</span><span class=w> </span><span class=kt>VARCHAR</span><span class=p>(</span><span class=mi>15</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>);</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>修改后就不存在其他列之间的传递依赖关系，其他列都只依赖于主键列，满足了第三范式的设计！</p><h2 id=常见的存储引擎>常见的存储引擎</h2><p>MySQL 中常用的四种存储引擎分别是： <strong>MyISAM</strong>、<strong>InnoDB</strong>、<strong>MEMORY</strong>、<strong>ARCHIVE</strong>。MySQL 5.5 版本后默认的存储引擎为 <code>InnoDB</code>。</p><h3 id=innodb-存储引擎>InnoDB 存储引擎</h3><p>InnoDB 是 MySQL <strong>默认的事务型存储引擎</strong>，使用最广泛，基于聚簇索引建立的。InnoDB 内部做了很多优化，如能够自动在内存中创建自适应 hash 索引，以加速读操作。</p><p><strong>优点</strong>：支持<strong>事务</strong>和崩溃修复能力；引入了<strong>行级锁</strong>和<strong>外键约束</strong>。</p><p><strong>缺点</strong>：占用的数据空间相对较大。</p><p><strong>适用场景</strong>：需要事务支持，并且有较高的并发读写频率。</p><h3 id=myisam-存储引擎>MyISAM 存储引擎</h3><p>数据以紧密格式存储。对于只读数据，或者表比较小、可以容忍修复操作，可以使用 MyISAM 引擎。</p><p>MyISAM 会将表存储在两个文件中，数据文件 <code>.MYD</code> 和索引文件 <code>.MYI</code>（都是二进制文件）</p><p><strong>优点</strong>：访问速度快（数据以静态的方式存储在磁盘上）</p><p><strong>缺点</strong>：MyISAM 不支持事务和行级锁，不支持崩溃后的安全恢复，也不支持外键。</p><p><strong>适用场景</strong>：对事务完整性没有要求；表的数据都会只读的。</p><h3 id=memory-存储引擎>MEMORY 存储引擎</h3><p>MEMORY 引擎将数据全部放在<strong>内存</strong>中，访问速度较快，但是一旦系统奔溃的话，数据都会丢失。</p><p>MEMORY 引擎<strong>默认使用哈希索引</strong>，将键的哈希值和指向数据行的指针保存在哈希索引中。</p><p><strong>优点</strong>：访问速度较快。</p><p><strong>缺点</strong>：</p><ol><li>哈希索引数据不是按照索引值顺序存储，无法用于排序。</li><li>不支持部分索引匹配查找，因为哈希索引是使用索引列的全部内容来计算哈希值的。</li><li>只支持等值比较，不支持范围查询。</li><li>当出现哈希冲突时，存储引擎需要遍历链表中所有的行指针，逐行进行比较，直到找到符合条件的行。</li></ol><h3 id=archive-存储引擎>ARCHIVE 存储引擎</h3><p>ARCHIVE 存储引擎非常适合存储大量独立的、作为历史记录的数据。ARCHIVE 提供了压缩功能，拥有高效的插入速度，但是这种引擎<strong>不支持索引</strong>，所以查询性能较差。</p><p>数据文件以扩展名为".ARZ"的文件格式存储，它是一种高度压缩的存储格式，能够有效地节省磁盘空间。</p><h3 id=myisam-和-innodb-的区别>MyISAM 和 InnoDB 的区别</h3><ol><li><strong>是否支持行级锁</strong> : <code>MyISAM</code> 只有表级锁，而 <code>InnoDB</code> 支持行级锁和表级锁，默认为行级锁。</li><li><strong>是否支持事务和崩溃后的安全恢复</strong>： <code>MyISAM</code> 不提供事务支持。而 <code>InnoDB</code> 提供事务支持，具有事务、回滚和崩溃修复能力。</li><li><strong>是否支持外键：</strong><code>MyISAM</code> 不支持，而 <code>InnoDB</code> 支持。</li><li><strong>是否支持MVCC</strong> ：<code>MyISAM</code> 不支持，<code>InnoDB</code> 支持。应对高并发事务，MVCC 比单纯的加锁更高效。</li><li><code>MyISAM</code> 不支持聚集索引，<code>InnoDB</code> 支持聚集索引。</li></ol><h2 id=锁机制>锁机制</h2><h3 id=数据库锁与隔离级别的关系>数据库锁与隔离级别的关系</h3><table><thead><tr><th>隔离级别</th><th>实现方式</th></tr></thead><tbody><tr><td>读未提交</td><td>总是读取最新的数据，无需加锁</td></tr><tr><td>读已提交</td><td>读取数据时加共享锁，读取数据后释放共享锁</td></tr><tr><td>可重复读</td><td>读取数据时加共享锁，事务结束后释放共享锁</td></tr><tr><td>串行化</td><td>锁定整个范围的键，一直持有锁直到事务结束</td></tr></tbody></table><h3 id=数据库锁的类型>数据库锁的类型</h3><p>按照锁的粒度可以将 MySQL 锁分为三种：</p><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20220819134320945.png alt=image-20220819134320945><p>MyISAM 默认采用表级锁，InnoDB 默认采用行级锁。</p><p>从锁的类别上区别可以分为共享锁和排他锁</p><ul><li><p>共享锁：<strong>共享锁又称读锁</strong>，简写为 S 锁</p><ul><li>一个事务对一个数据对象加了 S 锁，可以对这个数据对象进行读取操作，但不能进行更新操作。</li><li>并且在加锁期间其他事务只能对这个数据对象加 S 锁，不能加 X 锁。</li></ul></li><li><p>排他锁：<strong>排他锁又称为写锁</strong>，简写为 X 锁</p><ul><li>一个事务对一个数据对象加了 X 锁，可以对这个对象进行读取和更新操作</li><li>加锁期间，其他事务不能对该数据对象进行加 X 锁或 S 锁。</li></ul></li></ul><h3 id=innodb-的行锁实现>InnoDB 的行锁实现</h3><p>行锁实现方式：InnoDB 的行锁是通过<strong>给索引上的索引项加锁</strong>实现的，如果没有索引，InnoDB 将通过隐藏的聚簇索引来对记录进行加锁。</p><p>InnoDB 行锁主要分三种情况：</p><ul><li>Record lock：对索引项加锁</li><li>Grap lock：对索引之间的“间隙”、第一条记录前的“间隙”或最后一条后的间隙加锁。</li><li>Next-key lock：前两种放入组合，对记录及前面的间隙加锁。</li></ul><p>InnoDB 行锁的特性：如果不通过索引条件检索数据，那么 InnoDB 将对表中所有记录加锁，实际产生的效果和表锁是一样的。</p><p>MVCC 不能解决幻读问题，在可重复读隔离级别下，使用 MVCC + Next-Key Locks 可以解决幻读问题。</p><h2 id=日志-log>日志 log</h2><p>MySQL 日志主要包括查询日志、慢查询日志、事务日志、错误日志、二进制日志等。</p><p>其中比较重要的是 <code>bin log</code>（二进制日志）和 <code>redo log</code>（重做日志）和 <code>undo log</code>（回滚日志）。</p><h3 id=二进制日志-bin-log>二进制日志 bin log</h3><p><code>bin log</code> 是 MySQL <strong>数据库级别</strong>的文件，记录对 MySQL 数据库执行<strong>修改</strong>的所有操作，不会记录 select 和 show 语句</p><p>主要用于<strong>恢复数据库</strong>和<strong>同步数据库</strong>。</p><h3 id=重做日志-redo-log>重做日志 redo log</h3><p><code>redo log</code> 是 <strong>innodb 引擎级别</strong>，用来记录 innodb 存储引擎的<strong>事务</strong>日志，不管事务是否提交都会记录下来，用于数据恢复。</p><p>当数据库发生故障，innoDB 存储引擎会使用 <code>redo log</code> 恢复到发生故障前的时刻，以此来保证数据的完整性。将参数 <code>innodb_flush_log_at_tx_commit</code> 设置为 1，那么在执行 commit 时会将 <code>redo log</code> 同步写到磁盘。</p><h3 id=回滚日志-undo-log>回滚日志 undo log</h3><p>除了记录 <code>redo log</code> 外，当进行数据修改时还会记录 <code>undo log</code>，<code>undo log</code> 用于数据的<strong>撤回</strong>操作，它保留了记录修改前的内容。</p><p>通过 <code>undo log</code> 可以<strong>实现事务回滚</strong>，并且可以根据 <code>undo log</code> 回溯到某个特定的版本的数据，<strong>实现 MVCC</strong>。</p><h3 id=bin-log-和-redo-log-有什么区别>bin log 和 redo log 有什么区别？</h3><ol><li><code>bin log</code> 会记录所有日志记录，包括 InnoDB、MyISAM 等存储引擎的日志；<code>redo log</code> 只记录 innoDB 自身的事务日志。</li><li><code>bin log</code> 只在事务提交前写入到磁盘，一个事务只写一次；而在事务进行过程，会有 <code>redo log</code> 不断写入磁盘。</li><li><code>bin log</code> 是逻辑日志，记录的是 SQL 语句的原始逻辑；<code>redo log</code> 是物理日志，记录的是在某个数据页上做了什么修改。</li></ol><h2 id=mysql-架构>MySQL 架构</h2><p>MySQL 主要分为 Server 层和存储引擎层：</p><ul><li><strong>Server 层</strong>：主要包括连接器、查询缓存、分析器、优化器、执行器等，所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图，函数等，还有一个通用的日志模块：bin log 日志模块。<ul><li><strong>连接器：</strong> 当客户端连接 MySQL 时，server 层会对其进行身份认证和权限校验。</li><li><strong>查询缓存:</strong> 执行查询语句的时候，会先查询缓存，先校验这个 sql 是否执行过，如果有缓存这个 sql，就会直接返回给客户端，如果没有命中，就会执行后续的操作。</li><li>**分析器：**没有命中缓存的话，SQL 语句就会经过分析器，主要分为两步，词法分析和语法分析，先看 SQL 语句要做什么，再检查 SQL 语句语法是否正确。</li><li><strong>优化器：</strong> 优化器对查询进行优化，包括重写查询、决定表的读写顺序以及选择合适的索引等，生成执行计划。</li><li><strong>执行器：</strong> 首先执行前会校验该用户有没有权限，如果没有权限，就会返回错误信息，如果有权限，就会根据执行计划去调用引擎的接口，返回结果。</li></ul></li><li><strong>存储引擎层</strong>： 主要负责数据的存储和读取。server 层通过 api 与存储引擎进行通信。</li></ul><h2 id=分表与分区>分表与分区</h2><p>当单表的数据量达到 1000W 或 100G 以后，优化索引、添加从库等可能对数据库性能提升效果不明显，此时就要考虑对其进行切分了。切分的目的就在于减少数据库的负担，缩短查询的时间。</p><p>数据切分可以分为两种方式：垂直划分和水平划分。</p><h3 id=两种方式>两种方式</h3><h4 id=垂直划分>垂直划分</h4><p>垂直划分数据库是根据业务进行划分，例如购物场景，可以将库中涉及商品、订单、用户的表分别划分出成一个库，通过降低单库的大小来提高性能。同样的，分表的情况就是将一个大表根据业务功能拆分成一个个子表，例如商品基本信息和商品描述，商品基本信息一般会展示在商品列表，商品描述在商品详情页，可以将商品基本信息和商品描述拆分成两张表。</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-1a3cfa1645cb5c1812e1d2d0a713835e_1440w.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-1a3cfa1645cb5c1812e1d2d0a713835e_1440w.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-1a3cfa1645cb5c1812e1d2d0a713835e_1440w.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-1a3cfa1645cb5c1812e1d2d0a713835e_1440w.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-1a3cfa1645cb5c1812e1d2d0a713835e_1440w.jpg title=img></p><p><strong>优点</strong>：行记录变小，数据页可以存放更多记录，在查询时减少 I/O 次数。</p><p><strong>缺点</strong>：</p><ul><li><strong>主键出现冗余</strong>，需要管理冗余列；</li><li>会引起表连接 join 操作，可以通过在业务服务器上进行 join 来减少数据库压力；</li><li>依然存在单表数据量过大的问题。</li></ul><h4 id=水平划分>水平划分</h4><p>水平划分是根据一定规则，例如时间或 id 序列值等进行数据的拆分。比如根据年份来拆分不同的数据库。每个数据库结构一致，但是数据得以拆分，从而提升性能。</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-406d883a97128e9e4b1ea6f97afd1108_1440w.jpg data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-406d883a97128e9e4b1ea6f97afd1108_1440w.jpg, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-406d883a97128e9e4b1ea6f97afd1108_1440w.jpg 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-406d883a97128e9e4b1ea6f97afd1108_1440w.jpg 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-406d883a97128e9e4b1ea6f97afd1108_1440w.jpg title=img></p><p><strong>优点</strong>：单库（表）的数据量得以减少，提高性能；切分出的表结构相同，程序改动较少。</p><p><strong>缺点</strong>：</p><ul><li>分片事务一致性难以解决</li><li>跨节点 <code>join</code> 性能差，逻辑复杂</li><li>数据分片在扩容时需要迁移</li></ul><h3 id=分区表>分区表</h3><p>分区是把一张表的数据分成 N 多个区块。<strong>分区表是一个独立的逻辑表，但是底层由多个物理子表组成。</strong></p><p>当查询条件的数据分布在某一个分区的时候，查询引擎只会去某一个分区查询，而不是遍历整个表。在管理层面，如果需要删除某一个分区的数据，只需要删除对应的分区即可。</p><p>分区一般都是放在单机里的，用的比较多的是时间范围分区，方便归档。只不过<strong>分库分表需要代码实现，分区则是 mysql 内部实现。分库分表和分区并不冲突，可以结合使用。</strong></p><h3 id=分区表类型>分区表类型</h3><h4 id=range-分区>range 分区</h4><p>按照范围分区。比如按照时间范围分区</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>test_range_partition</span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=n>id</span><span class=w> </span><span class=nb>INT</span><span class=w> </span><span class=n>auto_increment</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=n>createdate</span><span class=w> </span><span class=n>DATETIME</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=k>primary</span><span class=w> </span><span class=k>key</span><span class=w> </span><span class=p>(</span><span class=n>id</span><span class=p>,</span><span class=n>createdate</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=p>)</span><span class=w> 
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=n>PARTITION</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>RANGE</span><span class=w> </span><span class=p>(</span><span class=n>TO_DAYS</span><span class=p>(</span><span class=n>createdate</span><span class=p>)</span><span class=w> </span><span class=p>)</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201801</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20180201&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201802</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20180301&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201803</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20180401&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201804</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20180501&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201805</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20180601&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201806</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20180701&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201807</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20180801&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201808</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20180901&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201809</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20181001&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201810</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20181101&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201811</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20181201&#39;</span><span class=p>)</span><span class=w> </span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=n>PARTITION</span><span class=w> </span><span class=n>p201812</span><span class=w> </span><span class=k>VALUES</span><span class=w> </span><span class=k>LESS</span><span class=w> </span><span class=k>THAN</span><span class=w> </span><span class=p>(</span><span class=w> </span><span class=n>TO_DAYS</span><span class=p>(</span><span class=s1>&#39;20190101&#39;</span><span class=p>)</span><span class=w> </span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=p>);</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><p>在 <code>/var/lib/mysql/data/</code> 可以找到对应的数据文件，每个分区表都有一个使用 <code>#</code> 分隔命名的表文件：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=w>   </span><span class=o>-</span><span class=n>rw</span><span class=o>-</span><span class=n>r</span><span class=c1>----- 1 MySQL MySQL    65 Mar 14 21:47 db.opt
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>   </span><span class=o>-</span><span class=n>rw</span><span class=o>-</span><span class=n>r</span><span class=c1>----- 1 MySQL MySQL  8598 Mar 14 21:50 test_range_partition.frm
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>   </span><span class=o>-</span><span class=n>rw</span><span class=o>-</span><span class=n>r</span><span class=c1>----- 1 MySQL MySQL 98304 Mar 14 21:50 test_range_partition#P#p201801.ibd
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>   </span><span class=o>-</span><span class=n>rw</span><span class=o>-</span><span class=n>r</span><span class=c1>----- 1 MySQL MySQL 98304 Mar 14 21:50 test_range_partition#P#p201802.ibd
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=w>   </span><span class=o>-</span><span class=n>rw</span><span class=o>-</span><span class=n>r</span><span class=c1>----- 1 MySQL MySQL 98304 Mar 14 21:50 test_range_partition#P#p201803.ibd
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>...</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=list-分区>list 分区</h4><p>list 分区和 range 分区相似，主要区别在于 list 是枚举值（离散）列表的集合，range 是连续的区间值的集合。</p><p>对于 list 分区，分区字段必须是<strong>已知</strong>的，如果插入的字段不在分区时的枚举值中，将无法插入。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>create</span><span class=w> </span><span class=k>table</span><span class=w> </span><span class=n>test_list_partiotion</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=n>id</span><span class=w> </span><span class=nb>int</span><span class=w> </span><span class=n>auto_increment</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=n>data_type</span><span class=w> </span><span class=n>tinyint</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=k>primary</span><span class=w> </span><span class=k>key</span><span class=p>(</span><span class=n>id</span><span class=p>,</span><span class=n>data_type</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=p>)</span><span class=n>partition</span><span class=w> </span><span class=k>by</span><span class=w> </span><span class=n>list</span><span class=p>(</span><span class=n>data_type</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=n>partition</span><span class=w> </span><span class=n>p0</span><span class=w> </span><span class=k>values</span><span class=w> </span><span class=k>in</span><span class=w> </span><span class=p>(</span><span class=mi>0</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=mi>5</span><span class=p>,</span><span class=mi>6</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=n>partition</span><span class=w> </span><span class=n>p1</span><span class=w> </span><span class=k>values</span><span class=w> </span><span class=k>in</span><span class=w> </span><span class=p>(</span><span class=mi>7</span><span class=p>,</span><span class=mi>8</span><span class=p>,</span><span class=mi>9</span><span class=p>,</span><span class=mi>10</span><span class=p>,</span><span class=mi>11</span><span class=p>,</span><span class=mi>12</span><span class=p>),</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=n>partition</span><span class=w> </span><span class=n>p2</span><span class=w> </span><span class=k>values</span><span class=w> </span><span class=k>in</span><span class=w> </span><span class=p>(</span><span class=mi>13</span><span class=p>,</span><span class=mi>14</span><span class=p>,</span><span class=mi>15</span><span class=p>,</span><span class=mi>16</span><span class=p>,</span><span class=mi>17</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=p>);</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h4 id=hash-分区>hash 分区</h4><p>可以将数据均匀地分布到预先定义的分区中。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>create</span><span class=w> </span><span class=k>table</span><span class=w> </span><span class=n>test_hash_partiotion</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=p>(</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=n>id</span><span class=w> </span><span class=nb>int</span><span class=w> </span><span class=n>auto_increment</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=n>create_date</span><span class=w> </span><span class=n>datetime</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=k>primary</span><span class=w> </span><span class=k>key</span><span class=p>(</span><span class=n>id</span><span class=p>,</span><span class=n>create_date</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>   </span><span class=p>)</span><span class=n>partition</span><span class=w> </span><span class=k>by</span><span class=w> </span><span class=n>hash</span><span class=p>(</span><span class=k>year</span><span class=p>(</span><span class=n>create_date</span><span class=p>))</span><span class=w> </span><span class=n>partitions</span><span class=w> </span><span class=mi>10</span><span class=p>;</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=分区的问题>分区的问题</h3><ol><li>打开和锁住所有底层表的成本可能很高。当查询访问分区表时，MySQL 需要打开并锁住所有的底层表，这个操作在分区过滤之前发生，所以无法通过分区过滤来降低此开销，会影响到查询速度。可以通过批量操作来降低此类开销，比如批量插入、<code>LOAD DATA INFILE</code> 和一次删除多行数据。</li><li>维护分区的成本可能很高。例如重组分区，会先创建一个临时分区，然后将数据复制到其中，最后再删除原分区。</li><li>所有分区必须使用相同的存储引擎。</li></ol><h2 id=主从同步>主从同步</h2><h3 id=定义>定义</h3><h4 id=什么是主从同步>什么是主从同步</h4><p>主从同步 / 主从复制使得<strong>数据可以从一个数据库服务器复制到其他服务器上</strong>，在复制数据时，一个服务器充当主服务器（<code>master</code>），其余的服务器充当从服务器（<code>slave</code>）。</p><p>因为复制是异步进行的，所以从服务器不需要一直连接着主服务器，从服务器甚至可以通过拨号断断续续地连接主服务器。通过配置文件，可以指定复制所有的数据库，某个数据库，甚至是某个数据库上的某个表。</p><h4 id=为什么要做主从同步>为什么要做主从同步</h4><ol><li><strong>读写分离</strong>，使数据库能支撑更大的并发。</li><li>在主服务器上生成实时数据，而在从服务器上分析这些数据，从而提高主服务器的性能。</li><li><strong>数据备份</strong>，保证数据的安全。</li></ol><h4 id=读写分离>读写分离</h4><p>读写分离主要依赖于主从复制，主从复制为读写分离服务。</p><p>读写分离的优势：</p><ul><li>主服务器负责写，从服务器负责读，<strong>缓解了锁的竞争</strong></li><li><strong>从服务器可以使用 MyISAM</strong>，提升查询性能及节约系统开销</li><li><strong>增加冗余</strong>，提高可用性</li></ul><h3 id=主从复制的实现>主从复制的实现</h3><p>为保证主服务器和从服务器的数据一致性，在向主服务器插入数据后，从服务器会自动将主服务器中修改的数据同步过来。</p><p>主从复制主要有三个线程：binlog 线程，I/O 线程，SQL 线程。</p><ul><li><strong>binlog 线程</strong>：运行在 Master 上，负责将主服务器上的数据更改写入到二进制日志（Binary log）中</li><li><strong>I/O 线程</strong>：运行在 Replica 上，负责从主服务器上读取 bin log，并写入从服务器的中继日志（Relay log）中</li><li><strong>SQL 线程</strong>：运行在 Replica 上，负责读取中继日志，解析出主服务器中已经执行的数据更改并在从服务器中重放</li></ul><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/cfc5c1bd741803f8ce6208cb8666657a.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/cfc5c1bd741803f8ce6208cb8666657a.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/cfc5c1bd741803f8ce6208cb8666657a.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/cfc5c1bd741803f8ce6208cb8666657a.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/cfc5c1bd741803f8ce6208cb8666657a.png title=图片></p><ul><li><p>Master 在每个事务更新数据完成之前，将操作记录写入到 bin log 中。</p></li><li><p>Slave 从库连接 Master 主库，并且 Master 有多少个 Slave 就会创建多少个 binlog dump 线程。当 Master 节点的 binlog 发生变化时，binlog dump 会通知所有的 Slave，并将相应的 binlog 发送给 Slave。</p></li><li><p>I/O 线程接收到 bin log 内容后，将其写入到中继日志（Relay log）中。</p></li><li><p>SQL 线程读取中继日志，并在从服务器中重放。</p></li></ul><img src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/092506ce418ae6bc3bcccc9e34739092.png alt=图片 style=zoom:50%><h3 id=乐观锁和悲观锁>乐观锁和悲观锁</h3><p>数据库中的并发控制是确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性。乐观锁和悲观锁是并发控制主要采用的技术手段。</p><ul><li><strong>悲观锁</strong><ul><li>假定会发生并发冲突，会对操作的数据进行加锁，直到提交事务，才会释放锁，其他事务才能进行修改。</li><li>实现方式：使用数据库中的锁机制。</li></ul></li><li><strong>乐观锁</strong><ul><li>假设不会发生并发冲突，<strong>只在提交操作时检查是否数据是否被修改过</strong>。给表增加 <code>version</code> 字段，在修改提交之前检查 <code>version</code> 与原来取到的 <code>version</code> 值是否相等，若相等，表示数据没有被修改，可以更新，否则，数据为脏数据，不能更新。</li><li>实现方式：乐观锁一般使用<strong>版本号机制</strong>（version）或 <strong>CAS 算法</strong>实现。</li></ul></li></ul><h2 id=存储过程>存储过程</h2><p>MySQL 的存储过程是<strong>一组预编译的 SQL 语句</strong>，保存在数据库中。</p><p>存储过程思想上很简单，就是数据库 SQL 语言层面的代码封装与重用。</p><p>例</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=line><span class=cl><span class=k>DELIMITER</span><span class=w> </span><span class=o>//</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=k>PROCEDURE</span><span class=w> </span><span class=n>GetCustomerCount</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>BEGIN</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>DECLARE</span><span class=w> </span><span class=k>count</span><span class=w> </span><span class=nb>INT</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>SELECT</span><span class=w> </span><span class=k>COUNT</span><span class=p>(</span><span class=o>*</span><span class=p>)</span><span class=w> </span><span class=k>INTO</span><span class=w> </span><span class=k>count</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>customers</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>SELECT</span><span class=w> </span><span class=k>count</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>END</span><span class=w> </span><span class=o>//</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>DELIMITER</span><span class=w> </span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>CALL</span><span class=w> </span><span class=n>GetCustomerCount</span><span class=p>();</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=其他技巧>其他技巧</h2><h3 id=g-和-g><code>\G</code> 和 <code>\g</code></h3><h4 id=g><code>\g</code></h4><p>在 MySQL 的 sql 语句后加上 <code>\g</code>，效果等同于加上定界符，一般默认的定界符是分号 <code>;</code></p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src="https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128161938955-1493255127.png" data-srcset="https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128161938955-1493255127.png, https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128161938955-1493255127.png 1.5x, https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128161938955-1493255127.png 2x" data-sizes=auto alt="https://cubox.pro/c/filters:no_upscale()?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128161938955-1493255127.png" title=img></p><h4 id=g-1><code>\G</code></h4><p>在 MySQL 的 sql 语句后加上 <code>\G</code>，表示将查询结果进行按列打印，可以使每个字段打印到单独的行。</p><p><strong>即将查到的结构旋转 90 度变成纵向；</strong></p><p>使用前，显示效果很差</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src="https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162245789-197074841.png" data-srcset="https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162245789-197074841.png, https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162245789-197074841.png 1.5x, https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162245789-197074841.png 2x" data-sizes=auto alt="https://cubox.pro/c/filters:no_upscale()?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162245789-197074841.png" title=img></p><p>使用后，显示效果不错，方便查询</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src="https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162350281-970223551.png" data-srcset="https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162350281-970223551.png, https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162350281-970223551.png 1.5x, https://cubox.pro/c/filters:no_upscale%28%29?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162350281-970223551.png 2x" data-sizes=auto alt="https://cubox.pro/c/filters:no_upscale()?imageUrl=https%3A%2F%2Fimg2018.cnblogs.com%2Fblog%2F697611%2F201811%2F697611-20181128162350281-970223551.png" title=img></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/database/mysql/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/ data-title="关于 MySQL 的一些笔记" data-hashtags=数据库,快速入门,MySQL><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/database/mysql/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/ data-hashtag=数据库><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/database/mysql/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/ data-title="关于 MySQL 的一些笔记"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/>数据库</a>,&nbsp;<a href=/Notes/tags/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/>快速入门</a>,&nbsp;<a href=/Notes/tags/mysql/>MySQL</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E6%A0%87%E5%87%86%E5%BA%93/math/ class=prev rel=prev title="Go math 标准库"><i class="fa-solid fa-angle-left fa-fw"></i>Go math 标准库</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E5%91%BD%E5%90%8D%E5%92%8C%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/ class=next rel=next title="Go 命名和开发规范">Go 命名和开发规范<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

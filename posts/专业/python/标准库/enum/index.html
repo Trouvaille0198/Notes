@@ -1,0 +1,542 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>Python enum 库 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="enum 官方文档：https://docs.python.org/zh-cn/3/li"><meta name=keywords content='Python'><meta itemprop=name content="Python enum 库"><meta itemprop=description content="enum 官方文档：https://docs.python.org/zh-cn/3/li"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="3703"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="Python"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/enum/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="Python enum 库"><meta property="og:description" content="enum 官方文档：https://docs.python.org/zh-cn/3/li"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="Python"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Python enum 库"><meta name=twitter:description content="enum 官方文档：https://docs.python.org/zh-cn/3/li"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/enum/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/inspect/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/dramatiq/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Python enum 库","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/enum\/"},"genre":"posts","keywords":"Python","wordcount":3703,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/python\/%E6%A0%87%E5%87%86%E5%BA%93\/enum\/","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Python enum 库</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/python/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Python</a></span></div><div class=post-meta-line><span title="0001-01-01 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=0001-01-01>0001-01-01</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 3703 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#快速上手>快速上手</a><ul><li><a href=#enum-1>Enum</a></li><li><a href=#flag>Flag</a></li><li><a href=#枚举成员及其属性-key-and-value-的访问>枚举成员及其属性 (key and value) 的访问</a></li><li><a href=#重复的枚举成员和值>重复的枚举成员和值</a></li><li><a href=#使用自动设定的值>使用自动设定的值</a></li><li><a href=#迭代遍历>迭代遍历</a></li><li><a href=#比较运算>比较运算</a></li><li><a href=#合法的枚举成员和属性>合法的枚举成员和属性</a></li><li><a href=#受限的-enum-子类化>受限的 Enum 子类化</a></li><li><a href=#数据类支持>数据类支持</a></li><li><a href=#打包pickle>打包（pickle）</a></li><li><a href=#函数式-api>函数式 API</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=enum>enum</h1><blockquote><p>官方文档：https://docs.python.org/zh-cn/3/library/enum.html</p></blockquote><p>一个枚举（enum）是：</p><ul><li>是绑定到唯一值的符号名称（成员）集合</li><li>可以被执行迭代以按定义顺序返回其规范的（即非别名的）成员</li><li>使用 <em>调用</em> 语法按值返回成员</li><li>使用 <em>索引</em> 语法按名称返回成员</li></ul><p>枚举是使用 <a href=https://docs.python.org/zh-cn/3/reference/compound_stmts.html#class target=_blank rel="external nofollow noopener noreferrer"><code>class</code></a> 语法或是使用函数调用语法来创建的:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>enum</span> <span class=kn>import</span> <span class=n>Enum</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=c1># class syntax</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Color</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>RED</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>GREEN</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>BLUE</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=c1># functional syntax</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span> <span class=o>=</span> <span class=n>Enum</span><span class=p>(</span><span class=s1>&#39;Color&#39;</span><span class=p>,</span> <span class=p>[</span><span class=s1>&#39;RED&#39;</span><span class=p>,</span> <span class=s1>&#39;GREEN&#39;</span><span class=p>,</span> <span class=s1>&#39;BLUE&#39;</span><span class=p>])</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>虽然我们可以使用 <a href=https://docs.python.org/zh-cn/3/reference/compound_stmts.html#class target=_blank rel="external nofollow noopener noreferrer"><code>class</code></a> 语法来创建枚举，但枚举并不是常规的 Python 类。</p></blockquote><ul><li>类 <code>Color</code> 是一个 <em>枚举</em> （或 <em>enum</em> ）</li><li>属性 <code>Color.RED</code> 、 <code>Color.GREEN</code> 等是 <em>枚举成员</em> （或 <em>members</em> ）并且在功能上是常量。</li><li>枚举成员有 <em>names</em> 和 <em>values</em> (<code>Color.RED</code> 的 name 是 <code>RED</code>，<code>Color.BLUE</code> 的 value 是 <code>3</code>，等等)</li></ul><h2 id=快速上手>快速上手</h2><h3 id=enum-1>Enum</h3><p><a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum target=_blank rel="external nofollow noopener noreferrer"><code>Enum</code></a> 是一组与互不相同的值分别绑定的符号名。类似于全局变量，但提供了更好用的 <a href=https://docs.python.org/zh-cn/3/library/functions.html#repr target=_blank rel="external nofollow noopener noreferrer"><code>repr()</code></a>、分组、类型安全和一些其它特性。</p><p>它们最适用于当某个变量可选的值有限时。例如，从一周中选取一天：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>enum</span> <span class=kn>import</span> <span class=n>Enum</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Weekday</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>MONDAY</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>TUESDAY</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>WEDNESDAY</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>THURSDAY</span> <span class=o>=</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>FRIDAY</span> <span class=o>=</span> <span class=mi>5</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SATURDAY</span> <span class=o>=</span> <span class=mi>6</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SUNDAY</span> <span class=o>=</span> <span class=mi>7</span>
+</span></span></code></pre></td></tr></table></div></div><p>或是 RGB 三原色：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>enum</span> <span class=kn>import</span> <span class=n>Enum</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Color</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>RED</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>GREEN</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>BLUE</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span></code></pre></td></tr></table></div></div><p>正如你所见，创建一个 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum target=_blank rel="external nofollow noopener noreferrer"><code>Enum</code></a> 就是简单地写一个继承 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum target=_blank rel="external nofollow noopener noreferrer"><code>Enum</code></a> 的类。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Weekday</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>WEDNESDAY</span><span class=p>:</span> <span class=mi>3</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>print</span><span class=p>(</span><span class=n>Weekday</span><span class=o>.</span><span class=n>THURSDAY</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Weekday</span><span class=o>.</span><span class=n>THURSDAY</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>type</span><span class=p>(</span><span class=n>Weekday</span><span class=o>.</span><span class=n>MONDAY</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>enum</span> <span class=s1>&#39;Weekday&#39;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>Weekday</span><span class=o>.</span><span class=n>FRIDAY</span><span class=p>,</span> <span class=n>Weekday</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>print</span><span class=p>(</span><span class=n>Weekday</span><span class=o>.</span><span class=n>TUESDAY</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>TUESDAY</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>WEDNESDAY</span><span class=o>.</span><span class=n>value</span>
+</span></span><span class=line><span class=cl><span class=mi>3</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=flag>Flag</h3><p>如果变量只需要存一天，这个 <code>Weekday</code> 枚举是不错，但如果需要好几天呢？比如要写个函数来描绘一周内的家务，并且不想用 <a href=https://docs.python.org/zh-cn/3/library/stdtypes.html#list target=_blank rel="external nofollow noopener noreferrer"><code>list</code></a>，则可以使用不同类型的 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum target=_blank rel="external nofollow noopener noreferrer"><code>Enum</code></a>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>enum</span> <span class=kn>import</span> <span class=n>Flag</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Weekday</span><span class=p>(</span><span class=n>Flag</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>MONDAY</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>TUESDAY</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>WEDNESDAY</span> <span class=o>=</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>THURSDAY</span> <span class=o>=</span> <span class=mi>8</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>FRIDAY</span> <span class=o>=</span> <span class=mi>16</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SATURDAY</span> <span class=o>=</span> <span class=mi>32</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SUNDAY</span> <span class=o>=</span> <span class=mi>64</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里做了两处改动：继承了 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Flag target=_blank rel="external nofollow noopener noreferrer"><code>Flag</code></a>，而且值都是2的幂。</p><p>就像最开始的 <code>Weekday</code> 枚举一样，可以只用一种类型:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>first_week_day</span> <span class=o>=</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>MONDAY</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>first_week_day</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>MONDAY</span><span class=p>:</span> <span class=mi>1</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>但 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Flag target=_blank rel="external nofollow noopener noreferrer"><code>Flag</code></a> 也允许将几个成员并入一个变量:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>weekend</span> <span class=o>=</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>SATURDAY</span> <span class=o>|</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>SUNDAY</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>weekend</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>SATURDAY</span><span class=o>|</span><span class=n>SUNDAY</span><span class=p>:</span> <span class=mi>96</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>甚至可以在一个 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Flag target=_blank rel="external nofollow noopener noreferrer"><code>Flag</code></a> 变量上进行迭代:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>for</span> <span class=n>day</span> <span class=ow>in</span> <span class=n>weekend</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=nb>print</span><span class=p>(</span><span class=n>day</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>Weekday</span><span class=o>.</span><span class=n>SATURDAY</span>
+</span></span><span class=line><span class=cl><span class=n>Weekday</span><span class=o>.</span><span class=n>SUNDAY</span>
+</span></span></code></pre></td></tr></table></div></div><p>让我们来安排家务吧:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>chores_for_ethan</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=s1>&#39;feed the cat&#39;</span><span class=p>:</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>MONDAY</span> <span class=o>|</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>WEDNESDAY</span> <span class=o>|</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>FRIDAY</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=s1>&#39;do the dishes&#39;</span><span class=p>:</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>TUESDAY</span> <span class=o>|</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>THURSDAY</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=s1>&#39;answer SO questions&#39;</span><span class=p>:</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>SATURDAY</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>一个显示某天家务的函数:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>def</span> <span class=nf>show_chores</span><span class=p>(</span><span class=n>chores</span><span class=p>,</span> <span class=n>day</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=k>for</span> <span class=n>chore</span><span class=p>,</span> <span class=n>days</span> <span class=ow>in</span> <span class=n>chores</span><span class=o>.</span><span class=n>items</span><span class=p>():</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=k>if</span> <span class=n>day</span> <span class=ow>in</span> <span class=n>days</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>             <span class=nb>print</span><span class=p>(</span><span class=n>chore</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>show_chores</span><span class=p>(</span><span class=n>chores_for_ethan</span><span class=p>,</span> <span class=n>Weekday</span><span class=o>.</span><span class=n>SATURDAY</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>answer</span> <span class=n>SO</span> <span class=n>questions</span>
+</span></span></code></pre></td></tr></table></div></div><p>&#x2714;&#xfe0f; 如果成员值是什么无所谓，可以少些工作，用 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.auto target=_blank rel="external nofollow noopener noreferrer"><code>auto()</code></a> 来取值:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>enum</span> <span class=kn>import</span> <span class=n>auto</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Weekday</span><span class=p>(</span><span class=n>Flag</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>MONDAY</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>TUESDAY</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>WEDNESDAY</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>THURSDAY</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>FRIDAY</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SATURDAY</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SUNDAY</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>WEEKEND</span> <span class=o>=</span> <span class=n>SATURDAY</span> <span class=o>|</span> <span class=n>SUNDAY</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=枚举成员及其属性-key-and-value-的访问>枚举成员及其属性 (key and value) 的访问</h3><p>有时，要在程序中访问枚举成员（如，开发时不知道颜色的确切值，<code>Color.RED</code> 不适用的情况）。<code>Enum</code> 支持如下访问方式:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Color</span><span class=o>.</span><span class=n>RED</span><span class=p>:</span> <span class=mi>1</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Color</span><span class=o>.</span><span class=n>BLUE</span><span class=p>:</span> <span class=mi>3</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>若要用 <em>名称</em> 访问枚举成员时，可使用枚举项:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=p>[</span><span class=s1>&#39;RED&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Color</span><span class=o>.</span><span class=n>RED</span><span class=p>:</span> <span class=mi>1</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=p>[</span><span class=s1>&#39;GREEN&#39;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Color</span><span class=o>.</span><span class=n>GREEN</span><span class=p>:</span> <span class=mi>2</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>若有了枚举成员，需要获取 <code>name</code> 或 <code>value</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>member</span> <span class=o>=</span> <span class=n>Color</span><span class=o>.</span><span class=n>RED</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>member</span><span class=o>.</span><span class=n>name</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;RED&#39;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>member</span><span class=o>.</span><span class=n>value</span>
+</span></span><span class=line><span class=cl><span class=mi>1</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=重复的枚举成员和值>重复的枚举成员和值</h3><p>两个枚举成员的名称不能相同:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Shape</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SQUARE</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SQUARE</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Traceback</span> <span class=p>(</span><span class=n>most</span> <span class=n>recent</span> <span class=n>call</span> <span class=n>last</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=ne>TypeError</span><span class=p>:</span> <span class=s1>&#39;SQUARE&#39;</span> <span class=n>already</span> <span class=n>defined</span> <span class=k>as</span> <span class=mi>2</span>
+</span></span></code></pre></td></tr></table></div></div><p>然而，一个枚举成员可以关联多个其他名称。如果两个枚举项 <code>A</code> 和 <code>B</code> 具有相同值（并且首先定义的是 <code>A</code> ），则 <code>B</code> 是成员 <code>A</code> 的别名。对 <code>A</code> 按值检索将会返回成员 <code>A</code>。按名称检索 <code>B</code> 也会返回成员 <code>A</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Shape</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SQUARE</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>DIAMOND</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>CIRCLE</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>ALIAS_FOR_SQUARE</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Shape</span><span class=o>.</span><span class=n>SQUARE</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>SQUARE</span><span class=p>:</span> <span class=mi>2</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Shape</span><span class=o>.</span><span class=n>ALIAS_FOR_SQUARE</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>SQUARE</span><span class=p>:</span> <span class=mi>2</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Shape</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>SQUARE</span><span class=p>:</span> <span class=mi>2</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>默认情况下，枚举允许多个名称作为同一个值的别名。若不想如此，可以使用 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.unique target=_blank rel="external nofollow noopener noreferrer"><code>unique()</code></a> 装饰器:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>enum</span> <span class=kn>import</span> <span class=n>Enum</span><span class=p>,</span> <span class=n>unique</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nd>@unique</span>
+</span></span><span class=line><span class=cl><span class=o>...</span> <span class=k>class</span> <span class=nc>Mistake</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>ONE</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>TWO</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>THREE</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>FOUR</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Traceback</span> <span class=p>(</span><span class=n>most</span> <span class=n>recent</span> <span class=n>call</span> <span class=n>last</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=ne>ValueError</span><span class=p>:</span> <span class=n>duplicate</span> <span class=n>values</span> <span class=n>found</span> <span class=ow>in</span> <span class=o>&lt;</span><span class=n>enum</span> <span class=s1>&#39;Mistake&#39;</span><span class=o>&gt;</span><span class=p>:</span> <span class=n>FOUR</span> <span class=o>-&gt;</span> <span class=n>THREE</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=使用自动设定的值>使用自动设定的值</h3><p>如果具体的枚举值无所谓是什么，可以使用 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.auto target=_blank rel="external nofollow noopener noreferrer"><code>auto</code></a>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>enum</span> <span class=kn>import</span> <span class=n>Enum</span><span class=p>,</span> <span class=n>auto</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Color</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>RED</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>BLUE</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>GREEN</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=p>[</span><span class=n>member</span><span class=o>.</span><span class=n>value</span> <span class=k>for</span> <span class=n>member</span> <span class=ow>in</span> <span class=n>Color</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>枚举值将交由 <code>_generate_next_value_()</code> 选取，该函数可以被重写:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>AutoName</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=nd>@staticmethod</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=k>def</span> <span class=nf>_generate_next_value_</span><span class=p>(</span><span class=n>name</span><span class=p>,</span> <span class=n>start</span><span class=p>,</span> <span class=n>count</span><span class=p>,</span> <span class=n>last_values</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=k>return</span> <span class=n>name</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Ordinal</span><span class=p>(</span><span class=n>AutoName</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>NORTH</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SOUTH</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>EAST</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>WEST</span> <span class=o>=</span> <span class=n>auto</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=p>[</span><span class=n>member</span><span class=o>.</span><span class=n>value</span> <span class=k>for</span> <span class=n>member</span> <span class=ow>in</span> <span class=n>Ordinal</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=s1>&#39;NORTH&#39;</span><span class=p>,</span> <span class=s1>&#39;SOUTH&#39;</span><span class=p>,</span> <span class=s1>&#39;EAST&#39;</span><span class=p>,</span> <span class=s1>&#39;WEST&#39;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=迭代遍历>迭代遍历</h3><p>对枚举成员的迭代遍历不会列出别名:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>list</span><span class=p>(</span><span class=n>Shape</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>SQUARE</span><span class=p>:</span> <span class=mi>2</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>DIAMOND</span><span class=p>:</span> <span class=mi>1</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>CIRCLE</span><span class=p>:</span> <span class=mi>3</span><span class=o>&gt;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>list</span><span class=p>(</span><span class=n>Weekday</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>MONDAY</span><span class=p>:</span> <span class=mi>1</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>TUESDAY</span><span class=p>:</span> <span class=mi>2</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>WEDNESDAY</span><span class=p>:</span> <span class=mi>4</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>THURSDAY</span><span class=p>:</span> <span class=mi>8</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>FRIDAY</span><span class=p>:</span> <span class=mi>16</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>SATURDAY</span><span class=p>:</span> <span class=mi>32</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Weekday</span><span class=o>.</span><span class=n>SUNDAY</span><span class=p>:</span> <span class=mi>64</span><span class=o>&gt;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>👆 <code>Shape.ALIAS_FOR_SQUARE</code> 和 <code>Weekday.WEEKEND</code> 等别名没有被显示。</p><p>特殊属性 <code>__members__</code> 是一个名称与成员间的只读有序映射。包含了枚举中定义的所有名称，包括别名:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>for</span> <span class=n>name</span><span class=p>,</span> <span class=n>member</span> <span class=ow>in</span> <span class=n>Shape</span><span class=o>.</span><span class=n>__members__</span><span class=o>.</span><span class=n>items</span><span class=p>():</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>name</span><span class=p>,</span> <span class=n>member</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=s1>&#39;SQUARE&#39;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>SQUARE</span><span class=p>:</span> <span class=mi>2</span><span class=o>&gt;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=s1>&#39;DIAMOND&#39;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>DIAMOND</span><span class=p>:</span> <span class=mi>1</span><span class=o>&gt;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=s1>&#39;CIRCLE&#39;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>CIRCLE</span><span class=p>:</span> <span class=mi>3</span><span class=o>&gt;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=s1>&#39;ALIAS_FOR_SQUARE&#39;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Shape</span><span class=o>.</span><span class=n>SQUARE</span><span class=p>:</span> <span class=mi>2</span><span class=o>&gt;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>__members__</code> 属性可用于获取枚举成员的详细信息。比如查找所有别名:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=p>[</span><span class=n>name</span> <span class=k>for</span> <span class=n>name</span><span class=p>,</span> <span class=n>member</span> <span class=ow>in</span> <span class=n>Shape</span><span class=o>.</span><span class=n>__members__</span><span class=o>.</span><span class=n>items</span><span class=p>()</span> <span class=k>if</span> <span class=n>member</span><span class=o>.</span><span class=n>name</span> <span class=o>!=</span> <span class=n>name</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=s1>&#39;ALIAS_FOR_SQUARE&#39;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=比较运算>比较运算</h3><p>枚举成员是按 ID 进行比较的:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=o>.</span><span class=n>RED</span> <span class=ow>is</span> <span class=n>Color</span><span class=o>.</span><span class=n>RED</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=o>.</span><span class=n>RED</span> <span class=ow>is</span> <span class=n>Color</span><span class=o>.</span><span class=n>BLUE</span>
+</span></span><span class=line><span class=cl><span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=o>.</span><span class=n>RED</span> <span class=ow>is</span> <span class=ow>not</span> <span class=n>Color</span><span class=o>.</span><span class=n>BLUE</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span></code></pre></td></tr></table></div></div><p>枚举值之间无法进行有序的比较。枚举的成员不是整数（另请参阅下文 <a href=https://docs.python.org/zh-cn/3/howto/enum.html#intenum target=_blank rel="external nofollow noopener noreferrer">IntEnum</a>）:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=o>.</span><span class=n>RED</span> <span class=o>&lt;</span> <span class=n>Color</span><span class=o>.</span><span class=n>BLUE</span>
+</span></span><span class=line><span class=cl><span class=n>Traceback</span> <span class=p>(</span><span class=n>most</span> <span class=n>recent</span> <span class=n>call</span> <span class=n>last</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>  <span class=n>File</span> <span class=s2>&#34;&lt;stdin&gt;&#34;</span><span class=p>,</span> <span class=n>line</span> <span class=mi>1</span><span class=p>,</span> <span class=ow>in</span> <span class=o>&lt;</span><span class=n>module</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=ne>TypeError</span><span class=p>:</span> <span class=s1>&#39;&lt;&#39;</span> <span class=ow>not</span> <span class=n>supported</span> <span class=n>between</span> <span class=n>instances</span> <span class=n>of</span> <span class=s1>&#39;Color&#39;</span> <span class=ow>and</span> <span class=s1>&#39;Color&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>相等性比较的定义如下:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=o>.</span><span class=n>BLUE</span> <span class=o>==</span> <span class=n>Color</span><span class=o>.</span><span class=n>BLUE</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=o>.</span><span class=n>BLUE</span> <span class=o>==</span> <span class=n>Color</span><span class=o>.</span><span class=n>RED</span>
+</span></span><span class=line><span class=cl><span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=o>.</span><span class=n>BLUE</span> <span class=o>!=</span> <span class=n>Color</span><span class=o>.</span><span class=n>RED</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span></code></pre></td></tr></table></div></div><p>与非枚举值的比较将总是不等的（同样 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.IntEnum target=_blank rel="external nofollow noopener noreferrer"><code>IntEnum</code></a> 有意设计为其他的做法，参见下文）:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Color</span><span class=o>.</span><span class=n>BLUE</span> <span class=o>==</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=kc>False</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=合法的枚举成员和属性>合法的枚举成员和属性</h3><p>以上大多数示例都用了整数作为枚举值。使用整数确实简短方便（并且是 <a href=https://docs.python.org/zh-cn/3/howto/enum.html#functional-api target=_blank rel="external nofollow noopener noreferrer">Functional API</a> 默认提供的值），但并非强制要求。绝大多数情况下，人们并不关心枚举的实际值是什么。但如果值确实重要，可以使用任何值。</p><p>枚举是 Python 的类，可带有普通方法和特殊方法。假设有如下枚举:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Mood</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>FUNKY</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>HAPPY</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=k>def</span> <span class=nf>describe</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=c1># self is the member here</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>value</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=k>def</span> <span class=fm>__str__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=k>return</span> <span class=s1>&#39;my custom str! </span><span class=si>{0}</span><span class=s1>&#39;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=nd>@classmethod</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=k>def</span> <span class=nf>favorite_mood</span><span class=p>(</span><span class=bp>cls</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=c1># cls here is the enumeration</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=k>return</span> <span class=bp>cls</span><span class=o>.</span><span class=n>HAPPY</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span></code></pre></td></tr></table></div></div><p>那么:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Mood</span><span class=o>.</span><span class=n>favorite_mood</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Mood</span><span class=o>.</span><span class=n>HAPPY</span><span class=p>:</span> <span class=mi>3</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Mood</span><span class=o>.</span><span class=n>HAPPY</span><span class=o>.</span><span class=n>describe</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>(</span><span class=s1>&#39;HAPPY&#39;</span><span class=p>,</span> <span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>str</span><span class=p>(</span><span class=n>Mood</span><span class=o>.</span><span class=n>FUNKY</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;my custom str! 1&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>合法的规则如下：以单下划线开头和结尾的名称是保留值，不能使用；在枚举中定义的其他所有属性都将成为该枚举的成员，但特殊方法（<code>__str__()</code> 、<code>__add__()</code> 等）、描述符（方法也是描述符）和在 <code>_ignore_</code> 中列出的变量名除外。</p><p>注意：如果你的枚举定义了 <code>__new__()</code> 和/或 <code>__init__()</code>，则给予枚举成员的任何值都将被传递给这些方法。 请参阅示例 <a href=https://docs.python.org/zh-cn/3/howto/enum.html#planet target=_blank rel="external nofollow noopener noreferrer">Planet</a>。</p><blockquote><p>如果定义了 <code>__new__()</code> 方法，则它会在创建 Enum 成员时被使用；然后它将被 Enum 的 <code>__new__()</code> 所替换，该方法会在类创建后被用于查找现有成员。 详情参见 <a href=https://docs.python.org/zh-cn/3/howto/enum.html#new-vs-init target=_blank rel="external nofollow noopener noreferrer">何时使用 <strong>new</strong>() 与 <strong>init</strong>()</a>。</p></blockquote><h3 id=受限的-enum-子类化>受限的 Enum 子类化</h3><p>新建的 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum target=_blank rel="external nofollow noopener noreferrer"><code>Enum</code></a> 类必须包含：一个枚举基类、至多一种数据类型和按需提供的基于 <a href=https://docs.python.org/zh-cn/3/library/functions.html#object target=_blank rel="external nofollow noopener noreferrer"><code>object</code></a> 的混合类。这些基类的顺序如下:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=k>class</span> <span class=nc>EnumName</span><span class=p>([</span><span class=n>mix</span><span class=o>-</span><span class=ow>in</span><span class=p>,</span> <span class=o>...</span><span class=p>,]</span> <span class=p>[</span><span class=n>data</span><span class=o>-</span><span class=nb>type</span><span class=p>,]</span> <span class=n>base</span><span class=o>-</span><span class=n>enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>pass</span>
+</span></span></code></pre></td></tr></table></div></div><p>仅当未定义任何成员时，枚举类才允许被子类化。因此不得有以下写法:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>MoreColor</span><span class=p>(</span><span class=n>Color</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>PINK</span> <span class=o>=</span> <span class=mi>17</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=n>Traceback</span> <span class=p>(</span><span class=n>most</span> <span class=n>recent</span> <span class=n>call</span> <span class=n>last</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=ne>TypeError</span><span class=p>:</span> <span class=o>&lt;</span><span class=n>enum</span> <span class=s1>&#39;MoreColor&#39;</span><span class=o>&gt;</span> <span class=n>cannot</span> <span class=n>extend</span> <span class=o>&lt;</span><span class=n>enum</span> <span class=s1>&#39;Color&#39;</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>但以下代码是可以的:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Foo</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=k>def</span> <span class=nf>some_behavior</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>         <span class=k>pass</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Bar</span><span class=p>(</span><span class=n>Foo</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>HAPPY</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>SAD</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果定义了成员的枚举也能被子类化，则类型与实例的某些重要不可变规则将会被破坏。另一方面，一组枚举类共享某些操作也是合理的。（请参阅例程 <a href=https://docs.python.org/zh-cn/3/howto/enum.html#orderedenum target=_blank rel="external nofollow noopener noreferrer">OrderedEnum</a> ）</p><h3 id=数据类支持>数据类支持</h3><p>当从 <a href=https://docs.python.org/zh-cn/3/library/dataclasses.html#dataclasses.dataclass target=_blank rel="external nofollow noopener noreferrer"><code>dataclass</code></a> 继承时，<a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum.__repr__ target=_blank rel="external nofollow noopener noreferrer"><code>__repr__()</code></a> 将忽略被继承类的名称。 例如:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>dataclass</span><span class=p>,</span> <span class=n>field</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nd>@dataclass</span>
+</span></span><span class=line><span class=cl><span class=o>...</span> <span class=k>class</span> <span class=nc>CreatureDataMixin</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>size</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>legs</span><span class=p>:</span> <span class=nb>int</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>tail</span><span class=p>:</span> <span class=nb>bool</span> <span class=o>=</span> <span class=n>field</span><span class=p>(</span><span class=nb>repr</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>default</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Creature</span><span class=p>(</span><span class=n>CreatureDataMixin</span><span class=p>,</span> <span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>BEETLE</span> <span class=o>=</span> <span class=s1>&#39;small&#39;</span><span class=p>,</span> <span class=mi>6</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>DOG</span> <span class=o>=</span> <span class=s1>&#39;medium&#39;</span><span class=p>,</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Creature</span><span class=o>.</span><span class=n>DOG</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Creature</span><span class=o>.</span><span class=n>DOG</span><span class=p>:</span> <span class=n>size</span><span class=o>=</span><span class=s1>&#39;medium&#39;</span><span class=p>,</span> <span class=n>legs</span><span class=o>=</span><span class=mi>4</span><span class=o>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用 <code>dataclass()</code> 参数 <code>repr=False</code> 来使用标准的 <a href=https://docs.python.org/zh-cn/3/library/functions.html#repr target=_blank rel="external nofollow noopener noreferrer"><code>repr()</code></a>。</p><blockquote><p><em>在 3.12 版本发生变更:</em> 只有数据类字段会被显示在值区域中，而不会显示数据类的名称。Only the dataclass fields are shown in the value area, not the dataclass&rsquo; name.</p></blockquote><h3 id=打包pickle>打包（pickle）</h3><p>枚举类型可以被打包和解包:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>test.test_enum</span> <span class=kn>import</span> <span class=n>Fruit</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>from</span> <span class=nn>pickle</span> <span class=kn>import</span> <span class=n>dumps</span><span class=p>,</span> <span class=n>loads</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Fruit</span><span class=o>.</span><span class=n>TOMATO</span> <span class=ow>is</span> <span class=n>loads</span><span class=p>(</span><span class=n>dumps</span><span class=p>(</span><span class=n>Fruit</span><span class=o>.</span><span class=n>TOMATO</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span></code></pre></td></tr></table></div></div><p>打包的常规限制同样适用于枚举类型：必须在模块的最高层级定义，因为解包操作要求可从该模块导入。</p><blockquote><p>用 pickle 协议版本 4 可以轻松地将嵌入其他类中的枚举进行打包。</p></blockquote><p>通过在枚举类中定义 <code>__reduce_ex__()</code> 来修改枚举成员的封存/解封方式是可能的。 默认的方法是基于值的，但具有复杂值的枚举也许会想要基于名称的:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=kn>import</span> <span class=nn>enum</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>MyEnum</span><span class=p>(</span><span class=n>enum</span><span class=o>.</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>__reduce_ex__</span> <span class=o>=</span> <span class=n>enum</span><span class=o>.</span><span class=n>pickle_by_enum_name</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>不建议为旗标使用基于名称的方式，因为未命名的别名将无法解封。</p></blockquote><h3 id=函数式-api>函数式 API</h3><p><a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum target=_blank rel="external nofollow noopener noreferrer"><code>Enum</code></a> 类可调用并提供了以下函数式 API：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Animal</span> <span class=o>=</span> <span class=n>Enum</span><span class=p>(</span><span class=s1>&#39;Animal&#39;</span><span class=p>,</span> <span class=s1>&#39;ANT BEE CAT DOG&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Animal</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>enum</span> <span class=s1>&#39;Animal&#39;</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>Animal</span><span class=o>.</span><span class=n>ANT</span>
+</span></span><span class=line><span class=cl><span class=o>&lt;</span><span class=n>Animal</span><span class=o>.</span><span class=n>ANT</span><span class=p>:</span> <span class=mi>1</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=nb>list</span><span class=p>(</span><span class=n>Animal</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=o>&lt;</span><span class=n>Animal</span><span class=o>.</span><span class=n>ANT</span><span class=p>:</span> <span class=mi>1</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Animal</span><span class=o>.</span><span class=n>BEE</span><span class=p>:</span> <span class=mi>2</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Animal</span><span class=o>.</span><span class=n>CAT</span><span class=p>:</span> <span class=mi>3</span><span class=o>&gt;</span><span class=p>,</span> <span class=o>&lt;</span><span class=n>Animal</span><span class=o>.</span><span class=n>DOG</span><span class=p>:</span> <span class=mi>4</span><span class=o>&gt;</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><p>该 API 的语义类似于 <a href=https://docs.python.org/zh-cn/3/library/collections.html#collections.namedtuple target=_blank rel="external nofollow noopener noreferrer"><code>namedtuple</code></a>。调用 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum target=_blank rel="external nofollow noopener noreferrer"><code>Enum</code></a> 的第一个参数是枚举的名称。</p><p>第二个参数是枚举成员名称的 <em>来源</em>。可以是个用空格分隔的名称字符串、名称序列、表示键/值对的二元组的序列，或者名称到值的映射（如字典）。 最后两种可以为枚举赋任意值；其他类型则会自动赋成由 1 开始递增的整数值（利用 <code>start</code> 形参可指定为其他起始值）。返回值是一个派生自 <a href=https://docs.python.org/zh-cn/3/library/enum.html#enum.Enum target=_blank rel="external nofollow noopener noreferrer"><code>Enum</code></a> 的新类。换句话说，上述对 <code>Animal</code> 的赋值等价于:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-py data-lang=py><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=k>class</span> <span class=nc>Animal</span><span class=p>(</span><span class=n>Enum</span><span class=p>):</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>ANT</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>BEE</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>CAT</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>     <span class=n>DOG</span> <span class=o>=</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span></code></pre></td></tr></table></div></div><p>默认从 <code>1</code> 开始而非 <code>0</code> ，因为 <code>0</code> 是布尔值 <code>False</code> ，但默认的枚举成员都被视作 <code>True</code> 。</p><p>对使用函数式 API 创建的枚举进行封存，可能会很棘手，因为要使用栈帧的实现细节来尝试找出枚举是在哪个模块中创建的（例如当你使用了另一个模块中的实用函数时它就可能失败，在 IronPython 或 Jython 上也可能无效）。解决办法是像下面这样显式地指定模块名称：</p><p>>&#187;</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&gt;&gt;&gt; Animal = Enum(&#39;Animal&#39;, &#39;ANT BEE CAT DOG&#39;, module=__name__)
+</span></span></code></pre></td></tr></table></div></div><p>警告</p><p>如果未提供 <code>module</code>，且 Enum 无法确定是哪个模块，新的 Enum 成员将不可被解封；为了让错误尽量靠近源头，封存将被禁用。</p><p>新的 pickle 协议版本 4 在某些情况下同样依赖于 <a href=https://docs.python.org/zh-cn/3/library/stdtypes.html#definition.__qualname__ target=_blank rel="external nofollow noopener noreferrer"><code>__qualname__</code></a> 被设为特定位置以便 pickle 能够找到相应的类。 例如，类是否存在于全局作用域的 SomeData 类中:</p><p>>&#187;</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&gt;&gt;&gt; Animal = Enum(&#39;Animal&#39;, &#39;ANT BEE CAT DOG&#39;, qualname=&#39;SomeData.Animal&#39;)
+</span></span></code></pre></td></tr></table></div></div><p>完整的签名为:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Enum(
+</span></span><span class=line><span class=cl>    value=&#39;NewEnumName&#39;,
+</span></span><span class=line><span class=cl>    names=&lt;...&gt;,
+</span></span><span class=line><span class=cl>    *,
+</span></span><span class=line><span class=cl>    module=&#39;...&#39;,
+</span></span><span class=line><span class=cl>    qualname=&#39;...&#39;,
+</span></span><span class=line><span class=cl>    type=&lt;mixed-in class&gt;,
+</span></span><span class=line><span class=cl>    start=1,
+</span></span><span class=line><span class=cl>    )
+</span></span></code></pre></td></tr></table></div></div><ul><li><p><em>value</em>: 新枚举类将会作为其名称记录的值。</p></li><li><p><em>names</em>: 枚举的成员。 这可以是一个用空格或逗号分隔的字符串（值将从 1 开始除非另外指定）:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>&#39;RED GREEN BLUE&#39; | &#39;RED,GREEN,BLUE&#39; | &#39;RED, GREEN, BLUE&#39;
+</span></span></code></pre></td></tr></table></div></div><p>或是一个名称的迭代器对象:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[&#39;RED&#39;, &#39;GREEN&#39;, &#39;BLUE&#39;]
+</span></span></code></pre></td></tr></table></div></div><p>或是一个 (名称, 值) 对的迭代器对象:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[(&#39;CYAN&#39;, 4), (&#39;MAGENTA&#39;, 5), (&#39;YELLOW&#39;, 6)]
+</span></span></code></pre></td></tr></table></div></div><p>或是一个映射对象:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>{&#39;CHARTREUSE&#39;: 7, &#39;SEA_GREEN&#39;: 11, &#39;ROSEMARY&#39;: 42}
+</span></span></code></pre></td></tr></table></div></div></li><li><p><em>module</em>: 新枚举类所在的模块名。</p></li><li><p><em>qualname</em>: 新枚举类在模块内的位置。</p></li><li><p><em>type</em>: 要混入到新枚举类的类型。</p></li><li><p><em>start</em>: 当只传入名称时要使用的起始计数编号。</p></li></ul><p><em>在 3.5 版本发生变更:</em> 增加了 <em>start</em> 形参。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/enum/ data-title="Python enum 库" data-hashtags=Python><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/enum/ data-hashtag=Python><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/enum/ data-title="Python enum 库"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/python/>Python</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E6%A0%87%E5%87%86%E5%BA%93/inspect/ class=prev rel=prev title="Python inspect 库"><i class="fa-solid fa-angle-left fa-fw"></i>Python inspect 库</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/python/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1/dramatiq/ class=next rel=next title="Python dramatiq 库">Python dramatiq 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>

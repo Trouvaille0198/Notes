@@ -1,0 +1,856 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><meta http-equiv=X-UA-Compatible content="IE=edge, chrome=1"><title>Go 高性能编程 - 伤心肠粉的酱油碟子</title><meta name=author content>
+<meta name=author-link content><meta name=description content="Go 高性能编程 https://geektutu.com/post/high-performance-go.html 常用数据结构 字符串高效拼接 在 Go 语言中，字符串 (string) 是不可变的，拼接字符"><meta name=keywords content='进阶'><meta itemprop=name content="Go 高性能编程"><meta itemprop=description content="Go 高性能编程 https://geektutu.com/post/high-performance-go.html 常用数据结构 字符串高效拼接 在 Go 语言中，字符串 (string) 是不可变的，拼接字符"><meta itemprop=datePublished content="2022-03-03T00:00:00+00:00"><meta itemprop=dateModified content="2024-04-27T05:32:21+00:00"><meta itemprop=wordCount content="6824"><meta itemprop=image content="https://trouvaille0198.github.io/logo.png"><meta itemprop=keywords content="进阶"><meta property="og:url" content="https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/"><meta property="og:site_name" content="伤心肠粉的酱油碟子"><meta property="og:title" content="Go 高性能编程"><meta property="og:description" content="Go 高性能编程 https://geektutu.com/post/high-performance-go.html 常用数据结构 字符串高效拼接 在 Go 语言中，字符串 (string) 是不可变的，拼接字符"><meta property="og:locale" content="zh-CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-03-03T00:00:00+00:00"><meta property="article:modified_time" content="2024-04-27T05:32:21+00:00"><meta property="article:tag" content="进阶"><meta property="og:image" content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://trouvaille0198.github.io/logo.png"><meta name=twitter:title content="Go 高性能编程"><meta name=twitter:description content="Go 高性能编程 https://geektutu.com/post/high-performance-go.html 常用数据结构 字符串高效拼接 在 Go 语言中，字符串 (string) 是不可变的，拼接字符"><meta name=application-name content="FixIt"><meta name=apple-mobile-web-app-title content="FixIt"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#252627"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/><link rel=prev href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/><link rel=next href=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E6%A0%87%E5%87%86%E5%BA%93/pprof/><link rel=stylesheet href=/Notes/lib/normalize/normalize.min.css><link rel=stylesheet href=/Notes/css/style.min.css><link rel=stylesheet href=/Notes/lib/fontawesome-free/all.min.css><link rel=stylesheet href=/Notes/lib/animate/animate.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Go 高性能编程","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/golang\/%E8%BF%9B%E9%98%B6\/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B\/"},"genre":"posts","keywords":"进阶","wordcount":6824,"url":"https:\/\/trouvaille0198.github.io\/Notes\/posts\/%E4%B8%93%E4%B8%9A\/golang\/%E8%BF%9B%E9%98%B6\/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B\/","datePublished":"2022-03-03T00:00:00+00:00","dateModified":"2024-04-27T05:32:21+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"MelonCholi"},"description":""}</script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-desktop>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/Notes/ title=伤心肠粉的酱油碟子><span class=header-title-text>伤心肠粉</span></a><span class=header-subtitle></span></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder="搜索文章标题或内容 ..." id=search-input-mobile>
+<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search fa-fw"></i>
+</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle fa-fw"></i>
+</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-fw fa-spin"></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/Notes/categories/>分类</a></li><li class=menu-item><a class=menu-link href=/Notes/tags/>标签</a></li><li class=menu-item><a class=menu-link href=/Notes/posts/>文章</a></li><li class="menu-item theme-switch" title=切换主题><i class="fa-solid fa-adjust fa-fw"></i></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=container page-style=normal><aside class=toc id=toc-auto><h2 class=toc-title>目录 <i class="toc-icon fa-solid fa-angle-down fa-fw"></i></h2><div class="toc-content always-active" id=toc-content-auto></div></aside><aside class=aside-custom></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Go 高性能编程</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle"></i>
+MelonCholi</span></span>
+<span class=post-category>收录于 <a href=/Notes/categories/golang/><i class="fa-regular fa-folder fa-fw"></i>&nbsp;Golang</a></span></div><div class=post-meta-line><span title="2022-03-03 00:00:00"><i class="fa-regular fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2022-03-03>2022-03-03</time>
+</span>&nbsp;<i class="fa-solid fa-pencil-alt fa-fw"></i>&nbsp;约 6824 字&nbsp;
+<i class="fa-regular fa-clock fa-fw"></i>&nbsp;预计阅读 14 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept=false><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fa-solid fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#常用数据结构>常用数据结构</a><ul><li><a href=#字符串高效拼接>字符串高效拼接</a><ul><li><a href=#常见的拼接方式>常见的拼接方式</a></li><li><a href=#benchmark-性能比拼>benchmark 性能比拼</a></li><li><a href=#建议>建议</a></li><li><a href=#性能背后的原理>性能背后的原理</a><ul><li><a href=#比较-stringsbuilder-和->比较 strings.Builder 和 <code>+</code></a></li><li><a href=#比较-stringsbuilder-和-bytesbuffer>比较 strings.Builder 和 bytes.Buffer</a></li></ul></li></ul></li><li><a href=#切片-slice-性能及陷阱>切片 (slice) 性能及陷阱</a><ul><li><a href=#切片的本质>切片的本质</a><ul><li><a href=#数组>数组</a></li><li><a href=#切片>切片</a></li></ul></li><li><a href=#切片操作及性能>切片操作及性能</a><ul><li><a href=#copy>Copy</a></li><li><a href=#append>Append</a></li><li><a href=#delete>Delete</a></li><li><a href=#deletegc>Delete(GC)</a></li><li><a href=#insert>Insert</a></li><li><a href=#filter>Filter</a></li><li><a href=#push>Push</a></li><li><a href=#pop>Pop</a></li></ul></li><li><a href=#性能陷阱>性能陷阱</a><ul><li><a href=#大量内存得不到释放>大量内存得不到释放</a></li></ul></li></ul></li><li><a href=#for-和-range-的性能比较>for 和 range 的性能比较</a><ul><li><a href=#range-的简单回顾>range 的简单回顾</a><ul><li><a href=#arrayslice>array/slice</a></li><li><a href=#map>map</a></li><li><a href=#channel>channel</a></li></ul></li><li><a href=#for-和-range-的性能比较-1>for 和 range 的性能比较</a><ul><li><a href=#int><code>[]int</code></a></li><li><a href=#struct>[]struct</a></li><li><a href=#int-和-struct-的性能差异><code>[]int</code> 和 <code>[]struct{}</code> 的性能差异</a></li><li><a href=#struct-1><code>[]*struct{}</code></a></li></ul></li><li><a href=#star-总结>&#x2b50; 总结</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=go-高性能编程>Go 高性能编程</h1><p><a href=https://geektutu.com/post/high-performance-go.html target=_blank rel="external nofollow noopener noreferrer">https://geektutu.com/post/high-performance-go.html</a></p><h2 id=常用数据结构>常用数据结构</h2><h3 id=字符串高效拼接>字符串高效拼接</h3><p>在 Go 语言中，字符串 (string) 是不可变的，拼接字符串事实上是创建了一个新的字符串对象。</p><p><strong>如果代码中存在大量的字符串拼接，对性能会产生严重的影响。</strong></p><h4 id=常见的拼接方式>常见的拼接方式</h4><p>为了避免编译器优化，我们首先实现一个生成长度为 n 的随机字符串的函数。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>const</span> <span class=nx>letterBytes</span> <span class=p>=</span> <span class=s>&#34;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>randomString</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>b</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>b</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>b</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>letterBytes</span><span class=p>[</span><span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nx>letterBytes</span><span class=p>))]</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nb>string</span><span class=p>(</span><span class=nx>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后利用这个函数生成字符串 <code>str</code>，然后将 <code>str</code> 拼接 N 次。在 Go 语言中，常见的字符串拼接方式有如下 5 种：</p><ul><li>使用 <code>+</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>plusConcat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>str</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>s</span> <span class=o>+=</span> <span class=nx>str</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>s</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>使用 <code>fmt.Sprintf</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>sprintfConcat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>str</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>s</span> <span class=o>:=</span> <span class=s>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>s</span> <span class=p>=</span> <span class=nx>fmt</span><span class=p>.</span><span class=nf>Sprintf</span><span class=p>(</span><span class=s>&#34;%s%s&#34;</span><span class=p>,</span> <span class=nx>s</span><span class=p>,</span> <span class=nx>str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>s</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>使用 <code>strings.Builder</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>builderConcat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>str</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>builder</span> <span class=nx>strings</span><span class=p>.</span><span class=nx>Builder</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>builder</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>builder</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>使用 <code>bytes.Buffer</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>bufferConcat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>buf</span> <span class=o>:=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>bytes</span><span class=p>.</span><span class=nx>Buffer</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>buf</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>buf</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>使用 <code>[]byte</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>byteConcat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>str</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>buf</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>buf</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>buf</span><span class=p>,</span> <span class=nx>str</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nb>string</span><span class=p>(</span><span class=nx>buf</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如果长度是可预知的，那么创建 <code>[]byte</code> 时，我们还可以预分配切片的容量(cap)。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>preByteConcat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>str</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>buf</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>n</span><span class=o>*</span><span class=nb>len</span><span class=p>(</span><span class=nx>str</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>buf</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>buf</span><span class=p>,</span> <span class=nx>str</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nb>string</span><span class=p>(</span><span class=nx>buf</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p><code>make([]byte, 0, n*len(str))</code> 第二个参数是长度，第三个参数是容量 (cap)，切片创建时，将预分配 cap 大小的内存。</p></blockquote><h4 id=benchmark-性能比拼>benchmark 性能比拼</h4><p>每个 benchmark 用例中，生成了一个长度为 10 的字符串，并拼接 1w 次。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>benchmark</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>,</span> <span class=nx>f</span> <span class=kd>func</span><span class=p>(</span><span class=kt>int</span><span class=p>,</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>str</span> <span class=p>=</span> <span class=nf>randomString</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nf>f</span><span class=p>(</span><span class=mi>10000</span><span class=p>,</span> <span class=nx>str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkPlusConcat</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span>    <span class=p>{</span> <span class=nf>benchmark</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>plusConcat</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkSprintfConcat</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span> <span class=nf>benchmark</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>sprintfConcat</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkBuilderConcat</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span> <span class=nf>benchmark</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>builderConcat</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkBufferConcat</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span>  <span class=p>{</span> <span class=nf>benchmark</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>bufferConcat</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkByteConcat</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span>    <span class=p>{</span> <span class=nf>benchmark</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>byteConcat</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkPreByteConcat</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span> <span class=nf>benchmark</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>preByteConcat</span><span class=p>)</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行该用例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>bench</span><span class=p>=</span><span class=s>&#34;Concat$&#34;</span> <span class=o>-</span><span class=nx>benchmem</span> <span class=p>.</span>
+</span></span><span class=line><span class=cl><span class=nx>goos</span><span class=p>:</span> <span class=nx>darwin</span>
+</span></span><span class=line><span class=cl><span class=nx>goarch</span><span class=p>:</span> <span class=nx>amd64</span>
+</span></span><span class=line><span class=cl><span class=nx>pkg</span><span class=p>:</span> <span class=nx>example</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkPlusConcat</span><span class=o>-</span><span class=mi>8</span>         <span class=mi>19</span>      <span class=mi>56</span> <span class=nx>ms</span><span class=o>/</span><span class=nx>op</span>   <span class=mi>530</span> <span class=nx>MB</span><span class=o>/</span><span class=nx>op</span>   <span class=mi>10026</span> <span class=nx>allocs</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkSprintfConcat</span><span class=o>-</span><span class=mi>8</span>      <span class=mi>10</span>     <span class=mi>112</span> <span class=nx>ms</span><span class=o>/</span><span class=nx>op</span>   <span class=mi>835</span> <span class=nx>MB</span><span class=o>/</span><span class=nx>op</span>   <span class=mi>37435</span> <span class=nx>allocs</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkBuilderConcat</span><span class=o>-</span><span class=mi>8</span>    <span class=mi>8901</span>    <span class=mf>0.13</span> <span class=nx>ms</span><span class=o>/</span><span class=nx>op</span>   <span class=mf>0.5</span> <span class=nx>MB</span><span class=o>/</span><span class=nx>op</span>      <span class=mi>23</span> <span class=nx>allocs</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkBufferConcat</span><span class=o>-</span><span class=mi>8</span>     <span class=mi>8130</span>    <span class=mf>0.14</span> <span class=nx>ms</span><span class=o>/</span><span class=nx>op</span>   <span class=mf>0.4</span> <span class=nx>MB</span><span class=o>/</span><span class=nx>op</span>      <span class=mi>13</span> <span class=nx>allocs</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkByteConcat</span><span class=o>-</span><span class=mi>8</span>       <span class=mi>8984</span>    <span class=mf>0.12</span> <span class=nx>ms</span><span class=o>/</span><span class=nx>op</span>   <span class=mf>0.6</span> <span class=nx>MB</span><span class=o>/</span><span class=nx>op</span>      <span class=mi>24</span> <span class=nx>allocs</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkPreByteConcat</span><span class=o>-</span><span class=mi>8</span>   <span class=mi>17379</span>    <span class=mf>0.07</span> <span class=nx>ms</span><span class=o>/</span><span class=nx>op</span>   <span class=mf>0.2</span> <span class=nx>MB</span><span class=o>/</span><span class=nx>op</span>       <span class=mi>2</span> <span class=nx>allocs</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>8.627</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><p>从基准测试的结果来看，使用 <code>+</code> 和 <code>fmt.Sprintf</code> 的效率是最低的，和其余的方式相比，性能相差约 1000 倍，而且消耗了超过 1000 倍的内存。当然 <code>fmt.Sprintf</code> 通常是用来格式化字符串的，一般不会用来拼接字符串。</p><p><code>strings.Builder</code>、<code>bytes.Buffer</code> 和 <code>[]byte</code> 的性能差距不大，而且消耗的内存也十分接近，性能最好且消耗内存最小的是 <code>preByteConcat</code>，这种方式预分配了内存，在字符串拼接的过程中，不需要进行字符串的拷贝，也不需要分配新的内存，因此性能最好，且内存消耗最小。</p><h4 id=建议>建议</h4><p>综合易用性和性能，<strong>一般推荐使用 <code>strings.Builder</code> 来拼接字符串。</strong></p><p>这是 Go 官方对 <code>strings.Builder</code> 的解释：</p><blockquote><p>A Builder is used to efficiently build a string using Write methods. It minimizes memory copying.</p></blockquote><p><code>string.Builder</code> 也提供了预分配内存的方式 <code>Grow</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>builderConcat</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>str</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>builder</span> <span class=nx>strings</span><span class=p>.</span><span class=nx>Builder</span>
+</span></span><span class=line><span class=cl>	<span class=nx>builder</span><span class=p>.</span><span class=nf>Grow</span><span class=p>(</span><span class=nx>n</span> <span class=o>*</span> <span class=nb>len</span><span class=p>(</span><span class=nx>str</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>builder</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>builder</span><span class=p>.</span><span class=nf>String</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>使用了 Grow 优化后的版本的 benchmark 结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>BenchmarkBuilderConcat</span><span class=o>-</span><span class=mi>8</span>   <span class=mi>16855</span>    <span class=mf>0.07</span> <span class=nx>ns</span><span class=o>/</span><span class=nx>op</span>   <span class=mf>0.1</span> <span class=nx>MB</span><span class=o>/</span><span class=nx>op</span>       <span class=mi>1</span> <span class=nx>allocs</span><span class=o>/</span><span class=nx>op</span>
+</span></span><span class=line><span class=cl><span class=nx>BenchmarkPreByteConcat</span><span class=o>-</span><span class=mi>8</span>   <span class=mi>17379</span>    <span class=mf>0.07</span> <span class=nx>ms</span><span class=o>/</span><span class=nx>op</span>   <span class=mf>0.2</span> <span class=nx>MB</span><span class=o>/</span><span class=nx>op</span>       <span class=mi>2</span> <span class=nx>allocs</span><span class=o>/</span><span class=nx>op</span>
+</span></span></code></pre></td></tr></table></div></div><p>与预分配内存的 <code>[]byte</code> 相比，因为省去了 <code>[]byte</code> 和字符串 (string) 之间的转换，内存分配次数还减少了 1 次，内存消耗减半。</p><h4 id=性能背后的原理>性能背后的原理</h4><h5 id=比较-stringsbuilder-和->比较 strings.Builder 和 <code>+</code></h5><p><code>strings.Builder</code> 和 <code>+</code> 性能和内存消耗差距如此巨大，是因为两者的内存分配方式不一样。</p><p>字符串在 Go 语言中是不可变类型，占用内存大小是固定的，当使用 <code>+</code> 拼接 2 个字符串时，生成一个新的字符串，那么就需要开辟一段新的空间，新空间的大小是原来两个字符串的大小之和。拼接第三个字符串时，再开辟一段新空间，新空间大小是三个字符串大小之和，以此类推。</p><p>假设一个字符串大小为 10 byte，拼接 1w 次，需要申请的内存大小为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>10 + 2 * 10 + 3 * 10 + ... + 10000 * 10 byte = 500 MB 
+</span></span></code></pre></td></tr></table></div></div><p>而 <code>strings.Builder</code>，<code>bytes.Buffer</code>，包括切片 <code>[]byte</code> 的内存是以倍数申请的。例如，初始大小为 0，当第一次写入大小为 10 byte 的字符串时，则会申请大小为 16 byte 的内存（恰好大于 10 byte 的 2 的指数），第二次写入 10 byte 时，内存不够，则申请 32 byte 的内存，第三次写入内存足够，则不申请新的，以此类推。在实际过程中，超过一定大小，比如 2048 byte 后，申请策略上会有些许调整。我们可以通过打印 <code>builder.Cap()</code> 查看字符串拼接过程中，<code>strings.Builder</code> 的内存申请过程。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestBuilderConcat</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>str</span> <span class=p>=</span> <span class=nf>randomString</span><span class=p>(</span><span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>builder</span> <span class=nx>strings</span><span class=p>.</span><span class=nx>Builder</span>
+</span></span><span class=line><span class=cl>	<span class=nx>cap</span> <span class=o>:=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>10000</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>builder</span><span class=p>.</span><span class=nf>Cap</span><span class=p>()</span> <span class=o>!=</span> <span class=nx>cap</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>fmt</span><span class=p>.</span><span class=nf>Print</span><span class=p>(</span><span class=nx>builder</span><span class=p>.</span><span class=nf>Cap</span><span class=p>(),</span> <span class=s>&#34; &#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=nx>cap</span> <span class=p>=</span> <span class=nx>builder</span><span class=p>.</span><span class=nf>Cap</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>builder</span><span class=p>.</span><span class=nf>WriteString</span><span class=p>(</span><span class=nx>str</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>run</span><span class=p>=</span><span class=s>&#34;TestBuilderConcat&#34;</span> <span class=p>.</span> <span class=o>-</span><span class=nx>v</span>
+</span></span><span class=line><span class=cl><span class=o>==</span><span class=p>=</span> <span class=nx>RUN</span>   <span class=nx>TestBuilderConcat</span>
+</span></span><span class=line><span class=cl><span class=mi>16</span> <span class=mi>32</span> <span class=mi>64</span> <span class=mi>128</span> <span class=mi>256</span> <span class=mi>512</span> <span class=mi>1024</span> <span class=mi>2048</span> <span class=mi>2688</span> <span class=mi>3456</span> <span class=mi>4864</span> <span class=mi>6144</span> <span class=mi>8192</span> <span class=mi>10240</span> <span class=mi>13568</span> <span class=mi>18432</span> <span class=mi>24576</span> <span class=mi>32768</span> <span class=mi>40960</span> <span class=mi>57344</span> <span class=mi>73728</span> <span class=mi>98304</span> <span class=mi>122880</span> <span class=o>---</span> <span class=nx>PASS</span><span class=p>:</span> <span class=nf>TestBuilderConcat</span> <span class=p>(</span><span class=mf>0.00</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>0.007</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><p>我们可以看到，2048 以前按倍数申请，2048 之后，以 640 递增，最后一次递增 24576 到 122880。总共申请的内存大小约 <code>0.52 MB</code>，约为上一种方式的千分之一。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>16 + 32 + 64 + ... + 122880 = 0.52 MB
+</span></span></code></pre></td></tr></table></div></div><h5 id=比较-stringsbuilder-和-bytesbuffer>比较 strings.Builder 和 bytes.Buffer</h5><p><code>strings.Builder</code> 和 <code>bytes.Buffer</code> 底层都是 <code>[]byte</code> 数组，但 <code>strings.Builder</code> 性能比 <code>bytes.Buffer</code> 略快约 10% 。</p><p>一个比较重要的区别在于</p><ul><li><code>bytes.Buffer</code> 转化为字符串时重新申请了一块空间，存放生成的字符串变量</li><li><code>strings.Builder</code> 直接将底层的 <code>[]byte</code> 转换成了字符串类型返回了回来。</li></ul><p>bytes.Buffer：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// To build strings more efficiently, see the strings.Builder type.
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>Buffer</span><span class=p>)</span> <span class=nf>String</span><span class=p>()</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>b</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// Special case, useful in debugging.
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>return</span> <span class=s>&#34;&lt;nil&gt;&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nb>string</span><span class=p>(</span><span class=nx>b</span><span class=p>.</span><span class=nx>buf</span><span class=p>[</span><span class=nx>b</span><span class=p>.</span><span class=nx>off</span><span class=p>:])</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>strings.Builder：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// String returns the accumulated string.
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>Builder</span><span class=p>)</span> <span class=nf>String</span><span class=p>()</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=o>*</span><span class=p>(</span><span class=o>*</span><span class=kt>string</span><span class=p>)(</span><span class=nx>unsafe</span><span class=p>.</span><span class=nf>Pointer</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>b</span><span class=p>.</span><span class=nx>buf</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>bytes.Buffer</code> 的注释中还特意提到了：</p><blockquote><p>To build strings more efficiently, see the strings.Builder type.</p></blockquote><h3 id=切片-slice-性能及陷阱>切片 (slice) 性能及陷阱</h3><h4 id=切片的本质>切片的本质</h4><p>在 Go 语言中，切片 (slice) 可能是使用最为频繁的数据结构之一，切片类型为处理同类型数据序列提供一个方便而高效的方式。</p><h5 id=数组>数组</h5><p>Go 的切片 (slice) 是在数组 (array) 之上的抽象数据类型，数组类型定义了长度和元素类型。例如， <code>[3]int</code> 类型表示由 3 个 int 整型组成的数组，数组以索引方式访问，例如表达式 s[n] 访问数组的第 n 个元素。数组的长度是固定的，长度是数组类型的一部分。长度不同的 2 个数组是不可以相互赋值的，因为这 2 个数组属于不同的类型。例如下面的代码是不合法的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>a</span> <span class=o>:=</span> <span class=p>[</span><span class=mi>3</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>b</span> <span class=o>:=</span> <span class=p>[</span><span class=mi>4</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span><span class=mi>2</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>,</span> <span class=mi>6</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>a</span> <span class=p>=</span> <span class=nx>b</span> <span class=c1>// cannot use b (type [4]int) as type [3]int in assignment
+</span></span></span></code></pre></td></tr></table></div></div><p>在 C 语言中，数组变量是指向第一个元素的指针，但是 Go 语言中并不是。</p><p>Go 语言中，数组变量属于值类型(value type)，<strong>因此当一个数组变量被赋值或者传递时，实际上会复制整个数组</strong>。例如，将 a 赋值给 b，修改 a 中的元素并不会改变 b 中的元素：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>a</span> <span class=o>:=</span> <span class=p>[</span><span class=o>...</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>}</span> <span class=c1>// ... 会自动计算数组长度
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>b</span> <span class=o>:=</span> <span class=nx>a</span>
+</span></span><span class=line><span class=cl><span class=nx>a</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=p>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>a</span><span class=p>,</span> <span class=nx>b</span><span class=p>)</span> <span class=c1>// [100 2 3] [1 2 3]
+</span></span></span></code></pre></td></tr></table></div></div><p>**为了避免复制数组，一般会传递指向数组的指针。**例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>square</span><span class=p>(</span><span class=nx>arr</span> <span class=o>*</span><span class=p>[</span><span class=mi>3</span><span class=p>]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>num</span> <span class=o>:=</span> <span class=k>range</span> <span class=o>*</span><span class=nx>arr</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=p>(</span><span class=o>*</span><span class=nx>arr</span><span class=p>)[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>num</span> <span class=o>*</span> <span class=nx>num</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestArrayPointer</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>a</span> <span class=o>:=</span> <span class=p>[</span><span class=o>...</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nf>square</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>a</span><span class=p>)</span> <span class=c1>// [1 4 9]
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nx>a</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>!=</span> <span class=mi>4</span> <span class=o>&amp;&amp;</span> <span class=nx>a</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=o>!=</span> <span class=mi>9</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>t</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=s>&#34;failed&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h5 id=切片>切片</h5><p>数组固定长度，缺少灵活性，大部分场景下会选择使用基于数组构建的功能更强大，使用更便利的切片类型。</p><p>切片使用字面量初始化时和数组很像，但是不需要指定长度：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>languages</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span><span class=s>&#34;Go&#34;</span><span class=p>,</span> <span class=s>&#34;Python&#34;</span><span class=p>,</span> <span class=s>&#34;C&#34;</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>或者使用内置函数 make 进行初始化，make 的函数定义如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nb>make</span><span class=p>([]</span><span class=nx>T</span><span class=p>,</span> <span class=nx>len</span><span class=p>,</span> <span class=nx>cap</span><span class=p>)</span> <span class=p>[]</span><span class=nx>T</span>
+</span></span></code></pre></td></tr></table></div></div><p>第一个参数是 <code>[]T</code>，T 即元素类型，第二个参数是长度 len，即初始化的切片拥有多少个元素，第三个参数是容量 cap，容量是可选参数，默认等于长度。使用内置函数 <code>len</code> 和 <code>cap</code> 可以得到切片的长度和容量，例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>printLenCap</span><span class=p>(</span><span class=nx>nums</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;len: %d, cap: %d %v\n&#34;</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=nx>nums</span><span class=p>),</span> <span class=nb>cap</span><span class=p>(</span><span class=nx>nums</span><span class=p>),</span> <span class=nx>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestSliceLenAndCap</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printLenCap</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span> <span class=c1>// len: 1, cap: 1 [1]
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>nums</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printLenCap</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span> <span class=c1>// len: 2, cap: 2 [1 2]
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>nums</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printLenCap</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span> <span class=c1>// len: 3, cap: 4 [1 2 3]
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>nums</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printLenCap</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span> <span class=c1>// len: 4, cap: 4 [1 2 3 3]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>容量是当前切片已经预分配的内存能够容纳的元素个数，<strong>如果往切片中不断地增加新的元素，超过了当前切片的容量，就需要分配新的内存，并将当前切片所有的元素拷贝到新的内存块上</strong>。</p><p>因此为了减少内存的拷贝次数，容量在比较小的时候，一般是以 2 的倍数扩大的，例如 2 4 8 16 …，当达到 2048 时，会采取新的策略，避免申请内存过大，导致浪费。Go 语言源代码 <a href=https://golang.org/src/runtime/slice.go target=_blank rel="external nofollow noopener noreferrer">runtime/slice.go</a> 中是这么实现的，不同版本可能有所差异：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>newcap</span> <span class=o>:=</span> <span class=nx>old</span><span class=p>.</span><span class=nx>cap</span>
+</span></span><span class=line><span class=cl><span class=nx>doublecap</span> <span class=o>:=</span> <span class=nx>newcap</span> <span class=o>+</span> <span class=nx>newcap</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=nx>cap</span> <span class=p>&gt;</span> <span class=nx>doublecap</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>newcap</span> <span class=p>=</span> <span class=nx>cap</span> <span class=c1>// 要分配的长度大于原容量的两倍时 直接分配
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>old</span><span class=p>.</span><span class=nx>len</span> <span class=p>&lt;</span> <span class=mi>1024</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>newcap</span> <span class=p>=</span> <span class=nx>doublecap</span> <span class=c1>// 要分配的长度小于原容量的两倍时 分配两倍
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// Check 0 &lt; newcap to detect overflow
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// and prevent an infinite loop.
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>for</span> <span class=mi>0</span> <span class=p>&lt;</span> <span class=nx>newcap</span> <span class=o>&amp;&amp;</span> <span class=nx>newcap</span> <span class=p>&lt;</span> <span class=nx>cap</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>newcap</span> <span class=o>+=</span> <span class=nx>newcap</span> <span class=o>/</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// Set newcap to the requested cap when
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// the newcap calculation overflowed.
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>if</span> <span class=nx>newcap</span> <span class=o>&lt;=</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>newcap</span> <span class=p>=</span> <span class=nx>cap</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>切片和数组很相似，按照下标进行索引。<strong>切片本质是一个数组片段的描述，包括了数组的指针，这个片段的长度和容量</strong> (不改变内存分配情况下的最大长度)。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ptr</span> <span class=o>*</span><span class=p>[]</span><span class=nx>T</span>
+</span></span><span class=line><span class=cl>    <span class=nx>len</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>    <span class=nx>cap</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>切片操作并不复制切片指向的元素，创建一个新的切片会复用原来切片的底层数组，因此切片操作是非常高效的。下面的例子展示了这个过程：</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://geektutu.com/post/hpg-slice/slice.jpg data-srcset="https://geektutu.com/post/hpg-slice/slice.jpg, https://geektutu.com/post/hpg-slice/slice.jpg 1.5x, https://geektutu.com/post/hpg-slice/slice.jpg 2x" data-sizes=auto alt=https://geektutu.com/post/hpg-slice/slice.jpg title="golang slice"></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>nums</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>8</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>nums</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>nums2</span> <span class=o>:=</span> <span class=nx>nums</span><span class=p>[</span><span class=mi>2</span><span class=p>:</span><span class=mi>4</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nf>printLenCap</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span>  <span class=c1>// len: 5, cap: 8 [1 2 3 4 5]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nf>printLenCap</span><span class=p>(</span><span class=nx>nums2</span><span class=p>)</span> <span class=c1>// len: 2, cap: 6 [3 4]
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=nx>nums2</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums2</span><span class=p>,</span> <span class=mi>50</span><span class=p>,</span> <span class=mi>60</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nf>printLenCap</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span>  <span class=c1>// len: 5, cap: 8 [1 2 3 4 50]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nf>printLenCap</span><span class=p>(</span><span class=nx>nums2</span><span class=p>)</span> <span class=c1>// len: 4, cap: 6 [3 4 50 60]
+</span></span></span></code></pre></td></tr></table></div></div><ul><li>nums2 执行了一个切片操作 <code>[2, 4)</code>，此时 nums 和 nums2 指向的是同一个数组。</li><li>nums2 增加 2 个元素 50 和 60 后，将底层数组下标 [4] 的值改为了 50，下标 [5] 的值置为 60。</li><li>因为 nums 和 nums2 指向的是同一个数组，因此 nums 被修改为 [1, 2, 3, 4, 50]。</li></ul><h4 id=切片操作及性能>切片操作及性能</h4><p>搞清楚切片的本质之后，理解切片的常用操作的性能就容易很多了。</p><p>Go 语言在 Github 上的官方 wiki - <a href=https://github.com/golang/go/wiki/SliceTricks target=_blank rel="external nofollow noopener noreferrer">SliceTricks</a> 介绍了切片常见的操作技巧。另一个项目 <a href=https://ueokande.github.io/go-slice-tricks/ target=_blank rel="external nofollow noopener noreferrer">Go Slice Tricks Cheat Sheet</a> 将这些操作以图片的形式呈现了出来，非常直观。</p><h5 id=copy>Copy</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/copy.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/copy.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/copy.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/copy.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/copy.png title=hpg-slice></p><h5 id=append>Append</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/append.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/append.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/append.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/append.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/append.png title=hpg-slice></p><p>切片有三个属性，指针(ptr)、长度(len) 和容量(cap)。append 时有两种场景：</p><ul><li>当 append 之后的长度小于等于 cap，将会直接利用原底层数组剩余的空间。</li><li>当 append 后的长度大于 cap 时，则会<strong>分配一块更大的区域</strong>来容纳新的底层数组。</li></ul><blockquote><p>因此，为了避免内存发生拷贝，如果能够知道最终的切片的大小，<strong>预先设置 cap 的值能够获得最好的性能</strong>。</p></blockquote><h5 id=delete>Delete</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete.png title=hpg-slice></p><p>切片的底层是数组，因此删除意味着后面的元素需要逐个向前移位。每次删除的复杂度为 O(N)，因此切片不合适大量随机删除的场景，这种场景下适合使用链表。</p><h5 id=deletegc>Delete(GC)</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete_gc.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete_gc.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete_gc.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete_gc.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/delete_gc.png title=hpg-slice></p><p>删除后，将空余的位置置空，有助于垃圾回收。</p><h5 id=insert>Insert</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/insert.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/insert.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/insert.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/insert.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/insert.png title=hpg-slice></p><p>insert 和 append 类似。即在某个位置添加一个元素后，将该位置后面的元素再 append 回去。复杂度为 O(N)。因此，不适合大量随机插入的场景。</p><h5 id=filter>Filter</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/filter_in_place.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/filter_in_place.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/filter_in_place.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/filter_in_place.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/filter_in_place.png title=hpg-slice></p><p>当原切片不会再被使用时，就地 filter 方式是比较推荐的，可以节省内存空间。</p><h5 id=push>Push</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push.png title=hpg-slice></p><p>在末尾追加元素，不考虑内存拷贝的情况，复杂度为 O(1)。</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push_front.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push_front.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push_front.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push_front.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/push_front.png title=hpg-slice></p><p>在头部追加元素，时间和空间复杂度均为 O(N)，不推荐。</p><h5 id=pop>Pop</h5><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop.png title=hpg-slice></p><p>尾部删除元素，复杂度 O(1)</p><p><img class=lazyload src=/Notes/svg/loading.min.svg data-src=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop_front.png data-srcset="https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop_front.png, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop_front.png 1.5x, https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop_front.png 2x" data-sizes=auto alt=https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/pop_front.png title=hpg-slice></p><p>头部删除元素，如果使用切片方式，复杂度为 O(1)。</p><p>但是需要注意的是，<strong>底层数组没有发生改变，第 0 个位置的内存仍旧没有释放。如果有大量这样的操作，头部的内存会一直被占用。</strong></p><h4 id=性能陷阱>性能陷阱</h4><h5 id=大量内存得不到释放>大量内存得不到释放</h5><p>在已有切片的基础上进行切片，不会创建新的底层数组。因为原来的底层数组没有发生变化，内存会一直占用，直到没有变量引用该数组。</p><p>因此很可能出现这么一种情况，原切片由大量的元素构成，但是我们在原切片的基础上切片，虽然只使用了很小一段，但底层数组在内存中仍然占据了大量空间，得不到释放。</p><p>比较推荐的做法，使用 <code>copy</code> 替代 <code>re-slice</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>lastNumsBySlice</span><span class=p>(</span><span class=nx>origin</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>origin</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=nx>origin</span><span class=p>)</span><span class=o>-</span><span class=mi>2</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>lastNumsByCopy</span><span class=p>(</span><span class=nx>origin</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>result</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nb>copy</span><span class=p>(</span><span class=nx>result</span><span class=p>,</span> <span class=nx>origin</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=nx>origin</span><span class=p>)</span><span class=o>-</span><span class=mi>2</span><span class=p>:])</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>result</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>上述两个函数的作用是一样的，取 origin 切片的最后 2 个元素。</p><ul><li>第一个函数直接在原切片基础上进行切片。</li><li>第二个函数创建了一个新的切片，将 origin 的最后两个元素拷贝到新切片上，然后返回新切片。</li></ul><p>我们可以写两个测试用例来比较这两种方式的性能差异：</p><p>在此之前呢，我们先实现 2 个辅助函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>generateWithCap</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>nums</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Int</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>nums</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>printMem</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>t</span><span class=p>.</span><span class=nf>Helper</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>rtm</span> <span class=nx>runtime</span><span class=p>.</span><span class=nx>MemStats</span>
+</span></span><span class=line><span class=cl>	<span class=nx>runtime</span><span class=p>.</span><span class=nf>ReadMemStats</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>rtm</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>t</span><span class=p>.</span><span class=nf>Logf</span><span class=p>(</span><span class=s>&#34;%.2f MB&#34;</span><span class=p>,</span> <span class=nb>float64</span><span class=p>(</span><span class=nx>rtm</span><span class=p>.</span><span class=nx>Alloc</span><span class=p>)</span><span class=o>/</span><span class=mf>1024.</span><span class=o>/</span><span class=mf>1024.</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><code>generateWithCap</code> 用于随机生成 n 个 int 整数，64 位机器上，一个 int 占 8 Byte，128 * 1024 个整数恰好占据 1 MB 的空间。</li><li><code>printMem</code> 用于打印程序运行时占用的内存大小。</li></ul><p>接下来分别为 <code>lastNumsBySlice</code> 和 <code>lastNumsByCopy</code> 实现测试用例：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>testLastChars</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>,</span> <span class=nx>f</span> <span class=kd>func</span><span class=p>([]</span><span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>t</span><span class=p>.</span><span class=nf>Helper</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ans</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([][]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>k</span> <span class=p>&lt;</span> <span class=mi>100</span><span class=p>;</span> <span class=nx>k</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>origin</span> <span class=o>:=</span> <span class=nf>generateWithCap</span><span class=p>(</span><span class=mi>128</span> <span class=o>*</span> <span class=mi>1024</span><span class=p>)</span> <span class=c1>// 1M
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>ans</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>ans</span><span class=p>,</span> <span class=nf>f</span><span class=p>(</span><span class=nx>origin</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printMem</span><span class=p>(</span><span class=nx>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>ans</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestLastCharsBySlice</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span> <span class=p>{</span> <span class=nf>testLastChars</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=nx>lastNumsBySlice</span><span class=p>)</span> <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestLastCharsByCopy</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>)</span>  <span class=p>{</span> <span class=nf>testLastChars</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=nx>lastNumsByCopy</span><span class=p>)</span> <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>测试用例内容非常简单，随机生成一个大小为 1 MB 的切片( 128*1024 个 int 整型，恰好为 1 MB)。</li><li>分别调用 <code>lastNumsBySlice</code> 和 <code>lastNumsByCopy</code> 取切片的最后两个元素。</li><li>最后然后打印程序所占用的内存。</li></ul><p>运行结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>run</span><span class=p>=^</span><span class=nx>TestLastChars</span>  <span class=o>-</span><span class=nx>v</span>
+</span></span><span class=line><span class=cl><span class=o>==</span><span class=p>=</span> <span class=nx>RUN</span>   <span class=nx>TestLastCharsBySlice</span>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=nx>PASS</span><span class=p>:</span> <span class=nf>TestLastCharsBySlice</span> <span class=p>(</span><span class=mf>0.31</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>slice_test</span><span class=p>.</span><span class=k>go</span><span class=p>:</span><span class=mi>73</span><span class=p>:</span> <span class=mf>100.14</span> <span class=nx>MB</span>
+</span></span><span class=line><span class=cl><span class=o>==</span><span class=p>=</span> <span class=nx>RUN</span>   <span class=nx>TestLastCharsByCopy</span>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=nx>PASS</span><span class=p>:</span> <span class=nf>TestLastCharsByCopy</span> <span class=p>(</span><span class=mf>0.28</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>slice_test</span><span class=p>.</span><span class=k>go</span><span class=p>:</span><span class=mi>74</span><span class=p>:</span> <span class=mf>3.14</span> <span class=nx>MB</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>0.601</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><p>结果差异非常明显，<code>lastNumsBySlice</code> 耗费了 100.14 MB 内存，也就是说，申请的 100 个 1 MB 大小的内存没有被回收。因为切片虽然只使用了最后 2 个元素，但是因为与原来 1M 的切片引用了相同的底层数组，底层数组得不到释放，因此，最终 100 MB 的内存始终得不到释放。</p><p>而 <code>lastNumsByCopy</code> 仅消耗了 3.14 MB 的内存。这是因为，通过 <code>copy</code>，指向了一个新的底层数组，当 origin 不再被引用后，内存会被垃圾回收 (garbage collector, GC)。</p><p>如果我们在循环中，显示地调用 <code>runtime.GC()</code>，效果会更加地明显：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>testLastChars</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>T</span><span class=p>,</span> <span class=nx>f</span> <span class=kd>func</span><span class=p>([]</span><span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>t</span><span class=p>.</span><span class=nf>Helper</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ans</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([][]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>k</span> <span class=p>&lt;</span> <span class=mi>100</span><span class=p>;</span> <span class=nx>k</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>origin</span> <span class=o>:=</span> <span class=nf>generateWithCap</span><span class=p>(</span><span class=mi>128</span> <span class=o>*</span> <span class=mi>1024</span><span class=p>)</span> <span class=c1>// 1M
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>ans</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>ans</span><span class=p>,</span> <span class=nf>f</span><span class=p>(</span><span class=nx>origin</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>		<span class=nx>runtime</span><span class=p>.</span><span class=nf>GC</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nf>printMem</span><span class=p>(</span><span class=nx>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>_</span> <span class=p>=</span> <span class=nx>ans</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>lastNumsByCopy</code> 内存占用直接下降到 0.15 MB。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=err>$</span> <span class=k>go</span> <span class=nx>test</span> <span class=o>-</span><span class=nx>run</span><span class=p>=^</span><span class=nx>TestLastChars</span>  <span class=o>-</span><span class=nx>v</span>
+</span></span><span class=line><span class=cl><span class=o>==</span><span class=p>=</span> <span class=nx>RUN</span>   <span class=nx>TestLastCharsBySlice</span>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=nx>PASS</span><span class=p>:</span> <span class=nf>TestLastCharsBySlice</span> <span class=p>(</span><span class=mf>0.37</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>slice_test</span><span class=p>.</span><span class=k>go</span><span class=p>:</span><span class=mi>75</span><span class=p>:</span> <span class=mf>100.14</span> <span class=nx>MB</span>
+</span></span><span class=line><span class=cl><span class=o>==</span><span class=p>=</span> <span class=nx>RUN</span>   <span class=nx>TestLastCharsByCopy</span>
+</span></span><span class=line><span class=cl><span class=o>---</span> <span class=nx>PASS</span><span class=p>:</span> <span class=nf>TestLastCharsByCopy</span> <span class=p>(</span><span class=mf>0.34</span><span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>slice_test</span><span class=p>.</span><span class=k>go</span><span class=p>:</span><span class=mi>76</span><span class=p>:</span> <span class=mf>0.15</span> <span class=nx>MB</span>
+</span></span><span class=line><span class=cl><span class=nx>PASS</span>
+</span></span><span class=line><span class=cl><span class=nx>ok</span>      <span class=nx>example</span> <span class=mf>0.723</span><span class=nx>s</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=for-和-range-的性能比较>for 和 range 的性能比较</h3><h4 id=range-的简单回顾>range 的简单回顾</h4><p>Go 语言中，range 可以用来很方便地遍历数组 (array)、切片 (slice)、字典 (map) 和信道 (chan)</p><h5 id=arrayslice>array/slice</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>words</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span><span class=s>&#34;Go&#34;</span><span class=p>,</span> <span class=s>&#34;语言&#34;</span><span class=p>,</span> <span class=s>&#34;高性能&#34;</span><span class=p>,</span> <span class=s>&#34;编程&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>s</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>words</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>words</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>words</span><span class=p>,</span> <span class=s>&#34;test&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>s</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>0 Go
+</span></span><span class=line><span class=cl>1 语言
+</span></span><span class=line><span class=cl>2 高性能
+</span></span><span class=line><span class=cl>3 编程
+</span></span></code></pre></td></tr></table></div></div><ul><li>变量 words 在循环开始前，仅会计算一次，如果<strong>在循环中修改切片的长度不会改变本次循环的次数</strong>。</li><li>迭代过程中，每次迭代的下标和值被赋值给变量 i 和 s，第二个参数 s 是可选的。</li><li>针对 nil 切片，迭代次数为 0。</li></ul><p>range 还有另一种只遍历下标的写法，这种写法与 for 几乎没什么差异了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>words</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>words</span><span class=p>[</span><span class=nx>i</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出也是一样的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>0 Go
+</span></span><span class=line><span class=cl>1 语言
+</span></span><span class=line><span class=cl>2 高性能
+</span></span><span class=line><span class=cl>3 编程
+</span></span></code></pre></td></tr></table></div></div><h5 id=map>map</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>m</span> <span class=o>:=</span> <span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;one&#34;</span><span class=p>:</span>   <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;two&#34;</span><span class=p>:</span>   <span class=mi>2</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;three&#34;</span><span class=p>:</span> <span class=mi>3</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>k</span><span class=p>,</span> <span class=nx>v</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>m</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nb>delete</span><span class=p>(</span><span class=nx>m</span><span class=p>,</span> <span class=s>&#34;two&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>m</span><span class=p>[</span><span class=s>&#34;four&#34;</span><span class=p>]</span> <span class=p>=</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;%v: %v\n&#34;</span><span class=p>,</span> <span class=nx>k</span><span class=p>,</span> <span class=nx>v</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出结果为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>one: 1
+</span></span><span class=line><span class=cl>four: 4
+</span></span><span class=line><span class=cl>three: 3
+</span></span></code></pre></td></tr></table></div></div><ul><li>和切片不同的是，<strong>迭代过程中，删除还未迭代到的键值对，则该键值对不会被迭代。</strong></li><li>在迭代过程中，<strong>如果创建新的键值对，那么新增键值对，可能被迭代，也可能不会被迭代。</strong></li><li>针对 nil 字典，迭代次数为 0</li></ul><h5 id=channel>channel</h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>ch</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=s>&#34;Go&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=s>&#34;语言&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=s>&#34;高性能&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ch</span> <span class=o>&lt;-</span> <span class=s>&#34;编程&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>close</span><span class=p>(</span><span class=nx>ch</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}()</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>n</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>ch</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>发送给信道 (channel) 的值可以使用 for 循环迭代，直到信道被关闭。</li><li>如果是 nil 信道，循环将永远阻塞。</li></ul><h4 id=for-和-range-的性能比较-1>for 和 range 的性能比较</h4><h5 id=int><code>[]int</code></h5><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>generateWithCap</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=kt>int</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>int</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>nums</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Int</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>nums</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkForIntSlice</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=nf>generateWithCap</span><span class=p>(</span><span class=mi>1024</span> <span class=o>*</span> <span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>len</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>k</span> <span class=p>&lt;</span> <span class=nx>len</span><span class=p>;</span> <span class=nx>k</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>nums</span><span class=p>[</span><span class=nx>k</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkRangeIntSlice</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>nums</span> <span class=o>:=</span> <span class=nf>generateWithCap</span><span class=p>(</span><span class=mi>1024</span> <span class=o>*</span> <span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>num</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>nums</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>num</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ go test -bench=IntSlice$ .
+</span></span><span class=line><span class=cl>goos: darwin
+</span></span><span class=line><span class=cl>goarch: amd64
+</span></span><span class=line><span class=cl>pkg: example/hpg-range
+</span></span><span class=line><span class=cl>BenchmarkForIntSlice-8              3603            324512 ns/op
+</span></span><span class=line><span class=cl>BenchmarkRangeIntSlice-8            3591            322744 ns/op
+</span></span></code></pre></td></tr></table></div></div><ul><li><code>generateWithCap</code> 用于生成长度为 n 元素类型为 int 的切片。</li><li>从最终的结果可以看到，遍历 <code>[]int</code> 类型的切片，for 与 range 性能几乎没有区别。</li></ul><h5 id=struct>[]struct</h5><p>那如果是稍微复杂一点的 <code>[]struct</code> 类型呢？</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Item</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>id</span>  <span class=kt>int</span>
+</span></span><span class=line><span class=cl>	<span class=nx>val</span> <span class=p>[</span><span class=mi>4096</span><span class=p>]</span><span class=kt>byte</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkForStruct</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>items</span> <span class=p>[</span><span class=mi>1024</span><span class=p>]</span><span class=nx>Item</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>length</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>items</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>k</span> <span class=p>&lt;</span> <span class=nx>length</span><span class=p>;</span> <span class=nx>k</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>items</span><span class=p>[</span><span class=nx>k</span><span class=p>].</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkRangeIndexStruct</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>items</span> <span class=p>[</span><span class=mi>1024</span><span class=p>]</span><span class=nx>Item</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>items</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>items</span><span class=p>[</span><span class=nx>k</span><span class=p>].</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkRangeStruct</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>items</span> <span class=p>[</span><span class=mi>1024</span><span class=p>]</span><span class=nx>Item</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>item</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>items</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>item</span><span class=p>.</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>先看下 Benchmark 的结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>$ go <span class=nb>test</span> -bench<span class=o>=</span>Struct$ .
+</span></span><span class=line><span class=cl>goos: darwin
+</span></span><span class=line><span class=cl>goarch: amd64
+</span></span><span class=line><span class=cl>pkg: example/hpg-range
+</span></span><span class=line><span class=cl>BenchmarkForStruct-8             <span class=m>3769580</span>               <span class=m>324</span> ns/op
+</span></span><span class=line><span class=cl>BenchmarkRangeIndexStruct-8      <span class=m>3597555</span>               <span class=m>330</span> ns/op
+</span></span><span class=line><span class=cl>BenchmarkRangeStruct-8              <span class=m>2194</span>            <span class=m>467411</span> ns/op
+</span></span></code></pre></td></tr></table></div></div><ul><li>仅遍历下标的情况下，for 和 range 的性能几乎是一样的。</li><li><code>items</code> 的每一个元素的类型是一个结构体类型 <code>Item</code>，<code>Item</code> 由两个字段构成，一个类型是 int，一个是类型是 <code>[4096]byte</code>，也就是说每个 <code>Item</code> 实例需要申请约 4KB 的内存。</li><li>在这个例子中，for 的性能大约是 range (同时遍历下标和值) 的 2000 倍。</li></ul><h5 id=int-和-struct-的性能差异><code>[]int</code> 和 <code>[]struct{}</code> 的性能差异</h5><p>与 for 不同的是，<code>range</code> 对每个迭代值都创建了一个拷贝。因此如果每次迭代的值内存占用很小的情况下，for 和 range 的性能几乎没有差异，但是如果每个迭代值内存占用很大，例如上面的例子中，每个结构体需要占据 4KB 的内存，这种情况下差距就非常明显了。</p><p>我们可以用一个非常简单的例子来证明 range 迭代时，返回的是拷贝。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>persons</span> <span class=o>:=</span> <span class=p>[]</span><span class=kd>struct</span><span class=p>{</span> <span class=nx>no</span> <span class=kt>int</span> <span class=p>}{{</span><span class=nx>no</span><span class=p>:</span> <span class=mi>1</span><span class=p>},</span> <span class=p>{</span><span class=nx>no</span><span class=p>:</span> <span class=mi>2</span><span class=p>},</span> <span class=p>{</span><span class=nx>no</span><span class=p>:</span> <span class=mi>3</span><span class=p>}}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>s</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>persons</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>s</span><span class=p>.</span><span class=nx>no</span> <span class=o>+=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>persons</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>persons</span><span class=p>[</span><span class=nx>i</span><span class=p>].</span><span class=nx>no</span> <span class=o>+=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>persons</span><span class=p>)</span> <span class=c1>// [{101} {102} {103}]
+</span></span></span></code></pre></td></tr></table></div></div><ul><li><code>persons</code> 是一个长度为 3 的切片，每个元素是一个结构体。</li><li>使用 <code>range</code> 迭代时，试图将每个结构体的 no 字段增加 10，但修改无效，因为 range 返回的是拷贝。</li><li>使用 <code>for</code> 迭代时，将每个结构体的 no 字段增加 100，修改有效。</li></ul><h5 id=struct-1><code>[]*struct{}</code></h5><p>那如果切片中是指针，而不是结构体呢？</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>generateItems</span><span class=p>(</span><span class=nx>n</span> <span class=kt>int</span><span class=p>)</span> <span class=p>[]</span><span class=o>*</span><span class=nx>Item</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>items</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=o>*</span><span class=nx>Item</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>n</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>items</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>items</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>Item</span><span class=p>{</span><span class=nx>id</span><span class=p>:</span> <span class=nx>i</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>items</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkForPointer</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>items</span> <span class=o>:=</span> <span class=nf>generateItems</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>length</span> <span class=o>:=</span> <span class=nb>len</span><span class=p>(</span><span class=nx>items</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>k</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>k</span> <span class=p>&lt;</span> <span class=nx>length</span><span class=p>;</span> <span class=nx>k</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>items</span><span class=p>[</span><span class=nx>k</span><span class=p>].</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkRangePointer</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>items</span> <span class=o>:=</span> <span class=nf>generateItems</span><span class=p>(</span><span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>tmp</span> <span class=kt>int</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>item</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>items</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>tmp</span> <span class=p>=</span> <span class=nx>item</span><span class=p>.</span><span class=nx>id</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>_</span> <span class=p>=</span> <span class=nx>tmp</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行结果如下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>goos: darwin
+</span></span><span class=line><span class=cl>goarch: amd64
+</span></span><span class=line><span class=cl>pkg: example/hpg-range
+</span></span><span class=line><span class=cl>BenchmarkForPointer-8             271279              4160 ns/op
+</span></span><span class=line><span class=cl>BenchmarkRangePointer-8           264068              4194 ns/op
+</span></span></code></pre></td></tr></table></div></div><p>切片元素从结构体 <code>Item</code> 替换为指针 <code>*Item</code> 后，for 和 range 的性能几乎是一样的。而且使用指针还有另一个好处，可以直接修改指针对应的结构体的值。</p><h4 id=star-总结>&#x2b50; 总结</h4><p>range 在迭代过程中返回的是<strong>迭代值的拷贝</strong>，如果每次迭代的元素的内存占用很低，那么 for 和 range 的性能几乎是一样，例如 <code>[]int</code>。</p><p>但是如果迭代的元素内存占用较高，例如一个包含很多属性的 struct 结构体，那么 for 的性能将显著地高于 range，有时候甚至会有上千倍的性能差异。对于这种场景，建议使用 for，如果使用 range，建议只迭代下标，通过下标访问迭代值，这种使用方式和 for 就没有区别了。</p><p>如果想使用 range 同时迭代下标和值，则需要将切片/数组的元素改为<strong>指针</strong>，才能不影响性能，同时又能方便地修改元素。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="2024-04-27 05:32:21">更新于 2024-04-27</span></div><div class=post-info-license><span><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="分享到 Twitter" data-sharer=twitter data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/ data-title="Go 高性能编程" data-hashtags=进阶><i class="fa-brands fa-twitter fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 Facebook" data-sharer=facebook data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/ data-hashtag=进阶><i class="fa-brands fa-facebook-square fa-fw"></i></a>
+<a href=javascript:void(0); title="分享到 微博" data-sharer=weibo data-url=https://trouvaille0198.github.io/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E8%BF%9B%E9%98%B6/go-%E9%AB%98%E6%80%A7%E8%83%BD%E7%BC%96%E7%A8%8B/ data-title="Go 高性能编程"><i class="fa-brands fa-weibo fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fa-solid fa-tags fa-fw"></i>&nbsp;<a href=/Notes/tags/%E8%BF%9B%E9%98%B6/>进阶</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/Notes/>主页</a></span></section></div><div class=post-nav><a href=/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E8%BF%9B%E9%98%B6/go-%E8%BF%9B%E9%98%B6/ class=prev rel=prev title="Go 进阶"><i class="fa-solid fa-angle-left fa-fw"></i>Go 进阶</a>
+<a href=/Notes/posts/%E4%B8%93%E4%B8%9A/golang/%E6%A0%87%E5%87%86%E5%BA%93/pprof/ class=next rel=next title="Go runtime/pprof 库">Go runtime/pprof 库<i class="fa-solid fa-angle-right fa-fw"></i></a></div></div></article></main><footer class=footer><div class=footer-container><div class="footer-line custom">酒困路长惟欲睡，日高人渴漫思茶</div><div class="footer-line copyright"><i class="fa-regular fa-copyright fa-fw"></i>
+<span itemprop=copyrightYear>2022 - 2024</span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class="footer-line statistics"></div></div></footer></div><div class=widgets><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title=回到顶部><i class="fa-solid fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fa-solid fa-comment fa-fw"></i></a></div><div id=mask></div></div><link rel=stylesheet href=/Notes/lib/katex/katex.min.css><link rel=stylesheet href=/Notes/lib/katex/copy-tex.min.css><link rel=stylesheet href=/Notes/lib/cookieconsent/cookieconsent.min.css><script type=text/javascript src=/Notes/lib/autocomplete/autocomplete.min.js defer></script><script type=text/javascript src=/Notes/lib/algoliasearch/algoliasearch-lite.umd.min.js defer></script><script type=text/javascript src=/Notes/lib/lazysizes/lazysizes.min.js async defer></script><script type=text/javascript src=/Notes/lib/sharer/sharer.min.js async defer></script><script type=text/javascript src=/Notes/lib/katex/katex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/Notes/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/Notes/lib/cookieconsent/cookieconsent.min.js defer></script><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",editLockTitle:"锁定可编辑代码块",editUnLockTitle:"解锁可编辑代码块",editable:!0,maxShownLines:45},comment:{},cookieconsent:{content:{dismiss:"同意",link:"了解更多",message:"本网站使用 Cookies 来改善您的浏览体验。"},enable:!0,palette:{button:{background:"#f0f0f0"},popup:{background:"#1aa3ff"}},theme:"edgeless"},enablePWA:!0,math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{algoliaAppID:"7I9AMOLA4S",algoliaIndex:"Notes",algoliaSearchKey:"3c1638dfe9f4d49a59d81ff6943416b8",highlightTag:"em",maxResultLength:30,noResultsFound:"没有找到结果",snippetLength:50,type:"algolia"}}</script><script type=text/javascript src=/Notes/js/theme.min.js defer></script><script type=text/javascript src=/Notes/js/_custom.min.js defer></script></body></html>
