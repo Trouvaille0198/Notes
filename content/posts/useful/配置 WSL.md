@@ -5,6 +5,8 @@ draft: false
 author: "MelonCholi"
 tags: []
 categories: [有用的东东]
+date created: 24-04-10 09:58
+date modified: 24-04-10 13:44
 ---
 
 # 配置 WSL
@@ -113,7 +115,7 @@ esac
 ps -ef|grep ssh
 ```
 
-windows 下面 `win+r` 打开 `cmd`，输 入`netstat -ano|findstr "12308"` 查看端口，发现已经启动
+windows 下面 `win+r` 打开 `cmd`，输 入 `netstat -ano|findstr "12308"` 查看端口，发现已经启动
 
 到这个阶段，已经可以用本地 win 主机来 ssh 连接 wsl 了
 
@@ -155,7 +157,7 @@ ssh jack@1.2.3.4 -p 2222
 
 其实，通过这一步可以自由的配置本地端口与 wsl 端口的映射，也就是可以通过物理机来进行网站或应用程序的访问，比如，我们再 wsl 部署一个网站，我们可以直接将该网站的端口 xxxx 映射到物理机的 8080（举例），那么我们通过本机 ip:8080 即可访问该网站，大大提高我们的易操作性。
 
-### wsl “固定IP” 配置
+### wsl “固定 IP” 配置
 
 wsl 每次重启，ip 地址都会变化，也就是说通过以上步骤添加的映射规则再 wsl 重启后就失效了！
 

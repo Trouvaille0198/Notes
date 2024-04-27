@@ -5,6 +5,9 @@ draft: false
 author: "MelonCholi"
 tags: []
 categories: [有用的东东]
+aliases: [Go Dockerfile 通用配置]
+date created: 24-04-10 09:58
+date modified: 24-04-25 18:39
 ---
 
 # Go Dockerfile 通用配置
@@ -50,4 +53,3 @@ EXPOSE 8080
 # 启动容器时运行的命令
 CMD ["/server", "--config", "/server.yml"]
 ```
-

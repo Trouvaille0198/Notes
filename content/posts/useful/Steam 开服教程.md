@@ -5,6 +5,8 @@ draft: false
 author: "MelonCholi"
 tags: []
 categories: [有用的东东]
+date created: 24-04-10 09:58
+date modified: 24-04-25 18:39
 ---
 
 # Steam 开服教程
@@ -166,7 +168,7 @@ cd ~/SteamCMD/GameServer/Pal
 
 如果报了以下错误：
 
-```
+```py
 .steam/sdk64/steamclient.so: cannot open shared object file: No such file or directory
 ```
 
@@ -180,4 +182,4 @@ cp ~/Steam/steamapps/common/Steamworks\ SDK\ Redist/linux64/steamclient.so ~/.st
 
 > If this procedure is performed after the server is operational, the game will start from character re-creation. We recommend that you do not perform this on servers that are already in play.
 
-Error is displayed once at startup. if [.steam/sdk64/steamclient.so OK.  (First tried local 'steamclient.so')] is displayed, there is no problem.
+Error is displayed once at startup. if [.steam/sdk64/steamclient.so OK. (First tried local 'steamclient.so')] is displayed, there is no problem.

@@ -17,6 +17,10 @@ USB 作为一种接口技术，并不单指某种硬件接口，实际上它更�
 
 ![秒懂所有USB接口类型，USB接口大全；Type-A、Type-B、Type-C、miniUSB、microUSB区分](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/v2-cbdf8d90862a4ceb729b65b939eb890b_1440w.image)
 
+![image-20240227090445945](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20240227090445945.png)
+
+![image-20240227090807727](https://markdown-1303167219.cos.ap-shanghai.myqcloud.com/image-20240227090807727.png)
+
 USB 是英文 Universal Serial Bus（通用串行总线）的缩写，是一个**外部总线标准**，用于规范电脑与外部设备的连接和通讯，是应用在 PC 领域的接口技术。
 
 作为一种新兴的并逐渐取代其他接口标准的数据通信方式，USB 由 Intel、Compaq、Digital、IBM、Microsoft、NEC 及 Northern Telecom 等计算机公司和通信公司于 1995 年联合制定，并逐渐形成了行业标准。

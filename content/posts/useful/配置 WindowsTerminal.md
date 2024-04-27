@@ -82,7 +82,7 @@ https://windowsterminalthemes.dev/
 // Cousine Nerd Font
 ```
 
-推荐：CaskaydiaCove Nerd Font Mono（或者叫 CaskaydiaCove NFM）
+推荐：==CaskaydiaCove Nerd Font Mono==（或者叫 CaskaydiaCove NFM）
 
 #### Meslo LGM NF
 
